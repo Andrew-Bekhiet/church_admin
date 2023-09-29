@@ -120,6 +120,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
           ),
         )),
       ) as _i7.Future<_i2.File>);
+
   @override
   _i7.Stream<_i3.FileInfo> getFile(
     String? url, {
@@ -138,6 +139,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Stream<_i3.FileInfo>.empty(),
         returnValueForMissingStub: _i7.Stream<_i3.FileInfo>.empty(),
       ) as _i7.Stream<_i3.FileInfo>);
+
   @override
   _i7.Stream<_i8.FileResponse> getFileStream(
     String? url, {
@@ -158,6 +160,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Stream<_i8.FileResponse>.empty(),
         returnValueForMissingStub: _i7.Stream<_i8.FileResponse>.empty(),
       ) as _i7.Stream<_i8.FileResponse>);
+
   @override
   _i7.Future<_i3.FileInfo> downloadFile(
     String? url, {
@@ -201,6 +204,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
           ),
         )),
       ) as _i7.Future<_i3.FileInfo>);
+
   @override
   _i7.Future<_i3.FileInfo?> getFileFromCache(
     String? key, {
@@ -215,6 +219,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Future<_i3.FileInfo?>.value(),
         returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
       ) as _i7.Future<_i3.FileInfo?>);
+
   @override
   _i7.Future<_i3.FileInfo?> getFileFromMemory(String? key) =>
       (super.noSuchMethod(
@@ -225,6 +230,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Future<_i3.FileInfo?>.value(),
         returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
       ) as _i7.Future<_i3.FileInfo?>);
+
   @override
   _i7.Future<_i2.File> putFile(
     String? url,
@@ -281,6 +287,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
           ),
         )),
       ) as _i7.Future<_i2.File>);
+
   @override
   _i7.Future<_i2.File> putFileStream(
     String? url,
@@ -337,6 +344,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
           ),
         )),
       ) as _i7.Future<_i2.File>);
+
   @override
   _i7.Future<void> removeFile(String? key) => (super.noSuchMethod(
         Invocation.method(
@@ -346,6 +354,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<void> emptyCache() => (super.noSuchMethod(
         Invocation.method(
@@ -355,6 +364,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -398,6 +408,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
           ),
         ),
       ) as _i4.HttpsCallable);
+
   @override
   _i7.Future<_i4.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
@@ -424,6 +435,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
           ),
         )),
       ) as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
+
   @override
   _i7.Future<String> getDownloadUrl(
     String? table,
@@ -442,6 +454,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValue: _i7.Future<String>.value(''),
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+
   @override
   _i7.Future<String> getUploadUrl(
     String? table,
@@ -460,6 +473,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValue: _i7.Future<String>.value(''),
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+
   @override
   _i7.Future<void> deletePhoto(
     String? table,
@@ -476,6 +490,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<String?> getAddressFromLocation(_i10.Point? location) =>
       (super.noSuchMethod(
@@ -486,6 +501,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValue: _i7.Future<String?>.value(),
         returnValueForMissingStub: _i7.Future<String?>.value(),
       ) as _i7.Future<String?>);
+
   @override
   _i7.Future<_i5.Response<dynamic>> uploadPhoto({
     required String? url,
@@ -540,6 +556,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
           ),
         )),
       ) as _i7.Future<_i5.Response<dynamic>>);
+
   @override
   _i7.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
         Invocation.method(
@@ -549,6 +566,7 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
         returnValue: _i7.Future<bool>.value(false),
         returnValueForMissingStub: _i7.Future<bool>.value(false),
       ) as _i7.Future<bool>);
+
   @override
   _i7.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(

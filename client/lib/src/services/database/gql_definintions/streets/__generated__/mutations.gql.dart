@@ -21,6 +21,7 @@ class Variables_Mutation_deleteStreet {
   Map<String, dynamic> _$data;
 
   UuidValue get streetId => (_$data['streetId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$streetId = streetId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteStreet {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deleteStreet<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk {
     final local$deleteStreetsByPk = _instance.deleteStreetsByPk;
     return local$deleteStreetsByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deleteStreet<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
 }
@@ -310,6 +314,7 @@ class Variables_Mutation_insertStreet {
 
   Input_StreetsInsertInput get newStreet =>
       (_$data['newStreet'] as Input_StreetsInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newStreet = newStreet;
@@ -322,6 +327,7 @@ class Variables_Mutation_insertStreet {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -500,6 +506,7 @@ class _CopyWithImpl_Mutation_insertStreet<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Street<TRes> get insertStreetsOne {
     final local$insertStreetsOne = _instance.insertStreetsOne;
     return local$insertStreetsOne == null
@@ -520,6 +527,7 @@ class _CopyWithStubImpl_Mutation_insertStreet<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Street<TRes> get insertStreetsOne =>
       CopyWith_Fragment_Street.stub(_res);
 }
@@ -603,8 +611,10 @@ class Variables_Mutation_updateStreet {
   Map<String, dynamic> _$data;
 
   UuidValue get streetId => (_$data['streetId'] as UuidValue);
+
   Input_StreetsSetInput get newStreet =>
       (_$data['newStreet'] as Input_StreetsSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$streetId = streetId;
@@ -619,6 +629,7 @@ class Variables_Mutation_updateStreet {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -818,6 +829,7 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk {
     final local$updateStreetsByPk = _instance.updateStreetsByPk;
     return local$updateStreetsByPk == null
@@ -838,6 +850,7 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
 }

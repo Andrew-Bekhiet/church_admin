@@ -27,7 +27,9 @@ class Variables_Mutation_insertPersonLastConfession {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   DateTime get lastConfession => (_$data['lastConfession'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -43,6 +45,7 @@ class Variables_Mutation_insertPersonLastConfession {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -261,6 +264,7 @@ class _CopyWithImpl_Mutation_insertPersonLastConfession<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
@@ -286,6 +290,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastConfession<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne<
           TRes>
       get insertHistoryConfessionHistoryOne =>
@@ -544,6 +549,7 @@ class _CopyWithImpl_Mutation_insertPersonLastConfession_insertHistoryConfessionH
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -565,6 +571,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastConfession_insertHistoryConfess
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -594,7 +601,9 @@ class Variables_Mutation_insertPersonLastKodas {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   DateTime get lastKodas => (_$data['lastKodas'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -610,6 +619,7 @@ class Variables_Mutation_insertPersonLastKodas {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -818,6 +828,7 @@ class _CopyWithImpl_Mutation_insertPersonLastKodas<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne {
     final local$insertHistoryKodasHistoryOne =
@@ -843,6 +854,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastKodas<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne =>
           CopyWith_Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne
@@ -1093,6 +1105,7 @@ class _CopyWithImpl_Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -1114,6 +1127,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastKodas_insertHistoryKodasHistory
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -1143,7 +1157,9 @@ class Variables_Mutation_insertPersonLastCall {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   DateTime get lastCall => (_$data['lastCall'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -1159,6 +1175,7 @@ class Variables_Mutation_insertPersonLastCall {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1366,6 +1383,7 @@ class _CopyWithImpl_Mutation_insertPersonLastCall<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne {
     final local$insertHistoryCallHistoryOne =
@@ -1391,6 +1409,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastCall<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne =>
           CopyWith_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne
@@ -1605,6 +1624,7 @@ class _CopyWithImpl_Mutation_insertPersonLastCall_insertHistoryCallHistoryOne<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -1626,6 +1646,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastCall_insertHistoryCallHistoryOn
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -1655,7 +1676,9 @@ class Variables_Mutation_insertPersonLastVisit {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   DateTime get lastVisit => (_$data['lastVisit'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -1671,6 +1694,7 @@ class Variables_Mutation_insertPersonLastVisit {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1879,6 +1903,7 @@ class _CopyWithImpl_Mutation_insertPersonLastVisit<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne {
     final local$insertHistoryVisitHistoryOne =
@@ -1904,6 +1929,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne =>
           CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne
@@ -2119,6 +2145,7 @@ class _CopyWithImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -2140,6 +2167,7 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }

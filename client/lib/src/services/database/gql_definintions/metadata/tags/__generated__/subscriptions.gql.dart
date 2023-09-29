@@ -34,7 +34,9 @@ class Variables_Subscription_watchAllTags {
 
   List<Input_TagsBoolExp>? get where =>
       (_$data['where'] as List<Input_TagsBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -54,6 +56,7 @@ class Variables_Subscription_watchAllTags {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -256,6 +259,7 @@ class _CopyWithImpl_Subscription_watchAllTags<TRes>
       tags: tags == _undefined || tags == null
           ? _instance.tags
           : (tags as List<Subscription_watchAllTags_tags>)));
+
   TRes tags(
           Iterable<Subscription_watchAllTags_tags> Function(
                   Iterable<
@@ -277,6 +281,7 @@ class _CopyWithStubImpl_Subscription_watchAllTags<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllTags_tags>? tags}) => _res;
+
   tags(_fn) => _res;
 }
 

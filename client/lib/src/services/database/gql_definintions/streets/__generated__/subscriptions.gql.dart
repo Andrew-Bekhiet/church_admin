@@ -46,9 +46,12 @@ class Variables_Subscription_watchAllStreets {
 
   List<Input_StreetsBoolExp>? get where =>
       (_$data['where'] as List<Input_StreetsBoolExp>?);
+
   List<Input_StreetsOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_StreetsOrderBy>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -72,6 +75,7 @@ class Variables_Subscription_watchAllStreets {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -306,6 +310,7 @@ class _CopyWithImpl_Subscription_watchAllStreets<TRes>
           streets: streets == _undefined || streets == null
               ? _instance.streets
               : (streets as List<Subscription_watchAllStreets_streets>)));
+
   TRes streets(
           Iterable<Subscription_watchAllStreets_streets> Function(
                   Iterable<
@@ -327,6 +332,7 @@ class _CopyWithStubImpl_Subscription_watchAllStreets<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllStreets_streets>? streets}) => _res;
+
   streets(_fn) => _res;
 }
 
@@ -671,6 +677,7 @@ class Variables_Subscription_watchStreet {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -684,6 +691,7 @@ class Variables_Subscription_watchStreet {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -834,6 +842,7 @@ class _CopyWithImpl_Subscription_watchStreet<TRes>
           streetsByPk: streetsByPk == _undefined
               ? _instance.streetsByPk
               : (streetsByPk as Subscription_watchStreet_streetsByPk?)));
+
   CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk {
     final local$streetsByPk = _instance.streetsByPk;
     return local$streetsByPk == null
@@ -850,6 +859,7 @@ class _CopyWithStubImpl_Subscription_watchStreet<TRes>
   TRes _res;
 
   call({Subscription_watchStreet_streetsByPk? streetsByPk}) => _res;
+
   CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk =>
       CopyWith_Subscription_watchStreet_streetsByPk.stub(_res);
 }
@@ -1205,6 +1215,7 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
       ));
+
   TRes areas(
           Iterable<Fragment_Area>? Function(
                   Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
@@ -1234,5 +1245,6 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
     Json? lastEdit,
   }) =>
       _res;
+
   areas(_fn) => _res;
 }

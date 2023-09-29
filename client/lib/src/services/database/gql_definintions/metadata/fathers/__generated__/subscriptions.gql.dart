@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllFathers {
 
   List<Input_FathersBoolExp>? get where =>
       (_$data['where'] as List<Input_FathersBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllFathers {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -259,6 +262,7 @@ class _CopyWithImpl_Subscription_watchAllFathers<TRes>
           fathers: fathers == _undefined || fathers == null
               ? _instance.fathers
               : (fathers as List<Subscription_watchAllFathers_fathers>)));
+
   TRes fathers(
           Iterable<Subscription_watchAllFathers_fathers> Function(
                   Iterable<
@@ -280,6 +284,7 @@ class _CopyWithStubImpl_Subscription_watchAllFathers<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllFathers_fathers>? fathers}) => _res;
+
   fathers(_fn) => _res;
 }
 

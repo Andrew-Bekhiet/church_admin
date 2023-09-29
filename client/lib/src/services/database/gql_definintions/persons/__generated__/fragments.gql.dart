@@ -1474,6 +1474,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
             ? _instance.user
             : (user as Fragment_FullPersonData_user?),
       ));
+
   TRes areas(
           Iterable<Fragment_Area>? Function(
                   Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
@@ -1483,6 +1484,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   TRes classes(
           Iterable<Fragment_Class>? Function(
                   Iterable<CopyWith_Fragment_Class<Fragment_Class>>?)
@@ -1492,6 +1494,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Fragment_FullPersonData_church<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -1535,6 +1538,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonData_job<TRes> get job {
     final local$job = _instance.job;
     return local$job == null
@@ -1578,6 +1582,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonData_shammasLevel<TRes> get shammasLevel {
     final local$shammasLevel = _instance.shammasLevel;
     return local$shammasLevel == null
@@ -1603,6 +1608,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Fragment_FullPersonData_studyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
@@ -1623,6 +1629,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes tags(
           Iterable<Fragment_FullPersonData_tags> Function(
                   Iterable<
@@ -1635,6 +1642,7 @@ class _CopyWithImpl_Fragment_FullPersonData<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonData_user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -1695,35 +1703,54 @@ class _CopyWithStubImpl_Fragment_FullPersonData<TRes>
     Fragment_FullPersonData_user? user,
   }) =>
       _res;
+
   areas(_fn) => _res;
+
   classes(_fn) => _res;
+
   CopyWith_Fragment_FullPersonData_church<TRes> get church =>
       CopyWith_Fragment_FullPersonData_church.stub(_res);
+
   CopyWith_Fragment_FullPersonData_college<TRes> get college =>
       CopyWith_Fragment_FullPersonData_college.stub(_res);
+
   CopyWith_Fragment_Family<TRes> get family =>
       CopyWith_Fragment_Family.stub(_res);
+
   CopyWith_Fragment_FullPersonData_father<TRes> get father =>
       CopyWith_Fragment_FullPersonData_father.stub(_res);
+
   groups(_fn) => _res;
+
   CopyWith_Fragment_FullPersonData_job<TRes> get job =>
       CopyWith_Fragment_FullPersonData_job.stub(_res);
+
   CopyWith_Fragment_FullPersonData_personType<TRes> get personType =>
       CopyWith_Fragment_FullPersonData_personType.stub(_res);
+
   CopyWith_Fragment_FullPersonData_qualification<TRes> get qualification =>
       CopyWith_Fragment_FullPersonData_qualification.stub(_res);
+
   CopyWith_Fragment_FullPersonData_school<TRes> get school =>
       CopyWith_Fragment_FullPersonData_school.stub(_res);
+
   services(_fn) => _res;
+
   CopyWith_Fragment_FullPersonData_shammasLevel<TRes> get shammasLevel =>
       CopyWith_Fragment_FullPersonData_shammasLevel.stub(_res);
+
   CopyWith_Fragment_FullPersonData_state<TRes> get state =>
       CopyWith_Fragment_FullPersonData_state.stub(_res);
+
   streets(_fn) => _res;
+
   CopyWith_Fragment_FullPersonData_studyYear<TRes> get studyYear =>
       CopyWith_Fragment_FullPersonData_studyYear.stub(_res);
+
   hobbies(_fn) => _res;
+
   tags(_fn) => _res;
+
   CopyWith_Fragment_FullPersonData_user<TRes> get user =>
       CopyWith_Fragment_FullPersonData_user.stub(_res);
 }
@@ -3034,6 +3061,7 @@ class _CopyWithImpl_Fragment_FullPersonData_father<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonData_father_church<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -3056,6 +3084,7 @@ class _CopyWithStubImpl_Fragment_FullPersonData_father<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonData_father_church<TRes> get church =>
       CopyWith_Fragment_FullPersonData_father_church.stub(_res);
 }
@@ -3316,6 +3345,7 @@ class _CopyWithImpl_Fragment_FullPersonData_groups<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return CopyWith_Fragment_Group(local$group, (e) => call(group: e));
@@ -3333,6 +3363,7 @@ class _CopyWithStubImpl_Fragment_FullPersonData_groups<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
@@ -4024,6 +4055,7 @@ class _CopyWithImpl_Fragment_FullPersonData_services<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
     return CopyWith_Fragment_ServiceWithStudyYears(
@@ -4042,6 +4074,7 @@ class _CopyWithStubImpl_Fragment_FullPersonData_services<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
 }
@@ -4632,6 +4665,7 @@ class _CopyWithImpl_Fragment_FullPersonData_hobbies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonData_hobbies_hobby<TRes> get hobby {
     final local$hobby = _instance.hobby;
     return CopyWith_Fragment_FullPersonData_hobbies_hobby(
@@ -4650,6 +4684,7 @@ class _CopyWithStubImpl_Fragment_FullPersonData_hobbies<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonData_hobbies_hobby<TRes> get hobby =>
       CopyWith_Fragment_FullPersonData_hobbies_hobby.stub(_res);
 }
@@ -4929,6 +4964,7 @@ class _CopyWithImpl_Fragment_FullPersonData_tags<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonData_tags_tag<TRes> get tag {
     final local$tag = _instance.tag;
     return CopyWith_Fragment_FullPersonData_tags_tag(
@@ -4947,6 +4983,7 @@ class _CopyWithStubImpl_Fragment_FullPersonData_tags<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonData_tags_tag<TRes> get tag =>
       CopyWith_Fragment_FullPersonData_tags_tag.stub(_res);
 }
@@ -5300,6 +5337,7 @@ class Variables_Fragment_FullPersonDataWithAttendance {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -5316,6 +5354,7 @@ class Variables_Fragment_FullPersonDataWithAttendance {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6425,6 +6464,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
             ? _instance.user
             : (user as Fragment_FullPersonDataWithAttendance_user?),
       ));
+
   TRes areas(
           Iterable<Fragment_Area>? Function(
                   Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
@@ -6434,6 +6474,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   TRes classes(
           Iterable<Fragment_FullPersonDataWithAttendance_classes>? Function(
                   Iterable<
@@ -6446,6 +6487,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Fragment_FullPersonDataWithAttendance_church<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -6492,6 +6534,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonDataWithAttendance_job<TRes> get job {
     final local$job = _instance.job;
     return local$job == null
@@ -6542,6 +6585,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonDataWithAttendance_shammasLevel<TRes>
       get shammasLevel {
     final local$shammasLevel = _instance.shammasLevel;
@@ -6570,6 +6614,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Fragment_FullPersonDataWithAttendance_studyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
@@ -6591,6 +6636,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes tags(
           Iterable<Fragment_FullPersonDataWithAttendance_tags> Function(
                   Iterable<
@@ -6603,6 +6649,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_FullPersonDataWithAttendance_user<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -6664,41 +6711,60 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance<TRes>
     Fragment_FullPersonDataWithAttendance_user? user,
   }) =>
       _res;
+
   areas(_fn) => _res;
+
   classes(_fn) => _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_church<TRes> get church =>
       CopyWith_Fragment_FullPersonDataWithAttendance_church.stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_college<TRes> get college =>
       CopyWith_Fragment_FullPersonDataWithAttendance_college.stub(_res);
+
   CopyWith_Fragment_Family<TRes> get family =>
       CopyWith_Fragment_Family.stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_father<TRes> get father =>
       CopyWith_Fragment_FullPersonDataWithAttendance_father.stub(_res);
+
   groups(_fn) => _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_job<TRes> get job =>
       CopyWith_Fragment_FullPersonDataWithAttendance_job.stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_personType<TRes>
       get personType =>
           CopyWith_Fragment_FullPersonDataWithAttendance_personType.stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_qualification<TRes>
       get qualification =>
           CopyWith_Fragment_FullPersonDataWithAttendance_qualification.stub(
               _res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_school<TRes> get school =>
       CopyWith_Fragment_FullPersonDataWithAttendance_school.stub(_res);
+
   services(_fn) => _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_shammasLevel<TRes>
       get shammasLevel =>
           CopyWith_Fragment_FullPersonDataWithAttendance_shammasLevel.stub(
               _res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_state<TRes> get state =>
       CopyWith_Fragment_FullPersonDataWithAttendance_state.stub(_res);
+
   streets(_fn) => _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_studyYear<TRes>
       get studyYear =>
           CopyWith_Fragment_FullPersonDataWithAttendance_studyYear.stub(_res);
+
   hobbies(_fn) => _res;
+
   tags(_fn) => _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_user<TRes> get user =>
       CopyWith_Fragment_FullPersonDataWithAttendance_user.stub(_res);
 }
@@ -7302,6 +7368,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_classes<TRes>
             : (attendanceHistoryAggregate
                 as Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -7329,6 +7396,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_classes<TRes>
         attendanceHistoryAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
@@ -7782,6 +7850,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_father<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_father_church<TRes>
       get church {
     final local$church = _instance.church;
@@ -7806,6 +7875,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_father<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_father_church<TRes>
       get church =>
           CopyWith_Fragment_FullPersonDataWithAttendance_father_church.stub(
@@ -8081,6 +8151,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_groups<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group<TRes> get group {
     final local$group = _instance.group;
     return CopyWith_Fragment_FullPersonDataWithAttendance_groups_group(
@@ -8099,6 +8170,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_groups<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group<TRes> get group =>
       CopyWith_Fragment_FullPersonDataWithAttendance_groups_group.stub(_res);
 }
@@ -8321,6 +8393,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_groups_group<TRes>
             : (attendanceHistoryAggregate
                 as Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -8350,6 +8423,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_groups_group<TRes>
         attendanceHistoryAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
@@ -9068,6 +9142,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_services<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service<TRes>
       get service {
     final local$service = _instance.service;
@@ -9087,6 +9162,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_services<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service<TRes>
       get service =>
           CopyWith_Fragment_FullPersonDataWithAttendance_services_service.stub(
@@ -9366,6 +9442,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_services_service<TRes>
             : (attendanceHistoryAggregate
                 as Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_studyYearFrom<
       TRes> get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
@@ -9420,16 +9497,19 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_services_service<
         attendanceHistoryAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_studyYearFrom<
           TRes>
       get studyYearFrom =>
           CopyWith_Fragment_FullPersonDataWithAttendance_services_service_studyYearFrom
               .stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_studyYearTo<
           TRes>
       get studyYearTo =>
           CopyWith_Fragment_FullPersonDataWithAttendance_services_service_studyYearTo
               .stub(_res);
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
@@ -10369,6 +10449,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_hobbies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_hobbies_hobby<TRes> get hobby {
     final local$hobby = _instance.hobby;
     return CopyWith_Fragment_FullPersonDataWithAttendance_hobbies_hobby(
@@ -10387,6 +10468,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_hobbies<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_hobbies_hobby<TRes>
       get hobby =>
           CopyWith_Fragment_FullPersonDataWithAttendance_hobbies_hobby.stub(
@@ -10680,6 +10762,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_tags<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_tags_tag<TRes> get tag {
     final local$tag = _instance.tag;
     return CopyWith_Fragment_FullPersonDataWithAttendance_tags_tag(
@@ -10698,6 +10781,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_tags<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_tags_tag<TRes> get tag =>
       CopyWith_Fragment_FullPersonDataWithAttendance_tags_tag.stub(_res);
 }
@@ -11169,6 +11253,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_classes_attendanceHist
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -11196,6 +11281,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_classes_attendance
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
@@ -11337,6 +11423,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_classes_attendanceHist
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -11364,6 +11451,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_classes_attendance
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -11648,6 +11736,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_groups_group_attendanc
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -11675,6 +11764,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_groups_group_atten
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
@@ -11816,6 +11906,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_groups_group_attendanc
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -11843,6 +11934,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_groups_group_atten
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_groups_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -12127,6 +12219,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_services_service_atten
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -12154,6 +12247,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_services_service_a
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
@@ -12295,6 +12389,7 @@ class _CopyWithImpl_Fragment_FullPersonDataWithAttendance_services_service_atten
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -12322,6 +12417,7 @@ class _CopyWithStubImpl_Fragment_FullPersonDataWithAttendance_services_service_a
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_FullPersonDataWithAttendance_services_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>

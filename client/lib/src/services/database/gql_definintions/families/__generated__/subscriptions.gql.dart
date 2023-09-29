@@ -46,10 +46,13 @@ class Variables_Subscription_watchAllFamilies {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
+
   List<Input_FamiliesOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_FamiliesOrderBy>?);
+
   List<Input_FamiliesBoolExp>? get where =>
       (_$data['where'] as List<Input_FamiliesBoolExp>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -73,6 +76,7 @@ class Variables_Subscription_watchAllFamilies {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -304,6 +308,7 @@ class _CopyWithImpl_Subscription_watchAllFamilies<TRes>
           families: families == _undefined || families == null
               ? _instance.families
               : (families as List<Fragment_Family>)));
+
   TRes families(
           Iterable<Fragment_Family> Function(
                   Iterable<CopyWith_Fragment_Family<Fragment_Family>>)
@@ -322,6 +327,7 @@ class _CopyWithStubImpl_Subscription_watchAllFamilies<TRes>
   TRes _res;
 
   call({List<Fragment_Family>? families}) => _res;
+
   families(_fn) => _res;
 }
 
@@ -434,6 +440,7 @@ class Variables_Subscription_watchFamily {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -447,6 +454,7 @@ class Variables_Subscription_watchFamily {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -597,6 +605,7 @@ class _CopyWithImpl_Subscription_watchFamily<TRes>
           familiesByPk: familiesByPk == _undefined
               ? _instance.familiesByPk
               : (familiesByPk as Subscription_watchFamily_familiesByPk?)));
+
   CopyWith_Subscription_watchFamily_familiesByPk<TRes> get familiesByPk {
     final local$familiesByPk = _instance.familiesByPk;
     return local$familiesByPk == null
@@ -613,6 +622,7 @@ class _CopyWithStubImpl_Subscription_watchFamily<TRes>
   TRes _res;
 
   call({Subscription_watchFamily_familiesByPk? familiesByPk}) => _res;
+
   CopyWith_Subscription_watchFamily_familiesByPk<TRes> get familiesByPk =>
       CopyWith_Subscription_watchFamily_familiesByPk.stub(_res);
 }
@@ -1084,6 +1094,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
       ));
+
   TRes areas(
           Iterable<Fragment_Area>? Function(
                   Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
@@ -1093,6 +1104,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   TRes streets(
           Iterable<Fragment_Street>? Function(
                   Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
@@ -1125,6 +1137,8 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     Json? lastEdit,
   }) =>
       _res;
+
   areas(_fn) => _res;
+
   streets(_fn) => _res;
 }

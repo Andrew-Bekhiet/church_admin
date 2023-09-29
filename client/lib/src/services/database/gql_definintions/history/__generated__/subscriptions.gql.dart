@@ -37,7 +37,9 @@ class Variables_Subscription_editHistory {
 
   List<Input_HistoryEditHistoryBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryEditHistoryBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -57,6 +59,7 @@ class Variables_Subscription_editHistory {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -261,6 +264,7 @@ class _CopyWithImpl_Subscription_editHistory<TRes>
               historyEditHistory == _undefined || historyEditHistory == null
                   ? _instance.historyEditHistory
                   : (historyEditHistory as List<Fragment_EditHistory>)));
+
   TRes historyEditHistory(
           Iterable<Fragment_EditHistory> Function(
                   Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>)
@@ -280,6 +284,7 @@ class _CopyWithStubImpl_Subscription_editHistory<TRes>
   TRes _res;
 
   call({List<Fragment_EditHistory>? historyEditHistory}) => _res;
+
   historyEditHistory(_fn) => _res;
 }
 
@@ -397,9 +402,12 @@ class Variables_Subscription_personCallHistory {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   List<Input_HistoryCallHistoryBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryCallHistoryBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -421,6 +429,7 @@ class Variables_Subscription_personCallHistory {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -637,6 +646,7 @@ class _CopyWithImpl_Subscription_personCallHistory<TRes>
               historyCallHistory == _undefined || historyCallHistory == null
                   ? _instance.historyCallHistory
                   : (historyCallHistory as List<Fragment_CallHistory>)));
+
   TRes historyCallHistory(
           Iterable<Fragment_CallHistory> Function(
                   Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>)
@@ -656,6 +666,7 @@ class _CopyWithStubImpl_Subscription_personCallHistory<TRes>
   TRes _res;
 
   call({List<Fragment_CallHistory>? historyCallHistory}) => _res;
+
   historyCallHistory(_fn) => _res;
 }
 
@@ -801,9 +812,12 @@ class Variables_Subscription_personVisitHistory {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   List<Input_HistoryVisitHistoryBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryVisitHistoryBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -825,6 +839,7 @@ class Variables_Subscription_personVisitHistory {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1042,6 +1057,7 @@ class _CopyWithImpl_Subscription_personVisitHistory<TRes>
               historyVisitHistory == _undefined || historyVisitHistory == null
                   ? _instance.historyVisitHistory
                   : (historyVisitHistory as List<Fragment_VisitHistory>)));
+
   TRes historyVisitHistory(
           Iterable<Fragment_VisitHistory> Function(
                   Iterable<
@@ -1062,6 +1078,7 @@ class _CopyWithStubImpl_Subscription_personVisitHistory<TRes>
   TRes _res;
 
   call({List<Fragment_VisitHistory>? historyVisitHistory}) => _res;
+
   historyVisitHistory(_fn) => _res;
 }
 
@@ -1207,9 +1224,12 @@ class Variables_Subscription_personConfessionHistory {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   List<Input_HistoryConfessionHistoryBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryConfessionHistoryBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -1231,6 +1251,7 @@ class Variables_Subscription_personConfessionHistory {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1458,6 +1479,7 @@ class _CopyWithImpl_Subscription_personConfessionHistory<TRes>
               ? _instance.historyConfessionHistory
               : (historyConfessionHistory
                   as List<Fragment_ConfessionHistory>)));
+
   TRes historyConfessionHistory(
           Iterable<Fragment_ConfessionHistory> Function(
                   Iterable<
@@ -1479,6 +1501,7 @@ class _CopyWithStubImpl_Subscription_personConfessionHistory<TRes>
   TRes _res;
 
   call({List<Fragment_ConfessionHistory>? historyConfessionHistory}) => _res;
+
   historyConfessionHistory(_fn) => _res;
 }
 
@@ -1625,9 +1648,12 @@ class Variables_Subscription_personKodasHistory {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   List<Input_HistoryKodasHistoryBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryKodasHistoryBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -1649,6 +1675,7 @@ class Variables_Subscription_personKodasHistory {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1866,6 +1893,7 @@ class _CopyWithImpl_Subscription_personKodasHistory<TRes>
               historyKodasHistory == _undefined || historyKodasHistory == null
                   ? _instance.historyKodasHistory
                   : (historyKodasHistory as List<Fragment_KodasHistory>)));
+
   TRes historyKodasHistory(
           Iterable<Fragment_KodasHistory> Function(
                   Iterable<
@@ -1886,6 +1914,7 @@ class _CopyWithStubImpl_Subscription_personKodasHistory<TRes>
   TRes _res;
 
   call({List<Fragment_KodasHistory>? historyKodasHistory}) => _res;
+
   historyKodasHistory(_fn) => _res;
 }
 

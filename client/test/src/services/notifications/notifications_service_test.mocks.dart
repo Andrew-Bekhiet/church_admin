@@ -159,6 +159,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValueForMissingStub: _i10.Future<_i11.PermissionStatus>.value(
             _i11.PermissionStatus.denied),
       ) as _i10.Future<_i11.PermissionStatus>);
+
   @override
   _i10.Future<_i11.ServiceStatus> checkServiceStatus(
           _i11.Permission? permission) =>
@@ -172,6 +173,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValueForMissingStub:
             _i10.Future<_i11.ServiceStatus>.value(_i11.ServiceStatus.disabled),
       ) as _i10.Future<_i11.ServiceStatus>);
+
   @override
   _i10.Future<bool> openAppSettings() => (super.noSuchMethod(
         Invocation.method(
@@ -181,6 +183,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<Map<_i11.Permission, _i11.PermissionStatus>> requestPermissions(
           List<_i11.Permission>? permissions) =>
@@ -196,6 +199,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
             _i10.Future<Map<_i11.Permission, _i11.PermissionStatus>>.value(
                 <_i11.Permission, _i11.PermissionStatus>{}),
       ) as _i10.Future<Map<_i11.Permission, _i11.PermissionStatus>>);
+
   @override
   _i10.Future<bool> shouldShowRequestPermissionRationale(
           _i11.Permission? permission) =>
@@ -225,6 +229,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
           Invocation.getter(#app),
         ),
       ) as _i2.FirebaseApp);
+
   @override
   set app(_i2.FirebaseApp? _app) => super.noSuchMethod(
         Invocation.setter(
@@ -233,24 +238,28 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isAutoInitEnabled => (super.noSuchMethod(
         Invocation.getter(#isAutoInitEnabled),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i10.Stream<String> get onTokenRefresh => (super.noSuchMethod(
         Invocation.getter(#onTokenRefresh),
         returnValue: _i10.Stream<String>.empty(),
         returnValueForMissingStub: _i10.Stream<String>.empty(),
       ) as _i10.Stream<String>);
+
   @override
   Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
         Invocation.getter(#pluginConstants),
         returnValue: <dynamic, dynamic>{},
         returnValueForMissingStub: <dynamic, dynamic>{},
       ) as Map<dynamic, dynamic>);
+
   @override
   _i10.Future<_i3.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
         Invocation.method(
@@ -260,6 +269,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<_i3.RemoteMessage?>.value(),
         returnValueForMissingStub: _i10.Future<_i3.RemoteMessage?>.value(),
       ) as _i10.Future<_i3.RemoteMessage?>);
+
   @override
   _i10.Future<void> deleteToken() => (super.noSuchMethod(
         Invocation.method(
@@ -269,6 +279,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<String?> getAPNSToken() => (super.noSuchMethod(
         Invocation.method(
@@ -278,6 +289,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<String?>.value(),
         returnValueForMissingStub: _i10.Future<String?>.value(),
       ) as _i10.Future<String?>);
+
   @override
   _i10.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
         Invocation.method(
@@ -288,6 +300,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<String?>.value(),
         returnValueForMissingStub: _i10.Future<String?>.value(),
       ) as _i10.Future<String?>);
+
   @override
   _i10.Future<bool> isSupported() => (super.noSuchMethod(
         Invocation.method(
@@ -297,6 +310,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<_i3.NotificationSettings> getNotificationSettings() =>
       (super.noSuchMethod(
@@ -321,6 +335,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
           ),
         )),
       ) as _i10.Future<_i3.NotificationSettings>);
+
   @override
   _i10.Future<_i3.NotificationSettings> requestPermission({
     bool? alert = true,
@@ -380,6 +395,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
           ),
         )),
       ) as _i10.Future<_i3.NotificationSettings>);
+
   @override
   _i10.Future<void> sendMessage({
     String? to,
@@ -405,6 +421,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
         Invocation.method(
@@ -414,6 +431,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
       (super.noSuchMethod(
@@ -424,6 +442,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setForegroundNotificationPresentationOptions({
     bool? alert = false,
@@ -443,6 +462,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
         Invocation.method(
@@ -452,6 +472,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i12.FirebaseMessaging {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
         Invocation.method(
@@ -474,60 +495,70 @@ class MockNotificationSettings extends _i1.Mock
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get announcement => (super.noSuchMethod(
         Invocation.getter(#announcement),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AuthorizationStatus get authorizationStatus => (super.noSuchMethod(
         Invocation.getter(#authorizationStatus),
         returnValue: _i3.AuthorizationStatus.authorized,
         returnValueForMissingStub: _i3.AuthorizationStatus.authorized,
       ) as _i3.AuthorizationStatus);
+
   @override
   _i3.AppleNotificationSetting get timeSensitive => (super.noSuchMethod(
         Invocation.getter(#timeSensitive),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get criticalAlert => (super.noSuchMethod(
         Invocation.getter(#criticalAlert),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get badge => (super.noSuchMethod(
         Invocation.getter(#badge),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get carPlay => (super.noSuchMethod(
         Invocation.getter(#carPlay),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get lockScreen => (super.noSuchMethod(
         Invocation.getter(#lockScreen),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleNotificationSetting get notificationCenter => (super.noSuchMethod(
         Invocation.getter(#notificationCenter),
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
   @override
   _i3.AppleShowPreviewSetting get showPreviews => (super.noSuchMethod(
         Invocation.getter(#showPreviews),
         returnValue: _i3.AppleShowPreviewSetting.always,
         returnValueForMissingStub: _i3.AppleShowPreviewSetting.always,
       ) as _i3.AppleShowPreviewSetting);
+
   @override
   _i3.AppleNotificationSetting get sound => (super.noSuchMethod(
         Invocation.getter(#sound),
@@ -562,6 +593,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<bool?>.value(),
         returnValueForMissingStub: _i10.Future<bool?>.value(),
       ) as _i10.Future<bool?>);
+
   @override
   _i10.Future<_i15.NotificationAppLaunchDetails?>
       getNotificationAppLaunchDetails() => (super.noSuchMethod(
@@ -574,6 +606,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
             returnValueForMissingStub:
                 _i10.Future<_i15.NotificationAppLaunchDetails?>.value(),
           ) as _i10.Future<_i15.NotificationAppLaunchDetails?>);
+
   @override
   _i10.Future<void> show(
     int? id,
@@ -596,6 +629,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> cancel(
     int? id, {
@@ -610,6 +644,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> cancelAll() => (super.noSuchMethod(
         Invocation.method(
@@ -619,6 +654,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> zonedSchedule(
     int? id,
@@ -655,6 +691,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> periodicallyShow(
     int? id,
@@ -685,6 +722,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<List<_i15.PendingNotificationRequest>>
       pendingNotificationRequests() => (super.noSuchMethod(
@@ -699,6 +737,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
                 _i10.Future<List<_i15.PendingNotificationRequest>>.value(
                     <_i15.PendingNotificationRequest>[]),
           ) as _i10.Future<List<_i15.PendingNotificationRequest>>);
+
   @override
   _i10.Future<List<_i15.ActiveNotification>> getActiveNotifications() =>
       (super.noSuchMethod(
@@ -730,6 +769,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#multiFactorManager),
         ),
       ) as _i4.MultiFactorManager);
+
   @override
   set multiFactorManager(_i4.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
@@ -739,12 +779,14 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i5.ValueStream<_i4.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -757,6 +799,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#userStream),
         ),
       ) as _i5.ValueStream<_i4.User?>);
+
   @override
   _i5.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -769,6 +812,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#idTokenStream),
         ),
       ) as _i5.ValueStream<String?>);
+
   @override
   _i10.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -786,6 +830,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -803,6 +848,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -820,6 +866,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -829,6 +876,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -838,6 +886,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -847,6 +896,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -856,6 +906,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<String?>.value(),
         returnValueForMissingStub: _i10.Future<String?>.value(),
       ) as _i10.Future<String?>);
+
   @override
   _i10.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -865,6 +916,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -893,18 +945,14 @@ class MockUserSettingsService extends _i1.Mock
           Invocation.getter(#box),
         ),
       ) as _i6.Box<dynamic>);
-  @override
-  bool get darkTheme => (super.noSuchMethod(
-        Invocation.getter(#darkTheme),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+
   @override
   bool get greatFeastTheme => (super.noSuchMethod(
         Invocation.getter(#greatFeastTheme),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i10.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
@@ -914,6 +962,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
         Invocation.method(
@@ -923,6 +972,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
@@ -932,6 +982,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   String? getSecondLineFor(Type? t) => (super.noSuchMethod(
         Invocation.method(
@@ -940,6 +991,7 @@ class MockUserSettingsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       ) as String?);
+
   @override
   _i10.Future<void> setSecondLineFor(
     Type? t,
@@ -956,6 +1008,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setupDefaults() => (super.noSuchMethod(
         Invocation.method(
@@ -999,6 +1052,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         ),
       ) as _i7.HttpsCallable);
+
   @override
   _i10.Future<_i7.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
@@ -1025,6 +1079,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i10.Future<_i7.HttpsCallableResult<dynamic>>);
+
   @override
   _i10.Future<String> getDownloadUrl(
     String? table,
@@ -1043,6 +1098,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i10.Future<String>.value(''),
         returnValueForMissingStub: _i10.Future<String>.value(''),
       ) as _i10.Future<String>);
+
   @override
   _i10.Future<String> getUploadUrl(
     String? table,
@@ -1061,6 +1117,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i10.Future<String>.value(''),
         returnValueForMissingStub: _i10.Future<String>.value(''),
       ) as _i10.Future<String>);
+
   @override
   _i10.Future<void> deletePhoto(
     String? table,
@@ -1077,6 +1134,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<String?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
@@ -1087,6 +1145,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i10.Future<String?>.value(),
         returnValueForMissingStub: _i10.Future<String?>.value(),
       ) as _i10.Future<String?>);
+
   @override
   _i10.Future<_i8.Response<dynamic>> uploadPhoto({
     required String? url,
@@ -1141,6 +1200,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i10.Future<_i8.Response<dynamic>>);
+
   @override
   _i10.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
         Invocation.method(
@@ -1150,6 +1210,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
@@ -1173,6 +1234,7 @@ class MockInitializationService extends _i1.Mock
         returnValue: <_i4.Initializer>{},
         returnValueForMissingStub: <_i4.Initializer>{},
       ) as Set<_i4.Initializer>);
+
   @override
   _i10.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
@@ -1199,6 +1261,7 @@ class MockNotificationsStorage extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<_i4.Notification?> readNotification(String? notificationId) =>
       (super.noSuchMethod(
@@ -1228,6 +1291,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
           Invocation.getter(#birthDayTimeSetting),
         ),
       ) as _i4.NotificationSetting);
+
   @override
   _i4.NotificationSetting get kodasTimeSetting => (super.noSuchMethod(
         Invocation.getter(#kodasTimeSetting),
@@ -1240,6 +1304,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
           Invocation.getter(#kodasTimeSetting),
         ),
       ) as _i4.NotificationSetting);
+
   @override
   _i4.NotificationSetting get meetingTimeSetting => (super.noSuchMethod(
         Invocation.getter(#meetingTimeSetting),
@@ -1252,6 +1317,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
           Invocation.getter(#meetingTimeSetting),
         ),
       ) as _i4.NotificationSetting);
+
   @override
   _i4.NotificationSetting get confessionTimeSetting => (super.noSuchMethod(
         Invocation.getter(#confessionTimeSetting),
@@ -1264,6 +1330,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
           Invocation.getter(#confessionTimeSetting),
         ),
       ) as _i4.NotificationSetting);
+
   @override
   _i10.Future<void> setBirthDayTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
@@ -1274,6 +1341,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setKodasTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
@@ -1284,6 +1352,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setMeetingTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
@@ -1294,6 +1363,7 @@ class MockNotificationsSettingsStorage extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> setConfessionTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
@@ -1318,12 +1388,14 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Stream<_i4.Notification>.empty(),
         returnValueForMissingStub: _i10.Stream<_i4.Notification>.empty(),
       ) as _i10.Stream<_i4.Notification>);
+
   @override
   bool get isPaused => (super.noSuchMethod(
         Invocation.getter(#isPaused),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void addForegroundNotificationTap(_i4.Notification? notification) =>
       super.noSuchMethod(
@@ -1333,6 +1405,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void pauseListeners() => super.noSuchMethod(
         Invocation.method(
@@ -1341,6 +1414,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void resumeListeners() => super.noSuchMethod(
         Invocation.method(
@@ -1349,6 +1423,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i10.Future<_i4.Notification?> getInitialNotification() =>
       (super.noSuchMethod(
@@ -1359,6 +1434,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<_i4.Notification?>.value(),
         returnValueForMissingStub: _i10.Future<_i4.Notification?>.value(),
       ) as _i10.Future<_i4.Notification?>);
+
   @override
   _i10.Future<void> scheduleBirthDayNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -1375,6 +1451,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> scheduleMeetingNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -1391,6 +1468,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> scheduleKodasNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -1407,6 +1485,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> scheduleConfessionNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -1423,6 +1502,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
         Invocation.method(
@@ -1432,6 +1512,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> notify(
     _i4.Notification? notification, {
@@ -1450,6 +1531,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<bool> registerFCMTokenAndListenForChanges(
           {String? cachedToken}) =>
@@ -1462,6 +1544,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
         Invocation.method(
@@ -1471,6 +1554,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

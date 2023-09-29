@@ -137,6 +137,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<_i2.Box<E>> openBox<E>(
     String? name, {
@@ -199,6 +200,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         )),
       ) as _i4.Future<_i2.Box<E>>);
+
   @override
   _i4.Future<_i2.LazyBox<E>> openLazyBox<E>(
     String? name, {
@@ -258,6 +260,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         )),
       ) as _i4.Future<_i2.LazyBox<E>>);
+
   @override
   _i2.Box<E> box<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -279,6 +282,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         ),
       ) as _i2.Box<E>);
+
   @override
   _i2.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -300,6 +304,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         ),
       ) as _i2.LazyBox<E>);
+
   @override
   bool isBoxOpen(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -309,6 +314,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
@@ -318,6 +324,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> deleteBoxFromDisk(
     String? name, {
@@ -332,6 +339,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> deleteFromDisk() => (super.noSuchMethod(
         Invocation.method(
@@ -341,6 +349,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   List<int> generateSecureKey() => (super.noSuchMethod(
         Invocation.method(
@@ -350,6 +359,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: <int>[],
         returnValueForMissingStub: <int>[],
       ) as List<int>);
+
   @override
   _i4.Future<bool> boxExists(
     String? name, {
@@ -364,6 +374,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   void resetAdapters() => super.noSuchMethod(
         Invocation.method(
@@ -372,6 +383,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void registerAdapter<T>(
     _i2.TypeAdapter<T>? adapter, {
@@ -389,6 +401,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
         Invocation.method(
@@ -398,6 +411,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
         Invocation.method(
@@ -422,6 +436,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<String?> getApplicationSupportPath() => (super.noSuchMethod(
         Invocation.method(
@@ -431,6 +446,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<String?> getLibraryPath() => (super.noSuchMethod(
         Invocation.method(
@@ -440,6 +456,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<String?> getApplicationDocumentsPath() => (super.noSuchMethod(
         Invocation.method(
@@ -449,6 +466,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<String?> getApplicationCachePath() => (super.noSuchMethod(
         Invocation.method(
@@ -458,6 +476,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<String?> getExternalStoragePath() => (super.noSuchMethod(
         Invocation.method(
@@ -467,6 +486,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<List<String>?> getExternalCachePaths() => (super.noSuchMethod(
         Invocation.method(
@@ -476,6 +496,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<List<String>?>.value(),
         returnValueForMissingStub: _i4.Future<List<String>?>.value(),
       ) as _i4.Future<List<String>?>);
+
   @override
   _i4.Future<List<String>?> getExternalStoragePaths(
           {_i9.StorageDirectory? type}) =>
@@ -488,6 +509,7 @@ class MockPathProviderPlatform_ extends _i1.Mock
         returnValue: _i4.Future<List<String>?>.value(),
         returnValueForMissingStub: _i4.Future<List<String>?>.value(),
       ) as _i4.Future<List<String>?>);
+
   @override
   _i4.Future<String?> getDownloadsPath() => (super.noSuchMethod(
         Invocation.method(
@@ -516,6 +538,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#iOptions),
         ),
       ) as _i3.IOSOptions);
+
   @override
   _i3.AndroidOptions get aOptions => (super.noSuchMethod(
         Invocation.getter(#aOptions),
@@ -528,6 +551,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#aOptions),
         ),
       ) as _i3.AndroidOptions);
+
   @override
   _i3.LinuxOptions get lOptions => (super.noSuchMethod(
         Invocation.getter(#lOptions),
@@ -540,6 +564,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#lOptions),
         ),
       ) as _i3.LinuxOptions);
+
   @override
   _i3.WindowsOptions get wOptions => (super.noSuchMethod(
         Invocation.getter(#wOptions),
@@ -552,6 +577,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#wOptions),
         ),
       ) as _i3.WindowsOptions);
+
   @override
   _i3.WebOptions get webOptions => (super.noSuchMethod(
         Invocation.getter(#webOptions),
@@ -564,6 +590,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#webOptions),
         ),
       ) as _i3.WebOptions);
+
   @override
   _i3.MacOsOptions get mOptions => (super.noSuchMethod(
         Invocation.getter(#mOptions),
@@ -576,6 +603,7 @@ class MockFlutterSecureStorage extends _i1.Mock
           Invocation.getter(#mOptions),
         ),
       ) as _i3.MacOsOptions);
+
   @override
   _i4.Future<void> write({
     required String? key,
@@ -605,6 +633,7 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<String?> read({
     required String? key,
@@ -632,6 +661,7 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<bool> containsKey({
     required String? key,
@@ -659,6 +689,7 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<void> delete({
     required String? key,
@@ -686,6 +717,7 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<Map<String, String>> readAll({
     _i3.IOSOptions? iOptions,
@@ -712,6 +744,7 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValueForMissingStub:
             _i4.Future<Map<String, String>>.value(<String, String>{}),
       ) as _i4.Future<Map<String, String>>);
+
   @override
   _i4.Future<void> deleteAll({
     _i3.IOSOptions? iOptions,
@@ -760,6 +793,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
         returnValue: _i4.Future<String>.value(''),
         returnValueForMissingStub: _i4.Future<String>.value(''),
       ) as _i4.Future<String>);
+
   @override
   _i4.Future<_i7.Uint8List> deriveKey({
     required String? password,
@@ -778,6 +812,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
         returnValueForMissingStub:
             _i4.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
       ) as _i4.Future<_i7.Uint8List>);
+
   @override
   _i4.Future<bool> verifyPassword({
     required String? passwordToVerify,
@@ -797,6 +832,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<_i7.Uint8List> additionalDeviceInfo() => (super.noSuchMethod(
         Invocation.method(
@@ -807,6 +843,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
         returnValueForMissingStub:
             _i4.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
       ) as _i4.Future<_i7.Uint8List>);
+
   @override
   _i4.Future<_i2.HiveCipher> getHiveCipher({String? boxName}) =>
       (super.noSuchMethod(

@@ -92,6 +92,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#multiFactorManager),
         ),
       ) as _i2.MultiFactorManager);
+
   @override
   set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
@@ -101,12 +102,14 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -119,6 +122,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#userStream),
         ),
       ) as _i3.ValueStream<_i2.User?>);
+
   @override
   _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -131,6 +135,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#idTokenStream),
         ),
       ) as _i3.ValueStream<String?>);
+
   @override
   _i5.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -148,6 +153,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -165,6 +171,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -182,6 +189,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -191,6 +199,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -200,6 +209,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -209,6 +219,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -218,6 +229,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<String?>.value(),
         returnValueForMissingStub: _i5.Future<String?>.value(),
       ) as _i5.Future<String?>);
+
   @override
   _i5.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -227,6 +239,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -254,18 +267,21 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
           Invocation.getter(#timeToReauth),
         ),
       ) as Duration);
+
   @override
   bool get shouldAuthenticate => (super.noSuchMethod(
         Invocation.getter(#shouldAuthenticate),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i5.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
         returnValue: _i5.Stream<void>.empty(),
         returnValueForMissingStub: _i5.Stream<void>.empty(),
       ) as _i5.Stream<void>);
+
   @override
   bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -275,6 +291,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -284,6 +301,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
       super.noSuchMethod(
@@ -293,6 +311,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void scheduleReauth() => super.noSuchMethod(
         Invocation.method(
@@ -301,6 +320,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void resetAuthState({String? path}) => super.noSuchMethod(
         Invocation.method(
@@ -310,6 +330,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i5.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
@@ -319,6 +340,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
@@ -328,6 +350,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> verifyPassword({
     required String? email,
@@ -347,6 +370,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -356,6 +380,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
@@ -365,6 +390,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
@@ -374,6 +400,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<bool> didPushRouteInformation(
           _i7.RouteInformation? routeInformation) =>
@@ -385,6 +412,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   void didChangeMetrics() => super.noSuchMethod(
         Invocation.method(
@@ -393,6 +421,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeTextScaleFactor() => super.noSuchMethod(
         Invocation.method(
@@ -401,6 +430,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangePlatformBrightness() => super.noSuchMethod(
         Invocation.method(
@@ -409,6 +439,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
@@ -417,6 +448,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i5.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
@@ -428,6 +460,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub:
             _i5.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
       ) as _i5.Future<_i6.AppExitResponse>);
+
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(
@@ -436,6 +469,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeAccessibilityFeatures() => super.noSuchMethod(
         Invocation.method(
@@ -463,18 +497,21 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
           Invocation.getter(#uri),
         ),
       ) as Uri);
+
   @override
   String get matchedLocation => (super.noSuchMethod(
         Invocation.getter(#matchedLocation),
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   Map<String, String> get pathParameters => (super.noSuchMethod(
         Invocation.getter(#pathParameters),
         returnValue: <String, String>{},
         returnValueForMissingStub: <String, String>{},
       ) as Map<String, String>);
+
   @override
   _i4.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
@@ -487,6 +524,7 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
           Invocation.getter(#pageKey),
         ),
       ) as _i4.ValueKey<String>);
+
   @override
   String namedLocation(
     String? name, {

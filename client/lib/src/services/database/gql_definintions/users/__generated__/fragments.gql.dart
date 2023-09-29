@@ -700,6 +700,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
             ? _instance.person
             : (person as Fragment_UserOverview_person?),
       ));
+
   TRes permissions(
           Iterable<Fragment_UserOverview_permissions> Function(
                   Iterable<
@@ -712,6 +713,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_UserOverview_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -738,7 +740,9 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
     Fragment_UserOverview_person? person,
   }) =>
       _res;
+
   permissions(_fn) => _res;
+
   CopyWith_Fragment_UserOverview_person<TRes> get person =>
       CopyWith_Fragment_UserOverview_person.stub(_res);
 }
@@ -1490,6 +1494,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
             ? _instance.adminOn
             : (adminOn as List<Fragment_UserDetails_adminOn>),
       ));
+
   TRes permissions(
           Iterable<Fragment_UserDetails_permissions> Function(
                   Iterable<
@@ -1502,6 +1507,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_UserDetails_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -1543,9 +1549,12 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
     List<Fragment_UserDetails_adminOn>? adminOn,
   }) =>
       _res;
+
   permissions(_fn) => _res;
+
   CopyWith_Fragment_UserDetails_person<TRes> get person =>
       CopyWith_Fragment_UserDetails_person.stub(_res);
+
   adminOn(_fn) => _res;
 }
 
@@ -2338,6 +2347,7 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
@@ -2371,6 +2381,7 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -2402,13 +2413,18 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+
   CopyWith_Fragment_Service<TRes> get service =>
       CopyWith_Fragment_Service.stub(_res);
+
   CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData =>
           CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(_res);
+
   classes(_fn) => _res;
+
   CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
@@ -2692,6 +2708,7 @@ class _CopyWithImpl_Fragment_UserPermissions<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes permissions(
           Iterable<Fragment_UserPermissions_permissions> Function(
                   Iterable<
@@ -2717,6 +2734,7 @@ class _CopyWithStubImpl_Fragment_UserPermissions<TRes>
     String? $__typename,
   }) =>
       _res;
+
   permissions(_fn) => _res;
 }
 
@@ -3015,6 +3033,7 @@ class _CopyWithImpl_Fragment_UserAdminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes adminOn(
           Iterable<Fragment_UserAdminOn_adminOn> Function(
                   Iterable<
@@ -3040,6 +3059,7 @@ class _CopyWithStubImpl_Fragment_UserAdminOn<TRes>
     String? $__typename,
   }) =>
       _res;
+
   adminOn(_fn) => _res;
 }
 
@@ -3691,6 +3711,7 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
@@ -3724,6 +3745,7 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -3755,13 +3777,18 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+
   CopyWith_Fragment_Service<TRes> get service =>
       CopyWith_Fragment_Service.stub(_res);
+
   CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
       get serviceStudyYearData =>
           CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(_res);
+
   classes(_fn) => _res;
+
   CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
@@ -3979,12 +4006,18 @@ class Variables_Fragment_AttendanceFields {
   Map<String, dynamic> _$data;
 
   DateTime? get dateFrom => (_$data['dateFrom'] as DateTime?);
+
   DateTime? get dateTo => (_$data['dateTo'] as DateTime?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   List<UuidValue>? get servicesIds =>
       (_$data['servicesIds'] as List<UuidValue>?);
+
   List<UuidValue>? get classesIds => (_$data['classesIds'] as List<UuidValue>?);
+
   List<UuidValue>? get groupsIds => (_$data['groupsIds'] as List<UuidValue>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dateFrom')) {
@@ -4025,6 +4058,7 @@ class Variables_Fragment_AttendanceFields {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4427,6 +4461,7 @@ class _CopyWithImpl_Fragment_AttendanceFields<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes servicesHistory(
           Iterable<Fragment_AttendanceFields_servicesHistory> Function(
                   Iterable<
@@ -4439,6 +4474,7 @@ class _CopyWithImpl_Fragment_AttendanceFields<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes classesHistory(
           Iterable<Fragment_AttendanceFields_classesHistory> Function(
                   Iterable<
@@ -4451,6 +4487,7 @@ class _CopyWithImpl_Fragment_AttendanceFields<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes groupsHistory(
           Iterable<Fragment_AttendanceFields_groupsHistory> Function(
                   Iterable<
@@ -4478,8 +4515,11 @@ class _CopyWithStubImpl_Fragment_AttendanceFields<TRes>
     String? $__typename,
   }) =>
       _res;
+
   servicesHistory(_fn) => _res;
+
   classesHistory(_fn) => _res;
+
   groupsHistory(_fn) => _res;
 }
 
@@ -5457,6 +5497,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
@@ -5479,6 +5520,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes>
       get service =>
           CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(_res);
@@ -5738,6 +5780,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
             : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -5778,11 +5821,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -5964,6 +6009,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -6006,11 +6052,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attend
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -6167,6 +6215,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -6195,6 +6244,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attend
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -6664,6 +6714,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -6706,11 +6757,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attend
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -7152,6 +7205,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes classes(
           Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
                   Iterable<
@@ -7178,6 +7232,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   classes(_fn) => _res;
 }
 
@@ -7432,6 +7487,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
             : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -7470,11 +7526,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -7656,6 +7714,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceH
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -7698,11 +7757,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attenda
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -7859,6 +7920,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceH
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -7887,6 +7949,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attenda
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -8356,6 +8419,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceD
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -8398,11 +8462,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attenda
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -8831,6 +8897,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -8853,6 +8920,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group =>
       CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(_res);
 }
@@ -9108,6 +9176,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
             : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -9146,11 +9215,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -9332,6 +9403,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHist
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -9374,11 +9446,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendance
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -9535,6 +9609,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHist
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -9563,6 +9638,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendance
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -10032,6 +10108,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDays
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -10074,11 +10151,13 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendance
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 

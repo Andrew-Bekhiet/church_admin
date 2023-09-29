@@ -61,6 +61,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i3.Future<_i2.Box<E>> openBox<E>(
     String? name, {
@@ -123,6 +124,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         )),
       ) as _i3.Future<_i2.Box<E>>);
+
   @override
   _i3.Future<_i2.LazyBox<E>> openLazyBox<E>(
     String? name, {
@@ -182,6 +184,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         )),
       ) as _i3.Future<_i2.LazyBox<E>>);
+
   @override
   _i2.Box<E> box<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -203,6 +206,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         ),
       ) as _i2.Box<E>);
+
   @override
   _i2.LazyBox<E> lazyBox<E>(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -224,6 +228,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
           ),
         ),
       ) as _i2.LazyBox<E>);
+
   @override
   bool isBoxOpen(String? name) => (super.noSuchMethod(
         Invocation.method(
@@ -233,6 +238,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
@@ -242,6 +248,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> deleteBoxFromDisk(
     String? name, {
@@ -256,6 +263,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> deleteFromDisk() => (super.noSuchMethod(
         Invocation.method(
@@ -265,6 +273,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   List<int> generateSecureKey() => (super.noSuchMethod(
         Invocation.method(
@@ -274,6 +283,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: <int>[],
         returnValueForMissingStub: <int>[],
       ) as List<int>);
+
   @override
   _i3.Future<bool> boxExists(
     String? name, {
@@ -288,6 +298,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   void resetAdapters() => super.noSuchMethod(
         Invocation.method(
@@ -296,6 +307,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void registerAdapter<T>(
     _i2.TypeAdapter<T>? adapter, {
@@ -313,6 +325,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool isAdapterRegistered(int? typeId) => (super.noSuchMethod(
         Invocation.method(
@@ -322,6 +335,7 @@ class MockHiveInterface extends _i1.Mock implements _i2.HiveInterface {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void ignoreTypeId<T>(int? typeId) => super.noSuchMethod(
         Invocation.method(
@@ -342,42 +356,49 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   bool get isOpen => (super.noSuchMethod(
         Invocation.getter(#isOpen),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get lazy => (super.noSuchMethod(
         Invocation.getter(#lazy),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   Iterable<dynamic> get keys => (super.noSuchMethod(
         Invocation.getter(#keys),
         returnValue: <dynamic>[],
         returnValueForMissingStub: <dynamic>[],
       ) as Iterable<dynamic>);
+
   @override
   int get length => (super.noSuchMethod(
         Invocation.getter(#length),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
   @override
   bool get isEmpty => (super.noSuchMethod(
         Invocation.getter(#isEmpty),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get isNotEmpty => (super.noSuchMethod(
         Invocation.getter(#isNotEmpty),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<_i7.Notification?> get(
     dynamic key, {
@@ -392,6 +413,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<_i7.Notification?>.value(),
         returnValueForMissingStub: _i3.Future<_i7.Notification?>.value(),
       ) as _i3.Future<_i7.Notification?>);
+
   @override
   _i3.Future<_i7.Notification?> getAt(int? index) => (super.noSuchMethod(
         Invocation.method(
@@ -401,6 +423,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<_i7.Notification?>.value(),
         returnValueForMissingStub: _i3.Future<_i7.Notification?>.value(),
       ) as _i3.Future<_i7.Notification?>);
+
   @override
   dynamic keyAt(int? index) => super.noSuchMethod(
         Invocation.method(
@@ -409,6 +432,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i3.Stream<_i2.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
         Invocation.method(
@@ -419,6 +443,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Stream<_i2.BoxEvent>.empty(),
         returnValueForMissingStub: _i3.Stream<_i2.BoxEvent>.empty(),
       ) as _i3.Stream<_i2.BoxEvent>);
+
   @override
   bool containsKey(dynamic key) => (super.noSuchMethod(
         Invocation.method(
@@ -428,6 +453,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<void> put(
     dynamic key,
@@ -444,6 +470,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> putAt(
     int? index,
@@ -460,6 +487,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> putAll(Map<dynamic, _i7.Notification>? entries) =>
       (super.noSuchMethod(
@@ -470,6 +498,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<int> add(_i7.Notification? value) => (super.noSuchMethod(
         Invocation.method(
@@ -479,6 +508,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<int>.value(0),
         returnValueForMissingStub: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
+
   @override
   _i3.Future<Iterable<int>> addAll(Iterable<_i7.Notification>? values) =>
       (super.noSuchMethod(
@@ -489,6 +519,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<Iterable<int>>.value(<int>[]),
         returnValueForMissingStub: _i3.Future<Iterable<int>>.value(<int>[]),
       ) as _i3.Future<Iterable<int>>);
+
   @override
   _i3.Future<void> delete(dynamic key) => (super.noSuchMethod(
         Invocation.method(
@@ -498,6 +529,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> deleteAt(int? index) => (super.noSuchMethod(
         Invocation.method(
@@ -507,6 +539,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> deleteAll(Iterable<dynamic>? keys) => (super.noSuchMethod(
         Invocation.method(
@@ -516,6 +549,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> compact() => (super.noSuchMethod(
         Invocation.method(
@@ -525,6 +559,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<int> clear() => (super.noSuchMethod(
         Invocation.method(
@@ -534,6 +569,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<int>.value(0),
         returnValueForMissingStub: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
+
   @override
   _i3.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
@@ -543,6 +579,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> deleteFromDisk() => (super.noSuchMethod(
         Invocation.method(
@@ -552,6 +589,7 @@ class MockLazyBox extends _i1.Mock implements _i2.LazyBox<_i7.Notification> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> flush() => (super.noSuchMethod(
         Invocation.method(

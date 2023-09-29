@@ -21,6 +21,7 @@ class Variables_Mutation_deleteArea {
   Map<String, dynamic> _$data;
 
   UuidValue get areaId => (_$data['areaId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$areaId = areaId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteArea {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -210,6 +212,7 @@ class _CopyWithImpl_Mutation_deleteArea<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk {
     final local$deleteAreasByPk = _instance.deleteAreasByPk;
     return local$deleteAreasByPk == null
@@ -230,6 +233,7 @@ class _CopyWithStubImpl_Mutation_deleteArea<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
 }
@@ -309,6 +313,7 @@ class Variables_Mutation_insertArea {
 
   Input_AreasInsertInput get newArea =>
       (_$data['newArea'] as Input_AreasInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newArea = newArea;
@@ -321,6 +326,7 @@ class Variables_Mutation_insertArea {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -498,6 +504,7 @@ class _CopyWithImpl_Mutation_insertArea<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get insertAreasOne {
     final local$insertAreasOne = _instance.insertAreasOne;
     return local$insertAreasOne == null
@@ -518,6 +525,7 @@ class _CopyWithStubImpl_Mutation_insertArea<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get insertAreasOne =>
       CopyWith_Fragment_Area.stub(_res);
 }
@@ -601,7 +609,9 @@ class Variables_Mutation_updateArea {
   Map<String, dynamic> _$data;
 
   UuidValue get areaId => (_$data['areaId'] as UuidValue);
+
   Input_AreasSetInput get newArea => (_$data['newArea'] as Input_AreasSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$areaId = areaId;
@@ -616,6 +626,7 @@ class Variables_Mutation_updateArea {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -814,6 +825,7 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get updateAreasByPk {
     final local$updateAreasByPk = _instance.updateAreasByPk;
     return local$updateAreasByPk == null
@@ -834,6 +846,7 @@ class _CopyWithStubImpl_Mutation_updateArea<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get updateAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
 }

@@ -21,6 +21,7 @@ class Variables_Mutation_deletePerson {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deletePerson {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deletePerson<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk {
     final local$deletePersonsByPk = _instance.deletePersonsByPk;
     return local$deletePersonsByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deletePerson<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -506,44 +510,71 @@ class Variables_Mutation_updatePerson {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   Input_PersonsSetInput get newPerson =>
       (_$data['newPerson'] as Input_PersonsSetInput);
+
   List<Input_PersonsGroupsInsertInput>? get newGroups =>
       (_$data['newGroups'] as List<Input_PersonsGroupsInsertInput>?);
+
   List<UuidValue>? get deleteGroups =>
       (_$data['deleteGroups'] as List<UuidValue>?);
+
   List<Input_PersonsServicesInsertInput>? get newServices =>
       (_$data['newServices'] as List<Input_PersonsServicesInsertInput>?);
+
   List<UuidValue>? get deleteServices =>
       (_$data['deleteServices'] as List<UuidValue>?);
+
   List<Input_PersonsHobbiesInsertInput>? get newHobbies =>
       (_$data['newHobbies'] as List<Input_PersonsHobbiesInsertInput>?);
+
   List<UuidValue>? get deleteHobbies =>
       (_$data['deleteHobbies'] as List<UuidValue>?);
+
   List<Input_PersonsTagsInsertInput>? get newTags =>
       (_$data['newTags'] as List<Input_PersonsTagsInsertInput>?);
+
   List<UuidValue>? get deleteTags => (_$data['deleteTags'] as List<UuidValue>?);
+
   DateTime? get lastConfession => (_$data['lastConfession'] as DateTime?);
+
   DateTime? get lastKodas => (_$data['lastKodas'] as DateTime?);
+
   DateTime? get lastCall => (_$data['lastCall'] as DateTime?);
+
   DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
   bool? get updatePersonsByPk => (_$data['updatePersonsByPk'] as bool?);
+
   bool? get insertPersonsServices => (_$data['insertPersonsServices'] as bool?);
+
   bool? get insertPersonsGroups => (_$data['insertPersonsGroups'] as bool?);
+
   bool? get insertPersonsHobbies => (_$data['insertPersonsHobbies'] as bool?);
+
   bool? get insertPersonsTags => (_$data['insertPersonsTags'] as bool?);
+
   bool? get deletePersonsTags => (_$data['deletePersonsTags'] as bool?);
+
   bool? get deletePersonsHobbies => (_$data['deletePersonsHobbies'] as bool?);
+
   bool? get deletePersonsGroups => (_$data['deletePersonsGroups'] as bool?);
+
   bool? get deletePersonsServices => (_$data['deletePersonsServices'] as bool?);
+
   bool? get insertHistoryConfessionHistoryOne =>
       (_$data['insertHistoryConfessionHistoryOne'] as bool?);
+
   bool? get insertHistoryKodasHistoryOne =>
       (_$data['insertHistoryKodasHistoryOne'] as bool?);
+
   bool? get insertHistoryCallHistoryOne =>
       (_$data['insertHistoryCallHistoryOne'] as bool?);
+
   bool? get insertHistoryVisitHistoryOne =>
       (_$data['insertHistoryVisitHistoryOne'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -682,6 +713,7 @@ class Variables_Mutation_updatePerson {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1753,6 +1785,7 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk {
     final local$updatePersonsByPk = _instance.updatePersonsByPk;
     return local$updatePersonsByPk == null
@@ -1915,43 +1948,56 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices =>
           CopyWith_Mutation_updatePerson_insertPersonsServices.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
       get insertPersonsGroups =>
           CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
       get insertPersonsHobbies =>
           CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes>
       get insertPersonsTags =>
           CopyWith_Mutation_updatePerson_insertPersonsTags.stub(_res);
+
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes>
       get deletePersonsTags =>
           CopyWith_Mutation_updatePerson_deletePersonsTags.stub(_res);
+
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
       get deletePersonsHobbies =>
           CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(_res);
+
   CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
       get deletePersonsGroups =>
           CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(_res);
+
   CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
       get deletePersonsServices =>
           CopyWith_Mutation_updatePerson_deletePersonsServices.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
       get insertHistoryConfessionHistoryOne =>
           CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
               _res);
+
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne =>
           CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
               _res);
+
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
       get insertHistoryCallHistoryOne =>
           CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(_res);
+
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
       get insertHistoryVisitHistoryOne =>
           CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
@@ -4157,6 +4203,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
@@ -4179,6 +4226,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
       get person =>
           CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
@@ -4466,6 +4514,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
@@ -4487,6 +4536,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
       get person =>
           CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person
@@ -4770,6 +4820,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
@@ -4791,6 +4842,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
       get person =>
           CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person
@@ -5075,6 +5127,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
       get person {
     final local$person = _instance.person;
@@ -5096,6 +5149,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
       get person =>
           CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person
@@ -5280,6 +5334,7 @@ class Variables_Mutation_insertPerson {
 
   Input_PersonsInsertInput get newPerson =>
       (_$data['newPerson'] as Input_PersonsInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newPerson = newPerson;
@@ -5292,6 +5347,7 @@ class Variables_Mutation_insertPerson {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5470,6 +5526,7 @@ class _CopyWithImpl_Mutation_insertPerson<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get insertPersonsOne {
     final local$insertPersonsOne = _instance.insertPersonsOne;
     return local$insertPersonsOne == null
@@ -5490,6 +5547,7 @@ class _CopyWithStubImpl_Mutation_insertPerson<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get insertPersonsOne =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -5577,8 +5635,11 @@ class Variables_Mutation_updatePersonSpiritData {
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   DateTime get lastConfession => (_$data['lastConfession'] as DateTime);
+
   DateTime get lastKodas => (_$data['lastKodas'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
@@ -5596,6 +5657,7 @@ class Variables_Mutation_updatePersonSpiritData {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5853,6 +5915,7 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
@@ -5892,11 +5955,13 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
           TRes>
       get insertHistoryConfessionHistoryOne =>
           CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
               .stub(_res);
+
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
       get insertHistoryKodasHistoryOne =>
           CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
@@ -6242,6 +6307,7 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHisto
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -6263,6 +6329,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionH
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }
@@ -6389,6 +6456,7 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
     return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
@@ -6410,6 +6478,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistor
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
 }

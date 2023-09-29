@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllShammasLevels {
 
   List<Input_ShammasLevelsBoolExp>? get where =>
       (_$data['where'] as List<Input_ShammasLevelsBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllShammasLevels {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -265,6 +268,7 @@ class _CopyWithImpl_Subscription_watchAllShammasLevels<TRes>
               ? _instance.shammasLevels
               : (shammasLevels
                   as List<Subscription_watchAllShammasLevels_shammasLevels>)));
+
   TRes shammasLevels(
           Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
                   Iterable<
@@ -289,6 +293,7 @@ class _CopyWithStubImpl_Subscription_watchAllShammasLevels<TRes>
           {List<Subscription_watchAllShammasLevels_shammasLevels>?
               shammasLevels}) =>
       _res;
+
   shammasLevels(_fn) => _res;
 }
 

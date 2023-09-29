@@ -77,12 +77,14 @@ class MockRequest extends _i1.Mock implements _i4.Request {
           Invocation.getter(#operation),
         ),
       ) as _i2.Operation);
+
   @override
   Map<String, dynamic> get variables => (super.noSuchMethod(
         Invocation.getter(#variables),
         returnValue: <String, dynamic>{},
         returnValueForMissingStub: <String, dynamic>{},
       ) as Map<String, dynamic>);
+
   @override
   _i3.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
@@ -95,6 +97,7 @@ class MockRequest extends _i1.Mock implements _i4.Request {
           Invocation.getter(#context),
         ),
       ) as _i3.Context);
+
   @override
   _i4.Request withContextEntry<T extends _i3.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
@@ -117,6 +120,7 @@ class MockRequest extends _i1.Mock implements _i4.Request {
           ),
         ),
       ) as _i4.Request);
+
   @override
   _i4.Request updateContextEntry<T extends _i3.ContextEntry>(
           _i3.ContextUpdater<T?>? update) =>
@@ -153,6 +157,7 @@ class MockResponse extends _i1.Mock implements _i5.Response {
         returnValue: <String, dynamic>{},
         returnValueForMissingStub: <String, dynamic>{},
       ) as Map<String, dynamic>);
+
   @override
   _i3.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
@@ -165,6 +170,7 @@ class MockResponse extends _i1.Mock implements _i5.Response {
           Invocation.getter(#context),
         ),
       ) as _i3.Context);
+
   @override
   _i5.Response withContextEntry<T extends _i3.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
@@ -187,6 +193,7 @@ class MockResponse extends _i1.Mock implements _i5.Response {
           ),
         ),
       ) as _i5.Response);
+
   @override
   _i5.Response updateContextEntry<T extends _i3.ContextEntry>(
           _i3.ContextUpdater<T?>? update) =>

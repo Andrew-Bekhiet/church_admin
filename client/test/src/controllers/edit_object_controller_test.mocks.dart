@@ -111,6 +111,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         ),
       ) as _i2.HttpsCallable);
+
   @override
   _i7.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
@@ -137,6 +138,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
       ) as _i7.Future<_i2.HttpsCallableResult<dynamic>>);
+
   @override
   _i7.Future<String> getDownloadUrl(
     String? table,
@@ -155,6 +157,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
         returnValue: _i7.Future<String>.value(''),
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+
   @override
   _i7.Future<String> getUploadUrl(
     String? table,
@@ -173,6 +176,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
         returnValue: _i7.Future<String>.value(''),
         returnValueForMissingStub: _i7.Future<String>.value(''),
       ) as _i7.Future<String>);
+
   @override
   _i7.Future<void> deletePhoto(
     String? table,
@@ -189,6 +193,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<String?> getAddressFromLocation(_i6.Point? location) =>
       (super.noSuchMethod(
@@ -199,6 +204,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
         returnValue: _i7.Future<String?>.value(),
         returnValueForMissingStub: _i7.Future<String?>.value(),
       ) as _i7.Future<String?>);
+
   @override
   _i7.Future<_i3.Response<dynamic>> uploadPhoto({
     required String? url,
@@ -253,6 +259,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
       ) as _i7.Future<_i3.Response<dynamic>>);
+
   @override
   _i7.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
         Invocation.method(
@@ -262,6 +269,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
         returnValue: _i7.Future<bool>.value(false),
         returnValueForMissingStub: _i7.Future<bool>.value(false),
       ) as _i7.Future<bool>);
+
   @override
   _i7.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
@@ -290,6 +298,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           Invocation.getter(#navigatorObserver),
         ),
       ) as _i4.NavigatorObserver);
+
   @override
   _i7.Future<void> onFlutterError(_i5.FlutterErrorDetails? flutterError) =>
       (super.noSuchMethod(
@@ -300,6 +309,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i4.Widget errorWidgetBuilder(_i5.FlutterErrorDetails? error) =>
       (super.noSuchMethod(
@@ -322,6 +332,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           ),
         ),
       ) as _i4.Widget);
+
   @override
   _i7.Future<void> reportError(
     dynamic error, {
@@ -342,6 +353,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<void> reportFlutterError(
     _i5.FlutterErrorDetails? flutterError, {
@@ -360,6 +372,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
   @override
   _i7.Future<void> showErrorDialogAndReport(
     _i4.BuildContext? context,

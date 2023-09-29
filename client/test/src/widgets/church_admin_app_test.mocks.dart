@@ -431,6 +431,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
           Invocation.getter(#navigatorObserver),
         ),
       ) as _i2.NavigatorObserver);
+
   @override
   _i9.Future<void> onFlutterError(_i3.FlutterErrorDetails? flutterError) =>
       (super.noSuchMethod(
@@ -441,6 +442,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i2.Widget errorWidgetBuilder(_i3.FlutterErrorDetails? error) =>
       (super.noSuchMethod(
@@ -463,6 +465,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
           ),
         ),
       ) as _i2.Widget);
+
   @override
   _i9.Future<void> reportError(
     dynamic error, {
@@ -483,6 +486,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> reportFlutterError(
     _i3.FlutterErrorDetails? flutterError, {
@@ -501,6 +505,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> showErrorDialogAndReport(
     _i2.BuildContext? context,
@@ -543,6 +548,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#multiFactorManager),
         ),
       ) as _i4.MultiFactorManager);
+
   @override
   set multiFactorManager(_i4.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
@@ -552,12 +558,14 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i5.ValueStream<_i4.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -570,6 +578,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#userStream),
         ),
       ) as _i5.ValueStream<_i4.User?>);
+
   @override
   _i5.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -582,6 +591,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
           Invocation.getter(#idTokenStream),
         ),
       ) as _i5.ValueStream<String?>);
+
   @override
   _i9.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -599,6 +609,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -616,6 +627,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -633,6 +645,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -642,6 +655,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -651,6 +665,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -660,6 +675,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -669,6 +685,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<String?>.value(),
         returnValueForMissingStub: _i9.Future<String?>.value(),
       ) as _i9.Future<String?>);
+
   @override
   _i9.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -678,6 +695,7 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -700,6 +718,7 @@ class MockMultiFactorManager extends _i1.Mock
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i9.Future<_i4.MultiFactorSession> enrollNewMultiFactor(
           {required String? password}) =>
@@ -728,6 +747,7 @@ class MockMultiFactorManager extends _i1.Mock
           ),
         )),
       ) as _i9.Future<_i4.MultiFactorSession>);
+
   @override
   _i4.MultiFactorInfo getMultiFactorInfoForPendingSession() =>
       (super.noSuchMethod(
@@ -750,6 +770,7 @@ class MockMultiFactorManager extends _i1.Mock
           ),
         ),
       ) as _i4.MultiFactorInfo);
+
   @override
   _i9.Future<(String, int?)> initiateMultifactorLogin(
     _i4.MultiFactorSession? session, {
@@ -770,6 +791,7 @@ class MockMultiFactorManager extends _i1.Mock
         returnValue: _i9.Future<(String, int?)>.value(('', null)),
         returnValueForMissingStub: _i9.Future<(String, int?)>.value(('', null)),
       ) as _i9.Future<(String, int?)>);
+
   @override
   _i9.Future<void> finishMultiFactorSession(
     String? verificationId,
@@ -806,6 +828,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i4.DBGraphQLClient);
+
   @override
   _i6.GQLParser get parser => (super.noSuchMethod(
         Invocation.getter(#parser),
@@ -818,6 +841,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#parser),
         ),
       ) as _i6.GQLParser);
+
   @override
   _i7.AreasDAO get areas => (super.noSuchMethod(
         Invocation.getter(#areas),
@@ -830,6 +854,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#areas),
         ),
       ) as _i7.AreasDAO);
+
   @override
   _i7.StreetsDAO get streets => (super.noSuchMethod(
         Invocation.getter(#streets),
@@ -842,6 +867,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#streets),
         ),
       ) as _i7.StreetsDAO);
+
   @override
   _i7.FamiliesDAO get families => (super.noSuchMethod(
         Invocation.getter(#families),
@@ -854,6 +880,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#families),
         ),
       ) as _i7.FamiliesDAO);
+
   @override
   _i7.StoresDAO get stores => (super.noSuchMethod(
         Invocation.getter(#stores),
@@ -866,6 +893,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#stores),
         ),
       ) as _i7.StoresDAO);
+
   @override
   _i7.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
@@ -878,6 +906,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#persons),
         ),
       ) as _i7.PersonsDAO);
+
   @override
   _i7.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
@@ -890,6 +919,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#services),
         ),
       ) as _i7.ServicesDAO);
+
   @override
   _i7.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
@@ -902,6 +932,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#classes),
         ),
       ) as _i7.ClassesDAO);
+
   @override
   _i7.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
@@ -914,6 +945,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#groups),
         ),
       ) as _i7.GroupsDAO);
+
   @override
   _i7.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
@@ -926,6 +958,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#users),
         ),
       ) as _i7.UsersDAO);
+
   @override
   _i7.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
@@ -938,6 +971,7 @@ class MockDatabaseService extends _i1.Mock implements _i4.DatabaseService {
           Invocation.getter(#metadata),
         ),
       ) as _i7.MetadataDAO);
+
   @override
   _i7.HistoryDAO get history => (super.noSuchMethod(
         Invocation.getter(#history),
@@ -972,6 +1006,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
           Invocation.getter(#baseStreamAllConfig),
         ),
       ) as _i4.StreamAllConfig<_i4.User, _i4.Input_AuthUsersDataBoolExp>);
+
   @override
   _i4.StreamSingleByIdConfig<_i4.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
@@ -985,6 +1020,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
       ) as _i4.StreamSingleByIdConfig<_i4.User>);
+
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
@@ -997,6 +1033,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
           Invocation.getter(#db),
         ),
       ) as _i4.DatabaseService);
+
   @override
   _i4.User Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
@@ -1009,6 +1046,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
           Invocation.getter(#fromJson),
         ),
       ) as _i4.User Function(Map<String, dynamic>));
+
   @override
   _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
@@ -1021,6 +1059,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i4.DBGraphQLClient);
+
   @override
   _i4.StreamableDAOProxy<_i4.User, _i4.Input_AuthUsersDataBoolExp>
       get streamingProxy => (super.noSuchMethod(
@@ -1037,6 +1076,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
             ),
           ) as _i4
               .StreamableDAOProxy<_i4.User, _i4.Input_AuthUsersDataBoolExp>);
+
   @override
   _i9.Stream<_i4.User?> streamSingleById({
     required String? id,
@@ -1054,6 +1094,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
         returnValue: _i9.Stream<_i4.User?>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.User?>.empty(),
       ) as _i9.Stream<_i4.User?>);
+
   @override
   _i9.Future<_i4.User?> analyzeUserAttendance({
     required String? personId,
@@ -1081,6 +1122,7 @@ class MockUsersDAO extends _i1.Mock implements _i7.UsersDAO {
         returnValue: _i9.Future<_i4.User?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.User?>.value(),
       ) as _i9.Future<_i4.User?>);
+
   @override
   _i4.GQLPaginatableStream<_i4.User> streamAll({
     _i9.Stream<String?>? searchQuery,
@@ -1137,6 +1179,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#notificationsQueries),
         ),
       ) as _i8.PersonsNotificationsQueries);
+
   @override
   _i4.StreamAllConfig<_i4.Person, _i4.Input_PersonsBoolExp>
       get baseStreamAllConfig => (super.noSuchMethod(
@@ -1152,6 +1195,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
               Invocation.getter(#baseStreamAllConfig),
             ),
           ) as _i4.StreamAllConfig<_i4.Person, _i4.Input_PersonsBoolExp>);
+
   @override
   _i4.StreamSingleByIdConfig<_i4.Person> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1165,6 +1209,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
       ) as _i4.StreamSingleByIdConfig<_i4.Person>);
+
   @override
   _i4.DeleteSingleByIdConfig<_i4.Person> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1178,6 +1223,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
       ) as _i4.DeleteSingleByIdConfig<_i4.Person>);
+
   @override
   _i4.UpdateObjectConfig<_i4.Person> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
@@ -1191,6 +1237,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#baseUpdateObjectConfig),
         ),
       ) as _i4.UpdateObjectConfig<_i4.Person>);
+
   @override
   _i4.CreateObjectConfig<_i4.Person> get baseCreateObjectConfig =>
       (super.noSuchMethod(
@@ -1204,6 +1251,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#baseCreateObjectConfig),
         ),
       ) as _i4.CreateObjectConfig<_i4.Person>);
+
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
@@ -1216,6 +1264,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#db),
         ),
       ) as _i4.DatabaseService);
+
   @override
   _i4.Person Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
@@ -1229,6 +1278,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#fromJson),
         ),
       ) as _i4.Person Function(Map<String, dynamic>));
+
   @override
   _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
@@ -1241,6 +1291,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i4.DBGraphQLClient);
+
   @override
   _i4.StreamableDAOProxy<
       _i4.Person, _i4.Input_PersonsBoolExp> get streamingProxy => (super
@@ -1257,6 +1308,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#streamingProxy),
         ),
       ) as _i4.StreamableDAOProxy<_i4.Person, _i4.Input_PersonsBoolExp>);
+
   @override
   _i4.CreatableDAOProxy<_i4.Person> get createObjectProxy =>
       (super.noSuchMethod(
@@ -1270,6 +1322,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#createObjectProxy),
         ),
       ) as _i4.CreatableDAOProxy<_i4.Person>);
+
   @override
   _i4.UpdatableDAOProxy<_i4.Person> get updateObjectProxy =>
       (super.noSuchMethod(
@@ -1283,6 +1336,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#updateObjectProxy),
         ),
       ) as _i4.UpdatableDAOProxy<_i4.Person>);
+
   @override
   _i4.DeletableDAOProxy<_i4.Person> get deleteSingleByIdProxy =>
       (super.noSuchMethod(
@@ -1296,6 +1350,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           Invocation.getter(#deleteSingleByIdProxy),
         ),
       ) as _i4.DeletableDAOProxy<_i4.Person>);
+
   @override
   _i9.Stream<_i4.Person?> streamSingleById({
     required String? id,
@@ -1317,10 +1372,10 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValue: _i9.Stream<_i4.Person?>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.Person?>.empty(),
       ) as _i9.Stream<_i4.Person?>);
+
   @override
   _i4.GQLPaginatableStream<_i4.Person> streamAll({
     _i9.Stream<String?>? searchQuery,
-    String? secondLineFieldName,
     List<_i4.Input_PersonsBoolExp>? where,
   }) =>
       (super.noSuchMethod(
@@ -1329,7 +1384,6 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           [],
           {
             #searchQuery: searchQuery,
-            #secondLineFieldName: secondLineFieldName,
             #where: where,
           },
         ),
@@ -1340,7 +1394,6 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
             [],
             {
               #searchQuery: searchQuery,
-              #secondLineFieldName: secondLineFieldName,
               #where: where,
             },
           ),
@@ -1352,12 +1405,12 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
             [],
             {
               #searchQuery: searchQuery,
-              #secondLineFieldName: secondLineFieldName,
               #where: where,
             },
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Person>);
+
   @override
   _i9.Future<_i4.Person?> personServicesClassesGroups(
           {required String? personId}) =>
@@ -1370,6 +1423,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValue: _i9.Future<_i4.Person?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
       ) as _i9.Future<_i4.Person?>);
+
   @override
   _i9.Future<_i4.PersonsGeolocationsResponse?> personsGeolocations({
     String? personId,
@@ -1410,6 +1464,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValueForMissingStub:
             _i9.Future<_i4.PersonsGeolocationsResponse?>.value(),
       ) as _i9.Future<_i4.PersonsGeolocationsResponse?>);
+
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
       paginatePersonClassAttendance({
@@ -1457,6 +1512,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
               ),
             ),
           ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
       paginatePersonGroupAttendance({
@@ -1504,6 +1560,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
               ),
             ),
           ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>
       paginatePersonServiceAttendance({
@@ -1551,6 +1608,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
               ),
             ),
           ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+
   @override
   _i4.GQLPaginatableStream<_i4.LastRecordedByInfo> paginatePersonAttendance({
     required _i11.Variables_Subscription_personAttendance Function(
@@ -1592,6 +1650,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.LastRecordedByInfo>);
+
   @override
   _i9.Future<_i4.Person?> getPersonAnalysis({
     required String? personId,
@@ -1609,6 +1668,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValue: _i9.Future<_i4.Person?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
       ) as _i9.Future<_i4.Person?>);
+
   @override
   _i9.Future<_i4.Person?> updatePersonSpiritData({
     required String? personId,
@@ -1628,6 +1688,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValue: _i9.Future<_i4.Person?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
       ) as _i9.Future<_i4.Person?>);
+
   @override
   _i9.Future<_i4.Person> createObject({required _i4.Person? newObject}) =>
       (super.noSuchMethod(
@@ -1653,6 +1714,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
           ),
         )),
       ) as _i9.Future<_i4.Person>);
+
   @override
   _i9.Future<_i4.Person?> updateObject({
     required _i4.Person? newObject,
@@ -1670,6 +1732,7 @@ class MockPersonsDAO extends _i1.Mock implements _i7.PersonsDAO {
         returnValue: _i9.Future<_i4.Person?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Person?>.value(),
       ) as _i9.Future<_i4.Person?>);
+
   @override
   _i9.Future<_i4.Person?> deleteById({required String? id}) =>
       (super.noSuchMethod(
@@ -1702,6 +1765,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
               Invocation.getter(#baseStreamAllConfig),
             ),
           ) as _i4.StreamAllConfig<_i4.Area, _i4.Input_AreasBoolExp>);
+
   @override
   _i4.StreamSingleByIdConfig<_i4.Area> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1715,6 +1779,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
       ) as _i4.StreamSingleByIdConfig<_i4.Area>);
+
   @override
   _i4.DeleteSingleByIdConfig<_i4.Area> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1728,6 +1793,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
       ) as _i4.DeleteSingleByIdConfig<_i4.Area>);
+
   @override
   _i4.UpdateObjectConfig<_i4.Area> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
@@ -1741,6 +1807,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#baseUpdateObjectConfig),
         ),
       ) as _i4.UpdateObjectConfig<_i4.Area>);
+
   @override
   _i4.CreateObjectConfig<_i4.Area> get baseCreateObjectConfig =>
       (super.noSuchMethod(
@@ -1754,6 +1821,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#baseCreateObjectConfig),
         ),
       ) as _i4.CreateObjectConfig<_i4.Area>);
+
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
@@ -1766,6 +1834,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#db),
         ),
       ) as _i4.DatabaseService);
+
   @override
   _i4.Area Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
@@ -1778,6 +1847,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#fromJson),
         ),
       ) as _i4.Area Function(Map<String, dynamic>));
+
   @override
   _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
@@ -1790,6 +1860,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i4.DBGraphQLClient);
+
   @override
   _i4.StreamableDAOProxy<_i4.Area, _i4.Input_AreasBoolExp> get streamingProxy =>
       (super.noSuchMethod(
@@ -1805,6 +1876,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#streamingProxy),
         ),
       ) as _i4.StreamableDAOProxy<_i4.Area, _i4.Input_AreasBoolExp>);
+
   @override
   _i4.CreatableDAOProxy<_i4.Area> get createObjectProxy => (super.noSuchMethod(
         Invocation.getter(#createObjectProxy),
@@ -1817,6 +1889,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#createObjectProxy),
         ),
       ) as _i4.CreatableDAOProxy<_i4.Area>);
+
   @override
   _i4.UpdatableDAOProxy<_i4.Area> get updateObjectProxy => (super.noSuchMethod(
         Invocation.getter(#updateObjectProxy),
@@ -1829,6 +1902,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#updateObjectProxy),
         ),
       ) as _i4.UpdatableDAOProxy<_i4.Area>);
+
   @override
   _i4.DeletableDAOProxy<_i4.Area> get deleteSingleByIdProxy =>
       (super.noSuchMethod(
@@ -1842,6 +1916,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           Invocation.getter(#deleteSingleByIdProxy),
         ),
       ) as _i4.DeletableDAOProxy<_i4.Area>);
+
   @override
   _i4.GQLPaginatableStream<_i4.Area> streamAll({
     _i9.Stream<String?>? searchQuery,
@@ -1879,6 +1954,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Area>);
+
   @override
   _i9.Stream<_i4.Area?> streamSingleById({required String? id}) =>
       (super.noSuchMethod(
@@ -1890,6 +1966,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
         returnValue: _i9.Stream<_i4.Area?>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.Area?>.empty(),
       ) as _i9.Stream<_i4.Area?>);
+
   @override
   _i9.Future<_i4.Area> createObject({required _i4.Area? newObject}) =>
       (super.noSuchMethod(
@@ -1915,6 +1992,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
           ),
         )),
       ) as _i9.Future<_i4.Area>);
+
   @override
   _i9.Future<_i4.Area?> updateObject({
     required _i4.Area? newObject,
@@ -1932,6 +2010,7 @@ class MockAreasDAO extends _i1.Mock implements _i7.AreasDAO {
         returnValue: _i9.Future<_i4.Area?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Area?>.value(),
       ) as _i9.Future<_i4.Area?>);
+
   @override
   _i9.Future<_i4.Area?> deleteById({required String? id}) =>
       (super.noSuchMethod(
@@ -1964,6 +2043,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
               Invocation.getter(#baseStreamAllConfig),
             ),
           ) as _i4.StreamAllConfig<_i4.Service, _i4.Input_ServicesBoolExp>);
+
   @override
   _i4.StreamSingleByIdConfig<_i4.Service> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1977,6 +2057,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
       ) as _i4.StreamSingleByIdConfig<_i4.Service>);
+
   @override
   _i4.DeleteSingleByIdConfig<_i4.Service> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
@@ -1990,6 +2071,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
       ) as _i4.DeleteSingleByIdConfig<_i4.Service>);
+
   @override
   _i4.UpdateObjectConfig<_i4.Service> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
@@ -2003,6 +2085,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#baseUpdateObjectConfig),
         ),
       ) as _i4.UpdateObjectConfig<_i4.Service>);
+
   @override
   _i4.CreateObjectConfig<_i4.Service> get baseCreateObjectConfig =>
       (super.noSuchMethod(
@@ -2016,6 +2099,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#baseCreateObjectConfig),
         ),
       ) as _i4.CreateObjectConfig<_i4.Service>);
+
   @override
   _i4.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
@@ -2028,6 +2112,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#db),
         ),
       ) as _i4.DatabaseService);
+
   @override
   _i4.Service Function(Map<String, dynamic>) get fromJson =>
       (super.noSuchMethod(
@@ -2042,6 +2127,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#fromJson),
         ),
       ) as _i4.Service Function(Map<String, dynamic>));
+
   @override
   _i4.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
@@ -2054,6 +2140,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#graphQLClient),
         ),
       ) as _i4.DBGraphQLClient);
+
   @override
   _i4.StreamableDAOProxy<
       _i4.Service, _i4.Input_ServicesBoolExp> get streamingProxy => (super
@@ -2070,6 +2157,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#streamingProxy),
         ),
       ) as _i4.StreamableDAOProxy<_i4.Service, _i4.Input_ServicesBoolExp>);
+
   @override
   _i4.CreatableDAOProxy<_i4.Service> get createObjectProxy =>
       (super.noSuchMethod(
@@ -2083,6 +2171,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#createObjectProxy),
         ),
       ) as _i4.CreatableDAOProxy<_i4.Service>);
+
   @override
   _i4.UpdatableDAOProxy<_i4.Service> get updateObjectProxy =>
       (super.noSuchMethod(
@@ -2096,6 +2185,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#updateObjectProxy),
         ),
       ) as _i4.UpdatableDAOProxy<_i4.Service>);
+
   @override
   _i4.DeletableDAOProxy<_i4.Service> get deleteSingleByIdProxy =>
       (super.noSuchMethod(
@@ -2109,6 +2199,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           Invocation.getter(#deleteSingleByIdProxy),
         ),
       ) as _i4.DeletableDAOProxy<_i4.Service>);
+
   @override
   _i4.GQLPaginatableStream<_i4.Service> streamAll({
     _i9.Stream<String?>? searchQuery,
@@ -2154,6 +2245,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           ),
         ),
       ) as _i4.GQLPaginatableStream<_i4.Service>);
+
   @override
   _i9.Stream<_i4.Service?> streamSingleById({required String? id}) =>
       (super.noSuchMethod(
@@ -2165,6 +2257,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
         returnValue: _i9.Stream<_i4.Service?>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.Service?>.empty(),
       ) as _i9.Stream<_i4.Service?>);
+
   @override
   _i9.Future<_i4.Service> createObject({required _i4.Service? newObject}) =>
       (super.noSuchMethod(
@@ -2191,6 +2284,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
           ),
         )),
       ) as _i9.Future<_i4.Service>);
+
   @override
   _i9.Future<_i4.Service?> updateObject({
     required _i4.Service? newObject,
@@ -2208,6 +2302,7 @@ class MockServicesDAO extends _i1.Mock implements _i7.ServicesDAO {
         returnValue: _i9.Future<_i4.Service?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Service?>.value(),
       ) as _i9.Future<_i4.Service?>);
+
   @override
   _i9.Future<_i4.Service?> deleteById({required String? id}) =>
       (super.noSuchMethod(
@@ -2237,18 +2332,21 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
           Invocation.getter(#timeToReauth),
         ),
       ) as Duration);
+
   @override
   bool get shouldAuthenticate => (super.noSuchMethod(
         Invocation.getter(#shouldAuthenticate),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i9.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
         returnValue: _i9.Stream<void>.empty(),
         returnValueForMissingStub: _i9.Stream<void>.empty(),
       ) as _i9.Stream<void>);
+
   @override
   bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -2258,6 +2356,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -2267,6 +2366,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void didChangeAppLifecycleState(_i12.AppLifecycleState? state) =>
       super.noSuchMethod(
@@ -2276,6 +2376,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void scheduleReauth() => super.noSuchMethod(
         Invocation.method(
@@ -2284,6 +2385,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void resetAuthState({String? path}) => super.noSuchMethod(
         Invocation.method(
@@ -2293,6 +2395,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i9.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
@@ -2302,6 +2405,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
@@ -2311,6 +2415,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> verifyPassword({
     required String? email,
@@ -2330,6 +2435,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -2339,6 +2445,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
@@ -2348,6 +2455,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
@@ -2357,6 +2465,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> didPushRouteInformation(
           _i2.RouteInformation? routeInformation) =>
@@ -2368,6 +2477,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   void didChangeMetrics() => super.noSuchMethod(
         Invocation.method(
@@ -2376,6 +2486,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeTextScaleFactor() => super.noSuchMethod(
         Invocation.method(
@@ -2384,6 +2495,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangePlatformBrightness() => super.noSuchMethod(
         Invocation.method(
@@ -2392,6 +2504,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeLocales(List<_i12.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
@@ -2400,6 +2513,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i9.Future<_i12.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
@@ -2411,6 +2525,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         returnValueForMissingStub:
             _i9.Future<_i12.AppExitResponse>.value(_i12.AppExitResponse.exit),
       ) as _i9.Future<_i12.AppExitResponse>);
+
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(
@@ -2419,6 +2534,7 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeAccessibilityFeatures() => super.noSuchMethod(
         Invocation.method(
@@ -2440,6 +2556,7 @@ class MockConnectivityService extends _i1.Mock
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   _i5.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
@@ -2452,6 +2569,7 @@ class MockConnectivityService extends _i1.Mock
           Invocation.getter(#connectivityStream),
         ),
       ) as _i5.ValueStream<bool>);
+
   @override
   _i9.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
@@ -2461,6 +2579,7 @@ class MockConnectivityService extends _i1.Mock
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -2484,12 +2603,14 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Stream<_i4.Notification>.empty(),
         returnValueForMissingStub: _i9.Stream<_i4.Notification>.empty(),
       ) as _i9.Stream<_i4.Notification>);
+
   @override
   bool get isPaused => (super.noSuchMethod(
         Invocation.getter(#isPaused),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void addForegroundNotificationTap(_i4.Notification? notification) =>
       super.noSuchMethod(
@@ -2499,6 +2620,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void pauseListeners() => super.noSuchMethod(
         Invocation.method(
@@ -2507,6 +2629,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void resumeListeners() => super.noSuchMethod(
         Invocation.method(
@@ -2515,6 +2638,7 @@ class MockNotificationsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i9.Future<_i4.Notification?> getInitialNotification() => (super.noSuchMethod(
         Invocation.method(
@@ -2524,6 +2648,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<_i4.Notification?>.value(),
         returnValueForMissingStub: _i9.Future<_i4.Notification?>.value(),
       ) as _i9.Future<_i4.Notification?>);
+
   @override
   _i9.Future<void> scheduleBirthDayNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -2540,6 +2665,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> scheduleMeetingNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -2556,6 +2682,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> scheduleKodasNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -2572,6 +2699,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> scheduleConfessionNotification(
           [_i4.NotificationSetting? notificationSetting =
@@ -2588,6 +2716,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
         Invocation.method(
@@ -2597,6 +2726,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<void> notify(
     _i4.Notification? notification, {
@@ -2615,6 +2745,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
       ) as _i9.Future<void>);
+
   @override
   _i9.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
       (super.noSuchMethod(
@@ -2626,6 +2757,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
         Invocation.method(
@@ -2635,6 +2767,7 @@ class MockNotificationsService extends _i1.Mock
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
   @override
   _i9.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

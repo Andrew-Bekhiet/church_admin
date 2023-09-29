@@ -471,6 +471,7 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears<TRes>
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
       ));
+
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
       get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
@@ -508,9 +509,11 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears<TRes>
     String? blurhash,
   }) =>
       _res;
+
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
       get studyYearFrom =>
           CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom.stub(_res);
+
   CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> get studyYearTo =>
       CopyWith_Fragment_ServiceWithStudyYears_studyYearTo.stub(_res);
 }

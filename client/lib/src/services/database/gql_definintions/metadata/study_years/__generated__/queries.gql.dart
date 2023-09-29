@@ -18,6 +18,7 @@ class Variables_Query_getStudyYearName {
   Map<String, dynamic> _$data;
 
   int get order => (_$data['order'] as int);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$order = order;
@@ -30,6 +31,7 @@ class Variables_Query_getStudyYearName {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -208,6 +210,7 @@ class _CopyWithImpl_Query_getStudyYearName<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> get studyYearsByPk {
     final local$studyYearsByPk = _instance.studyYearsByPk;
     return local$studyYearsByPk == null
@@ -228,6 +231,7 @@ class _CopyWithStubImpl_Query_getStudyYearName<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_getStudyYearName_studyYearsByPk<TRes> get studyYearsByPk =>
       CopyWith_Query_getStudyYearName_studyYearsByPk.stub(_res);
 }

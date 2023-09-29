@@ -130,6 +130,7 @@ class _CopyWithImpl_Fragment_EditHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -150,6 +151,7 @@ class _CopyWithStubImpl_Fragment_EditHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
@@ -333,6 +335,7 @@ class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -351,6 +354,7 @@ class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
@@ -532,6 +536,7 @@ class _CopyWithImpl_Fragment_CallHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -552,6 +557,7 @@ class _CopyWithStubImpl_Fragment_CallHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
@@ -733,6 +739,7 @@ class _CopyWithImpl_Fragment_VisitHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -753,6 +760,7 @@ class _CopyWithStubImpl_Fragment_VisitHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
@@ -932,6 +940,7 @@ class _CopyWithImpl_Fragment_KodasHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -950,6 +959,7 @@ class _CopyWithStubImpl_Fragment_KodasHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
@@ -1131,6 +1141,7 @@ class _CopyWithImpl_Fragment_ConfessionHistory<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -1149,6 +1160,7 @@ class _CopyWithStubImpl_Fragment_ConfessionHistory<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 

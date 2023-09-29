@@ -21,6 +21,7 @@ class Variables_Mutation_deleteGroup {
   Map<String, dynamic> _$data;
 
   UuidValue get groupId => (_$data['groupId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$groupId = groupId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteGroup {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deleteGroup<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk {
     final local$deleteGroupsByPk = _instance.deleteGroupsByPk;
     return local$deleteGroupsByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deleteGroup<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
 }
@@ -310,6 +314,7 @@ class Variables_Mutation_insertGroup {
 
   Input_GroupsInsertInput get newGroup =>
       (_$data['newGroup'] as Input_GroupsInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newGroup = newGroup;
@@ -322,6 +327,7 @@ class Variables_Mutation_insertGroup {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -500,6 +506,7 @@ class _CopyWithImpl_Mutation_insertGroup<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Group<TRes> get insertGroupsOne {
     final local$insertGroupsOne = _instance.insertGroupsOne;
     return local$insertGroupsOne == null
@@ -520,6 +527,7 @@ class _CopyWithStubImpl_Mutation_insertGroup<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Group<TRes> get insertGroupsOne =>
       CopyWith_Fragment_Group.stub(_res);
 }
@@ -603,8 +611,10 @@ class Variables_Mutation_updateGroup {
   Map<String, dynamic> _$data;
 
   UuidValue get groupId => (_$data['groupId'] as UuidValue);
+
   Input_GroupsSetInput get newGroup =>
       (_$data['newGroup'] as Input_GroupsSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$groupId = groupId;
@@ -619,6 +629,7 @@ class Variables_Mutation_updateGroup {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -818,6 +829,7 @@ class _CopyWithImpl_Mutation_updateGroup<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk {
     final local$updateGroupsByPk = _instance.updateGroupsByPk;
     return local$updateGroupsByPk == null
@@ -838,6 +850,7 @@ class _CopyWithStubImpl_Mutation_updateGroup<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
 }

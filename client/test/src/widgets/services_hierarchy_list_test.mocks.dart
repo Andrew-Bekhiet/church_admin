@@ -160,30 +160,35 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
   @override
   bool get isLoading => (super.noSuchMethod(
         Invocation.getter(#isLoading),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get canPaginateForward => (super.noSuchMethod(
         Invocation.getter(#canPaginateForward),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get canPaginateBackward => (super.noSuchMethod(
         Invocation.getter(#canPaginateBackward),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   int get currentOffset => (super.noSuchMethod(
         Invocation.getter(#currentOffset),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
   @override
   _i2.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
         Invocation.getter(#onLoadingChanged),
@@ -196,6 +201,7 @@ class MockPaginatableStreamBase extends _i1.Mock
           Invocation.getter(#onLoadingChanged),
         ),
       ) as _i2.ValueStream<bool>);
+
   @override
   _i2.ValueStream<List<_i12.Service>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
@@ -208,30 +214,35 @@ class MockPaginatableStreamBase extends _i1.Mock
           Invocation.getter(#stream),
         ),
       ) as _i2.ValueStream<List<_i12.Service>>);
+
   @override
   List<_i12.Service> get currentValue => (super.noSuchMethod(
         Invocation.getter(#currentValue),
         returnValue: <_i12.Service>[],
         returnValueForMissingStub: <_i12.Service>[],
       ) as List<_i12.Service>);
+
   @override
   bool get isBroadcast => (super.noSuchMethod(
         Invocation.getter(#isBroadcast),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<int> get length => (super.noSuchMethod(
         Invocation.getter(#length),
         returnValue: _i3.Future<int>.value(0),
         returnValueForMissingStub: _i3.Future<int>.value(0),
       ) as _i3.Future<int>);
+
   @override
   _i3.Future<bool> get isEmpty => (super.noSuchMethod(
         Invocation.getter(#isEmpty),
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<List<_i12.Service>> get first => (super.noSuchMethod(
         Invocation.getter(#first),
@@ -239,6 +250,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> get last => (super.noSuchMethod(
         Invocation.getter(#last),
@@ -246,6 +258,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> get single => (super.noSuchMethod(
         Invocation.getter(#single),
@@ -253,6 +266,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<void> loadPage(int? offset) => (super.noSuchMethod(
         Invocation.method(
@@ -262,6 +276,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> loadNextPage() => (super.noSuchMethod(
         Invocation.method(
@@ -271,6 +286,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> loadPreviousPage() => (super.noSuchMethod(
         Invocation.method(
@@ -280,6 +296,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.StreamSubscription<List<_i12.Service>> listen(
     void Function(List<_i12.Service>)? onData, {
@@ -323,6 +340,7 @@ class MockPaginatableStreamBase extends _i1.Mock
           ),
         ),
       ) as _i3.StreamSubscription<List<_i12.Service>>);
+
   @override
   _i3.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -332,6 +350,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Stream<List<_i12.Service>> asBroadcastStream({
     void Function(_i3.StreamSubscription<List<_i12.Service>>)? onListen,
@@ -349,6 +368,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> where(
           bool Function(List<_i12.Service>)? test) =>
@@ -360,6 +380,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<S> map<S>(S Function(List<_i12.Service>)? convert) =>
       (super.noSuchMethod(
@@ -370,6 +391,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<S>.empty(),
         returnValueForMissingStub: _i3.Stream<S>.empty(),
       ) as _i3.Stream<S>);
+
   @override
   _i3.Stream<E> asyncMap<E>(
           _i3.FutureOr<E> Function(List<_i12.Service>)? convert) =>
@@ -381,6 +403,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<E>.empty(),
         returnValueForMissingStub: _i3.Stream<E>.empty(),
       ) as _i3.Stream<E>);
+
   @override
   _i3.Stream<E> asyncExpand<E>(
           _i3.Stream<E>? Function(List<_i12.Service>)? convert) =>
@@ -392,6 +415,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<E>.empty(),
         returnValueForMissingStub: _i3.Stream<E>.empty(),
       ) as _i3.Stream<E>);
+
   @override
   _i3.Stream<List<_i12.Service>> handleError(
     Function? onError, {
@@ -406,6 +430,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<S> expand<S>(Iterable<S> Function(List<_i12.Service>)? convert) =>
       (super.noSuchMethod(
@@ -416,6 +441,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<S>.empty(),
         returnValueForMissingStub: _i3.Stream<S>.empty(),
       ) as _i3.Stream<S>);
+
   @override
   _i3.Future<dynamic> pipe(
           _i3.StreamConsumer<List<_i12.Service>>? streamConsumer) =>
@@ -427,6 +453,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<dynamic>.value(),
         returnValueForMissingStub: _i3.Future<dynamic>.value(),
       ) as _i3.Future<dynamic>);
+
   @override
   _i3.Stream<S> transform<S>(
           _i3.StreamTransformer<List<_i12.Service>, S>? streamTransformer) =>
@@ -438,6 +465,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<S>.empty(),
         returnValueForMissingStub: _i3.Stream<S>.empty(),
       ) as _i3.Stream<S>);
+
   @override
   _i3.Future<List<_i12.Service>> reduce(
           List<_i12.Service> Function(
@@ -453,6 +481,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<S> fold<S>(
     S? initialValue,
@@ -516,6 +545,7 @@ class MockPaginatableStreamBase extends _i1.Mock
               ),
             ),
       ) as _i3.Future<S>);
+
   @override
   _i3.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
         Invocation.method(
@@ -525,6 +555,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<String>.value(''),
         returnValueForMissingStub: _i3.Future<String>.value(''),
       ) as _i3.Future<String>);
+
   @override
   _i3.Future<bool> contains(Object? needle) => (super.noSuchMethod(
         Invocation.method(
@@ -534,6 +565,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<void> forEach(void Function(List<_i12.Service>)? action) =>
       (super.noSuchMethod(
@@ -544,6 +576,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<bool> every(bool Function(List<_i12.Service>)? test) =>
       (super.noSuchMethod(
@@ -554,6 +587,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> any(bool Function(List<_i12.Service>)? test) =>
       (super.noSuchMethod(
@@ -564,6 +598,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Stream<R> cast<R>() => (super.noSuchMethod(
         Invocation.method(
@@ -573,6 +608,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<R>.empty(),
         returnValueForMissingStub: _i3.Stream<R>.empty(),
       ) as _i3.Stream<R>);
+
   @override
   _i3.Future<List<List<_i12.Service>>> toList() => (super.noSuchMethod(
         Invocation.method(
@@ -584,6 +620,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<List<_i12.Service>>>.value(<List<_i12.Service>>[]),
       ) as _i3.Future<List<List<_i12.Service>>>);
+
   @override
   _i3.Future<Set<List<_i12.Service>>> toSet() => (super.noSuchMethod(
         Invocation.method(
@@ -595,6 +632,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<Set<List<_i12.Service>>>.value(<List<_i12.Service>>{}),
       ) as _i3.Future<Set<List<_i12.Service>>>);
+
   @override
   _i3.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
         Invocation.method(
@@ -636,6 +674,7 @@ class MockPaginatableStreamBase extends _i1.Mock
               ),
             ),
       ) as _i3.Future<E>);
+
   @override
   _i3.Stream<List<_i12.Service>> take(int? count) => (super.noSuchMethod(
         Invocation.method(
@@ -645,6 +684,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> takeWhile(
           bool Function(List<_i12.Service>)? test) =>
@@ -656,6 +696,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> skip(int? count) => (super.noSuchMethod(
         Invocation.method(
@@ -665,6 +706,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> skipWhile(
           bool Function(List<_i12.Service>)? test) =>
@@ -676,6 +718,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> distinct(
           [bool Function(
@@ -690,6 +733,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValue: _i3.Stream<List<_i12.Service>>.empty(),
         returnValueForMissingStub: _i3.Stream<List<_i12.Service>>.empty(),
       ) as _i3.Stream<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> firstWhere(
     bool Function(List<_i12.Service>)? test, {
@@ -705,6 +749,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> lastWhere(
     bool Function(List<_i12.Service>)? test, {
@@ -720,6 +765,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> singleWhere(
     bool Function(List<_i12.Service>)? test, {
@@ -735,6 +781,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Future<List<_i12.Service>> elementAt(int? index) => (super.noSuchMethod(
         Invocation.method(
@@ -745,6 +792,7 @@ class MockPaginatableStreamBase extends _i1.Mock
         returnValueForMissingStub:
             _i3.Future<List<_i12.Service>>.value(<_i12.Service>[]),
       ) as _i3.Future<List<_i12.Service>>);
+
   @override
   _i3.Stream<List<_i12.Service>> timeout(
     Duration? timeLimit, {
@@ -777,6 +825,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           Invocation.getter(#configuration),
         ),
       ) as _i4.RouteConfiguration);
+
   @override
   set configuration(_i4.RouteConfiguration? _configuration) =>
       super.noSuchMethod(
@@ -786,6 +835,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i5.BackButtonDispatcher get backButtonDispatcher => (super.noSuchMethod(
         Invocation.getter(#backButtonDispatcher),
@@ -798,6 +848,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           Invocation.getter(#backButtonDispatcher),
         ),
       ) as _i5.BackButtonDispatcher);
+
   @override
   _i6.GoRouterDelegate get routerDelegate => (super.noSuchMethod(
         Invocation.getter(#routerDelegate),
@@ -810,6 +861,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           Invocation.getter(#routerDelegate),
         ),
       ) as _i6.GoRouterDelegate);
+
   @override
   set routerDelegate(_i6.GoRouterDelegate? _routerDelegate) =>
       super.noSuchMethod(
@@ -819,6 +871,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i7.GoRouteInformationProvider get routeInformationProvider =>
       (super.noSuchMethod(
@@ -832,6 +885,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           Invocation.getter(#routeInformationProvider),
         ),
       ) as _i7.GoRouteInformationProvider);
+
   @override
   set routeInformationProvider(
           _i7.GoRouteInformationProvider? _routeInformationProvider) =>
@@ -842,6 +896,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i8.GoRouteInformationParser get routeInformationParser =>
       (super.noSuchMethod(
@@ -855,6 +910,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
           Invocation.getter(#routeInformationParser),
         ),
       ) as _i8.GoRouteInformationParser);
+
   @override
   set routeInformationParser(
           _i8.GoRouteInformationParser? _routeInformationParser) =>
@@ -865,12 +921,14 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get overridePlatformDefaultLocation => (super.noSuchMethod(
         Invocation.getter(#overridePlatformDefaultLocation),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool canPop() => (super.noSuchMethod(
         Invocation.method(
@@ -880,6 +938,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   String namedLocation(
     String? name, {
@@ -898,6 +957,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   void go(
     String? location, {
@@ -911,6 +971,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void restore(_i15.RouteMatchList? matchList) => super.noSuchMethod(
         Invocation.method(
@@ -919,6 +980,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void goNamed(
     String? name, {
@@ -938,6 +1000,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i3.Future<T?> push<T extends Object?>(
     String? location, {
@@ -952,6 +1015,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   _i3.Future<T?> pushNamed<T extends Object?>(
     String? name, {
@@ -972,6 +1036,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   _i3.Future<T?> pushReplacement<T extends Object?>(
     String? location, {
@@ -986,6 +1051,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   _i3.Future<T?> pushReplacementNamed<T extends Object?>(
     String? name, {
@@ -1006,6 +1072,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   _i3.Future<T?> replace<T>(
     String? location, {
@@ -1020,6 +1087,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   _i3.Future<T?> replaceNamed<T>(
     String? name, {
@@ -1040,6 +1108,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         returnValue: _i3.Future<T?>.value(),
         returnValueForMissingStub: _i3.Future<T?>.value(),
       ) as _i3.Future<T?>);
+
   @override
   void pop<T extends Object?>([T? result]) => super.noSuchMethod(
         Invocation.method(
@@ -1048,6 +1117,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void refresh() => super.noSuchMethod(
         Invocation.method(
@@ -1056,6 +1126,7 @@ class MockGoRouter extends _i1.Mock implements _i14.GoRouter {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void dispose() => super.noSuchMethod(
         Invocation.method(
@@ -1083,6 +1154,7 @@ class MockImageUrlCacheService extends _i1.Mock
           Invocation.getter(#box),
         ),
       ) as _i9.Box<String>);
+
   @override
   _i10.BaseCacheManager get cacheManager => (super.noSuchMethod(
         Invocation.getter(#cacheManager),
@@ -1095,6 +1167,7 @@ class MockImageUrlCacheService extends _i1.Mock
           Invocation.getter(#cacheManager),
         ),
       ) as _i10.BaseCacheManager);
+
   @override
   _i3.Future<_i11.File> getImageFile(_i12.IImage? imageObject) =>
       (super.noSuchMethod(
@@ -1117,6 +1190,7 @@ class MockImageUrlCacheService extends _i1.Mock
           ),
         )),
       ) as _i3.Future<_i11.File>);
+
   @override
   _i3.Future<String> getImageUrl(_i12.IImage? imageObject) =>
       (super.noSuchMethod(
@@ -1127,6 +1201,7 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValue: _i3.Future<String>.value(''),
         returnValueForMissingStub: _i3.Future<String>.value(''),
       ) as _i3.Future<String>);
+
   @override
   String? getCachedImageUrl(_i12.IImage? imageObject) => (super.noSuchMethod(
         Invocation.method(
@@ -1135,6 +1210,7 @@ class MockImageUrlCacheService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       ) as String?);
+
   @override
   _i3.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
       (super.noSuchMethod(
@@ -1145,6 +1221,7 @@ class MockImageUrlCacheService extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   bool isUrlExpired(String? url) => (super.noSuchMethod(
         Invocation.method(
@@ -1173,18 +1250,14 @@ class MockUserSettingsService extends _i1.Mock
           Invocation.getter(#box),
         ),
       ) as _i9.Box<dynamic>);
-  @override
-  bool get darkTheme => (super.noSuchMethod(
-        Invocation.getter(#darkTheme),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+
   @override
   bool get greatFeastTheme => (super.noSuchMethod(
         Invocation.getter(#greatFeastTheme),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
@@ -1194,6 +1267,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
         Invocation.method(
@@ -1203,6 +1277,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
         Invocation.method(
@@ -1212,6 +1287,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   String? getSecondLineFor(Type? t) => (super.noSuchMethod(
         Invocation.method(
@@ -1220,6 +1296,7 @@ class MockUserSettingsService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       ) as String?);
+
   @override
   _i3.Future<void> setSecondLineFor(
     Type? t,
@@ -1236,6 +1313,7 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
   @override
   _i3.Future<void> setupDefaults() => (super.noSuchMethod(
         Invocation.method(

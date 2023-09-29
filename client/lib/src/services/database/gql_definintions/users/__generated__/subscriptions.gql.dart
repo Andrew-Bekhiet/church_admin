@@ -34,7 +34,9 @@ class Variables_Subscription_watchUser {
   Map<String, dynamic> _$data;
 
   UuidValue get uid => (_$data['uid'] as UuidValue);
+
   bool? get fullData => (_$data['fullData'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$uid = uid;
@@ -51,6 +53,7 @@ class Variables_Subscription_watchUser {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -225,6 +228,7 @@ class _CopyWithImpl_Subscription_watchUser<TRes>
               ? _instance.authUsersDataByPk
               : (authUsersDataByPk
                   as Subscription_watchUser_authUsersDataByPk?)));
+
   CopyWith_Subscription_watchUser_authUsersDataByPk<TRes>
       get authUsersDataByPk {
     final local$authUsersDataByPk = _instance.authUsersDataByPk;
@@ -243,6 +247,7 @@ class _CopyWithStubImpl_Subscription_watchUser<TRes>
   TRes _res;
 
   call({Subscription_watchUser_authUsersDataByPk? authUsersDataByPk}) => _res;
+
   CopyWith_Subscription_watchUser_authUsersDataByPk<TRes>
       get authUsersDataByPk =>
           CopyWith_Subscription_watchUser_authUsersDataByPk.stub(_res);
@@ -652,6 +657,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
             : (adminOn
                 as List<Subscription_watchUser_authUsersDataByPk_adminOn>),
       ));
+
   TRes permissions(
           Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
                   Iterable<
@@ -664,6 +670,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -706,9 +713,12 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     List<Subscription_watchUser_authUsersDataByPk_adminOn>? adminOn,
   }) =>
       _res;
+
   permissions(_fn) => _res;
+
   CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> get person =>
       CopyWith_Subscription_watchUser_authUsersDataByPk_person.stub(_res);
+
   adminOn(_fn) => _res;
 }
 
@@ -1470,6 +1480,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
@@ -1503,6 +1514,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -1535,15 +1547,20 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+
   CopyWith_Fragment_Service<TRes> get service =>
       CopyWith_Fragment_Service.stub(_res);
+
   CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData<
           TRes>
       get serviceStudyYearData =>
           CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn_serviceStudyYearData
               .stub(_res);
+
   classes(_fn) => _res;
+
   CopyWith_Fragment_Group<TRes> get group => CopyWith_Fragment_Group.stub(_res);
 }
 
@@ -1757,9 +1774,12 @@ class Variables_Subscription_watchAllUsers {
 
   List<Input_AuthUsersDataBoolExp>? get where =>
       (_$data['where'] as List<Input_AuthUsersDataBoolExp>?);
+
   List<Input_AuthUsersDataOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_AuthUsersDataOrderBy>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -1783,6 +1803,7 @@ class Variables_Subscription_watchAllUsers {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2016,6 +2037,7 @@ class _CopyWithImpl_Subscription_watchAllUsers<TRes>
           authUsersData: authUsersData == _undefined || authUsersData == null
               ? _instance.authUsersData
               : (authUsersData as List<Fragment_UserOverview>)));
+
   TRes authUsersData(
           Iterable<Fragment_UserOverview> Function(
                   Iterable<
@@ -2036,6 +2058,7 @@ class _CopyWithStubImpl_Subscription_watchAllUsers<TRes>
   TRes _res;
 
   call({List<Fragment_UserOverview>? authUsersData}) => _res;
+
   authUsersData(_fn) => _res;
 }
 

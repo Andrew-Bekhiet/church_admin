@@ -84,6 +84,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         ),
       ) as _i2.HttpsCallable);
+
   @override
   _i5.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
@@ -110,6 +111,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i5.Future<_i2.HttpsCallableResult<dynamic>>);
+
   @override
   _i5.Future<String> getDownloadUrl(
     String? table,
@@ -128,6 +130,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i5.Future<String>.value(''),
         returnValueForMissingStub: _i5.Future<String>.value(''),
       ) as _i5.Future<String>);
+
   @override
   _i5.Future<String> getUploadUrl(
     String? table,
@@ -146,6 +149,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i5.Future<String>.value(''),
         returnValueForMissingStub: _i5.Future<String>.value(''),
       ) as _i5.Future<String>);
+
   @override
   _i5.Future<void> deletePhoto(
     String? table,
@@ -162,6 +166,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
   @override
   _i5.Future<String?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
@@ -172,6 +177,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i5.Future<String?>.value(),
         returnValueForMissingStub: _i5.Future<String?>.value(),
       ) as _i5.Future<String?>);
+
   @override
   _i5.Future<_i3.Response<dynamic>> uploadPhoto({
     required String? url,
@@ -226,6 +232,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i5.Future<_i3.Response<dynamic>>);
+
   @override
   _i5.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
         Invocation.method(
@@ -235,6 +242,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
   @override
   _i5.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(

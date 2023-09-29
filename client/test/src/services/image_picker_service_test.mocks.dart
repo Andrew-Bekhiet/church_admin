@@ -65,6 +65,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValueForMissingStub:
             _i4.Future<_i3.PermissionStatus>.value(_i3.PermissionStatus.denied),
       ) as _i4.Future<_i3.PermissionStatus>);
+
   @override
   _i4.Future<_i3.ServiceStatus> checkServiceStatus(
           _i3.Permission? permission) =>
@@ -78,6 +79,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValueForMissingStub:
             _i4.Future<_i3.ServiceStatus>.value(_i3.ServiceStatus.disabled),
       ) as _i4.Future<_i3.ServiceStatus>);
+
   @override
   _i4.Future<bool> openAppSettings() => (super.noSuchMethod(
         Invocation.method(
@@ -87,6 +89,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<Map<_i3.Permission, _i3.PermissionStatus>> requestPermissions(
           List<_i3.Permission>? permissions) =>
@@ -102,6 +105,7 @@ class PermissionHandlerPlatform_ extends _i1.Mock
             _i4.Future<Map<_i3.Permission, _i3.PermissionStatus>>.value(
                 <_i3.Permission, _i3.PermissionStatus>{}),
       ) as _i4.Future<Map<_i3.Permission, _i3.PermissionStatus>>);
+
   @override
   _i4.Future<bool> shouldShowRequestPermissionRationale(
           _i3.Permission? permission) =>
@@ -142,6 +146,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<_i2.PickedFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i2.PickedFile?>.value(),
       ) as _i4.Future<_i2.PickedFile?>);
+
   @override
   _i4.Future<List<_i2.PickedFile>?> pickMultiImage({
     double? maxWidth,
@@ -161,6 +166,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<List<_i2.PickedFile>?>.value(),
         returnValueForMissingStub: _i4.Future<List<_i2.PickedFile>?>.value(),
       ) as _i4.Future<List<_i2.PickedFile>?>);
+
   @override
   _i4.Future<_i2.PickedFile?> pickVideo({
     required _i2.ImageSource? source,
@@ -180,6 +186,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<_i2.PickedFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i2.PickedFile?>.value(),
       ) as _i4.Future<_i2.PickedFile?>);
+
   @override
   _i4.Future<_i2.LostData> retrieveLostData() => (super.noSuchMethod(
         Invocation.method(
@@ -202,6 +209,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
           ),
         )),
       ) as _i4.Future<_i2.LostData>);
+
   @override
   _i4.Future<_i6.XFile?> getImage({
     required _i2.ImageSource? source,
@@ -225,6 +233,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<_i6.XFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i6.XFile?>.value(),
       ) as _i4.Future<_i6.XFile?>);
+
   @override
   _i4.Future<List<_i6.XFile>?> getMultiImage({
     double? maxWidth,
@@ -244,6 +253,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<List<_i6.XFile>?>.value(),
         returnValueForMissingStub: _i4.Future<List<_i6.XFile>?>.value(),
       ) as _i4.Future<List<_i6.XFile>?>);
+
   @override
   _i4.Future<List<_i6.XFile>> getMedia({required _i2.MediaOptions? options}) =>
       (super.noSuchMethod(
@@ -256,6 +266,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValueForMissingStub:
             _i4.Future<List<_i6.XFile>>.value(<_i6.XFile>[]),
       ) as _i4.Future<List<_i6.XFile>>);
+
   @override
   _i4.Future<_i6.XFile?> getVideo({
     required _i2.ImageSource? source,
@@ -275,6 +286,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<_i6.XFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i6.XFile?>.value(),
       ) as _i4.Future<_i6.XFile?>);
+
   @override
   _i4.Future<_i2.LostDataResponse> getLostData() => (super.noSuchMethod(
         Invocation.method(
@@ -298,6 +310,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
           ),
         )),
       ) as _i4.Future<_i2.LostDataResponse>);
+
   @override
   _i4.Future<_i6.XFile?> getImageFromSource({
     required _i2.ImageSource? source,
@@ -315,6 +328,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValue: _i4.Future<_i6.XFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i6.XFile?>.value(),
       ) as _i4.Future<_i6.XFile?>);
+
   @override
   _i4.Future<List<_i6.XFile>> getMultiImageWithOptions(
           {_i2.MultiImagePickerOptions? options =
@@ -329,6 +343,7 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
         returnValueForMissingStub:
             _i4.Future<List<_i6.XFile>>.value(<_i6.XFile>[]),
       ) as _i4.Future<List<_i6.XFile>>);
+
   @override
   bool supportsImageSource(_i2.ImageSource? source) => (super.noSuchMethod(
         Invocation.method(
@@ -382,6 +397,7 @@ class ImageCropperPlatform_ extends _i1.Mock
         returnValue: _i4.Future<_i7.CroppedFile?>.value(),
         returnValueForMissingStub: _i4.Future<_i7.CroppedFile?>.value(),
       ) as _i4.Future<_i7.CroppedFile?>);
+
   @override
   _i4.Future<_i7.CroppedFile?> recoverImage() => (super.noSuchMethod(
         Invocation.method(

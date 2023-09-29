@@ -170,6 +170,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#multiFactorManager),
         ),
       ) as _i2.MultiFactorManager);
+
   @override
   set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
@@ -179,12 +180,14 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -197,6 +200,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#userStream),
         ),
       ) as _i3.ValueStream<_i2.User?>);
+
   @override
   _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -209,6 +213,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#idTokenStream),
         ),
       ) as _i3.ValueStream<String?>);
+
   @override
   _i10.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -226,6 +231,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -243,6 +249,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -260,6 +267,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<bool>.value(false),
         returnValueForMissingStub: _i10.Future<bool>.value(false),
       ) as _i10.Future<bool>);
+
   @override
   _i10.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -269,6 +277,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -278,6 +287,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -287,6 +297,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -296,6 +307,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<String?>.value(),
         returnValueForMissingStub: _i10.Future<String?>.value(),
       ) as _i10.Future<String?>);
+
   @override
   _i10.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -305,6 +317,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -333,12 +346,14 @@ class MockRequest extends _i1.Mock implements _i6.Request {
           Invocation.getter(#operation),
         ),
       ) as _i4.Operation);
+
   @override
   Map<String, dynamic> get variables => (super.noSuchMethod(
         Invocation.getter(#variables),
         returnValue: <String, dynamic>{},
         returnValueForMissingStub: <String, dynamic>{},
       ) as Map<String, dynamic>);
+
   @override
   _i5.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
@@ -351,6 +366,7 @@ class MockRequest extends _i1.Mock implements _i6.Request {
           Invocation.getter(#context),
         ),
       ) as _i5.Context);
+
   @override
   _i6.Request withContextEntry<T extends _i5.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
@@ -373,6 +389,7 @@ class MockRequest extends _i1.Mock implements _i6.Request {
           ),
         ),
       ) as _i6.Request);
+
   @override
   _i6.Request updateContextEntry<T extends _i5.ContextEntry>(
           _i5.ContextUpdater<T?>? update) =>
@@ -409,6 +426,7 @@ class MockResponse extends _i1.Mock implements _i6.Response {
         returnValue: <String, dynamic>{},
         returnValueForMissingStub: <String, dynamic>{},
       ) as Map<String, dynamic>);
+
   @override
   _i5.Context get context => (super.noSuchMethod(
         Invocation.getter(#context),
@@ -421,6 +439,7 @@ class MockResponse extends _i1.Mock implements _i6.Response {
           Invocation.getter(#context),
         ),
       ) as _i5.Context);
+
   @override
   _i6.Response withContextEntry<T extends _i5.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
@@ -443,6 +462,7 @@ class MockResponse extends _i1.Mock implements _i6.Response {
           ),
         ),
       ) as _i6.Response);
+
   @override
   _i6.Response updateContextEntry<T extends _i5.ContextEntry>(
           _i5.ContextUpdater<T?>? update) =>
@@ -503,18 +523,21 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           Invocation.getter(#uri),
         ),
       ) as Uri);
+
   @override
   Map<String, String> get defaultHeaders => (super.noSuchMethod(
         Invocation.getter(#defaultHeaders),
         returnValue: <String, String>{},
         returnValueForMissingStub: <String, String>{},
       ) as Map<String, String>);
+
   @override
   bool get useGETForQueries => (super.noSuchMethod(
         Invocation.getter(#useGETForQueries),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i8.RequestSerializer get serializer => (super.noSuchMethod(
         Invocation.getter(#serializer),
@@ -527,6 +550,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           Invocation.getter(#serializer),
         ),
       ) as _i8.RequestSerializer);
+
   @override
   _i8.ResponseParser get parser => (super.noSuchMethod(
         Invocation.getter(#parser),
@@ -539,12 +563,14 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           Invocation.getter(#parser),
         ),
       ) as _i8.ResponseParser);
+
   @override
   _i11.HttpResponseDecoder get httpResponseDecoder => (super.noSuchMethod(
         Invocation.getter(#httpResponseDecoder),
         returnValue: (_i12.Response httpResponse) => null,
         returnValueForMissingStub: (_i12.Response httpResponse) => null,
       ) as _i11.HttpResponseDecoder);
+
   @override
   set httpResponseDecoder(_i11.HttpResponseDecoder? _httpResponseDecoder) =>
       super.noSuchMethod(
@@ -554,6 +580,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i10.Stream<_i6.Response> request(
     _i6.Request? request, [
@@ -570,6 +597,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
         returnValue: _i10.Stream<_i6.Response>.empty(),
         returnValueForMissingStub: _i10.Stream<_i6.Response>.empty(),
       ) as _i10.Stream<_i6.Response>);
+
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -579,6 +607,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i8.Link concat(_i8.Link? next) => (super.noSuchMethod(
         Invocation.method(
@@ -600,6 +629,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           ),
         ),
       ) as _i8.Link);
+
   @override
   _i8.Link route(_i8.LinkRouter? route) => (super.noSuchMethod(
         Invocation.method(
@@ -621,6 +651,7 @@ class MockHttpLink extends _i1.Mock implements _i11.HttpLink {
           ),
         ),
       ) as _i8.Link);
+
   @override
   _i8.Link split(
     bool Function(_i6.Request)? test,
@@ -671,12 +702,14 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   String get subProtocol => (super.noSuchMethod(
         Invocation.getter(#subProtocol),
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   _i9.SocketClientConfig get config => (super.noSuchMethod(
         Invocation.getter(#config),
@@ -689,6 +722,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
           Invocation.getter(#config),
         ),
       ) as _i9.SocketClientConfig);
+
   @override
   _i10.Stream<_i6.Response> request(
     _i6.Request? request, [
@@ -705,6 +739,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
         returnValue: _i10.Stream<_i6.Response>.empty(),
         returnValueForMissingStub: _i10.Stream<_i6.Response>.empty(),
       ) as _i10.Stream<_i6.Response>);
+
   @override
   void connectOrReconnect() => super.noSuchMethod(
         Invocation.method(
@@ -713,6 +748,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -722,6 +758,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
+
   @override
   _i8.Link concat(_i8.Link? next) => (super.noSuchMethod(
         Invocation.method(
@@ -743,6 +780,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
           ),
         ),
       ) as _i8.Link);
+
   @override
   _i8.Link route(_i8.LinkRouter? route) => (super.noSuchMethod(
         Invocation.method(
@@ -764,6 +802,7 @@ class MockWebSocketLink extends _i1.Mock implements _i13.WebSocketLink {
           ),
         ),
       ) as _i8.Link);
+
   @override
   _i8.Link split(
     bool Function(_i6.Request)? test,

@@ -22,6 +22,7 @@ class Variables_Query_getFamilyRelatedFamilies {
   Map<String, dynamic> _$data;
 
   UuidValue get familyId => (_$data['familyId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$familyId = familyId;
@@ -35,6 +36,7 @@ class Variables_Query_getFamilyRelatedFamilies {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -215,6 +217,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk {
     final local$familiesByPk = _instance.familiesByPk;
     return local$familiesByPk == null
@@ -236,6 +239,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk =>
       CopyWith_Query_getFamilyRelatedFamilies_familiesByPk.stub(_res);
 }
@@ -652,6 +656,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
             : (parents
                 as List<Query_getFamilyRelatedFamilies_familiesByPk_parents>),
       ));
+
   TRes children(
           Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
                   Iterable<
@@ -664,6 +669,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes parents(
           Iterable<Query_getFamilyRelatedFamilies_familiesByPk_parents> Function(
                   Iterable<
@@ -695,7 +701,9 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   }) =>
       _res;
+
   children(_fn) => _res;
+
   parents(_fn) => _res;
 }
 
@@ -817,6 +825,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_children<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Family<TRes> get child {
     final local$child = _instance.child;
     return CopyWith_Fragment_Family(local$child, (e) => call(child: e));
@@ -837,6 +846,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_children<
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Family<TRes> get child =>
       CopyWith_Fragment_Family.stub(_res);
 }
@@ -959,6 +969,7 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Family<TRes> get parent {
     final local$parent = _instance.parent;
     return CopyWith_Fragment_Family(local$parent, (e) => call(parent: e));
@@ -979,6 +990,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents<
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Family<TRes> get parent =>
       CopyWith_Fragment_Family.stub(_res);
 }

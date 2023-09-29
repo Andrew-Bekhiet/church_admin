@@ -84,17 +84,24 @@ class Variables_Subscription_watchAllServices {
 
   List<Input_ServicesBoolExp>? get where =>
       (_$data['where'] as List<Input_ServicesBoolExp>?);
+
   List<Input_GroupsBoolExp>? get groupsWhere =>
       (_$data['groupsWhere'] as List<Input_GroupsBoolExp>?);
+
   List<Input_ClassesBoolExp>? get classesWhere =>
       (_$data['classesWhere'] as List<Input_ClassesBoolExp>?);
+
   List<Input_ServicesOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_ServicesOrderBy>?);
+
   List<Input_ClassesOrderBy>? get classesOrderBy =>
       (_$data['classesOrderBy'] as List<Input_ClassesOrderBy>?);
+
   List<Input_GroupsOrderBy>? get groupsOrderBy =>
       (_$data['groupsOrderBy'] as List<Input_GroupsOrderBy>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -138,6 +145,7 @@ class Variables_Subscription_watchAllServices {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -496,6 +504,7 @@ class _CopyWithImpl_Subscription_watchAllServices<TRes>
           services: services == _undefined || services == null
               ? _instance.services
               : (services as List<Subscription_watchAllServices_services>)));
+
   TRes services(
           Iterable<Subscription_watchAllServices_services> Function(
                   Iterable<
@@ -517,6 +526,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllServices_services>? services}) => _res;
+
   services(_fn) => _res;
 }
 
@@ -1094,6 +1104,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
             ? _instance.groups
             : (groups as List<Fragment_Group>),
       ));
+
   CopyWith_Subscription_watchAllServices_services_studyYearFrom<TRes>
       get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
@@ -1126,6 +1137,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   TRes groups(
           Iterable<Fragment_Group> Function(
                   Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
@@ -1156,15 +1168,19 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services<TRes>
     List<Fragment_Group>? groups,
   }) =>
       _res;
+
   CopyWith_Subscription_watchAllServices_services_studyYearFrom<TRes>
       get studyYearFrom =>
           CopyWith_Subscription_watchAllServices_services_studyYearFrom.stub(
               _res);
+
   CopyWith_Subscription_watchAllServices_services_studyYearTo<TRes>
       get studyYearTo =>
           CopyWith_Subscription_watchAllServices_services_studyYearTo.stub(
               _res);
+
   classes(_fn) => _res;
+
   groups(_fn) => _res;
 }
 
@@ -1689,6 +1705,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
             : (studyYear
                 as Subscription_watchAllServices_services_classes_studyYear),
       ));
+
   CopyWith_Subscription_watchAllServices_services_classes_studyYear<TRes>
       get studyYear {
     final local$studyYear = _instance.studyYear;
@@ -1713,6 +1730,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes<TRes>
     Subscription_watchAllServices_services_classes_studyYear? studyYear,
   }) =>
       _res;
+
   CopyWith_Subscription_watchAllServices_services_classes_studyYear<TRes>
       get studyYear =>
           CopyWith_Subscription_watchAllServices_services_classes_studyYear
@@ -1897,6 +1915,7 @@ class Variables_Subscription_watchService {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -1910,6 +1929,7 @@ class Variables_Subscription_watchService {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2060,6 +2080,7 @@ class _CopyWithImpl_Subscription_watchService<TRes>
           servicesByPk: servicesByPk == _undefined
               ? _instance.servicesByPk
               : (servicesByPk as Subscription_watchService_servicesByPk?)));
+
   CopyWith_Subscription_watchService_servicesByPk<TRes> get servicesByPk {
     final local$servicesByPk = _instance.servicesByPk;
     return local$servicesByPk == null
@@ -2076,6 +2097,7 @@ class _CopyWithStubImpl_Subscription_watchService<TRes>
   TRes _res;
 
   call({Subscription_watchService_servicesByPk? servicesByPk}) => _res;
+
   CopyWith_Subscription_watchService_servicesByPk<TRes> get servicesByPk =>
       CopyWith_Subscription_watchService_servicesByPk.stub(_res);
 }
@@ -2508,6 +2530,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
             ? _instance.nextService
             : (nextService as Fragment_Service?),
       ));
+
   CopyWith_Subscription_watchService_servicesByPk_studyYearFrom<TRes>
       get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
@@ -2540,6 +2563,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Fragment_Service<TRes> get nextService {
     final local$nextService = _instance.nextService;
     return local$nextService == null
@@ -2569,15 +2593,19 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     Fragment_Service? nextService,
   }) =>
       _res;
+
   CopyWith_Subscription_watchService_servicesByPk_studyYearFrom<TRes>
       get studyYearFrom =>
           CopyWith_Subscription_watchService_servicesByPk_studyYearFrom.stub(
               _res);
+
   CopyWith_Subscription_watchService_servicesByPk_studyYearTo<TRes>
       get studyYearTo =>
           CopyWith_Subscription_watchService_servicesByPk_studyYearTo.stub(
               _res);
+
   adminUsers(_fn) => _res;
+
   CopyWith_Fragment_Service<TRes> get nextService =>
       CopyWith_Fragment_Service.stub(_res);
 }
@@ -3009,6 +3037,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk_adminUsers<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -3028,5 +3057,6 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk_adminUsers<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

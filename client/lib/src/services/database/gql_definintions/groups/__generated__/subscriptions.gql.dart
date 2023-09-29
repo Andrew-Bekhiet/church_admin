@@ -46,10 +46,13 @@ class Variables_Subscription_watchAllGroups {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
+
   List<Input_GroupsOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_GroupsOrderBy>?);
+
   List<Input_GroupsBoolExp>? get where =>
       (_$data['where'] as List<Input_GroupsBoolExp>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -73,6 +76,7 @@ class Variables_Subscription_watchAllGroups {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -302,6 +306,7 @@ class _CopyWithImpl_Subscription_watchAllGroups<TRes>
       groups: groups == _undefined || groups == null
           ? _instance.groups
           : (groups as List<Fragment_Group>)));
+
   TRes groups(
           Iterable<Fragment_Group> Function(
                   Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
@@ -320,6 +325,7 @@ class _CopyWithStubImpl_Subscription_watchAllGroups<TRes>
   TRes _res;
 
   call({List<Fragment_Group>? groups}) => _res;
+
   groups(_fn) => _res;
 }
 
@@ -432,6 +438,7 @@ class Variables_Subscription_watchGroup {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -444,6 +451,7 @@ class Variables_Subscription_watchGroup {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -592,6 +600,7 @@ class _CopyWithImpl_Subscription_watchGroup<TRes>
       groupsByPk: groupsByPk == _undefined
           ? _instance.groupsByPk
           : (groupsByPk as Subscription_watchGroup_groupsByPk?)));
+
   CopyWith_Subscription_watchGroup_groupsByPk<TRes> get groupsByPk {
     final local$groupsByPk = _instance.groupsByPk;
     return local$groupsByPk == null
@@ -608,6 +617,7 @@ class _CopyWithStubImpl_Subscription_watchGroup<TRes>
   TRes _res;
 
   call({Subscription_watchGroup_groupsByPk? groupsByPk}) => _res;
+
   CopyWith_Subscription_watchGroup_groupsByPk<TRes> get groupsByPk =>
       CopyWith_Subscription_watchGroup_groupsByPk.stub(_res);
 }
@@ -1016,6 +1026,7 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
             : (adminUsers
                 as List<Subscription_watchGroup_groupsByPk_adminUsers>),
       ));
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
     return CopyWith_Fragment_ServiceWithStudyYears(
@@ -1055,8 +1066,10 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk<TRes>
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
   }) =>
       _res;
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
+
   adminUsers(_fn) => _res;
 }
 
@@ -1174,6 +1187,7 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk_adminUsers<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -1191,5 +1205,6 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk_adminUsers<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

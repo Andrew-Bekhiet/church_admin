@@ -21,6 +21,7 @@ class Variables_Mutation_deleteService {
   Map<String, dynamic> _$data;
 
   UuidValue get serviceId => (_$data['serviceId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$serviceId = serviceId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteService {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -212,6 +214,7 @@ class _CopyWithImpl_Mutation_deleteService<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Service<TRes> get deleteServicesByPk {
     final local$deleteServicesByPk = _instance.deleteServicesByPk;
     return local$deleteServicesByPk == null
@@ -232,6 +235,7 @@ class _CopyWithStubImpl_Mutation_deleteService<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Service<TRes> get deleteServicesByPk =>
       CopyWith_Fragment_Service.stub(_res);
 }
@@ -311,6 +315,7 @@ class Variables_Mutation_insertService {
 
   Input_ServicesInsertInput get newService =>
       (_$data['newService'] as Input_ServicesInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newService = newService;
@@ -323,6 +328,7 @@ class Variables_Mutation_insertService {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -502,6 +508,7 @@ class _CopyWithImpl_Mutation_insertService<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Service<TRes> get insertServicesOne {
     final local$insertServicesOne = _instance.insertServicesOne;
     return local$insertServicesOne == null
@@ -522,6 +529,7 @@ class _CopyWithStubImpl_Mutation_insertService<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Service<TRes> get insertServicesOne =>
       CopyWith_Fragment_Service.stub(_res);
 }
@@ -605,8 +613,10 @@ class Variables_Mutation_updateService {
   Map<String, dynamic> _$data;
 
   UuidValue get serviceId => (_$data['serviceId'] as UuidValue);
+
   Input_ServicesSetInput get newService =>
       (_$data['newService'] as Input_ServicesSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$serviceId = serviceId;
@@ -621,6 +631,7 @@ class Variables_Mutation_updateService {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -821,6 +832,7 @@ class _CopyWithImpl_Mutation_updateService<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Service<TRes> get updateServicesByPk {
     final local$updateServicesByPk = _instance.updateServicesByPk;
     return local$updateServicesByPk == null
@@ -841,6 +853,7 @@ class _CopyWithStubImpl_Mutation_updateService<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Service<TRes> get updateServicesByPk =>
       CopyWith_Fragment_Service.stub(_res);
 }

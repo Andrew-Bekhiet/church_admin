@@ -21,6 +21,7 @@ class Variables_Mutation_deleteFamily {
   Map<String, dynamic> _$data;
 
   UuidValue get familyId => (_$data['familyId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$familyId = familyId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteFamily {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deleteFamily<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk {
     final local$deleteFamiliesByPk = _instance.deleteFamiliesByPk;
     return local$deleteFamiliesByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deleteFamily<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
 }
@@ -310,6 +314,7 @@ class Variables_Mutation_insertFamily {
 
   Input_FamiliesInsertInput get newFamily =>
       (_$data['newFamily'] as Input_FamiliesInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newFamily = newFamily;
@@ -322,6 +327,7 @@ class Variables_Mutation_insertFamily {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -500,6 +506,7 @@ class _CopyWithImpl_Mutation_insertFamily<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne {
     final local$insertFamiliesOne = _instance.insertFamiliesOne;
     return local$insertFamiliesOne == null
@@ -520,6 +527,7 @@ class _CopyWithStubImpl_Mutation_insertFamily<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne =>
       CopyWith_Fragment_Family.stub(_res);
 }
@@ -633,17 +641,25 @@ class Variables_Mutation_updateFamily {
   Map<String, dynamic> _$data;
 
   UuidValue get familyId => (_$data['familyId'] as UuidValue);
+
   Input_FamiliesSetInput get newFamily =>
       (_$data['newFamily'] as Input_FamiliesSetInput);
+
   List<UuidValue> get deleteParents =>
       (_$data['deleteParents'] as List<UuidValue>);
+
   List<UuidValue> get deleteChildren =>
       (_$data['deleteChildren'] as List<UuidValue>);
+
   List<Input_FamiliesFamiliesInsertInput> get addRelatedFamilies =>
       (_$data['addRelatedFamilies'] as List<Input_FamiliesFamiliesInsertInput>);
+
   bool get updateFamily => (_$data['updateFamily'] as bool);
+
   bool get deleteRelatedFamilies => (_$data['deleteRelatedFamilies'] as bool);
+
   bool get insertRelatedFamilies => (_$data['insertRelatedFamilies'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$familyId = familyId;
@@ -673,6 +689,7 @@ class Variables_Mutation_updateFamily {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1018,6 +1035,7 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk {
     final local$updateFamiliesByPk = _instance.updateFamiliesByPk;
     return local$updateFamiliesByPk == null
@@ -1062,11 +1080,14 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
+
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies =>
           CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(_res);
+
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies =>
           CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);

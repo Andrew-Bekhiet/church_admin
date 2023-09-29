@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllHobbies {
 
   List<Input_HobbiesBoolExp>? get where =>
       (_$data['where'] as List<Input_HobbiesBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllHobbies {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -259,6 +262,7 @@ class _CopyWithImpl_Subscription_watchAllHobbies<TRes>
           hobbies: hobbies == _undefined || hobbies == null
               ? _instance.hobbies
               : (hobbies as List<Subscription_watchAllHobbies_hobbies>)));
+
   TRes hobbies(
           Iterable<Subscription_watchAllHobbies_hobbies> Function(
                   Iterable<
@@ -280,6 +284,7 @@ class _CopyWithStubImpl_Subscription_watchAllHobbies<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllHobbies_hobbies>? hobbies}) => _res;
+
   hobbies(_fn) => _res;
 }
 

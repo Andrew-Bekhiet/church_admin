@@ -34,6 +34,7 @@ class MockUrlLauncherPlatform_ extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> launch(
     String? url, {
@@ -62,6 +63,7 @@ class MockUrlLauncherPlatform_ extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<bool> launchUrl(
     String? url,
@@ -78,6 +80,7 @@ class MockUrlLauncherPlatform_ extends _i1.Mock
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+
   @override
   _i3.Future<void> closeWebView() => (super.noSuchMethod(
         Invocation.method(

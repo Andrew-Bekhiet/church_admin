@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllPersonStates {
 
   List<Input_PersonStatesBoolExp>? get where =>
       (_$data['where'] as List<Input_PersonStatesBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllPersonStates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -263,6 +266,7 @@ class _CopyWithImpl_Subscription_watchAllPersonStates<TRes>
               ? _instance.personStates
               : (personStates
                   as List<Subscription_watchAllPersonStates_personStates>)));
+
   TRes personStates(
           Iterable<Subscription_watchAllPersonStates_personStates> Function(
                   Iterable<
@@ -285,6 +289,7 @@ class _CopyWithStubImpl_Subscription_watchAllPersonStates<TRes>
 
   call({List<Subscription_watchAllPersonStates_personStates>? personStates}) =>
       _res;
+
   personStates(_fn) => _res;
 }
 

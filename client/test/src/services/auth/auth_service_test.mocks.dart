@@ -100,6 +100,7 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
         returnValue: _i4.Future<_i2.User?>.value(),
         returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
       ) as _i4.Future<_i2.User?>);
+
   @override
   _i4.Future<void> writeUserToCache(_i2.User? user) => (super.noSuchMethod(
         Invocation.method(
@@ -109,6 +110,7 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<String?> getPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -118,6 +120,7 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<void> saveUserPasswordHash(
     String? email,
@@ -134,6 +137,7 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> clearPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -162,18 +166,21 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           Invocation.getter(#multiFactorManagerAdapter),
         ),
       ) as _i2.FirebaseMultiFactorManagerAdapter);
+
   @override
   _i4.Stream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
         returnValue: _i4.Stream<_i2.User?>.empty(),
         returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
       ) as _i4.Stream<_i2.User?>);
+
   @override
   _i4.Stream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
         returnValue: _i4.Stream<String?>.empty(),
         returnValueForMissingStub: _i4.Stream<String?>.empty(),
       ) as _i4.Stream<String?>);
+
   @override
   _i4.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -191,6 +198,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -208,6 +216,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -225,6 +234,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -234,6 +244,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -243,6 +254,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -252,6 +264,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   bool isTokenUpToDate(_i2.User? user) => (super.noSuchMethod(
         Invocation.method(
@@ -261,6 +274,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   DateTime tokenExpiry(String? idToken) => (super.noSuchMethod(
         Invocation.method(
@@ -282,6 +296,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
           ),
         ),
       ) as DateTime);
+
   @override
   _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -291,6 +306,7 @@ class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -313,6 +329,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void addPendingMultiFactorLogin(
     _i2.MultiFactorSession? session,
@@ -328,6 +345,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<_i2.MultiFactorSession> enrollNewMultiFactor(
           {required String? password}) =>
@@ -356,6 +374,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.MultiFactorSession>);
+
   @override
   _i2.MultiFactorInfo getMultiFactorInfoForPendingSession() =>
       (super.noSuchMethod(
@@ -378,6 +397,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
           ),
         ),
       ) as _i2.MultiFactorInfo);
+
   @override
   _i4.Future<(String, int?)> initiateMultifactorLogin(
     _i2.MultiFactorSession? session, {
@@ -398,6 +418,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
         returnValue: _i4.Future<(String, int?)>.value(('', null)),
         returnValueForMissingStub: _i4.Future<(String, int?)>.value(('', null)),
       ) as _i4.Future<(String, int?)>);
+
   @override
   _i4.Future<void> finishMultiFactorSession(
     String? verificationId,
@@ -414,6 +435,7 @@ class MockFirebaseMultiFactorManagerAdapter extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   void clearPendingMultiFactorLogin() => super.noSuchMethod(
         Invocation.method(
@@ -440,18 +462,21 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
           Invocation.getter(#timeToReauth),
         ),
       ) as Duration);
+
   @override
   bool get shouldAuthenticate => (super.noSuchMethod(
         Invocation.getter(#shouldAuthenticate),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i4.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
         returnValue: _i4.Stream<void>.empty(),
         returnValueForMissingStub: _i4.Stream<void>.empty(),
       ) as _i4.Stream<void>);
+
   @override
   bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -461,6 +486,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
         Invocation.method(
@@ -470,6 +496,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
       super.noSuchMethod(
@@ -479,6 +506,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void scheduleReauth() => super.noSuchMethod(
         Invocation.method(
@@ -487,6 +515,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void resetAuthState({String? path}) => super.noSuchMethod(
         Invocation.method(
@@ -496,6 +525,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
@@ -505,6 +535,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
@@ -514,6 +545,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> verifyPassword({
     required String? email,
@@ -533,6 +565,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
@@ -542,6 +575,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
@@ -551,6 +585,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
@@ -560,6 +595,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> didPushRouteInformation(
           _i7.RouteInformation? routeInformation) =>
@@ -571,6 +607,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   void didChangeMetrics() => super.noSuchMethod(
         Invocation.method(
@@ -579,6 +616,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeTextScaleFactor() => super.noSuchMethod(
         Invocation.method(
@@ -587,6 +625,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangePlatformBrightness() => super.noSuchMethod(
         Invocation.method(
@@ -595,6 +634,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
@@ -603,6 +643,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   _i4.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
@@ -614,6 +655,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         returnValueForMissingStub:
             _i4.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
       ) as _i4.Future<_i6.AppExitResponse>);
+
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
         Invocation.method(
@@ -622,6 +664,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   void didChangeAccessibilityFeatures() => super.noSuchMethod(
         Invocation.method(
@@ -643,6 +686,7 @@ class MockConnectivityService extends _i1.Mock
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+
   @override
   _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
         Invocation.getter(#connectivityStream),
@@ -655,6 +699,7 @@ class MockConnectivityService extends _i1.Mock
           Invocation.getter(#connectivityStream),
         ),
       ) as _i3.ValueStream<bool>);
+
   @override
   _i4.Future<bool> isConnected() => (super.noSuchMethod(
         Invocation.method(
@@ -664,6 +709,7 @@ class MockConnectivityService extends _i1.Mock
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

@@ -63,6 +63,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#multiFactorManager),
         ),
       ) as _i2.MultiFactorManager);
+
   @override
   set multiFactorManager(_i2.MultiFactorManager? _multiFactorManager) =>
       super.noSuchMethod(
@@ -72,12 +73,14 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         ),
         returnValueForMissingStub: null,
       );
+
   @override
   bool get isSignedIn => (super.noSuchMethod(
         Invocation.getter(#isSignedIn),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i3.ValueStream<_i2.User?> get userStream => (super.noSuchMethod(
         Invocation.getter(#userStream),
@@ -90,6 +93,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#userStream),
         ),
       ) as _i3.ValueStream<_i2.User?>);
+
   @override
   _i3.ValueStream<String?> get idTokenStream => (super.noSuchMethod(
         Invocation.getter(#idTokenStream),
@@ -102,6 +106,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
           Invocation.getter(#idTokenStream),
         ),
       ) as _i3.ValueStream<String?>);
+
   @override
   _i4.Future<bool> signInWithEmailPassword({
     required String? email,
@@ -119,6 +124,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> reauthWithEmailPassword({
     required String? email,
@@ -136,6 +142,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<bool> signUpWithEmailPassword({
     required String? email,
@@ -153,6 +160,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<bool>.value(false),
         returnValueForMissingStub: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
+
   @override
   _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -162,6 +170,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
@@ -171,6 +180,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
@@ -180,6 +190,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
@@ -189,6 +200,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<String?>.value(),
         returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
+
   @override
   _i4.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
@@ -198,6 +210,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
   @override
   _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(

@@ -43,10 +43,13 @@ class Variables_Subscription_watchAllAreas {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
+
   List<Input_AreasOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_AreasOrderBy>?);
+
   List<Input_AreasBoolExp>? get where =>
       (_$data['where'] as List<Input_AreasBoolExp>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -70,6 +73,7 @@ class Variables_Subscription_watchAllAreas {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -302,6 +306,7 @@ class _CopyWithImpl_Subscription_watchAllAreas<TRes>
       areas: areas == _undefined || areas == null
           ? _instance.areas
           : (areas as List<Subscription_watchAllAreas_areas>)));
+
   TRes areas(
           Iterable<Subscription_watchAllAreas_areas> Function(
                   Iterable<
@@ -323,6 +328,7 @@ class _CopyWithStubImpl_Subscription_watchAllAreas<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllAreas_areas>? areas}) => _res;
+
   areas(_fn) => _res;
 }
 
@@ -664,6 +670,7 @@ class Variables_Subscription_watchArea {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -676,6 +683,7 @@ class Variables_Subscription_watchArea {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -824,6 +832,7 @@ class _CopyWithImpl_Subscription_watchArea<TRes>
       areasByPk: areasByPk == _undefined
           ? _instance.areasByPk
           : (areasByPk as Subscription_watchArea_areasByPk?)));
+
   CopyWith_Subscription_watchArea_areasByPk<TRes> get areasByPk {
     final local$areasByPk = _instance.areasByPk;
     return local$areasByPk == null
@@ -840,6 +849,7 @@ class _CopyWithStubImpl_Subscription_watchArea<TRes>
   TRes _res;
 
   call({Subscription_watchArea_areasByPk? areasByPk}) => _res;
+
   CopyWith_Subscription_watchArea_areasByPk<TRes> get areasByPk =>
       CopyWith_Subscription_watchArea_areasByPk.stub(_res);
 }
@@ -1202,6 +1212,7 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
             ? _instance.adminUsers
             : (adminUsers as List<Subscription_watchArea_areasByPk_adminUsers>),
       ));
+
   TRes adminUsers(
           Iterable<Subscription_watchArea_areasByPk_adminUsers> Function(
                   Iterable<
@@ -1234,6 +1245,7 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   }) =>
       _res;
+
   adminUsers(_fn) => _res;
 }
 
@@ -1350,6 +1362,7 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk_adminUsers<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -1367,5 +1380,6 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk_adminUsers<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

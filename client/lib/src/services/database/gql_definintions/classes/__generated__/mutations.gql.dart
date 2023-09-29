@@ -21,6 +21,7 @@ class Variables_Mutation_deleteClass {
   Map<String, dynamic> _$data;
 
   UuidValue get classId => (_$data['classId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$classId = classId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteClass {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deleteClass<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Class<TRes> get deleteClassesByPk {
     final local$deleteClassesByPk = _instance.deleteClassesByPk;
     return local$deleteClassesByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deleteClass<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Class<TRes> get deleteClassesByPk =>
       CopyWith_Fragment_Class.stub(_res);
 }
@@ -310,6 +314,7 @@ class Variables_Mutation_insertClass {
 
   Input_ClassesInsertInput get newClass =>
       (_$data['newClass'] as Input_ClassesInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newClass = newClass;
@@ -322,6 +327,7 @@ class Variables_Mutation_insertClass {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -500,6 +506,7 @@ class _CopyWithImpl_Mutation_insertClass<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Class<TRes> get insertClassesOne {
     final local$insertClassesOne = _instance.insertClassesOne;
     return local$insertClassesOne == null
@@ -520,6 +527,7 @@ class _CopyWithStubImpl_Mutation_insertClass<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Class<TRes> get insertClassesOne =>
       CopyWith_Fragment_Class.stub(_res);
 }
@@ -603,8 +611,10 @@ class Variables_Mutation_updateClass {
   Map<String, dynamic> _$data;
 
   UuidValue get classId => (_$data['classId'] as UuidValue);
+
   Input_ClassesSetInput get newClass =>
       (_$data['newClass'] as Input_ClassesSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$classId = classId;
@@ -619,6 +629,7 @@ class Variables_Mutation_updateClass {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -818,6 +829,7 @@ class _CopyWithImpl_Mutation_updateClass<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Class<TRes> get updateClassesByPk {
     final local$updateClassesByPk = _instance.updateClassesByPk;
     return local$updateClassesByPk == null
@@ -838,6 +850,7 @@ class _CopyWithStubImpl_Mutation_updateClass<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Class<TRes> get updateClassesByPk =>
       CopyWith_Fragment_Class.stub(_res);
 }

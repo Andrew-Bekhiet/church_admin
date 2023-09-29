@@ -34,7 +34,9 @@ class Variables_Subscription_watchAllJobs {
 
   List<Input_JobsBoolExp>? get where =>
       (_$data['where'] as List<Input_JobsBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -54,6 +56,7 @@ class Variables_Subscription_watchAllJobs {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -256,6 +259,7 @@ class _CopyWithImpl_Subscription_watchAllJobs<TRes>
       jobs: jobs == _undefined || jobs == null
           ? _instance.jobs
           : (jobs as List<Subscription_watchAllJobs_jobs>)));
+
   TRes jobs(
           Iterable<Subscription_watchAllJobs_jobs> Function(
                   Iterable<
@@ -277,6 +281,7 @@ class _CopyWithStubImpl_Subscription_watchAllJobs<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllJobs_jobs>? jobs}) => _res;
+
   jobs(_fn) => _res;
 }
 

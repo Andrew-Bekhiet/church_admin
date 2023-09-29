@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllColleges {
 
   List<Input_CollegesBoolExp>? get where =>
       (_$data['where'] as List<Input_CollegesBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllColleges {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -259,6 +262,7 @@ class _CopyWithImpl_Subscription_watchAllColleges<TRes>
           colleges: colleges == _undefined || colleges == null
               ? _instance.colleges
               : (colleges as List<Subscription_watchAllColleges_colleges>)));
+
   TRes colleges(
           Iterable<Subscription_watchAllColleges_colleges> Function(
                   Iterable<
@@ -280,6 +284,7 @@ class _CopyWithStubImpl_Subscription_watchAllColleges<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllColleges_colleges>? colleges}) => _res;
+
   colleges(_fn) => _res;
 }
 

@@ -67,12 +67,14 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
           Invocation.getter(#value),
         ),
       ) as T);
+
   @override
   bool get hasValue => (super.noSuchMethod(
         Invocation.getter(#hasValue),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   Object get error => (super.noSuchMethod(
         Invocation.getter(#error),
@@ -85,30 +87,35 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
           Invocation.getter(#error),
         ),
       ) as Object);
+
   @override
   bool get hasError => (super.noSuchMethod(
         Invocation.getter(#hasError),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   bool get isBroadcast => (super.noSuchMethod(
         Invocation.getter(#isBroadcast),
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
   @override
   _i2.Future<int> get length => (super.noSuchMethod(
         Invocation.getter(#length),
         returnValue: _i2.Future<int>.value(0),
         returnValueForMissingStub: _i2.Future<int>.value(0),
       ) as _i2.Future<int>);
+
   @override
   _i2.Future<bool> get isEmpty => (super.noSuchMethod(
         Invocation.getter(#isEmpty),
         returnValue: _i2.Future<bool>.value(false),
         returnValueForMissingStub: _i2.Future<bool>.value(false),
       ) as _i2.Future<bool>);
+
   @override
   _i2.Future<T> get first => (super.noSuchMethod(
         Invocation.getter(#first),
@@ -135,6 +142,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               Invocation.getter(#first),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<T> get last => (super.noSuchMethod(
         Invocation.getter(#last),
@@ -161,6 +169,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               Invocation.getter(#last),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<T> get single => (super.noSuchMethod(
         Invocation.getter(#single),
@@ -187,6 +196,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               Invocation.getter(#single),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Stream<T> asBroadcastStream({
     void Function(_i2.StreamSubscription<T>)? onListen,
@@ -204,6 +214,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.StreamSubscription<T> listen(
     void Function(T)? onData, {
@@ -246,6 +257,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
           ),
         ),
       ) as _i2.StreamSubscription<T>);
+
   @override
   _i2.Stream<T> where(bool Function(T)? test) => (super.noSuchMethod(
         Invocation.method(
@@ -255,6 +267,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<S> map<S>(S Function(T)? convert) => (super.noSuchMethod(
         Invocation.method(
@@ -264,6 +277,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<S>.empty(),
         returnValueForMissingStub: _i2.Stream<S>.empty(),
       ) as _i2.Stream<S>);
+
   @override
   _i2.Stream<E> asyncMap<E>(_i2.FutureOr<E> Function(T)? convert) =>
       (super.noSuchMethod(
@@ -274,6 +288,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<E>.empty(),
         returnValueForMissingStub: _i2.Stream<E>.empty(),
       ) as _i2.Stream<E>);
+
   @override
   _i2.Stream<E> asyncExpand<E>(_i2.Stream<E>? Function(T)? convert) =>
       (super.noSuchMethod(
@@ -284,6 +299,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<E>.empty(),
         returnValueForMissingStub: _i2.Stream<E>.empty(),
       ) as _i2.Stream<E>);
+
   @override
   _i2.Stream<T> handleError(
     Function? onError, {
@@ -298,6 +314,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<S> expand<S>(Iterable<S> Function(T)? convert) =>
       (super.noSuchMethod(
@@ -308,6 +325,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<S>.empty(),
         returnValueForMissingStub: _i2.Stream<S>.empty(),
       ) as _i2.Stream<S>);
+
   @override
   _i2.Future<dynamic> pipe(_i2.StreamConsumer<T>? streamConsumer) =>
       (super.noSuchMethod(
@@ -318,6 +336,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<dynamic>.value(),
         returnValueForMissingStub: _i2.Future<dynamic>.value(),
       ) as _i2.Future<dynamic>);
+
   @override
   _i2.Stream<S> transform<S>(_i2.StreamTransformer<T, S>? streamTransformer) =>
       (super.noSuchMethod(
@@ -328,6 +347,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<S>.empty(),
         returnValueForMissingStub: _i2.Stream<S>.empty(),
       ) as _i2.Stream<S>);
+
   @override
   _i2.Future<T> reduce(
           T Function(
@@ -374,6 +394,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<S> fold<S>(
     S? initialValue,
@@ -437,6 +458,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<S>);
+
   @override
   _i2.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
         Invocation.method(
@@ -446,6 +468,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<String>.value(''),
         returnValueForMissingStub: _i2.Future<String>.value(''),
       ) as _i2.Future<String>);
+
   @override
   _i2.Future<bool> contains(Object? needle) => (super.noSuchMethod(
         Invocation.method(
@@ -455,6 +478,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<bool>.value(false),
         returnValueForMissingStub: _i2.Future<bool>.value(false),
       ) as _i2.Future<bool>);
+
   @override
   _i2.Future<void> forEach(void Function(T)? action) => (super.noSuchMethod(
         Invocation.method(
@@ -464,6 +488,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<void>.value(),
         returnValueForMissingStub: _i2.Future<void>.value(),
       ) as _i2.Future<void>);
+
   @override
   _i2.Future<bool> every(bool Function(T)? test) => (super.noSuchMethod(
         Invocation.method(
@@ -473,6 +498,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<bool>.value(false),
         returnValueForMissingStub: _i2.Future<bool>.value(false),
       ) as _i2.Future<bool>);
+
   @override
   _i2.Future<bool> any(bool Function(T)? test) => (super.noSuchMethod(
         Invocation.method(
@@ -482,6 +508,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<bool>.value(false),
         returnValueForMissingStub: _i2.Future<bool>.value(false),
       ) as _i2.Future<bool>);
+
   @override
   _i2.Stream<R> cast<R>() => (super.noSuchMethod(
         Invocation.method(
@@ -491,6 +518,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<R>.empty(),
         returnValueForMissingStub: _i2.Stream<R>.empty(),
       ) as _i2.Stream<R>);
+
   @override
   _i2.Future<List<T>> toList() => (super.noSuchMethod(
         Invocation.method(
@@ -500,6 +528,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<List<T>>.value(<T>[]),
         returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
       ) as _i2.Future<List<T>>);
+
   @override
   _i2.Future<Set<T>> toSet() => (super.noSuchMethod(
         Invocation.method(
@@ -509,6 +538,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Future<Set<T>>.value(<T>{}),
         returnValueForMissingStub: _i2.Future<Set<T>>.value(<T>{}),
       ) as _i2.Future<Set<T>>);
+
   @override
   _i2.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
         Invocation.method(
@@ -550,6 +580,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<E>);
+
   @override
   _i2.Stream<T> take(int? count) => (super.noSuchMethod(
         Invocation.method(
@@ -559,6 +590,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<T> takeWhile(bool Function(T)? test) => (super.noSuchMethod(
         Invocation.method(
@@ -568,6 +600,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<T> skip(int? count) => (super.noSuchMethod(
         Invocation.method(
@@ -577,6 +610,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<T> skipWhile(bool Function(T)? test) => (super.noSuchMethod(
         Invocation.method(
@@ -586,6 +620,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Stream<T> distinct(
           [bool Function(
@@ -600,6 +635,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
         returnValue: _i2.Stream<T>.empty(),
         returnValueForMissingStub: _i2.Stream<T>.empty(),
       ) as _i2.Stream<T>);
+
   @override
   _i2.Future<T> firstWhere(
     bool Function(T)? test, {
@@ -650,6 +686,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<T> lastWhere(
     bool Function(T)? test, {
@@ -700,6 +737,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<T> singleWhere(
     bool Function(T)? test, {
@@ -750,6 +788,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Future<T> elementAt(int? index) => (super.noSuchMethod(
         Invocation.method(
@@ -791,6 +830,7 @@ class MockValueStream<T> extends _i1.Mock implements _i3.ValueStream<T> {
               ),
             ),
       ) as _i2.Future<T>);
+
   @override
   _i2.Stream<T> timeout(
     Duration? timeLimit, {

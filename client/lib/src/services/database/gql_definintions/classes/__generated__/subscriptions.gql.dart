@@ -46,10 +46,13 @@ class Variables_Subscription_watchAllClasses {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
+
   List<Input_ClassesOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_ClassesOrderBy>?);
+
   List<Input_ClassesBoolExp>? get where =>
       (_$data['where'] as List<Input_ClassesBoolExp>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -73,6 +76,7 @@ class Variables_Subscription_watchAllClasses {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -304,6 +308,7 @@ class _CopyWithImpl_Subscription_watchAllClasses<TRes>
           classes: classes == _undefined || classes == null
               ? _instance.classes
               : (classes as List<Fragment_Class>)));
+
   TRes classes(
           Iterable<Fragment_Class> Function(
                   Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
@@ -322,6 +327,7 @@ class _CopyWithStubImpl_Subscription_watchAllClasses<TRes>
   TRes _res;
 
   call({List<Fragment_Class>? classes}) => _res;
+
   classes(_fn) => _res;
 }
 
@@ -434,6 +440,7 @@ class Variables_Subscription_watchClass {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -446,6 +453,7 @@ class Variables_Subscription_watchClass {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -595,6 +603,7 @@ class _CopyWithImpl_Subscription_watchClass<TRes>
           classesByPk: classesByPk == _undefined
               ? _instance.classesByPk
               : (classesByPk as Subscription_watchClass_classesByPk?)));
+
   CopyWith_Subscription_watchClass_classesByPk<TRes> get classesByPk {
     final local$classesByPk = _instance.classesByPk;
     return local$classesByPk == null
@@ -611,6 +620,7 @@ class _CopyWithStubImpl_Subscription_watchClass<TRes>
   TRes _res;
 
   call({Subscription_watchClass_classesByPk? classesByPk}) => _res;
+
   CopyWith_Subscription_watchClass_classesByPk<TRes> get classesByPk =>
       CopyWith_Subscription_watchClass_classesByPk.stub(_res);
 }
@@ -1068,6 +1078,7 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk<TRes>
             : (adminUsers
                 as List<Subscription_watchClass_classesByPk_adminUsers>),
       ));
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
     return CopyWith_Fragment_ServiceWithStudyYears(
@@ -1114,10 +1125,13 @@ class _CopyWithStubImpl_Subscription_watchClass_classesByPk<TRes>
     List<Subscription_watchClass_classesByPk_adminUsers>? adminUsers,
   }) =>
       _res;
+
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
+
   CopyWith_Subscription_watchClass_classesByPk_studyYear<TRes> get studyYear =>
       CopyWith_Subscription_watchClass_classesByPk_studyYear.stub(_res);
+
   adminUsers(_fn) => _res;
 }
 
@@ -1383,6 +1397,7 @@ class _CopyWithImpl_Subscription_watchClass_classesByPk_adminUsers<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
     return CopyWith_Fragment_User(local$user, (e) => call(user: e));
@@ -1400,5 +1415,6 @@ class _CopyWithStubImpl_Subscription_watchClass_classesByPk_adminUsers<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

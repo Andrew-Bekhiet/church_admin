@@ -61,13 +61,20 @@ class Variables_Query_analyzeUserAttendance {
   Map<String, dynamic> _$data;
 
   DateTime get dateFrom => (_$data['dateFrom'] as DateTime);
+
   DateTime get dateTo => (_$data['dateTo'] as DateTime);
+
   UuidValue get personId => (_$data['personId'] as UuidValue);
+
   UuidValue get userId => (_$data['userId'] as UuidValue);
+
   List<UuidValue>? get groupsIds => (_$data['groupsIds'] as List<UuidValue>?);
+
   List<UuidValue>? get classesIds => (_$data['classesIds'] as List<UuidValue>?);
+
   List<UuidValue>? get servicesIds =>
       (_$data['servicesIds'] as List<UuidValue>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$dateFrom = dateFrom;
@@ -102,6 +109,7 @@ class Variables_Query_analyzeUserAttendance {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -422,6 +430,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
       get authUsersDataByPk {
     final local$authUsersDataByPk = _instance.authUsersDataByPk;
@@ -444,6 +453,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
       get authUsersDataByPk =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk.stub(_res);
@@ -889,6 +899,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
             : (groupsHistory as List<
                 Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory>),
       ));
+
   TRes servicesHistory(
           Iterable<Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory> Function(
                   Iterable<
@@ -901,6 +912,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes classesHistory(
           Iterable<Query_analyzeUserAttendance_authUsersDataByPk_classesHistory> Function(
                   Iterable<
@@ -913,6 +925,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   TRes groupsHistory(
           Iterable<Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory> Function(
                   Iterable<
@@ -948,8 +961,11 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk<TRes>
         groupsHistory,
   }) =>
       _res;
+
   servicesHistory(_fn) => _res;
+
   classesHistory(_fn) => _res;
+
   groupsHistory(_fn) => _res;
 }
 
@@ -1102,6 +1118,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service<
       TRes> get service {
     final local$service = _instance.service;
@@ -1130,6 +1147,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service<
           TRes>
       get service =>
@@ -1404,6 +1422,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
             : (attendanceDaysConstraintsAggregate
                 as Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -1446,11 +1465,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -1634,6 +1655,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -1676,11 +1698,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -1839,6 +1863,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -1867,6 +1892,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -2342,6 +2368,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistor
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -2384,11 +2411,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_servicesHi
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -2848,6 +2877,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   TRes classes(
           Iterable<Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes> Function(
                   Iterable<
@@ -2879,6 +2909,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     String? $__typename,
   }) =>
       _res;
+
   classes(_fn) => _res;
 }
 
@@ -3149,6 +3180,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
             : (attendanceDaysConstraintsAggregate
                 as Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -3191,11 +3223,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -3379,6 +3413,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -3421,11 +3456,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -3584,6 +3621,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -3612,6 +3650,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -4087,6 +4126,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -4129,11 +4169,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_classesHis
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -4579,6 +4621,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory<
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group<
       TRes> get group {
     final local$group = _instance.group;
@@ -4606,6 +4649,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group<
           TRes>
       get group =>
@@ -4877,6 +4921,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
             : (attendanceDaysConstraintsAggregate
                 as Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -4919,11 +4964,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate
               .stub(_res);
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
@@ -5107,6 +5154,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -5149,11 +5197,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 
@@ -5312,6 +5362,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
@@ -5340,6 +5391,7 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
@@ -5815,6 +5867,7 @@ class _CopyWithImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
@@ -5857,11 +5910,13 @@ class _CopyWithStubImpl_Query_analyzeUserAttendance_authUsersDataByPk_groupsHist
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
           CopyWith_Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
+
   nodes(_fn) => _res;
 }
 

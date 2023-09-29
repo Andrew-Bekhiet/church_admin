@@ -34,7 +34,9 @@ class Variables_Subscription_watchAllStudyYears {
 
   List<Input_StudyYearsBoolExp>? get where =>
       (_$data['where'] as List<Input_StudyYearsBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -54,6 +56,7 @@ class Variables_Subscription_watchAllStudyYears {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -259,6 +262,7 @@ class _CopyWithImpl_Subscription_watchAllStudyYears<TRes>
               ? _instance.studyYears
               : (studyYears
                   as List<Subscription_watchAllStudyYears_studyYears>)));
+
   TRes studyYears(
           Iterable<Subscription_watchAllStudyYears_studyYears> Function(
                   Iterable<
@@ -280,6 +284,7 @@ class _CopyWithStubImpl_Subscription_watchAllStudyYears<TRes>
   TRes _res;
 
   call({List<Subscription_watchAllStudyYears_studyYears>? studyYears}) => _res;
+
   studyYears(_fn) => _res;
 }
 

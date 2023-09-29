@@ -35,7 +35,9 @@ class Variables_Subscription_watchAllQualifications {
 
   List<Input_QualificationsBoolExp>? get where =>
       (_$data['where'] as List<Input_QualificationsBoolExp>?);
+
   int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
@@ -55,6 +57,7 @@ class Variables_Subscription_watchAllQualifications {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -267,6 +270,7 @@ class _CopyWithImpl_Subscription_watchAllQualifications<TRes>
               ? _instance.qualifications
               : (qualifications as List<
                   Subscription_watchAllQualifications_qualifications>)));
+
   TRes qualifications(
           Iterable<Subscription_watchAllQualifications_qualifications> Function(
                   Iterable<
@@ -291,6 +295,7 @@ class _CopyWithStubImpl_Subscription_watchAllQualifications<TRes>
           {List<Subscription_watchAllQualifications_qualifications>?
               qualifications}) =>
       _res;
+
   qualifications(_fn) => _res;
 }
 
