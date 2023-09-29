@@ -47,10 +47,13 @@ class Variables_Subscription_watchAllStores {
   Map<String, dynamic> _$data;
 
   int? get limit => (_$data['limit'] as int?);
+
   List<Input_StoresOrderBy>? get orderBy =>
       (_$data['orderBy'] as List<Input_StoresOrderBy>?);
+
   List<Input_StoresBoolExp>? get where =>
       (_$data['where'] as List<Input_StoresBoolExp>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('limit')) {
@@ -74,6 +77,7 @@ class Variables_Subscription_watchAllStores {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -303,6 +307,7 @@ class _CopyWithImpl_Subscription_watchAllStores<TRes>
       stores: stores == _undefined || stores == null
           ? _instance.stores
           : (stores as List<Fragment_Store>)));
+
   TRes stores(
           Iterable<Fragment_Store> Function(
                   Iterable<CopyWith_Fragment_Store<Fragment_Store>>)
@@ -321,6 +326,7 @@ class _CopyWithStubImpl_Subscription_watchAllStores<TRes>
   TRes _res;
 
   call({List<Fragment_Store>? stores}) => _res;
+
   stores(_fn) => _res;
 }
 
@@ -433,6 +439,7 @@ class Variables_Subscription_watchStore {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -445,6 +452,7 @@ class Variables_Subscription_watchStore {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -593,6 +601,7 @@ class _CopyWithImpl_Subscription_watchStore<TRes>
       storesByPk: storesByPk == _undefined
           ? _instance.storesByPk
           : (storesByPk as Subscription_watchStore_storesByPk?)));
+
   CopyWith_Subscription_watchStore_storesByPk<TRes> get storesByPk {
     final local$storesByPk = _instance.storesByPk;
     return local$storesByPk == null
@@ -609,6 +618,7 @@ class _CopyWithStubImpl_Subscription_watchStore<TRes>
   TRes _res;
 
   call({Subscription_watchStore_storesByPk? storesByPk}) => _res;
+
   CopyWith_Subscription_watchStore_storesByPk<TRes> get storesByPk =>
       CopyWith_Subscription_watchStore_storesByPk.stub(_res);
 }
@@ -711,6 +721,13 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'address'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'geolocation'),
             alias: null,
             arguments: [],
@@ -769,6 +786,7 @@ class Subscription_watchStore_storesByPk
     this.areas,
     this.streets,
     this.lastEdit,
+    this.address,
     this.geolocation,
     this.family,
   });
@@ -784,6 +802,7 @@ class Subscription_watchStore_storesByPk
     final l$areas = json['areas'];
     final l$streets = json['streets'];
     final l$lastEdit = json['lastEdit'];
+    final l$address = json['address'];
     final l$geolocation = json['geolocation'];
     final l$family = json['family'];
     return Subscription_watchStore_storesByPk(
@@ -801,6 +820,7 @@ class Subscription_watchStore_storesByPk
           ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
           .toList(),
       lastEdit: (l$lastEdit as Json?),
+      address: (l$address as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       family: l$family == null
           ? null
@@ -825,6 +845,8 @@ class Subscription_watchStore_storesByPk
   final List<Fragment_Street>? streets;
 
   final Json? lastEdit;
+
+  final String? address;
 
   final Map<String, dynamic>? geolocation;
 
@@ -851,6 +873,8 @@ class Subscription_watchStore_storesByPk
     _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit;
+    final l$address = address;
+    _resultData['address'] = l$address;
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$family = family;
@@ -869,6 +893,7 @@ class Subscription_watchStore_storesByPk
     final l$areas = areas;
     final l$streets = streets;
     final l$lastEdit = lastEdit;
+    final l$address = address;
     final l$geolocation = geolocation;
     final l$family = family;
     return Object.hashAll([
@@ -881,6 +906,7 @@ class Subscription_watchStore_storesByPk
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
       l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
       l$lastEdit,
+      l$address,
       l$geolocation,
       l$family,
     ]);
@@ -962,6 +988,11 @@ class Subscription_watchStore_storesByPk
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
+      return false;
+    }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
     if (l$geolocation != lOther$geolocation) {
@@ -1005,6 +1036,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
     Json? lastEdit,
+    String? address,
     Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   });
@@ -1042,6 +1074,7 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     Object? areas = _undefined,
     Object? streets = _undefined,
     Object? lastEdit = _undefined,
+    Object? address = _undefined,
     Object? geolocation = _undefined,
     Object? family = _undefined,
   }) =>
@@ -1067,6 +1100,8 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
             : (streets as List<Fragment_Street>?),
         lastEdit:
             lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
+        address:
+            address == _undefined ? _instance.address : (address as String?),
         geolocation: geolocation == _undefined
             ? _instance.geolocation
             : (geolocation as Map<String, dynamic>?),
@@ -1074,6 +1109,7 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
             ? _instance.family
             : (family as Fragment_Family?),
       ));
+
   TRes areas(
           Iterable<Fragment_Area>? Function(
                   Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
@@ -1083,6 +1119,7 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   TRes streets(
           Iterable<Fragment_Street>? Function(
                   Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
@@ -1092,6 +1129,7 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Fragment_Family<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
@@ -1116,12 +1154,16 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
     Json? lastEdit,
+    String? address,
     Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   }) =>
       _res;
+
   areas(_fn) => _res;
+
   streets(_fn) => _res;
+
   CopyWith_Fragment_Family<TRes> get family =>
       CopyWith_Fragment_Family.stub(_res);
 }

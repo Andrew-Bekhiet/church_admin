@@ -109,22 +109,33 @@ class Input_AreasAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Input_AreasAvgOrderBy? get avg => (_$data['avg'] as Input_AreasAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_AreasMaxOrderBy? get max => (_$data['max'] as Input_AreasMaxOrderBy?);
+
   Input_AreasMinOrderBy? get min => (_$data['min'] as Input_AreasMinOrderBy?);
+
   Input_AreasStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_AreasStddevOrderBy?);
+
   Input_AreasStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_AreasStddevPopOrderBy?);
+
   Input_AreasStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_AreasStddevSampOrderBy?);
+
   Input_AreasSumOrderBy? get sum => (_$data['sum'] as Input_AreasSumOrderBy?);
+
   Input_AreasVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_AreasVarPopOrderBy?);
+
   Input_AreasVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_AreasVarSampOrderBy?);
+
   Input_AreasVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_AreasVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -180,6 +191,7 @@ class Input_AreasAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -392,6 +404,7 @@ class _CopyWithImpl_Input_AreasAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_AreasVarianceOrderBy?),
       }));
+
   CopyWith_Input_AreasAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -489,24 +502,34 @@ class _CopyWithStubImpl_Input_AreasAggregateOrderBy<TRes>
     Input_AreasVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_AreasAvgOrderBy<TRes> get avg =>
       CopyWith_Input_AreasAvgOrderBy.stub(_res);
+
   CopyWith_Input_AreasMaxOrderBy<TRes> get max =>
       CopyWith_Input_AreasMaxOrderBy.stub(_res);
+
   CopyWith_Input_AreasMinOrderBy<TRes> get min =>
       CopyWith_Input_AreasMinOrderBy.stub(_res);
+
   CopyWith_Input_AreasStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_AreasStddevOrderBy.stub(_res);
+
   CopyWith_Input_AreasStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_AreasStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_AreasStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_AreasStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_AreasSumOrderBy<TRes> get sum =>
       CopyWith_Input_AreasSumOrderBy.stub(_res);
+
   CopyWith_Input_AreasVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_AreasVarPopOrderBy.stub(_res);
+
   CopyWith_Input_AreasVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_AreasVarSampOrderBy.stub(_res);
+
   CopyWith_Input_AreasVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_AreasVarianceOrderBy.stub(_res);
 }
@@ -532,6 +555,7 @@ class Input_AreasAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -547,6 +571,7 @@ class Input_AreasAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -788,38 +813,56 @@ class Input_AreasBoolExp {
 
   List<Input_AreasBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_AreasBoolExp>?);
+
   Input_AreasBoolExp? get $_not => (_$data['_not'] as Input_AreasBoolExp?);
+
   List<Input_AreasBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_AreasBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_AuthUsersAdminOnAggregateBoolExp? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_GeographyComparisonExp? get bounds =>
       (_$data['bounds'] as Input_GeographyComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_FamiliesBoolExp? get families =>
       (_$data['families'] as Input_FamiliesBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_StoresBoolExp? get stores => (_$data['stores'] as Input_StoresBoolExp?);
+
   Input_StreetsBoolExp? get streets =>
       (_$data['streets'] as Input_StreetsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -902,6 +945,7 @@ class Input_AreasBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1267,6 +1311,7 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
         if (streets != _undefined)
           'streets': (streets as Input_StreetsBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_AreasBoolExp>? Function(
                   Iterable<CopyWith_Input_AreasBoolExp<Input_AreasBoolExp>>?)
@@ -1276,6 +1321,7 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AreasBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -1292,6 +1338,7 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -1436,39 +1483,57 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
     Input_StreetsBoolExp? streets,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_AreasBoolExp<TRes> get $_not =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_GeographyComparisonExp<TRes> get bounds =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get families =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_StoresBoolExp<TRes> get stores =>
       CopyWith_Input_StoresBoolExp.stub(_res);
+
   CopyWith_Input_StreetsBoolExp<TRes> get streets =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
@@ -1492,6 +1557,7 @@ class Input_AreasIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -1506,6 +1572,7 @@ class Input_AreasIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1635,13 +1702,20 @@ class Input_AreasInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsers')) {
@@ -1681,6 +1755,7 @@ class Input_AreasInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -1829,6 +1904,7 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -1855,6 +1931,7 @@ class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
     DateTime? photoUpdatedAt,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
 }
@@ -1912,11 +1989,16 @@ class Input_AreasMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -1951,6 +2033,7 @@ class Input_AreasMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2139,11 +2222,16 @@ class Input_AreasMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -2178,6 +2266,7 @@ class Input_AreasMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2343,8 +2432,10 @@ class Input_AreasObjRelInsertInput {
   Map<String, dynamic> _$data;
 
   Input_AreasInsertInput get data => (_$data['data'] as Input_AreasInsertInput);
+
   Input_AreasOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_AreasOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -2361,6 +2452,7 @@ class Input_AreasObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2439,6 +2531,7 @@ class _CopyWithImpl_Input_AreasObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_AreasOnConflict?),
       }));
+
   CopyWith_Input_AreasInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_AreasInsertInput(local$data, (e) => call(data: e));
@@ -2464,8 +2557,10 @@ class _CopyWithStubImpl_Input_AreasObjRelInsertInput<TRes>
     Input_AreasOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_AreasInsertInput<TRes> get data =>
       CopyWith_Input_AreasInsertInput.stub(_res);
+
   CopyWith_Input_AreasOnConflict<TRes> get onConflict =>
       CopyWith_Input_AreasOnConflict.stub(_res);
 }
@@ -2508,9 +2603,12 @@ class Input_AreasOnConflict {
 
   Enum_AreasConstraint get constraint =>
       (_$data['constraint'] as Enum_AreasConstraint);
+
   List<Enum_AreasUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_AreasUpdateColumn>?);
+
   Input_AreasBoolExp? get where => (_$data['where'] as Input_AreasBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -2534,6 +2632,7 @@ class Input_AreasOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -2638,6 +2737,7 @@ class _CopyWithImpl_Input_AreasOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_AreasUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_AreasBoolExp?),
       }));
+
   CopyWith_Input_AreasBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -2658,6 +2758,7 @@ class _CopyWithStubImpl_Input_AreasOnConflict<TRes>
     Input_AreasBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AreasBoolExp<TRes> get where =>
       CopyWith_Input_AreasBoolExp.stub(_res);
 }
@@ -2796,26 +2897,40 @@ class Input_AreasOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get bounds => (_$data['bounds'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Input_FamiliesAggregateOrderBy? get familiesAggregate =>
       (_$data['familiesAggregate'] as Input_FamiliesAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_StoresAggregateOrderBy? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateOrderBy?);
+
   Input_StreetsAggregateOrderBy? get streetsAggregate =>
       (_$data['streetsAggregate'] as Input_StreetsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsersAggregate')) {
@@ -2892,6 +3007,7 @@ class Input_AreasOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3156,6 +3272,7 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
           'streetsAggregate':
               (streetsAggregate as Input_StreetsAggregateOrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate {
     final local$adminUsersAggregate = _instance.adminUsersAggregate;
@@ -3221,15 +3338,20 @@ class _CopyWithStubImpl_Input_AreasOrderBy<TRes>
     Input_StreetsAggregateOrderBy? streetsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesAggregateOrderBy<TRes> get familiesAggregate =>
       CopyWith_Input_FamiliesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StreetsAggregateOrderBy<TRes> get streetsAggregate =>
       CopyWith_Input_StreetsAggregateOrderBy.stub(_res);
 }
@@ -3252,6 +3374,7 @@ class Input_AreasPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -3264,6 +3387,7 @@ class Input_AreasPkColumnsInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3381,12 +3505,18 @@ class Input_AreasSetInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -3422,6 +3552,7 @@ class Input_AreasSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3592,6 +3723,7 @@ class Input_AreasStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -3607,6 +3739,7 @@ class Input_AreasStddevOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3695,6 +3828,7 @@ class Input_AreasStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -3710,6 +3844,7 @@ class Input_AreasStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3799,6 +3934,7 @@ class Input_AreasStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -3814,6 +3950,7 @@ class Input_AreasStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -3912,8 +4049,10 @@ class Input_AreasStreamCursorInput {
 
   Input_AreasStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_AreasStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -3931,6 +4070,7 @@ class Input_AreasStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4008,6 +4148,7 @@ class _CopyWithImpl_Input_AreasStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_AreasStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AreasStreamCursorValueInput(
@@ -4026,6 +4167,7 @@ class _CopyWithStubImpl_Input_AreasStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_AreasStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_AreasStreamCursorValueInput.stub(_res);
 }
@@ -4084,12 +4226,18 @@ class Input_AreasStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Map<String, dynamic>? get bounds =>
       (_$data['bounds'] as Map<String, dynamic>?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -4125,6 +4273,7 @@ class Input_AreasStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4296,6 +4445,7 @@ class Input_AreasSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -4311,6 +4461,7 @@ class Input_AreasSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4414,8 +4565,11 @@ class Input_AreasUpdates {
   Map<String, dynamic> _$data;
 
   Input_AreasIncInput? get $_inc => (_$data['_inc'] as Input_AreasIncInput?);
+
   Input_AreasSetInput? get $_set => (_$data['_set'] as Input_AreasSetInput?);
+
   Input_AreasBoolExp get where => (_$data['where'] as Input_AreasBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -4436,6 +4590,7 @@ class Input_AreasUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4525,6 +4680,7 @@ class _CopyWithImpl_Input_AreasUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_AreasBoolExp),
       }));
+
   CopyWith_Input_AreasIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -4557,10 +4713,13 @@ class _CopyWithStubImpl_Input_AreasUpdates<TRes>
     Input_AreasBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AreasIncInput<TRes> get $_inc =>
       CopyWith_Input_AreasIncInput.stub(_res);
+
   CopyWith_Input_AreasSetInput<TRes> get $_set =>
       CopyWith_Input_AreasSetInput.stub(_res);
+
   CopyWith_Input_AreasBoolExp<TRes> get where =>
       CopyWith_Input_AreasBoolExp.stub(_res);
 }
@@ -4586,6 +4745,7 @@ class Input_AreasVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -4601,6 +4761,7 @@ class Input_AreasVarPopOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4689,6 +4850,7 @@ class Input_AreasVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -4704,6 +4866,7 @@ class Input_AreasVarSampOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4792,6 +4955,7 @@ class Input_AreasVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -4807,6 +4971,7 @@ class Input_AreasVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -4920,10 +5085,13 @@ class Input_AuthUsersAdminOnAggregateBoolExp {
 
   Input_authUsersAdminOnAggregateBoolExpBool_and? get bool_and =>
       (_$data['bool_and'] as Input_authUsersAdminOnAggregateBoolExpBool_and?);
+
   Input_authUsersAdminOnAggregateBoolExpBool_or? get bool_or =>
       (_$data['bool_or'] as Input_authUsersAdminOnAggregateBoolExpBool_or?);
+
   Input_authUsersAdminOnAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_authUsersAdminOnAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('bool_and')) {
@@ -4947,6 +5115,7 @@ class Input_AuthUsersAdminOnAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5045,6 +5214,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_authUsersAdminOnAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_authUsersAdminOnAggregateBoolExpBool_and<TRes> get bool_and {
     final local$bool_and = _instance.bool_and;
     return local$bool_and == null
@@ -5085,10 +5255,13 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
     Input_authUsersAdminOnAggregateBoolExpCount? count,
   }) =>
       _res;
+
   CopyWith_Input_authUsersAdminOnAggregateBoolExpBool_and<TRes> get bool_and =>
       CopyWith_Input_authUsersAdminOnAggregateBoolExpBool_and.stub(_res);
+
   CopyWith_Input_authUsersAdminOnAggregateBoolExpBool_or<TRes> get bool_or =>
       CopyWith_Input_authUsersAdminOnAggregateBoolExpBool_or.stub(_res);
+
   CopyWith_Input_authUsersAdminOnAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_authUsersAdminOnAggregateBoolExpCount.stub(_res);
 }
@@ -5208,25 +5381,36 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
 
   Input_AuthUsersAdminOnAvgOrderBy? get avg =>
       (_$data['avg'] as Input_AuthUsersAdminOnAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_AuthUsersAdminOnMaxOrderBy? get max =>
       (_$data['max'] as Input_AuthUsersAdminOnMaxOrderBy?);
+
   Input_AuthUsersAdminOnMinOrderBy? get min =>
       (_$data['min'] as Input_AuthUsersAdminOnMinOrderBy?);
+
   Input_AuthUsersAdminOnStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_AuthUsersAdminOnStddevOrderBy?);
+
   Input_AuthUsersAdminOnStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_AuthUsersAdminOnStddevPopOrderBy?);
+
   Input_AuthUsersAdminOnStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_AuthUsersAdminOnStddevSampOrderBy?);
+
   Input_AuthUsersAdminOnSumOrderBy? get sum =>
       (_$data['sum'] as Input_AuthUsersAdminOnSumOrderBy?);
+
   Input_AuthUsersAdminOnVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_AuthUsersAdminOnVarPopOrderBy?);
+
   Input_AuthUsersAdminOnVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_AuthUsersAdminOnVarSampOrderBy?);
+
   Input_AuthUsersAdminOnVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_AuthUsersAdminOnVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -5283,6 +5467,7 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5500,6 +5685,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_AuthUsersAdminOnVarianceOrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -5602,24 +5788,34 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     Input_AuthUsersAdminOnVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg =>
       CopyWith_Input_AuthUsersAdminOnAvgOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> get max =>
       CopyWith_Input_AuthUsersAdminOnMaxOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> get min =>
       CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_AuthUsersAdminOnStddevOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> get sum =>
       CopyWith_Input_AuthUsersAdminOnSumOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_AuthUsersAdminOnVarPopOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_AuthUsersAdminOnVarSampOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_AuthUsersAdminOnVarianceOrderBy.stub(_res);
 }
@@ -5658,8 +5854,10 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
 
   List<Input_AuthUsersAdminOnInsertInput> get data =>
       (_$data['data'] as List<Input_AuthUsersAdminOnInsertInput>);
+
   Input_AuthUsersAdminOnOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_AuthUsersAdminOnOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -5677,6 +5875,7 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -5767,6 +5966,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_AuthUsersAdminOnOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_AuthUsersAdminOnInsertInput> Function(
                   Iterable<
@@ -5779,6 +5979,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -5799,7 +6000,9 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnArrRelInsertInput<TRes>
     Input_AuthUsersAdminOnOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> get onConflict =>
       CopyWith_Input_AuthUsersAdminOnOnConflict.stub(_res);
 }
@@ -5827,6 +6030,7 @@ class Input_AuthUsersAdminOnAvgOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -5843,6 +6047,7 @@ class Input_AuthUsersAdminOnAvgOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6136,48 +6341,71 @@ class Input_AuthUsersAdminOnBoolExp {
 
   List<Input_AuthUsersAdminOnBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_AuthUsersAdminOnBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get $_not =>
       (_$data['_not'] as Input_AuthUsersAdminOnBoolExp?);
+
   List<Input_AuthUsersAdminOnBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_AuthUsersAdminOnBoolExp>?);
+
   Input_UuidComparisonExp? get adminOnArea =>
       (_$data['adminOnArea'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get adminOnGroup =>
       (_$data['adminOnGroup'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get adminOnService =>
       (_$data['adminOnService'] as Input_UuidComparisonExp?);
+
   Input_AreasBoolExp? get area => (_$data['area'] as Input_AreasBoolExp?);
+
   Input_BooleanComparisonExp? get areaAdminOnUsers =>
       (_$data['areaAdminOnUsers'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get areaAllowEdit =>
       (_$data['areaAllowEdit'] as Input_BooleanComparisonExp?);
+
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
+
   Input_ClassesAggregateBoolExp? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+
   Input_BooleanComparisonExp? get groupAdminOnUsers =>
       (_$data['groupAdminOnUsers'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get groupAllowEdit =>
       (_$data['groupAllowEdit'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get permissionId =>
       (_$data['permissionId'] as Input_UuidComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_BooleanComparisonExp? get serviceAdminOnUsers =>
       (_$data['serviceAdminOnUsers'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get serviceAllowEdit =>
       (_$data['serviceAllowEdit'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get serviceGender =>
       (_$data['serviceGender'] as Input_BooleanComparisonExp?);
+
   Input_SmallintComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_SmallintComparisonExp?);
+
   Input_StudyYearsBoolExp? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsBoolExp?);
+
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -6280,6 +6508,7 @@ class Input_AuthUsersAdminOnBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -6734,6 +6963,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
         if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
                   Iterable<
@@ -6746,6 +6976,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -6766,6 +6997,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnArea {
     final local$adminOnArea = _instance.adminOnArea;
     return local$adminOnArea == null
@@ -6954,48 +7186,71 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get $_not =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnArea =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnGroup =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnService =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_AreasBoolExp<TRes> get area =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get areaAdminOnUsers =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get areaAllowEdit =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAdminOnUsers =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAllowEdit =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get permissionId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAdminOnUsers =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAllowEdit =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_SmallintComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -7020,6 +7275,7 @@ class Input_AuthUsersAdminOnIncInput {
   Map<String, dynamic> _$data;
 
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -7034,6 +7290,7 @@ class Input_AuthUsersAdminOnIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -7261,30 +7518,49 @@ class Input_AuthUsersAdminOnInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminOnArea => (_$data['adminOnArea'] as UuidValue?);
+
   UuidValue? get adminOnGroup => (_$data['adminOnGroup'] as UuidValue?);
+
   UuidValue? get adminOnService => (_$data['adminOnService'] as UuidValue?);
+
   Input_AreasObjRelInsertInput? get area =>
       (_$data['area'] as Input_AreasObjRelInsertInput?);
+
   bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
+
   bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
+
   Input_ClassesArrRelInsertInput? get classes =>
       (_$data['classes'] as Input_ClassesArrRelInsertInput?);
+
   Input_GroupsObjRelInsertInput? get group =>
       (_$data['group'] as Input_GroupsObjRelInsertInput?);
+
   bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
+
   bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
+
   UuidValue? get permissionId => (_$data['permissionId'] as UuidValue?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
+
   bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsObjRelInsertInput?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -7375,6 +7651,7 @@ class Input_AuthUsersAdminOnInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -7713,6 +7990,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
       }));
+
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
@@ -7790,16 +8068,22 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Input_AuthUsersDataObjRelInsertInput? user,
   }) =>
       _res;
+
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area =>
       CopyWith_Input_AreasObjRelInsertInput.stub(_res);
+
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
       CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
       CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -7867,13 +8151,19 @@ class Input_AuthUsersAdminOnMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get adminOnArea => (_$data['adminOnArea'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnGroup => (_$data['adminOnGroup'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnService =>
       (_$data['adminOnService'] as Enum_OrderBy?);
+
   Enum_OrderBy? get permissionId => (_$data['permissionId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -7915,6 +8205,7 @@ class Input_AuthUsersAdminOnMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8135,13 +8426,19 @@ class Input_AuthUsersAdminOnMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get adminOnArea => (_$data['adminOnArea'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnGroup => (_$data['adminOnGroup'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnService =>
       (_$data['adminOnService'] as Enum_OrderBy?);
+
   Enum_OrderBy? get permissionId => (_$data['permissionId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -8183,6 +8480,7 @@ class Input_AuthUsersAdminOnMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8379,10 +8677,13 @@ class Input_AuthUsersAdminOnOnConflict {
 
   Enum_AuthUsersAdminOnConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersAdminOnConstraint);
+
   List<Enum_AuthUsersAdminOnUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_AuthUsersAdminOnUpdateColumn>?);
+
   Input_AuthUsersAdminOnBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersAdminOnBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -8407,6 +8708,7 @@ class Input_AuthUsersAdminOnOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -8514,6 +8816,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_AuthUsersAdminOnBoolExp?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -8535,6 +8838,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOnConflict<TRes>
     Input_AuthUsersAdminOnBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
 }
@@ -8711,35 +9015,54 @@ class Input_AuthUsersAdminOnOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get adminOnArea => (_$data['adminOnArea'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnGroup => (_$data['adminOnGroup'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminOnService =>
       (_$data['adminOnService'] as Enum_OrderBy?);
+
   Input_AreasOrderBy? get area => (_$data['area'] as Input_AreasOrderBy?);
+
   Enum_OrderBy? get areaAdminOnUsers =>
       (_$data['areaAdminOnUsers'] as Enum_OrderBy?);
+
   Enum_OrderBy? get areaAllowEdit => (_$data['areaAllowEdit'] as Enum_OrderBy?);
+
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
+
   Input_GroupsOrderBy? get group => (_$data['group'] as Input_GroupsOrderBy?);
+
   Enum_OrderBy? get groupAdminOnUsers =>
       (_$data['groupAdminOnUsers'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupAllowEdit =>
       (_$data['groupAllowEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get permissionId => (_$data['permissionId'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceAdminOnUsers =>
       (_$data['serviceAdminOnUsers'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceAllowEdit =>
       (_$data['serviceAllowEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsOrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -8845,6 +9168,7 @@ class Input_AuthUsersAdminOnOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9183,6 +9507,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
         if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
       }));
+
   CopyWith_Input_AreasOrderBy<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
@@ -9257,16 +9582,22 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     Input_AuthUsersDataOrderBy? user,
   }) =>
       _res;
+
   CopyWith_Input_AreasOrderBy<TRes> get area =>
       CopyWith_Input_AreasOrderBy.stub(_res);
+
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_GroupsOrderBy<TRes> get group =>
       CopyWith_Input_GroupsOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -9291,6 +9622,7 @@ class Input_AuthUsersAdminOnPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get permissionId => (_$data['permissionId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$permissionId = permissionId;
@@ -9304,6 +9636,7 @@ class Input_AuthUsersAdminOnPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9469,18 +9802,31 @@ class Input_AuthUsersAdminOnSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminOnArea => (_$data['adminOnArea'] as UuidValue?);
+
   UuidValue? get adminOnGroup => (_$data['adminOnGroup'] as UuidValue?);
+
   UuidValue? get adminOnService => (_$data['adminOnService'] as UuidValue?);
+
   bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
+
   bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
+
   bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
+
   bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
+
   UuidValue? get permissionId => (_$data['permissionId'] as UuidValue?);
+
   bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
+
   bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -9547,6 +9893,7 @@ class Input_AuthUsersAdminOnSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9843,6 +10190,7 @@ class Input_AuthUsersAdminOnStddevOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -9860,6 +10208,7 @@ class Input_AuthUsersAdminOnStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -9957,6 +10306,7 @@ class Input_AuthUsersAdminOnStddevPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -9974,6 +10324,7 @@ class Input_AuthUsersAdminOnStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10071,6 +10422,7 @@ class Input_AuthUsersAdminOnStddevSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -10088,6 +10440,7 @@ class Input_AuthUsersAdminOnStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10192,8 +10545,10 @@ class Input_AuthUsersAdminOnStreamCursorInput {
 
   Input_AuthUsersAdminOnStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_AuthUsersAdminOnStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -10212,6 +10567,7 @@ class Input_AuthUsersAdminOnStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10290,6 +10646,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
@@ -10308,6 +10665,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(_res);
@@ -10413,18 +10771,31 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get adminOnArea => (_$data['adminOnArea'] as UuidValue?);
+
   UuidValue? get adminOnGroup => (_$data['adminOnGroup'] as UuidValue?);
+
   UuidValue? get adminOnService => (_$data['adminOnService'] as UuidValue?);
+
   bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
+
   bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
+
   bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
+
   bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
+
   UuidValue? get permissionId => (_$data['permissionId'] as UuidValue?);
+
   bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
+
   bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
@@ -10492,6 +10863,7 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10786,6 +11158,7 @@ class Input_AuthUsersAdminOnSumOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -10802,6 +11175,7 @@ class Input_AuthUsersAdminOnSumOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -10914,10 +11288,13 @@ class Input_AuthUsersAdminOnUpdates {
 
   Input_AuthUsersAdminOnIncInput? get $_inc =>
       (_$data['_inc'] as Input_AuthUsersAdminOnIncInput?);
+
   Input_AuthUsersAdminOnSetInput? get $_set =>
       (_$data['_set'] as Input_AuthUsersAdminOnSetInput?);
+
   Input_AuthUsersAdminOnBoolExp get where =>
       (_$data['where'] as Input_AuthUsersAdminOnBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -10938,6 +11315,7 @@ class Input_AuthUsersAdminOnUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11030,6 +11408,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_AuthUsersAdminOnBoolExp),
       }));
+
   CopyWith_Input_AuthUsersAdminOnIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -11065,10 +11444,13 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnUpdates<TRes>
     Input_AuthUsersAdminOnBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnIncInput<TRes> get $_inc =>
       CopyWith_Input_AuthUsersAdminOnIncInput.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnSetInput<TRes> get $_set =>
       CopyWith_Input_AuthUsersAdminOnSetInput.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
 }
@@ -11098,6 +11480,7 @@ class Input_AuthUsersAdminOnVarPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -11115,6 +11498,7 @@ class Input_AuthUsersAdminOnVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11212,6 +11596,7 @@ class Input_AuthUsersAdminOnVarSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -11229,6 +11614,7 @@ class Input_AuthUsersAdminOnVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11326,6 +11712,7 @@ class Input_AuthUsersAdminOnVarianceOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -11343,6 +11730,7 @@ class Input_AuthUsersAdminOnVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -11586,39 +11974,56 @@ class Input_AuthUsersDataBoolExp {
 
   List<Input_AuthUsersDataBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_AuthUsersDataBoolExp>?);
+
   Input_AuthUsersDataBoolExp? get $_not =>
       (_$data['_not'] as Input_AuthUsersDataBoolExp?);
+
   List<Input_AuthUsersDataBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_AuthUsersDataBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get adminOn =>
       (_$data['adminOn'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_AuthUsersAdminOnAggregateBoolExp? get adminOnAggregate =>
       (_$data['adminOnAggregate'] as Input_AuthUsersAdminOnAggregateBoolExp?);
+
   Input_StringComparisonExp? get authId =>
       (_$data['authId'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get email =>
       (_$data['email'] as Input_StringComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToChange =>
       (_$data['isUserAllowedToChange'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_AuthUsersPermissionsBoolExp? get permissions =>
       (_$data['permissions'] as Input_AuthUsersPermissionsBoolExp?);
+
   Input_AuthUsersPermissionsAggregateBoolExp? get permissionsAggregate =>
       (_$data['permissionsAggregate']
           as Input_AuthUsersPermissionsAggregateBoolExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -11697,6 +12102,7 @@ class Input_AuthUsersDataBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12056,6 +12462,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
           'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
         if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_AuthUsersDataBoolExp>? Function(
                   Iterable<
@@ -12068,6 +12475,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -12088,6 +12496,7 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminOn {
     final local$adminOn = _instance.adminOn;
     return local$adminOn == null
@@ -12226,37 +12635,54 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
     Input_UuidComparisonExp? uid,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get $_not =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminOn =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes> get adminOnAggregate =>
       CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get authId =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get email =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToChange =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get permissions =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsAggregateBoolExp<TRes>
       get permissionsAggregate =>
           CopyWith_Input_AuthUsersPermissionsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -12342,16 +12768,25 @@ class Input_AuthUsersDataInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminOn =>
       (_$data['adminOn'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
   String? get authId => (_$data['authId'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   String? get email => (_$data['email'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_AuthUsersPermissionsArrRelInsertInput? get permissions =>
       (_$data['permissions'] as Input_AuthUsersPermissionsArrRelInsertInput?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOn')) {
@@ -12399,6 +12834,7 @@ class Input_AuthUsersDataInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12577,6 +13013,7 @@ class _CopyWithImpl_Input_AuthUsersDataInsertInput<TRes>
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
         if (uid != _undefined) 'uid': (uid as UuidValue?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminOn {
     final local$adminOn = _instance.adminOn;
     return local$adminOn == null
@@ -12622,10 +13059,13 @@ class _CopyWithStubImpl_Input_AuthUsersDataInsertInput<TRes>
     UuidValue? uid,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminOn =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsArrRelInsertInput<TRes> get permissions =>
       CopyWith_Input_AuthUsersPermissionsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
 }
@@ -12662,8 +13102,10 @@ class Input_AuthUsersDataObjRelInsertInput {
 
   Input_AuthUsersDataInsertInput get data =>
       (_$data['data'] as Input_AuthUsersDataInsertInput);
+
   Input_AuthUsersDataOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_AuthUsersDataOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -12681,6 +13123,7 @@ class Input_AuthUsersDataObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12759,6 +13202,7 @@ class _CopyWithImpl_Input_AuthUsersDataObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_AuthUsersDataOnConflict?),
       }));
+
   CopyWith_Input_AuthUsersDataInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_AuthUsersDataInsertInput(
@@ -12785,8 +13229,10 @@ class _CopyWithStubImpl_Input_AuthUsersDataObjRelInsertInput<TRes>
     Input_AuthUsersDataOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataInsertInput<TRes> get data =>
       CopyWith_Input_AuthUsersDataInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataOnConflict<TRes> get onConflict =>
       CopyWith_Input_AuthUsersDataOnConflict.stub(_res);
 }
@@ -12830,10 +13276,13 @@ class Input_AuthUsersDataOnConflict {
 
   Enum_AuthUsersDataConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersDataConstraint);
+
   List<Enum_AuthUsersDataUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_AuthUsersDataUpdateColumn>?);
+
   Input_AuthUsersDataBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -12858,6 +13307,7 @@ class Input_AuthUsersDataOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -12965,6 +13415,7 @@ class _CopyWithImpl_Input_AuthUsersDataOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_AuthUsersDataBoolExp?),
       }));
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -12986,6 +13437,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataOnConflict<TRes>
     Input_AuthUsersDataBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -13104,23 +13556,35 @@ class Input_AuthUsersDataOrderBy {
 
   Input_AuthUsersAdminOnAggregateOrderBy? get adminOnAggregate =>
       (_$data['adminOnAggregate'] as Input_AuthUsersAdminOnAggregateOrderBy?);
+
   Enum_OrderBy? get authId => (_$data['authId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get email => (_$data['email'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToChange =>
       (_$data['isUserAllowedToChange'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_AuthUsersPermissionsAggregateOrderBy? get permissionsAggregate =>
       (_$data['permissionsAggregate']
           as Input_AuthUsersPermissionsAggregateOrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnAggregate')) {
@@ -13189,6 +13653,7 @@ class Input_AuthUsersDataOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13419,6 +13884,7 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
           'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
         if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate {
     final local$adminOnAggregate = _instance.adminOnAggregate;
     return local$adminOnAggregate == null
@@ -13466,11 +13932,14 @@ class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
     Enum_OrderBy? uid,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate =>
       CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
       get permissionsAggregate =>
           CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
 }
@@ -13494,6 +13963,7 @@ class Input_AuthUsersDataPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get uid => (_$data['uid'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$uid = uid;
@@ -13506,6 +13976,7 @@ class Input_AuthUsersDataPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13624,11 +14095,17 @@ class Input_AuthUsersDataSetInput {
   Map<String, dynamic> _$data;
 
   String? get authId => (_$data['authId'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   String? get email => (_$data['email'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('authId')) {
@@ -13664,6 +14141,7 @@ class Input_AuthUsersDataSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13846,8 +14324,10 @@ class Input_AuthUsersDataStreamCursorInput {
 
   Input_AuthUsersDataStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_AuthUsersDataStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -13866,6 +14346,7 @@ class Input_AuthUsersDataStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -13944,6 +14425,7 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AuthUsersDataStreamCursorValueInput(
@@ -13962,6 +14444,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_AuthUsersDataStreamCursorValueInput.stub(_res);
 }
@@ -14020,11 +14503,17 @@ class Input_AuthUsersDataStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get authId => (_$data['authId'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   String? get email => (_$data['email'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('authId')) {
@@ -14061,6 +14550,7 @@ class Input_AuthUsersDataStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14242,8 +14732,10 @@ class Input_AuthUsersDataUpdates {
 
   Input_AuthUsersDataSetInput? get $_set =>
       (_$data['_set'] as Input_AuthUsersDataSetInput?);
+
   Input_AuthUsersDataBoolExp get where =>
       (_$data['where'] as Input_AuthUsersDataBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -14260,6 +14752,7 @@ class Input_AuthUsersDataUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14337,6 +14830,7 @@ class _CopyWithImpl_Input_AuthUsersDataUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_AuthUsersDataBoolExp),
       }));
+
   CopyWith_Input_AuthUsersDataSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -14363,8 +14857,10 @@ class _CopyWithStubImpl_Input_AuthUsersDataUpdates<TRes>
     Input_AuthUsersDataBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataSetInput<TRes> get $_set =>
       CopyWith_Input_AuthUsersDataSetInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -14395,6 +14891,7 @@ class Input_AuthUsersPermissionsAggregateBoolExp {
 
   Input_authUsersPermissionsAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_authUsersPermissionsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -14410,6 +14907,7 @@ class Input_AuthUsersPermissionsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14469,6 +14967,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_authUsersPermissionsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_authUsersPermissionsAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -14486,6 +14985,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_authUsersPermissionsAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_authUsersPermissionsAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_authUsersPermissionsAggregateBoolExpCount.stub(_res);
 }
@@ -14532,10 +15032,13 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_AuthUsersPermissionsMaxOrderBy? get max =>
       (_$data['max'] as Input_AuthUsersPermissionsMaxOrderBy?);
+
   Input_AuthUsersPermissionsMinOrderBy? get min =>
       (_$data['min'] as Input_AuthUsersPermissionsMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -14560,6 +15063,7 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14653,6 +15157,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_AuthUsersPermissionsMinOrderBy?),
       }));
+
   CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -14682,8 +15187,10 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
     Input_AuthUsersPermissionsMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max =>
       CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> get min =>
       CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(_res);
 }
@@ -14722,8 +15229,10 @@ class Input_AuthUsersPermissionsArrRelInsertInput {
 
   List<Input_AuthUsersPermissionsInsertInput> get data =>
       (_$data['data'] as List<Input_AuthUsersPermissionsInsertInput>);
+
   Input_AuthUsersPermissionsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_AuthUsersPermissionsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -14741,6 +15250,7 @@ class Input_AuthUsersPermissionsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -14831,6 +15341,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_AuthUsersPermissionsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_AuthUsersPermissionsInsertInput> Function(
                   Iterable<
@@ -14843,6 +15354,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_AuthUsersPermissionsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -14863,7 +15375,9 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsArrRelInsertInput<TRes>
     Input_AuthUsersPermissionsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_AuthUsersPermissionsOnConflict<TRes> get onConflict =>
       CopyWith_Input_AuthUsersPermissionsOnConflict.stub(_res);
 }
@@ -14939,16 +15453,22 @@ class Input_AuthUsersPermissionsBoolExp {
 
   List<Input_AuthUsersPermissionsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_AuthUsersPermissionsBoolExp>?);
+
   Input_AuthUsersPermissionsBoolExp? get $_not =>
       (_$data['_not'] as Input_AuthUsersPermissionsBoolExp?);
+
   List<Input_AuthUsersPermissionsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_AuthUsersPermissionsBoolExp>?);
+
   Input_StringComparisonExp? get permission =>
       (_$data['permission'] as Input_StringComparisonExp?);
+
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -14983,6 +15503,7 @@ class Input_AuthUsersPermissionsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15162,6 +15683,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsBoolExp<TRes>
         if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
                   Iterable<
@@ -15174,6 +15696,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -15194,6 +15717,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_StringComparisonExp<TRes> get permission {
     final local$permission = _instance.permission;
     return local$permission == null
@@ -15232,14 +15756,20 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get $_not =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_StringComparisonExp<TRes> get permission =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -15282,9 +15812,12 @@ class Input_AuthUsersPermissionsInsertInput {
   Map<String, dynamic> _$data;
 
   String? get permission => (_$data['permission'] as String?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -15308,6 +15841,7 @@ class Input_AuthUsersPermissionsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15400,6 +15934,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsInsertInput<TRes>
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
       }));
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -15421,6 +15956,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput<TRes>
     Input_AuthUsersDataObjRelInsertInput? user,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -15457,7 +15993,9 @@ class Input_AuthUsersPermissionsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -15478,6 +16016,7 @@ class Input_AuthUsersPermissionsMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15603,7 +16142,9 @@ class Input_AuthUsersPermissionsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -15624,6 +16165,7 @@ class Input_AuthUsersPermissionsMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15758,10 +16300,13 @@ class Input_AuthUsersPermissionsOnConflict {
 
   Enum_AuthUsersPermissionsConstraint get constraint =>
       (_$data['constraint'] as Enum_AuthUsersPermissionsConstraint);
+
   List<Enum_AuthUsersPermissionsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_AuthUsersPermissionsUpdateColumn>?);
+
   Input_AuthUsersPermissionsBoolExp? get where =>
       (_$data['where'] as Input_AuthUsersPermissionsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -15787,6 +16332,7 @@ class Input_AuthUsersPermissionsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -15894,6 +16440,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_AuthUsersPermissionsBoolExp?),
       }));
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -15915,6 +16462,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsOnConflict<TRes>
     Input_AuthUsersPermissionsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
 }
@@ -15960,9 +16508,12 @@ class Input_AuthUsersPermissionsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -15986,6 +16537,7 @@ class Input_AuthUsersPermissionsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16078,6 +16630,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsOrderBy<TRes>
         if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
       }));
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -16098,6 +16651,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsOrderBy<TRes>
     Input_AuthUsersDataOrderBy? user,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -16127,7 +16681,9 @@ class Input_AuthUsersPermissionsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   String get permission => (_$data['permission'] as String);
+
   UuidValue get uid => (_$data['uid'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$permission = permission;
@@ -16143,6 +16699,7 @@ class Input_AuthUsersPermissionsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16258,7 +16815,9 @@ class Input_AuthUsersPermissionsSetInput {
   Map<String, dynamic> _$data;
 
   String? get permission => (_$data['permission'] as String?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -16278,6 +16837,7 @@ class Input_AuthUsersPermissionsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16403,8 +16963,10 @@ class Input_AuthUsersPermissionsStreamCursorInput {
   Input_AuthUsersPermissionsStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_AuthUsersPermissionsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -16423,6 +16985,7 @@ class Input_AuthUsersPermissionsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16502,6 +17065,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -16521,6 +17085,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput.stub(_res);
@@ -16555,7 +17120,9 @@ class Input_AuthUsersPermissionsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get permission => (_$data['permission'] as String?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
@@ -16575,6 +17142,7 @@ class Input_AuthUsersPermissionsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16700,8 +17268,10 @@ class Input_AuthUsersPermissionsUpdates {
 
   Input_AuthUsersPermissionsSetInput? get $_set =>
       (_$data['_set'] as Input_AuthUsersPermissionsSetInput?);
+
   Input_AuthUsersPermissionsBoolExp get where =>
       (_$data['where'] as Input_AuthUsersPermissionsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -16718,6 +17288,7 @@ class Input_AuthUsersPermissionsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -16795,6 +17366,7 @@ class _CopyWithImpl_Input_AuthUsersPermissionsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_AuthUsersPermissionsBoolExp),
       }));
+
   CopyWith_Input_AuthUsersPermissionsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -16821,8 +17393,10 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsUpdates<TRes>
     Input_AuthUsersPermissionsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersPermissionsSetInput<TRes> get $_set =>
       CopyWith_Input_AuthUsersPermissionsSetInput.stub(_res);
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
 }
@@ -16899,14 +17473,23 @@ class Input_BigintComparisonExp {
   Map<String, dynamic> _$data;
 
   int? get $_eq => (_$data['_eq'] as int?);
+
   int? get $_gt => (_$data['_gt'] as int?);
+
   int? get $_gte => (_$data['_gte'] as int?);
+
   List<int>? get $_in => (_$data['_in'] as List<int>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   int? get $_lt => (_$data['_lt'] as int?);
+
   int? get $_lte => (_$data['_lte'] as int?);
+
   int? get $_neq => (_$data['_neq'] as int?);
+
   List<int>? get $_nin => (_$data['_nin'] as List<int>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -16953,6 +17536,7 @@ class Input_BigintComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -17244,14 +17828,23 @@ class Input_BooleanComparisonExp {
   Map<String, dynamic> _$data;
 
   bool? get $_eq => (_$data['_eq'] as bool?);
+
   bool? get $_gt => (_$data['_gt'] as bool?);
+
   bool? get $_gte => (_$data['_gte'] as bool?);
+
   List<bool>? get $_in => (_$data['_in'] as List<bool>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   bool? get $_lt => (_$data['_lt'] as bool?);
+
   bool? get $_lte => (_$data['_lte'] as bool?);
+
   bool? get $_neq => (_$data['_neq'] as bool?);
+
   List<bool>? get $_nin => (_$data['_nin'] as List<bool>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -17298,6 +17891,7 @@ class Input_BooleanComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -17611,21 +18205,30 @@ class Input_ChurchesBoolExp {
 
   List<Input_ChurchesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_ChurchesBoolExp>?);
+
   Input_ChurchesBoolExp? get $_not =>
       (_$data['_not'] as Input_ChurchesBoolExp?);
+
   List<Input_ChurchesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_ChurchesBoolExp>?);
+
   Input_FathersBoolExp? get fathers =>
       (_$data['fathers'] as Input_FathersBoolExp?);
+
   Input_FathersAggregateBoolExp? get fathersAggregate =>
       (_$data['fathersAggregate'] as Input_FathersAggregateBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -17672,6 +18275,7 @@ class Input_ChurchesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -17892,6 +18496,7 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_ChurchesBoolExp>? Function(
                   Iterable<
@@ -17902,6 +18507,7 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_ChurchesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -17919,6 +18525,7 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_FathersBoolExp<TRes> get fathers {
     final local$fathers = _instance.fathers;
     return local$fathers == null
@@ -17982,20 +18589,29 @@ class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_ChurchesBoolExp<TRes> get $_not =>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_FathersBoolExp<TRes> get fathers =>
       CopyWith_Input_FathersBoolExp.stub(_res);
+
   CopyWith_Input_FathersAggregateBoolExp<TRes> get fathersAggregate =>
       CopyWith_Input_FathersAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -18047,10 +18663,14 @@ class Input_ChurchesInsertInput {
 
   Input_FathersArrRelInsertInput? get fathers =>
       (_$data['fathers'] as Input_FathersArrRelInsertInput?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('fathers')) {
@@ -18077,6 +18697,7 @@ class Input_ChurchesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18183,6 +18804,7 @@ class _CopyWithImpl_Input_ChurchesInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_FathersArrRelInsertInput<TRes> get fathers {
     final local$fathers = _instance.fathers;
     return local$fathers == null
@@ -18213,8 +18835,10 @@ class _CopyWithStubImpl_Input_ChurchesInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_FathersArrRelInsertInput<TRes> get fathers =>
       CopyWith_Input_FathersArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -18250,8 +18874,10 @@ class Input_ChurchesObjRelInsertInput {
 
   Input_ChurchesInsertInput get data =>
       (_$data['data'] as Input_ChurchesInsertInput);
+
   Input_ChurchesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_ChurchesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -18268,6 +18894,7 @@ class Input_ChurchesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18346,6 +18973,7 @@ class _CopyWithImpl_Input_ChurchesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_ChurchesOnConflict?),
       }));
+
   CopyWith_Input_ChurchesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_ChurchesInsertInput(local$data, (e) => call(data: e));
@@ -18371,8 +18999,10 @@ class _CopyWithStubImpl_Input_ChurchesObjRelInsertInput<TRes>
     Input_ChurchesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesInsertInput<TRes> get data =>
       CopyWith_Input_ChurchesInsertInput.stub(_res);
+
   CopyWith_Input_ChurchesOnConflict<TRes> get onConflict =>
       CopyWith_Input_ChurchesOnConflict.stub(_res);
 }
@@ -18415,10 +19045,13 @@ class Input_ChurchesOnConflict {
 
   Enum_ChurchesConstraint get constraint =>
       (_$data['constraint'] as Enum_ChurchesConstraint);
+
   List<Enum_ChurchesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_ChurchesUpdateColumn>?);
+
   Input_ChurchesBoolExp? get where =>
       (_$data['where'] as Input_ChurchesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -18442,6 +19075,7 @@ class Input_ChurchesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18547,6 +19181,7 @@ class _CopyWithImpl_Input_ChurchesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_ChurchesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_ChurchesBoolExp?),
       }));
+
   CopyWith_Input_ChurchesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -18567,6 +19202,7 @@ class _CopyWithStubImpl_Input_ChurchesOnConflict<TRes>
     Input_ChurchesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesBoolExp<TRes> get where =>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
 }
@@ -18620,10 +19256,14 @@ class Input_ChurchesOrderBy {
 
   Input_FathersAggregateOrderBy? get fathersAggregate =>
       (_$data['fathersAggregate'] as Input_FathersAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('fathersAggregate')) {
@@ -18650,6 +19290,7 @@ class Input_ChurchesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18759,6 +19400,7 @@ class _CopyWithImpl_Input_ChurchesOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_FathersAggregateOrderBy<TRes> get fathersAggregate {
     final local$fathersAggregate = _instance.fathersAggregate;
     return local$fathersAggregate == null
@@ -18789,8 +19431,10 @@ class _CopyWithStubImpl_Input_ChurchesOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_FathersAggregateOrderBy<TRes> get fathersAggregate =>
       CopyWith_Input_FathersAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -18813,6 +19457,7 @@ class Input_ChurchesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -18825,6 +19470,7 @@ class Input_ChurchesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -18917,7 +19563,9 @@ class Input_ChurchesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -18936,6 +19584,7 @@ class Input_ChurchesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19057,8 +19706,10 @@ class Input_ChurchesStreamCursorInput {
 
   Input_ChurchesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_ChurchesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -19076,6 +19727,7 @@ class Input_ChurchesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19154,6 +19806,7 @@ class _CopyWithImpl_Input_ChurchesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_ChurchesStreamCursorValueInput(
@@ -19172,6 +19825,7 @@ class _CopyWithStubImpl_Input_ChurchesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_ChurchesStreamCursorValueInput.stub(_res);
 }
@@ -19205,7 +19859,9 @@ class Input_ChurchesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -19225,6 +19881,7 @@ class Input_ChurchesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19346,7 +20003,9 @@ class Input_ChurchesUpdates {
 
   Input_ChurchesSetInput? get $_set =>
       (_$data['_set'] as Input_ChurchesSetInput?);
+
   Input_ChurchesBoolExp get where => (_$data['where'] as Input_ChurchesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -19363,6 +20022,7 @@ class Input_ChurchesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19438,6 +20098,7 @@ class _CopyWithImpl_Input_ChurchesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_ChurchesBoolExp),
       }));
+
   CopyWith_Input_ChurchesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -19462,8 +20123,10 @@ class _CopyWithStubImpl_Input_ChurchesUpdates<TRes>
     Input_ChurchesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesSetInput<TRes> get $_set =>
       CopyWith_Input_ChurchesSetInput.stub(_res);
+
   CopyWith_Input_ChurchesBoolExp<TRes> get where =>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
 }
@@ -19512,10 +20175,13 @@ class Input_ClassesAggregateBoolExp {
 
   Input_classesAggregateBoolExpBool_and? get bool_and =>
       (_$data['bool_and'] as Input_classesAggregateBoolExpBool_and?);
+
   Input_classesAggregateBoolExpBool_or? get bool_or =>
       (_$data['bool_or'] as Input_classesAggregateBoolExpBool_or?);
+
   Input_classesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_classesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('bool_and')) {
@@ -19538,6 +20204,7 @@ class Input_ClassesAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -19634,6 +20301,7 @@ class _CopyWithImpl_Input_ClassesAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_classesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and {
     final local$bool_and = _instance.bool_and;
     return local$bool_and == null
@@ -19671,10 +20339,13 @@ class _CopyWithStubImpl_Input_ClassesAggregateBoolExp<TRes>
     Input_classesAggregateBoolExpCount? count,
   }) =>
       _res;
+
   CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and =>
       CopyWith_Input_classesAggregateBoolExpBool_and.stub(_res);
+
   CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or =>
       CopyWith_Input_classesAggregateBoolExpBool_or.stub(_res);
+
   CopyWith_Input_classesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_classesAggregateBoolExpCount.stub(_res);
 }
@@ -19789,25 +20460,36 @@ class Input_ClassesAggregateOrderBy {
 
   Input_ClassesAvgOrderBy? get avg =>
       (_$data['avg'] as Input_ClassesAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_ClassesMaxOrderBy? get max =>
       (_$data['max'] as Input_ClassesMaxOrderBy?);
+
   Input_ClassesMinOrderBy? get min =>
       (_$data['min'] as Input_ClassesMinOrderBy?);
+
   Input_ClassesStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_ClassesStddevOrderBy?);
+
   Input_ClassesStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_ClassesStddevPopOrderBy?);
+
   Input_ClassesStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_ClassesStddevSampOrderBy?);
+
   Input_ClassesSumOrderBy? get sum =>
       (_$data['sum'] as Input_ClassesSumOrderBy?);
+
   Input_ClassesVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_ClassesVarPopOrderBy?);
+
   Input_ClassesVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_ClassesVarSampOrderBy?);
+
   Input_ClassesVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_ClassesVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -19863,6 +20545,7 @@ class Input_ClassesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -20075,6 +20758,7 @@ class _CopyWithImpl_Input_ClassesAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_ClassesVarianceOrderBy?),
       }));
+
   CopyWith_Input_ClassesAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -20172,24 +20856,34 @@ class _CopyWithStubImpl_Input_ClassesAggregateOrderBy<TRes>
     Input_ClassesVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_ClassesAvgOrderBy<TRes> get avg =>
       CopyWith_Input_ClassesAvgOrderBy.stub(_res);
+
   CopyWith_Input_ClassesMaxOrderBy<TRes> get max =>
       CopyWith_Input_ClassesMaxOrderBy.stub(_res);
+
   CopyWith_Input_ClassesMinOrderBy<TRes> get min =>
       CopyWith_Input_ClassesMinOrderBy.stub(_res);
+
   CopyWith_Input_ClassesStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_ClassesStddevOrderBy.stub(_res);
+
   CopyWith_Input_ClassesStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_ClassesStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_ClassesStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_ClassesStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_ClassesSumOrderBy<TRes> get sum =>
       CopyWith_Input_ClassesSumOrderBy.stub(_res);
+
   CopyWith_Input_ClassesVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_ClassesVarPopOrderBy.stub(_res);
+
   CopyWith_Input_ClassesVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_ClassesVarSampOrderBy.stub(_res);
+
   CopyWith_Input_ClassesVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_ClassesVarianceOrderBy.stub(_res);
 }
@@ -20227,8 +20921,10 @@ class Input_ClassesArrRelInsertInput {
 
   List<Input_ClassesInsertInput> get data =>
       (_$data['data'] as List<Input_ClassesInsertInput>);
+
   Input_ClassesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_ClassesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -20245,6 +20941,7 @@ class Input_ClassesArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -20334,6 +21031,7 @@ class _CopyWithImpl_Input_ClassesArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_ClassesOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_ClassesInsertInput> Function(
                   Iterable<
@@ -20345,6 +21043,7 @@ class _CopyWithImpl_Input_ClassesArrRelInsertInput<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Input_ClassesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -20365,7 +21064,9 @@ class _CopyWithStubImpl_Input_ClassesArrRelInsertInput<TRes>
     Input_ClassesOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_ClassesOnConflict<TRes> get onConflict =>
       CopyWith_Input_ClassesOnConflict.stub(_res);
 }
@@ -20401,8 +21102,10 @@ class Input_ClassesAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -20424,6 +21127,7 @@ class Input_ClassesAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -20742,51 +21446,73 @@ class Input_ClassesBoolExp {
 
   List<Input_ClassesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_ClassesBoolExp>?);
+
   Input_ClassesBoolExp? get $_not => (_$data['_not'] as Input_ClassesBoolExp?);
+
   List<Input_ClassesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_ClassesBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_AuthUsersAdminOnAggregateBoolExp? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_BooleanComparisonExp? get serviceGender =>
       (_$data['serviceGender'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get serviceId =>
       (_$data['serviceId'] as Input_UuidComparisonExp?);
+
   Input_IntComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -20889,6 +21615,7 @@ class Input_ClassesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -21341,6 +22068,7 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_ClassesBoolExp>? Function(
                   Iterable<
@@ -21351,6 +22079,7 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_ClassesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -21368,6 +22097,7 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -21563,51 +22293,73 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
     Input_StudyYearsBoolExp? studyYear,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_ClassesBoolExp<TRes> get $_not =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
@@ -21640,7 +22392,9 @@ class Input_ClassesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -21659,6 +22413,7 @@ class Input_ClassesIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -21866,24 +22621,37 @@ class Input_ClassesInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsers')) {
@@ -21949,6 +22717,7 @@ class Input_ClassesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22198,6 +22967,7 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -22268,17 +23038,22 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
     Input_StudyYearsObjRelInsertInput? studyYear,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory =>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
 }
@@ -22352,14 +23127,21 @@ class Input_ClassesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -22405,6 +23187,7 @@ class Input_ClassesMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22641,14 +23424,21 @@ class Input_ClassesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -22694,6 +23484,7 @@ class Input_ClassesMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22892,8 +23683,10 @@ class Input_ClassesObjRelInsertInput {
 
   Input_ClassesInsertInput get data =>
       (_$data['data'] as Input_ClassesInsertInput);
+
   Input_ClassesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_ClassesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -22910,6 +23703,7 @@ class Input_ClassesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -22988,6 +23782,7 @@ class _CopyWithImpl_Input_ClassesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_ClassesOnConflict?),
       }));
+
   CopyWith_Input_ClassesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_ClassesInsertInput(local$data, (e) => call(data: e));
@@ -23013,8 +23808,10 @@ class _CopyWithStubImpl_Input_ClassesObjRelInsertInput<TRes>
     Input_ClassesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_ClassesInsertInput<TRes> get data =>
       CopyWith_Input_ClassesInsertInput.stub(_res);
+
   CopyWith_Input_ClassesOnConflict<TRes> get onConflict =>
       CopyWith_Input_ClassesOnConflict.stub(_res);
 }
@@ -23057,9 +23854,12 @@ class Input_ClassesOnConflict {
 
   Enum_ClassesConstraint get constraint =>
       (_$data['constraint'] as Enum_ClassesConstraint);
+
   List<Enum_ClassesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_ClassesUpdateColumn>?);
+
   Input_ClassesBoolExp? get where => (_$data['where'] as Input_ClassesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -23083,6 +23883,7 @@ class Input_ClassesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -23188,6 +23989,7 @@ class _CopyWithImpl_Input_ClassesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_ClassesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_ClassesBoolExp?),
       }));
+
   CopyWith_Input_ClassesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -23208,6 +24010,7 @@ class _CopyWithStubImpl_Input_ClassesOnConflict<TRes>
     Input_ClassesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ClassesBoolExp<TRes> get where =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
 }
@@ -23370,32 +24173,48 @@ class Input_ClassesOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
+
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsersAggregate')) {
@@ -23486,6 +24305,7 @@ class Input_ClassesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -23791,6 +24611,7 @@ class _CopyWithImpl_Input_ClassesOrderBy<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsOrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate {
     final local$adminUsersAggregate = _instance.adminUsersAggregate;
@@ -23867,18 +24688,23 @@ class _CopyWithStubImpl_Input_ClassesOrderBy<TRes>
     Input_StudyYearsOrderBy? studyYear,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
 }
@@ -23901,6 +24727,7 @@ class Input_ClassesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -23913,6 +24740,7 @@ class Input_ClassesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24043,13 +24871,21 @@ class Input_ClassesSetInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -24094,6 +24930,7 @@ class Input_ClassesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24307,8 +25144,10 @@ class Input_ClassesStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -24330,6 +25169,7 @@ class Input_ClassesStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24454,8 +25294,10 @@ class Input_ClassesStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -24477,6 +25319,7 @@ class Input_ClassesStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24601,8 +25444,10 @@ class Input_ClassesStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -24624,6 +25469,7 @@ class Input_ClassesStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24747,8 +25593,10 @@ class Input_ClassesStreamCursorInput {
 
   Input_ClassesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_ClassesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -24766,6 +25614,7 @@ class Input_ClassesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -24843,6 +25692,7 @@ class _CopyWithImpl_Input_ClassesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_ClassesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_ClassesStreamCursorValueInput(
@@ -24861,6 +25711,7 @@ class _CopyWithStubImpl_Input_ClassesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_ClassesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_ClassesStreamCursorValueInput.stub(_res);
 }
@@ -24932,13 +25783,21 @@ class Input_ClassesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -24984,6 +25843,7 @@ class Input_ClassesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25198,8 +26058,10 @@ class Input_ClassesSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -25221,6 +26083,7 @@ class Input_ClassesSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25352,9 +26215,12 @@ class Input_ClassesUpdates {
 
   Input_ClassesIncInput? get $_inc =>
       (_$data['_inc'] as Input_ClassesIncInput?);
+
   Input_ClassesSetInput? get $_set =>
       (_$data['_set'] as Input_ClassesSetInput?);
+
   Input_ClassesBoolExp get where => (_$data['where'] as Input_ClassesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -25375,6 +26241,7 @@ class Input_ClassesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25464,6 +26331,7 @@ class _CopyWithImpl_Input_ClassesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_ClassesBoolExp),
       }));
+
   CopyWith_Input_ClassesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -25496,10 +26364,13 @@ class _CopyWithStubImpl_Input_ClassesUpdates<TRes>
     Input_ClassesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ClassesIncInput<TRes> get $_inc =>
       CopyWith_Input_ClassesIncInput.stub(_res);
+
   CopyWith_Input_ClassesSetInput<TRes> get $_set =>
       CopyWith_Input_ClassesSetInput.stub(_res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get where =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
 }
@@ -25535,8 +26406,10 @@ class Input_ClassesVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -25558,6 +26431,7 @@ class Input_ClassesVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25682,8 +26556,10 @@ class Input_ClassesVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -25705,6 +26581,7 @@ class Input_ClassesVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25829,8 +26706,10 @@ class Input_ClassesVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -25852,6 +26731,7 @@ class Input_ClassesVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -25970,6 +26850,7 @@ class Input_CollegesAggregateBoolExp {
 
   Input_collegesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_collegesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -25984,6 +26865,7 @@ class Input_CollegesAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26043,6 +26925,7 @@ class _CopyWithImpl_Input_CollegesAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_collegesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_collegesAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -26059,6 +26942,7 @@ class _CopyWithStubImpl_Input_CollegesAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_collegesAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_collegesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_collegesAggregateBoolExpCount.stub(_res);
 }
@@ -26102,10 +26986,13 @@ class Input_CollegesAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_CollegesMaxOrderBy? get max =>
       (_$data['max'] as Input_CollegesMaxOrderBy?);
+
   Input_CollegesMinOrderBy? get min =>
       (_$data['min'] as Input_CollegesMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -26129,6 +27016,7 @@ class Input_CollegesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26220,6 +27108,7 @@ class _CopyWithImpl_Input_CollegesAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_CollegesMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_CollegesMinOrderBy?),
       }));
+
   CopyWith_Input_CollegesMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -26247,8 +27136,10 @@ class _CopyWithStubImpl_Input_CollegesAggregateOrderBy<TRes>
     Input_CollegesMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_CollegesMaxOrderBy<TRes> get max =>
       CopyWith_Input_CollegesMaxOrderBy.stub(_res);
+
   CopyWith_Input_CollegesMinOrderBy<TRes> get min =>
       CopyWith_Input_CollegesMinOrderBy.stub(_res);
 }
@@ -26286,8 +27177,10 @@ class Input_CollegesArrRelInsertInput {
 
   List<Input_CollegesInsertInput> get data =>
       (_$data['data'] as List<Input_CollegesInsertInput>);
+
   Input_CollegesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_CollegesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -26304,6 +27197,7 @@ class Input_CollegesArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26394,6 +27288,7 @@ class _CopyWithImpl_Input_CollegesArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_CollegesOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_CollegesInsertInput> Function(
                   Iterable<
@@ -26406,6 +27301,7 @@ class _CopyWithImpl_Input_CollegesArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_CollegesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -26426,7 +27322,9 @@ class _CopyWithStubImpl_Input_CollegesArrRelInsertInput<TRes>
     Input_CollegesOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_CollegesOnConflict<TRes> get onConflict =>
       CopyWith_Input_CollegesOnConflict.stub(_res);
 }
@@ -26526,21 +27424,30 @@ class Input_CollegesBoolExp {
 
   List<Input_CollegesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_CollegesBoolExp>?);
+
   Input_CollegesBoolExp? get $_not =>
       (_$data['_not'] as Input_CollegesBoolExp?);
+
   List<Input_CollegesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_CollegesBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Input_UniversitiesBoolExp? get university =>
       (_$data['university'] as Input_UniversitiesBoolExp?);
+
   Input_UuidComparisonExp? get universityId =>
       (_$data['universityId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -26587,6 +27494,7 @@ class Input_CollegesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -26807,6 +27715,7 @@ class _CopyWithImpl_Input_CollegesBoolExp<TRes>
         if (universityId != _undefined)
           'universityId': (universityId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_CollegesBoolExp>? Function(
                   Iterable<
@@ -26817,6 +27726,7 @@ class _CopyWithImpl_Input_CollegesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_CollegesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -26834,6 +27744,7 @@ class _CopyWithImpl_Input_CollegesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -26898,20 +27809,29 @@ class _CopyWithStubImpl_Input_CollegesBoolExp<TRes>
     Input_UuidComparisonExp? universityId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_CollegesBoolExp<TRes> get $_not =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get university =>
       CopyWith_Input_UniversitiesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get universityId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -26969,12 +27889,17 @@ class Input_CollegesInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Input_UniversitiesObjRelInsertInput? get university =>
       (_$data['university'] as Input_UniversitiesObjRelInsertInput?);
+
   UuidValue? get universityId => (_$data['universityId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -27006,6 +27931,7 @@ class Input_CollegesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27128,6 +28054,7 @@ class _CopyWithImpl_Input_CollegesInsertInput<TRes>
         if (universityId != _undefined)
           'universityId': (universityId as UuidValue?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -27159,8 +28086,10 @@ class _CopyWithStubImpl_Input_CollegesInsertInput<TRes>
     UuidValue? universityId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_UniversitiesObjRelInsertInput<TRes> get university =>
       CopyWith_Input_UniversitiesObjRelInsertInput.stub(_res);
 }
@@ -27203,8 +28132,11 @@ class Input_CollegesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get universityId => (_$data['universityId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -27228,6 +28160,7 @@ class Input_CollegesMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27373,8 +28306,11 @@ class Input_CollegesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get universityId => (_$data['universityId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -27398,6 +28334,7 @@ class Input_CollegesMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27536,8 +28473,10 @@ class Input_CollegesObjRelInsertInput {
 
   Input_CollegesInsertInput get data =>
       (_$data['data'] as Input_CollegesInsertInput);
+
   Input_CollegesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_CollegesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -27554,6 +28493,7 @@ class Input_CollegesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27632,6 +28572,7 @@ class _CopyWithImpl_Input_CollegesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_CollegesOnConflict?),
       }));
+
   CopyWith_Input_CollegesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_CollegesInsertInput(local$data, (e) => call(data: e));
@@ -27657,8 +28598,10 @@ class _CopyWithStubImpl_Input_CollegesObjRelInsertInput<TRes>
     Input_CollegesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_CollegesInsertInput<TRes> get data =>
       CopyWith_Input_CollegesInsertInput.stub(_res);
+
   CopyWith_Input_CollegesOnConflict<TRes> get onConflict =>
       CopyWith_Input_CollegesOnConflict.stub(_res);
 }
@@ -27701,10 +28644,13 @@ class Input_CollegesOnConflict {
 
   Enum_CollegesConstraint get constraint =>
       (_$data['constraint'] as Enum_CollegesConstraint);
+
   List<Enum_CollegesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_CollegesUpdateColumn>?);
+
   Input_CollegesBoolExp? get where =>
       (_$data['where'] as Input_CollegesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -27728,6 +28674,7 @@ class Input_CollegesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27833,6 +28780,7 @@ class _CopyWithImpl_Input_CollegesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_CollegesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_CollegesBoolExp?),
       }));
+
   CopyWith_Input_CollegesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -27853,6 +28801,7 @@ class _CopyWithStubImpl_Input_CollegesOnConflict<TRes>
     Input_CollegesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_CollegesBoolExp<TRes> get where =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
 }
@@ -27913,12 +28862,17 @@ class Input_CollegesOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Input_UniversitiesOrderBy? get university =>
       (_$data['university'] as Input_UniversitiesOrderBy?);
+
   Enum_OrderBy? get universityId => (_$data['universityId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -27950,6 +28904,7 @@ class Input_CollegesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28073,6 +29028,7 @@ class _CopyWithImpl_Input_CollegesOrderBy<TRes>
         if (universityId != _undefined)
           'universityId': (universityId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -28104,8 +29060,10 @@ class _CopyWithStubImpl_Input_CollegesOrderBy<TRes>
     Enum_OrderBy? universityId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_UniversitiesOrderBy<TRes> get university =>
       CopyWith_Input_UniversitiesOrderBy.stub(_res);
 }
@@ -28128,6 +29086,7 @@ class Input_CollegesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -28140,6 +29099,7 @@ class Input_CollegesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28239,8 +29199,11 @@ class Input_CollegesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   UuidValue? get universityId => (_$data['universityId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -28264,6 +29227,7 @@ class Input_CollegesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28401,8 +29365,10 @@ class Input_CollegesStreamCursorInput {
 
   Input_CollegesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_CollegesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -28420,6 +29386,7 @@ class Input_CollegesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28498,6 +29465,7 @@ class _CopyWithImpl_Input_CollegesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_CollegesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_CollegesStreamCursorValueInput(
@@ -28516,6 +29484,7 @@ class _CopyWithStubImpl_Input_CollegesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_CollegesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_CollegesStreamCursorValueInput.stub(_res);
 }
@@ -28556,8 +29525,11 @@ class Input_CollegesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   UuidValue? get universityId => (_$data['universityId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -28582,6 +29554,7 @@ class Input_CollegesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28719,7 +29692,9 @@ class Input_CollegesUpdates {
 
   Input_CollegesSetInput? get $_set =>
       (_$data['_set'] as Input_CollegesSetInput?);
+
   Input_CollegesBoolExp get where => (_$data['where'] as Input_CollegesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -28736,6 +29711,7 @@ class Input_CollegesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -28811,6 +29787,7 @@ class _CopyWithImpl_Input_CollegesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_CollegesBoolExp),
       }));
+
   CopyWith_Input_CollegesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -28835,8 +29812,10 @@ class _CopyWithStubImpl_Input_CollegesUpdates<TRes>
     Input_CollegesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_CollegesSetInput<TRes> get $_set =>
       CopyWith_Input_CollegesSetInput.stub(_res);
+
   CopyWith_Input_CollegesBoolExp<TRes> get where =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
 }
@@ -28913,14 +29892,23 @@ class Input_DateComparisonExp {
   Map<String, dynamic> _$data;
 
   DateTime? get $_eq => (_$data['_eq'] as DateTime?);
+
   DateTime? get $_gt => (_$data['_gt'] as DateTime?);
+
   DateTime? get $_gte => (_$data['_gte'] as DateTime?);
+
   List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   DateTime? get $_lt => (_$data['_lt'] as DateTime?);
+
   DateTime? get $_lte => (_$data['_lte'] as DateTime?);
+
   DateTime? get $_neq => (_$data['_neq'] as DateTime?);
+
   List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -28967,6 +29955,7 @@ class Input_DateComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -29263,14 +30252,23 @@ class Input_DaterangeComparisonExp {
   Map<String, dynamic> _$data;
 
   DateTimeRange? get $_eq => (_$data['_eq'] as DateTimeRange?);
+
   DateTimeRange? get $_gt => (_$data['_gt'] as DateTimeRange?);
+
   DateTimeRange? get $_gte => (_$data['_gte'] as DateTimeRange?);
+
   List<DateTimeRange>? get $_in => (_$data['_in'] as List<DateTimeRange>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   DateTimeRange? get $_lt => (_$data['_lt'] as DateTimeRange?);
+
   DateTimeRange? get $_lte => (_$data['_lte'] as DateTimeRange?);
+
   DateTimeRange? get $_neq => (_$data['_neq'] as DateTimeRange?);
+
   List<DateTimeRange>? get $_nin => (_$data['_nin'] as List<DateTimeRange>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -29317,6 +30315,7 @@ class Input_DaterangeComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -29599,14 +30598,19 @@ class Input_FaceRecognitionPeronsLabelsBoolExp {
 
   List<Input_FaceRecognitionPeronsLabelsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_FaceRecognitionPeronsLabelsBoolExp>?);
+
   Input_FaceRecognitionPeronsLabelsBoolExp? get $_not =>
       (_$data['_not'] as Input_FaceRecognitionPeronsLabelsBoolExp?);
+
   List<Input_FaceRecognitionPeronsLabelsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_FaceRecognitionPeronsLabelsBoolExp>?);
+
   Input_BigintComparisonExp? get label =>
       (_$data['label'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -29638,6 +30642,7 @@ class Input_FaceRecognitionPeronsLabelsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -29803,6 +30808,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsBoolExp<TRes>
         if (personId != _undefined)
           'personId': (personId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_FaceRecognitionPeronsLabelsBoolExp>? Function(
                   Iterable<
@@ -29815,6 +30821,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -29836,6 +30843,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_BigintComparisonExp<TRes> get label {
     final local$label = _instance.label;
     return local$label == null
@@ -29867,12 +30875,17 @@ class _CopyWithStubImpl_Input_FaceRecognitionPeronsLabelsBoolExp<TRes>
     Input_UuidComparisonExp? personId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp<TRes> get $_not =>
       CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_BigintComparisonExp<TRes> get label =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -29898,6 +30911,7 @@ class Input_FaceRecognitionPeronsLabelsIncInput {
   Map<String, dynamic> _$data;
 
   int? get label => (_$data['label'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -29913,6 +30927,7 @@ class Input_FaceRecognitionPeronsLabelsIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30011,7 +31026,9 @@ class Input_FaceRecognitionPeronsLabelsInsertInput {
   Map<String, dynamic> _$data;
 
   int? get label => (_$data['label'] as int?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -30032,6 +31049,7 @@ class Input_FaceRecognitionPeronsLabelsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30166,11 +31184,14 @@ class Input_FaceRecognitionPeronsLabelsOnConflict {
 
   Enum_FaceRecognitionPeronsLabelsConstraint get constraint =>
       (_$data['constraint'] as Enum_FaceRecognitionPeronsLabelsConstraint);
+
   List<Enum_FaceRecognitionPeronsLabelsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
           as List<Enum_FaceRecognitionPeronsLabelsUpdateColumn>?);
+
   Input_FaceRecognitionPeronsLabelsBoolExp? get where =>
       (_$data['where'] as Input_FaceRecognitionPeronsLabelsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -30196,6 +31217,7 @@ class Input_FaceRecognitionPeronsLabelsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30304,6 +31326,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_FaceRecognitionPeronsLabelsBoolExp?),
       }));
+
   CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -30326,6 +31349,7 @@ class _CopyWithStubImpl_Input_FaceRecognitionPeronsLabelsOnConflict<TRes>
     Input_FaceRecognitionPeronsLabelsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp<TRes> get where =>
       CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp.stub(_res);
 }
@@ -30362,7 +31386,9 @@ class Input_FaceRecognitionPeronsLabelsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get label => (_$data['label'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -30384,6 +31410,7 @@ class Input_FaceRecognitionPeronsLabelsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30496,6 +31523,7 @@ class Input_FaceRecognitionPeronsLabelsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   int get label => (_$data['label'] as int);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$label = label;
@@ -30509,6 +31537,7 @@ class Input_FaceRecognitionPeronsLabelsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30605,7 +31634,9 @@ class Input_FaceRecognitionPeronsLabelsSetInput {
   Map<String, dynamic> _$data;
 
   int? get label => (_$data['label'] as int?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -30626,6 +31657,7 @@ class Input_FaceRecognitionPeronsLabelsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30752,8 +31784,10 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorInput {
   Input_FaceRecognitionPeronsLabelsStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_FaceRecognitionPeronsLabelsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -30773,6 +31807,7 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -30855,6 +31890,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_FaceRecognitionPeronsLabelsStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -30876,6 +31912,7 @@ class _CopyWithStubImpl_Input_FaceRecognitionPeronsLabelsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_FaceRecognitionPeronsLabelsStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_FaceRecognitionPeronsLabelsStreamCursorValueInput.stub(
@@ -30913,7 +31950,9 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   int? get label => (_$data['label'] as int?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('label')) {
@@ -30935,6 +31974,7 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -31076,10 +32116,13 @@ class Input_FaceRecognitionPeronsLabelsUpdates {
 
   Input_FaceRecognitionPeronsLabelsIncInput? get $_inc =>
       (_$data['_inc'] as Input_FaceRecognitionPeronsLabelsIncInput?);
+
   Input_FaceRecognitionPeronsLabelsSetInput? get $_set =>
       (_$data['_set'] as Input_FaceRecognitionPeronsLabelsSetInput?);
+
   Input_FaceRecognitionPeronsLabelsBoolExp get where =>
       (_$data['where'] as Input_FaceRecognitionPeronsLabelsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -31101,6 +32144,7 @@ class Input_FaceRecognitionPeronsLabelsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -31193,6 +32237,7 @@ class _CopyWithImpl_Input_FaceRecognitionPeronsLabelsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_FaceRecognitionPeronsLabelsBoolExp),
       }));
+
   CopyWith_Input_FaceRecognitionPeronsLabelsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -31230,10 +32275,13 @@ class _CopyWithStubImpl_Input_FaceRecognitionPeronsLabelsUpdates<TRes>
     Input_FaceRecognitionPeronsLabelsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FaceRecognitionPeronsLabelsIncInput<TRes> get $_inc =>
       CopyWith_Input_FaceRecognitionPeronsLabelsIncInput.stub(_res);
+
   CopyWith_Input_FaceRecognitionPeronsLabelsSetInput<TRes> get $_set =>
       CopyWith_Input_FaceRecognitionPeronsLabelsSetInput.stub(_res);
+
   CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp<TRes> get where =>
       CopyWith_Input_FaceRecognitionPeronsLabelsBoolExp.stub(_res);
 }
@@ -31348,25 +32396,36 @@ class Input_FamiliesAggregateOrderBy {
 
   Input_FamiliesAvgOrderBy? get avg =>
       (_$data['avg'] as Input_FamiliesAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_FamiliesMaxOrderBy? get max =>
       (_$data['max'] as Input_FamiliesMaxOrderBy?);
+
   Input_FamiliesMinOrderBy? get min =>
       (_$data['min'] as Input_FamiliesMinOrderBy?);
+
   Input_FamiliesStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_FamiliesStddevOrderBy?);
+
   Input_FamiliesStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_FamiliesStddevPopOrderBy?);
+
   Input_FamiliesStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_FamiliesStddevSampOrderBy?);
+
   Input_FamiliesSumOrderBy? get sum =>
       (_$data['sum'] as Input_FamiliesSumOrderBy?);
+
   Input_FamiliesVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_FamiliesVarPopOrderBy?);
+
   Input_FamiliesVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_FamiliesVarSampOrderBy?);
+
   Input_FamiliesVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_FamiliesVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -31422,6 +32481,7 @@ class Input_FamiliesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -31634,6 +32694,7 @@ class _CopyWithImpl_Input_FamiliesAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_FamiliesVarianceOrderBy?),
       }));
+
   CopyWith_Input_FamiliesAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -31731,24 +32792,34 @@ class _CopyWithStubImpl_Input_FamiliesAggregateOrderBy<TRes>
     Input_FamiliesVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesAvgOrderBy<TRes> get avg =>
       CopyWith_Input_FamiliesAvgOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesMaxOrderBy<TRes> get max =>
       CopyWith_Input_FamiliesMaxOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesMinOrderBy<TRes> get min =>
       CopyWith_Input_FamiliesMinOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_FamiliesStddevOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_FamiliesStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_FamiliesStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesSumOrderBy<TRes> get sum =>
       CopyWith_Input_FamiliesSumOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_FamiliesVarPopOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_FamiliesVarSampOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_FamiliesVarianceOrderBy.stub(_res);
 }
@@ -31774,6 +32845,7 @@ class Input_FamiliesAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -31789,6 +32861,7 @@ class Input_FamiliesAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -32085,49 +33158,73 @@ class Input_FamiliesBoolExp {
 
   List<Input_FamiliesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_FamiliesBoolExp>?);
+
   Input_FamiliesBoolExp? get $_not =>
       (_$data['_not'] as Input_FamiliesBoolExp?);
+
   List<Input_FamiliesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_FamiliesBoolExp>?);
+
   Input_StringComparisonExp? get address =>
       (_$data['address'] as Input_StringComparisonExp?);
+
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_FamiliesFamiliesBoolExp? get children =>
       (_$data['children'] as Input_FamiliesFamiliesBoolExp?);
+
   Input_FamiliesFamiliesAggregateBoolExp? get childrenAggregate =>
       (_$data['childrenAggregate'] as Input_FamiliesFamiliesAggregateBoolExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get notes =>
       (_$data['notes'] as Input_StringComparisonExp?);
+
   Input_FamiliesFamiliesBoolExp? get parents =>
       (_$data['parents'] as Input_FamiliesFamiliesBoolExp?);
+
   Input_FamiliesFamiliesAggregateBoolExp? get parentsAggregate =>
       (_$data['parentsAggregate'] as Input_FamiliesFamiliesAggregateBoolExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_StoresBoolExp? get stores => (_$data['stores'] as Input_StoresBoolExp?);
+
   Input_StoresAggregateBoolExp? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateBoolExp?);
+
   Input_StreetsBoolExp? get streets =>
       (_$data['streets'] as Input_StreetsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -32234,6 +33331,7 @@ class Input_FamiliesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -32691,6 +33789,7 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (streets != _undefined)
           'streets': (streets as Input_StreetsBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_FamiliesBoolExp>? Function(
                   Iterable<
@@ -32701,6 +33800,7 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_FamiliesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -32718,6 +33818,7 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_StringComparisonExp<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
@@ -32914,50 +34015,74 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_StreetsBoolExp? streets,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_FamiliesBoolExp<TRes> get $_not =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_StringComparisonExp<TRes> get address =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateBoolExp<TRes> get childrenAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get notes =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get parents =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateBoolExp<TRes> get parentsAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_StoresBoolExp<TRes> get stores =>
       CopyWith_Input_StoresBoolExp.stub(_res);
+
   CopyWith_Input_StoresAggregateBoolExp<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StreetsBoolExp<TRes> get streets =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
@@ -32988,6 +34113,7 @@ class Input_FamiliesFamiliesAggregateBoolExp {
 
   Input_familiesFamiliesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_familiesFamiliesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -33003,6 +34129,7 @@ class Input_FamiliesFamiliesAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -33062,6 +34189,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_familiesFamiliesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_familiesFamiliesAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -33079,6 +34207,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_familiesFamiliesAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_familiesFamiliesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_familiesFamiliesAggregateBoolExpCount.stub(_res);
 }
@@ -33125,10 +34254,13 @@ class Input_FamiliesFamiliesAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_FamiliesFamiliesMaxOrderBy? get max =>
       (_$data['max'] as Input_FamiliesFamiliesMaxOrderBy?);
+
   Input_FamiliesFamiliesMinOrderBy? get min =>
       (_$data['min'] as Input_FamiliesFamiliesMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -33153,6 +34285,7 @@ class Input_FamiliesFamiliesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -33246,6 +34379,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_FamiliesFamiliesMinOrderBy?),
       }));
+
   CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -33275,8 +34409,10 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
     Input_FamiliesFamiliesMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max =>
       CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> get min =>
       CopyWith_Input_FamiliesFamiliesMinOrderBy.stub(_res);
 }
@@ -33315,8 +34451,10 @@ class Input_FamiliesFamiliesArrRelInsertInput {
 
   List<Input_FamiliesFamiliesInsertInput> get data =>
       (_$data['data'] as List<Input_FamiliesFamiliesInsertInput>);
+
   Input_FamiliesFamiliesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_FamiliesFamiliesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -33334,6 +34472,7 @@ class Input_FamiliesFamiliesArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -33424,6 +34563,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_FamiliesFamiliesOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_FamiliesFamiliesInsertInput> Function(
                   Iterable<
@@ -33436,6 +34576,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -33456,7 +34597,9 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
     Input_FamiliesFamiliesOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict =>
       CopyWith_Input_FamiliesFamiliesOnConflict.stub(_res);
 }
@@ -33547,20 +34690,28 @@ class Input_FamiliesFamiliesBoolExp {
 
   List<Input_FamiliesFamiliesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_FamiliesFamiliesBoolExp>?);
+
   Input_FamiliesFamiliesBoolExp? get $_not =>
       (_$data['_not'] as Input_FamiliesFamiliesBoolExp?);
+
   List<Input_FamiliesFamiliesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_FamiliesFamiliesBoolExp>?);
+
   Input_FamiliesBoolExp? get child =>
       (_$data['child'] as Input_FamiliesBoolExp?);
+
   Input_UuidComparisonExp? get childFamilyId =>
       (_$data['childFamilyId'] as Input_UuidComparisonExp?);
+
   Input_FamiliesBoolExp? get parent =>
       (_$data['parent'] as Input_FamiliesBoolExp?);
+
   Input_UuidComparisonExp? get parentFamilyId =>
       (_$data['parentFamilyId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get relId =>
       (_$data['relId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -33603,6 +34754,7 @@ class Input_FamiliesFamiliesBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -33812,6 +34964,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
           'parentFamilyId': (parentFamilyId as Input_UuidComparisonExp?),
         if (relId != _undefined) 'relId': (relId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_FamiliesFamiliesBoolExp>? Function(
                   Iterable<
@@ -33824,6 +34977,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -33844,6 +34998,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_FamiliesBoolExp<TRes> get child {
     final local$child = _instance.child;
     return local$child == null
@@ -33899,18 +35054,26 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesBoolExp<TRes>
     Input_UuidComparisonExp? relId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get $_not =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_FamiliesBoolExp<TRes> get child =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get childFamilyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get parent =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get parentFamilyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get relId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -33971,11 +35134,16 @@ class Input_FamiliesFamiliesInsertInput {
 
   Input_FamiliesObjRelInsertInput? get child =>
       (_$data['child'] as Input_FamiliesObjRelInsertInput?);
+
   UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+
   Input_FamiliesObjRelInsertInput? get parent =>
       (_$data['parent'] as Input_FamiliesObjRelInsertInput?);
+
   UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('child')) {
@@ -34008,6 +35176,7 @@ class Input_FamiliesFamiliesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -34131,6 +35300,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesInsertInput<TRes>
           'parentFamilyId': (parentFamilyId as UuidValue?),
         if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get child {
     final local$child = _instance.child;
     return local$child == null
@@ -34162,8 +35332,10 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesInsertInput<TRes>
     UuidValue? relId,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get child =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get parent =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
 }
@@ -34207,9 +35379,12 @@ class Input_FamiliesFamiliesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get parentFamilyId =>
       (_$data['parentFamilyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
@@ -34236,6 +35411,7 @@ class Input_FamiliesFamiliesMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -34384,9 +35560,12 @@ class Input_FamiliesFamiliesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get parentFamilyId =>
       (_$data['parentFamilyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
@@ -34413,6 +35592,7 @@ class Input_FamiliesFamiliesMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -34561,10 +35741,13 @@ class Input_FamiliesFamiliesOnConflict {
 
   Enum_FamiliesFamiliesConstraint get constraint =>
       (_$data['constraint'] as Enum_FamiliesFamiliesConstraint);
+
   List<Enum_FamiliesFamiliesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_FamiliesFamiliesUpdateColumn>?);
+
   Input_FamiliesFamiliesBoolExp? get where =>
       (_$data['where'] as Input_FamiliesFamiliesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -34589,6 +35772,7 @@ class Input_FamiliesFamiliesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -34696,6 +35880,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_FamiliesFamiliesBoolExp?),
       }));
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -34717,6 +35902,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesOnConflict<TRes>
     Input_FamiliesFamiliesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get where =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
 }
@@ -34777,12 +35963,17 @@ class Input_FamiliesFamiliesOrderBy {
 
   Input_FamiliesOrderBy? get child =>
       (_$data['child'] as Input_FamiliesOrderBy?);
+
   Enum_OrderBy? get childFamilyId => (_$data['childFamilyId'] as Enum_OrderBy?);
+
   Input_FamiliesOrderBy? get parent =>
       (_$data['parent'] as Input_FamiliesOrderBy?);
+
   Enum_OrderBy? get parentFamilyId =>
       (_$data['parentFamilyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('child')) {
@@ -34817,6 +36008,7 @@ class Input_FamiliesFamiliesOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -34938,6 +36130,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesOrderBy<TRes>
           'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
         if (relId != _undefined) 'relId': (relId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_FamiliesOrderBy<TRes> get child {
     final local$child = _instance.child;
     return local$child == null
@@ -34967,8 +36160,10 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesOrderBy<TRes>
     Enum_OrderBy? relId,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesOrderBy<TRes> get child =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesOrderBy<TRes> get parent =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
 }
@@ -34992,6 +36187,7 @@ class Input_FamiliesFamiliesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get relId => (_$data['relId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$relId = relId;
@@ -35005,6 +36201,7 @@ class Input_FamiliesFamiliesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35106,8 +36303,11 @@ class Input_FamiliesFamiliesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+
   UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
@@ -35132,6 +36332,7 @@ class Input_FamiliesFamiliesSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35273,8 +36474,10 @@ class Input_FamiliesFamiliesStreamCursorInput {
 
   Input_FamiliesFamiliesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_FamiliesFamiliesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -35293,6 +36496,7 @@ class Input_FamiliesFamiliesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35371,6 +36575,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(
@@ -35389,6 +36594,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_FamiliesFamiliesStreamCursorValueInput.stub(_res);
@@ -35431,8 +36637,11 @@ class Input_FamiliesFamiliesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get childFamilyId => (_$data['childFamilyId'] as UuidValue?);
+
   UuidValue? get parentFamilyId => (_$data['parentFamilyId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
@@ -35458,6 +36667,7 @@ class Input_FamiliesFamiliesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35598,8 +36808,10 @@ class Input_FamiliesFamiliesUpdates {
 
   Input_FamiliesFamiliesSetInput? get $_set =>
       (_$data['_set'] as Input_FamiliesFamiliesSetInput?);
+
   Input_FamiliesFamiliesBoolExp get where =>
       (_$data['where'] as Input_FamiliesFamiliesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -35616,6 +36828,7 @@ class Input_FamiliesFamiliesUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35693,6 +36906,7 @@ class _CopyWithImpl_Input_FamiliesFamiliesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_FamiliesFamiliesBoolExp),
       }));
+
   CopyWith_Input_FamiliesFamiliesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -35719,8 +36933,10 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesUpdates<TRes>
     Input_FamiliesFamiliesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesSetInput<TRes> get $_set =>
       CopyWith_Input_FamiliesFamiliesSetInput.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get where =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
 }
@@ -35744,6 +36960,7 @@ class Input_FamiliesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -35758,6 +36975,7 @@ class Input_FamiliesIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -35926,22 +37144,34 @@ class Input_FamiliesInsertInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Input_FamiliesFamiliesArrRelInsertInput? get children =>
       (_$data['children'] as Input_FamiliesFamiliesArrRelInsertInput?);
+
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Input_FamiliesFamiliesArrRelInsertInput? get parents =>
       (_$data['parents'] as Input_FamiliesFamiliesArrRelInsertInput?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Input_StoresArrRelInsertInput? get stores =>
       (_$data['stores'] as Input_StoresArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -36001,6 +37231,7 @@ class Input_FamiliesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -36221,6 +37452,7 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
         if (stores != _undefined)
           'stores': (stores as Input_StoresArrRelInsertInput?),
       }));
+
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get children {
     final local$children = _instance.children;
     return local$children == null
@@ -36277,12 +37509,16 @@ class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
     Input_StoresArrRelInsertInput? stores,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get children =>
       CopyWith_Input_FamiliesFamiliesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get parents =>
       CopyWith_Input_FamiliesFamiliesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_StoresArrRelInsertInput<TRes> get stores =>
       CopyWith_Input_StoresArrRelInsertInput.stub(_res);
 }
@@ -36355,13 +37591,20 @@ class Input_FamiliesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -36406,6 +37649,7 @@ class Input_FamiliesMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -36638,13 +37882,20 @@ class Input_FamiliesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -36689,6 +37940,7 @@ class Input_FamiliesMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -36884,8 +38136,10 @@ class Input_FamiliesObjRelInsertInput {
 
   Input_FamiliesInsertInput get data =>
       (_$data['data'] as Input_FamiliesInsertInput);
+
   Input_FamiliesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_FamiliesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -36902,6 +38156,7 @@ class Input_FamiliesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -36980,6 +38235,7 @@ class _CopyWithImpl_Input_FamiliesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_FamiliesOnConflict?),
       }));
+
   CopyWith_Input_FamiliesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_FamiliesInsertInput(local$data, (e) => call(data: e));
@@ -37005,8 +38261,10 @@ class _CopyWithStubImpl_Input_FamiliesObjRelInsertInput<TRes>
     Input_FamiliesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesInsertInput<TRes> get data =>
       CopyWith_Input_FamiliesInsertInput.stub(_res);
+
   CopyWith_Input_FamiliesOnConflict<TRes> get onConflict =>
       CopyWith_Input_FamiliesOnConflict.stub(_res);
 }
@@ -37049,10 +38307,13 @@ class Input_FamiliesOnConflict {
 
   Enum_FamiliesConstraint get constraint =>
       (_$data['constraint'] as Enum_FamiliesConstraint);
+
   List<Enum_FamiliesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_FamiliesUpdateColumn>?);
+
   Input_FamiliesBoolExp? get where =>
       (_$data['where'] as Input_FamiliesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -37076,6 +38337,7 @@ class Input_FamiliesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -37181,6 +38443,7 @@ class _CopyWithImpl_Input_FamiliesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_FamiliesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_FamiliesBoolExp?),
       }));
+
   CopyWith_Input_FamiliesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -37201,6 +38464,7 @@ class _CopyWithStubImpl_Input_FamiliesOnConflict<TRes>
     Input_FamiliesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesBoolExp<TRes> get where =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
 }
@@ -37361,31 +38625,48 @@ class Input_FamiliesOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Input_FamiliesFamiliesAggregateOrderBy? get childrenAggregate =>
       (_$data['childrenAggregate'] as Input_FamiliesFamiliesAggregateOrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get geolocation => (_$data['geolocation'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Input_FamiliesFamiliesAggregateOrderBy? get parentsAggregate =>
       (_$data['parentsAggregate'] as Input_FamiliesFamiliesAggregateOrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_StoresAggregateOrderBy? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateOrderBy?);
+
   Input_StreetsAggregateOrderBy? get streetsAggregate =>
       (_$data['streetsAggregate'] as Input_StreetsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -37476,6 +38757,7 @@ class Input_FamiliesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -37782,6 +39064,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
           'streetsAggregate':
               (streetsAggregate as Input_StreetsAggregateOrderBy?),
       }));
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate {
     final local$areasAggregate = _instance.areasAggregate;
     return local$areasAggregate == null
@@ -37857,16 +39140,22 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Input_StreetsAggregateOrderBy? streetsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate =>
       CopyWith_Input_AreasAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StreetsAggregateOrderBy<TRes> get streetsAggregate =>
       CopyWith_Input_StreetsAggregateOrderBy.stub(_res);
 }
@@ -37889,6 +39178,7 @@ class Input_FamiliesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -37901,6 +39191,7 @@ class Input_FamiliesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38030,14 +39321,22 @@ class Input_FamiliesSetInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -38081,6 +39380,7 @@ class Input_FamiliesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38282,6 +39582,7 @@ class Input_FamiliesStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -38297,6 +39598,7 @@ class Input_FamiliesStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38386,6 +39688,7 @@ class Input_FamiliesStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -38401,6 +39704,7 @@ class Input_FamiliesStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38490,6 +39794,7 @@ class Input_FamiliesStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -38505,6 +39810,7 @@ class Input_FamiliesStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38603,8 +39909,10 @@ class Input_FamiliesStreamCursorInput {
 
   Input_FamiliesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_FamiliesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -38622,6 +39930,7 @@ class Input_FamiliesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -38700,6 +40009,7 @@ class _CopyWithImpl_Input_FamiliesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_FamiliesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_FamiliesStreamCursorValueInput(
@@ -38718,6 +40028,7 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_FamiliesStreamCursorValueInput.stub(_res);
 }
@@ -38788,14 +40099,22 @@ class Input_FamiliesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -38840,6 +40159,7 @@ class Input_FamiliesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39041,6 +40361,7 @@ class Input_FamiliesSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -39056,6 +40377,7 @@ class Input_FamiliesSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39161,9 +40483,12 @@ class Input_FamiliesUpdates {
 
   Input_FamiliesIncInput? get $_inc =>
       (_$data['_inc'] as Input_FamiliesIncInput?);
+
   Input_FamiliesSetInput? get $_set =>
       (_$data['_set'] as Input_FamiliesSetInput?);
+
   Input_FamiliesBoolExp get where => (_$data['where'] as Input_FamiliesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -39184,6 +40509,7 @@ class Input_FamiliesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39273,6 +40599,7 @@ class _CopyWithImpl_Input_FamiliesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_FamiliesBoolExp),
       }));
+
   CopyWith_Input_FamiliesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -39305,10 +40632,13 @@ class _CopyWithStubImpl_Input_FamiliesUpdates<TRes>
     Input_FamiliesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesIncInput<TRes> get $_inc =>
       CopyWith_Input_FamiliesIncInput.stub(_res);
+
   CopyWith_Input_FamiliesSetInput<TRes> get $_set =>
       CopyWith_Input_FamiliesSetInput.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get where =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
 }
@@ -39334,6 +40664,7 @@ class Input_FamiliesVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -39349,6 +40680,7 @@ class Input_FamiliesVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39438,6 +40770,7 @@ class Input_FamiliesVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -39453,6 +40786,7 @@ class Input_FamiliesVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39542,6 +40876,7 @@ class Input_FamiliesVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -39557,6 +40892,7 @@ class Input_FamiliesVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39650,6 +40986,7 @@ class Input_FathersAggregateBoolExp {
 
   Input_fathersAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_fathersAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -39664,6 +41001,7 @@ class Input_FathersAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39723,6 +41061,7 @@ class _CopyWithImpl_Input_FathersAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_fathersAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_fathersAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -39739,6 +41078,7 @@ class _CopyWithStubImpl_Input_FathersAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_fathersAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_fathersAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_fathersAggregateBoolExpCount.stub(_res);
 }
@@ -39782,10 +41122,13 @@ class Input_FathersAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_FathersMaxOrderBy? get max =>
       (_$data['max'] as Input_FathersMaxOrderBy?);
+
   Input_FathersMinOrderBy? get min =>
       (_$data['min'] as Input_FathersMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -39809,6 +41152,7 @@ class Input_FathersAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -39900,6 +41244,7 @@ class _CopyWithImpl_Input_FathersAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_FathersMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_FathersMinOrderBy?),
       }));
+
   CopyWith_Input_FathersMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -39927,8 +41272,10 @@ class _CopyWithStubImpl_Input_FathersAggregateOrderBy<TRes>
     Input_FathersMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_FathersMaxOrderBy<TRes> get max =>
       CopyWith_Input_FathersMaxOrderBy.stub(_res);
+
   CopyWith_Input_FathersMinOrderBy<TRes> get min =>
       CopyWith_Input_FathersMinOrderBy.stub(_res);
 }
@@ -39966,8 +41313,10 @@ class Input_FathersArrRelInsertInput {
 
   List<Input_FathersInsertInput> get data =>
       (_$data['data'] as List<Input_FathersInsertInput>);
+
   Input_FathersOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_FathersOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -39984,6 +41333,7 @@ class Input_FathersArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -40073,6 +41423,7 @@ class _CopyWithImpl_Input_FathersArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_FathersOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_FathersInsertInput> Function(
                   Iterable<
@@ -40084,6 +41435,7 @@ class _CopyWithImpl_Input_FathersArrRelInsertInput<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Input_FathersOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -40104,7 +41456,9 @@ class _CopyWithStubImpl_Input_FathersArrRelInsertInput<TRes>
     Input_FathersOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_FathersOnConflict<TRes> get onConflict =>
       CopyWith_Input_FathersOnConflict.stub(_res);
 }
@@ -40203,20 +41557,29 @@ class Input_FathersBoolExp {
 
   List<Input_FathersBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_FathersBoolExp>?);
+
   Input_FathersBoolExp? get $_not => (_$data['_not'] as Input_FathersBoolExp?);
+
   List<Input_FathersBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_FathersBoolExp>?);
+
   Input_ChurchesBoolExp? get church =>
       (_$data['church'] as Input_ChurchesBoolExp?);
+
   Input_UuidComparisonExp? get churchId =>
       (_$data['churchId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -40263,6 +41626,7 @@ class Input_FathersBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -40480,6 +41844,7 @@ class _CopyWithImpl_Input_FathersBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_FathersBoolExp>? Function(
                   Iterable<
@@ -40490,6 +41855,7 @@ class _CopyWithImpl_Input_FathersBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_FathersBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -40507,6 +41873,7 @@ class _CopyWithImpl_Input_FathersBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_ChurchesBoolExp<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -40570,20 +41937,29 @@ class _CopyWithStubImpl_Input_FathersBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_FathersBoolExp<TRes> get $_not =>
       CopyWith_Input_FathersBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_ChurchesBoolExp<TRes> get church =>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get churchId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -40642,11 +42018,16 @@ class Input_FathersInsertInput {
 
   Input_ChurchesObjRelInsertInput? get church =>
       (_$data['church'] as Input_ChurchesObjRelInsertInput?);
+
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('church')) {
@@ -40678,6 +42059,7 @@ class Input_FathersInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -40798,6 +42180,7 @@ class _CopyWithImpl_Input_FathersInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -40829,8 +42212,10 @@ class _CopyWithStubImpl_Input_FathersInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church =>
       CopyWith_Input_ChurchesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -40873,8 +42258,11 @@ class Input_FathersMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('churchId')) {
@@ -40898,6 +42286,7 @@ class Input_FathersMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41042,8 +42431,11 @@ class Input_FathersMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('churchId')) {
@@ -41067,6 +42459,7 @@ class Input_FathersMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41204,8 +42597,10 @@ class Input_FathersObjRelInsertInput {
 
   Input_FathersInsertInput get data =>
       (_$data['data'] as Input_FathersInsertInput);
+
   Input_FathersOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_FathersOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -41222,6 +42617,7 @@ class Input_FathersObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41300,6 +42696,7 @@ class _CopyWithImpl_Input_FathersObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_FathersOnConflict?),
       }));
+
   CopyWith_Input_FathersInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_FathersInsertInput(local$data, (e) => call(data: e));
@@ -41325,8 +42722,10 @@ class _CopyWithStubImpl_Input_FathersObjRelInsertInput<TRes>
     Input_FathersOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_FathersInsertInput<TRes> get data =>
       CopyWith_Input_FathersInsertInput.stub(_res);
+
   CopyWith_Input_FathersOnConflict<TRes> get onConflict =>
       CopyWith_Input_FathersOnConflict.stub(_res);
 }
@@ -41369,9 +42768,12 @@ class Input_FathersOnConflict {
 
   Enum_FathersConstraint get constraint =>
       (_$data['constraint'] as Enum_FathersConstraint);
+
   List<Enum_FathersUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_FathersUpdateColumn>?);
+
   Input_FathersBoolExp? get where => (_$data['where'] as Input_FathersBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -41395,6 +42797,7 @@ class Input_FathersOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41500,6 +42903,7 @@ class _CopyWithImpl_Input_FathersOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_FathersUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_FathersBoolExp?),
       }));
+
   CopyWith_Input_FathersBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -41520,6 +42924,7 @@ class _CopyWithStubImpl_Input_FathersOnConflict<TRes>
     Input_FathersBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FathersBoolExp<TRes> get where =>
       CopyWith_Input_FathersBoolExp.stub(_res);
 }
@@ -41580,11 +42985,16 @@ class Input_FathersOrderBy {
 
   Input_ChurchesOrderBy? get church =>
       (_$data['church'] as Input_ChurchesOrderBy?);
+
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('church')) {
@@ -41616,6 +43026,7 @@ class Input_FathersOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41736,6 +43147,7 @@ class _CopyWithImpl_Input_FathersOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_ChurchesOrderBy<TRes> get church {
     final local$church = _instance.church;
     return local$church == null
@@ -41766,8 +43178,10 @@ class _CopyWithStubImpl_Input_FathersOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_ChurchesOrderBy<TRes> get church =>
       CopyWith_Input_ChurchesOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -41790,6 +43204,7 @@ class Input_FathersPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -41802,6 +43217,7 @@ class Input_FathersPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -41901,8 +43317,11 @@ class Input_FathersSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('churchId')) {
@@ -41926,6 +43345,7 @@ class Input_FathersSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -42061,8 +43481,10 @@ class Input_FathersStreamCursorInput {
 
   Input_FathersStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_FathersStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -42080,6 +43502,7 @@ class Input_FathersStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -42157,6 +43580,7 @@ class _CopyWithImpl_Input_FathersStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_FathersStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_FathersStreamCursorValueInput(
@@ -42175,6 +43599,7 @@ class _CopyWithStubImpl_Input_FathersStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_FathersStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_FathersStreamCursorValueInput.stub(_res);
 }
@@ -42215,8 +43640,11 @@ class Input_FathersStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('churchId')) {
@@ -42241,6 +43669,7 @@ class Input_FathersStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -42377,7 +43806,9 @@ class Input_FathersUpdates {
 
   Input_FathersSetInput? get $_set =>
       (_$data['_set'] as Input_FathersSetInput?);
+
   Input_FathersBoolExp get where => (_$data['where'] as Input_FathersBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -42394,6 +43825,7 @@ class Input_FathersUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -42469,6 +43901,7 @@ class _CopyWithImpl_Input_FathersUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_FathersBoolExp),
       }));
+
   CopyWith_Input_FathersSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -42493,8 +43926,10 @@ class _CopyWithStubImpl_Input_FathersUpdates<TRes>
     Input_FathersBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_FathersSetInput<TRes> get $_set =>
       CopyWith_Input_FathersSetInput.stub(_res);
+
   CopyWith_Input_FathersBoolExp<TRes> get where =>
       CopyWith_Input_FathersBoolExp.stub(_res);
 }
@@ -42523,6 +43958,7 @@ class Input_GeographyCastExp {
 
   Input_GeometryComparisonExp? get geometry =>
       (_$data['geometry'] as Input_GeometryComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('geometry')) {
@@ -42537,6 +43973,7 @@ class Input_GeographyCastExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -42597,6 +44034,7 @@ class _CopyWithImpl_Input_GeographyCastExp<TRes>
         if (geometry != _undefined)
           'geometry': (geometry as Input_GeometryComparisonExp?),
       }));
+
   CopyWith_Input_GeometryComparisonExp<TRes> get geometry {
     final local$geometry = _instance.geometry;
     return local$geometry == null
@@ -42613,6 +44051,7 @@ class _CopyWithStubImpl_Input_GeographyCastExp<TRes>
   TRes _res;
 
   call({Input_GeometryComparisonExp? geometry}) => _res;
+
   CopyWith_Input_GeometryComparisonExp<TRes> get geometry =>
       CopyWith_Input_GeometryComparisonExp.stub(_res);
 }
@@ -42716,21 +44155,33 @@ class Input_GeographyComparisonExp {
 
   Input_GeographyCastExp? get $_cast =>
       (_$data['_cast'] as Input_GeographyCastExp?);
+
   Map<String, dynamic>? get $_eq => (_$data['_eq'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_gt => (_$data['_gt'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_gte => (_$data['_gte'] as Map<String, dynamic>?);
+
   List<Map<String, dynamic>>? get $_in =>
       (_$data['_in'] as List<Map<String, dynamic>>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   Map<String, dynamic>? get $_lt => (_$data['_lt'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_lte => (_$data['_lte'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_neq => (_$data['_neq'] as Map<String, dynamic>?);
+
   List<Map<String, dynamic>>? get $_nin =>
       (_$data['_nin'] as List<Map<String, dynamic>>?);
+
   Input_st_d_within_geography_input? get $_stDWithin =>
       (_$data['_stDWithin'] as Input_st_d_within_geography_input?);
+
   Map<String, dynamic>? get $_stIntersects =>
       (_$data['_stIntersects'] as Map<String, dynamic>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_cast')) {
@@ -42789,6 +44240,7 @@ class Input_GeographyComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -43031,6 +44483,7 @@ class _CopyWithImpl_Input_GeographyComparisonExp<TRes>
         if ($_stIntersects != _undefined)
           '_stIntersects': ($_stIntersects as Map<String, dynamic>?),
       }));
+
   CopyWith_Input_GeographyCastExp<TRes> get $_cast {
     final local$$_cast = _instance.$_cast;
     return local$$_cast == null
@@ -43068,8 +44521,10 @@ class _CopyWithStubImpl_Input_GeographyComparisonExp<TRes>
     Map<String, dynamic>? $_stIntersects,
   }) =>
       _res;
+
   CopyWith_Input_GeographyCastExp<TRes> get $_cast =>
       CopyWith_Input_GeographyCastExp.stub(_res);
+
   CopyWith_Input_st_d_within_geography_input<TRes> get $_stDWithin =>
       CopyWith_Input_st_d_within_geography_input.stub(_res);
 }
@@ -43098,6 +44553,7 @@ class Input_GeometryCastExp {
 
   Input_GeographyComparisonExp? get geography =>
       (_$data['geography'] as Input_GeographyComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('geography')) {
@@ -43112,6 +44568,7 @@ class Input_GeometryCastExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -43171,6 +44628,7 @@ class _CopyWithImpl_Input_GeometryCastExp<TRes>
         if (geography != _undefined)
           'geography': (geography as Input_GeographyComparisonExp?),
       }));
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geography {
     final local$geography = _instance.geography;
     return local$geography == null
@@ -43187,6 +44645,7 @@ class _CopyWithStubImpl_Input_GeometryCastExp<TRes>
   TRes _res;
 
   call({Input_GeographyComparisonExp? geography}) => _res;
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geography =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
 }
@@ -43342,37 +44801,57 @@ class Input_GeometryComparisonExp {
 
   Input_GeometryCastExp? get $_cast =>
       (_$data['_cast'] as Input_GeometryCastExp?);
+
   Map<String, dynamic>? get $_eq => (_$data['_eq'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_gt => (_$data['_gt'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_gte => (_$data['_gte'] as Map<String, dynamic>?);
+
   List<Map<String, dynamic>>? get $_in =>
       (_$data['_in'] as List<Map<String, dynamic>>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   Map<String, dynamic>? get $_lt => (_$data['_lt'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_lte => (_$data['_lte'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_neq => (_$data['_neq'] as Map<String, dynamic>?);
+
   List<Map<String, dynamic>>? get $_nin =>
       (_$data['_nin'] as List<Map<String, dynamic>>?);
+
   Input_st_d_within_input? get $_st3dDWithin =>
       (_$data['_st3dDWithin'] as Input_st_d_within_input?);
+
   Map<String, dynamic>? get $_st3dIntersects =>
       (_$data['_st3dIntersects'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stContains =>
       (_$data['_stContains'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stCrosses =>
       (_$data['_stCrosses'] as Map<String, dynamic>?);
+
   Input_st_d_within_input? get $_stDWithin =>
       (_$data['_stDWithin'] as Input_st_d_within_input?);
+
   Map<String, dynamic>? get $_stEquals =>
       (_$data['_stEquals'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stIntersects =>
       (_$data['_stIntersects'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stOverlaps =>
       (_$data['_stOverlaps'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stTouches =>
       (_$data['_stTouches'] as Map<String, dynamic>?);
+
   Map<String, dynamic>? get $_stWithin =>
       (_$data['_stWithin'] as Map<String, dynamic>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_cast')) {
@@ -43463,6 +44942,7 @@ class Input_GeometryComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -43826,6 +45306,7 @@ class _CopyWithImpl_Input_GeometryComparisonExp<TRes>
         if ($_stWithin != _undefined)
           '_stWithin': ($_stWithin as Map<String, dynamic>?),
       }));
+
   CopyWith_Input_GeometryCastExp<TRes> get $_cast {
     final local$$_cast = _instance.$_cast;
     return local$$_cast == null
@@ -43879,10 +45360,13 @@ class _CopyWithStubImpl_Input_GeometryComparisonExp<TRes>
     Map<String, dynamic>? $_stWithin,
   }) =>
       _res;
+
   CopyWith_Input_GeometryCastExp<TRes> get $_cast =>
       CopyWith_Input_GeometryCastExp.stub(_res);
+
   CopyWith_Input_st_d_within_input<TRes> get $_st3dDWithin =>
       CopyWith_Input_st_d_within_input.stub(_res);
+
   CopyWith_Input_st_d_within_input<TRes> get $_stDWithin =>
       CopyWith_Input_st_d_within_input.stub(_res);
 }
@@ -43912,6 +45396,7 @@ class Input_GroupsAggregateBoolExp {
 
   Input_groupsAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_groupsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -43926,6 +45411,7 @@ class Input_GroupsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -43985,6 +45471,7 @@ class _CopyWithImpl_Input_GroupsAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_groupsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_groupsAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -44001,6 +45488,7 @@ class _CopyWithStubImpl_Input_GroupsAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_groupsAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_groupsAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_groupsAggregateBoolExpCount.stub(_res);
 }
@@ -44114,22 +45602,33 @@ class Input_GroupsAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Input_GroupsAvgOrderBy? get avg => (_$data['avg'] as Input_GroupsAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_GroupsMaxOrderBy? get max => (_$data['max'] as Input_GroupsMaxOrderBy?);
+
   Input_GroupsMinOrderBy? get min => (_$data['min'] as Input_GroupsMinOrderBy?);
+
   Input_GroupsStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_GroupsStddevOrderBy?);
+
   Input_GroupsStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_GroupsStddevPopOrderBy?);
+
   Input_GroupsStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_GroupsStddevSampOrderBy?);
+
   Input_GroupsSumOrderBy? get sum => (_$data['sum'] as Input_GroupsSumOrderBy?);
+
   Input_GroupsVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_GroupsVarPopOrderBy?);
+
   Input_GroupsVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_GroupsVarSampOrderBy?);
+
   Input_GroupsVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_GroupsVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -44185,6 +45684,7 @@ class Input_GroupsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -44397,6 +45897,7 @@ class _CopyWithImpl_Input_GroupsAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_GroupsVarianceOrderBy?),
       }));
+
   CopyWith_Input_GroupsAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -44494,24 +45995,34 @@ class _CopyWithStubImpl_Input_GroupsAggregateOrderBy<TRes>
     Input_GroupsVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_GroupsAvgOrderBy<TRes> get avg =>
       CopyWith_Input_GroupsAvgOrderBy.stub(_res);
+
   CopyWith_Input_GroupsMaxOrderBy<TRes> get max =>
       CopyWith_Input_GroupsMaxOrderBy.stub(_res);
+
   CopyWith_Input_GroupsMinOrderBy<TRes> get min =>
       CopyWith_Input_GroupsMinOrderBy.stub(_res);
+
   CopyWith_Input_GroupsStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_GroupsStddevOrderBy.stub(_res);
+
   CopyWith_Input_GroupsStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_GroupsStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_GroupsStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_GroupsStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_GroupsSumOrderBy<TRes> get sum =>
       CopyWith_Input_GroupsSumOrderBy.stub(_res);
+
   CopyWith_Input_GroupsVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_GroupsVarPopOrderBy.stub(_res);
+
   CopyWith_Input_GroupsVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_GroupsVarSampOrderBy.stub(_res);
+
   CopyWith_Input_GroupsVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_GroupsVarianceOrderBy.stub(_res);
 }
@@ -44549,8 +46060,10 @@ class Input_GroupsArrRelInsertInput {
 
   List<Input_GroupsInsertInput> get data =>
       (_$data['data'] as List<Input_GroupsInsertInput>);
+
   Input_GroupsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_GroupsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -44567,6 +46080,7 @@ class Input_GroupsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -44656,6 +46170,7 @@ class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_GroupsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_GroupsInsertInput> Function(
                   Iterable<
@@ -44667,6 +46182,7 @@ class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Input_GroupsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -44687,7 +46203,9 @@ class _CopyWithStubImpl_Input_GroupsArrRelInsertInput<TRes>
     Input_GroupsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_GroupsOnConflict<TRes> get onConflict =>
       CopyWith_Input_GroupsOnConflict.stub(_res);
 }
@@ -44713,6 +46231,7 @@ class Input_GroupsAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -44728,6 +46247,7 @@ class Input_GroupsAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -45020,51 +46540,73 @@ class Input_GroupsBoolExp {
 
   List<Input_GroupsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_GroupsBoolExp>?);
+
   Input_GroupsBoolExp? get $_not => (_$data['_not'] as Input_GroupsBoolExp?);
+
   List<Input_GroupsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_GroupsBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_AuthUsersAdminOnAggregateBoolExp? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsGroupsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsGroupsBoolExp?);
+
   Input_PersonsGroupsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsGroupsAggregateBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_UuidComparisonExp? get serviceId =>
       (_$data['serviceId'] as Input_UuidComparisonExp?);
+
   Input_DaterangeComparisonExp? get validity =>
       (_$data['validity'] as Input_DaterangeComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -45167,6 +46709,7 @@ class Input_GroupsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -45619,6 +47162,7 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
         if (validity != _undefined)
           'validity': (validity as Input_DaterangeComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_GroupsBoolExp>? Function(
                   Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
@@ -45628,6 +47172,7 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_GroupsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -45644,6 +47189,7 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -45839,51 +47385,73 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
     Input_DaterangeComparisonExp? validity,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_GroupsBoolExp<TRes> get $_not =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsGroupsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsGroupsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_DaterangeComparisonExp<TRes> get validity =>
       CopyWith_Input_DaterangeComparisonExp.stub(_res);
 }
@@ -45907,6 +47475,7 @@ class Input_GroupsIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -45921,6 +47490,7 @@ class Input_GroupsIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -46097,23 +47667,35 @@ class Input_GroupsInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsGroupsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsGroupsArrRelInsertInput?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsers')) {
@@ -46176,6 +47758,7 @@ class Input_GroupsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -46408,6 +47991,7 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
         if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
         if (validity != _undefined) 'validity': (validity as DateTimeRange?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -46477,17 +48061,22 @@ class _CopyWithStubImpl_Input_GroupsInsertInput<TRes>
     DateTimeRange? validity,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory =>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
 }
@@ -46553,12 +48142,18 @@ class Input_GroupsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -46598,6 +48193,7 @@ class Input_GroupsMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -46810,12 +48406,18 @@ class Input_GroupsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -46855,6 +48457,7 @@ class Input_GroupsMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -47037,8 +48640,10 @@ class Input_GroupsObjRelInsertInput {
 
   Input_GroupsInsertInput get data =>
       (_$data['data'] as Input_GroupsInsertInput);
+
   Input_GroupsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_GroupsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -47055,6 +48660,7 @@ class Input_GroupsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -47133,6 +48739,7 @@ class _CopyWithImpl_Input_GroupsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_GroupsOnConflict?),
       }));
+
   CopyWith_Input_GroupsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_GroupsInsertInput(local$data, (e) => call(data: e));
@@ -47158,8 +48765,10 @@ class _CopyWithStubImpl_Input_GroupsObjRelInsertInput<TRes>
     Input_GroupsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_GroupsInsertInput<TRes> get data =>
       CopyWith_Input_GroupsInsertInput.stub(_res);
+
   CopyWith_Input_GroupsOnConflict<TRes> get onConflict =>
       CopyWith_Input_GroupsOnConflict.stub(_res);
 }
@@ -47202,9 +48811,12 @@ class Input_GroupsOnConflict {
 
   Enum_GroupsConstraint get constraint =>
       (_$data['constraint'] as Enum_GroupsConstraint);
+
   List<Enum_GroupsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_GroupsUpdateColumn>?);
+
   Input_GroupsBoolExp? get where => (_$data['where'] as Input_GroupsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -47228,6 +48840,7 @@ class Input_GroupsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -47333,6 +48946,7 @@ class _CopyWithImpl_Input_GroupsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_GroupsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_GroupsBoolExp?),
       }));
+
   CopyWith_Input_GroupsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -47353,6 +48967,7 @@ class _CopyWithStubImpl_Input_GroupsOnConflict<TRes>
     Input_GroupsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_GroupsBoolExp<TRes> get where =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
 }
@@ -47507,30 +49122,45 @@ class Input_GroupsOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
+
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsGroupsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsGroupsAggregateOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get validity => (_$data['validity'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsersAggregate')) {
@@ -47615,6 +49245,7 @@ class Input_GroupsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -47905,6 +49536,7 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
         if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
         if (validity != _undefined) 'validity': (validity as Enum_OrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate {
     final local$adminUsersAggregate = _instance.adminUsersAggregate;
@@ -47980,18 +49612,23 @@ class _CopyWithStubImpl_Input_GroupsOrderBy<TRes>
     Enum_OrderBy? validity,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
 }
@@ -48014,6 +49651,7 @@ class Input_GroupsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -48026,6 +49664,7 @@ class Input_GroupsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48151,12 +49790,19 @@ class Input_GroupsSetInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -48198,6 +49844,7 @@ class Input_GroupsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48384,6 +50031,7 @@ class Input_GroupsStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -48399,6 +50047,7 @@ class Input_GroupsStddevOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48487,6 +50136,7 @@ class Input_GroupsStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -48502,6 +50152,7 @@ class Input_GroupsStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48591,6 +50242,7 @@ class Input_GroupsStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -48606,6 +50258,7 @@ class Input_GroupsStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48704,8 +50357,10 @@ class Input_GroupsStreamCursorInput {
 
   Input_GroupsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_GroupsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -48723,6 +50378,7 @@ class Input_GroupsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -48800,6 +50456,7 @@ class _CopyWithImpl_Input_GroupsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_GroupsStreamCursorValueInput(
@@ -48818,6 +50475,7 @@ class _CopyWithStubImpl_Input_GroupsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_GroupsStreamCursorValueInput.stub(_res);
 }
@@ -48884,12 +50542,19 @@ class Input_GroupsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -48932,6 +50597,7 @@ class Input_GroupsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49119,6 +50785,7 @@ class Input_GroupsSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -49134,6 +50801,7 @@ class Input_GroupsSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49238,8 +50906,11 @@ class Input_GroupsUpdates {
   Map<String, dynamic> _$data;
 
   Input_GroupsIncInput? get $_inc => (_$data['_inc'] as Input_GroupsIncInput?);
+
   Input_GroupsSetInput? get $_set => (_$data['_set'] as Input_GroupsSetInput?);
+
   Input_GroupsBoolExp get where => (_$data['where'] as Input_GroupsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -49260,6 +50931,7 @@ class Input_GroupsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49349,6 +51021,7 @@ class _CopyWithImpl_Input_GroupsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_GroupsBoolExp),
       }));
+
   CopyWith_Input_GroupsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -49381,10 +51054,13 @@ class _CopyWithStubImpl_Input_GroupsUpdates<TRes>
     Input_GroupsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_GroupsIncInput<TRes> get $_inc =>
       CopyWith_Input_GroupsIncInput.stub(_res);
+
   CopyWith_Input_GroupsSetInput<TRes> get $_set =>
       CopyWith_Input_GroupsSetInput.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get where =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
 }
@@ -49410,6 +51086,7 @@ class Input_GroupsVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -49425,6 +51102,7 @@ class Input_GroupsVarPopOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49513,6 +51191,7 @@ class Input_GroupsVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -49528,6 +51207,7 @@ class Input_GroupsVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49617,6 +51297,7 @@ class Input_GroupsVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -49632,6 +51313,7 @@ class Input_GroupsVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -49851,36 +51533,50 @@ class Input_HistoryAttendanceDaysBoolExp {
 
   List<Input_HistoryAttendanceDaysBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryAttendanceDaysBoolExp>?);
+
   Input_HistoryAttendanceDaysBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryAttendanceDaysBoolExp?);
+
   List<Input_HistoryAttendanceDaysBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryAttendanceDaysBoolExp>?);
+
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
   Input_HistoryConfessionHistoryBoolExp? get confessionHistory =>
       (_$data['confessionHistory'] as Input_HistoryConfessionHistoryBoolExp?);
+
   Input_HistoryConfessionHistoryAggregateBoolExp?
       get confessionHistoryAggregate => (_$data['confessionHistoryAggregate']
           as Input_HistoryConfessionHistoryAggregateBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get constraints =>
       (_$data['constraints'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
       get constraintsAggregate => (_$data['constraintsAggregate']
           as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
   Input_DateComparisonExp? get day =>
       (_$data['day'] as Input_DateComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_HistoryKodasHistoryBoolExp? get kodasHistory =>
       (_$data['kodasHistory'] as Input_HistoryKodasHistoryBoolExp?);
+
   Input_HistoryKodasHistoryAggregateBoolExp? get kodasHistoryAggregate =>
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateBoolExp?);
+
   Input_StringComparisonExp? get notes =>
       (_$data['notes'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -49950,6 +51646,7 @@ class Input_HistoryAttendanceDaysBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -50280,6 +51977,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
               as Input_HistoryKodasHistoryAggregateBoolExp?),
         if (notes != _undefined) 'notes': (notes as Input_StringComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
                   Iterable<
@@ -50292,6 +51990,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -50312,6 +52011,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
     final local$attendanceHistory = _instance.attendanceHistory;
     return local$attendanceHistory == null
@@ -50437,36 +52137,50 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
     Input_StringComparisonExp? notes,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get confessionHistory =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
       get confessionHistoryAggregate =>
           CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get constraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
       get constraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
               _res);
+
   CopyWith_Input_DateComparisonExp<TRes> get day =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
       get kodasHistoryAggregate =>
           CopyWith_Input_HistoryKodasHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get notes =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -50518,12 +52232,15 @@ class Input_HistoryAttendanceDaysConstraintsAggregateBoolExp {
   Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and?
       get bool_and => (_$data['bool_and']
           as Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and?);
+
   Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or? get bool_or =>
       (_$data['bool_or']
           as Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or?);
+
   Input_historyAttendanceDaysConstraintsAggregateBoolExpCount? get count =>
       (_$data['count']
           as Input_historyAttendanceDaysConstraintsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('bool_and')) {
@@ -50548,6 +52265,7 @@ class Input_HistoryAttendanceDaysConstraintsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -50654,6 +52372,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
           'count': (count
               as Input_historyAttendanceDaysConstraintsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and<TRes>
       get bool_and {
     final local$bool_and = _instance.bool_and;
@@ -50700,14 +52419,17 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<
     Input_historyAttendanceDaysConstraintsAggregateBoolExpCount? count,
   }) =>
       _res;
+
   CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and<TRes>
       get bool_and =>
           CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and
               .stub(_res);
+
   CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or<TRes>
       get bool_or =>
           CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or
               .stub(_res);
+
   CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpCount<TRes>
       get count =>
           CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpCount
@@ -50830,31 +52552,42 @@ class Input_HistoryAttendanceDaysConstraintsAggregateOrderBy {
 
   Input_HistoryAttendanceDaysConstraintsAvgOrderBy? get avg =>
       (_$data['avg'] as Input_HistoryAttendanceDaysConstraintsAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryAttendanceDaysConstraintsMaxOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryAttendanceDaysConstraintsMinOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsStddevOrderBy? get stddev =>
       (_$data['stddev']
           as Input_HistoryAttendanceDaysConstraintsStddevOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop']
           as Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp']
           as Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsSumOrderBy? get sum =>
       (_$data['sum'] as Input_HistoryAttendanceDaysConstraintsSumOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsVarPopOrderBy? get varPop =>
       (_$data['varPop']
           as Input_HistoryAttendanceDaysConstraintsVarPopOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsVarSampOrderBy? get varSamp =>
       (_$data['varSamp']
           as Input_HistoryAttendanceDaysConstraintsVarSampOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsVarianceOrderBy? get variance =>
       (_$data['variance']
           as Input_HistoryAttendanceDaysConstraintsVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -50912,6 +52645,7 @@ class Input_HistoryAttendanceDaysConstraintsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -51142,6 +52876,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
           'variance': (variance
               as Input_HistoryAttendanceDaysConstraintsVarianceOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -51262,34 +52997,44 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<
     Input_HistoryAttendanceDaysConstraintsVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAvgOrderBy<TRes> get avg =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsAvgOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsMinOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsStddevOrderBy<TRes>
       get stddev =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsStddevOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy<TRes>
       get stddevPop =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy<TRes>
       get stddevSamp =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsSumOrderBy<TRes> get sum =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsSumOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsVarPopOrderBy<TRes>
       get varPop =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsVarPopOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsVarSampOrderBy<TRes>
       get varSamp =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsVarSampOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsVarianceOrderBy<TRes>
       get variance =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsVarianceOrderBy.stub(
@@ -51332,9 +53077,11 @@ class Input_HistoryAttendanceDaysConstraintsArrRelInsertInput {
   List<Input_HistoryAttendanceDaysConstraintsInsertInput> get data =>
       (_$data['data']
           as List<Input_HistoryAttendanceDaysConstraintsInsertInput>);
+
   Input_HistoryAttendanceDaysConstraintsOnConflict? get onConflict =>
       (_$data['onConflict']
           as Input_HistoryAttendanceDaysConstraintsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -51353,6 +53100,7 @@ class Input_HistoryAttendanceDaysConstraintsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -51451,6 +53199,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<
           'onConflict':
               (onConflict as Input_HistoryAttendanceDaysConstraintsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryAttendanceDaysConstraintsInsertInput> Function(
                   Iterable<
@@ -51463,6 +53212,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsOnConflict<TRes>
       get onConflict {
     final local$onConflict = _instance.onConflict;
@@ -51488,7 +53238,9 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<
     Input_HistoryAttendanceDaysConstraintsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsOnConflict<TRes>
       get onConflict =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsOnConflict.stub(_res);
@@ -51519,6 +53271,7 @@ class Input_HistoryAttendanceDaysConstraintsAvgOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -51536,6 +53289,7 @@ class Input_HistoryAttendanceDaysConstraintsAvgOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -51760,32 +53514,47 @@ class Input_HistoryAttendanceDaysConstraintsBoolExp {
 
   List<Input_HistoryAttendanceDaysConstraintsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryAttendanceDaysConstraintsBoolExp>?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   List<Input_HistoryAttendanceDaysConstraintsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryAttendanceDaysConstraintsBoolExp>?);
+
   Input_HistoryAttendanceDaysBoolExp? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysBoolExp?);
+
   Input_DateComparisonExp? get dayId =>
       (_$data['dayId'] as Input_DateComparisonExp?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+
   Input_UuidComparisonExp? get groupId =>
       (_$data['groupId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_BooleanComparisonExp? get serviceGender =>
       (_$data['serviceGender'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get serviceId =>
       (_$data['serviceId'] as Input_UuidComparisonExp?);
+
   Input_IntComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -51857,6 +53626,7 @@ class Input_HistoryAttendanceDaysConstraintsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -52183,6 +53953,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryAttendanceDaysConstraintsBoolExp>? Function(
                   Iterable<
@@ -52195,6 +53966,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -52216,6 +53988,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -52334,32 +54107,47 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
     Input_StudyYearsBoolExp? studyYear,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get dayId =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
@@ -52386,6 +54174,7 @@ class Input_HistoryAttendanceDaysConstraintsIncInput {
   Map<String, dynamic> _$data;
 
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -52401,6 +54190,7 @@ class Input_HistoryAttendanceDaysConstraintsIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -52566,18 +54356,28 @@ class Input_HistoryAttendanceDaysConstraintsInsertInput {
 
   Input_HistoryAttendanceDaysObjRelInsertInput? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysObjRelInsertInput?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   Input_GroupsObjRelInsertInput? get group =>
       (_$data['group'] as Input_GroupsObjRelInsertInput?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -52632,6 +54432,7 @@ class Input_HistoryAttendanceDaysConstraintsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -52829,6 +54630,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsInsertInput<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -52884,12 +54686,16 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsInsertInput<TRes>
     Input_StudyYearsObjRelInsertInput? studyYear,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput.stub(_res);
+
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
       CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
 }
@@ -52949,11 +54755,16 @@ class Input_HistoryAttendanceDaysConstraintsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -52990,6 +54801,7 @@ class Input_HistoryAttendanceDaysConstraintsMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -53182,11 +54994,16 @@ class Input_HistoryAttendanceDaysConstraintsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -53223,6 +55040,7 @@ class Input_HistoryAttendanceDaysConstraintsMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -53403,11 +55221,14 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
 
   Enum_HistoryAttendanceDaysConstraintsConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceDaysConstraintsConstraint);
+
   List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
           as List<Enum_HistoryAttendanceDaysConstraintsUpdateColumn>?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -53434,6 +55255,7 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -53543,6 +55365,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryAttendanceDaysConstraintsBoolExp?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -53565,6 +55388,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsOnConflict<TRes>
     Input_HistoryAttendanceDaysConstraintsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
 }
@@ -53685,22 +55509,34 @@ class Input_HistoryAttendanceDaysConstraintsOrderBy {
 
   Input_HistoryAttendanceDaysOrderBy? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysOrderBy?);
+
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Input_GroupsOrderBy? get group => (_$data['group'] as Input_GroupsOrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -53770,6 +55606,7 @@ class Input_HistoryAttendanceDaysConstraintsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -53998,6 +55835,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsOrderBy<TRes>
         if (studyYear != _undefined)
           'studyYear': (studyYear as Input_StudyYearsOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -54051,12 +55889,16 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsOrderBy<TRes>
     Input_StudyYearsOrderBy? studyYear,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysOrderBy.stub(_res);
+
   CopyWith_Input_GroupsOrderBy<TRes> get group =>
       CopyWith_Input_GroupsOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
 }
@@ -54081,6 +55923,7 @@ class Input_HistoryAttendanceDaysConstraintsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -54095,6 +55938,7 @@ class Input_HistoryAttendanceDaysConstraintsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54222,11 +56066,17 @@ class Input_HistoryAttendanceDaysConstraintsSetInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -54264,6 +56114,7 @@ class Input_HistoryAttendanceDaysConstraintsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54442,6 +56293,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -54460,6 +56312,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54565,6 +56418,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -54583,6 +56437,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54688,6 +56543,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -54706,6 +56562,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54821,8 +56678,10 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorInput {
   Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput
       get initialValue => (_$data['initialValue']
           as Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -54842,6 +56701,7 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -54926,6 +56786,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsStreamCursorInput<
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -54948,6 +56809,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsStreamCursorInput<
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput
@@ -55010,11 +56872,17 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -55053,6 +56921,7 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55242,6 +57111,7 @@ class Input_HistoryAttendanceDaysConstraintsSumOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -55259,6 +57129,7 @@ class Input_HistoryAttendanceDaysConstraintsSumOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55374,10 +57245,13 @@ class Input_HistoryAttendanceDaysConstraintsUpdates {
 
   Input_HistoryAttendanceDaysConstraintsIncInput? get $_inc =>
       (_$data['_inc'] as Input_HistoryAttendanceDaysConstraintsIncInput?);
+
   Input_HistoryAttendanceDaysConstraintsSetInput? get $_set =>
       (_$data['_set'] as Input_HistoryAttendanceDaysConstraintsSetInput?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysConstraintsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -55399,6 +57273,7 @@ class Input_HistoryAttendanceDaysConstraintsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55492,6 +57367,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryAttendanceDaysConstraintsBoolExp),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -55529,10 +57405,13 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsUpdates<TRes>
     Input_HistoryAttendanceDaysConstraintsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsIncInput<TRes> get $_inc =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsIncInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsSetInput<TRes> get $_set =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsSetInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
 }
@@ -55562,6 +57441,7 @@ class Input_HistoryAttendanceDaysConstraintsVarPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -55580,6 +57460,7 @@ class Input_HistoryAttendanceDaysConstraintsVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55684,6 +57565,7 @@ class Input_HistoryAttendanceDaysConstraintsVarSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -55702,6 +57584,7 @@ class Input_HistoryAttendanceDaysConstraintsVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55806,6 +57689,7 @@ class Input_HistoryAttendanceDaysConstraintsVarianceOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -55824,6 +57708,7 @@ class Input_HistoryAttendanceDaysConstraintsVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -55970,16 +57855,22 @@ class Input_HistoryAttendanceDaysInsertInput {
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
   Input_HistoryConfessionHistoryArrRelInsertInput? get confessionHistory =>
       (_$data['confessionHistory']
           as Input_HistoryConfessionHistoryArrRelInsertInput?);
+
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput? get constraints =>
       (_$data['constraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
   DateTime? get day => (_$data['day'] as DateTime?);
+
   Input_HistoryKodasHistoryArrRelInsertInput? get kodasHistory =>
       (_$data['kodasHistory'] as Input_HistoryKodasHistoryArrRelInsertInput?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('attendanceHistory')) {
@@ -56015,6 +57906,7 @@ class Input_HistoryAttendanceDaysInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -56162,6 +58054,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysInsertInput<TRes>
               (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
         if (notes != _undefined) 'notes': (notes as String?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory {
     final local$attendanceHistory = _instance.attendanceHistory;
@@ -56217,16 +58110,20 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysInsertInput<TRes>
     String? notes,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory =>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
       get confessionHistory =>
           CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get constraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
               _res);
+
   CopyWith_Input_HistoryKodasHistoryArrRelInsertInput<TRes> get kodasHistory =>
       CopyWith_Input_HistoryKodasHistoryArrRelInsertInput.stub(_res);
 }
@@ -56263,8 +58160,10 @@ class Input_HistoryAttendanceDaysObjRelInsertInput {
 
   Input_HistoryAttendanceDaysInsertInput get data =>
       (_$data['data'] as Input_HistoryAttendanceDaysInsertInput);
+
   Input_HistoryAttendanceDaysOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryAttendanceDaysOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -56282,6 +58181,7 @@ class Input_HistoryAttendanceDaysObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -56360,6 +58260,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HistoryAttendanceDaysOnConflict?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_HistoryAttendanceDaysInsertInput(
@@ -56386,8 +58287,10 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysObjRelInsertInput<TRes>
     Input_HistoryAttendanceDaysOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> get data =>
       CopyWith_Input_HistoryAttendanceDaysInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryAttendanceDaysOnConflict.stub(_res);
 }
@@ -56433,11 +58336,14 @@ class Input_HistoryAttendanceDaysOnConflict {
 
   Enum_HistoryAttendanceDaysConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceDaysConstraint);
+
   List<Enum_HistoryAttendanceDaysUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
           as List<Enum_HistoryAttendanceDaysUpdateColumn>?);
+
   Input_HistoryAttendanceDaysBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -56463,6 +58369,7 @@ class Input_HistoryAttendanceDaysOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -56570,6 +58477,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryAttendanceDaysBoolExp?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -56591,6 +58499,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysOnConflict<TRes>
     Input_HistoryAttendanceDaysBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
 }
@@ -56680,19 +58589,26 @@ class Input_HistoryAttendanceDaysOrderBy {
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+
   Input_HistoryConfessionHistoryAggregateOrderBy?
       get confessionHistoryAggregate => (_$data['confessionHistoryAggregate']
           as Input_HistoryConfessionHistoryAggregateOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get constraintsAggregate => (_$data['constraintsAggregate']
           as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
+
   Enum_OrderBy? get day => (_$data['day'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Input_HistoryKodasHistoryAggregateOrderBy? get kodasHistoryAggregate =>
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('attendanceHistoryAggregate')) {
@@ -56737,6 +58653,7 @@ class Input_HistoryAttendanceDaysOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -56911,6 +58828,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysOrderBy<TRes>
               as Input_HistoryKodasHistoryAggregateOrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
@@ -56973,16 +58891,20 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysOrderBy<TRes>
     Enum_OrderBy? notes,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
       get confessionHistoryAggregate =>
           CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get constraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
       get kodasHistoryAggregate =>
           CopyWith_Input_HistoryKodasHistoryAggregateOrderBy.stub(_res);
@@ -57007,6 +58929,7 @@ class Input_HistoryAttendanceDaysPkColumnsInput {
   Map<String, dynamic> _$data;
 
   DateTime get day => (_$data['day'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$day = day;
@@ -57020,6 +58943,7 @@ class Input_HistoryAttendanceDaysPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57114,7 +59038,9 @@ class Input_HistoryAttendanceDaysSetInput {
   Map<String, dynamic> _$data;
 
   DateTime? get day => (_$data['day'] as DateTime?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -57134,6 +59060,7 @@ class Input_HistoryAttendanceDaysSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57258,8 +59185,10 @@ class Input_HistoryAttendanceDaysStreamCursorInput {
   Input_HistoryAttendanceDaysStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryAttendanceDaysStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -57278,6 +59207,7 @@ class Input_HistoryAttendanceDaysStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57357,6 +59287,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -57376,6 +59307,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput.stub(_res);
@@ -57410,7 +59342,9 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   DateTime? get day => (_$data['day'] as DateTime?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -57431,6 +59365,7 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57559,8 +59494,10 @@ class Input_HistoryAttendanceDaysUpdates {
 
   Input_HistoryAttendanceDaysSetInput? get $_set =>
       (_$data['_set'] as Input_HistoryAttendanceDaysSetInput?);
+
   Input_HistoryAttendanceDaysBoolExp get where =>
       (_$data['where'] as Input_HistoryAttendanceDaysBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -57578,6 +59515,7 @@ class Input_HistoryAttendanceDaysUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57655,6 +59593,7 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryAttendanceDaysBoolExp),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -57681,8 +59620,10 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates<TRes>
     Input_HistoryAttendanceDaysBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set =>
       CopyWith_Input_HistoryAttendanceDaysSetInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
 }
@@ -57733,11 +59674,14 @@ class Input_HistoryAttendanceHistoryAggregateBoolExp {
   Input_historyAttendanceHistoryAggregateBoolExpBool_and? get bool_and =>
       (_$data['bool_and']
           as Input_historyAttendanceHistoryAggregateBoolExpBool_and?);
+
   Input_historyAttendanceHistoryAggregateBoolExpBool_or? get bool_or =>
       (_$data['bool_or']
           as Input_historyAttendanceHistoryAggregateBoolExpBool_or?);
+
   Input_historyAttendanceHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyAttendanceHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('bool_and')) {
@@ -57761,6 +59705,7 @@ class Input_HistoryAttendanceHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -57863,6 +59808,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
           'count':
               (count as Input_historyAttendanceHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
       get bool_and {
     final local$bool_and = _instance.bool_and;
@@ -57905,14 +59851,17 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
     Input_historyAttendanceHistoryAggregateBoolExpCount? count,
   }) =>
       _res;
+
   CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
       get bool_and =>
           CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and.stub(
               _res);
+
   CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<TRes>
       get bool_or =>
           CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or.stub(
               _res);
+
   CopyWith_Input_historyAttendanceHistoryAggregateBoolExpCount<TRes>
       get count =>
           CopyWith_Input_historyAttendanceHistoryAggregateBoolExpCount.stub(
@@ -58034,26 +59983,37 @@ class Input_HistoryAttendanceHistoryAggregateOrderBy {
 
   Input_HistoryAttendanceHistoryAvgOrderBy? get avg =>
       (_$data['avg'] as Input_HistoryAttendanceHistoryAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryAttendanceHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryAttendanceHistoryMaxOrderBy?);
+
   Input_HistoryAttendanceHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryAttendanceHistoryMinOrderBy?);
+
   Input_HistoryAttendanceHistoryStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_HistoryAttendanceHistoryStddevOrderBy?);
+
   Input_HistoryAttendanceHistoryStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_HistoryAttendanceHistoryStddevPopOrderBy?);
+
   Input_HistoryAttendanceHistoryStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp']
           as Input_HistoryAttendanceHistoryStddevSampOrderBy?);
+
   Input_HistoryAttendanceHistorySumOrderBy? get sum =>
       (_$data['sum'] as Input_HistoryAttendanceHistorySumOrderBy?);
+
   Input_HistoryAttendanceHistoryVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_HistoryAttendanceHistoryVarPopOrderBy?);
+
   Input_HistoryAttendanceHistoryVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_HistoryAttendanceHistoryVarSampOrderBy?);
+
   Input_HistoryAttendanceHistoryVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_HistoryAttendanceHistoryVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -58110,6 +60070,7 @@ class Input_HistoryAttendanceHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -58330,6 +60291,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
           'variance':
               (variance as Input_HistoryAttendanceHistoryVarianceOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -58442,25 +60404,35 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
     Input_HistoryAttendanceHistoryVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryAvgOrderBy<TRes> get avg =>
       CopyWith_Input_HistoryAttendanceHistoryAvgOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryAttendanceHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryAttendanceHistoryMinOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes>
       get stddevSamp =>
           CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistorySumOrderBy<TRes> get sum =>
       CopyWith_Input_HistoryAttendanceHistorySumOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_HistoryAttendanceHistoryVarPopOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_HistoryAttendanceHistoryVarSampOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_HistoryAttendanceHistoryVarianceOrderBy.stub(_res);
 }
@@ -58499,8 +60471,10 @@ class Input_HistoryAttendanceHistoryArrRelInsertInput {
 
   List<Input_HistoryAttendanceHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryAttendanceHistoryInsertInput>);
+
   Input_HistoryAttendanceHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryAttendanceHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -58518,6 +60492,7 @@ class Input_HistoryAttendanceHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -58610,6 +60585,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
           'onConflict':
               (onConflict as Input_HistoryAttendanceHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryAttendanceHistoryInsertInput> Function(
                   Iterable<
@@ -58622,6 +60598,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryAttendanceHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -58643,7 +60620,9 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
     Input_HistoryAttendanceHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryAttendanceHistoryOnConflict.stub(_res);
 }
@@ -58673,6 +60652,7 @@ class Input_HistoryAttendanceHistoryAvgOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -58690,6 +60670,7 @@ class Input_HistoryAttendanceHistoryAvgOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -58974,46 +60955,68 @@ class Input_HistoryAttendanceHistoryBoolExp {
 
   List<Input_HistoryAttendanceHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryAttendanceHistoryBoolExp>?);
+
   Input_HistoryAttendanceHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   List<Input_HistoryAttendanceHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryAttendanceHistoryBoolExp>?);
+
   Input_BooleanComparisonExp? get asAdmin =>
       (_$data['asAdmin'] as Input_BooleanComparisonExp?);
+
   Input_ClassesBoolExp? get $class =>
       (_$data['class'] as Input_ClassesBoolExp?);
+
   Input_HistoryAttendanceDaysBoolExp? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysBoolExp?);
+
   Input_DateComparisonExp? get dayId =>
       (_$data['dayId'] as Input_DateComparisonExp?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+
   Input_UuidComparisonExp? get groupId =>
       (_$data['groupId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_BooleanComparisonExp? get serviceGender =>
       (_$data['serviceGender'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get serviceId =>
       (_$data['serviceId'] as Input_UuidComparisonExp?);
+
   Input_IntComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
   Input_TimestampComparisonExp? get time =>
       (_$data['time'] as Input_TimestampComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -59113,6 +61116,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -59540,6 +61544,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
         if (time != _undefined) 'time': (time as Input_TimestampComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryAttendanceHistoryBoolExp>? Function(
                   Iterable<
@@ -59552,6 +61557,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -59572,6 +61578,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_BooleanComparisonExp<TRes> get asAdmin {
     final local$asAdmin = _instance.asAdmin;
     return local$asAdmin == null
@@ -59750,46 +61757,68 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_BooleanComparisonExp<TRes> get asAdmin =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get $class =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get dayId =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   CopyWith_Input_TimestampComparisonExp<TRes> get time =>
       CopyWith_Input_TimestampComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -59815,6 +61844,7 @@ class Input_HistoryAttendanceHistoryIncInput {
   Map<String, dynamic> _$data;
 
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -59830,6 +61860,7 @@ class Input_HistoryAttendanceHistoryIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -60046,29 +62077,46 @@ class Input_HistoryAttendanceHistoryInsertInput {
   Map<String, dynamic> _$data;
 
   bool? get asAdmin => (_$data['asAdmin'] as bool?);
+
   Input_ClassesObjRelInsertInput? get $class =>
       (_$data['class'] as Input_ClassesObjRelInsertInput?);
+
   Input_HistoryAttendanceDaysObjRelInsertInput? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysObjRelInsertInput?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   Input_GroupsObjRelInsertInput? get group =>
       (_$data['group'] as Input_GroupsObjRelInsertInput?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('asAdmin')) {
@@ -60152,6 +62200,7 @@ class Input_HistoryAttendanceHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -60445,6 +62494,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
       }));
+
   CopyWith_Input_ClassesObjRelInsertInput<TRes> get $class {
     final local$$class = _instance.$class;
     return local$$class == null
@@ -60529,18 +62579,25 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
     Input_AuthUsersDataObjRelInsertInput? user,
   }) =>
       _res;
+
   CopyWith_Input_ClassesObjRelInsertInput<TRes> get $class =>
       CopyWith_Input_ClassesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput.stub(_res);
+
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
       CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -60623,14 +62680,22 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -60681,6 +62746,7 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -60940,14 +63006,22 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -60998,6 +63072,7 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -61221,11 +63296,14 @@ class Input_HistoryAttendanceHistoryOnConflict {
 
   Enum_HistoryAttendanceHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryAttendanceHistoryConstraint);
+
   List<Enum_HistoryAttendanceHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
           as List<Enum_HistoryAttendanceHistoryUpdateColumn>?);
+
   Input_HistoryAttendanceHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -61251,6 +63329,7 @@ class Input_HistoryAttendanceHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -61358,6 +63437,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryAttendanceHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -61379,6 +63459,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryOnConflict<TRes>
     Input_HistoryAttendanceHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
 }
@@ -61554,33 +63635,52 @@ class Input_HistoryAttendanceHistoryOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get asAdmin => (_$data['asAdmin'] as Enum_OrderBy?);
+
   Input_ClassesOrderBy? get $class =>
       (_$data['class'] as Input_ClassesOrderBy?);
+
   Input_HistoryAttendanceDaysOrderBy? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysOrderBy?);
+
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Input_GroupsOrderBy? get group => (_$data['group'] as Input_GroupsOrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsOrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('asAdmin')) {
@@ -61681,6 +63781,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62005,6 +64106,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryOrderBy<TRes>
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
       }));
+
   CopyWith_Input_ClassesOrderBy<TRes> get $class {
     final local$$class = _instance.$class;
     return local$$class == null
@@ -62086,18 +64188,25 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryOrderBy<TRes>
     Input_AuthUsersDataOrderBy? user,
   }) =>
       _res;
+
   CopyWith_Input_ClassesOrderBy<TRes> get $class =>
       CopyWith_Input_ClassesOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysOrderBy.stub(_res);
+
   CopyWith_Input_GroupsOrderBy<TRes> get group =>
       CopyWith_Input_GroupsOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -62122,6 +64231,7 @@ class Input_HistoryAttendanceHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -62135,6 +64245,7 @@ class Input_HistoryAttendanceHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62281,15 +64392,25 @@ class Input_HistoryAttendanceHistorySetInput {
   Map<String, dynamic> _$data;
 
   bool? get asAdmin => (_$data['asAdmin'] as bool?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('asAdmin')) {
@@ -62345,6 +64466,7 @@ class Input_HistoryAttendanceHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62580,6 +64702,7 @@ class Input_HistoryAttendanceHistoryStddevOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -62597,6 +64720,7 @@ class Input_HistoryAttendanceHistoryStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62694,6 +64818,7 @@ class Input_HistoryAttendanceHistoryStddevPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -62711,6 +64836,7 @@ class Input_HistoryAttendanceHistoryStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62809,6 +64935,7 @@ class Input_HistoryAttendanceHistoryStddevSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -62826,6 +64953,7 @@ class Input_HistoryAttendanceHistoryStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -62932,8 +65060,10 @@ class Input_HistoryAttendanceHistoryStreamCursorInput {
   Input_HistoryAttendanceHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryAttendanceHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -62952,6 +65082,7 @@ class Input_HistoryAttendanceHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63032,6 +65163,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -63051,6 +65183,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryAttendanceHistoryStreamCursorValueInput.stub(
@@ -63138,15 +65271,25 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   bool? get asAdmin => (_$data['asAdmin'] as bool?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('asAdmin')) {
@@ -63203,6 +65346,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63445,6 +65589,7 @@ class Input_HistoryAttendanceHistorySumOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -63462,6 +65607,7 @@ class Input_HistoryAttendanceHistorySumOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63575,10 +65721,13 @@ class Input_HistoryAttendanceHistoryUpdates {
 
   Input_HistoryAttendanceHistoryIncInput? get $_inc =>
       (_$data['_inc'] as Input_HistoryAttendanceHistoryIncInput?);
+
   Input_HistoryAttendanceHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryAttendanceHistorySetInput?);
+
   Input_HistoryAttendanceHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryAttendanceHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -63600,6 +65749,7 @@ class Input_HistoryAttendanceHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63692,6 +65842,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryAttendanceHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -63727,10 +65878,13 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryUpdates<TRes>
     Input_HistoryAttendanceHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryIncInput<TRes> get $_inc =>
       CopyWith_Input_HistoryAttendanceHistoryIncInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryAttendanceHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
 }
@@ -63760,6 +65914,7 @@ class Input_HistoryAttendanceHistoryVarPopOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -63777,6 +65932,7 @@ class Input_HistoryAttendanceHistoryVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63874,6 +66030,7 @@ class Input_HistoryAttendanceHistoryVarSampOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -63891,6 +66048,7 @@ class Input_HistoryAttendanceHistoryVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -63988,6 +66146,7 @@ class Input_HistoryAttendanceHistoryVarianceOrderBy {
 
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('serviceStudyYear')) {
@@ -64005,6 +66164,7 @@ class Input_HistoryAttendanceHistoryVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -64104,6 +66264,7 @@ class Input_HistoryCallHistoryAggregateBoolExp {
 
   Input_historyCallHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyCallHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -64119,6 +66280,7 @@ class Input_HistoryCallHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -64178,6 +66340,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_historyCallHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyCallHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -64195,6 +66358,7 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_historyCallHistoryAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_historyCallHistoryAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_historyCallHistoryAggregateBoolExpCount.stub(_res);
 }
@@ -64241,10 +66405,13 @@ class Input_HistoryCallHistoryAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryCallHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryCallHistoryMaxOrderBy?);
+
   Input_HistoryCallHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryCallHistoryMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -64269,6 +66436,7 @@ class Input_HistoryCallHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -64362,6 +66530,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_HistoryCallHistoryMinOrderBy?),
       }));
+
   CopyWith_Input_HistoryCallHistoryMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -64391,8 +66560,10 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryAggregateOrderBy<TRes>
     Input_HistoryCallHistoryMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_HistoryCallHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryCallHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryCallHistoryMinOrderBy.stub(_res);
 }
@@ -64431,8 +66602,10 @@ class Input_HistoryCallHistoryArrRelInsertInput {
 
   List<Input_HistoryCallHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryCallHistoryInsertInput>);
+
   Input_HistoryCallHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryCallHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -64450,6 +66623,7 @@ class Input_HistoryCallHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -64540,6 +66714,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HistoryCallHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryCallHistoryInsertInput> Function(
                   Iterable<
@@ -64552,6 +66727,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryCallHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -64572,7 +66748,9 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryArrRelInsertInput<TRes>
     Input_HistoryCallHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryCallHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryCallHistoryOnConflict.stub(_res);
 }
@@ -64674,22 +66852,31 @@ class Input_HistoryCallHistoryBoolExp {
 
   List<Input_HistoryCallHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryCallHistoryBoolExp>?);
+
   Input_HistoryCallHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryCallHistoryBoolExp?);
+
   List<Input_HistoryCallHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryCallHistoryBoolExp>?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Input_StringComparisonExp? get userRole =>
       (_$data['userRole'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -64736,6 +66923,7 @@ class Input_HistoryCallHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -64962,6 +67150,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryBoolExp<TRes>
         if (userRole != _undefined)
           'userRole': (userRole as Input_StringComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryCallHistoryBoolExp>? Function(
                   Iterable<
@@ -64974,6 +67163,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -64994,6 +67184,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsBoolExp<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -65059,20 +67250,29 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryBoolExp<TRes>
     Input_StringComparisonExp? userRole,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get userRole =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -65139,12 +67339,18 @@ class Input_HistoryCallHistoryInsertInput {
 
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -65182,6 +67388,7 @@ class Input_HistoryCallHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -65317,6 +67524,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryInsertInput<TRes>
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
         if (userRole != _undefined) 'userRole': (userRole as String?),
       }));
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -65349,8 +67557,10 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryInsertInput<TRes>
     String? userRole,
   }) =>
       _res;
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -65403,9 +67613,13 @@ class Input_HistoryCallHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -65436,6 +67650,7 @@ class Input_HistoryCallHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -65607,9 +67822,13 @@ class Input_HistoryCallHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -65640,6 +67859,7 @@ class Input_HistoryCallHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -65804,10 +68024,13 @@ class Input_HistoryCallHistoryOnConflict {
 
   Enum_HistoryCallHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryCallHistoryConstraint);
+
   List<Enum_HistoryCallHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_HistoryCallHistoryUpdateColumn>?);
+
   Input_HistoryCallHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryCallHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -65833,6 +68056,7 @@ class Input_HistoryCallHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -65940,6 +68164,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryCallHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -65961,6 +68186,7 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryOnConflict<TRes>
     Input_HistoryCallHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
 }
@@ -66030,12 +68256,18 @@ class Input_HistoryCallHistoryOrderBy {
 
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -66073,6 +68305,7 @@ class Input_HistoryCallHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -66207,6 +68440,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryOrderBy<TRes>
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
         if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
       }));
+
   CopyWith_Input_PersonsOrderBy<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -66237,8 +68471,10 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryOrderBy<TRes>
     Enum_OrderBy? userRole,
   }) =>
       _res;
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -66262,6 +68498,7 @@ class Input_HistoryCallHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   DateTime get time => (_$data['time'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$time = time;
@@ -66275,6 +68512,7 @@ class Input_HistoryCallHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -66382,9 +68620,13 @@ class Input_HistoryCallHistorySetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -66413,6 +68655,7 @@ class Input_HistoryCallHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -66568,8 +68811,10 @@ class Input_HistoryCallHistoryStreamCursorInput {
   Input_HistoryCallHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryCallHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -66588,6 +68833,7 @@ class Input_HistoryCallHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -66667,6 +68913,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryCallHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -66686,6 +68933,7 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryCallHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryCallHistoryStreamCursorValueInput.stub(_res);
@@ -66734,9 +68982,13 @@ class Input_HistoryCallHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -66766,6 +69018,7 @@ class Input_HistoryCallHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -66920,8 +69173,10 @@ class Input_HistoryCallHistoryUpdates {
 
   Input_HistoryCallHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryCallHistorySetInput?);
+
   Input_HistoryCallHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryCallHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -66938,6 +69193,7 @@ class Input_HistoryCallHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -67015,6 +69271,7 @@ class _CopyWithImpl_Input_HistoryCallHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryCallHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryCallHistorySetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -67041,8 +69298,10 @@ class _CopyWithStubImpl_Input_HistoryCallHistoryUpdates<TRes>
     Input_HistoryCallHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryCallHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryCallHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
 }
@@ -67073,6 +69332,7 @@ class Input_HistoryConfessionHistoryAggregateBoolExp {
 
   Input_historyConfessionHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyConfessionHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -67088,6 +69348,7 @@ class Input_HistoryConfessionHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -67149,6 +69410,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
           'count':
               (count as Input_historyConfessionHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyConfessionHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -67166,6 +69428,7 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_historyConfessionHistoryAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_historyConfessionHistoryAggregateBoolExpCount<TRes>
       get count =>
           CopyWith_Input_historyConfessionHistoryAggregateBoolExpCount.stub(
@@ -67214,10 +69477,13 @@ class Input_HistoryConfessionHistoryAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryConfessionHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryConfessionHistoryMaxOrderBy?);
+
   Input_HistoryConfessionHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryConfessionHistoryMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -67242,6 +69508,7 @@ class Input_HistoryConfessionHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -67336,6 +69603,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_HistoryConfessionHistoryMinOrderBy?),
       }));
+
   CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -67367,8 +69635,10 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
     Input_HistoryConfessionHistoryMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_HistoryConfessionHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryConfessionHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryConfessionHistoryMinOrderBy.stub(_res);
 }
@@ -67407,8 +69677,10 @@ class Input_HistoryConfessionHistoryArrRelInsertInput {
 
   List<Input_HistoryConfessionHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryConfessionHistoryInsertInput>);
+
   Input_HistoryConfessionHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryConfessionHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -67426,6 +69698,7 @@ class Input_HistoryConfessionHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -67518,6 +69791,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
           'onConflict':
               (onConflict as Input_HistoryConfessionHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryConfessionHistoryInsertInput> Function(
                   Iterable<
@@ -67530,6 +69804,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryConfessionHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -67551,7 +69826,9 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
     Input_HistoryConfessionHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryConfessionHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryConfessionHistoryOnConflict.stub(_res);
 }
@@ -67669,25 +69946,36 @@ class Input_HistoryConfessionHistoryBoolExp {
 
   List<Input_HistoryConfessionHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryConfessionHistoryBoolExp>?);
+
   Input_HistoryConfessionHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryConfessionHistoryBoolExp?);
+
   List<Input_HistoryConfessionHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryConfessionHistoryBoolExp>?);
+
   Input_HistoryAttendanceDaysBoolExp? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysBoolExp?);
+
   Input_DateComparisonExp? get dayId =>
       (_$data['dayId'] as Input_DateComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_DateComparisonExp? get time =>
       (_$data['time'] as Input_DateComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -67743,6 +70031,7 @@ class Input_HistoryConfessionHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -67995,6 +70284,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryBoolExp<TRes>
         if (time != _undefined) 'time': (time as Input_DateComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryConfessionHistoryBoolExp>? Function(
                   Iterable<
@@ -68007,6 +70297,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -68027,6 +70318,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -68107,24 +70399,35 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get dayId =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get time =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -68200,14 +70503,21 @@ class Input_HistoryConfessionHistoryInsertInput {
 
   Input_HistoryAttendanceDaysObjRelInsertInput? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysObjRelInsertInput?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -68249,6 +70559,7 @@ class Input_HistoryConfessionHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -68398,6 +70709,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryInsertInput<TRes>
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -68440,10 +70752,13 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryInsertInput<TRes>
     Input_AuthUsersDataObjRelInsertInput? user,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -68502,10 +70817,15 @@ class Input_HistoryConfessionHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -68540,6 +70860,7 @@ class Input_HistoryConfessionHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -68730,10 +71051,15 @@ class Input_HistoryConfessionHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -68768,6 +71094,7 @@ class Input_HistoryConfessionHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -68946,11 +71273,14 @@ class Input_HistoryConfessionHistoryOnConflict {
 
   Enum_HistoryConfessionHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryConfessionHistoryConstraint);
+
   List<Enum_HistoryConfessionHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns']
           as List<Enum_HistoryConfessionHistoryUpdateColumn>?);
+
   Input_HistoryConfessionHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryConfessionHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -68976,6 +71306,7 @@ class Input_HistoryConfessionHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -69083,6 +71414,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryConfessionHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -69104,6 +71436,7 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryOnConflict<TRes>
     Input_HistoryConfessionHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
 }
@@ -69189,15 +71522,23 @@ class Input_HistoryConfessionHistoryOrderBy {
 
   Input_HistoryAttendanceDaysOrderBy? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysOrderBy?);
+
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -69244,6 +71585,7 @@ class Input_HistoryConfessionHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -69405,6 +71747,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryOrderBy<TRes>
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -69445,10 +71788,13 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryOrderBy<TRes>
     Input_AuthUsersDataOrderBy? user,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -69473,6 +71819,7 @@ class Input_HistoryConfessionHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -69486,6 +71833,7 @@ class Input_HistoryConfessionHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -69594,9 +71942,13 @@ class Input_HistoryConfessionHistorySetInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -69626,6 +71978,7 @@ class Input_HistoryConfessionHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -69780,8 +72133,10 @@ class Input_HistoryConfessionHistoryStreamCursorInput {
   Input_HistoryConfessionHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryConfessionHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -69800,6 +72155,7 @@ class Input_HistoryConfessionHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -69880,6 +72236,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -69899,6 +72256,7 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryConfessionHistoryStreamCursorValueInput.stub(
@@ -69954,10 +72312,15 @@ class Input_HistoryConfessionHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -69992,6 +72355,7 @@ class Input_HistoryConfessionHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -70166,8 +72530,10 @@ class Input_HistoryConfessionHistoryUpdates {
 
   Input_HistoryConfessionHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryConfessionHistorySetInput?);
+
   Input_HistoryConfessionHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryConfessionHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -70185,6 +72551,7 @@ class Input_HistoryConfessionHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -70262,6 +72629,7 @@ class _CopyWithImpl_Input_HistoryConfessionHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryConfessionHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryConfessionHistorySetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -70288,8 +72656,10 @@ class _CopyWithStubImpl_Input_HistoryConfessionHistoryUpdates<TRes>
     Input_HistoryConfessionHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryConfessionHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryConfessionHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
 }
@@ -70320,6 +72690,7 @@ class Input_HistoryEditHistoryAggregateBoolExp {
 
   Input_historyEditHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyEditHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -70335,6 +72706,7 @@ class Input_HistoryEditHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -70394,6 +72766,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_historyEditHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyEditHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -70411,6 +72784,7 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_historyEditHistoryAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_historyEditHistoryAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_historyEditHistoryAggregateBoolExpCount.stub(_res);
 }
@@ -70457,10 +72831,13 @@ class Input_HistoryEditHistoryAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryEditHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryEditHistoryMaxOrderBy?);
+
   Input_HistoryEditHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryEditHistoryMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -70485,6 +72862,7 @@ class Input_HistoryEditHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -70578,6 +72956,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_HistoryEditHistoryMinOrderBy?),
       }));
+
   CopyWith_Input_HistoryEditHistoryMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -70607,8 +72986,10 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryAggregateOrderBy<TRes>
     Input_HistoryEditHistoryMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_HistoryEditHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryEditHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryEditHistoryMinOrderBy.stub(_res);
 }
@@ -70647,8 +73028,10 @@ class Input_HistoryEditHistoryArrRelInsertInput {
 
   List<Input_HistoryEditHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryEditHistoryInsertInput>);
+
   Input_HistoryEditHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryEditHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -70666,6 +73049,7 @@ class Input_HistoryEditHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -70756,6 +73140,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HistoryEditHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryEditHistoryInsertInput> Function(
                   Iterable<
@@ -70768,6 +73153,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryEditHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -70788,7 +73174,9 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryArrRelInsertInput<TRes>
     Input_HistoryEditHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryEditHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryEditHistoryOnConflict.stub(_res);
 }
@@ -70909,26 +73297,37 @@ class Input_HistoryEditHistoryBoolExp {
 
   List<Input_HistoryEditHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryEditHistoryBoolExp>?);
+
   Input_HistoryEditHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryEditHistoryBoolExp?);
+
   List<Input_HistoryEditHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryEditHistoryBoolExp>?);
+
   Input_UuidComparisonExp? get auditId =>
       (_$data['auditId'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get recordId =>
       (_$data['recordId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_NameComparisonExp? get table =>
       (_$data['table'] as Input_NameComparisonExp?);
+
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Input_StringComparisonExp? get userRole =>
       (_$data['userRole'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -70983,6 +73382,7 @@ class Input_HistoryEditHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -71243,6 +73643,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryBoolExp<TRes>
         if (userRole != _undefined)
           'userRole': (userRole as Input_StringComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryEditHistoryBoolExp>? Function(
                   Iterable<
@@ -71255,6 +73656,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -71275,6 +73677,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get auditId {
     final local$auditId = _instance.auditId;
     return local$auditId == null
@@ -71358,24 +73761,35 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryBoolExp<TRes>
     Input_StringComparisonExp? userRole,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get auditId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_NameComparisonExp<TRes> get table =>
       CopyWith_Input_NameComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get userRole =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -71445,13 +73859,20 @@ class Input_HistoryEditHistoryInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get auditId => (_$data['auditId'] as UuidValue?);
+
   UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -71494,6 +73915,7 @@ class Input_HistoryEditHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -71640,6 +74062,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryInsertInput<TRes>
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
         if (userRole != _undefined) 'userRole': (userRole as String?),
       }));
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -71665,6 +74088,7 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryInsertInput<TRes>
     String? userRole,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -71725,10 +74149,15 @@ class Input_HistoryEditHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get auditId => (_$data['auditId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -71764,6 +74193,7 @@ class Input_HistoryEditHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -71957,10 +74387,15 @@ class Input_HistoryEditHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get auditId => (_$data['auditId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -71996,6 +74431,7 @@ class Input_HistoryEditHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -72174,10 +74610,13 @@ class Input_HistoryEditHistoryOnConflict {
 
   Enum_HistoryEditHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryEditHistoryConstraint);
+
   List<Enum_HistoryEditHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_HistoryEditHistoryUpdateColumn>?);
+
   Input_HistoryEditHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryEditHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -72203,6 +74642,7 @@ class Input_HistoryEditHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -72310,6 +74750,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryEditHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -72331,6 +74772,7 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryOnConflict<TRes>
     Input_HistoryEditHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
 }
@@ -72415,15 +74857,23 @@ class Input_HistoryEditHistoryOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get auditId => (_$data['auditId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get table => (_$data['table'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -72473,6 +74923,7 @@ class Input_HistoryEditHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -72636,6 +75087,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryOrderBy<TRes>
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
         if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
       }));
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
     final local$user = _instance.user;
     return local$user == null
@@ -72661,6 +75113,7 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryOrderBy<TRes>
     Enum_OrderBy? userRole,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -72685,6 +75138,7 @@ class Input_HistoryEditHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get auditId => (_$data['auditId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$auditId = auditId;
@@ -72698,6 +75152,7 @@ class Input_HistoryEditHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -72819,11 +75274,17 @@ class Input_HistoryEditHistorySetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get auditId => (_$data['auditId'] as UuidValue?);
+
   UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -72861,6 +75322,7 @@ class Input_HistoryEditHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73044,8 +75506,10 @@ class Input_HistoryEditHistoryStreamCursorInput {
   Input_HistoryEditHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryEditHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -73064,6 +75528,7 @@ class Input_HistoryEditHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73143,6 +75608,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryEditHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -73162,6 +75628,7 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryEditHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryEditHistoryStreamCursorValueInput.stub(_res);
@@ -73223,11 +75690,17 @@ class Input_HistoryEditHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get auditId => (_$data['auditId'] as UuidValue?);
+
   UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('auditId')) {
@@ -73266,6 +75739,7 @@ class Input_HistoryEditHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73448,8 +75922,10 @@ class Input_HistoryEditHistoryUpdates {
 
   Input_HistoryEditHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryEditHistorySetInput?);
+
   Input_HistoryEditHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryEditHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -73466,6 +75942,7 @@ class Input_HistoryEditHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73543,6 +76020,7 @@ class _CopyWithImpl_Input_HistoryEditHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryEditHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryEditHistorySetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -73569,8 +76047,10 @@ class _CopyWithStubImpl_Input_HistoryEditHistoryUpdates<TRes>
     Input_HistoryEditHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryEditHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryEditHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
 }
@@ -73601,6 +76081,7 @@ class Input_HistoryKodasHistoryAggregateBoolExp {
 
   Input_historyKodasHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyKodasHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -73616,6 +76097,7 @@ class Input_HistoryKodasHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73675,6 +76157,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_historyKodasHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyKodasHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -73692,6 +76175,7 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_historyKodasHistoryAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_historyKodasHistoryAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_historyKodasHistoryAggregateBoolExpCount.stub(_res);
 }
@@ -73738,10 +76222,13 @@ class Input_HistoryKodasHistoryAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryKodasHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryKodasHistoryMaxOrderBy?);
+
   Input_HistoryKodasHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryKodasHistoryMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -73766,6 +76253,7 @@ class Input_HistoryKodasHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -73859,6 +76347,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_HistoryKodasHistoryMinOrderBy?),
       }));
+
   CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -73888,8 +76377,10 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
     Input_HistoryKodasHistoryMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_HistoryKodasHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryKodasHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryKodasHistoryMinOrderBy.stub(_res);
 }
@@ -73928,8 +76419,10 @@ class Input_HistoryKodasHistoryArrRelInsertInput {
 
   List<Input_HistoryKodasHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryKodasHistoryInsertInput>);
+
   Input_HistoryKodasHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryKodasHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -73947,6 +76440,7 @@ class Input_HistoryKodasHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -74037,6 +76531,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HistoryKodasHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryKodasHistoryInsertInput> Function(
                   Iterable<
@@ -74049,6 +76544,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -74069,7 +76565,9 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryArrRelInsertInput<TRes>
     Input_HistoryKodasHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryKodasHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryKodasHistoryOnConflict.stub(_res);
 }
@@ -74186,25 +76684,36 @@ class Input_HistoryKodasHistoryBoolExp {
 
   List<Input_HistoryKodasHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryKodasHistoryBoolExp>?);
+
   Input_HistoryKodasHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryKodasHistoryBoolExp?);
+
   List<Input_HistoryKodasHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryKodasHistoryBoolExp>?);
+
   Input_HistoryAttendanceDaysBoolExp? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysBoolExp?);
+
   Input_DateComparisonExp? get dayId =>
       (_$data['dayId'] as Input_DateComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_DateComparisonExp? get time =>
       (_$data['time'] as Input_DateComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -74259,6 +76768,7 @@ class Input_HistoryKodasHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -74511,6 +77021,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryBoolExp<TRes>
         if (time != _undefined) 'time': (time as Input_DateComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryKodasHistoryBoolExp>? Function(
                   Iterable<
@@ -74523,6 +77034,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -74543,6 +77055,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -74623,24 +77136,35 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get dayId =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get time =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 }
@@ -74716,14 +77240,21 @@ class Input_HistoryKodasHistoryInsertInput {
 
   Input_HistoryAttendanceDaysObjRelInsertInput? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysObjRelInsertInput?);
+
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -74765,6 +77296,7 @@ class Input_HistoryKodasHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -74914,6 +77446,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryInsertInput<TRes>
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -74956,10 +77489,13 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryInsertInput<TRes>
     Input_AuthUsersDataObjRelInsertInput? user,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -75018,10 +77554,15 @@ class Input_HistoryKodasHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -75056,6 +77597,7 @@ class Input_HistoryKodasHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -75246,10 +77788,15 @@ class Input_HistoryKodasHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -75284,6 +77831,7 @@ class Input_HistoryKodasHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -75461,10 +78009,13 @@ class Input_HistoryKodasHistoryOnConflict {
 
   Enum_HistoryKodasHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryKodasHistoryConstraint);
+
   List<Enum_HistoryKodasHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_HistoryKodasHistoryUpdateColumn>?);
+
   Input_HistoryKodasHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryKodasHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -75490,6 +78041,7 @@ class Input_HistoryKodasHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -75597,6 +78149,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryKodasHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -75618,6 +78171,7 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryOnConflict<TRes>
     Input_HistoryKodasHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
 }
@@ -75702,15 +78256,23 @@ class Input_HistoryKodasHistoryOrderBy {
 
   Input_HistoryAttendanceDaysOrderBy? get day =>
       (_$data['day'] as Input_HistoryAttendanceDaysOrderBy?);
+
   Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
@@ -75756,6 +78318,7 @@ class Input_HistoryKodasHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -75917,6 +78480,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryOrderBy<TRes>
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day {
     final local$day = _instance.day;
     return local$day == null
@@ -75957,10 +78521,13 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryOrderBy<TRes>
     Input_AuthUsersDataOrderBy? user,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> get day =>
       CopyWith_Input_HistoryAttendanceDaysOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -75984,6 +78551,7 @@ class Input_HistoryKodasHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -75997,6 +78565,7 @@ class Input_HistoryKodasHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76105,9 +78674,13 @@ class Input_HistoryKodasHistorySetInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -76136,6 +78709,7 @@ class Input_HistoryKodasHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76290,8 +78864,10 @@ class Input_HistoryKodasHistoryStreamCursorInput {
   Input_HistoryKodasHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryKodasHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -76310,6 +78886,7 @@ class Input_HistoryKodasHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76389,6 +78966,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -76408,6 +78986,7 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryKodasHistoryStreamCursorValueInput.stub(_res);
@@ -76462,10 +79041,15 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dayId')) {
@@ -76499,6 +79083,7 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76666,8 +79251,10 @@ class Input_HistoryKodasHistoryUpdates {
 
   Input_HistoryKodasHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryKodasHistorySetInput?);
+
   Input_HistoryKodasHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryKodasHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -76684,6 +79271,7 @@ class Input_HistoryKodasHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76761,6 +79349,7 @@ class _CopyWithImpl_Input_HistoryKodasHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryKodasHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryKodasHistorySetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -76787,8 +79376,10 @@ class _CopyWithStubImpl_Input_HistoryKodasHistoryUpdates<TRes>
     Input_HistoryKodasHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryKodasHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryKodasHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
 }
@@ -76819,6 +79410,7 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
 
   Input_historyVisitHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyVisitHistoryAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -76834,6 +79426,7 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -76893,6 +79486,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_historyVisitHistoryAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -76910,6 +79504,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_historyVisitHistoryAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_historyVisitHistoryAggregateBoolExpCount.stub(_res);
 }
@@ -76956,10 +79551,13 @@ class Input_HistoryVisitHistoryAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_HistoryVisitHistoryMaxOrderBy? get max =>
       (_$data['max'] as Input_HistoryVisitHistoryMaxOrderBy?);
+
   Input_HistoryVisitHistoryMinOrderBy? get min =>
       (_$data['min'] as Input_HistoryVisitHistoryMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -76984,6 +79582,7 @@ class Input_HistoryVisitHistoryAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -77077,6 +79676,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
         if (min != _undefined)
           'min': (min as Input_HistoryVisitHistoryMinOrderBy?),
       }));
+
   CopyWith_Input_HistoryVisitHistoryMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -77106,8 +79706,10 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
     Input_HistoryVisitHistoryMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_HistoryVisitHistoryMaxOrderBy<TRes> get max =>
       CopyWith_Input_HistoryVisitHistoryMaxOrderBy.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryMinOrderBy<TRes> get min =>
       CopyWith_Input_HistoryVisitHistoryMinOrderBy.stub(_res);
 }
@@ -77146,8 +79748,10 @@ class Input_HistoryVisitHistoryArrRelInsertInput {
 
   List<Input_HistoryVisitHistoryInsertInput> get data =>
       (_$data['data'] as List<Input_HistoryVisitHistoryInsertInput>);
+
   Input_HistoryVisitHistoryOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HistoryVisitHistoryOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -77165,6 +79769,7 @@ class Input_HistoryVisitHistoryArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -77255,6 +79860,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HistoryVisitHistoryOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_HistoryVisitHistoryInsertInput> Function(
                   Iterable<
@@ -77267,6 +79873,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_HistoryVisitHistoryOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -77287,7 +79894,9 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryArrRelInsertInput<TRes>
     Input_HistoryVisitHistoryOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_HistoryVisitHistoryOnConflict<TRes> get onConflict =>
       CopyWith_Input_HistoryVisitHistoryOnConflict.stub(_res);
 }
@@ -77389,22 +79998,31 @@ class Input_HistoryVisitHistoryBoolExp {
 
   List<Input_HistoryVisitHistoryBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HistoryVisitHistoryBoolExp>?);
+
   Input_HistoryVisitHistoryBoolExp? get $_not =>
       (_$data['_not'] as Input_HistoryVisitHistoryBoolExp?);
+
   List<Input_HistoryVisitHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryVisitHistoryBoolExp>?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Input_StringComparisonExp? get userRole =>
       (_$data['userRole'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -77451,6 +80069,7 @@ class Input_HistoryVisitHistoryBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -77677,6 +80296,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
         if (userRole != _undefined)
           'userRole': (userRole as Input_StringComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HistoryVisitHistoryBoolExp>? Function(
                   Iterable<
@@ -77689,6 +80309,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -77709,6 +80330,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsBoolExp<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -77774,20 +80396,29 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
     Input_StringComparisonExp? userRole,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get $_not =>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get userRole =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -77854,12 +80485,18 @@ class Input_HistoryVisitHistoryInsertInput {
 
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -77897,6 +80534,7 @@ class Input_HistoryVisitHistoryInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -78032,6 +80670,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryInsertInput<TRes>
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
         if (userRole != _undefined) 'userRole': (userRole as String?),
       }));
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -78064,8 +80703,10 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput<TRes>
     String? userRole,
   }) =>
       _res;
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
@@ -78118,9 +80759,13 @@ class Input_HistoryVisitHistoryMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -78151,6 +80796,7 @@ class Input_HistoryVisitHistoryMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -78322,9 +80968,13 @@ class Input_HistoryVisitHistoryMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -78355,6 +81005,7 @@ class Input_HistoryVisitHistoryMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -78519,10 +81170,13 @@ class Input_HistoryVisitHistoryOnConflict {
 
   Enum_HistoryVisitHistoryConstraint get constraint =>
       (_$data['constraint'] as Enum_HistoryVisitHistoryConstraint);
+
   List<Enum_HistoryVisitHistoryUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_HistoryVisitHistoryUpdateColumn>?);
+
   Input_HistoryVisitHistoryBoolExp? get where =>
       (_$data['where'] as Input_HistoryVisitHistoryBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -78548,6 +81202,7 @@ class Input_HistoryVisitHistoryOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -78655,6 +81310,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_HistoryVisitHistoryBoolExp?),
       }));
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -78676,6 +81332,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOnConflict<TRes>
     Input_HistoryVisitHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
 }
@@ -78745,12 +81402,18 @@ class Input_HistoryVisitHistoryOrderBy {
 
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -78788,6 +81451,7 @@ class Input_HistoryVisitHistoryOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -78922,6 +81586,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryOrderBy<TRes>
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
         if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
       }));
+
   CopyWith_Input_PersonsOrderBy<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -78952,8 +81617,10 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOrderBy<TRes>
     Enum_OrderBy? userRole,
   }) =>
       _res;
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
@@ -78977,6 +81644,7 @@ class Input_HistoryVisitHistoryPkColumnsInput {
   Map<String, dynamic> _$data;
 
   DateTime get time => (_$data['time'] as DateTime);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$time = time;
@@ -78990,6 +81658,7 @@ class Input_HistoryVisitHistoryPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -79098,9 +81767,13 @@ class Input_HistoryVisitHistorySetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -79129,6 +81802,7 @@ class Input_HistoryVisitHistorySetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -79284,8 +81958,10 @@ class Input_HistoryVisitHistoryStreamCursorInput {
   Input_HistoryVisitHistoryStreamCursorValueInput get initialValue =>
       (_$data['initialValue']
           as Input_HistoryVisitHistoryStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -79304,6 +81980,7 @@ class Input_HistoryVisitHistoryStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -79383,6 +82060,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
       get initialValue {
     final local$initialValue = _instance.initialValue;
@@ -79402,6 +82080,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
       get initialValue =>
           CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput.stub(_res);
@@ -79450,9 +82129,13 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
   String? get userRole => (_$data['userRole'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -79482,6 +82165,7 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -79636,8 +82320,10 @@ class Input_HistoryVisitHistoryUpdates {
 
   Input_HistoryVisitHistorySetInput? get $_set =>
       (_$data['_set'] as Input_HistoryVisitHistorySetInput?);
+
   Input_HistoryVisitHistoryBoolExp get where =>
       (_$data['where'] as Input_HistoryVisitHistoryBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -79654,6 +82340,7 @@ class Input_HistoryVisitHistoryUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -79731,6 +82418,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HistoryVisitHistoryBoolExp),
       }));
+
   CopyWith_Input_HistoryVisitHistorySetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -79757,8 +82445,10 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryUpdates<TRes>
     Input_HistoryVisitHistoryBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HistoryVisitHistorySetInput<TRes> get $_set =>
       CopyWith_Input_HistoryVisitHistorySetInput.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get where =>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
 }
@@ -79850,18 +82540,26 @@ class Input_HobbiesBoolExp {
 
   List<Input_HobbiesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_HobbiesBoolExp>?);
+
   Input_HobbiesBoolExp? get $_not => (_$data['_not'] as Input_HobbiesBoolExp?);
+
   List<Input_HobbiesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HobbiesBoolExp>?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsHobbiesBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsHobbiesBoolExp?);
+
   Input_PersonsHobbiesAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsHobbiesAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -79904,6 +82602,7 @@ class Input_HobbiesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -80105,6 +82804,7 @@ class _CopyWithImpl_Input_HobbiesBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsHobbiesAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_HobbiesBoolExp>? Function(
                   Iterable<
@@ -80115,6 +82815,7 @@ class _CopyWithImpl_Input_HobbiesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_HobbiesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -80132,6 +82833,7 @@ class _CopyWithImpl_Input_HobbiesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
@@ -80188,18 +82890,26 @@ class _CopyWithStubImpl_Input_HobbiesBoolExp<TRes>
     Input_PersonsHobbiesAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_HobbiesBoolExp<TRes> get $_not =>
       CopyWith_Input_HobbiesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
+
   CopyWith_Input_PersonsHobbiesAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsHobbiesAggregateBoolExp.stub(_res);
 }
@@ -80223,6 +82933,7 @@ class Input_HobbiesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -80237,6 +82948,7 @@ class Input_HobbiesIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -80346,10 +83058,14 @@ class Input_HobbiesInsertInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsHobbiesArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsHobbiesArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -80376,6 +83092,7 @@ class Input_HobbiesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -80480,6 +83197,7 @@ class _CopyWithImpl_Input_HobbiesInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsHobbiesArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsHobbiesArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -80502,6 +83220,7 @@ class _CopyWithStubImpl_Input_HobbiesInsertInput<TRes>
     Input_PersonsHobbiesArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsHobbiesArrRelInsertInput.stub(_res);
 }
@@ -80537,8 +83256,10 @@ class Input_HobbiesObjRelInsertInput {
 
   Input_HobbiesInsertInput get data =>
       (_$data['data'] as Input_HobbiesInsertInput);
+
   Input_HobbiesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_HobbiesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -80555,6 +83276,7 @@ class Input_HobbiesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -80633,6 +83355,7 @@ class _CopyWithImpl_Input_HobbiesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_HobbiesOnConflict?),
       }));
+
   CopyWith_Input_HobbiesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_HobbiesInsertInput(local$data, (e) => call(data: e));
@@ -80658,8 +83381,10 @@ class _CopyWithStubImpl_Input_HobbiesObjRelInsertInput<TRes>
     Input_HobbiesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesInsertInput<TRes> get data =>
       CopyWith_Input_HobbiesInsertInput.stub(_res);
+
   CopyWith_Input_HobbiesOnConflict<TRes> get onConflict =>
       CopyWith_Input_HobbiesOnConflict.stub(_res);
 }
@@ -80702,9 +83427,12 @@ class Input_HobbiesOnConflict {
 
   Enum_HobbiesConstraint get constraint =>
       (_$data['constraint'] as Enum_HobbiesConstraint);
+
   List<Enum_HobbiesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_HobbiesUpdateColumn>?);
+
   Input_HobbiesBoolExp? get where => (_$data['where'] as Input_HobbiesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -80728,6 +83456,7 @@ class Input_HobbiesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -80833,6 +83562,7 @@ class _CopyWithImpl_Input_HobbiesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_HobbiesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_HobbiesBoolExp?),
       }));
+
   CopyWith_Input_HobbiesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -80853,6 +83583,7 @@ class _CopyWithStubImpl_Input_HobbiesOnConflict<TRes>
     Input_HobbiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesBoolExp<TRes> get where =>
       CopyWith_Input_HobbiesBoolExp.stub(_res);
 }
@@ -80903,10 +83634,14 @@ class Input_HobbiesOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsHobbiesAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsHobbiesAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -80934,6 +83669,7 @@ class Input_HobbiesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81039,6 +83775,7 @@ class _CopyWithImpl_Input_HobbiesOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsHobbiesAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -81061,6 +83798,7 @@ class _CopyWithStubImpl_Input_HobbiesOrderBy<TRes>
     Input_PersonsHobbiesAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsHobbiesAggregateOrderBy.stub(_res);
 }
@@ -81083,6 +83821,7 @@ class Input_HobbiesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -81095,6 +83834,7 @@ class Input_HobbiesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81193,8 +83933,11 @@ class Input_HobbiesSetInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -81217,6 +83960,7 @@ class Input_HobbiesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81351,8 +84095,10 @@ class Input_HobbiesStreamCursorInput {
 
   Input_HobbiesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_HobbiesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -81370,6 +84116,7 @@ class Input_HobbiesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81447,6 +84194,7 @@ class _CopyWithImpl_Input_HobbiesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_HobbiesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_HobbiesStreamCursorValueInput(
@@ -81465,6 +84213,7 @@ class _CopyWithStubImpl_Input_HobbiesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_HobbiesStreamCursorValueInput.stub(_res);
 }
@@ -81504,8 +84253,11 @@ class Input_HobbiesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -81529,6 +84281,7 @@ class Input_HobbiesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81672,9 +84425,12 @@ class Input_HobbiesUpdates {
 
   Input_HobbiesIncInput? get $_inc =>
       (_$data['_inc'] as Input_HobbiesIncInput?);
+
   Input_HobbiesSetInput? get $_set =>
       (_$data['_set'] as Input_HobbiesSetInput?);
+
   Input_HobbiesBoolExp get where => (_$data['where'] as Input_HobbiesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -81695,6 +84451,7 @@ class Input_HobbiesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -81784,6 +84541,7 @@ class _CopyWithImpl_Input_HobbiesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_HobbiesBoolExp),
       }));
+
   CopyWith_Input_HobbiesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -81816,10 +84574,13 @@ class _CopyWithStubImpl_Input_HobbiesUpdates<TRes>
     Input_HobbiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesIncInput<TRes> get $_inc =>
       CopyWith_Input_HobbiesIncInput.stub(_res);
+
   CopyWith_Input_HobbiesSetInput<TRes> get $_set =>
       CopyWith_Input_HobbiesSetInput.stub(_res);
+
   CopyWith_Input_HobbiesBoolExp<TRes> get where =>
       CopyWith_Input_HobbiesBoolExp.stub(_res);
 }
@@ -81896,14 +84657,23 @@ class Input_IntComparisonExp {
   Map<String, dynamic> _$data;
 
   int? get $_eq => (_$data['_eq'] as int?);
+
   int? get $_gt => (_$data['_gt'] as int?);
+
   int? get $_gte => (_$data['_gte'] as int?);
+
   List<int>? get $_in => (_$data['_in'] as List<int>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   int? get $_lt => (_$data['_lt'] as int?);
+
   int? get $_lte => (_$data['_lte'] as int?);
+
   int? get $_neq => (_$data['_neq'] as int?);
+
   List<int>? get $_nin => (_$data['_nin'] as List<int>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -81950,6 +84720,7 @@ class Input_IntComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -82244,16 +85015,23 @@ class Input_JobsBoolExp {
 
   List<Input_JobsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_JobsBoolExp>?);
+
   Input_JobsBoolExp? get $_not => (_$data['_not'] as Input_JobsBoolExp?);
+
   List<Input_JobsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_JobsBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -82292,6 +85070,7 @@ class Input_JobsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -82479,6 +85258,7 @@ class _CopyWithImpl_Input_JobsBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_JobsBoolExp>? Function(
                   Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?)
@@ -82488,6 +85268,7 @@ class _CopyWithImpl_Input_JobsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_JobsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -82504,6 +85285,7 @@ class _CopyWithImpl_Input_JobsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -82550,16 +85332,23 @@ class _CopyWithStubImpl_Input_JobsBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_JobsBoolExp<TRes> get $_not =>
       CopyWith_Input_JobsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -82601,9 +85390,12 @@ class Input_JobsInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -82626,6 +85418,7 @@ class Input_JobsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -82716,6 +85509,7 @@ class _CopyWithImpl_Input_JobsInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -82737,6 +85531,7 @@ class _CopyWithStubImpl_Input_JobsInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -82771,8 +85566,10 @@ class Input_JobsObjRelInsertInput {
   Map<String, dynamic> _$data;
 
   Input_JobsInsertInput get data => (_$data['data'] as Input_JobsInsertInput);
+
   Input_JobsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_JobsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -82789,6 +85586,7 @@ class Input_JobsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -82867,6 +85665,7 @@ class _CopyWithImpl_Input_JobsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_JobsOnConflict?),
       }));
+
   CopyWith_Input_JobsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_JobsInsertInput(local$data, (e) => call(data: e));
@@ -82892,8 +85691,10 @@ class _CopyWithStubImpl_Input_JobsObjRelInsertInput<TRes>
     Input_JobsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_JobsInsertInput<TRes> get data =>
       CopyWith_Input_JobsInsertInput.stub(_res);
+
   CopyWith_Input_JobsOnConflict<TRes> get onConflict =>
       CopyWith_Input_JobsOnConflict.stub(_res);
 }
@@ -82936,9 +85737,12 @@ class Input_JobsOnConflict {
 
   Enum_JobsConstraint get constraint =>
       (_$data['constraint'] as Enum_JobsConstraint);
+
   List<Enum_JobsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_JobsUpdateColumn>?);
+
   Input_JobsBoolExp? get where => (_$data['where'] as Input_JobsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -82962,6 +85766,7 @@ class Input_JobsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83066,6 +85871,7 @@ class _CopyWithImpl_Input_JobsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_JobsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_JobsBoolExp?),
       }));
+
   CopyWith_Input_JobsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -83086,6 +85892,7 @@ class _CopyWithStubImpl_Input_JobsOnConflict<TRes>
     Input_JobsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_JobsBoolExp<TRes> get where =>
       CopyWith_Input_JobsBoolExp.stub(_res);
 }
@@ -83129,9 +85936,12 @@ class Input_JobsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -83154,6 +85964,7 @@ class Input_JobsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83246,6 +86057,7 @@ class _CopyWithImpl_Input_JobsOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -83267,6 +86079,7 @@ class _CopyWithStubImpl_Input_JobsOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -83289,6 +86102,7 @@ class Input_JobsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -83301,6 +86115,7 @@ class Input_JobsPkColumnsInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83393,7 +86208,9 @@ class Input_JobsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -83412,6 +86229,7 @@ class Input_JobsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83532,8 +86350,10 @@ class Input_JobsStreamCursorInput {
 
   Input_JobsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_JobsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -83551,6 +86371,7 @@ class Input_JobsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83628,6 +86449,7 @@ class _CopyWithImpl_Input_JobsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_JobsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_JobsStreamCursorValueInput(
@@ -83646,6 +86468,7 @@ class _CopyWithStubImpl_Input_JobsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_JobsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_JobsStreamCursorValueInput.stub(_res);
 }
@@ -83678,7 +86501,9 @@ class Input_JobsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -83697,6 +86522,7 @@ class Input_JobsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83817,7 +86643,9 @@ class Input_JobsUpdates {
   Map<String, dynamic> _$data;
 
   Input_JobsSetInput? get $_set => (_$data['_set'] as Input_JobsSetInput?);
+
   Input_JobsBoolExp get where => (_$data['where'] as Input_JobsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -83834,6 +86662,7 @@ class Input_JobsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -83909,6 +86738,7 @@ class _CopyWithImpl_Input_JobsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_JobsBoolExp),
       }));
+
   CopyWith_Input_JobsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -83933,8 +86763,10 @@ class _CopyWithStubImpl_Input_JobsUpdates<TRes>
     Input_JobsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_JobsSetInput<TRes> get $_set =>
       CopyWith_Input_JobsSetInput.stub(_res);
+
   CopyWith_Input_JobsBoolExp<TRes> get where =>
       CopyWith_Input_JobsBoolExp.stub(_res);
 }
@@ -83963,6 +86795,7 @@ class Input_JsonbCastExp {
 
   Input_StringComparisonExp? get $String =>
       (_$data['String'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('String')) {
@@ -83977,6 +86810,7 @@ class Input_JsonbCastExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -84035,6 +86869,7 @@ class _CopyWithImpl_Input_JsonbCastExp<TRes>
         if ($String != _undefined)
           'String': ($String as Input_StringComparisonExp?),
       }));
+
   CopyWith_Input_StringComparisonExp<TRes> get $String {
     final local$$String = _instance.$String;
     return local$$String == null
@@ -84051,6 +86886,7 @@ class _CopyWithStubImpl_Input_JsonbCastExp<TRes>
   TRes _res;
 
   call({Input_StringComparisonExp? $String}) => _res;
+
   CopyWith_Input_StringComparisonExp<TRes> get $String =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -84169,20 +87005,35 @@ class Input_JsonbComparisonExp {
   Map<String, dynamic> _$data;
 
   Input_JsonbCastExp? get $_cast => (_$data['_cast'] as Input_JsonbCastExp?);
+
   Json? get $_containedIn => (_$data['_containedIn'] as Json?);
+
   Json? get $_contains => (_$data['_contains'] as Json?);
+
   Json? get $_eq => (_$data['_eq'] as Json?);
+
   Json? get $_gt => (_$data['_gt'] as Json?);
+
   Json? get $_gte => (_$data['_gte'] as Json?);
+
   String? get $_hasKey => (_$data['_hasKey'] as String?);
+
   List<String>? get $_hasKeysAll => (_$data['_hasKeysAll'] as List<String>?);
+
   List<String>? get $_hasKeysAny => (_$data['_hasKeysAny'] as List<String>?);
+
   List<Json>? get $_in => (_$data['_in'] as List<Json>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   Json? get $_lt => (_$data['_lt'] as Json?);
+
   Json? get $_lte => (_$data['_lte'] as Json?);
+
   Json? get $_neq => (_$data['_neq'] as Json?);
+
   List<Json>? get $_nin => (_$data['_nin'] as List<Json>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_cast')) {
@@ -84253,6 +87104,7 @@ class Input_JsonbComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -84566,6 +87418,7 @@ class _CopyWithImpl_Input_JsonbComparisonExp<TRes>
         if ($_neq != _undefined) '_neq': ($_neq as Json?),
         if ($_nin != _undefined) '_nin': ($_nin as List<Json>?),
       }));
+
   CopyWith_Input_JsonbCastExp<TRes> get $_cast {
     final local$$_cast = _instance.$_cast;
     return local$$_cast == null
@@ -84598,6 +87451,7 @@ class _CopyWithStubImpl_Input_JsonbComparisonExp<TRes>
     List<Json>? $_nin,
   }) =>
       _res;
+
   CopyWith_Input_JsonbCastExp<TRes> get $_cast =>
       CopyWith_Input_JsonbCastExp.stub(_res);
 }
@@ -84632,7 +87486,9 @@ class Input_LastAttendancePersonsArgs {
   Map<String, dynamic> _$data;
 
   UuidValue? get group_id => (_$data['group_id'] as UuidValue?);
+
   UuidValue? get service_id => (_$data['service_id'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('group_id')) {
@@ -84653,6 +87509,7 @@ class Input_LastAttendancePersonsArgs {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -84818,14 +87675,23 @@ class Input_NameComparisonExp {
   Map<String, dynamic> _$data;
 
   String? get $_eq => (_$data['_eq'] as String?);
+
   String? get $_gt => (_$data['_gt'] as String?);
+
   String? get $_gte => (_$data['_gte'] as String?);
+
   List<String>? get $_in => (_$data['_in'] as List<String>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   String? get $_lt => (_$data['_lt'] as String?);
+
   String? get $_lte => (_$data['_lte'] as String?);
+
   String? get $_neq => (_$data['_neq'] as String?);
+
   List<String>? get $_nin => (_$data['_nin'] as List<String>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -84872,6 +87738,7 @@ class Input_NameComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -85178,19 +88045,27 @@ class Input_PersonStatesBoolExp {
 
   List<Input_PersonStatesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonStatesBoolExp>?);
+
   Input_PersonStatesBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonStatesBoolExp?);
+
   List<Input_PersonStatesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonStatesBoolExp>?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -85233,6 +88108,7 @@ class Input_PersonStatesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -85441,6 +88317,7 @@ class _CopyWithImpl_Input_PersonStatesBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonStatesBoolExp>? Function(
                   Iterable<
@@ -85453,6 +88330,7 @@ class _CopyWithImpl_Input_PersonStatesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -85473,6 +88351,7 @@ class _CopyWithImpl_Input_PersonStatesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
@@ -85528,18 +88407,26 @@ class _CopyWithStubImpl_Input_PersonStatesBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonStatesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -85564,6 +88451,7 @@ class Input_PersonStatesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -85578,6 +88466,7 @@ class Input_PersonStatesIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -85689,10 +88578,14 @@ class Input_PersonStatesInsertInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -85719,6 +88612,7 @@ class Input_PersonStatesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -85823,6 +88717,7 @@ class _CopyWithImpl_Input_PersonStatesInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -85845,6 +88740,7 @@ class _CopyWithStubImpl_Input_PersonStatesInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -85881,8 +88777,10 @@ class Input_PersonStatesObjRelInsertInput {
 
   Input_PersonStatesInsertInput get data =>
       (_$data['data'] as Input_PersonStatesInsertInput);
+
   Input_PersonStatesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonStatesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -85900,6 +88798,7 @@ class Input_PersonStatesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -85978,6 +88877,7 @@ class _CopyWithImpl_Input_PersonStatesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonStatesOnConflict?),
       }));
+
   CopyWith_Input_PersonStatesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_PersonStatesInsertInput(
@@ -86004,8 +88904,10 @@ class _CopyWithStubImpl_Input_PersonStatesObjRelInsertInput<TRes>
     Input_PersonStatesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_PersonStatesInsertInput<TRes> get data =>
       CopyWith_Input_PersonStatesInsertInput.stub(_res);
+
   CopyWith_Input_PersonStatesOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonStatesOnConflict.stub(_res);
 }
@@ -86049,10 +88951,13 @@ class Input_PersonStatesOnConflict {
 
   Enum_PersonStatesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonStatesConstraint);
+
   List<Enum_PersonStatesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonStatesUpdateColumn>?);
+
   Input_PersonStatesBoolExp? get where =>
       (_$data['where'] as Input_PersonStatesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -86077,6 +88982,7 @@ class Input_PersonStatesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -86183,6 +89089,7 @@ class _CopyWithImpl_Input_PersonStatesOnConflict<TRes>
               (updateColumns as List<Enum_PersonStatesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_PersonStatesBoolExp?),
       }));
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -86204,6 +89111,7 @@ class _CopyWithStubImpl_Input_PersonStatesOnConflict<TRes>
     Input_PersonStatesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get where =>
       CopyWith_Input_PersonStatesBoolExp.stub(_res);
 }
@@ -86254,10 +89162,14 @@ class Input_PersonStatesOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -86285,6 +89197,7 @@ class Input_PersonStatesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -86391,6 +89304,7 @@ class _CopyWithImpl_Input_PersonStatesOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -86413,6 +89327,7 @@ class _CopyWithStubImpl_Input_PersonStatesOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -86435,6 +89350,7 @@ class Input_PersonStatesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -86447,6 +89363,7 @@ class Input_PersonStatesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -86546,8 +89463,11 @@ class Input_PersonStatesSetInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -86570,6 +89490,7 @@ class Input_PersonStatesSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -86707,8 +89628,10 @@ class Input_PersonStatesStreamCursorInput {
 
   Input_PersonStatesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonStatesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -86727,6 +89650,7 @@ class Input_PersonStatesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -86805,6 +89729,7 @@ class _CopyWithImpl_Input_PersonStatesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonStatesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonStatesStreamCursorValueInput(
@@ -86823,6 +89748,7 @@ class _CopyWithStubImpl_Input_PersonStatesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonStatesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonStatesStreamCursorValueInput.stub(_res);
 }
@@ -86862,8 +89788,11 @@ class Input_PersonStatesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -86887,6 +89816,7 @@ class Input_PersonStatesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -87032,10 +89962,13 @@ class Input_PersonStatesUpdates {
 
   Input_PersonStatesIncInput? get $_inc =>
       (_$data['_inc'] as Input_PersonStatesIncInput?);
+
   Input_PersonStatesSetInput? get $_set =>
       (_$data['_set'] as Input_PersonStatesSetInput?);
+
   Input_PersonStatesBoolExp get where =>
       (_$data['where'] as Input_PersonStatesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -87056,6 +89989,7 @@ class Input_PersonStatesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -87146,6 +90080,7 @@ class _CopyWithImpl_Input_PersonStatesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonStatesBoolExp),
       }));
+
   CopyWith_Input_PersonStatesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -87181,10 +90116,13 @@ class _CopyWithStubImpl_Input_PersonStatesUpdates<TRes>
     Input_PersonStatesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonStatesIncInput<TRes> get $_inc =>
       CopyWith_Input_PersonStatesIncInput.stub(_res);
+
   CopyWith_Input_PersonStatesSetInput<TRes> get $_set =>
       CopyWith_Input_PersonStatesSetInput.stub(_res);
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get where =>
       CopyWith_Input_PersonStatesBoolExp.stub(_res);
 }
@@ -87275,19 +90213,27 @@ class Input_PersonTypesBoolExp {
 
   List<Input_PersonTypesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonTypesBoolExp>?);
+
   Input_PersonTypesBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonTypesBoolExp?);
+
   List<Input_PersonTypesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonTypesBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_IntComparisonExp? get order =>
       (_$data['order'] as Input_IntComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -87330,6 +90276,7 @@ class Input_PersonTypesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -87536,6 +90483,7 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonTypesBoolExp>? Function(
                   Iterable<
@@ -87548,6 +90496,7 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -87567,6 +90516,7 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -87621,18 +90571,26 @@ class _CopyWithStubImpl_Input_PersonTypesBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonTypesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get order =>
       CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -87657,6 +90615,7 @@ class Input_PersonTypesIncInput {
   Map<String, dynamic> _$data;
 
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('order')) {
@@ -87671,6 +90630,7 @@ class Input_PersonTypesIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -87781,10 +90741,14 @@ class Input_PersonTypesInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -87811,6 +90775,7 @@ class Input_PersonTypesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -87915,6 +90880,7 @@ class _CopyWithImpl_Input_PersonTypesInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -87937,6 +90903,7 @@ class _CopyWithStubImpl_Input_PersonTypesInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -87973,8 +90940,10 @@ class Input_PersonTypesObjRelInsertInput {
 
   Input_PersonTypesInsertInput get data =>
       (_$data['data'] as Input_PersonTypesInsertInput);
+
   Input_PersonTypesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonTypesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -87992,6 +90961,7 @@ class Input_PersonTypesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88070,6 +91040,7 @@ class _CopyWithImpl_Input_PersonTypesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonTypesOnConflict?),
       }));
+
   CopyWith_Input_PersonTypesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_PersonTypesInsertInput(
@@ -88096,8 +91067,10 @@ class _CopyWithStubImpl_Input_PersonTypesObjRelInsertInput<TRes>
     Input_PersonTypesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_PersonTypesInsertInput<TRes> get data =>
       CopyWith_Input_PersonTypesInsertInput.stub(_res);
+
   CopyWith_Input_PersonTypesOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonTypesOnConflict.stub(_res);
 }
@@ -88141,10 +91114,13 @@ class Input_PersonTypesOnConflict {
 
   Enum_PersonTypesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonTypesConstraint);
+
   List<Enum_PersonTypesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonTypesUpdateColumn>?);
+
   Input_PersonTypesBoolExp? get where =>
       (_$data['where'] as Input_PersonTypesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -88168,6 +91144,7 @@ class Input_PersonTypesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88274,6 +91251,7 @@ class _CopyWithImpl_Input_PersonTypesOnConflict<TRes>
               (updateColumns as List<Enum_PersonTypesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_PersonTypesBoolExp?),
       }));
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -88294,6 +91272,7 @@ class _CopyWithStubImpl_Input_PersonTypesOnConflict<TRes>
     Input_PersonTypesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get where =>
       CopyWith_Input_PersonTypesBoolExp.stub(_res);
 }
@@ -88344,10 +91323,14 @@ class Input_PersonTypesOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -88375,6 +91358,7 @@ class Input_PersonTypesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88481,6 +91465,7 @@ class _CopyWithImpl_Input_PersonTypesOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -88503,6 +91488,7 @@ class _CopyWithStubImpl_Input_PersonTypesOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -88525,6 +91511,7 @@ class Input_PersonTypesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -88537,6 +91524,7 @@ class Input_PersonTypesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88636,8 +91624,11 @@ class Input_PersonTypesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -88660,6 +91651,7 @@ class Input_PersonTypesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88797,8 +91789,10 @@ class Input_PersonTypesStreamCursorInput {
 
   Input_PersonTypesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonTypesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -88817,6 +91811,7 @@ class Input_PersonTypesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -88895,6 +91890,7 @@ class _CopyWithImpl_Input_PersonTypesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonTypesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonTypesStreamCursorValueInput(
@@ -88913,6 +91909,7 @@ class _CopyWithStubImpl_Input_PersonTypesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonTypesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonTypesStreamCursorValueInput.stub(_res);
 }
@@ -88952,8 +91949,11 @@ class Input_PersonTypesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -88977,6 +91977,7 @@ class Input_PersonTypesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -89122,10 +92123,13 @@ class Input_PersonTypesUpdates {
 
   Input_PersonTypesIncInput? get $_inc =>
       (_$data['_inc'] as Input_PersonTypesIncInput?);
+
   Input_PersonTypesSetInput? get $_set =>
       (_$data['_set'] as Input_PersonTypesSetInput?);
+
   Input_PersonTypesBoolExp get where =>
       (_$data['where'] as Input_PersonTypesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -89146,6 +92150,7 @@ class Input_PersonTypesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -89236,6 +92241,7 @@ class _CopyWithImpl_Input_PersonTypesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonTypesBoolExp),
       }));
+
   CopyWith_Input_PersonTypesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -89271,10 +92277,13 @@ class _CopyWithStubImpl_Input_PersonTypesUpdates<TRes>
     Input_PersonTypesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonTypesIncInput<TRes> get $_inc =>
       CopyWith_Input_PersonTypesIncInput.stub(_res);
+
   CopyWith_Input_PersonTypesSetInput<TRes> get $_set =>
       CopyWith_Input_PersonTypesSetInput.stub(_res);
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get where =>
       CopyWith_Input_PersonTypesBoolExp.stub(_res);
 }
@@ -89323,10 +92332,13 @@ class Input_PersonsAggregateBoolExp {
 
   Input_personsAggregateBoolExpBool_and? get bool_and =>
       (_$data['bool_and'] as Input_personsAggregateBoolExpBool_and?);
+
   Input_personsAggregateBoolExpBool_or? get bool_or =>
       (_$data['bool_or'] as Input_personsAggregateBoolExpBool_or?);
+
   Input_personsAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_personsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('bool_and')) {
@@ -89349,6 +92361,7 @@ class Input_PersonsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -89445,6 +92458,7 @@ class _CopyWithImpl_Input_PersonsAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_personsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_personsAggregateBoolExpBool_and<TRes> get bool_and {
     final local$bool_and = _instance.bool_and;
     return local$bool_and == null
@@ -89482,10 +92496,13 @@ class _CopyWithStubImpl_Input_PersonsAggregateBoolExp<TRes>
     Input_personsAggregateBoolExpCount? count,
   }) =>
       _res;
+
   CopyWith_Input_personsAggregateBoolExpBool_and<TRes> get bool_and =>
       CopyWith_Input_personsAggregateBoolExpBool_and.stub(_res);
+
   CopyWith_Input_personsAggregateBoolExpBool_or<TRes> get bool_or =>
       CopyWith_Input_personsAggregateBoolExpBool_or.stub(_res);
+
   CopyWith_Input_personsAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_personsAggregateBoolExpCount.stub(_res);
 }
@@ -89600,25 +92617,36 @@ class Input_PersonsAggregateOrderBy {
 
   Input_PersonsAvgOrderBy? get avg =>
       (_$data['avg'] as Input_PersonsAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_PersonsMaxOrderBy? get max =>
       (_$data['max'] as Input_PersonsMaxOrderBy?);
+
   Input_PersonsMinOrderBy? get min =>
       (_$data['min'] as Input_PersonsMinOrderBy?);
+
   Input_PersonsStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_PersonsStddevOrderBy?);
+
   Input_PersonsStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_PersonsStddevPopOrderBy?);
+
   Input_PersonsStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_PersonsStddevSampOrderBy?);
+
   Input_PersonsSumOrderBy? get sum =>
       (_$data['sum'] as Input_PersonsSumOrderBy?);
+
   Input_PersonsVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_PersonsVarPopOrderBy?);
+
   Input_PersonsVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_PersonsVarSampOrderBy?);
+
   Input_PersonsVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_PersonsVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -89674,6 +92702,7 @@ class Input_PersonsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -89886,6 +92915,7 @@ class _CopyWithImpl_Input_PersonsAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_PersonsVarianceOrderBy?),
       }));
+
   CopyWith_Input_PersonsAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -89983,24 +93013,34 @@ class _CopyWithStubImpl_Input_PersonsAggregateOrderBy<TRes>
     Input_PersonsVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAvgOrderBy<TRes> get avg =>
       CopyWith_Input_PersonsAvgOrderBy.stub(_res);
+
   CopyWith_Input_PersonsMaxOrderBy<TRes> get max =>
       CopyWith_Input_PersonsMaxOrderBy.stub(_res);
+
   CopyWith_Input_PersonsMinOrderBy<TRes> get min =>
       CopyWith_Input_PersonsMinOrderBy.stub(_res);
+
   CopyWith_Input_PersonsStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_PersonsStddevOrderBy.stub(_res);
+
   CopyWith_Input_PersonsStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_PersonsStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_PersonsStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_PersonsStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_PersonsSumOrderBy<TRes> get sum =>
       CopyWith_Input_PersonsSumOrderBy.stub(_res);
+
   CopyWith_Input_PersonsVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_PersonsVarPopOrderBy.stub(_res);
+
   CopyWith_Input_PersonsVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_PersonsVarSampOrderBy.stub(_res);
+
   CopyWith_Input_PersonsVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_PersonsVarianceOrderBy.stub(_res);
 }
@@ -90025,6 +93065,7 @@ class Input_PersonsAppendInput {
   Map<String, dynamic> _$data;
 
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('otherPhones')) {
@@ -90039,6 +93080,7 @@ class Input_PersonsAppendInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -90142,8 +93184,10 @@ class Input_PersonsArrRelInsertInput {
 
   List<Input_PersonsInsertInput> get data =>
       (_$data['data'] as List<Input_PersonsInsertInput>);
+
   Input_PersonsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -90160,6 +93204,7 @@ class Input_PersonsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -90249,6 +93294,7 @@ class _CopyWithImpl_Input_PersonsArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_PersonsInsertInput> Function(
                   Iterable<
@@ -90260,6 +93306,7 @@ class _CopyWithImpl_Input_PersonsArrRelInsertInput<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Input_PersonsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -90280,7 +93327,9 @@ class _CopyWithStubImpl_Input_PersonsArrRelInsertInput<TRes>
     Input_PersonsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_PersonsOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsOnConflict.stub(_res);
 }
@@ -90316,7 +93365,9 @@ class Input_PersonsAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -90337,6 +93388,7 @@ class Input_PersonsAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -91118,156 +94170,231 @@ class Input_PersonsBoolExp {
 
   List<Input_PersonsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonsBoolExp>?);
+
   Input_PersonsBoolExp? get $_not => (_$data['_not'] as Input_PersonsBoolExp?);
+
   List<Input_PersonsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonsBoolExp>?);
+
   Input_StringComparisonExp? get address =>
       (_$data['address'] as Input_StringComparisonExp?);
+
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
   Input_DateComparisonExp? get birthdate =>
       (_$data['birthdate'] as Input_DateComparisonExp?);
+
   Input_StringComparisonExp? get birthday =>
       (_$data['birthday'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_HistoryCallHistoryBoolExp? get callHistory =>
       (_$data['callHistory'] as Input_HistoryCallHistoryBoolExp?);
+
   Input_HistoryCallHistoryAggregateBoolExp? get callHistoryAggregate =>
       (_$data['callHistoryAggregate']
           as Input_HistoryCallHistoryAggregateBoolExp?);
+
   Input_ChurchesBoolExp? get church =>
       (_$data['church'] as Input_ChurchesBoolExp?);
+
   Input_UuidComparisonExp? get churchId =>
       (_$data['churchId'] as Input_UuidComparisonExp?);
+
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
+
   Input_CollegesBoolExp? get college =>
       (_$data['college'] as Input_CollegesBoolExp?);
+
   Input_UuidComparisonExp? get collegeId =>
       (_$data['collegeId'] as Input_UuidComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_HistoryConfessionHistoryBoolExp? get confessionHistory =>
       (_$data['confessionHistory'] as Input_HistoryConfessionHistoryBoolExp?);
+
   Input_HistoryConfessionHistoryAggregateBoolExp?
       get confessionHistoryAggregate => (_$data['confessionHistoryAggregate']
           as Input_HistoryConfessionHistoryAggregateBoolExp?);
+
   Input_HistoryEditHistoryBoolExp? get editHistory =>
       (_$data['editHistory'] as Input_HistoryEditHistoryBoolExp?);
+
   Input_HistoryEditHistoryAggregateBoolExp? get editHistoryAggregate =>
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateBoolExp?);
+
   Input_FamiliesBoolExp? get family =>
       (_$data['family'] as Input_FamiliesBoolExp?);
+
   Input_UuidComparisonExp? get familyId =>
       (_$data['familyId'] as Input_UuidComparisonExp?);
+
   Input_FathersBoolExp? get father =>
       (_$data['father'] as Input_FathersBoolExp?);
+
   Input_UuidComparisonExp? get fatherId =>
       (_$data['fatherId'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get gender =>
       (_$data['gender'] as Input_BooleanComparisonExp?);
+
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
+
   Input_PersonsGroupsBoolExp? get groups =>
       (_$data['groups'] as Input_PersonsGroupsBoolExp?);
+
   Input_PersonsGroupsAggregateBoolExp? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_PersonsGroupsAggregateBoolExp?);
+
   Input_PersonsHobbiesBoolExp? get hobbies =>
       (_$data['hobbies'] as Input_PersonsHobbiesBoolExp?);
+
   Input_PersonsHobbiesAggregateBoolExp? get hobbiesAggregate =>
       (_$data['hobbiesAggregate'] as Input_PersonsHobbiesAggregateBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isServant =>
       (_$data['isServant'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isShammas =>
       (_$data['isShammas'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isStudent =>
       (_$data['isStudent'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JobsBoolExp? get job => (_$data['job'] as Input_JobsBoolExp?);
+
   Input_StringComparisonExp? get jobDescription =>
       (_$data['jobDescription'] as Input_StringComparisonExp?);
+
   Input_UuidComparisonExp? get jobId =>
       (_$data['jobId'] as Input_UuidComparisonExp?);
+
   Input_HistoryKodasHistoryBoolExp? get kodasHistory =>
       (_$data['kodasHistory'] as Input_HistoryKodasHistoryBoolExp?);
+
   Input_HistoryKodasHistoryAggregateBoolExp? get kodasHistoryAggregate =>
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateBoolExp?);
+
   Input_JsonbComparisonExp? get lastCall =>
       (_$data['lastCall'] as Input_JsonbComparisonExp?);
+
   Input_JsonbComparisonExp? get lastConfession =>
       (_$data['lastConfession'] as Input_JsonbComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_JsonbComparisonExp? get lastKodas =>
       (_$data['lastKodas'] as Input_JsonbComparisonExp?);
+
   Input_JsonbComparisonExp? get lastVisit =>
       (_$data['lastVisit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get mainPhone =>
       (_$data['mainPhone'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get notes =>
       (_$data['notes'] as Input_StringComparisonExp?);
+
   Input_JsonbComparisonExp? get otherPhones =>
       (_$data['otherPhones'] as Input_JsonbComparisonExp?);
+
   Input_PersonTypesBoolExp? get personType =>
       (_$data['personType'] as Input_PersonTypesBoolExp?);
+
   Input_UuidComparisonExp? get personTypeId =>
       (_$data['personTypeId'] as Input_UuidComparisonExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_QualificationsBoolExp? get qualification =>
       (_$data['qualification'] as Input_QualificationsBoolExp?);
+
   Input_UuidComparisonExp? get qualificationId =>
       (_$data['qualificationId'] as Input_UuidComparisonExp?);
+
   Input_SchoolsBoolExp? get school =>
       (_$data['school'] as Input_SchoolsBoolExp?);
+
   Input_UuidComparisonExp? get schoolId =>
       (_$data['schoolId'] as Input_UuidComparisonExp?);
+
   Input_PersonsServicesBoolExp? get services =>
       (_$data['services'] as Input_PersonsServicesBoolExp?);
+
   Input_PersonsServicesAggregateBoolExp? get servicesAggregate =>
       (_$data['servicesAggregate'] as Input_PersonsServicesAggregateBoolExp?);
+
   Input_ShammasLevelsBoolExp? get shammasLevel =>
       (_$data['shammasLevel'] as Input_ShammasLevelsBoolExp?);
+
   Input_UuidComparisonExp? get shammasLevelId =>
       (_$data['shammasLevelId'] as Input_UuidComparisonExp?);
+
   Input_PersonStatesBoolExp? get state =>
       (_$data['state'] as Input_PersonStatesBoolExp?);
+
   Input_UuidComparisonExp? get stateId =>
       (_$data['stateId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get storeId =>
       (_$data['storeId'] as Input_UuidComparisonExp?);
+
   Input_StreetsBoolExp? get streets =>
       (_$data['streets'] as Input_StreetsBoolExp?);
+
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
+
   Input_SmallintComparisonExp? get studyYearId =>
       (_$data['studyYearId'] as Input_SmallintComparisonExp?);
+
   Input_PersonsTagsBoolExp? get tags =>
       (_$data['tags'] as Input_PersonsTagsBoolExp?);
+
   Input_PersonsTagsAggregateBoolExp? get tagsAggregate =>
       (_$data['tagsAggregate'] as Input_PersonsTagsAggregateBoolExp?);
+
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
+
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
   Input_HistoryVisitHistoryBoolExp? get visitHistory =>
       (_$data['visitHistory'] as Input_HistoryVisitHistoryBoolExp?);
+
   Input_HistoryVisitHistoryAggregateBoolExp? get visitHistoryAggregate =>
       (_$data['visitHistoryAggregate']
           as Input_HistoryVisitHistoryAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -91580,6 +94707,7 @@ class Input_PersonsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -92856,6 +95984,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
           'visitHistoryAggregate': (visitHistoryAggregate
               as Input_HistoryVisitHistoryAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonsBoolExp>? Function(
                   Iterable<
@@ -92866,6 +95995,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_PersonsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -92883,6 +96013,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_StringComparisonExp<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
@@ -93546,157 +96677,232 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_StringComparisonExp<TRes> get address =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get birthdate =>
       CopyWith_Input_DateComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get birthday =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get callHistory =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryAggregateBoolExp<TRes>
       get callHistoryAggregate =>
           CopyWith_Input_HistoryCallHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_ChurchesBoolExp<TRes> get church =>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get churchId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_CollegesBoolExp<TRes> get college =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get collegeId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get confessionHistory =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
       get confessionHistoryAggregate =>
           CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
       get editHistoryAggregate =>
           CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get family =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_FathersBoolExp<TRes> get father =>
       CopyWith_Input_FathersBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get fatherId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get gender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get groups =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsGroupsAggregateBoolExp<TRes> get groupsAggregate =>
       CopyWith_Input_PersonsGroupsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get hobbies =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
+
   CopyWith_Input_PersonsHobbiesAggregateBoolExp<TRes> get hobbiesAggregate =>
       CopyWith_Input_PersonsHobbiesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isServant =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isShammas =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isStudent =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JobsBoolExp<TRes> get job =>
       CopyWith_Input_JobsBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get jobDescription =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get jobId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
       get kodasHistoryAggregate =>
           CopyWith_Input_HistoryKodasHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastCall =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastConfession =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastKodas =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastVisit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get notes =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get otherPhones =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_PersonTypesBoolExp<TRes> get personType =>
       CopyWith_Input_PersonTypesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personTypeId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_QualificationsBoolExp<TRes> get qualification =>
       CopyWith_Input_QualificationsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get qualificationId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_SchoolsBoolExp<TRes> get school =>
       CopyWith_Input_SchoolsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get schoolId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get services =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
+
   CopyWith_Input_PersonsServicesAggregateBoolExp<TRes> get servicesAggregate =>
       CopyWith_Input_PersonsServicesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get shammasLevel =>
       CopyWith_Input_ShammasLevelsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get shammasLevelId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonStatesBoolExp<TRes> get state =>
       CopyWith_Input_PersonStatesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get stateId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get storeId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StreetsBoolExp<TRes> get streets =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   CopyWith_Input_SmallintComparisonExp<TRes> get studyYearId =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get tags =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsTagsAggregateBoolExp<TRes> get tagsAggregate =>
       CopyWith_Input_PersonsTagsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get visitHistory =>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
       get visitHistoryAggregate =>
           CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(_res);
@@ -93723,6 +96929,7 @@ class Input_PersonsDeleteAtPathInput {
   Map<String, dynamic> _$data;
 
   List<String>? get otherPhones => (_$data['otherPhones'] as List<String>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('otherPhones')) {
@@ -93737,6 +96944,7 @@ class Input_PersonsDeleteAtPathInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -93844,6 +97052,7 @@ class Input_PersonsDeleteElemInput {
   Map<String, dynamic> _$data;
 
   int? get otherPhones => (_$data['otherPhones'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('otherPhones')) {
@@ -93858,6 +97067,7 @@ class Input_PersonsDeleteElemInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -93948,6 +97158,7 @@ class Input_PersonsDeleteKeyInput {
   Map<String, dynamic> _$data;
 
   String? get otherPhones => (_$data['otherPhones'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('otherPhones')) {
@@ -93962,6 +97173,7 @@ class Input_PersonsDeleteKeyInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -94058,6 +97270,7 @@ class Input_PersonsGroupsAggregateBoolExp {
 
   Input_personsGroupsAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_personsGroupsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -94073,6 +97286,7 @@ class Input_PersonsGroupsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -94132,6 +97346,7 @@ class _CopyWithImpl_Input_PersonsGroupsAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_personsGroupsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_personsGroupsAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -94149,6 +97364,7 @@ class _CopyWithStubImpl_Input_PersonsGroupsAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_personsGroupsAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_personsGroupsAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_personsGroupsAggregateBoolExpCount.stub(_res);
 }
@@ -94195,10 +97411,13 @@ class Input_PersonsGroupsAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_PersonsGroupsMaxOrderBy? get max =>
       (_$data['max'] as Input_PersonsGroupsMaxOrderBy?);
+
   Input_PersonsGroupsMinOrderBy? get min =>
       (_$data['min'] as Input_PersonsGroupsMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -94223,6 +97442,7 @@ class Input_PersonsGroupsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -94314,6 +97534,7 @@ class _CopyWithImpl_Input_PersonsGroupsAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_PersonsGroupsMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_PersonsGroupsMinOrderBy?),
       }));
+
   CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -94343,8 +97564,10 @@ class _CopyWithStubImpl_Input_PersonsGroupsAggregateOrderBy<TRes>
     Input_PersonsGroupsMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_PersonsGroupsMaxOrderBy<TRes> get max =>
       CopyWith_Input_PersonsGroupsMaxOrderBy.stub(_res);
+
   CopyWith_Input_PersonsGroupsMinOrderBy<TRes> get min =>
       CopyWith_Input_PersonsGroupsMinOrderBy.stub(_res);
 }
@@ -94383,8 +97606,10 @@ class Input_PersonsGroupsArrRelInsertInput {
 
   List<Input_PersonsGroupsInsertInput> get data =>
       (_$data['data'] as List<Input_PersonsGroupsInsertInput>);
+
   Input_PersonsGroupsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsGroupsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -94402,6 +97627,7 @@ class Input_PersonsGroupsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -94492,6 +97718,7 @@ class _CopyWithImpl_Input_PersonsGroupsArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsGroupsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_PersonsGroupsInsertInput> Function(
                   Iterable<
@@ -94504,6 +97731,7 @@ class _CopyWithImpl_Input_PersonsGroupsArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_PersonsGroupsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -94524,7 +97752,9 @@ class _CopyWithStubImpl_Input_PersonsGroupsArrRelInsertInput<TRes>
     Input_PersonsGroupsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_PersonsGroupsOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsGroupsOnConflict.stub(_res);
 }
@@ -94615,19 +97845,27 @@ class Input_PersonsGroupsBoolExp {
 
   List<Input_PersonsGroupsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonsGroupsBoolExp>?);
+
   Input_PersonsGroupsBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonsGroupsBoolExp?);
+
   List<Input_PersonsGroupsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonsGroupsBoolExp>?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
+
   Input_UuidComparisonExp? get groupId =>
       (_$data['groupId'] as Input_UuidComparisonExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get relId =>
       (_$data['relId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -94670,6 +97908,7 @@ class Input_PersonsGroupsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -94877,6 +98116,7 @@ class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
           'personId': (personId as Input_UuidComparisonExp?),
         if (relId != _undefined) 'relId': (relId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonsGroupsBoolExp>? Function(
                   Iterable<
@@ -94889,6 +98129,7 @@ class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -94909,6 +98150,7 @@ class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_GroupsBoolExp<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -94964,18 +98206,26 @@ class _CopyWithStubImpl_Input_PersonsGroupsBoolExp<TRes>
     Input_UuidComparisonExp? relId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get relId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -95035,11 +98285,16 @@ class Input_PersonsGroupsInsertInput {
 
   Input_GroupsObjRelInsertInput? get group =>
       (_$data['group'] as Input_GroupsObjRelInsertInput?);
+
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('group')) {
@@ -95072,6 +98327,7 @@ class Input_PersonsGroupsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -95192,6 +98448,7 @@ class _CopyWithImpl_Input_PersonsGroupsInsertInput<TRes>
         if (personId != _undefined) 'personId': (personId as UuidValue?),
         if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
+
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -95223,8 +98480,10 @@ class _CopyWithStubImpl_Input_PersonsGroupsInsertInput<TRes>
     UuidValue? relId,
   }) =>
       _res;
+
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
       CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
 }
@@ -95268,8 +98527,11 @@ class Input_PersonsGroupsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('groupId')) {
@@ -95295,6 +98557,7 @@ class Input_PersonsGroupsMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -95440,8 +98703,11 @@ class Input_PersonsGroupsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('groupId')) {
@@ -95467,6 +98733,7 @@ class Input_PersonsGroupsMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -95612,10 +98879,13 @@ class Input_PersonsGroupsOnConflict {
 
   Enum_PersonsGroupsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsGroupsConstraint);
+
   List<Enum_PersonsGroupsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonsGroupsUpdateColumn>?);
+
   Input_PersonsGroupsBoolExp? get where =>
       (_$data['where'] as Input_PersonsGroupsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -95640,6 +98910,7 @@ class Input_PersonsGroupsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -95747,6 +99018,7 @@ class _CopyWithImpl_Input_PersonsGroupsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_PersonsGroupsBoolExp?),
       }));
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -95768,6 +99040,7 @@ class _CopyWithStubImpl_Input_PersonsGroupsOnConflict<TRes>
     Input_PersonsGroupsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
 }
@@ -95827,11 +99100,16 @@ class Input_PersonsGroupsOrderBy {
   Map<String, dynamic> _$data;
 
   Input_GroupsOrderBy? get group => (_$data['group'] as Input_GroupsOrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('group')) {
@@ -95865,6 +99143,7 @@ class Input_PersonsGroupsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -95983,6 +99262,7 @@ class _CopyWithImpl_Input_PersonsGroupsOrderBy<TRes>
         if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
         if (relId != _undefined) 'relId': (relId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_GroupsOrderBy<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -96012,8 +99292,10 @@ class _CopyWithStubImpl_Input_PersonsGroupsOrderBy<TRes>
     Enum_OrderBy? relId,
   }) =>
       _res;
+
   CopyWith_Input_GroupsOrderBy<TRes> get group =>
       CopyWith_Input_GroupsOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
 }
@@ -96037,6 +99319,7 @@ class Input_PersonsGroupsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get relId => (_$data['relId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$relId = relId;
@@ -96049,6 +99332,7 @@ class Input_PersonsGroupsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96150,8 +99434,11 @@ class Input_PersonsGroupsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('groupId')) {
@@ -96176,6 +99463,7 @@ class Input_PersonsGroupsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96314,8 +99602,10 @@ class Input_PersonsGroupsStreamCursorInput {
 
   Input_PersonsGroupsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonsGroupsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -96334,6 +99624,7 @@ class Input_PersonsGroupsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96412,6 +99703,7 @@ class _CopyWithImpl_Input_PersonsGroupsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonsGroupsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsGroupsStreamCursorValueInput(
@@ -96430,6 +99722,7 @@ class _CopyWithStubImpl_Input_PersonsGroupsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonsGroupsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsGroupsStreamCursorValueInput.stub(_res);
 }
@@ -96471,8 +99764,11 @@ class Input_PersonsGroupsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('groupId')) {
@@ -96498,6 +99794,7 @@ class Input_PersonsGroupsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96635,8 +99932,10 @@ class Input_PersonsGroupsUpdates {
 
   Input_PersonsGroupsSetInput? get $_set =>
       (_$data['_set'] as Input_PersonsGroupsSetInput?);
+
   Input_PersonsGroupsBoolExp get where =>
       (_$data['where'] as Input_PersonsGroupsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -96653,6 +99952,7 @@ class Input_PersonsGroupsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96730,6 +100030,7 @@ class _CopyWithImpl_Input_PersonsGroupsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonsGroupsBoolExp),
       }));
+
   CopyWith_Input_PersonsGroupsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -96756,8 +100057,10 @@ class _CopyWithStubImpl_Input_PersonsGroupsUpdates<TRes>
     Input_PersonsGroupsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsGroupsSetInput<TRes> get $_set =>
       CopyWith_Input_PersonsGroupsSetInput.stub(_res);
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
 }
@@ -96788,6 +100091,7 @@ class Input_PersonsHobbiesAggregateBoolExp {
 
   Input_personsHobbiesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_personsHobbiesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -96803,6 +100107,7 @@ class Input_PersonsHobbiesAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -96862,6 +100167,7 @@ class _CopyWithImpl_Input_PersonsHobbiesAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_personsHobbiesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_personsHobbiesAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -96879,6 +100185,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_personsHobbiesAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_personsHobbiesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_personsHobbiesAggregateBoolExpCount.stub(_res);
 }
@@ -96925,10 +100232,13 @@ class Input_PersonsHobbiesAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_PersonsHobbiesMaxOrderBy? get max =>
       (_$data['max'] as Input_PersonsHobbiesMaxOrderBy?);
+
   Input_PersonsHobbiesMinOrderBy? get min =>
       (_$data['min'] as Input_PersonsHobbiesMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -96953,6 +100263,7 @@ class Input_PersonsHobbiesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -97044,6 +100355,7 @@ class _CopyWithImpl_Input_PersonsHobbiesAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_PersonsHobbiesMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_PersonsHobbiesMinOrderBy?),
       }));
+
   CopyWith_Input_PersonsHobbiesMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -97073,8 +100385,10 @@ class _CopyWithStubImpl_Input_PersonsHobbiesAggregateOrderBy<TRes>
     Input_PersonsHobbiesMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesMaxOrderBy<TRes> get max =>
       CopyWith_Input_PersonsHobbiesMaxOrderBy.stub(_res);
+
   CopyWith_Input_PersonsHobbiesMinOrderBy<TRes> get min =>
       CopyWith_Input_PersonsHobbiesMinOrderBy.stub(_res);
 }
@@ -97113,8 +100427,10 @@ class Input_PersonsHobbiesArrRelInsertInput {
 
   List<Input_PersonsHobbiesInsertInput> get data =>
       (_$data['data'] as List<Input_PersonsHobbiesInsertInput>);
+
   Input_PersonsHobbiesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsHobbiesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -97132,6 +100448,7 @@ class Input_PersonsHobbiesArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -97222,6 +100539,7 @@ class _CopyWithImpl_Input_PersonsHobbiesArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsHobbiesOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_PersonsHobbiesInsertInput> Function(
                   Iterable<
@@ -97234,6 +100552,7 @@ class _CopyWithImpl_Input_PersonsHobbiesArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_PersonsHobbiesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -97254,7 +100573,9 @@ class _CopyWithStubImpl_Input_PersonsHobbiesArrRelInsertInput<TRes>
     Input_PersonsHobbiesOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_PersonsHobbiesOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsHobbiesOnConflict.stub(_res);
 }
@@ -97345,19 +100666,27 @@ class Input_PersonsHobbiesBoolExp {
 
   List<Input_PersonsHobbiesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonsHobbiesBoolExp>?);
+
   Input_PersonsHobbiesBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonsHobbiesBoolExp?);
+
   List<Input_PersonsHobbiesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonsHobbiesBoolExp>?);
+
   Input_HobbiesBoolExp? get hobby => (_$data['hobby'] as Input_HobbiesBoolExp?);
+
   Input_UuidComparisonExp? get hobbyId =>
       (_$data['hobbyId'] as Input_UuidComparisonExp?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get relId =>
       (_$data['relId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -97400,6 +100729,7 @@ class Input_PersonsHobbiesBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -97608,6 +100938,7 @@ class _CopyWithImpl_Input_PersonsHobbiesBoolExp<TRes>
           'personId': (personId as Input_UuidComparisonExp?),
         if (relId != _undefined) 'relId': (relId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonsHobbiesBoolExp>? Function(
                   Iterable<
@@ -97620,6 +100951,7 @@ class _CopyWithImpl_Input_PersonsHobbiesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -97640,6 +100972,7 @@ class _CopyWithImpl_Input_PersonsHobbiesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_HobbiesBoolExp<TRes> get hobby {
     final local$hobby = _instance.hobby;
     return local$hobby == null
@@ -97695,18 +101028,26 @@ class _CopyWithStubImpl_Input_PersonsHobbiesBoolExp<TRes>
     Input_UuidComparisonExp? relId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HobbiesBoolExp<TRes> get hobby =>
       CopyWith_Input_HobbiesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get hobbyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get relId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -97766,11 +101107,16 @@ class Input_PersonsHobbiesInsertInput {
 
   Input_HobbiesObjRelInsertInput? get hobby =>
       (_$data['hobby'] as Input_HobbiesObjRelInsertInput?);
+
   UuidValue? get hobbyId => (_$data['hobbyId'] as UuidValue?);
+
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobby')) {
@@ -97803,6 +101149,7 @@ class Input_PersonsHobbiesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -97923,6 +101270,7 @@ class _CopyWithImpl_Input_PersonsHobbiesInsertInput<TRes>
         if (personId != _undefined) 'personId': (personId as UuidValue?),
         if (relId != _undefined) 'relId': (relId as UuidValue?),
       }));
+
   CopyWith_Input_HobbiesObjRelInsertInput<TRes> get hobby {
     final local$hobby = _instance.hobby;
     return local$hobby == null
@@ -97954,8 +101302,10 @@ class _CopyWithStubImpl_Input_PersonsHobbiesInsertInput<TRes>
     UuidValue? relId,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesObjRelInsertInput<TRes> get hobby =>
       CopyWith_Input_HobbiesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
 }
@@ -97999,8 +101349,11 @@ class Input_PersonsHobbiesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get hobbyId => (_$data['hobbyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobbyId')) {
@@ -98026,6 +101379,7 @@ class Input_PersonsHobbiesMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -98171,8 +101525,11 @@ class Input_PersonsHobbiesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get hobbyId => (_$data['hobbyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobbyId')) {
@@ -98198,6 +101555,7 @@ class Input_PersonsHobbiesMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -98343,10 +101701,13 @@ class Input_PersonsHobbiesOnConflict {
 
   Enum_PersonsHobbiesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsHobbiesConstraint);
+
   List<Enum_PersonsHobbiesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonsHobbiesUpdateColumn>?);
+
   Input_PersonsHobbiesBoolExp? get where =>
       (_$data['where'] as Input_PersonsHobbiesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -98371,6 +101732,7 @@ class Input_PersonsHobbiesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -98478,6 +101840,7 @@ class _CopyWithImpl_Input_PersonsHobbiesOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_PersonsHobbiesBoolExp?),
       }));
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -98499,6 +101862,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesOnConflict<TRes>
     Input_PersonsHobbiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
 }
@@ -98558,11 +101922,16 @@ class Input_PersonsHobbiesOrderBy {
   Map<String, dynamic> _$data;
 
   Input_HobbiesOrderBy? get hobby => (_$data['hobby'] as Input_HobbiesOrderBy?);
+
   Enum_OrderBy? get hobbyId => (_$data['hobbyId'] as Enum_OrderBy?);
+
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobby')) {
@@ -98596,6 +101965,7 @@ class Input_PersonsHobbiesOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -98714,6 +102084,7 @@ class _CopyWithImpl_Input_PersonsHobbiesOrderBy<TRes>
         if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
         if (relId != _undefined) 'relId': (relId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_HobbiesOrderBy<TRes> get hobby {
     final local$hobby = _instance.hobby;
     return local$hobby == null
@@ -98743,8 +102114,10 @@ class _CopyWithStubImpl_Input_PersonsHobbiesOrderBy<TRes>
     Enum_OrderBy? relId,
   }) =>
       _res;
+
   CopyWith_Input_HobbiesOrderBy<TRes> get hobby =>
       CopyWith_Input_HobbiesOrderBy.stub(_res);
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
 }
@@ -98768,6 +102141,7 @@ class Input_PersonsHobbiesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get relId => (_$data['relId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$relId = relId;
@@ -98781,6 +102155,7 @@ class Input_PersonsHobbiesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -98882,8 +102257,11 @@ class Input_PersonsHobbiesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get hobbyId => (_$data['hobbyId'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobbyId')) {
@@ -98908,6 +102286,7 @@ class Input_PersonsHobbiesSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -99046,8 +102425,10 @@ class Input_PersonsHobbiesStreamCursorInput {
 
   Input_PersonsHobbiesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonsHobbiesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -99066,6 +102447,7 @@ class Input_PersonsHobbiesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -99144,6 +102526,7 @@ class _CopyWithImpl_Input_PersonsHobbiesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonsHobbiesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsHobbiesStreamCursorValueInput(
@@ -99162,6 +102545,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsHobbiesStreamCursorValueInput.stub(_res);
 }
@@ -99203,8 +102587,11 @@ class Input_PersonsHobbiesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get hobbyId => (_$data['hobbyId'] as UuidValue?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobbyId')) {
@@ -99230,6 +102617,7 @@ class Input_PersonsHobbiesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -99367,8 +102755,10 @@ class Input_PersonsHobbiesUpdates {
 
   Input_PersonsHobbiesSetInput? get $_set =>
       (_$data['_set'] as Input_PersonsHobbiesSetInput?);
+
   Input_PersonsHobbiesBoolExp get where =>
       (_$data['where'] as Input_PersonsHobbiesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -99385,6 +102775,7 @@ class Input_PersonsHobbiesUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -99462,6 +102853,7 @@ class _CopyWithImpl_Input_PersonsHobbiesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonsHobbiesBoolExp),
       }));
+
   CopyWith_Input_PersonsHobbiesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -99488,8 +102880,10 @@ class _CopyWithStubImpl_Input_PersonsHobbiesUpdates<TRes>
     Input_PersonsHobbiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesSetInput<TRes> get $_set =>
       CopyWith_Input_PersonsHobbiesSetInput.stub(_res);
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
 }
@@ -99522,7 +102916,9 @@ class Input_PersonsIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   int? get studyYearId => (_$data['studyYearId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -99541,6 +102937,7 @@ class Input_PersonsIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -100032,81 +103429,132 @@ class Input_PersonsInsertInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Input_HistoryCallHistoryArrRelInsertInput? get callHistory =>
       (_$data['callHistory'] as Input_HistoryCallHistoryArrRelInsertInput?);
+
   Input_ChurchesObjRelInsertInput? get church =>
       (_$data['church'] as Input_ChurchesObjRelInsertInput?);
+
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   Input_CollegesObjRelInsertInput? get college =>
       (_$data['college'] as Input_CollegesObjRelInsertInput?);
+
   UuidValue? get collegeId => (_$data['collegeId'] as UuidValue?);
+
   int? get color => (_$data['color'] as int?);
+
   Input_HistoryConfessionHistoryArrRelInsertInput? get confessionHistory =>
       (_$data['confessionHistory']
           as Input_HistoryConfessionHistoryArrRelInsertInput?);
+
   Input_HistoryEditHistoryArrRelInsertInput? get editHistory =>
       (_$data['editHistory'] as Input_HistoryEditHistoryArrRelInsertInput?);
+
   Input_FamiliesObjRelInsertInput? get family =>
       (_$data['family'] as Input_FamiliesObjRelInsertInput?);
+
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
+
   Input_FathersObjRelInsertInput? get father =>
       (_$data['father'] as Input_FathersObjRelInsertInput?);
+
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
+
   bool? get gender => (_$data['gender'] as bool?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   Input_PersonsGroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_PersonsGroupsArrRelInsertInput?);
+
   Input_PersonsHobbiesArrRelInsertInput? get hobbies =>
       (_$data['hobbies'] as Input_PersonsHobbiesArrRelInsertInput?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   bool? get isServant => (_$data['isServant'] as bool?);
+
   bool? get isShammas => (_$data['isShammas'] as bool?);
+
   bool? get isStudent => (_$data['isStudent'] as bool?);
+
   Input_JobsObjRelInsertInput? get job =>
       (_$data['job'] as Input_JobsObjRelInsertInput?);
+
   String? get jobDescription => (_$data['jobDescription'] as String?);
+
   UuidValue? get jobId => (_$data['jobId'] as UuidValue?);
+
   Input_HistoryKodasHistoryArrRelInsertInput? get kodasHistory =>
       (_$data['kodasHistory'] as Input_HistoryKodasHistoryArrRelInsertInput?);
+
   String? get mainPhone => (_$data['mainPhone'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
   Input_PersonTypesObjRelInsertInput? get personType =>
       (_$data['personType'] as Input_PersonTypesObjRelInsertInput?);
+
   UuidValue? get personTypeId => (_$data['personTypeId'] as UuidValue?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Input_QualificationsObjRelInsertInput? get qualification =>
       (_$data['qualification'] as Input_QualificationsObjRelInsertInput?);
+
   UuidValue? get qualificationId => (_$data['qualificationId'] as UuidValue?);
+
   Input_SchoolsObjRelInsertInput? get school =>
       (_$data['school'] as Input_SchoolsObjRelInsertInput?);
+
   UuidValue? get schoolId => (_$data['schoolId'] as UuidValue?);
+
   Input_PersonsServicesArrRelInsertInput? get services =>
       (_$data['services'] as Input_PersonsServicesArrRelInsertInput?);
+
   Input_ShammasLevelsObjRelInsertInput? get shammasLevel =>
       (_$data['shammasLevel'] as Input_ShammasLevelsObjRelInsertInput?);
+
   UuidValue? get shammasLevelId => (_$data['shammasLevelId'] as UuidValue?);
+
   Input_PersonStatesObjRelInsertInput? get state =>
       (_$data['state'] as Input_PersonStatesObjRelInsertInput?);
+
   UuidValue? get stateId => (_$data['stateId'] as UuidValue?);
+
   UuidValue? get storeId => (_$data['storeId'] as UuidValue?);
+
   Input_StudyYearsObjRelInsertInput? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
+
   int? get studyYearId => (_$data['studyYearId'] as int?);
+
   Input_PersonsTagsArrRelInsertInput? get tags =>
       (_$data['tags'] as Input_PersonsTagsArrRelInsertInput?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
   Input_HistoryVisitHistoryArrRelInsertInput? get visitHistory =>
       (_$data['visitHistory'] as Input_HistoryVisitHistoryArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -100333,6 +103781,7 @@ class Input_PersonsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -101135,6 +104584,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
           'visitHistory':
               (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory {
     final local$attendanceHistory = _instance.attendanceHistory;
@@ -101379,50 +104829,72 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory =>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryArrRelInsertInput<TRes> get callHistory =>
       CopyWith_Input_HistoryCallHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church =>
       CopyWith_Input_ChurchesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_CollegesObjRelInsertInput<TRes> get college =>
       CopyWith_Input_CollegesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
       get confessionHistory =>
           CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryArrRelInsertInput<TRes> get editHistory =>
       CopyWith_Input_HistoryEditHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_FathersObjRelInsertInput<TRes> get father =>
       CopyWith_Input_FathersObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get groups =>
       CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsHobbiesArrRelInsertInput<TRes> get hobbies =>
       CopyWith_Input_PersonsHobbiesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_JobsObjRelInsertInput<TRes> get job =>
       CopyWith_Input_JobsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryArrRelInsertInput<TRes> get kodasHistory =>
       CopyWith_Input_HistoryKodasHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonTypesObjRelInsertInput<TRes> get personType =>
       CopyWith_Input_PersonTypesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_QualificationsObjRelInsertInput<TRes> get qualification =>
       CopyWith_Input_QualificationsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_SchoolsObjRelInsertInput<TRes> get school =>
       CopyWith_Input_SchoolsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get services =>
       CopyWith_Input_PersonsServicesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ShammasLevelsObjRelInsertInput<TRes> get shammasLevel =>
       CopyWith_Input_ShammasLevelsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonStatesObjRelInsertInput<TRes> get state =>
       CopyWith_Input_PersonStatesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get tags =>
       CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory =>
       CopyWith_Input_HistoryVisitHistoryArrRelInsertInput.stub(_res);
 }
@@ -101621,32 +105093,55 @@ class Input_PersonsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get collegeId => (_$data['collegeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get jobDescription =>
       (_$data['jobDescription'] as Enum_OrderBy?);
+
   Enum_OrderBy? get jobId => (_$data['jobId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get qualificationId =>
       (_$data['qualificationId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get shammasLevelId =>
       (_$data['shammasLevelId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get stateId => (_$data['stateId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get storeId => (_$data['storeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -101773,6 +105268,7 @@ class Input_PersonsMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -102372,32 +105868,55 @@ class Input_PersonsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get collegeId => (_$data['collegeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get jobDescription =>
       (_$data['jobDescription'] as Enum_OrderBy?);
+
   Enum_OrderBy? get jobId => (_$data['jobId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Enum_OrderBy? get qualificationId =>
       (_$data['qualificationId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get shammasLevelId =>
       (_$data['shammasLevelId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get stateId => (_$data['stateId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get storeId => (_$data['storeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -102524,6 +106043,7 @@ class Input_PersonsMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -102960,8 +106480,10 @@ class Input_PersonsObjRelInsertInput {
 
   Input_PersonsInsertInput get data =>
       (_$data['data'] as Input_PersonsInsertInput);
+
   Input_PersonsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -102978,6 +106500,7 @@ class Input_PersonsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -103056,6 +106579,7 @@ class _CopyWithImpl_Input_PersonsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsOnConflict?),
       }));
+
   CopyWith_Input_PersonsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_PersonsInsertInput(local$data, (e) => call(data: e));
@@ -103081,8 +106605,10 @@ class _CopyWithStubImpl_Input_PersonsObjRelInsertInput<TRes>
     Input_PersonsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_PersonsInsertInput<TRes> get data =>
       CopyWith_Input_PersonsInsertInput.stub(_res);
+
   CopyWith_Input_PersonsOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsOnConflict.stub(_res);
 }
@@ -103125,9 +106651,12 @@ class Input_PersonsOnConflict {
 
   Enum_PersonsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsConstraint);
+
   List<Enum_PersonsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonsUpdateColumn>?);
+
   Input_PersonsBoolExp? get where => (_$data['where'] as Input_PersonsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -103151,6 +106680,7 @@ class Input_PersonsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -103256,6 +106786,7 @@ class _CopyWithImpl_Input_PersonsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_PersonsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_PersonsBoolExp?),
       }));
+
   CopyWith_Input_PersonsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -103276,6 +106807,7 @@ class _CopyWithStubImpl_Input_PersonsOnConflict<TRes>
     Input_PersonsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
 }
@@ -103814,104 +107346,166 @@ class Input_PersonsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
+
   Enum_OrderBy? get birthday => (_$data['birthday'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Input_HistoryCallHistoryAggregateOrderBy? get callHistoryAggregate =>
       (_$data['callHistoryAggregate']
           as Input_HistoryCallHistoryAggregateOrderBy?);
+
   Input_ChurchesOrderBy? get church =>
       (_$data['church'] as Input_ChurchesOrderBy?);
+
   Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
+
   Input_CollegesOrderBy? get college =>
       (_$data['college'] as Input_CollegesOrderBy?);
+
   Enum_OrderBy? get collegeId => (_$data['collegeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Input_HistoryConfessionHistoryAggregateOrderBy?
       get confessionHistoryAggregate => (_$data['confessionHistoryAggregate']
           as Input_HistoryConfessionHistoryAggregateOrderBy?);
+
   Input_HistoryEditHistoryAggregateOrderBy? get editHistoryAggregate =>
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateOrderBy?);
+
   Input_FamiliesOrderBy? get family =>
       (_$data['family'] as Input_FamiliesOrderBy?);
+
   Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
+
   Input_FathersOrderBy? get father =>
       (_$data['father'] as Input_FathersOrderBy?);
+
   Enum_OrderBy? get fatherId => (_$data['fatherId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get gender => (_$data['gender'] as Enum_OrderBy?);
+
   Enum_OrderBy? get geolocation => (_$data['geolocation'] as Enum_OrderBy?);
+
   Input_PersonsGroupsAggregateOrderBy? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_PersonsGroupsAggregateOrderBy?);
+
   Input_PersonsHobbiesAggregateOrderBy? get hobbiesAggregate =>
       (_$data['hobbiesAggregate'] as Input_PersonsHobbiesAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isServant => (_$data['isServant'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isShammas => (_$data['isShammas'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isStudent => (_$data['isStudent'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Input_JobsOrderBy? get job => (_$data['job'] as Input_JobsOrderBy?);
+
   Enum_OrderBy? get jobDescription =>
       (_$data['jobDescription'] as Enum_OrderBy?);
+
   Enum_OrderBy? get jobId => (_$data['jobId'] as Enum_OrderBy?);
+
   Input_HistoryKodasHistoryAggregateOrderBy? get kodasHistoryAggregate =>
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get lastCall => (_$data['lastCall'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastConfession =>
       (_$data['lastConfession'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastKodas => (_$data['lastKodas'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastVisit => (_$data['lastVisit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
+
   Enum_OrderBy? get otherPhones => (_$data['otherPhones'] as Enum_OrderBy?);
+
   Input_PersonTypesOrderBy? get personType =>
       (_$data['personType'] as Input_PersonTypesOrderBy?);
+
   Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_QualificationsOrderBy? get qualification =>
       (_$data['qualification'] as Input_QualificationsOrderBy?);
+
   Enum_OrderBy? get qualificationId =>
       (_$data['qualificationId'] as Enum_OrderBy?);
+
   Input_SchoolsOrderBy? get school =>
       (_$data['school'] as Input_SchoolsOrderBy?);
+
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
+
   Input_PersonsServicesAggregateOrderBy? get servicesAggregate =>
       (_$data['servicesAggregate'] as Input_PersonsServicesAggregateOrderBy?);
+
   Input_ShammasLevelsOrderBy? get shammasLevel =>
       (_$data['shammasLevel'] as Input_ShammasLevelsOrderBy?);
+
   Enum_OrderBy? get shammasLevelId =>
       (_$data['shammasLevelId'] as Enum_OrderBy?);
+
   Input_PersonStatesOrderBy? get state =>
       (_$data['state'] as Input_PersonStatesOrderBy?);
+
   Enum_OrderBy? get stateId => (_$data['stateId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get storeId => (_$data['storeId'] as Enum_OrderBy?);
+
   Input_StreetsAggregateOrderBy? get streetsAggregate =>
       (_$data['streetsAggregate'] as Input_StreetsAggregateOrderBy?);
+
   Input_StudyYearsOrderBy? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsOrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Input_PersonsTagsAggregateOrderBy? get tagsAggregate =>
       (_$data['tagsAggregate'] as Input_PersonsTagsAggregateOrderBy?);
+
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
   Input_HistoryVisitHistoryAggregateOrderBy? get visitHistoryAggregate =>
       (_$data['visitHistoryAggregate']
           as Input_HistoryVisitHistoryAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -104213,6 +107807,7 @@ class Input_PersonsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -105200,6 +108795,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
           'visitHistoryAggregate': (visitHistoryAggregate
               as Input_HistoryVisitHistoryAggregateOrderBy?),
       }));
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate {
     final local$areasAggregate = _instance.areasAggregate;
     return local$areasAggregate == null
@@ -105482,59 +109078,84 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   }) =>
       _res;
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate =>
       CopyWith_Input_AreasAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryCallHistoryAggregateOrderBy<TRes>
       get callHistoryAggregate =>
           CopyWith_Input_HistoryCallHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ChurchesOrderBy<TRes> get church =>
       CopyWith_Input_ChurchesOrderBy.stub(_res);
+
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_CollegesOrderBy<TRes> get college =>
       CopyWith_Input_CollegesOrderBy.stub(_res);
+
   CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
       get confessionHistoryAggregate =>
           CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
       get editHistoryAggregate =>
           CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesOrderBy<TRes> get family =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
+
   CopyWith_Input_FathersOrderBy<TRes> get father =>
       CopyWith_Input_FathersOrderBy.stub(_res);
+
   CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get groupsAggregate =>
       CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsHobbiesAggregateOrderBy<TRes> get hobbiesAggregate =>
       CopyWith_Input_PersonsHobbiesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_JobsOrderBy<TRes> get job =>
       CopyWith_Input_JobsOrderBy.stub(_res);
+
   CopyWith_Input_HistoryKodasHistoryAggregateOrderBy<TRes>
       get kodasHistoryAggregate =>
           CopyWith_Input_HistoryKodasHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonTypesOrderBy<TRes> get personType =>
       CopyWith_Input_PersonTypesOrderBy.stub(_res);
+
   CopyWith_Input_QualificationsOrderBy<TRes> get qualification =>
       CopyWith_Input_QualificationsOrderBy.stub(_res);
+
   CopyWith_Input_SchoolsOrderBy<TRes> get school =>
       CopyWith_Input_SchoolsOrderBy.stub(_res);
+
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get servicesAggregate =>
       CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel =>
       CopyWith_Input_ShammasLevelsOrderBy.stub(_res);
+
   CopyWith_Input_PersonStatesOrderBy<TRes> get state =>
       CopyWith_Input_PersonStatesOrderBy.stub(_res);
+
   CopyWith_Input_StreetsAggregateOrderBy<TRes> get streetsAggregate =>
       CopyWith_Input_StreetsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
+
   CopyWith_Input_PersonsTagsAggregateOrderBy<TRes> get tagsAggregate =>
       CopyWith_Input_PersonsTagsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+
   CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
       get visitHistoryAggregate =>
           CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(_res);
@@ -105558,6 +109179,7 @@ class Input_PersonsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -105570,6 +109192,7 @@ class Input_PersonsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -105654,6 +109277,7 @@ class Input_PersonsPrependInput {
   Map<String, dynamic> _$data;
 
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('otherPhones')) {
@@ -105668,6 +109292,7 @@ class Input_PersonsPrependInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -105764,6 +109389,7 @@ class Input_PersonsServicesAggregateBoolExp {
 
   Input_personsServicesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_personsServicesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -105779,6 +109405,7 @@ class Input_PersonsServicesAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -105838,6 +109465,7 @@ class _CopyWithImpl_Input_PersonsServicesAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_personsServicesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_personsServicesAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -105855,6 +109483,7 @@ class _CopyWithStubImpl_Input_PersonsServicesAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_personsServicesAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_personsServicesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_personsServicesAggregateBoolExpCount.stub(_res);
 }
@@ -105901,10 +109530,13 @@ class Input_PersonsServicesAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_PersonsServicesMaxOrderBy? get max =>
       (_$data['max'] as Input_PersonsServicesMaxOrderBy?);
+
   Input_PersonsServicesMinOrderBy? get min =>
       (_$data['min'] as Input_PersonsServicesMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -105929,6 +109561,7 @@ class Input_PersonsServicesAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -106020,6 +109653,7 @@ class _CopyWithImpl_Input_PersonsServicesAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_PersonsServicesMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_PersonsServicesMinOrderBy?),
       }));
+
   CopyWith_Input_PersonsServicesMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -106049,8 +109683,10 @@ class _CopyWithStubImpl_Input_PersonsServicesAggregateOrderBy<TRes>
     Input_PersonsServicesMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_PersonsServicesMaxOrderBy<TRes> get max =>
       CopyWith_Input_PersonsServicesMaxOrderBy.stub(_res);
+
   CopyWith_Input_PersonsServicesMinOrderBy<TRes> get min =>
       CopyWith_Input_PersonsServicesMinOrderBy.stub(_res);
 }
@@ -106089,8 +109725,10 @@ class Input_PersonsServicesArrRelInsertInput {
 
   List<Input_PersonsServicesInsertInput> get data =>
       (_$data['data'] as List<Input_PersonsServicesInsertInput>);
+
   Input_PersonsServicesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsServicesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -106108,6 +109746,7 @@ class Input_PersonsServicesArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -106198,6 +109837,7 @@ class _CopyWithImpl_Input_PersonsServicesArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsServicesOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_PersonsServicesInsertInput> Function(
                   Iterable<
@@ -106210,6 +109850,7 @@ class _CopyWithImpl_Input_PersonsServicesArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_PersonsServicesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -106230,7 +109871,9 @@ class _CopyWithStubImpl_Input_PersonsServicesArrRelInsertInput<TRes>
     Input_PersonsServicesOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_PersonsServicesOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsServicesOnConflict.stub(_res);
 }
@@ -106321,20 +109964,28 @@ class Input_PersonsServicesBoolExp {
 
   List<Input_PersonsServicesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonsServicesBoolExp>?);
+
   Input_PersonsServicesBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonsServicesBoolExp?);
+
   List<Input_PersonsServicesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonsServicesBoolExp>?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get relId =>
       (_$data['relId'] as Input_UuidComparisonExp?);
+
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
+
   Input_UuidComparisonExp? get serviceId =>
       (_$data['serviceId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -106377,6 +110028,7 @@ class Input_PersonsServicesBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -106587,6 +110239,7 @@ class _CopyWithImpl_Input_PersonsServicesBoolExp<TRes>
         if (serviceId != _undefined)
           'serviceId': (serviceId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonsServicesBoolExp>? Function(
                   Iterable<
@@ -106599,6 +110252,7 @@ class _CopyWithImpl_Input_PersonsServicesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -106619,6 +110273,7 @@ class _CopyWithImpl_Input_PersonsServicesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsBoolExp<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -106675,18 +110330,26 @@ class _CopyWithStubImpl_Input_PersonsServicesBoolExp<TRes>
     Input_UuidComparisonExp? serviceId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get relId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -106746,11 +110409,16 @@ class Input_PersonsServicesInsertInput {
 
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -106783,6 +110451,7 @@ class Input_PersonsServicesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -106904,6 +110573,7 @@ class _CopyWithImpl_Input_PersonsServicesInsertInput<TRes>
           'service': (service as Input_ServicesObjRelInsertInput?),
         if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
       }));
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -106935,8 +110605,10 @@ class _CopyWithStubImpl_Input_PersonsServicesInsertInput<TRes>
     UuidValue? serviceId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
 }
@@ -106980,8 +110652,11 @@ class Input_PersonsServicesMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -107007,6 +110682,7 @@ class Input_PersonsServicesMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -107153,8 +110829,11 @@ class Input_PersonsServicesMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -107180,6 +110859,7 @@ class Input_PersonsServicesMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -107326,10 +111006,13 @@ class Input_PersonsServicesOnConflict {
 
   Enum_PersonsServicesConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsServicesConstraint);
+
   List<Enum_PersonsServicesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonsServicesUpdateColumn>?);
+
   Input_PersonsServicesBoolExp? get where =>
       (_$data['where'] as Input_PersonsServicesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -107354,6 +111037,7 @@ class Input_PersonsServicesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -107461,6 +111145,7 @@ class _CopyWithImpl_Input_PersonsServicesOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_PersonsServicesBoolExp?),
       }));
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -107482,6 +111167,7 @@ class _CopyWithStubImpl_Input_PersonsServicesOnConflict<TRes>
     Input_PersonsServicesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get where =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
 }
@@ -107542,11 +111228,16 @@ class Input_PersonsServicesOrderBy {
 
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get service =>
       (_$data['service'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -107580,6 +111271,7 @@ class Input_PersonsServicesOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -107700,6 +111392,7 @@ class _CopyWithImpl_Input_PersonsServicesOrderBy<TRes>
           'service': (service as Input_ServicesOrderBy?),
         if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_PersonsOrderBy<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -107730,8 +111423,10 @@ class _CopyWithStubImpl_Input_PersonsServicesOrderBy<TRes>
     Enum_OrderBy? serviceId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get service =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
 }
@@ -107755,6 +111450,7 @@ class Input_PersonsServicesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get relId => (_$data['relId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$relId = relId;
@@ -107768,6 +111464,7 @@ class Input_PersonsServicesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -107869,8 +111566,11 @@ class Input_PersonsServicesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -107895,6 +111595,7 @@ class Input_PersonsServicesSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -108034,8 +111735,10 @@ class Input_PersonsServicesStreamCursorInput {
 
   Input_PersonsServicesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonsServicesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -108054,6 +111757,7 @@ class Input_PersonsServicesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -108132,6 +111836,7 @@ class _CopyWithImpl_Input_PersonsServicesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonsServicesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsServicesStreamCursorValueInput(
@@ -108150,6 +111855,7 @@ class _CopyWithStubImpl_Input_PersonsServicesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonsServicesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsServicesStreamCursorValueInput.stub(_res);
 }
@@ -108191,8 +111897,11 @@ class Input_PersonsServicesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -108218,6 +111927,7 @@ class Input_PersonsServicesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -108356,8 +112066,10 @@ class Input_PersonsServicesUpdates {
 
   Input_PersonsServicesSetInput? get $_set =>
       (_$data['_set'] as Input_PersonsServicesSetInput?);
+
   Input_PersonsServicesBoolExp get where =>
       (_$data['where'] as Input_PersonsServicesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -108374,6 +112086,7 @@ class Input_PersonsServicesUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -108451,6 +112164,7 @@ class _CopyWithImpl_Input_PersonsServicesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonsServicesBoolExp),
       }));
+
   CopyWith_Input_PersonsServicesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -108477,8 +112191,10 @@ class _CopyWithStubImpl_Input_PersonsServicesUpdates<TRes>
     Input_PersonsServicesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsServicesSetInput<TRes> get $_set =>
       CopyWith_Input_PersonsServicesSetInput.stub(_res);
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get where =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
 }
@@ -108685,35 +112401,64 @@ class Input_PersonsSetInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   UuidValue? get collegeId => (_$data['collegeId'] as UuidValue?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
+
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
+
   bool? get gender => (_$data['gender'] as bool?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   bool? get isServant => (_$data['isServant'] as bool?);
+
   bool? get isShammas => (_$data['isShammas'] as bool?);
+
   bool? get isStudent => (_$data['isStudent'] as bool?);
+
   String? get jobDescription => (_$data['jobDescription'] as String?);
+
   UuidValue? get jobId => (_$data['jobId'] as UuidValue?);
+
   String? get mainPhone => (_$data['mainPhone'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
   UuidValue? get personTypeId => (_$data['personTypeId'] as UuidValue?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get qualificationId => (_$data['qualificationId'] as UuidValue?);
+
   UuidValue? get schoolId => (_$data['schoolId'] as UuidValue?);
+
   UuidValue? get shammasLevelId => (_$data['shammasLevelId'] as UuidValue?);
+
   UuidValue? get stateId => (_$data['stateId'] as UuidValue?);
+
   UuidValue? get storeId => (_$data['storeId'] as UuidValue?);
+
   int? get studyYearId => (_$data['studyYearId'] as int?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -108852,6 +112597,7 @@ class Input_PersonsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -109376,7 +113122,9 @@ class Input_PersonsStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -109397,6 +113145,7 @@ class Input_PersonsStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -109521,7 +113270,9 @@ class Input_PersonsStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -109542,6 +113293,7 @@ class Input_PersonsStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -109666,7 +113418,9 @@ class Input_PersonsStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -109687,6 +113441,7 @@ class Input_PersonsStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -109810,8 +113565,10 @@ class Input_PersonsStreamCursorInput {
 
   Input_PersonsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -109829,6 +113586,7 @@ class Input_PersonsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -109906,6 +113664,7 @@ class _CopyWithImpl_Input_PersonsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsStreamCursorValueInput(
@@ -109924,6 +113683,7 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsStreamCursorValueInput.stub(_res);
 }
@@ -110131,35 +113891,64 @@ class Input_PersonsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get address => (_$data['address'] as String?);
+
   DateTime? get birthdate => (_$data['birthdate'] as DateTime?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   UuidValue? get collegeId => (_$data['collegeId'] as UuidValue?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
+
   UuidValue? get fatherId => (_$data['fatherId'] as UuidValue?);
+
   bool? get gender => (_$data['gender'] as bool?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   bool? get isServant => (_$data['isServant'] as bool?);
+
   bool? get isShammas => (_$data['isShammas'] as bool?);
+
   bool? get isStudent => (_$data['isStudent'] as bool?);
+
   String? get jobDescription => (_$data['jobDescription'] as String?);
+
   UuidValue? get jobId => (_$data['jobId'] as UuidValue?);
+
   String? get mainPhone => (_$data['mainPhone'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   String? get notes => (_$data['notes'] as String?);
+
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
+
   UuidValue? get personTypeId => (_$data['personTypeId'] as UuidValue?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   UuidValue? get qualificationId => (_$data['qualificationId'] as UuidValue?);
+
   UuidValue? get schoolId => (_$data['schoolId'] as UuidValue?);
+
   UuidValue? get shammasLevelId => (_$data['shammasLevelId'] as UuidValue?);
+
   UuidValue? get stateId => (_$data['stateId'] as UuidValue?);
+
   UuidValue? get storeId => (_$data['storeId'] as UuidValue?);
+
   int? get studyYearId => (_$data['studyYearId'] as int?);
+
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('address')) {
@@ -110299,6 +114088,7 @@ class Input_PersonsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -110824,7 +114614,9 @@ class Input_PersonsSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -110845,6 +114637,7 @@ class Input_PersonsSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -110964,6 +114757,7 @@ class Input_PersonsTagsAggregateBoolExp {
 
   Input_personsTagsAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_personsTagsAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -110978,6 +114772,7 @@ class Input_PersonsTagsAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -111037,6 +114832,7 @@ class _CopyWithImpl_Input_PersonsTagsAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_personsTagsAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_personsTagsAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -111053,6 +114849,7 @@ class _CopyWithStubImpl_Input_PersonsTagsAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_personsTagsAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_personsTagsAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_personsTagsAggregateBoolExpCount.stub(_res);
 }
@@ -111099,10 +114896,13 @@ class Input_PersonsTagsAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_PersonsTagsMaxOrderBy? get max =>
       (_$data['max'] as Input_PersonsTagsMaxOrderBy?);
+
   Input_PersonsTagsMinOrderBy? get min =>
       (_$data['min'] as Input_PersonsTagsMinOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -111126,6 +114926,7 @@ class Input_PersonsTagsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -111217,6 +115018,7 @@ class _CopyWithImpl_Input_PersonsTagsAggregateOrderBy<TRes>
         if (max != _undefined) 'max': (max as Input_PersonsTagsMaxOrderBy?),
         if (min != _undefined) 'min': (min as Input_PersonsTagsMinOrderBy?),
       }));
+
   CopyWith_Input_PersonsTagsMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
@@ -111244,8 +115046,10 @@ class _CopyWithStubImpl_Input_PersonsTagsAggregateOrderBy<TRes>
     Input_PersonsTagsMinOrderBy? min,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsMaxOrderBy<TRes> get max =>
       CopyWith_Input_PersonsTagsMaxOrderBy.stub(_res);
+
   CopyWith_Input_PersonsTagsMinOrderBy<TRes> get min =>
       CopyWith_Input_PersonsTagsMinOrderBy.stub(_res);
 }
@@ -111284,8 +115088,10 @@ class Input_PersonsTagsArrRelInsertInput {
 
   List<Input_PersonsTagsInsertInput> get data =>
       (_$data['data'] as List<Input_PersonsTagsInsertInput>);
+
   Input_PersonsTagsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_PersonsTagsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -111303,6 +115109,7 @@ class Input_PersonsTagsArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -111393,6 +115200,7 @@ class _CopyWithImpl_Input_PersonsTagsArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_PersonsTagsOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_PersonsTagsInsertInput> Function(
                   Iterable<
@@ -111405,6 +115213,7 @@ class _CopyWithImpl_Input_PersonsTagsArrRelInsertInput<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
   CopyWith_Input_PersonsTagsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -111425,7 +115234,9 @@ class _CopyWithStubImpl_Input_PersonsTagsArrRelInsertInput<TRes>
     Input_PersonsTagsOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_PersonsTagsOnConflict<TRes> get onConflict =>
       CopyWith_Input_PersonsTagsOnConflict.stub(_res);
 }
@@ -111515,19 +115326,27 @@ class Input_PersonsTagsBoolExp {
 
   List<Input_PersonsTagsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_PersonsTagsBoolExp>?);
+
   Input_PersonsTagsBoolExp? get $_not =>
       (_$data['_not'] as Input_PersonsTagsBoolExp?);
+
   List<Input_PersonsTagsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_PersonsTagsBoolExp>?);
+
   Input_PersonsBoolExp? get person =>
       (_$data['person'] as Input_PersonsBoolExp?);
+
   Input_UuidComparisonExp? get personId =>
       (_$data['personId'] as Input_UuidComparisonExp?);
+
   Input_UuidComparisonExp? get relId =>
       (_$data['relId'] as Input_UuidComparisonExp?);
+
   Input_TagsBoolExp? get tag => (_$data['tag'] as Input_TagsBoolExp?);
+
   Input_UuidComparisonExp? get tagId =>
       (_$data['tagId'] as Input_UuidComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -111570,6 +115389,7 @@ class Input_PersonsTagsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -111774,6 +115594,7 @@ class _CopyWithImpl_Input_PersonsTagsBoolExp<TRes>
         if (tag != _undefined) 'tag': (tag as Input_TagsBoolExp?),
         if (tagId != _undefined) 'tagId': (tagId as Input_UuidComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_PersonsTagsBoolExp>? Function(
                   Iterable<
@@ -111786,6 +115607,7 @@ class _CopyWithImpl_Input_PersonsTagsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -111805,6 +115627,7 @@ class _CopyWithImpl_Input_PersonsTagsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_PersonsBoolExp<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -111859,18 +115682,26 @@ class _CopyWithStubImpl_Input_PersonsTagsBoolExp<TRes>
     Input_UuidComparisonExp? tagId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get $_not =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get person =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get personId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get relId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_TagsBoolExp<TRes> get tag =>
       CopyWith_Input_TagsBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get tagId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
@@ -111929,11 +115760,16 @@ class Input_PersonsTagsInsertInput {
 
   Input_PersonsObjRelInsertInput? get person =>
       (_$data['person'] as Input_PersonsObjRelInsertInput?);
+
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   Input_TagsObjRelInsertInput? get tag =>
       (_$data['tag'] as Input_TagsObjRelInsertInput?);
+
   UuidValue? get tagId => (_$data['tagId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -111965,6 +115801,7 @@ class Input_PersonsTagsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -112084,6 +115921,7 @@ class _CopyWithImpl_Input_PersonsTagsInsertInput<TRes>
         if (tag != _undefined) 'tag': (tag as Input_TagsObjRelInsertInput?),
         if (tagId != _undefined) 'tagId': (tagId as UuidValue?),
       }));
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -112114,8 +115952,10 @@ class _CopyWithStubImpl_Input_PersonsTagsInsertInput<TRes>
     UuidValue? tagId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
       CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_TagsObjRelInsertInput<TRes> get tag =>
       CopyWith_Input_TagsObjRelInsertInput.stub(_res);
 }
@@ -112158,8 +115998,11 @@ class Input_PersonsTagsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get tagId => (_$data['tagId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -112185,6 +116028,7 @@ class Input_PersonsTagsMaxOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -112329,8 +116173,11 @@ class Input_PersonsTagsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get tagId => (_$data['tagId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -112356,6 +116203,7 @@ class Input_PersonsTagsMinOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -112501,10 +116349,13 @@ class Input_PersonsTagsOnConflict {
 
   Enum_PersonsTagsConstraint get constraint =>
       (_$data['constraint'] as Enum_PersonsTagsConstraint);
+
   List<Enum_PersonsTagsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_PersonsTagsUpdateColumn>?);
+
   Input_PersonsTagsBoolExp? get where =>
       (_$data['where'] as Input_PersonsTagsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -112528,6 +116379,7 @@ class Input_PersonsTagsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -112634,6 +116486,7 @@ class _CopyWithImpl_Input_PersonsTagsOnConflict<TRes>
               (updateColumns as List<Enum_PersonsTagsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_PersonsTagsBoolExp?),
       }));
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -112654,6 +116507,7 @@ class _CopyWithStubImpl_Input_PersonsTagsOnConflict<TRes>
     Input_PersonsTagsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
 }
@@ -112713,10 +116567,15 @@ class Input_PersonsTagsOrderBy {
 
   Input_PersonsOrderBy? get person =>
       (_$data['person'] as Input_PersonsOrderBy?);
+
   Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get relId => (_$data['relId'] as Enum_OrderBy?);
+
   Input_TagsOrderBy? get tag => (_$data['tag'] as Input_TagsOrderBy?);
+
   Enum_OrderBy? get tagId => (_$data['tagId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('person')) {
@@ -112750,6 +116609,7 @@ class Input_PersonsTagsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -112868,6 +116728,7 @@ class _CopyWithImpl_Input_PersonsTagsOrderBy<TRes>
         if (tag != _undefined) 'tag': (tag as Input_TagsOrderBy?),
         if (tagId != _undefined) 'tagId': (tagId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_PersonsOrderBy<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
@@ -112897,8 +116758,10 @@ class _CopyWithStubImpl_Input_PersonsTagsOrderBy<TRes>
     Enum_OrderBy? tagId,
   }) =>
       _res;
+
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
+
   CopyWith_Input_TagsOrderBy<TRes> get tag =>
       CopyWith_Input_TagsOrderBy.stub(_res);
 }
@@ -112921,6 +116784,7 @@ class Input_PersonsTagsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get relId => (_$data['relId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$relId = relId;
@@ -112933,6 +116797,7 @@ class Input_PersonsTagsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113033,8 +116898,11 @@ class Input_PersonsTagsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   UuidValue? get tagId => (_$data['tagId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -113058,6 +116926,7 @@ class Input_PersonsTagsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113196,8 +117065,10 @@ class Input_PersonsTagsStreamCursorInput {
 
   Input_PersonsTagsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_PersonsTagsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -113216,6 +117087,7 @@ class Input_PersonsTagsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113294,6 +117166,7 @@ class _CopyWithImpl_Input_PersonsTagsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_PersonsTagsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsTagsStreamCursorValueInput(
@@ -113312,6 +117185,7 @@ class _CopyWithStubImpl_Input_PersonsTagsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsTagsStreamCursorValueInput.stub(_res);
 }
@@ -113352,8 +117226,11 @@ class Input_PersonsTagsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
   UuidValue? get relId => (_$data['relId'] as UuidValue?);
+
   UuidValue? get tagId => (_$data['tagId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('personId')) {
@@ -113378,6 +117255,7 @@ class Input_PersonsTagsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113515,8 +117393,10 @@ class Input_PersonsTagsUpdates {
 
   Input_PersonsTagsSetInput? get $_set =>
       (_$data['_set'] as Input_PersonsTagsSetInput?);
+
   Input_PersonsTagsBoolExp get where =>
       (_$data['where'] as Input_PersonsTagsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -113533,6 +117413,7 @@ class Input_PersonsTagsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113609,6 +117490,7 @@ class _CopyWithImpl_Input_PersonsTagsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonsTagsBoolExp),
       }));
+
   CopyWith_Input_PersonsTagsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -113635,8 +117517,10 @@ class _CopyWithStubImpl_Input_PersonsTagsUpdates<TRes>
     Input_PersonsTagsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsSetInput<TRes> get $_set =>
       CopyWith_Input_PersonsTagsSetInput.stub(_res);
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
 }
@@ -113724,19 +117608,27 @@ class Input_PersonsUpdates {
 
   Input_PersonsAppendInput? get $_append =>
       (_$data['_append'] as Input_PersonsAppendInput?);
+
   Input_PersonsDeleteAtPathInput? get $_deleteAtPath =>
       (_$data['_deleteAtPath'] as Input_PersonsDeleteAtPathInput?);
+
   Input_PersonsDeleteElemInput? get $_deleteElem =>
       (_$data['_deleteElem'] as Input_PersonsDeleteElemInput?);
+
   Input_PersonsDeleteKeyInput? get $_deleteKey =>
       (_$data['_deleteKey'] as Input_PersonsDeleteKeyInput?);
+
   Input_PersonsIncInput? get $_inc =>
       (_$data['_inc'] as Input_PersonsIncInput?);
+
   Input_PersonsPrependInput? get $_prepend =>
       (_$data['_prepend'] as Input_PersonsPrependInput?);
+
   Input_PersonsSetInput? get $_set =>
       (_$data['_set'] as Input_PersonsSetInput?);
+
   Input_PersonsBoolExp get where => (_$data['where'] as Input_PersonsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_append')) {
@@ -113777,6 +117669,7 @@ class Input_PersonsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -113945,6 +117838,7 @@ class _CopyWithImpl_Input_PersonsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_PersonsBoolExp),
       }));
+
   CopyWith_Input_PersonsAppendInput<TRes> get $_append {
     final local$$_append = _instance.$_append;
     return local$$_append == null
@@ -114022,20 +117916,28 @@ class _CopyWithStubImpl_Input_PersonsUpdates<TRes>
     Input_PersonsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAppendInput<TRes> get $_append =>
       CopyWith_Input_PersonsAppendInput.stub(_res);
+
   CopyWith_Input_PersonsDeleteAtPathInput<TRes> get $_deleteAtPath =>
       CopyWith_Input_PersonsDeleteAtPathInput.stub(_res);
+
   CopyWith_Input_PersonsDeleteElemInput<TRes> get $_deleteElem =>
       CopyWith_Input_PersonsDeleteElemInput.stub(_res);
+
   CopyWith_Input_PersonsDeleteKeyInput<TRes> get $_deleteKey =>
       CopyWith_Input_PersonsDeleteKeyInput.stub(_res);
+
   CopyWith_Input_PersonsIncInput<TRes> get $_inc =>
       CopyWith_Input_PersonsIncInput.stub(_res);
+
   CopyWith_Input_PersonsPrependInput<TRes> get $_prepend =>
       CopyWith_Input_PersonsPrependInput.stub(_res);
+
   CopyWith_Input_PersonsSetInput<TRes> get $_set =>
       CopyWith_Input_PersonsSetInput.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
 }
@@ -114071,7 +117973,9 @@ class Input_PersonsVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -114092,6 +117996,7 @@ class Input_PersonsVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -114216,7 +118121,9 @@ class Input_PersonsVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -114237,6 +118144,7 @@ class Input_PersonsVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -114361,7 +118269,9 @@ class Input_PersonsVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -114382,6 +118292,7 @@ class Input_PersonsVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -114553,17 +118464,24 @@ class Input_QualificationsBoolExp {
 
   List<Input_QualificationsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_QualificationsBoolExp>?);
+
   Input_QualificationsBoolExp? get $_not =>
       (_$data['_not'] as Input_QualificationsBoolExp?);
+
   List<Input_QualificationsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_QualificationsBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -114602,6 +118520,7 @@ class Input_QualificationsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -114797,6 +118716,7 @@ class _CopyWithImpl_Input_QualificationsBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_QualificationsBoolExp>? Function(
                   Iterable<
@@ -114809,6 +118729,7 @@ class _CopyWithImpl_Input_QualificationsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_QualificationsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -114829,6 +118750,7 @@ class _CopyWithImpl_Input_QualificationsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -114875,16 +118797,23 @@ class _CopyWithStubImpl_Input_QualificationsBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_QualificationsBoolExp<TRes> get $_not =>
       CopyWith_Input_QualificationsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -114926,9 +118855,12 @@ class Input_QualificationsInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -114951,6 +118883,7 @@ class Input_QualificationsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115042,6 +118975,7 @@ class _CopyWithImpl_Input_QualificationsInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -115063,6 +118997,7 @@ class _CopyWithStubImpl_Input_QualificationsInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -115099,8 +119034,10 @@ class Input_QualificationsObjRelInsertInput {
 
   Input_QualificationsInsertInput get data =>
       (_$data['data'] as Input_QualificationsInsertInput);
+
   Input_QualificationsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_QualificationsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -115118,6 +119055,7 @@ class Input_QualificationsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115196,6 +119134,7 @@ class _CopyWithImpl_Input_QualificationsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_QualificationsOnConflict?),
       }));
+
   CopyWith_Input_QualificationsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_QualificationsInsertInput(
@@ -115222,8 +119161,10 @@ class _CopyWithStubImpl_Input_QualificationsObjRelInsertInput<TRes>
     Input_QualificationsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_QualificationsInsertInput<TRes> get data =>
       CopyWith_Input_QualificationsInsertInput.stub(_res);
+
   CopyWith_Input_QualificationsOnConflict<TRes> get onConflict =>
       CopyWith_Input_QualificationsOnConflict.stub(_res);
 }
@@ -115267,10 +119208,13 @@ class Input_QualificationsOnConflict {
 
   Enum_QualificationsConstraint get constraint =>
       (_$data['constraint'] as Enum_QualificationsConstraint);
+
   List<Enum_QualificationsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_QualificationsUpdateColumn>?);
+
   Input_QualificationsBoolExp? get where =>
       (_$data['where'] as Input_QualificationsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -115295,6 +119239,7 @@ class Input_QualificationsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115402,6 +119347,7 @@ class _CopyWithImpl_Input_QualificationsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_QualificationsBoolExp?),
       }));
+
   CopyWith_Input_QualificationsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -115423,6 +119369,7 @@ class _CopyWithStubImpl_Input_QualificationsOnConflict<TRes>
     Input_QualificationsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_QualificationsBoolExp<TRes> get where =>
       CopyWith_Input_QualificationsBoolExp.stub(_res);
 }
@@ -115466,9 +119413,12 @@ class Input_QualificationsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -115491,6 +119441,7 @@ class Input_QualificationsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115584,6 +119535,7 @@ class _CopyWithImpl_Input_QualificationsOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -115605,6 +119557,7 @@ class _CopyWithStubImpl_Input_QualificationsOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -115628,6 +119581,7 @@ class Input_QualificationsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -115641,6 +119595,7 @@ class Input_QualificationsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115734,7 +119689,9 @@ class Input_QualificationsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -115753,6 +119710,7 @@ class Input_QualificationsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115876,8 +119834,10 @@ class Input_QualificationsStreamCursorInput {
 
   Input_QualificationsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_QualificationsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -115896,6 +119856,7 @@ class Input_QualificationsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -115974,6 +119935,7 @@ class _CopyWithImpl_Input_QualificationsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_QualificationsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_QualificationsStreamCursorValueInput(
@@ -115992,6 +119954,7 @@ class _CopyWithStubImpl_Input_QualificationsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_QualificationsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_QualificationsStreamCursorValueInput.stub(_res);
 }
@@ -116025,7 +119988,9 @@ class Input_QualificationsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -116045,6 +120010,7 @@ class Input_QualificationsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -116167,8 +120133,10 @@ class Input_QualificationsUpdates {
 
   Input_QualificationsSetInput? get $_set =>
       (_$data['_set'] as Input_QualificationsSetInput?);
+
   Input_QualificationsBoolExp get where =>
       (_$data['where'] as Input_QualificationsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -116185,6 +120153,7 @@ class Input_QualificationsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -116262,6 +120231,7 @@ class _CopyWithImpl_Input_QualificationsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_QualificationsBoolExp),
       }));
+
   CopyWith_Input_QualificationsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -116288,8 +120258,10 @@ class _CopyWithStubImpl_Input_QualificationsUpdates<TRes>
     Input_QualificationsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_QualificationsSetInput<TRes> get $_set =>
       CopyWith_Input_QualificationsSetInput.stub(_res);
+
   CopyWith_Input_QualificationsBoolExp<TRes> get where =>
       CopyWith_Input_QualificationsBoolExp.stub(_res);
 }
@@ -116371,16 +120343,23 @@ class Input_SchoolsBoolExp {
 
   List<Input_SchoolsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_SchoolsBoolExp>?);
+
   Input_SchoolsBoolExp? get $_not => (_$data['_not'] as Input_SchoolsBoolExp?);
+
   List<Input_SchoolsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_SchoolsBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -116419,6 +120398,7 @@ class Input_SchoolsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -116606,6 +120586,7 @@ class _CopyWithImpl_Input_SchoolsBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_SchoolsBoolExp>? Function(
                   Iterable<
@@ -116616,6 +120597,7 @@ class _CopyWithImpl_Input_SchoolsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_SchoolsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -116633,6 +120615,7 @@ class _CopyWithImpl_Input_SchoolsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -116679,16 +120662,23 @@ class _CopyWithStubImpl_Input_SchoolsBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_SchoolsBoolExp<TRes> get $_not =>
       CopyWith_Input_SchoolsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -116730,9 +120720,12 @@ class Input_SchoolsInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -116755,6 +120748,7 @@ class Input_SchoolsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -116846,6 +120840,7 @@ class _CopyWithImpl_Input_SchoolsInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -116867,6 +120862,7 @@ class _CopyWithStubImpl_Input_SchoolsInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -116902,8 +120898,10 @@ class Input_SchoolsObjRelInsertInput {
 
   Input_SchoolsInsertInput get data =>
       (_$data['data'] as Input_SchoolsInsertInput);
+
   Input_SchoolsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_SchoolsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -116920,6 +120918,7 @@ class Input_SchoolsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -116998,6 +120997,7 @@ class _CopyWithImpl_Input_SchoolsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_SchoolsOnConflict?),
       }));
+
   CopyWith_Input_SchoolsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_SchoolsInsertInput(local$data, (e) => call(data: e));
@@ -117023,8 +121023,10 @@ class _CopyWithStubImpl_Input_SchoolsObjRelInsertInput<TRes>
     Input_SchoolsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_SchoolsInsertInput<TRes> get data =>
       CopyWith_Input_SchoolsInsertInput.stub(_res);
+
   CopyWith_Input_SchoolsOnConflict<TRes> get onConflict =>
       CopyWith_Input_SchoolsOnConflict.stub(_res);
 }
@@ -117067,9 +121069,12 @@ class Input_SchoolsOnConflict {
 
   Enum_SchoolsConstraint get constraint =>
       (_$data['constraint'] as Enum_SchoolsConstraint);
+
   List<Enum_SchoolsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_SchoolsUpdateColumn>?);
+
   Input_SchoolsBoolExp? get where => (_$data['where'] as Input_SchoolsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -117093,6 +121098,7 @@ class Input_SchoolsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117198,6 +121204,7 @@ class _CopyWithImpl_Input_SchoolsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_SchoolsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_SchoolsBoolExp?),
       }));
+
   CopyWith_Input_SchoolsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -117218,6 +121225,7 @@ class _CopyWithStubImpl_Input_SchoolsOnConflict<TRes>
     Input_SchoolsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_SchoolsBoolExp<TRes> get where =>
       CopyWith_Input_SchoolsBoolExp.stub(_res);
 }
@@ -117261,9 +121269,12 @@ class Input_SchoolsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -117286,6 +121297,7 @@ class Input_SchoolsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117378,6 +121390,7 @@ class _CopyWithImpl_Input_SchoolsOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -117399,6 +121412,7 @@ class _CopyWithStubImpl_Input_SchoolsOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -117421,6 +121435,7 @@ class Input_SchoolsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -117433,6 +121448,7 @@ class Input_SchoolsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117525,7 +121541,9 @@ class Input_SchoolsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -117544,6 +121562,7 @@ class Input_SchoolsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117664,8 +121683,10 @@ class Input_SchoolsStreamCursorInput {
 
   Input_SchoolsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_SchoolsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -117683,6 +121704,7 @@ class Input_SchoolsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117760,6 +121782,7 @@ class _CopyWithImpl_Input_SchoolsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_SchoolsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_SchoolsStreamCursorValueInput(
@@ -117778,6 +121801,7 @@ class _CopyWithStubImpl_Input_SchoolsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_SchoolsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_SchoolsStreamCursorValueInput.stub(_res);
 }
@@ -117811,7 +121835,9 @@ class Input_SchoolsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -117831,6 +121857,7 @@ class Input_SchoolsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -117952,7 +121979,9 @@ class Input_SchoolsUpdates {
 
   Input_SchoolsSetInput? get $_set =>
       (_$data['_set'] as Input_SchoolsSetInput?);
+
   Input_SchoolsBoolExp get where => (_$data['where'] as Input_SchoolsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -117969,6 +121998,7 @@ class Input_SchoolsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -118044,6 +122074,7 @@ class _CopyWithImpl_Input_SchoolsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_SchoolsBoolExp),
       }));
+
   CopyWith_Input_SchoolsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -118068,8 +122099,10 @@ class _CopyWithStubImpl_Input_SchoolsUpdates<TRes>
     Input_SchoolsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_SchoolsSetInput<TRes> get $_set =>
       CopyWith_Input_SchoolsSetInput.stub(_res);
+
   CopyWith_Input_SchoolsBoolExp<TRes> get where =>
       CopyWith_Input_SchoolsBoolExp.stub(_res);
 }
@@ -118361,65 +122394,94 @@ class Input_ServicesBoolExp {
 
   List<Input_ServicesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_ServicesBoolExp>?);
+
   Input_ServicesBoolExp? get $_not =>
       (_$data['_not'] as Input_ServicesBoolExp?);
+
   List<Input_ServicesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_ServicesBoolExp>?);
+
   Input_AuthUsersAdminOnBoolExp? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_AuthUsersAdminOnAggregateBoolExp? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_HistoryAttendanceHistoryAggregateBoolExp?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
+
   Input_ClassesAggregateBoolExp? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_GroupsBoolExp? get groups => (_$data['groups'] as Input_GroupsBoolExp?);
+
   Input_GroupsAggregateBoolExp? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_ServicesBoolExp? get nextService =>
       (_$data['nextService'] as Input_ServicesBoolExp?);
+
   Input_UuidComparisonExp? get nextServiceId =>
       (_$data['nextServiceId'] as Input_UuidComparisonExp?);
+
   Input_PersonsServicesBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsServicesBoolExp?);
+
   Input_PersonsServicesAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsServicesAggregateBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYearFrom =>
       (_$data['studyYearFrom'] as Input_StudyYearsBoolExp?);
+
   Input_SmallintComparisonExp? get studyYearFromId =>
       (_$data['studyYearFromId'] as Input_SmallintComparisonExp?);
+
   Input_StudyYearsBoolExp? get studyYearTo =>
       (_$data['studyYearTo'] as Input_StudyYearsBoolExp?);
+
   Input_SmallintComparisonExp? get studyYearToId =>
       (_$data['studyYearToId'] as Input_SmallintComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -118550,6 +122612,7 @@ class Input_ServicesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -119114,6 +123177,7 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         if (studyYearToId != _undefined)
           'studyYearToId': (studyYearToId as Input_SmallintComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_ServicesBoolExp>? Function(
                   Iterable<
@@ -119124,6 +123188,7 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_ServicesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -119141,6 +123206,7 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -119397,65 +123463,94 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
     Input_SmallintComparisonExp? studyYearToId,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_ServicesBoolExp<TRes> get $_not =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_AuthUsersAdminOnAggregateBoolExp<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get groups =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_GroupsAggregateBoolExp<TRes> get groupsAggregate =>
       CopyWith_Input_GroupsAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get nextService =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get nextServiceId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
+
   CopyWith_Input_PersonsServicesAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsServicesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearFrom =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   CopyWith_Input_SmallintComparisonExp<TRes> get studyYearFromId =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   CopyWith_Input_SmallintComparisonExp<TRes> get studyYearToId =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
 }
@@ -119494,8 +123589,11 @@ class Input_ServicesIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -119518,6 +123616,7 @@ class Input_ServicesIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -119778,32 +123877,49 @@ class Input_ServicesInsertInput {
 
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
       (_$data['attendanceHistory']
           as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   Input_ClassesArrRelInsertInput? get classes =>
       (_$data['classes'] as Input_ClassesArrRelInsertInput?);
+
   int? get color => (_$data['color'] as int?);
+
   Input_GroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_GroupsArrRelInsertInput?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_ServicesObjRelInsertInput? get nextService =>
       (_$data['nextService'] as Input_ServicesObjRelInsertInput?);
+
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
+
   Input_PersonsServicesArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsServicesArrRelInsertInput?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Input_StudyYearsObjRelInsertInput? get studyYearFrom =>
       (_$data['studyYearFrom'] as Input_StudyYearsObjRelInsertInput?);
+
   int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
   Input_StudyYearsObjRelInsertInput? get studyYearTo =>
       (_$data['studyYearTo'] as Input_StudyYearsObjRelInsertInput?);
+
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsers')) {
@@ -119885,6 +124001,7 @@ class Input_ServicesInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -120198,6 +124315,7 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
         if (studyYearToId != _undefined)
           'studyYearToId': (studyYearToId as int?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
@@ -120304,25 +124422,34 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
     int? studyYearToId,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
       get attendanceHistory =>
           CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
       CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups =>
       CopyWith_Input_GroupsArrRelInsertInput.stub(_res);
+
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextService =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsServicesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearFrom =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
 }
@@ -120358,8 +124485,10 @@ class Input_ServicesObjRelInsertInput {
 
   Input_ServicesInsertInput get data =>
       (_$data['data'] as Input_ServicesInsertInput);
+
   Input_ServicesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_ServicesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -120376,6 +124505,7 @@ class Input_ServicesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -120454,6 +124584,7 @@ class _CopyWithImpl_Input_ServicesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_ServicesOnConflict?),
       }));
+
   CopyWith_Input_ServicesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_ServicesInsertInput(local$data, (e) => call(data: e));
@@ -120479,8 +124610,10 @@ class _CopyWithStubImpl_Input_ServicesObjRelInsertInput<TRes>
     Input_ServicesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_ServicesInsertInput<TRes> get data =>
       CopyWith_Input_ServicesInsertInput.stub(_res);
+
   CopyWith_Input_ServicesOnConflict<TRes> get onConflict =>
       CopyWith_Input_ServicesOnConflict.stub(_res);
 }
@@ -120523,10 +124656,13 @@ class Input_ServicesOnConflict {
 
   Enum_ServicesConstraint get constraint =>
       (_$data['constraint'] as Enum_ServicesConstraint);
+
   List<Enum_ServicesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_ServicesUpdateColumn>?);
+
   Input_ServicesBoolExp? get where =>
       (_$data['where'] as Input_ServicesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -120550,6 +124686,7 @@ class Input_ServicesOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -120655,6 +124792,7 @@ class _CopyWithImpl_Input_ServicesOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_ServicesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_ServicesBoolExp?),
       }));
+
   CopyWith_Input_ServicesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -120675,6 +124813,7 @@ class _CopyWithStubImpl_Input_ServicesOnConflict<TRes>
     Input_ServicesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ServicesBoolExp<TRes> get where =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
 }
@@ -120874,40 +125013,60 @@ class Input_ServicesOrderBy {
   Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
       (_$data['adminUsersAggregate']
           as Input_AuthUsersAdminOnAggregateOrderBy?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
+
   Input_HistoryAttendanceHistoryAggregateOrderBy?
       get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Input_GroupsAggregateOrderBy? get groupsAggregate =>
       (_$data['groupsAggregate'] as Input_GroupsAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_ServicesOrderBy? get nextService =>
       (_$data['nextService'] as Input_ServicesOrderBy?);
+
   Enum_OrderBy? get nextServiceId => (_$data['nextServiceId'] as Enum_OrderBy?);
+
   Input_PersonsServicesAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsServicesAggregateOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYearFrom =>
       (_$data['studyYearFrom'] as Input_StudyYearsOrderBy?);
+
   Enum_OrderBy? get studyYearFromId =>
       (_$data['studyYearFromId'] as Enum_OrderBy?);
+
   Input_StudyYearsOrderBy? get studyYearTo =>
       (_$data['studyYearTo'] as Input_StudyYearsOrderBy?);
+
   Enum_OrderBy? get studyYearToId => (_$data['studyYearToId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminUsersAggregate')) {
@@ -121014,6 +125173,7 @@ class Input_ServicesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -121387,6 +125547,7 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         if (studyYearToId != _undefined)
           'studyYearToId': (studyYearToId as Enum_OrderBy?),
       }));
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate {
     final local$adminUsersAggregate = _instance.adminUsersAggregate;
@@ -121499,26 +125660,35 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
     Enum_OrderBy? studyYearToId,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
       get adminUsersAggregate =>
           CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
               _res);
+
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
       get attendanceHistoryAggregate =>
           CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_GroupsAggregateOrderBy<TRes> get groupsAggregate =>
       CopyWith_Input_GroupsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_ServicesOrderBy<TRes> get nextService =>
       CopyWith_Input_ServicesOrderBy.stub(_res);
+
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearFrom =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
+
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYearTo =>
       CopyWith_Input_StudyYearsOrderBy.stub(_res);
 }
@@ -121541,6 +125711,7 @@ class Input_ServicesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -121553,6 +125724,7 @@ class Input_ServicesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -121683,13 +125855,21 @@ class Input_ServicesSetInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -121734,6 +125914,7 @@ class Input_ServicesSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -121948,8 +126129,10 @@ class Input_ServicesStreamCursorInput {
 
   Input_ServicesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_ServicesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -121967,6 +126150,7 @@ class Input_ServicesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -122045,6 +126229,7 @@ class _CopyWithImpl_Input_ServicesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_ServicesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_ServicesStreamCursorValueInput(
@@ -122063,6 +126248,7 @@ class _CopyWithStubImpl_Input_ServicesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_ServicesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_ServicesStreamCursorValueInput.stub(_res);
 }
@@ -122134,13 +126320,21 @@ class Input_ServicesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   int? get studyYearFromId => (_$data['studyYearFromId'] as int?);
+
   int? get studyYearToId => (_$data['studyYearToId'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -122186,6 +126380,7 @@ class Input_ServicesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -122408,9 +126603,12 @@ class Input_ServicesUpdates {
 
   Input_ServicesIncInput? get $_inc =>
       (_$data['_inc'] as Input_ServicesIncInput?);
+
   Input_ServicesSetInput? get $_set =>
       (_$data['_set'] as Input_ServicesSetInput?);
+
   Input_ServicesBoolExp get where => (_$data['where'] as Input_ServicesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -122431,6 +126629,7 @@ class Input_ServicesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -122520,6 +126719,7 @@ class _CopyWithImpl_Input_ServicesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_ServicesBoolExp),
       }));
+
   CopyWith_Input_ServicesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -122552,10 +126752,13 @@ class _CopyWithStubImpl_Input_ServicesUpdates<TRes>
     Input_ServicesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ServicesIncInput<TRes> get $_inc =>
       CopyWith_Input_ServicesIncInput.stub(_res);
+
   CopyWith_Input_ServicesSetInput<TRes> get $_set =>
       CopyWith_Input_ServicesSetInput.stub(_res);
+
   CopyWith_Input_ServicesBoolExp<TRes> get where =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
 }
@@ -122629,15 +126832,21 @@ class Input_ShammasLevelsBoolExp {
 
   List<Input_ShammasLevelsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_ShammasLevelsBoolExp>?);
+
   Input_ShammasLevelsBoolExp? get $_not =>
       (_$data['_not'] as Input_ShammasLevelsBoolExp?);
+
   List<Input_ShammasLevelsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_ShammasLevelsBoolExp>?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_IntComparisonExp? get order =>
       (_$data['order'] as Input_IntComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -122672,6 +126881,7 @@ class Input_ShammasLevelsBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -122848,6 +127058,7 @@ class _CopyWithImpl_Input_ShammasLevelsBoolExp<TRes>
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (order != _undefined) 'order': (order as Input_IntComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_ShammasLevelsBoolExp>? Function(
                   Iterable<
@@ -122860,6 +127071,7 @@ class _CopyWithImpl_Input_ShammasLevelsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -122880,6 +127092,7 @@ class _CopyWithImpl_Input_ShammasLevelsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -122917,14 +127130,20 @@ class _CopyWithStubImpl_Input_ShammasLevelsBoolExp<TRes>
     Input_IntComparisonExp? order,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get $_not =>
       CopyWith_Input_ShammasLevelsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get order =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -122949,6 +127168,7 @@ class Input_ShammasLevelsIncInput {
   Map<String, dynamic> _$data;
 
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('order')) {
@@ -122963,6 +127183,7 @@ class Input_ShammasLevelsIncInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123065,8 +127286,11 @@ class Input_ShammasLevelsInsertInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -123089,6 +127313,7 @@ class Input_ShammasLevelsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123226,8 +127451,10 @@ class Input_ShammasLevelsObjRelInsertInput {
 
   Input_ShammasLevelsInsertInput get data =>
       (_$data['data'] as Input_ShammasLevelsInsertInput);
+
   Input_ShammasLevelsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_ShammasLevelsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -123245,6 +127472,7 @@ class Input_ShammasLevelsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123323,6 +127551,7 @@ class _CopyWithImpl_Input_ShammasLevelsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_ShammasLevelsOnConflict?),
       }));
+
   CopyWith_Input_ShammasLevelsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_ShammasLevelsInsertInput(
@@ -123349,8 +127578,10 @@ class _CopyWithStubImpl_Input_ShammasLevelsObjRelInsertInput<TRes>
     Input_ShammasLevelsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_ShammasLevelsInsertInput<TRes> get data =>
       CopyWith_Input_ShammasLevelsInsertInput.stub(_res);
+
   CopyWith_Input_ShammasLevelsOnConflict<TRes> get onConflict =>
       CopyWith_Input_ShammasLevelsOnConflict.stub(_res);
 }
@@ -123394,10 +127625,13 @@ class Input_ShammasLevelsOnConflict {
 
   Enum_ShammasLevelsConstraint get constraint =>
       (_$data['constraint'] as Enum_ShammasLevelsConstraint);
+
   List<Enum_ShammasLevelsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_ShammasLevelsUpdateColumn>?);
+
   Input_ShammasLevelsBoolExp? get where =>
       (_$data['where'] as Input_ShammasLevelsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -123422,6 +127656,7 @@ class Input_ShammasLevelsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123529,6 +127764,7 @@ class _CopyWithImpl_Input_ShammasLevelsOnConflict<TRes>
         if (where != _undefined)
           'where': (where as Input_ShammasLevelsBoolExp?),
       }));
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -123550,6 +127786,7 @@ class _CopyWithStubImpl_Input_ShammasLevelsOnConflict<TRes>
     Input_ShammasLevelsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get where =>
       CopyWith_Input_ShammasLevelsBoolExp.stub(_res);
 }
@@ -123591,8 +127828,11 @@ class Input_ShammasLevelsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -123616,6 +127856,7 @@ class Input_ShammasLevelsOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123740,6 +127981,7 @@ class Input_ShammasLevelsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -123752,6 +127994,7 @@ class Input_ShammasLevelsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -123851,8 +128094,11 @@ class Input_ShammasLevelsSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -123875,6 +128121,7 @@ class Input_ShammasLevelsSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124012,8 +128259,10 @@ class Input_ShammasLevelsStreamCursorInput {
 
   Input_ShammasLevelsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_ShammasLevelsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -124032,6 +128281,7 @@ class Input_ShammasLevelsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124110,6 +128360,7 @@ class _CopyWithImpl_Input_ShammasLevelsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_ShammasLevelsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_ShammasLevelsStreamCursorValueInput(
@@ -124128,6 +128379,7 @@ class _CopyWithStubImpl_Input_ShammasLevelsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_ShammasLevelsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_ShammasLevelsStreamCursorValueInput.stub(_res);
 }
@@ -124167,8 +128419,11 @@ class Input_ShammasLevelsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -124192,6 +128447,7 @@ class Input_ShammasLevelsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124337,10 +128593,13 @@ class Input_ShammasLevelsUpdates {
 
   Input_ShammasLevelsIncInput? get $_inc =>
       (_$data['_inc'] as Input_ShammasLevelsIncInput?);
+
   Input_ShammasLevelsSetInput? get $_set =>
       (_$data['_set'] as Input_ShammasLevelsSetInput?);
+
   Input_ShammasLevelsBoolExp get where =>
       (_$data['where'] as Input_ShammasLevelsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -124361,6 +128620,7 @@ class Input_ShammasLevelsUpdates {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124453,6 +128713,7 @@ class _CopyWithImpl_Input_ShammasLevelsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_ShammasLevelsBoolExp),
       }));
+
   CopyWith_Input_ShammasLevelsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -124488,10 +128749,13 @@ class _CopyWithStubImpl_Input_ShammasLevelsUpdates<TRes>
     Input_ShammasLevelsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_ShammasLevelsIncInput<TRes> get $_inc =>
       CopyWith_Input_ShammasLevelsIncInput.stub(_res);
+
   CopyWith_Input_ShammasLevelsSetInput<TRes> get $_set =>
       CopyWith_Input_ShammasLevelsSetInput.stub(_res);
+
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get where =>
       CopyWith_Input_ShammasLevelsBoolExp.stub(_res);
 }
@@ -124568,14 +128832,23 @@ class Input_SmallintComparisonExp {
   Map<String, dynamic> _$data;
 
   int? get $_eq => (_$data['_eq'] as int?);
+
   int? get $_gt => (_$data['_gt'] as int?);
+
   int? get $_gte => (_$data['_gte'] as int?);
+
   List<int>? get $_in => (_$data['_in'] as List<int>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   int? get $_lt => (_$data['_lt'] as int?);
+
   int? get $_lte => (_$data['_lte'] as int?);
+
   int? get $_neq => (_$data['_neq'] as int?);
+
   List<int>? get $_nin => (_$data['_nin'] as List<int>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -124622,6 +128895,7 @@ class Input_SmallintComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124866,6 +129140,7 @@ class Input_StoresAggregateBoolExp {
 
   Input_storesAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_storesAggregateBoolExpCount?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
@@ -124880,6 +129155,7 @@ class Input_StoresAggregateBoolExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -124939,6 +129215,7 @@ class _CopyWithImpl_Input_StoresAggregateBoolExp<TRes>
         if (count != _undefined)
           'count': (count as Input_storesAggregateBoolExpCount?),
       }));
+
   CopyWith_Input_storesAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
     return local$count == null
@@ -124955,6 +129232,7 @@ class _CopyWithStubImpl_Input_StoresAggregateBoolExp<TRes>
   TRes _res;
 
   call({Input_storesAggregateBoolExpCount? count}) => _res;
+
   CopyWith_Input_storesAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_storesAggregateBoolExpCount.stub(_res);
 }
@@ -125068,22 +129346,33 @@ class Input_StoresAggregateOrderBy {
   Map<String, dynamic> _$data;
 
   Input_StoresAvgOrderBy? get avg => (_$data['avg'] as Input_StoresAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_StoresMaxOrderBy? get max => (_$data['max'] as Input_StoresMaxOrderBy?);
+
   Input_StoresMinOrderBy? get min => (_$data['min'] as Input_StoresMinOrderBy?);
+
   Input_StoresStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_StoresStddevOrderBy?);
+
   Input_StoresStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_StoresStddevPopOrderBy?);
+
   Input_StoresStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_StoresStddevSampOrderBy?);
+
   Input_StoresSumOrderBy? get sum => (_$data['sum'] as Input_StoresSumOrderBy?);
+
   Input_StoresVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_StoresVarPopOrderBy?);
+
   Input_StoresVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_StoresVarSampOrderBy?);
+
   Input_StoresVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_StoresVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -125139,6 +129428,7 @@ class Input_StoresAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -125351,6 +129641,7 @@ class _CopyWithImpl_Input_StoresAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_StoresVarianceOrderBy?),
       }));
+
   CopyWith_Input_StoresAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -125448,24 +129739,34 @@ class _CopyWithStubImpl_Input_StoresAggregateOrderBy<TRes>
     Input_StoresVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_StoresAvgOrderBy<TRes> get avg =>
       CopyWith_Input_StoresAvgOrderBy.stub(_res);
+
   CopyWith_Input_StoresMaxOrderBy<TRes> get max =>
       CopyWith_Input_StoresMaxOrderBy.stub(_res);
+
   CopyWith_Input_StoresMinOrderBy<TRes> get min =>
       CopyWith_Input_StoresMinOrderBy.stub(_res);
+
   CopyWith_Input_StoresStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_StoresStddevOrderBy.stub(_res);
+
   CopyWith_Input_StoresStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_StoresStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_StoresStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_StoresStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_StoresSumOrderBy<TRes> get sum =>
       CopyWith_Input_StoresSumOrderBy.stub(_res);
+
   CopyWith_Input_StoresVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_StoresVarPopOrderBy.stub(_res);
+
   CopyWith_Input_StoresVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_StoresVarSampOrderBy.stub(_res);
+
   CopyWith_Input_StoresVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_StoresVarianceOrderBy.stub(_res);
 }
@@ -125503,8 +129804,10 @@ class Input_StoresArrRelInsertInput {
 
   List<Input_StoresInsertInput> get data =>
       (_$data['data'] as List<Input_StoresInsertInput>);
+
   Input_StoresOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_StoresOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -125521,6 +129824,7 @@ class Input_StoresArrRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -125610,6 +129914,7 @@ class _CopyWithImpl_Input_StoresArrRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_StoresOnConflict?),
       }));
+
   TRes data(
           Iterable<Input_StoresInsertInput> Function(
                   Iterable<
@@ -125621,6 +129926,7 @@ class _CopyWithImpl_Input_StoresArrRelInsertInput<TRes>
                 e,
                 (i) => i,
               ))).toList());
+
   CopyWith_Input_StoresOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
@@ -125641,7 +129947,9 @@ class _CopyWithStubImpl_Input_StoresArrRelInsertInput<TRes>
     Input_StoresOnConflict? onConflict,
   }) =>
       _res;
+
   data(_fn) => _res;
+
   CopyWith_Input_StoresOnConflict<TRes> get onConflict =>
       CopyWith_Input_StoresOnConflict.stub(_res);
 }
@@ -125667,6 +129975,7 @@ class Input_StoresAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -125682,6 +129991,7 @@ class Input_StoresAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -125754,6 +130064,7 @@ class Input_StoresBoolExp {
     List<Input_StoresBoolExp>? $_and,
     Input_StoresBoolExp? $_not,
     List<Input_StoresBoolExp>? $_or,
+    Input_StringComparisonExp? address,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
     Input_StringComparisonExp? blurhash,
@@ -125772,6 +130083,7 @@ class Input_StoresBoolExp {
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (areas != null) r'areas': areas,
         if (blurhash != null) r'blurhash': blurhash,
@@ -125812,6 +130124,13 @@ class Input_StoresBoolExp {
           ?.map(
               (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
+    }
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$address as Map<String, dynamic>));
     }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
@@ -125907,33 +130226,52 @@ class Input_StoresBoolExp {
 
   List<Input_StoresBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_StoresBoolExp>?);
+
   Input_StoresBoolExp? get $_not => (_$data['_not'] as Input_StoresBoolExp?);
+
   List<Input_StoresBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_StoresBoolExp>?);
+
+  Input_StringComparisonExp? get address =>
+      (_$data['address'] as Input_StringComparisonExp?);
+
   Input_UuidComparisonExp? get adminFamily =>
       (_$data['adminFamily'] as Input_UuidComparisonExp?);
+
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_FamiliesBoolExp? get family =>
       (_$data['family'] as Input_FamiliesBoolExp?);
+
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_StreetsBoolExp? get streets =>
       (_$data['streets'] as Input_StreetsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -125947,6 +130285,10 @@ class Input_StoresBoolExp {
     if (_$data.containsKey('_or')) {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address?.toJson();
     }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
@@ -126008,6 +130350,7 @@ class Input_StoresBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -126060,6 +130403,14 @@ class Input_StoresBoolExp {
         }
       }
     } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -126181,6 +130532,7 @@ class Input_StoresBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$areas = areas;
     final l$blurhash = blurhash;
@@ -126206,6 +130558,7 @@ class Input_StoresBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('areas') ? l$areas : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
@@ -126240,6 +130593,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
     List<Input_StoresBoolExp>? $_and,
     Input_StoresBoolExp? $_not,
     List<Input_StoresBoolExp>? $_or,
+    Input_StringComparisonExp? address,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
     Input_StringComparisonExp? blurhash,
@@ -126263,6 +130617,7 @@ abstract class CopyWith_Input_StoresBoolExp<TRes> {
       Iterable<Input_StoresBoolExp>? Function(
               Iterable<CopyWith_Input_StoresBoolExp<Input_StoresBoolExp>>?)
           _fn);
+  CopyWith_Input_StringComparisonExp<TRes> get address;
   CopyWith_Input_UuidComparisonExp<TRes> get adminFamily;
   CopyWith_Input_AreasBoolExp<TRes> get areas;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
@@ -126295,6 +130650,7 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? areas = _undefined,
     Object? blurhash = _undefined,
@@ -126314,6 +130670,8 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
         if ($_and != _undefined) '_and': ($_and as List<Input_StoresBoolExp>?),
         if ($_not != _undefined) '_not': ($_not as Input_StoresBoolExp?),
         if ($_or != _undefined) '_or': ($_or as List<Input_StoresBoolExp>?),
+        if (address != _undefined)
+          'address': (address as Input_StringComparisonExp?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Input_UuidComparisonExp?),
         if (areas != _undefined) 'areas': (areas as Input_AreasBoolExp?),
@@ -126338,6 +130696,7 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
         if (streets != _undefined)
           'streets': (streets as Input_StreetsBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_StoresBoolExp>? Function(
                   Iterable<CopyWith_Input_StoresBoolExp<Input_StoresBoolExp>>?)
@@ -126347,6 +130706,7 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_StoresBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -126363,6 +130723,15 @@ class _CopyWithImpl_Input_StoresBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
+  CopyWith_Input_StringComparisonExp<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$address, (e) => call(address: e));
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminFamily {
     final local$adminFamily = _instance.adminFamily;
     return local$adminFamily == null
@@ -126473,6 +130842,7 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
     List<Input_StoresBoolExp>? $_and,
     Input_StoresBoolExp? $_not,
     List<Input_StoresBoolExp>? $_or,
+    Input_StringComparisonExp? address,
     Input_UuidComparisonExp? adminFamily,
     Input_AreasBoolExp? areas,
     Input_StringComparisonExp? blurhash,
@@ -126488,34 +130858,53 @@ class _CopyWithStubImpl_Input_StoresBoolExp<TRes>
     Input_StreetsBoolExp? streets,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_StoresBoolExp<TRes> get $_not =>
       CopyWith_Input_StoresBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
+  CopyWith_Input_StringComparisonExp<TRes> get address =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get adminFamily =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get family =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_StreetsBoolExp<TRes> get streets =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
@@ -126539,6 +130928,7 @@ class Input_StoresIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -126553,6 +130943,7 @@ class Input_StoresIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -126621,6 +131012,7 @@ class _CopyWithStubImpl_Input_StoresIncInput<TRes>
 
 class Input_StoresInsertInput {
   factory Input_StoresInsertInput({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -126631,6 +131023,7 @@ class Input_StoresInsertInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StoresInsertInput._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
@@ -126645,6 +131038,10 @@ class Input_StoresInsertInput {
 
   factory Input_StoresInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = (l$address as String?);
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
@@ -126687,18 +131084,32 @@ class Input_StoresInsertInput {
 
   Map<String, dynamic> _$data;
 
+  String? get address => (_$data['address'] as String?);
+
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   Input_FamiliesObjRelInsertInput? get family =>
       (_$data['family'] as Input_FamiliesObjRelInsertInput?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address;
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -126741,6 +131152,7 @@ class Input_StoresInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -126748,6 +131160,14 @@ class Input_StoresInsertInput {
     }
     if (!(other is Input_StoresInsertInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -126823,6 +131243,7 @@ class Input_StoresInsertInput {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$blurhash = blurhash;
     final l$color = color;
@@ -126832,6 +131253,7 @@ class Input_StoresInsertInput {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -126854,6 +131276,7 @@ abstract class CopyWith_Input_StoresInsertInput<TRes> {
       _CopyWithStubImpl_Input_StoresInsertInput;
 
   TRes call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -126880,6 +131303,7 @@ class _CopyWithImpl_Input_StoresInsertInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
@@ -126891,6 +131315,7 @@ class _CopyWithImpl_Input_StoresInsertInput<TRes>
   }) =>
       _then(Input_StoresInsertInput._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as String?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
         if (blurhash != _undefined) 'blurhash': (blurhash as String?),
@@ -126904,6 +131329,7 @@ class _CopyWithImpl_Input_StoresInsertInput<TRes>
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
       }));
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
@@ -126920,6 +131346,7 @@ class _CopyWithStubImpl_Input_StoresInsertInput<TRes>
   TRes _res;
 
   call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -126930,12 +131357,14 @@ class _CopyWithStubImpl_Input_StoresInsertInput<TRes>
     DateTime? photoUpdatedAt,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
 }
 
 class Input_StoresMaxOrderBy {
   factory Input_StoresMaxOrderBy({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -126944,6 +131373,7 @@ class Input_StoresMaxOrderBy {
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_StoresMaxOrderBy._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
@@ -126956,6 +131386,12 @@ class Input_StoresMaxOrderBy {
 
   factory Input_StoresMaxOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : fromJson_Enum_OrderBy((l$address as String));
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] = l$adminFamily == null
@@ -126994,15 +131430,28 @@ class Input_StoresMaxOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] =
+          l$address == null ? null : toJson_Enum_OrderBy(l$address);
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -127040,6 +131489,7 @@ class Input_StoresMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -127047,6 +131497,14 @@ class Input_StoresMaxOrderBy {
     }
     if (!(other is Input_StoresMaxOrderBy) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -127105,6 +131563,7 @@ class Input_StoresMaxOrderBy {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$blurhash = blurhash;
     final l$color = color;
@@ -127112,6 +131571,7 @@ class Input_StoresMaxOrderBy {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -127132,6 +131592,7 @@ abstract class CopyWith_Input_StoresMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_StoresMaxOrderBy;
 
   TRes call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -127155,6 +131616,7 @@ class _CopyWithImpl_Input_StoresMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
@@ -127164,6 +131626,7 @@ class _CopyWithImpl_Input_StoresMaxOrderBy<TRes>
   }) =>
       _then(Input_StoresMaxOrderBy._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Enum_OrderBy?),
         if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
@@ -127182,6 +131645,7 @@ class _CopyWithStubImpl_Input_StoresMaxOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -127194,6 +131658,7 @@ class _CopyWithStubImpl_Input_StoresMaxOrderBy<TRes>
 
 class Input_StoresMinOrderBy {
   factory Input_StoresMinOrderBy({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -127202,6 +131667,7 @@ class Input_StoresMinOrderBy {
     Enum_OrderBy? photoUpdatedAt,
   }) =>
       Input_StoresMinOrderBy._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
@@ -127214,6 +131680,12 @@ class Input_StoresMinOrderBy {
 
   factory Input_StoresMinOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : fromJson_Enum_OrderBy((l$address as String));
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] = l$adminFamily == null
@@ -127252,15 +131724,28 @@ class Input_StoresMinOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] =
+          l$address == null ? null : toJson_Enum_OrderBy(l$address);
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -127298,6 +131783,7 @@ class Input_StoresMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -127305,6 +131791,14 @@ class Input_StoresMinOrderBy {
     }
     if (!(other is Input_StoresMinOrderBy) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -127363,6 +131857,7 @@ class Input_StoresMinOrderBy {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$blurhash = blurhash;
     final l$color = color;
@@ -127370,6 +131865,7 @@ class Input_StoresMinOrderBy {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -127390,6 +131886,7 @@ abstract class CopyWith_Input_StoresMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_StoresMinOrderBy;
 
   TRes call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -127413,6 +131910,7 @@ class _CopyWithImpl_Input_StoresMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
@@ -127422,6 +131920,7 @@ class _CopyWithImpl_Input_StoresMinOrderBy<TRes>
   }) =>
       _then(Input_StoresMinOrderBy._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Enum_OrderBy?),
         if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
@@ -127440,6 +131939,7 @@ class _CopyWithStubImpl_Input_StoresMinOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
@@ -127488,9 +131988,12 @@ class Input_StoresOnConflict {
 
   Enum_StoresConstraint get constraint =>
       (_$data['constraint'] as Enum_StoresConstraint);
+
   List<Enum_StoresUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_StoresUpdateColumn>?);
+
   Input_StoresBoolExp? get where => (_$data['where'] as Input_StoresBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -127514,6 +132017,7 @@ class Input_StoresOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -127619,6 +132123,7 @@ class _CopyWithImpl_Input_StoresOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_StoresUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_StoresBoolExp?),
       }));
+
   CopyWith_Input_StoresBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -127639,12 +132144,14 @@ class _CopyWithStubImpl_Input_StoresOnConflict<TRes>
     Input_StoresBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StoresBoolExp<TRes> get where =>
       CopyWith_Input_StoresBoolExp.stub(_res);
 }
 
 class Input_StoresOrderBy {
   factory Input_StoresOrderBy({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
     Enum_OrderBy? blurhash,
@@ -127660,6 +132167,7 @@ class Input_StoresOrderBy {
     Input_StreetsAggregateOrderBy? streetsAggregate,
   }) =>
       Input_StoresOrderBy._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (areasAggregate != null) r'areasAggregate': areasAggregate,
         if (blurhash != null) r'blurhash': blurhash,
@@ -127681,6 +132189,12 @@ class Input_StoresOrderBy {
 
   factory Input_StoresOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = l$address == null
+          ? null
+          : fromJson_Enum_OrderBy((l$address as String));
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] = l$adminFamily == null
@@ -127763,27 +132277,47 @@ class Input_StoresOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get address => (_$data['address'] as Enum_OrderBy?);
+
   Enum_OrderBy? get adminFamily => (_$data['adminFamily'] as Enum_OrderBy?);
+
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Input_FamiliesOrderBy? get family =>
       (_$data['family'] as Input_FamiliesOrderBy?);
+
   Enum_OrderBy? get geolocation => (_$data['geolocation'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_StreetsAggregateOrderBy? get streetsAggregate =>
       (_$data['streetsAggregate'] as Input_StreetsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] =
+          l$address == null ? null : toJson_Enum_OrderBy(l$address);
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -127855,12 +132389,21 @@ class Input_StoresOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
     if (!(other is Input_StoresOrderBy) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -127981,6 +132524,7 @@ class Input_StoresOrderBy {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$areasAggregate = areasAggregate;
     final l$blurhash = blurhash;
@@ -127995,6 +132539,7 @@ class Input_StoresOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$streetsAggregate = streetsAggregate;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('areasAggregate') ? l$areasAggregate : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
@@ -128026,6 +132571,7 @@ abstract class CopyWith_Input_StoresOrderBy<TRes> {
       _CopyWithStubImpl_Input_StoresOrderBy;
 
   TRes call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
     Enum_OrderBy? blurhash,
@@ -128059,6 +132605,7 @@ class _CopyWithImpl_Input_StoresOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? areasAggregate = _undefined,
     Object? blurhash = _undefined,
@@ -128075,6 +132622,7 @@ class _CopyWithImpl_Input_StoresOrderBy<TRes>
   }) =>
       _then(Input_StoresOrderBy._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as Enum_OrderBy?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as Enum_OrderBy?),
         if (areasAggregate != _undefined)
@@ -128097,6 +132645,7 @@ class _CopyWithImpl_Input_StoresOrderBy<TRes>
           'streetsAggregate':
               (streetsAggregate as Input_StreetsAggregateOrderBy?),
       }));
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate {
     final local$areasAggregate = _instance.areasAggregate;
     return local$areasAggregate == null
@@ -128128,6 +132677,7 @@ class _CopyWithStubImpl_Input_StoresOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? address,
     Enum_OrderBy? adminFamily,
     Input_AreasAggregateOrderBy? areasAggregate,
     Enum_OrderBy? blurhash,
@@ -128143,10 +132693,13 @@ class _CopyWithStubImpl_Input_StoresOrderBy<TRes>
     Input_StreetsAggregateOrderBy? streetsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate =>
       CopyWith_Input_AreasAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesOrderBy<TRes> get family =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
+
   CopyWith_Input_StreetsAggregateOrderBy<TRes> get streetsAggregate =>
       CopyWith_Input_StreetsAggregateOrderBy.stub(_res);
 }
@@ -128169,6 +132722,7 @@ class Input_StoresPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -128181,6 +132735,7 @@ class Input_StoresPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -128247,6 +132802,7 @@ class _CopyWithStubImpl_Input_StoresPkColumnsInput<TRes>
 
 class Input_StoresSetInput {
   factory Input_StoresSetInput({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -128256,6 +132812,7 @@ class Input_StoresSetInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StoresSetInput._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
@@ -128269,6 +132826,10 @@ class Input_StoresSetInput {
 
   factory Input_StoresSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = (l$address as String?);
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
@@ -128304,16 +132865,29 @@ class Input_StoresSetInput {
 
   Map<String, dynamic> _$data;
 
+  String? get address => (_$data['address'] as String?);
+
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address;
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -128352,12 +132926,21 @@ class Input_StoresSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
     if (!(other is Input_StoresSetInput) || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -128425,6 +133008,7 @@ class Input_StoresSetInput {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$blurhash = blurhash;
     final l$color = color;
@@ -128433,6 +133017,7 @@ class Input_StoresSetInput {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -128454,6 +133039,7 @@ abstract class CopyWith_Input_StoresSetInput<TRes> {
       _CopyWithStubImpl_Input_StoresSetInput;
 
   TRes call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -128478,6 +133064,7 @@ class _CopyWithImpl_Input_StoresSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
@@ -128488,6 +133075,7 @@ class _CopyWithImpl_Input_StoresSetInput<TRes>
   }) =>
       _then(Input_StoresSetInput._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as String?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
         if (blurhash != _undefined) 'blurhash': (blurhash as String?),
@@ -128508,6 +133096,7 @@ class _CopyWithStubImpl_Input_StoresSetInput<TRes>
   TRes _res;
 
   call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -128540,6 +133129,7 @@ class Input_StoresStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -128555,6 +133145,7 @@ class Input_StoresStddevOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -128643,6 +133234,7 @@ class Input_StoresStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -128658,6 +133250,7 @@ class Input_StoresStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -128747,6 +133340,7 @@ class Input_StoresStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -128762,6 +133356,7 @@ class Input_StoresStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -128860,8 +133455,10 @@ class Input_StoresStreamCursorInput {
 
   Input_StoresStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_StoresStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -128879,6 +133476,7 @@ class Input_StoresStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -128956,6 +133554,7 @@ class _CopyWithImpl_Input_StoresStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_StoresStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_StoresStreamCursorValueInput(
@@ -128974,12 +133573,14 @@ class _CopyWithStubImpl_Input_StoresStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_StoresStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_StoresStreamCursorValueInput.stub(_res);
 }
 
 class Input_StoresStreamCursorValueInput {
   factory Input_StoresStreamCursorValueInput({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -128989,6 +133590,7 @@ class Input_StoresStreamCursorValueInput {
     DateTime? photoUpdatedAt,
   }) =>
       Input_StoresStreamCursorValueInput._({
+        if (address != null) r'address': address,
         if (adminFamily != null) r'adminFamily': adminFamily,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
@@ -129003,6 +133605,10 @@ class Input_StoresStreamCursorValueInput {
   factory Input_StoresStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('address')) {
+      final l$address = data['address'];
+      result$data['address'] = (l$address as String?);
+    }
     if (data.containsKey('adminFamily')) {
       final l$adminFamily = data['adminFamily'];
       result$data['adminFamily'] =
@@ -129038,16 +133644,29 @@ class Input_StoresStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get address => (_$data['address'] as String?);
+
   UuidValue? get adminFamily => (_$data['adminFamily'] as UuidValue?);
+
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('address')) {
+      final l$address = address;
+      result$data['address'] = l$address;
+    }
     if (_$data.containsKey('adminFamily')) {
       final l$adminFamily = adminFamily;
       result$data['adminFamily'] =
@@ -129087,6 +133706,7 @@ class Input_StoresStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129094,6 +133714,14 @@ class Input_StoresStreamCursorValueInput {
     }
     if (!(other is Input_StoresStreamCursorValueInput) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$address = address;
+    final lOther$address = other.address;
+    if (_$data.containsKey('address') != other._$data.containsKey('address')) {
+      return false;
+    }
+    if (l$address != lOther$address) {
       return false;
     }
     final l$adminFamily = adminFamily;
@@ -129161,6 +133789,7 @@ class Input_StoresStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$address = address;
     final l$adminFamily = adminFamily;
     final l$blurhash = blurhash;
     final l$color = color;
@@ -129169,6 +133798,7 @@ class Input_StoresStreamCursorValueInput {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
+      _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('adminFamily') ? l$adminFamily : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
@@ -129190,6 +133820,7 @@ abstract class CopyWith_Input_StoresStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_StoresStreamCursorValueInput;
 
   TRes call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -129214,6 +133845,7 @@ class _CopyWithImpl_Input_StoresStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? address = _undefined,
     Object? adminFamily = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
@@ -129224,6 +133856,7 @@ class _CopyWithImpl_Input_StoresStreamCursorValueInput<TRes>
   }) =>
       _then(Input_StoresStreamCursorValueInput._({
         ..._instance._$data,
+        if (address != _undefined) 'address': (address as String?),
         if (adminFamily != _undefined)
           'adminFamily': (adminFamily as UuidValue?),
         if (blurhash != _undefined) 'blurhash': (blurhash as String?),
@@ -129244,6 +133877,7 @@ class _CopyWithStubImpl_Input_StoresStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    String? address,
     UuidValue? adminFamily,
     String? blurhash,
     int? color,
@@ -129276,6 +133910,7 @@ class Input_StoresSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -129291,6 +133926,7 @@ class Input_StoresSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129395,8 +134031,11 @@ class Input_StoresUpdates {
   Map<String, dynamic> _$data;
 
   Input_StoresIncInput? get $_inc => (_$data['_inc'] as Input_StoresIncInput?);
+
   Input_StoresSetInput? get $_set => (_$data['_set'] as Input_StoresSetInput?);
+
   Input_StoresBoolExp get where => (_$data['where'] as Input_StoresBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -129417,6 +134056,7 @@ class Input_StoresUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129506,6 +134146,7 @@ class _CopyWithImpl_Input_StoresUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_StoresBoolExp),
       }));
+
   CopyWith_Input_StoresIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -129538,10 +134179,13 @@ class _CopyWithStubImpl_Input_StoresUpdates<TRes>
     Input_StoresBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StoresIncInput<TRes> get $_inc =>
       CopyWith_Input_StoresIncInput.stub(_res);
+
   CopyWith_Input_StoresSetInput<TRes> get $_set =>
       CopyWith_Input_StoresSetInput.stub(_res);
+
   CopyWith_Input_StoresBoolExp<TRes> get where =>
       CopyWith_Input_StoresBoolExp.stub(_res);
 }
@@ -129567,6 +134211,7 @@ class Input_StoresVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -129582,6 +134227,7 @@ class Input_StoresVarPopOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129670,6 +134316,7 @@ class Input_StoresVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -129685,6 +134332,7 @@ class Input_StoresVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129774,6 +134422,7 @@ class Input_StoresVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -129789,6 +134438,7 @@ class Input_StoresVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -129967,25 +134617,36 @@ class Input_StreetsAggregateOrderBy {
 
   Input_StreetsAvgOrderBy? get avg =>
       (_$data['avg'] as Input_StreetsAvgOrderBy?);
+
   Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+
   Input_StreetsMaxOrderBy? get max =>
       (_$data['max'] as Input_StreetsMaxOrderBy?);
+
   Input_StreetsMinOrderBy? get min =>
       (_$data['min'] as Input_StreetsMinOrderBy?);
+
   Input_StreetsStddevOrderBy? get stddev =>
       (_$data['stddev'] as Input_StreetsStddevOrderBy?);
+
   Input_StreetsStddevPopOrderBy? get stddevPop =>
       (_$data['stddevPop'] as Input_StreetsStddevPopOrderBy?);
+
   Input_StreetsStddevSampOrderBy? get stddevSamp =>
       (_$data['stddevSamp'] as Input_StreetsStddevSampOrderBy?);
+
   Input_StreetsSumOrderBy? get sum =>
       (_$data['sum'] as Input_StreetsSumOrderBy?);
+
   Input_StreetsVarPopOrderBy? get varPop =>
       (_$data['varPop'] as Input_StreetsVarPopOrderBy?);
+
   Input_StreetsVarSampOrderBy? get varSamp =>
       (_$data['varSamp'] as Input_StreetsVarSampOrderBy?);
+
   Input_StreetsVarianceOrderBy? get variance =>
       (_$data['variance'] as Input_StreetsVarianceOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('avg')) {
@@ -130041,6 +134702,7 @@ class Input_StreetsAggregateOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -130253,6 +134915,7 @@ class _CopyWithImpl_Input_StreetsAggregateOrderBy<TRes>
         if (variance != _undefined)
           'variance': (variance as Input_StreetsVarianceOrderBy?),
       }));
+
   CopyWith_Input_StreetsAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
@@ -130350,24 +135013,34 @@ class _CopyWithStubImpl_Input_StreetsAggregateOrderBy<TRes>
     Input_StreetsVarianceOrderBy? variance,
   }) =>
       _res;
+
   CopyWith_Input_StreetsAvgOrderBy<TRes> get avg =>
       CopyWith_Input_StreetsAvgOrderBy.stub(_res);
+
   CopyWith_Input_StreetsMaxOrderBy<TRes> get max =>
       CopyWith_Input_StreetsMaxOrderBy.stub(_res);
+
   CopyWith_Input_StreetsMinOrderBy<TRes> get min =>
       CopyWith_Input_StreetsMinOrderBy.stub(_res);
+
   CopyWith_Input_StreetsStddevOrderBy<TRes> get stddev =>
       CopyWith_Input_StreetsStddevOrderBy.stub(_res);
+
   CopyWith_Input_StreetsStddevPopOrderBy<TRes> get stddevPop =>
       CopyWith_Input_StreetsStddevPopOrderBy.stub(_res);
+
   CopyWith_Input_StreetsStddevSampOrderBy<TRes> get stddevSamp =>
       CopyWith_Input_StreetsStddevSampOrderBy.stub(_res);
+
   CopyWith_Input_StreetsSumOrderBy<TRes> get sum =>
       CopyWith_Input_StreetsSumOrderBy.stub(_res);
+
   CopyWith_Input_StreetsVarPopOrderBy<TRes> get varPop =>
       CopyWith_Input_StreetsVarPopOrderBy.stub(_res);
+
   CopyWith_Input_StreetsVarSampOrderBy<TRes> get varSamp =>
       CopyWith_Input_StreetsVarSampOrderBy.stub(_res);
+
   CopyWith_Input_StreetsVarianceOrderBy<TRes> get variance =>
       CopyWith_Input_StreetsVarianceOrderBy.stub(_res);
 }
@@ -130393,6 +135066,7 @@ class Input_StreetsAvgOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -130408,6 +135082,7 @@ class Input_StreetsAvgOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -130633,32 +135308,48 @@ class Input_StreetsBoolExp {
 
   List<Input_StreetsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_StreetsBoolExp>?);
+
   Input_StreetsBoolExp? get $_not => (_$data['_not'] as Input_StreetsBoolExp?);
+
   List<Input_StreetsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_StreetsBoolExp>?);
+
   Input_AreasBoolExp? get areas => (_$data['areas'] as Input_AreasBoolExp?);
+
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_FamiliesBoolExp? get families =>
       (_$data['families'] as Input_FamiliesBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
+
   Input_BooleanComparisonExp? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
   Input_JsonbComparisonExp? get lastEdit =>
       (_$data['lastEdit'] as Input_JsonbComparisonExp?);
+
   Input_GeographyComparisonExp? get line =>
       (_$data['line'] as Input_GeographyComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_TimestamptzComparisonExp? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
   Input_StoresBoolExp? get stores => (_$data['stores'] as Input_StoresBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -130733,6 +135424,7 @@ class Input_StreetsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -131061,6 +135753,7 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
           'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
         if (stores != _undefined) 'stores': (stores as Input_StoresBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_StreetsBoolExp>? Function(
                   Iterable<
@@ -131071,6 +135764,7 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_StreetsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -131088,6 +135782,7 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_AreasBoolExp<TRes> get areas {
     final local$areas = _instance.areas;
     return local$areas == null
@@ -131213,34 +135908,50 @@ class _CopyWithStubImpl_Input_StreetsBoolExp<TRes>
     Input_StoresBoolExp? stores,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_StreetsBoolExp<TRes> get $_not =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_AreasBoolExp<TRes> get areas =>
       CopyWith_Input_AreasBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_FamiliesBoolExp<TRes> get families =>
       CopyWith_Input_FamiliesBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_JsonbComparisonExp<TRes> get lastEdit =>
       CopyWith_Input_JsonbComparisonExp.stub(_res);
+
   CopyWith_Input_GeographyComparisonExp<TRes> get line =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
   CopyWith_Input_StoresBoolExp<TRes> get stores =>
       CopyWith_Input_StoresBoolExp.stub(_res);
 }
@@ -131264,6 +135975,7 @@ class Input_StreetsIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -131278,6 +135990,7 @@ class Input_StreetsIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -131397,11 +136110,17 @@ class Input_StreetsInsertInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -131437,6 +136156,7 @@ class Input_StreetsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -131640,11 +136360,16 @@ class Input_StreetsMaxOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -131679,6 +136404,7 @@ class Input_StreetsMaxOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -131868,11 +136594,16 @@ class Input_StreetsMinOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -131907,6 +136638,7 @@ class Input_StreetsMinOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -132081,9 +136813,12 @@ class Input_StreetsOnConflict {
 
   Enum_StreetsConstraint get constraint =>
       (_$data['constraint'] as Enum_StreetsConstraint);
+
   List<Enum_StreetsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_StreetsUpdateColumn>?);
+
   Input_StreetsBoolExp? get where => (_$data['where'] as Input_StreetsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -132107,6 +136842,7 @@ class Input_StreetsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -132212,6 +136948,7 @@ class _CopyWithImpl_Input_StreetsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_StreetsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_StreetsBoolExp?),
       }));
+
   CopyWith_Input_StreetsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -132232,6 +136969,7 @@ class _CopyWithStubImpl_Input_StreetsOnConflict<TRes>
     Input_StreetsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StreetsBoolExp<TRes> get where =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
@@ -132359,24 +137097,37 @@ class Input_StreetsOrderBy {
 
   Input_AreasAggregateOrderBy? get areasAggregate =>
       (_$data['areasAggregate'] as Input_AreasAggregateOrderBy?);
+
   Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Input_FamiliesAggregateOrderBy? get familiesAggregate =>
       (_$data['familiesAggregate'] as Input_FamiliesAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToRead =>
       (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
+
   Enum_OrderBy? get isUserAllowedToWrite =>
       (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
   Enum_OrderBy? get lastEdit => (_$data['lastEdit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get line => (_$data['line'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Enum_OrderBy? get photoUpdatedAt =>
       (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
   Input_StoresAggregateOrderBy? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('areasAggregate')) {
@@ -132448,6 +137199,7 @@ class Input_StreetsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -132692,6 +137444,7 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
         if (storesAggregate != _undefined)
           'storesAggregate': (storesAggregate as Input_StoresAggregateOrderBy?),
       }));
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate {
     final local$areasAggregate = _instance.areasAggregate;
     return local$areasAggregate == null
@@ -132747,12 +137500,16 @@ class _CopyWithStubImpl_Input_StreetsOrderBy<TRes>
     Input_StoresAggregateOrderBy? storesAggregate,
   }) =>
       _res;
+
   CopyWith_Input_AreasAggregateOrderBy<TRes> get areasAggregate =>
       CopyWith_Input_AreasAggregateOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesAggregateOrderBy<TRes> get familiesAggregate =>
       CopyWith_Input_FamiliesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
+
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
 }
@@ -132775,6 +137532,7 @@ class Input_StreetsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -132787,6 +137545,7 @@ class Input_StreetsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -132904,11 +137663,17 @@ class Input_StreetsSetInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -132944,6 +137709,7 @@ class Input_StreetsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133114,6 +137880,7 @@ class Input_StreetsStddevOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -133129,6 +137896,7 @@ class Input_StreetsStddevOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133218,6 +137986,7 @@ class Input_StreetsStddevPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -133233,6 +138002,7 @@ class Input_StreetsStddevPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133322,6 +138092,7 @@ class Input_StreetsStddevSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -133337,6 +138108,7 @@ class Input_StreetsStddevSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133435,8 +138207,10 @@ class Input_StreetsStreamCursorInput {
 
   Input_StreetsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_StreetsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -133454,6 +138228,7 @@ class Input_StreetsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133531,6 +138306,7 @@ class _CopyWithImpl_Input_StreetsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_StreetsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_StreetsStreamCursorValueInput(
@@ -133549,6 +138325,7 @@ class _CopyWithStubImpl_Input_StreetsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_StreetsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_StreetsStreamCursorValueInput.stub(_res);
 }
@@ -133607,11 +138384,17 @@ class Input_StreetsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get blurhash => (_$data['blurhash'] as String?);
+
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   Map<String, dynamic>? get line => (_$data['line'] as Map<String, dynamic>?);
+
   String? get name => (_$data['name'] as String?);
+
   DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
@@ -133648,6 +138431,7 @@ class Input_StreetsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133819,6 +138603,7 @@ class Input_StreetsSumOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -133834,6 +138619,7 @@ class Input_StreetsSumOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -133939,9 +138725,12 @@ class Input_StreetsUpdates {
 
   Input_StreetsIncInput? get $_inc =>
       (_$data['_inc'] as Input_StreetsIncInput?);
+
   Input_StreetsSetInput? get $_set =>
       (_$data['_set'] as Input_StreetsSetInput?);
+
   Input_StreetsBoolExp get where => (_$data['where'] as Input_StreetsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -133962,6 +138751,7 @@ class Input_StreetsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -134051,6 +138841,7 @@ class _CopyWithImpl_Input_StreetsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_StreetsBoolExp),
       }));
+
   CopyWith_Input_StreetsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -134083,10 +138874,13 @@ class _CopyWithStubImpl_Input_StreetsUpdates<TRes>
     Input_StreetsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StreetsIncInput<TRes> get $_inc =>
       CopyWith_Input_StreetsIncInput.stub(_res);
+
   CopyWith_Input_StreetsSetInput<TRes> get $_set =>
       CopyWith_Input_StreetsSetInput.stub(_res);
+
   CopyWith_Input_StreetsBoolExp<TRes> get where =>
       CopyWith_Input_StreetsBoolExp.stub(_res);
 }
@@ -134112,6 +138906,7 @@ class Input_StreetsVarPopOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -134127,6 +138922,7 @@ class Input_StreetsVarPopOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -134216,6 +139012,7 @@ class Input_StreetsVarSampOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -134231,6 +139028,7 @@ class Input_StreetsVarSampOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -134320,6 +139118,7 @@ class Input_StreetsVarianceOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -134335,6 +139134,7 @@ class Input_StreetsVarianceOrderBy {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -134535,24 +139335,43 @@ class Input_StringComparisonExp {
   Map<String, dynamic> _$data;
 
   String? get $_eq => (_$data['_eq'] as String?);
+
   String? get $_gt => (_$data['_gt'] as String?);
+
   String? get $_gte => (_$data['_gte'] as String?);
+
   String? get $_ilike => (_$data['_ilike'] as String?);
+
   List<String>? get $_in => (_$data['_in'] as List<String>?);
+
   String? get $_iregex => (_$data['_iregex'] as String?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   String? get $_like => (_$data['_like'] as String?);
+
   String? get $_lt => (_$data['_lt'] as String?);
+
   String? get $_lte => (_$data['_lte'] as String?);
+
   String? get $_neq => (_$data['_neq'] as String?);
+
   String? get $_nilike => (_$data['_nilike'] as String?);
+
   List<String>? get $_nin => (_$data['_nin'] as List<String>?);
+
   String? get $_niregex => (_$data['_niregex'] as String?);
+
   String? get $_nlike => (_$data['_nlike'] as String?);
+
   String? get $_nregex => (_$data['_nregex'] as String?);
+
   String? get $_nsimilar => (_$data['_nsimilar'] as String?);
+
   String? get $_regex => (_$data['_regex'] as String?);
+
   String? get $_similar => (_$data['_similar'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -134639,6 +139458,7 @@ class Input_StringComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -135130,31 +139950,43 @@ class Input_StudyYearsBoolExp {
 
   List<Input_StudyYearsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_StudyYearsBoolExp>?);
+
   Input_StudyYearsBoolExp? get $_not =>
       (_$data['_not'] as Input_StudyYearsBoolExp?);
+
   List<Input_StudyYearsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_StudyYearsBoolExp>?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
+
   Input_ClassesAggregateBoolExp? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
+
   Input_StringComparisonExp? get id =>
       (_$data['id'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_SmallintComparisonExp? get order =>
       (_$data['order'] as Input_SmallintComparisonExp?);
+
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
   Input_PersonsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -135216,6 +140048,7 @@ class Input_StudyYearsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -135500,6 +140333,7 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_StudyYearsBoolExp>? Function(
                   Iterable<
@@ -135512,6 +140346,7 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -135530,6 +140365,7 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -135628,29 +140464,41 @@ class _CopyWithStubImpl_Input_StudyYearsBoolExp<TRes>
     Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get $_not =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
               _res);
+
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get id =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_SmallintComparisonExp<TRes> get order =>
       CopyWith_Input_SmallintComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
@@ -135674,6 +140522,7 @@ class Input_StudyYearsIncInput {
   Map<String, dynamic> _$data;
 
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('order')) {
@@ -135688,6 +140537,7 @@ class Input_StudyYearsIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -135815,12 +140665,17 @@ class Input_StudyYearsInsertInput {
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
       get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
   Input_ClassesArrRelInsertInput? get classes =>
       (_$data['classes'] as Input_ClassesArrRelInsertInput?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('attendanceDaysConstraints')) {
@@ -135852,6 +140707,7 @@ class Input_StudyYearsInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -135979,6 +140835,7 @@ class _CopyWithImpl_Input_StudyYearsInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
@@ -136022,12 +140879,15 @@ class _CopyWithStubImpl_Input_StudyYearsInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
       get attendanceDaysConstraints =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
               _res);
+
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
       CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
@@ -136064,8 +140924,10 @@ class Input_StudyYearsObjRelInsertInput {
 
   Input_StudyYearsInsertInput get data =>
       (_$data['data'] as Input_StudyYearsInsertInput);
+
   Input_StudyYearsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_StudyYearsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -136082,6 +140944,7 @@ class Input_StudyYearsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -136160,6 +141023,7 @@ class _CopyWithImpl_Input_StudyYearsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_StudyYearsOnConflict?),
       }));
+
   CopyWith_Input_StudyYearsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_StudyYearsInsertInput(
@@ -136186,8 +141050,10 @@ class _CopyWithStubImpl_Input_StudyYearsObjRelInsertInput<TRes>
     Input_StudyYearsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_StudyYearsInsertInput<TRes> get data =>
       CopyWith_Input_StudyYearsInsertInput.stub(_res);
+
   CopyWith_Input_StudyYearsOnConflict<TRes> get onConflict =>
       CopyWith_Input_StudyYearsOnConflict.stub(_res);
 }
@@ -136230,10 +141096,13 @@ class Input_StudyYearsOnConflict {
 
   Enum_StudyYearsConstraint get constraint =>
       (_$data['constraint'] as Enum_StudyYearsConstraint);
+
   List<Enum_StudyYearsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_StudyYearsUpdateColumn>?);
+
   Input_StudyYearsBoolExp? get where =>
       (_$data['where'] as Input_StudyYearsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -136257,6 +141126,7 @@ class Input_StudyYearsOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -136362,6 +141232,7 @@ class _CopyWithImpl_Input_StudyYearsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_StudyYearsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_StudyYearsBoolExp?),
       }));
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -136382,6 +141253,7 @@ class _CopyWithStubImpl_Input_StudyYearsOnConflict<TRes>
     Input_StudyYearsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get where =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
@@ -136459,13 +141331,19 @@ class Input_StudyYearsOrderBy {
       get attendanceDaysConstraintsAggregate =>
           (_$data['attendanceDaysConstraintsAggregate']
               as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
+
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
+
   Input_PersonsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
@@ -136503,6 +141381,7 @@ class Input_StudyYearsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -136652,6 +141531,7 @@ class _CopyWithImpl_Input_StudyYearsOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsAggregateOrderBy?),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
@@ -136697,12 +141577,15 @@ class _CopyWithStubImpl_Input_StudyYearsOrderBy<TRes>
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
       get attendanceDaysConstraintsAggregate =>
           CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
               _res);
+
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
 }
@@ -136725,6 +141608,7 @@ class Input_StudyYearsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   int get order => (_$data['order'] as int);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$order = order;
@@ -136737,6 +141621,7 @@ class Input_StudyYearsPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -136830,7 +141715,9 @@ class Input_StudyYearsSetInput {
   Map<String, dynamic> _$data;
 
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('name')) {
@@ -136849,6 +141736,7 @@ class Input_StudyYearsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -136972,8 +141860,10 @@ class Input_StudyYearsStreamCursorInput {
 
   Input_StudyYearsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_StudyYearsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -136991,6 +141881,7 @@ class Input_StudyYearsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -137069,6 +141960,7 @@ class _CopyWithImpl_Input_StudyYearsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_StudyYearsStreamCursorValueInput(
@@ -137087,6 +141979,7 @@ class _CopyWithStubImpl_Input_StudyYearsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_StudyYearsStreamCursorValueInput.stub(_res);
 }
@@ -137126,8 +142019,11 @@ class Input_StudyYearsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   String? get id => (_$data['id'] as String?);
+
   String? get name => (_$data['name'] as String?);
+
   int? get order => (_$data['order'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -137151,6 +142047,7 @@ class Input_StudyYearsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -137296,10 +142193,13 @@ class Input_StudyYearsUpdates {
 
   Input_StudyYearsIncInput? get $_inc =>
       (_$data['_inc'] as Input_StudyYearsIncInput?);
+
   Input_StudyYearsSetInput? get $_set =>
       (_$data['_set'] as Input_StudyYearsSetInput?);
+
   Input_StudyYearsBoolExp get where =>
       (_$data['where'] as Input_StudyYearsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -137320,6 +142220,7 @@ class Input_StudyYearsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -137410,6 +142311,7 @@ class _CopyWithImpl_Input_StudyYearsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_StudyYearsBoolExp),
       }));
+
   CopyWith_Input_StudyYearsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -137442,10 +142344,13 @@ class _CopyWithStubImpl_Input_StudyYearsUpdates<TRes>
     Input_StudyYearsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_StudyYearsIncInput<TRes> get $_inc =>
       CopyWith_Input_StudyYearsIncInput.stub(_res);
+
   CopyWith_Input_StudyYearsSetInput<TRes> get $_set =>
       CopyWith_Input_StudyYearsSetInput.stub(_res);
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get where =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
@@ -137535,18 +142440,26 @@ class Input_TagsBoolExp {
 
   List<Input_TagsBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_TagsBoolExp>?);
+
   Input_TagsBoolExp? get $_not => (_$data['_not'] as Input_TagsBoolExp?);
+
   List<Input_TagsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_TagsBoolExp>?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Input_PersonsTagsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsTagsBoolExp?);
+
   Input_PersonsTagsAggregateBoolExp? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsTagsAggregateBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -137589,6 +142502,7 @@ class Input_TagsBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -137790,6 +142704,7 @@ class _CopyWithImpl_Input_TagsBoolExp<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsTagsAggregateBoolExp?),
       }));
+
   TRes $_and(
           Iterable<Input_TagsBoolExp>? Function(
                   Iterable<CopyWith_Input_TagsBoolExp<Input_TagsBoolExp>>?)
@@ -137799,6 +142714,7 @@ class _CopyWithImpl_Input_TagsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_TagsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -137815,6 +142731,7 @@ class _CopyWithImpl_Input_TagsBoolExp<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
   CopyWith_Input_BigintComparisonExp<TRes> get color {
     final local$color = _instance.color;
     return local$color == null
@@ -137871,18 +142788,26 @@ class _CopyWithStubImpl_Input_TagsBoolExp<TRes>
     Input_PersonsTagsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_TagsBoolExp<TRes> get $_not =>
       CopyWith_Input_TagsBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
+
   CopyWith_Input_PersonsTagsAggregateBoolExp<TRes> get personsAggregate =>
       CopyWith_Input_PersonsTagsAggregateBoolExp.stub(_res);
 }
@@ -137906,6 +142831,7 @@ class Input_TagsIncInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -137920,6 +142846,7 @@ class Input_TagsIncInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138029,10 +142956,14 @@ class Input_TagsInsertInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Input_PersonsTagsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsTagsArrRelInsertInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -138059,6 +142990,7 @@ class Input_TagsInsertInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138162,6 +143094,7 @@ class _CopyWithImpl_Input_TagsInsertInput<TRes>
         if (persons != _undefined)
           'persons': (persons as Input_PersonsTagsArrRelInsertInput?),
       }));
+
   CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons {
     final local$persons = _instance.persons;
     return local$persons == null
@@ -138184,6 +143117,7 @@ class _CopyWithStubImpl_Input_TagsInsertInput<TRes>
     Input_PersonsTagsArrRelInsertInput? persons,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_res);
 }
@@ -138218,8 +143152,10 @@ class Input_TagsObjRelInsertInput {
   Map<String, dynamic> _$data;
 
   Input_TagsInsertInput get data => (_$data['data'] as Input_TagsInsertInput);
+
   Input_TagsOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_TagsOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -138236,6 +143172,7 @@ class Input_TagsObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138314,6 +143251,7 @@ class _CopyWithImpl_Input_TagsObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_TagsOnConflict?),
       }));
+
   CopyWith_Input_TagsInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_TagsInsertInput(local$data, (e) => call(data: e));
@@ -138339,8 +143277,10 @@ class _CopyWithStubImpl_Input_TagsObjRelInsertInput<TRes>
     Input_TagsOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_TagsInsertInput<TRes> get data =>
       CopyWith_Input_TagsInsertInput.stub(_res);
+
   CopyWith_Input_TagsOnConflict<TRes> get onConflict =>
       CopyWith_Input_TagsOnConflict.stub(_res);
 }
@@ -138383,9 +143323,12 @@ class Input_TagsOnConflict {
 
   Enum_TagsConstraint get constraint =>
       (_$data['constraint'] as Enum_TagsConstraint);
+
   List<Enum_TagsUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_TagsUpdateColumn>?);
+
   Input_TagsBoolExp? get where => (_$data['where'] as Input_TagsBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -138409,6 +143352,7 @@ class Input_TagsOnConflict {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138513,6 +143457,7 @@ class _CopyWithImpl_Input_TagsOnConflict<TRes>
           'updateColumns': (updateColumns as List<Enum_TagsUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_TagsBoolExp?),
       }));
+
   CopyWith_Input_TagsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -138533,6 +143478,7 @@ class _CopyWithStubImpl_Input_TagsOnConflict<TRes>
     Input_TagsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_TagsBoolExp<TRes> get where =>
       CopyWith_Input_TagsBoolExp.stub(_res);
 }
@@ -138583,10 +143529,14 @@ class Input_TagsOrderBy {
   Map<String, dynamic> _$data;
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Input_PersonsTagsAggregateOrderBy? get personsAggregate =>
       (_$data['personsAggregate'] as Input_PersonsTagsAggregateOrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -138614,6 +143564,7 @@ class Input_TagsOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138719,6 +143670,7 @@ class _CopyWithImpl_Input_TagsOrderBy<TRes>
           'personsAggregate':
               (personsAggregate as Input_PersonsTagsAggregateOrderBy?),
       }));
+
   CopyWith_Input_PersonsTagsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -138741,6 +143693,7 @@ class _CopyWithStubImpl_Input_TagsOrderBy<TRes>
     Input_PersonsTagsAggregateOrderBy? personsAggregate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsTagsAggregateOrderBy.stub(_res);
 }
@@ -138763,6 +143716,7 @@ class Input_TagsPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -138775,6 +143729,7 @@ class Input_TagsPkColumnsInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -138873,8 +143828,11 @@ class Input_TagsSetInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -138897,6 +143855,7 @@ class Input_TagsSetInput {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -139031,8 +143990,10 @@ class Input_TagsStreamCursorInput {
 
   Input_TagsStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_TagsStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -139050,6 +144011,7 @@ class Input_TagsStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -139127,6 +144089,7 @@ class _CopyWithImpl_Input_TagsStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_TagsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_TagsStreamCursorValueInput(
@@ -139145,6 +144108,7 @@ class _CopyWithStubImpl_Input_TagsStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_TagsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_TagsStreamCursorValueInput.stub(_res);
 }
@@ -139183,8 +144147,11 @@ class Input_TagsStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   int? get color => (_$data['color'] as int?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
@@ -139207,6 +144174,7 @@ class Input_TagsStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -139349,8 +144317,11 @@ class Input_TagsUpdates {
   Map<String, dynamic> _$data;
 
   Input_TagsIncInput? get $_inc => (_$data['_inc'] as Input_TagsIncInput?);
+
   Input_TagsSetInput? get $_set => (_$data['_set'] as Input_TagsSetInput?);
+
   Input_TagsBoolExp get where => (_$data['where'] as Input_TagsBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_inc')) {
@@ -139371,6 +144342,7 @@ class Input_TagsUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -139460,6 +144432,7 @@ class _CopyWithImpl_Input_TagsUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_TagsBoolExp),
       }));
+
   CopyWith_Input_TagsIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
     return local$$_inc == null
@@ -139492,10 +144465,13 @@ class _CopyWithStubImpl_Input_TagsUpdates<TRes>
     Input_TagsBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_TagsIncInput<TRes> get $_inc =>
       CopyWith_Input_TagsIncInput.stub(_res);
+
   CopyWith_Input_TagsSetInput<TRes> get $_set =>
       CopyWith_Input_TagsSetInput.stub(_res);
+
   CopyWith_Input_TagsBoolExp<TRes> get where =>
       CopyWith_Input_TagsBoolExp.stub(_res);
 }
@@ -139572,14 +144548,23 @@ class Input_TimestampComparisonExp {
   Map<String, dynamic> _$data;
 
   DateTime? get $_eq => (_$data['_eq'] as DateTime?);
+
   DateTime? get $_gt => (_$data['_gt'] as DateTime?);
+
   DateTime? get $_gte => (_$data['_gte'] as DateTime?);
+
   List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   DateTime? get $_lt => (_$data['_lt'] as DateTime?);
+
   DateTime? get $_lte => (_$data['_lte'] as DateTime?);
+
   DateTime? get $_neq => (_$data['_neq'] as DateTime?);
+
   List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -139626,6 +144611,7 @@ class Input_TimestampComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -139917,14 +144903,23 @@ class Input_TimestamptzComparisonExp {
   Map<String, dynamic> _$data;
 
   DateTime? get $_eq => (_$data['_eq'] as DateTime?);
+
   DateTime? get $_gt => (_$data['_gt'] as DateTime?);
+
   DateTime? get $_gte => (_$data['_gte'] as DateTime?);
+
   List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   DateTime? get $_lt => (_$data['_lt'] as DateTime?);
+
   DateTime? get $_lte => (_$data['_lte'] as DateTime?);
+
   DateTime? get $_neq => (_$data['_neq'] as DateTime?);
+
   List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -139971,6 +144966,7 @@ class Input_TimestamptzComparisonExp {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -140269,17 +145265,24 @@ class Input_UniversitiesBoolExp {
 
   List<Input_UniversitiesBoolExp>? get $_and =>
       (_$data['_and'] as List<Input_UniversitiesBoolExp>?);
+
   Input_UniversitiesBoolExp? get $_not =>
       (_$data['_not'] as Input_UniversitiesBoolExp?);
+
   List<Input_UniversitiesBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_UniversitiesBoolExp>?);
+
   Input_CollegesBoolExp? get colleges =>
       (_$data['colleges'] as Input_CollegesBoolExp?);
+
   Input_CollegesAggregateBoolExp? get collegesAggregate =>
       (_$data['collegesAggregate'] as Input_CollegesAggregateBoolExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_and')) {
@@ -140318,6 +145321,7 @@ class Input_UniversitiesBoolExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -140513,6 +145517,7 @@ class _CopyWithImpl_Input_UniversitiesBoolExp<TRes>
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       }));
+
   TRes $_and(
           Iterable<Input_UniversitiesBoolExp>? Function(
                   Iterable<
@@ -140525,6 +145530,7 @@ class _CopyWithImpl_Input_UniversitiesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
@@ -140545,6 +145551,7 @@ class _CopyWithImpl_Input_UniversitiesBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
   CopyWith_Input_CollegesBoolExp<TRes> get colleges {
     final local$colleges = _instance.colleges;
     return local$colleges == null
@@ -140592,16 +145599,23 @@ class _CopyWithStubImpl_Input_UniversitiesBoolExp<TRes>
     Input_StringComparisonExp? name,
   }) =>
       _res;
+
   $_and(_fn) => _res;
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get $_not =>
       CopyWith_Input_UniversitiesBoolExp.stub(_res);
+
   $_or(_fn) => _res;
+
   CopyWith_Input_CollegesBoolExp<TRes> get colleges =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
+
   CopyWith_Input_CollegesAggregateBoolExp<TRes> get collegesAggregate =>
       CopyWith_Input_CollegesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 }
@@ -140644,8 +145658,11 @@ class Input_UniversitiesInsertInput {
 
   Input_CollegesArrRelInsertInput? get colleges =>
       (_$data['colleges'] as Input_CollegesArrRelInsertInput?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('colleges')) {
@@ -140668,6 +145685,7 @@ class Input_UniversitiesInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -140760,6 +145778,7 @@ class _CopyWithImpl_Input_UniversitiesInsertInput<TRes>
         if (id != _undefined) 'id': (id as UuidValue?),
         if (name != _undefined) 'name': (name as String?),
       }));
+
   CopyWith_Input_CollegesArrRelInsertInput<TRes> get colleges {
     final local$colleges = _instance.colleges;
     return local$colleges == null
@@ -140781,6 +145800,7 @@ class _CopyWithStubImpl_Input_UniversitiesInsertInput<TRes>
     String? name,
   }) =>
       _res;
+
   CopyWith_Input_CollegesArrRelInsertInput<TRes> get colleges =>
       CopyWith_Input_CollegesArrRelInsertInput.stub(_res);
 }
@@ -140817,8 +145837,10 @@ class Input_UniversitiesObjRelInsertInput {
 
   Input_UniversitiesInsertInput get data =>
       (_$data['data'] as Input_UniversitiesInsertInput);
+
   Input_UniversitiesOnConflict? get onConflict =>
       (_$data['onConflict'] as Input_UniversitiesOnConflict?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$data = data;
@@ -140836,6 +145858,7 @@ class Input_UniversitiesObjRelInsertInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -140914,6 +145937,7 @@ class _CopyWithImpl_Input_UniversitiesObjRelInsertInput<TRes>
         if (onConflict != _undefined)
           'onConflict': (onConflict as Input_UniversitiesOnConflict?),
       }));
+
   CopyWith_Input_UniversitiesInsertInput<TRes> get data {
     final local$data = _instance.data;
     return CopyWith_Input_UniversitiesInsertInput(
@@ -140940,8 +145964,10 @@ class _CopyWithStubImpl_Input_UniversitiesObjRelInsertInput<TRes>
     Input_UniversitiesOnConflict? onConflict,
   }) =>
       _res;
+
   CopyWith_Input_UniversitiesInsertInput<TRes> get data =>
       CopyWith_Input_UniversitiesInsertInput.stub(_res);
+
   CopyWith_Input_UniversitiesOnConflict<TRes> get onConflict =>
       CopyWith_Input_UniversitiesOnConflict.stub(_res);
 }
@@ -140985,10 +146011,13 @@ class Input_UniversitiesOnConflict {
 
   Enum_UniversitiesConstraint get constraint =>
       (_$data['constraint'] as Enum_UniversitiesConstraint);
+
   List<Enum_UniversitiesUpdateColumn>? get updateColumns =>
       (_$data['updateColumns'] as List<Enum_UniversitiesUpdateColumn>?);
+
   Input_UniversitiesBoolExp? get where =>
       (_$data['where'] as Input_UniversitiesBoolExp?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
@@ -141013,6 +146042,7 @@ class Input_UniversitiesOnConflict {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141119,6 +146149,7 @@ class _CopyWithImpl_Input_UniversitiesOnConflict<TRes>
               (updateColumns as List<Enum_UniversitiesUpdateColumn>),
         if (where != _undefined) 'where': (where as Input_UniversitiesBoolExp?),
       }));
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
@@ -141140,6 +146171,7 @@ class _CopyWithStubImpl_Input_UniversitiesOnConflict<TRes>
     Input_UniversitiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get where =>
       CopyWith_Input_UniversitiesBoolExp.stub(_res);
 }
@@ -141184,8 +146216,11 @@ class Input_UniversitiesOrderBy {
 
   Input_CollegesAggregateOrderBy? get collegesAggregate =>
       (_$data['collegesAggregate'] as Input_CollegesAggregateOrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('collegesAggregate')) {
@@ -141208,6 +146243,7 @@ class Input_UniversitiesOrderBy {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141301,6 +146337,7 @@ class _CopyWithImpl_Input_UniversitiesOrderBy<TRes>
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
       }));
+
   CopyWith_Input_CollegesAggregateOrderBy<TRes> get collegesAggregate {
     final local$collegesAggregate = _instance.collegesAggregate;
     return local$collegesAggregate == null
@@ -141322,6 +146359,7 @@ class _CopyWithStubImpl_Input_UniversitiesOrderBy<TRes>
     Enum_OrderBy? name,
   }) =>
       _res;
+
   CopyWith_Input_CollegesAggregateOrderBy<TRes> get collegesAggregate =>
       CopyWith_Input_CollegesAggregateOrderBy.stub(_res);
 }
@@ -141344,6 +146382,7 @@ class Input_UniversitiesPkColumnsInput {
   Map<String, dynamic> _$data;
 
   UuidValue get id => (_$data['id'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -141356,6 +146395,7 @@ class Input_UniversitiesPkColumnsInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141449,7 +146489,9 @@ class Input_UniversitiesSetInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -141468,6 +146510,7 @@ class Input_UniversitiesSetInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141591,8 +146634,10 @@ class Input_UniversitiesStreamCursorInput {
 
   Input_UniversitiesStreamCursorValueInput get initialValue =>
       (_$data['initialValue'] as Input_UniversitiesStreamCursorValueInput);
+
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$initialValue = initialValue;
@@ -141611,6 +146656,7 @@ class Input_UniversitiesStreamCursorInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141689,6 +146735,7 @@ class _CopyWithImpl_Input_UniversitiesStreamCursorInput<TRes>
         if (ordering != _undefined)
           'ordering': (ordering as Enum_CursorOrdering?),
       }));
+
   CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_UniversitiesStreamCursorValueInput(
@@ -141707,6 +146754,7 @@ class _CopyWithStubImpl_Input_UniversitiesStreamCursorInput<TRes>
     Enum_CursorOrdering? ordering,
   }) =>
       _res;
+
   CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_UniversitiesStreamCursorValueInput.stub(_res);
 }
@@ -141740,7 +146788,9 @@ class Input_UniversitiesStreamCursorValueInput {
   Map<String, dynamic> _$data;
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
@@ -141760,6 +146810,7 @@ class Input_UniversitiesStreamCursorValueInput {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141882,8 +146933,10 @@ class Input_UniversitiesUpdates {
 
   Input_UniversitiesSetInput? get $_set =>
       (_$data['_set'] as Input_UniversitiesSetInput?);
+
   Input_UniversitiesBoolExp get where =>
       (_$data['where'] as Input_UniversitiesBoolExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_set')) {
@@ -141900,6 +146953,7 @@ class Input_UniversitiesUpdates {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -141976,6 +147030,7 @@ class _CopyWithImpl_Input_UniversitiesUpdates<TRes>
         if (where != _undefined && where != null)
           'where': (where as Input_UniversitiesBoolExp),
       }));
+
   CopyWith_Input_UniversitiesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
@@ -142002,8 +147057,10 @@ class _CopyWithStubImpl_Input_UniversitiesUpdates<TRes>
     Input_UniversitiesBoolExp? where,
   }) =>
       _res;
+
   CopyWith_Input_UniversitiesSetInput<TRes> get $_set =>
       CopyWith_Input_UniversitiesSetInput.stub(_res);
+
   CopyWith_Input_UniversitiesBoolExp<TRes> get where =>
       CopyWith_Input_UniversitiesBoolExp.stub(_res);
 }
@@ -142080,14 +147137,23 @@ class Input_UuidComparisonExp {
   Map<String, dynamic> _$data;
 
   UuidValue? get $_eq => (_$data['_eq'] as UuidValue?);
+
   UuidValue? get $_gt => (_$data['_gt'] as UuidValue?);
+
   UuidValue? get $_gte => (_$data['_gte'] as UuidValue?);
+
   List<UuidValue>? get $_in => (_$data['_in'] as List<UuidValue>?);
+
   bool? get $_isNull => (_$data['_isNull'] as bool?);
+
   UuidValue? get $_lt => (_$data['_lt'] as UuidValue?);
+
   UuidValue? get $_lte => (_$data['_lte'] as UuidValue?);
+
   UuidValue? get $_neq => (_$data['_neq'] as UuidValue?);
+
   List<UuidValue>? get $_nin => (_$data['_nin'] as List<UuidValue>?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('_eq')) {
@@ -142134,6 +147200,7 @@ class Input_UuidComparisonExp {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -142399,11 +147466,15 @@ class Input_authUsersAdminOnAggregateBoolExpBool_and {
   Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_AuthUsersAdminOnBoolExp? get filter =>
       (_$data['filter'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -142429,6 +147500,7 @@ class Input_authUsersAdminOnAggregateBoolExpBool_and {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -142534,6 +147606,7 @@ class _CopyWithImpl_Input_authUsersAdminOnAggregateBoolExpBool_and<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -142563,8 +147636,10 @@ class _CopyWithStubImpl_Input_authUsersAdminOnAggregateBoolExpBool_and<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -142615,11 +147690,15 @@ class Input_authUsersAdminOnAggregateBoolExpBool_or {
   Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_AuthUsersAdminOnBoolExp? get filter =>
       (_$data['filter'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -142645,6 +147724,7 @@ class Input_authUsersAdminOnAggregateBoolExpBool_or {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -142750,6 +147830,7 @@ class _CopyWithImpl_Input_authUsersAdminOnAggregateBoolExpBool_or<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -142779,8 +147860,10 @@ class _CopyWithStubImpl_Input_authUsersAdminOnAggregateBoolExpBool_or<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -142832,11 +147915,15 @@ class Input_authUsersAdminOnAggregateBoolExpCount {
 
   List<Enum_AuthUsersAdminOnSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_AuthUsersAdminOnSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_AuthUsersAdminOnBoolExp? get filter =>
       (_$data['filter'] as Input_AuthUsersAdminOnBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -142864,6 +147951,7 @@ class Input_authUsersAdminOnAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -142985,6 +148073,7 @@ class _CopyWithImpl_Input_authUsersAdminOnAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -143013,8 +148102,10 @@ class _CopyWithStubImpl_Input_authUsersAdminOnAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get filter =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -143066,11 +148157,15 @@ class Input_authUsersPermissionsAggregateBoolExpCount {
 
   List<Enum_AuthUsersPermissionsSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_AuthUsersPermissionsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_AuthUsersPermissionsBoolExp? get filter =>
       (_$data['filter'] as Input_AuthUsersPermissionsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -143098,6 +148193,7 @@ class Input_authUsersPermissionsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -143221,6 +148317,7 @@ class _CopyWithImpl_Input_authUsersPermissionsAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -143249,8 +148346,10 @@ class _CopyWithStubImpl_Input_authUsersPermissionsAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get filter =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -143300,11 +148399,15 @@ class Input_classesAggregateBoolExpBool_and {
   Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_ClassesBoolExp? get filter =>
       (_$data['filter'] as Input_ClassesBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -143330,6 +148433,7 @@ class Input_classesAggregateBoolExpBool_and {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -143433,6 +148537,7 @@ class _CopyWithImpl_Input_classesAggregateBoolExpBool_and<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -143461,8 +148566,10 @@ class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -143512,11 +148619,15 @@ class Input_classesAggregateBoolExpBool_or {
   Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_ClassesBoolExp? get filter =>
       (_$data['filter'] as Input_ClassesBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -143542,6 +148653,7 @@ class Input_classesAggregateBoolExpBool_or {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -143645,6 +148757,7 @@ class _CopyWithImpl_Input_classesAggregateBoolExpBool_or<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -143673,8 +148786,10 @@ class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -143724,11 +148839,15 @@ class Input_classesAggregateBoolExpCount {
 
   List<Enum_ClassesSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_ClassesSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_ClassesBoolExp? get filter =>
       (_$data['filter'] as Input_ClassesBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -143755,6 +148874,7 @@ class Input_classesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -143875,6 +148995,7 @@ class _CopyWithImpl_Input_classesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -143902,8 +149023,10 @@ class _CopyWithStubImpl_Input_classesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_ClassesBoolExp<TRes> get filter =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -143953,11 +149076,15 @@ class Input_collegesAggregateBoolExpCount {
 
   List<Enum_CollegesSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_CollegesSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_CollegesBoolExp? get filter =>
       (_$data['filter'] as Input_CollegesBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -143984,6 +149111,7 @@ class Input_collegesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -144104,6 +149232,7 @@ class _CopyWithImpl_Input_collegesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_CollegesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -144131,8 +149260,10 @@ class _CopyWithStubImpl_Input_collegesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_CollegesBoolExp<TRes> get filter =>
       CopyWith_Input_CollegesBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -144184,11 +149315,15 @@ class Input_familiesFamiliesAggregateBoolExpCount {
 
   List<Enum_FamiliesFamiliesSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_FamiliesFamiliesSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_FamiliesFamiliesBoolExp? get filter =>
       (_$data['filter'] as Input_FamiliesFamiliesBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -144216,6 +149351,7 @@ class Input_familiesFamiliesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -144337,6 +149473,7 @@ class _CopyWithImpl_Input_familiesFamiliesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -144365,8 +149502,10 @@ class _CopyWithStubImpl_Input_familiesFamiliesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get filter =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -144416,11 +149555,15 @@ class Input_fathersAggregateBoolExpCount {
 
   List<Enum_FathersSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_FathersSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_FathersBoolExp? get filter =>
       (_$data['filter'] as Input_FathersBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -144447,6 +149590,7 @@ class Input_fathersAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -144567,6 +149711,7 @@ class _CopyWithImpl_Input_fathersAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_FathersBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -144594,8 +149739,10 @@ class _CopyWithStubImpl_Input_fathersAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_FathersBoolExp<TRes> get filter =>
       CopyWith_Input_FathersBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -144645,10 +149792,14 @@ class Input_groupsAggregateBoolExpCount {
 
   List<Enum_GroupsSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_GroupsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_GroupsBoolExp? get filter => (_$data['filter'] as Input_GroupsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -144674,6 +149825,7 @@ class Input_groupsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -144794,6 +149946,7 @@ class _CopyWithImpl_Input_groupsAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_GroupsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -144821,8 +149974,10 @@ class _CopyWithStubImpl_Input_groupsAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_GroupsBoolExp<TRes> get filter =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -144874,11 +150029,15 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and {
   Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -144905,6 +150064,7 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -145019,6 +150179,7 @@ class _CopyWithImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_a
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -145053,8 +150214,10 @@ class _CopyWithStubImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpBo
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -145106,11 +150269,15 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or {
   Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -145137,6 +150304,7 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -145249,6 +150417,7 @@ class _CopyWithImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_o
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -145283,8 +150452,10 @@ class _CopyWithStubImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpBo
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -145339,11 +150510,15 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpCount {
   List<Enum_HistoryAttendanceDaysConstraintsSelectColumn>? get arguments =>
       (_$data['arguments']
           as List<Enum_HistoryAttendanceDaysConstraintsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceDaysConstraintsBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -145373,6 +150548,7 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -145503,6 +150679,7 @@ class _CopyWithImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpCount<
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -145536,8 +150713,10 @@ class _CopyWithStubImpl_Input_historyAttendanceDaysConstraintsAggregateBoolExpCo
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -145589,11 +150768,15 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
   Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -145620,6 +150803,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -145728,6 +150912,7 @@ class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -145760,8 +150945,10 @@ class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -145812,11 +150999,15 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
   Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -145843,6 +151034,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -145951,6 +151143,7 @@ class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -145983,8 +151176,10 @@ class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -146036,11 +151231,15 @@ class Input_historyAttendanceHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryAttendanceHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryAttendanceHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryAttendanceHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -146069,6 +151268,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -146195,6 +151395,7 @@ class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -146226,8 +151427,10 @@ class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpCount<
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -146279,11 +151482,15 @@ class Input_historyCallHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryCallHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryCallHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryCallHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryCallHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -146311,6 +151518,7 @@ class Input_historyCallHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -146434,6 +151642,7 @@ class _CopyWithImpl_Input_historyCallHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -146462,8 +151671,10 @@ class _CopyWithStubImpl_Input_historyCallHistoryAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -146515,11 +151726,15 @@ class Input_historyConfessionHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryConfessionHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryConfessionHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryConfessionHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryConfessionHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -146548,6 +151763,7 @@ class Input_historyConfessionHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -146674,6 +151890,7 @@ class _CopyWithImpl_Input_historyConfessionHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -146705,8 +151922,10 @@ class _CopyWithStubImpl_Input_historyConfessionHistoryAggregateBoolExpCount<
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -146758,11 +151977,15 @@ class Input_historyEditHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryEditHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryEditHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryEditHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryEditHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -146790,6 +152013,7 @@ class Input_historyEditHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -146913,6 +152137,7 @@ class _CopyWithImpl_Input_historyEditHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -146941,8 +152166,10 @@ class _CopyWithStubImpl_Input_historyEditHistoryAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -146994,11 +152221,15 @@ class Input_historyKodasHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryKodasHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryKodasHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryKodasHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryKodasHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -147026,6 +152257,7 @@ class Input_historyKodasHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -147149,6 +152381,7 @@ class _CopyWithImpl_Input_historyKodasHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -147177,8 +152410,10 @@ class _CopyWithStubImpl_Input_historyKodasHistoryAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -147230,11 +152465,15 @@ class Input_historyVisitHistoryAggregateBoolExpCount {
 
   List<Enum_HistoryVisitHistorySelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_HistoryVisitHistorySelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_HistoryVisitHistoryBoolExp? get filter =>
       (_$data['filter'] as Input_HistoryVisitHistoryBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -147262,6 +152501,7 @@ class Input_historyVisitHistoryAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -147385,6 +152625,7 @@ class _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -147413,8 +152654,10 @@ class _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter =>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -147464,11 +152707,15 @@ class Input_personsAggregateBoolExpBool_and {
   Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -147494,6 +152741,7 @@ class Input_personsAggregateBoolExpBool_and {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -147597,6 +152845,7 @@ class _CopyWithImpl_Input_personsAggregateBoolExpBool_and<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -147625,8 +152874,10 @@ class _CopyWithStubImpl_Input_personsAggregateBoolExpBool_and<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -147676,11 +152927,15 @@ class Input_personsAggregateBoolExpBool_or {
   Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
       get arguments => (_$data['arguments']
           as Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsBoolExp?);
+
   Input_BooleanComparisonExp get predicate =>
       (_$data['predicate'] as Input_BooleanComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$arguments = arguments;
@@ -147706,6 +152961,7 @@ class Input_personsAggregateBoolExpBool_or {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -147809,6 +153065,7 @@ class _CopyWithImpl_Input_personsAggregateBoolExpBool_or<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_BooleanComparisonExp),
       }));
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -147837,8 +153094,10 @@ class _CopyWithStubImpl_Input_personsAggregateBoolExpBool_or<TRes>
     Input_BooleanComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
@@ -147888,11 +153147,15 @@ class Input_personsAggregateBoolExpCount {
 
   List<Enum_PersonsSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_PersonsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -147919,6 +153182,7 @@ class Input_personsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -148039,6 +153303,7 @@ class _CopyWithImpl_Input_personsAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -148066,8 +153331,10 @@ class _CopyWithStubImpl_Input_personsAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -148118,11 +153385,15 @@ class Input_personsGroupsAggregateBoolExpCount {
 
   List<Enum_PersonsGroupsSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_PersonsGroupsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsGroupsBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsGroupsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -148150,6 +153421,7 @@ class Input_personsGroupsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -148271,6 +153543,7 @@ class _CopyWithImpl_Input_personsGroupsAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -148299,8 +153572,10 @@ class _CopyWithStubImpl_Input_personsGroupsAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsGroupsBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -148351,11 +153626,15 @@ class Input_personsHobbiesAggregateBoolExpCount {
 
   List<Enum_PersonsHobbiesSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_PersonsHobbiesSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsHobbiesBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsHobbiesBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -148383,6 +153662,7 @@ class Input_personsHobbiesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -148504,6 +153784,7 @@ class _CopyWithImpl_Input_personsHobbiesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -148532,8 +153813,10 @@ class _CopyWithStubImpl_Input_personsHobbiesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -148584,11 +153867,15 @@ class Input_personsServicesAggregateBoolExpCount {
 
   List<Enum_PersonsServicesSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_PersonsServicesSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsServicesBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsServicesBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -148616,6 +153903,7 @@ class Input_personsServicesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -148737,6 +154025,7 @@ class _CopyWithImpl_Input_personsServicesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -148765,8 +154054,10 @@ class _CopyWithStubImpl_Input_personsServicesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -148817,11 +154108,15 @@ class Input_personsTagsAggregateBoolExpCount {
 
   List<Enum_PersonsTagsSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_PersonsTagsSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_PersonsTagsBoolExp? get filter =>
       (_$data['filter'] as Input_PersonsTagsBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -148849,6 +154144,7 @@ class Input_personsTagsAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -148970,6 +154266,7 @@ class _CopyWithImpl_Input_personsTagsAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -148998,8 +154295,10 @@ class _CopyWithStubImpl_Input_personsTagsAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_PersonsTagsBoolExp<TRes> get filter =>
       CopyWith_Input_PersonsTagsBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -149035,8 +154334,11 @@ class Input_st_d_within_geography_input {
   Map<String, dynamic> _$data;
 
   double get distance => (_$data['distance'] as double);
+
   Map<String, dynamic> get from => (_$data['from'] as Map<String, dynamic>);
+
   bool? get use_spheroid => (_$data['use_spheroid'] as bool?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$distance = distance;
@@ -149055,6 +154357,7 @@ class Input_st_d_within_geography_input {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -149181,7 +154484,9 @@ class Input_st_d_within_input {
   Map<String, dynamic> _$data;
 
   double get distance => (_$data['distance'] as double);
+
   Map<String, dynamic> get from => (_$data['from'] as Map<String, dynamic>);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$distance = distance;
@@ -149196,6 +154501,7 @@ class Input_st_d_within_input {
         this,
         (i) => i,
       );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -149328,10 +154634,14 @@ class Input_storesAggregateBoolExpCount {
 
   List<Enum_StoresSelectColumn>? get arguments =>
       (_$data['arguments'] as List<Enum_StoresSelectColumn>?);
+
   bool? get distinct => (_$data['distinct'] as bool?);
+
   Input_StoresBoolExp? get filter => (_$data['filter'] as Input_StoresBoolExp?);
+
   Input_IntComparisonExp get predicate =>
       (_$data['predicate'] as Input_IntComparisonExp);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('arguments')) {
@@ -149357,6 +154667,7 @@ class Input_storesAggregateBoolExpCount {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -149477,6 +154788,7 @@ class _CopyWithImpl_Input_storesAggregateBoolExpCount<TRes>
         if (predicate != _undefined && predicate != null)
           'predicate': (predicate as Input_IntComparisonExp),
       }));
+
   CopyWith_Input_StoresBoolExp<TRes> get filter {
     final local$filter = _instance.filter;
     return local$filter == null
@@ -149504,8 +154816,10 @@ class _CopyWithStubImpl_Input_storesAggregateBoolExpCount<TRes>
     Input_IntComparisonExp? predicate,
   }) =>
       _res;
+
   CopyWith_Input_StoresBoolExp<TRes> get filter =>
       CopyWith_Input_StoresBoolExp.stub(_res);
+
   CopyWith_Input_IntComparisonExp<TRes> get predicate =>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
@@ -153771,6 +159085,7 @@ Enum_StoresConstraint fromJson_Enum_StoresConstraint(String value) {
 }
 
 enum Enum_StoresSelectColumn {
+  address,
   adminFamily,
   blurhash,
   color,
@@ -153783,6 +159098,8 @@ enum Enum_StoresSelectColumn {
 
 String toJson_Enum_StoresSelectColumn(Enum_StoresSelectColumn e) {
   switch (e) {
+    case Enum_StoresSelectColumn.address:
+      return r'address';
     case Enum_StoresSelectColumn.adminFamily:
       return r'adminFamily';
     case Enum_StoresSelectColumn.blurhash:
@@ -153804,6 +159121,8 @@ String toJson_Enum_StoresSelectColumn(Enum_StoresSelectColumn e) {
 
 Enum_StoresSelectColumn fromJson_Enum_StoresSelectColumn(String value) {
   switch (value) {
+    case r'address':
+      return Enum_StoresSelectColumn.address;
     case r'adminFamily':
       return Enum_StoresSelectColumn.adminFamily;
     case r'blurhash':
@@ -153824,6 +159143,7 @@ Enum_StoresSelectColumn fromJson_Enum_StoresSelectColumn(String value) {
 }
 
 enum Enum_StoresUpdateColumn {
+  address,
   adminFamily,
   blurhash,
   color,
@@ -153836,6 +159156,8 @@ enum Enum_StoresUpdateColumn {
 
 String toJson_Enum_StoresUpdateColumn(Enum_StoresUpdateColumn e) {
   switch (e) {
+    case Enum_StoresUpdateColumn.address:
+      return r'address';
     case Enum_StoresUpdateColumn.adminFamily:
       return r'adminFamily';
     case Enum_StoresUpdateColumn.blurhash:
@@ -153857,6 +159179,8 @@ String toJson_Enum_StoresUpdateColumn(Enum_StoresUpdateColumn e) {
 
 Enum_StoresUpdateColumn fromJson_Enum_StoresUpdateColumn(String value) {
   switch (value) {
+    case r'address':
+      return Enum_StoresUpdateColumn.address;
     case r'adminFamily':
       return Enum_StoresUpdateColumn.adminFamily;
     case r'blurhash':

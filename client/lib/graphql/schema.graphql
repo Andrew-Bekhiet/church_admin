@@ -3798,6 +3798,7 @@ type ShammasLevelsVarianceFields {
 
 "columns and relationships of \"stores\""
 type Stores {
+    address: String
     adminFamily: uuid
     "A computed field, executes function \"store_areas\""
     areas(
@@ -3872,6 +3873,7 @@ type StoresAvgFields {
 
 "aggregate max on columns"
 type StoresMaxFields {
+    address: String
     adminFamily: uuid
     blurhash: String
     color: bigint
@@ -3882,6 +3884,7 @@ type StoresMaxFields {
 
 "aggregate min on columns"
 type StoresMinFields {
+    address: String
     adminFamily: uuid
     blurhash: String
     color: bigint
@@ -9835,6 +9838,8 @@ enum StoresConstraint {
 "select columns of table \"stores\""
 enum StoresSelectColumn {
     "column name"
+    address
+    "column name"
     adminFamily
     "column name"
     blurhash
@@ -9852,6 +9857,8 @@ enum StoresSelectColumn {
 
 "update columns of table \"stores\""
 enum StoresUpdateColumn {
+    "column name"
+    address
     "column name"
     adminFamily
     "column name"
@@ -14597,6 +14604,7 @@ input StoresBoolExp {
     _and: [StoresBoolExp!]
     _not: StoresBoolExp
     _or: [StoresBoolExp!]
+    address: StringComparisonExp
     adminFamily: UuidComparisonExp
     areas: AreasBoolExp
     blurhash: StringComparisonExp
@@ -14619,6 +14627,7 @@ input StoresIncInput {
 
 "input type for inserting data into table \"stores\""
 input StoresInsertInput {
+    address: String
     adminFamily: uuid
     blurhash: String
     color: bigint
@@ -14631,6 +14640,7 @@ input StoresInsertInput {
 
 "order by max() on columns of table \"stores\""
 input StoresMaxOrderBy {
+    address: OrderBy
     adminFamily: OrderBy
     blurhash: OrderBy
     color: OrderBy
@@ -14641,6 +14651,7 @@ input StoresMaxOrderBy {
 
 "order by min() on columns of table \"stores\""
 input StoresMinOrderBy {
+    address: OrderBy
     adminFamily: OrderBy
     blurhash: OrderBy
     color: OrderBy
@@ -14658,6 +14669,7 @@ input StoresOnConflict {
 
 "Ordering options when selecting data from \"stores\"."
 input StoresOrderBy {
+    address: OrderBy
     adminFamily: OrderBy
     areasAggregate: AreasAggregateOrderBy
     blurhash: OrderBy
@@ -14680,6 +14692,7 @@ input StoresPkColumnsInput {
 
 "input type for updating data in table \"stores\""
 input StoresSetInput {
+    address: String
     adminFamily: uuid
     blurhash: String
     color: bigint
@@ -14714,6 +14727,7 @@ input StoresStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input StoresStreamCursorValueInput {
+    address: String
     adminFamily: uuid
     blurhash: String
     color: bigint

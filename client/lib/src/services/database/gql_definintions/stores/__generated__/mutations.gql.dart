@@ -21,6 +21,7 @@ class Variables_Mutation_deleteStore {
   Map<String, dynamic> _$data;
 
   UuidValue get storeId => (_$data['storeId'] as UuidValue);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$storeId = storeId;
@@ -33,6 +34,7 @@ class Variables_Mutation_deleteStore {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -211,6 +213,7 @@ class _CopyWithImpl_Mutation_deleteStore<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk {
     final local$deleteStoresByPk = _instance.deleteStoresByPk;
     return local$deleteStoresByPk == null
@@ -231,6 +234,7 @@ class _CopyWithStubImpl_Mutation_deleteStore<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
 }
@@ -310,6 +314,7 @@ class Variables_Mutation_insertStore {
 
   Input_StoresInsertInput get newStore =>
       (_$data['newStore'] as Input_StoresInsertInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$newStore = newStore;
@@ -322,6 +327,7 @@ class Variables_Mutation_insertStore {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -500,6 +506,7 @@ class _CopyWithImpl_Mutation_insertStore<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Store<TRes> get insertStoresOne {
     final local$insertStoresOne = _instance.insertStoresOne;
     return local$insertStoresOne == null
@@ -520,6 +527,7 @@ class _CopyWithStubImpl_Mutation_insertStore<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Store<TRes> get insertStoresOne =>
       CopyWith_Fragment_Store.stub(_res);
 }
@@ -603,8 +611,10 @@ class Variables_Mutation_updateStore {
   Map<String, dynamic> _$data;
 
   UuidValue get storeId => (_$data['storeId'] as UuidValue);
+
   Input_StoresSetInput get newStore =>
       (_$data['newStore'] as Input_StoresSetInput);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$storeId = storeId;
@@ -619,6 +629,7 @@ class Variables_Mutation_updateStore {
             this,
             (i) => i,
           );
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -818,6 +829,7 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
   CopyWith_Fragment_Store<TRes> get updateStoresByPk {
     final local$updateStoresByPk = _instance.updateStoresByPk;
     return local$updateStoresByPk == null
@@ -838,6 +850,7 @@ class _CopyWithStubImpl_Mutation_updateStore<TRes>
     String? $__typename,
   }) =>
       _res;
+
   CopyWith_Fragment_Store<TRes> get updateStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
 }

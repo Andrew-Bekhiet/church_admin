@@ -62,25 +62,26 @@ class _ViewStoreState extends State<ViewStore> {
       detailsBuilder: (context, store) => SliverList(
         delegate: SliverChildListDelegate(
           [
-            if (store.geolocation != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: FilledButton.tonalIcon(
-                  label: const Text('الموقع على الخريطة'),
-                  icon: const Icon(Icons.map),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ViewGeodataMap(
-                        initialGeomapOptions:
-                            GeomapOptions(selectedStores: {store}),
+            CopiablePropertyWidget(
+              'العنوان والموقع',
+              store.address,
+              additionalOptions: [
+                if (store.geolocation != null)
+                  IconButton(
+                    icon: const Icon(Icons.map),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ViewGeodataMap(
+                          initialGeomapOptions: GeomapOptions(
+                            selectedFamilies: {store},
+                          ),
+                        ),
                       ),
                     ),
+                    tooltip: 'إظهار على الخريطة',
                   ),
-                ),
-              ),
+              ],
+            ),
             ListTile(
               title: const Text('المناطق التي يظهر بها'),
               subtitle: Column(

@@ -18,6 +18,7 @@ subscription watchStore($id: uuid!) {
       ...Street
     }
     lastEdit
+    address
     geolocation
     family {
       ...Family

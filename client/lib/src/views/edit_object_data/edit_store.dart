@@ -67,10 +67,12 @@ class _EditStoreState extends State<EditStore> {
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
-          FilledButton.tonalIcon(
-            onPressed: _editGeolocation(context),
-            icon: const Icon(Icons.edit_location),
-            label: const Text('المكان على الخريطة'),
+          AddressWithLocationField(
+            initialAddress: newStore.address,
+            onAddressChanged: (value) => setState(
+              () => newStore = newStore.copyWith(address: value),
+            ),
+            onEditLocation: _editGeolocation,
           ),
           ObjectSelectionField<Family, Family?>(
             decoration: const InputDecoration(errorMaxLines: 2),
@@ -113,23 +115,24 @@ class _EditStoreState extends State<EditStore> {
     );
   }
 
-  void Function() _editGeolocation(BuildContext context) => () async {
-        final Store? result = await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => EditStoreLocationMap(
-              onSaved: Navigator.of(context).pop,
-              initialStore: newStore,
-              geomapOptions: GeomapOptions(
-                layers: const {
-                  GeoMapLayer.stores,
-                },
-                selectedStores: {newStore},
-              ),
-            ),
+  Future<Point?> _editGeolocation(BuildContext context) async {
+    final Store? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditStoreLocationMap(
+          onSaved: Navigator.of(context).pop,
+          initialStore: newStore,
+          geomapOptions: GeomapOptions(
+            layers: const {
+              GeoMapLayer.stores,
+            },
+            selectedStores: {newStore},
           ),
-        );
-        if (result != null) {
-          newStore = result;
-        }
-      };
+        ),
+      ),
+    );
+    if (result != null) {
+      newStore = result;
+    }
+    return result?.geolocation;
+  }
 }

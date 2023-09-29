@@ -159,6 +159,7 @@ abstract final class AdvancedQueriesMetadata {
       ('name', 'الاسم'),
       ('adminFamily', 'العائلة المسؤولة'),
       ('geolocation', 'الموقع'),
+      ('address', 'العنوان'),
       ('color', 'اللون'),
       ('areas', 'المناطق'),
       ('streets', 'الشوارع'),
