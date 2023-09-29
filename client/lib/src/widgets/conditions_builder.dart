@@ -256,9 +256,7 @@ class ConditionBuilder extends StatelessWidget {
               type: conditionFieldMetadata.type,
               condition: condition,
               onChanged: (value) {
-                final isNested = conditionFieldMetadata.dummyInstance
-                        is ViewableWithID &&
-                    conditionFieldMetadata.dummyInstance is! UserPermission &&
+                final isNested = conditionFieldMetadata.isNestabale &&
                     condition.field != 'id';
 
                 onValueChanged(value, isNested);
