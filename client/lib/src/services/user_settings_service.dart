@@ -25,13 +25,14 @@ class UserSettingsService {
       box.put('greatFeastTheme', value);
 
   String? getSecondLineFor(Type t) =>
-      box.get((t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine');
+      box.get(AdvancedQueriesMetadata.queryableTypes[t]!.$2 + 'SecondLine');
   Future<void> setSecondLineFor(Type t, String? value) => box.put(
-        (t.toString().replaceAll(RegExp(r'_|\$'), '')) + 'SecondLine',
+        AdvancedQueriesMetadata.queryableTypes[t]!.$2 + 'SecondLine',
         value,
       );
 
   Future<void> setupDefaults() async {
+    await setGreatFeastTheme(true);
     await setSecondLineFor(Area, 'lastVisit');
     await setSecondLineFor(Street, 'lastVisit');
     await setSecondLineFor(Family, 'lastVisit');
