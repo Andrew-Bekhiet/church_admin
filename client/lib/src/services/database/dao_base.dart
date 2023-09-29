@@ -9,8 +9,8 @@ abstract class DAOBase<T extends ViewableWithID> {
 
   final DatabaseService db;
 
-  DBGraphQLClient get graphQLClient => db.graphQLClient;
-
   @protected
   final T Function(Json json) fromJson;
+
+  DBGraphQLClient get graphQLClient => db.graphQLClient;
 }

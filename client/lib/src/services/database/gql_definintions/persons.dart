@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart';
-import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 import 'package:uuid/uuid.dart';
 
@@ -113,23 +112,12 @@ class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
   @override
   GQLPaginatableStream<Person> streamAll({
     Stream<String?>? searchQuery,
-    String? secondLineFieldName,
     List<Input_PersonsBoolExp>? where,
   }) {
     return streamingProxy.streamAll(
       searchQuery: searchQuery,
       where: where,
-      streamAllConfig: baseStreamAllConfig.copyWith(
-        document: secondLineFieldName == null
-            ? baseStreamAllConfig.document
-            : baseStreamAllConfig.document.addSelectionFields(
-                {
-                  'persons': [
-                    FieldNode(name: NameNode(value: secondLineFieldName)),
-                  ],
-                },
-              ),
-      ),
+      streamAllConfig: baseStreamAllConfig,
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
@@ -34,7 +35,16 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp> on DAOBase<T> {
 
 class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
     extends DAOBase<T> {
-  StreamableDAOProxy({required super.db, required super.fromJson});
+  StreamableDAOProxy({
+    required super.db,
+    required super.fromJson,
+    String? secondLineFieldNameOverride,
+  }) : _secondLineFieldNameOverride = secondLineFieldNameOverride;
+
+  final String? _secondLineFieldNameOverride;
+
+  String? get secondLineFieldName =>
+      _secondLineFieldNameOverride ?? UserSettingsService.I.getSecondLineFor(T);
 
   GQLPaginatableStream<T> streamAll({
     required StreamAllConfig<T, TBoolExp> streamAllConfig,
@@ -47,7 +57,7 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
           graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
-              document: streamAllConfig.document,
+              document: _getDocumentWithSecondLine(streamAllConfig),
               operationName: streamAllConfig.effectiveOperationName,
               variables: streamAllConfig.variables ??
                   streamAllConfig.varsConstructor?.call(
@@ -59,6 +69,32 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
                   db.parser.singleListParser(fromJson),
             ),
       ),
+    );
+  }
+
+  dynamic _getDocumentWithSecondLine(
+    StreamAllConfig<T, TBoolExp> streamAllConfig,
+  ) {
+    final configDocument = streamAllConfig.document;
+
+    if (secondLineFieldName == null) {
+      return configDocument;
+    }
+
+    final firstSelectionNode =
+        ((configDocument.definitions.first as OperationDefinitionNode)
+                .selectionSet
+                .selections
+                .first as FieldNode)
+            .name
+            .value;
+
+    return configDocument.addSelectionFields(
+      {
+        firstSelectionNode: [
+          FieldNode(name: NameNode(value: secondLineFieldName!)),
+        ],
+      },
     );
   }
 

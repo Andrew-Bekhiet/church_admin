@@ -74,12 +74,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     vsync: this,
   );
 
-  late final _personsController = _createControllerUsing<Person>(
-    ({searchQuery}) => DatabaseService.I.persons.streamAll(
-      searchQuery: searchQuery,
-      secondLineFieldName: UserSettingsService.I.getSecondLineFor(Person),
-    ),
-  );
+  late final _personsController =
+      _createControllerUsing<Person>(DatabaseService.I.persons.streamAll);
   late final _servicesController = _createControllerUsing<Service>(
     DatabaseService.I.services.streamAll,
   );
