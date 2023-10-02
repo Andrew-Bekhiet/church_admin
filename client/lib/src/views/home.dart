@@ -44,12 +44,13 @@ class HomeScreen extends StatefulWidget {
       return MultiFactorLogin.route.path;
     } else if (!AuthService.I.currentUser!.permissions.approved) {
       return UnapprovedUser.route.path;
-    } else if (LocalAuthService.I.shouldAuthenticate) {
+    } /* else if (LocalAuthService.I.shouldAuthenticate) {
       return Uri(
         path: AuthenticateScreen.route.path,
         queryParameters: {'next': state.uri.toString()},
       ).toString();
-    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
+    } */
+    else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
       return Uri(
         path: UpdateUserSpiritData.route.path,
         queryParameters: {'forced': 'true'},
@@ -90,6 +91,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    _listenToLocalAuth();
 
     _tabController.addListener(_tabControllerListener);
   }
@@ -160,6 +163,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           );
         },
       ),
+    );
+  }
+
+  void _listenToLocalAuth() {
+    final entry = OverlayEntry(
+      builder: (context) => const AuthenticateScreen(),
+      opaque: true,
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => Overlay.of(context).insert(entry),
+    );
+
+    LocalAuthService.I.refreshUIStream.listen(
+      (_) {
+        if (LocalAuthService.I.shouldAuthenticate && !entry.mounted) {
+          Overlay.of(context).insert(entry);
+        } else if (!LocalAuthService.I.shouldAuthenticate) {
+          entry.remove();
+        }
+      },
     );
   }
 
