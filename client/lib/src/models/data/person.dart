@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,17 @@ part 'person.freezed.dart';
 part 'person.g.dart';
 
 @freezed
+@TypeMetadata(ignoreFields: ['blurhash', 'otherPhones'])
 class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$PersonFields;
+
+  static final QueryableType<Person> queryableType = QueryableType<Person>(
+    name: 'Person',
+    label: 'الأشخاص',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Person.fromJson,
+  );
+
   factory Person({
     required String id,
     required String name,
@@ -18,6 +29,7 @@ class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
     String? mainPhone,
     @Default({}) Json otherPhones,
     DateTime? birthdate,
+    String? birthday,
     @Default(true) bool gender,
     @Default(false) bool isShammas,
     String? shammasLevelId,
@@ -67,35 +79,46 @@ class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
     @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
     List<Hobby>? hobbies,
     User? user,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? kodasHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? confessionHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? callHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? visitHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? editHistoryAggregate,
+    List<LastRecordedByInfo>? kodasHistory,
+    List<LastRecordedByInfo>? confessionHistory,
+    List<LastRecordedByInfo>? callHistory,
+    List<LastRecordedByInfo>? visitHistory,
+    List<LastRecordedByInfo>? editHistory,
+    HistoryAggregateData? kodasHistoryAggregate,
+    HistoryAggregateData? confessionHistoryAggregate,
+    HistoryAggregateData? callHistoryAggregate,
+    HistoryAggregateData? visitHistoryAggregate,
+    HistoryAggregateData? editHistoryAggregate,
   }) = _Person;
   Person._() : super();
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
+
+  @override
+  LastRecordedByInfo? get lastConfession =>
+      super.lastConfession ??
+      confessionHistoryAggregate?.aggregate.max ??
+      confessionHistory?.singleOrNull;
+  @override
+  LastRecordedByInfo? get lastKodas =>
+      super.lastKodas ??
+      kodasHistoryAggregate?.aggregate.max ??
+      kodasHistory?.singleOrNull;
+  @override
+  LastRecordedByInfo? get lastCall =>
+      super.lastCall ??
+      callHistoryAggregate?.aggregate.max ??
+      callHistory?.singleOrNull;
+  @override
+  LastRecordedByInfo? get lastVisit =>
+      super.lastVisit ??
+      visitHistoryAggregate?.aggregate.max ??
+      visitHistory?.singleOrNull;
+  @override
+  LastRecordedByInfo? get lastEdit =>
+      super.lastEdit ??
+      editHistoryAggregate?.aggregate.max ??
+      editHistory?.singleOrNull;
 
   @override
   ObjectImageInfo get imageInfo =>

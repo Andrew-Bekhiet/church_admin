@@ -8,7 +8,7 @@ subscription watchAllFamilies(
   }
 }
 
-subscription watchFamily($id: uuid!) {
+subscription watchFamily($id: Uuid!) {
   familiesByPk(id: $id) {
     ...Family
     areas(orderBy: { name: ASC }) {

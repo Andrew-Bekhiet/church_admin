@@ -12,6 +12,7 @@ abstract class PaginatableStreamBase<T> with Stream<List<T>> {
   bool get canPaginateBackward;
 
   int get currentOffset;
+  T? get currentCursor;
 
   ValueStream<bool> get onLoadingChanged;
 

@@ -5,23 +5,18 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'study_years/__generated__/subscriptions.gql.dart';
 
 class StudyYearsDAO extends DAOBase<StudyYear>
-    with StreamableDAO<StudyYear, Input_StudyYearsBoolExp> {
+    with
+        StreamableDAO<StudyYear, Input_StudyYearsBoolExp,
+            Input_StudyYearsOrderBy> {
   StudyYearsDAO({
     required super.db,
   }) : super(fromJson: StudyYear.fromJson);
 
   @override
-  StreamAllConfig<StudyYear, Input_StudyYearsBoolExp> get baseStreamAllConfig =>
-      StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllStudyYears,
-        varsConstructor: ({required event, required where}) => graphQLClient
-            .getDefaultSearchVars(
-              event,
-              Variables_Subscription_watchAllStudyYears.new,
-              Input_StudyYearsBoolExp.new,
-            )
-            .toJson(),
-      );
+  StreamAllConfig<StudyYear, Input_StudyYearsBoolExp, Input_StudyYearsOrderBy>
+      get baseStreamAllConfig => const StreamAllConfig(
+            document: documentNodeSubscriptionwatchAllStudyYears,
+          );
 
   @override
   StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>

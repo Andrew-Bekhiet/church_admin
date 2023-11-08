@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,17 @@ part 'store.freezed.dart';
 part 'store.g.dart';
 
 @freezed
+@TypeMetadata()
 class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$StoreFields;
+
+  static final QueryableType<Store> queryableType = QueryableType<Store>(
+    name: 'Store',
+    label: 'المتاجر',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Store.fromJson,
+  );
+
   factory Store({
     required String id,
     required String name,

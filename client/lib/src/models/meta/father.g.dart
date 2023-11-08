@@ -3,16 +3,34 @@
 part of 'father.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$FatherFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Father>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Father _$$_FatherFromJson(Map json) => _$_Father(
+_$FatherImpl _$$FatherImplFromJson(Map json) => _$FatherImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       churchId: json['churchId'] as String?,
     );
 
-Map<String, dynamic> _$$_FatherToJson(_$_Father instance) => <String, dynamic>{
+Map<String, dynamic> _$$FatherImplToJson(_$FatherImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'churchId': instance.churchId,

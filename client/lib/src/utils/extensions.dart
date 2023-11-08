@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
+import 'package:gql/ast.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:timeago/timeago.dart';
 
@@ -166,4 +167,9 @@ extension CopyDateTimeRange on DateTimeRange {
       end: end ?? this.end,
     );
   }
+}
+
+extension FirstSelectionNode on OperationDefinitionNode {
+  FieldNode get firstSelectionNode =>
+      selectionSet.selections.first as FieldNode;
 }

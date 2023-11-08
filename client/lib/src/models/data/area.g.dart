@@ -3,10 +3,47 @@
 part of 'area.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$AreaFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Area>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'bounds': FieldMetadata<Polygon>(
+    name: 'bounds',
+    label: 'الموقع',
+    operators: Operator.spatial,
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'adminUsers': FieldMetadata<User>(
+    name: 'adminUsers',
+    label: 'الخدام المسؤلين',
+    isOrderable: false,
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Area _$$_AreaFromJson(Map json) => _$_Area(
+_$AreaImpl _$$AreaImplFromJson(Map json) => _$AreaImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       bounds: polygonFromJson(json['bounds']),
@@ -22,7 +59,8 @@ _$_Area _$$_AreaFromJson(Map json) => _$_Area(
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
     );
 
-Map<String, dynamic> _$$_AreaToJson(_$_Area instance) => <String, dynamic>{
+Map<String, dynamic> _$$AreaImplToJson(_$AreaImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'bounds': polygonToJson(instance.bounds),

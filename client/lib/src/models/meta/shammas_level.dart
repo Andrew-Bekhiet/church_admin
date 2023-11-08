@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,9 +8,20 @@ part 'shammas_level.freezed.dart';
 part 'shammas_level.g.dart';
 
 @freezed
+@TypeMetadata()
 class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$ShammasLevelFields;
+
+  static final QueryableType<ShammasLevel> queryableType =
+      QueryableType<ShammasLevel>(
+    name: 'ShammasLevel',
+    label: 'رتب الشموسية',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: ShammasLevel.fromJson,
+  );
+
   factory ShammasLevel({
     required int order,
     required String name,

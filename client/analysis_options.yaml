@@ -11,7 +11,6 @@ dart_code_metrics:
   # - prefer-conditional-expressions
   rules:
     - avoid-cascade-after-if-null
-    - avoid-collection-methods-with-unrelated-types
     - avoid-double-slash-imports
     - avoid-duplicate-exports
     - avoid-global-state

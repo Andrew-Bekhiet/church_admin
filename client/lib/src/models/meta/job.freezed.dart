@@ -65,18 +65,18 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
-  factory _$$_JobCopyWith(_$_Job value, $Res Function(_$_Job) then) =
-      __$$_JobCopyWithImpl<$Res>;
+abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
+  factory _$$JobImplCopyWith(_$JobImpl value, $Res Function(_$JobImpl) then) =
+      __$$JobImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
-    implements _$$_JobCopyWith<$Res> {
-  __$$_JobCopyWithImpl(_$_Job _value, $Res Function(_$_Job) _then)
+class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
+    implements _$$JobImplCopyWith<$Res> {
+  __$$JobImplCopyWithImpl(_$JobImpl _value, $Res Function(_$JobImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_Job(
+    return _then(_$JobImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -100,10 +100,11 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Job extends _Job {
-  _$_Job({required this.id, required this.name}) : super._();
+class _$JobImpl extends _Job {
+  _$JobImpl({required this.id, required this.name}) : super._();
 
-  factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
+  factory _$JobImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobImplFromJson(json);
 
   @override
   final String id;
@@ -119,7 +120,7 @@ class _$_Job extends _Job {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Job &&
+            other is _$JobImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -131,22 +132,23 @@ class _$_Job extends _Job {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_JobCopyWith<_$_Job> get copyWith =>
-      __$$_JobCopyWithImpl<_$_Job>(this, _$identity);
+  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
+      __$$JobImplCopyWithImpl<_$JobImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_JobToJson(
+    return _$$JobImplToJson(
       this,
     );
   }
 }
 
 abstract class _Job extends Job {
-  factory _Job({required final String id, required final String name}) = _$_Job;
+  factory _Job({required final String id, required final String name}) =
+      _$JobImpl;
   _Job._() : super._();
 
-  factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
+  factory _Job.fromJson(Map<String, dynamic> json) = _$JobImpl.fromJson;
 
   @override
   String get id;
@@ -154,5 +156,6 @@ abstract class _Job extends Job {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;
+  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

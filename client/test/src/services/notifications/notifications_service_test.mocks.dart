@@ -984,26 +984,18 @@ class MockUserSettingsService extends _i1.Mock
       ) as _i10.Future<void>);
 
   @override
-  String? getSecondLineFor(Type? t) => (super.noSuchMethod(
-        Invocation.method(
-          #getSecondLineFor,
-          [t],
-        ),
-        returnValueForMissingStub: null,
-      ) as String?);
-
-  @override
-  _i10.Future<void> setSecondLineFor(
-    Type? t,
-    String? value,
-  ) =>
+  _i10.Future<void> setSecondLineFor<T>({
+    required String? value,
+    Type? type,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #setSecondLineFor,
-          [
-            t,
-            value,
-          ],
+          [],
+          {
+            #value: value,
+            #type: type,
+          },
         ),
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),

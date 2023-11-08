@@ -8,17 +8,16 @@ import 'persons/__generated__/queries.gql.dart';
 import 'persons/__generated__/subscriptions.gql.dart';
 import 'persons/helpers.dart';
 
-class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
+class PersonsDAO
+    extends FullCRUDDAO<Person, Input_PersonsBoolExp, Input_PersonsOrderBy> {
   PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
 
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
   @override
-  late final StreamAllConfig<Person, Input_PersonsBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllPersons,
-    varsConstructor: _streamAllVarsConstructor,
-  );
+  late final StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>
+      baseStreamAllConfig =
+      const StreamAllConfig(document: documentNodeSubscriptionwatchAllPersons);
   @override
   final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(
@@ -42,24 +41,6 @@ class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
     document: documentNodeMutationinsertPerson,
     varsConstructor: _createPersonVarsConstructor,
   );
-
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Person> event,
-    required List<Input_PersonsBoolExp> where,
-  }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-      event,
-      Variables_Subscription_watchAllPersons.new,
-      Input_PersonsBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-    ).toJson();
-  }
 
   Json _streamSingleByIdVarsConstructor({
     required UuidValue id,
@@ -106,18 +87,6 @@ class PersonsDAO extends FullCRUDDAO<Person, Input_PersonsBoolExp> {
           groupsLimit: groupsLimit,
         ),
       ),
-    );
-  }
-
-  @override
-  GQLPaginatableStream<Person> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_PersonsBoolExp>? where,
-  }) {
-    return streamingProxy.streamAll(
-      searchQuery: searchQuery,
-      where: where,
-      streamAllConfig: baseStreamAllConfig,
     );
   }
 

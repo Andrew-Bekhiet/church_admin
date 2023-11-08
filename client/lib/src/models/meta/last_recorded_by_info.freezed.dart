@@ -92,11 +92,11 @@ class _$LastRecordedByInfoCopyWithImpl<$Res, $Val extends LastRecordedByInfo>
 }
 
 /// @nodoc
-abstract class _$$_LastRecordedByInfoCopyWith<$Res>
+abstract class _$$LastRecordedByInfoImplCopyWith<$Res>
     implements $LastRecordedByInfoCopyWith<$Res> {
-  factory _$$_LastRecordedByInfoCopyWith(_$_LastRecordedByInfo value,
-          $Res Function(_$_LastRecordedByInfo) then) =
-      __$$_LastRecordedByInfoCopyWithImpl<$Res>;
+  factory _$$LastRecordedByInfoImplCopyWith(_$LastRecordedByInfoImpl value,
+          $Res Function(_$LastRecordedByInfoImpl) then) =
+      __$$LastRecordedByInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -109,11 +109,11 @@ abstract class _$$_LastRecordedByInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LastRecordedByInfoCopyWithImpl<$Res>
-    extends _$LastRecordedByInfoCopyWithImpl<$Res, _$_LastRecordedByInfo>
-    implements _$$_LastRecordedByInfoCopyWith<$Res> {
-  __$$_LastRecordedByInfoCopyWithImpl(
-      _$_LastRecordedByInfo _value, $Res Function(_$_LastRecordedByInfo) _then)
+class __$$LastRecordedByInfoImplCopyWithImpl<$Res>
+    extends _$LastRecordedByInfoCopyWithImpl<$Res, _$LastRecordedByInfoImpl>
+    implements _$$LastRecordedByInfoImplCopyWith<$Res> {
+  __$$LastRecordedByInfoImplCopyWithImpl(_$LastRecordedByInfoImpl _value,
+      $Res Function(_$LastRecordedByInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_LastRecordedByInfoCopyWithImpl<$Res>
     Object? recordedBy = freezed,
     Object? user = freezed,
   }) {
-    return _then(_$_LastRecordedByInfo(
+    return _then(_$LastRecordedByInfoImpl(
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -142,15 +142,15 @@ class __$$_LastRecordedByInfoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LastRecordedByInfo extends _LastRecordedByInfo {
-  _$_LastRecordedByInfo(
+class _$LastRecordedByInfoImpl extends _LastRecordedByInfo {
+  _$LastRecordedByInfoImpl(
       {required this.time,
       @JsonKey(readValue: readRecordedBy) this.recordedBy,
       this.user})
       : super._();
 
-  factory _$_LastRecordedByInfo.fromJson(Map<String, dynamic> json) =>
-      _$$_LastRecordedByInfoFromJson(json);
+  factory _$LastRecordedByInfoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LastRecordedByInfoImplFromJson(json);
 
   @override
   final DateTime time;
@@ -169,7 +169,7 @@ class _$_LastRecordedByInfo extends _LastRecordedByInfo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LastRecordedByInfo &&
+            other is _$LastRecordedByInfoImpl &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.recordedBy, recordedBy) ||
                 other.recordedBy == recordedBy) &&
@@ -183,13 +183,13 @@ class _$_LastRecordedByInfo extends _LastRecordedByInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LastRecordedByInfoCopyWith<_$_LastRecordedByInfo> get copyWith =>
-      __$$_LastRecordedByInfoCopyWithImpl<_$_LastRecordedByInfo>(
+  _$$LastRecordedByInfoImplCopyWith<_$LastRecordedByInfoImpl> get copyWith =>
+      __$$LastRecordedByInfoImplCopyWithImpl<_$LastRecordedByInfoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LastRecordedByInfoToJson(
+    return _$$LastRecordedByInfoImplToJson(
       this,
     );
   }
@@ -199,11 +199,11 @@ abstract class _LastRecordedByInfo extends LastRecordedByInfo {
   factory _LastRecordedByInfo(
       {required final DateTime time,
       @JsonKey(readValue: readRecordedBy) final String? recordedBy,
-      final User? user}) = _$_LastRecordedByInfo;
+      final User? user}) = _$LastRecordedByInfoImpl;
   _LastRecordedByInfo._() : super._();
 
   factory _LastRecordedByInfo.fromJson(Map<String, dynamic> json) =
-      _$_LastRecordedByInfo.fromJson;
+      _$LastRecordedByInfoImpl.fromJson;
 
   @override
   DateTime get time;
@@ -214,6 +214,6 @@ abstract class _LastRecordedByInfo extends LastRecordedByInfo {
   User? get user;
   @override
   @JsonKey(ignore: true)
-  _$$_LastRecordedByInfoCopyWith<_$_LastRecordedByInfo> get copyWith =>
+  _$$LastRecordedByInfoImplCopyWith<_$LastRecordedByInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

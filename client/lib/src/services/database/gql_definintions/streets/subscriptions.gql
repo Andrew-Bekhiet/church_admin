@@ -9,7 +9,7 @@ subscription watchAllStreets(
   }
 }
 
-subscription watchStreet($id: uuid!) {
+subscription watchStreet($id: Uuid!) {
   streetsByPk(id: $id) {
     ...Street
     areas(orderBy: { name: ASC }) {

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,17 @@ part 'street.freezed.dart';
 part 'street.g.dart';
 
 @freezed
+@TypeMetadata()
 class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$StreetFields;
+
+  static final QueryableType<Street> queryableType = QueryableType<Street>(
+    name: 'Street',
+    label: 'الشوارع',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Street.fromJson,
+  );
+
   factory Street({
     required String id,
     required String name,

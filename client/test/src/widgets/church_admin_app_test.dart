@@ -36,21 +36,18 @@ void main() {
     'Church Admin App => First Screen',
     (tester) async {
       await tester.pumpWidget(const ChurchAdminApp());
+      await tester.pump();
 
       if (firstScreenVariant.currentValue ==
           FirstScreenVariantEnum.values.first) {
         verify(LoggingService.I.navigatorObserver);
       }
 
-      // await tester.pumpAndSettle();
-
       final goRouter = tester
           .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
           .goRouter;
 
-      final lastMatch = goRouter
-          .routerDelegate
-          .currentConfiguration.last;
+      final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
 
       final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
           ? lastMatch.matches
@@ -61,7 +58,13 @@ void main() {
         firstScreenVariant.expectedLocation(),
       );
 
-      // await _disposeLocalAuthService();
+      if (firstScreenVariant.currentValue ==
+          FirstScreenVariantEnum.authenticate) {
+        expect(
+          find.byType(AuthenticateScreen, skipOffstage: false),
+          findsOneWidget,
+        );
+      }
     },
     variant: firstScreenVariant,
   );
@@ -329,7 +332,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       case FirstScreenVariantEnum.updateUserSpiritData:
         return '/updateUserSpiritData?forced=true';
       case FirstScreenVariantEnum.authenticate:
-        return '/authenticate?next=%2F';
       case FirstScreenVariantEnum.home:
         return '/';
       case null:
@@ -358,7 +360,7 @@ enum FirstScreenVariantEnum {
 
 class FakeUserSettings extends Fake implements UserSettingsService {
   @override
-  String? getSecondLineFor(Type t) {
+  String? getSecondLineFor<T>([Type? t]) {
     return null;
   }
 }

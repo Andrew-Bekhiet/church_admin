@@ -3,35 +3,45 @@
 part of 'aggregate_data.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$AggregateDataFields = <String, FieldMetadata>{
+  'count': FieldMetadata<int>(
+    name: 'count',
+    label: 'العدد',
+    operators: Operator.comparitive,
+  ),
+  'max': FieldMetadata<LastRecordedByInfo>(
+    name: 'max',
+    label: 'أقصى',
+  ),
+  'min': FieldMetadata<LastRecordedByInfo>(
+    name: 'min',
+    label: 'أدنى',
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AggregateData<T> _$$_AggregateDataFromJson<T>(
-  Map json,
-  T Function(Object? json) fromJsonT,
-) =>
-    _$_AggregateData<T>(
+_$AggregateDataImpl _$$AggregateDataImplFromJson(Map json) =>
+    _$AggregateDataImpl(
       count: json['count'] as int?,
-      max: _$nullableGenericFromJson(json['max'], fromJsonT),
+      max: _readLastRecordedByInfo(json, 'max') == null
+          ? null
+          : LastRecordedByInfo.fromJson(Map<String, Object?>.from(
+              _readLastRecordedByInfo(json, 'max') as Map)),
+      min: _readLastRecordedByInfo(json, 'min') == null
+          ? null
+          : LastRecordedByInfo.fromJson(Map<String, Object?>.from(
+              _readLastRecordedByInfo(json, 'min') as Map)),
     );
 
-Map<String, dynamic> _$$_AggregateDataToJson<T>(
-  _$_AggregateData<T> instance,
-  Object? Function(T value) toJsonT,
-) =>
+Map<String, dynamic> _$$AggregateDataImplToJson(_$AggregateDataImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
-      'max': _$nullableGenericToJson(instance.max, toJsonT),
+      'max': instance.max?.toJson(),
+      'min': instance.min?.toJson(),
     };
-
-T? _$nullableGenericFromJson<T>(
-  Object? input,
-  T Function(Object? json) fromJson,
-) =>
-    input == null ? null : fromJson(input);
-
-Object? _$nullableGenericToJson<T>(
-  T? input,
-  Object? Function(T value) toJson,
-) =>
-    input == null ? null : toJson(input);

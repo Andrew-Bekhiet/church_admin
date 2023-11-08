@@ -6,7 +6,7 @@ part of 'admin_on_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AdminOnData _$$_AdminOnDataFromJson(Map json) => _$_AdminOnData(
+_$AdminOnDataImpl _$$AdminOnDataImplFromJson(Map json) => _$AdminOnDataImpl(
       permissionId: json['permissionId'] as String,
       area: json['area'] == null
           ? null
@@ -34,7 +34,7 @@ _$_AdminOnData _$$_AdminOnDataFromJson(Map json) => _$_AdminOnData(
       groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
     );
 
-Map<String, dynamic> _$$_AdminOnDataToJson(_$_AdminOnData instance) =>
+Map<String, dynamic> _$$AdminOnDataImplToJson(_$AdminOnDataImpl instance) =>
     <String, dynamic>{
       'permissionId': instance.permissionId,
       'area': instance.area?.toJson(),

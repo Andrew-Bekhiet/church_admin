@@ -66,19 +66,21 @@ class _$SchoolCopyWithImpl<$Res, $Val extends School>
 }
 
 /// @nodoc
-abstract class _$$_SchoolCopyWith<$Res> implements $SchoolCopyWith<$Res> {
-  factory _$$_SchoolCopyWith(_$_School value, $Res Function(_$_School) then) =
-      __$$_SchoolCopyWithImpl<$Res>;
+abstract class _$$SchoolImplCopyWith<$Res> implements $SchoolCopyWith<$Res> {
+  factory _$$SchoolImplCopyWith(
+          _$SchoolImpl value, $Res Function(_$SchoolImpl) then) =
+      __$$SchoolImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_SchoolCopyWithImpl<$Res>
-    extends _$SchoolCopyWithImpl<$Res, _$_School>
-    implements _$$_SchoolCopyWith<$Res> {
-  __$$_SchoolCopyWithImpl(_$_School _value, $Res Function(_$_School) _then)
+class __$$SchoolImplCopyWithImpl<$Res>
+    extends _$SchoolCopyWithImpl<$Res, _$SchoolImpl>
+    implements _$$SchoolImplCopyWith<$Res> {
+  __$$SchoolImplCopyWithImpl(
+      _$SchoolImpl _value, $Res Function(_$SchoolImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +89,7 @@ class __$$_SchoolCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_School(
+    return _then(_$SchoolImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -102,11 +104,11 @@ class __$$_SchoolCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_School extends _School {
-  _$_School({required this.id, required this.name}) : super._();
+class _$SchoolImpl extends _School {
+  _$SchoolImpl({required this.id, required this.name}) : super._();
 
-  factory _$_School.fromJson(Map<String, dynamic> json) =>
-      _$$_SchoolFromJson(json);
+  factory _$SchoolImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SchoolImplFromJson(json);
 
   @override
   final String id;
@@ -122,7 +124,7 @@ class _$_School extends _School {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_School &&
+            other is _$SchoolImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -134,12 +136,12 @@ class _$_School extends _School {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SchoolCopyWith<_$_School> get copyWith =>
-      __$$_SchoolCopyWithImpl<_$_School>(this, _$identity);
+  _$$SchoolImplCopyWith<_$SchoolImpl> get copyWith =>
+      __$$SchoolImplCopyWithImpl<_$SchoolImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SchoolToJson(
+    return _$$SchoolImplToJson(
       this,
     );
   }
@@ -147,10 +149,10 @@ class _$_School extends _School {
 
 abstract class _School extends School {
   factory _School({required final String id, required final String name}) =
-      _$_School;
+      _$SchoolImpl;
   _School._() : super._();
 
-  factory _School.fromJson(Map<String, dynamic> json) = _$_School.fromJson;
+  factory _School.fromJson(Map<String, dynamic> json) = _$SchoolImpl.fromJson;
 
   @override
   String get id;
@@ -158,6 +160,6 @@ abstract class _School extends School {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_SchoolCopyWith<_$_School> get copyWith =>
+  _$$SchoolImplCopyWith<_$SchoolImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

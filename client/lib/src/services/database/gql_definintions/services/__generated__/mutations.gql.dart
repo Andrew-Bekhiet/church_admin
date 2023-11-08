@@ -248,7 +248,7 @@ const documentNodeMutationdeleteService = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'serviceId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -866,7 +866,7 @@ const documentNodeMutationupdateService = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'serviceId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

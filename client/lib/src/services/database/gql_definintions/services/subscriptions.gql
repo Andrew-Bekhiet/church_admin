@@ -27,7 +27,7 @@ subscription watchAllServices(
     }
   }
 }
-subscription watchService($id: uuid!) {
+subscription watchService($id: Uuid!) {
   servicesByPk(id: $id) {
     ...ServiceWithStudyYears
     lastEdit

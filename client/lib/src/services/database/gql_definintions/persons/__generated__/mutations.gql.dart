@@ -247,7 +247,7 @@ const documentNodeMutationdeletePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2012,7 +2012,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2043,7 +2043,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteGroups')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2067,7 +2067,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteServices')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2091,7 +2091,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteHobbies')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2115,7 +2115,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteTags')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2126,7 +2126,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2135,7 +2135,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2144,7 +2144,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastCall')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2153,7 +2153,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastVisit')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2735,7 +2735,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -2753,8 +2753,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(
-                        value: 'confession_history_day_id_person_id_key')),
+                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
               )
             ]),
           ),
@@ -2839,7 +2838,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -2857,8 +2856,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name:
-                        NameNode(value: 'kodas_history_day_id_person_id_key')),
+                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
               )
             ]),
           ),
@@ -5976,7 +5974,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -5985,7 +5983,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -5994,7 +5992,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -6033,7 +6031,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -6051,8 +6049,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(
-                        value: 'confession_history_day_id_person_id_key')),
+                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
               )
             ]),
           ),
@@ -6116,7 +6113,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -6134,8 +6131,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name:
-                        NameNode(value: 'kodas_history_day_id_person_id_key')),
+                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
               )
             ]),
           ),

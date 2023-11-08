@@ -156,14 +156,30 @@ void main() {
 
 Override _setUpUserSettings() {
   final userSettings = MockUserSettingsService();
-  when(userSettings.setSecondLineFor(Area, captureAny))
-      .thenAnswer((_) async {});
-  when(userSettings.setSecondLineFor(Street, captureAny))
-      .thenAnswer((_) async {});
-  when(userSettings.setSecondLineFor(Family, captureAny))
-      .thenAnswer((_) async {});
-  when(userSettings.setSecondLineFor(Person, captureAny))
-      .thenAnswer((_) async {});
+  when(
+    userSettings.setSecondLineFor(
+      type: Area,
+      value: captureAnyNamed('value'),
+    ),
+  ).thenAnswer((_) async {});
+  when(
+    userSettings.setSecondLineFor(
+      type: Street,
+      value: captureAnyNamed('value'),
+    ),
+  ).thenAnswer((_) async {});
+  when(
+    userSettings.setSecondLineFor(
+      type: Family,
+      value: captureAnyNamed('value'),
+    ),
+  ).thenAnswer((_) async {});
+  when(
+    userSettings.setSecondLineFor(
+      type: Person,
+      value: captureAnyNamed('value'),
+    ),
+  ).thenAnswer((_) async {});
 
   return userSettingsServiceProvider.overrideWithValue(userSettings);
 }

@@ -126,9 +126,10 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
 }
 
 /// @nodoc
-abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
-  factory _$$_StreetCopyWith(_$_Street value, $Res Function(_$_Street) then) =
-      __$$_StreetCopyWithImpl<$Res>;
+abstract class _$$StreetImplCopyWith<$Res> implements $StreetCopyWith<$Res> {
+  factory _$$StreetImplCopyWith(
+          _$StreetImpl value, $Res Function(_$StreetImpl) then) =
+      __$$StreetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -146,10 +147,11 @@ abstract class _$$_StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StreetCopyWithImpl<$Res>
-    extends _$StreetCopyWithImpl<$Res, _$_Street>
-    implements _$$_StreetCopyWith<$Res> {
-  __$$_StreetCopyWithImpl(_$_Street _value, $Res Function(_$_Street) _then)
+class __$$StreetImplCopyWithImpl<$Res>
+    extends _$StreetCopyWithImpl<$Res, _$StreetImpl>
+    implements _$$StreetImplCopyWith<$Res> {
+  __$$StreetImplCopyWithImpl(
+      _$StreetImpl _value, $Res Function(_$StreetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -164,7 +166,7 @@ class __$$_StreetCopyWithImpl<$Res>
     Object? areas = freezed,
     Object? lastEdit = freezed,
   }) {
-    return _then(_$_Street(
+    return _then(_$StreetImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -203,8 +205,8 @@ class __$$_StreetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Street extends _Street {
-  _$_Street(
+class _$StreetImpl extends _Street {
+  _$StreetImpl(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) this.line,
@@ -216,8 +218,8 @@ class _$_Street extends _Street {
       : _areas = areas,
         super._();
 
-  factory _$_Street.fromJson(Map<String, dynamic> json) =>
-      _$$_StreetFromJson(json);
+  factory _$StreetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StreetImplFromJson(json);
 
   @override
   final String id;
@@ -255,7 +257,7 @@ class _$_Street extends _Street {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Street &&
+            other is _$StreetImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.line, line) || other.line == line) &&
@@ -285,12 +287,12 @@ class _$_Street extends _Street {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StreetCopyWith<_$_Street> get copyWith =>
-      __$$_StreetCopyWithImpl<_$_Street>(this, _$identity);
+  _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
+      __$$StreetImplCopyWithImpl<_$StreetImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StreetToJson(
+    return _$$StreetImplToJson(
       this,
     );
   }
@@ -305,10 +307,10 @@ abstract class _Street extends Street {
       final DateTime? photoUpdatedAt,
       final String? blurhash,
       final List<Area>? areas,
-      final LastRecordedByInfo? lastEdit}) = _$_Street;
+      final LastRecordedByInfo? lastEdit}) = _$StreetImpl;
   _Street._() : super._();
 
-  factory _Street.fromJson(Map<String, dynamic> json) = _$_Street.fromJson;
+  factory _Street.fromJson(Map<String, dynamic> json) = _$StreetImpl.fromJson;
 
   @override
   String get id;
@@ -330,6 +332,6 @@ abstract class _Street extends Street {
   LastRecordedByInfo? get lastEdit;
   @override
   @JsonKey(ignore: true)
-  _$$_StreetCopyWith<_$_Street> get copyWith =>
+  _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

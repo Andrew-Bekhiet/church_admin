@@ -11,7 +11,7 @@ IterableDifferenceResult<T> diff<T>(Set<T> old, Set<T> $new) {
 }
 
 extension AddSelectionFields on DocumentNode {
-  DocumentNode addSelectionFields(
+  DocumentNode withSelectionFields(
     Map<String, List<FieldNode>> fieldsToAdd,
   ) {
     return DocumentNode(

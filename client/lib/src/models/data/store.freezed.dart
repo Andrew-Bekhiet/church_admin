@@ -168,9 +168,10 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
 }
 
 /// @nodoc
-abstract class _$$_StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
-  factory _$$_StoreCopyWith(_$_Store value, $Res Function(_$_Store) then) =
-      __$$_StoreCopyWithImpl<$Res>;
+abstract class _$$StoreImplCopyWith<$Res> implements $StoreCopyWith<$Res> {
+  factory _$$StoreImplCopyWith(
+          _$StoreImpl value, $Res Function(_$StoreImpl) then) =
+      __$$StoreImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -194,9 +195,11 @@ abstract class _$$_StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
-    implements _$$_StoreCopyWith<$Res> {
-  __$$_StoreCopyWithImpl(_$_Store _value, $Res Function(_$_Store) _then)
+class __$$StoreImplCopyWithImpl<$Res>
+    extends _$StoreCopyWithImpl<$Res, _$StoreImpl>
+    implements _$$StoreImplCopyWith<$Res> {
+  __$$StoreImplCopyWithImpl(
+      _$StoreImpl _value, $Res Function(_$StoreImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -215,7 +218,7 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
   }) {
-    return _then(_$_Store(
+    return _then(_$StoreImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -270,8 +273,8 @@ class __$$_StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res, _$_Store>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Store extends _Store {
-  _$_Store(
+class _$StoreImpl extends _Store {
+  _$StoreImpl(
       {required this.id,
       required this.name,
       this.family,
@@ -288,8 +291,8 @@ class _$_Store extends _Store {
         _streets = streets,
         super._();
 
-  factory _$_Store.fromJson(Map<String, dynamic> json) =>
-      _$$_StoreFromJson(json);
+  factory _$StoreImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StoreImplFromJson(json);
 
   @override
   final String id;
@@ -344,7 +347,7 @@ class _$_Store extends _Store {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Store &&
+            other is _$StoreImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.family, family) || other.family == family) &&
@@ -384,12 +387,12 @@ class _$_Store extends _Store {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StoreCopyWith<_$_Store> get copyWith =>
-      __$$_StoreCopyWithImpl<_$_Store>(this, _$identity);
+  _$$StoreImplCopyWith<_$StoreImpl> get copyWith =>
+      __$$StoreImplCopyWithImpl<_$StoreImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StoreToJson(
+    return _$$StoreImplToJson(
       this,
     );
   }
@@ -409,10 +412,10 @@ abstract class _Store extends Store {
       final List<Street>? streets,
       final LastRecordedByInfo? lastEdit,
       final DateTime? photoUpdatedAt,
-      final String? blurhash}) = _$_Store;
+      final String? blurhash}) = _$StoreImpl;
   _Store._() : super._();
 
-  factory _Store.fromJson(Map<String, dynamic> json) = _$_Store.fromJson;
+  factory _Store.fromJson(Map<String, dynamic> json) = _$StoreImpl.fromJson;
 
   @override
   String get id;
@@ -443,6 +446,6 @@ abstract class _Store extends Store {
   String? get blurhash;
   @override
   @JsonKey(ignore: true)
-  _$$_StoreCopyWith<_$_Store> get copyWith =>
+  _$$StoreImplCopyWith<_$StoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

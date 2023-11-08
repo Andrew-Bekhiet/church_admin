@@ -3,10 +3,74 @@
 part of 'family.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$FamilyFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Family>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'address': FieldMetadata<String>(
+    name: 'address',
+    label: 'العنوان',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'geolocation': FieldMetadata<Point>(
+    name: 'geolocation',
+    label: 'الموقع',
+    operators: Operator.spatial,
+  ),
+  'notes': FieldMetadata<String>(
+    name: 'notes',
+    label: 'ملاحظات',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'areas': FieldMetadata<Area>(
+    name: 'areas',
+    label: 'المناطق',
+    isOrderable: false,
+  ),
+  'streets': FieldMetadata<Street>(
+    name: 'streets',
+    label: 'الشوارع',
+    isOrderable: false,
+  ),
+  'children': FieldMetadata<Family>(
+    name: 'children',
+    label: 'العائلات الأبناء',
+    isOrderable: false,
+  ),
+  'parents': FieldMetadata<Family>(
+    name: 'parents',
+    label: 'العائلات الأباء',
+    isOrderable: false,
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Family _$$_FamilyFromJson(Map json) => _$_Family(
+_$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String?,
@@ -31,7 +95,8 @@ _$_Family _$$_FamilyFromJson(Map json) => _$_Family(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$$_FamilyToJson(_$_Family instance) => <String, dynamic>{
+Map<String, dynamic> _$$FamilyImplToJson(_$FamilyImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,

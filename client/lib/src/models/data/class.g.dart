@@ -3,10 +3,68 @@
 part of 'class.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$ClassFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Class>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'service': FieldMetadata<Service>(
+    name: 'service',
+    label: 'الخدمة',
+  ),
+  'studyYear': FieldMetadata<StudyYear>(
+    name: 'studyYear',
+    label: 'السنة الدراسية',
+  ),
+  'serviceStudyYear': FieldMetadata<int>(
+    name: 'serviceStudyYear',
+    label: 'ترتيب السنة الدراسية',
+    operators: Operator.comparitive,
+  ),
+  'serviceGender': FieldMetadata<bool>(
+    name: 'serviceGender',
+    label: 'النوع',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'adminUsers': FieldMetadata<User>(
+    name: 'adminUsers',
+    label: 'الخدام المسؤلين',
+    isOrderable: false,
+  ),
+  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceHistoryAggregate',
+    label: 'attendanceHistoryAggregate',
+  ),
+  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceDaysConstraintsAggregate',
+    label: 'attendanceDaysConstraintsAggregate',
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Class _$$_ClassFromJson(Map json) => _$_Class(
+_$ClassImpl _$$ClassImplFromJson(Map json) => _$ClassImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),
@@ -29,13 +87,19 @@ _$_Class _$$_ClassFromJson(Map json) => _$_Class(
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      attendanceHistoryAggregate: analysisDataFromJson(
-          json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
-      attendanceDaysConstraintsAggregate: analysisDataFromJson(
-          json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
+      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+              json['attendanceHistoryAggregate'] as Map)),
+      attendanceDaysConstraintsAggregate:
+          json['attendanceDaysConstraintsAggregate'] == null
+              ? null
+              : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+                  json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
+Map<String, dynamic> _$$ClassImplToJson(_$ClassImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),
@@ -49,7 +113,7 @@ Map<String, dynamic> _$$_ClassToJson(_$_Class instance) => <String, dynamic>{
       'lastEdit': instance.lastEdit?.toJson(),
       'adminUsers': adminUsersToJson(instance.adminUsers),
       'attendanceHistoryAggregate':
-          analysisDataToJson(instance.attendanceHistoryAggregate),
+          instance.attendanceHistoryAggregate?.toJson(),
       'attendanceDaysConstraintsAggregate':
-          analysisDataToJson(instance.attendanceDaysConstraintsAggregate),
+          instance.attendanceDaysConstraintsAggregate?.toJson(),
     };

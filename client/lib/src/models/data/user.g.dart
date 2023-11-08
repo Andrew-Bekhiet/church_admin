@@ -3,10 +3,62 @@
 part of 'user.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$UserFields = <String, FieldMetadata>{
+  'uid': FieldMetadata<String>(
+    name: 'uid',
+    label: '=',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'adminOn': FieldMetadata<AdminOnData>(
+    name: 'adminOn',
+    label: 'مسؤول عن',
+    isOrderable: false,
+  ),
+  'permissions': FieldMetadata<PermissionsSet>(
+    name: 'permissions',
+    label: 'الصلاحيات',
+  ),
+  'person': FieldMetadata<Person>(
+    name: 'person',
+    label: 'بيانات المخدوم',
+  ),
+  'servicesHistory': FieldMetadata<AdminOnData>(
+    name: 'servicesHistory',
+    label: 'servicesHistory',
+    isOrderable: false,
+  ),
+  'classesHistory': FieldMetadata<AdminOnData>(
+    name: 'classesHistory',
+    label: 'classesHistory',
+    isOrderable: false,
+  ),
+  'groupsHistory': FieldMetadata<AdminOnData>(
+    name: 'groupsHistory',
+    label: 'groupsHistory',
+    isOrderable: false,
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map json) => _$_User(
+_$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
       uid: json['uid'] as String,
       name: json['name'] as String,
       email: json['email'] as String?,
@@ -46,7 +98,7 @@ _$_User _$$_UserFromJson(Map json) => _$_User(
           .toList(),
     );
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) {
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) {
   final val = <String, dynamic>{
     'uid': instance.uid,
     'name': instance.name,

@@ -9,7 +9,7 @@ void main() {
         'String',
         () {
           final unit = Condition(
-            type: Area,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
             field: 'name',
             operator: Operator.eq,
             value: 'kkmkmk',
@@ -23,7 +23,7 @@ void main() {
         'int',
         () {
           final unit = Condition(
-            type: StudyYear,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[StudyYear]!,
             field: 'order',
             operator: Operator.eq,
             value: 4,
@@ -37,7 +37,7 @@ void main() {
         'id field',
         () {
           final unit = Condition(
-            type: Area,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
             field: 'id',
             operator: Operator.eq,
             value: Area(id: 'asdasdsad', name: 'area name'),
@@ -51,7 +51,7 @@ void main() {
         'isNull: true',
         () {
           final unit = Condition(
-            type: Area,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
             field: 'photoUpdatedAt',
             operator: Operator.isNull,
             value: true,
@@ -65,7 +65,7 @@ void main() {
         'isNull: false',
         () {
           final unit = Condition(
-            type: Area,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
             field: 'photoUpdatedAt',
             operator: Operator.isNull,
             value: false,
@@ -79,23 +79,25 @@ void main() {
         'Nested conditions',
         () {
           final unit = Condition(
-            type: Area,
+            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
             field: 'persons',
             operator: null,
             value: [
               Condition(
-                type: Person,
+                queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
                 field: 'services',
                 operator: null,
                 value: [
                   Condition(
-                    type: Service,
+                    queryableType:
+                        AdvancedQueriesMetadata.queryableTypes[Service]!,
                     field: 'studyYearFrom',
                     operator: Operator.eq,
                     value: 1,
                   ),
                   Condition(
-                    type: Service,
+                    queryableType:
+                        AdvancedQueriesMetadata.queryableTypes[Service]!,
                     field: 'studyYearTo',
                     operator: Operator.eq,
                     value: 6,
@@ -119,20 +121,19 @@ void main() {
             }
 
             final unit = Condition(
-              type: Area,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
               field: 'persons',
               operator: null,
               value: [
                 Condition(
-                  type: Person,
+                  queryableType:
+                      AdvancedQueriesMetadata.queryableTypes[Person]!,
                   field: serializer.key,
                   operator: null,
                   value: [
                     Condition(
-                      type: AdvancedQueriesMetadata.getFieldMetadata(
-                        serializer.key,
-                        const FieldMetadata(type: Null),
-                      ).type,
+                      queryableType:
+                          AdvancedQueriesMetadata.queryableTypes[Person]!,
                       field: 'id',
                       operator: Operator.eq,
                       value: 'qweqq23',

@@ -3,10 +3,47 @@
 part of 'street.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$StreetFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Street>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'line': FieldMetadata<Line>(
+    name: 'line',
+    label: 'الموقع',
+    operators: Operator.spatial,
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'areas': FieldMetadata<Area>(
+    name: 'areas',
+    label: 'المناطق',
+    isOrderable: false,
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Street _$$_StreetFromJson(Map json) => _$_Street(
+_$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       line: lineFromJson(json['line']),
@@ -24,7 +61,8 @@ _$_Street _$$_StreetFromJson(Map json) => _$_Street(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$$_StreetToJson(_$_Street instance) => <String, dynamic>{
+Map<String, dynamic> _$$StreetImplToJson(_$StreetImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'line': lineToJson(instance.line),

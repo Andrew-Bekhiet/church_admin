@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,7 +8,28 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
+@TypeMetadata(
+  labelsOverrides: {'uid': '='},
+  ignoreFields: [
+    'email',
+    'blurhash',
+    'authId',
+    'isMultiFactorEnrolled',
+    'idToken',
+    'emailVerified',
+    'passwordKeyHash',
+  ],
+)
 class User extends ViewableWithIDAndImage with _$User implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$UserFields;
+
+  static final QueryableType<User> queryableType = QueryableType<User>(
+    name: 'User',
+    label: 'الخدام',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: User.fromJson,
+  );
+
   factory User({
     required String uid,
     required String name,

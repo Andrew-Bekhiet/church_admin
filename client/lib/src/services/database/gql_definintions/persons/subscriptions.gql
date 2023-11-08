@@ -9,7 +9,7 @@ subscription watchAllPersons(
 }
 
 subscription watchPerson(
-  $id: uuid!
+  $id: Uuid!
   $classesLimit: Int
   $groupsLimit: Int
   $servicesLimit: Int

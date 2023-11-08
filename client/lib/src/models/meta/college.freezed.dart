@@ -72,20 +72,21 @@ class _$CollegeCopyWithImpl<$Res, $Val extends College>
 }
 
 /// @nodoc
-abstract class _$$_CollegeCopyWith<$Res> implements $CollegeCopyWith<$Res> {
-  factory _$$_CollegeCopyWith(
-          _$_College value, $Res Function(_$_College) then) =
-      __$$_CollegeCopyWithImpl<$Res>;
+abstract class _$$CollegeImplCopyWith<$Res> implements $CollegeCopyWith<$Res> {
+  factory _$$CollegeImplCopyWith(
+          _$CollegeImpl value, $Res Function(_$CollegeImpl) then) =
+      __$$CollegeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String? universityId});
 }
 
 /// @nodoc
-class __$$_CollegeCopyWithImpl<$Res>
-    extends _$CollegeCopyWithImpl<$Res, _$_College>
-    implements _$$_CollegeCopyWith<$Res> {
-  __$$_CollegeCopyWithImpl(_$_College _value, $Res Function(_$_College) _then)
+class __$$CollegeImplCopyWithImpl<$Res>
+    extends _$CollegeCopyWithImpl<$Res, _$CollegeImpl>
+    implements _$$CollegeImplCopyWith<$Res> {
+  __$$CollegeImplCopyWithImpl(
+      _$CollegeImpl _value, $Res Function(_$CollegeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +96,7 @@ class __$$_CollegeCopyWithImpl<$Res>
     Object? name = null,
     Object? universityId = freezed,
   }) {
-    return _then(_$_College(
+    return _then(_$CollegeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -114,12 +115,12 @@ class __$$_CollegeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_College extends _College {
-  _$_College({required this.id, required this.name, this.universityId})
+class _$CollegeImpl extends _College {
+  _$CollegeImpl({required this.id, required this.name, this.universityId})
       : super._();
 
-  factory _$_College.fromJson(Map<String, dynamic> json) =>
-      _$$_CollegeFromJson(json);
+  factory _$CollegeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CollegeImplFromJson(json);
 
   @override
   final String id;
@@ -137,7 +138,7 @@ class _$_College extends _College {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_College &&
+            other is _$CollegeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.universityId, universityId) ||
@@ -151,12 +152,12 @@ class _$_College extends _College {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CollegeCopyWith<_$_College> get copyWith =>
-      __$$_CollegeCopyWithImpl<_$_College>(this, _$identity);
+  _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
+      __$$CollegeImplCopyWithImpl<_$CollegeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CollegeToJson(
+    return _$$CollegeImplToJson(
       this,
     );
   }
@@ -166,10 +167,10 @@ abstract class _College extends College {
   factory _College(
       {required final String id,
       required final String name,
-      final String? universityId}) = _$_College;
+      final String? universityId}) = _$CollegeImpl;
   _College._() : super._();
 
-  factory _College.fromJson(Map<String, dynamic> json) = _$_College.fromJson;
+  factory _College.fromJson(Map<String, dynamic> json) = _$CollegeImpl.fromJson;
 
   @override
   String get id;
@@ -179,6 +180,6 @@ abstract class _College extends College {
   String? get universityId;
   @override
   @JsonKey(ignore: true)
-  _$$_CollegeCopyWith<_$_College> get copyWith =>
+  _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

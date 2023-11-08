@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +11,17 @@ part 'hobby.freezed.dart';
 part 'hobby.g.dart';
 
 @freezed
+@TypeMetadata()
 class Hobby extends ViewableWithID with _$Hobby implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$HobbyFields;
+
+  static final QueryableType<Hobby> queryableType = QueryableType<Hobby>(
+    name: 'Hobby',
+    label: 'الهوايات',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Hobby.fromJson,
+  );
+
   factory Hobby({
     required String id,
     required String name,

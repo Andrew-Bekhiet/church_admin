@@ -11,13 +11,16 @@ void main() {
     () async {
       final unit = UserSettingsService(box: FakeBox());
 
-      expect(unit.darkTheme, isFalse);
+      expect(unit.darkTheme, isNull);
 
       await unit.setDarkTheme(true);
       expect(unit.darkTheme, isTrue);
 
       await unit.setDarkTheme(false);
       expect(unit.darkTheme, isFalse);
+
+      await unit.setDarkTheme(null);
+      expect(unit.darkTheme, isNull);
     },
   );
   test(
@@ -55,10 +58,13 @@ void main() {
 
       expect(unit.getSecondLineFor(PhoneNumberService), isNull);
 
-      await unit.setSecondLineFor(PhoneNumberService, 'secondLine');
+      await unit.setSecondLineFor(
+        type: PhoneNumberService,
+        value: 'secondLine',
+      );
       expect(unit.getSecondLineFor(PhoneNumberService), 'secondLine');
 
-      await unit.setSecondLineFor(PhoneNumberService, null);
+      await unit.setSecondLineFor(type: PhoneNumberService, value: null);
       expect(unit.getSecondLineFor(PhoneNumberService), isNull);
     },
   );

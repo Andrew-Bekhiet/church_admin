@@ -111,7 +111,7 @@ class NotificationTypeAdapter extends TypeAdapter<NotificationType> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Notification _$$_NotificationFromJson(Map json) => _$_Notification(
+_$NotificationImpl _$$NotificationImplFromJson(Map json) => _$NotificationImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       body: json['body'] as String,
@@ -125,7 +125,7 @@ _$_Notification _$$_NotificationFromJson(Map json) => _$_Notification(
       ),
     );
 
-Map<String, dynamic> _$$_NotificationToJson(_$_Notification instance) =>
+Map<String, dynamic> _$$NotificationImplToJson(_$NotificationImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

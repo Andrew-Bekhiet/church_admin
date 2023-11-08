@@ -6,8 +6,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 class PersonAttendanceIndicator extends StatelessWidget {
   final DateTimeRange range;
-  final AnalysisData<DateTime> analysisData;
-  final AnalysisData<DateTime> totalAnalysisData;
+  final HistoryAggregateData analysisData;
+  final HistoryAggregateData totalAnalysisData;
   final DelegatingPaginatableStream<LastRecordedByInfo> Function()
       getHistoryStream;
 
@@ -30,13 +30,13 @@ class PersonAttendanceIndicator extends StatelessWidget {
     EqualityBy(
       (d) => DateTime(d.year, d.month, d.day),
     ),
-    analysisData.nodes,
+    analysisData.nodes.map((n) => n.time),
   );
   late final _totalAnalysisDataNodesSet = EqualitySet<DateTime>.from(
     EqualityBy(
       (d) => DateTime(d.year, d.month, d.day),
     ),
-    totalAnalysisData.nodes,
+    totalAnalysisData.nodes.map((n) => n.time),
   );
 
   final ValueNotifier<CalendarFormat> _calendarFormat =
@@ -200,7 +200,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
         ),
         HistoryProperty(
           name: 'أخر حضور ' + name,
-          value: analysisData.aggregate.max,
+          value: analysisData.aggregate.max?.time,
           getHistoryStream: getHistoryStream,
           showTime: showTime,
         ),

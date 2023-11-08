@@ -3,16 +3,38 @@
 part of 'person_type.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$PersonTypeFields = <String, FieldMetadata>{
+  'id': FieldMetadata<PersonType>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PersonType _$$_PersonTypeFromJson(Map json) => _$_PersonType(
+_$PersonTypeImpl _$$PersonTypeImplFromJson(Map json) => _$PersonTypeImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),
     );
 
-Map<String, dynamic> _$$_PersonTypeToJson(_$_PersonType instance) =>
+Map<String, dynamic> _$$PersonTypeImplToJson(_$PersonTypeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

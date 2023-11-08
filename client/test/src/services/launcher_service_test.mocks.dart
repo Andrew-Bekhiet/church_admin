@@ -90,4 +90,26 @@ class MockUrlLauncherPlatform_ extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<bool> supportsMode(_i2.PreferredLaunchMode? mode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #supportsMode,
+          [mode],
+        ),
+        returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
+
+  @override
+  _i3.Future<bool> supportsCloseForMode(_i2.PreferredLaunchMode? mode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #supportsCloseForMode,
+          [mode],
+        ),
+        returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 }

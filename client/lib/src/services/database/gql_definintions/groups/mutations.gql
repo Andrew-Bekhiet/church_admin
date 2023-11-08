@@ -1,4 +1,4 @@
-mutation deleteGroup($groupId: uuid!) {
+mutation deleteGroup($groupId: Uuid!) {
   deleteGroupsByPk(id: $groupId) {
     ...Group
   }
@@ -10,7 +10,7 @@ mutation insertGroup($newGroup: GroupsInsertInput!) {
   }
 }
 
-mutation updateGroup($groupId: uuid!, $newGroup: GroupsSetInput!) {
+mutation updateGroup($groupId: Uuid!, $newGroup: GroupsSetInput!) {
   updateGroupsByPk(pkColumns: { id: $groupId }, _set: $newGroup) {
     ...Group
   }

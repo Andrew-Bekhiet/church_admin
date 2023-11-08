@@ -10,7 +10,7 @@ import 'package:tuple/tuple.dart';
 
 class PersonAnalysisChart extends StatefulWidget {
   final DateTimeRange range;
-  final AnalysisData<DateTime> analysisData;
+  final HistoryAggregateData analysisData;
   final DelegatingPaginatableStream<LastRecordedByInfo> Function()
       getHistoryStream;
 
@@ -36,7 +36,7 @@ class PersonAnalysisChart extends StatefulWidget {
 
 class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
   late final groupedAnalysisData = widget.analysisData.nodes
-      .groupListsBy((d) => DateTime(d.year, d.month, d.day));
+      .groupListsBy((d) => DateTime(d.time.year, d.time.month, d.time.day));
 
   late final vAvgDiff = groupedAnalysisData.values.map((e) => e.length).average;
 
@@ -241,7 +241,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
         ),
         HistoryProperty(
           name: widget.lastTimeName,
-          value: widget.analysisData.aggregate.max,
+          value: widget.analysisData.aggregate.max?.time,
           getHistoryStream: widget.getHistoryStream,
           showTime: widget.showTime,
         ),

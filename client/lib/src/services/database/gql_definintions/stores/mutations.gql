@@ -1,4 +1,4 @@
-mutation deleteStore($storeId: uuid!) {
+mutation deleteStore($storeId: Uuid!) {
   deleteStoresByPk(id: $storeId) {
     ...Store
   }
@@ -10,7 +10,7 @@ mutation insertStore($newStore: StoresInsertInput!) {
   }
 }
 
-mutation updateStore($storeId: uuid!, $newStore: StoresSetInput!) {
+mutation updateStore($storeId: Uuid!, $newStore: StoresSetInput!) {
   updateStoresByPk(pkColumns: { id: $storeId }, _set: $newStore) {
     ...Store
   }

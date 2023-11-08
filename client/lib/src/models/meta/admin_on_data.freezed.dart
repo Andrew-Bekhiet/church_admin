@@ -200,11 +200,11 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
 }
 
 /// @nodoc
-abstract class _$$_AdminOnDataCopyWith<$Res>
+abstract class _$$AdminOnDataImplCopyWith<$Res>
     implements $AdminOnDataCopyWith<$Res> {
-  factory _$$_AdminOnDataCopyWith(
-          _$_AdminOnData value, $Res Function(_$_AdminOnData) then) =
-      __$$_AdminOnDataCopyWithImpl<$Res>;
+  factory _$$AdminOnDataImplCopyWith(
+          _$AdminOnDataImpl value, $Res Function(_$AdminOnDataImpl) then) =
+      __$$AdminOnDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -233,11 +233,11 @@ abstract class _$$_AdminOnDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminOnDataCopyWithImpl<$Res>
-    extends _$AdminOnDataCopyWithImpl<$Res, _$_AdminOnData>
-    implements _$$_AdminOnDataCopyWith<$Res> {
-  __$$_AdminOnDataCopyWithImpl(
-      _$_AdminOnData _value, $Res Function(_$_AdminOnData) _then)
+class __$$AdminOnDataImplCopyWithImpl<$Res>
+    extends _$AdminOnDataCopyWithImpl<$Res, _$AdminOnDataImpl>
+    implements _$$AdminOnDataImplCopyWith<$Res> {
+  __$$AdminOnDataImplCopyWithImpl(
+      _$AdminOnDataImpl _value, $Res Function(_$AdminOnDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -257,7 +257,7 @@ class __$$_AdminOnDataCopyWithImpl<$Res>
     Object? groupAllowEdit = freezed,
     Object? groupAdminOnUsers = freezed,
   }) {
-    return _then(_$_AdminOnData(
+    return _then(_$AdminOnDataImpl(
       permissionId: null == permissionId
           ? _value.permissionId
           : permissionId // ignore: cast_nullable_to_non_nullable
@@ -316,8 +316,8 @@ class __$$_AdminOnDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AdminOnData extends _AdminOnData {
-  const _$_AdminOnData(
+class _$AdminOnDataImpl extends _AdminOnData {
+  const _$AdminOnDataImpl(
       {required this.permissionId,
       this.area,
       this.areaAllowEdit,
@@ -334,8 +334,8 @@ class _$_AdminOnData extends _AdminOnData {
       : _classes = classes,
         super._();
 
-  factory _$_AdminOnData.fromJson(Map<String, dynamic> json) =>
-      _$$_AdminOnDataFromJson(json);
+  factory _$AdminOnDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AdminOnDataImplFromJson(json);
 
   @override
   final String permissionId;
@@ -380,7 +380,7 @@ class _$_AdminOnData extends _AdminOnData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminOnData &&
+            other is _$AdminOnDataImpl &&
             (identical(other.permissionId, permissionId) ||
                 other.permissionId == permissionId) &&
             (identical(other.area, area) || other.area == area) &&
@@ -426,12 +426,12 @@ class _$_AdminOnData extends _AdminOnData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminOnDataCopyWith<_$_AdminOnData> get copyWith =>
-      __$$_AdminOnDataCopyWithImpl<_$_AdminOnData>(this, _$identity);
+  _$$AdminOnDataImplCopyWith<_$AdminOnDataImpl> get copyWith =>
+      __$$AdminOnDataImplCopyWithImpl<_$AdminOnDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AdminOnDataToJson(
+    return _$$AdminOnDataImplToJson(
       this,
     );
   }
@@ -451,11 +451,11 @@ abstract class _AdminOnData extends AdminOnData {
       final List<Class> classes,
       final Group? group,
       final bool? groupAllowEdit,
-      final bool? groupAdminOnUsers}) = _$_AdminOnData;
+      final bool? groupAdminOnUsers}) = _$AdminOnDataImpl;
   const _AdminOnData._() : super._();
 
   factory _AdminOnData.fromJson(Map<String, dynamic> json) =
-      _$_AdminOnData.fromJson;
+      _$AdminOnDataImpl.fromJson;
 
   @override
   String get permissionId;
@@ -485,6 +485,6 @@ abstract class _AdminOnData extends AdminOnData {
   bool? get groupAdminOnUsers;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminOnDataCopyWith<_$_AdminOnData> get copyWith =>
+  _$$AdminOnDataImplCopyWith<_$AdminOnDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,14 +6,16 @@ import 'users/__generated__/queries.gql.dart';
 import 'users/__generated__/subscriptions.gql.dart';
 
 class UsersDAO extends DAOBase<User>
-    with StreamableDAO<User, Input_AuthUsersDataBoolExp> {
+    with
+        StreamableDAO<User, Input_AuthUsersDataBoolExp,
+            Input_AuthUsersDataOrderBy> {
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 
   @override
-  late final StreamAllConfig<User, Input_AuthUsersDataBoolExp>
-      baseStreamAllConfig = StreamAllConfig(
+  late final StreamAllConfig<User, Input_AuthUsersDataBoolExp,
+      Input_AuthUsersDataOrderBy> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
-    varsConstructor: _streamAllVarsConstructor,
+    transformVars: _streamAllVarsConstructor,
   );
   @override
   late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
@@ -21,21 +23,15 @@ class UsersDAO extends DAOBase<User>
 
   Json _streamAllVarsConstructor({
     required GQLPaginatableStreamEvent<User> event,
-    required List<Input_AuthUsersDataBoolExp> where,
+    List<Input_AuthUsersDataBoolExp>? where,
+    List<Input_AuthUsersDataOrderBy>? orderBy,
   }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+    return db.varsTransformer.transformVariablesForPagination(
       event,
-      Variables_Subscription_watchAllUsers.new,
-      Input_AuthUsersDataBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
+      where: where?.map((o) => o.toJson()).toList() ?? [],
       orderBy: [
-        ...defaultSearchVars.orderBy ?? [],
+        // ignore: unnecessary_parenthesis
+        ...(orderBy ?? <Input_AuthUsersDataOrderBy>[]),
         Input_AuthUsersDataOrderBy(
           permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
             count: Enum_OrderBy.DESC,
@@ -43,8 +39,8 @@ class UsersDAO extends DAOBase<User>
         ),
         Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC),
         Input_AuthUsersDataOrderBy(email: Enum_OrderBy.ASC),
-      ],
-    ).toJson();
+      ].map((o) => o.toJson()).toList(),
+    );
   }
 
   Json _streamSingleByIdVarsConstructor({

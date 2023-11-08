@@ -35,7 +35,7 @@ class HomeScreen extends StatefulWidget {
   );
 
   @visibleForTesting
-  static String? redirect(GoRouterState state) {
+  static String? redirect(GoRouterState _) {
     if (!AuthService.I.isSignedIn) {
       return LoginScreen.route.path;
     } else if (!(AuthService.I.currentUser!.emailVerified ?? false)) {
@@ -44,13 +44,7 @@ class HomeScreen extends StatefulWidget {
       return MultiFactorLogin.route.path;
     } else if (!AuthService.I.currentUser!.permissions.approved) {
       return UnapprovedUser.route.path;
-    } /* else if (LocalAuthService.I.shouldAuthenticate) {
-      return Uri(
-        path: AuthenticateScreen.route.path,
-        queryParameters: {'next': state.uri.toString()},
-      ).toString();
-    } */
-    else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
+    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
       return Uri(
         path: UpdateUserSpiritData.route.path,
         queryParameters: {'forced': 'true'},
@@ -75,8 +69,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     vsync: this,
   );
 
-  late final _personsController =
-      _createControllerUsing<Person>(DatabaseService.I.persons.streamAll);
+  late final _personsController = _createControllerUsing<Person>(
+    DatabaseService.I.persons.streamAll,
+  );
   late final _servicesController = _createControllerUsing<Service>(
     DatabaseService.I.services.streamAll,
   );
@@ -173,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
 
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Overlay.of(context).insert(entry),
+      (_) => !entry.mounted ? Overlay.of(context).insert(entry) : null,
     );
 
     LocalAuthService.I.refreshUIStream.listen(

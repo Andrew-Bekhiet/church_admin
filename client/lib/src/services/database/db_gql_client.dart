@@ -1,4 +1,3 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -28,38 +27,6 @@ class DBGraphQLClient extends GraphQLClient {
       throw result.exception!;
     }
     return result;
-  }
-
-  VarsType getDefaultSearchVars<VarsType, BoolExp, T extends Viewable>(
-    GQLPaginatableStreamEvent<T> event,
-    VarsConstructor<VarsType, BoolExp> varsConstructor,
-    BoolExpConstructor<BoolExp> boolExpConstructor,
-  ) {
-    final instance = event.instance;
-    final offset = event.offset;
-    final search = event.search;
-    final lastSearch = event.lastSearch;
-
-    return varsConstructor(
-      limit: instance.limit + 1,
-      where: [
-        if (search != null && search.isNotEmpty)
-          boolExpConstructor(
-            name: Input_StringComparisonExp(
-              $_ilike: '%$search%',
-            ),
-          ),
-        if (lastSearch == search && offset > 0)
-          boolExpConstructor(
-            name: Input_StringComparisonExp(
-              $_gt: instance
-                  .currentValue[
-                      (offset - 1) * instance.limit + instance.limit - 1]
-                  .name,
-            ),
-          ),
-      ],
-    );
   }
 
   @override
@@ -188,12 +155,3 @@ class DBGraphQLClient extends GraphQLClient {
         .then((r) => r.parsedData!);
   }
 }
-
-typedef VarsConstructor<T, BoolExp> = T Function({
-  int limit,
-  List<BoolExp> where,
-});
-
-typedef BoolExpConstructor<T> = T Function({
-  Input_StringComparisonExp? name,
-});

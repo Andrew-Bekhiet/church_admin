@@ -76,9 +76,10 @@ class _$HobbyCopyWithImpl<$Res, $Val extends Hobby>
 }
 
 /// @nodoc
-abstract class _$$_HobbyCopyWith<$Res> implements $HobbyCopyWith<$Res> {
-  factory _$$_HobbyCopyWith(_$_Hobby value, $Res Function(_$_Hobby) then) =
-      __$$_HobbyCopyWithImpl<$Res>;
+abstract class _$$HobbyImplCopyWith<$Res> implements $HobbyCopyWith<$Res> {
+  factory _$$HobbyImplCopyWith(
+          _$HobbyImpl value, $Res Function(_$HobbyImpl) then) =
+      __$$HobbyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,9 +89,11 @@ abstract class _$$_HobbyCopyWith<$Res> implements $HobbyCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_HobbyCopyWithImpl<$Res> extends _$HobbyCopyWithImpl<$Res, _$_Hobby>
-    implements _$$_HobbyCopyWith<$Res> {
-  __$$_HobbyCopyWithImpl(_$_Hobby _value, $Res Function(_$_Hobby) _then)
+class __$$HobbyImplCopyWithImpl<$Res>
+    extends _$HobbyCopyWithImpl<$Res, _$HobbyImpl>
+    implements _$$HobbyImplCopyWith<$Res> {
+  __$$HobbyImplCopyWithImpl(
+      _$HobbyImpl _value, $Res Function(_$HobbyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +103,7 @@ class __$$_HobbyCopyWithImpl<$Res> extends _$HobbyCopyWithImpl<$Res, _$_Hobby>
     Object? name = null,
     Object? color = freezed,
   }) {
-    return _then(_$_Hobby(
+    return _then(_$HobbyImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -119,15 +122,15 @@ class __$$_HobbyCopyWithImpl<$Res> extends _$HobbyCopyWithImpl<$Res, _$_Hobby>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Hobby extends _Hobby {
-  _$_Hobby(
+class _$HobbyImpl extends _Hobby {
+  _$HobbyImpl(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
       : super._();
 
-  factory _$_Hobby.fromJson(Map<String, dynamic> json) =>
-      _$$_HobbyFromJson(json);
+  factory _$HobbyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HobbyImplFromJson(json);
 
   @override
   final String id;
@@ -146,7 +149,7 @@ class _$_Hobby extends _Hobby {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Hobby &&
+            other is _$HobbyImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color));
@@ -159,12 +162,12 @@ class _$_Hobby extends _Hobby {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HobbyCopyWith<_$_Hobby> get copyWith =>
-      __$$_HobbyCopyWithImpl<_$_Hobby>(this, _$identity);
+  _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
+      __$$HobbyImplCopyWithImpl<_$HobbyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HobbyToJson(
+    return _$$HobbyImplToJson(
       this,
     );
   }
@@ -175,10 +178,10 @@ abstract class _Hobby extends Hobby {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-      final Color? color}) = _$_Hobby;
+      final Color? color}) = _$HobbyImpl;
   _Hobby._() : super._();
 
-  factory _Hobby.fromJson(Map<String, dynamic> json) = _$_Hobby.fromJson;
+  factory _Hobby.fromJson(Map<String, dynamic> json) = _$HobbyImpl.fromJson;
 
   @override
   String get id;
@@ -189,6 +192,6 @@ abstract class _Hobby extends Hobby {
   Color? get color;
   @override
   @JsonKey(ignore: true)
-  _$$_HobbyCopyWith<_$_Hobby> get copyWith =>
+  _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

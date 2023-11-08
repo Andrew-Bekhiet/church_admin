@@ -24,19 +24,25 @@ class UserSettingsService {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
-  String? getSecondLineFor(Type t) =>
-      box.get(AdvancedQueriesMetadata.queryableTypes[t]!.$2 + 'SecondLine');
-  Future<void> setSecondLineFor(Type t, String? value) => box.put(
-        AdvancedQueriesMetadata.queryableTypes[t]!.$2 + 'SecondLine',
+  String? getSecondLineFor<T>([Type? type]) => box.get(
+        _getTypeName(type ?? T) + 'SecondLine',
+      );
+  Future<void> setSecondLineFor<T>({required String? value, Type? type}) =>
+      box.put(
+        _getTypeName(type ?? T) + 'SecondLine',
         value,
       );
 
+  String _getTypeName(Type t) =>
+      AdvancedQueriesMetadata.queryableTypes[t]?.name ??
+      (t.toString().replaceAll(RegExp(r'_|\$'), ''));
+
   Future<void> setupDefaults() async {
     await setGreatFeastTheme(true);
-    await setSecondLineFor(Area, 'lastVisit');
-    await setSecondLineFor(Street, 'lastVisit');
-    await setSecondLineFor(Family, 'lastVisit');
-    await setSecondLineFor(Person, 'birthdate');
-    await setSecondLineFor(User, 'permissions');
+    await setSecondLineFor(type: Area, value: 'lastVisit');
+    await setSecondLineFor(type: Street, value: 'lastVisit');
+    await setSecondLineFor(type: Family, value: 'lastVisit');
+    await setSecondLineFor(type: Person, value: 'birthdate');
+    await setSecondLineFor(type: User, value: 'permissions');
   }
 }

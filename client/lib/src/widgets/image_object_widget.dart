@@ -213,6 +213,14 @@ class _ImagePlaceholder extends StatelessWidget {
           blurhash!,
           scale: 32 / size,
         ),
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (frame != null) return child;
+
+          return Icon(
+            defaultIcon,
+            size: size,
+          );
+        },
         gaplessPlayback: true,
       );
     }

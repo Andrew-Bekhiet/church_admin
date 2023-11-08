@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,19 @@ part 'service.freezed.dart';
 part 'service.g.dart';
 
 @freezed
+@TypeMetadata()
 class Service extends ViewableWithIDAndImage
     with _$Service
     implements ToJson, AttendanceAnalyzable {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$ServiceFields;
+
+  static final QueryableType<Service> queryableType = QueryableType<Service>(
+    name: 'Service',
+    label: 'الخدمات',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Service.fromJson,
+  );
+
   factory Service({
     required String id,
     required String name,
@@ -29,16 +40,8 @@ class Service extends ViewableWithIDAndImage
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
     List<User>? adminUsers,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? attendanceDaysConstraintsAggregate,
   }) = _Service;
   Service._() : super();
 

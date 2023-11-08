@@ -1,31 +1,37 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/graphql/scalars/time.dart';
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class Condition with EquatableMixin {
-  final Type type;
+  final QueryableType queryableType;
   final String field;
   final Operator? operator;
   late final dynamic value;
 
+  String get fieldLabel =>
+      LogicalOperator.values.firstWhereOrNull((e) => e.value == field)?.label ??
+      queryableType.fieldsMetadata[field]!.label;
+
   Condition({
-    required this.type,
+    required this.queryableType,
     required this.field,
     required this.operator,
     this.value,
   });
 
   Condition.fromJson(Json json)
-      : type = AdvancedQueriesMetadata.queryableTypes.entries
-            .firstWhere((t) => t.value.$2 == json['type'])
-            .key,
+      : queryableType = AdvancedQueriesMetadata.queryableTypes.entries
+            .firstWhere((t) => t.value.name == json['type'])
+            .value,
         field = json['field'],
         operator = json['operator'] == null
             ? null
             : Operator.values.byName(json['operator']) {
     value = deserializeFieldValue(
-      type,
+      queryableType,
       field,
       json['value'],
       json['selectedViewable'],
@@ -33,16 +39,16 @@ class Condition with EquatableMixin {
   }
 
   @override
-  List<Object?> get props => [type, field, operator, value];
+  List<Object?> get props => [queryableType, field, operator, value];
 
   Condition copyWith({
-    Type? type,
+    QueryableType? queryableType,
     String? field,
     Operator? operator,
     dynamic value,
   }) {
     return Condition(
-      type: type ?? this.type,
+      queryableType: queryableType ?? this.queryableType,
       field: field ?? this.field,
       operator: operator ?? this.operator,
       value: value ?? this.value,
@@ -50,10 +56,14 @@ class Condition with EquatableMixin {
   }
 
   Json toSearchJson() {
-    final serializedValue = serializeFieldValue(type, field, value);
+    final serializedValue =
+        LogicalOperator.values.map((e) => e.value).contains(field) &&
+                value is List<Condition>
+            ? (value as List<Condition>).map((e) => e.toSearchJson()).toList()
+            : serializeFieldValue(queryableType.type, field, value);
 
     final effectiveFieldName =
-        field == 'id' && type == StudyYear ? 'order' : field;
+        field == 'id' && queryableType.type == StudyYear ? 'order' : field;
 
     return {
       effectiveFieldName: operator == null
@@ -70,10 +80,10 @@ class Condition with EquatableMixin {
   Json toJson() {
     final serializedValue = value is List<Condition>
         ? (value! as List<Condition>).map((e) => e.toJson()).toList()
-        : serializeFieldValue(type, field, value) ?? value;
+        : serializeFieldValue(queryableType.type, field, value) ?? value;
 
     return {
-      'type': AdvancedQueriesMetadata.queryableTypes[type]!.$2,
+      'type': queryableType.name,
       'field': field,
       if (operator != null) 'operator': operator!.name,
       if (serializedValue != null) 'value': serializedValue,
@@ -99,7 +109,10 @@ final Map<String, Serializer> serializersByField = {
   'persons': _personsSerializer,
 };
 
-dynamic _permissionsSerializer<T>(Type type, T? value) {
+dynamic _permissionsSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == User && value is UserPermission) {
     return {
       'permission': {'_eq': value.name},
@@ -107,7 +120,10 @@ dynamic _permissionsSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _adminUsersSerializer<T>(Type type, T? value) {
+dynamic _adminUsersSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == User && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -121,7 +137,10 @@ dynamic _adminUsersSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _personsTagsSerializer<T>(Type type, T? value) {
+dynamic _personsTagsSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Person && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -135,7 +154,10 @@ dynamic _personsTagsSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _personsServicesSerializer<T>(Type type, T? value) {
+dynamic _personsServicesSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Person && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -149,7 +171,10 @@ dynamic _personsServicesSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _personsHobbiesSerializer<T>(Type type, T? value) {
+dynamic _personsHobbiesSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Person && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -163,7 +188,10 @@ dynamic _personsHobbiesSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _personsGroupsSerializer<T>(Type type, T? value) {
+dynamic _personsGroupsSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Person && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -177,7 +205,10 @@ dynamic _personsGroupsSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _familiesChildrenSerializer<T>(Type type, T? value) {
+dynamic _familiesChildrenSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Family && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -191,7 +222,10 @@ dynamic _familiesChildrenSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _familiesParentsSerializer<T>(Type type, T? value) {
+dynamic _familiesParentsSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (type == Family && value is List<Condition>) {
     return {
       ..._maybeAddAnd(
@@ -205,7 +239,10 @@ dynamic _familiesParentsSerializer<T>(Type type, T? value) {
   }
 }
 
-dynamic _personsSerializer<T>(Type type, T? value) {
+dynamic _personsSerializer<T>(
+  Type type,
+  T? value,
+) {
   if (value is List<Condition> &&
       (type == Group || type == Hobby || type == Service || type == Tag)) {
     return {
@@ -222,7 +259,10 @@ dynamic _personsSerializer<T>(Type type, T? value) {
   return _serializeByValueType(value);
 }
 
-dynamic _idSerializer<T>(Type _, T? value) {
+dynamic _idSerializer<T>(
+  Type _,
+  T? value,
+) {
   return value is ViewableWithID ? value.id : _serializeByValueType(value);
 }
 
@@ -233,7 +273,9 @@ Json _maybeAddAnd(List<Json> list) {
 dynamic _serializeByValueType<T>(T? value) {
   switch (value) {
     case List<Condition> _:
-      return _maybeAddAnd(value.map((e) => e.toSearchJson()).toList());
+      return _maybeAddAnd(
+        value.map((e) => e.toSearchJson()).toList(),
+      );
 
     case ToJson _:
       return value.toJson();
@@ -244,8 +286,15 @@ dynamic _serializeByValueType<T>(T? value) {
     case Color _:
       return colorToInt(value);
 
-    case DateTime _:
+    case DateTime _
+        when value.hour == 0 &&
+            value.minute == 0 &&
+            value.second == 0 &&
+            value.millisecond == 0 &&
+            value.microsecond == 0:
       return dateToString(value);
+    case DateTime _:
+      return timeToString(value);
 
     // case DateTimeRange _:
     //   return dateRangeToString(value);
@@ -258,34 +307,38 @@ dynamic _serializeByValueType<T>(T? value) {
   }
 }
 
-dynamic serializeFieldValue(Type type, String field, dynamic value) {
+dynamic serializeFieldValue(
+  Type type,
+  String field,
+  dynamic value,
+) {
   return serializersByField[field]?.call(type, value) ??
       _serializeByValueType(value);
 }
 
 dynamic deserializeFieldValue(
-  Type type,
+  QueryableType queryableType,
   String field,
   dynamic value,
   Json? selectedViewable,
 ) {
   switch (field) {
     case 'id' when selectedViewable != null:
-      return AdvancedQueriesMetadata.typeDeserializers[type]!(selectedViewable);
+      return queryableType.fromJson(selectedViewable);
 
     case 'color' when value is int:
       return Color(value);
 
-    case 'photoUpdatedAt' || 'birthdate' when value is String:
+    case 'photoUpdatedAt' || 'birthdate' || 'time' when value is String:
     case _ when field.startsWith('last') && value is String:
-      return dateFromString(value);
+      return timeFromString(value);
 
     case 'validity' when value is String:
       return dateRangeFromString(value);
   }
 
-  if (value is List<Map>) {
-    return value.map((v) => Condition.fromJson(v.cast())).toList();
+  if (value is List && value.every((e) => e is Map)) {
+    return value.map((v) => Condition.fromJson(Json.from(v))).toList();
   } else if (value is Json && value['type'] == 'Polygon') {
     return polygonFromJson(value);
   }

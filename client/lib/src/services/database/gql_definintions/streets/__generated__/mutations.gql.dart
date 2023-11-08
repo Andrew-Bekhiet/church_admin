@@ -247,7 +247,7 @@ const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'streetId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -863,7 +863,7 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'streetId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

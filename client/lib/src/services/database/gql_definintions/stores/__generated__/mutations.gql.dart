@@ -247,7 +247,7 @@ const documentNodeMutationdeleteStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'storeId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -863,7 +863,7 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'storeId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

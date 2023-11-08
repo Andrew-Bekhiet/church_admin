@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,7 +8,17 @@ part 'job.freezed.dart';
 part 'job.g.dart';
 
 @freezed
+@TypeMetadata()
 class Job extends ViewableWithID with _$Job implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$JobFields;
+
+  static final QueryableType<Job> queryableType = QueryableType<Job>(
+    name: 'Job',
+    label: 'الوظائف',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Job.fromJson,
+  );
+
   factory Job({
     required String id,
     required String name,

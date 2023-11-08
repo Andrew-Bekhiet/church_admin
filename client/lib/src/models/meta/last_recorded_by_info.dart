@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,9 +8,21 @@ part 'last_recorded_by_info.freezed.dart';
 part 'last_recorded_by_info.g.dart';
 
 @freezed
+@TypeMetadata(ignoreFields: ['recordedBy'])
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata =>
+      _$LastRecordedByInfoFields;
+
+  static final QueryableType<LastRecordedByInfo> queryableType =
+      QueryableType<LastRecordedByInfo>(
+    name: 'LastRecordedByInfo',
+    label: 'بيانات آخر تسجيل',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: LastRecordedByInfo.fromJson,
+  );
+
   factory LastRecordedByInfo({
     required DateTime time,
     @JsonKey(readValue: readRecordedBy) String? recordedBy,

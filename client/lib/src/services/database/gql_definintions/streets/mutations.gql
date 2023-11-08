@@ -1,4 +1,4 @@
-mutation deleteStreet($streetId: uuid!) {
+mutation deleteStreet($streetId: Uuid!) {
   deleteStreetsByPk(id: $streetId) {
     ...Street
   }
@@ -10,7 +10,7 @@ mutation insertStreet($newStreet: StreetsInsertInput!) {
   }
 }
 
-mutation updateStreet($streetId: uuid!, $newStreet: StreetsSetInput!) {
+mutation updateStreet($streetId: Uuid!, $newStreet: StreetsSetInput!) {
   updateStreetsByPk(pkColumns: { id: $streetId }, _set: $newStreet) {
     ...Street
   }

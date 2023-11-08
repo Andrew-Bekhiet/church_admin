@@ -32,6 +32,9 @@ class FakePaginatableStreamBase<T> extends PaginatableStreamBase<T> {
   int get currentOffset => 0;
 
   @override
+  T? get currentCursor => null;
+
+  @override
   List<T> get currentValue => [];
 
   @override

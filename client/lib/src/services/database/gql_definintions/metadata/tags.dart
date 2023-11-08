@@ -2,23 +2,17 @@ import 'package:church_admin/church_admin.dart';
 
 import 'tags/__generated__/subscriptions.gql.dart';
 
-class TagsDAO extends DAOBase<Tag> with StreamableDAO<Tag, Input_TagsBoolExp> {
+class TagsDAO extends DAOBase<Tag>
+    with StreamableDAO<Tag, Input_TagsBoolExp, Input_TagsOrderBy> {
   TagsDAO({
     required super.db,
   }) : super(fromJson: Tag.fromJson);
 
   @override
-  StreamAllConfig<Tag, Input_TagsBoolExp> get baseStreamAllConfig =>
-      StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllTags,
-        varsConstructor: ({required event, required where}) => graphQLClient
-            .getDefaultSearchVars(
-              event,
-              Variables_Subscription_watchAllTags.new,
-              Input_TagsBoolExp.new,
-            )
-            .toJson(),
-      );
+  StreamAllConfig<Tag, Input_TagsBoolExp, Input_TagsOrderBy>
+      get baseStreamAllConfig => const StreamAllConfig(
+            document: documentNodeSubscriptionwatchAllTags,
+          );
 
   @override
   StreamSingleByIdConfig<Tag> get baseStreamSingleByIdConfig =>

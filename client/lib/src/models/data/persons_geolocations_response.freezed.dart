@@ -95,12 +95,12 @@ class _$PersonsGeolocationsResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PersonsGeolocationsResponseCopyWith<$Res>
+abstract class _$$PersonsGeolocationsResponseImplCopyWith<$Res>
     implements $PersonsGeolocationsResponseCopyWith<$Res> {
-  factory _$$_PersonsGeolocationsResponseCopyWith(
-          _$_PersonsGeolocationsResponse value,
-          $Res Function(_$_PersonsGeolocationsResponse) then) =
-      __$$_PersonsGeolocationsResponseCopyWithImpl<$Res>;
+  factory _$$PersonsGeolocationsResponseImplCopyWith(
+          _$PersonsGeolocationsResponseImpl value,
+          $Res Function(_$PersonsGeolocationsResponseImpl) then) =
+      __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,13 +112,13 @@ abstract class _$$_PersonsGeolocationsResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PersonsGeolocationsResponseCopyWithImpl<$Res>
+class __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>
     extends _$PersonsGeolocationsResponseCopyWithImpl<$Res,
-        _$_PersonsGeolocationsResponse>
-    implements _$$_PersonsGeolocationsResponseCopyWith<$Res> {
-  __$$_PersonsGeolocationsResponseCopyWithImpl(
-      _$_PersonsGeolocationsResponse _value,
-      $Res Function(_$_PersonsGeolocationsResponse) _then)
+        _$PersonsGeolocationsResponseImpl>
+    implements _$$PersonsGeolocationsResponseImplCopyWith<$Res> {
+  __$$PersonsGeolocationsResponseImplCopyWithImpl(
+      _$PersonsGeolocationsResponseImpl _value,
+      $Res Function(_$PersonsGeolocationsResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -130,7 +130,7 @@ class __$$_PersonsGeolocationsResponseCopyWithImpl<$Res>
     Object? stores = null,
     Object? persons = null,
   }) {
-    return _then(_$_PersonsGeolocationsResponse(
+    return _then(_$PersonsGeolocationsResponseImpl(
       areas: null == areas
           ? _value._areas
           : areas // ignore: cast_nullable_to_non_nullable
@@ -157,8 +157,9 @@ class __$$_PersonsGeolocationsResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PersonsGeolocationsResponse implements _PersonsGeolocationsResponse {
-  _$_PersonsGeolocationsResponse(
+class _$PersonsGeolocationsResponseImpl
+    implements _PersonsGeolocationsResponse {
+  _$PersonsGeolocationsResponseImpl(
       {final Set<Area> areas = const {},
       final Set<Street> streets = const {},
       final Set<Family> families = const {},
@@ -170,8 +171,9 @@ class _$_PersonsGeolocationsResponse implements _PersonsGeolocationsResponse {
         _stores = stores,
         _persons = persons;
 
-  factory _$_PersonsGeolocationsResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonsGeolocationsResponseFromJson(json);
+  factory _$PersonsGeolocationsResponseImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$PersonsGeolocationsResponseImplFromJson(json);
 
   final Set<Area> _areas;
   @override
@@ -227,7 +229,7 @@ class _$_PersonsGeolocationsResponse implements _PersonsGeolocationsResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PersonsGeolocationsResponse &&
+            other is _$PersonsGeolocationsResponseImpl &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._families, _families) &&
@@ -248,13 +250,13 @@ class _$_PersonsGeolocationsResponse implements _PersonsGeolocationsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonsGeolocationsResponseCopyWith<_$_PersonsGeolocationsResponse>
-      get copyWith => __$$_PersonsGeolocationsResponseCopyWithImpl<
-          _$_PersonsGeolocationsResponse>(this, _$identity);
+  _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
+      get copyWith => __$$PersonsGeolocationsResponseImplCopyWithImpl<
+          _$PersonsGeolocationsResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonsGeolocationsResponseToJson(
+    return _$$PersonsGeolocationsResponseImplToJson(
       this,
     );
   }
@@ -267,10 +269,10 @@ abstract class _PersonsGeolocationsResponse
       final Set<Street> streets,
       final Set<Family> families,
       final Set<Store> stores,
-      final Set<Person> persons}) = _$_PersonsGeolocationsResponse;
+      final Set<Person> persons}) = _$PersonsGeolocationsResponseImpl;
 
   factory _PersonsGeolocationsResponse.fromJson(Map<String, dynamic> json) =
-      _$_PersonsGeolocationsResponse.fromJson;
+      _$PersonsGeolocationsResponseImpl.fromJson;
 
   @override
   Set<Area> get areas;
@@ -284,6 +286,6 @@ abstract class _PersonsGeolocationsResponse
   Set<Person> get persons;
   @override
   @JsonKey(ignore: true)
-  _$$_PersonsGeolocationsResponseCopyWith<_$_PersonsGeolocationsResponse>
+  _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -692,6 +692,7 @@ class _ShowMoreSubtitle<T extends Viewable> extends StatelessWidget {
                 .attendanceHistoryAggregate!
                 .aggregate
                 .max!
+                .time
                 .toDurationString(),
           ),
         ),
@@ -700,7 +701,8 @@ class _ShowMoreSubtitle<T extends Viewable> extends StatelessWidget {
             (viewable as AttendanceAnalyzable)
                 .attendanceHistoryAggregate!
                 .aggregate
-                .max!,
+                .max!
+                .time,
           ),
           style: Theme.of(context).textTheme.labelSmall,
         ),

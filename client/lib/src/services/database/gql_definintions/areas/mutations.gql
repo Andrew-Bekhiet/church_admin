@@ -1,4 +1,4 @@
-mutation deleteArea($areaId: uuid!) {
+mutation deleteArea($areaId: Uuid!) {
   deleteAreasByPk(id: $areaId) {
     ...Area
   }
@@ -10,7 +10,7 @@ mutation insertArea($newArea: AreasInsertInput!) {
   }
 }
 
-mutation updateArea($areaId: uuid!, $newArea: AreasSetInput!) {
+mutation updateArea($areaId: Uuid!, $newArea: AreasSetInput!) {
   updateAreasByPk(pkColumns: { id: $areaId }, _set: $newArea) {
     ...Area
   }

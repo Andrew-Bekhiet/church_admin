@@ -3,11 +3,12 @@ import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
-mixin StreamableDAO<T extends ViewableWithID, TBoolExp> on DAOBase<T> {
-  late final StreamableDAOProxy<T, TBoolExp> streamingProxy =
-      StreamableDAOProxy<T, TBoolExp>(db: db, fromJson: fromJson);
+mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
+    on DAOBase<T> {
+  late final StreamableDAOProxy<T, TBoolExp, TOrderByExp> streamingProxy =
+      StreamableDAOProxy<T, TBoolExp, TOrderByExp>(db: db, fromJson: fromJson);
 
-  StreamAllConfig<T, TBoolExp> get baseStreamAllConfig;
+  StreamAllConfig<T, TBoolExp, TOrderByExp> get baseStreamAllConfig;
 
   @protected
   StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
@@ -15,11 +16,13 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp> on DAOBase<T> {
   GQLPaginatableStream<T> streamAll({
     Stream<String?>? searchQuery,
     List<TBoolExp>? where,
+    List<TOrderByExp>? orderBy,
   }) {
     return streamingProxy.streamAll(
+      streamAllConfig: baseStreamAllConfig,
       searchQuery: searchQuery,
       where: where,
-      streamAllConfig: baseStreamAllConfig,
+      orderBy: orderBy,
     );
   }
 
@@ -33,7 +36,7 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp> on DAOBase<T> {
   }
 }
 
-class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
+class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
     extends DAOBase<T> {
   StreamableDAOProxy({
     required super.db,
@@ -44,12 +47,14 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
   final String? _secondLineFieldNameOverride;
 
   String? get secondLineFieldName =>
-      _secondLineFieldNameOverride ?? UserSettingsService.I.getSecondLineFor(T);
+      _secondLineFieldNameOverride ??
+      UserSettingsService.I.getSecondLineFor<T>();
 
   GQLPaginatableStream<T> streamAll({
-    required StreamAllConfig<T, TBoolExp> streamAllConfig,
+    required StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
     Stream<String?>? searchQuery,
     List<TBoolExp>? where,
+    List<TOrderByExp>? orderBy,
   }) {
     return GQLPaginatableStream<T>(
       searchQuery: searchQuery,
@@ -59,12 +64,12 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
             SubscriptionOptions(
               document: _getDocumentWithSecondLine(streamAllConfig),
               operationName: streamAllConfig.effectiveOperationName,
-              variables: streamAllConfig.variables ??
-                  streamAllConfig.varsConstructor?.call(
-                    event: event,
-                    where: where ?? [],
-                  ) ??
-                  {},
+              variables: _getEffectiveStreamAllVars(
+                streamAllConfig,
+                event,
+                where,
+                orderBy,
+              ),
               parserFn: streamAllConfig.parserFn ??
                   db.parser.singleListParser(fromJson),
             ),
@@ -72,8 +77,32 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
     );
   }
 
+  Json _getEffectiveStreamAllVars(
+    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    GQLPaginatableStreamEvent<T> event,
+    List<TBoolExp>? where,
+    List<TOrderByExp>? orderBy,
+  ) {
+    return streamAllConfig.variables ??
+        streamAllConfig.transformVars?.call(
+          event: event,
+          where: where,
+          orderBy: orderBy,
+        ) ??
+        db.varsTransformer.transformVariablesForPagination<T>(
+          event,
+          where:
+              where?.map((o) => (o as dynamic).toJson() as Json).toList() ?? [],
+          orderBy:
+              orderBy?.map((o) => (o as dynamic).toJson() as Json).toList() ??
+                  [
+                    {'name': 'ASC'},
+                  ],
+        );
+  }
+
   dynamic _getDocumentWithSecondLine(
-    StreamAllConfig<T, TBoolExp> streamAllConfig,
+    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
   ) {
     final configDocument = streamAllConfig.document;
 
@@ -81,17 +110,16 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp>
       return configDocument;
     }
 
-    final firstSelectionNode =
-        ((configDocument.definitions.first as OperationDefinitionNode)
-                .selectionSet
-                .selections
-                .first as FieldNode)
-            .name
-            .value;
+    final firstSelectionNodeName = configDocument.definitions
+        .whereType<OperationDefinitionNode>()
+        .first
+        .firstSelectionNode
+        .name
+        .value;
 
-    return configDocument.addSelectionFields(
+    return configDocument.withSelectionFields(
       {
-        firstSelectionNode: [
+        firstSelectionNodeName: [
           FieldNode(name: NameNode(value: secondLineFieldName!)),
         ],
       },

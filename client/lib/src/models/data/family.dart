@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,17 @@ part 'family.freezed.dart';
 part 'family.g.dart';
 
 @freezed
+@TypeMetadata()
 class Family extends ViewableWithIDAndImage with _$Family implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$FamilyFields;
+
+  static final QueryableType<Family> queryableType = QueryableType<Family>(
+    name: 'Family',
+    label: 'العائلات',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Family.fromJson,
+  );
+
   factory Family({
     required String id,
     required String name,

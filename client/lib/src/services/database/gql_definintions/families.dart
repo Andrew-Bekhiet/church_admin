@@ -7,14 +7,14 @@ import 'families/__generated__/mutations.gql.dart';
 import 'families/__generated__/queries.gql.dart';
 import 'families/__generated__/subscriptions.gql.dart';
 
-class FamiliesDAO extends FullCRUDDAO<Family, Input_FamiliesBoolExp> {
+class FamiliesDAO
+    extends FullCRUDDAO<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy> {
   FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
 
   @override
-  late final StreamAllConfig<Family, Input_FamiliesBoolExp>
-      baseStreamAllConfig = StreamAllConfig(
+  final StreamAllConfig<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy>
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFamilies,
-    varsConstructor: _streamAllVarsConstructor,
   );
 
   @override
@@ -44,24 +44,6 @@ class FamiliesDAO extends FullCRUDDAO<Family, Input_FamiliesBoolExp> {
     document: documentNodeMutationinsertFamily,
     varsConstructor: _createFamilyVarsConstructor,
   );
-
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Family> event,
-    required List<Input_FamiliesBoolExp> where,
-  }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-      event,
-      Variables_Subscription_watchAllFamilies.new,
-      Input_FamiliesBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-    ).toJson();
-  }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchFamily(id: id).toJson();

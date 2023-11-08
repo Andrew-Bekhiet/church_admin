@@ -5,12 +5,13 @@ import 'package:uuid/uuid.dart';
 import 'services/__generated__/mutations.gql.dart';
 import 'services/__generated__/subscriptions.gql.dart';
 
-class ServicesDAO extends FullCRUDDAO<Service, Input_ServicesBoolExp> {
+class ServicesDAO
+    extends FullCRUDDAO<Service, Input_ServicesBoolExp, Input_ServicesOrderBy> {
   ServicesDAO({required super.db}) : super(fromJson: Service.fromJson);
 
   @override
-  late final StreamAllConfig<Service, Input_ServicesBoolExp>
-      baseStreamAllConfig =
+  late final StreamAllConfig<Service, Input_ServicesBoolExp,
+          Input_ServicesOrderBy> baseStreamAllConfig =
       const StreamAllConfig(document: documentNodeSubscriptionwatchAllServices);
 
   @override
@@ -40,65 +41,62 @@ class ServicesDAO extends FullCRUDDAO<Service, Input_ServicesBoolExp> {
 
   Json _streamAllVarsConstructor({
     required GQLPaginatableStreamEvent<Service> event,
-    required List<Input_ServicesBoolExp> where,
+    List<Input_ServicesBoolExp>? where,
     List<Input_GroupsBoolExp> groupsWhere = const [],
     List<Input_ClassesBoolExp> classesWhere = const [],
+    List<Input_ServicesOrderBy>? orderBy,
   }) {
-    final instance = event.instance;
-    final offset = event.offset;
     final search = event.search;
-    final lastSearch = event.lastSearch;
 
     final bool nameSearch = search != null && search.isNotEmpty;
     final nameSearchExp = Input_StringComparisonExp($_ilike: '%$search%');
 
-    return Variables_Subscription_watchAllServices(
-      limit: instance.limit + 1,
-      where: [
-        ...where,
-        if (nameSearch)
-          Input_ServicesBoolExp(
-            $_or: [
-              Input_ServicesBoolExp(
-                name: nameSearchExp,
-              ),
-              Input_ServicesBoolExp(
-                classes: Input_ClassesBoolExp(
-                  name: nameSearchExp,
-                ),
-              ),
-              Input_ServicesBoolExp(
-                groups: Input_GroupsBoolExp(
-                  name: nameSearchExp,
-                ),
-              ),
-            ],
-          ),
-        if (lastSearch == search && offset > 0)
-          Input_ServicesBoolExp(
-            name: Input_StringComparisonExp(
-              $_gt: instance
-                  .currentValue[
-                      (offset - 1) * instance.limit + instance.limit - 1]
-                  .name,
-            ),
-          ),
-      ],
-      classesWhere: [
+    return {
+      'classesWhere': [
         ...classesWhere,
         if (nameSearch)
           Input_ClassesBoolExp(
             name: nameSearchExp,
           ),
-      ],
-      groupsWhere: [
+      ].map((e) => e.toJson()).toList(),
+      'groupsWhere': [
         ...groupsWhere,
         if (nameSearch)
           Input_GroupsBoolExp(
             name: nameSearchExp,
           ),
-      ],
-    ).toJson();
+      ].map((e) => e.toJson()).toList(),
+      ...db.varsTransformer.transformVariablesForPagination(
+        event,
+        where: nameSearch
+            ? [
+                ...where?.map((o) => o.toJson()) ?? [],
+                Input_ServicesBoolExp(
+                  $_or: [
+                    Input_ServicesBoolExp(
+                      name: nameSearchExp,
+                    ),
+                    Input_ServicesBoolExp(
+                      classes: Input_ClassesBoolExp(
+                        name: nameSearchExp,
+                      ),
+                    ),
+                    Input_ServicesBoolExp(
+                      groups: Input_GroupsBoolExp(
+                        name: nameSearchExp,
+                      ),
+                    ),
+                  ],
+                ).toJson(),
+              ]
+            : [],
+        orderBy: orderBy?.map((o) => o.toJson()).toList() ??
+            [
+              {'studyYearFromId': 'ASC'},
+              {'studyYearToId': 'ASC'},
+            ],
+      ),
+    };
   }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
@@ -129,17 +127,20 @@ class ServicesDAO extends FullCRUDDAO<Service, Input_ServicesBoolExp> {
     List<Input_ServicesBoolExp>? where,
     List<Input_GroupsBoolExp>? groupsWhere,
     List<Input_ClassesBoolExp>? classesWhere,
+    List<Input_ServicesOrderBy>? orderBy,
   }) {
     return streamingProxy.streamAll(
       searchQuery: searchQuery,
       where: where,
+      orderBy: orderBy,
       streamAllConfig: baseStreamAllConfig.copyWith(
-        varsConstructor: ({required event, required where}) =>
+        varsConstructor: ({required event, where, orderBy}) =>
             _streamAllVarsConstructor(
           event: event,
-          where: where,
+          where: where ?? [],
           groupsWhere: groupsWhere ?? [],
           classesWhere: classesWhere ?? [],
+          orderBy: orderBy,
         ),
       ),
     );

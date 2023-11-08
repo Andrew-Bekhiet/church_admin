@@ -3,15 +3,33 @@
 part of 'study_year.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$StudyYearFields = <String, FieldMetadata>{
+  'order': FieldMetadata<int>(
+    name: 'order',
+    label: 'الترتيب',
+    operators: Operator.comparitive,
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StudyYear _$$_StudyYearFromJson(Map json) => _$_StudyYear(
+_$StudyYearImpl _$$StudyYearImplFromJson(Map json) => _$StudyYearImpl(
       order: json['order'] as int,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_StudyYearToJson(_$_StudyYear instance) =>
+Map<String, dynamic> _$$StudyYearImplToJson(_$StudyYearImpl instance) =>
     <String, dynamic>{
       'order': instance.order,
       'name': instance.name,

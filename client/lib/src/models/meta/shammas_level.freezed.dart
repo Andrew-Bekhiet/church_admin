@@ -74,22 +74,22 @@ class _$ShammasLevelCopyWithImpl<$Res, $Val extends ShammasLevel>
 }
 
 /// @nodoc
-abstract class _$$_ShammasLevelCopyWith<$Res>
+abstract class _$$ShammasLevelImplCopyWith<$Res>
     implements $ShammasLevelCopyWith<$Res> {
-  factory _$$_ShammasLevelCopyWith(
-          _$_ShammasLevel value, $Res Function(_$_ShammasLevel) then) =
-      __$$_ShammasLevelCopyWithImpl<$Res>;
+  factory _$$ShammasLevelImplCopyWith(
+          _$ShammasLevelImpl value, $Res Function(_$ShammasLevelImpl) then) =
+      __$$ShammasLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int order, String name, String id});
 }
 
 /// @nodoc
-class __$$_ShammasLevelCopyWithImpl<$Res>
-    extends _$ShammasLevelCopyWithImpl<$Res, _$_ShammasLevel>
-    implements _$$_ShammasLevelCopyWith<$Res> {
-  __$$_ShammasLevelCopyWithImpl(
-      _$_ShammasLevel _value, $Res Function(_$_ShammasLevel) _then)
+class __$$ShammasLevelImplCopyWithImpl<$Res>
+    extends _$ShammasLevelCopyWithImpl<$Res, _$ShammasLevelImpl>
+    implements _$$ShammasLevelImplCopyWith<$Res> {
+  __$$ShammasLevelImplCopyWithImpl(
+      _$ShammasLevelImpl _value, $Res Function(_$ShammasLevelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_ShammasLevelCopyWithImpl<$Res>
     Object? name = null,
     Object? id = null,
   }) {
-    return _then(_$_ShammasLevel(
+    return _then(_$ShammasLevelImpl(
       order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
@@ -118,12 +118,13 @@ class __$$_ShammasLevelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ShammasLevel extends _ShammasLevel {
-  _$_ShammasLevel({required this.order, required this.name, required this.id})
+class _$ShammasLevelImpl extends _ShammasLevel {
+  _$ShammasLevelImpl(
+      {required this.order, required this.name, required this.id})
       : super._();
 
-  factory _$_ShammasLevel.fromJson(Map<String, dynamic> json) =>
-      _$$_ShammasLevelFromJson(json);
+  factory _$ShammasLevelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ShammasLevelImplFromJson(json);
 
   @override
   final int order;
@@ -141,7 +142,7 @@ class _$_ShammasLevel extends _ShammasLevel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShammasLevel &&
+            other is _$ShammasLevelImpl &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id));
@@ -154,12 +155,12 @@ class _$_ShammasLevel extends _ShammasLevel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShammasLevelCopyWith<_$_ShammasLevel> get copyWith =>
-      __$$_ShammasLevelCopyWithImpl<_$_ShammasLevel>(this, _$identity);
+  _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
+      __$$ShammasLevelImplCopyWithImpl<_$ShammasLevelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ShammasLevelToJson(
+    return _$$ShammasLevelImplToJson(
       this,
     );
   }
@@ -169,11 +170,11 @@ abstract class _ShammasLevel extends ShammasLevel {
   factory _ShammasLevel(
       {required final int order,
       required final String name,
-      required final String id}) = _$_ShammasLevel;
+      required final String id}) = _$ShammasLevelImpl;
   _ShammasLevel._() : super._();
 
   factory _ShammasLevel.fromJson(Map<String, dynamic> json) =
-      _$_ShammasLevel.fromJson;
+      _$ShammasLevelImpl.fromJson;
 
   @override
   int get order;
@@ -183,6 +184,6 @@ abstract class _ShammasLevel extends ShammasLevel {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_ShammasLevelCopyWith<_$_ShammasLevel> get copyWith =>
+  _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

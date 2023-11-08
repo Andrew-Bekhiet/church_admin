@@ -66,19 +66,21 @@ class _$ChurchCopyWithImpl<$Res, $Val extends Church>
 }
 
 /// @nodoc
-abstract class _$$_ChurchCopyWith<$Res> implements $ChurchCopyWith<$Res> {
-  factory _$$_ChurchCopyWith(_$_Church value, $Res Function(_$_Church) then) =
-      __$$_ChurchCopyWithImpl<$Res>;
+abstract class _$$ChurchImplCopyWith<$Res> implements $ChurchCopyWith<$Res> {
+  factory _$$ChurchImplCopyWith(
+          _$ChurchImpl value, $Res Function(_$ChurchImpl) then) =
+      __$$ChurchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_ChurchCopyWithImpl<$Res>
-    extends _$ChurchCopyWithImpl<$Res, _$_Church>
-    implements _$$_ChurchCopyWith<$Res> {
-  __$$_ChurchCopyWithImpl(_$_Church _value, $Res Function(_$_Church) _then)
+class __$$ChurchImplCopyWithImpl<$Res>
+    extends _$ChurchCopyWithImpl<$Res, _$ChurchImpl>
+    implements _$$ChurchImplCopyWith<$Res> {
+  __$$ChurchImplCopyWithImpl(
+      _$ChurchImpl _value, $Res Function(_$ChurchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +89,7 @@ class __$$_ChurchCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_Church(
+    return _then(_$ChurchImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -102,11 +104,11 @@ class __$$_ChurchCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Church extends _Church {
-  _$_Church({required this.id, required this.name}) : super._();
+class _$ChurchImpl extends _Church {
+  _$ChurchImpl({required this.id, required this.name}) : super._();
 
-  factory _$_Church.fromJson(Map<String, dynamic> json) =>
-      _$$_ChurchFromJson(json);
+  factory _$ChurchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChurchImplFromJson(json);
 
   @override
   final String id;
@@ -122,7 +124,7 @@ class _$_Church extends _Church {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Church &&
+            other is _$ChurchImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -134,12 +136,12 @@ class _$_Church extends _Church {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChurchCopyWith<_$_Church> get copyWith =>
-      __$$_ChurchCopyWithImpl<_$_Church>(this, _$identity);
+  _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
+      __$$ChurchImplCopyWithImpl<_$ChurchImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChurchToJson(
+    return _$$ChurchImplToJson(
       this,
     );
   }
@@ -147,10 +149,10 @@ class _$_Church extends _Church {
 
 abstract class _Church extends Church {
   factory _Church({required final String id, required final String name}) =
-      _$_Church;
+      _$ChurchImpl;
   _Church._() : super._();
 
-  factory _Church.fromJson(Map<String, dynamic> json) = _$_Church.fromJson;
+  factory _Church.fromJson(Map<String, dynamic> json) = _$ChurchImpl.fromJson;
 
   @override
   String get id;
@@ -158,6 +160,6 @@ abstract class _Church extends Church {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_ChurchCopyWith<_$_Church> get copyWith =>
+  _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -3,15 +3,33 @@
 part of 'church.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$ChurchFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Church>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Church _$$_ChurchFromJson(Map json) => _$_Church(
+_$ChurchImpl _$$ChurchImplFromJson(Map json) => _$ChurchImpl(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_ChurchToJson(_$_Church instance) => <String, dynamic>{
+Map<String, dynamic> _$$ChurchImplToJson(_$ChurchImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

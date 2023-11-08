@@ -13,22 +13,27 @@ void main() {
 
           final expectedQuery = AdvancedQuery(
             name: '',
+            queryableType: Person.queryableType,
             conditions: [
               Condition(
-                type: Person,
+                queryableType: Person.queryableType,
                 field: 'name',
                 operator: Operator.ilike,
+                value: '%%',
               ),
             ],
             orderBy: [
-              const OrderBy(field: 'name'),
+              OrderBy(fieldName: 'name'),
             ],
           );
 
           expect(unit.query, expectedQuery);
 
           expect(unit.conditions, expectedQuery.conditions);
-          expect(unit.selectedType, expectedQuery.conditions.first.type);
+          expect(
+            unit.selectedQueryableType,
+            expectedQuery.conditions.first.queryableType,
+          );
           expect(unit.limit, expectedQuery.limit);
           expect(unit.orderBy, expectedQuery.orderBy);
         },
@@ -39,13 +44,13 @@ void main() {
         () {
           final newConditions = [
             Condition(
-              type: Person,
+              queryableType: Person.queryableType,
               field: 'mainPhone',
               operator: Operator.eq,
               value: '01234567890',
             ),
             Condition(
-              type: Person,
+              queryableType: Person.queryableType,
               field: 'address',
               operator: Operator.ilike,
               value: 'address',
@@ -53,14 +58,15 @@ void main() {
           ];
 
           final newOrderBy = [
-            const OrderBy(field: 'mainPhone'),
-            const OrderBy(field: 'address'),
+            OrderBy(fieldName: 'mainPhone'),
+            OrderBy(fieldName: 'address'),
           ];
           const newLimit = 10;
-          const newType = Area;
+          final newType = Area.queryableType;
 
           final newQuery = AdvancedQuery(
             name: 'new query',
+            queryableType: Person.queryableType,
             conditions: newConditions,
             orderBy: newOrderBy,
             limit: newLimit,
@@ -77,7 +83,7 @@ void main() {
           expect(unit.limitStream, emitsInOrder([unit.limit, newLimit]));
           expect(
             unit.selectedTypeStream,
-            emitsInOrder([unit.selectedType, newType]),
+            emitsInOrder([unit.selectedQueryableType, newType]),
           );
 
           expect(
@@ -96,15 +102,16 @@ void main() {
               ),
               AdvancedQuery(
                 name: unit.query.name,
+                queryableType: newType,
                 conditions: [
                   Condition(
-                    type: newType,
+                    queryableType: newType,
                     field: 'name',
                     operator: Operator.eq,
                   ),
                 ],
                 orderBy: [
-                  const OrderBy(field: 'name'),
+                  OrderBy(fieldName: 'name'),
                 ],
               ),
               newQuery,
@@ -115,7 +122,7 @@ void main() {
             ..changeConditions(newConditions)
             ..changeOrderBy(newOrderBy)
             ..changeLimit(newLimit)
-            ..changeSelectedType(newType, 'name')
+            ..changeSelectedQueryableType(newType)
             ..changeQuery(newQuery);
         },
       );
@@ -125,13 +132,13 @@ void main() {
         () {
           final newConditions = [
             Condition(
-              type: Person,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
               field: 'mainPhone',
               operator: Operator.eq,
               value: '01234567890',
             ),
             Condition(
-              type: Person,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
               field: 'address',
               operator: Operator.ilike,
               value: 'address',
@@ -167,19 +174,19 @@ void main() {
         () {
           final newConditions = [
             Condition(
-              type: Area,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
               field: 'mainPhone',
               operator: Operator.eq,
               value: '01234567890',
             ),
             Condition(
-              type: Person,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
               field: 'address',
               operator: Operator.ilike,
               value: 'address',
             ),
             Condition(
-              type: Area,
+              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
               field: 'address',
               operator: Operator.ilike,
               value: 'address',
@@ -208,14 +215,14 @@ void main() {
         'OrderBy methods',
         () {
           final newOrderBy = [
-            const OrderBy(
-              field: 'mainPhone',
-              direction: Enum_OrderBy.DESC,
+            OrderBy(
+              fieldName: 'mainPhone',
+              value: Enum_OrderBy.DESC,
             ),
-            const OrderBy(
-              field: 'address',
+            OrderBy(
+              fieldName: 'address',
               // ignore: avoid_redundant_argument_values
-              direction: Enum_OrderBy.ASC,
+              value: Enum_OrderBy.ASC,
             ),
           ];
 

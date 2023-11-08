@@ -12,7 +12,7 @@ subscription editHistory(
 }
 
 subscription personCallHistory(
-  $personId: uuid!
+  $personId: Uuid!
   $where: [HistoryCallHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
@@ -26,7 +26,7 @@ subscription personCallHistory(
 }
 
 subscription personVisitHistory(
-  $personId: uuid!
+  $personId: Uuid!
   $where: [HistoryVisitHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
@@ -40,7 +40,7 @@ subscription personVisitHistory(
 }
 
 subscription personConfessionHistory(
-  $personId: uuid!
+  $personId: Uuid!
   $where: [HistoryConfessionHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {
@@ -54,7 +54,7 @@ subscription personConfessionHistory(
 }
 
 subscription personKodasHistory(
-  $personId: uuid!
+  $personId: Uuid!
   $where: [HistoryKodasHistoryBoolExp!] = {}
   $limit: Int = 200
 ) {

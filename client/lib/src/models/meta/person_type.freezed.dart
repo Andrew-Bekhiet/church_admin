@@ -78,11 +78,11 @@ class _$PersonTypeCopyWithImpl<$Res, $Val extends PersonType>
 }
 
 /// @nodoc
-abstract class _$$_PersonTypeCopyWith<$Res>
+abstract class _$$PersonTypeImplCopyWith<$Res>
     implements $PersonTypeCopyWith<$Res> {
-  factory _$$_PersonTypeCopyWith(
-          _$_PersonType value, $Res Function(_$_PersonType) then) =
-      __$$_PersonTypeCopyWithImpl<$Res>;
+  factory _$$PersonTypeImplCopyWith(
+          _$PersonTypeImpl value, $Res Function(_$PersonTypeImpl) then) =
+      __$$PersonTypeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +92,11 @@ abstract class _$$_PersonTypeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PersonTypeCopyWithImpl<$Res>
-    extends _$PersonTypeCopyWithImpl<$Res, _$_PersonType>
-    implements _$$_PersonTypeCopyWith<$Res> {
-  __$$_PersonTypeCopyWithImpl(
-      _$_PersonType _value, $Res Function(_$_PersonType) _then)
+class __$$PersonTypeImplCopyWithImpl<$Res>
+    extends _$PersonTypeCopyWithImpl<$Res, _$PersonTypeImpl>
+    implements _$$PersonTypeImplCopyWith<$Res> {
+  __$$PersonTypeImplCopyWithImpl(
+      _$PersonTypeImpl _value, $Res Function(_$PersonTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_PersonTypeCopyWithImpl<$Res>
     Object? name = null,
     Object? color = freezed,
   }) {
-    return _then(_$_PersonType(
+    return _then(_$PersonTypeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -125,15 +125,15 @@ class __$$_PersonTypeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PersonType extends _PersonType {
-  _$_PersonType(
+class _$PersonTypeImpl extends _PersonType {
+  _$PersonTypeImpl(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
       : super._();
 
-  factory _$_PersonType.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonTypeFromJson(json);
+  factory _$PersonTypeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PersonTypeImplFromJson(json);
 
   @override
   final String id;
@@ -152,7 +152,7 @@ class _$_PersonType extends _PersonType {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PersonType &&
+            other is _$PersonTypeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color));
@@ -165,12 +165,12 @@ class _$_PersonType extends _PersonType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonTypeCopyWith<_$_PersonType> get copyWith =>
-      __$$_PersonTypeCopyWithImpl<_$_PersonType>(this, _$identity);
+  _$$PersonTypeImplCopyWith<_$PersonTypeImpl> get copyWith =>
+      __$$PersonTypeImplCopyWithImpl<_$PersonTypeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonTypeToJson(
+    return _$$PersonTypeImplToJson(
       this,
     );
   }
@@ -181,11 +181,11 @@ abstract class _PersonType extends PersonType {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-      final Color? color}) = _$_PersonType;
+      final Color? color}) = _$PersonTypeImpl;
   _PersonType._() : super._();
 
   factory _PersonType.fromJson(Map<String, dynamic> json) =
-      _$_PersonType.fromJson;
+      _$PersonTypeImpl.fromJson;
 
   @override
   String get id;
@@ -196,6 +196,6 @@ abstract class _PersonType extends PersonType {
   Color? get color;
   @override
   @JsonKey(ignore: true)
-  _$$_PersonTypeCopyWith<_$_PersonType> get copyWith =>
+  _$$PersonTypeImplCopyWith<_$PersonTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

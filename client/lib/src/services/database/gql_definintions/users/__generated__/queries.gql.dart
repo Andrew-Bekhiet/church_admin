@@ -467,7 +467,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateFrom')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -476,7 +476,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateTo')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -485,7 +485,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -494,7 +494,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'userId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -504,7 +504,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'groupsIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -516,7 +516,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'classesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -528,7 +528,7 @@ const documentNodeQueryanalyzeUserAttendance = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'servicesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,

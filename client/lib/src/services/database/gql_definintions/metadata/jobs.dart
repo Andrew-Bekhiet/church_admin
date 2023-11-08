@@ -2,23 +2,17 @@ import 'package:church_admin/church_admin.dart';
 
 import 'jobs/__generated__/subscriptions.gql.dart';
 
-class JobsDAO extends DAOBase<Job> with StreamableDAO<Job, Input_JobsBoolExp> {
+class JobsDAO extends DAOBase<Job>
+    with StreamableDAO<Job, Input_JobsBoolExp, Input_JobsOrderBy> {
   JobsDAO({
     required super.db,
   }) : super(fromJson: Job.fromJson);
 
   @override
-  StreamAllConfig<Job, Input_JobsBoolExp> get baseStreamAllConfig =>
-      StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllJobs,
-        varsConstructor: ({required event, required where}) => graphQLClient
-            .getDefaultSearchVars(
-              event,
-              Variables_Subscription_watchAllJobs.new,
-              Input_JobsBoolExp.new,
-            )
-            .toJson(),
-      );
+  StreamAllConfig<Job, Input_JobsBoolExp, Input_JobsOrderBy>
+      get baseStreamAllConfig => const StreamAllConfig(
+            document: documentNodeSubscriptionwatchAllJobs,
+          );
 
   @override
   StreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>

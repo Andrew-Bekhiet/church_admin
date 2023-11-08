@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,19 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
+@TypeMetadata(ignoreFields: ['validity'])
 class Group extends ViewableWithIDAndImage
     with _$Group
     implements ToJson, AttendanceAnalyzable {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$GroupFields;
+
+  static final QueryableType<Group> queryableType = QueryableType<Group>(
+    name: 'Group',
+    label: 'المجموعات',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Group.fromJson,
+  );
+
   factory Group({
     required String id,
     required String name,
@@ -25,16 +36,8 @@ class Group extends ViewableWithIDAndImage
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
     List<User>? adminUsers,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? attendanceDaysConstraintsAggregate,
   }) = _Group;
   Group._() : super();
 

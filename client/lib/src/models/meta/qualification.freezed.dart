@@ -68,22 +68,22 @@ class _$QualificationCopyWithImpl<$Res, $Val extends Qualification>
 }
 
 /// @nodoc
-abstract class _$$_QualificationCopyWith<$Res>
+abstract class _$$QualificationImplCopyWith<$Res>
     implements $QualificationCopyWith<$Res> {
-  factory _$$_QualificationCopyWith(
-          _$_Qualification value, $Res Function(_$_Qualification) then) =
-      __$$_QualificationCopyWithImpl<$Res>;
+  factory _$$QualificationImplCopyWith(
+          _$QualificationImpl value, $Res Function(_$QualificationImpl) then) =
+      __$$QualificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_QualificationCopyWithImpl<$Res>
-    extends _$QualificationCopyWithImpl<$Res, _$_Qualification>
-    implements _$$_QualificationCopyWith<$Res> {
-  __$$_QualificationCopyWithImpl(
-      _$_Qualification _value, $Res Function(_$_Qualification) _then)
+class __$$QualificationImplCopyWithImpl<$Res>
+    extends _$QualificationCopyWithImpl<$Res, _$QualificationImpl>
+    implements _$$QualificationImplCopyWith<$Res> {
+  __$$QualificationImplCopyWithImpl(
+      _$QualificationImpl _value, $Res Function(_$QualificationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_QualificationCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_Qualification(
+    return _then(_$QualificationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_QualificationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Qualification extends _Qualification {
-  _$_Qualification({required this.id, required this.name}) : super._();
+class _$QualificationImpl extends _Qualification {
+  _$QualificationImpl({required this.id, required this.name}) : super._();
 
-  factory _$_Qualification.fromJson(Map<String, dynamic> json) =>
-      _$$_QualificationFromJson(json);
+  factory _$QualificationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$QualificationImplFromJson(json);
 
   @override
   final String id;
@@ -127,7 +127,7 @@ class _$_Qualification extends _Qualification {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Qualification &&
+            other is _$QualificationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -139,12 +139,12 @@ class _$_Qualification extends _Qualification {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QualificationCopyWith<_$_Qualification> get copyWith =>
-      __$$_QualificationCopyWithImpl<_$_Qualification>(this, _$identity);
+  _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
+      __$$QualificationImplCopyWithImpl<_$QualificationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QualificationToJson(
+    return _$$QualificationImplToJson(
       this,
     );
   }
@@ -153,11 +153,11 @@ class _$_Qualification extends _Qualification {
 abstract class _Qualification extends Qualification {
   factory _Qualification(
       {required final String id,
-      required final String name}) = _$_Qualification;
+      required final String name}) = _$QualificationImpl;
   _Qualification._() : super._();
 
   factory _Qualification.fromJson(Map<String, dynamic> json) =
-      _$_Qualification.fromJson;
+      _$QualificationImpl.fromJson;
 
   @override
   String get id;
@@ -165,6 +165,6 @@ abstract class _Qualification extends Qualification {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_QualificationCopyWith<_$_Qualification> get copyWith =>
+  _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

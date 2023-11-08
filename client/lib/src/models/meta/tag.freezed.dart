@@ -75,9 +75,9 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
-  factory _$$_TagCopyWith(_$_Tag value, $Res Function(_$_Tag) then) =
-      __$$_TagCopyWithImpl<$Res>;
+abstract class _$$TagImplCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$$TagImplCopyWith(_$TagImpl value, $Res Function(_$TagImpl) then) =
+      __$$TagImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,9 +87,9 @@ abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
-    implements _$$_TagCopyWith<$Res> {
-  __$$_TagCopyWithImpl(_$_Tag _value, $Res Function(_$_Tag) _then)
+class __$$TagImplCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$TagImpl>
+    implements _$$TagImplCopyWith<$Res> {
+  __$$TagImplCopyWithImpl(_$TagImpl _value, $Res Function(_$TagImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
     Object? name = null,
     Object? color = freezed,
   }) {
-    return _then(_$_Tag(
+    return _then(_$TagImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,15 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Tag extends _Tag {
-  _$_Tag(
+class _$TagImpl extends _Tag {
+  _$TagImpl(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
       : super._();
 
-  factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
+  factory _$TagImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TagImplFromJson(json);
 
   @override
   final String id;
@@ -144,7 +145,7 @@ class _$_Tag extends _Tag {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tag &&
+            other is _$TagImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color));
@@ -157,12 +158,12 @@ class _$_Tag extends _Tag {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TagCopyWith<_$_Tag> get copyWith =>
-      __$$_TagCopyWithImpl<_$_Tag>(this, _$identity);
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      __$$TagImplCopyWithImpl<_$TagImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TagToJson(
+    return _$$TagImplToJson(
       this,
     );
   }
@@ -173,10 +174,10 @@ abstract class _Tag extends Tag {
       {required final String id,
       required final String name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-      final Color? color}) = _$_Tag;
+      final Color? color}) = _$TagImpl;
   _Tag._() : super._();
 
-  factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
+  factory _Tag.fromJson(Map<String, dynamic> json) = _$TagImpl.fromJson;
 
   @override
   String get id;
@@ -187,5 +188,6 @@ abstract class _Tag extends Tag {
   Color? get color;
   @override
   @JsonKey(ignore: true)
-  _$$_TagCopyWith<_$_Tag> get copyWith => throw _privateConstructorUsedError;
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

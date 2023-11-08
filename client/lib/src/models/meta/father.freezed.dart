@@ -72,19 +72,21 @@ class _$FatherCopyWithImpl<$Res, $Val extends Father>
 }
 
 /// @nodoc
-abstract class _$$_FatherCopyWith<$Res> implements $FatherCopyWith<$Res> {
-  factory _$$_FatherCopyWith(_$_Father value, $Res Function(_$_Father) then) =
-      __$$_FatherCopyWithImpl<$Res>;
+abstract class _$$FatherImplCopyWith<$Res> implements $FatherCopyWith<$Res> {
+  factory _$$FatherImplCopyWith(
+          _$FatherImpl value, $Res Function(_$FatherImpl) then) =
+      __$$FatherImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String? churchId});
 }
 
 /// @nodoc
-class __$$_FatherCopyWithImpl<$Res>
-    extends _$FatherCopyWithImpl<$Res, _$_Father>
-    implements _$$_FatherCopyWith<$Res> {
-  __$$_FatherCopyWithImpl(_$_Father _value, $Res Function(_$_Father) _then)
+class __$$FatherImplCopyWithImpl<$Res>
+    extends _$FatherCopyWithImpl<$Res, _$FatherImpl>
+    implements _$$FatherImplCopyWith<$Res> {
+  __$$FatherImplCopyWithImpl(
+      _$FatherImpl _value, $Res Function(_$FatherImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +96,7 @@ class __$$_FatherCopyWithImpl<$Res>
     Object? name = null,
     Object? churchId = freezed,
   }) {
-    return _then(_$_Father(
+    return _then(_$FatherImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -113,11 +115,12 @@ class __$$_FatherCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Father extends _Father {
-  _$_Father({required this.id, required this.name, this.churchId}) : super._();
+class _$FatherImpl extends _Father {
+  _$FatherImpl({required this.id, required this.name, this.churchId})
+      : super._();
 
-  factory _$_Father.fromJson(Map<String, dynamic> json) =>
-      _$$_FatherFromJson(json);
+  factory _$FatherImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FatherImplFromJson(json);
 
   @override
   final String id;
@@ -135,7 +138,7 @@ class _$_Father extends _Father {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Father &&
+            other is _$FatherImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.churchId, churchId) ||
@@ -149,12 +152,12 @@ class _$_Father extends _Father {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FatherCopyWith<_$_Father> get copyWith =>
-      __$$_FatherCopyWithImpl<_$_Father>(this, _$identity);
+  _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
+      __$$FatherImplCopyWithImpl<_$FatherImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FatherToJson(
+    return _$$FatherImplToJson(
       this,
     );
   }
@@ -164,10 +167,10 @@ abstract class _Father extends Father {
   factory _Father(
       {required final String id,
       required final String name,
-      final String? churchId}) = _$_Father;
+      final String? churchId}) = _$FatherImpl;
   _Father._() : super._();
 
-  factory _Father.fromJson(Map<String, dynamic> json) = _$_Father.fromJson;
+  factory _Father.fromJson(Map<String, dynamic> json) = _$FatherImpl.fromJson;
 
   @override
   String get id;
@@ -177,6 +180,6 @@ abstract class _Father extends Father {
   String? get churchId;
   @override
   @JsonKey(ignore: true)
-  _$$_FatherCopyWith<_$_Father> get copyWith =>
+  _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

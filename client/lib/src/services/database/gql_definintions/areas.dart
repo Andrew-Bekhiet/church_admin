@@ -5,14 +5,14 @@ import 'package:uuid/uuid.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
 
-class AreasDAO extends FullCRUDDAO<Area, Input_AreasBoolExp> {
+class AreasDAO
+    extends FullCRUDDAO<Area, Input_AreasBoolExp, Input_AreasOrderBy> {
   AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
 
   @override
-  late final StreamAllConfig<Area, Input_AreasBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
+  late final StreamAllConfig<Area, Input_AreasBoolExp, Input_AreasOrderBy>
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllAreas,
-    varsConstructor: _streamAllVarsConstructor,
   );
   @override
   late final StreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
@@ -38,24 +38,6 @@ class AreasDAO extends FullCRUDDAO<Area, Input_AreasBoolExp> {
     document: documentNodeMutationinsertArea,
     varsConstructor: _createAreaVarsConstructor,
   );
-
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Area> event,
-    required List<Input_AreasBoolExp> where,
-  }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-      event,
-      Variables_Subscription_watchAllAreas.new,
-      Input_AreasBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-    ).toJson();
-  }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchArea(id: id).toJson();

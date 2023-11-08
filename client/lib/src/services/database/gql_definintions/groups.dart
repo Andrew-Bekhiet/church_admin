@@ -5,14 +5,15 @@ import 'package:uuid/uuid.dart';
 import 'groups/__generated__/mutations.gql.dart';
 import 'groups/__generated__/subscriptions.gql.dart';
 
-class GroupsDAO extends FullCRUDDAO<Group, Input_GroupsBoolExp> {
+class GroupsDAO
+    extends FullCRUDDAO<Group, Input_GroupsBoolExp, Input_GroupsOrderBy> {
   GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
 
   @override
-  late final StreamAllConfig<Group, Input_GroupsBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
+  late final StreamAllConfig<Group, Input_GroupsBoolExp, Input_GroupsOrderBy>
+      baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllGroups,
-    varsConstructor: _streamAllVarsConstructor,
+    transformVars: _streamAllVarsConstructor,
   );
   @override
   late final StreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
@@ -41,28 +42,25 @@ class GroupsDAO extends FullCRUDDAO<Group, Input_GroupsBoolExp> {
 
   Json _streamAllVarsConstructor({
     required GQLPaginatableStreamEvent<Group> event,
-    required List<Input_GroupsBoolExp> where,
+    List<Input_GroupsBoolExp>? where,
+    List<Input_GroupsOrderBy>? orderBy,
   }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+    return db.varsTransformer.transformVariablesForPagination(
       event,
-      Variables_Subscription_watchAllGroups.new,
-      Input_GroupsBoolExp.new,
+      where: where?.map((o) => o.toJson()).toList() ?? [],
+      orderBy: ((orderBy?.isEmpty ?? true)
+              ? [
+                  Input_GroupsOrderBy(
+                    validity: Enum_OrderBy.ASC,
+                  ),
+                  Input_GroupsOrderBy(
+                    name: Enum_OrderBy.ASC,
+                  ),
+                ]
+              : orderBy!)
+          .map((o) => o.toJson())
+          .toList(),
     );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-      orderBy: [
-        Input_GroupsOrderBy(
-          validity: Enum_OrderBy.ASC,
-        ),
-        Input_GroupsOrderBy(
-          name: Enum_OrderBy.ASC,
-        ),
-      ],
-    ).toJson();
   }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>

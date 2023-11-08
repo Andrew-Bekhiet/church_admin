@@ -58,20 +58,23 @@ class NotificationsServiceCallbacks {
     required String channelDescription,
     required String title,
     required LocalNotificationType type,
-    required Map<String, dynamic> additionalData,
-    required Future<Iterable<Person>> Function() getPersons,
+    required AdvancedQuery query,
   }) async {
     await InitializationService.I.initialize();
 
     if (!AuthService.I.isSignedIn) return;
 
-    final persons = await getPersons();
+    final persons = await DatabaseService.I.advancedQueryParser
+        .createPaginatableStream(query)
+        .first;
 
     if (persons.isNotEmpty || !kReleaseMode) {
       final notification = makeNotificationWith(
         persons: persons,
         title: title,
-        additionalData: additionalData,
+        additionalData: {
+          'query': query.toJson(),
+        },
       );
 
       await NotificationsStorage.I.writeNotification(notification);
@@ -97,13 +100,13 @@ class NotificationsServiceCallbacks {
   @visibleForTesting
   static Notification makeNotificationWith({
     required String title,
-    required Iterable<Person> persons,
+    required Iterable<Viewable> persons,
     Map<String, dynamic>? additionalData,
   }) {
     return Notification(
       id: DateTime.now().toIso8601String(),
       senderUID: NotificationsService.localNotificationSenderUID,
-      body: persons.map((p) => p.name).join(', '),
+      body: persons.map((p) => p.name).join('، '),
       title: title,
       sentTime: DateTime.now(),
       type: NotificationType.local,
@@ -139,17 +142,40 @@ class NotificationsServiceCallbacks {
   }) {
     return AdvancedQuery(
       name: name,
+      queryableType: Person.queryableType,
       conditions: [
         Condition(
-          type: Person,
+          queryableType: Person.queryableType,
           field: field,
-          operator: Operator.lt,
-          value: value,
+          operator: null,
+          value: [
+            Condition(
+              queryableType: LastRecordedByInfo.queryableType,
+              field: 'time',
+              operator: Operator.isNull,
+              value: false,
+            ),
+            Condition(
+              queryableType: LastRecordedByInfo.queryableType,
+              field: 'time',
+              operator: Operator.lt,
+              value: value,
+            ),
+          ],
         ),
       ],
       orderBy: [
-        OrderBy(field: field),
-        const OrderBy(field: 'name'),
+        OrderBy(
+          fieldName: field + 'Aggregate',
+          value: OrderBy(
+            fieldName: 'max',
+            value: OrderBy(
+              fieldName: 'time',
+              value: Enum_OrderBy.DESC,
+            ),
+          ),
+        ),
+        OrderBy(fieldName: 'name'),
       ],
     );
   }
@@ -158,29 +184,29 @@ class NotificationsServiceCallbacks {
   static Future<void> showKodasNotification() {
     final date = DateTime.now().subtract(const Duration(days: 7));
 
+    final query = _createAdvQueryWith(
+      name: 'إشعارات القداس',
+      field: 'kodasHistory',
+      value: date,
+    );
+
     return showNotification(
       channelId: 'Kodas',
       channelName: 'إشعارات القداس',
       channelDescription: 'إشعارات القداس',
       title: 'إشعارات القداس',
       type: LocalNotificationType.kodas,
-      additionalData: {
-        'query': _createAdvQueryWith(
-          name: 'إشعارات القداس',
-          field: 'lastKodas',
-          value: date,
-        ).toJson(),
-      },
-      getPersons: () =>
-          DatabaseService.I.persons.notificationsQueries.getPersonsKodasWarning(
-        date: date,
-      ),
+      query: query,
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showMeetingNotification() {
-    final date = DateTime.now().subtract(const Duration(days: 7));
+    final query = _createAdvQueryWith(
+      name: 'إنذار حضور الاجتماع',
+      field: 'meetingHistory',
+      value: DateTime.now().subtract(const Duration(days: 7)),
+    );
 
     return showNotification(
       channelId: 'Meeting',
@@ -188,17 +214,7 @@ class NotificationsServiceCallbacks {
       channelDescription: 'إشعارات حضور الاجتماع',
       title: 'إنذار حضور الاجتماع',
       type: LocalNotificationType.meeting,
-      additionalData: {
-        'query': _createAdvQueryWith(
-          name: 'إنذار حضور الاجتماع',
-          field: 'lastMeeting',
-          value: date,
-        ).toJson(),
-      },
-      getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getPersonsMeetingWarning(
-        date: date,
-      ),
+      query: query,
     );
   }
 
@@ -206,27 +222,29 @@ class NotificationsServiceCallbacks {
   static Future<void> showVisitNotification() {
     final date = DateTime.now().subtract(const Duration(days: 20));
 
+    final query = _createAdvQueryWith(
+      name: 'إنذار الافتقاد',
+      field: 'visitHistory',
+      value: date,
+    );
+
     return showNotification(
       channelId: 'Visit',
       channelName: 'إشعارات الافتقاد',
       channelDescription: 'إشعارات الافتقاد',
       title: 'إنذار الافتقاد',
       type: LocalNotificationType.visit,
-      additionalData: {
-        'query': _createAdvQueryWith(
-          name: 'إنذار الافتقاد',
-          field: 'lastVisit',
-          value: date,
-        ).toJson(),
-      },
-      getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getPersonsVisitWarning(date: date),
+      query: query,
     );
   }
 
   @pragma('vm:entry-point')
   static Future<void> showConfessionNotification() {
-    final date = DateTime.now().subtract(const Duration(days: 7));
+    final query = _createAdvQueryWith(
+      name: 'إنذار الاعتراف',
+      field: 'confessionHistory',
+      value: DateTime.now().subtract(const Duration(days: 7)),
+    );
 
     return showNotification(
       channelId: 'Confession',
@@ -234,15 +252,7 @@ class NotificationsServiceCallbacks {
       channelDescription: 'إشعارات الاعتراف',
       title: 'إنذار الاعتراف',
       type: LocalNotificationType.confession,
-      additionalData: {
-        'query': _createAdvQueryWith(
-          name: 'إنذار الاعتراف',
-          field: 'lastConfession',
-          value: date,
-        ).toJson(),
-      },
-      getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getPersonsConfessionWarning(date: date),
+      query: query,
     );
   }
 
@@ -250,33 +260,32 @@ class NotificationsServiceCallbacks {
   static Future<void> showBirthDayNotification() {
     final now = DateTime.now();
 
+    final query = AdvancedQuery(
+      name: 'أعياد الميلاد',
+      queryableType: Person.queryableType,
+      conditions: [
+        Condition(
+          queryableType: Person.queryableType,
+          field: 'birthday',
+          operator: Operator.eq,
+          value: now.month.toString().padLeft(2, '0') +
+              '-' +
+              now.day.toString().padLeft(2, '0'),
+        ),
+      ],
+      orderBy: [
+        OrderBy(fieldName: 'birthdate'),
+        OrderBy(fieldName: 'name'),
+      ],
+    );
+
     return showNotification(
       channelId: 'Birthday',
       channelName: 'إشعارات أعياد الميلاد',
       channelDescription: 'إشعارات أعياد الميلاد',
       title: 'أعياد الميلاد',
       type: LocalNotificationType.birthday,
-      additionalData: {
-        'query': AdvancedQuery(
-          name: 'أعياد الميلاد',
-          conditions: [
-            Condition(
-              type: Person,
-              field: 'birthday',
-              operator: Operator.eq,
-              value: now.month.toString().padLeft(2, '0') +
-                  '-' +
-                  now.day.toString().padLeft(2, '0'),
-            ),
-          ],
-          orderBy: const [
-            OrderBy(field: 'birthdate'),
-            OrderBy(field: 'name'),
-          ],
-        ).toJson(),
-      },
-      getPersons: () => DatabaseService.I.persons.notificationsQueries
-          .getBirthdayPersons(date: now),
+      query: query,
     );
   }
 }

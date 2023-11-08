@@ -3,10 +3,225 @@
 part of 'person.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$PersonFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Person>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'address': FieldMetadata<String>(
+    name: 'address',
+    label: 'العنوان',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'geolocation': FieldMetadata<Point>(
+    name: 'geolocation',
+    label: 'الموقع',
+    operators: Operator.spatial,
+  ),
+  'mainPhone': FieldMetadata<String>(
+    name: 'mainPhone',
+    label: 'رقم الهاتف',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'birthdate': FieldMetadata<DateTime>(
+    name: 'birthdate',
+    label: 'تاريخ الميلاد',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'birthday': FieldMetadata<String>(
+    name: 'birthday',
+    label: 'يوم وشهر الميلاد',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'gender': FieldMetadata<bool>(
+    name: 'gender',
+    label: 'النوع',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'isShammas': FieldMetadata<bool>(
+    name: 'isShammas',
+    label: 'شماس؟',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'shammasLevel': FieldMetadata<ShammasLevel>(
+    name: 'shammasLevel',
+    label: 'رتبة الشموسية',
+  ),
+  'school': FieldMetadata<School>(
+    name: 'school',
+    label: 'المدرسة',
+  ),
+  'college': FieldMetadata<College>(
+    name: 'college',
+    label: 'الكلية',
+  ),
+  'church': FieldMetadata<Church>(
+    name: 'church',
+    label: 'الكنيسة',
+  ),
+  'father': FieldMetadata<Father>(
+    name: 'father',
+    label: 'اب الاعتراف',
+  ),
+  'isStudent': FieldMetadata<bool>(
+    name: 'isStudent',
+    label: 'طالب؟',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'job': FieldMetadata<Job>(
+    name: 'job',
+    label: 'الوظيفة',
+  ),
+  'jobDescription': FieldMetadata<String>(
+    name: 'jobDescription',
+    label: 'تفاصيل الوظيفة',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'qualification': FieldMetadata<Qualification>(
+    name: 'qualification',
+    label: 'المؤهل',
+  ),
+  'personType': FieldMetadata<PersonType>(
+    name: 'personType',
+    label: 'الحالة الاجتماعية',
+  ),
+  'state': FieldMetadata<PersonState>(
+    name: 'state',
+    label: 'الحالة الروحية',
+  ),
+  'isServant': FieldMetadata<bool>(
+    name: 'isServant',
+    label: 'خادم؟',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'notes': FieldMetadata<String>(
+    name: 'notes',
+    label: 'ملاحظات',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'family': FieldMetadata<Family>(
+    name: 'family',
+    label: 'العائلة',
+  ),
+  'studyYear': FieldMetadata<StudyYear>(
+    name: 'studyYear',
+    label: 'السنة الدراسية',
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'classes': FieldMetadata<Class>(
+    name: 'classes',
+    label: 'الفصول',
+    isOrderable: false,
+  ),
+  'groups': FieldMetadata<Group>(
+    name: 'groups',
+    label: 'المجموعات',
+    isOrderable: false,
+  ),
+  'services': FieldMetadata<Service>(
+    name: 'services',
+    label: 'الخدمات',
+    isOrderable: false,
+  ),
+  'areas': FieldMetadata<Area>(
+    name: 'areas',
+    label: 'المناطق',
+    isOrderable: false,
+  ),
+  'streets': FieldMetadata<Street>(
+    name: 'streets',
+    label: 'الشوارع',
+    isOrderable: false,
+  ),
+  'tags': FieldMetadata<Tag>(
+    name: 'tags',
+    label: 'الشارات',
+    isOrderable: false,
+  ),
+  'hobbies': FieldMetadata<Hobby>(
+    name: 'hobbies',
+    label: 'الهوايات',
+    isOrderable: false,
+  ),
+  'user': FieldMetadata<User>(
+    name: 'user',
+    label: 'بيانات الخادم',
+  ),
+  'kodasHistory': FieldMetadata<LastRecordedByInfo>(
+    name: 'kodasHistory',
+    label: 'سجل التناول',
+    isOrderable: false,
+  ),
+  'confessionHistory': FieldMetadata<LastRecordedByInfo>(
+    name: 'confessionHistory',
+    label: 'سجل الاعتراف',
+    isOrderable: false,
+  ),
+  'callHistory': FieldMetadata<LastRecordedByInfo>(
+    name: 'callHistory',
+    label: 'سجل المكالمات',
+    isOrderable: false,
+  ),
+  'visitHistory': FieldMetadata<LastRecordedByInfo>(
+    name: 'visitHistory',
+    label: 'سجل الافتقاد',
+    isOrderable: false,
+  ),
+  'editHistory': FieldMetadata<LastRecordedByInfo>(
+    name: 'editHistory',
+    label: 'سجل تحديث البيانات',
+    isOrderable: false,
+  ),
+  'kodasHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'kodasHistoryAggregate',
+    label: 'إحصائيات سجل التناول',
+  ),
+  'confessionHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'confessionHistoryAggregate',
+    label: 'إحصائيات سجل الاعتراف',
+  ),
+  'callHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'callHistoryAggregate',
+    label: 'إحصائيات سجل المكالمات',
+  ),
+  'visitHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'visitHistoryAggregate',
+    label: 'إحصائيات سجل الافتقاد',
+  ),
+  'editHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'editHistoryAggregate',
+    label: 'إحصائيات سجل تحديث البيانات',
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Person _$$_PersonFromJson(Map json) => _$_Person(
+_$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] as String?,
@@ -19,6 +234,7 @@ _$_Person _$$_PersonFromJson(Map json) => _$_Person(
       birthdate: json['birthdate'] == null
           ? null
           : DateTime.parse(json['birthdate'] as String),
+      birthday: json['birthday'] as String?,
       gender: json['gender'] as bool? ?? true,
       isShammas: json['isShammas'] as bool? ?? false,
       shammasLevelId: json['shammasLevelId'] as String?,
@@ -116,19 +332,50 @@ _$_Person _$$_PersonFromJson(Map json) => _$_Person(
       user: json['user'] == null
           ? null
           : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-      kodasHistoryAggregate: analysisDataFromJson(
-          json['kodasHistoryAggregate'] as Map<String, dynamic>?),
-      confessionHistoryAggregate: analysisDataFromJson(
-          json['confessionHistoryAggregate'] as Map<String, dynamic>?),
-      callHistoryAggregate: analysisDataFromJson(
-          json['callHistoryAggregate'] as Map<String, dynamic>?),
-      visitHistoryAggregate: analysisDataFromJson(
-          json['visitHistoryAggregate'] as Map<String, dynamic>?),
-      editHistoryAggregate: analysisDataFromJson(
-          json['editHistoryAggregate'] as Map<String, dynamic>?),
+      kodasHistory: (json['kodasHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      confessionHistory: (json['confessionHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      callHistory: (json['callHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      visitHistory: (json['visitHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      editHistory: (json['editHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
+      kodasHistoryAggregate: json['kodasHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(
+              Map<String, dynamic>.from(json['kodasHistoryAggregate'] as Map)),
+      confessionHistoryAggregate: json['confessionHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+              json['confessionHistoryAggregate'] as Map)),
+      callHistoryAggregate: json['callHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(
+              Map<String, dynamic>.from(json['callHistoryAggregate'] as Map)),
+      visitHistoryAggregate: json['visitHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(
+              Map<String, dynamic>.from(json['visitHistoryAggregate'] as Map)),
+      editHistoryAggregate: json['editHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(
+              Map<String, dynamic>.from(json['editHistoryAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
+Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,
@@ -136,6 +383,7 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'mainPhone': instance.mainPhone,
       'otherPhones': instance.otherPhones,
       'birthdate': instance.birthdate?.toIso8601String(),
+      'birthday': instance.birthday,
       'gender': instance.gender,
       'isShammas': instance.isShammas,
       'shammasLevelId': instance.shammasLevelId,
@@ -181,12 +429,16 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'tags': personsTagsToJson(instance.tags),
       'hobbies': personsHobbiesToJson(instance.hobbies),
       'user': instance.user?.toJson(),
-      'kodasHistoryAggregate':
-          analysisDataToJson(instance.kodasHistoryAggregate),
+      'kodasHistory': instance.kodasHistory?.map((e) => e.toJson()).toList(),
+      'confessionHistory':
+          instance.confessionHistory?.map((e) => e.toJson()).toList(),
+      'callHistory': instance.callHistory?.map((e) => e.toJson()).toList(),
+      'visitHistory': instance.visitHistory?.map((e) => e.toJson()).toList(),
+      'editHistory': instance.editHistory?.map((e) => e.toJson()).toList(),
+      'kodasHistoryAggregate': instance.kodasHistoryAggregate?.toJson(),
       'confessionHistoryAggregate':
-          analysisDataToJson(instance.confessionHistoryAggregate),
-      'callHistoryAggregate': analysisDataToJson(instance.callHistoryAggregate),
-      'visitHistoryAggregate':
-          analysisDataToJson(instance.visitHistoryAggregate),
-      'editHistoryAggregate': analysisDataToJson(instance.editHistoryAggregate),
+          instance.confessionHistoryAggregate?.toJson(),
+      'callHistoryAggregate': instance.callHistoryAggregate?.toJson(),
+      'visitHistoryAggregate': instance.visitHistoryAggregate?.toJson(),
+      'editHistoryAggregate': instance.editHistoryAggregate?.toJson(),
     };

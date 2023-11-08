@@ -5,14 +5,15 @@ import 'package:uuid/uuid.dart';
 import 'classes/__generated__/mutations.gql.dart';
 import 'classes/__generated__/subscriptions.gql.dart';
 
-class ClassesDAO extends FullCRUDDAO<Class, Input_ClassesBoolExp> {
+class ClassesDAO
+    extends FullCRUDDAO<Class, Input_ClassesBoolExp, Input_ClassesOrderBy> {
   ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
 
   @override
-  late final StreamAllConfig<Class, Input_ClassesBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
+  late final StreamAllConfig<Class, Input_ClassesBoolExp, Input_ClassesOrderBy>
+      baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllClasses,
-    varsConstructor: _streamAllVarsConstructor,
+    transformVars: _streamAllVarsConstructor,
   );
   @override
   late final StreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
@@ -41,33 +42,24 @@ class ClassesDAO extends FullCRUDDAO<Class, Input_ClassesBoolExp> {
 
   Json _streamAllVarsConstructor({
     required GQLPaginatableStreamEvent<Class> event,
-    required List<Input_ClassesBoolExp> where,
+    List<Input_ClassesBoolExp>? where,
+    List<Input_ClassesOrderBy>? orderBy,
   }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
+    return db.varsTransformer.transformVariablesForPagination(
       event,
-      Variables_Subscription_watchAllClasses.new,
-      Input_ClassesBoolExp.new,
+      where: where?.map((o) => o.toJson()).toList() ?? [],
+      orderBy: ((orderBy?.isEmpty ?? true)
+              ? [
+                  Input_ClassesOrderBy(serviceStudyYear: Enum_OrderBy.ASC),
+                  Input_ClassesOrderBy(
+                    serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
+                  ),
+                  Input_ClassesOrderBy(name: Enum_OrderBy.ASC),
+                ]
+              : orderBy!)
+          .map((o) => o.toJson())
+          .toList(),
     );
-
-    return {
-      ...defaultSearchVars.copyWith(
-        where: [
-          ...where,
-          if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-        ],
-        orderBy: [
-          Input_ClassesOrderBy(
-            serviceStudyYear: Enum_OrderBy.ASC,
-          ),
-          Input_ClassesOrderBy(
-            serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
-          ),
-          Input_ClassesOrderBy(
-            name: Enum_OrderBy.ASC,
-          ),
-        ],
-      ).toJson(),
-    };
   }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>

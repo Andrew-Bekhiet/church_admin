@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -6,14 +8,33 @@ part 'order_by.g.dart';
 
 @freezed
 class OrderBy with _$OrderBy {
-  const factory OrderBy({
-    required String field,
-    @Default(Enum_OrderBy.ASC) Enum_OrderBy direction,
+  @Assert('value is OrderBy || value is Enum_OrderBy')
+  factory OrderBy({
+    required String fieldName,
+
+    /// [value] is either OrderBy or Enum_OrderBy
+    @Default(Enum_OrderBy.ASC)
+    @JsonKey(
+      fromJson: orderByValueFromJson,
+      toJson: orderByValueToJson,
+    )
+    Object value,
   }) = _OrderBy;
-  const OrderBy._() : super();
+  OrderBy._() : super();
 
   factory OrderBy.fromJson(Map<String, Object?> json) =>
       _$OrderByFromJson(json);
 
-  Json toSearchJson() => {field: direction.name};
+  Json toSearchJson() => {
+        fieldName: value is OrderBy
+            ? (value as OrderBy).toSearchJson()
+            : (value as Enum_OrderBy).name,
+      };
 }
+
+Object orderByValueFromJson(Object? data) => data is String
+    ? Enum_OrderBy.values.byName(data)
+    : OrderBy.fromJson(Json.from(data! as Map));
+
+Object orderByValueToJson(Object value) =>
+    value is Enum_OrderBy ? value.name : (value as OrderBy).toJson();

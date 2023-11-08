@@ -4,39 +4,42 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class StreamAllConfig<T, TBoolExp> extends DAOMethodTemplate<Iterable<T>> {
-  final StreamAllConfigVarsConstructor<T, TBoolExp>? varsConstructor;
+class StreamAllConfig<T, TBoolExp, TOrderByExp>
+    extends DAOMethodTemplate<Iterable<T>> {
+  final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? transformVars;
   final SubscriptionOptions<Iterable<T>>? operationOptions;
 
   const StreamAllConfig({
     required super.document,
-    this.varsConstructor,
+    this.transformVars,
     this.operationOptions,
     super.operationName,
     super.variables,
     super.parserFn,
   });
 
-  StreamAllConfig<T, TBoolExp> copyWith({
+  StreamAllConfig<T, TBoolExp, TOrderByExp> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    StreamAllConfigVarsConstructor<T, TBoolExp>? varsConstructor,
+    StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? varsConstructor,
     SubscriptionOptions<Iterable<T>>? operationOptions,
     Iterable<T> Function(Json)? parserFn,
   }) {
-    return StreamAllConfig<T, TBoolExp>(
+    return StreamAllConfig<T, TBoolExp, TOrderByExp>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
-      varsConstructor: varsConstructor ?? this.varsConstructor,
+      transformVars: varsConstructor ?? this.transformVars,
       operationOptions: operationOptions ?? this.operationOptions,
       parserFn: parserFn ?? this.parserFn,
     );
   }
 }
 
-typedef StreamAllConfigVarsConstructor<T, TBoolExp> = Json Function({
+typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> = Json
+    Function({
   required GQLPaginatableStreamEvent<T> event,
-  required List<TBoolExp> where,
+  List<TBoolExp>? where,
+  List<TOrderByExp>? orderBy,
 });

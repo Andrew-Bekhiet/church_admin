@@ -307,7 +307,7 @@ const documentNodeMutationinsertPersonLastConfession =
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -316,7 +316,7 @@ const documentNodeMutationinsertPersonLastConfession =
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -355,7 +355,7 @@ const documentNodeMutationinsertPersonLastConfession =
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -373,8 +373,7 @@ const documentNodeMutationinsertPersonLastConfession =
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(
-                        value: 'confession_history_day_id_person_id_key')),
+                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
               )
             ]),
           ),
@@ -869,7 +868,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -878,7 +877,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -916,7 +915,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
+                            name: NameNode(value: 'attendanceDaysPkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -934,8 +933,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name:
-                        NameNode(value: 'kodas_history_day_id_person_id_key')),
+                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
               )
             ]),
           ),
@@ -1424,7 +1422,7 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1433,7 +1431,7 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastCall')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1944,7 +1942,7 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1953,7 +1951,7 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastVisit')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

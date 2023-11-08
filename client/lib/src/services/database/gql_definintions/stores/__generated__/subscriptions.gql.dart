@@ -631,7 +631,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -819,7 +819,10 @@ class Subscription_watchStore_storesByPk
       streets: (l$streets as List<dynamic>?)
           ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
           .toList(),
-      lastEdit: (l$lastEdit as Json?),
+      lastEdit: l$lastEdit == null
+          ? null
+          : Subscription_watchStore_storesByPk_lastEdit.fromJson(
+              (l$lastEdit as Map<String, dynamic>)),
       address: (l$address as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       family: l$family == null
@@ -844,7 +847,7 @@ class Subscription_watchStore_storesByPk
 
   final List<Fragment_Street>? streets;
 
-  final Json? lastEdit;
+  final Subscription_watchStore_storesByPk_lastEdit? lastEdit;
 
   final String? address;
 
@@ -872,7 +875,7 @@ class Subscription_watchStore_storesByPk
     final l$streets = streets;
     _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
     final l$lastEdit = lastEdit;
-    _resultData['lastEdit'] = l$lastEdit;
+    _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$address = address;
     _resultData['address'] = l$address;
     final l$geolocation = geolocation;
@@ -1035,7 +1038,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
     String? blurhash,
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
-    Json? lastEdit,
+    Subscription_watchStore_storesByPk_lastEdit? lastEdit,
     String? address,
     Map<String, dynamic>? geolocation,
     Fragment_Family? family,
@@ -1048,6 +1051,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
       Iterable<Fragment_Street>? Function(
               Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
           _fn);
+  CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> get lastEdit;
   CopyWith_Fragment_Family<TRes> get family;
 }
 
@@ -1098,8 +1102,9 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
         streets: streets == _undefined
             ? _instance.streets
             : (streets as List<Fragment_Street>?),
-        lastEdit:
-            lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
+        lastEdit: lastEdit == _undefined
+            ? _instance.lastEdit
+            : (lastEdit as Subscription_watchStore_storesByPk_lastEdit?),
         address:
             address == _undefined ? _instance.address : (address as String?),
         geolocation: geolocation == _undefined
@@ -1130,6 +1135,15 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
                 (i) => i,
               )))?.toList());
 
+  CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Subscription_watchStore_storesByPk_lastEdit.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchStore_storesByPk_lastEdit(
+            local$lastEdit, (e) => call(lastEdit: e));
+  }
+
   CopyWith_Fragment_Family<TRes> get family {
     final local$family = _instance.family;
     return local$family == null
@@ -1153,7 +1167,7 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     String? blurhash,
     List<Fragment_Area>? areas,
     List<Fragment_Street>? streets,
-    Json? lastEdit,
+    Subscription_watchStore_storesByPk_lastEdit? lastEdit,
     String? address,
     Map<String, dynamic>? geolocation,
     Fragment_Family? family,
@@ -1164,6 +1178,87 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
 
   streets(_fn) => _res;
 
+  CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> get lastEdit =>
+      CopyWith_Subscription_watchStore_storesByPk_lastEdit.stub(_res);
+
   CopyWith_Fragment_Family<TRes> get family =>
       CopyWith_Fragment_Family.stub(_res);
+}
+
+class Subscription_watchStore_storesByPk_lastEdit {
+  Subscription_watchStore_storesByPk_lastEdit();
+
+  factory Subscription_watchStore_storesByPk_lastEdit.fromJson(
+      Map<String, dynamic> json) {
+    return Subscription_watchStore_storesByPk_lastEdit();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hashAll([]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription_watchStore_storesByPk_lastEdit) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStore_storesByPk_lastEdit
+    on Subscription_watchStore_storesByPk_lastEdit {
+  CopyWith_Subscription_watchStore_storesByPk_lastEdit<
+          Subscription_watchStore_storesByPk_lastEdit>
+      get copyWith => CopyWith_Subscription_watchStore_storesByPk_lastEdit(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> {
+  factory CopyWith_Subscription_watchStore_storesByPk_lastEdit(
+    Subscription_watchStore_storesByPk_lastEdit instance,
+    TRes Function(Subscription_watchStore_storesByPk_lastEdit) then,
+  ) = _CopyWithImpl_Subscription_watchStore_storesByPk_lastEdit;
+
+  factory CopyWith_Subscription_watchStore_storesByPk_lastEdit.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit;
+
+  TRes call();
+}
+
+class _CopyWithImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> {
+  _CopyWithImpl_Subscription_watchStore_storesByPk_lastEdit(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStore_storesByPk_lastEdit _instance;
+
+  final TRes Function(Subscription_watchStore_storesByPk_lastEdit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call() => _then(Subscription_watchStore_storesByPk_lastEdit());
+}
+
+class _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> {
+  _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit(this._res);
+
+  TRes _res;
+
+  call() => _res;
 }

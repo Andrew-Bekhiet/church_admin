@@ -3,10 +3,60 @@
 part of 'group.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$GroupFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Group>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'blurhash': FieldMetadata<String>(
+    name: 'blurhash',
+    label: 'blurhash',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'service': FieldMetadata<Service>(
+    name: 'service',
+    label: 'الخدمة',
+  ),
+  'adminUsers': FieldMetadata<User>(
+    name: 'adminUsers',
+    label: 'الخدام المسؤلين',
+    isOrderable: false,
+  ),
+  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceHistoryAggregate',
+    label: 'attendanceHistoryAggregate',
+  ),
+  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceDaysConstraintsAggregate',
+    label: 'attendanceDaysConstraintsAggregate',
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Group _$$_GroupFromJson(Map json) => _$_Group(
+_$GroupImpl _$$GroupImplFromJson(Map json) => _$GroupImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt(json['color'] as int?),
@@ -24,13 +74,19 @@ _$_Group _$$_GroupFromJson(Map json) => _$_Group(
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      attendanceHistoryAggregate: analysisDataFromJson(
-          json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
-      attendanceDaysConstraintsAggregate: analysisDataFromJson(
-          json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
+      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+              json['attendanceHistoryAggregate'] as Map)),
+      attendanceDaysConstraintsAggregate:
+          json['attendanceDaysConstraintsAggregate'] == null
+              ? null
+              : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+                  json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
+Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),
@@ -42,7 +98,7 @@ Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
       'lastEdit': instance.lastEdit?.toJson(),
       'adminUsers': adminUsersToJson(instance.adminUsers),
       'attendanceHistoryAggregate':
-          analysisDataToJson(instance.attendanceHistoryAggregate),
+          instance.attendanceHistoryAggregate?.toJson(),
       'attendanceDaysConstraintsAggregate':
-          analysisDataToJson(instance.attendanceDaysConstraintsAggregate),
+          instance.attendanceDaysConstraintsAggregate?.toJson(),
     };

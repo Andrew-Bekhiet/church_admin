@@ -1515,7 +1515,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'areasIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1527,7 +1527,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'streetsIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1539,7 +1539,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'familiesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1551,7 +1551,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'storesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -3662,7 +3662,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateFrom')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3671,7 +3671,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateTo')),
         type: NamedTypeNode(
-          name: NameNode(value: 'date'),
+          name: NameNode(value: 'Date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3680,7 +3680,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'timeFrom')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3689,7 +3689,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'timeTo')),
         type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
+          name: NameNode(value: 'Timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3698,7 +3698,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3708,7 +3708,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'groupsIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -3720,7 +3720,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'classesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -3732,7 +3732,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'servicesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -14151,7 +14151,7 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

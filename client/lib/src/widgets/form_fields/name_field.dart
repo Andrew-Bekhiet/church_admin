@@ -27,7 +27,7 @@ class NameField extends StatelessWidget {
       textCapitalization: TextCapitalization.words,
       validator: (value) {
         if (value?.trim().isEmpty ?? true) {
-          return 'يجب ملئ الاسم';
+          return 'برجاء إدخال الاسم';
         }
         return null;
       },

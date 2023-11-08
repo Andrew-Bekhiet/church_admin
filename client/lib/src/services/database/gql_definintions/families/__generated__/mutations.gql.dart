@@ -247,7 +247,7 @@ const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'familyId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1101,7 +1101,7 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'familyId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1120,7 +1120,7 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteParents')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: true,
@@ -1132,7 +1132,7 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteChildren')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Uuid'),
             isNonNull: true,
           ),
           isNonNull: true,

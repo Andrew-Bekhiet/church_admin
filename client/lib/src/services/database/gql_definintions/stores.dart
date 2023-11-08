@@ -5,14 +5,14 @@ import 'package:uuid/uuid.dart';
 import 'stores/__generated__/mutations.gql.dart';
 import 'stores/__generated__/subscriptions.gql.dart';
 
-class StoresDAO extends FullCRUDDAO<Store, Input_StoresBoolExp> {
+class StoresDAO
+    extends FullCRUDDAO<Store, Input_StoresBoolExp, Input_StoresOrderBy> {
   StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
 
   @override
-  late final StreamAllConfig<Store, Input_StoresBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
+  late final StreamAllConfig<Store, Input_StoresBoolExp, Input_StoresOrderBy>
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,
-    varsConstructor: _streamAllVarsConstructor,
   );
 
   @override
@@ -42,24 +42,6 @@ class StoresDAO extends FullCRUDDAO<Store, Input_StoresBoolExp> {
     document: documentNodeMutationinsertStore,
     varsConstructor: _createStoreVarsConstructor,
   );
-
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Store> event,
-    required List<Input_StoresBoolExp> where,
-  }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-      event,
-      Variables_Subscription_watchAllStores.new,
-      Input_StoresBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-    ).toJson();
-  }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStore(id: id).toJson();

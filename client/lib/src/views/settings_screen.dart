@@ -17,15 +17,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  static const _secondLineTypes = [
-    Area,
-    Street,
-    Family,
-    Store,
-    Service,
-    Class,
-    Group,
-    Person,
+  static final List<QueryableType> _secondLineTypes = [
+    Area.queryableType,
+    Street.queryableType,
+    Family.queryableType,
+    Store.queryableType,
+    Service.queryableType,
+    Class.queryableType,
+    Group.queryableType,
+    Person.queryableType,
   ];
 
   final userSettingsService = UserSettingsService.I;
@@ -99,34 +99,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: const Text('مظهر البيانات'),
                 children: [
                   ..._secondLineTypes.map(
-                    (type) => Container(
+                    (qtype) => Container(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: DropdownButtonFormField<String?>(
-                        value: userSettingsService.getSecondLineFor(type),
+                        value: userSettingsService.getSecondLineFor(qtype.type),
                         items: [
                           const DropdownMenuItem(
                             child: Text(''),
                           ),
-                          ...AdvancedQueriesMetadata.propertiesByType[type]!
+                          ...qtype.fieldsMetadata.values
                               .where(
                                 (element) =>
-                                    element.$1 != 'id' && element.$1 != 'color',
+                                    element.name != 'id' &&
+                                    element.name != 'color',
                               )
                               .map(
                                 (e) => DropdownMenuItem(
-                                  value: e.$1,
-                                  child: Text(e.$2),
+                                  value: e.name,
+                                  child: Text(e.label),
                                 ),
                               ),
                         ],
                         onChanged: (value) {},
                         onSaved: (value) {
-                          userSettingsService.setSecondLineFor(type, value);
+                          userSettingsService.setSecondLineFor(
+                            type: qtype.type,
+                            value: value,
+                          );
                         },
                         decoration: InputDecoration(
                           labelText: 'السطر الثاني لل' +
-                              AdvancedQueriesMetadata.queryableTypes[type]!.$1
-                                  .replaceFirst(RegExp('^ال'), 'ل'),
+                              qtype.label.replaceFirst(RegExp('^ال'), 'ل'),
                         ),
                       ),
                     ),

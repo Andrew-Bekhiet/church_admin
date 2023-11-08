@@ -8,14 +8,14 @@ import 'streets/__generated__/subscriptions.gql.dart';
 export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';
 
-class StreetsDAO extends FullCRUDDAO<Street, Input_StreetsBoolExp> {
+class StreetsDAO
+    extends FullCRUDDAO<Street, Input_StreetsBoolExp, Input_StreetsOrderBy> {
   StreetsDAO({required super.db}) : super(fromJson: Street.fromJson);
 
   @override
-  late final StreamAllConfig<Street, Input_StreetsBoolExp> baseStreamAllConfig =
-      StreamAllConfig(
+  late final StreamAllConfig<Street, Input_StreetsBoolExp, Input_StreetsOrderBy>
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStreets,
-    varsConstructor: _streamAllVarsConstructor,
   );
 
   @override
@@ -45,24 +45,6 @@ class StreetsDAO extends FullCRUDDAO<Street, Input_StreetsBoolExp> {
     document: documentNodeMutationinsertStreet,
     varsConstructor: _createStreetVarsConstructor,
   );
-
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Street> event,
-    required List<Input_StreetsBoolExp> where,
-  }) {
-    final defaultSearchVars = graphQLClient.getDefaultSearchVars(
-      event,
-      Variables_Subscription_watchAllStreets.new,
-      Input_StreetsBoolExp.new,
-    );
-
-    return defaultSearchVars.copyWith(
-      where: [
-        ...where,
-        if (defaultSearchVars.where != null) ...defaultSearchVars.where!,
-      ],
-    ).toJson();
-  }
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStreet(id: id).toJson();

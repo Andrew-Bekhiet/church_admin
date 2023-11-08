@@ -5,15 +5,18 @@ import 'package:uuid/uuid.dart';
 
 import 'data_geomap/edit_object_points_map.dart';
 
-class ConditionsBuilder extends StatelessWidget {
-  final Type type;
+class ConditionsBuilder<T> extends StatelessWidget {
+  final QueryableType<T> queryableType;
+
+  final bool canAddManyConditions;
   final List<Condition> conditions;
   final void Function(List<Condition>) onChanged;
 
   const ConditionsBuilder({
-    required this.type,
+    required this.queryableType,
     required this.conditions,
     required this.onChanged,
+    this.canAddManyConditions = true,
     super.key,
   });
 
@@ -21,8 +24,7 @@ class ConditionsBuilder extends StatelessWidget {
     onChanged(value);
   }
 
-  Iterable<(String, String)> get properties =>
-      AdvancedQueriesMetadata.propertiesByType[type] ?? [];
+  Iterable<FieldMetadata> get fields => queryableType.fieldsMetadata.values;
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +34,17 @@ class ConditionsBuilder extends StatelessWidget {
       children: [
         ...conditions.mapIndexed(
           (i, condition) {
-            final conditionFieldMetadata =
-                AdvancedQueriesMetadata.getFieldMetadata(
-              condition.field,
-              FieldMetadata(type: type),
-            );
-
-            final validOperators = conditionFieldMetadata.operators;
-
             return ConditionBuilder(
-              type: type,
+              queryableType: queryableType,
               condition: condition,
-              conditionFieldMetadata: conditionFieldMetadata,
-              operators: validOperators.toList(),
+              operators: queryableType
+                  .fieldsMetadata[condition.field]!.operators
+                  .toList(),
               onFieldChanged: (field) {
-                final newCondition =
-                    _createConditionForField(field!, condition.operator);
+                final newCondition = _createConditionForField(
+                  queryableType.fieldsMetadata[field!]!,
+                  condition.operator,
+                );
 
                 conditions = conditions.mapIndexed(
                   (_i, e) {
@@ -81,42 +78,39 @@ class ConditionsBuilder extends StatelessWidget {
             );
           },
         ),
-        ElevatedButton.icon(
-          onPressed: () {
-            final property = properties.firstWhere((p) => p.$1 != 'id');
-            final fieldMetadata = AdvancedQueriesMetadata.getFieldMetadata(
-              property.$1,
-              FieldMetadata(type: type),
-            );
-
-            conditions = [
+        if (canAddManyConditions || conditions.isEmpty)
+          ElevatedButton.icon(
+            onPressed: () => conditions = [
               ...conditions,
-              Condition(
-                type: type,
-                field: property.$1,
-                operator: fieldMetadata.operators.firstOrNull,
-              ),
-            ];
-          },
-          icon: const Icon(Icons.filter_alt),
-          label: Text(
-            'إضافة شرط ل' +
-                AdvancedQueriesMetadata.queryableTypes[type]!.$1
-                    .replaceFirst(RegExp('^ال'), 'ل'),
+              _createNewCondition(),
+            ],
+            icon: const Icon(Icons.filter_alt),
+            label: Text(
+              'إضافة شرط ل' +
+                  queryableType.label.replaceFirst(RegExp('^ال'), 'ل'),
+            ),
           ),
-        ),
       ],
     );
   }
 
   Condition _createConditionForField(
-    String field, [
+    FieldMetadata fieldMetadata, [
     Operator? currentOperator,
   ]) {
-    final newValidOperators = AdvancedQueriesMetadata.getFieldMetadata(
-      field,
-      FieldMetadata(type: type),
-    ).operators;
+    final logicalOperatorOrNull = LogicalOperator.values
+        .firstWhereOrNull((e) => e.value == fieldMetadata.name);
+
+    if (logicalOperatorOrNull != null) {
+      return Condition(
+        queryableType: queryableType,
+        field: logicalOperatorOrNull.value,
+        operator: null,
+        value: [_createNewCondition()],
+      );
+    }
+
+    final newValidOperators = fieldMetadata.operators;
 
     final selectedOrFirstValidOperator = currentOperator != null &&
             newValidOperators.isNotEmpty &&
@@ -124,41 +118,44 @@ class ConditionsBuilder extends StatelessWidget {
         ? currentOperator
         : newValidOperators.firstOrNull;
 
-    final addNestedCondition =
-        newValidOperators.isEmpty && field != 'id' && field != 'permissions';
+    final bool addNestedCondition = fieldMetadata.isNestabale;
 
     final nestedField = addNestedCondition
-        ? AdvancedQueriesMetadata.propertiesByType[type]
-                ?.firstWhereOrNull((p) => p.$1 != 'id')
-                ?.$1 ??
-            'id'
+        ? AdvancedQueriesMetadata
+            .queryableTypes[fieldMetadata.type]?.fieldsMetadata.values
+            .firstWhere(
+            (p) => p.name != 'id',
+            orElse: () => FieldMetadata(
+              name: 'id',
+              label: '=',
+              type: fieldMetadata.type,
+            ),
+          )
         : null;
 
     return Condition(
-      type: type,
-      field: field,
+      queryableType: queryableType,
+      field: fieldMetadata.name,
       operator: selectedOrFirstValidOperator,
       value:
           nestedField != null ? [_createConditionForField(nestedField)] : null,
     );
   }
 
-  Set<Operator> validOperatorsForFields(String field) {
-    if (field == 'id') return {Operator.eq};
-    if (field == 'permissions') return {};
+  Condition _createNewCondition() {
+    final property = fields.firstWhere((p) => p.name != 'id');
 
-    final fieldType = AdvancedQueriesMetadata.getFieldMetadata(
-      field,
-      FieldMetadata(type: type),
+    return Condition(
+      queryableType: queryableType,
+      field: property.name,
+      operator: property.operators.firstOrNull,
     );
-
-    return fieldType.operators;
   }
 }
 
-class ConditionBuilder extends StatelessWidget {
+class ConditionBuilder<T> extends StatelessWidget {
+  final QueryableType<T> queryableType;
   final Condition condition;
-  final Type type;
 
   final void Function(String?) onFieldChanged;
   final void Function(Operator?) onOperatorChanged;
@@ -166,22 +163,21 @@ class ConditionBuilder extends StatelessWidget {
   final void Function(List<Condition>, bool) onValueChanged;
 
   final List<Operator> operators;
-  final FieldMetadata conditionFieldMetadata;
 
   const ConditionBuilder({
     required this.condition,
-    required this.type,
+    required this.queryableType,
     required this.onFieldChanged,
     required this.operators,
-    required this.conditionFieldMetadata,
     required this.onOperatorChanged,
     required this.onConditionRemoved,
     required this.onValueChanged,
     super.key,
   });
 
-  Iterable<(String, String)> get properties =>
-      AdvancedQueriesMetadata.propertiesByType[type] ?? [];
+  Iterable<FieldMetadata> get fields => queryableType.fieldsMetadata.values;
+  FieldMetadata get conditionFieldMetadata =>
+      queryableType.fieldsMetadata[condition.field]!;
 
   @override
   Widget build(BuildContext context) {
@@ -195,6 +191,7 @@ class ConditionBuilder extends StatelessWidget {
           Row(
             children: [
               Expanded(
+                flex: 3,
                 child: DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
                     labelText: 'بشرط',
@@ -202,22 +199,28 @@ class ConditionBuilder extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   isExpanded: true,
                   value: condition.field,
-                  items: properties
+                  items: [
+                    FieldMetadata<T>(name: '_and', label: 'و'),
+                    FieldMetadata<T>(name: '_or', label: 'أو'),
+                    FieldMetadata<T>(name: '_not', label: 'ليس'),
+                    ...fields,
+                  ]
                       .map(
                         (p) => DropdownMenuItem(
                           alignment: Alignment.center,
-                          value: p.$1,
-                          child: Text(p.$2),
+                          value: p.name,
+                          child: Text(p.label),
                         ),
                       )
                       .toList(),
                   onChanged: onFieldChanged,
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 3),
               if (operators.isNotEmpty &&
                   !(operators.length == 1 && operators.single == Operator.eq))
                 Expanded(
+                  flex: 2,
                   child: DropdownButtonFormField<Operator>(
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     isExpanded: true,
@@ -253,11 +256,11 @@ class ConditionBuilder extends StatelessWidget {
               ),
             ),
             child: _SelectValueWidget(
-              type: conditionFieldMetadata.type,
+              queryableType: AdvancedQueriesMetadata
+                  .queryableTypes[conditionFieldMetadata.type],
               condition: condition,
               onChanged: (value) {
-                final isNested = conditionFieldMetadata.isNestabale &&
-                    condition.field != 'id';
+                final isNested = conditionFieldMetadata.isNestabale;
 
                 onValueChanged(value, isNested);
               },
@@ -271,13 +274,13 @@ class ConditionBuilder extends StatelessWidget {
 }
 
 class _SelectValueWidget<T> extends StatelessWidget {
-  final Type type;
+  final QueryableType<T>? queryableType;
   final T dummyInstance;
   final Condition condition;
   final void Function(List<Condition>) onChanged;
 
   const _SelectValueWidget({
-    required this.type,
+    required this.queryableType,
     required this.condition,
     required this.onChanged,
     required this.dummyInstance,
@@ -286,7 +289,44 @@ class _SelectValueWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (dummyInstance is String || dummyInstance is num) {
+    if (dummyInstance is bool && condition.field.endsWith('ender')) {
+      return DropdownButtonFormField<bool?>(
+        alignment: Alignment.center,
+        value: condition.value,
+        isExpanded: true,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        items: [null, true, false]
+            .map(
+              (item) => DropdownMenuItem(
+                alignment: Alignment.center,
+                value: item,
+                child: Text(
+                  item == null
+                      ? 'غير محدد'
+                      : item
+                          ? 'بنين'
+                          : 'بنات',
+                ),
+              ),
+            )
+            .toList(),
+        onChanged: _onValueChanged,
+      );
+    } else if (dummyInstance is bool || condition.operator == Operator.isNull) {
+      return CheckboxListTile(
+        title: const Text('قيمة البحث'),
+        subtitle: Text(
+          condition.value ?? false ? 'نعم' : 'لا',
+        ),
+        value: condition.value ?? false,
+        tristate: condition.operator != Operator.isNull,
+        onChanged: (value) {
+          onChanged([
+            condition.copyWith(value: value ?? false),
+          ]);
+        },
+      );
+    } else if (dummyInstance is String || dummyInstance is num) {
       return TextFormField(
         initialValue: condition.value,
         onChanged: _onValueChanged,
@@ -310,43 +350,6 @@ class _SelectValueWidget<T> extends StatelessWidget {
                 decimal: dummyInstance is double,
               )
             : TextInputType.text,
-      );
-    } else if (dummyInstance is bool && condition.field.endsWith('ender')) {
-      return DropdownButtonFormField<bool?>(
-        alignment: Alignment.center,
-        value: condition.value,
-        isExpanded: true,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        items: [null, true, false]
-            .map(
-              (item) => DropdownMenuItem(
-                alignment: Alignment.center,
-                value: item,
-                child: Text(
-                  item == null
-                      ? 'غير محدد'
-                      : item
-                          ? 'بنين'
-                          : 'بنات',
-                ),
-              ),
-            )
-            .toList(),
-        onChanged: _onValueChanged,
-      );
-    } else if (dummyInstance is bool) {
-      return CheckboxListTile(
-        title: const Text('قيمة البحث'),
-        subtitle: Text(
-          condition.value ?? false ? 'نعم' : 'لا',
-        ),
-        value: condition.value ?? false,
-        tristate: true,
-        onChanged: (value) {
-          onChanged([
-            condition.copyWith(value: value ?? false),
-          ]);
-        },
       );
     } else if (dummyInstance is Color) {
       return ColorField(
@@ -398,6 +401,10 @@ class _SelectValueWidget<T> extends StatelessWidget {
     } else if (dummyInstance is AdminOnData) {
       //TODO: implement EditAdminOnData
     } else if (dummyInstance is ViewableWithID && condition.field == 'id') {
+      if (queryableType?.dao == null) {
+        throw Exception('No dao for $queryableType');
+      }
+
       return ObjectSelectionField<ViewableWithID, ViewableWithID?>(
         listController: _listControllerForType,
         builder: _buildViewableObject,
@@ -412,8 +419,13 @@ class _SelectValueWidget<T> extends StatelessWidget {
         ]),
       );
     } else if (dummyInstance is ViewableWithID) {
+      if (queryableType == null) {
+        throw Exception('No $queryableType for $dummyInstance');
+      }
+
       return ConditionsBuilder(
-        type: type,
+        canAddManyConditions: condition.field != LogicalOperator.not.value,
+        queryableType: queryableType!,
         conditions: condition.value is List<Condition> ? condition.value : [],
         onChanged: onChanged,
       );
@@ -421,7 +433,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
     return ErrorWidget.builder(
       FlutterErrorDetails(
         exception: Exception(
-          'No widget for type $type and instance $dummyInstance '
+          'No widget for type $queryableType and instance $dummyInstance '
           'in condition builder',
         ),
       ),
@@ -454,8 +466,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
 
   ViewableObjectListController<ViewableWithID> _listControllerForType(s) =>
       ViewableObjectListController(
-        objectsPaginatableStream: AdvancedQueriesMetadata.streamableDAOs[type]!
-            .streamAll(searchQuery: s),
+        objectsPaginatableStream: queryableType!.dao!.streamAll(searchQuery: s),
       );
 }
 

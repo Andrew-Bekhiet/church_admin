@@ -3,10 +3,72 @@
 part of 'service.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$ServiceFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Service>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'studyYearFrom': FieldMetadata<StudyYear>(
+    name: 'studyYearFrom',
+    label: 'السنة الدراسية: من',
+  ),
+  'studyYearTo': FieldMetadata<StudyYear>(
+    name: 'studyYearTo',
+    label: 'السنة الدراسية: إلى',
+  ),
+  'nextService': FieldMetadata<Service>(
+    name: 'nextService',
+    label: 'الخدمة التالية',
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'classes': FieldMetadata<Class>(
+    name: 'classes',
+    label: 'الفصول',
+    isOrderable: false,
+  ),
+  'groups': FieldMetadata<Group>(
+    name: 'groups',
+    label: 'المجموعات',
+    isOrderable: false,
+  ),
+  'adminUsers': FieldMetadata<User>(
+    name: 'adminUsers',
+    label: 'الخدام المسؤلين',
+    isOrderable: false,
+  ),
+  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceHistoryAggregate',
+    label: 'attendanceHistoryAggregate',
+  ),
+  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    name: 'attendanceDaysConstraintsAggregate',
+    label: 'attendanceDaysConstraintsAggregate',
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Service _$$_ServiceFromJson(Map json) => _$_Service(
+_$ServiceImpl _$$ServiceImplFromJson(Map json) => _$ServiceImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       studyYearFrom: json['studyYearFrom'] == null
@@ -40,13 +102,18 @@ _$_Service _$$_ServiceFromJson(Map json) => _$_Service(
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      attendanceHistoryAggregate: analysisDataFromJson(
-          json['attendanceHistoryAggregate'] as Map<String, dynamic>?),
-      attendanceDaysConstraintsAggregate: analysisDataFromJson(
-          json['attendanceDaysConstraintsAggregate'] as Map<String, dynamic>?),
+      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+              json['attendanceHistoryAggregate'] as Map)),
+      attendanceDaysConstraintsAggregate:
+          json['attendanceDaysConstraintsAggregate'] == null
+              ? null
+              : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+                  json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
+Map<String, dynamic> _$$ServiceImplToJson(_$ServiceImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -64,7 +131,7 @@ Map<String, dynamic> _$$_ServiceToJson(_$_Service instance) =>
       'lastEdit': instance.lastEdit?.toJson(),
       'adminUsers': adminUsersToJson(instance.adminUsers),
       'attendanceHistoryAggregate':
-          analysisDataToJson(instance.attendanceHistoryAggregate),
+          instance.attendanceHistoryAggregate?.toJson(),
       'attendanceDaysConstraintsAggregate':
-          analysisDataToJson(instance.attendanceDaysConstraintsAggregate),
+          instance.attendanceDaysConstraintsAggregate?.toJson(),
     };

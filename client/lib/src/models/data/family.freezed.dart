@@ -165,9 +165,10 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
 }
 
 /// @nodoc
-abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
-  factory _$$_FamilyCopyWith(_$_Family value, $Res Function(_$_Family) then) =
-      __$$_FamilyCopyWithImpl<$Res>;
+abstract class _$$FamilyImplCopyWith<$Res> implements $FamilyCopyWith<$Res> {
+  factory _$$FamilyImplCopyWith(
+          _$FamilyImpl value, $Res Function(_$FamilyImpl) then) =
+      __$$FamilyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -192,10 +193,11 @@ abstract class _$$_FamilyCopyWith<$Res> implements $FamilyCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FamilyCopyWithImpl<$Res>
-    extends _$FamilyCopyWithImpl<$Res, _$_Family>
-    implements _$$_FamilyCopyWith<$Res> {
-  __$$_FamilyCopyWithImpl(_$_Family _value, $Res Function(_$_Family) _then)
+class __$$FamilyImplCopyWithImpl<$Res>
+    extends _$FamilyCopyWithImpl<$Res, _$FamilyImpl>
+    implements _$$FamilyImplCopyWith<$Res> {
+  __$$FamilyImplCopyWithImpl(
+      _$FamilyImpl _value, $Res Function(_$FamilyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -215,7 +217,7 @@ class __$$_FamilyCopyWithImpl<$Res>
     Object? parents = freezed,
     Object? lastEdit = freezed,
   }) {
-    return _then(_$_Family(
+    return _then(_$FamilyImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -274,8 +276,8 @@ class __$$_FamilyCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Family extends _Family {
-  _$_Family(
+class _$FamilyImpl extends _Family {
+  _$FamilyImpl(
       {required this.id,
       required this.name,
       this.address,
@@ -297,8 +299,8 @@ class _$_Family extends _Family {
         _parents = parents,
         super._();
 
-  factory _$_Family.fromJson(Map<String, dynamic> json) =>
-      _$$_FamilyFromJson(json);
+  factory _$FamilyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FamilyImplFromJson(json);
 
   @override
   final String id;
@@ -372,7 +374,7 @@ class _$_Family extends _Family {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Family &&
+            other is _$FamilyImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
@@ -413,12 +415,12 @@ class _$_Family extends _Family {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FamilyCopyWith<_$_Family> get copyWith =>
-      __$$_FamilyCopyWithImpl<_$_Family>(this, _$identity);
+  _$$FamilyImplCopyWith<_$FamilyImpl> get copyWith =>
+      __$$FamilyImplCopyWithImpl<_$FamilyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FamilyToJson(
+    return _$$FamilyImplToJson(
       this,
     );
   }
@@ -441,10 +443,10 @@ abstract class _Family extends Family {
       final List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
       final List<Family>? parents,
-      final LastRecordedByInfo? lastEdit}) = _$_Family;
+      final LastRecordedByInfo? lastEdit}) = _$FamilyImpl;
   _Family._() : super._();
 
-  factory _Family.fromJson(Map<String, dynamic> json) = _$_Family.fromJson;
+  factory _Family.fromJson(Map<String, dynamic> json) = _$FamilyImpl.fromJson;
 
   @override
   String get id;
@@ -478,6 +480,6 @@ abstract class _Family extends Family {
   LastRecordedByInfo? get lastEdit;
   @override
   @JsonKey(ignore: true)
-  _$$_FamilyCopyWith<_$_Family> get copyWith =>
+  _$$FamilyImplCopyWith<_$FamilyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -28,6 +28,7 @@ mixin _$Person {
   String? get mainPhone => throw _privateConstructorUsedError;
   Map<String, dynamic> get otherPhones => throw _privateConstructorUsedError;
   DateTime? get birthdate => throw _privateConstructorUsedError;
+  String? get birthday => throw _privateConstructorUsedError;
   bool get gender => throw _privateConstructorUsedError;
   bool get isShammas => throw _privateConstructorUsedError;
   String? get shammasLevelId => throw _privateConstructorUsedError;
@@ -78,20 +79,25 @@ mixin _$Person {
   @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
   List<Hobby>? get hobbies => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get kodasHistoryAggregate =>
+  List<LastRecordedByInfo>? get kodasHistory =>
       throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get confessionHistoryAggregate =>
+  List<LastRecordedByInfo>? get confessionHistory =>
       throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get callHistoryAggregate =>
+  List<LastRecordedByInfo>? get callHistory =>
       throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get visitHistoryAggregate =>
+  List<LastRecordedByInfo>? get visitHistory =>
       throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get editHistoryAggregate =>
+  List<LastRecordedByInfo>? get editHistory =>
+      throw _privateConstructorUsedError;
+  HistoryAggregateData? get kodasHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  HistoryAggregateData? get confessionHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  HistoryAggregateData? get callHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  HistoryAggregateData? get visitHistoryAggregate =>
+      throw _privateConstructorUsedError;
+  HistoryAggregateData? get editHistoryAggregate =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -112,6 +118,7 @@ abstract class $PersonCopyWith<$Res> {
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
+      String? birthday,
       bool gender,
       bool isShammas,
       String? shammasLevelId,
@@ -161,16 +168,16 @@ abstract class $PersonCopyWith<$Res> {
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
       List<Hobby>? hobbies,
       User? user,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? kodasHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? confessionHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? callHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? visitHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? editHistoryAggregate});
+      List<LastRecordedByInfo>? kodasHistory,
+      List<LastRecordedByInfo>? confessionHistory,
+      List<LastRecordedByInfo>? callHistory,
+      List<LastRecordedByInfo>? visitHistory,
+      List<LastRecordedByInfo>? editHistory,
+      HistoryAggregateData? kodasHistoryAggregate,
+      HistoryAggregateData? confessionHistoryAggregate,
+      HistoryAggregateData? callHistoryAggregate,
+      HistoryAggregateData? visitHistoryAggregate,
+      HistoryAggregateData? editHistoryAggregate});
 
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
   $SchoolCopyWith<$Res>? get school;
@@ -189,11 +196,11 @@ abstract class $PersonCopyWith<$Res> {
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   $UserCopyWith<$Res>? get user;
-  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate;
-  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate;
-  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate;
-  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate;
-  $AnalysisDataCopyWith<DateTime, $Res>? get editHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate;
 }
 
 /// @nodoc
@@ -216,6 +223,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? mainPhone = freezed,
     Object? otherPhones = null,
     Object? birthdate = freezed,
+    Object? birthday = freezed,
     Object? gender = null,
     Object? isShammas = null,
     Object? shammasLevelId = freezed,
@@ -261,6 +269,11 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? tags = freezed,
     Object? hobbies = freezed,
     Object? user = freezed,
+    Object? kodasHistory = freezed,
+    Object? confessionHistory = freezed,
+    Object? callHistory = freezed,
+    Object? visitHistory = freezed,
+    Object? editHistory = freezed,
     Object? kodasHistoryAggregate = freezed,
     Object? confessionHistoryAggregate = freezed,
     Object? callHistoryAggregate = freezed,
@@ -296,6 +309,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -476,26 +493,46 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      kodasHistory: freezed == kodasHistory
+          ? _value.kodasHistory
+          : kodasHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      confessionHistory: freezed == confessionHistory
+          ? _value.confessionHistory
+          : confessionHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      callHistory: freezed == callHistory
+          ? _value.callHistory
+          : callHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      visitHistory: freezed == visitHistory
+          ? _value.visitHistory
+          : visitHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      editHistory: freezed == editHistory
+          ? _value.editHistory
+          : editHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
       kodasHistoryAggregate: freezed == kodasHistoryAggregate
           ? _value.kodasHistoryAggregate
           : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       confessionHistoryAggregate: freezed == confessionHistoryAggregate
           ? _value.confessionHistoryAggregate
           : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       callHistoryAggregate: freezed == callHistoryAggregate
           ? _value.callHistoryAggregate
           : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       visitHistoryAggregate: freezed == visitHistoryAggregate
           ? _value.visitHistoryAggregate
           : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       editHistoryAggregate: freezed == editHistoryAggregate
           ? _value.editHistoryAggregate
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
     ) as $Val);
   }
 
@@ -705,12 +742,12 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate {
     if (_value.kodasHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(_value.kodasHistoryAggregate!,
+    return $HistoryAggregateDataCopyWith<$Res>(_value.kodasHistoryAggregate!,
         (value) {
       return _then(_value.copyWith(kodasHistoryAggregate: value) as $Val);
     });
@@ -718,12 +755,12 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate {
     if (_value.confessionHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(
+    return $HistoryAggregateDataCopyWith<$Res>(
         _value.confessionHistoryAggregate!, (value) {
       return _then(_value.copyWith(confessionHistoryAggregate: value) as $Val);
     });
@@ -731,12 +768,12 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate {
     if (_value.callHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(_value.callHistoryAggregate!,
+    return $HistoryAggregateDataCopyWith<$Res>(_value.callHistoryAggregate!,
         (value) {
       return _then(_value.copyWith(callHistoryAggregate: value) as $Val);
     });
@@ -744,12 +781,12 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate {
     if (_value.visitHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(_value.visitHistoryAggregate!,
+    return $HistoryAggregateDataCopyWith<$Res>(_value.visitHistoryAggregate!,
         (value) {
       return _then(_value.copyWith(visitHistoryAggregate: value) as $Val);
     });
@@ -757,12 +794,12 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get editHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate {
     if (_value.editHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(_value.editHistoryAggregate!,
+    return $HistoryAggregateDataCopyWith<$Res>(_value.editHistoryAggregate!,
         (value) {
       return _then(_value.copyWith(editHistoryAggregate: value) as $Val);
     });
@@ -770,9 +807,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 }
 
 /// @nodoc
-abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
-  factory _$$_PersonCopyWith(_$_Person value, $Res Function(_$_Person) then) =
-      __$$_PersonCopyWithImpl<$Res>;
+abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
+  factory _$$PersonImplCopyWith(
+          _$PersonImpl value, $Res Function(_$PersonImpl) then) =
+      __$$PersonImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -783,6 +821,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
+      String? birthday,
       bool gender,
       bool isShammas,
       String? shammasLevelId,
@@ -832,16 +871,16 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
       List<Hobby>? hobbies,
       User? user,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? kodasHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? confessionHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? callHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? visitHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? editHistoryAggregate});
+      List<LastRecordedByInfo>? kodasHistory,
+      List<LastRecordedByInfo>? confessionHistory,
+      List<LastRecordedByInfo>? callHistory,
+      List<LastRecordedByInfo>? visitHistory,
+      List<LastRecordedByInfo>? editHistory,
+      HistoryAggregateData? kodasHistoryAggregate,
+      HistoryAggregateData? confessionHistoryAggregate,
+      HistoryAggregateData? callHistoryAggregate,
+      HistoryAggregateData? visitHistoryAggregate,
+      HistoryAggregateData? editHistoryAggregate});
 
   @override
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
@@ -878,22 +917,23 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
   @override
   $UserCopyWith<$Res>? get user;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get kodasHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get confessionHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get callHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get visitHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get editHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate;
 }
 
 /// @nodoc
-class __$$_PersonCopyWithImpl<$Res>
-    extends _$PersonCopyWithImpl<$Res, _$_Person>
-    implements _$$_PersonCopyWith<$Res> {
-  __$$_PersonCopyWithImpl(_$_Person _value, $Res Function(_$_Person) _then)
+class __$$PersonImplCopyWithImpl<$Res>
+    extends _$PersonCopyWithImpl<$Res, _$PersonImpl>
+    implements _$$PersonImplCopyWith<$Res> {
+  __$$PersonImplCopyWithImpl(
+      _$PersonImpl _value, $Res Function(_$PersonImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -906,6 +946,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? mainPhone = freezed,
     Object? otherPhones = null,
     Object? birthdate = freezed,
+    Object? birthday = freezed,
     Object? gender = null,
     Object? isShammas = null,
     Object? shammasLevelId = freezed,
@@ -951,13 +992,18 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? tags = freezed,
     Object? hobbies = freezed,
     Object? user = freezed,
+    Object? kodasHistory = freezed,
+    Object? confessionHistory = freezed,
+    Object? callHistory = freezed,
+    Object? visitHistory = freezed,
+    Object? editHistory = freezed,
     Object? kodasHistoryAggregate = freezed,
     Object? confessionHistoryAggregate = freezed,
     Object? callHistoryAggregate = freezed,
     Object? visitHistoryAggregate = freezed,
     Object? editHistoryAggregate = freezed,
   }) {
-    return _then(_$_Person(
+    return _then(_$PersonImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -986,6 +1032,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.birthdate
           : birthdate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -1166,34 +1216,54 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      kodasHistory: freezed == kodasHistory
+          ? _value._kodasHistory
+          : kodasHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      confessionHistory: freezed == confessionHistory
+          ? _value._confessionHistory
+          : confessionHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      callHistory: freezed == callHistory
+          ? _value._callHistory
+          : callHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      visitHistory: freezed == visitHistory
+          ? _value._visitHistory
+          : visitHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
+      editHistory: freezed == editHistory
+          ? _value._editHistory
+          : editHistory // ignore: cast_nullable_to_non_nullable
+              as List<LastRecordedByInfo>?,
       kodasHistoryAggregate: freezed == kodasHistoryAggregate
           ? _value.kodasHistoryAggregate
           : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       confessionHistoryAggregate: freezed == confessionHistoryAggregate
           ? _value.confessionHistoryAggregate
           : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       callHistoryAggregate: freezed == callHistoryAggregate
           ? _value.callHistoryAggregate
           : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       visitHistoryAggregate: freezed == visitHistoryAggregate
           ? _value.visitHistoryAggregate
           : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       editHistoryAggregate: freezed == editHistoryAggregate
           ? _value.editHistoryAggregate
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Person extends _Person {
-  _$_Person(
+class _$PersonImpl extends _Person {
+  _$PersonImpl(
       {required this.id,
       required this.name,
       this.address,
@@ -1201,6 +1271,7 @@ class _$_Person extends _Person {
       this.mainPhone,
       final Map<String, dynamic> otherPhones = const {},
       this.birthdate,
+      this.birthday,
       this.gender = true,
       this.isShammas = false,
       this.shammasLevelId,
@@ -1250,15 +1321,15 @@ class _$_Person extends _Person {
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
       final List<Hobby>? hobbies,
       this.user,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
+      final List<LastRecordedByInfo>? kodasHistory,
+      final List<LastRecordedByInfo>? confessionHistory,
+      final List<LastRecordedByInfo>? callHistory,
+      final List<LastRecordedByInfo>? visitHistory,
+      final List<LastRecordedByInfo>? editHistory,
       this.kodasHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.confessionHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.callHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.visitHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.editHistoryAggregate})
       : _otherPhones = otherPhones,
         _classes = classes,
@@ -1268,10 +1339,15 @@ class _$_Person extends _Person {
         _streets = streets,
         _tags = tags,
         _hobbies = hobbies,
+        _kodasHistory = kodasHistory,
+        _confessionHistory = confessionHistory,
+        _callHistory = callHistory,
+        _visitHistory = visitHistory,
+        _editHistory = editHistory,
         super._();
 
-  factory _$_Person.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonFromJson(json);
+  factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PersonImplFromJson(json);
 
   @override
   final String id;
@@ -1295,6 +1371,8 @@ class _$_Person extends _Person {
 
   @override
   final DateTime? birthdate;
+  @override
+  final String? birthday;
   @override
   @JsonKey()
   final bool gender;
@@ -1450,32 +1528,78 @@ class _$_Person extends _Person {
 
   @override
   final User? user;
+  final List<LastRecordedByInfo>? _kodasHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? kodasHistoryAggregate;
+  List<LastRecordedByInfo>? get kodasHistory {
+    final value = _kodasHistory;
+    if (value == null) return null;
+    if (_kodasHistory is EqualUnmodifiableListView) return _kodasHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<LastRecordedByInfo>? _confessionHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? confessionHistoryAggregate;
+  List<LastRecordedByInfo>? get confessionHistory {
+    final value = _confessionHistory;
+    if (value == null) return null;
+    if (_confessionHistory is EqualUnmodifiableListView)
+      return _confessionHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<LastRecordedByInfo>? _callHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? callHistoryAggregate;
+  List<LastRecordedByInfo>? get callHistory {
+    final value = _callHistory;
+    if (value == null) return null;
+    if (_callHistory is EqualUnmodifiableListView) return _callHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<LastRecordedByInfo>? _visitHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? visitHistoryAggregate;
+  List<LastRecordedByInfo>? get visitHistory {
+    final value = _visitHistory;
+    if (value == null) return null;
+    if (_visitHistory is EqualUnmodifiableListView) return _visitHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<LastRecordedByInfo>? _editHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? editHistoryAggregate;
+  List<LastRecordedByInfo>? get editHistory {
+    final value = _editHistory;
+    if (value == null) return null;
+    if (_editHistory is EqualUnmodifiableListView) return _editHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final HistoryAggregateData? kodasHistoryAggregate;
+  @override
+  final HistoryAggregateData? confessionHistoryAggregate;
+  @override
+  final HistoryAggregateData? callHistoryAggregate;
+  @override
+  final HistoryAggregateData? visitHistoryAggregate;
+  @override
+  final HistoryAggregateData? editHistoryAggregate;
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Person &&
+            other is _$PersonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
@@ -1487,6 +1611,8 @@ class _$_Person extends _Person {
                 .equals(other._otherPhones, _otherPhones) &&
             (identical(other.birthdate, birthdate) ||
                 other.birthdate == birthdate) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.isShammas, isShammas) ||
                 other.isShammas == isShammas) &&
@@ -1556,6 +1682,16 @@ class _$_Person extends _Person {
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality().equals(other._hobbies, _hobbies) &&
             (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality()
+                .equals(other._kodasHistory, _kodasHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._confessionHistory, _confessionHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._callHistory, _callHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._visitHistory, _visitHistory) &&
+            const DeepCollectionEquality()
+                .equals(other._editHistory, _editHistory) &&
             (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
                 other.kodasHistoryAggregate == kodasHistoryAggregate) &&
             (identical(other.confessionHistoryAggregate,
@@ -1581,6 +1717,7 @@ class _$_Person extends _Person {
         mainPhone,
         const DeepCollectionEquality().hash(_otherPhones),
         birthdate,
+        birthday,
         gender,
         isShammas,
         shammasLevelId,
@@ -1626,6 +1763,11 @@ class _$_Person extends _Person {
         const DeepCollectionEquality().hash(_tags),
         const DeepCollectionEquality().hash(_hobbies),
         user,
+        const DeepCollectionEquality().hash(_kodasHistory),
+        const DeepCollectionEquality().hash(_confessionHistory),
+        const DeepCollectionEquality().hash(_callHistory),
+        const DeepCollectionEquality().hash(_visitHistory),
+        const DeepCollectionEquality().hash(_editHistory),
         kodasHistoryAggregate,
         confessionHistoryAggregate,
         callHistoryAggregate,
@@ -1636,12 +1778,12 @@ class _$_Person extends _Person {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonCopyWith<_$_Person> get copyWith =>
-      __$$_PersonCopyWithImpl<_$_Person>(this, _$identity);
+  _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
+      __$$PersonImplCopyWithImpl<_$PersonImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonToJson(
+    return _$$PersonImplToJson(
       this,
     );
   }
@@ -1657,6 +1799,7 @@ abstract class _Person extends Person {
       final String? mainPhone,
       final Map<String, dynamic> otherPhones,
       final DateTime? birthdate,
+      final String? birthday,
       final bool gender,
       final bool isShammas,
       final String? shammasLevelId,
@@ -1706,19 +1849,19 @@ abstract class _Person extends Person {
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
       final List<Hobby>? hobbies,
       final User? user,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? kodasHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? confessionHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? callHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? visitHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? editHistoryAggregate}) = _$_Person;
+      final List<LastRecordedByInfo>? kodasHistory,
+      final List<LastRecordedByInfo>? confessionHistory,
+      final List<LastRecordedByInfo>? callHistory,
+      final List<LastRecordedByInfo>? visitHistory,
+      final List<LastRecordedByInfo>? editHistory,
+      final HistoryAggregateData? kodasHistoryAggregate,
+      final HistoryAggregateData? confessionHistoryAggregate,
+      final HistoryAggregateData? callHistoryAggregate,
+      final HistoryAggregateData? visitHistoryAggregate,
+      final HistoryAggregateData? editHistoryAggregate}) = _$PersonImpl;
   _Person._() : super._();
 
-  factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
+  factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
   @override
   String get id;
@@ -1735,6 +1878,8 @@ abstract class _Person extends Person {
   Map<String, dynamic> get otherPhones;
   @override
   DateTime? get birthdate;
+  @override
+  String? get birthday;
   @override
   bool get gender;
   @override
@@ -1831,22 +1976,27 @@ abstract class _Person extends Person {
   @override
   User? get user;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get kodasHistoryAggregate;
+  List<LastRecordedByInfo>? get kodasHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get confessionHistoryAggregate;
+  List<LastRecordedByInfo>? get confessionHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get callHistoryAggregate;
+  List<LastRecordedByInfo>? get callHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get visitHistoryAggregate;
+  List<LastRecordedByInfo>? get visitHistory;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get editHistoryAggregate;
+  List<LastRecordedByInfo>? get editHistory;
+  @override
+  HistoryAggregateData? get kodasHistoryAggregate;
+  @override
+  HistoryAggregateData? get confessionHistoryAggregate;
+  @override
+  HistoryAggregateData? get callHistoryAggregate;
+  @override
+  HistoryAggregateData? get visitHistoryAggregate;
+  @override
+  HistoryAggregateData? get editHistoryAggregate;
   @override
   @JsonKey(ignore: true)
-  _$$_PersonCopyWith<_$_Person> get copyWith =>
+  _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

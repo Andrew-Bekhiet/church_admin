@@ -635,7 +635,7 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -812,7 +812,10 @@ class Subscription_watchFamily_familiesByPk
       geolocation: (l$geolocation as Map<String, dynamic>?),
       address: (l$address as String?),
       notes: (l$notes as String?),
-      lastEdit: (l$lastEdit as Json?),
+      lastEdit: l$lastEdit == null
+          ? null
+          : Subscription_watchFamily_familiesByPk_lastEdit.fromJson(
+              (l$lastEdit as Map<String, dynamic>)),
     );
   }
 
@@ -838,7 +841,7 @@ class Subscription_watchFamily_familiesByPk
 
   final String? notes;
 
-  final Json? lastEdit;
+  final Subscription_watchFamily_familiesByPk_lastEdit? lastEdit;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -866,7 +869,7 @@ class Subscription_watchFamily_familiesByPk
     final l$notes = notes;
     _resultData['notes'] = l$notes;
     final l$lastEdit = lastEdit;
-    _resultData['lastEdit'] = l$lastEdit;
+    _resultData['lastEdit'] = l$lastEdit?.toJson();
     return _resultData;
   }
 
@@ -1026,7 +1029,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     Map<String, dynamic>? geolocation,
     String? address,
     String? notes,
-    Json? lastEdit,
+    Subscription_watchFamily_familiesByPk_lastEdit? lastEdit,
   });
   TRes areas(
       Iterable<Fragment_Area>? Function(
@@ -1036,6 +1039,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
       Iterable<Fragment_Street>? Function(
               Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
           _fn);
+  CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> get lastEdit;
 }
 
 class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
@@ -1091,8 +1095,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         address:
             address == _undefined ? _instance.address : (address as String?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
-        lastEdit:
-            lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
+        lastEdit: lastEdit == _undefined
+            ? _instance.lastEdit
+            : (lastEdit as Subscription_watchFamily_familiesByPk_lastEdit?),
       ));
 
   TRes areas(
@@ -1114,6 +1119,15 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
                 e,
                 (i) => i,
               )))?.toList());
+
+  CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Subscription_watchFamily_familiesByPk_lastEdit.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchFamily_familiesByPk_lastEdit(
+            local$lastEdit, (e) => call(lastEdit: e));
+  }
 }
 
 class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
@@ -1134,11 +1148,93 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     Map<String, dynamic>? geolocation,
     String? address,
     String? notes,
-    Json? lastEdit,
+    Subscription_watchFamily_familiesByPk_lastEdit? lastEdit,
   }) =>
       _res;
 
   areas(_fn) => _res;
 
   streets(_fn) => _res;
+
+  CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> get lastEdit =>
+      CopyWith_Subscription_watchFamily_familiesByPk_lastEdit.stub(_res);
+}
+
+class Subscription_watchFamily_familiesByPk_lastEdit {
+  Subscription_watchFamily_familiesByPk_lastEdit();
+
+  factory Subscription_watchFamily_familiesByPk_lastEdit.fromJson(
+      Map<String, dynamic> json) {
+    return Subscription_watchFamily_familiesByPk_lastEdit();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hashAll([]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription_watchFamily_familiesByPk_lastEdit) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchFamily_familiesByPk_lastEdit
+    on Subscription_watchFamily_familiesByPk_lastEdit {
+  CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<
+          Subscription_watchFamily_familiesByPk_lastEdit>
+      get copyWith => CopyWith_Subscription_watchFamily_familiesByPk_lastEdit(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> {
+  factory CopyWith_Subscription_watchFamily_familiesByPk_lastEdit(
+    Subscription_watchFamily_familiesByPk_lastEdit instance,
+    TRes Function(Subscription_watchFamily_familiesByPk_lastEdit) then,
+  ) = _CopyWithImpl_Subscription_watchFamily_familiesByPk_lastEdit;
+
+  factory CopyWith_Subscription_watchFamily_familiesByPk_lastEdit.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_lastEdit;
+
+  TRes call();
+}
+
+class _CopyWithImpl_Subscription_watchFamily_familiesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> {
+  _CopyWithImpl_Subscription_watchFamily_familiesByPk_lastEdit(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchFamily_familiesByPk_lastEdit _instance;
+
+  final TRes Function(Subscription_watchFamily_familiesByPk_lastEdit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call() => _then(Subscription_watchFamily_familiesByPk_lastEdit());
+}
+
+class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_lastEdit<TRes> {
+  _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_lastEdit(this._res);
+
+  TRes _res;
+
+  call() => _res;
 }

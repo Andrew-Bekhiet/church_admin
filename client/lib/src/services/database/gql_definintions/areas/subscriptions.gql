@@ -9,7 +9,7 @@ subscription watchAllAreas(
   }
 }
 
-subscription watchArea($id: uuid!) {
+subscription watchArea($id: Uuid!) {
   areasByPk(id: $id) {
     ...Area
     bounds

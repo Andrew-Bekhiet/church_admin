@@ -236,6 +236,7 @@ class _EditPersonState extends State<EditPerson> {
           ),
           const Divider(thickness: 1),
           DateTimeField(
+            withTime: false,
             label: 'تاريخ الميلاد',
             initialValue: newPerson.birthdate,
             nullable: true,
@@ -812,6 +813,7 @@ class _EditPersonState extends State<EditPerson> {
                                       ), */
           const Divider(thickness: 1),
           DateTimeField(
+            withTime: false,
             label: 'أخر تناول',
             initialValue: newPerson.lastKodas?.time,
             onChanged: (v) {
@@ -827,6 +829,7 @@ class _EditPersonState extends State<EditPerson> {
             validator: (v) => null,
           ),
           DateTimeField(
+            withTime: false,
             label: 'أخر اعتراف',
             initialValue: newPerson.lastConfession?.time,
             onChanged: (v) {

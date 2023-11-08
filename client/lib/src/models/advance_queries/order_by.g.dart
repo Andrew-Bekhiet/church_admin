@@ -6,25 +6,15 @@ part of 'order_by.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderBy _$$_OrderByFromJson(Map json) => _$_OrderBy(
-      field: json['field'] as String,
-      direction:
-          $enumDecodeNullable(_$Enum_OrderByEnumMap, json['direction']) ??
-              Enum_OrderBy.ASC,
+_$OrderByImpl _$$OrderByImplFromJson(Map json) => _$OrderByImpl(
+      fieldName: json['fieldName'] as String,
+      value: json['value'] == null
+          ? Enum_OrderBy.ASC
+          : orderByValueFromJson(json['value']),
     );
 
-Map<String, dynamic> _$$_OrderByToJson(_$_OrderBy instance) =>
+Map<String, dynamic> _$$OrderByImplToJson(_$OrderByImpl instance) =>
     <String, dynamic>{
-      'field': instance.field,
-      'direction': _$Enum_OrderByEnumMap[instance.direction]!,
+      'fieldName': instance.fieldName,
+      'value': orderByValueToJson(instance.value),
     };
-
-const _$Enum_OrderByEnumMap = {
-  Enum_OrderBy.ASC: 'ASC',
-  Enum_OrderBy.ASC_NULLS_FIRST: 'ASC_NULLS_FIRST',
-  Enum_OrderBy.ASC_NULLS_LAST: 'ASC_NULLS_LAST',
-  Enum_OrderBy.DESC: 'DESC',
-  Enum_OrderBy.DESC_NULLS_FIRST: 'DESC_NULLS_FIRST',
-  Enum_OrderBy.DESC_NULLS_LAST: 'DESC_NULLS_LAST',
-  Enum_OrderBy.$unknown: r'$unknown',
-};

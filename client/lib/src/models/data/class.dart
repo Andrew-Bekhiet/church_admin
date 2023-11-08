@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target, always_put_required_named_parameters_first
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,19 @@ part 'class.freezed.dart';
 part 'class.g.dart';
 
 @freezed
+@TypeMetadata(labelsOverrides: {'serviceStudyYear': 'ترتيب السنة الدراسية'})
 class Class extends ViewableWithIDAndImage
     with _$Class
     implements ToJson, AttendanceAnalyzable {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$ClassFields;
+
+  static final QueryableType<Class> queryableType = QueryableType<Class>(
+    name: 'Class',
+    label: 'الفصول',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Class.fromJson,
+  );
+
   factory Class({
     required String id,
     required String name,
@@ -26,16 +37,8 @@ class Class extends ViewableWithIDAndImage
     LastRecordedByInfo? lastEdit,
     @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
     List<User>? adminUsers,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceHistoryAggregate,
-    @JsonKey(
-      fromJson: analysisDataFromJson,
-      toJson: analysisDataToJson,
-    )
-    AnalysisData<DateTime>? attendanceDaysConstraintsAggregate,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? attendanceDaysConstraintsAggregate,
   }) = _Class;
   Class._() : super();
 

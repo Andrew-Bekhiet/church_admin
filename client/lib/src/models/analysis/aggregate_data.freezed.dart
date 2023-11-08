@@ -14,35 +14,42 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AggregateData<T> _$AggregateDataFromJson<T>(
-    Map<String, dynamic> json, T Function(Object?) fromJsonT) {
-  return _AggregateData<T>.fromJson(json, fromJsonT);
+AggregateData _$AggregateDataFromJson(Map<String, dynamic> json) {
+  return _AggregateData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AggregateData<T> {
+mixin _$AggregateData {
   int? get count => throw _privateConstructorUsedError;
-  T? get max => throw _privateConstructorUsedError;
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  LastRecordedByInfo? get max => throw _privateConstructorUsedError;
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  LastRecordedByInfo? get min => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
-      throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AggregateDataCopyWith<T, AggregateData<T>> get copyWith =>
+  $AggregateDataCopyWith<AggregateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AggregateDataCopyWith<T, $Res> {
+abstract class $AggregateDataCopyWith<$Res> {
   factory $AggregateDataCopyWith(
-          AggregateData<T> value, $Res Function(AggregateData<T>) then) =
-      _$AggregateDataCopyWithImpl<T, $Res, AggregateData<T>>;
+          AggregateData value, $Res Function(AggregateData) then) =
+      _$AggregateDataCopyWithImpl<$Res, AggregateData>;
   @useResult
-  $Res call({int? count, T? max});
+  $Res call(
+      {int? count,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? max,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? min});
+
+  $LastRecordedByInfoCopyWith<$Res>? get max;
+  $LastRecordedByInfoCopyWith<$Res>? get min;
 }
 
 /// @nodoc
-class _$AggregateDataCopyWithImpl<T, $Res, $Val extends AggregateData<T>>
-    implements $AggregateDataCopyWith<T, $Res> {
+class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
+    implements $AggregateDataCopyWith<$Res> {
   _$AggregateDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -55,6 +62,7 @@ class _$AggregateDataCopyWithImpl<T, $Res, $Val extends AggregateData<T>>
   $Res call({
     Object? count = freezed,
     Object? max = freezed,
+    Object? min = freezed,
   }) {
     return _then(_value.copyWith(
       count: freezed == count
@@ -64,28 +72,64 @@ class _$AggregateDataCopyWithImpl<T, $Res, $Val extends AggregateData<T>>
       max: freezed == max
           ? _value.max
           : max // ignore: cast_nullable_to_non_nullable
-              as T?,
+              as LastRecordedByInfo?,
+      min: freezed == min
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get max {
+    if (_value.max == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.max!, (value) {
+      return _then(_value.copyWith(max: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get min {
+    if (_value.min == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.min!, (value) {
+      return _then(_value.copyWith(min: value) as $Val);
+    });
   }
 }
 
 /// @nodoc
-abstract class _$$_AggregateDataCopyWith<T, $Res>
-    implements $AggregateDataCopyWith<T, $Res> {
-  factory _$$_AggregateDataCopyWith(
-          _$_AggregateData<T> value, $Res Function(_$_AggregateData<T>) then) =
-      __$$_AggregateDataCopyWithImpl<T, $Res>;
+abstract class _$$AggregateDataImplCopyWith<$Res>
+    implements $AggregateDataCopyWith<$Res> {
+  factory _$$AggregateDataImplCopyWith(
+          _$AggregateDataImpl value, $Res Function(_$AggregateDataImpl) then) =
+      __$$AggregateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? count, T? max});
+  $Res call(
+      {int? count,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? max,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? min});
+
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get max;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get min;
 }
 
 /// @nodoc
-class __$$_AggregateDataCopyWithImpl<T, $Res>
-    extends _$AggregateDataCopyWithImpl<T, $Res, _$_AggregateData<T>>
-    implements _$$_AggregateDataCopyWith<T, $Res> {
-  __$$_AggregateDataCopyWithImpl(
-      _$_AggregateData<T> _value, $Res Function(_$_AggregateData<T>) _then)
+class __$$AggregateDataImplCopyWithImpl<$Res>
+    extends _$AggregateDataCopyWithImpl<$Res, _$AggregateDataImpl>
+    implements _$$AggregateDataImplCopyWith<$Res> {
+  __$$AggregateDataImplCopyWithImpl(
+      _$AggregateDataImpl _value, $Res Function(_$AggregateDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,8 +137,9 @@ class __$$_AggregateDataCopyWithImpl<T, $Res>
   $Res call({
     Object? count = freezed,
     Object? max = freezed,
+    Object? min = freezed,
   }) {
-    return _then(_$_AggregateData<T>(
+    return _then(_$AggregateDataImpl(
       count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -102,70 +147,89 @@ class __$$_AggregateDataCopyWithImpl<T, $Res>
       max: freezed == max
           ? _value.max
           : max // ignore: cast_nullable_to_non_nullable
-              as T?,
+              as LastRecordedByInfo?,
+      min: freezed == min
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable(genericArgumentFactories: true)
-class _$_AggregateData<T> implements _AggregateData<T> {
-  _$_AggregateData({this.count, this.max});
+@JsonSerializable()
+class _$AggregateDataImpl implements _AggregateData {
+  const _$AggregateDataImpl(
+      {this.count,
+      @JsonKey(readValue: _readLastRecordedByInfo) this.max,
+      @JsonKey(readValue: _readLastRecordedByInfo) this.min});
 
-  factory _$_AggregateData.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$$_AggregateDataFromJson(json, fromJsonT);
+  factory _$AggregateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AggregateDataImplFromJson(json);
 
   @override
   final int? count;
   @override
-  final T? max;
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  final LastRecordedByInfo? max;
+  @override
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  final LastRecordedByInfo? min;
 
   @override
   String toString() {
-    return 'AggregateData<$T>(count: $count, max: $max)';
+    return 'AggregateData(count: $count, max: $max, min: $min)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AggregateData<T> &&
+            other is _$AggregateDataImpl &&
             (identical(other.count, count) || other.count == count) &&
-            const DeepCollectionEquality().equals(other.max, max));
+            (identical(other.max, max) || other.max == max) &&
+            (identical(other.min, min) || other.min == min));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, count, const DeepCollectionEquality().hash(max));
+  int get hashCode => Object.hash(runtimeType, count, max, min);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AggregateDataCopyWith<T, _$_AggregateData<T>> get copyWith =>
-      __$$_AggregateDataCopyWithImpl<T, _$_AggregateData<T>>(this, _$identity);
+  _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
+      __$$AggregateDataImplCopyWithImpl<_$AggregateDataImpl>(this, _$identity);
 
   @override
-  Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-    return _$$_AggregateDataToJson<T>(this, toJsonT);
+  Map<String, dynamic> toJson() {
+    return _$$AggregateDataImplToJson(
+      this,
+    );
   }
 }
 
-abstract class _AggregateData<T> implements AggregateData<T> {
-  factory _AggregateData({final int? count, final T? max}) =
-      _$_AggregateData<T>;
+abstract class _AggregateData implements AggregateData {
+  const factory _AggregateData(
+      {final int? count,
+      @JsonKey(readValue: _readLastRecordedByInfo)
+      final LastRecordedByInfo? max,
+      @JsonKey(readValue: _readLastRecordedByInfo)
+      final LastRecordedByInfo? min}) = _$AggregateDataImpl;
 
-  factory _AggregateData.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =
-      _$_AggregateData<T>.fromJson;
+  factory _AggregateData.fromJson(Map<String, dynamic> json) =
+      _$AggregateDataImpl.fromJson;
 
   @override
   int? get count;
   @override
-  T? get max;
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  LastRecordedByInfo? get max;
+  @override
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  LastRecordedByInfo? get min;
   @override
   @JsonKey(ignore: true)
-  _$$_AggregateDataCopyWith<T, _$_AggregateData<T>> get copyWith =>
+  _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

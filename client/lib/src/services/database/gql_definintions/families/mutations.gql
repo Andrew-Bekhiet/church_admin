@@ -1,4 +1,4 @@
-mutation deleteFamily($familyId: uuid!) {
+mutation deleteFamily($familyId: Uuid!) {
   deleteFamiliesByPk(id: $familyId) {
     ...Family
   }
@@ -11,10 +11,10 @@ mutation insertFamily($newFamily: FamiliesInsertInput!) {
 }
 
 mutation updateFamily(
-  $familyId: uuid!
+  $familyId: Uuid!
   $newFamily: FamiliesSetInput!
-  $deleteParents: [uuid!]!
-  $deleteChildren: [uuid!]!
+  $deleteParents: [Uuid!]!
+  $deleteChildren: [Uuid!]!
   $addRelatedFamilies: [FamiliesFamiliesInsertInput!]!
   $updateFamily: Boolean!
   $deleteRelatedFamilies: Boolean!

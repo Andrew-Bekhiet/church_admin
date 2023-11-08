@@ -3,10 +3,62 @@
 part of 'store.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$StoreFields = <String, FieldMetadata>{
+  'id': FieldMetadata<Store>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'family': FieldMetadata<Family>(
+    name: 'family',
+    label: 'العائلة',
+  ),
+  'address': FieldMetadata<String>(
+    name: 'address',
+    label: 'العنوان',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+  'geolocation': FieldMetadata<Point>(
+    name: 'geolocation',
+    label: 'الموقع',
+    operators: Operator.spatial,
+  ),
+  'color': FieldMetadata<Color>(
+    name: 'color',
+    label: 'اللون',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+  'areas': FieldMetadata<Area>(
+    name: 'areas',
+    label: 'المناطق',
+    isOrderable: false,
+  ),
+  'streets': FieldMetadata<Street>(
+    name: 'streets',
+    label: 'الشوارع',
+    isOrderable: false,
+  ),
+  'photoUpdatedAt': FieldMetadata<DateTime>(
+    name: 'photoUpdatedAt',
+    label: 'أخر تحديث للصورة',
+    operators: Operator.comparitive.union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Store _$$_StoreFromJson(Map json) => _$_Store(
+_$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       family: json['family'] == null
@@ -32,7 +84,8 @@ _$_Store _$$_StoreFromJson(Map json) => _$_Store(
       blurhash: json['blurhash'] as String?,
     );
 
-Map<String, dynamic> _$$_StoreToJson(_$_Store instance) => <String, dynamic>{
+Map<String, dynamic> _$$StoreImplToJson(_$StoreImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'family': instance.family?.toJson(),

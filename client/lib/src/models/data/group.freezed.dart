@@ -33,11 +33,9 @@ mixin _$Group {
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get attendanceHistoryAggregate =>
+  HistoryAggregateData? get attendanceHistoryAggregate =>
       throw _privateConstructorUsedError;
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate =>
+  HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,15 +61,13 @@ abstract class $GroupCopyWith<$Res> {
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      HistoryAggregateData? attendanceHistoryAggregate,
+      HistoryAggregateData? attendanceDaysConstraintsAggregate});
 
   $ServiceCopyWith<$Res>? get service;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
-  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
@@ -144,12 +140,12 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       attendanceDaysConstraintsAggregate: freezed ==
               attendanceDaysConstraintsAggregate
           ? _value.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
     ) as $Val);
   }
 
@@ -179,12 +175,12 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
     if (_value.attendanceHistoryAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(
+    return $HistoryAggregateDataCopyWith<$Res>(
         _value.attendanceHistoryAggregate!, (value) {
       return _then(_value.copyWith(attendanceHistoryAggregate: value) as $Val);
     });
@@ -192,13 +188,12 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnalysisDataCopyWith<DateTime, $Res>?
-      get attendanceDaysConstraintsAggregate {
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
     if (_value.attendanceDaysConstraintsAggregate == null) {
       return null;
     }
 
-    return $AnalysisDataCopyWith<DateTime, $Res>(
+    return $HistoryAggregateDataCopyWith<$Res>(
         _value.attendanceDaysConstraintsAggregate!, (value) {
       return _then(
           _value.copyWith(attendanceDaysConstraintsAggregate: value) as $Val);
@@ -207,9 +202,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
 }
 
 /// @nodoc
-abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
-  factory _$$_GroupCopyWith(_$_Group value, $Res Function(_$_Group) then) =
-      __$$_GroupCopyWithImpl<$Res>;
+abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
+  factory _$$GroupImplCopyWith(
+          _$GroupImpl value, $Res Function(_$GroupImpl) then) =
+      __$$GroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -225,25 +221,25 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      AnalysisData<DateTime>? attendanceDaysConstraintsAggregate});
+      HistoryAggregateData? attendanceHistoryAggregate,
+      HistoryAggregateData? attendanceDaysConstraintsAggregate});
 
   @override
   $ServiceCopyWith<$Res>? get service;
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceHistoryAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
   @override
-  $AnalysisDataCopyWith<DateTime, $Res>? get attendanceDaysConstraintsAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
 }
 
 /// @nodoc
-class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
-    implements _$$_GroupCopyWith<$Res> {
-  __$$_GroupCopyWithImpl(_$_Group _value, $Res Function(_$_Group) _then)
+class __$$GroupImplCopyWithImpl<$Res>
+    extends _$GroupCopyWithImpl<$Res, _$GroupImpl>
+    implements _$$GroupImplCopyWith<$Res> {
+  __$$GroupImplCopyWithImpl(
+      _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -262,7 +258,7 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
-    return _then(_$_Group(
+    return _then(_$GroupImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -306,20 +302,20 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
           ? _value.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
       attendanceDaysConstraintsAggregate: freezed ==
               attendanceDaysConstraintsAggregate
           ? _value.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as AnalysisData<DateTime>?,
+              as HistoryAggregateData?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Group extends _Group {
-  _$_Group(
+class _$GroupImpl extends _Group {
+  _$GroupImpl(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
@@ -332,15 +328,13 @@ class _$_Group extends _Group {
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.attendanceHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
       this.attendanceDaysConstraintsAggregate})
       : _adminUsers = adminUsers,
         super._();
 
-  factory _$_Group.fromJson(Map<String, dynamic> json) =>
-      _$$_GroupFromJson(json);
+  factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupImplFromJson(json);
 
   @override
   final String id;
@@ -374,11 +368,9 @@ class _$_Group extends _Group {
   }
 
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? attendanceHistoryAggregate;
+  final HistoryAggregateData? attendanceHistoryAggregate;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  final AnalysisData<DateTime>? attendanceDaysConstraintsAggregate;
+  final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
   @override
   String toString() {
@@ -389,7 +381,7 @@ class _$_Group extends _Group {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Group &&
+            other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color) &&
@@ -436,12 +428,12 @@ class _$_Group extends _Group {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GroupCopyWith<_$_Group> get copyWith =>
-      __$$_GroupCopyWithImpl<_$_Group>(this, _$identity);
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
+      __$$GroupImplCopyWithImpl<_$GroupImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GroupToJson(
+    return _$$GroupImplToJson(
       this,
     );
   }
@@ -461,14 +453,12 @@ abstract class _Group extends Group {
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>? attendanceHistoryAggregate,
-      @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-      final AnalysisData<DateTime>?
-          attendanceDaysConstraintsAggregate}) = _$_Group;
+      final HistoryAggregateData? attendanceHistoryAggregate,
+      final HistoryAggregateData?
+          attendanceDaysConstraintsAggregate}) = _$GroupImpl;
   _Group._() : super._();
 
-  factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
+  factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
   @override
   String get id;
@@ -494,13 +484,11 @@ abstract class _Group extends Group {
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get attendanceHistoryAggregate;
+  HistoryAggregateData? get attendanceHistoryAggregate;
   @override
-  @JsonKey(fromJson: analysisDataFromJson, toJson: analysisDataToJson)
-  AnalysisData<DateTime>? get attendanceDaysConstraintsAggregate;
+  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
   @override
   @JsonKey(ignore: true)
-  _$$_GroupCopyWith<_$_Group> get copyWith =>
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

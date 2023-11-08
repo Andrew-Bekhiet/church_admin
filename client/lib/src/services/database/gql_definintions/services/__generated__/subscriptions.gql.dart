@@ -2110,7 +2110,7 @@ const documentNodeSubscriptionwatchService = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
+          name: NameNode(value: 'Uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2262,7 +2262,10 @@ class Subscription_watchService_servicesByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      lastEdit: (l$lastEdit as Json?),
+      lastEdit: l$lastEdit == null
+          ? null
+          : Subscription_watchService_servicesByPk_lastEdit.fromJson(
+              (l$lastEdit as Map<String, dynamic>)),
       adminUsers: (l$adminUsers as List<dynamic>)
           .map((e) =>
               Subscription_watchService_servicesByPk_adminUsers.fromJson(
@@ -2290,7 +2293,7 @@ class Subscription_watchService_servicesByPk
 
   final String? blurhash;
 
-  final Json? lastEdit;
+  final Subscription_watchService_servicesByPk_lastEdit? lastEdit;
 
   final List<Subscription_watchService_servicesByPk_adminUsers> adminUsers;
 
@@ -2316,7 +2319,7 @@ class Subscription_watchService_servicesByPk
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$lastEdit = lastEdit;
-    _resultData['lastEdit'] = l$lastEdit;
+    _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$adminUsers = adminUsers;
     _resultData['adminUsers'] = l$adminUsers.map((e) => e.toJson()).toList();
     final l$nextService = nextService;
@@ -2455,7 +2458,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Json? lastEdit,
+    Subscription_watchService_servicesByPk_lastEdit? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
   });
@@ -2463,6 +2466,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
       get studyYearFrom;
   CopyWith_Subscription_watchService_servicesByPk_studyYearTo<TRes>
       get studyYearTo;
+  CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> get lastEdit;
   TRes adminUsers(
       Iterable<Subscription_watchService_servicesByPk_adminUsers> Function(
               Iterable<
@@ -2520,8 +2524,9 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        lastEdit:
-            lastEdit == _undefined ? _instance.lastEdit : (lastEdit as Json?),
+        lastEdit: lastEdit == _undefined
+            ? _instance.lastEdit
+            : (lastEdit as Subscription_watchService_servicesByPk_lastEdit?),
         adminUsers: adminUsers == _undefined || adminUsers == null
             ? _instance.adminUsers
             : (adminUsers
@@ -2549,6 +2554,15 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
             _then(_instance))
         : CopyWith_Subscription_watchService_servicesByPk_studyYearTo(
             local$studyYearTo, (e) => call(studyYearTo: e));
+  }
+
+  CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Subscription_watchService_servicesByPk_lastEdit.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchService_servicesByPk_lastEdit(
+            local$lastEdit, (e) => call(lastEdit: e));
   }
 
   TRes adminUsers(
@@ -2588,7 +2602,7 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Json? lastEdit,
+    Subscription_watchService_servicesByPk_lastEdit? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
   }) =>
@@ -2603,6 +2617,9 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
       get studyYearTo =>
           CopyWith_Subscription_watchService_servicesByPk_studyYearTo.stub(
               _res);
+
+  CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> get lastEdit =>
+      CopyWith_Subscription_watchService_servicesByPk_lastEdit.stub(_res);
 
   adminUsers(_fn) => _res;
 
@@ -2918,6 +2935,85 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk_studyYearTo<TRes>
     String? $__typename,
   }) =>
       _res;
+}
+
+class Subscription_watchService_servicesByPk_lastEdit {
+  Subscription_watchService_servicesByPk_lastEdit();
+
+  factory Subscription_watchService_servicesByPk_lastEdit.fromJson(
+      Map<String, dynamic> json) {
+    return Subscription_watchService_servicesByPk_lastEdit();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hashAll([]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription_watchService_servicesByPk_lastEdit) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchService_servicesByPk_lastEdit
+    on Subscription_watchService_servicesByPk_lastEdit {
+  CopyWith_Subscription_watchService_servicesByPk_lastEdit<
+          Subscription_watchService_servicesByPk_lastEdit>
+      get copyWith => CopyWith_Subscription_watchService_servicesByPk_lastEdit(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> {
+  factory CopyWith_Subscription_watchService_servicesByPk_lastEdit(
+    Subscription_watchService_servicesByPk_lastEdit instance,
+    TRes Function(Subscription_watchService_servicesByPk_lastEdit) then,
+  ) = _CopyWithImpl_Subscription_watchService_servicesByPk_lastEdit;
+
+  factory CopyWith_Subscription_watchService_servicesByPk_lastEdit.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchService_servicesByPk_lastEdit;
+
+  TRes call();
+}
+
+class _CopyWithImpl_Subscription_watchService_servicesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> {
+  _CopyWithImpl_Subscription_watchService_servicesByPk_lastEdit(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchService_servicesByPk_lastEdit _instance;
+
+  final TRes Function(Subscription_watchService_servicesByPk_lastEdit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call() => _then(Subscription_watchService_servicesByPk_lastEdit());
+}
+
+class _CopyWithStubImpl_Subscription_watchService_servicesByPk_lastEdit<TRes>
+    implements CopyWith_Subscription_watchService_servicesByPk_lastEdit<TRes> {
+  _CopyWithStubImpl_Subscription_watchService_servicesByPk_lastEdit(this._res);
+
+  TRes _res;
+
+  call() => _res;
 }
 
 class Subscription_watchService_servicesByPk_adminUsers {

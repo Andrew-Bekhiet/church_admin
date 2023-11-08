@@ -107,11 +107,11 @@ class _$GeomapOptionsCopyWithImpl<$Res, $Val extends GeomapOptions>
 }
 
 /// @nodoc
-abstract class _$$_GeoMapOptionsCopyWith<$Res>
+abstract class _$$GeoMapOptionsImplCopyWith<$Res>
     implements $GeomapOptionsCopyWith<$Res> {
-  factory _$$_GeoMapOptionsCopyWith(
-          _$_GeoMapOptions value, $Res Function(_$_GeoMapOptions) then) =
-      __$$_GeoMapOptionsCopyWithImpl<$Res>;
+  factory _$$GeoMapOptionsImplCopyWith(
+          _$GeoMapOptionsImpl value, $Res Function(_$GeoMapOptionsImpl) then) =
+      __$$GeoMapOptionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_GeoMapOptionsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GeoMapOptionsCopyWithImpl<$Res>
-    extends _$GeomapOptionsCopyWithImpl<$Res, _$_GeoMapOptions>
-    implements _$$_GeoMapOptionsCopyWith<$Res> {
-  __$$_GeoMapOptionsCopyWithImpl(
-      _$_GeoMapOptions _value, $Res Function(_$_GeoMapOptions) _then)
+class __$$GeoMapOptionsImplCopyWithImpl<$Res>
+    extends _$GeomapOptionsCopyWithImpl<$Res, _$GeoMapOptionsImpl>
+    implements _$$GeoMapOptionsImplCopyWith<$Res> {
+  __$$GeoMapOptionsImplCopyWithImpl(
+      _$GeoMapOptionsImpl _value, $Res Function(_$GeoMapOptionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_GeoMapOptionsCopyWithImpl<$Res>
     Object? selectedClasses = null,
     Object? selectedGroups = null,
   }) {
-    return _then(_$_GeoMapOptions(
+    return _then(_$GeoMapOptionsImpl(
       layers: null == layers
           ? _value._layers
           : layers // ignore: cast_nullable_to_non_nullable
@@ -184,8 +184,8 @@ class __$$_GeoMapOptionsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GeoMapOptions implements _GeoMapOptions {
-  _$_GeoMapOptions(
+class _$GeoMapOptionsImpl implements _GeoMapOptions {
+  _$GeoMapOptionsImpl(
       {final Set<GeoMapLayer> layers = const {
         GeoMapLayer.areas,
         GeoMapLayer.streets,
@@ -290,7 +290,7 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeoMapOptions &&
+            other is _$GeoMapOptionsImpl &&
             const DeepCollectionEquality().equals(other._layers, _layers) &&
             const DeepCollectionEquality()
                 .equals(other._selectedAreas, _selectedAreas) &&
@@ -323,8 +323,8 @@ class _$_GeoMapOptions implements _GeoMapOptions {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeoMapOptionsCopyWith<_$_GeoMapOptions> get copyWith =>
-      __$$_GeoMapOptionsCopyWithImpl<_$_GeoMapOptions>(this, _$identity);
+  _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
+      __$$GeoMapOptionsImplCopyWithImpl<_$GeoMapOptionsImpl>(this, _$identity);
 }
 
 abstract class _GeoMapOptions implements GeomapOptions {
@@ -336,7 +336,7 @@ abstract class _GeoMapOptions implements GeomapOptions {
       final Set<Store> selectedStores,
       final Set<Service> selectedServices,
       final Set<Class> selectedClasses,
-      final Set<Group> selectedGroups}) = _$_GeoMapOptions;
+      final Set<Group> selectedGroups}) = _$GeoMapOptionsImpl;
 
   @override
   Set<GeoMapLayer> get layers;
@@ -356,6 +356,6 @@ abstract class _GeoMapOptions implements GeomapOptions {
   Set<Group> get selectedGroups;
   @override
   @JsonKey(ignore: true)
-  _$$_GeoMapOptionsCopyWith<_$_GeoMapOptions> get copyWith =>
+  _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

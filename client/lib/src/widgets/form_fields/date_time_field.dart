@@ -7,6 +7,7 @@ class DateTimeField extends StatelessWidget {
   final DateTime? initialValue;
   final bool nullable;
   final DateFormat dateFormat;
+  final bool withTime;
 
   final void Function(DateTime?)? onChanged;
   final void Function(DateTime?)? onSaved;
@@ -26,8 +27,10 @@ class DateTimeField extends StatelessWidget {
     this.autovalidateMode,
     this.focusNode,
     this.decoration,
+    this.withTime = true,
     super.key,
-  }) : dateFormat = dateFormat ?? DateFormat('yyyy/M/d');
+  }) : dateFormat =
+            dateFormat ?? DateFormat(withTime ? 'yyyy/M/d h:m a' : 'yyyy/M/d');
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class DateTimeField extends StatelessWidget {
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
 
-        final newValue = await _selectDate(
+        final newValue = await _selectDateTime(
               context,
               state.value ?? DateTime.now(),
             ) ??
@@ -84,21 +87,56 @@ class DateTimeField extends StatelessWidget {
     );
   }
 
-  Future<DateTime?> _selectDate(
+  Future<DateTime?> _selectDateTime(
     BuildContext context,
-    DateTime initialDate,
+    DateTime initialDateTime,
   ) async {
-    final picked = await showDatePicker(
+    DateTime? resultDateTime;
+
+    final pickedDate = await showDatePicker(
       helpText: label,
       locale: const Locale('ar', 'EG'),
       context: context,
-      initialDate: initialDate,
+      initialDate: initialDateTime,
       firstDate: DateTime(1500),
       lastDate: DateTime.now(),
     );
-    if (picked != null && picked != initialDate) {
-      return picked;
+
+    if (pickedDate != null && withTime) {
+      final pickedTime = context.mounted
+          ? await _selectTime(
+              context,
+              TimeOfDay.fromDateTime(initialDateTime),
+            )
+          : null;
+
+      if (pickedTime != null) {
+        resultDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+      }
+    } else {
+      resultDateTime = pickedDate;
+    }
+
+    if (resultDateTime != null && resultDateTime != initialDateTime) {
+      return resultDateTime;
     }
     return null;
+  }
+
+  Future<TimeOfDay?> _selectTime(
+    BuildContext context,
+    TimeOfDay initialTime,
+  ) {
+    return showTimePicker(
+      helpText: label,
+      context: context,
+      initialTime: initialTime,
+    );
   }
 }

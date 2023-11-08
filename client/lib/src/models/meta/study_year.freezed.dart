@@ -67,21 +67,22 @@ class _$StudyYearCopyWithImpl<$Res, $Val extends StudyYear>
 }
 
 /// @nodoc
-abstract class _$$_StudyYearCopyWith<$Res> implements $StudyYearCopyWith<$Res> {
-  factory _$$_StudyYearCopyWith(
-          _$_StudyYear value, $Res Function(_$_StudyYear) then) =
-      __$$_StudyYearCopyWithImpl<$Res>;
+abstract class _$$StudyYearImplCopyWith<$Res>
+    implements $StudyYearCopyWith<$Res> {
+  factory _$$StudyYearImplCopyWith(
+          _$StudyYearImpl value, $Res Function(_$StudyYearImpl) then) =
+      __$$StudyYearImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int order, String name});
 }
 
 /// @nodoc
-class __$$_StudyYearCopyWithImpl<$Res>
-    extends _$StudyYearCopyWithImpl<$Res, _$_StudyYear>
-    implements _$$_StudyYearCopyWith<$Res> {
-  __$$_StudyYearCopyWithImpl(
-      _$_StudyYear _value, $Res Function(_$_StudyYear) _then)
+class __$$StudyYearImplCopyWithImpl<$Res>
+    extends _$StudyYearCopyWithImpl<$Res, _$StudyYearImpl>
+    implements _$$StudyYearImplCopyWith<$Res> {
+  __$$StudyYearImplCopyWithImpl(
+      _$StudyYearImpl _value, $Res Function(_$StudyYearImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +91,7 @@ class __$$_StudyYearCopyWithImpl<$Res>
     Object? order = null,
     Object? name = null,
   }) {
-    return _then(_$_StudyYear(
+    return _then(_$StudyYearImpl(
       order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
@@ -105,11 +106,11 @@ class __$$_StudyYearCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StudyYear extends _StudyYear {
-  _$_StudyYear({required this.order, required this.name}) : super._();
+class _$StudyYearImpl extends _StudyYear {
+  _$StudyYearImpl({required this.order, required this.name}) : super._();
 
-  factory _$_StudyYear.fromJson(Map<String, dynamic> json) =>
-      _$$_StudyYearFromJson(json);
+  factory _$StudyYearImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StudyYearImplFromJson(json);
 
   @override
   final int order;
@@ -125,7 +126,7 @@ class _$_StudyYear extends _StudyYear {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StudyYear &&
+            other is _$StudyYearImpl &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -137,12 +138,12 @@ class _$_StudyYear extends _StudyYear {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StudyYearCopyWith<_$_StudyYear> get copyWith =>
-      __$$_StudyYearCopyWithImpl<_$_StudyYear>(this, _$identity);
+  _$$StudyYearImplCopyWith<_$StudyYearImpl> get copyWith =>
+      __$$StudyYearImplCopyWithImpl<_$StudyYearImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StudyYearToJson(
+    return _$$StudyYearImplToJson(
       this,
     );
   }
@@ -150,11 +151,11 @@ class _$_StudyYear extends _StudyYear {
 
 abstract class _StudyYear extends StudyYear {
   factory _StudyYear({required final int order, required final String name}) =
-      _$_StudyYear;
+      _$StudyYearImpl;
   _StudyYear._() : super._();
 
   factory _StudyYear.fromJson(Map<String, dynamic> json) =
-      _$_StudyYear.fromJson;
+      _$StudyYearImpl.fromJson;
 
   @override
   int get order;
@@ -162,6 +163,6 @@ abstract class _StudyYear extends StudyYear {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_StudyYearCopyWith<_$_StudyYear> get copyWith =>
+  _$$StudyYearImplCopyWith<_$StudyYearImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

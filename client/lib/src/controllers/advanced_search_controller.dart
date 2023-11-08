@@ -1,24 +1,33 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:rxdart_ext/rxdart_ext.dart';
 
 class AdvancedSearchController {
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
       name: '',
+      queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
       conditions: [
-        Condition(type: Person, field: 'name', operator: Operator.ilike),
+        Condition(
+          queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
+          field: 'name',
+          operator: Operator.ilike,
+          value: '%%',
+        ),
       ],
-      orderBy: const [
-        OrderBy(field: 'name'),
+      orderBy: [
+        OrderBy(fieldName: 'name'),
       ],
     ),
   );
 
   Stream<AdvancedQuery> get queryStream => _query.stream;
 
-  Stream<Type> get selectedTypeStream =>
-      _query.map((q) => q.conditions.first.type).distinct();
+  Stream<QueryableType> get selectedTypeStream =>
+      _query.map((q) => q.queryableType).distinct();
+
+  Stream<LogicalOperator> get logicalOperatorStream =>
+      _query.map((q) => q.logicalOperator).distinct();
 
   Stream<List<Condition>> get conditionsStream =>
       _query.map((q) => q.conditions).distinct();
@@ -30,7 +39,9 @@ class AdvancedSearchController {
 
   AdvancedQuery get query => _query.value;
 
-  Type get selectedType => _query.value.conditions.first.type;
+  QueryableType get selectedQueryableType => _query.value.queryableType;
+
+  LogicalOperator get logicalOperator => _query.value.logicalOperator;
 
   List<Condition> get conditions => _query.value.conditions;
 
@@ -40,15 +51,23 @@ class AdvancedSearchController {
 
   void changeQuery(AdvancedQuery value) => _query.add(value);
 
-  void changeSelectedType(Type type, String field) {
+  void changeSelectedQueryableType(QueryableType queryableType) {
+    final defaultField =
+        queryableType.fieldsMetadata.keys.firstWhere((p) => p != 'id');
+
     _query.add(
       AdvancedQuery(
         name: query.name,
+        queryableType: queryableType,
         conditions: [
-          Condition(type: type, field: field, operator: Operator.eq),
+          Condition(
+            queryableType: queryableType,
+            field: defaultField,
+            operator: Operator.eq,
+          ),
         ],
         orderBy: [
-          OrderBy(field: field),
+          OrderBy(fieldName: defaultField),
         ],
       ),
     );
@@ -56,7 +75,7 @@ class AdvancedSearchController {
 
   void changeConditions(List<Condition> newConditions) {
     for (final condition in newConditions) {
-      _checkConditionType(condition, newConditions.first.type);
+      _checkConditionType(condition);
     }
 
     _query.add(query.copyWith(conditions: newConditions));
@@ -80,12 +99,11 @@ class AdvancedSearchController {
     );
   }
 
-  void _checkConditionType(Condition condition, [Type? requiredType]) {
-    requiredType ??= selectedType;
-
-    if (condition.type != requiredType) {
+  void _checkConditionType(Condition condition) {
+    if (condition.queryableType != selectedQueryableType) {
       throw ArgumentError(
-        'Expected all conditions to be o type $requiredType, but got ${condition.type}',
+        'Expected all conditions to be of type ${selectedQueryableType.type}, '
+        'but got ${condition.queryableType.type}',
       );
     }
   }

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,17 @@ part 'area.freezed.dart';
 part 'area.g.dart';
 
 @freezed
+@TypeMetadata()
 class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$AreaFields;
+
+  static final QueryableType<Area> queryableType = QueryableType<Area>(
+    name: 'Area',
+    label: 'المناطق',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Area.fromJson,
+  );
+
   factory Area({
     required String id,
     required String name,

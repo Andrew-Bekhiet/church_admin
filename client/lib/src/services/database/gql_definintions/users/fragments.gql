@@ -16,14 +16,29 @@ fragment UserOverview on AuthUsersData {
   ...UserPermissions
   person {
     ...Person
-    lastKodas
-    lastConfession
+    lastKodas {
+      time
+      user {
+        ...User
+      }
+    }
+    lastConfession {
+      time
+      user {
+        ...User
+      }
+    }
   }
 }
 
 fragment UserDetails on AuthUsersData {
   ...UserOverview
-  lastEdit
+  lastEdit {
+    time
+    user {
+      ...User
+    }
+  }
   ...UserAdminOn
 }
 

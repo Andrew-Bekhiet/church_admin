@@ -15,10 +15,10 @@ query personsGeolocations(
   $getFamilies: Boolean! = true
   $getStores: Boolean! = true
   $getPersons: Boolean! = true
-  $areasIds: [uuid!]
-  $streetsIds: [uuid!]
-  $familiesIds: [uuid!]
-  $storesIds: [uuid!]
+  $areasIds: [Uuid!]
+  $streetsIds: [Uuid!]
+  $familiesIds: [Uuid!]
+  $storesIds: [Uuid!]
   $personsConditions: [PersonsBoolExp!] = {}
 ) {
   areas(
@@ -92,14 +92,14 @@ query personsGeolocations(
 }
 
 query personHistoryAnalysis(
-  $dateFrom: date!
-  $dateTo: date!
-  $timeFrom: timestamptz!
-  $timeTo: timestamptz!
-  $personId: uuid!
-  $groupsIds: [uuid!] = []
-  $classesIds: [uuid!] = []
-  $servicesIds: [uuid!] = []
+  $dateFrom: Date!
+  $dateTo: Date!
+  $timeFrom: Timestamptz!
+  $timeTo: Timestamptz!
+  $personId: Uuid!
+  $groupsIds: [Uuid!] = []
+  $classesIds: [Uuid!] = []
+  $servicesIds: [Uuid!] = []
   $callHistory: Boolean! = false
   $visitHistory: Boolean! = false
   $editHistory: Boolean! = false
@@ -267,7 +267,7 @@ query personHistoryAnalysis(
   }
 }
 
-query personServicesClassesGroups($id: uuid!) {
+query personServicesClassesGroups($id: Uuid!) {
   personsByPk(id: $id) {
     id
     name

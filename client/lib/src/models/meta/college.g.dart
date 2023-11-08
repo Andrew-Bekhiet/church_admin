@@ -3,16 +3,33 @@
 part of 'college.dart';
 
 // **************************************************************************
+// ChurchAdminGenerator
+// **************************************************************************
+
+final _$CollegeFields = <String, FieldMetadata>{
+  'id': FieldMetadata<College>(
+    name: 'id',
+    label: '=',
+  ),
+  'name': FieldMetadata<String>(
+    name: 'name',
+    label: 'الاسم',
+    operators:
+        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
+  ),
+};
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_College _$$_CollegeFromJson(Map json) => _$_College(
+_$CollegeImpl _$$CollegeImplFromJson(Map json) => _$CollegeImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       universityId: json['universityId'] as String?,
     );
 
-Map<String, dynamic> _$$_CollegeToJson(_$_College instance) =>
+Map<String, dynamic> _$$CollegeImplToJson(_$CollegeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

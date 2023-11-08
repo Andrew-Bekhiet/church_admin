@@ -1,13 +1,13 @@
-mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
+mutation insertPersonLastConfession($personId: Uuid!, $lastConfession: Date!) {
   insertHistoryConfessionHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
+        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confession_history_day_id_person_id_key }
+    onConflict: { constraint: confessionHistoryDayIdPersonIdKey }
   ) {
     person {
       ...Person
@@ -15,16 +15,16 @@ mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
   }
 }
 
-mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
+mutation insertPersonLastKodas($personId: Uuid!, $lastKodas: Date!) {
   insertHistoryKodasHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
+        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodas_history_day_id_person_id_key }
+    onConflict: { constraint: kodasHistoryDayIdPersonIdKey }
   ) {
     person {
       ...Person
@@ -32,7 +32,7 @@ mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
   }
 }
 
-mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
+mutation insertPersonLastCall($personId: Uuid!, $lastCall: Timestamptz!) {
   insertHistoryCallHistoryOne(
     object: { personId: $personId, time: $lastCall }
   ) {
@@ -42,7 +42,7 @@ mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
   }
 }
 
-mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
+mutation insertPersonLastVisit($personId: Uuid!, $lastVisit: Timestamptz!) {
   insertHistoryVisitHistoryOne(
     object: { personId: $personId, time: $lastVisit }
   ) {
