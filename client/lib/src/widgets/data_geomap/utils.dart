@@ -94,14 +94,14 @@ LatLng getMapCenter({
 
 Marker markerFromPoint(
   Point geolocation,
-  WidgetBuilder builder, {
-  AnchorPos? anchorPos,
+  Widget child, {
+  Alignment? alignment,
 }) {
   return Marker(
     height: 50,
     width: 50,
-    anchorPos: anchorPos ?? AnchorPos.align(AnchorAlign.top),
-    builder: builder,
+    alignment: alignment ?? Alignment.topCenter,
+    child: child,
     point: LatLng(
       geolocation.latitude,
       geolocation.longitude,

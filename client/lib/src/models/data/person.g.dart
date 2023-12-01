@@ -131,6 +131,26 @@ final _$PersonFields = <String, FieldMetadata>{
     label: 'أخر تحديث للصورة',
     operators: Operator.comparitive.union({Operator.isNull}),
   ),
+  'lastConfession': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastConfession',
+    label: 'أخر اعتراف',
+  ),
+  'lastKodas': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastKodas',
+    label: 'أخر تناول',
+  ),
+  'lastCall': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastCall',
+    label: 'أخر مكالمات',
+  ),
+  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastVisit',
+    label: 'أخر افتقاد',
+  ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'classes': FieldMetadata<Class>(
     name: 'classes',
     label: 'الفصول',

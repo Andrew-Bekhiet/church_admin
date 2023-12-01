@@ -16,7 +16,7 @@ import './add_auth_link_test.mocks.dart';
   MockSpec<Request>(),
   MockSpec<Response>(),
   MockSpec<Operation>(),
-  MockSpec<h.HttpLink>(),
+  MockSpec<HttpLink>(),
   MockSpec<WebSocketLink>(),
 ])
 void main() {

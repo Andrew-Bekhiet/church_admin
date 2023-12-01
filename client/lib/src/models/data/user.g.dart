@@ -33,6 +33,10 @@ final _$UserFields = <String, FieldMetadata>{
     name: 'permissions',
     label: 'الصلاحيات',
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'person': FieldMetadata<Person>(
     name: 'person',
     label: 'بيانات المخدوم',

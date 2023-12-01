@@ -62,6 +62,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _search = StateSubject<String?>(null);
   final _bottomNavBar = StateSubject<Type>(Service);
+  late final StreamSubscription<void> _localAuthListener;
 
   late final TabController _tabController = TabController(
     length: 3,
@@ -171,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       (_) => !entry.mounted ? Overlay.of(context).insert(entry) : null,
     );
 
-    LocalAuthService.I.refreshUIStream.listen(
+    _localAuthListener = LocalAuthService.I.refreshUIStream.listen(
       (_) {
         if (LocalAuthService.I.shouldAuthenticate && !entry.mounted) {
           Overlay.of(context).insert(entry);
@@ -229,6 +230,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     await _search.close();
     await _bottomNavBar.close();
+
+    await _localAuthListener.cancel();
 
     await Future.wait(_controllersToDispose.map((e) => e.dispose()));
   }

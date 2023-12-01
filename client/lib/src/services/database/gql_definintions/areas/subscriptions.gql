@@ -13,7 +13,9 @@ subscription watchArea($id: Uuid!) {
   areasByPk(id: $id) {
     ...Area
     bounds
-    lastEdit
+    lastEdit {
+      ...EditHistory
+    }
     adminUsers(distinctOn: uid) {
       user {
         ...User

@@ -37,6 +37,10 @@ final _$StreetFields = <String, FieldMetadata>{
     label: 'المناطق',
     isOrderable: false,
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
 };
 
 // **************************************************************************

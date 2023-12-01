@@ -1,6 +1,7 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
@@ -335,7 +336,10 @@ const documentNodeSubscriptionwatchUser = DocumentNode(definitions: [
   fragmentDefinitionUserPermissions,
   fragmentDefinitionPerson,
   fragmentDefinitionPersonNoPhoto,
+  fragmentDefinitionKodasHistory,
+  fragmentDefinitionConfessionHistory,
   fragmentDefinitionUserDetails,
+  fragmentDefinitionEditHistory,
   fragmentDefinitionUserAdminOn,
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
@@ -1179,38 +1183,20 @@ class Subscription_watchUser_authUsersDataByPk_person_lastKodas
     implements
         Fragment_UserOverview_person_lastKodas,
         Fragment_UserDetails_person_lastKodas {
-  Subscription_watchUser_authUsersDataByPk_person_lastKodas({
-    this.time,
-    this.user,
-    this.$__typename = 'HistoryLatestKodases',
-  });
+  Subscription_watchUser_authUsersDataByPk_person_lastKodas(
+      {this.$__typename = 'HistoryLatestKodases'});
 
   factory Subscription_watchUser_authUsersDataByPk_person_lastKodas.fromJson(
       Map<String, dynamic> json) {
-    final l$time = json['time'];
-    final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Subscription_watchUser_authUsersDataByPk_person_lastKodas(
-      time: l$time == null ? null : dateFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
+        $__typename: (l$$__typename as String));
   }
-
-  final DateTime? time;
-
-  final Fragment_User? user;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : dateToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1218,14 +1204,8 @@ class Subscription_watchUser_authUsersDataByPk_person_lastKodas
 
   @override
   int get hashCode {
-    final l$time = time;
-    final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -1235,16 +1215,6 @@ class Subscription_watchUser_authUsersDataByPk_person_lastKodas
     }
     if (!(other is Subscription_watchUser_authUsersDataByPk_person_lastKodas) ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1279,12 +1249,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_person_lastKoda
           TRes res) =
       _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastKodas;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_User<TRes> get user;
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person_lastKodas<
@@ -1304,25 +1269,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person_lastKodas<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
+  TRes call({Object? $__typename = _undefined}) =>
       _then(Subscription_watchUser_authUsersDataByPk_person_lastKodas(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-
-  CopyWith_Fragment_User<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_User.stub(_then(_instance))
-        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
-  }
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastKodas<
@@ -1335,52 +1286,27 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastKoda
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchUser_authUsersDataByPk_person_lastConfession
     implements
         Fragment_UserOverview_person_lastConfession,
         Fragment_UserDetails_person_lastConfession {
-  Subscription_watchUser_authUsersDataByPk_person_lastConfession({
-    this.time,
-    this.user,
-    this.$__typename = 'HistoryLatestConfessions',
-  });
+  Subscription_watchUser_authUsersDataByPk_person_lastConfession(
+      {this.$__typename = 'HistoryLatestConfessions'});
 
   factory Subscription_watchUser_authUsersDataByPk_person_lastConfession.fromJson(
       Map<String, dynamic> json) {
-    final l$time = json['time'];
-    final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Subscription_watchUser_authUsersDataByPk_person_lastConfession(
-      time: l$time == null ? null : dateFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
+        $__typename: (l$$__typename as String));
   }
-
-  final DateTime? time;
-
-  final Fragment_User? user;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : dateToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1388,14 +1314,8 @@ class Subscription_watchUser_authUsersDataByPk_person_lastConfession
 
   @override
   int get hashCode {
-    final l$time = time;
-    final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -1406,16 +1326,6 @@ class Subscription_watchUser_authUsersDataByPk_person_lastConfession
     if (!(other
             is Subscription_watchUser_authUsersDataByPk_person_lastConfession) ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1451,12 +1361,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_person_lastConf
           TRes res) =
       _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastConfession;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_User<TRes> get user;
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person_lastConfession<
@@ -1477,25 +1382,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person_lastConfessi
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
+  TRes call({Object? $__typename = _undefined}) =>
       _then(Subscription_watchUser_authUsersDataByPk_person_lastConfession(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-
-  CopyWith_Fragment_User<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_User.stub(_then(_instance))
-        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
-  }
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastConfession<
@@ -1508,50 +1399,25 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person_lastConf
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchUser_authUsersDataByPk_lastEdit
     implements Fragment_UserDetails_lastEdit {
-  Subscription_watchUser_authUsersDataByPk_lastEdit({
-    this.time,
-    this.user,
-    this.$__typename = 'HistoryLatestEdits',
-  });
+  Subscription_watchUser_authUsersDataByPk_lastEdit(
+      {this.$__typename = 'HistoryLatestEdits'});
 
   factory Subscription_watchUser_authUsersDataByPk_lastEdit.fromJson(
       Map<String, dynamic> json) {
-    final l$time = json['time'];
-    final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Subscription_watchUser_authUsersDataByPk_lastEdit(
-      time: l$time == null ? null : tstzFromString(l$time),
-      user: l$user == null
-          ? null
-          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
+        $__typename: (l$$__typename as String));
   }
-
-  final DateTime? time;
-
-  final Fragment_User? user;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$time = time;
-    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1559,14 +1425,8 @@ class Subscription_watchUser_authUsersDataByPk_lastEdit
 
   @override
   int get hashCode {
-    final l$time = time;
-    final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -1576,16 +1436,6 @@ class Subscription_watchUser_authUsersDataByPk_lastEdit
     }
     if (!(other is Subscription_watchUser_authUsersDataByPk_lastEdit) ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1619,12 +1469,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_lastEdit<
           TRes res) =
       _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_lastEdit;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
-  CopyWith_Fragment_User<TRes> get user;
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_lastEdit<TRes>
@@ -1641,25 +1486,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_lastEdit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? time = _undefined,
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
+  TRes call({Object? $__typename = _undefined}) =>
       _then(Subscription_watchUser_authUsersDataByPk_lastEdit(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-
-  CopyWith_Fragment_User<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Fragment_User.stub(_then(_instance))
-        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
-  }
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_lastEdit<TRes>
@@ -1670,14 +1501,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_lastEdit<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchUser_authUsersDataByPk_adminOn
@@ -2723,4 +2547,6 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(definitions: [
   fragmentDefinitionUserPermissions,
   fragmentDefinitionPerson,
   fragmentDefinitionPersonNoPhoto,
+  fragmentDefinitionKodasHistory,
+  fragmentDefinitionConfessionHistory,
 ]);

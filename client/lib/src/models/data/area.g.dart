@@ -32,6 +32,10 @@ final _$AreaFields = <String, FieldMetadata>{
     label: 'أخر تحديث للصورة',
     operators: Operator.comparitive.union({Operator.isNull}),
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'adminUsers': FieldMetadata<User>(
     name: 'adminUsers',
     label: 'الخدام المسؤلين',

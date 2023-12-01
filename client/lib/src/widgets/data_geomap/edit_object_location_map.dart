@@ -87,7 +87,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
                     if (geolocation != null)
                       markerFromPoint(
                         geolocation,
-                        (context) => ObjectMarkerWidget(
+                        ObjectMarkerWidget(
                           object: snapshot.requireData,
                           isFocused: true,
                           enableTap: false,
@@ -106,10 +106,11 @@ class _EditObjectLocationMap<T extends ViewableWithID>
               );
             },
             maxZoom: 18,
-            zoom: 14,
-            interactiveFlags:
-                InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-            center: center,
+            initialZoom: 14,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+            ),
+            initialCenter: center,
           ),
         ),
       ),

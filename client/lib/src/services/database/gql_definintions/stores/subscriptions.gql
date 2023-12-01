@@ -17,7 +17,9 @@ subscription watchStore($id: Uuid!) {
     streets(orderBy: { name: ASC }) {
       ...Street
     }
-    lastEdit
+    lastEdit {
+      ...EditHistory
+    }
     address
     geolocation
     family {

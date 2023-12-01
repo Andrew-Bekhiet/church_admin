@@ -1,6 +1,7 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../families/__generated__/fragments.gql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
@@ -718,7 +719,19 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'EditHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'address'),
@@ -770,6 +783,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
   fragmentDefinitionAreaNoPhoto,
   fragmentDefinitionStreet,
   fragmentDefinitionStreetNoPhoto,
+  fragmentDefinitionEditHistory,
   fragmentDefinitionFamily,
   fragmentDefinitionFamilyNoPhoto,
 ]);
@@ -1186,21 +1200,29 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
 }
 
 class Subscription_watchStore_storesByPk_lastEdit {
-  Subscription_watchStore_storesByPk_lastEdit();
+  Subscription_watchStore_storesByPk_lastEdit(
+      {this.$__typename = 'HistoryLatestEdits'});
 
   factory Subscription_watchStore_storesByPk_lastEdit.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchStore_storesByPk_lastEdit();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStore_storesByPk_lastEdit(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -1210,6 +1232,11 @@ class Subscription_watchStore_storesByPk_lastEdit {
     }
     if (!(other is Subscription_watchStore_storesByPk_lastEdit) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -1235,7 +1262,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk_lastEdit<TRes> {
   factory CopyWith_Subscription_watchStore_storesByPk_lastEdit.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
@@ -1251,7 +1278,11 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchStore_storesByPk_lastEdit());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchStore_storesByPk_lastEdit(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
@@ -1260,5 +1291,5 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk_lastEdit<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }

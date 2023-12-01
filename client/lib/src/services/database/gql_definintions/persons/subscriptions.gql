@@ -74,11 +74,21 @@ subscription watchPerson(
       name
     }
     jobDescription
-    lastCall
-    lastConfession
-    lastEdit
-    lastKodas
-    lastVisit
+    lastCall {
+      ...CallHistory
+    }
+    lastConfession {
+      ...ConfessionHistory
+    }
+    lastEdit {
+      ...EditHistory
+    }
+    lastKodas {
+      ...KodasHistory
+    }
+    lastVisit {
+      ...VisitHistory
+    }
     mainPhone
     notes
     otherPhones

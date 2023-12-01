@@ -17,16 +17,10 @@ fragment UserOverview on AuthUsersData {
   person {
     ...Person
     lastKodas {
-      time
-      user {
-        ...User
-      }
+      ...KodasHistory
     }
     lastConfession {
-      time
-      user {
-        ...User
-      }
+      ...ConfessionHistory
     }
   }
 }
@@ -34,10 +28,7 @@ fragment UserOverview on AuthUsersData {
 fragment UserDetails on AuthUsersData {
   ...UserOverview
   lastEdit {
-    time
-    user {
-      ...User
-    }
+    ...EditHistory
   }
   ...UserAdminOn
 }

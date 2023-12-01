@@ -1,4 +1,5 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
@@ -898,7 +899,19 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'EditHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'adminUsers'),
@@ -952,6 +965,7 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
   ),
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionEditHistory,
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
 ]);
@@ -1267,21 +1281,29 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
 }
 
 class Subscription_watchArea_areasByPk_lastEdit {
-  Subscription_watchArea_areasByPk_lastEdit();
+  Subscription_watchArea_areasByPk_lastEdit(
+      {this.$__typename = 'HistoryLatestEdits'});
 
   factory Subscription_watchArea_areasByPk_lastEdit.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchArea_areasByPk_lastEdit();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchArea_areasByPk_lastEdit(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -1291,6 +1313,11 @@ class Subscription_watchArea_areasByPk_lastEdit {
     }
     if (!(other is Subscription_watchArea_areasByPk_lastEdit) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -1316,7 +1343,7 @@ abstract class CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> {
   factory CopyWith_Subscription_watchArea_areasByPk_lastEdit.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
@@ -1332,7 +1359,11 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchArea_areasByPk_lastEdit());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchArea_areasByPk_lastEdit(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
@@ -1341,7 +1372,7 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchArea_areasByPk_adminUsers {

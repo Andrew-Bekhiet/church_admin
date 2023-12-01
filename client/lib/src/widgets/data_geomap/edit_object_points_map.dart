@@ -122,10 +122,11 @@ class _EditObjectPointsMap<T extends ViewableWithID>
               );
             },
             maxZoom: 18,
-            zoom: 14,
-            interactiveFlags:
-                InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-            center: center,
+            initialZoom: 14,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+            ),
+            initialCenter: center,
           ),
         ),
       ),

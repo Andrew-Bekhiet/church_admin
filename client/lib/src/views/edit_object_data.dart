@@ -51,7 +51,12 @@ class _EditObjectDataState<T extends ViewableWithID>
       child: Scaffold(
         body: Form(
           key: _controller.formKey,
-          onWillPop: () => _controller.confirmExit(context),
+          onPopInvoked: (didPop) async {
+            if (didPop) return;
+
+            final navigator = Navigator.of(context);
+            if (await _controller.confirmExit(context)) navigator.pop();
+          },
           child: CustomScrollView(
             slivers: [
               if (newObjectData is ViewableWithIDAndImage)

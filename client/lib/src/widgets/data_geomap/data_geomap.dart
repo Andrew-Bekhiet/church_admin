@@ -24,7 +24,7 @@ class DataGeomap extends StatefulWidget {
   final Person? initialPerson;
   final ValueStream<GeomapOptions> geomapOptionsStream;
   final BehaviorSubject<Point?>? focusedLocationStream;
-  final MapOptions Function(LatLng?)? createMapOptions;
+  final MapOptions Function(LatLng)? createMapOptions;
   final List<Widget> addLayers;
   final Stream<PersonsGeolocationsResponse?> Function(
     PersonsGeolocationsResponse?,
@@ -113,7 +113,7 @@ class DataGeomapState extends State<DataGeomap> {
             stores: stores,
             persons: persons,
           ),
-          nonRotatedChildren: [
+          children: [
             SimpleAttributionWidget(
               alignment: Alignment.topLeft,
               source: const Text('OpenStreetMap'),
@@ -123,12 +123,9 @@ class DataGeomapState extends State<DataGeomap> {
                     Uri.parse('https://openstreetmap.org/copyright'),
                   ),
             ),
-          ],
-          children: [
             TileLayer(
               tileProvider: FMTC.instance['default'].getTileProvider(),
               urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: const ['a', 'b', 'c'],
               userAgentPackageName: (packageName.isEmpty
                       ? 'com.AndroidQuartz.church_admin'
                       : packageName) +
@@ -184,10 +181,11 @@ class DataGeomapState extends State<DataGeomap> {
             widget.focusedLocationStream?.value = null;
           },
           maxZoom: 18,
-          zoom: 14,
-          interactiveFlags:
-              InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-          center: center,
+          initialZoom: 14,
+          interactionOptions: const InteractionOptions(
+            flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+          ),
+          initialCenter: center,
         );
   }
 

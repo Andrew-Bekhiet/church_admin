@@ -37,6 +37,10 @@ final _$GroupFields = <String, FieldMetadata>{
     name: 'service',
     label: 'الخدمة',
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'adminUsers': FieldMetadata<User>(
     name: 'adminUsers',
     label: 'الخدام المسؤلين',

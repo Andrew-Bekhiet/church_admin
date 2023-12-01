@@ -91,7 +91,14 @@ void main() {
                 tester.firstState<NavigatorState>(find.byType(Navigator)).push(
                       MaterialPageRoute(
                         builder: (context) => Form(
-                          onWillPop: () => unit.confirmExit(context),
+                          onPopInvoked: (didPop) async {
+                            if (didPop) return;
+
+                            final navigator = Navigator.of(context);
+                            if (await unit.confirmExit(context)) {
+                              navigator.pop();
+                            }
+                          },
                           key: unit.formKey,
                           child: Scaffold(
                             appBar: AppBar(),
@@ -127,7 +134,14 @@ void main() {
                 tester.firstState<NavigatorState>(find.byType(Navigator)).push(
                       MaterialPageRoute(
                         builder: (context) => Form(
-                          onWillPop: () => unit.confirmExit(context),
+                          onPopInvoked: (didPop) async {
+                            if (didPop) return;
+
+                            final navigator = Navigator.of(context);
+                            if (await unit.confirmExit(context)) {
+                              navigator.pop();
+                            }
+                          },
                           key: unit.formKey,
                           child: Scaffold(
                             appBar: AppBar(),

@@ -47,7 +47,7 @@ class _LocationsLayerState extends State<_LocationsLayer>
   Marker _buildMarkerWith(Viewable object, Point geolocation) {
     return markerFromPoint(
       geolocation,
-      (context) => StreamBuilder<Point?>(
+      StreamBuilder<Point?>(
         stream: widget.focusedLocationStream,
         builder: (context, snapshot) {
           return ObjectMarkerWidget(
@@ -61,7 +61,7 @@ class _LocationsLayerState extends State<_LocationsLayer>
                   geolocation.latitude,
                   geolocation.longitude,
                 ),
-                widget.mapController.zoom,
+                widget.mapController.camera.zoom,
               );
             },
           );
@@ -72,15 +72,15 @@ class _LocationsLayerState extends State<_LocationsLayer>
 
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final latTween = Tween<double>(
-      begin: widget.mapController.center.latitude,
+      begin: widget.mapController.camera.center.latitude,
       end: destLocation.latitude,
     );
     final lngTween = Tween<double>(
-      begin: widget.mapController.center.longitude,
+      begin: widget.mapController.camera.center.longitude,
       end: destLocation.longitude,
     );
     final zoomTween =
-        Tween<double>(begin: widget.mapController.zoom, end: destZoom);
+        Tween<double>(begin: widget.mapController.camera.zoom, end: destZoom);
 
     final controller = AnimationController(
       duration: const Duration(milliseconds: 300),

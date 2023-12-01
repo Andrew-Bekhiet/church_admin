@@ -16,6 +16,8 @@ subscription watchStreet($id: Uuid!) {
       ...Area
     }
     line
-    lastEdit
+    lastEdit {
+      ...EditHistory
+    }
   }
 }

@@ -64,6 +64,10 @@ final _$FamilyFields = <String, FieldMetadata>{
     label: 'العائلات الأباء',
     isOrderable: false,
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
 };
 
 // **************************************************************************

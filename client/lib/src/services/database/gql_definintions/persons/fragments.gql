@@ -55,34 +55,19 @@ fragment FullPersonData on Persons {
   }
   jobDescription
   lastCall {
-    time
-    user {
-      ...User
-    }
+    ...CallHistory
   }
   lastConfession {
-    time
-    user {
-      ...User
-    }
+    ...ConfessionHistory
   }
   lastEdit {
-    time
-    user {
-      ...User
-    }
+    ...EditHistory
   }
   lastKodas {
-    time
-    user {
-      ...User
-    }
+    ...KodasHistory
   }
   lastVisit {
-    time
-    user {
-      ...User
-    }
+    ...VisitHistory
   }
   mainPhone
   notes

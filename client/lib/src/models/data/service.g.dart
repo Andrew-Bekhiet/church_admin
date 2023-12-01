@@ -49,6 +49,10 @@ final _$ServiceFields = <String, FieldMetadata>{
     label: 'المجموعات',
     isOrderable: false,
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'adminUsers': FieldMetadata<User>(
     name: 'adminUsers',
     label: 'الخدام المسؤلين',

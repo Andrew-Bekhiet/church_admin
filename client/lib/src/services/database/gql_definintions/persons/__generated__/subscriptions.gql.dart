@@ -1260,35 +1260,95 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'CallHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'lastConfession'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'ConfessionHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'lastEdit'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'EditHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'lastKodas'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'KodasHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'lastVisit'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'VisitHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: 'mainPhone'),
@@ -1835,6 +1895,11 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
   fragmentDefinitionGroup,
   fragmentDefinitionGroupNoPhoto,
+  fragmentDefinitionCallHistory,
+  fragmentDefinitionConfessionHistory,
+  fragmentDefinitionEditHistory,
+  fragmentDefinitionKodasHistory,
+  fragmentDefinitionVisitHistory,
   fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
   fragmentDefinitionStreet,
@@ -5644,21 +5709,29 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_job<TRes>
 }
 
 class Subscription_watchPerson_personsByPk_lastCall {
-  Subscription_watchPerson_personsByPk_lastCall();
+  Subscription_watchPerson_personsByPk_lastCall(
+      {this.$__typename = 'HistoryLatestCalls'});
 
   factory Subscription_watchPerson_personsByPk_lastCall.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchPerson_personsByPk_lastCall();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_lastCall(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -5668,6 +5741,11 @@ class Subscription_watchPerson_personsByPk_lastCall {
     }
     if (!(other is Subscription_watchPerson_personsByPk_lastCall) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -5694,7 +5772,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> {
           TRes res) =
       _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
@@ -5710,7 +5788,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchPerson_personsByPk_lastCall());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchPerson_personsByPk_lastCall(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
@@ -5719,25 +5801,33 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_lastConfession {
-  Subscription_watchPerson_personsByPk_lastConfession();
+  Subscription_watchPerson_personsByPk_lastConfession(
+      {this.$__typename = 'HistoryLatestConfessions'});
 
   factory Subscription_watchPerson_personsByPk_lastConfession.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchPerson_personsByPk_lastConfession();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_lastConfession(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -5747,6 +5837,11 @@ class Subscription_watchPerson_personsByPk_lastConfession {
     }
     if (!(other is Subscription_watchPerson_personsByPk_lastConfession) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -5775,7 +5870,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_lastConfession<
           TRes res) =
       _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastConfession<TRes>
@@ -5793,7 +5888,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastConfession<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchPerson_personsByPk_lastConfession());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchPerson_personsByPk_lastConfession(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession<
@@ -5805,25 +5904,33 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession<
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_lastEdit {
-  Subscription_watchPerson_personsByPk_lastEdit();
+  Subscription_watchPerson_personsByPk_lastEdit(
+      {this.$__typename = 'HistoryLatestEdits'});
 
   factory Subscription_watchPerson_personsByPk_lastEdit.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchPerson_personsByPk_lastEdit();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_lastEdit(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -5833,6 +5940,11 @@ class Subscription_watchPerson_personsByPk_lastEdit {
     }
     if (!(other is Subscription_watchPerson_personsByPk_lastEdit) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -5859,7 +5971,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> {
           TRes res) =
       _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
@@ -5875,7 +5987,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchPerson_personsByPk_lastEdit());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchPerson_personsByPk_lastEdit(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
@@ -5884,25 +6000,33 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_lastKodas {
-  Subscription_watchPerson_personsByPk_lastKodas();
+  Subscription_watchPerson_personsByPk_lastKodas(
+      {this.$__typename = 'HistoryLatestKodases'});
 
   factory Subscription_watchPerson_personsByPk_lastKodas.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchPerson_personsByPk_lastKodas();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_lastKodas(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -5912,6 +6036,11 @@ class Subscription_watchPerson_personsByPk_lastKodas {
     }
     if (!(other is Subscription_watchPerson_personsByPk_lastKodas) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -5938,7 +6067,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> {
           TRes res) =
       _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
@@ -5954,7 +6083,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchPerson_personsByPk_lastKodas());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchPerson_personsByPk_lastKodas(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
@@ -5963,25 +6096,33 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_lastVisit {
-  Subscription_watchPerson_personsByPk_lastVisit();
+  Subscription_watchPerson_personsByPk_lastVisit(
+      {this.$__typename = 'HistoryLatestVisits'});
 
   factory Subscription_watchPerson_personsByPk_lastVisit.fromJson(
       Map<String, dynamic> json) {
-    return Subscription_watchPerson_personsByPk_lastVisit();
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_lastVisit(
+        $__typename: (l$$__typename as String));
   }
+
+  final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
     return _resultData;
   }
 
   @override
   int get hashCode {
-    return Object.hashAll([]);
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -5991,6 +6132,11 @@ class Subscription_watchPerson_personsByPk_lastVisit {
     }
     if (!(other is Subscription_watchPerson_personsByPk_lastVisit) ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
       return false;
     }
     return true;
@@ -6017,7 +6163,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> {
           TRes res) =
       _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit;
 
-  TRes call();
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
@@ -6033,7 +6179,11 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call() => _then(Subscription_watchPerson_personsByPk_lastVisit());
+  TRes call({Object? $__typename = _undefined}) =>
+      _then(Subscription_watchPerson_personsByPk_lastVisit(
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
@@ -6042,7 +6192,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
 
   TRes _res;
 
-  call() => _res;
+  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_personType {

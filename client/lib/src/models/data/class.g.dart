@@ -45,6 +45,10 @@ final _$ClassFields = <String, FieldMetadata>{
     label: 'النوع',
     operators: Operator.comparitive.union({Operator.isNull}),
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'adminUsers': FieldMetadata<User>(
     name: 'adminUsers',
     label: 'الخدام المسؤلين',

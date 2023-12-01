@@ -30,7 +30,9 @@ subscription watchAllServices(
 subscription watchService($id: Uuid!) {
   servicesByPk(id: $id) {
     ...ServiceWithStudyYears
-    lastEdit
+    lastEdit {
+      ...EditHistory
+    }
     adminUsers(distinctOn: uid) {
       user {
         ...User

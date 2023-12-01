@@ -20,6 +20,8 @@ subscription watchFamily($id: Uuid!) {
     geolocation
     address
     notes
-    lastEdit
+    lastEdit {
+      ...EditHistory
+    }
   }
 }

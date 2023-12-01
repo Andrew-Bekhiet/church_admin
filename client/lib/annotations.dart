@@ -9,6 +9,6 @@ final class TypeMetadata {
   const TypeMetadata({
     this.labelsOverrides = const {},
     this.ignoreFields = const ['blurhash'],
-    this.regexIgnoreFields = const [r'^last.+$', r'^.+Id$'],
+    this.regexIgnoreFields = const [r'^.+Id$'],
   });
 }

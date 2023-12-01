@@ -47,6 +47,10 @@ final _$StoreFields = <String, FieldMetadata>{
     label: 'الشوارع',
     isOrderable: false,
   ),
+  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastEdit',
+    label: 'أخر تحديث البيانات',
+  ),
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
