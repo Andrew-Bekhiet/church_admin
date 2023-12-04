@@ -51,6 +51,7 @@ class _EditObjectDataState<T extends ViewableWithID>
       child: Scaffold(
         body: Form(
           key: _controller.formKey,
+          canPop: false,
           onPopInvoked: (didPop) async {
             if (didPop) return;
 

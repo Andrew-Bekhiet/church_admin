@@ -91,6 +91,7 @@ void main() {
                 tester.firstState<NavigatorState>(find.byType(Navigator)).push(
                       MaterialPageRoute(
                         builder: (context) => Form(
+                          canPop: false,
                           onPopInvoked: (didPop) async {
                             if (didPop) return;
 
@@ -134,6 +135,7 @@ void main() {
                 tester.firstState<NavigatorState>(find.byType(Navigator)).push(
                       MaterialPageRoute(
                         builder: (context) => Form(
+                          canPop: false,
                           onPopInvoked: (didPop) async {
                             if (didPop) return;
 
