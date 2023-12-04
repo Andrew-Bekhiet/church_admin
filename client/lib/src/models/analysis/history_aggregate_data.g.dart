@@ -17,7 +17,8 @@ final _$HistoryAggregateDataFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HistoryDataImpl _$$HistoryDataImplFromJson(Map json) => _$HistoryDataImpl(
+_$HistoryAggregateDataImpl _$$HistoryAggregateDataImplFromJson(Map json) =>
+    _$HistoryAggregateDataImpl(
       aggregate: AggregateData.fromJson(
           Map<String, Object?>.from(json['aggregate'] as Map)),
       nodes: (json['nodes'] as List<dynamic>?)
@@ -27,7 +28,8 @@ _$HistoryDataImpl _$$HistoryDataImplFromJson(Map json) => _$HistoryDataImpl(
           const [],
     );
 
-Map<String, dynamic> _$$HistoryDataImplToJson(_$HistoryDataImpl instance) =>
+Map<String, dynamic> _$$HistoryAggregateDataImplToJson(
+        _$HistoryAggregateDataImpl instance) =>
     <String, dynamic>{
       'aggregate': instance.aggregate.toJson(),
       'nodes': instance.nodes.map((e) => e.toJson()).toList(),

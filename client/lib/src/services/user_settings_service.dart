@@ -35,7 +35,7 @@ class UserSettingsService {
 
   String _getTypeName(Type t) =>
       AdvancedQueriesMetadata.queryableTypes[t]?.name ??
-      (t.toString().replaceAll(RegExp(r'_|\$'), ''));
+      (t.toString().replaceAll(RegExp(r'_|\$|(Impl)'), ''));
 
   Future<void> setupDefaults() async {
     await setGreatFeastTheme(true);

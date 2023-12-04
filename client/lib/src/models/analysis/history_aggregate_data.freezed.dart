@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 HistoryAggregateData _$HistoryAggregateDataFromJson(Map<String, dynamic> json) {
-  return _HistoryData.fromJson(json);
+  return _HistoryAggregateData.fromJson(json);
 }
 
 /// @nodoc
@@ -79,11 +79,11 @@ class _$HistoryAggregateDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$HistoryDataImplCopyWith<$Res>
+abstract class _$$HistoryAggregateDataImplCopyWith<$Res>
     implements $HistoryAggregateDataCopyWith<$Res> {
-  factory _$$HistoryDataImplCopyWith(
-          _$HistoryDataImpl value, $Res Function(_$HistoryDataImpl) then) =
-      __$$HistoryDataImplCopyWithImpl<$Res>;
+  factory _$$HistoryAggregateDataImplCopyWith(_$HistoryAggregateDataImpl value,
+          $Res Function(_$HistoryAggregateDataImpl) then) =
+      __$$HistoryAggregateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AggregateData aggregate, List<LastRecordedByInfo> nodes});
@@ -93,11 +93,11 @@ abstract class _$$HistoryDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$HistoryDataImplCopyWithImpl<$Res>
-    extends _$HistoryAggregateDataCopyWithImpl<$Res, _$HistoryDataImpl>
-    implements _$$HistoryDataImplCopyWith<$Res> {
-  __$$HistoryDataImplCopyWithImpl(
-      _$HistoryDataImpl _value, $Res Function(_$HistoryDataImpl) _then)
+class __$$HistoryAggregateDataImplCopyWithImpl<$Res>
+    extends _$HistoryAggregateDataCopyWithImpl<$Res, _$HistoryAggregateDataImpl>
+    implements _$$HistoryAggregateDataImplCopyWith<$Res> {
+  __$$HistoryAggregateDataImplCopyWithImpl(_$HistoryAggregateDataImpl _value,
+      $Res Function(_$HistoryAggregateDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$HistoryDataImplCopyWithImpl<$Res>
     Object? aggregate = null,
     Object? nodes = null,
   }) {
-    return _then(_$HistoryDataImpl(
+    return _then(_$HistoryAggregateDataImpl(
       aggregate: null == aggregate
           ? _value.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
@@ -121,14 +121,14 @@ class __$$HistoryDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HistoryDataImpl implements _HistoryData {
-  const _$HistoryDataImpl(
+class _$HistoryAggregateDataImpl implements _HistoryAggregateData {
+  const _$HistoryAggregateDataImpl(
       {required this.aggregate,
       final List<LastRecordedByInfo> nodes = const []})
       : _nodes = nodes;
 
-  factory _$HistoryDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$HistoryDataImplFromJson(json);
+  factory _$HistoryAggregateDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HistoryAggregateDataImplFromJson(json);
 
   @override
   final AggregateData aggregate;
@@ -150,7 +150,7 @@ class _$HistoryDataImpl implements _HistoryData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HistoryDataImpl &&
+            other is _$HistoryAggregateDataImpl &&
             (identical(other.aggregate, aggregate) ||
                 other.aggregate == aggregate) &&
             const DeepCollectionEquality().equals(other._nodes, _nodes));
@@ -164,24 +164,26 @@ class _$HistoryDataImpl implements _HistoryData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HistoryDataImplCopyWith<_$HistoryDataImpl> get copyWith =>
-      __$$HistoryDataImplCopyWithImpl<_$HistoryDataImpl>(this, _$identity);
+  _$$HistoryAggregateDataImplCopyWith<_$HistoryAggregateDataImpl>
+      get copyWith =>
+          __$$HistoryAggregateDataImplCopyWithImpl<_$HistoryAggregateDataImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HistoryDataImplToJson(
+    return _$$HistoryAggregateDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _HistoryData implements HistoryAggregateData {
-  const factory _HistoryData(
+abstract class _HistoryAggregateData implements HistoryAggregateData {
+  const factory _HistoryAggregateData(
       {required final AggregateData aggregate,
-      final List<LastRecordedByInfo> nodes}) = _$HistoryDataImpl;
+      final List<LastRecordedByInfo> nodes}) = _$HistoryAggregateDataImpl;
 
-  factory _HistoryData.fromJson(Map<String, dynamic> json) =
-      _$HistoryDataImpl.fromJson;
+  factory _HistoryAggregateData.fromJson(Map<String, dynamic> json) =
+      _$HistoryAggregateDataImpl.fromJson;
 
   @override
   AggregateData get aggregate;
@@ -189,6 +191,6 @@ abstract class _HistoryData implements HistoryAggregateData {
   List<LastRecordedByInfo> get nodes;
   @override
   @JsonKey(ignore: true)
-  _$$HistoryDataImplCopyWith<_$HistoryDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$HistoryAggregateDataImplCopyWith<_$HistoryAggregateDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

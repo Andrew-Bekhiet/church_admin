@@ -22,7 +22,7 @@ class HistoryAggregateData with _$HistoryAggregateData {
   const factory HistoryAggregateData({
     required AggregateData aggregate,
     @Default([]) List<LastRecordedByInfo> nodes,
-  }) = _HistoryData;
+  }) = _HistoryAggregateData;
 
   factory HistoryAggregateData.fromJson(Json json) =>
       _$HistoryAggregateDataFromJson(json);
