@@ -1,8 +1,4 @@
 dependency_overrides:
-  church_admin:
-    git:
-      url: https://github.com/Andrew-Bekhiet/church_admin
-      ref: master
   church_admin_generator:
     git:
       url: https://github.com/Andrew-Bekhiet/church_admin_generator
