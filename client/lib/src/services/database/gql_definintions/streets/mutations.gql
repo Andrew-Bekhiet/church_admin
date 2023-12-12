@@ -10,8 +10,19 @@ mutation insertStreet($newStreet: StreetsInsertInput!) {
   }
 }
 
-mutation updateStreet($streetId: Uuid!, $newStreet: StreetsSetInput!) {
+mutation updateStreet(
+  $streetId: Uuid!
+  $newStreet: StreetsSetInput!
+  $lastVisit: Timestamptz
+  $updateLastVisit: Boolean!
+) {
   updateStreetsByPk(pkColumns: { id: $streetId }, _set: $newStreet) {
     ...Street
+  }
+
+  insertHistoryVisitHistoryOne(
+    object: { table: "streets", recordId: $streetId, time: $lastVisit }
+  ) @include(if: $updateLastVisit) {
+    ...VisitHistory
   }
 }

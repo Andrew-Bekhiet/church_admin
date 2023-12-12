@@ -37,6 +37,10 @@ final _$StreetFields = <String, FieldMetadata>{
     label: 'المناطق',
     isOrderable: false,
   ),
+  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastVisit',
+    label: 'أخر افتقاد',
+  ),
   'lastEdit': FieldMetadata<LastRecordedByInfo>(
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -59,6 +63,10 @@ _$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
       areas: (json['areas'] as List<dynamic>?)
           ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
+      lastVisit: json['lastVisit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastVisit'] as Map)),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -74,5 +82,6 @@ Map<String, dynamic> _$$StreetImplToJson(_$StreetImpl instance) =>
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
+      'lastVisit': instance.lastVisit?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
     };

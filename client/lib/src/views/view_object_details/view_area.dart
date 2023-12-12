@@ -161,6 +161,12 @@ class _ViewAreaState extends State<ViewArea> {
                 ),
               ),
             HistoryProperty(
+              name: 'أخر افتقاد',
+              value: area.lastEdit?.time,
+              getHistoryStream: () => DatabaseService.I.history
+                  .paginateVisitHistory<Area>(id: area.id),
+            ),
+            HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: area.lastEdit?.time,
               getHistoryStream: () => DatabaseService.I.history

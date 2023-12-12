@@ -11,6 +11,19 @@ subscription editHistory(
   }
 }
 
+subscription visitHistory(
+  $where: [HistoryVisitHistoryBoolExp!] = {}
+  $limit: Int = 200
+) {
+  historyVisitHistory(
+    where: { _and: $where }
+    limit: $limit
+    orderBy: { time: DESC }
+  ) {
+    ...VisitHistory
+  }
+}
+
 subscription personCallHistory(
   $personId: Uuid!
   $where: [HistoryCallHistoryBoolExp!] = {}

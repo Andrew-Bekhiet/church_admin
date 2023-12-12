@@ -63,6 +63,21 @@ class _EditAreaState extends State<EditArea> {
             icon: const Icon(Icons.edit_location),
             label: const Text('المكان على الخريطة'),
           ),
+          DateTimeField(
+            label: 'أخر افتقاد',
+            initialValue: newArea.lastVisit?.time,
+            onChanged: (v) {
+              if (v != null) {
+                newArea = newArea.copyWith(
+                  lastVisit: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthService.I.currentUser?.uid,
+                  ),
+                );
+              }
+            },
+            validator: (v) => null,
+          ),
           ColorField(
             initialValue: newArea.color,
             onChanged: (value) => setState(

@@ -162,6 +162,12 @@ class _ViewStreetState extends State<ViewStreet> {
               ),
             ),
             HistoryProperty(
+              name: 'أخر افتقاد',
+              value: street.lastVisit?.time,
+              getHistoryStream: () => DatabaseService.I.history
+                  .paginateVisitHistory<Street>(id: street.id),
+            ),
+            HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: street.lastEdit?.time,
               getHistoryStream: () => DatabaseService.I.history

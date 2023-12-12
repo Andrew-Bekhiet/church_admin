@@ -1,9 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
 import 'package:uuid/uuid.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
+import 'areas/helpers.dart';
 
 class AreasDAO
     extends FullCRUDDAO<Area, Input_AreasBoolExp, Input_AreasOrderBy> {
@@ -51,12 +51,10 @@ class AreasDAO
     required Area newObject,
     required Area oldObject,
   }) =>
-      Variables_Mutation_updateArea(
-        areaId: newObject.id.toUuid(),
-        newArea: Input_AreasSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-        ),
-      ).toJson();
+      AreaUpdateHelper(
+        oldArea: oldObject,
+        newArea: newObject,
+      ).variables.toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteArea(areaId: id).toJson();

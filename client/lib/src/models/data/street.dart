@@ -29,6 +29,7 @@ class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
     DateTime? photoUpdatedAt,
     String? blurhash,
     List<Area>? areas,
+    LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
   }) = _Street;
   Street._() : super();

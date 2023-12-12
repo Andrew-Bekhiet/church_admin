@@ -29,6 +29,7 @@ mixin _$Street {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,8 +50,10 @@ abstract class $StreetCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       String? blurhash,
       List<Area>? areas,
+      LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit});
 
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
@@ -74,6 +77,7 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
     Object? areas = freezed,
+    Object? lastVisit = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_value.copyWith(
@@ -105,11 +109,27 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
           ? _value.areas
           : areas // ignore: cast_nullable_to_non_nullable
               as List<Area>?,
+      lastVisit: freezed == lastVisit
+          ? _value.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_value.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastVisit!, (value) {
+      return _then(_value.copyWith(lastVisit: value) as $Val);
+    });
   }
 
   @override
@@ -140,8 +160,11 @@ abstract class _$$StreetImplCopyWith<$Res> implements $StreetCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       String? blurhash,
       List<Area>? areas,
+      LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit});
 
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
@@ -164,6 +187,7 @@ class __$$StreetImplCopyWithImpl<$Res>
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
     Object? areas = freezed,
+    Object? lastVisit = freezed,
     Object? lastEdit = freezed,
   }) {
     return _then(_$StreetImpl(
@@ -195,6 +219,10 @@ class __$$StreetImplCopyWithImpl<$Res>
           ? _value._areas
           : areas // ignore: cast_nullable_to_non_nullable
               as List<Area>?,
+      lastVisit: freezed == lastVisit
+          ? _value.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -214,6 +242,7 @@ class _$StreetImpl extends _Street {
       this.photoUpdatedAt,
       this.blurhash,
       final List<Area>? areas,
+      this.lastVisit,
       this.lastEdit})
       : _areas = areas,
         super._();
@@ -246,11 +275,13 @@ class _$StreetImpl extends _Street {
   }
 
   @override
+  final LastRecordedByInfo? lastVisit;
+  @override
   final LastRecordedByInfo? lastEdit;
 
   @override
   String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastEdit: $lastEdit)';
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit)';
   }
 
   @override
@@ -267,6 +298,8 @@ class _$StreetImpl extends _Street {
             (identical(other.blurhash, blurhash) ||
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
+            (identical(other.lastVisit, lastVisit) ||
+                other.lastVisit == lastVisit) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit));
   }
@@ -282,6 +315,7 @@ class _$StreetImpl extends _Street {
       photoUpdatedAt,
       blurhash,
       const DeepCollectionEquality().hash(_areas),
+      lastVisit,
       lastEdit);
 
   @JsonKey(ignore: true)
@@ -307,6 +341,7 @@ abstract class _Street extends Street {
       final DateTime? photoUpdatedAt,
       final String? blurhash,
       final List<Area>? areas,
+      final LastRecordedByInfo? lastVisit,
       final LastRecordedByInfo? lastEdit}) = _$StreetImpl;
   _Street._() : super._();
 
@@ -328,6 +363,8 @@ abstract class _Street extends Street {
   String? get blurhash;
   @override
   List<Area>? get areas;
+  @override
+  LastRecordedByInfo? get lastVisit;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

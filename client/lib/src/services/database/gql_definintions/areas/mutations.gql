@@ -10,8 +10,19 @@ mutation insertArea($newArea: AreasInsertInput!) {
   }
 }
 
-mutation updateArea($areaId: Uuid!, $newArea: AreasSetInput!) {
+mutation updateArea(
+  $areaId: Uuid!
+  $newArea: AreasSetInput!
+  $lastVisit: Timestamptz
+  $updateLastVisit: Boolean!
+) {
   updateAreasByPk(pkColumns: { id: $areaId }, _set: $newArea) {
     ...Area
+  }
+
+  insertHistoryVisitHistoryOne(
+    object: { table: "areas", recordId: $areaId, time: $lastVisit }
+  ) @include(if: $updateLastVisit) {
+    ...VisitHistory
   }
 }

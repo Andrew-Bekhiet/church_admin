@@ -1,4 +1,6 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
+import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -590,10 +592,14 @@ class Variables_Mutation_updateStreet {
   factory Variables_Mutation_updateStreet({
     required UuidValue streetId,
     required Input_StreetsSetInput newStreet,
+    DateTime? lastVisit,
+    required bool updateLastVisit,
   }) =>
       Variables_Mutation_updateStreet._({
         r'streetId': streetId,
         r'newStreet': newStreet,
+        if (lastVisit != null) r'lastVisit': lastVisit,
+        r'updateLastVisit': updateLastVisit,
       });
 
   Variables_Mutation_updateStreet._(this._$data);
@@ -605,6 +611,13 @@ class Variables_Mutation_updateStreet {
     final l$newStreet = data['newStreet'];
     result$data['newStreet'] =
         Input_StreetsSetInput.fromJson((l$newStreet as Map<String, dynamic>));
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+    }
+    final l$updateLastVisit = data['updateLastVisit'];
+    result$data['updateLastVisit'] = (l$updateLastVisit as bool);
     return Variables_Mutation_updateStreet._(result$data);
   }
 
@@ -615,12 +628,23 @@ class Variables_Mutation_updateStreet {
   Input_StreetsSetInput get newStreet =>
       (_$data['newStreet'] as Input_StreetsSetInput);
 
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  bool get updateLastVisit => (_$data['updateLastVisit'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$streetId = streetId;
     result$data['streetId'] = uuidToString(l$streetId);
     final l$newStreet = newStreet;
     result$data['newStreet'] = l$newStreet.toJson();
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+    }
+    final l$updateLastVisit = updateLastVisit;
+    result$data['updateLastVisit'] = l$updateLastVisit;
     return result$data;
   }
 
@@ -649,6 +673,20 @@ class Variables_Mutation_updateStreet {
     if (l$newStreet != lOther$newStreet) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$updateLastVisit = updateLastVisit;
+    final lOther$updateLastVisit = other.updateLastVisit;
+    if (l$updateLastVisit != lOther$updateLastVisit) {
+      return false;
+    }
     return true;
   }
 
@@ -656,9 +694,13 @@ class Variables_Mutation_updateStreet {
   int get hashCode {
     final l$streetId = streetId;
     final l$newStreet = newStreet;
+    final l$lastVisit = lastVisit;
+    final l$updateLastVisit = updateLastVisit;
     return Object.hashAll([
       l$streetId,
       l$newStreet,
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      l$updateLastVisit,
     ]);
   }
 }
@@ -675,6 +717,8 @@ abstract class CopyWith_Variables_Mutation_updateStreet<TRes> {
   TRes call({
     UuidValue? streetId,
     Input_StreetsSetInput? newStreet,
+    DateTime? lastVisit,
+    bool? updateLastVisit,
   });
 }
 
@@ -694,6 +738,8 @@ class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
   TRes call({
     Object? streetId = _undefined,
     Object? newStreet = _undefined,
+    Object? lastVisit = _undefined,
+    Object? updateLastVisit = _undefined,
   }) =>
       _then(Variables_Mutation_updateStreet._({
         ..._instance._$data,
@@ -701,6 +747,9 @@ class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
           'streetId': (streetId as UuidValue),
         if (newStreet != _undefined && newStreet != null)
           'newStreet': (newStreet as Input_StreetsSetInput),
+        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+        if (updateLastVisit != _undefined && updateLastVisit != null)
+          'updateLastVisit': (updateLastVisit as bool),
       }));
 }
 
@@ -713,6 +762,8 @@ class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
   call({
     UuidValue? streetId,
     Input_StreetsSetInput? newStreet,
+    DateTime? lastVisit,
+    bool? updateLastVisit,
   }) =>
       _res;
 }
@@ -720,22 +771,30 @@ class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
 class Mutation_updateStreet {
   Mutation_updateStreet({
     this.updateStreetsByPk,
+    this.insertHistoryVisitHistoryOne,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateStreet.fromJson(Map<String, dynamic> json) {
     final l$updateStreetsByPk = json['updateStreetsByPk'];
+    final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$__typename = json['__typename'];
     return Mutation_updateStreet(
       updateStreetsByPk: l$updateStreetsByPk == null
           ? null
           : Fragment_Street.fromJson(
               (l$updateStreetsByPk as Map<String, dynamic>)),
+      insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
+          ? null
+          : Fragment_VisitHistory.fromJson(
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Street? updateStreetsByPk;
+
+  final Fragment_VisitHistory? insertHistoryVisitHistoryOne;
 
   final String $__typename;
 
@@ -743,6 +802,9 @@ class Mutation_updateStreet {
     final _resultData = <String, dynamic>{};
     final l$updateStreetsByPk = updateStreetsByPk;
     _resultData['updateStreetsByPk'] = l$updateStreetsByPk?.toJson();
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    _resultData['insertHistoryVisitHistoryOne'] =
+        l$insertHistoryVisitHistoryOne?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -751,9 +813,11 @@ class Mutation_updateStreet {
   @override
   int get hashCode {
     final l$updateStreetsByPk = updateStreetsByPk;
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateStreetsByPk,
+      l$insertHistoryVisitHistoryOne,
       l$$__typename,
     ]);
   }
@@ -769,6 +833,12 @@ class Mutation_updateStreet {
     final l$updateStreetsByPk = updateStreetsByPk;
     final lOther$updateStreetsByPk = other.updateStreetsByPk;
     if (l$updateStreetsByPk != lOther$updateStreetsByPk) {
+      return false;
+    }
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final lOther$insertHistoryVisitHistoryOne =
+        other.insertHistoryVisitHistoryOne;
+    if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -799,9 +869,11 @@ abstract class CopyWith_Mutation_updateStreet<TRes> {
 
   TRes call({
     Fragment_Street? updateStreetsByPk,
+    Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     String? $__typename,
   });
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk;
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
 }
 
 class _CopyWithImpl_Mutation_updateStreet<TRes>
@@ -819,12 +891,16 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
 
   TRes call({
     Object? updateStreetsByPk = _undefined,
+    Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updateStreet(
         updateStreetsByPk: updateStreetsByPk == _undefined
             ? _instance.updateStreetsByPk
             : (updateStreetsByPk as Fragment_Street?),
+        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+            ? _instance.insertHistoryVisitHistoryOne
+            : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -837,6 +913,15 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
         : CopyWith_Fragment_Street(
             local$updateStreetsByPk, (e) => call(updateStreetsByPk: e));
   }
+
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne {
+    final local$insertHistoryVisitHistoryOne =
+        _instance.insertHistoryVisitHistoryOne;
+    return local$insertHistoryVisitHistoryOne == null
+        ? CopyWith_Fragment_VisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_VisitHistory(local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateStreet<TRes>
@@ -847,12 +932,16 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
 
   call({
     Fragment_Street? updateStreetsByPk,
+    Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
+
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne =>
+      CopyWith_Fragment_VisitHistory.stub(_res);
 }
 
 const documentNodeMutationupdateStreet = DocumentNode(definitions: [
@@ -873,6 +962,24 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'newStreet')),
         type: NamedTypeNode(
           name: NameNode(value: 'StreetsSetInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'lastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Timestamptz'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -915,6 +1022,56 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
         ]),
       ),
       FieldNode(
+        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'streets',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
+                value: VariableNode(name: NameNode(value: 'streetId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: VariableNode(name: NameNode(value: 'lastVisit')),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateLastVisit')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'VisitHistory'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -925,4 +1082,7 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
   ),
   fragmentDefinitionStreet,
   fragmentDefinitionStreetNoPhoto,
+  fragmentDefinitionVisitHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
 ]);

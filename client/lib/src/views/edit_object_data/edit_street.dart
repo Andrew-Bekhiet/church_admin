@@ -64,6 +64,21 @@ class _EditStreetState extends State<EditStreet> {
             icon: const Icon(Icons.edit_location),
             label: const Text('المكان على الخريطة'),
           ),
+          DateTimeField(
+            label: 'أخر افتقاد',
+            initialValue: newStreet.lastVisit?.time,
+            onChanged: (v) {
+              if (v != null) {
+                newStreet = newStreet.copyWith(
+                  lastVisit: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthService.I.currentUser?.uid,
+                  ),
+                );
+              }
+            },
+            validator: (v) => null,
+          ),
           ColorField(
             initialValue: newStreet.color,
             onChanged: (value) => setState(

@@ -1,4 +1,6 @@
 import '../../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
+import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -588,10 +590,14 @@ class Variables_Mutation_updateArea {
   factory Variables_Mutation_updateArea({
     required UuidValue areaId,
     required Input_AreasSetInput newArea,
+    DateTime? lastVisit,
+    required bool updateLastVisit,
   }) =>
       Variables_Mutation_updateArea._({
         r'areaId': areaId,
         r'newArea': newArea,
+        if (lastVisit != null) r'lastVisit': lastVisit,
+        r'updateLastVisit': updateLastVisit,
       });
 
   Variables_Mutation_updateArea._(this._$data);
@@ -603,6 +609,13 @@ class Variables_Mutation_updateArea {
     final l$newArea = data['newArea'];
     result$data['newArea'] =
         Input_AreasSetInput.fromJson((l$newArea as Map<String, dynamic>));
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+    }
+    final l$updateLastVisit = data['updateLastVisit'];
+    result$data['updateLastVisit'] = (l$updateLastVisit as bool);
     return Variables_Mutation_updateArea._(result$data);
   }
 
@@ -612,12 +625,23 @@ class Variables_Mutation_updateArea {
 
   Input_AreasSetInput get newArea => (_$data['newArea'] as Input_AreasSetInput);
 
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  bool get updateLastVisit => (_$data['updateLastVisit'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$areaId = areaId;
     result$data['areaId'] = uuidToString(l$areaId);
     final l$newArea = newArea;
     result$data['newArea'] = l$newArea.toJson();
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+    }
+    final l$updateLastVisit = updateLastVisit;
+    result$data['updateLastVisit'] = l$updateLastVisit;
     return result$data;
   }
 
@@ -646,6 +670,20 @@ class Variables_Mutation_updateArea {
     if (l$newArea != lOther$newArea) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$updateLastVisit = updateLastVisit;
+    final lOther$updateLastVisit = other.updateLastVisit;
+    if (l$updateLastVisit != lOther$updateLastVisit) {
+      return false;
+    }
     return true;
   }
 
@@ -653,9 +691,13 @@ class Variables_Mutation_updateArea {
   int get hashCode {
     final l$areaId = areaId;
     final l$newArea = newArea;
+    final l$lastVisit = lastVisit;
+    final l$updateLastVisit = updateLastVisit;
     return Object.hashAll([
       l$areaId,
       l$newArea,
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      l$updateLastVisit,
     ]);
   }
 }
@@ -672,6 +714,8 @@ abstract class CopyWith_Variables_Mutation_updateArea<TRes> {
   TRes call({
     UuidValue? areaId,
     Input_AreasSetInput? newArea,
+    DateTime? lastVisit,
+    bool? updateLastVisit,
   });
 }
 
@@ -691,6 +735,8 @@ class _CopyWithImpl_Variables_Mutation_updateArea<TRes>
   TRes call({
     Object? areaId = _undefined,
     Object? newArea = _undefined,
+    Object? lastVisit = _undefined,
+    Object? updateLastVisit = _undefined,
   }) =>
       _then(Variables_Mutation_updateArea._({
         ..._instance._$data,
@@ -698,6 +744,9 @@ class _CopyWithImpl_Variables_Mutation_updateArea<TRes>
           'areaId': (areaId as UuidValue),
         if (newArea != _undefined && newArea != null)
           'newArea': (newArea as Input_AreasSetInput),
+        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+        if (updateLastVisit != _undefined && updateLastVisit != null)
+          'updateLastVisit': (updateLastVisit as bool),
       }));
 }
 
@@ -710,6 +759,8 @@ class _CopyWithStubImpl_Variables_Mutation_updateArea<TRes>
   call({
     UuidValue? areaId,
     Input_AreasSetInput? newArea,
+    DateTime? lastVisit,
+    bool? updateLastVisit,
   }) =>
       _res;
 }
@@ -717,21 +768,29 @@ class _CopyWithStubImpl_Variables_Mutation_updateArea<TRes>
 class Mutation_updateArea {
   Mutation_updateArea({
     this.updateAreasByPk,
+    this.insertHistoryVisitHistoryOne,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateArea.fromJson(Map<String, dynamic> json) {
     final l$updateAreasByPk = json['updateAreasByPk'];
+    final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
     final l$$__typename = json['__typename'];
     return Mutation_updateArea(
       updateAreasByPk: l$updateAreasByPk == null
           ? null
           : Fragment_Area.fromJson((l$updateAreasByPk as Map<String, dynamic>)),
+      insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
+          ? null
+          : Fragment_VisitHistory.fromJson(
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Area? updateAreasByPk;
+
+  final Fragment_VisitHistory? insertHistoryVisitHistoryOne;
 
   final String $__typename;
 
@@ -739,6 +798,9 @@ class Mutation_updateArea {
     final _resultData = <String, dynamic>{};
     final l$updateAreasByPk = updateAreasByPk;
     _resultData['updateAreasByPk'] = l$updateAreasByPk?.toJson();
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    _resultData['insertHistoryVisitHistoryOne'] =
+        l$insertHistoryVisitHistoryOne?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -747,9 +809,11 @@ class Mutation_updateArea {
   @override
   int get hashCode {
     final l$updateAreasByPk = updateAreasByPk;
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateAreasByPk,
+      l$insertHistoryVisitHistoryOne,
       l$$__typename,
     ]);
   }
@@ -765,6 +829,12 @@ class Mutation_updateArea {
     final l$updateAreasByPk = updateAreasByPk;
     final lOther$updateAreasByPk = other.updateAreasByPk;
     if (l$updateAreasByPk != lOther$updateAreasByPk) {
+      return false;
+    }
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final lOther$insertHistoryVisitHistoryOne =
+        other.insertHistoryVisitHistoryOne;
+    if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -795,9 +865,11 @@ abstract class CopyWith_Mutation_updateArea<TRes> {
 
   TRes call({
     Fragment_Area? updateAreasByPk,
+    Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get updateAreasByPk;
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
 }
 
 class _CopyWithImpl_Mutation_updateArea<TRes>
@@ -815,12 +887,16 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
 
   TRes call({
     Object? updateAreasByPk = _undefined,
+    Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updateArea(
         updateAreasByPk: updateAreasByPk == _undefined
             ? _instance.updateAreasByPk
             : (updateAreasByPk as Fragment_Area?),
+        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+            ? _instance.insertHistoryVisitHistoryOne
+            : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -833,6 +909,15 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
         : CopyWith_Fragment_Area(
             local$updateAreasByPk, (e) => call(updateAreasByPk: e));
   }
+
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne {
+    final local$insertHistoryVisitHistoryOne =
+        _instance.insertHistoryVisitHistoryOne;
+    return local$insertHistoryVisitHistoryOne == null
+        ? CopyWith_Fragment_VisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_VisitHistory(local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateArea<TRes>
@@ -843,12 +928,16 @@ class _CopyWithStubImpl_Mutation_updateArea<TRes>
 
   call({
     Fragment_Area? updateAreasByPk,
+    Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith_Fragment_Area<TRes> get updateAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
+
+  CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne =>
+      CopyWith_Fragment_VisitHistory.stub(_res);
 }
 
 const documentNodeMutationupdateArea = DocumentNode(definitions: [
@@ -869,6 +958,24 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'newArea')),
         type: NamedTypeNode(
           name: NameNode(value: 'AreasSetInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'lastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Timestamptz'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -911,6 +1018,56 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
         ]),
       ),
       FieldNode(
+        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'areas',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
+                value: VariableNode(name: NameNode(value: 'areaId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: VariableNode(name: NameNode(value: 'lastVisit')),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateLastVisit')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'VisitHistory'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -921,4 +1078,7 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
   ),
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionVisitHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
 ]);

@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/gql_definintions/helpers.dart';
+import 'package:church_admin/src/services/database/gql_definintions/streets/helpers.dart';
 import 'package:uuid/uuid.dart';
 
 import 'streets/__generated__/mutations.gql.dart';
@@ -58,12 +58,10 @@ class StreetsDAO
     required Street newObject,
     required Street oldObject,
   }) =>
-      Variables_Mutation_updateStreet(
-        streetId: newObject.id.toUuid(),
-        newStreet: Input_StreetsSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-        ),
-      ).toJson();
+      StreetUpdateHelper(
+        oldStreet: oldObject,
+        newStreet: newObject,
+      ).variables.toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteStreet(streetId: id).toJson();

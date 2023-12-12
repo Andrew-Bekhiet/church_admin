@@ -56,6 +56,51 @@ class HistoryDAO {
     );
   }
 
+  GQLPaginatableStream<LastRecordedByInfo>
+      paginateVisitHistory<T extends Viewable>({
+    required String id,
+  }) {
+    return GQLPaginatableStream(
+      subscriptionStreamCallback: (event) {
+        final instance = event.instance;
+        final offset = event.offset;
+
+        return graphQLClient.subscribeAndReturnParsed(
+          SubscriptionOptions(
+            document: documentNodeSubscriptionvisitHistory,
+            operationName: 'visitHistory',
+            variables: Variables_Subscription_visitHistory(
+              limit: instance.limit + 1,
+              where: [
+                Input_HistoryVisitHistoryBoolExp(
+                  table: Input_NameComparisonExp(
+                    $_eq: ViewablesEnum.from<T>().toPluralString(),
+                  ),
+                ),
+                Input_HistoryVisitHistoryBoolExp(
+                  recordId: Input_UuidComparisonExp(
+                    $_eq: id.toUuid(),
+                  ),
+                ),
+                if (offset > 0)
+                  Input_HistoryVisitHistoryBoolExp(
+                    time: Input_TimestamptzComparisonExp(
+                      $_lt: instance
+                          .currentValue[(offset - 1) * instance.limit +
+                              instance.limit -
+                              1]
+                          .time,
+                    ),
+                  ),
+              ],
+            ).toJson(),
+            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+          ),
+        );
+      },
+    );
+  }
+
   GQLPaginatableStream<LastRecordedByInfo> paginatePersonCallHistory({
     required String personId,
   }) {
@@ -262,8 +307,9 @@ class HistoryDAO {
           personId: personId.toUuid(),
           lastVisit: lastVisit,
         ).toJson(),
-        parserFn: db.parser
-            .singleOrNullParser(db.parser.singleOrNullParser(LastRecordedByInfo.fromJson)),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
+        ),
       ),
     );
   }

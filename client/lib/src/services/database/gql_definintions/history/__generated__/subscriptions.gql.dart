@@ -366,6 +366,370 @@ const documentNodeSubscriptioneditHistory = DocumentNode(definitions: [
   fragmentDefinitionUserNoPhoto,
 ]);
 
+class Variables_Subscription_visitHistory {
+  factory Variables_Subscription_visitHistory({
+    List<Input_HistoryVisitHistoryBoolExp>? where,
+    int? limit,
+  }) =>
+      Variables_Subscription_visitHistory._({
+        if (where != null) r'where': where,
+        if (limit != null) r'limit': limit,
+      });
+
+  Variables_Subscription_visitHistory._(this._$data);
+
+  factory Variables_Subscription_visitHistory.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map((e) => Input_HistoryVisitHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int?);
+    }
+    return Variables_Subscription_visitHistory._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_HistoryVisitHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryVisitHistoryBoolExp>?);
+
+  int? get limit => (_$data['limit'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = l$limit;
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_visitHistory<
+          Variables_Subscription_visitHistory>
+      get copyWith => CopyWith_Variables_Subscription_visitHistory(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables_Subscription_visitHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    final l$limit = limit;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_visitHistory<TRes> {
+  factory CopyWith_Variables_Subscription_visitHistory(
+    Variables_Subscription_visitHistory instance,
+    TRes Function(Variables_Subscription_visitHistory) then,
+  ) = _CopyWithImpl_Variables_Subscription_visitHistory;
+
+  factory CopyWith_Variables_Subscription_visitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_visitHistory;
+
+  TRes call({
+    List<Input_HistoryVisitHistoryBoolExp>? where,
+    int? limit,
+  });
+}
+
+class _CopyWithImpl_Variables_Subscription_visitHistory<TRes>
+    implements CopyWith_Variables_Subscription_visitHistory<TRes> {
+  _CopyWithImpl_Variables_Subscription_visitHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_visitHistory _instance;
+
+  final TRes Function(Variables_Subscription_visitHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? where = _undefined,
+    Object? limit = _undefined,
+  }) =>
+      _then(Variables_Subscription_visitHistory._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
+        if (limit != _undefined) 'limit': (limit as int?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_visitHistory<TRes>
+    implements CopyWith_Variables_Subscription_visitHistory<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_visitHistory(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryVisitHistoryBoolExp>? where,
+    int? limit,
+  }) =>
+      _res;
+}
+
+class Subscription_visitHistory {
+  Subscription_visitHistory({required this.historyVisitHistory});
+
+  factory Subscription_visitHistory.fromJson(Map<String, dynamic> json) {
+    final l$historyVisitHistory = json['historyVisitHistory'];
+    return Subscription_visitHistory(
+        historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
+            .map((e) =>
+                Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)))
+            .toList());
+  }
+
+  final List<Fragment_VisitHistory> historyVisitHistory;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$historyVisitHistory = historyVisitHistory;
+    _resultData['historyVisitHistory'] =
+        l$historyVisitHistory.map((e) => e.toJson()).toList();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$historyVisitHistory = historyVisitHistory;
+    return Object.hashAll(
+        [Object.hashAll(l$historyVisitHistory.map((v) => v))]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription_visitHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$historyVisitHistory = historyVisitHistory;
+    final lOther$historyVisitHistory = other.historyVisitHistory;
+    if (l$historyVisitHistory.length != lOther$historyVisitHistory.length) {
+      return false;
+    }
+    for (int i = 0; i < l$historyVisitHistory.length; i++) {
+      final l$historyVisitHistory$entry = l$historyVisitHistory[i];
+      final lOther$historyVisitHistory$entry = lOther$historyVisitHistory[i];
+      if (l$historyVisitHistory$entry != lOther$historyVisitHistory$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_visitHistory
+    on Subscription_visitHistory {
+  CopyWith_Subscription_visitHistory<Subscription_visitHistory> get copyWith =>
+      CopyWith_Subscription_visitHistory(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Subscription_visitHistory<TRes> {
+  factory CopyWith_Subscription_visitHistory(
+    Subscription_visitHistory instance,
+    TRes Function(Subscription_visitHistory) then,
+  ) = _CopyWithImpl_Subscription_visitHistory;
+
+  factory CopyWith_Subscription_visitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_visitHistory;
+
+  TRes call({List<Fragment_VisitHistory>? historyVisitHistory});
+  TRes historyVisitHistory(
+      Iterable<Fragment_VisitHistory> Function(
+              Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
+          _fn);
+}
+
+class _CopyWithImpl_Subscription_visitHistory<TRes>
+    implements CopyWith_Subscription_visitHistory<TRes> {
+  _CopyWithImpl_Subscription_visitHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_visitHistory _instance;
+
+  final TRes Function(Subscription_visitHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? historyVisitHistory = _undefined}) =>
+      _then(Subscription_visitHistory(
+          historyVisitHistory:
+              historyVisitHistory == _undefined || historyVisitHistory == null
+                  ? _instance.historyVisitHistory
+                  : (historyVisitHistory as List<Fragment_VisitHistory>)));
+
+  TRes historyVisitHistory(
+          Iterable<Fragment_VisitHistory> Function(
+                  Iterable<
+                      CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
+              _fn) =>
+      call(
+          historyVisitHistory: _fn(_instance.historyVisitHistory
+              .map((e) => CopyWith_Fragment_VisitHistory(
+                    e,
+                    (i) => i,
+                  ))).toList());
+}
+
+class _CopyWithStubImpl_Subscription_visitHistory<TRes>
+    implements CopyWith_Subscription_visitHistory<TRes> {
+  _CopyWithStubImpl_Subscription_visitHistory(this._res);
+
+  TRes _res;
+
+  call({List<Fragment_VisitHistory>? historyVisitHistory}) => _res;
+
+  historyVisitHistory(_fn) => _res;
+}
+
+const documentNodeSubscriptionvisitHistory = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'visitHistory'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'limit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'historyVisitHistory'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'limit'),
+            value: VariableNode(name: NameNode(value: 'limit')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'orderBy'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: EnumValueNode(name: NameNode(value: 'DESC')),
+              )
+            ]),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'VisitHistory'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+  fragmentDefinitionVisitHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
 class Variables_Subscription_personCallHistory {
   factory Variables_Subscription_personCallHistory({
     required UuidValue personId,

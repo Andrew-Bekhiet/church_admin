@@ -32,6 +32,10 @@ final _$AreaFields = <String, FieldMetadata>{
     label: 'أخر تحديث للصورة',
     operators: Operator.comparitive.union({Operator.isNull}),
   ),
+  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+    name: 'lastVisit',
+    label: 'أخر افتقاد',
+  ),
   'lastEdit': FieldMetadata<LastRecordedByInfo>(
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -56,6 +60,10 @@ _$AreaImpl _$$AreaImplFromJson(Map json) => _$AreaImpl(
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
       blurhash: json['blurhash'] as String?,
+      lastVisit: json['lastVisit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastVisit'] as Map)),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -71,6 +79,7 @@ Map<String, dynamic> _$$AreaImplToJson(_$AreaImpl instance) =>
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,
+      'lastVisit': instance.lastVisit?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
       'adminUsers': adminUsersToJson(instance.adminUsers),
     };

@@ -28,6 +28,7 @@ mixin _$Area {
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers => throw _privateConstructorUsedError;
@@ -50,10 +51,12 @@ abstract class $AreaCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
+      LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers});
 
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
@@ -76,6 +79,7 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
+    Object? lastVisit = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
@@ -104,6 +108,10 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
           ? _value.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastVisit: freezed == lastVisit
+          ? _value.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -113,6 +121,18 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
           : adminUsers // ignore: cast_nullable_to_non_nullable
               as List<User>?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_value.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_value.lastVisit!, (value) {
+      return _then(_value.copyWith(lastVisit: value) as $Val);
+    });
   }
 
   @override
@@ -143,10 +163,13 @@ abstract class _$$AreaImplCopyWith<$Res> implements $AreaCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
+      LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       List<User>? adminUsers});
 
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
@@ -167,6 +190,7 @@ class __$$AreaImplCopyWithImpl<$Res>
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
+    Object? lastVisit = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
@@ -195,6 +219,10 @@ class __$$AreaImplCopyWithImpl<$Res>
           ? _value.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastVisit: freezed == lastVisit
+          ? _value.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -217,6 +245,7 @@ class _$AreaImpl extends _Area {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.blurhash,
+      this.lastVisit,
       this.lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers})
@@ -241,6 +270,8 @@ class _$AreaImpl extends _Area {
   @override
   final String? blurhash;
   @override
+  final LastRecordedByInfo? lastVisit;
+  @override
   final LastRecordedByInfo? lastEdit;
   final List<User>? _adminUsers;
   @override
@@ -255,7 +286,7 @@ class _$AreaImpl extends _Area {
 
   @override
   String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastEdit: $lastEdit, adminUsers: $adminUsers)';
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers)';
   }
 
   @override
@@ -271,6 +302,8 @@ class _$AreaImpl extends _Area {
                 other.photoUpdatedAt == photoUpdatedAt) &&
             (identical(other.blurhash, blurhash) ||
                 other.blurhash == blurhash) &&
+            (identical(other.lastVisit, lastVisit) ||
+                other.lastVisit == lastVisit) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             const DeepCollectionEquality()
@@ -287,6 +320,7 @@ class _$AreaImpl extends _Area {
       color,
       photoUpdatedAt,
       blurhash,
+      lastVisit,
       lastEdit,
       const DeepCollectionEquality().hash(_adminUsers));
 
@@ -313,6 +347,7 @@ abstract class _Area extends Area {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final String? blurhash,
+      final LastRecordedByInfo? lastVisit,
       final LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
       final List<User>? adminUsers}) = _$AreaImpl;
@@ -334,6 +369,8 @@ abstract class _Area extends Area {
   DateTime? get photoUpdatedAt;
   @override
   String? get blurhash;
+  @override
+  LastRecordedByInfo? get lastVisit;
   @override
   LastRecordedByInfo? get lastEdit;
   @override
