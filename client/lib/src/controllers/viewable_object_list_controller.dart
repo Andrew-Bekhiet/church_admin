@@ -46,8 +46,8 @@ class ViewableObjectListController<T extends Viewable> {
         },
       ).listen(
         _filteredObjectsSubject!.add,
-        onError: _filteredObjectsSubject!.addError,
-        onDone: _filteredObjectsSubject!.close,
+        onError: _filteredObjectsSubject.addError,
+        onDone: _filteredObjectsSubject.close,
       );
     } else {
       _filteredObjectsSubject = null;

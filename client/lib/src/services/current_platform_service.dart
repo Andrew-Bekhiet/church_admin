@@ -10,7 +10,7 @@ class CurrentPlatformService {
   const CurrentPlatformService([this._override]);
 
   PlatformValue get effectiveValue {
-    if (_override != null) return _override!;
+    if (_override != null) return _override;
 
     if (isAndroid) {
       return PlatformValue.android;
