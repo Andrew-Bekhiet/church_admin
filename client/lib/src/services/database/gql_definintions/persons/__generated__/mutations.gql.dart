@@ -2989,7 +2989,14 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
             name: NameNode(value: 'object'),
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
-                name: NameNode(value: 'personId'),
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'persons',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
                 value: VariableNode(name: NameNode(value: 'personId')),
               ),
               ObjectFieldNode(
@@ -3013,33 +3020,11 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         ],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'person'),
+            name: NameNode(value: 'visitId'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
+            selectionSet: null,
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -5006,30 +4991,28 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person
 
 class Mutation_updatePerson_insertHistoryVisitHistoryOne {
   Mutation_updatePerson_insertHistoryVisitHistoryOne({
-    required this.person,
+    required this.visitId,
     this.$__typename = 'HistoryVisitHistory',
   });
 
   factory Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
       Map<String, dynamic> json) {
-    final l$person = json['person'];
+    final l$visitId = json['visitId'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryVisitHistoryOne(
-      person:
-          Mutation_updatePerson_insertHistoryVisitHistoryOne_person.fromJson(
-              (l$person as Map<String, dynamic>)),
+      visitId: stringToUuid(l$visitId),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Mutation_updatePerson_insertHistoryVisitHistoryOne_person person;
+  final UuidValue visitId;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$person = person;
-    _resultData['person'] = l$person.toJson();
+    final l$visitId = visitId;
+    _resultData['visitId'] = uuidToString(l$visitId);
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5037,10 +5020,10 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
 
   @override
   int get hashCode {
-    final l$person = person;
+    final l$visitId = visitId;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$person,
+      l$visitId,
       l$$__typename,
     ]);
   }
@@ -5054,9 +5037,9 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (l$person != lOther$person) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5091,11 +5074,9 @@ abstract class CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<
       _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
 
   TRes call({
-    Mutation_updatePerson_insertHistoryVisitHistoryOne_person? person,
+    UuidValue? visitId,
     String? $__typename,
   });
-  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
-      get person;
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
@@ -5113,25 +5094,17 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? person = _undefined,
+    Object? visitId = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updatePerson_insertHistoryVisitHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person
-                as Mutation_updatePerson_insertHistoryVisitHistoryOne_person),
+        visitId: visitId == _undefined || visitId == null
+            ? _instance.visitId
+            : (visitId as UuidValue),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-
-  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
-      get person {
-    final local$person = _instance.person;
-    return CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-        local$person, (e) => call(person: e));
-  }
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
@@ -5143,169 +5116,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
   TRes _res;
 
   call({
-    Mutation_updatePerson_insertHistoryVisitHistoryOne_person? person,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<TRes>
-      get person =>
-          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person
-              .stub(_res);
-}
-
-class Mutation_updatePerson_insertHistoryVisitHistoryOne_person {
-  Mutation_updatePerson_insertHistoryVisitHistoryOne_person({
-    required this.id,
-    required this.name,
-    this.$__typename = 'Persons',
-  });
-
-  factory Mutation_updatePerson_insertHistoryVisitHistoryOne_person.fromJson(
-      Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$$__typename = json['__typename'];
-    return Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-      id: stringToUuid(l$id),
-      name: (l$name as String),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue id;
-
-  final String name;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Mutation_updatePerson_insertHistoryVisitHistoryOne_person) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Mutation_updatePerson_insertHistoryVisitHistoryOne_person
-    on Mutation_updatePerson_insertHistoryVisitHistoryOne_person {
-  CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-          Mutation_updatePerson_insertHistoryVisitHistoryOne_person>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-    TRes> {
-  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-    Mutation_updatePerson_insertHistoryVisitHistoryOne_person instance,
-    TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne_person)
-        then,
-  ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person;
-
-  factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person;
-
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-        TRes>
-    implements
-        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-            TRes> {
-  _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-    this._instance,
-    this._then,
-  );
-
-  final Mutation_updatePerson_insertHistoryVisitHistoryOne_person _instance;
-
-  final TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne_person)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-        TRes>
-    implements
-        CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne_person<
-            TRes> {
-  _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne_person(
-      this._res);
-
-  TRes _res;
-
-  call({
-    UuidValue? id,
-    String? name,
+    UuidValue? visitId,
     String? $__typename,
   }) =>
       _res;

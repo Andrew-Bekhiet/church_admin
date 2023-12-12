@@ -75,19 +75,19 @@ subscription watchPerson(
     }
     jobDescription
     lastCall {
-      ...CallHistory
+      ...LatestCallHistory
     }
     lastConfession {
-      ...ConfessionHistory
+      ...LatestConfessionHistory
     }
     lastEdit {
-      ...EditHistory
+      ...LatestEditHistory
     }
     lastKodas {
-      ...KodasHistory
+      ...LatestKodasHistory
     }
     lastVisit {
-      ...VisitHistory
+      ...LatestVisitHistory
     }
     mainPhone
     notes

@@ -39,3 +39,37 @@ fragment ConfessionHistory on HistoryConfessionHistory {
     ...User
   }
 }
+
+fragment LatestEditHistory on HistoryLatestEdits {
+  time
+  user {
+    ...User
+  }
+}
+fragment LatestCallHistory on HistoryLatestCalls {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment LatestVisitHistory on HistoryLatestVisits {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment LatestKodasHistory on HistoryLatestKodases {
+  time
+  user {
+    ...User
+  }
+}
+
+fragment LatestConfessionHistory on HistoryLatestConfessions {
+  time
+  user {
+    ...User
+  }
+}

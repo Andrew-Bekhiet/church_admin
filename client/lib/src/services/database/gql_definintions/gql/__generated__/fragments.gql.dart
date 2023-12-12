@@ -1213,3 +1213,1018 @@ const documentNodeFragmentConfessionHistory = DocumentNode(definitions: [
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
 ]);
+
+class Fragment_LatestEditHistory {
+  Fragment_LatestEditHistory({
+    this.time,
+    this.user,
+    this.$__typename = 'HistoryLatestEdits',
+  });
+
+  factory Fragment_LatestEditHistory.fromJson(Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment_LatestEditHistory(
+      time: l$time == null ? null : tstzFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment_LatestEditHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_LatestEditHistory
+    on Fragment_LatestEditHistory {
+  CopyWith_Fragment_LatestEditHistory<Fragment_LatestEditHistory>
+      get copyWith => CopyWith_Fragment_LatestEditHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Fragment_LatestEditHistory<TRes> {
+  factory CopyWith_Fragment_LatestEditHistory(
+    Fragment_LatestEditHistory instance,
+    TRes Function(Fragment_LatestEditHistory) then,
+  ) = _CopyWithImpl_Fragment_LatestEditHistory;
+
+  factory CopyWith_Fragment_LatestEditHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_LatestEditHistory;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Fragment_LatestEditHistory<TRes>
+    implements CopyWith_Fragment_LatestEditHistory<TRes> {
+  _CopyWithImpl_Fragment_LatestEditHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_LatestEditHistory _instance;
+
+  final TRes Function(Fragment_LatestEditHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_LatestEditHistory(
+        time: time == _undefined ? _instance.time : (time as DateTime?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_LatestEditHistory<TRes>
+    implements CopyWith_Fragment_LatestEditHistory<TRes> {
+  _CopyWithStubImpl_Fragment_LatestEditHistory(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}
+
+const fragmentDefinitionLatestEditHistory = FragmentDefinitionNode(
+  name: NameNode(value: 'LatestEditHistory'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'HistoryLatestEdits'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'time'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'User'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentLatestEditHistory = DocumentNode(definitions: [
+  fragmentDefinitionLatestEditHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
+class Fragment_LatestCallHistory {
+  Fragment_LatestCallHistory({
+    this.time,
+    this.user,
+    this.$__typename = 'HistoryLatestCalls',
+  });
+
+  factory Fragment_LatestCallHistory.fromJson(Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment_LatestCallHistory(
+      time: l$time == null ? null : tstzFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment_LatestCallHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_LatestCallHistory
+    on Fragment_LatestCallHistory {
+  CopyWith_Fragment_LatestCallHistory<Fragment_LatestCallHistory>
+      get copyWith => CopyWith_Fragment_LatestCallHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Fragment_LatestCallHistory<TRes> {
+  factory CopyWith_Fragment_LatestCallHistory(
+    Fragment_LatestCallHistory instance,
+    TRes Function(Fragment_LatestCallHistory) then,
+  ) = _CopyWithImpl_Fragment_LatestCallHistory;
+
+  factory CopyWith_Fragment_LatestCallHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_LatestCallHistory;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Fragment_LatestCallHistory<TRes>
+    implements CopyWith_Fragment_LatestCallHistory<TRes> {
+  _CopyWithImpl_Fragment_LatestCallHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_LatestCallHistory _instance;
+
+  final TRes Function(Fragment_LatestCallHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_LatestCallHistory(
+        time: time == _undefined ? _instance.time : (time as DateTime?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_LatestCallHistory<TRes>
+    implements CopyWith_Fragment_LatestCallHistory<TRes> {
+  _CopyWithStubImpl_Fragment_LatestCallHistory(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}
+
+const fragmentDefinitionLatestCallHistory = FragmentDefinitionNode(
+  name: NameNode(value: 'LatestCallHistory'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'HistoryLatestCalls'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'time'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'User'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentLatestCallHistory = DocumentNode(definitions: [
+  fragmentDefinitionLatestCallHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
+class Fragment_LatestVisitHistory {
+  Fragment_LatestVisitHistory({
+    this.time,
+    this.user,
+    this.$__typename = 'HistoryLatestVisits',
+  });
+
+  factory Fragment_LatestVisitHistory.fromJson(Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment_LatestVisitHistory(
+      time: l$time == null ? null : tstzFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : tstzToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment_LatestVisitHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_LatestVisitHistory
+    on Fragment_LatestVisitHistory {
+  CopyWith_Fragment_LatestVisitHistory<Fragment_LatestVisitHistory>
+      get copyWith => CopyWith_Fragment_LatestVisitHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Fragment_LatestVisitHistory<TRes> {
+  factory CopyWith_Fragment_LatestVisitHistory(
+    Fragment_LatestVisitHistory instance,
+    TRes Function(Fragment_LatestVisitHistory) then,
+  ) = _CopyWithImpl_Fragment_LatestVisitHistory;
+
+  factory CopyWith_Fragment_LatestVisitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_LatestVisitHistory;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Fragment_LatestVisitHistory<TRes>
+    implements CopyWith_Fragment_LatestVisitHistory<TRes> {
+  _CopyWithImpl_Fragment_LatestVisitHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_LatestVisitHistory _instance;
+
+  final TRes Function(Fragment_LatestVisitHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_LatestVisitHistory(
+        time: time == _undefined ? _instance.time : (time as DateTime?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_LatestVisitHistory<TRes>
+    implements CopyWith_Fragment_LatestVisitHistory<TRes> {
+  _CopyWithStubImpl_Fragment_LatestVisitHistory(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}
+
+const fragmentDefinitionLatestVisitHistory = FragmentDefinitionNode(
+  name: NameNode(value: 'LatestVisitHistory'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'HistoryLatestVisits'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'time'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'User'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentLatestVisitHistory = DocumentNode(definitions: [
+  fragmentDefinitionLatestVisitHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
+class Fragment_LatestKodasHistory {
+  Fragment_LatestKodasHistory({
+    this.time,
+    this.user,
+    this.$__typename = 'HistoryLatestKodases',
+  });
+
+  factory Fragment_LatestKodasHistory.fromJson(Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment_LatestKodasHistory(
+      time: l$time == null ? null : dateFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : dateToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment_LatestKodasHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_LatestKodasHistory
+    on Fragment_LatestKodasHistory {
+  CopyWith_Fragment_LatestKodasHistory<Fragment_LatestKodasHistory>
+      get copyWith => CopyWith_Fragment_LatestKodasHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Fragment_LatestKodasHistory<TRes> {
+  factory CopyWith_Fragment_LatestKodasHistory(
+    Fragment_LatestKodasHistory instance,
+    TRes Function(Fragment_LatestKodasHistory) then,
+  ) = _CopyWithImpl_Fragment_LatestKodasHistory;
+
+  factory CopyWith_Fragment_LatestKodasHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_LatestKodasHistory;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Fragment_LatestKodasHistory<TRes>
+    implements CopyWith_Fragment_LatestKodasHistory<TRes> {
+  _CopyWithImpl_Fragment_LatestKodasHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_LatestKodasHistory _instance;
+
+  final TRes Function(Fragment_LatestKodasHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_LatestKodasHistory(
+        time: time == _undefined ? _instance.time : (time as DateTime?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_LatestKodasHistory<TRes>
+    implements CopyWith_Fragment_LatestKodasHistory<TRes> {
+  _CopyWithStubImpl_Fragment_LatestKodasHistory(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}
+
+const fragmentDefinitionLatestKodasHistory = FragmentDefinitionNode(
+  name: NameNode(value: 'LatestKodasHistory'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'HistoryLatestKodases'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'time'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'User'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentLatestKodasHistory = DocumentNode(definitions: [
+  fragmentDefinitionLatestKodasHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
+class Fragment_LatestConfessionHistory {
+  Fragment_LatestConfessionHistory({
+    this.time,
+    this.user,
+    this.$__typename = 'HistoryLatestConfessions',
+  });
+
+  factory Fragment_LatestConfessionHistory.fromJson(Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Fragment_LatestConfessionHistory(
+      time: l$time == null ? null : dateFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = l$time == null ? null : dateToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment_LatestConfessionHistory) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_LatestConfessionHistory
+    on Fragment_LatestConfessionHistory {
+  CopyWith_Fragment_LatestConfessionHistory<Fragment_LatestConfessionHistory>
+      get copyWith => CopyWith_Fragment_LatestConfessionHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Fragment_LatestConfessionHistory<TRes> {
+  factory CopyWith_Fragment_LatestConfessionHistory(
+    Fragment_LatestConfessionHistory instance,
+    TRes Function(Fragment_LatestConfessionHistory) then,
+  ) = _CopyWithImpl_Fragment_LatestConfessionHistory;
+
+  factory CopyWith_Fragment_LatestConfessionHistory.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_LatestConfessionHistory;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Fragment_LatestConfessionHistory<TRes>
+    implements CopyWith_Fragment_LatestConfessionHistory<TRes> {
+  _CopyWithImpl_Fragment_LatestConfessionHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_LatestConfessionHistory _instance;
+
+  final TRes Function(Fragment_LatestConfessionHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_LatestConfessionHistory(
+        time: time == _undefined ? _instance.time : (time as DateTime?),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_LatestConfessionHistory<TRes>
+    implements CopyWith_Fragment_LatestConfessionHistory<TRes> {
+  _CopyWithStubImpl_Fragment_LatestConfessionHistory(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}
+
+const fragmentDefinitionLatestConfessionHistory = FragmentDefinitionNode(
+  name: NameNode(value: 'LatestConfessionHistory'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'HistoryLatestConfessions'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'time'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'user'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'User'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentLatestConfessionHistory = DocumentNode(definitions: [
+  fragmentDefinitionLatestConfessionHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);

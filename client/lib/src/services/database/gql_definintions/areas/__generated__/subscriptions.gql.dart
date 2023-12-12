@@ -901,7 +901,7 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'EditHistory'),
+                name: NameNode(value: 'LatestEditHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -965,7 +965,7 @@ const documentNodeSubscriptionwatchArea = DocumentNode(definitions: [
   ),
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionEditHistory,
+  fragmentDefinitionLatestEditHistory,
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
 ]);
@@ -1005,7 +1005,7 @@ class Subscription_watchArea_areasByPk
       bounds: (l$bounds as Map<String, dynamic>?),
       lastEdit: l$lastEdit == null
           ? null
-          : Subscription_watchArea_areasByPk_lastEdit.fromJson(
+          : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>)),
       adminUsers: (l$adminUsers as List<dynamic>)
           .map((e) => Subscription_watchArea_areasByPk_adminUsers.fromJson(
@@ -1028,7 +1028,7 @@ class Subscription_watchArea_areasByPk
 
   final Map<String, dynamic>? bounds;
 
-  final Subscription_watchArea_areasByPk_lastEdit? lastEdit;
+  final Fragment_LatestEditHistory? lastEdit;
 
   final List<Subscription_watchArea_areasByPk_adminUsers> adminUsers;
 
@@ -1171,10 +1171,10 @@ abstract class CopyWith_Subscription_watchArea_areasByPk<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     Map<String, dynamic>? bounds,
-    Subscription_watchArea_areasByPk_lastEdit? lastEdit,
+    Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   });
-  CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> get lastEdit;
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   TRes adminUsers(
       Iterable<Subscription_watchArea_areasByPk_adminUsers> Function(
               Iterable<
@@ -1226,18 +1226,17 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
             : (bounds as Map<String, dynamic>?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
-            : (lastEdit as Subscription_watchArea_areasByPk_lastEdit?),
+            : (lastEdit as Fragment_LatestEditHistory?),
         adminUsers: adminUsers == _undefined || adminUsers == null
             ? _instance.adminUsers
             : (adminUsers as List<Subscription_watchArea_areasByPk_adminUsers>),
       ));
 
-  CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> get lastEdit {
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
     return local$lastEdit == null
-        ? CopyWith_Subscription_watchArea_areasByPk_lastEdit.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchArea_areasByPk_lastEdit(
+        ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEditHistory(
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
@@ -1269,110 +1268,15 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Map<String, dynamic>? bounds,
-    Subscription_watchArea_areasByPk_lastEdit? lastEdit,
+    Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   }) =>
       _res;
 
-  CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> get lastEdit =>
-      CopyWith_Subscription_watchArea_areasByPk_lastEdit.stub(_res);
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
+      CopyWith_Fragment_LatestEditHistory.stub(_res);
 
   adminUsers(_fn) => _res;
-}
-
-class Subscription_watchArea_areasByPk_lastEdit {
-  Subscription_watchArea_areasByPk_lastEdit(
-      {this.$__typename = 'HistoryLatestEdits'});
-
-  factory Subscription_watchArea_areasByPk_lastEdit.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchArea_areasByPk_lastEdit(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchArea_areasByPk_lastEdit) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchArea_areasByPk_lastEdit
-    on Subscription_watchArea_areasByPk_lastEdit {
-  CopyWith_Subscription_watchArea_areasByPk_lastEdit<
-          Subscription_watchArea_areasByPk_lastEdit>
-      get copyWith => CopyWith_Subscription_watchArea_areasByPk_lastEdit(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> {
-  factory CopyWith_Subscription_watchArea_areasByPk_lastEdit(
-    Subscription_watchArea_areasByPk_lastEdit instance,
-    TRes Function(Subscription_watchArea_areasByPk_lastEdit) then,
-  ) = _CopyWithImpl_Subscription_watchArea_areasByPk_lastEdit;
-
-  factory CopyWith_Subscription_watchArea_areasByPk_lastEdit.stub(TRes res) =
-      _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
-    implements CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> {
-  _CopyWithImpl_Subscription_watchArea_areasByPk_lastEdit(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchArea_areasByPk_lastEdit _instance;
-
-  final TRes Function(Subscription_watchArea_areasByPk_lastEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchArea_areasByPk_lastEdit(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit<TRes>
-    implements CopyWith_Subscription_watchArea_areasByPk_lastEdit<TRes> {
-  _CopyWithStubImpl_Subscription_watchArea_areasByPk_lastEdit(this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchArea_areasByPk_adminUsers {

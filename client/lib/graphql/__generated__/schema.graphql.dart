@@ -86731,21 +86731,26 @@ class Input_HistoryLatestVisitsBoolExp {
     List<Input_HistoryLatestVisitsBoolExp>? $_and,
     Input_HistoryLatestVisitsBoolExp? $_not,
     List<Input_HistoryLatestVisitsBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
   }) =>
       Input_HistoryLatestVisitsBoolExp._({
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (isUserAllowedToRead != null)
+          r'isUserAllowedToRead': isUserAllowedToRead,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryLatestVisitsBoolExp._(this._$data);
@@ -86773,18 +86778,19 @@ class Input_HistoryLatestVisitsBoolExp {
               (e as Map<String, dynamic>)))
           .toList();
     }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = data['isUserAllowedToRead'];
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
           ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isUserAllowedToRead as Map<String, dynamic>));
     }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>));
+              (l$recordId as Map<String, dynamic>));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
@@ -86792,6 +86798,12 @@ class Input_HistoryLatestVisitsBoolExp {
           ? null
           : Input_UuidComparisonExp.fromJson(
               (l$recordedBy as Map<String, dynamic>));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
+          ? null
+          : Input_NameComparisonExp.fromJson((l$table as Map<String, dynamic>));
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -86807,6 +86819,13 @@ class Input_HistoryLatestVisitsBoolExp {
           : Input_AuthUsersDataBoolExp.fromJson(
               (l$user as Map<String, dynamic>));
     }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$visitId as Map<String, dynamic>));
+    }
     return Input_HistoryLatestVisitsBoolExp._(result$data);
   }
 
@@ -86821,20 +86840,26 @@ class Input_HistoryLatestVisitsBoolExp {
   List<Input_HistoryLatestVisitsBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryLatestVisitsBoolExp>?);
 
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
+  Input_BooleanComparisonExp? get isUserAllowedToRead =>
+      (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
 
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
+  Input_UuidComparisonExp? get recordId =>
+      (_$data['recordId'] as Input_UuidComparisonExp?);
 
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
+  Input_NameComparisonExp? get table =>
+      (_$data['table'] as Input_NameComparisonExp?);
 
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
 
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
+  Input_UuidComparisonExp? get visitId =>
+      (_$data['visitId'] as Input_UuidComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -86850,17 +86875,21 @@ class Input_HistoryLatestVisitsBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = isUserAllowedToRead;
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead?.toJson();
     }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId?.toJson();
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] = l$recordedBy?.toJson();
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table?.toJson();
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -86869,6 +86898,10 @@ class Input_HistoryLatestVisitsBoolExp {
     if (_$data.containsKey('user')) {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] = l$visitId?.toJson();
     }
     return result$data;
   }
@@ -86934,21 +86967,22 @@ class Input_HistoryLatestVisitsBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final lOther$isUserAllowedToRead = other.isUserAllowedToRead;
+    if (_$data.containsKey('isUserAllowedToRead') !=
+        other._$data.containsKey('isUserAllowedToRead')) {
       return false;
     }
-    if (l$person != lOther$person) {
+    if (l$isUserAllowedToRead != lOther$isUserAllowedToRead) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -86958,6 +86992,14 @@ class Input_HistoryLatestVisitsBoolExp {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -86976,6 +87018,14 @@ class Input_HistoryLatestVisitsBoolExp {
     if (l$user != lOther$user) {
       return false;
     }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
     return true;
   }
 
@@ -86984,11 +87034,13 @@ class Input_HistoryLatestVisitsBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$person = person;
-    final l$personId = personId;
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
+    final l$visitId = visitId;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -87001,11 +87053,15 @@ class Input_HistoryLatestVisitsBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('isUserAllowedToRead')
+          ? l$isUserAllowedToRead
+          : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -87023,11 +87079,13 @@ abstract class CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> {
     List<Input_HistoryLatestVisitsBoolExp>? $_and,
     Input_HistoryLatestVisitsBoolExp? $_not,
     List<Input_HistoryLatestVisitsBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
   });
   TRes $_and(
       Iterable<Input_HistoryLatestVisitsBoolExp>? Function(
@@ -87042,11 +87100,13 @@ abstract class CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> {
                   CopyWith_Input_HistoryLatestVisitsBoolExp<
                       Input_HistoryLatestVisitsBoolExp>>?)
           _fn);
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
-  CopyWith_Input_UuidComparisonExp<TRes> get personId;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId;
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
+  CopyWith_Input_NameComparisonExp<TRes> get table;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId;
 }
 
 class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
@@ -87066,11 +87126,13 @@ class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? isUserAllowedToRead = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryLatestVisitsBoolExp._({
         ..._instance._$data,
@@ -87080,14 +87142,19 @@ class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
           '_not': ($_not as Input_HistoryLatestVisitsBoolExp?),
         if ($_or != _undefined)
           '_or': ($_or as List<Input_HistoryLatestVisitsBoolExp>?),
-        if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-        if (personId != _undefined)
-          'personId': (personId as Input_UuidComparisonExp?),
+        if (isUserAllowedToRead != _undefined)
+          'isUserAllowedToRead':
+              (isUserAllowedToRead as Input_BooleanComparisonExp?),
+        if (recordId != _undefined)
+          'recordId': (recordId as Input_UuidComparisonExp?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Input_UuidComparisonExp?),
+        if (table != _undefined) 'table': (table as Input_NameComparisonExp?),
         if (time != _undefined)
           'time': (time as Input_TimestamptzComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+        if (visitId != _undefined)
+          'visitId': (visitId as Input_UuidComparisonExp?),
       }));
 
   TRes $_and(
@@ -87124,19 +87191,20 @@ class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
                     (i) => i,
                   )))?.toList());
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead {
+    final local$isUserAllowedToRead = _instance.isUserAllowedToRead;
+    return local$isUserAllowedToRead == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isUserAllowedToRead, (e) => call(isUserAllowedToRead: e));
   }
 
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId {
+    final local$recordId = _instance.recordId;
+    return local$recordId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$personId, (e) => call(personId: e));
+            local$recordId, (e) => call(recordId: e));
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
@@ -87145,6 +87213,13 @@ class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
             local$recordedBy, (e) => call(recordedBy: e));
+  }
+
+  CopyWith_Input_NameComparisonExp<TRes> get table {
+    final local$table = _instance.table;
+    return local$table == null
+        ? CopyWith_Input_NameComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_NameComparisonExp(local$table, (e) => call(table: e));
   }
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
@@ -87161,6 +87236,14 @@ class _CopyWithImpl_Input_HistoryLatestVisitsBoolExp<TRes>
         ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
   }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId {
+    final local$visitId = _instance.visitId;
+    return local$visitId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$visitId, (e) => call(visitId: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_HistoryLatestVisitsBoolExp<TRes>
@@ -87173,11 +87256,13 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsBoolExp<TRes>
     List<Input_HistoryLatestVisitsBoolExp>? $_and,
     Input_HistoryLatestVisitsBoolExp? $_not,
     List<Input_HistoryLatestVisitsBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
   }) =>
       _res;
 
@@ -87188,36 +87273,44 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsBoolExp<TRes>
 
   $_or(_fn) => _res;
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_NameComparisonExp<TRes> get table =>
+      CopyWith_Input_NameComparisonExp.stub(_res);
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
 
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 }
 
 class Input_HistoryLatestVisitsInsertInput {
   factory Input_HistoryLatestVisitsInsertInput({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? visitId,
   }) =>
       Input_HistoryLatestVisitsInsertInput._({
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryLatestVisitsInsertInput._(this._$data);
@@ -87225,22 +87318,19 @@ class Input_HistoryLatestVisitsInsertInput {
   factory Input_HistoryLatestVisitsInsertInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] =
+          l$recordId == null ? null : stringToUuid(l$recordId);
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] =
           l$recordedBy == null ? null : stringToUuid(l$recordedBy);
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = (l$table as String?);
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -87253,38 +87343,44 @@ class Input_HistoryLatestVisitsInsertInput {
           : Input_AuthUsersDataObjRelInsertInput.fromJson(
               (l$user as Map<String, dynamic>));
     }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] =
+          l$visitId == null ? null : stringToUuid(l$visitId);
+    }
     return Input_HistoryLatestVisitsInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
-
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+  UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
+  String? get table => (_$data['table'] as String?);
 
   DateTime? get time => (_$data['time'] as DateTime?);
 
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
 
+  UuidValue? get visitId => (_$data['visitId'] as UuidValue?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : uuidToString(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : uuidToString(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table;
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -87293,6 +87389,11 @@ class Input_HistoryLatestVisitsInsertInput {
     if (_$data.containsKey('user')) {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : uuidToString(l$visitId);
     }
     return result$data;
   }
@@ -87313,21 +87414,13 @@ class Input_HistoryLatestVisitsInsertInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -87337,6 +87430,14 @@ class Input_HistoryLatestVisitsInsertInput {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -87355,22 +87456,32 @@ class Input_HistoryLatestVisitsInsertInput {
     if (l$user != lOther$user) {
       return false;
     }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
-    final l$person = person;
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -87385,13 +87496,13 @@ abstract class CopyWith_Input_HistoryLatestVisitsInsertInput<TRes> {
       _CopyWithStubImpl_Input_HistoryLatestVisitsInsertInput;
 
   TRes call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? visitId,
   });
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
 }
 
@@ -87409,30 +87520,23 @@ class _CopyWithImpl_Input_HistoryLatestVisitsInsertInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryLatestVisitsInsertInput._({
         ..._instance._$data,
-        if (person != _undefined)
-          'person': (person as Input_PersonsObjRelInsertInput?),
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+        if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
+        if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
       }));
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_PersonsObjRelInsertInput(
-            local$person, (e) => call(person: e));
-  }
 
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
     final local$user = _instance.user;
@@ -87450,16 +87554,14 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsInsertInput<TRes>
   TRes _res;
 
   call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? visitId,
   }) =>
       _res;
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
-      CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
 
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
@@ -87580,41 +87682,51 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsObjRelInsertInput<TRes>
 
 class Input_HistoryLatestVisitsOrderBy {
   factory Input_HistoryLatestVisitsOrderBy({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
   }) =>
       Input_HistoryLatestVisitsOrderBy._({
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (isUserAllowedToRead != null)
+          r'isUserAllowedToRead': isUserAllowedToRead,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryLatestVisitsOrderBy._(this._$data);
 
   factory Input_HistoryLatestVisitsOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = data['isUserAllowedToRead'];
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
           ? null
-          : Input_PersonsOrderBy.fromJson((l$person as Map<String, dynamic>));
+          : fromJson_Enum_OrderBy((l$isUserAllowedToRead as String));
     }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
+          : fromJson_Enum_OrderBy((l$recordId as String));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] = l$recordedBy == null
           ? null
           : fromJson_Enum_OrderBy((l$recordedBy as String));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] =
+          l$table == null ? null : fromJson_Enum_OrderBy((l$table as String));
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -87628,38 +87740,55 @@ class Input_HistoryLatestVisitsOrderBy {
           : Input_AuthUsersDataOrderBy.fromJson(
               (l$user as Map<String, dynamic>));
     }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$visitId as String));
+    }
     return Input_HistoryLatestVisitsOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_PersonsOrderBy? get person =>
-      (_$data['person'] as Input_PersonsOrderBy?);
+  Enum_OrderBy? get isUserAllowedToRead =>
+      (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get table => (_$data['table'] as Enum_OrderBy?);
 
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
 
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
 
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = isUserAllowedToRead;
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
+          ? null
+          : toJson_Enum_OrderBy(l$isUserAllowedToRead);
     }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : toJson_Enum_OrderBy(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : toJson_Enum_OrderBy(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] =
+          l$table == null ? null : toJson_Enum_OrderBy(l$table);
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -87668,6 +87797,11 @@ class Input_HistoryLatestVisitsOrderBy {
     if (_$data.containsKey('user')) {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : toJson_Enum_OrderBy(l$visitId);
     }
     return result$data;
   }
@@ -87687,21 +87821,22 @@ class Input_HistoryLatestVisitsOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final lOther$isUserAllowedToRead = other.isUserAllowedToRead;
+    if (_$data.containsKey('isUserAllowedToRead') !=
+        other._$data.containsKey('isUserAllowedToRead')) {
       return false;
     }
-    if (l$person != lOther$person) {
+    if (l$isUserAllowedToRead != lOther$isUserAllowedToRead) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -87711,6 +87846,14 @@ class Input_HistoryLatestVisitsOrderBy {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -87729,22 +87872,36 @@ class Input_HistoryLatestVisitsOrderBy {
     if (l$user != lOther$user) {
       return false;
     }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
-    final l$person = person;
-    final l$personId = personId;
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('isUserAllowedToRead')
+          ? l$isUserAllowedToRead
+          : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -87759,13 +87916,14 @@ abstract class CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> {
       _CopyWithStubImpl_Input_HistoryLatestVisitsOrderBy;
 
   TRes call({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
   });
-  CopyWith_Input_PersonsOrderBy<TRes> get person;
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
 }
 
@@ -87783,28 +87941,26 @@ class _CopyWithImpl_Input_HistoryLatestVisitsOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? isUserAllowedToRead = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryLatestVisitsOrderBy._({
         ..._instance._$data,
-        if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+        if (isUserAllowedToRead != _undefined)
+          'isUserAllowedToRead': (isUserAllowedToRead as Enum_OrderBy?),
+        if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Enum_OrderBy?),
+        if (table != _undefined) 'table': (table as Enum_OrderBy?),
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+        if (visitId != _undefined) 'visitId': (visitId as Enum_OrderBy?),
       }));
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsOrderBy(local$person, (e) => call(person: e));
-  }
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
     final local$user = _instance.user;
@@ -87821,16 +87977,15 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsOrderBy<TRes>
   TRes _res;
 
   call({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
   }) =>
       _res;
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person =>
-      CopyWith_Input_PersonsOrderBy.stub(_res);
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
@@ -87999,14 +88154,18 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsStreamCursorInput<TRes>
 
 class Input_HistoryLatestVisitsStreamCursorValueInput {
   factory Input_HistoryLatestVisitsStreamCursorValueInput({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
+    UuidValue? visitId,
   }) =>
       Input_HistoryLatestVisitsStreamCursorValueInput._({
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryLatestVisitsStreamCursorValueInput._(this._$data);
@@ -88014,46 +88173,68 @@ class Input_HistoryLatestVisitsStreamCursorValueInput {
   factory Input_HistoryLatestVisitsStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] =
+          l$recordId == null ? null : stringToUuid(l$recordId);
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] =
           l$recordedBy == null ? null : stringToUuid(l$recordedBy);
     }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = (l$table as String?);
+    }
     if (data.containsKey('time')) {
       final l$time = data['time'];
       result$data['time'] = l$time == null ? null : tstzFromString(l$time);
+    }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] =
+          l$visitId == null ? null : stringToUuid(l$visitId);
     }
     return Input_HistoryLatestVisitsStreamCursorValueInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+  UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
 
+  String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
+
+  UuidValue? get visitId => (_$data['visitId'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : uuidToString(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : uuidToString(l$recordedBy);
     }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table;
+    }
     if (_$data.containsKey('time')) {
       final l$time = time;
       result$data['time'] = l$time == null ? null : tstzToString(l$time);
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : uuidToString(l$visitId);
     }
     return result$data;
   }
@@ -88074,13 +88255,13 @@ class Input_HistoryLatestVisitsStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -88092,6 +88273,14 @@ class Input_HistoryLatestVisitsStreamCursorValueInput {
     if (l$recordedBy != lOther$recordedBy) {
       return false;
     }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
     final l$time = time;
     final lOther$time = other.time;
     if (_$data.containsKey('time') != other._$data.containsKey('time')) {
@@ -88100,18 +88289,30 @@ class Input_HistoryLatestVisitsStreamCursorValueInput {
     if (l$time != lOther$time) {
       return false;
     }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -88127,9 +88328,11 @@ abstract class CopyWith_Input_HistoryLatestVisitsStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_HistoryLatestVisitsStreamCursorValueInput;
 
   TRes call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
+    UuidValue? visitId,
   });
 }
 
@@ -88147,15 +88350,19 @@ class _CopyWithImpl_Input_HistoryLatestVisitsStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryLatestVisitsStreamCursorValueInput._({
         ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+        if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
+        if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
       }));
 }
 
@@ -88166,9 +88373,11 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
+    UuidValue? visitId,
   }) =>
       _res;
 }
@@ -88695,23 +88904,29 @@ class Input_HistoryVisitHistoryBoolExp {
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_BooleanComparisonExp? isUserAllowedToWrite,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
-    Input_StringComparisonExp? userRole,
+    Input_UuidComparisonExp? visitId,
   }) =>
       Input_HistoryVisitHistoryBoolExp._({
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (isUserAllowedToRead != null)
+          r'isUserAllowedToRead': isUserAllowedToRead,
+        if (isUserAllowedToWrite != null)
+          r'isUserAllowedToWrite': isUserAllowedToWrite,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryBoolExp._(this._$data);
@@ -88739,18 +88954,26 @@ class Input_HistoryVisitHistoryBoolExp {
               (e as Map<String, dynamic>)))
           .toList();
     }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = data['isUserAllowedToRead'];
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
           ? null
-          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isUserAllowedToRead as Map<String, dynamic>));
     }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('isUserAllowedToWrite')) {
+      final l$isUserAllowedToWrite = data['isUserAllowedToWrite'];
+      result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isUserAllowedToWrite as Map<String, dynamic>));
+    }
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$personId as Map<String, dynamic>));
+              (l$recordId as Map<String, dynamic>));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
@@ -88758,6 +88981,12 @@ class Input_HistoryVisitHistoryBoolExp {
           ? null
           : Input_UuidComparisonExp.fromJson(
               (l$recordedBy as Map<String, dynamic>));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
+          ? null
+          : Input_NameComparisonExp.fromJson((l$table as Map<String, dynamic>));
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -88773,12 +89002,12 @@ class Input_HistoryVisitHistoryBoolExp {
           : Input_AuthUsersDataBoolExp.fromJson(
               (l$user as Map<String, dynamic>));
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = l$userRole == null
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
           ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$userRole as Map<String, dynamic>));
+          : Input_UuidComparisonExp.fromJson(
+              (l$visitId as Map<String, dynamic>));
     }
     return Input_HistoryVisitHistoryBoolExp._(result$data);
   }
@@ -88794,14 +89023,20 @@ class Input_HistoryVisitHistoryBoolExp {
   List<Input_HistoryVisitHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryVisitHistoryBoolExp>?);
 
-  Input_PersonsBoolExp? get person =>
-      (_$data['person'] as Input_PersonsBoolExp?);
+  Input_BooleanComparisonExp? get isUserAllowedToRead =>
+      (_$data['isUserAllowedToRead'] as Input_BooleanComparisonExp?);
 
-  Input_UuidComparisonExp? get personId =>
-      (_$data['personId'] as Input_UuidComparisonExp?);
+  Input_BooleanComparisonExp? get isUserAllowedToWrite =>
+      (_$data['isUserAllowedToWrite'] as Input_BooleanComparisonExp?);
+
+  Input_UuidComparisonExp? get recordId =>
+      (_$data['recordId'] as Input_UuidComparisonExp?);
 
   Input_UuidComparisonExp? get recordedBy =>
       (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
+  Input_NameComparisonExp? get table =>
+      (_$data['table'] as Input_NameComparisonExp?);
 
   Input_TimestamptzComparisonExp? get time =>
       (_$data['time'] as Input_TimestamptzComparisonExp?);
@@ -88809,8 +89044,8 @@ class Input_HistoryVisitHistoryBoolExp {
   Input_AuthUsersDataBoolExp? get user =>
       (_$data['user'] as Input_AuthUsersDataBoolExp?);
 
-  Input_StringComparisonExp? get userRole =>
-      (_$data['userRole'] as Input_StringComparisonExp?);
+  Input_UuidComparisonExp? get visitId =>
+      (_$data['visitId'] as Input_UuidComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -88826,17 +89061,25 @@ class Input_HistoryVisitHistoryBoolExp {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = isUserAllowedToRead;
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead?.toJson();
     }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId?.toJson();
+    if (_$data.containsKey('isUserAllowedToWrite')) {
+      final l$isUserAllowedToWrite = isUserAllowedToWrite;
+      result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite?.toJson();
+    }
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId?.toJson();
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] = l$recordedBy?.toJson();
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table?.toJson();
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -88846,9 +89089,9 @@ class Input_HistoryVisitHistoryBoolExp {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] = l$userRole?.toJson();
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] = l$visitId?.toJson();
     }
     return result$data;
   }
@@ -88914,21 +89157,31 @@ class Input_HistoryVisitHistoryBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final lOther$isUserAllowedToRead = other.isUserAllowedToRead;
+    if (_$data.containsKey('isUserAllowedToRead') !=
+        other._$data.containsKey('isUserAllowedToRead')) {
       return false;
     }
-    if (l$person != lOther$person) {
+    if (l$isUserAllowedToRead != lOther$isUserAllowedToRead) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final lOther$isUserAllowedToWrite = other.isUserAllowedToWrite;
+    if (_$data.containsKey('isUserAllowedToWrite') !=
+        other._$data.containsKey('isUserAllowedToWrite')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$isUserAllowedToWrite != lOther$isUserAllowedToWrite) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -88938,6 +89191,14 @@ class Input_HistoryVisitHistoryBoolExp {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -88956,13 +89217,12 @@ class Input_HistoryVisitHistoryBoolExp {
     if (l$user != lOther$user) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -88973,12 +89233,14 @@ class Input_HistoryVisitHistoryBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
-    final l$person = person;
-    final l$personId = personId;
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -88991,12 +89253,18 @@ class Input_HistoryVisitHistoryBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('isUserAllowedToRead')
+          ? l$isUserAllowedToRead
+          : const {},
+      _$data.containsKey('isUserAllowedToWrite')
+          ? l$isUserAllowedToWrite
+          : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -89014,12 +89282,14 @@ abstract class CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> {
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_BooleanComparisonExp? isUserAllowedToWrite,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
-    Input_StringComparisonExp? userRole,
+    Input_UuidComparisonExp? visitId,
   });
   TRes $_and(
       Iterable<Input_HistoryVisitHistoryBoolExp>? Function(
@@ -89034,12 +89304,14 @@ abstract class CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> {
                   CopyWith_Input_HistoryVisitHistoryBoolExp<
                       Input_HistoryVisitHistoryBoolExp>>?)
           _fn);
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
-  CopyWith_Input_UuidComparisonExp<TRes> get personId;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite;
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId;
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
+  CopyWith_Input_NameComparisonExp<TRes> get table;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
-  CopyWith_Input_StringComparisonExp<TRes> get userRole;
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId;
 }
 
 class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
@@ -89059,12 +89331,14 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? isUserAllowedToRead = _undefined,
+    Object? isUserAllowedToWrite = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryBoolExp._({
         ..._instance._$data,
@@ -89074,16 +89348,22 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
           '_not': ($_not as Input_HistoryVisitHistoryBoolExp?),
         if ($_or != _undefined)
           '_or': ($_or as List<Input_HistoryVisitHistoryBoolExp>?),
-        if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-        if (personId != _undefined)
-          'personId': (personId as Input_UuidComparisonExp?),
+        if (isUserAllowedToRead != _undefined)
+          'isUserAllowedToRead':
+              (isUserAllowedToRead as Input_BooleanComparisonExp?),
+        if (isUserAllowedToWrite != _undefined)
+          'isUserAllowedToWrite':
+              (isUserAllowedToWrite as Input_BooleanComparisonExp?),
+        if (recordId != _undefined)
+          'recordId': (recordId as Input_UuidComparisonExp?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Input_UuidComparisonExp?),
+        if (table != _undefined) 'table': (table as Input_NameComparisonExp?),
         if (time != _undefined)
           'time': (time as Input_TimestamptzComparisonExp?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
-        if (userRole != _undefined)
-          'userRole': (userRole as Input_StringComparisonExp?),
+        if (visitId != _undefined)
+          'visitId': (visitId as Input_UuidComparisonExp?),
       }));
 
   TRes $_and(
@@ -89120,19 +89400,28 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
                     (i) => i,
                   )))?.toList());
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead {
+    final local$isUserAllowedToRead = _instance.isUserAllowedToRead;
+    return local$isUserAllowedToRead == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isUserAllowedToRead, (e) => call(isUserAllowedToRead: e));
   }
 
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite {
+    final local$isUserAllowedToWrite = _instance.isUserAllowedToWrite;
+    return local$isUserAllowedToWrite == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isUserAllowedToWrite, (e) => call(isUserAllowedToWrite: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId {
+    final local$recordId = _instance.recordId;
+    return local$recordId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$personId, (e) => call(personId: e));
+            local$recordId, (e) => call(recordId: e));
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
@@ -89141,6 +89430,13 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
             local$recordedBy, (e) => call(recordedBy: e));
+  }
+
+  CopyWith_Input_NameComparisonExp<TRes> get table {
+    final local$table = _instance.table;
+    return local$table == null
+        ? CopyWith_Input_NameComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_NameComparisonExp(local$table, (e) => call(table: e));
   }
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
@@ -89158,12 +89454,12 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
         : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
   }
 
-  CopyWith_Input_StringComparisonExp<TRes> get userRole {
-    final local$userRole = _instance.userRole;
-    return local$userRole == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$userRole, (e) => call(userRole: e));
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId {
+    final local$visitId = _instance.visitId;
+    return local$visitId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$visitId, (e) => call(visitId: e));
   }
 }
 
@@ -89177,12 +89473,14 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
+    Input_BooleanComparisonExp? isUserAllowedToRead,
+    Input_BooleanComparisonExp? isUserAllowedToWrite,
+    Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
     Input_TimestamptzComparisonExp? time,
     Input_AuthUsersDataBoolExp? user,
-    Input_StringComparisonExp? userRole,
+    Input_UuidComparisonExp? visitId,
   }) =>
       _res;
 
@@ -89193,14 +89491,20 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
 
   $_or(_fn) => _res;
 
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
+  CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_NameComparisonExp<TRes> get table =>
+      CopyWith_Input_NameComparisonExp.stub(_res);
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
@@ -89208,26 +89512,26 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
       CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 
-  CopyWith_Input_StringComparisonExp<TRes> get userRole =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 }
 
 class Input_HistoryVisitHistoryInsertInput {
   factory Input_HistoryVisitHistoryInsertInput({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       Input_HistoryVisitHistoryInsertInput._({
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryInsertInput._(this._$data);
@@ -89235,22 +89539,19 @@ class Input_HistoryVisitHistoryInsertInput {
   factory Input_HistoryVisitHistoryInsertInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] =
+          l$recordId == null ? null : stringToUuid(l$recordId);
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] =
           l$recordedBy == null ? null : stringToUuid(l$recordedBy);
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = (l$table as String?);
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -89263,44 +89564,44 @@ class Input_HistoryVisitHistoryInsertInput {
           : Input_AuthUsersDataObjRelInsertInput.fromJson(
               (l$user as Map<String, dynamic>));
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = (l$userRole as String?);
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] =
+          l$visitId == null ? null : stringToUuid(l$visitId);
     }
     return Input_HistoryVisitHistoryInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
-
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+  UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
+
+  String? get table => (_$data['table'] as String?);
 
   DateTime? get time => (_$data['time'] as DateTime?);
 
   Input_AuthUsersDataObjRelInsertInput? get user =>
       (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
 
-  String? get userRole => (_$data['userRole'] as String?);
+  UuidValue? get visitId => (_$data['visitId'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : uuidToString(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : uuidToString(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table;
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -89310,9 +89611,10 @@ class Input_HistoryVisitHistoryInsertInput {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] = l$userRole;
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : uuidToString(l$visitId);
     }
     return result$data;
   }
@@ -89333,21 +89635,13 @@ class Input_HistoryVisitHistoryInsertInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -89357,6 +89651,14 @@ class Input_HistoryVisitHistoryInsertInput {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -89375,13 +89677,12 @@ class Input_HistoryVisitHistoryInsertInput {
     if (l$user != lOther$user) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -89389,19 +89690,19 @@ class Input_HistoryVisitHistoryInsertInput {
 
   @override
   int get hashCode {
-    final l$person = person;
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -89416,14 +89717,13 @@ abstract class CopyWith_Input_HistoryVisitHistoryInsertInput<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput;
 
   TRes call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
-    String? userRole,
+    UuidValue? visitId,
   });
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
 }
 
@@ -89441,32 +89741,23 @@ class _CopyWithImpl_Input_HistoryVisitHistoryInsertInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryInsertInput._({
         ..._instance._$data,
-        if (person != _undefined)
-          'person': (person as Input_PersonsObjRelInsertInput?),
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+        if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
         if (user != _undefined)
           'user': (user as Input_AuthUsersDataObjRelInsertInput?),
-        if (userRole != _undefined) 'userRole': (userRole as String?),
+        if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
       }));
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_PersonsObjRelInsertInput(
-            local$person, (e) => call(person: e));
-  }
 
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
     final local$user = _instance.user;
@@ -89484,17 +89775,14 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput<TRes>
   TRes _res;
 
   call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
     Input_AuthUsersDataObjRelInsertInput? user,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       _res;
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
-      CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
 
   CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
       CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
@@ -89502,16 +89790,16 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput<TRes>
 
 class Input_HistoryVisitHistoryMaxOrderBy {
   factory Input_HistoryVisitHistoryMaxOrderBy({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       Input_HistoryVisitHistoryMaxOrderBy._({
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
         if (time != null) r'time': time,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryMaxOrderBy._(this._$data);
@@ -89519,11 +89807,11 @@ class Input_HistoryVisitHistoryMaxOrderBy {
   factory Input_HistoryVisitHistoryMaxOrderBy.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
+          : fromJson_Enum_OrderBy((l$recordId as String));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
@@ -89536,31 +89824,31 @@ class Input_HistoryVisitHistoryMaxOrderBy {
       result$data['time'] =
           l$time == null ? null : fromJson_Enum_OrderBy((l$time as String));
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = l$userRole == null
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
           ? null
-          : fromJson_Enum_OrderBy((l$userRole as String));
+          : fromJson_Enum_OrderBy((l$visitId as String));
     }
     return Input_HistoryVisitHistoryMaxOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
 
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : toJson_Enum_OrderBy(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
@@ -89571,10 +89859,10 @@ class Input_HistoryVisitHistoryMaxOrderBy {
       final l$time = time;
       result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] =
-          l$userRole == null ? null : toJson_Enum_OrderBy(l$userRole);
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : toJson_Enum_OrderBy(l$visitId);
     }
     return result$data;
   }
@@ -89595,13 +89883,13 @@ class Input_HistoryVisitHistoryMaxOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -89621,13 +89909,12 @@ class Input_HistoryVisitHistoryMaxOrderBy {
     if (l$time != lOther$time) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -89635,15 +89922,15 @@ class Input_HistoryVisitHistoryMaxOrderBy {
 
   @override
   int get hashCode {
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
     final l$time = time;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -89658,10 +89945,10 @@ abstract class CopyWith_Input_HistoryVisitHistoryMaxOrderBy<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryMaxOrderBy;
 
   TRes call({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   });
 }
 
@@ -89679,18 +89966,18 @@ class _CopyWithImpl_Input_HistoryVisitHistoryMaxOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
     Object? time = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryMaxOrderBy._({
         ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+        if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Enum_OrderBy?),
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
-        if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
+        if (visitId != _undefined) 'visitId': (visitId as Enum_OrderBy?),
       }));
 }
 
@@ -89701,26 +89988,26 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryMaxOrderBy<TRes>
   TRes _res;
 
   call({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       _res;
 }
 
 class Input_HistoryVisitHistoryMinOrderBy {
   factory Input_HistoryVisitHistoryMinOrderBy({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       Input_HistoryVisitHistoryMinOrderBy._({
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
         if (time != null) r'time': time,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryMinOrderBy._(this._$data);
@@ -89728,11 +90015,11 @@ class Input_HistoryVisitHistoryMinOrderBy {
   factory Input_HistoryVisitHistoryMinOrderBy.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
           ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
+          : fromJson_Enum_OrderBy((l$recordId as String));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
@@ -89745,31 +90032,31 @@ class Input_HistoryVisitHistoryMinOrderBy {
       result$data['time'] =
           l$time == null ? null : fromJson_Enum_OrderBy((l$time as String));
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = l$userRole == null
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
           ? null
-          : fromJson_Enum_OrderBy((l$userRole as String));
+          : fromJson_Enum_OrderBy((l$visitId as String));
     }
     return Input_HistoryVisitHistoryMinOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
 
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : toJson_Enum_OrderBy(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
@@ -89780,10 +90067,10 @@ class Input_HistoryVisitHistoryMinOrderBy {
       final l$time = time;
       result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] =
-          l$userRole == null ? null : toJson_Enum_OrderBy(l$userRole);
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : toJson_Enum_OrderBy(l$visitId);
     }
     return result$data;
   }
@@ -89804,13 +90091,13 @@ class Input_HistoryVisitHistoryMinOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -89830,13 +90117,12 @@ class Input_HistoryVisitHistoryMinOrderBy {
     if (l$time != lOther$time) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -89844,15 +90130,15 @@ class Input_HistoryVisitHistoryMinOrderBy {
 
   @override
   int get hashCode {
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
     final l$time = time;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -89867,10 +90153,10 @@ abstract class CopyWith_Input_HistoryVisitHistoryMinOrderBy<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryMinOrderBy;
 
   TRes call({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   });
 }
 
@@ -89888,18 +90174,18 @@ class _CopyWithImpl_Input_HistoryVisitHistoryMinOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
     Object? time = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryMinOrderBy._({
         ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+        if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Enum_OrderBy?),
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
-        if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
+        if (visitId != _undefined) 'visitId': (visitId as Enum_OrderBy?),
       }));
 }
 
@@ -89910,10 +90196,10 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryMinOrderBy<TRes>
   TRes _res;
 
   call({
-    Enum_OrderBy? personId,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? time,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       _res;
 }
@@ -90128,43 +90414,60 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOnConflict<TRes>
 
 class Input_HistoryVisitHistoryOrderBy {
   factory Input_HistoryVisitHistoryOrderBy({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? isUserAllowedToWrite,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       Input_HistoryVisitHistoryOrderBy._({
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
+        if (isUserAllowedToRead != null)
+          r'isUserAllowedToRead': isUserAllowedToRead,
+        if (isUserAllowedToWrite != null)
+          r'isUserAllowedToWrite': isUserAllowedToWrite,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
         if (user != null) r'user': user,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryOrderBy._(this._$data);
 
   factory Input_HistoryVisitHistoryOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
+    if (data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = data['isUserAllowedToRead'];
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
           ? null
-          : Input_PersonsOrderBy.fromJson((l$person as Map<String, dynamic>));
+          : fromJson_Enum_OrderBy((l$isUserAllowedToRead as String));
     }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
+    if (data.containsKey('isUserAllowedToWrite')) {
+      final l$isUserAllowedToWrite = data['isUserAllowedToWrite'];
+      result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite == null
           ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
+          : fromJson_Enum_OrderBy((l$isUserAllowedToWrite as String));
+    }
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordId as String));
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] = l$recordedBy == null
           ? null
           : fromJson_Enum_OrderBy((l$recordedBy as String));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] =
+          l$table == null ? null : fromJson_Enum_OrderBy((l$table as String));
     }
     if (data.containsKey('time')) {
       final l$time = data['time'];
@@ -90178,46 +90481,64 @@ class Input_HistoryVisitHistoryOrderBy {
           : Input_AuthUsersDataOrderBy.fromJson(
               (l$user as Map<String, dynamic>));
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = l$userRole == null
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
           ? null
-          : fromJson_Enum_OrderBy((l$userRole as String));
+          : fromJson_Enum_OrderBy((l$visitId as String));
     }
     return Input_HistoryVisitHistoryOrderBy._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_PersonsOrderBy? get person =>
-      (_$data['person'] as Input_PersonsOrderBy?);
+  Enum_OrderBy? get isUserAllowedToRead =>
+      (_$data['isUserAllowedToRead'] as Enum_OrderBy?);
 
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+  Enum_OrderBy? get isUserAllowedToWrite =>
+      (_$data['isUserAllowedToWrite'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get table => (_$data['table'] as Enum_OrderBy?);
 
   Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
 
   Input_AuthUsersDataOrderBy? get user =>
       (_$data['user'] as Input_AuthUsersDataOrderBy?);
 
-  Enum_OrderBy? get userRole => (_$data['userRole'] as Enum_OrderBy?);
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
+    if (_$data.containsKey('isUserAllowedToRead')) {
+      final l$isUserAllowedToRead = isUserAllowedToRead;
+      result$data['isUserAllowedToRead'] = l$isUserAllowedToRead == null
+          ? null
+          : toJson_Enum_OrderBy(l$isUserAllowedToRead);
     }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+    if (_$data.containsKey('isUserAllowedToWrite')) {
+      final l$isUserAllowedToWrite = isUserAllowedToWrite;
+      result$data['isUserAllowedToWrite'] = l$isUserAllowedToWrite == null
+          ? null
+          : toJson_Enum_OrderBy(l$isUserAllowedToWrite);
+    }
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : toJson_Enum_OrderBy(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : toJson_Enum_OrderBy(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] =
+          l$table == null ? null : toJson_Enum_OrderBy(l$table);
     }
     if (_$data.containsKey('time')) {
       final l$time = time;
@@ -90227,10 +90548,10 @@ class Input_HistoryVisitHistoryOrderBy {
       final l$user = user;
       result$data['user'] = l$user?.toJson();
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] =
-          l$userRole == null ? null : toJson_Enum_OrderBy(l$userRole);
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : toJson_Enum_OrderBy(l$visitId);
     }
     return result$data;
   }
@@ -90250,21 +90571,31 @@ class Input_HistoryVisitHistoryOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final lOther$isUserAllowedToRead = other.isUserAllowedToRead;
+    if (_$data.containsKey('isUserAllowedToRead') !=
+        other._$data.containsKey('isUserAllowedToRead')) {
       return false;
     }
-    if (l$person != lOther$person) {
+    if (l$isUserAllowedToRead != lOther$isUserAllowedToRead) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final lOther$isUserAllowedToWrite = other.isUserAllowedToWrite;
+    if (_$data.containsKey('isUserAllowedToWrite') !=
+        other._$data.containsKey('isUserAllowedToWrite')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$isUserAllowedToWrite != lOther$isUserAllowedToWrite) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -90274,6 +90605,14 @@ class Input_HistoryVisitHistoryOrderBy {
       return false;
     }
     if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
       return false;
     }
     final l$time = time;
@@ -90292,13 +90631,12 @@ class Input_HistoryVisitHistoryOrderBy {
     if (l$user != lOther$user) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -90306,19 +90644,27 @@ class Input_HistoryVisitHistoryOrderBy {
 
   @override
   int get hashCode {
-    final l$person = person;
-    final l$personId = personId;
+    final l$isUserAllowedToRead = isUserAllowedToRead;
+    final l$isUserAllowedToWrite = isUserAllowedToWrite;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
     final l$user = user;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('isUserAllowedToRead')
+          ? l$isUserAllowedToRead
+          : const {},
+      _$data.containsKey('isUserAllowedToWrite')
+          ? l$isUserAllowedToWrite
+          : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -90333,14 +90679,15 @@ abstract class CopyWith_Input_HistoryVisitHistoryOrderBy<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryOrderBy;
 
   TRes call({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? isUserAllowedToWrite,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   });
-  CopyWith_Input_PersonsOrderBy<TRes> get person;
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
 }
 
@@ -90358,30 +90705,29 @@ class _CopyWithImpl_Input_HistoryVisitHistoryOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? person = _undefined,
-    Object? personId = _undefined,
+    Object? isUserAllowedToRead = _undefined,
+    Object? isUserAllowedToWrite = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryOrderBy._({
         ..._instance._$data,
-        if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+        if (isUserAllowedToRead != _undefined)
+          'isUserAllowedToRead': (isUserAllowedToRead as Enum_OrderBy?),
+        if (isUserAllowedToWrite != _undefined)
+          'isUserAllowedToWrite': (isUserAllowedToWrite as Enum_OrderBy?),
+        if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Enum_OrderBy?),
+        if (table != _undefined) 'table': (table as Enum_OrderBy?),
         if (time != _undefined) 'time': (time as Enum_OrderBy?),
         if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
-        if (userRole != _undefined) 'userRole': (userRole as Enum_OrderBy?),
+        if (visitId != _undefined) 'visitId': (visitId as Enum_OrderBy?),
       }));
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsOrderBy(local$person, (e) => call(person: e));
-  }
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
     final local$user = _instance.user;
@@ -90398,26 +90744,26 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOrderBy<TRes>
   TRes _res;
 
   call({
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? personId,
+    Enum_OrderBy? isUserAllowedToRead,
+    Enum_OrderBy? isUserAllowedToWrite,
+    Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
     Enum_OrderBy? time,
     Input_AuthUsersDataOrderBy? user,
-    Enum_OrderBy? userRole,
+    Enum_OrderBy? visitId,
   }) =>
       _res;
-
-  CopyWith_Input_PersonsOrderBy<TRes> get person =>
-      CopyWith_Input_PersonsOrderBy.stub(_res);
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
 
 class Input_HistoryVisitHistoryPkColumnsInput {
-  factory Input_HistoryVisitHistoryPkColumnsInput({required DateTime time}) =>
+  factory Input_HistoryVisitHistoryPkColumnsInput(
+          {required UuidValue visitId}) =>
       Input_HistoryVisitHistoryPkColumnsInput._({
-        r'time': time,
+        r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryPkColumnsInput._(this._$data);
@@ -90425,19 +90771,19 @@ class Input_HistoryVisitHistoryPkColumnsInput {
   factory Input_HistoryVisitHistoryPkColumnsInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$time = data['time'];
-    result$data['time'] = tstzFromString(l$time);
+    final l$visitId = data['visitId'];
+    result$data['visitId'] = stringToUuid(l$visitId);
     return Input_HistoryVisitHistoryPkColumnsInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  DateTime get time => (_$data['time'] as DateTime);
+  UuidValue get visitId => (_$data['visitId'] as UuidValue);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$time = time;
-    result$data['time'] = tstzToString(l$time);
+    final l$visitId = visitId;
+    result$data['visitId'] = uuidToString(l$visitId);
     return result$data;
   }
 
@@ -90457,9 +90803,9 @@ class Input_HistoryVisitHistoryPkColumnsInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (l$time != lOther$time) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -90467,8 +90813,8 @@ class Input_HistoryVisitHistoryPkColumnsInput {
 
   @override
   int get hashCode {
-    final l$time = time;
-    return Object.hashAll([l$time]);
+    final l$visitId = visitId;
+    return Object.hashAll([l$visitId]);
   }
 }
 
@@ -90481,7 +90827,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryPkColumnsInput<TRes> {
   factory CopyWith_Input_HistoryVisitHistoryPkColumnsInput.stub(TRes res) =
       _CopyWithStubImpl_Input_HistoryVisitHistoryPkColumnsInput;
 
-  TRes call({DateTime? time});
+  TRes call({UuidValue? visitId});
 }
 
 class _CopyWithImpl_Input_HistoryVisitHistoryPkColumnsInput<TRes>
@@ -90497,10 +90843,11 @@ class _CopyWithImpl_Input_HistoryVisitHistoryPkColumnsInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? time = _undefined}) =>
+  TRes call({Object? visitId = _undefined}) =>
       _then(Input_HistoryVisitHistoryPkColumnsInput._({
         ..._instance._$data,
-        if (time != _undefined && time != null) 'time': (time as DateTime),
+        if (visitId != _undefined && visitId != null)
+          'visitId': (visitId as UuidValue),
       }));
 }
 
@@ -90510,21 +90857,23 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryPkColumnsInput<TRes>
 
   TRes _res;
 
-  call({DateTime? time}) => _res;
+  call({UuidValue? visitId}) => _res;
 }
 
 class Input_HistoryVisitHistorySetInput {
   factory Input_HistoryVisitHistorySetInput({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       Input_HistoryVisitHistorySetInput._({
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistorySetInput._(this._$data);
@@ -90532,56 +90881,68 @@ class Input_HistoryVisitHistorySetInput {
   factory Input_HistoryVisitHistorySetInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] =
+          l$recordId == null ? null : stringToUuid(l$recordId);
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] =
           l$recordedBy == null ? null : stringToUuid(l$recordedBy);
     }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = (l$table as String?);
+    }
     if (data.containsKey('time')) {
       final l$time = data['time'];
       result$data['time'] = l$time == null ? null : tstzFromString(l$time);
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = (l$userRole as String?);
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] =
+          l$visitId == null ? null : stringToUuid(l$visitId);
     }
     return Input_HistoryVisitHistorySetInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+  UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
 
+  String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
 
-  String? get userRole => (_$data['userRole'] as String?);
+  UuidValue? get visitId => (_$data['visitId'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : uuidToString(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : uuidToString(l$recordedBy);
     }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table;
+    }
     if (_$data.containsKey('time')) {
       final l$time = time;
       result$data['time'] = l$time == null ? null : tstzToString(l$time);
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] = l$userRole;
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : uuidToString(l$visitId);
     }
     return result$data;
   }
@@ -90601,13 +90962,13 @@ class Input_HistoryVisitHistorySetInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -90619,6 +90980,14 @@ class Input_HistoryVisitHistorySetInput {
     if (l$recordedBy != lOther$recordedBy) {
       return false;
     }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
     final l$time = time;
     final lOther$time = other.time;
     if (_$data.containsKey('time') != other._$data.containsKey('time')) {
@@ -90627,13 +90996,12 @@ class Input_HistoryVisitHistorySetInput {
     if (l$time != lOther$time) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -90641,15 +91009,17 @@ class Input_HistoryVisitHistorySetInput {
 
   @override
   int get hashCode {
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -90664,10 +91034,11 @@ abstract class CopyWith_Input_HistoryVisitHistorySetInput<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistorySetInput;
 
   TRes call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   });
 }
 
@@ -90685,17 +91056,19 @@ class _CopyWithImpl_Input_HistoryVisitHistorySetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistorySetInput._({
         ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+        if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
-        if (userRole != _undefined) 'userRole': (userRole as String?),
+        if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
       }));
 }
 
@@ -90706,10 +91079,11 @@ class _CopyWithStubImpl_Input_HistoryVisitHistorySetInput<TRes>
   TRes _res;
 
   call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       _res;
 }
@@ -90877,16 +91251,18 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorInput<TRes>
 
 class Input_HistoryVisitHistoryStreamCursorValueInput {
   factory Input_HistoryVisitHistoryStreamCursorValueInput({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       Input_HistoryVisitHistoryStreamCursorValueInput._({
-        if (personId != null) r'personId': personId,
+        if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
         if (time != null) r'time': time,
-        if (userRole != null) r'userRole': userRole,
+        if (visitId != null) r'visitId': visitId,
       });
 
   Input_HistoryVisitHistoryStreamCursorValueInput._(this._$data);
@@ -90894,56 +91270,68 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
   factory Input_HistoryVisitHistoryStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] =
+          l$recordId == null ? null : stringToUuid(l$recordId);
     }
     if (data.containsKey('recordedBy')) {
       final l$recordedBy = data['recordedBy'];
       result$data['recordedBy'] =
           l$recordedBy == null ? null : stringToUuid(l$recordedBy);
     }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = (l$table as String?);
+    }
     if (data.containsKey('time')) {
       final l$time = data['time'];
       result$data['time'] = l$time == null ? null : tstzFromString(l$time);
     }
-    if (data.containsKey('userRole')) {
-      final l$userRole = data['userRole'];
-      result$data['userRole'] = (l$userRole as String?);
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] =
+          l$visitId == null ? null : stringToUuid(l$visitId);
     }
     return Input_HistoryVisitHistoryStreamCursorValueInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+  UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
 
+  String? get table => (_$data['table'] as String?);
+
   DateTime? get time => (_$data['time'] as DateTime?);
 
-  String? get userRole => (_$data['userRole'] as String?);
+  UuidValue? get visitId => (_$data['visitId'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : uuidToString(l$recordId);
     }
     if (_$data.containsKey('recordedBy')) {
       final l$recordedBy = recordedBy;
       result$data['recordedBy'] =
           l$recordedBy == null ? null : uuidToString(l$recordedBy);
     }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table;
+    }
     if (_$data.containsKey('time')) {
       final l$time = time;
       result$data['time'] = l$time == null ? null : tstzToString(l$time);
     }
-    if (_$data.containsKey('userRole')) {
-      final l$userRole = userRole;
-      result$data['userRole'] = l$userRole;
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : uuidToString(l$visitId);
     }
     return result$data;
   }
@@ -90964,13 +91352,13 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
       return false;
     }
-    if (l$personId != lOther$personId) {
+    if (l$recordId != lOther$recordId) {
       return false;
     }
     final l$recordedBy = recordedBy;
@@ -90982,6 +91370,14 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
     if (l$recordedBy != lOther$recordedBy) {
       return false;
     }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
     final l$time = time;
     final lOther$time = other.time;
     if (_$data.containsKey('time') != other._$data.containsKey('time')) {
@@ -90990,13 +91386,12 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
     if (l$time != lOther$time) {
       return false;
     }
-    final l$userRole = userRole;
-    final lOther$userRole = other.userRole;
-    if (_$data.containsKey('userRole') !=
-        other._$data.containsKey('userRole')) {
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
       return false;
     }
-    if (l$userRole != lOther$userRole) {
+    if (l$visitId != lOther$visitId) {
       return false;
     }
     return true;
@@ -91004,15 +91399,17 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
 
   @override
   int get hashCode {
-    final l$personId = personId;
+    final l$recordId = recordId;
     final l$recordedBy = recordedBy;
+    final l$table = table;
     final l$time = time;
-    final l$userRole = userRole;
+    final l$visitId = visitId;
     return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
-      _$data.containsKey('userRole') ? l$userRole : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
     ]);
   }
 }
@@ -91028,10 +91425,11 @@ abstract class CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput;
 
   TRes call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   });
 }
 
@@ -91049,17 +91447,19 @@ class _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? personId = _undefined,
+    Object? recordId = _undefined,
     Object? recordedBy = _undefined,
+    Object? table = _undefined,
     Object? time = _undefined,
-    Object? userRole = _undefined,
+    Object? visitId = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryStreamCursorValueInput._({
         ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+        if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
-        if (userRole != _undefined) 'userRole': (userRole as String?),
+        if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
       }));
 }
 
@@ -91070,10 +91470,11 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
-    UuidValue? personId,
+    UuidValue? recordId,
     UuidValue? recordedBy,
+    String? table,
     DateTime? time,
-    String? userRole,
+    UuidValue? visitId,
   }) =>
       _res;
 }
@@ -167259,21 +167660,27 @@ Enum_HistoryLatestKodasesSelectColumn
 }
 
 enum Enum_HistoryLatestVisitsSelectColumn {
-  personId,
+  recordId,
   recordedBy,
+  table,
   time,
+  visitId,
   $unknown
 }
 
 String toJson_Enum_HistoryLatestVisitsSelectColumn(
     Enum_HistoryLatestVisitsSelectColumn e) {
   switch (e) {
-    case Enum_HistoryLatestVisitsSelectColumn.personId:
-      return r'personId';
+    case Enum_HistoryLatestVisitsSelectColumn.recordId:
+      return r'recordId';
     case Enum_HistoryLatestVisitsSelectColumn.recordedBy:
       return r'recordedBy';
+    case Enum_HistoryLatestVisitsSelectColumn.table:
+      return r'table';
     case Enum_HistoryLatestVisitsSelectColumn.time:
       return r'time';
+    case Enum_HistoryLatestVisitsSelectColumn.visitId:
+      return r'visitId';
     case Enum_HistoryLatestVisitsSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -167282,12 +167689,16 @@ String toJson_Enum_HistoryLatestVisitsSelectColumn(
 Enum_HistoryLatestVisitsSelectColumn
     fromJson_Enum_HistoryLatestVisitsSelectColumn(String value) {
   switch (value) {
-    case r'personId':
-      return Enum_HistoryLatestVisitsSelectColumn.personId;
+    case r'recordId':
+      return Enum_HistoryLatestVisitsSelectColumn.recordId;
     case r'recordedBy':
       return Enum_HistoryLatestVisitsSelectColumn.recordedBy;
+    case r'table':
+      return Enum_HistoryLatestVisitsSelectColumn.table;
     case r'time':
       return Enum_HistoryLatestVisitsSelectColumn.time;
+    case r'visitId':
+      return Enum_HistoryLatestVisitsSelectColumn.visitId;
     default:
       return Enum_HistoryLatestVisitsSelectColumn.$unknown;
   }
@@ -167316,24 +167727,27 @@ Enum_HistoryVisitHistoryConstraint fromJson_Enum_HistoryVisitHistoryConstraint(
 }
 
 enum Enum_HistoryVisitHistorySelectColumn {
-  personId,
+  recordId,
   recordedBy,
+  table,
   time,
-  userRole,
+  visitId,
   $unknown
 }
 
 String toJson_Enum_HistoryVisitHistorySelectColumn(
     Enum_HistoryVisitHistorySelectColumn e) {
   switch (e) {
-    case Enum_HistoryVisitHistorySelectColumn.personId:
-      return r'personId';
+    case Enum_HistoryVisitHistorySelectColumn.recordId:
+      return r'recordId';
     case Enum_HistoryVisitHistorySelectColumn.recordedBy:
       return r'recordedBy';
+    case Enum_HistoryVisitHistorySelectColumn.table:
+      return r'table';
     case Enum_HistoryVisitHistorySelectColumn.time:
       return r'time';
-    case Enum_HistoryVisitHistorySelectColumn.userRole:
-      return r'userRole';
+    case Enum_HistoryVisitHistorySelectColumn.visitId:
+      return r'visitId';
     case Enum_HistoryVisitHistorySelectColumn.$unknown:
       return r'$unknown';
   }
@@ -167342,38 +167756,43 @@ String toJson_Enum_HistoryVisitHistorySelectColumn(
 Enum_HistoryVisitHistorySelectColumn
     fromJson_Enum_HistoryVisitHistorySelectColumn(String value) {
   switch (value) {
-    case r'personId':
-      return Enum_HistoryVisitHistorySelectColumn.personId;
+    case r'recordId':
+      return Enum_HistoryVisitHistorySelectColumn.recordId;
     case r'recordedBy':
       return Enum_HistoryVisitHistorySelectColumn.recordedBy;
+    case r'table':
+      return Enum_HistoryVisitHistorySelectColumn.table;
     case r'time':
       return Enum_HistoryVisitHistorySelectColumn.time;
-    case r'userRole':
-      return Enum_HistoryVisitHistorySelectColumn.userRole;
+    case r'visitId':
+      return Enum_HistoryVisitHistorySelectColumn.visitId;
     default:
       return Enum_HistoryVisitHistorySelectColumn.$unknown;
   }
 }
 
 enum Enum_HistoryVisitHistoryUpdateColumn {
-  personId,
+  recordId,
   recordedBy,
+  table,
   time,
-  userRole,
+  visitId,
   $unknown
 }
 
 String toJson_Enum_HistoryVisitHistoryUpdateColumn(
     Enum_HistoryVisitHistoryUpdateColumn e) {
   switch (e) {
-    case Enum_HistoryVisitHistoryUpdateColumn.personId:
-      return r'personId';
+    case Enum_HistoryVisitHistoryUpdateColumn.recordId:
+      return r'recordId';
     case Enum_HistoryVisitHistoryUpdateColumn.recordedBy:
       return r'recordedBy';
+    case Enum_HistoryVisitHistoryUpdateColumn.table:
+      return r'table';
     case Enum_HistoryVisitHistoryUpdateColumn.time:
       return r'time';
-    case Enum_HistoryVisitHistoryUpdateColumn.userRole:
-      return r'userRole';
+    case Enum_HistoryVisitHistoryUpdateColumn.visitId:
+      return r'visitId';
     case Enum_HistoryVisitHistoryUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -167382,14 +167801,16 @@ String toJson_Enum_HistoryVisitHistoryUpdateColumn(
 Enum_HistoryVisitHistoryUpdateColumn
     fromJson_Enum_HistoryVisitHistoryUpdateColumn(String value) {
   switch (value) {
-    case r'personId':
-      return Enum_HistoryVisitHistoryUpdateColumn.personId;
+    case r'recordId':
+      return Enum_HistoryVisitHistoryUpdateColumn.recordId;
     case r'recordedBy':
       return Enum_HistoryVisitHistoryUpdateColumn.recordedBy;
+    case r'table':
+      return Enum_HistoryVisitHistoryUpdateColumn.table;
     case r'time':
       return Enum_HistoryVisitHistoryUpdateColumn.time;
-    case r'userRole':
-      return Enum_HistoryVisitHistoryUpdateColumn.userRole;
+    case r'visitId':
+      return Enum_HistoryVisitHistoryUpdateColumn.visitId;
     default:
       return Enum_HistoryVisitHistoryUpdateColumn.$unknown;
   }

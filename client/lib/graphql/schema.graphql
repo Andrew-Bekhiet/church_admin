@@ -2360,13 +2360,15 @@ type HistoryLatestKodasesMinFields {
 
 "columns and relationships of \"history.latest_visits\""
 type HistoryLatestVisits {
-    "An object relationship"
-    person: Persons
-    personId: Uuid
+    "A computed field, executes function \"history.user_allowed_to_read_latest_visit\""
+    isUserAllowedToRead: Boolean
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
     "An object relationship"
     user: AuthUsersData
+    visitId: Uuid
 }
 
 "aggregated selection of \"history.latest_visits\""
@@ -2384,28 +2386,33 @@ type HistoryLatestVisitsAggregateFields {
 
 "aggregate max on columns"
 type HistoryLatestVisitsMaxFields {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
     time: Timestamptz
+    visitId: Uuid
 }
 
 "aggregate min on columns"
 type HistoryLatestVisitsMinFields {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
     time: Timestamptz
+    visitId: Uuid
 }
 
 "columns and relationships of \"history.visit_history\""
 type HistoryVisitHistory {
-    "An object relationship"
-    person: Persons!
-    personId: Uuid!
+    "A computed field, executes function \"history.user_allowed_to_read_visit\""
+    isUserAllowedToRead: Boolean
+    "A computed field, executes function \"history.user_allowed_to_write_visit\""
+    isUserAllowedToWrite: Boolean
+    recordId: Uuid!
     recordedBy: Uuid
+    table: Name!
     time: Timestamptz!
     "An object relationship"
     user: AuthUsersData
-    userRole: String
+    visitId: Uuid!
 }
 
 "aggregated selection of \"history.visit_history\""
@@ -2423,18 +2430,18 @@ type HistoryVisitHistoryAggregateFields {
 
 "aggregate max on columns"
 type HistoryVisitHistoryMaxFields {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
     time: Timestamptz
-    userRole: String
+    visitId: Uuid
 }
 
 "aggregate min on columns"
 type HistoryVisitHistoryMinFields {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
     time: Timestamptz
-    userRole: String
+    visitId: Uuid
 }
 
 "response of any mutation on the table \"history.visit_history\""
@@ -4920,7 +4927,7 @@ type mutation_root {
         where: HistoryVisitHistoryBoolExp!
     ): HistoryVisitHistoryMutationResponse
     "delete single row from the table: \"history.visit_history\""
-    deleteHistoryVisitHistoryByPk(time: Timestamptz!): HistoryVisitHistory
+    deleteHistoryVisitHistoryByPk(visitId: Uuid!): HistoryVisitHistory
     "delete data from the table: \"hobbies\""
     deleteHobbies(
         "filter the rows which have to be deleted"
@@ -7047,7 +7054,7 @@ type query_root {
         where: HistoryVisitHistoryBoolExp
     ): HistoryVisitHistoryAggregate!
     "fetch data from the table: \"history.visit_history\" using primary key columns"
-    historyVisitHistoryByPk(time: Timestamptz!): HistoryVisitHistory
+    historyVisitHistoryByPk(visitId: Uuid!): HistoryVisitHistory
     "fetch data from the table: \"hobbies\""
     hobbies(
         "distinct select on columns"
@@ -8460,7 +8467,7 @@ type subscription_root {
         where: HistoryVisitHistoryBoolExp
     ): HistoryVisitHistoryAggregate!
     "fetch data from the table: \"history.visit_history\" using primary key columns"
-    historyVisitHistoryByPk(time: Timestamptz!): HistoryVisitHistory
+    historyVisitHistoryByPk(visitId: Uuid!): HistoryVisitHistory
     "fetch data from the table in a streaming manner: \"history.visit_history\""
     historyVisitHistoryStream(
         "maximum number of rows returned in a single batch"
@@ -9971,41 +9978,49 @@ enum HistoryLatestKodasesSelectColumn {
 "select columns of table \"history.latest_visits\""
 enum HistoryLatestVisitsSelectColumn {
     "column name"
-    personId
+    recordId
     "column name"
     recordedBy
     "column name"
+    table
+    "column name"
     time
+    "column name"
+    visitId
 }
 
 "unique or primary key constraints on table \"history.visit_history\""
 enum HistoryVisitHistoryConstraint {
-    "unique or primary key constraint on columns \"time\""
+    "unique or primary key constraint on columns \"visit_id\""
     visitHistoryPkey
 }
 
 "select columns of table \"history.visit_history\""
 enum HistoryVisitHistorySelectColumn {
     "column name"
-    personId
+    recordId
     "column name"
     recordedBy
     "column name"
+    table
+    "column name"
     time
     "column name"
-    userRole
+    visitId
 }
 
 "update columns of table \"history.visit_history\""
 enum HistoryVisitHistoryUpdateColumn {
     "column name"
-    personId
+    recordId
     "column name"
     recordedBy
     "column name"
+    table
+    "column name"
     time
     "column name"
-    userRole
+    visitId
 }
 
 "unique or primary key constraints on table \"hobbies\""
@@ -13755,20 +13770,23 @@ input HistoryLatestVisitsBoolExp {
     _and: [HistoryLatestVisitsBoolExp!]
     _not: HistoryLatestVisitsBoolExp
     _or: [HistoryLatestVisitsBoolExp!]
-    person: PersonsBoolExp
-    personId: UuidComparisonExp
+    isUserAllowedToRead: BooleanComparisonExp
+    recordId: UuidComparisonExp
     recordedBy: UuidComparisonExp
+    table: NameComparisonExp
     time: TimestamptzComparisonExp
     user: AuthUsersDataBoolExp
+    visitId: UuidComparisonExp
 }
 
 "input type for inserting data into table \"history.latest_visits\""
 input HistoryLatestVisitsInsertInput {
-    person: PersonsObjRelInsertInput
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
     user: AuthUsersDataObjRelInsertInput
+    visitId: Uuid
 }
 
 "input type for inserting object relation for remote table \"history.latest_visits\""
@@ -13778,11 +13796,13 @@ input HistoryLatestVisitsObjRelInsertInput {
 
 "Ordering options when selecting data from \"history.latest_visits\"."
 input HistoryLatestVisitsOrderBy {
-    person: PersonsOrderBy
-    personId: OrderBy
+    isUserAllowedToRead: OrderBy
+    recordId: OrderBy
     recordedBy: OrderBy
+    table: OrderBy
     time: OrderBy
     user: AuthUsersDataOrderBy
+    visitId: OrderBy
 }
 
 "Streaming cursor of the table \"history_latest_visits\""
@@ -13795,9 +13815,11 @@ input HistoryLatestVisitsStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input HistoryLatestVisitsStreamCursorValueInput {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
+    visitId: Uuid
 }
 
 input HistoryVisitHistoryAggregateBoolExp {
@@ -13823,38 +13845,40 @@ input HistoryVisitHistoryBoolExp {
     _and: [HistoryVisitHistoryBoolExp!]
     _not: HistoryVisitHistoryBoolExp
     _or: [HistoryVisitHistoryBoolExp!]
-    person: PersonsBoolExp
-    personId: UuidComparisonExp
+    isUserAllowedToRead: BooleanComparisonExp
+    isUserAllowedToWrite: BooleanComparisonExp
+    recordId: UuidComparisonExp
     recordedBy: UuidComparisonExp
+    table: NameComparisonExp
     time: TimestamptzComparisonExp
     user: AuthUsersDataBoolExp
-    userRole: StringComparisonExp
+    visitId: UuidComparisonExp
 }
 
 "input type for inserting data into table \"history.visit_history\""
 input HistoryVisitHistoryInsertInput {
-    person: PersonsObjRelInsertInput
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
     user: AuthUsersDataObjRelInsertInput
-    userRole: String
+    visitId: Uuid
 }
 
 "order by max() on columns of table \"history.visit_history\""
 input HistoryVisitHistoryMaxOrderBy {
-    personId: OrderBy
+    recordId: OrderBy
     recordedBy: OrderBy
     time: OrderBy
-    userRole: OrderBy
+    visitId: OrderBy
 }
 
 "order by min() on columns of table \"history.visit_history\""
 input HistoryVisitHistoryMinOrderBy {
-    personId: OrderBy
+    recordId: OrderBy
     recordedBy: OrderBy
     time: OrderBy
-    userRole: OrderBy
+    visitId: OrderBy
 }
 
 "on_conflict condition type for table \"history.visit_history\""
@@ -13866,25 +13890,28 @@ input HistoryVisitHistoryOnConflict {
 
 "Ordering options when selecting data from \"history.visit_history\"."
 input HistoryVisitHistoryOrderBy {
-    person: PersonsOrderBy
-    personId: OrderBy
+    isUserAllowedToRead: OrderBy
+    isUserAllowedToWrite: OrderBy
+    recordId: OrderBy
     recordedBy: OrderBy
+    table: OrderBy
     time: OrderBy
     user: AuthUsersDataOrderBy
-    userRole: OrderBy
+    visitId: OrderBy
 }
 
 "primary key columns input for table: history.visit_history"
 input HistoryVisitHistoryPkColumnsInput {
-    time: Timestamptz!
+    visitId: Uuid!
 }
 
 "input type for updating data in table \"history.visit_history\""
 input HistoryVisitHistorySetInput {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
-    userRole: String
+    visitId: Uuid
 }
 
 "Streaming cursor of the table \"history_visit_history\""
@@ -13897,10 +13924,11 @@ input HistoryVisitHistoryStreamCursorInput {
 
 "Initial value of the column from where the streaming should start"
 input HistoryVisitHistoryStreamCursorValueInput {
-    personId: Uuid
+    recordId: Uuid
     recordedBy: Uuid
+    table: Name
     time: Timestamptz
-    userRole: String
+    visitId: Uuid
 }
 
 input HistoryVisitHistoryUpdates {

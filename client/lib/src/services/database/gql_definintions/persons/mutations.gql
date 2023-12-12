@@ -115,12 +115,9 @@ mutation updatePerson(
   }
 
   insertHistoryVisitHistoryOne(
-    object: { personId: $personId, time: $lastVisit }
+    object: { table: "persons", recordId: $personId, time: $lastVisit }
   ) @include(if: $insertHistoryVisitHistoryOne) {
-    person {
-      id
-      name
-    }
+    visitId
   }
 }
 

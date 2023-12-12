@@ -1262,7 +1262,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'CallHistory'),
+                name: NameNode(value: 'LatestCallHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -1281,7 +1281,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'ConfessionHistory'),
+                name: NameNode(value: 'LatestConfessionHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -1300,7 +1300,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'EditHistory'),
+                name: NameNode(value: 'LatestEditHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -1319,7 +1319,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'KodasHistory'),
+                name: NameNode(value: 'LatestKodasHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -1338,7 +1338,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'VisitHistory'),
+                name: NameNode(value: 'LatestVisitHistory'),
                 directives: [],
               ),
               FieldNode(
@@ -1895,11 +1895,13 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   fragmentDefinitionFamilyNoPhoto,
   fragmentDefinitionGroup,
   fragmentDefinitionGroupNoPhoto,
-  fragmentDefinitionCallHistory,
-  fragmentDefinitionConfessionHistory,
-  fragmentDefinitionEditHistory,
-  fragmentDefinitionKodasHistory,
-  fragmentDefinitionVisitHistory,
+  fragmentDefinitionLatestCallHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+  fragmentDefinitionLatestConfessionHistory,
+  fragmentDefinitionLatestEditHistory,
+  fragmentDefinitionLatestKodasHistory,
+  fragmentDefinitionLatestVisitHistory,
   fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
   fragmentDefinitionStreet,
@@ -2045,23 +2047,23 @@ class Subscription_watchPerson_personsByPk
       jobDescription: (l$jobDescription as String?),
       lastCall: l$lastCall == null
           ? null
-          : Subscription_watchPerson_personsByPk_lastCall.fromJson(
+          : Fragment_LatestCallHistory.fromJson(
               (l$lastCall as Map<String, dynamic>)),
       lastConfession: l$lastConfession == null
           ? null
-          : Subscription_watchPerson_personsByPk_lastConfession.fromJson(
+          : Fragment_LatestConfessionHistory.fromJson(
               (l$lastConfession as Map<String, dynamic>)),
       lastEdit: l$lastEdit == null
           ? null
-          : Subscription_watchPerson_personsByPk_lastEdit.fromJson(
+          : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>)),
       lastKodas: l$lastKodas == null
           ? null
-          : Subscription_watchPerson_personsByPk_lastKodas.fromJson(
+          : Fragment_LatestKodasHistory.fromJson(
               (l$lastKodas as Map<String, dynamic>)),
       lastVisit: l$lastVisit == null
           ? null
-          : Subscription_watchPerson_personsByPk_lastVisit.fromJson(
+          : Fragment_LatestVisitHistory.fromJson(
               (l$lastVisit as Map<String, dynamic>)),
       mainPhone: (l$mainPhone as String?),
       notes: (l$notes as String?),
@@ -2157,15 +2159,15 @@ class Subscription_watchPerson_personsByPk
 
   final String? jobDescription;
 
-  final Subscription_watchPerson_personsByPk_lastCall? lastCall;
+  final Fragment_LatestCallHistory? lastCall;
 
-  final Subscription_watchPerson_personsByPk_lastConfession? lastConfession;
+  final Fragment_LatestConfessionHistory? lastConfession;
 
-  final Subscription_watchPerson_personsByPk_lastEdit? lastEdit;
+  final Fragment_LatestEditHistory? lastEdit;
 
-  final Subscription_watchPerson_personsByPk_lastKodas? lastKodas;
+  final Fragment_LatestKodasHistory? lastKodas;
 
-  final Subscription_watchPerson_personsByPk_lastVisit? lastVisit;
+  final Fragment_LatestVisitHistory? lastVisit;
 
   final String? mainPhone;
 
@@ -2704,11 +2706,11 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     bool? isStudent,
     Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
-    Subscription_watchPerson_personsByPk_lastCall? lastCall,
-    Subscription_watchPerson_personsByPk_lastConfession? lastConfession,
-    Subscription_watchPerson_personsByPk_lastEdit? lastEdit,
-    Subscription_watchPerson_personsByPk_lastKodas? lastKodas,
-    Subscription_watchPerson_personsByPk_lastVisit? lastVisit,
+    Fragment_LatestCallHistory? lastCall,
+    Fragment_LatestConfessionHistory? lastConfession,
+    Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestKodasHistory? lastKodas,
+    Fragment_LatestVisitHistory? lastVisit,
     String? mainPhone,
     String? notes,
     Json? otherPhones,
@@ -2746,12 +2748,11 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
                       Subscription_watchPerson_personsByPk_groups>>)
           _fn);
   CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job;
-  CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> get lastCall;
-  CopyWith_Subscription_watchPerson_personsByPk_lastConfession<TRes>
-      get lastConfession;
-  CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> get lastEdit;
-  CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> get lastKodas;
-  CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> get lastVisit;
+  CopyWith_Fragment_LatestCallHistory<TRes> get lastCall;
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession;
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas;
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit;
   CopyWith_Subscription_watchPerson_personsByPk_personType<TRes> get personType;
   CopyWith_Subscription_watchPerson_personsByPk_qualification<TRes>
       get qualification;
@@ -2905,20 +2906,19 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             : (jobDescription as String?),
         lastCall: lastCall == _undefined
             ? _instance.lastCall
-            : (lastCall as Subscription_watchPerson_personsByPk_lastCall?),
+            : (lastCall as Fragment_LatestCallHistory?),
         lastConfession: lastConfession == _undefined
             ? _instance.lastConfession
-            : (lastConfession
-                as Subscription_watchPerson_personsByPk_lastConfession?),
+            : (lastConfession as Fragment_LatestConfessionHistory?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
-            : (lastEdit as Subscription_watchPerson_personsByPk_lastEdit?),
+            : (lastEdit as Fragment_LatestEditHistory?),
         lastKodas: lastKodas == _undefined
             ? _instance.lastKodas
-            : (lastKodas as Subscription_watchPerson_personsByPk_lastKodas?),
+            : (lastKodas as Fragment_LatestKodasHistory?),
         lastVisit: lastVisit == _undefined
             ? _instance.lastVisit
-            : (lastVisit as Subscription_watchPerson_personsByPk_lastVisit?),
+            : (lastVisit as Fragment_LatestVisitHistory?),
         mainPhone: mainPhone == _undefined
             ? _instance.mainPhone
             : (mainPhone as String?),
@@ -3043,49 +3043,43 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             local$job, (e) => call(job: e));
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> get lastCall {
+  CopyWith_Fragment_LatestCallHistory<TRes> get lastCall {
     final local$lastCall = _instance.lastCall;
     return local$lastCall == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_lastCall.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_lastCall(
+        ? CopyWith_Fragment_LatestCallHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestCallHistory(
             local$lastCall, (e) => call(lastCall: e));
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastConfession<TRes>
-      get lastConfession {
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession {
     final local$lastConfession = _instance.lastConfession;
     return local$lastConfession == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_lastConfession.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_lastConfession(
+        ? CopyWith_Fragment_LatestConfessionHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestConfessionHistory(
             local$lastConfession, (e) => call(lastConfession: e));
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> get lastEdit {
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
     return local$lastEdit == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_lastEdit.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_lastEdit(
+        ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestEditHistory(
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> get lastKodas {
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
     final local$lastKodas = _instance.lastKodas;
     return local$lastKodas == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_lastKodas.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_lastKodas(
+        ? CopyWith_Fragment_LatestKodasHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestKodasHistory(
             local$lastKodas, (e) => call(lastKodas: e));
   }
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> get lastVisit {
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit {
     final local$lastVisit = _instance.lastVisit;
     return local$lastVisit == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_lastVisit.stub(
-            _then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_lastVisit(
+        ? CopyWith_Fragment_LatestVisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisitHistory(
             local$lastVisit, (e) => call(lastVisit: e));
   }
 
@@ -3234,11 +3228,11 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     bool? isStudent,
     Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
-    Subscription_watchPerson_personsByPk_lastCall? lastCall,
-    Subscription_watchPerson_personsByPk_lastConfession? lastConfession,
-    Subscription_watchPerson_personsByPk_lastEdit? lastEdit,
-    Subscription_watchPerson_personsByPk_lastKodas? lastKodas,
-    Subscription_watchPerson_personsByPk_lastVisit? lastVisit,
+    Fragment_LatestCallHistory? lastCall,
+    Fragment_LatestConfessionHistory? lastConfession,
+    Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestKodasHistory? lastKodas,
+    Fragment_LatestVisitHistory? lastVisit,
     String? mainPhone,
     String? notes,
     Json? otherPhones,
@@ -3278,22 +3272,20 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
   CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job =>
       CopyWith_Subscription_watchPerson_personsByPk_job.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> get lastCall =>
-      CopyWith_Subscription_watchPerson_personsByPk_lastCall.stub(_res);
+  CopyWith_Fragment_LatestCallHistory<TRes> get lastCall =>
+      CopyWith_Fragment_LatestCallHistory.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastConfession<TRes>
-      get lastConfession =>
-          CopyWith_Subscription_watchPerson_personsByPk_lastConfession.stub(
-              _res);
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession =>
+      CopyWith_Fragment_LatestConfessionHistory.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> get lastEdit =>
-      CopyWith_Subscription_watchPerson_personsByPk_lastEdit.stub(_res);
+  CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
+      CopyWith_Fragment_LatestEditHistory.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> get lastKodas =>
-      CopyWith_Subscription_watchPerson_personsByPk_lastKodas.stub(_res);
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
+      CopyWith_Fragment_LatestKodasHistory.stub(_res);
 
-  CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> get lastVisit =>
-      CopyWith_Subscription_watchPerson_personsByPk_lastVisit.stub(_res);
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit =>
+      CopyWith_Fragment_LatestVisitHistory.stub(_res);
 
   CopyWith_Subscription_watchPerson_personsByPk_personType<TRes>
       get personType =>
@@ -5706,493 +5698,6 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_job<TRes>
     String? $__typename,
   }) =>
       _res;
-}
-
-class Subscription_watchPerson_personsByPk_lastCall {
-  Subscription_watchPerson_personsByPk_lastCall(
-      {this.$__typename = 'HistoryLatestCalls'});
-
-  factory Subscription_watchPerson_personsByPk_lastCall.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_lastCall(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchPerson_personsByPk_lastCall) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_lastCall
-    on Subscription_watchPerson_personsByPk_lastCall {
-  CopyWith_Subscription_watchPerson_personsByPk_lastCall<
-          Subscription_watchPerson_personsByPk_lastCall>
-      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_lastCall(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastCall(
-    Subscription_watchPerson_personsByPk_lastCall instance,
-    TRes Function(Subscription_watchPerson_personsByPk_lastCall) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_lastCall;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastCall.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_lastCall(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_lastCall _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_lastCall) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchPerson_personsByPk_lastCall(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastCall<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastCall(this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
-}
-
-class Subscription_watchPerson_personsByPk_lastConfession {
-  Subscription_watchPerson_personsByPk_lastConfession(
-      {this.$__typename = 'HistoryLatestConfessions'});
-
-  factory Subscription_watchPerson_personsByPk_lastConfession.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_lastConfession(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchPerson_personsByPk_lastConfession) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_lastConfession
-    on Subscription_watchPerson_personsByPk_lastConfession {
-  CopyWith_Subscription_watchPerson_personsByPk_lastConfession<
-          Subscription_watchPerson_personsByPk_lastConfession>
-      get copyWith =>
-          CopyWith_Subscription_watchPerson_personsByPk_lastConfession(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_lastConfession<
-    TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastConfession(
-    Subscription_watchPerson_personsByPk_lastConfession instance,
-    TRes Function(Subscription_watchPerson_personsByPk_lastConfession) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_lastConfession;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastConfession.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastConfession<TRes>
-    implements
-        CopyWith_Subscription_watchPerson_personsByPk_lastConfession<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_lastConfession(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_lastConfession _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_lastConfession)
-      _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchPerson_personsByPk_lastConfession(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession<
-        TRes>
-    implements
-        CopyWith_Subscription_watchPerson_personsByPk_lastConfession<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastConfession(
-      this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
-}
-
-class Subscription_watchPerson_personsByPk_lastEdit {
-  Subscription_watchPerson_personsByPk_lastEdit(
-      {this.$__typename = 'HistoryLatestEdits'});
-
-  factory Subscription_watchPerson_personsByPk_lastEdit.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_lastEdit(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchPerson_personsByPk_lastEdit) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_lastEdit
-    on Subscription_watchPerson_personsByPk_lastEdit {
-  CopyWith_Subscription_watchPerson_personsByPk_lastEdit<
-          Subscription_watchPerson_personsByPk_lastEdit>
-      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_lastEdit(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastEdit(
-    Subscription_watchPerson_personsByPk_lastEdit instance,
-    TRes Function(Subscription_watchPerson_personsByPk_lastEdit) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_lastEdit;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastEdit.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_lastEdit(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_lastEdit _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_lastEdit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchPerson_personsByPk_lastEdit(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastEdit<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastEdit(this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
-}
-
-class Subscription_watchPerson_personsByPk_lastKodas {
-  Subscription_watchPerson_personsByPk_lastKodas(
-      {this.$__typename = 'HistoryLatestKodases'});
-
-  factory Subscription_watchPerson_personsByPk_lastKodas.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_lastKodas(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchPerson_personsByPk_lastKodas) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_lastKodas
-    on Subscription_watchPerson_personsByPk_lastKodas {
-  CopyWith_Subscription_watchPerson_personsByPk_lastKodas<
-          Subscription_watchPerson_personsByPk_lastKodas>
-      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_lastKodas(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastKodas(
-    Subscription_watchPerson_personsByPk_lastKodas instance,
-    TRes Function(Subscription_watchPerson_personsByPk_lastKodas) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_lastKodas;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastKodas.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_lastKodas(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_lastKodas _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_lastKodas) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchPerson_personsByPk_lastKodas(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastKodas<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastKodas(this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
-}
-
-class Subscription_watchPerson_personsByPk_lastVisit {
-  Subscription_watchPerson_personsByPk_lastVisit(
-      {this.$__typename = 'HistoryLatestVisits'});
-
-  factory Subscription_watchPerson_personsByPk_lastVisit.fromJson(
-      Map<String, dynamic> json) {
-    final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_lastVisit(
-        $__typename: (l$$__typename as String));
-  }
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Subscription_watchPerson_personsByPk_lastVisit) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchPerson_personsByPk_lastVisit
-    on Subscription_watchPerson_personsByPk_lastVisit {
-  CopyWith_Subscription_watchPerson_personsByPk_lastVisit<
-          Subscription_watchPerson_personsByPk_lastVisit>
-      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_lastVisit(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastVisit(
-    Subscription_watchPerson_personsByPk_lastVisit instance,
-    TRes Function(Subscription_watchPerson_personsByPk_lastVisit) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_lastVisit;
-
-  factory CopyWith_Subscription_watchPerson_personsByPk_lastVisit.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit;
-
-  TRes call({String? $__typename});
-}
-
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_lastVisit(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchPerson_personsByPk_lastVisit _instance;
-
-  final TRes Function(Subscription_watchPerson_personsByPk_lastVisit) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $__typename = _undefined}) =>
-      _then(Subscription_watchPerson_personsByPk_lastVisit(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
-}
-
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_lastVisit<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_lastVisit(this._res);
-
-  TRes _res;
-
-  call({String? $__typename}) => _res;
 }
 
 class Subscription_watchPerson_personsByPk_personType {

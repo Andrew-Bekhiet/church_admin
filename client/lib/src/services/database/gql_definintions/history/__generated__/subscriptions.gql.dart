@@ -1132,7 +1132,21 @@ const documentNodeSubscriptionpersonVisitHistory = DocumentNode(definitions: [
                 value: ListValueNode(values: [
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
+                      name: NameNode(value: 'table'),
+                      value: ObjectValueNode(fields: [
+                        ObjectFieldNode(
+                          name: NameNode(value: '_eq'),
+                          value: StringValueNode(
+                            value: 'persons',
+                            isBlock: false,
+                          ),
+                        )
+                      ]),
+                    )
+                  ]),
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
                           name: NameNode(value: '_eq'),

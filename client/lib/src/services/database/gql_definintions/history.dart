@@ -250,7 +250,7 @@ class HistoryDAO {
     );
   }
 
-  Future<Person?> updatePersonLastVisit({
+  Future<LastRecordedByInfo?> updatePersonLastVisit({
     required String personId,
     required DateTime lastVisit,
   }) {
@@ -263,7 +263,7 @@ class HistoryDAO {
           lastVisit: lastVisit,
         ).toJson(),
         parserFn: db.parser
-            .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
+            .singleOrNullParser(db.parser.singleOrNullParser(LastRecordedByInfo.fromJson)),
       ),
     );
   }

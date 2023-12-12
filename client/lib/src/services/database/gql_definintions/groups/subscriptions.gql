@@ -15,7 +15,7 @@ subscription watchGroup($id: Uuid!) {
       ...ServiceWithStudyYears
     }
     lastEdit {
-      ...EditHistory
+      ...LatestEditHistory
     }
     validity
     adminUsers(distinctOn: uid) {

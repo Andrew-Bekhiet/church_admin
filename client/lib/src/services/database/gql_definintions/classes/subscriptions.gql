@@ -15,7 +15,7 @@ subscription watchClass($id: Uuid!) {
       ...ServiceWithStudyYears
     }
     lastEdit {
-      ...EditHistory
+      ...LatestEditHistory
     }
     serviceGender
     studyYear {

@@ -31,7 +31,13 @@ subscription personVisitHistory(
   $limit: Int = 200
 ) {
   historyVisitHistory(
-    where: { _and: [{ personId: { _eq: $personId } }, { _and: $where }] }
+    where: {
+      _and: [
+        { table: { _eq: "persons" } }
+        { recordId: { _eq: $personId } }
+        { _and: $where }
+      ]
+    }
     limit: $limit
     orderBy: { time: DESC }
   ) {

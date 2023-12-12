@@ -31,7 +31,7 @@ subscription watchService($id: Uuid!) {
   servicesByPk(id: $id) {
     ...ServiceWithStudyYears
     lastEdit {
-      ...EditHistory
+      ...LatestEditHistory
     }
     adminUsers(distinctOn: uid) {
       user {

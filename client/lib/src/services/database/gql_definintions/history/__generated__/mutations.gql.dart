@@ -1,3 +1,4 @@
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import 'package:church_admin/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -1968,7 +1969,14 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
             name: NameNode(value: 'object'),
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
-                name: NameNode(value: 'personId'),
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'persons',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
                 value: VariableNode(name: NameNode(value: 'personId')),
               ),
               ObjectFieldNode(
@@ -1980,24 +1988,9 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
+          FragmentSpreadNode(
+            name: NameNode(value: 'LatestVisitHistory'),
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Person'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -2017,34 +2010,24 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
+  fragmentDefinitionLatestVisitHistory,
 ]);
 
 class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
-  Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne({
-    required this.person,
-    this.$__typename = 'HistoryVisitHistory',
-  });
+  Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
+      {this.$__typename = 'HistoryVisitHistory'});
 
   factory Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne.fromJson(
       Map<String, dynamic> json) {
-    final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
-      person: Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
+        $__typename: (l$$__typename as String));
   }
-
-  final Fragment_Person person;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$person = person;
-    _resultData['person'] = l$person.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2052,12 +2035,8 @@ class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
 
   @override
   int get hashCode {
-    final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$$__typename]);
   }
 
   @override
@@ -2068,11 +2047,6 @@ class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
     if (!(other
             is Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne) ||
         runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (l$person != lOther$person) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2107,11 +2081,7 @@ abstract class CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
           TRes res) =
       _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne;
 
-  TRes call({
-    Fragment_Person? person,
-    String? $__typename,
-  });
-  CopyWith_Fragment_Person<TRes> get person;
+  TRes call({String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
@@ -2131,23 +2101,11 @@ class _CopyWithImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? person = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
+  TRes call({Object? $__typename = _undefined}) =>
       _then(Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person as Fragment_Person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-
-  CopyWith_Fragment_Person<TRes> get person {
-    final local$person = _instance.person;
-    return CopyWith_Fragment_Person(local$person, (e) => call(person: e));
-  }
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String)));
 }
 
 class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
@@ -2160,12 +2118,5 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
 
   TRes _res;
 
-  call({
-    Fragment_Person? person,
-    String? $__typename,
-  }) =>
-      _res;
-
-  CopyWith_Fragment_Person<TRes> get person =>
-      CopyWith_Fragment_Person.stub(_res);
+  call({String? $__typename}) => _res;
 }

@@ -21,7 +21,7 @@ subscription watchFamily($id: Uuid!) {
     address
     notes
     lastEdit {
-      ...EditHistory
+      ...LatestEditHistory
     }
   }
 }

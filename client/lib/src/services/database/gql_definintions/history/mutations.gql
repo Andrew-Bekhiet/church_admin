@@ -44,10 +44,8 @@ mutation insertPersonLastCall($personId: Uuid!, $lastCall: Timestamptz!) {
 
 mutation insertPersonLastVisit($personId: Uuid!, $lastVisit: Timestamptz!) {
   insertHistoryVisitHistoryOne(
-    object: { personId: $personId, time: $lastVisit }
+    object: { table: "persons", recordId: $personId, time: $lastVisit }
   ) {
-    person {
-      ...Person
-    }
+    ...LatestVisitHistory
   }
 }
