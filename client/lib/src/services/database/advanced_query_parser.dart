@@ -83,13 +83,13 @@ class AdvancedQueryParser {
           ],
           orderBy: jsonOrderBy,
         ),
-        'limit': limit ?? (event.instance.limit + 1),
+        if (limit != null) 'limit': limit,
       },
     );
   }
 }
 
-extension _ToGQLFieldWithSelection on Json {
+extension ToGQLFieldWithSelection on Json {
   FieldNode toGQLFieldWithSelection() {
     return FieldNode(
       name: NameNode(value: keys.single),
