@@ -219,7 +219,6 @@ Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
           n.android!.visibility == expected.android!.visibility &&
           n.android!.showWhen == expected.android!.showWhen,
     );
-
 Matcher matchExpectedNotification(Notification expectedNotification) =>
     predicate<Notification>(
       (n) =>

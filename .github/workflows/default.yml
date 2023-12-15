@@ -73,10 +73,21 @@ jobs:
           cp --force lib/src/services/secrets/secrets_service_ci_impl.dart lib/src/services/secrets/secrets_service_impl.dart
           cp pubspec_overrides_ci.yaml pubspec_overrides.yaml
 
-      - name: Install dependencies
+      - name: Override git pubspec overrides
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         env:
           DEPS_TOKEN: ${{ secrets.DEPS_TOKEN }}
+        run: |
+          cat > pubspec_overrides.yaml << EOF
+          dependency_overrides:
+            church_admin_generator:
+              git:
+                url: https://${DEPS_TOKEN}@github.com/Andrew-Bekhiet/church_admin_generator.git
+                ref: master
+          EOF
+
+      - name: Install dependencies
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         run:
           flutter pub get
 
