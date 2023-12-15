@@ -228,6 +228,7 @@ Matcher matchExpectedNotification(Notification expectedNotification) =>
           n.senderUID == expectedNotification.senderUID &&
           n.type == expectedNotification.type,
     );
+
 void _setUp() {
   final overrides = [
     _setUpMockInitializationService(),
