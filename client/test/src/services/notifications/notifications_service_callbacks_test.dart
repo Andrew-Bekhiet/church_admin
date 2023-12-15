@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/gql_definintions.dart';
-import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart';
+import 'package:church_admin/src/services/database/advanced_query_parser.dart';
 import 'package:church_admin/src/services/notifications/notifications_storage.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
@@ -18,8 +19,8 @@ import 'notifications_service_callbacks_test.mocks.dart';
   MockSpec<AuthService>(),
   MockSpec<NotificationsService>(),
   MockSpec<DatabaseService>(),
-  MockSpec<PersonsDAO>(),
-  MockSpec<PersonsNotificationsQueries>(),
+  MockSpec<AdvancedQueryParser>(),
+  MockSpec<GQLPaginatableStream>(),
 ])
 void main() {
   group(
@@ -81,8 +82,6 @@ void main() {
                 channelId: 'Kodas',
                 callback: NotificationsServiceCallbacks.showKodasNotification,
                 type: LocalNotificationType.kodas,
-                expectedNotificationsQueriesCall: (q) =>
-                    q.getPersonsKodasWarning(date: anyNamed('date')),
               );
             },
           );
@@ -97,8 +96,6 @@ void main() {
                 channelId: 'Meeting',
                 callback: NotificationsServiceCallbacks.showMeetingNotification,
                 type: LocalNotificationType.meeting,
-                expectedNotificationsQueriesCall: (q) =>
-                    q.getPersonsMeetingWarning(date: anyNamed('date')),
               );
             },
           );
@@ -113,8 +110,6 @@ void main() {
                 channelId: 'Visit',
                 callback: NotificationsServiceCallbacks.showVisitNotification,
                 type: LocalNotificationType.visit,
-                expectedNotificationsQueriesCall: (q) =>
-                    q.getPersonsVisitWarning(date: anyNamed('date')),
               );
             },
           );
@@ -130,8 +125,6 @@ void main() {
                 callback:
                     NotificationsServiceCallbacks.showConfessionNotification,
                 type: LocalNotificationType.confession,
-                expectedNotificationsQueriesCall: (q) =>
-                    q.getPersonsConfessionWarning(date: anyNamed('date')),
               );
             },
           );
@@ -148,8 +141,6 @@ void main() {
                 callback:
                     NotificationsServiceCallbacks.showBirthDayNotification,
                 type: LocalNotificationType.birthday,
-                expectedNotificationsQueriesCall: (q) =>
-                    q.getBirthdayPersons(date: anyNamed('date')),
               );
             },
           );
@@ -165,8 +156,6 @@ Future<void> _testNotificationMethod({
   required String channelDescription,
   required String channelId,
   required LocalNotificationType type,
-  required void Function(MockPersonsNotificationsQueries)
-      expectedNotificationsQueriesCall,
   required Future<void> Function() callback,
   String icon = 'warning_notification',
 }) async {
@@ -186,16 +175,15 @@ Future<void> _testNotificationMethod({
       icon: icon,
     ),
   );
+  final advancedQueryParser =
+      DatabaseService.I.advancedQueryParser as MockAdvancedQueryParser;
 
   await callback();
 
-  final notificationsQueries = DatabaseService.I.persons.notificationsQueries
-      as MockPersonsNotificationsQueries;
-
-  verifyInOrder([
+  final paginatableStreamCall = verifyInOrder([
     InitializationService.I.initialize(),
     AuthService.I.isSignedIn,
-    expectedNotificationsQueriesCall(notificationsQueries),
+    advancedQueryParser.createPaginatableStream(captureAny),
     (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
       argThat(matchExpectedNotification(expectedNotification)),
     ),
@@ -207,7 +195,15 @@ Future<void> _testNotificationMethod({
         named: 'notificationDetails',
       ),
     ),
-  ]);
+  ]).captured[2];
+
+  final advQueryJson =
+      json.encode((paginatableStreamCall.first as AdvancedQuery).toJson());
+
+  expect(
+    advQueryJson,
+    contains(type.name),
+  );
 }
 
 Matcher matchExpectedNotificationDetails(NotificationDetails expected) =>
@@ -286,43 +282,22 @@ final expectedPersons = [
 ];
 
 Override _setUpMockDatabaseService() {
-  final mockPersonsNotificationsQueries = MockPersonsNotificationsQueries();
+  final expectedStream = MockGQLPaginatableStream<Person>();
+
   when(
-    mockPersonsNotificationsQueries.getPersonsKodasWarning(
-      date: anyNamed('date'),
-    ),
-  ).thenAnswer((_) async => expectedPersons);
-  when(
-    mockPersonsNotificationsQueries.getPersonsMeetingWarning(
-      date: anyNamed('date'),
-    ),
-  ).thenAnswer((_) async => expectedPersons);
-  when(
-    mockPersonsNotificationsQueries.getPersonsVisitWarning(
-      date: anyNamed('date'),
-    ),
-  ).thenAnswer((_) async => expectedPersons);
-  when(
-    mockPersonsNotificationsQueries.getPersonsConfessionWarning(
-      date: anyNamed('date'),
-    ),
-  ).thenAnswer((_) async => expectedPersons);
-  when(
-    mockPersonsNotificationsQueries.getBirthdayPersons(
-      date: anyNamed('date'),
-    ),
+    expectedStream.first,
   ).thenAnswer((_) async => expectedPersons);
 
-  final mockPersonsDAO = MockPersonsDAO();
-
-  when(mockPersonsDAO.notificationsQueries)
-      .thenReturn(mockPersonsNotificationsQueries);
+  final mockAdvQueryParser = MockAdvancedQueryParser();
+  when(
+    mockAdvQueryParser.createPaginatableStream(any),
+  ).thenAnswer((_) => expectedStream);
 
   final mockDatabaseService = MockDatabaseService();
 
   when(
-    mockDatabaseService.persons,
-  ).thenReturn(mockPersonsDAO);
+    mockDatabaseService.advancedQueryParser,
+  ).thenReturn(mockAdvQueryParser);
 
   return databaseServiceProvider.overrideWithValue(mockDatabaseService);
 }

@@ -3,25 +3,21 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i7;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:church_admin/src/services/database/advanced_query_parser.dart'
     as _i5;
 import 'package:church_admin/src/services/database/gql_definintions.dart'
     as _i6;
-import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
-    as _i12;
-import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart'
-    as _i7;
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i4;
 import 'package:church_admin/src/services/notifications/notifications_storage.dart'
     as _i8;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    as _i10;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i10;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
-import 'package:uuid/uuid.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -211,141 +207,30 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i6.HistoryDAO {
         );
 }
 
-class _FakePersonsNotificationsQueries_17 extends _i1.SmartFake
-    implements _i7.PersonsNotificationsQueries {
-  _FakePersonsNotificationsQueries_17(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeStreamAllConfig_18<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamAllConfig<T, TBoolExp, TOrderByExp> {
-  _FakeStreamAllConfig_18(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeStreamSingleByIdConfig_19<T> extends _i1.SmartFake
-    implements _i2.StreamSingleByIdConfig<T> {
-  _FakeStreamSingleByIdConfig_19(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDeleteSingleByIdConfig_20<T> extends _i1.SmartFake
-    implements _i2.DeleteSingleByIdConfig<T> {
-  _FakeDeleteSingleByIdConfig_20(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUpdateObjectConfig_21<T> extends _i1.SmartFake
-    implements _i2.UpdateObjectConfig<T> {
-  _FakeUpdateObjectConfig_21(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeCreateObjectConfig_22<T> extends _i1.SmartFake
-    implements _i2.CreateObjectConfig<T> {
-  _FakeCreateObjectConfig_22(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDatabaseService_23 extends _i1.SmartFake
-    implements _i2.DatabaseService {
-  _FakeDatabaseService_23(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakePerson_24 extends _i1.SmartFake implements _i2.Person {
-  _FakePerson_24(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
-        TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
-  _FakeStreamableDAOProxy_25(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeCreatableDAOProxy_26<T extends _i2.ViewableWithID>
-    extends _i1.SmartFake implements _i2.CreatableDAOProxy<T> {
-  _FakeCreatableDAOProxy_26(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeUpdatableDAOProxy_27<T extends _i2.ViewableWithID>
-    extends _i1.SmartFake implements _i2.UpdatableDAOProxy<T> {
-  _FakeUpdatableDAOProxy_27(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDeletableDAOProxy_28<T extends _i2.ViewableWithID>
-    extends _i1.SmartFake implements _i2.DeletableDAOProxy<T> {
-  _FakeDeletableDAOProxy_28(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeGQLPaginatableStream_29<T> extends _i1.SmartFake
+class _FakeGQLPaginatableStream_17<T> extends _i1.SmartFake
     implements _i2.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_29(
+  _FakeGQLPaginatableStream_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamSubscription_18<T1> extends _i1.SmartFake
+    implements _i7.StreamSubscription<T1> {
+  _FakeStreamSubscription_18(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFuture_19<T1> extends _i1.SmartFake implements _i7.Future<T1> {
+  _FakeFuture_19(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -360,26 +245,26 @@ class _FakeGQLPaginatableStream_29<T> extends _i1.SmartFake
 class MockNotificationsStorage extends _i1.Mock
     implements _i8.NotificationsStorage {
   @override
-  _i9.Future<void> writeNotification(_i2.Notification? notification) =>
+  _i7.Future<void> writeNotification(_i2.Notification? notification) =>
       (super.noSuchMethod(
         Invocation.method(
           #writeNotification,
           [notification],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<_i2.Notification?> readNotification(String? notificationId) =>
+  _i7.Future<_i2.Notification?> readNotification(String? notificationId) =>
       (super.noSuchMethod(
         Invocation.method(
           #readNotification,
           [notificationId],
         ),
-        returnValue: _i9.Future<_i2.Notification?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Notification?>.value(),
-      ) as _i9.Future<_i2.Notification?>);
+        returnValue: _i7.Future<_i2.Notification?>.value(),
+        returnValueForMissingStub: _i7.Future<_i2.Notification?>.value(),
+      ) as _i7.Future<_i2.Notification?>);
 }
 
 /// A class which mocks [InitializationService].
@@ -395,14 +280,14 @@ class MockInitializationService extends _i1.Mock
       ) as Set<_i2.Initializer>);
 
   @override
-  _i9.Future<void> initialize() => (super.noSuchMethod(
+  _i7.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
           #initialize,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [AuthService].
@@ -466,7 +351,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
       ) as _i3.ValueStream<String?>);
 
   @override
-  _i9.Future<bool> signInWithEmailPassword({
+  _i7.Future<bool> signInWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -479,12 +364,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
-  _i9.Future<bool> reauthWithEmailPassword({
+  _i7.Future<bool> reauthWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -497,12 +382,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
-  _i9.Future<bool> signUpWithEmailPassword({
+  _i7.Future<bool> signUpWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -515,69 +400,69 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
-  _i9.Future<void> sendEmailVerification() => (super.noSuchMethod(
+  _i7.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
           #sendEmailVerification,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> reload() => (super.noSuchMethod(
+  _i7.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
           #reload,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> refreshToken() => (super.noSuchMethod(
+  _i7.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+  _i7.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
           #getStoredPasswordHash,
           [],
         ),
-        returnValue: _i9.Future<String?>.value(),
-        returnValueForMissingStub: _i9.Future<String?>.value(),
-      ) as _i9.Future<String?>);
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
 
   @override
-  _i9.Future<void> signOut() => (super.noSuchMethod(
+  _i7.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> dispose() => (super.noSuchMethod(
+  _i7.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [NotificationsService].
@@ -586,12 +471,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
 class MockNotificationsService extends _i1.Mock
     implements _i2.NotificationsService {
   @override
-  _i9.Stream<_i2.Notification> get onNotificationTapStream =>
+  _i7.Stream<_i2.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
         Invocation.getter(#onNotificationTapStream),
-        returnValue: _i9.Stream<_i2.Notification>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i2.Notification>.empty(),
-      ) as _i9.Stream<_i2.Notification>);
+        returnValue: _i7.Stream<_i2.Notification>.empty(),
+        returnValueForMissingStub: _i7.Stream<_i2.Notification>.empty(),
+      ) as _i7.Stream<_i2.Notification>);
 
   @override
   bool get isPaused => (super.noSuchMethod(
@@ -629,17 +514,17 @@ class MockNotificationsService extends _i1.Mock
       );
 
   @override
-  _i9.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
+  _i7.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
         Invocation.method(
           #getInitialNotification,
           [],
         ),
-        returnValue: _i9.Future<_i2.Notification?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Notification?>.value(),
-      ) as _i9.Future<_i2.Notification?>);
+        returnValue: _i7.Future<_i2.Notification?>.value(),
+        returnValueForMissingStub: _i7.Future<_i2.Notification?>.value(),
+      ) as _i7.Future<_i2.Notification?>);
 
   @override
-  _i9.Future<void> scheduleBirthDayNotification(
+  _i7.Future<void> scheduleBirthDayNotification(
           [_i2.NotificationSetting? notificationSetting =
               const _i2.NotificationSetting(
             11,
@@ -651,12 +536,12 @@ class MockNotificationsService extends _i1.Mock
           #scheduleBirthDayNotification,
           [notificationSetting],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> scheduleMeetingNotification(
+  _i7.Future<void> scheduleMeetingNotification(
           [_i2.NotificationSetting? notificationSetting =
               const _i2.NotificationSetting(
             11,
@@ -668,12 +553,12 @@ class MockNotificationsService extends _i1.Mock
           #scheduleMeetingNotification,
           [notificationSetting],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> scheduleKodasNotification(
+  _i7.Future<void> scheduleKodasNotification(
           [_i2.NotificationSetting? notificationSetting =
               const _i2.NotificationSetting(
             11,
@@ -685,12 +570,12 @@ class MockNotificationsService extends _i1.Mock
           #scheduleKodasNotification,
           [notificationSetting],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> scheduleConfessionNotification(
+  _i7.Future<void> scheduleConfessionNotification(
           [_i2.NotificationSetting? notificationSetting =
               const _i2.NotificationSetting(
             11,
@@ -702,25 +587,25 @@ class MockNotificationsService extends _i1.Mock
           #scheduleConfessionNotification,
           [notificationSetting],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
+  _i7.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
         Invocation.method(
           #scheduleDefaultNotifications,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<void> notify(
+  _i7.Future<void> notify(
     _i2.Notification? notification, {
     int? id,
-    _i10.NotificationDetails? notificationDetails,
+    _i9.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -731,41 +616,41 @@ class MockNotificationsService extends _i1.Mock
             #notificationDetails: notificationDetails,
           },
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i9.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
+  _i7.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerFCMTokenAndListenForChanges,
           [],
           {#cachedToken: cachedToken},
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
-  _i9.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
+  _i7.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
         Invocation.method(
           #requestNotificationsPermission,
           [],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
-  _i9.Future<void> dispose() => (super.noSuchMethod(
+  _i7.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [DatabaseService].
@@ -976,695 +861,731 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
       ) as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
 }
 
-/// A class which mocks [PersonsDAO].
+/// A class which mocks [AdvancedQueryParser].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPersonsDAO extends _i1.Mock implements _i6.PersonsDAO {
+class MockAdvancedQueryParser extends _i1.Mock
+    implements _i5.AdvancedQueryParser {
   @override
-  _i7.PersonsNotificationsQueries get notificationsQueries =>
-      (super.noSuchMethod(
-        Invocation.getter(#notificationsQueries),
-        returnValue: _FakePersonsNotificationsQueries_17(
-          this,
-          Invocation.getter(#notificationsQueries),
-        ),
-        returnValueForMissingStub: _FakePersonsNotificationsQueries_17(
-          this,
-          Invocation.getter(#notificationsQueries),
-        ),
-      ) as _i7.PersonsNotificationsQueries);
-
-  @override
-  _i2.StreamAllConfig<_i2.Person,
-          _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_18<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_18<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i2.StreamAllConfig<_i2.Person, _i2.Input_PersonsBoolExp,
-              _i2.Input_PersonsOrderBy>);
-
-  @override
-  _i2.StreamSingleByIdConfig<_i2.Person> get baseStreamSingleByIdConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeStreamSingleByIdConfig_19<_i2.Person>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-        returnValueForMissingStub: _FakeStreamSingleByIdConfig_19<_i2.Person>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-      ) as _i2.StreamSingleByIdConfig<_i2.Person>);
-
-  @override
-  _i2.DeleteSingleByIdConfig<_i2.Person> get baseDeleteSingleByIdConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseDeleteSingleByIdConfig),
-        returnValue: _FakeDeleteSingleByIdConfig_20<_i2.Person>(
-          this,
-          Invocation.getter(#baseDeleteSingleByIdConfig),
-        ),
-        returnValueForMissingStub: _FakeDeleteSingleByIdConfig_20<_i2.Person>(
-          this,
-          Invocation.getter(#baseDeleteSingleByIdConfig),
-        ),
-      ) as _i2.DeleteSingleByIdConfig<_i2.Person>);
-
-  @override
-  _i2.UpdateObjectConfig<_i2.Person> get baseUpdateObjectConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseUpdateObjectConfig),
-        returnValue: _FakeUpdateObjectConfig_21<_i2.Person>(
-          this,
-          Invocation.getter(#baseUpdateObjectConfig),
-        ),
-        returnValueForMissingStub: _FakeUpdateObjectConfig_21<_i2.Person>(
-          this,
-          Invocation.getter(#baseUpdateObjectConfig),
-        ),
-      ) as _i2.UpdateObjectConfig<_i2.Person>);
-
-  @override
-  _i2.CreateObjectConfig<_i2.Person> get baseCreateObjectConfig =>
-      (super.noSuchMethod(
-        Invocation.getter(#baseCreateObjectConfig),
-        returnValue: _FakeCreateObjectConfig_22<_i2.Person>(
-          this,
-          Invocation.getter(#baseCreateObjectConfig),
-        ),
-        returnValueForMissingStub: _FakeCreateObjectConfig_22<_i2.Person>(
-          this,
-          Invocation.getter(#baseCreateObjectConfig),
-        ),
-      ) as _i2.CreateObjectConfig<_i2.Person>);
-
-  @override
-  _i2.DatabaseService get db => (super.noSuchMethod(
-        Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_23(
-          this,
-          Invocation.getter(#db),
-        ),
-        returnValueForMissingStub: _FakeDatabaseService_23(
-          this,
-          Invocation.getter(#db),
-        ),
-      ) as _i2.DatabaseService);
-
-  @override
-  _i2.Person Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
-        Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _FakePerson_24(
-          this,
-          Invocation.getter(#fromJson),
-        ),
-        returnValueForMissingStub: (Map<String, dynamic> json) =>
-            _FakePerson_24(
-          this,
-          Invocation.getter(#fromJson),
-        ),
-      ) as _i2.Person Function(Map<String, dynamic>));
-
-  @override
-  _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
-        Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-      ) as _i2.DBGraphQLClient);
-
-  @override
-  _i2.StreamableDAOProxy<_i2.Person,
-          _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_25<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i2.StreamableDAOProxy<_i2.Person, _i2.Input_PersonsBoolExp,
-              _i2.Input_PersonsOrderBy>);
-
-  @override
-  _i2.CreatableDAOProxy<_i2.Person> get createObjectProxy =>
-      (super.noSuchMethod(
-        Invocation.getter(#createObjectProxy),
-        returnValue: _FakeCreatableDAOProxy_26<_i2.Person>(
-          this,
-          Invocation.getter(#createObjectProxy),
-        ),
-        returnValueForMissingStub: _FakeCreatableDAOProxy_26<_i2.Person>(
-          this,
-          Invocation.getter(#createObjectProxy),
-        ),
-      ) as _i2.CreatableDAOProxy<_i2.Person>);
-
-  @override
-  _i2.UpdatableDAOProxy<_i2.Person> get updateObjectProxy =>
-      (super.noSuchMethod(
-        Invocation.getter(#updateObjectProxy),
-        returnValue: _FakeUpdatableDAOProxy_27<_i2.Person>(
-          this,
-          Invocation.getter(#updateObjectProxy),
-        ),
-        returnValueForMissingStub: _FakeUpdatableDAOProxy_27<_i2.Person>(
-          this,
-          Invocation.getter(#updateObjectProxy),
-        ),
-      ) as _i2.UpdatableDAOProxy<_i2.Person>);
-
-  @override
-  _i2.DeletableDAOProxy<_i2.Person> get deleteSingleByIdProxy =>
-      (super.noSuchMethod(
-        Invocation.getter(#deleteSingleByIdProxy),
-        returnValue: _FakeDeletableDAOProxy_28<_i2.Person>(
-          this,
-          Invocation.getter(#deleteSingleByIdProxy),
-        ),
-        returnValueForMissingStub: _FakeDeletableDAOProxy_28<_i2.Person>(
-          this,
-          Invocation.getter(#deleteSingleByIdProxy),
-        ),
-      ) as _i2.DeletableDAOProxy<_i2.Person>);
-
-  @override
-  _i9.Stream<_i2.Person?> streamSingleById({
-    required String? id,
-    int? servicesLimit = 6,
-    int? classesLimit = 6,
-    int? groupsLimit = 6,
-  }) =>
+  _i2.GQLPaginatableStream<_i2.ViewableWithID> createPaginatableStream(
+    _i2.AdvancedQuery? query, [
+    _i3.BehaviorSubject<String?>? searchStream,
+  ]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #streamSingleById,
-          [],
-          {
-            #id: id,
-            #servicesLimit: servicesLimit,
-            #classesLimit: classesLimit,
-            #groupsLimit: groupsLimit,
-          },
+          #createPaginatableStream,
+          [
+            query,
+            searchStream,
+          ],
         ),
-        returnValue: _i9.Stream<_i2.Person?>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i2.Person?>.empty(),
-      ) as _i9.Stream<_i2.Person?>);
-
-  @override
-  _i9.Future<_i2.Person?> personServicesClassesGroups(
-          {required String? personId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #personServicesClassesGroups,
-          [],
-          {#personId: personId},
-        ),
-        returnValue: _i9.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Person?>.value(),
-      ) as _i9.Future<_i2.Person?>);
-
-  @override
-  _i9.Future<_i2.PersonsGeolocationsResponse?> personsGeolocations({
-    String? personId,
-    List<_i11.UuidValue>? areasIds = const [],
-    List<_i11.UuidValue>? streetsIds = const [],
-    List<_i11.UuidValue>? familiesIds = const [],
-    List<_i11.UuidValue>? storesIds = const [],
-    List<_i11.UuidValue>? servicesIds = const [],
-    List<_i11.UuidValue>? classesIds = const [],
-    List<_i11.UuidValue>? groupsIds = const [],
-    bool? getAreas = false,
-    bool? getStreets = false,
-    bool? getFamilies = false,
-    bool? getStores = false,
-    bool? getPersons = false,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #personsGeolocations,
-          [],
-          {
-            #personId: personId,
-            #areasIds: areasIds,
-            #streetsIds: streetsIds,
-            #familiesIds: familiesIds,
-            #storesIds: storesIds,
-            #servicesIds: servicesIds,
-            #classesIds: classesIds,
-            #groupsIds: groupsIds,
-            #getAreas: getAreas,
-            #getStreets: getStreets,
-            #getFamilies: getFamilies,
-            #getStores: getStores,
-            #getPersons: getPersons,
-          },
-        ),
-        returnValue: _i9.Future<_i2.PersonsGeolocationsResponse?>.value(),
-        returnValueForMissingStub:
-            _i9.Future<_i2.PersonsGeolocationsResponse?>.value(),
-      ) as _i9.Future<_i2.PersonsGeolocationsResponse?>);
-
-  @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
-      paginatePersonClassAttendance({
-    required String? personId,
-    required String? classId,
-    bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonClassAttendance,
-              [],
-              {
-                #personId: personId,
-                #classId: classId,
-                #asAdmin: asAdmin,
-                #where: where,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonClassAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #classId: classId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonClassAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #classId: classId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
-
-  @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
-      paginatePersonGroupAttendance({
-    required String? personId,
-    required String? groupId,
-    bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonGroupAttendance,
-              [],
-              {
-                #personId: personId,
-                #groupId: groupId,
-                #asAdmin: asAdmin,
-                #where: where,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonGroupAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #groupId: groupId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonGroupAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #groupId: groupId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
-
-  @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
-      paginatePersonServiceAttendance({
-    required String? personId,
-    required String? serviceId,
-    bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
-  }) =>
-          (super.noSuchMethod(
-            Invocation.method(
-              #paginatePersonServiceAttendance,
-              [],
-              {
-                #personId: personId,
-                #serviceId: serviceId,
-                #asAdmin: asAdmin,
-                #where: where,
-              },
-            ),
-            returnValue: _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonServiceAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #serviceId: serviceId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-            returnValueForMissingStub:
-                _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
-              this,
-              Invocation.method(
-                #paginatePersonServiceAttendance,
-                [],
-                {
-                  #personId: personId,
-                  #serviceId: serviceId,
-                  #asAdmin: asAdmin,
-                  #where: where,
-                },
-              ),
-            ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
-
-  @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo> paginatePersonAttendance({
-    required _i12.Variables_Subscription_personAttendance Function(
-      int,
-      _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>,
-    )? vars,
-    int? limit,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonAttendance,
-          [],
-          {
-            #vars: vars,
-            #limit: limit,
-          },
-        ),
-        returnValue: _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
+        returnValue: _FakeGQLPaginatableStream_17<_i2.ViewableWithID>(
           this,
           Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
           ),
         ),
         returnValueForMissingStub:
-            _FakeGQLPaginatableStream_29<_i2.LastRecordedByInfo>(
+            _FakeGQLPaginatableStream_17<_i2.ViewableWithID>(
           this,
           Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
           ),
         ),
-      ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
-
-  @override
-  _i9.Future<_i2.Person?> getPersonAnalysis({
-    required String? personId,
-    required _i2.PersonAnalysisOptions? options,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonAnalysis,
-          [],
-          {
-            #personId: personId,
-            #options: options,
-          },
-        ),
-        returnValue: _i9.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Person?>.value(),
-      ) as _i9.Future<_i2.Person?>);
-
-  @override
-  _i9.Future<_i2.Person?> updatePersonSpiritData({
-    required String? personId,
-    required DateTime? lastConfession,
-    required DateTime? lastKodas,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updatePersonSpiritData,
-          [],
-          {
-            #personId: personId,
-            #lastConfession: lastConfession,
-            #lastKodas: lastKodas,
-          },
-        ),
-        returnValue: _i9.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Person?>.value(),
-      ) as _i9.Future<_i2.Person?>);
-
-  @override
-  _i2.GQLPaginatableStream<_i2.Person> streamAll({
-    _i9.Stream<String?>? searchQuery,
-    List<_i2.Input_PersonsBoolExp>? where,
-    List<_i2.Input_PersonsOrderBy>? orderBy,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #streamAll,
-          [],
-          {
-            #searchQuery: searchQuery,
-            #where: where,
-            #orderBy: orderBy,
-          },
-        ),
-        returnValue: _FakeGQLPaginatableStream_29<_i2.Person>(
-          this,
-          Invocation.method(
-            #streamAll,
-            [],
-            {
-              #searchQuery: searchQuery,
-              #where: where,
-              #orderBy: orderBy,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_29<_i2.Person>(
-          this,
-          Invocation.method(
-            #streamAll,
-            [],
-            {
-              #searchQuery: searchQuery,
-              #where: where,
-              #orderBy: orderBy,
-            },
-          ),
-        ),
-      ) as _i2.GQLPaginatableStream<_i2.Person>);
-
-  @override
-  _i9.Future<_i2.Person> createObject({required _i2.Person? newObject}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #createObject,
-          [],
-          {#newObject: newObject},
-        ),
-        returnValue: _i9.Future<_i2.Person>.value(_FakePerson_24(
-          this,
-          Invocation.method(
-            #createObject,
-            [],
-            {#newObject: newObject},
-          ),
-        )),
-        returnValueForMissingStub: _i9.Future<_i2.Person>.value(_FakePerson_24(
-          this,
-          Invocation.method(
-            #createObject,
-            [],
-            {#newObject: newObject},
-          ),
-        )),
-      ) as _i9.Future<_i2.Person>);
-
-  @override
-  _i9.Future<_i2.Person?> updateObject({
-    required _i2.Person? newObject,
-    required _i2.Person? oldObject,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateObject,
-          [],
-          {
-            #newObject: newObject,
-            #oldObject: oldObject,
-          },
-        ),
-        returnValue: _i9.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Person?>.value(),
-      ) as _i9.Future<_i2.Person?>);
-
-  @override
-  _i9.Future<_i2.Person?> deleteById({required String? id}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deleteById,
-          [],
-          {#id: id},
-        ),
-        returnValue: _i9.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i9.Future<_i2.Person?>.value(),
-      ) as _i9.Future<_i2.Person?>);
+      ) as _i2.GQLPaginatableStream<_i2.ViewableWithID>);
 }
 
-/// A class which mocks [PersonsNotificationsQueries].
+/// A class which mocks [GQLPaginatableStream].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPersonsNotificationsQueries extends _i1.Mock
-    implements _i7.PersonsNotificationsQueries {
+class MockGQLPaginatableStream<T> extends _i1.Mock
+    implements _i2.GQLPaginatableStream<T> {
   @override
-  _i2.DatabaseService get db => (super.noSuchMethod(
-        Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_23(
+  _i7.Stream<Iterable<T>> Function(
+      _i2
+          .GQLPaginatableStreamEvent<T>) get subscriptionStreamCallback =>
+      (super.noSuchMethod(
+        Invocation.getter(#subscriptionStreamCallback),
+        returnValue: (_i2.GQLPaginatableStreamEvent<T> __p0) =>
+            _i7.Stream<Iterable<T>>.empty(),
+        returnValueForMissingStub: (_i2.GQLPaginatableStreamEvent<T> __p0) =>
+            _i7.Stream<Iterable<T>>.empty(),
+      ) as _i7.Stream<Iterable<T>> Function(_i2.GQLPaginatableStreamEvent<T>));
+
+  @override
+  set lastSearch(String? _lastSearch) => super.noSuchMethod(
+        Invocation.setter(
+          #lastSearch,
+          _lastSearch,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i2.OnQuery<T> get streamDelegate => (super.noSuchMethod(
+        Invocation.getter(#streamDelegate),
+        returnValue: (
+          _i2.DelegatingPaginatableStream<T> instance,
+          _i7.Stream<int> offset,
+        ) =>
+            _i7.Stream<_i2.DelegatingStreamResult<T>>.empty(),
+        returnValueForMissingStub: (
+          _i2.DelegatingPaginatableStream<T> instance,
+          _i7.Stream<int> offset,
+        ) =>
+            _i7.Stream<_i2.DelegatingStreamResult<T>>.empty(),
+      ) as _i2.OnQuery<T>);
+
+  @override
+  _i3.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
+        Invocation.getter(#onLoadingChanged),
+        returnValue: _FakeValueStream_1<bool>(
           this,
-          Invocation.getter(#db),
+          Invocation.getter(#onLoadingChanged),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_23(
+        returnValueForMissingStub: _FakeValueStream_1<bool>(
           this,
-          Invocation.getter(#db),
+          Invocation.getter(#onLoadingChanged),
         ),
-      ) as _i2.DatabaseService);
+      ) as _i3.ValueStream<bool>);
 
   @override
-  _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
-        Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_2(
+  bool get isLoading => (super.noSuchMethod(
+        Invocation.getter(#isLoading),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get canPaginateBackward => (super.noSuchMethod(
+        Invocation.getter(#canPaginateBackward),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get canPaginateForward => (super.noSuchMethod(
+        Invocation.getter(#canPaginateForward),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  int get currentOffset => (super.noSuchMethod(
+        Invocation.getter(#currentOffset),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i3.ValueStream<List<T>> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _FakeValueStream_1<List<T>>(
           this,
-          Invocation.getter(#graphQLClient),
+          Invocation.getter(#stream),
         ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_2(
+        returnValueForMissingStub: _FakeValueStream_1<List<T>>(
           this,
-          Invocation.getter(#graphQLClient),
+          Invocation.getter(#stream),
         ),
-      ) as _i2.DBGraphQLClient);
+      ) as _i3.ValueStream<List<T>>);
 
   @override
-  _i9.Future<Iterable<_i2.Person>> getPersonsConfessionWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsConfessionWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-        returnValueForMissingStub:
-            _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-      ) as _i9.Future<Iterable<_i2.Person>>);
+  List<T> get currentValue => (super.noSuchMethod(
+        Invocation.getter(#currentValue),
+        returnValue: <T>[],
+        returnValueForMissingStub: <T>[],
+      ) as List<T>);
 
   @override
-  _i9.Future<Iterable<_i2.Person>> getPersonsKodasWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsKodasWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-        returnValueForMissingStub:
-            _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-      ) as _i9.Future<Iterable<_i2.Person>>);
+  int get limit => (super.noSuchMethod(
+        Invocation.getter(#limit),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 
   @override
-  _i9.Future<Iterable<_i2.Person>> getPersonsMeetingWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsMeetingWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-        returnValueForMissingStub:
-            _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-      ) as _i9.Future<Iterable<_i2.Person>>);
+  bool get isBroadcast => (super.noSuchMethod(
+        Invocation.getter(#isBroadcast),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 
   @override
-  _i9.Future<Iterable<_i2.Person>> getPersonsVisitWarning(
-          {required DateTime? date}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPersonsVisitWarning,
-          [],
-          {#date: date},
-        ),
-        returnValue: _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-        returnValueForMissingStub:
-            _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-      ) as _i9.Future<Iterable<_i2.Person>>);
+  _i7.Future<int> get length => (super.noSuchMethod(
+        Invocation.getter(#length),
+        returnValue: _i7.Future<int>.value(0),
+        returnValueForMissingStub: _i7.Future<int>.value(0),
+      ) as _i7.Future<int>);
 
   @override
-  _i9.Future<Iterable<_i2.Person>> getBirthdayPersons(
-          {required DateTime? date}) =>
+  _i7.Future<bool> get isEmpty => (super.noSuchMethod(
+        Invocation.getter(#isEmpty),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+
+  @override
+  _i7.Future<List<T>> get first => (super.noSuchMethod(
+        Invocation.getter(#first),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<List<T>> get last => (super.noSuchMethod(
+        Invocation.getter(#last),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<List<T>> get single => (super.noSuchMethod(
+        Invocation.getter(#single),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+        Invocation.method(
+          #loadPage,
+          [offset],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> loadNextPage() => (super.noSuchMethod(
+        Invocation.method(
+          #loadNextPage,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> loadPreviousPage() => (super.noSuchMethod(
+        Invocation.method(
+          #loadPreviousPage,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.StreamSubscription<List<T>> listen(
+    void Function(List<T>)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getBirthdayPersons,
-          [],
-          {#date: date},
+          #listen,
+          [onData],
+          {
+            #onError: onError,
+            #onDone: onDone,
+            #cancelOnError: cancelOnError,
+          },
         ),
-        returnValue: _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
+        returnValue: _FakeStreamSubscription_18<List<T>>(
+          this,
+          Invocation.method(
+            #listen,
+            [onData],
+            {
+              #onError: onError,
+              #onDone: onDone,
+              #cancelOnError: cancelOnError,
+            },
+          ),
+        ),
+        returnValueForMissingStub: _FakeStreamSubscription_18<List<T>>(
+          this,
+          Invocation.method(
+            #listen,
+            [onData],
+            {
+              #onError: onError,
+              #onDone: onDone,
+              #cancelOnError: cancelOnError,
+            },
+          ),
+        ),
+      ) as _i7.StreamSubscription<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> asBroadcastStream({
+    void Function(_i7.StreamSubscription<List<T>>)? onListen,
+    void Function(_i7.StreamSubscription<List<T>>)? onCancel,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asBroadcastStream,
+          [],
+          {
+            #onListen: onListen,
+            #onCancel: onCancel,
+          },
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> where(bool Function(List<T>)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #where,
+          [test],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<S> map<S>(S Function(List<T>)? convert) => (super.noSuchMethod(
+        Invocation.method(
+          #map,
+          [convert],
+        ),
+        returnValue: _i7.Stream<S>.empty(),
+        returnValueForMissingStub: _i7.Stream<S>.empty(),
+      ) as _i7.Stream<S>);
+
+  @override
+  _i7.Stream<E> asyncMap<E>(_i7.FutureOr<E> Function(List<T>)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asyncMap,
+          [convert],
+        ),
+        returnValue: _i7.Stream<E>.empty(),
+        returnValueForMissingStub: _i7.Stream<E>.empty(),
+      ) as _i7.Stream<E>);
+
+  @override
+  _i7.Stream<E> asyncExpand<E>(_i7.Stream<E>? Function(List<T>)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asyncExpand,
+          [convert],
+        ),
+        returnValue: _i7.Stream<E>.empty(),
+        returnValueForMissingStub: _i7.Stream<E>.empty(),
+      ) as _i7.Stream<E>);
+
+  @override
+  _i7.Stream<List<T>> handleError(
+    Function? onError, {
+    bool Function(dynamic)? test,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #handleError,
+          [onError],
+          {#test: test},
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<S> expand<S>(Iterable<S> Function(List<T>)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #expand,
+          [convert],
+        ),
+        returnValue: _i7.Stream<S>.empty(),
+        returnValueForMissingStub: _i7.Stream<S>.empty(),
+      ) as _i7.Stream<S>);
+
+  @override
+  _i7.Future<dynamic> pipe(_i7.StreamConsumer<List<T>>? streamConsumer) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pipe,
+          [streamConsumer],
+        ),
+        returnValue: _i7.Future<dynamic>.value(),
+        returnValueForMissingStub: _i7.Future<dynamic>.value(),
+      ) as _i7.Future<dynamic>);
+
+  @override
+  _i7.Stream<S> transform<S>(
+          _i7.StreamTransformer<List<T>, S>? streamTransformer) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #transform,
+          [streamTransformer],
+        ),
+        returnValue: _i7.Stream<S>.empty(),
+        returnValueForMissingStub: _i7.Stream<S>.empty(),
+      ) as _i7.Stream<S>);
+
+  @override
+  _i7.Future<List<T>> reduce(
+          List<T> Function(
+            List<T>,
+            List<T>,
+          )? combine) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reduce,
+          [combine],
+        ),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<S> fold<S>(
+    S? initialValue,
+    S Function(
+      S,
+      List<T>,
+    )? combine,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fold,
+          [
+            initialValue,
+            combine,
+          ],
+        ),
+        returnValue: _i10.ifNotNull(
+              _i10.dummyValueOrNull<S>(
+                this,
+                Invocation.method(
+                  #fold,
+                  [
+                    initialValue,
+                    combine,
+                  ],
+                ),
+              ),
+              (S v) => _i7.Future<S>.value(v),
+            ) ??
+            _FakeFuture_19<S>(
+              this,
+              Invocation.method(
+                #fold,
+                [
+                  initialValue,
+                  combine,
+                ],
+              ),
+            ),
+        returnValueForMissingStub: _i10.ifNotNull(
+              _i10.dummyValueOrNull<S>(
+                this,
+                Invocation.method(
+                  #fold,
+                  [
+                    initialValue,
+                    combine,
+                  ],
+                ),
+              ),
+              (S v) => _i7.Future<S>.value(v),
+            ) ??
+            _FakeFuture_19<S>(
+              this,
+              Invocation.method(
+                #fold,
+                [
+                  initialValue,
+                  combine,
+                ],
+              ),
+            ),
+      ) as _i7.Future<S>);
+
+  @override
+  _i7.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
+        Invocation.method(
+          #join,
+          [separator],
+        ),
+        returnValue: _i7.Future<String>.value(_i10.dummyValue<String>(
+          this,
+          Invocation.method(
+            #join,
+            [separator],
+          ),
+        )),
         returnValueForMissingStub:
-            _i9.Future<Iterable<_i2.Person>>.value(<_i2.Person>[]),
-      ) as _i9.Future<Iterable<_i2.Person>>);
+            _i7.Future<String>.value(_i10.dummyValue<String>(
+          this,
+          Invocation.method(
+            #join,
+            [separator],
+          ),
+        )),
+      ) as _i7.Future<String>);
+
+  @override
+  _i7.Future<bool> contains(Object? needle) => (super.noSuchMethod(
+        Invocation.method(
+          #contains,
+          [needle],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+
+  @override
+  _i7.Future<void> forEach(void Function(List<T>)? action) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #forEach,
+          [action],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<bool> every(bool Function(List<T>)? test) => (super.noSuchMethod(
+        Invocation.method(
+          #every,
+          [test],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+
+  @override
+  _i7.Future<bool> any(bool Function(List<T>)? test) => (super.noSuchMethod(
+        Invocation.method(
+          #any,
+          [test],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+        returnValueForMissingStub: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+
+  @override
+  _i7.Stream<R> cast<R>() => (super.noSuchMethod(
+        Invocation.method(
+          #cast,
+          [],
+        ),
+        returnValue: _i7.Stream<R>.empty(),
+        returnValueForMissingStub: _i7.Stream<R>.empty(),
+      ) as _i7.Stream<R>);
+
+  @override
+  _i7.Future<List<List<T>>> toList() => (super.noSuchMethod(
+        Invocation.method(
+          #toList,
+          [],
+        ),
+        returnValue: _i7.Future<List<List<T>>>.value(<List<T>>[]),
+        returnValueForMissingStub: _i7.Future<List<List<T>>>.value(<List<T>>[]),
+      ) as _i7.Future<List<List<T>>>);
+
+  @override
+  _i7.Future<Set<List<T>>> toSet() => (super.noSuchMethod(
+        Invocation.method(
+          #toSet,
+          [],
+        ),
+        returnValue: _i7.Future<Set<List<T>>>.value(<List<T>>{}),
+        returnValueForMissingStub: _i7.Future<Set<List<T>>>.value(<List<T>>{}),
+      ) as _i7.Future<Set<List<T>>>);
+
+  @override
+  _i7.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
+        Invocation.method(
+          #drain,
+          [futureValue],
+        ),
+        returnValue: _i10.ifNotNull(
+              _i10.dummyValueOrNull<E>(
+                this,
+                Invocation.method(
+                  #drain,
+                  [futureValue],
+                ),
+              ),
+              (E v) => _i7.Future<E>.value(v),
+            ) ??
+            _FakeFuture_19<E>(
+              this,
+              Invocation.method(
+                #drain,
+                [futureValue],
+              ),
+            ),
+        returnValueForMissingStub: _i10.ifNotNull(
+              _i10.dummyValueOrNull<E>(
+                this,
+                Invocation.method(
+                  #drain,
+                  [futureValue],
+                ),
+              ),
+              (E v) => _i7.Future<E>.value(v),
+            ) ??
+            _FakeFuture_19<E>(
+              this,
+              Invocation.method(
+                #drain,
+                [futureValue],
+              ),
+            ),
+      ) as _i7.Future<E>);
+
+  @override
+  _i7.Stream<List<T>> take(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #take,
+          [count],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> takeWhile(bool Function(List<T>)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #takeWhile,
+          [test],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> skip(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #skip,
+          [count],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> skipWhile(bool Function(List<T>)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #skipWhile,
+          [test],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> distinct(
+          [bool Function(
+            List<T>,
+            List<T>,
+          )? equals]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #distinct,
+          [equals],
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
+
+  @override
+  _i7.Future<List<T>> firstWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #firstWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<List<T>> lastWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #lastWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<List<T>> singleWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #singleWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Future<List<T>> elementAt(int? index) => (super.noSuchMethod(
+        Invocation.method(
+          #elementAt,
+          [index],
+        ),
+        returnValue: _i7.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i7.Future<List<T>>.value(<T>[]),
+      ) as _i7.Future<List<T>>);
+
+  @override
+  _i7.Stream<List<T>> timeout(
+    Duration? timeLimit, {
+    void Function(_i7.EventSink<List<T>>)? onTimeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #timeout,
+          [timeLimit],
+          {#onTimeout: onTimeout},
+        ),
+        returnValue: _i7.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i7.Stream<List<T>>.empty(),
+      ) as _i7.Stream<List<T>>);
 }
