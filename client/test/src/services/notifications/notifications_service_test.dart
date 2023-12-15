@@ -7,6 +7,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/notifications/notifications_storage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/file.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,6 +33,8 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<NotificationsStorage>(),
   MockSpec<NotificationsSettingsStorage>(),
   MockSpec<NotificationsService>(),
+  MockSpec<BaseCacheManager>(),
+  MockSpec<File>(),
 ])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -131,6 +135,95 @@ void main() {
           );
         },
       );
+
+      group(
+        'notificationsDetailsFor',
+        () {
+          const imageURL = 'http://example.com/image.jpg';
+
+          setUp(
+            () {
+              final mockFile = MockFile();
+              when(mockFile.path).thenReturn('mockFilePath');
+
+              when(
+                globalProviderContainer
+                    .read(baseCacheManagerProvider)
+                    .getSingleFile(imageURL),
+              ).thenAnswer((_) async => mockFile);
+            },
+          );
+
+          tearDown(
+            () {
+              reset(globalProviderContainer.read(baseCacheManagerProvider));
+            },
+          );
+
+          test(
+            'returns correct NotificationDetails',
+            () async {
+              final notification = Notification(
+                id: 'id',
+                title: 'title',
+                body: 'body',
+                senderUID: 'senderUID',
+                sentTime: DateTime.now().subtract(const Duration(minutes: 4)),
+                additionalData: const {},
+                type: NotificationType.local,
+                imageURL: imageURL,
+              );
+
+              final notificationDetails =
+                  await NotificationsService.notificationsDetailsFor(
+                notification,
+              );
+
+              expect(
+                notificationDetails.android?.styleInformation,
+                isA<BigPictureStyleInformation>(),
+              );
+              expect(
+                (notificationDetails.android!.styleInformation!
+                        as BigPictureStyleInformation)
+                    .bigPicture
+                    .data,
+                'mockFilePath',
+              );
+              expect(
+                notificationDetails.iOS?.attachments?.first.filePath,
+                'mockFilePath',
+              );
+            },
+          );
+
+          test(
+            'returns default if notification has no imageURL',
+            () async {
+              final notification = Notification(
+                id: 'id',
+                title: 'title',
+                body: 'body',
+                senderUID: 'senderUID',
+                sentTime: DateTime.now().subtract(const Duration(minutes: 4)),
+                additionalData: const {},
+                type: NotificationType.local,
+              );
+
+              final notificationDetails =
+                  await NotificationsService.notificationsDetailsFor(
+                notification,
+              );
+
+              expect(
+                notificationDetails,
+                NotificationsService.defaultRemoteNotificationsDetails,
+              );
+            },
+          );
+        },
+      );
+
       test(
         'notify',
         () async {
@@ -758,6 +851,7 @@ Future<void> _setUp() async {
     _setUpStorage(),
     _setUpNotificationsService(),
     _setUpNotificationsSettingsStorage(),
+    _setUpCacheManager(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -840,6 +934,12 @@ void _setUpAlarmManagerPlatformChannel(
 Override _setUpNotificationsSettingsStorage() {
   return notificationsSettingsProvider
       .overrideWithValue(MockNotificationsSettingsStorage());
+}
+
+Override _setUpCacheManager() {
+  return baseCacheManagerProvider.overrideWithValue(
+    MockBaseCacheManager(),
+  );
 }
 
 class MockPermissionHandlerPlatform extends PermissionHandlerPlatform_
