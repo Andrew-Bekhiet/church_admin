@@ -75,7 +75,11 @@ jobs:
 
       - name: Install dependencies
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        run: flutter pub get
+        env:
+          TOKEN: ${{ secrets.DEPS_TOKEN }}
+        run: 
+          git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/" \
+          flutter pub get
 
       - name: Run new builder
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
