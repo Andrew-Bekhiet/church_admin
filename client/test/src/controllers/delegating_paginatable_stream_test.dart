@@ -135,7 +135,14 @@ void main() {
       // We only check that offset delegation works correctly
       final expected = [
         DelegatingStreamResult<Object>(
-          result: [0],
+          result: [
+            0,
+            'something',
+            {2},
+            3.5,
+            {},
+            [],
+          ],
           canPaginateForward: true,
           canPaginateBackward: false,
         ),
@@ -143,6 +150,10 @@ void main() {
           result: [
             'something',
             {2},
+            3.5,
+            {},
+            [],
+            's',
           ],
           canPaginateForward: true,
           canPaginateBackward: true,
@@ -167,6 +178,7 @@ void main() {
         streamDelegate: (instance, offset) {
           return offset.map((o) => expected[o]);
         },
+        limit: 6,
       );
       addTearDown(unit.dispose);
 
@@ -194,6 +206,18 @@ void main() {
         expect(unit.isLoading, isFalse);
         expect(unit.canPaginateBackward, expected[offset].canPaginateBackward);
         expect(unit.canPaginateForward, expected[offset].canPaginateForward);
+        expect(unit.currentOffset, offset);
+
+        final expectedValue = expected[offset].result;
+
+        expect(unit.currentValue, expectedValue);
+
+        if (expectedValue.length >=
+            unit.limit * unit.currentOffset + unit.limit) {
+          expect(unit.currentCursor, expectedValue.last);
+        } else {
+          expect(unit.currentCursor, isNull);
+        }
       }
     },
   );
