@@ -59,10 +59,17 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   int get currentOffset => _offset.value;
 
   @override
-  T? get currentCursor =>
-      (currentValueOrNull?.length ?? -1) > limit * currentOffset - 1
-          ? currentValueOrNull![limit * currentOffset - 1]
-          : null;
+  T? get currentCursor {
+    final _currentValueOrNull = currentValueOrNull;
+
+    if (_currentValueOrNull == null) return null;
+
+    final index = currentOffset * limit + limit - 1;
+
+    if (index >= _currentValueOrNull.length) return null;
+
+    return _currentValueOrNull[index];
+  }
 
   @override
   ValueStream<List<T>> get stream => _subject.stream;
