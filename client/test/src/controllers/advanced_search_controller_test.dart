@@ -35,6 +35,7 @@ void main() {
             expectedQuery.conditions.first.queryableType,
           );
           expect(unit.limit, expectedQuery.limit);
+          expect(unit.logicalOperator, expectedQuery.logicalOperator);
           expect(unit.orderBy, expectedQuery.orderBy);
         },
       );
@@ -70,6 +71,7 @@ void main() {
             conditions: newConditions,
             orderBy: newOrderBy,
             limit: newLimit,
+            logicalOperator: LogicalOperator.or,
           );
 
           final unit = AdvancedSearchController();
@@ -115,6 +117,14 @@ void main() {
                 ],
               ),
               newQuery,
+            ]),
+          );
+
+          expect(
+            unit.logicalOperatorStream,
+            emitsInOrder([
+              LogicalOperator.and,
+              LogicalOperator.or,
             ]),
           );
 
