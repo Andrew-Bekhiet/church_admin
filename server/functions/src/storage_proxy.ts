@@ -185,7 +185,10 @@ async function assertUserAuthenticatedAndApproved(
   } else if (
     !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
   ) {
-    console.error("User is not approved");
+    console.error(
+      "User is not approved",
+      context.auth.token["x-hasura-user-id"]
+    );
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
