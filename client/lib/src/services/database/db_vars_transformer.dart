@@ -15,8 +15,9 @@ class DBVarsTransformer {
     final lastSearch = event.lastSearch;
 
     final paginatableStreamInstance = event.instance;
-    final cursor =
-        lastSearch == search ? paginatableStreamInstance.currentCursor : null;
+    final cursor = lastSearch == search
+        ? paginatableStreamInstance.getCursorForOffset(event.offset - 1)
+        : null;
 
     return {
       'where': [

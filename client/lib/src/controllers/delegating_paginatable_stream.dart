@@ -59,17 +59,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   int get currentOffset => _offset.value;
 
   @override
-  T? get currentCursor {
-    final _currentValueOrNull = currentValueOrNull;
-
-    if (_currentValueOrNull == null) return null;
-
-    final index = currentOffset * limit + limit - 1;
-
-    if (index >= _currentValueOrNull.length) return null;
-
-    return _currentValueOrNull[index];
-  }
+  T? get currentCursor => getCursorForOffset(_offset.value);
 
   @override
   ValueStream<List<T>> get stream => _subject.stream;
@@ -109,6 +99,18 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
     } else {
       throw StateError('Cannot paginate backward');
     }
+  }
+
+  T? getCursorForOffset(int offset) {
+    final _currentValueOrNull = currentValueOrNull;
+
+    if (_currentValueOrNull == null) return null;
+
+    final index = offset * limit + limit - 1;
+
+    if (index >= _currentValueOrNull.length || index < 0) return null;
+
+    return _currentValueOrNull[index];
   }
 
   @override
