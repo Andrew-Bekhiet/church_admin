@@ -1,8 +1,9 @@
 subscription watchAllChurches(
   $where: [ChurchesBoolExp!] = {}
+  $orderBy: [ChurchesOrderBy!] = { name: ASC }
   $limit: Int = 25
 ) {
-  churches(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+  churches(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

@@ -22,6 +22,20 @@ class StudyYearsDAO extends DAOBase<StudyYear>
   StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
+  @override
+  GQLPaginatableStream<StudyYear> streamAll({
+    Stream<String?>? searchQuery,
+    List<Input_StudyYearsBoolExp>? where,
+    List<Input_StudyYearsOrderBy>? orderBy,
+  }) {
+    return streamingProxy.streamAll(
+      streamAllConfig: baseStreamAllConfig,
+      searchQuery: searchQuery,
+      where: where,
+      orderBy: orderBy ?? [Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC)],
+    );
+  }
+
   Future<StudyYear?> getStudyYearName(int order) {
     return graphQLClient.queryAndReturnParsedNullable(
       QueryOptions(

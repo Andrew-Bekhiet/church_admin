@@ -1,12 +1,9 @@
 subscription watchAllQualifications(
   $where: [QualificationsBoolExp!] = {}
+  $orderBy: [QualificationsOrderBy!] = { name: ASC }
   $limit: Int = 25
 ) {
-  qualifications(
-    where: { _and: $where }
-    orderBy: { name: ASC }
-    limit: $limit
-  ) {
+  qualifications(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

@@ -1,8 +1,9 @@
 subscription watchAllPersonStates(
   $where: [PersonStatesBoolExp!] = {}
+  $orderBy: [PersonStatesOrderBy!] = { name: ASC }
   $limit: Int
 ) {
-  personStates(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+  personStates(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
     color

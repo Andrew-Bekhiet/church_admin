@@ -43,9 +43,7 @@ class AreasDAO
       Variables_Subscription_watchArea(id: id).toJson();
 
   Json _createAreaVarsConstructor({required Area newObject}) =>
-      Variables_Mutation_insertArea(
-        newArea: Input_AreasInsertInput.fromJson(newObject.toJson()),
-      ).toJson();
+      AreaInsertHelper(newArea: newObject).variables.toJson();
 
   Json _updateAreaVarsConstructor({
     required Area newObject,

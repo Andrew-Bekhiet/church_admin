@@ -55,6 +55,7 @@ mixin _$Person {
   String? get notes => throw _privateConstructorUsedError;
   Family? get family => throw _privateConstructorUsedError;
   String? get familyId => throw _privateConstructorUsedError;
+  Store? get store => throw _privateConstructorUsedError;
   String? get storeId => throw _privateConstructorUsedError;
   StudyYear? get studyYear => throw _privateConstructorUsedError;
   int? get studyYearId => throw _privateConstructorUsedError;
@@ -145,6 +146,7 @@ abstract class $PersonCopyWith<$Res> {
       String? notes,
       Family? family,
       String? familyId,
+      Store? store,
       String? storeId,
       StudyYear? studyYear,
       int? studyYearId,
@@ -189,6 +191,7 @@ abstract class $PersonCopyWith<$Res> {
   $PersonTypeCopyWith<$Res>? get personType;
   $PersonStateCopyWith<$Res>? get state;
   $FamilyCopyWith<$Res>? get family;
+  $StoreCopyWith<$Res>? get store;
   $StudyYearCopyWith<$Res>? get studyYear;
   $LastRecordedByInfoCopyWith<$Res>? get lastConfession;
   $LastRecordedByInfoCopyWith<$Res>? get lastKodas;
@@ -250,6 +253,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? notes = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
+    Object? store = freezed,
     Object? storeId = freezed,
     Object? studyYear = freezed,
     Object? studyYearId = freezed,
@@ -417,6 +421,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
+      store: freezed == store
+          ? _value.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as Store?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -658,6 +666,18 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 
   @override
   @pragma('vm:prefer-inline')
+  $StoreCopyWith<$Res>? get store {
+    if (_value.store == null) {
+      return null;
+    }
+
+    return $StoreCopyWith<$Res>(_value.store!, (value) {
+      return _then(_value.copyWith(store: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYear {
     if (_value.studyYear == null) {
       return null;
@@ -848,6 +868,7 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? notes,
       Family? family,
       String? familyId,
+      Store? store,
       String? storeId,
       StudyYear? studyYear,
       int? studyYearId,
@@ -902,6 +923,8 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
   $PersonStateCopyWith<$Res>? get state;
   @override
   $FamilyCopyWith<$Res>? get family;
+  @override
+  $StoreCopyWith<$Res>? get store;
   @override
   $StudyYearCopyWith<$Res>? get studyYear;
   @override
@@ -973,6 +996,7 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? notes = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
+    Object? store = freezed,
     Object? storeId = freezed,
     Object? studyYear = freezed,
     Object? studyYearId = freezed,
@@ -1140,6 +1164,10 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
+      store: freezed == store
+          ? _value.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as Store?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -1298,6 +1326,7 @@ class _$PersonImpl extends _Person {
       this.notes,
       this.family,
       this.familyId,
+      this.store,
       this.storeId,
       this.studyYear,
       this.studyYearId,
@@ -1429,6 +1458,8 @@ class _$PersonImpl extends _Person {
   final Family? family;
   @override
   final String? familyId;
+  @override
+  final Store? store;
   @override
   final String? storeId;
   @override
@@ -1592,11 +1623,11 @@ class _$PersonImpl extends _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PersonImpl &&
@@ -1654,6 +1685,7 @@ class _$PersonImpl extends _Person {
             (identical(other.family, family) || other.family == family) &&
             (identical(other.familyId, familyId) ||
                 other.familyId == familyId) &&
+            (identical(other.store, store) || other.store == store) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.studyYear, studyYear) ||
                 other.studyYear == studyYear) &&
@@ -1744,6 +1776,7 @@ class _$PersonImpl extends _Person {
         notes,
         family,
         familyId,
+        store,
         storeId,
         studyYear,
         studyYearId,
@@ -1826,6 +1859,7 @@ abstract class _Person extends Person {
       final String? notes,
       final Family? family,
       final String? familyId,
+      final Store? store,
       final String? storeId,
       final StudyYear? studyYear,
       final int? studyYearId,
@@ -1932,6 +1966,8 @@ abstract class _Person extends Person {
   Family? get family;
   @override
   String? get familyId;
+  @override
+  Store? get store;
   @override
   String? get storeId;
   @override

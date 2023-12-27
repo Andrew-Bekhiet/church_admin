@@ -225,7 +225,7 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AdvancedQueryImpl &&

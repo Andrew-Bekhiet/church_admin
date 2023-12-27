@@ -50,9 +50,7 @@ class StreetsDAO
       Variables_Subscription_watchStreet(id: id).toJson();
 
   Json _createStreetVarsConstructor({required Street newObject}) =>
-      Variables_Mutation_insertStreet(
-        newStreet: Input_StreetsInsertInput.fromJson(newObject.toJson()),
-      ).toJson();
+      StreetInsertHelper(newStreet: newObject).variables.toJson();
 
   Json _updateStreetVarsConstructor({
     required Street newObject,

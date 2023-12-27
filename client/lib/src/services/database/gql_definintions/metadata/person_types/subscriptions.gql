@@ -1,8 +1,9 @@
 subscription watchAllPersonTypes(
   $where: [PersonTypesBoolExp!] = {}
+  $orderBy: [PersonTypesOrderBy!] = { order: ASC }
   $limit: Int = 25
 ) {
-  personTypes(where: { _and: $where }, orderBy: { order: ASC }, limit: $limit) {
+  personTypes(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     order
     name

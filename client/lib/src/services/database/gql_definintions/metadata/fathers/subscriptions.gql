@@ -1,5 +1,9 @@
-subscription watchAllFathers($where: [FathersBoolExp!] = {}, $limit: Int = 25) {
-  fathers(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+subscription watchAllFathers(
+  $where: [FathersBoolExp!] = {}
+  $orderBy: [FathersOrderBy!] = { name: ASC }
+  $limit: Int = 25
+) {
+  fathers(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

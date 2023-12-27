@@ -1,8 +1,9 @@
 subscription watchAllColleges(
   $where: [CollegesBoolExp!] = {}
+  $orderBy: [CollegesOrderBy!] = { name: ASC }
   $limit: Int = 25
 ) {
-  colleges(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+  colleges(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

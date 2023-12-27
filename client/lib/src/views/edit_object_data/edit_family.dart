@@ -34,24 +34,7 @@ class EditFamily extends StatefulWidget {
 }
 
 class _EditFamilyState extends State<EditFamily> {
-  late EditObjectController<Family> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.families.createObject(newObject: object),
-    onUpdate: (oldFamily, newFamily) => DatabaseService.I.families.updateFamily(
-      oldFamily: oldFamily,
-      newFamily: newFamily,
-    ),
-    onDelete: (object) => DatabaseService.I.families.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.family ??
-        Family(
-          id: const Uuid().v4(),
-          name: 'عائلة جديدة',
-          children: widget.children?.toList() ?? [],
-          parents: widget.parents?.toList() ?? [],
-        ),
-    initialObject: widget.family,
-  );
+  late EditObjectController<Family> _controller;
 
   Family get initialFamily => _controller.initialObject!;
   Family get newFamily => _controller.newObject;
@@ -62,6 +45,29 @@ class _EditFamilyState extends State<EditFamily> {
   @override
   void initState() {
     super.initState();
+
+    final _oldFamily = widget.family;
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.families.createObject(newObject: object),
+      onUpdate: (oldFamily, newFamily) =>
+          DatabaseService.I.families.updateFamily(
+        oldFamily: oldFamily,
+        newFamily: newFamily,
+      ),
+      onDelete: (object) =>
+          DatabaseService.I.families.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldFamily ??
+          Family(
+            id: const Uuid().v4(),
+            name: 'عائلة جديدة',
+            children: widget.children?.toList() ?? [],
+            parents: widget.parents?.toList() ?? [],
+          ),
+      initialObject: _oldFamily,
+    );
 
     _loadRelatedFamilies();
   }

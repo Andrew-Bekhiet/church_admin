@@ -48,43 +48,61 @@ class EditPerson extends StatefulWidget {
 }
 
 class _EditPersonState extends State<EditPerson> {
-  late EditObjectController<Person> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.persons.createObject(newObject: object),
-    onUpdate: (oldPerson, newPerson) => DatabaseService.I.persons.updateObject(
-      oldObject: oldPerson,
-      newObject: newPerson,
-    ),
-    onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.person ??
-        Person(
-          id: const Uuid().v4(),
-          name: 'مخدوم جديد',
-          family: widget.family,
-          familyId: widget.family?.id,
-          services: widget.service != null ? [widget.service!] : [],
-          groups: widget.group != null ? [widget.group!] : [],
-          studyYear: widget.studyYear,
-          studyYearId: widget.studyYear?.order,
-          isStudent: widget.studyYear != null,
-          gender: widget.gender ?? true,
-        ),
-    initialObject: widget.person,
-  );
+  late EditObjectController<Person> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final Person? _oldPerson = widget.person?.copyWith(
+      familyId: widget.person?.family?.id,
+      churchId: widget.person?.church?.id,
+      collegeId: widget.person?.college?.id,
+      fatherId: widget.person?.father?.id,
+      jobId: widget.person?.job?.id,
+      personTypeId: widget.person?.personType?.id,
+      qualificationId: widget.person?.qualification?.id,
+      schoolId: widget.person?.school?.id,
+      shammasLevelId: widget.person?.shammasLevel?.id,
+      stateId: widget.person?.state?.id,
+      storeId: widget.person?.store?.id,
+      studyYearId: widget.person?.studyYear?.order,
+    );
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.persons.createObject(newObject: object),
+      onUpdate: (oldPerson, newPerson) =>
+          DatabaseService.I.persons.updateObject(
+        oldObject: oldPerson,
+        newObject: newPerson,
+      ),
+      onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldPerson ??
+          Person(
+            id: const Uuid().v4(),
+            name: 'مخدوم جديد',
+            family: widget.family,
+            familyId: widget.family?.id,
+            services: widget.service != null ? [widget.service!] : [],
+            groups: widget.group != null ? [widget.group!] : [],
+            studyYear: widget.studyYear,
+            studyYearId: widget.studyYear?.order,
+            isStudent: widget.studyYear != null,
+            gender: widget.gender ?? true,
+          ),
+      initialObject: _oldPerson,
+    );
+
+    _loadPersonServicesClassesGroups();
+  }
 
   Person get initialPerson => _controller.initialObject!;
   Person get newPerson => _controller.newObject;
   set newPerson(Person p) => _controller.newObject = p;
 
   bool _classesAndGroupsLoaded = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _loadPersonServicesClassesGroups();
-  }
 
   //TODO: make every field a separate widget
 

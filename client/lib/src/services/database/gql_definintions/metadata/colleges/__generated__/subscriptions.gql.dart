@@ -5,10 +5,12 @@ import 'package:gql/ast.dart';
 class Variables_Subscription_watchAllColleges {
   factory Variables_Subscription_watchAllColleges({
     List<Input_CollegesBoolExp>? where,
+    List<Input_CollegesOrderBy>? orderBy,
     int? limit,
   }) =>
       Variables_Subscription_watchAllColleges._({
         if (where != null) r'where': where,
+        if (orderBy != null) r'orderBy': orderBy,
         if (limit != null) r'limit': limit,
       });
 
@@ -24,6 +26,13 @@ class Variables_Subscription_watchAllColleges {
               Input_CollegesBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
+    if (data.containsKey('orderBy')) {
+      final l$orderBy = data['orderBy'];
+      result$data['orderBy'] = (l$orderBy as List<dynamic>?)
+          ?.map((e) =>
+              Input_CollegesOrderBy.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
@@ -36,6 +45,9 @@ class Variables_Subscription_watchAllColleges {
   List<Input_CollegesBoolExp>? get where =>
       (_$data['where'] as List<Input_CollegesBoolExp>?);
 
+  List<Input_CollegesOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_CollegesOrderBy>?);
+
   int? get limit => (_$data['limit'] as int?);
 
   Map<String, dynamic> toJson() {
@@ -43,6 +55,10 @@ class Variables_Subscription_watchAllColleges {
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('orderBy')) {
+      final l$orderBy = orderBy;
+      result$data['orderBy'] = l$orderBy?.map((e) => e.toJson()).toList();
     }
     if (_$data.containsKey('limit')) {
       final l$limit = limit;
@@ -86,6 +102,25 @@ class Variables_Subscription_watchAllColleges {
     } else if (l$where != lOther$where) {
       return false;
     }
+    final l$orderBy = orderBy;
+    final lOther$orderBy = other.orderBy;
+    if (_$data.containsKey('orderBy') != other._$data.containsKey('orderBy')) {
+      return false;
+    }
+    if (l$orderBy != null && lOther$orderBy != null) {
+      if (l$orderBy.length != lOther$orderBy.length) {
+        return false;
+      }
+      for (int i = 0; i < l$orderBy.length; i++) {
+        final l$orderBy$entry = l$orderBy[i];
+        final lOther$orderBy$entry = lOther$orderBy[i];
+        if (l$orderBy$entry != lOther$orderBy$entry) {
+          return false;
+        }
+      }
+    } else if (l$orderBy != lOther$orderBy) {
+      return false;
+    }
     final l$limit = limit;
     final lOther$limit = other.limit;
     if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
@@ -100,12 +135,18 @@ class Variables_Subscription_watchAllColleges {
   @override
   int get hashCode {
     final l$where = where;
+    final l$orderBy = orderBy;
     final l$limit = limit;
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
               ? null
               : Object.hashAll(l$where.map((v) => v))
+          : const {},
+      _$data.containsKey('orderBy')
+          ? l$orderBy == null
+              ? null
+              : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -123,6 +164,7 @@ abstract class CopyWith_Variables_Subscription_watchAllColleges<TRes> {
 
   TRes call({
     List<Input_CollegesBoolExp>? where,
+    List<Input_CollegesOrderBy>? orderBy,
     int? limit,
   });
 }
@@ -142,12 +184,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllColleges<TRes>
 
   TRes call({
     Object? where = _undefined,
+    Object? orderBy = _undefined,
     Object? limit = _undefined,
   }) =>
       _then(Variables_Subscription_watchAllColleges._({
         ..._instance._$data,
         if (where != _undefined)
           'where': (where as List<Input_CollegesBoolExp>?),
+        if (orderBy != _undefined)
+          'orderBy': (orderBy as List<Input_CollegesOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
@@ -160,6 +205,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllColleges<TRes>
 
   call({
     List<Input_CollegesBoolExp>? where,
+    List<Input_CollegesOrderBy>? orderBy,
     int? limit,
   }) =>
       _res;
@@ -306,6 +352,24 @@ const documentNodeSubscriptionwatchAllColleges = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'orderBy')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'CollegesOrderBy'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(
+            value: ObjectValueNode(fields: [
+          ObjectFieldNode(
+            name: NameNode(value: 'name'),
+            value: EnumValueNode(name: NameNode(value: 'ASC')),
+          )
+        ])),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'limit')),
         type: NamedTypeNode(
           name: NameNode(value: 'Int'),
@@ -332,12 +396,7 @@ const documentNodeSubscriptionwatchAllColleges = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: EnumValueNode(name: NameNode(value: 'ASC')),
-              )
-            ]),
+            value: VariableNode(name: NameNode(value: 'orderBy')),
           ),
           ArgumentNode(
             name: NameNode(value: 'limit'),

@@ -56,6 +56,7 @@ class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
     String? notes,
     Family? family,
     String? familyId,
+    Store? store,
     String? storeId,
     StudyYear? studyYear,
     int? studyYearId,

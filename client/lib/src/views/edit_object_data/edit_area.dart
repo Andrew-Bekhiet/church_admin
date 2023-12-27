@@ -25,18 +25,27 @@ class EditArea extends StatefulWidget {
 }
 
 class _EditAreaState extends State<EditArea> {
-  late final EditObjectController<Area> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.areas.createObject(newObject: object),
-    onUpdate: (oldArea, newArea) => DatabaseService.I.areas.updateObject(
-      oldObject: oldArea,
-      newObject: newArea,
-    ),
-    onDelete: (object) => DatabaseService.I.areas.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.area ?? Area(id: const Uuid().v4(), name: 'منطقة جديدة'),
-    initialObject: widget.area,
-  );
+  late final EditObjectController<Area> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final Area? _oldArea = widget.area;
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.areas.createObject(newObject: object),
+      onUpdate: (oldArea, newArea) => DatabaseService.I.areas.updateObject(
+        oldObject: oldArea,
+        newObject: newArea,
+      ),
+      onDelete: (object) => DatabaseService.I.areas.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldArea ?? Area(id: const Uuid().v4(), name: 'منطقة جديدة'),
+      initialObject: _oldArea,
+    );
+  }
 
   Area get initialArea => _controller.initialObject!;
   Area get newArea => _controller.newObject;

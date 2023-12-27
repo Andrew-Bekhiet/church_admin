@@ -1,5 +1,9 @@
-subscription watchAllSchools($where: [SchoolsBoolExp!] = {}, $limit: Int = 25) {
-  schools(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+subscription watchAllSchools(
+  $where: [SchoolsBoolExp!] = {}
+  $orderBy: [SchoolsOrderBy!] = {}
+  $limit: Int
+) {
+  schools(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

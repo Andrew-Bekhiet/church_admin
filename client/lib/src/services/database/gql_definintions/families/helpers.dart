@@ -23,7 +23,8 @@ class FamilyInsertHelper {
   }) : _familyDelta = computeObjectDelta(
           newFamily.toJson(),
           (oldFamily ?? Family(id: '', name: '')).toJson(),
-        )..removeWhere((k, v) => _mutationNonExistentVars.contains(k));
+          ignoreFields: _mutationNonExistentVars,
+        );
 
   Input_FamiliesFamiliesArrRelInsertInput get _childrenFamilies =>
       Input_FamiliesFamiliesArrRelInsertInput(

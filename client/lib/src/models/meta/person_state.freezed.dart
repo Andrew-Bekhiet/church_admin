@@ -149,7 +149,7 @@ class _$PersonStateImpl extends _PersonState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PersonStateImpl &&

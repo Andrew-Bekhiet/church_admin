@@ -5,10 +5,12 @@ import 'package:gql/ast.dart';
 class Variables_Subscription_watchAllTags {
   factory Variables_Subscription_watchAllTags({
     List<Input_TagsBoolExp>? where,
+    List<Input_TagsOrderBy>? order_by,
     int? limit,
   }) =>
       Variables_Subscription_watchAllTags._({
         if (where != null) r'where': where,
+        if (order_by != null) r'order_by': order_by,
         if (limit != null) r'limit': limit,
       });
 
@@ -23,6 +25,12 @@ class Variables_Subscription_watchAllTags {
           ?.map((e) => Input_TagsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
+    if (data.containsKey('order_by')) {
+      final l$order_by = data['order_by'];
+      result$data['order_by'] = (l$order_by as List<dynamic>?)
+          ?.map((e) => Input_TagsOrderBy.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
       result$data['limit'] = (l$limit as int?);
@@ -35,6 +43,9 @@ class Variables_Subscription_watchAllTags {
   List<Input_TagsBoolExp>? get where =>
       (_$data['where'] as List<Input_TagsBoolExp>?);
 
+  List<Input_TagsOrderBy>? get order_by =>
+      (_$data['order_by'] as List<Input_TagsOrderBy>?);
+
   int? get limit => (_$data['limit'] as int?);
 
   Map<String, dynamic> toJson() {
@@ -42,6 +53,10 @@ class Variables_Subscription_watchAllTags {
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('order_by')) {
+      final l$order_by = order_by;
+      result$data['order_by'] = l$order_by?.map((e) => e.toJson()).toList();
     }
     if (_$data.containsKey('limit')) {
       final l$limit = limit;
@@ -85,6 +100,26 @@ class Variables_Subscription_watchAllTags {
     } else if (l$where != lOther$where) {
       return false;
     }
+    final l$order_by = order_by;
+    final lOther$order_by = other.order_by;
+    if (_$data.containsKey('order_by') !=
+        other._$data.containsKey('order_by')) {
+      return false;
+    }
+    if (l$order_by != null && lOther$order_by != null) {
+      if (l$order_by.length != lOther$order_by.length) {
+        return false;
+      }
+      for (int i = 0; i < l$order_by.length; i++) {
+        final l$order_by$entry = l$order_by[i];
+        final lOther$order_by$entry = lOther$order_by[i];
+        if (l$order_by$entry != lOther$order_by$entry) {
+          return false;
+        }
+      }
+    } else if (l$order_by != lOther$order_by) {
+      return false;
+    }
     final l$limit = limit;
     final lOther$limit = other.limit;
     if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
@@ -99,12 +134,18 @@ class Variables_Subscription_watchAllTags {
   @override
   int get hashCode {
     final l$where = where;
+    final l$order_by = order_by;
     final l$limit = limit;
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
               ? null
               : Object.hashAll(l$where.map((v) => v))
+          : const {},
+      _$data.containsKey('order_by')
+          ? l$order_by == null
+              ? null
+              : Object.hashAll(l$order_by.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -122,6 +163,7 @@ abstract class CopyWith_Variables_Subscription_watchAllTags<TRes> {
 
   TRes call({
     List<Input_TagsBoolExp>? where,
+    List<Input_TagsOrderBy>? order_by,
     int? limit,
   });
 }
@@ -141,11 +183,14 @@ class _CopyWithImpl_Variables_Subscription_watchAllTags<TRes>
 
   TRes call({
     Object? where = _undefined,
+    Object? order_by = _undefined,
     Object? limit = _undefined,
   }) =>
       _then(Variables_Subscription_watchAllTags._({
         ..._instance._$data,
         if (where != _undefined) 'where': (where as List<Input_TagsBoolExp>?),
+        if (order_by != _undefined)
+          'order_by': (order_by as List<Input_TagsOrderBy>?),
         if (limit != _undefined) 'limit': (limit as int?),
       }));
 }
@@ -158,6 +203,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllTags<TRes>
 
   call({
     List<Input_TagsBoolExp>? where,
+    List<Input_TagsOrderBy>? order_by,
     int? limit,
   }) =>
       _res;
@@ -303,6 +349,18 @@ const documentNodeSubscriptionwatchAllTags = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'order_by')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'TagsOrderBy'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'limit')),
         type: NamedTypeNode(
           name: NameNode(value: 'Int'),
@@ -329,12 +387,7 @@ const documentNodeSubscriptionwatchAllTags = DocumentNode(definitions: [
           ),
           ArgumentNode(
             name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: EnumValueNode(name: NameNode(value: 'ASC')),
-              )
-            ]),
+            value: VariableNode(name: NameNode(value: 'order_by')),
           ),
           ArgumentNode(
             name: NameNode(value: 'limit'),

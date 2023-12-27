@@ -1,5 +1,9 @@
-subscription watchAllTags($where: [TagsBoolExp!] = {}, $limit: Int = 25) {
-  tags(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+subscription watchAllTags(
+  $where: [TagsBoolExp!] = {}
+  $order_by: [TagsOrderBy!] = {}
+  $limit: Int = 25
+) {
+  tags(where: { _and: $where }, orderBy: $order_by, limit: $limit) {
     id
     name
     color

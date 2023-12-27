@@ -5,11 +5,17 @@ final idEquality = EqualityBy<ID, String>((o) => o.id);
 final collectionEquality =
     DeepCollectionEquality.unordered(EqualityBy((o) => o is ID ? o.id : o));
 
-Json computeObjectDelta(Json newObject, Json oldObject) => {
+Json computeObjectDelta(
+  Json newObject,
+  Json oldObject, {
+  Set<String> ignoreFields = const {'id'},
+}) =>
+    {
       for (final kv in newObject.entries)
-        if (!collectionEquality.equals(
-          kv.value,
-          oldObject[kv.key],
-        ))
+        if (!ignoreFields.contains(kv.key) &&
+            !collectionEquality.equals(
+              kv.value,
+              oldObject[kv.key],
+            ))
           kv.key: kv.value,
     };

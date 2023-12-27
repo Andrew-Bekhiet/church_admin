@@ -146,7 +146,7 @@ class _$HobbyImpl extends _Hobby {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HobbyImpl &&

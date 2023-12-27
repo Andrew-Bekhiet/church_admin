@@ -28,24 +28,32 @@ class EditStore extends StatefulWidget {
 }
 
 class _EditStoreState extends State<EditStore> {
-  late final EditObjectController<Store> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.stores.createObject(newObject: object),
-    onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateObject(
-      oldObject: oldStore,
-      newObject: newStore,
-    ),
-    onDelete: (object) => DatabaseService.I.stores.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.store ??
-        Store(
-          id: const Uuid().v4(),
-          name: 'متجر جديد',
-          family: widget.family,
-          familyId: widget.family?.id,
-        ),
-    initialObject: widget.store,
-  );
+  late final EditObjectController<Store> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final Store? _oldStore = widget.store;
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.stores.createObject(newObject: object),
+      onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateObject(
+        oldObject: oldStore,
+        newObject: newStore,
+      ),
+      onDelete: (object) => DatabaseService.I.stores.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldStore ??
+          Store(
+            id: const Uuid().v4(),
+            name: 'متجر جديد',
+            family: widget.family,
+            familyId: widget.family?.id,
+          ),
+      initialObject: _oldStore,
+    );
+  }
 
   Store get initialStore => _controller.initialObject!;
   Store get newStore => _controller.newObject;

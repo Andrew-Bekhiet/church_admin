@@ -1,12 +1,9 @@
 subscription watchAllShammasLevels(
   $where: [ShammasLevelsBoolExp!] = {}
+  $orderBy: [ShammasLevelsOrderBy!] = { order: ASC }
   $limit: Int = 25
 ) {
-  shammasLevels(
-    where: { _and: $where }
-    orderBy: { order: ASC }
-    limit: $limit
-  ) {
+  shammasLevels(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     order
     name

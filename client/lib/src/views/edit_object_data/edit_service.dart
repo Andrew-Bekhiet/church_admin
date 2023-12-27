@@ -25,23 +25,36 @@ class EditService extends StatefulWidget {
 }
 
 class _EditServiceState extends State<EditService> {
-  late final EditObjectController<Service> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.services.createObject(newObject: object),
-    onUpdate: (oldService, newService) =>
-        DatabaseService.I.services.updateObject(
-      oldObject: oldService,
-      newObject: newService,
-    ),
-    onDelete: (object) => DatabaseService.I.services.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.service ??
-        Service(
-          id: const Uuid().v4(),
-          name: 'خدمة جديدة',
-        ),
-    initialObject: widget.service,
-  );
+  late final EditObjectController<Service> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final Service? _oldService = widget.service?.copyWith(
+      nextServiceId: widget.service?.nextService?.id,
+      studyYearFromId: widget.service?.studyYearFrom?.order,
+      studyYearToId: widget.service?.studyYearTo?.order,
+    );
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.services.createObject(newObject: object),
+      onUpdate: (oldService, newService) =>
+          DatabaseService.I.services.updateObject(
+        oldObject: oldService,
+        newObject: newService,
+      ),
+      onDelete: (object) =>
+          DatabaseService.I.services.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldService ??
+          Service(
+            id: const Uuid().v4(),
+            name: 'خدمة جديدة',
+          ),
+      initialObject: _oldService,
+    );
+  }
 
   Service get initialService => _controller.initialObject!;
   Service get newService => _controller.newObject;

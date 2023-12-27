@@ -1,5 +1,9 @@
-subscription watchAllHobbies($where: [HobbiesBoolExp!] = {}, $limit: Int = 25) {
-  hobbies(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+subscription watchAllHobbies(
+  $where: [HobbiesBoolExp!] = {}
+  $orderBy: [HobbiesOrderBy!] = { name: ASC }
+  $limit: Int = 25
+) {
+  hobbies(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
     color

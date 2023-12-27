@@ -28,24 +28,35 @@ class EditGroup extends StatefulWidget {
 }
 
 class _EditGroupState extends State<EditGroup> {
-  late final EditObjectController<Group> _controller = EditObjectController(
-    onCreate: (object) =>
-        DatabaseService.I.groups.createObject(newObject: object),
-    onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(
-      oldObject: oldGroup,
-      newObject: newGroup,
-    ),
-    onDelete: (object) => DatabaseService.I.groups.deleteById(id: object.id),
-    toJson: (object) => object.toJson(),
-    newObject: widget.group ??
-        Group(
-          id: const Uuid().v4(),
-          name: 'مجموعة جديدة',
-          service: widget.service,
-          serviceId: widget.service?.id,
-        ),
-    initialObject: widget.group,
-  );
+  late final EditObjectController<Group> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final Group? _oldGroup = widget.group?.copyWith(
+      serviceId: widget.service?.id,
+    );
+
+    _controller = EditObjectController(
+      onCreate: (object) =>
+          DatabaseService.I.groups.createObject(newObject: object),
+      onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(
+        oldObject: oldGroup,
+        newObject: newGroup,
+      ),
+      onDelete: (object) => DatabaseService.I.groups.deleteById(id: object.id),
+      toJson: (object) => object.toJson(),
+      newObject: _oldGroup ??
+          Group(
+            id: const Uuid().v4(),
+            name: 'مجموعة جديدة',
+            service: widget.service,
+            serviceId: widget.service?.id,
+          ),
+      initialObject: _oldGroup,
+    );
+  }
 
   Group get initialGroup => _controller.initialObject!;
   Group get newGroup => _controller.newObject;

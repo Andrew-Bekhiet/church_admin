@@ -117,6 +117,10 @@ final _$PersonFields = <String, FieldMetadata>{
     name: 'family',
     label: 'العائلة',
   ),
+  'store': FieldMetadata<Store>(
+    name: 'store',
+    label: 'store',
+  ),
   'studyYear': FieldMetadata<StudyYear>(
     name: 'studyYear',
     label: 'السنة الدراسية',
@@ -305,6 +309,9 @@ _$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
           ? null
           : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
       familyId: json['familyId'] as String?,
+      store: json['store'] == null
+          ? null
+          : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
       storeId: json['storeId'] as String?,
       studyYear: json['studyYear'] == null
           ? null
@@ -430,6 +437,7 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'notes': instance.notes,
       'family': instance.family?.toJson(),
       'familyId': instance.familyId,
+      'store': instance.store?.toJson(),
       'storeId': instance.storeId,
       'studyYear': instance.studyYear?.toJson(),
       'studyYearId': instance.studyYearId,

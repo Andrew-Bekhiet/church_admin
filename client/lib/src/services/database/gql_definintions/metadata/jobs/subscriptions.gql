@@ -1,5 +1,9 @@
-subscription watchAllJobs($where: [JobsBoolExp!] = {}, $limit: Int = 25) {
-  jobs(where: { _and: $where }, orderBy: { name: ASC }, limit: $limit) {
+subscription watchAllJobs(
+  $where: [JobsBoolExp!] = {}
+  $orderBy: [JobsOrderBy!] = { name: ASC }
+  $limit: Int = 25
+) {
+  jobs(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
     name
   }

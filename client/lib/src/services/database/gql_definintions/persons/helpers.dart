@@ -32,7 +32,8 @@ class PersonInsertHelper {
   }) : _personDelta = computeObjectDelta(
           newPerson.toJson(),
           (oldPerson ?? Person(id: '', name: '')).toJson(),
-        )..removeWhere((k, v) => _mutationNonExistentVars.contains(k));
+          ignoreFields: _mutationNonExistentVars,
+        );
 
   List<Input_PersonsServicesInsertInput> get _newServices =>
       (newPerson.services ?? [])

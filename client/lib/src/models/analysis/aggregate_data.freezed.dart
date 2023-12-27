@@ -182,7 +182,7 @@ class _$AggregateDataImpl implements _AggregateData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AggregateDataImpl &&

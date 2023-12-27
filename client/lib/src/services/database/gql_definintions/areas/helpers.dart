@@ -3,6 +3,29 @@ import 'package:church_admin/church_admin.dart';
 import '../helpers.dart';
 import '__generated__/mutations.gql.dart';
 
+class AreaInsertHelper {
+  static final _mutationNonExistentVars = {
+    'id',
+  };
+
+  final Area newArea;
+
+  final Map<String, dynamic> _areaDelta;
+
+  AreaInsertHelper({
+    required this.newArea,
+    Area? oldArea,
+  }) : _areaDelta = computeObjectDelta(
+          newArea.toJson(),
+          (oldArea ?? Area(id: '', name: '')).toJson(),
+          ignoreFields: _mutationNonExistentVars,
+        );
+
+  Variables_Mutation_insertArea get variables => Variables_Mutation_insertArea(
+        newArea: Input_AreasInsertInput.fromJson(_areaDelta),
+      );
+}
+
 class AreaUpdateHelper {
   final Area newArea;
   final Area oldArea;

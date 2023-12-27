@@ -3,6 +3,30 @@ import 'package:church_admin/src/services/database/gql_definintions.dart';
 
 import '../helpers.dart';
 
+class StreetInsertHelper {
+  static final _mutationNonExistentVars = {
+    'id',
+  };
+
+  final Street newStreet;
+
+  final Map<String, dynamic> _streetDelta;
+
+  StreetInsertHelper({
+    required this.newStreet,
+    Street? oldStreet,
+  }) : _streetDelta = computeObjectDelta(
+          newStreet.toJson(),
+          (oldStreet ?? Street(id: '', name: '')).toJson(),
+          ignoreFields: _mutationNonExistentVars,
+        );
+
+  Variables_Mutation_insertStreet get variables =>
+      Variables_Mutation_insertStreet(
+        newStreet: Input_StreetsInsertInput.fromJson(_streetDelta),
+      );
+}
+
 class StreetUpdateHelper {
   final Street newStreet;
   final Street oldStreet;

@@ -104,7 +104,18 @@ class ServicesDAO
 
   Json _createServiceVarsConstructor({required Service newObject}) =>
       Variables_Mutation_insertService(
-        newService: Input_ServicesInsertInput.fromJson(newObject.toJson()),
+        newService: Input_ServicesInsertInput.fromJson(
+          computeObjectDelta(
+            newObject.toJson(),
+            Service(id: '', name: '').toJson(),
+            ignoreFields: {
+              'id',
+              'studyYearFrom',
+              'studyYearTo',
+              'nextService',
+            },
+          ),
+        ),
       ).toJson();
 
   Json _updateServiceVarsConstructor({
@@ -114,7 +125,16 @@ class ServicesDAO
       Variables_Mutation_updateService(
         serviceId: newObject.id.toUuid(),
         newService: Input_ServicesSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
+          computeObjectDelta(
+            newObject.toJson(),
+            oldObject.toJson(),
+            ignoreFields: {
+              'id',
+              'studyYearFrom',
+              'studyYearTo',
+              'nextService',
+            },
+          ),
         ),
       ).toJson();
 
