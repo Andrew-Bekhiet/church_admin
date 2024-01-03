@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
@@ -135,7 +135,7 @@ jobs:
     if: github.repository != 'Andrew-Bekhiet/church_admin' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci:new_release]'))
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -217,3 +217,14 @@ jobs:
           artifacts: build/app/outputs/flutter-apk/app-release.apk
           tag: v${{ steps.version.outputs.version }}
           generateReleaseNotes: true
+
+      - name: Authenticate with Google Cloud
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.APP_RELEASE_UPLOADER_KEY }}"
+
+      - name: Upload APK to Google Cloud Storage
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: "build/app/outputs/flutter-apk/app-release.apk"
+          destination: "app-releases-church-data-admin/app-release-v${{ steps.version.outputs.version }}.apk"
