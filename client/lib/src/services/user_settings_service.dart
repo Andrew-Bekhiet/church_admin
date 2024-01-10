@@ -39,9 +39,9 @@ class UserSettingsService {
 
   Future<void> setupDefaults() async {
     await setGreatFeastTheme(true);
-    await setSecondLineFor(type: Area, value: 'lastVisit');
-    await setSecondLineFor(type: Street, value: 'lastVisit');
-    await setSecondLineFor(type: Family, value: 'lastVisit');
+    await setSecondLineFor(type: Area, value: null);
+    await setSecondLineFor(type: Street, value: null);
+    await setSecondLineFor(type: Family, value: 'address');
     await setSecondLineFor(type: Person, value: 'birthdate');
     await setSecondLineFor(type: User, value: 'permissions');
   }
