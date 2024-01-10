@@ -1408,11 +1408,7 @@ export async function renamePhotosAndUpdateBlurhashes(
 ) {
   if (!idsMapping) {
     idsMapping = JSON.parse(
-      fs
-        .readFileSync(
-          "/media/androidq/data/Projects/church_admin/server/functions/migration-mapping.json"
-        )
-        .toString()
+      fs.readFileSync(path.join(".", "migration-mapping.json")).toString()
     );
   }
 
