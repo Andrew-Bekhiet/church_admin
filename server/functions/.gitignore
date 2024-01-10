@@ -11,3 +11,8 @@ node_modules/
 # dotenv environment variables file
 .env
 .env.*
+migrate-result.json
+mapping-result.json
+migration-vars.json
+migration-mapping.json
+migration-mappging.json

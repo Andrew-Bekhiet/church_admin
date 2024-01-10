@@ -1,13 +1,9 @@
-import Axios = require("axios");
+import axios, { AxiosResponse } from "axios";
 import { https } from "firebase-functions/v1";
-
-//TODO: remove in newer versions > 1.1.3
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const axios = (Axios as any).create({}) as Axios.AxiosInstance;
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             query checkApproved($uid: Uuid!) {
               authUsersData(where: { uid: { _eq: $uid } }, limit: 1) {
@@ -39,7 +35,7 @@ export async function getHasuraUID(
   firebaseAuthUID: string
 ): Promise<string | null> {
   try {
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             query getUserByFirebaseUID($firebaseAuthUID: String) {
               authUsersData(where: {authId: {_eq: $firebaseAuthUID}}, limit: 1) {
@@ -65,7 +61,7 @@ export async function getPersonIdFromUser(
   hasuraUID: string
 ): Promise<string | null> {
   try {
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             query getPersonIdFromUser($hasuraUID: Uuid = "") {
               authUsersData(where: {uid: {_eq: $hasuraUID}}) {
@@ -105,7 +101,7 @@ export async function checkUserAccess(
       permission.at(0)!.toUpperCase() +
       permission.substring(1);
 
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             query checkPermissions($id: Uuid!) {
                 ${table == "users" ? "authUsersData" : table}(where: {${
@@ -143,7 +139,7 @@ export async function insertUser(user: {
   uid: string;
 }): Promise<{ person_id: string; hasura_uid: string } | null> {
   try {
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             mutation addUser(
               $email: String
@@ -204,7 +200,7 @@ export async function updatePhotoTime(
         ? "AuthUsersData"
         : table.replace(RegExp("^[a-z]"), (s) => s.toUpperCase())
     }ByPk`;
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             mutation updatePhotoTime($id: Uuid!, $photoUpdatedAt: Timestamptz) {
               ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
@@ -248,7 +244,7 @@ export async function updatePhotoBlurHash(
         ? "AuthUsersData"
         : table.replace(RegExp("^[a-z]"), (s) => s.toUpperCase())
     }ByPk`;
-    const hasura_response = await _makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
             mutation updatePhotoBlurHash($id: Uuid!, $blurhash: String) {
               ${op_name}(pkColumns: {id: $id}, _set: {blurhash: $blurhash}) {
@@ -292,7 +288,7 @@ export const photoTables = [
 ] as const;
 export type PhotoTable = (typeof photoTables)[number];
 
-async function _makeGraphqlRequest({
+export async function makeGraphqlRequest({
   query,
   variables,
   operationName,
@@ -302,7 +298,7 @@ async function _makeGraphqlRequest({
   variables: object;
   operationName?: string;
   headers?: object;
-}): Promise<Axios.AxiosResponse> {
+}): Promise<AxiosResponse> {
   return axios.post(
     process.env["HASURA_SERVER"]!,
     JSON.stringify({

@@ -1,7 +1,6 @@
 import { encode } from "blurhash";
 import { storage } from "firebase-admin";
-import { runWith } from "firebase-functions";
-import { ObjectMetadata } from "firebase-functions/v1/storage";
+import { storage as functions_storage } from "firebase-functions/v2";
 import * as sharp from "sharp";
 import {
   PhotoTable,
@@ -10,79 +9,48 @@ import {
   updatePhotoTime,
 } from "./hasura_interface";
 
-export const onPhotoUploaded = runWith({
-  memory: "1GB",
-  timeoutSeconds: 9 * 60,
-})
-  .region("europe-west6")
-  .storage.bucket("church-data-admin.appspot.com")
-  .object()
-  .onFinalize(async (object) => {
+export const onPhotoUploaded = functions_storage.onObjectFinalized(
+  "church-data-admin.appspot.com",
+  async (event) => {
+    const { data: object } = event;
+
     const match = _checkIsValidObject(object);
     if (!match) return;
 
     try {
-      await updatePhotoTime(match.table, match.file, new Date(object.updated));
+      await updatePhotoTime(match.table, match.file, new Date(object.updated!));
 
-      const blurhash = await _getImageBlurHash(object);
+      const blurhash = await getImageBlurHash(object);
 
       await updatePhotoBlurHash(match.table, match.file, blurhash);
     } catch (error) {
       console.error(error);
       throw error;
     }
-  });
+  }
+);
 
-/* export const updateAllBlurHashesFor = runWith({
-  memory: "1GB",
-  timeoutSeconds: 9 * 60,
-})
-  .region("europe-west6")
-  .https.onCall(async (data) => {
-    const filenames = data.filenames as string[];
-
-    try {
-      await Promise.all(
-        filenames.map(async (filename): Promise<void> => {
-          const blurhash = await _getImageBlurHash({
-            name: filename,
-          } as ObjectMetadata);
-
-          await updatePhotoBlurHash(
-            "persons",
-            filename.split("/").at(-1)!,
-            blurhash
-          );
-        })
-      );
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  });
- */
-async function _getImageBlurHash(object: ObjectMetadata) {
+export async function getImageBlurHash(object: { name?: string }) {
   const downloadData = await storage()
     .bucket("church-data-admin.appspot.com")
     .file(object.name!)
     .download();
 
   const { data: pixels, info: metadata } = await sharp(downloadData[0])
+    .resize({ width: 1024, height: 1024, fit: "inside" })
     .raw()
     .ensureAlpha()
     .toBuffer({ resolveWithObject: true });
 
-  console.log(`Image ${metadata.width}x${metadata.height}`);
-  console.log(`Image ${pixels.length} pixels`);
+  console.log(`Image Size ${metadata.width}x${metadata.height}`);
 
   const clamped = new Uint8ClampedArray(pixels);
 
-  const blurhash = encode(clamped, metadata.width!, metadata.height!, 5, 5);
-  return blurhash;
+  return encode(clamped, metadata.width!, metadata.height!, 5, 5);
 }
 
 function _checkIsValidObject(
-  object: ObjectMetadata
+  object: functions_storage.StorageObjectData
 ): { table: PhotoTable; file: string } | null {
   const regexp = RegExp(
     `^church-data-admin\\.appspot\\.com\\/(?<table>(${photoTables

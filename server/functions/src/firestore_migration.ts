@@ -1,31 +1,1488 @@
-import { storage } from "firebase-admin";
-// import { region } from "firebase-functions";
+import { firestore } from "firebase-admin";
+import { Storage } from "firebase-admin/lib/storage/storage";
+import * as fs from "fs";
+import * as uuid from "uuid";
+import {
+  PhotoTable,
+  makeGraphqlRequest,
+  updatePhotoBlurHash,
+} from "./hasura_interface";
+import { getImageBlurHash } from "./storage_triggers";
 import path = require("path");
-import fsPromises = require("fs/promises");
 
-export const migrateStorage = async () => {
-  const migrationMapping = await fsPromises
-    .readFile(
-      "/media/androidq/data/Projects/church_admin/migrate-result.json",
-      "utf8"
+type Area = {
+  id: string;
+  name: string;
+  bounds: {
+    type: "Polygon";
+    coordinates: [[number, number][]];
+  } | null;
+  color: number;
+  photoUpdatedAt: string | null;
+};
+
+type Street = {
+  id: string;
+  name: string;
+  line: {
+    type: "LineString";
+    coordinates: [number, number][];
+  } | null;
+  color: number;
+  photoUpdatedAt: string | null;
+};
+
+type Family = {
+  id: string;
+  name: string;
+  address: string;
+  geolocation: {
+    type: "Point";
+    coordinates: [number, number];
+  } | null;
+  notes: string;
+  color: number;
+  photoUpdatedAt: string | null;
+  parents: {
+    data: { parentFamilyId: string }[];
+  };
+};
+
+type Store = {
+  id: string;
+  adminFamily: string;
+  name: string;
+  address: string;
+  geolocation: {
+    type: "Point";
+    coordinates: [number, number];
+  } | null;
+  color: number;
+  photoUpdatedAt: string | null;
+};
+
+type Service = {
+  id: string;
+  name: string;
+  studyYearFromId: number | null;
+  studyYearToId: number | null;
+  color?: number;
+  photoUpdatedAt: string | null;
+};
+
+type Class = {
+  id: string;
+  name: string;
+  serviceId: string;
+  serviceStudyYear: number;
+  serviceGender: boolean;
+  color: number | null;
+  photoUpdatedAt: string | null;
+};
+
+type Person = {
+  id: string;
+  name: string;
+  address: string;
+  geolocation: {
+    type: "Point";
+    coordinates: [number, number];
+  } | null;
+  mainPhone: string | null;
+  otherPhones: Record<string, string>;
+  birthdate: string | null;
+  gender: boolean;
+  isShammas: boolean;
+  shammasLevelId: string;
+  isStudent: boolean;
+  isServant: boolean;
+  notes: string;
+  schoolId: string | null;
+  collegeId: string | null;
+  churchId: string | null;
+  fatherId: string | null;
+  studyYearId: number | null;
+  color: number;
+  photoUpdatedAt: string | null;
+  services: {
+    data: { serviceId: string }[];
+  };
+  jobId: string | null;
+  jobDescription: string | null;
+  qualificationId: string | null;
+  personTypeId: string | null;
+  stateId: string | null;
+  familyId: string | null;
+  storeId: string | null;
+};
+
+export async function migrateProjectsFromFirestore(
+  meetingHelperFirestore?: firestore.Firestore,
+  churchDataFirestore?: firestore.Firestore,
+  dstStorageInstance?: Storage
+) {
+  if (!meetingHelperFirestore && !churchDataFirestore) {
+    console.error(
+      "Please provide at least one firestore instance to migrate from"
+    );
+    return;
+  }
+
+  const migrationTime = new Date();
+  console.log("Starting migration at", migrationTime.toISOString());
+
+  const { variables, idsMapping } = await getMigrationVarsAndWriteToFile(
+    migrationTime,
+    meetingHelperFirestore,
+    churchDataFirestore
+  );
+
+  if ((await executeMigration(variables)) !== true) {
+    console.error("Migration execution failed. Exiting");
+    return;
+  }
+
+  if (dstStorageInstance) {
+    console.log("Migration successful. Updating photos blurhashes");
+    await renamePhotosAndUpdateBlurhashes(dstStorageInstance, idsMapping);
+  } else {
+    console.log("Migration successful. Skipping photos blurhashes update");
+  }
+}
+
+export async function getMigrationVarsAndWriteToFile(
+  migrationTime: Date,
+  meetingHelperFirestore?: firestore.Firestore,
+  churchDataFirestore?: firestore.Firestore
+) {
+  const studyYears = Object.entries({
+    ...(await getMappedCollection("StudyYears", meetingHelperFirestore)),
+    ...(await getMappedCollection("StudyYears", churchDataFirestore)),
+  }).reduce((acc, [key, value]) => {
+    const grade = value["Grade"]?.toString();
+
+    const duplicate = Object.entries(acc).find(
+      ([, item]) => item["Grade"]?.toString() === grade
+    );
+
+    if (duplicate) {
+      return {
+        ...acc,
+        [key]: acc[duplicate[0]],
+      };
+    }
+
+    return {
+      ...acc,
+      [key]: value,
+    };
+  }, {} as Record<string, firestore.DocumentData>);
+
+  console.log("Got study years", JSON.stringify(studyYears));
+
+  const uniqueChurches = await getCollectionDataUniqueByName(
+    "Churches",
+    meetingHelperFirestore,
+    churchDataFirestore
+  );
+  console.log("Got unique churches", JSON.stringify(uniqueChurches));
+
+  const uniqueColleges = await getCollectionDataUniqueByName(
+    "Colleges",
+    meetingHelperFirestore,
+    churchDataFirestore
+  );
+  console.log("Got unique colleges", JSON.stringify(uniqueColleges));
+
+  const uniqueFathers = Object.entries(
+    await getCollectionDataUniqueByName(
+      "Fathers",
+      meetingHelperFirestore,
+      churchDataFirestore
     )
-    .then(JSON.parse);
+  ).reduce((acc, [k, v], i, a) => {
+    if (!v) {
+      console.log("Processing father", k, v);
+      console.log(a);
+    }
 
-  const files = await storage()
+    return {
+      ...acc,
+      [k]: {
+        ...v,
+        churchId: v.churchId ? uniqueChurches[v.churchId]?.id : null,
+      },
+    };
+  }, {} as Record<string, { id: string; name: string; churchId: string | null }>);
+
+  console.log("Got unique fathers", JSON.stringify(uniqueFathers));
+
+  const uniqueSchools = await getCollectionDataUniqueByName(
+    "Schools",
+    meetingHelperFirestore,
+    churchDataFirestore
+  );
+  console.log("Got unique schools", JSON.stringify(uniqueSchools));
+
+  const uniqueJobs = await getCollectionDataUniqueByName(
+    "Jobs",
+    churchDataFirestore
+  );
+  console.log("Got unique jobs", JSON.stringify(uniqueJobs));
+
+  const uniqueStates = await getCollectionDataUniqueByName(
+    "States",
+    churchDataFirestore
+  );
+  console.log("Got unique states", JSON.stringify(uniqueStates));
+
+  const uniqueTypes = await getCollectionDataUniqueByName(
+    "Types",
+    churchDataFirestore
+  );
+  console.log("Got unique types", JSON.stringify(uniqueTypes));
+
+  const areas = await getMappedCollection("Areas", churchDataFirestore);
+  console.log("Got areas", JSON.stringify(areas));
+
+  const streets = await getMappedCollection("Streets", churchDataFirestore);
+  console.log("Got streets", JSON.stringify(streets));
+
+  const familiesAndStores = await getMappedCollection(
+    "Families",
+    churchDataFirestore
+  );
+  console.log("Got families", JSON.stringify(familiesAndStores));
+
+  const classes = await getMappedCollection("Classes", meetingHelperFirestore);
+  console.log("Got classes", JSON.stringify(classes));
+
+  const services = await getMappedCollection(
+    "Services",
+    meetingHelperFirestore
+  );
+  console.log("Got services", JSON.stringify(services));
+
+  const persons = {
+    ...(await getMappedCollection("Persons", meetingHelperFirestore)),
+    ...(await getMappedCollection("Persons", churchDataFirestore)),
+  };
+  console.log(
+    "Got persons, count: ",
+    Object.keys(persons).length,
+    "first 10:",
+    JSON.stringify(Object.entries(persons).slice(0, 10))
+  );
+
+  const uniqueQualifications: Record<string, { id: string; name: string }> =
+    Object.values(persons).reduce((acc, value) => {
+      if (!value["Qualification"]?.trim()) return acc;
+
+      return {
+        ...acc,
+        [value["Qualification"].trim()]: {
+          id: uuid.v4(),
+          name: value["Qualification"].trim(),
+        },
+      };
+    }, {} as Record<string, { id: string; name: string }>);
+
+  const createdStudyYears = [
+    {
+      order: -3,
+      name: "baby class 1",
+    },
+    {
+      order: -2,
+      name: "baby class 2",
+    },
+    {
+      order: -1,
+      name: "KG 1",
+    },
+    {
+      order: 0,
+      name: "KG 2",
+    },
+    {
+      order: 1,
+      name: "أولى ابتدائي",
+    },
+    {
+      order: 2,
+      name: "ثانية ابتدائي",
+    },
+    {
+      order: 3,
+      name: "ثالثة ابتدائي",
+    },
+    {
+      order: 4,
+      name: "رابعة ابتدائي",
+    },
+    {
+      order: 5,
+      name: "خامسة ابتدائي",
+    },
+    {
+      order: 6,
+      name: "سادسة ابتدائي",
+    },
+    {
+      order: 7,
+      name: "أولى اعدادي",
+    },
+    {
+      order: 8,
+      name: "ثانية اعدادي",
+    },
+    {
+      order: 9,
+      name: "ثالثة اعدادي",
+    },
+    {
+      order: 10,
+      name: "أولى ثانوي",
+    },
+    {
+      order: 11,
+      name: "ثانية ثانوي",
+    },
+    {
+      order: 12,
+      name: "ثالثة ثانوي",
+    },
+    {
+      order: 13,
+      name: "أولى جامعة",
+    },
+    {
+      order: 14,
+      name: "ثانية جامعة",
+    },
+    {
+      order: 15,
+      name: "ثالثة جامعة",
+    },
+    {
+      order: 16,
+      name: "رابعة جامعة",
+    },
+    {
+      order: 17,
+      name: "خامسة جامعة",
+    },
+    {
+      order: 18,
+      name: "سادسة جامعة",
+    },
+  ];
+
+  const oldShammasLevels = [
+    "ابصالتس",
+    "اغأناغنوستيس",
+    "أيبودياكون",
+    "دياكون",
+    "أرشيدياكون",
+  ];
+
+  const createdShammasLevels: Record<
+    string,
+    { id: string; order: number; name: string }
+  > = oldShammasLevels.reduce((acc, level, index) => {
+    return {
+      ...acc,
+      [level]: {
+        id: uuid.v4(),
+        order: index,
+        name: level,
+      },
+    };
+  }, {} as Record<string, { id: string; order: number; name: string }>);
+
+  console.log("Staged Shammas levels", JSON.stringify(createdShammasLevels));
+
+  const migratedAreas: Record<string, Area> = Object.entries(areas).reduce(
+    (acc, [key, value]) => {
+      if (!value["Name"]?.trim()) {
+        console.log("Skipping", key, "because it has no name");
+        return acc;
+      }
+
+      return {
+        ...acc,
+        [key]: {
+          id: uuid.v4(),
+          name: value["Name"].trim(),
+          color: value["Color"] === 0 ? null : value["Color"],
+          photoUpdatedAt:
+            value["hasPhoto"] === true ? migrationTime.toISOString() : null,
+          bounds:
+            value["Location"] &&
+            Array.isArray(value["Location"]) &&
+            (value["Location"] as Array<firestore.GeoPoint>).length > 0
+              ? {
+                  type: "Polygon",
+                  coordinates: [
+                    [
+                      ...(value["Location"] as Array<firestore.GeoPoint>).map(
+                        (e) => [e.longitude, e.latitude] as [number, number]
+                      ),
+                      [
+                        (value["Location"] as Array<firestore.GeoPoint>)[0]
+                          .longitude,
+                        (value["Location"] as Array<firestore.GeoPoint>)[0]
+                          .latitude,
+                      ],
+                    ],
+                  ],
+                }
+              : null,
+        } satisfies Area,
+      };
+    },
+    {} as Record<string, Area>
+  );
+
+  console.log("Staged migrated areas", JSON.stringify(migratedAreas));
+
+  const migratedStreets: Record<string, Street> = Object.entries(
+    streets
+  ).reduce((acc, [key, value]) => {
+    if (!value["Name"]?.trim()) {
+      console.log("Skipping", key, "because it has no name");
+      return acc;
+    }
+
+    return {
+      ...acc,
+      [key]: {
+        id: uuid.v4(),
+        name: value["Name"].trim(),
+        color: value["Color"] === 0 ? null : value["Color"],
+        photoUpdatedAt:
+          value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+        line:
+          value["Location"] &&
+          Array.isArray(value["Location"]) &&
+          (value["Location"] as Array<firestore.GeoPoint>).length > 0
+            ? {
+                type: "LineString",
+                coordinates: (
+                  value["Location"] as Array<firestore.GeoPoint>
+                ).map((e) => [e.longitude, e.latitude]),
+              }
+            : null,
+      } satisfies Street,
+    };
+  }, {} as Record<string, Street>);
+
+  console.log("Staged migrated streets", JSON.stringify(migratedStreets));
+
+  const intermediateFamilies: Record<string, Family> = Object.entries(
+    familiesAndStores
+  ).reduce((acc, [key, value]) => {
+    if (value["IsStore"]) return acc;
+
+    if (!value["Name"]?.trim()) {
+      console.log("Skipping", key, "because it has no name");
+      return acc;
+    }
+
+    const parentFamily1 = value["InsideFamily"]?.id;
+    const parentFamily2 = value["InsideFamily2"]?.id;
+
+    return {
+      ...acc,
+      [key]: {
+        id: uuid.v4(),
+        name: value["Name"].trim(),
+        address: value["Address"]?.trim(),
+        notes: value["Notes"],
+        color: value["Color"] === 0 ? null : value["Color"],
+        photoUpdatedAt:
+          value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+        geolocation: value["Location"]
+          ? {
+              type: "Point",
+              coordinates: [
+                value["Location"].longitude,
+                value["Location"].latitude,
+              ],
+            }
+          : null,
+        parents: {
+          data: [
+            parentFamily1 ? { parentFamilyId: parentFamily1 } : null,
+            parentFamily2
+              ? {
+                  parentFamilyId: parentFamily2,
+                }
+              : null,
+          ]
+            .filter((e) => e != null)
+            .map((o) => o as { parentFamilyId: string }),
+        },
+      } satisfies Family,
+    };
+  }, {} as Record<string, Family>);
+
+  const migratedFamilies: Record<string, Family> = Object.fromEntries(
+    Object.entries(intermediateFamilies).map(([k, v]) => {
+      const parentFamily1 =
+        intermediateFamilies[v.parents.data[0]?.parentFamilyId]?.id;
+      const parentFamily2 =
+        intermediateFamilies[v.parents.data[1]?.parentFamilyId]?.id;
+
+      return [
+        k,
+        {
+          ...v,
+          parents: {
+            data: [parentFamily1, parentFamily2]
+              .filter((e) => e != null)
+              .map((o) => ({ parentFamilyId: o as string })),
+          },
+        } satisfies Family,
+      ];
+    })
+  );
+
+  console.log("Staged migrated families", JSON.stringify(migratedFamilies));
+
+  const migratedStores: Record<string, Store> = Object.entries(
+    familiesAndStores
+  ).reduce((acc, [key, value]) => {
+    if (!value["IsStore"]) return acc;
+
+    if (!value["Name"]?.trim()) {
+      console.log("Skipping", key, "because it has no name");
+      return acc;
+    }
+    if (migratedFamilies[value["InsideFamily"]?.id] == null) {
+      console.log(
+        "Skipping",
+        key,
+        "because it has no admin family",
+        value["InsideFamily"]?.path
+      );
+      return acc;
+    }
+
+    return {
+      ...acc,
+      [key]: {
+        id: uuid.v4(),
+        name: value["Name"].trim(),
+        adminFamily: migratedFamilies[value["InsideFamily"]?.id].id,
+        address: value["Address"]?.trim(),
+        color: value["Color"] === 0 ? null : value["Color"],
+        photoUpdatedAt:
+          value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+        geolocation: value["Location"]
+          ? {
+              type: "Point",
+              coordinates: [
+                value["Location"].longitude,
+                value["Location"].latitude,
+              ],
+            }
+          : null,
+      } satisfies Store,
+    };
+  }, {} as Record<string, Store>);
+
+  console.log("Staged migrated stores", JSON.stringify(migratedStores));
+
+  const createdServices: Service[] = [
+    {
+      id: uuid.v4(),
+      name: "خدمة baby class",
+      studyYearFromId: -3,
+      studyYearToId: -2,
+      photoUpdatedAt: null,
+    },
+    {
+      id: uuid.v4(),
+      name: "خدمة KG",
+      studyYearFromId: -1,
+      studyYearToId: 0,
+      photoUpdatedAt: null,
+    },
+    {
+      id: uuid.v4(),
+      name: "خدمة ابتدائي",
+      studyYearFromId: 1,
+      studyYearToId: 6,
+      photoUpdatedAt: null,
+    },
+    {
+      id: uuid.v4(),
+      name: "خدمة اعدادي",
+      studyYearFromId: 7,
+      studyYearToId: 9,
+      photoUpdatedAt: null,
+    },
+    {
+      id: uuid.v4(),
+      name: "خدمة ثانوي",
+      studyYearFromId: 10,
+      studyYearToId: 12,
+      photoUpdatedAt: null,
+    },
+    {
+      id: uuid.v4(),
+      name: "خدمة جامعة",
+      studyYearFromId: 13,
+      studyYearToId: 18,
+      photoUpdatedAt: null,
+    },
+  ];
+
+  console.log("Staged new services", JSON.stringify(createdServices));
+
+  const migratedServices: Record<string, Service> = Object.entries(
+    services
+  ).reduce((acc, [key, value]) => {
+    if (!value["Name"]?.trim()) {
+      console.log("Skipping", key, "because it has no name");
+      return acc;
+    }
+
+    const studyYearFrom =
+      value["StudyYearRange"] != null
+        ? studyYears[value["StudyYearRange"]["From"].id]
+        : null;
+    const studyYearTo =
+      value["StudyYearRange"] != null
+        ? studyYears[value["StudyYearRange"]["To"].id]
+        : null;
+
+    const service: Service = {
+      id: uuid.v4(),
+      name: value["Name"].trim(),
+      photoUpdatedAt:
+        value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+      color: value["Color"] === 0 ? null : value["Color"],
+      studyYearFromId: null,
+      studyYearToId: null,
+    } satisfies Service;
+
+    if (
+      value["StudyYearRange"] != null &&
+      studyYearFrom != null &&
+      studyYearTo != null
+    ) {
+      service.studyYearFromId = studyYearFrom["Grade"];
+      service.studyYearToId = studyYearTo["Grade"];
+
+      console.log(
+        "Migrating service",
+        key,
+        "with study year range",
+        studyYearFrom["Name"],
+        "to",
+        studyYearTo["Name"]
+      );
+    } else {
+      console.log(
+        "Migrating service",
+        key,
+        "with no study year range, got",
+        value["StudyYearRange"],
+        "from",
+        studyYearFrom,
+        "to",
+        studyYearTo
+      );
+    }
+
+    return {
+      ...acc,
+      [key]: service,
+    };
+  }, {});
+
+  console.log("Staged migrated services", JSON.stringify(migratedServices));
+
+  const allServices = [...createdServices, ...Object.values(migratedServices)];
+
+  console.log("Staged all services", JSON.stringify(allServices));
+
+  const migratedClasses: Record<string, Class> = Object.entries(classes).reduce(
+    (acc, [key, value]) => {
+      if (!value["Name"]?.trim()) {
+        console.log("Skipping", key, "because it has no name");
+        return acc;
+      }
+
+      const serviceStudyYear = studyYears[value["StudyYear"].id]?.[
+        "Grade"
+      ] as number;
+
+      const serviceData = createdServices.find(
+        (s) =>
+          s.studyYearFromId != null &&
+          s.studyYearFromId <= serviceStudyYear &&
+          s.studyYearToId != null &&
+          s.studyYearToId >= serviceStudyYear
+      );
+
+      if (serviceData == null) {
+        console.log(
+          "Skipping",
+          key,
+          "because it has no service for study year",
+          "StudyYear:",
+          (value["StudyYear"] as firestore.DocumentReference).path
+        );
+        return acc;
+      }
+
+      return {
+        ...acc,
+        [key]: {
+          id: uuid.v4(),
+          name: value["Name"].trim(),
+          color: value["Color"] === 0 ? null : value["Color"],
+          photoUpdatedAt:
+            value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+          serviceId: serviceData["id"],
+          serviceGender: value["Gender"],
+          serviceStudyYear,
+        } satisfies Class,
+      };
+    },
+    {} as Record<string, Class>
+  );
+
+  console.log("Staged migrated classes", JSON.stringify(migratedClasses));
+
+  const migratedPersons: Record<string, Person> = Object.entries(
+    persons
+  ).reduce((acc, [key, value]) => {
+    if (value["Name"] == null) {
+      console.log("Skipping", key, "because it has no name");
+      return acc;
+    }
+
+    const studyYearIdFromClassId =
+      classes[value["ClassId"]?.id]?.["StudyYear"]?.id ??
+      value["StudyYear"]?.id;
+    const studyYearOrder = studyYears[studyYearIdFromClassId]?.["Grade"];
+
+    const personServices: string[] = [
+      ...(value["Services"] ?? []).map(
+        (e: firestore.DocumentReference) => migratedServices[e.id]!.id
+      ),
+      studyYearOrder != null
+        ? createdServices.find(
+            (s) =>
+              s["studyYearFromId"] != null &&
+              s["studyYearFromId"] <= studyYearOrder &&
+              s["studyYearToId"] != null &&
+              s["studyYearToId"] >= studyYearOrder
+          )?.id
+        : null,
+    ].filter((e) => e !== null);
+
+    const gender =
+      value["Gender"] ?? classes[value["ClassId"]?.id]?.["Gender"] ?? true;
+
+    const familyOrStoreId = value["FamilyId"]?.id;
+    const familyId = migratedFamilies[familyOrStoreId]?.id;
+    const storeId = migratedStores[familyOrStoreId]?.id;
+
+    if (
+      studyYearOrder == null &&
+      personServices.length === 0 &&
+      !value["Location"] &&
+      !familyOrStoreId
+    ) {
+      console.log(
+        "Skipping",
+        key,
+        "because it has no study year, no services, no location and no familyOrStoreId"
+      );
+      return acc;
+    }
+
+    const schoolId =
+      value["School"] != null && uniqueSchools[value["School"].id] != null
+        ? uniqueSchools[value["School"].id]?.id
+        : null;
+    const collegeId =
+      value["College"] != null && uniqueColleges[value["College"].id] != null
+        ? uniqueColleges[value["College"].id]?.id
+        : null;
+    const jobId =
+      value["Job"] != null && uniqueJobs[value["Job"].id] != null
+        ? uniqueJobs[value["Job"].id]?.id
+        : null;
+    const jobDescription = value["JobDescription"]?.trim();
+
+    return {
+      ...acc,
+      [key]: {
+        id: uuid.v4(),
+        name: value["Name"].trim(),
+        mainPhone: value["Phone"]?.replace(/ /g, "").trim(),
+        otherPhones: {
+          ...(value["FatherPhone"] != null
+            ? {
+                "رقم هاتف الأب": (value["FatherPhone"] as string)
+                  .replace(/ /g, "")
+                  .trim(),
+              }
+            : {}),
+          ...(value["MotherPhone"] != null
+            ? {
+                "رقم هاتف الأم": (value["MotherPhone"] as string)
+                  .replace(/ /g, "")
+                  .trim(),
+              }
+            : {}),
+          ...Object.fromEntries(
+            Object.entries(value["Phones"] ?? {}).map(([key, value]) => [
+              key,
+              (value as string).replace(/ /g, "").trim(),
+            ])
+          ),
+        },
+        gender,
+        isShammas: gender && !!createdShammasLevels[value["ShammasLevel"]]?.id,
+        isStudent: !!(schoolId || collegeId || !(jobId || jobDescription)),
+        isServant: false,
+        shammasLevelId: createdShammasLevels[value["ShammasLevel"]]?.["id"],
+        geolocation: value["Location"]
+          ? {
+              type: "Point",
+              coordinates: [
+                value["Location"].longitude,
+                value["Location"].latitude,
+              ],
+            }
+          : null,
+        color: value["Color"] === 0 ? null : value["Color"],
+        notes: value["Notes"],
+        photoUpdatedAt:
+          value["HasPhoto"] === true ? migrationTime.toISOString() : null,
+        address: value["Address"]?.trim(),
+        birthdate:
+          toNearestDay(value["BirthDate"]?.toDate())?.toISOString() ?? null,
+        churchId:
+          value["Church"] != null && uniqueChurches[value["Church"].id] != null
+            ? uniqueChurches[value["Church"].id]?.id
+            : null,
+        fatherId:
+          value["CFather"] != null && uniqueFathers[value["CFather"].id] != null
+            ? uniqueFathers[value["CFather"].id]?.id
+            : null,
+        collegeId,
+        schoolId,
+        studyYearId: studyYearOrder,
+        services: {
+          data: Array.from(new Set(personServices)).map((e) => ({
+            serviceId: e,
+          })),
+        },
+        jobId,
+        jobDescription,
+        familyId,
+        storeId,
+        personTypeId: value["Type"] ? uniqueTypes[value["Type"]]?.id : null,
+        qualificationId:
+          value["Qualification"] &&
+          uniqueQualifications[value["Qualification"].trim()] != null
+            ? uniqueQualifications[value["Qualification"].trim()]?.id
+            : null,
+        stateId:
+          value["State"] != null && uniqueStates[value["State"].id] != null
+            ? uniqueStates[value["State"].id]?.id
+            : null,
+      } satisfies Person,
+    };
+  }, {} as Record<string, Person>);
+
+  const uniqueMigratedPersons = Object.values(migratedPersons).reduce(
+    (acc, person) => {
+      const existingPerson = acc.find(
+        (p) =>
+          p.name
+            .substring(0, Math.min(p.name.length, person.name.length))
+            .replace(/ /g, "")
+            .replace(/ى/g, "ي")
+            .replace(/أ/g, "ا")
+            .replace(/إ/g, "ا")
+            .replace(/آ/g, "ا")
+            .replace(/ة/g, "ه") ===
+          person.name
+            .substring(0, Math.min(p.name.length, person.name.length))
+            .replace(/ /g, "")
+            .replace(/ى/g, "ي")
+            .replace(/أ/g, "ا")
+            .replace(/إ/g, "ا")
+            .replace(/آ/g, "ا")
+            .replace(/ة/g, "ه")
+      );
+
+      if (
+        existingPerson &&
+        existingPerson.birthdate &&
+        person.birthdate &&
+        existingPerson.birthdate == person.birthdate
+      ) {
+        const shammasLevelId =
+          existingPerson.shammasLevelId ?? person.shammasLevelId;
+
+        const gender =
+          !!shammasLevelId ||
+          (existingPerson.gender != null && person.gender != null
+            ? existingPerson.gender === person.gender
+              ? existingPerson.gender
+              : false
+            : existingPerson.gender ?? person.gender);
+
+        const merged: Person = {
+          id: existingPerson.id ?? person.id,
+          name: maxString(existingPerson.name, person.name),
+          address: (
+            (existingPerson.address ?? "") +
+            "\n" +
+            (person.address ?? "")
+          ).trim(),
+          geolocation: existingPerson.geolocation ?? person.geolocation,
+          mainPhone: existingPerson.mainPhone || person.mainPhone,
+          otherPhones: {
+            ...person.otherPhones,
+            ...existingPerson.otherPhones,
+          },
+          birthdate: existingPerson.birthdate || person.birthdate,
+          gender: gender,
+          isShammas: gender && !!shammasLevelId,
+          shammasLevelId: shammasLevelId,
+          isStudent: existingPerson.isStudent ?? person.isStudent,
+          isServant: existingPerson.isServant ?? person.isServant,
+          notes: (
+            (existingPerson.notes ?? "") +
+            "\n" +
+            (person.notes ?? "")
+          ).trim(),
+          schoolId: existingPerson.schoolId ?? person.schoolId,
+          collegeId: existingPerson.collegeId ?? person.collegeId,
+          churchId: existingPerson.churchId ?? person.churchId,
+          fatherId: existingPerson.fatherId ?? person.fatherId,
+          studyYearId: existingPerson.studyYearId ?? person.studyYearId,
+          color: existingPerson.color ?? person.color,
+          photoUpdatedAt:
+            existingPerson.photoUpdatedAt ?? person.photoUpdatedAt,
+          services: {
+            data: existingPerson.services.data.concat(
+              person.services.data.filter(
+                (item) =>
+                  !existingPerson.services.data.find(
+                    (o) => o.serviceId == item.serviceId
+                  )
+              )
+            ),
+          },
+          jobId: existingPerson.jobId ?? person.jobId,
+          jobDescription: (
+            (existingPerson.jobDescription ?? "") +
+            "\n" +
+            (person.jobDescription ?? "")
+          ).trim(),
+          qualificationId:
+            existingPerson.qualificationId ?? person.qualificationId,
+          personTypeId: existingPerson.personTypeId ?? person.personTypeId,
+          stateId: existingPerson.stateId ?? person.stateId,
+          familyId: existingPerson.familyId ?? person.familyId,
+          storeId: existingPerson.storeId ?? person.storeId,
+        };
+
+        console.log("Found duplicate person", person.name);
+        console.dir(["Existing person:", existingPerson]);
+        console.dir(["New person:", person]);
+        console.dir(["Merged:", merged]);
+
+        return [...acc.filter((p) => p.id != existingPerson.id), merged];
+      } else if (existingPerson) {
+        console.log(
+          "Possible duplicate person",
+          person.name,
+          existingPerson.name,
+          "trimmedName",
+          existingPerson.name
+            .substring(
+              0,
+              Math.min(existingPerson.name.length, person.name.length)
+            )
+            .replace(/ /g, "")
+            .replace(/ى/g, "ي")
+            .replace(/أ/g, "ا")
+            .replace(/إ/g, "ا")
+            .replace(/آ/g, "ا")
+            .replace(/ة/g, "ه")
+        );
+      }
+
+      return [...acc, person];
+    },
+    [] as Person[]
+  );
+
+  console.log(
+    "Staged migrated persons, count:",
+    Object.keys(uniqueMigratedPersons).length,
+    "first 10:",
+    JSON.stringify(Object.entries(uniqueMigratedPersons).slice(0, 10))
+  );
+
+  const idsMapping = {
+    classes: Object.entries(migratedClasses).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+    services: Object.entries(migratedServices).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] as string }),
+      {} as Record<string, string>
+    ),
+    areas: Object.entries(migratedAreas).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+    streets: Object.entries(migratedStreets).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+    families: Object.entries(migratedFamilies).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+    stores: Object.entries(migratedStores).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+    persons: Object.entries(migratedPersons).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
+      {} as Record<string, string>
+    ),
+  };
+
+  console.log(
+    "Done migrating data. Saving migration ids mapping to ./migration-mapping.json"
+  );
+
+  const filePath = path.join(".", "migration-mapping.json");
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(idsMapping));
+
+  const variables = {
+    studyYears: createdStudyYears,
+
+    qualifications: getUniqueValuesByName(
+      Object.values(uniqueQualifications) ?? []
+    ),
+    jobs: getUniqueValuesByName(Object.values(uniqueJobs) ?? []),
+    states: getUniqueValuesByName(Object.values(uniqueStates) ?? []),
+    types: getUniqueValuesByName(Object.values(uniqueTypes) ?? []),
+    colleges: getUniqueValuesByName(Object.values(uniqueColleges) ?? []),
+    schools: getUniqueValuesByName(Object.values(uniqueSchools) ?? []),
+    churches: getUniqueValuesByName(Object.values(uniqueChurches) ?? []),
+    fathers: getUniqueValuesByName(Object.values(uniqueFathers) ?? []),
+    shamasLevels: getUniqueValuesByName(
+      Object.values(createdShammasLevels) ?? []
+    ),
+
+    areas: Object.values(migratedAreas).filter((v) => v != null) ?? [],
+    streets: Object.values(migratedStreets).filter((v) => v != null) ?? [],
+    families: Object.values(migratedFamilies).filter((v) => v != null) ?? [],
+    stores: Object.values(migratedStores).filter((v) => v != null) ?? [],
+
+    services: allServices.filter((v) => v != null) ?? [],
+    classes: Object.values(migratedClasses).filter((v) => v != null) ?? [],
+
+    persons: uniqueMigratedPersons.filter((v) => v != null) ?? [],
+  };
+
+  console.log("Saving migration vars to ./migration-vars.json");
+
+  const filePath2 = path.join(".", "migration-vars.json");
+  fs.mkdirSync(path.dirname(filePath2), { recursive: true });
+  fs.writeFileSync(filePath2, JSON.stringify(variables));
+
+  return { variables, idsMapping };
+}
+
+export async function executeMigration(variables?: {
+  studyYears: Array<object>;
+  colleges: Array<object>;
+  schools: Array<object>;
+  churches: Array<object>;
+  fathers: Array<object>;
+  shamasLevels: Array<object>;
+  qualifications: Array<object>;
+  jobs: Array<object>;
+  states: Array<object>;
+  types: Array<object>;
+  areas: Array<Area>;
+  streets: Array<Street>;
+  families: Array<Family>;
+  stores: Array<Store>;
+  services: Array<Service>;
+  classes: Array<Class>;
+  persons: Array<Person>;
+}): Promise<boolean> {
+  if (!variables) {
+    variables = JSON.parse(
+      fs.readFileSync(path.join(".", "migration-vars.json")).toString()
+    );
+  }
+
+  try {
+    //TODO: add qualifications, jobs, states, types, areas, streets, families, stores
+    const result = await makeGraphqlRequest({
+      query: `
+        mutation migrateFromFirestore(
+  $studyYears: [StudyYearsInsertInput!]!
+  $colleges: [CollegesInsertInput!]!
+  $schools: [SchoolsInsertInput!]!
+  $churches: [ChurchesInsertInput!]!
+  $fathers: [FathersInsertInput!]!
+  $shamasLevels: [ShammasLevelsInsertInput!]!
+  $services: [ServicesInsertInput!]!
+  $classes: [ClassesInsertInput!]!
+  $persons: [PersonsInsertInput!]!
+
+  $qualifications: [QualificationsInsertInput!]!
+  $jobs: [JobsInsertInput!]!
+  $states: [PersonStatesInsertInput!]!
+  $types: [PersonTypesInsertInput!]!
+  $areas: [AreasInsertInput!]!
+  $streets: [StreetsInsertInput!]!
+  $families: [FamiliesInsertInput!]!
+  $stores: [StoresInsertInput!]!
+) {
+  insertStudyYears(
+    objects: $studyYears
+    onConflict: { constraint: studyYearsOrderKey, updateColumns: order }
+  ) {
+    affectedRows
+  }
+  insertServices(
+    objects: $services
+    onConflict: { constraint: servicesNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertColleges(
+    objects: $colleges
+    onConflict: { constraint: collegesNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertSchools(
+    objects: $schools
+    onConflict: { constraint: schoolsNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertChurches(
+    objects: $churches
+    onConflict: { constraint: churchesNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertFathers(
+    objects: $fathers
+    onConflict: { constraint: fathersNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertQualifications(
+    objects: $qualifications
+    onConflict: { constraint: qualificationsNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertJobs(
+    objects: $jobs
+    onConflict: { constraint: jobsNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertPersonStates(
+    objects: $states
+    onConflict: { constraint: statesNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertPersonTypes(
+    objects: $types
+    onConflict: { constraint: personTypesNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertShammasLevels(
+    objects: $shamasLevels
+    onConflict: { constraint: shammasLevelNameKey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertClasses(
+    objects: $classes
+    onConflict: { constraint: classesPkey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertAreas(
+    objects: $areas
+    onConflict: { constraint: areasPkey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertStreets(
+    objects: $streets
+    onConflict: { constraint: streetsPkey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertFamilies(
+    objects: $families
+    onConflict: { constraint: familiesPkey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertStores(
+    objects: $stores
+    onConflict: { constraint: storesPkey, updateColumns: id }
+  ) {
+    affectedRows
+  }
+  insertPersons(objects: $persons) {
+    affectedRows
+  }
+}
+`,
+      variables: variables!,
+    });
+
+    if (result.data.errors != null) {
+      throw result.data.errors;
+    }
+
+    return true;
+  } catch (e) {
+    console.dir(e, { depth: 3 });
+    throw e;
+  }
+}
+
+export async function getCollectionDataUniqueByName(
+  collectionName: string,
+  firestoreInstance1?: firestore.Firestore,
+  firestoreInstance2?: firestore.Firestore
+): Promise<
+  Record<
+    string,
+    {
+      id: string;
+      name: string;
+      color?: number | null;
+      order?: number | null;
+      churchId?: string | null;
+    }
+  >
+> {
+  const collection1 = await firestoreInstance1
+    ?.collection(collectionName)
+    .get();
+  const collection2 = await firestoreInstance2
+    ?.collection(collectionName)
+    .get();
+
+  return [...(collection1?.docs ?? []), ...(collection2?.docs ?? [])].reduce(
+    (acc, doc, i) => {
+      const name = doc.data()["Name"].trim();
+      const duplicate = Object.entries(acc).find(
+        ([, item]) => item && item.name === name
+      );
+
+      // if (doc.id == "RKEGGwtx27S2dft1Ln1r") {
+      //   console.dir(doc.data(), { depth: 3 });
+      //   console.dir(duplicate, { depth: 3 });
+      // }
+
+      if (duplicate) {
+        return {
+          ...acc,
+          [doc.id]: acc[duplicate[0]],
+        };
+      }
+
+      if (collectionName == "States") {
+        return {
+          ...acc,
+          [doc.id]: {
+            id: uuid.v4(),
+            name,
+            color: parseInt(doc.data()["Color"], 16),
+          },
+        };
+      } else if (collectionName == "Types") {
+        return {
+          ...acc,
+          [doc.id]: {
+            id: uuid.v4(),
+            name,
+            order: i,
+          },
+        };
+      } else if (collectionName == "Fathers") {
+        return {
+          ...acc,
+          [doc.id]: {
+            id: uuid.v4(),
+            name,
+            churchId: doc.data()["ChurchId"]?.id ?? null,
+          },
+        };
+      }
+
+      return {
+        ...acc,
+        [doc.id]: {
+          id: uuid.v4(),
+          name,
+        },
+      };
+    },
+    {} as Record<
+      string,
+      { id: string; name: string; color?: number | null; order?: number | null }
+    >
+  );
+}
+
+export async function getMappedCollection(
+  name: string,
+  firestoreInstance?: firestore.Firestore
+) {
+  if (!firestoreInstance) return {};
+
+  const collection = await firestoreInstance.collection(name).get();
+
+  return collection.docs.reduce((acc, doc) => {
+    return {
+      ...acc,
+      [doc.id]: doc.data(),
+    };
+  }, {} as Record<string, firestore.DocumentData>);
+}
+
+export function toNearestDay(date?: Date): Date | null {
+  if (date == null) return null;
+
+  date.setUTCDate(date.getUTCDate() + (date.getUTCHours() >= 12 ? 1 : 0));
+  date.setUTCHours(6);
+  date.setUTCMinutes(0);
+  date.setUTCSeconds(0);
+  date.setUTCMilliseconds(0);
+  return date;
+}
+
+export async function renamePhotosAndUpdateBlurhashes(
+  dstStorageInstance: Storage,
+  idsMapping?: {
+    classes: Record<string, string>;
+    services: Record<string, string>;
+    areas: Record<string, string>;
+    streets: Record<string, string>;
+    families: Record<string, string>;
+    stores: Record<string, string>;
+    persons: Record<string, string>;
+  },
+  pageToken?: string,
+  startOffset?: string,
+  maxResults?: string
+) {
+  if (!idsMapping) {
+    idsMapping = JSON.parse(
+      fs
+        .readFileSync(
+          "/media/androidq/data/Projects/church_admin/server/functions/migration-mapping.json"
+        )
+        .toString()
+    );
+  }
+
+  const files = await dstStorageInstance
     .bucket("church-data-admin.appspot.com")
-    .getFiles({ maxResults: 3500 });
+    .getFiles({
+      maxResults: Number.parseInt(
+        maxResults ?? process.env["maxResults"] ?? "3500"
+      ),
+      matchGlob: "{Persons,Classes,Services,Areas,Streets,Families}*/**",
+      startOffset: startOffset ?? process.env["startOffset"] ?? "0",
+      pageToken: pageToken ?? process.env["pageToken"] ?? undefined,
+    });
 
   for (const file of files[0]) {
-    if (!file.name.match(/^(Persons)|(Classes)|(Services)/)) continue;
+    if (
+      !file.name.match(
+        /^((Persons)|(Classes)|(Services)|(Areas)|(Streets)|(Families))Photos\/.+/
+      )
+    ) {
+      console.log("Skipping", file.name);
+      continue;
+    }
 
     const table = file.name.match(/^(.+)Photos\/(.+$)/)![1];
     const id = file.name.match(/^(.+)Photos\/(.+$)/)![2];
 
-    const newId = migrationMapping[table.toLowerCase()][id];
+    const newId = (
+      idsMapping?.[table.toLowerCase() as keyof typeof idsMapping] as
+        | Record<string, string>
+        | undefined
+    )?.[id] as string | undefined;
 
     if (newId) {
+      console.log("Getting blurhash for", table, "/", id);
+
+      const blurhash = await getImageBlurHash(file);
+
+      console.log("Setting blurhash for", table, "/", id, "to", blurhash);
+      await updatePhotoBlurHash(
+        table.toLowerCase() as PhotoTable,
+        newId,
+        blurhash
+      ).catch((e) => {
+        console.log(
+          "Failed to set blurhash for",
+          table,
+          "/",
+          id,
+          "to",
+          blurhash
+        );
+        console.log("Error:", e);
+      });
+
       console.log("Renaming", table, "/", id, "to", newId);
       await file.rename(path.join(table.toLowerCase(), newId));
     }
   }
-};
+}
+
+function maxString(a: string, b: string): string {
+  return a.length >= b.length ? a : b;
+}
+
+function getUniqueValuesByName<T extends { name: string }>(objects: T[]): T[] {
+  return objects.reduce((acc, value) => {
+    if (value && !acc.some((item) => item && item.name === value.name)) {
+      return [...acc, value];
+    }
+    return acc;
+  }, [] as T[]);
+}

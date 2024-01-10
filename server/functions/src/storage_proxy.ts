@@ -1,5 +1,6 @@
 import { auth, storage } from "firebase-admin";
-import { https, runWith } from "firebase-functions/v1";
+import { https } from "firebase-functions/v2";
+import { AuthData } from "firebase-functions/v2/tasks";
 import {
   PhotoTable,
   checkUserAccess,
@@ -11,73 +12,72 @@ import {
 } from "./hasura_interface";
 
 const expiryWindowMillis = 1000 * 60 * 5;
-const enforceAppCheck = process.env["IS_APP_LIVE"] == "true";
 
-export const deletePhoto = runWith({ enforceAppCheck: enforceAppCheck })
-  .region("europe-west6")
-  .https.onCall(async (data, context) => {
-    const { path, table, id, hasuraUID } = await _authenticateStorageRequest(
-      data,
-      context,
-      "delete"
-    );
+export const deletePhoto = https.onCall({}, async (req) => {
+  const { data, auth } = req;
 
-    console.log("Deleting photo", { table, id, hasuraUID });
+  const { path, table, id, hasuraUID } = await _authenticateStorageRequest(
+    data,
+    auth,
+    "delete"
+  );
 
-    await storage().bucket("church-data-admin.appspot.com").file(path).delete();
-    await updatePhotoTime(table as PhotoTable, id, null);
+  console.log("Deleting photo", { table, id, hasuraUID });
 
-    return true;
-  });
+  await storage().bucket("church-data-admin.appspot.com").file(path).delete();
+  await updatePhotoTime(table as PhotoTable, id, null);
 
-export const getDownloadUrl = runWith({ enforceAppCheck: enforceAppCheck })
-  .region("europe-west6")
-  .https.onCall(async (data, context) => {
-    const { path, contentType } = await _authenticateStorageRequest(
-      data,
-      context,
-      "read"
-    );
+  return true;
+});
 
-    return (
-      await storage()
-        .bucket("church-data-admin.appspot.com")
-        .file(path)
-        .getSignedUrl({
-          expires: Date.now() + expiryWindowMillis,
-          version: "v4",
-          action: "read",
-          contentType: contentType,
-        })
-    )[0];
-  });
+export const getDownloadUrl = https.onCall({}, async (req) => {
+  const { data, auth } = req;
 
-export const getUploadUrl = runWith({ enforceAppCheck: enforceAppCheck })
-  .region("europe-west6")
-  .https.onCall(async (data, context) => {
-    const { path, contentType } = await _authenticateStorageRequest(
-      data,
-      context,
-      "write"
-    );
+  const { path, contentType } = await _authenticateStorageRequest(
+    data,
+    auth,
+    "read"
+  );
 
-    return (
-      await storage()
-        .bucket("church-data-admin.appspot.com")
-        .file(path)
-        .getSignedUrl({
-          expires: Date.now() + expiryWindowMillis,
-          version: "v4",
-          action: "write",
-          contentType: contentType,
-        })
-    )[0];
-  });
+  return (
+    await storage()
+      .bucket("church-data-admin.appspot.com")
+      .file(path)
+      .getSignedUrl({
+        expires: Date.now() + expiryWindowMillis,
+        version: "v4",
+        action: "read",
+        contentType: contentType,
+      })
+  )[0];
+});
+
+export const getUploadUrl = https.onCall({}, async (req) => {
+  const { data, auth } = req;
+
+  const { path, contentType } = await _authenticateStorageRequest(
+    data,
+    auth,
+    "write"
+  );
+
+  return (
+    await storage()
+      .bucket("church-data-admin.appspot.com")
+      .file(path)
+      .getSignedUrl({
+        expires: Date.now() + expiryWindowMillis,
+        version: "v4",
+        action: "write",
+        contentType: contentType,
+      })
+  )[0];
+});
 
 async function _authenticateStorageRequest(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any,
-  context: https.CallableContext,
+  context: AuthData | undefined,
   action: "write" | "read" | "delete"
 ): Promise<{
   path: string;
@@ -167,28 +167,23 @@ async function _authenticateStorageRequest(
   }
 }
 async function assertUserAuthenticatedAndApproved(
-  context: https.CallableContext
+  authData: AuthData | undefined
 ): Promise<auth.UserRecord> {
-  if (!context.auth) {
+  if (!authData) {
     console.error("User not authenticated");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
-  } else if (!(context.auth!.token.email_verified ?? false)) {
+  } else if (!(authData?.token.email_verified ?? false)) {
     console.error("User email not verified");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
-  const authUser = await auth().getUser(context.auth!.uid!);
+  const authUser = await auth().getUser(authData!.uid!);
 
   if (!authUser.multiFactor) {
     console.error("User does not have 2FA enabled");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
-  } else if (
-    !(await checkUserApproved(context.auth.token["x-hasura-user-id"]))
-  ) {
-    console.error(
-      "User is not approved",
-      context.auth.token["x-hasura-user-id"]
-    );
+  } else if (!(await checkUserApproved(authData.token["x-hasura-user-id"]))) {
+    console.error("User is not approved", authData.token["x-hasura-user-id"]);
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
