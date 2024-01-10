@@ -218,6 +218,10 @@ jobs:
           tag: v${{ steps.version.outputs.version }}
           generateReleaseNotes: true
 
+      - name: Rename APK
+        run: |
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
+
       - name: Authenticate with Google Cloud
         uses: "google-github-actions/auth@v2"
         with:
@@ -226,5 +230,5 @@ jobs:
       - name: Upload APK to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: "build/app/outputs/flutter-apk/app-release.apk"
-          destination: "app-releases-church-data-admin/app-release-v${{ steps.version.outputs.version }}.apk"
+          path: "build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
+          destination: "app-releases-church-data-admin"
