@@ -32,9 +32,7 @@ class FirebaseInit implements Initializer {
           kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
       appleProvider:
           kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
-      webProvider: kIsWeb
-          ? ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey!)
-          : null,
+      webProvider: ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey!),
     );
 
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
