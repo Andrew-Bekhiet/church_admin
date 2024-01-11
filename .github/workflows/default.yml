@@ -6,6 +6,8 @@ jobs:
   test-and-upload-coverage:
     permissions:
       checks: write
+      contents: read
+
     runs-on: ubuntu-latest
 
     steps:
