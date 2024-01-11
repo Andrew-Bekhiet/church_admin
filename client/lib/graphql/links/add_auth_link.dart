@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
@@ -19,6 +21,9 @@ class AddAuthLink extends Link {
 
   late final AuthService _authService = _getAuthService();
 
+  HttpLink? _httpLink;
+  WebSocketLink? _wsLink;
+
   AddAuthLink({
     required this.url,
     AuthService Function()? getAuthService,
@@ -28,52 +33,48 @@ class AddAuthLink extends Link {
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
-    return _authService.idTokenStream.switchMap(
-      (t) => request.isSubscription
-          ? getWebSocketRequest(request, t!, forward)
-          : getHttpRequest(request, t!, forward),
-    );
+    return request.isSubscription
+        ? getWebSocketResponse(request, forward)
+        : getHttpResponse(request, forward);
   }
 
   @visibleForTesting
-  Stream<Response> getHttpRequest(
-    Request request,
-    String idToken, [
+  Stream<Response> getHttpResponse(
+    Request request, [
     NextLink? forward,
   ]) {
-    return createHttpLink(url).request(
-      request.updateContextEntry<HttpLinkHeaders>(
-        (headers) => HttpLinkHeaders(
-          headers: {
-            if (headers?.headers != null) ...headers!.headers,
-            'Authorization': 'Bearer $idToken',
-          },
-        ),
-      ),
-      forward,
-    );
+    _httpLink ??= createHttpLink(url);
+
+    return _authService.idTokenStream.whereNotNull().switchMap(
+          (t) => _httpLink!.request(
+            request
+                .updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
+            forward,
+          ),
+        );
   }
 
+  HttpLinkHeaders Function(HttpLinkHeaders?) _getHeadersWithToken(
+    String token,
+  ) =>
+      (headers) => HttpLinkHeaders(
+            headers: {
+              ...headers?.headers ?? {},
+              'Authorization': 'Bearer $token',
+            },
+          );
+
   @visibleForTesting
-  Stream<Response> getWebSocketRequest(
-    Request request,
-    String idToken, [
+  Stream<Response> getWebSocketResponse(
+    Request request, [
     NextLink? forward,
   ]) {
-    return createWSLink(
+    _wsLink ??= createWSLink(
       _getWebSocketURL(Uri.parse(url)),
-      SocketClientConfig(
-        queryAndMutationTimeout: const Duration(seconds: 5),
-        inactivityTimeout: null,
-        autoReconnect: false,
-        initialPayload: () => {
-          'headers': {
-            'Authorization': 'Bearer $idToken',
-            'content-type': 'application/json',
-          },
-        },
-      ),
-    ).request(request, forward);
+      _createWSConfig(),
+    );
+
+    return _wsLink!.request(request, forward);
   }
 
   String _getWebSocketURL(Uri uri) {
@@ -81,5 +82,29 @@ class AddAuthLink extends Link {
             ? uri.replace(scheme: 'wss')
             : uri.replace(scheme: 'ws'))
         .toString();
+  }
+
+  SocketClientConfig _createWSConfig() {
+    return SocketClientConfig(
+      delayBetweenReconnectionAttempts:
+          const Duration(seconds: 1, milliseconds: 500),
+      onConnectionLost: (code, reason) {
+        log('Connection lost: $code, reason: $reason');
+        return null;
+      },
+      initialPayload: () async => {
+        'headers': {
+          'Authorization':
+              'Bearer ${await _authService.idTokenStream.whereNotNull().take(1).first}',
+          'content-type': 'application/json',
+        },
+      },
+    );
+  }
+
+  @override
+  Future<void> dispose() async {
+    await _httpLink?.dispose();
+    await _wsLink?.dispose();
   }
 }

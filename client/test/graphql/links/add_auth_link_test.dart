@@ -3,8 +3,8 @@ import 'package:church_admin/graphql/links/add_auth_link.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' as h show HttpLink;
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
@@ -62,7 +62,22 @@ void main() {
       final unit = AddAuthLink(
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
-        createWSLink: (url, config) => mockWebSocketLink,
+        createWSLink: (url, config) {
+          expectLater(
+            config.initialPayload(),
+            completion(
+              containsPair(
+                'headers',
+                containsPair(
+                  'Authorization',
+                  'Bearer ${AuthService.I.currentUser!.idToken}',
+                ),
+              ),
+            ),
+          );
+
+          return mockWebSocketLink;
+        },
       );
       addTearDown(unit.dispose);
 
@@ -71,10 +86,7 @@ void main() {
         emits(mockResponse),
       );
 
-      verifyInOrder([
-        AuthService.I.idTokenStream,
-        mockWebSocketLink.request(mockRequest, forward),
-      ]);
+      verify(mockWebSocketLink.request(mockRequest, forward));
       verifyNever(mockHttpLink.request(mockRequest, forward));
     },
   );
@@ -120,13 +132,15 @@ void main() {
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
           expect(url, 'wss://example.com');
-          expect(
+          expectLater(
             config.initialPayload(),
-            containsPair(
-              'headers',
+            completion(
               containsPair(
-                'Authorization',
-                'Bearer ${AuthService.I.currentUser!.idToken}',
+                'headers',
+                containsPair(
+                  'Authorization',
+                  'Bearer ${AuthService.I.currentUser!.idToken}',
+                ),
               ),
             ),
           );
@@ -137,7 +151,7 @@ void main() {
       addTearDown(unit.dispose);
 
       await expectLater(
-        unit.getWebSocketRequest(mockRequest, 'idToken', forward),
+        unit.getWebSocketResponse(mockRequest, forward),
         emits(mockResponse),
       );
 
@@ -167,7 +181,7 @@ void main() {
       addTearDown(unit.dispose);
 
       await expectLater(
-        unit.getHttpRequest(mockRequest, 'idToken', forward),
+        unit.getHttpResponse(mockRequest, forward),
         emits(mockResponse),
       );
 
