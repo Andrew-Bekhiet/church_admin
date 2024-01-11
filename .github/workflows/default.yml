@@ -1,9 +1,11 @@
-name: Test and upload coverage
+name: Test, Report Coverage and Release
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test-and-upload-coverage:
+    permissions:
+      checks: write
     runs-on: ubuntu-latest
 
     steps:
@@ -100,7 +102,7 @@ jobs:
 
       - name: Analyze project source
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        uses: ValentinVignal/action-dart-analyze@v0.15
+        uses: ValentinVignal/action-dart-analyze@v0.16
         with:
           fail-on: "warning"
 
@@ -109,7 +111,7 @@ jobs:
         run: flutter test --coverage --machine > test-results.json --dart-define CI=true
 
       - name: Upload test-results.json to artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: ${{ failure() || success() }}
         with:
           name: test-results
@@ -203,7 +205,7 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Upload APK to artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
           retention-days: 1
