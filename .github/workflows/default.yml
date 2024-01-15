@@ -53,10 +53,6 @@ jobs:
           restore-keys: |
             flutter-dependencies-v1-
 
-      - name: cd into client
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
-        run: cd client
-
       - name: Populate the Flutter tool's cache of binary artifacts
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.flutter_cache.outputs.cache-hit != 'true' }}
         run: |
@@ -68,13 +64,14 @@ jobs:
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         id: dart_tool_cache
         with:
-          path: .dart_tool
+          path: client/.dart_tool
           key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
           restore-keys: |
             dart-tool-v1-
 
       - name: Override git ignored files
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        working-directory: client
         run: |
           cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
           cp --force lib/src/services/encryption/encryption_service_ci_impl.dart lib/src/services/encryption/encryption_service_impl.dart
@@ -83,6 +80,7 @@ jobs:
 
       - name: Override git pubspec overrides
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        working-directory: client
         env:
           DEPS_TOKEN: ${{ secrets.DEPS_TOKEN }}
         run: |
@@ -96,24 +94,29 @@ jobs:
 
       - name: Install dependencies
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        working-directory: client
         run: flutter pub get
 
       - name: Run new builder
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
+        working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Run cached builder
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit == 'true' }}
+        working-directory: client
         run: dart run build_runner build
 
       - name: Analyze project source
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         uses: ValentinVignal/action-dart-analyze@v0.16
         with:
+          working-directory: client
           fail-on: "warning"
 
       - name: Run Tests
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        working-directory: client
         run: flutter test --coverage --machine > test-results.json --dart-define CI=true
 
       - name: Upload test-results.json to artifacts
@@ -121,20 +124,22 @@ jobs:
         if: ${{ failure() || success() }}
         with:
           name: test-results
-          path: test-results.json
+          path: client/test-results.json
 
       - name: Upload Test Report
         uses: dorny/test-reporter@v1
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
           name: Unit and Widget Tests
-          path: test-results.json
+          path: client/test-results.json
           reporter: flutter-json
 
       - uses: codecov/codecov-action@v3
         if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
         with:
+          directory: client
           token: ${{ secrets.CODECOV_TOKEN }}
+
   release:
     permissions:
       contents: write
@@ -163,9 +168,6 @@ jobs:
           restore-keys: |
             flutter-dependencies-v1-
 
-      - name: cd into client
-        run: cd client
-
       - name: Populate the Flutter tool's cache of binary artifacts
         if: ${{ steps.flutter_cache.outputs.cache-hit != 'true' }}
         run: |
@@ -176,7 +178,7 @@ jobs:
         uses: actions/cache@v3
         id: dart_tool_cache
         with:
-          path: .dart_tool
+          path: client/.dart_tool
           key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
           restore-keys: |
             dart-tool-v1-
@@ -185,6 +187,7 @@ jobs:
         env:
           DEPS_TOKEN: ${{ secrets.DEPS_TOKEN }}
         run: |
+          cd client
           cat > pubspec_overrides.yaml << EOF
           dependency_overrides:
             church_admin_generator:
@@ -194,26 +197,32 @@ jobs:
           EOF
 
       - name: Install dependencies
+        working-directory: client
         run: flutter pub get
 
       - name: Run new builder
+        working-directory: client
         if: ${{ steps.dart_tool_cache.outputs.cache-hit != 'true' }}
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Run cached builder
+        working-directory: client
         if: ${{ steps.dart_tool_cache.outputs.cache-hit == 'true' }}
         run: dart run build_runner build
 
       - name: Build apk
+        working-directory: client
         run: flutter build apk
 
       - name: Get version from pubspec.yaml
+        working-directory: client
         id: version
         run: |
           version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Rename APK
+        working-directory: client
         run: |
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
 
@@ -225,7 +234,7 @@ jobs:
       - name: Upload APK to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
-          path: "build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
+          path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
