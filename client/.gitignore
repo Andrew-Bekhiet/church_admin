@@ -1,26 +1,3 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-.vscode/
-
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
@@ -51,17 +28,13 @@ lib/firebase_options.dart
 ios/firebase_app_id_file.json
 android/app/google-services.json
 
-.env
-.env.*
-
 lib/src/services/secrets/secrets_service_impl.dart
 lib/src/services/encryption/encryption_service_impl.dart
 lib/main.dart.backup
-theme.zip
 android/app/src/main/res/values/strings.xml
+
+theme.zip
 
 .graphqlconfig
 coverage
 **/failures/*.png
-
-migration/
