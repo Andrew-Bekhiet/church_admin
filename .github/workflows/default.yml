@@ -217,7 +217,7 @@ jobs:
           echo $FIREBASE_OPTIONS_DART > ./lib/firebase_options.dart
           echo $ENCRYPTION_SERVICE_DART > ./lib/src/services/encryption/encryption_service_impl.dart
           echo $SECRETS_SERVICE_DART > ./lib/src/services/secrets/secrets_service_impl.dart
-          ls
+          ls ./lib
 
       - name: Install dependencies
         working-directory: client
