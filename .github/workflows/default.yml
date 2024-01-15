@@ -196,28 +196,22 @@ jobs:
                 ref: master
           EOF
 
-      - name: Decode signing key
+      - name: Decode and save secrets to files
         working-directory: client
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
-        run: |
-          echo $ANDROID_SIGNING_KEY | base64 -d -i > ./android/app/key.keystore
-
-      - name: Save secrets to files
-        working-directory: client
-        env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
           FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
           ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
           SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
         run: |
-          echo $GOOGLE_SERVICES_JSON > ./android/app/google-services.json
-          echo $ANDROID_KEYSTORE_PROPERTIES > ./android/releaseKey.properties
-          echo $FIREBASE_OPTIONS_DART > ./lib/firebase_options.dart
-          echo $ENCRYPTION_SERVICE_DART > ./lib/src/services/encryption/encryption_service_impl.dart
-          echo $SECRETS_SERVICE_DART > ./lib/src/services/secrets/secrets_service_impl.dart
-          ls ./lib
+          echo $ANDROID_SIGNING_KEY | base64 -d -i > ./android/app/key.keystore
+          echo $GOOGLE_SERVICES_JSON | base64 -d -i > ./android/app/google-services.json
+          echo $ANDROID_KEYSTORE_PROPERTIES | base64 -d -i > ./android/releaseKey.properties
+          echo $FIREBASE_OPTIONS_DART | base64 -d -i > ./lib/firebase_options.dart
+          echo $ENCRYPTION_SERVICE_DART | base64 -d -i > ./lib/src/services/encryption/encryption_service_impl.dart
+          echo $SECRETS_SERVICE_DART | base64 -d -i > ./lib/src/services/secrets/secrets_service_impl.dart
 
       - name: Install dependencies
         working-directory: client
