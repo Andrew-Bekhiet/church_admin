@@ -22,10 +22,10 @@ jobs:
           files: |
             **.dart
             **/*.dart
-            assets
-            pubspec.yaml
-            build.yaml
-            analysis_options.yaml
+            client/assets
+            client/pubspec.yaml
+            client/build.yaml
+            client/analysis_options.yaml
             codecov.yaml
 
       - name: Get Cached Flutter installation
@@ -49,9 +49,13 @@ jobs:
         id: flutter_cache
         with:
           path: ${{ env.PUB_CACHE }}
-          key: flutter-dependencies-v1-${{hashFiles('pubspec.yaml', 'pubspec.lock')}}
+          key: flutter-dependencies-v1-${{hashFiles('client/pubspec.yaml', 'client/pubspec.lock')}}
           restore-keys: |
             flutter-dependencies-v1-
+
+      - name: cd into client
+        if: ${{ steps.source-changed.outputs.any_changed == 'true' }}
+        run: cd client
 
       - name: Populate the Flutter tool's cache of binary artifacts
         if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.flutter_cache.outputs.cache-hit != 'true' }}
@@ -65,7 +69,7 @@ jobs:
         id: dart_tool_cache
         with:
           path: .dart_tool
-          key: dart-tool-v1-${{hashFiles('pubspec.yaml', 'build.yaml')}}
+          key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
           restore-keys: |
             dart-tool-v1-
 
@@ -136,7 +140,7 @@ jobs:
       contents: write
     needs: test-and-upload-coverage
     runs-on: ubuntu-latest
-    if: github.repository != 'Andrew-Bekhiet/church_admin' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci:new_release]'))
+    if: github.repository != 'Andrew-Bekhiet/church_admin' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]'))
 
     steps:
       - uses: actions/checkout@v4
@@ -155,9 +159,12 @@ jobs:
         id: flutter_cache
         with:
           path: ${{ env.PUB_CACHE }}
-          key: flutter-dependencies-v1-${{hashFiles('pubspec.yaml', 'pubspec.lock')}}
+          key: flutter-dependencies-v1-${{hashFiles('client/pubspec.yaml', 'client/pubspec.lock')}}
           restore-keys: |
             flutter-dependencies-v1-
+
+      - name: cd into client
+        run: cd client
 
       - name: Populate the Flutter tool's cache of binary artifacts
         if: ${{ steps.flutter_cache.outputs.cache-hit != 'true' }}
@@ -170,7 +177,7 @@ jobs:
         id: dart_tool_cache
         with:
           path: .dart_tool
-          key: dart-tool-v1-${{hashFiles('pubspec.yaml', 'build.yaml')}}
+          key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
           restore-keys: |
             dart-tool-v1-
 
