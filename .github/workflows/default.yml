@@ -196,6 +196,26 @@ jobs:
                 ref: master
           EOF
 
+      - name: Decode signing key
+        working-directory: client
+        env:
+          ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
+        run: |
+          echo -n $ANDROID_SIGNING_KEY | base64 -d -o ./android/app/key.keystore
+
+      - name: Save secrets to files
+        working-directory: client
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
+          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
+          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
+        run: |
+          echo $GOOGLE_SERVICES_JSON > ./android/app/google-services.json
+          echo $ANDROID_KEYSTORE_PROPERTIES > ./android/releaseKey.properties
+          echo $ENCRYPTION_SERVICE_DART > ./lib/src/services/encryption/encryption_service_impl.dart
+          echo $SECRETS_SERVICE_DART > ./lib/src/services/secrets/secrets_service_impl.dart
+
       - name: Install dependencies
         working-directory: client
         run: flutter pub get
@@ -221,7 +241,7 @@ jobs:
           version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
           echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: Rename APK
+      - name: Add version to APK filename
         working-directory: client
         run: |
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
