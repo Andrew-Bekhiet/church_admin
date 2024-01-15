@@ -201,7 +201,7 @@ jobs:
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
         run: |
-          echo -n $ANDROID_SIGNING_KEY | base64 -d -o ./android/app/key.keystore
+          echo -n $ANDROID_SIGNING_KEY | base64 -d > ./android/app/key.keystore
 
       - name: Save secrets to files
         working-directory: client
