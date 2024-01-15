@@ -200,6 +200,7 @@ jobs:
         working-directory: client
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
+          ANDROID_STRINGS: ${{ secrets.ANDROID_STRINGS }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
           FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
@@ -207,6 +208,7 @@ jobs:
           SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
         run: |
           echo $ANDROID_SIGNING_KEY | base64 -d -i > ./android/app/key.keystore
+          echo $ANDROID_STRINGS | base64 -d -i > ./android/app/src/main/res/values/strings.xml
           echo $GOOGLE_SERVICES_JSON | base64 -d -i > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | base64 -d -i > ./android/releaseKey.properties
           echo $FIREBASE_OPTIONS_DART | base64 -d -i > ./lib/firebase_options.dart
