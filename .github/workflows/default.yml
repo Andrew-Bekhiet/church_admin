@@ -206,22 +206,6 @@ jobs:
           version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
           echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: Upload APK to artifacts
-        uses: actions/upload-artifact@v3
-        continue-on-error: true
-        with:
-          retention-days: 1
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
-
-      - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: build/app/outputs/flutter-apk/app-release.apk
-          tag: v${{ steps.version.outputs.version }}
-          generateReleaseNotes: true
-
       - name: Rename APK
         run: |
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
@@ -235,4 +219,11 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         with:
           path: "build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
-          destination: "app-releases-church-data-admin"
+          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ steps.version.outputs.version }}
+          generateReleaseNotes: true
