@@ -109,7 +109,6 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     Exception error,
     StackTrace stackTrace,
   ) async {
-    _session = null;
     if (mounted) setState(() {});
 
     await LoggingService.I.showErrorDialogAndReport(
@@ -300,7 +299,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
             Text(
               'قم بإدخال رمز التحقق الذي تم إرساله إلى ' +
                   (widget.phoneNumber ??
-                      widget.multiFactorInfo?.displayName ??
+                      (widget.multiFactorInfo?.displayName == ''
+                          ? null
+                          : widget.multiFactorInfo?.displayName) ??
                       'هاتفك'),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
