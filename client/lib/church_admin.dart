@@ -1,3 +1,4 @@
+export 'fmtc/fmtc.dart';
 export 'src/controllers.dart';
 export 'src/models.dart';
 export 'src/providers.dart';

@@ -102,6 +102,7 @@ class FirebaseAuthAdapter extends AuthAdapter {
       return true;
     } on FirebaseAuthMultiFactorException catch (e) {
       final multiFactorSession = MultiFactorSession(
+        platformSession: e.resolver.session,
         id: e.resolver.session.id,
         email: email,
         password: password,
@@ -230,6 +231,7 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
         await _firebaseAuth.currentUser!.multiFactor.getSession();
 
     return MultiFactorSession(
+      platformSession: multiFactorSession,
       id: multiFactorSession.id,
       email: _firebaseAuth.currentUser!.email!,
       password: password,
@@ -271,7 +273,7 @@ class FirebaseMultiFactorManagerAdapter extends MultiFactorManagerAdapter {
     _firebaseAuth.verifyPhoneNumber(
       forceResendingToken: forceResendingToken,
       phoneNumber: phoneNumber,
-      multiFactorSession: auth.MultiFactorSession(session.id),
+      multiFactorSession: session.platformSession as auth.MultiFactorSession,
       multiFactorInfo: multiFactorInfo,
       verificationCompleted: (credential) {
         finishMultiFactorSession(

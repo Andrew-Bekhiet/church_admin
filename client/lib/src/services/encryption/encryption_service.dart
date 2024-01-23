@@ -85,6 +85,18 @@ abstract class EncryptionService {
     final deviceInfoPlugin = DeviceInfoPlugin();
     final computedInfo = <int>[];
 
+    if (kIsWeb) {
+      final webBrowserInfo = await deviceInfoPlugin.webBrowserInfo;
+
+      return utf8.encode(
+        base64.encode(
+          utf8.encode(
+            '${webBrowserInfo.hardwareConcurrency}-${webBrowserInfo.vendor}',
+          ),
+        ),
+      );
+    }
+
     if (UniversalPlatform.isAndroid) {
       final androidDeviceInfo = await deviceInfoPlugin.androidInfo;
 

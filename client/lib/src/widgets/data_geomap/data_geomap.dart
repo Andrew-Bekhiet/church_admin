@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -125,7 +124,7 @@ class DataGeomapState extends State<DataGeomap> {
             ),
             TileLayer(
               tileProvider: FMTC.instance['default'].getTileProvider(),
-              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: (packageName.isEmpty
                       ? 'com.AndroidQuartz.church_admin'
                       : packageName) +
