@@ -93,7 +93,7 @@ dependencies:
   tinycolor2: ^3.0.1
   transparent_pointer: ^1.0.0
   tuple: ^2.0.1
-  universal_file: ^1.0.0
+  universal_io: ^2.2.2
   universal_platform: ^1.0.0+1
   url_launcher: ^6.1.11
   uuid: ^3.0.6

@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:transparent_pointer/transparent_pointer.dart';
-import 'package:universal_file/universal_file.dart';
+import 'package:universal_io/io.dart';
 
 class PhotoFieldState {
   final bool deletePhoto;

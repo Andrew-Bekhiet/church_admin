@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
 import 'package:flutter/foundation.dart';
-import 'package:universal_file/universal_file.dart';
+import 'package:universal_io/io.dart';
 
 class FakeDeviceInfoPlatform extends DeviceInfoPlatform {
   @override

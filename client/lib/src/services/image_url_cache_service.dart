@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:universal_file/universal_file.dart';
+import 'package:universal_io/io.dart';
 
 class ImageUrlCacheService {
   static ImageUrlCacheService get I =>
