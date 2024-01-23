@@ -1283,6 +1283,19 @@ class MockSecretsService extends _i1.Mock implements _i14.SecretsService {
       ) as String);
 
   @override
+  String get webRecaptchaSiteKey => (super.noSuchMethod(
+        Invocation.getter(#webRecaptchaSiteKey),
+        returnValue: _i15.dummyValue<String>(
+          this,
+          Invocation.getter(#webRecaptchaSiteKey),
+        ),
+        returnValueForMissingStub: _i15.dummyValue<String>(
+          this,
+          Invocation.getter(#webRecaptchaSiteKey),
+        ),
+      ) as String);
+
+  @override
   String get webAuthHandler => (super.noSuchMethod(
         Invocation.getter(#webAuthHandler),
         returnValue: _i15.dummyValue<String>(

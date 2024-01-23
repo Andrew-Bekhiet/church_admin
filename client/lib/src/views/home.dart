@@ -11,24 +11,27 @@ import 'package:rxdart_ext/rxdart_ext.dart';
 class HomeScreen extends StatefulWidget {
   static final GoRoute route = GoRoute(
     path: '/',
-    builder: (context, state) => const HomeScreen(),
-    routes: [
-      ViewPerson.route,
-      EditPerson.route,
-      ViewArea.route,
-      EditArea.route,
-      ViewService.route,
-      EditService.route,
-      ViewUser.route,
-      ViewGroup.route,
-      ViewClass.route,
-      ViewFamily.route,
-      ViewStreet.route,
-      ViewStore.route,
-      ManageUsersScreen.route,
-      AdvancedSearchScreen.route,
-      SettingsScreen.route,
-    ],
+    builder: (context, state) =>
+        kIsWeb ? const DownloadAppScreen() : const HomeScreen(),
+    routes: !kIsWeb
+        ? [
+            ViewPerson.route,
+            EditPerson.route,
+            ViewArea.route,
+            EditArea.route,
+            ViewService.route,
+            EditService.route,
+            ViewUser.route,
+            ViewGroup.route,
+            ViewClass.route,
+            ViewFamily.route,
+            ViewStreet.route,
+            ViewStore.route,
+            ManageUsersScreen.route,
+            AdvancedSearchScreen.route,
+            SettingsScreen.route,
+          ]
+        : [],
     redirect: (context, state) {
       return redirect(state);
     },

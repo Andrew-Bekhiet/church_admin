@@ -511,6 +511,8 @@ void main() {
 
               final session = MockMultiFactorSession();
               when(session.id).thenReturn('dasda');
+              when(session.platformSession)
+                  .thenReturn(MockAuthMultiFactorSession());
 
               final firebaseAuth = globalProviderContainer
                   .read(firebaseAuthProvider) as MockFirebaseAuth;
@@ -542,6 +544,8 @@ void main() {
 
               final session = MockMultiFactorSession();
               when(session.id).thenReturn('dasda');
+              when(session.platformSession)
+                  .thenReturn(MockAuthMultiFactorSession());
 
               final firebaseAuth = globalProviderContainer
                   .read(firebaseAuthProvider) as MockFirebaseAuth;
@@ -574,6 +578,8 @@ void main() {
 
               final session = MockMultiFactorSession();
               when(session.id).thenReturn('dasda');
+              when(session.platformSession)
+                  .thenReturn(MockAuthMultiFactorSession());
 
               final firebaseAuth = globalProviderContainer
                   .read(firebaseAuthProvider) as MockFirebaseAuth;
@@ -710,15 +716,11 @@ void _mockFirebaseAuthVerifyPhoneNumber(
   MockMultiFactorSession session,
   Answering<Future<void>> answer,
 ) {
+  final platformSession = session.platformSession;
   when(
     firebaseAuth.verifyPhoneNumber(
       phoneNumber: 'phoneNumber',
-      multiFactorSession: argThat(
-        predicate<auth.MultiFactorSession>(
-          (a) => a.id == session.id,
-        ),
-        named: 'multiFactorSession',
-      ),
+      multiFactorSession: platformSession,
       verificationCompleted: captureAnyNamed('verificationCompleted'),
       verificationFailed: captureAnyNamed('verificationFailed'),
       codeSent: captureAnyNamed('codeSent'),

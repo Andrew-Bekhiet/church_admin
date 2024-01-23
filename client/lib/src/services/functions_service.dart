@@ -1,7 +1,5 @@
 import 'dart:async';
 
-//TODO: support web
-
 import 'package:church_admin/church_admin.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dio/dio.dart';
@@ -123,5 +121,13 @@ class FunctionsService {
     await httpsCallable('registerUserWithCode').call({
       'registerCode': registerCode,
     });
+  }
+
+  Future<String> getAppDownloadLink(String platform) async {
+    final response = await httpsCallable('getAppDownloadLink').call({
+      'platform': platform,
+    });
+
+    return response.data;
   }
 }

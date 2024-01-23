@@ -1368,6 +1368,30 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
         returnValue: _i13.Future<void>.value(),
         returnValueForMissingStub: _i13.Future<void>.value(),
       ) as _i13.Future<void>);
+
+  @override
+  _i13.Future<String> getAppDownloadLink(String? platform) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAppDownloadLink,
+          [platform],
+        ),
+        returnValue: _i13.Future<String>.value(_i24.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getAppDownloadLink,
+            [platform],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i13.Future<String>.value(_i24.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getAppDownloadLink,
+            [platform],
+          ),
+        )),
+      ) as _i13.Future<String>);
 }
 
 /// A class which mocks [InitializationService].

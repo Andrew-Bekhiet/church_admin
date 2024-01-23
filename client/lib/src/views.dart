@@ -1,6 +1,7 @@
 export 'views/advanced_search_screen.dart';
 export 'views/analysis.dart';
 export 'views/authenticate.dart';
+export 'views/download_app.dart';
 export 'views/edit_object_data.dart';
 export 'views/home.dart';
 export 'views/login/email_verification_screen.dart';

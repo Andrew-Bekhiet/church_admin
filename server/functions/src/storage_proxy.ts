@@ -1,10 +1,10 @@
-import { auth, storage } from "firebase-admin";
+import { storage } from "firebase-admin";
 import { https } from "firebase-functions/v2";
 import { AuthData } from "firebase-functions/v2/tasks";
+import { assertUserAuthenticatedAndApproved } from "./common";
 import {
   PhotoTable,
   checkUserAccess,
-  checkUserApproved,
   getHasuraUID,
   getPersonIdFromUser,
   photoTables,
@@ -165,27 +165,4 @@ async function _authenticateStorageRequest(
     console.dir(e, { depth: 4 });
     throw e;
   }
-}
-async function assertUserAuthenticatedAndApproved(
-  authData: AuthData | undefined
-): Promise<auth.UserRecord> {
-  if (!authData) {
-    console.error("User not authenticated");
-    throw new https.HttpsError("unauthenticated", "unauthenticated");
-  } else if (!(authData?.token.email_verified ?? false)) {
-    console.error("User email not verified");
-    throw new https.HttpsError("unauthenticated", "unauthenticated");
-  }
-
-  const authUser = await auth().getUser(authData!.uid!);
-
-  if (!authUser.multiFactor) {
-    console.error("User does not have 2FA enabled");
-    throw new https.HttpsError("unauthenticated", "unauthenticated");
-  } else if (!(await checkUserApproved(authData.token["x-hasura-user-id"]))) {
-    console.error("User is not approved", authData.token["x-hasura-user-id"]);
-    throw new https.HttpsError("unauthenticated", "unauthenticated");
-  }
-
-  return authUser;
 }
