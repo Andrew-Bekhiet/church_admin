@@ -133,7 +133,7 @@ export async function checkUserAccess(
   return false;
 }
 
-export async function insertUser(user: {
+export async function upsertUser(user: {
   email: string;
   name: string;
   uid: string;
@@ -151,8 +151,12 @@ export async function insertUser(user: {
                   email: $email
                   authId: $firebaseAuthUID
                   name: $name,
-                  person: {data: {name: $name, isServant: true, isStudent: false}}
+                  person: {
+                    data: { name: $name, isServant: true, isStudent: false },
+                    onConflict: { constraint: personsUidKey, updateColumns: [isServant, isStudent] },
+                  }
                 }
+                onConflict: {constraint: usersDataEmailKey, updateColumns: [authId]}
               ) {
                 returning {
                   uid

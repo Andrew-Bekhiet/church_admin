@@ -2,7 +2,7 @@ import axios from "axios";
 import { auth, storage } from "firebase-admin";
 import { BlockingFunction, https, region } from "firebase-functions";
 import { Readable } from "stream";
-import { getHasuraUID, insertUser } from "./hasura_interface";
+import { getHasuraUID, upsertUser } from "./hasura_interface";
 
 export let beforeUserSignIn: BlockingFunction | undefined = undefined;
 if (process.env.FUNCTIONS_EMULATOR)
@@ -17,7 +17,7 @@ export const beforeUserSignUp = region("europe-west6")
   .beforeCreate(async (authUser) => {
     console.dir(authUser, { depth: 4 });
     try {
-      const dbUser = await insertUser({
+      const dbUser = await upsertUser({
         name: authUser.displayName ?? authUser.email!,
         email: authUser.email!,
         uid: authUser.uid!,
