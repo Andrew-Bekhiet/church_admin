@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:church_admin/church_admin.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
-import 'package:tuple/tuple.dart';
 
 class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
   @visibleForTesting
@@ -52,19 +51,19 @@ class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
 
   @override
   OnQuery<T> get streamDelegate => (instance, offsetStream) {
-        return Rx.combineLatest2<int, String?, Tuple2<int, String?>>(
+        return Rx.combineLatest2<int, String?, (int, String?)>(
           offsetStream,
           _transformSearchQuery(),
-          Tuple2.new,
+          (a, b) => (a, b),
         ).switchMap(_mapEvents(instance as GQLPaginatableStream<T>));
       };
 
-  Stream<DelegatingStreamResult<T>> Function(Tuple2<int, String?>) _mapEvents(
+  Stream<DelegatingStreamResult<T>> Function((int, String?)) _mapEvents(
     GQLPaginatableStream<T> instance,
   ) =>
       (event) {
-        final offset = event.item1;
-        final search = event.item2;
+        final offset = event.$1;
+        final search = event.$2;
 
         if (search != null &&
             search.isNotEmpty &&

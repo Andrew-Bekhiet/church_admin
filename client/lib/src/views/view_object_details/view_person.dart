@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tuple/tuple.dart';
 
 class ViewPerson extends StatefulWidget {
   static final GoRoute route = GoRoute(
@@ -54,13 +53,13 @@ class _ViewPersonState extends State<ViewPerson> {
     _servicesLimit.distinct(),
     _classesLimit.distinct(),
     _groupsLimit.distinct(),
-    Tuple3.new,
+    (a, b, c) => (a, b, c),
   ).switchMap(
     (limits) => DatabaseService.I.persons.streamSingleById(
       id: widget.personId,
-      servicesLimit: limits.item1,
-      classesLimit: limits.item2,
-      groupsLimit: limits.item3,
+      servicesLimit: limits.$1,
+      classesLimit: limits.$2,
+      groupsLimit: limits.$3,
     ),
   );
 

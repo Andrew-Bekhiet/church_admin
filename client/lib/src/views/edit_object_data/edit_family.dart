@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tuple/tuple.dart';
 import 'package:uuid/uuid.dart';
 
 class EditFamily extends StatefulWidget {
@@ -116,9 +115,7 @@ class _EditFamilyState extends State<EditFamily> {
           const Divider(),
           MultiObjectSelectionField<Family>(
             nullable: false,
-            key: ValueKey(
-              Tuple2('parents', newFamily.parents),
-            ),
+            key: ValueKey(('parents', newFamily.parents)),
             validator: (p) => p?.contains(newFamily) ?? false
                 ? 'لا يمكن أن تكون عائلة أب أو أم لنفسها'
                 : null,
@@ -170,9 +167,7 @@ class _EditFamilyState extends State<EditFamily> {
           ),
           MultiObjectSelectionField<Family>(
             nullable: false,
-            key: ValueKey(
-              Tuple2('children', newFamily.children),
-            ),
+            key: ValueKey(('children', newFamily.children)),
             validator: (c) => c?.contains(newFamily) ?? false
                 ? 'لا يمكن أن تكون عائلة أبن أو أبنة لنفسها'
                 : null,

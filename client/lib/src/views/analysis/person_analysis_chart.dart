@@ -6,7 +6,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tinycolor2/tinycolor2.dart';
-import 'package:tuple/tuple.dart';
 
 class PersonAnalysisChart extends StatefulWidget {
   final DateTimeRange range;
@@ -42,7 +41,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
 
   final Set<ShowingTooltipIndicators> selectedSpots = EqualitySet(
     EqualityBy(
-      (o) => o.showingSpots.map((e) => Tuple3(e.x, e.y, e.spotIndex)),
+      (o) => o.showingSpots.map((e) => (e.x, e.y, e.spotIndex)),
       const DeepCollectionEquality.unordered(),
     ),
   );

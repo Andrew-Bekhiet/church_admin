@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tuple/tuple.dart';
 import 'package:uuid/uuid.dart';
 
 class EditPerson extends StatefulWidget {
@@ -264,11 +263,11 @@ class _EditPersonState extends State<EditPerson> {
             validator: (v) => null,
           ),
           const Divider(thickness: 1),
-          TappableFormField<Tuple2<Set<Service>, Set<Group>>>(
+          TappableFormField<(Set<Service>, Set<Group>)>(
             key: ValueKey(
-              Tuple2(
+              (
                 newPerson.services?.toSet() ?? {},
-                newPerson.groups?.toSet() ?? {},
+                newPerson.groups?.toSet() ?? {}
               ),
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -281,7 +280,7 @@ class _EditPersonState extends State<EditPerson> {
 
               if (newPerson.isStudent &&
                   newPerson.studyYear != null &&
-                  v!.item1.any(
+                  v!.$1.any(
                     (s) =>
                         s.studyYearFrom == null ||
                         s.studyYearTo == null ||
@@ -309,16 +308,16 @@ class _EditPersonState extends State<EditPerson> {
               labelText: 'الخدمات والمجموعات المشارك بها',
               errorMaxLines: 3,
             ),
-            initialValue: Tuple2(
+            initialValue: (
               newPerson.services?.toSet() ?? {},
               newPerson.groups?.toSet() ?? {},
             ),
             onTap: _selectServices,
             builder: (context, state) {
-              if (state.value != null && state.value!.item1.isNotEmpty) {
+              if (state.value != null && state.value!.$1.isNotEmpty) {
                 final combinedServices = _combineGroupsWithServices(
-                  state.value!.item1,
-                  state.value!.item2,
+                  state.value!.$1,
+                  state.value!.$2,
                 );
 
                 return ExcludeFocus(
@@ -1012,7 +1011,7 @@ class _EditPersonState extends State<EditPerson> {
     if (contact == null) return;
 
     bool importName = false;
-    final Set<Tuple2<String, String>> numbersToImport = {};
+    final Set<(String, String)> numbersToImport = {};
 
     if (!mounted) return;
     final rslt = await showDialog(
@@ -1048,11 +1047,11 @@ class _EditPersonState extends State<EditPerson> {
                       return CheckboxListTile(
                         title: Text(label),
                         subtitle: Text(value),
-                        value: numbersToImport.contains(Tuple2(label, value)),
+                        value: numbersToImport.contains((label, value)),
                         onChanged: (v) => setState(
                           () => v ?? false
-                              ? numbersToImport.add(Tuple2(label, value))
-                              : numbersToImport.remove(Tuple2(label, value)),
+                              ? numbersToImport.add((label, value))
+                              : numbersToImport.remove((label, value)),
                         ),
                       );
                     },
@@ -1076,7 +1075,7 @@ class _EditPersonState extends State<EditPerson> {
         name: importName ? contact.displayName : newPerson.name,
         otherPhones: {
           ...newPerson.otherPhones,
-          for (final n in numbersToImport) n.item1: n.item2,
+          for (final n in numbersToImport) n.$1: n.$2,
         },
       );
       if (mounted) setState(() {});
@@ -1084,7 +1083,7 @@ class _EditPersonState extends State<EditPerson> {
   }
 
   Future<void> _selectServices(
-    FormFieldState<Tuple2<Set<Service>, Set<Group>>> state,
+    FormFieldState<(Set<Service>, Set<Group>)> state,
   ) async {
     final focusScope = FocusScope.of(state.context);
     final Set<Service>? rslt = await Navigator.of(context).push(
@@ -1092,8 +1091,8 @@ class _EditPersonState extends State<EditPerson> {
         builder: (context) => _SelectServicesPage(
           selected: state.value != null
               ? _combineGroupsWithServices(
-                  state.value!.item1,
-                  state.value!.item2,
+                  state.value!.$1,
+                  state.value!.$2,
                 ).toSet()
               : {},
         ),
@@ -1107,7 +1106,7 @@ class _EditPersonState extends State<EditPerson> {
           .expand((e) => e)
           .toSet();
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) => state.mounted ? state.didChange(Tuple2(services, groups)) : null,
+        (_) => state.mounted ? state.didChange((services, groups)) : null,
       );
       newPerson = newPerson.copyWith(
         services: services.toList(),
