@@ -393,8 +393,9 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
   @override
   void useDatabaseEmulator(
     String? host,
-    int? port,
-  ) =>
+    int? port, {
+    bool? automaticHostMapping = true,
+  }) =>
       super.noSuchMethod(
         Invocation.method(
           #useDatabaseEmulator,
@@ -402,6 +403,7 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
             host,
             port,
           ],
+          {#automaticHostMapping: automaticHostMapping},
         ),
         returnValueForMissingStub: null,
       );

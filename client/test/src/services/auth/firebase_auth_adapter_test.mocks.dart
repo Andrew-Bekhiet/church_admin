@@ -410,8 +410,9 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
   @override
   _i9.Future<void> useAuthEmulator(
     String? host,
-    int? port,
-  ) =>
+    int? port, {
+    bool? automaticHostMapping = true,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #useAuthEmulator,
@@ -419,6 +420,7 @@ class MockFirebaseAuth extends _i1.Mock implements _i4.FirebaseAuth {
             host,
             port,
           ],
+          {#automaticHostMapping: automaticHostMapping},
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),

@@ -58,5 +58,5 @@ extension AddSelectionFields on DocumentNode {
 }
 
 extension StringToUuid on String {
-  UuidValue toUuid() => UuidValue(this);
+  UuidValue toUuid() => UuidValue.fromString(this);
 }
