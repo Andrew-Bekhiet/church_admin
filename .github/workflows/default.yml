@@ -29,9 +29,10 @@ jobs:
 
       - name: Check if testing is required
         id: run-tests
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci test]') }}
+        env:
+          run-tests: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci test]') }}
         run: |
-          echo "run-tests=true" >> $GITHUB_ENV
+          echo "run-tests=$run-tests" >> $GITHUB_OUTPUT
 
       - name: Get Flutter
         uses: subosito/flutter-action@v2
