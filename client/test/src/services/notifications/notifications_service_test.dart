@@ -852,6 +852,7 @@ Future<void> _setUp() async {
     _setUpNotificationsService(),
     _setUpNotificationsSettingsStorage(),
     _setUpCacheManager(),
+    _setUpCurrentPlatformService(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -939,6 +940,12 @@ Override _setUpNotificationsSettingsStorage() {
 Override _setUpCacheManager() {
   return baseCacheManagerProvider.overrideWithValue(
     MockBaseCacheManager(),
+  );
+}
+
+Override _setUpCurrentPlatformService() {
+  return currentPlatformServiceProvider.overrideWithValue(
+    const CurrentPlatformService(PlatformValue.android),
   );
 }
 
