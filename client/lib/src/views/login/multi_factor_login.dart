@@ -333,7 +333,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
               child: const Text('تسجيل الدخول'),
             ),
             StreamBuilder<int>(
-              stream: snapshot.data?.$1 != null && snapshot.data?.$2 != null
+              stream: snapshot.data?.$1 != null
                   ? Stream.periodic(
                       const Duration(seconds: 1),
                       (i) => i,
