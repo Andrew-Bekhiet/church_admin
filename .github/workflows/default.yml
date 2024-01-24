@@ -96,12 +96,12 @@ jobs:
         run: flutter pub get
 
       - name: Run new builder
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.run-tests.outputs.run-tests == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
         working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Run cached builder
-        if: ${{ steps.source-changed.outputs.any_changed == 'true' && steps.dart_tool_cache.outputs.cache-hit == 'true' }}
+        if: ${{ steps.run-tests.outputs.run-tests == 'true' && steps.dart_tool_cache.outputs.cache-hit == 'true' }}
         working-directory: client
         run: dart run build_runner build
 
@@ -159,7 +159,7 @@ jobs:
 
     needs: run-tests
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]')
+    if: github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && contains(github.event.head_commit.message, '[ci release]')
 
     steps:
       - uses: actions/checkout@v4
