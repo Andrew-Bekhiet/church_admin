@@ -20,7 +20,10 @@ class DownloadAppScreen extends StatelessWidget {
         title: const Text('تنزيل التطبيق'),
       ),
       body: Center(
-        child: Row(
+        child: Flex(
+          direction: MediaQuery.of(context).orientation == Orientation.portrait
+              ? Axis.vertical
+              : Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ElevatedButton(
