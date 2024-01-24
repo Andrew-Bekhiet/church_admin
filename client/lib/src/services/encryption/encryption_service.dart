@@ -89,11 +89,8 @@ abstract class EncryptionService {
       final webBrowserInfo = await deviceInfoPlugin.webBrowserInfo;
 
       return utf8.encode(
-        base64.encode(
-          utf8.encode(
-            '${webBrowserInfo.hardwareConcurrency}-${webBrowserInfo.vendor}',
-          ),
-        ),
+        '${webBrowserInfo.hardwareConcurrency}-${webBrowserInfo.vendor}'
+            .padRight(16, '#'),
       );
     }
 
