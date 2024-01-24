@@ -131,17 +131,17 @@ jobs:
         with:
           name: test-results
 
-      - if: ${{ steps.check-test-results.outputs.exists == 'false' }}
+      - if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         run: echo "No test-results.json artifact found. Skipping job."
 
       - name: Download test-results.json from artifacts
-        if: ${{ steps.check-test-results.outputs.exists == 'false' }}
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: actions/download-artifact@v2
         with:
           name: test-results
 
       - name: Upload Test Report
-        if: ${{ steps.check-test-results.outputs.exists == 'false' }}
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
         with:
           name: Unit and Widget Tests
@@ -149,7 +149,7 @@ jobs:
           reporter: flutter-json
 
       - uses: codecov/codecov-action@v3
-        if: ${{ steps.check-test-results.outputs.exists == 'false' }}
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
