@@ -226,6 +226,8 @@ class NotificationsService {
     NotificationSetting notificationSetting =
         const NotificationSetting(11, 0, 7),
   }) async {
+    if (!CurrentPlatformService.I.isAndroid) return;
+
     final permissionStatus = await Permission.scheduleExactAlarm.request();
     final exactAlarmPermission = permissionStatus.isGranted;
 
