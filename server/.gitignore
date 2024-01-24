@@ -68,3 +68,5 @@ firebase-export-*/
 
 church-data-admin.json
 backup-script.sh
+
+public/
