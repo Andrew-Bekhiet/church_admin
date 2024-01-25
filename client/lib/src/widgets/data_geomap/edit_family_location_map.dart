@@ -18,6 +18,7 @@ class EditFamilyLocationMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EditObjectLocationMap(
+      showSetToCurrentLocation: true,
       onSaved: onSaved,
       initialObject: initialFamily,
       getLocation: (f) => f.geolocation,

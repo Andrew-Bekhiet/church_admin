@@ -9,7 +9,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:uuid/uuid.dart';
 
 import 'object_marker_widget.dart';
 import 'utils.dart';
@@ -30,6 +29,7 @@ class DataGeomap extends StatefulWidget {
   )? overrideResponseObjects;
 
   final bool showUserLocation;
+  final void Function(Position?)? onUserLocationChanged;
 
   const DataGeomap({
     required this.geomapOptionsStream,
@@ -39,6 +39,7 @@ class DataGeomap extends StatefulWidget {
     this.addLayers = const [],
     this.overrideResponseObjects,
     this.showUserLocation = true,
+    this.onUserLocationChanged,
     super.key,
   });
 
@@ -113,15 +114,6 @@ class DataGeomapState extends State<DataGeomap> {
             persons: persons,
           ),
           children: [
-            SimpleAttributionWidget(
-              alignment: Alignment.topLeft,
-              source: const Text('OpenStreetMap'),
-              onTap: () => globalProviderContainer
-                  .read(launcherServiceProvider)
-                  .launchUrl(
-                    Uri.parse('https://openstreetmap.org/copyright'),
-                  ),
-            ),
             TileLayer(
               tileProvider: FMTC.instance['default'].getTileProvider(),
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -149,6 +141,19 @@ class DataGeomapState extends State<DataGeomap> {
               stores: stores,
               persons: persons,
               focusedLocationStream: widget.focusedLocationStream,
+            ),
+            DefaultTextStyle(
+              style: Theme.of(context).textTheme.bodySmall ??
+                  const TextStyle(fontSize: 12),
+              child: SimpleAttributionWidget(
+                alignment: Alignment.topLeft,
+                source: const Text('OpenStreetMap'),
+                onTap: () => globalProviderContainer
+                    .read(launcherServiceProvider)
+                    .launchUrl(
+                      Uri.parse('https://openstreetmap.org/copyright'),
+                    ),
+              ),
             ),
             ...widget.addLayers,
           ],
@@ -190,12 +195,16 @@ class DataGeomapState extends State<DataGeomap> {
 
   Stream<Position?> _getUserLocationStream() {
     return _locationMemoizer
-        .runOnce(_requestLocationPermission)
+        .runOnce(_requestAndGetLocation)
         .asStream()
-        .startWith(null);
+        .startWith(null)
+        .map((event) {
+      widget.onUserLocationChanged?.call(event);
+      return event;
+    });
   }
 
-  Future<Position?> _requestLocationPermission() async {
+  Future<Position?> _requestAndGetLocation() async {
     if (!widget.showUserLocation) return null;
 
     final permissionStatus = await Permission.location.request();
@@ -232,15 +241,13 @@ class DataGeomapState extends State<DataGeomap> {
       getStreets: options.layers.contains(GeoMapLayer.streets),
       getPersons: options.layers.contains(GeoMapLayer.persons),
       getStores: options.layers.contains(GeoMapLayer.stores),
-      areasIds: options.selectedAreas.map((e) => UuidValue(e.id)).toList(),
-      streetsIds: options.selectedStreets.map((e) => UuidValue(e.id)).toList(),
-      familiesIds:
-          options.selectedFamilies.map((e) => UuidValue(e.id)).toList(),
-      storesIds: options.selectedStores.map((e) => UuidValue(e.id)).toList(),
-      classesIds: options.selectedClasses.map((e) => UuidValue(e.id)).toList(),
-      servicesIds:
-          options.selectedServices.map((e) => UuidValue(e.id)).toList(),
-      groupsIds: options.selectedGroups.map((e) => UuidValue(e.id)).toList(),
+      areasIds: options.selectedAreas.map((e) => e.id.toUuid()).toList(),
+      streetsIds: options.selectedStreets.map((e) => e.id.toUuid()).toList(),
+      familiesIds: options.selectedFamilies.map((e) => e.id.toUuid()).toList(),
+      storesIds: options.selectedStores.map((e) => e.id.toUuid()).toList(),
+      classesIds: options.selectedClasses.map((e) => e.id.toUuid()).toList(),
+      servicesIds: options.selectedServices.map((e) => e.id.toUuid()).toList(),
+      groupsIds: options.selectedGroups.map((e) => e.id.toUuid()).toList(),
     );
   }
 }

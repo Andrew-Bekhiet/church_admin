@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
@@ -13,6 +14,7 @@ import 'snapping_sheet.dart';
 import 'utils.dart';
 
 class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
+  final bool showSetToCurrentLocation;
   final T initialObject;
   final GeomapOptions geomapOptions;
   final void Function(T) onSaved;
@@ -25,6 +27,7 @@ class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
     required this.onSaved,
     required this.copyWithNewLocation,
     required this.getLocation,
+    this.showSetToCurrentLocation = false,
     super.key,
   });
 
@@ -39,6 +42,8 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
   late final _mapOptionsStream = BehaviorSubject.seeded(widget.geomapOptions);
   final _sheetScrollController = ScrollController();
+  final BehaviorSubject<Position?> _userLocationSubject =
+      BehaviorSubject.seeded(null);
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +78,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           initialPerson: widget.initialObject is Person
               ? widget.initialObject as Person
               : null,
+          onUserLocationChanged: _userLocationSubject.add,
           geomapOptionsStream: _mapOptionsStream,
           addLayers: [
             StreamBuilder<T>(
@@ -114,6 +120,29 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ),
       ),
+      floatingActionButton: widget.showSetToCurrentLocation
+          ? StreamBuilder<Position?>(
+              stream: _userLocationSubject,
+              builder: (context, locationSnapshot) {
+                if (locationSnapshot.hasData) {
+                  return FloatingActionButton.small(
+                    onPressed: () {
+                      resultObject.value = widget.copyWithNewLocation(
+                        resultObject.value,
+                        Point(
+                          locationSnapshot.requireData!.latitude,
+                          locationSnapshot.requireData!.longitude,
+                        ),
+                      );
+                    },
+                    child: const Icon(Icons.my_location),
+                  );
+                }
+
+                return const SizedBox();
+              },
+            )
+          : null,
     );
   }
 
@@ -122,6 +151,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     super.dispose();
 
     await _mapOptionsStream.close();
+    await _userLocationSubject.close();
     await resultObject.close();
   }
 }

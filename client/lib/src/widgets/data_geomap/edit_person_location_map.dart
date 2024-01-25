@@ -15,6 +15,7 @@ class EditPersonLocationMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EditObjectLocationMap<Person>(
+      showSetToCurrentLocation: true,
       onSaved: onSaved,
       initialObject: initialPerson,
       getLocation: (p) => p.geolocation,
