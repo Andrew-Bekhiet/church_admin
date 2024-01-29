@@ -1,16 +1,17 @@
 {
   "folders": [
+    { "name": "church_admin", "path": "." },
     {
-      "path": "."
-    },
-    {
+      "name": "church_admin_generator",
       "path": "../church_admin_generator"
     },
     {
+      "name": "church_admin_db",
       "path": "../church_admin_db"
     }
   ],
   "settings": {
+    "elixirLS.projectDir": "./backend-beta/",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#00c9b6",
       "activityBar.activeBorder": "#ca00df",
