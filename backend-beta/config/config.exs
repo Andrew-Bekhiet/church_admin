@@ -43,8 +43,10 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{config_env()}.exs"
+env = config_env()
 
-if config_env() == :dev do
-  import_config "dev.secrets.exs"
+import_config "#{env}.exs"
+
+if env in [:dev, :test] do
+  import_config "#{env}.secrets.exs"
 end
