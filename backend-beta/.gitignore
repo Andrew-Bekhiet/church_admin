@@ -25,6 +25,8 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 church_admin-*.tar
 
+/priv/cert/
+
 *.secrets.exs
 
 .mix_tasks
