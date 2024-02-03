@@ -11,6 +11,17 @@ config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
+config :church_admin, ChurchAdmin.Repo,
+  migration_primary_key: [
+    name: :id,
+    type: :binary_id,
+    default: {:fragment, "gen_random_uuid()"},
+    null: false
+  ],
+  types: ChurchAdmin.PostgresTypes,
+  extensions: [{Postgrex.Extensions.PostGIS, []}],
+  migration_foreign_key: [column: :id, type: :binary_id]
+
 # Configures the endpoint
 config :church_admin, ChurchAdminWeb.Endpoint,
   url: [host: "localhost"],
@@ -33,3 +44,7 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+
+if config_env() == :dev do
+  import_config "dev.secrets.exs"
+end

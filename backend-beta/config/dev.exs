@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :church_admin, ChurchAdmin.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "church_admin_dev",
+  # username: "postgres",
+  # password: "postgres",
+  # hostname: "localhost",
+  # database: "church_admin_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
