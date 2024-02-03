@@ -26,3 +26,5 @@ erl_crash.dump
 church_admin-*.tar
 
 *.secrets.exs
+
+.mix_tasks
