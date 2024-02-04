@@ -11,7 +11,7 @@
     }
   ],
   "settings": {
-    "elixirLS.projectDir": "./backend-beta/",
+    "elixirLS.projectDir": "./backend-beta",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#00c9b6",
       "activityBar.activeBorder": "#ca00df",
