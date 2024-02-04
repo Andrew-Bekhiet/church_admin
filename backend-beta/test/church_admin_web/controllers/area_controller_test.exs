@@ -5,9 +5,10 @@ defmodule ChurchAdminWeb.AreaControllerTest do
   alias ChurchAdmin.Schemas.Area
 
   @create_attrs %{
-    name: "Test Area",
-    bounds: %{
+    "name" => "Test Area",
+    "bounds" => %{
       "type" => "Polygon",
+      "crs" => %{"type" => "name", "properties" => %{"name" => "EPSG:4326"}},
       "coordinates" => [
         [
           [32, 32],
@@ -18,9 +19,8 @@ defmodule ChurchAdminWeb.AreaControllerTest do
         ]
       ]
     },
-    color: 0xFF323232,
-    photo_updated_at: "2018-08-22T00:00:00Z",
-    blurhash: nil
+    "color" => 0xFF323232,
+    "photo_updated_at" => "2018-08-22T00:00:00Z"
   }
   @update_attrs %{
     name: "Test Area Updated",
@@ -37,14 +37,68 @@ defmodule ChurchAdminWeb.AreaControllerTest do
   end
 
   describe "index" do
-    test "lists all areas", %{conn: conn} do
+    test "lists minimal areas", %{conn: conn} do
       conn = get(conn, ~p"/api/areas")
       assert json_response(conn, 200)["data"] == []
 
-      post(conn, ~p"/api/areas", area: @create_attrs)
+      %{"data" => %{"id" => id}} =
+        conn
+        |> post(~p"/api/areas", area: @create_attrs)
+        |> json_response(201)
 
       conn = get(conn, ~p"/api/areas")
-      assert length(json_response(conn, 200)["data"]) == 1
+
+      assert %{
+               "data" => [
+                 %{
+                   "id" => ^id,
+                   "name" => "Test Area"
+                 }
+               ]
+             } =
+               json_response(conn, 200)
+    end
+
+    test "lists full areas", %{conn: conn} do
+      conn = get(conn, ~p"/api/areas")
+      assert json_response(conn, 200)["data"] == []
+
+      %{"data" => %{"id" => id}} =
+        conn
+        |> post(~p"/api/areas", area: @create_attrs)
+        |> json_response(201)
+
+      conn = get(conn, ~p"/api/areas", %{"full" => "true"})
+
+      assert %{
+               "data" => [
+                 @create_attrs
+                 |> Enum.into(%{"id" => id})
+                 |> Map.drop(["blurhash"])
+               ]
+             } ==
+               json_response(conn, 200)
+    end
+
+    test "lists areas with subtitle", %{conn: conn} do
+      conn = get(conn, ~p"/api/areas")
+      assert json_response(conn, 200)["data"] == []
+
+      %{"data" => %{"id" => id}} =
+        conn
+        |> post(~p"/api/areas", area: @create_attrs)
+        |> json_response(201)
+
+      conn = get(conn, ~p"/api/areas", %{"subtitle" => "bounds"})
+
+      assert %{
+               "data" => [
+                 @create_attrs
+                 |> Enum.into(%{"id" => id})
+                 |> Map.take(["id", "name", "bounds"])
+               ]
+             } ==
+               json_response(conn, 200)
     end
   end
 
@@ -55,17 +109,7 @@ defmodule ChurchAdminWeb.AreaControllerTest do
 
       conn = get(conn, ~p"/api/areas/#{id}")
 
-      expected =
-        @create_attrs
-        |> Map.drop([:bounds])
-        |> Enum.map(fn {k, v} -> {Atom.to_string(k), v} end)
-        |> Enum.into(%{"id" => id})
-
-      actual =
-        json_response(conn, 200)["data"]
-        |> Map.drop(["bounds"])
-
-      assert expected == actual
+      assert %{"data" => @create_attrs |> Enum.into(%{"id" => id})} == json_response(conn, 200)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -95,9 +139,7 @@ defmodule ChurchAdminWeb.AreaControllerTest do
       conn = delete(conn, ~p"/api/areas/#{area}")
       assert response(conn, 204)
 
-      assert_error_sent 404, fn ->
-        get(conn, ~p"/api/areas/#{area}")
-      end
+      assert get(conn, ~p"/api/areas/#{area}") |> response(404)
     end
   end
 

@@ -4,18 +4,29 @@ defmodule ChurchAdminWeb.AreaJSON do
   @doc """
   Renders a list of areas.
   """
-  def index(%{areas: areas}) do
+  def index(%{areas: [%Area{} | _] = areas}) do
     %{data: for(area <- areas, do: data(area))}
+  end
+
+  def index(%{areas: [] = _}) do
+    %{data: []}
   end
 
   @doc """
   Renders a single area.
   """
-  def show(%{area: area}) do
+  def show(%{area: %Area{} = area}) do
     %{data: data(area)}
   end
 
   defp data(%Area{} = area) do
-    area
+    %{
+      id: area.id,
+      name: area.name,
+      bounds: area.bounds,
+      color: area.color,
+      photo_updated_at: area.photo_updated_at
+    }
+    |> Map.filter(fn {_, v} -> v != nil end)
   end
 end

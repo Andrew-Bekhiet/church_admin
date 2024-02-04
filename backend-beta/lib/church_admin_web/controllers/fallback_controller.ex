@@ -10,15 +10,23 @@ defmodule ChurchAdminWeb.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> put_view(json: ChurchAdminWeb.ChangesetJSON)
+    |> put_view(ChurchAdminWeb.ChangesetJSON)
     |> render(:error, changeset: changeset)
   end
 
-  # This clause is an example of how to handle resources that cannot be found.
-  def call(conn, {:error, :not_found}) do
+  def call(conn, {:error, %{status: status, message: message}}) when is_atom(status) do
     conn
-    |> put_status(:not_found)
-    |> put_view(html: ChurchAdminWeb.ErrorHTML, json: ChurchAdminWeb.ErrorJSON)
-    |> render(:"404")
+    |> put_status(status)
+    |> put_view(ChurchAdminWeb.ErrorJSON)
+    |> render(:error, message: message)
+  end
+
+  def call(conn, error) do
+    IO.puts("Error: #{inspect(error)}")
+
+    conn
+    |> put_status(:internal_server_error)
+    |> put_view(ChurchAdminWeb.ErrorJSON)
+    |> render(:error, message: "Internal server error")
   end
 end
