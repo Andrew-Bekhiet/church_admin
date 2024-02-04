@@ -7,6 +7,8 @@ defmodule ChurchAdminWeb.Router do
 
   scope "/api", ChurchAdminWeb do
     pipe_through(:api)
+
+    resources "/areas", AreaController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard in development
