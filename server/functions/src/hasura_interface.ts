@@ -21,7 +21,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
 
     return (
       permissions.find(
-        (o) => o?.["permission"].toLowerCase().replace("'", "") == "approved"
+        (o) => o?.["permission"]?.toLowerCase().replace("'", "") == "approved"
       ) != null
     );
   } catch (e) {
