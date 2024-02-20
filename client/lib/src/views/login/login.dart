@@ -139,9 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
         await setupSettings();
       }
     } on MultiFactorException {
-      if (context.mounted) context.go('/multiFactor');
+      if (mounted) context.go('/multiFactor');
     } on Exception catch (e, stackTrace) {
-      if (context.mounted) {
+      if (mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           context,
           e,
