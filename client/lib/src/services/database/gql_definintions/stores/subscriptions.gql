@@ -14,8 +14,10 @@ subscription watchStore($id: Uuid!) {
     areas(orderBy: { name: ASC }) {
       ...Area
     }
-    streets(orderBy: { name: ASC }) {
-      ...Street
+    streets(orderBy: { street: { name: ASC } }) {
+      street {
+        ...Street
+      }
     }
     lastEdit {
       ...LatestEditHistory

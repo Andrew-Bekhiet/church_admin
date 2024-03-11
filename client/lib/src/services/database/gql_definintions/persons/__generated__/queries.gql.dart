@@ -1601,7 +1601,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'streets'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'streetId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1715,7 +1715,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'areas'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'areaId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1732,7 +1732,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'families'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'familyId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1846,7 +1846,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'streets'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'streetId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1977,7 +1977,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'streets'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'streetId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),

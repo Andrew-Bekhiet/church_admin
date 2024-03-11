@@ -25,7 +25,7 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $areasIds } }
-        { streets: { id: { _in: $streetsIds } } }
+        { streets: { streetId: { _in: $streetsIds } } }
         { families: { id: { _in: $familiesIds } } }
         { persons: { _and: $personsConditions } }
       ]
@@ -40,8 +40,8 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $streetsIds } }
-        { areas: { id: { _in: $areasIds } } }
-        { families: { id: { _in: $familiesIds } } }
+        { areas: { areaId: { _in: $areasIds } } }
+        { families: { familyId: { _in: $familiesIds } } }
         { persons: { _and: $personsConditions } }
       ]
       line: { _isNull: false }
@@ -56,7 +56,7 @@ query personsGeolocations(
       _or: [
         { id: { _in: $familiesIds } }
         { areas: { id: { _in: $areasIds } } }
-        { streets: { id: { _in: $streetsIds } } }
+        { streets: { streetId: { _in: $streetsIds } } }
         { persons: { _and: $personsConditions } }
         { parents: { parentFamilyId: { _in: $familiesIds } } }
         { children: { childFamilyId: { _in: $familiesIds } } }
@@ -72,7 +72,7 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $storesIds } }
-        { streets: { id: { _in: $streetsIds } } }
+        { streets: { streetId: { _in: $streetsIds } } }
         { areas: { id: { _in: $areasIds } } }
         { adminFamily: { _in: $familiesIds } }
       ]

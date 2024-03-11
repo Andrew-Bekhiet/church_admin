@@ -1,5 +1,5 @@
+import { randomUUID } from "crypto";
 import { firestore } from "firebase-admin";
-import { Storage } from "firebase-admin/lib/storage/storage";
 import * as fs from "fs";
 import * as uuid from "uuid";
 import {
@@ -9,6 +9,16 @@ import {
 } from "./hasura_interface";
 import { getImageBlurHash } from "./storage_triggers";
 import path = require("path");
+
+type IdsMapping = {
+  Classes: Record<string, string>;
+  Services: Record<string, string>;
+  Areas: Record<string, string>;
+  Streets: Record<string, string>;
+  Families: Record<string, string>;
+  Stores: Record<string, string>;
+  Persons: Record<string, string>;
+};
 
 type Area = {
   id: string;
@@ -30,21 +40,29 @@ type Street = {
   } | null;
   color: number;
   photoUpdatedAt: string | null;
+  areas: {
+    data: { areaId: string }[];
+    onConflict: { constraint: "areasStreetsPk"; updateColumns: [] };
+  };
 };
 
 type Family = {
   id: string;
   name: string;
-  address: string;
+  address: string | null;
   geolocation: {
     type: "Point";
     coordinates: [number, number];
   } | null;
-  notes: string;
-  color: number;
+  notes: string | null;
+  color: number | null;
   photoUpdatedAt: string | null;
   parents: {
     data: { parentFamilyId: string }[];
+  };
+  streets: {
+    data: { streetId: string }[];
+    onConflict: { constraint: "streetsFamiliesPk"; updateColumns: [] };
   };
 };
 
@@ -59,6 +77,10 @@ type Store = {
   } | null;
   color: number;
   photoUpdatedAt: string | null;
+  streets: {
+    data: { streetId: string }[];
+    onConflict: { constraint: "streetsStoresPk"; updateColumns: [] };
+  };
 };
 
 type Service = {
@@ -112,7 +134,7 @@ type Person = {
   qualificationId: string | null;
   personTypeId: string | null;
   stateId: string | null;
-  familyId: string | null;
+  familyId: string | string[] | null;
   storeId: string | null;
 };
 
@@ -131,10 +153,17 @@ export async function migrateProjectsFromFirestore(
   const migrationTime = new Date();
   console.log("Starting migration at", migrationTime.toISOString());
 
+  const oldIdsMapping = fs.existsSync(path.join(".", "migration-mapping.json"))
+    ? JSON.parse(
+        fs.readFileSync(path.join(".", "migration-mapping.json")).toString()
+      )
+    : null;
+
   const { variables, idsMapping } = await getMigrationVarsAndWriteToFile(
     migrationTime,
     meetingHelperFirestore,
-    churchDataFirestore
+    churchDataFirestore,
+    oldIdsMapping
   );
 
   if ((await executeMigration(variables)) !== true) {
@@ -153,7 +182,8 @@ export async function migrateProjectsFromFirestore(
 export async function getMigrationVarsAndWriteToFile(
   migrationTime: Date,
   meetingHelperFirestore?: firestore.Firestore,
-  churchDataFirestore?: firestore.Firestore
+  churchDataFirestore?: firestore.Firestore,
+  mapping?: IdsMapping
 ) {
   const studyYears = Object.entries({
     ...(await getMappedCollection("StudyYears", meetingHelperFirestore)),
@@ -412,7 +442,7 @@ export async function getMigrationVarsAndWriteToFile(
       return {
         ...acc,
         [key]: {
-          id: uuid.v4(),
+          id: getExistingOrNewUUID(key, "Areas", mapping),
           name: value["Name"].trim(),
           color: value["Color"] === 0 ? null : value["Color"],
           photoUpdatedAt:
@@ -454,10 +484,12 @@ export async function getMigrationVarsAndWriteToFile(
       return acc;
     }
 
+    const firestoreAreaId = value["AreaId"]?.id;
+
     return {
       ...acc,
       [key]: {
-        id: uuid.v4(),
+        id: getExistingOrNewUUID(key, "Streets", mapping),
         name: value["Name"].trim(),
         color: value["Color"] === 0 ? null : value["Color"],
         photoUpdatedAt:
@@ -473,6 +505,12 @@ export async function getMigrationVarsAndWriteToFile(
                 ).map((e) => [e.longitude, e.latitude]),
               }
             : null,
+        areas: {
+          data: [{ areaId: migratedAreas[firestoreAreaId]?.id }].filter(
+            (e) => e.areaId != null
+          ),
+          onConflict: { constraint: "areasStreetsPk", updateColumns: [] },
+        },
       } satisfies Street,
     };
   }, {} as Record<string, Street>);
@@ -492,10 +530,12 @@ export async function getMigrationVarsAndWriteToFile(
     const parentFamily1 = value["InsideFamily"]?.id;
     const parentFamily2 = value["InsideFamily2"]?.id;
 
+    const firestoreStreetId = value["StreetId"]?.id;
+
     return {
       ...acc,
       [key]: {
-        id: uuid.v4(),
+        id: getExistingOrNewUUID(key, "Families", mapping),
         name: value["Name"].trim(),
         address: value["Address"]?.trim(),
         notes: value["Notes"],
@@ -522,6 +562,12 @@ export async function getMigrationVarsAndWriteToFile(
           ]
             .filter((e) => e != null)
             .map((o) => o as { parentFamilyId: string }),
+        },
+        streets: {
+          data: [{ streetId: migratedStreets[firestoreStreetId]?.id }].filter(
+            (e) => e.streetId != null
+          ),
+          onConflict: { constraint: "streetsFamiliesPk", updateColumns: [] },
         },
       } satisfies Family,
     };
@@ -569,10 +615,12 @@ export async function getMigrationVarsAndWriteToFile(
       return acc;
     }
 
+    const firestoreStreetId = value["StreetId"]?.id;
+
     return {
       ...acc,
       [key]: {
-        id: uuid.v4(),
+        id: getExistingOrNewUUID(key, "Stores", mapping),
         name: value["Name"].trim(),
         adminFamily: migratedFamilies[value["InsideFamily"]?.id].id,
         address: value["Address"]?.trim(),
@@ -588,6 +636,12 @@ export async function getMigrationVarsAndWriteToFile(
               ],
             }
           : null,
+        streets: {
+          data: [{ streetId: migratedStreets[firestoreStreetId]?.id }].filter(
+            (e) => e.streetId != null
+          ),
+          onConflict: { constraint: "streetsStoresPk", updateColumns: [] },
+        },
       } satisfies Store,
     };
   }, {} as Record<string, Store>);
@@ -659,7 +713,7 @@ export async function getMigrationVarsAndWriteToFile(
         : null;
 
     const service: Service = {
-      id: uuid.v4(),
+      id: getExistingOrNewUUID(key, "Services", mapping),
       name: value["Name"].trim(),
       photoUpdatedAt:
         value["HasPhoto"] === true ? migrationTime.toISOString() : null,
@@ -742,7 +796,7 @@ export async function getMigrationVarsAndWriteToFile(
       return {
         ...acc,
         [key]: {
-          id: uuid.v4(),
+          id: getExistingOrNewUUID(key, "Classes", mapping),
           name: value["Name"].trim(),
           color: value["Color"] === 0 ? null : value["Color"],
           photoUpdatedAt:
@@ -789,8 +843,50 @@ export async function getMigrationVarsAndWriteToFile(
     const gender =
       value["Gender"] ?? classes[value["ClassId"]?.id]?.["Gender"] ?? true;
 
+    const geolocation: Person["geolocation"] = value["Location"]
+      ? {
+          type: "Point",
+          coordinates: [
+            value["Location"].longitude,
+            value["Location"].latitude,
+          ],
+        }
+      : null;
+
+    const streetId = value["StreetId"]?.id;
+
+    const familyName = (value["Name"] as string)
+      .trim()
+      .split(" ")
+      .splice(1)
+      .join(" ");
+
     const familyOrStoreId = value["FamilyId"]?.id;
-    const familyId = migratedFamilies[familyOrStoreId]?.id;
+
+    const familyId =
+      // Get family by firestore id
+      migratedFamilies[familyOrStoreId]?.id ??
+      // Or previously created family
+      (
+        migratedFamilies[familyName] ??
+        // Or existing family with same name
+        Object.values(migratedFamilies).find((f) => f.name === familyName) ??
+        // Or create a new family
+        (migratedFamilies[familyName] = {
+          id: randomUUID(),
+          name: familyName,
+          address: null,
+          geolocation: geolocation,
+          notes: null,
+          color: null,
+          photoUpdatedAt: null,
+          parents: { data: [] },
+          streets: {
+            data: streetId ? [{ streetId: migratedStreets[streetId]?.id }] : [],
+            onConflict: { constraint: "streetsFamiliesPk", updateColumns: [] },
+          },
+        })
+      ).id;
     const storeId = migratedStores[familyOrStoreId]?.id;
 
     if (
@@ -824,7 +920,7 @@ export async function getMigrationVarsAndWriteToFile(
     return {
       ...acc,
       [key]: {
-        id: uuid.v4(),
+        id: getExistingOrNewUUID(key, "Persons", mapping),
         name: value["Name"].trim(),
         mainPhone: value["Phone"]?.replace(/ /g, "").trim(),
         otherPhones: {
@@ -854,15 +950,7 @@ export async function getMigrationVarsAndWriteToFile(
         isStudent: !!(schoolId || collegeId || !(jobId || jobDescription)),
         isServant: false,
         shammasLevelId: createdShammasLevels[value["ShammasLevel"]]?.["id"],
-        geolocation: value["Location"]
-          ? {
-              type: "Point",
-              coordinates: [
-                value["Location"].longitude,
-                value["Location"].latitude,
-              ],
-            }
-          : null,
+        geolocation,
         color: value["Color"] === 0 ? null : value["Color"],
         notes: value["Notes"],
         photoUpdatedAt:
@@ -888,7 +976,7 @@ export async function getMigrationVarsAndWriteToFile(
         },
         jobId,
         jobDescription,
-        familyId,
+        familyId: [familyId],
         storeId,
         personTypeId: value["Type"] ? uniqueTypes[value["Type"]]?.id : null,
         qualificationId:
@@ -996,7 +1084,12 @@ export async function getMigrationVarsAndWriteToFile(
             existingPerson.qualificationId ?? person.qualificationId,
           personTypeId: existingPerson.personTypeId ?? person.personTypeId,
           stateId: existingPerson.stateId ?? person.stateId,
-          familyId: existingPerson.familyId ?? person.familyId,
+          familyId: Array.from(
+            new Set([
+              ...(existingPerson.familyId ?? []),
+              ...(person.familyId ?? []),
+            ])
+          ).filter((v) => v != null),
           storeId: existingPerson.storeId ?? person.storeId,
         };
 
@@ -1031,6 +1124,13 @@ export async function getMigrationVarsAndWriteToFile(
     [] as Person[]
   );
 
+  const mergedFamiliesIdsMapping: Record<string, string> =
+    mergeFamiliesWithCommonPersons(uniqueMigratedPersons, migratedFamilies);
+
+  replaceFamiliesParentsIds(mergedFamiliesIdsMapping, migratedFamilies);
+  replaceStoresAdminFamiliesIds(mergedFamiliesIdsMapping, migratedStores);
+  replacePersonsFamiliesIds(mergedFamiliesIdsMapping, uniqueMigratedPersons);
+
   console.log(
     "Staged migrated persons, count:",
     Object.keys(uniqueMigratedPersons).length,
@@ -1038,32 +1138,32 @@ export async function getMigrationVarsAndWriteToFile(
     JSON.stringify(Object.entries(uniqueMigratedPersons).slice(0, 10))
   );
 
-  const idsMapping = {
-    classes: Object.entries(migratedClasses).reduce(
+  const idsMapping: IdsMapping = {
+    Classes: Object.entries(migratedClasses).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
-    services: Object.entries(migratedServices).reduce(
+    Services: Object.entries(migratedServices).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] as string }),
       {} as Record<string, string>
     ),
-    areas: Object.entries(migratedAreas).reduce(
+    Areas: Object.entries(migratedAreas).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
-    streets: Object.entries(migratedStreets).reduce(
+    Streets: Object.entries(migratedStreets).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
-    families: Object.entries(migratedFamilies).reduce(
+    Families: Object.entries(migratedFamilies).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
-    stores: Object.entries(migratedStores).reduce(
+    Stores: Object.entries(migratedStores).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
-    persons: Object.entries(migratedPersons).reduce(
+    Persons: Object.entries(migratedPersons).reduce(
       (acc, [key, value]) => ({ ...acc, [key]: value["id"] }),
       {} as Record<string, string>
     ),
@@ -1114,6 +1214,146 @@ export async function getMigrationVarsAndWriteToFile(
   return { variables, idsMapping };
 }
 
+function replacePersonsFamiliesIds(
+  mergedFamiliesIdsMapping: Record<string, string>,
+  uniqueMigratedPersons: Person[]
+) {
+  for (const person of Object.values(uniqueMigratedPersons)) {
+    if (
+      typeof person.familyId == "string" &&
+      mergedFamiliesIdsMapping[person.familyId!] != null
+    ) {
+      person.familyId = mergedFamiliesIdsMapping[person.familyId];
+    }
+  }
+}
+
+function replaceStoresAdminFamiliesIds(
+  mergedFamiliesIdsMapping: Record<string, string>,
+  migratedStores: Record<string, Store>
+) {
+  for (const store of Object.values(migratedStores)) {
+    if (store.adminFamily == null) continue;
+
+    const newAdminFamilyId = mergedFamiliesIdsMapping[store.adminFamily];
+
+    if (newAdminFamilyId == null) continue;
+
+    store.adminFamily = newAdminFamilyId;
+  }
+}
+
+function replaceFamiliesParentsIds(
+  mergedFamiliesIdsMapping: Record<string, string>,
+  migratedFamilies: Record<string, Family>
+) {
+  const allMergedIds = [
+    ...Object.keys(mergedFamiliesIdsMapping),
+    ...Object.values(mergedFamiliesIdsMapping),
+  ];
+  for (const family of Object.values(migratedFamilies)) {
+    if (
+      family.parents.data.filter((e) => allMergedIds.includes(e.parentFamilyId))
+        .length > 0
+    ) {
+      family.parents.data = family.parents.data.map((parent) => {
+        return {
+          parentFamilyId:
+            mergedFamiliesIdsMapping[parent.parentFamilyId] ??
+            parent.parentFamilyId,
+        };
+      });
+    }
+  }
+}
+
+function mergeFamiliesWithCommonPersons(
+  uniqueMigratedPersons: Person[],
+  migratedFamilies: Record<string, Family>
+) {
+  const mergedFamiliesIdsMapping: Record<string, string> = {};
+  let deletedFamilies: string[] = [];
+
+  for (const person of Object.values(uniqueMigratedPersons)) {
+    if (typeof person.familyId == "string") {
+      continue;
+    } else if ((person.familyId?.length ?? 0) == 1) {
+      person.familyId = person.familyId![0];
+
+      continue;
+    } else if ((person.familyId?.length ?? 0) == 0) {
+      console.log("Person: ", person.name, "has no family");
+      throw new Error("Person has no family");
+    }
+
+    console.log(
+      "Person: ",
+      person.name,
+      "has multiple families",
+      person.familyId,
+      "merging them"
+    );
+
+    const firstFamilyId = person.familyId![0];
+
+    const [firstFamilyFirestoreId, firstFamily] = Object.entries(
+      migratedFamilies
+    ).find(
+      ([, v]) =>
+        v.id === (mergedFamiliesIdsMapping[firstFamilyId] ?? firstFamilyId)
+    )!;
+
+    const [newToBeDeletedFamilies, mergedFamily] = (
+      person.familyId! as string[]
+    ).reduce(
+      ([deletedFamilies, acc], familyId) => {
+        const newId = mergedFamiliesIdsMapping[acc.id] ?? acc.id;
+
+        const [familyFirestoreId, family] = Object.entries(
+          migratedFamilies
+        ).find(
+          ([, v]) => v.id === (mergedFamiliesIdsMapping[familyId] ?? familyId)
+        )!;
+
+        const newFamily: Family = {
+          id: newId,
+          name: maxString(acc.name, family.name),
+          address: (acc.address ?? "") + "\n" + (family.address ?? ""),
+          geolocation: acc.geolocation ?? family.geolocation,
+          color: acc.color ?? family.color,
+          photoUpdatedAt: acc.photoUpdatedAt ?? family.photoUpdatedAt,
+          parents: {
+            data: acc.parents.data.concat(family.parents.data),
+          },
+          streets: {
+            data: acc.streets.data.concat(family.streets.data),
+            onConflict: { constraint: "streetsFamiliesPk", updateColumns: [] },
+          },
+          notes: (acc.notes ?? "") + "\n" + (family.notes ?? ""),
+        };
+
+        mergedFamiliesIdsMapping[familyId] = newId;
+        migratedFamilies[familyFirestoreId] = newFamily;
+
+        return [[...deletedFamilies, familyFirestoreId], newFamily];
+      },
+      [new Array<string>(), firstFamily]
+    );
+
+    migratedFamilies[firstFamilyFirestoreId] = mergedFamily;
+    deletedFamilies = [...deletedFamilies, ...newToBeDeletedFamilies].filter(
+      (e) => e != firstFamilyFirestoreId
+    );
+
+    person.familyId = mergedFamily!.id;
+  }
+
+  for (const familyId of deletedFamilies) {
+    delete migratedFamilies[familyId];
+  }
+  return mergedFamiliesIdsMapping;
+}
+
 export async function executeMigration(variables?: {
   studyYears: Array<object>;
   colleges: Array<object>;
@@ -1140,7 +1380,6 @@ export async function executeMigration(variables?: {
   }
 
   try {
-    //TODO: add qualifications, jobs, states, types, areas, streets, families, stores
     const result = await makeGraphqlRequest({
       query: `
         mutation migrateFromFirestore(
@@ -1279,9 +1518,18 @@ export async function executeMigration(variables?: {
 }
 
 export async function getCollectionDataUniqueByName(
-  collectionName: string,
+  collectionName:
+    | keyof IdsMapping
+    | "Churches"
+    | "Colleges"
+    | "Fathers"
+    | "Schools"
+    | "Jobs"
+    | "States"
+    | "Types",
   firestoreInstance1?: firestore.Firestore,
-  firestoreInstance2?: firestore.Firestore
+  firestoreInstance2?: firestore.Firestore,
+  mapping?: Record<string, Record<string, string>>
 ): Promise<
   Record<
     string,
@@ -1324,7 +1572,7 @@ export async function getCollectionDataUniqueByName(
         return {
           ...acc,
           [doc.id]: {
-            id: uuid.v4(),
+            id: getExistingOrNewUUID(doc.id, collectionName, mapping),
             name,
             color: parseInt(doc.data()["Color"], 16),
           },
@@ -1333,7 +1581,7 @@ export async function getCollectionDataUniqueByName(
         return {
           ...acc,
           [doc.id]: {
-            id: uuid.v4(),
+            id: getExistingOrNewUUID(doc.id, collectionName, mapping),
             name,
             order: i,
           },
@@ -1342,7 +1590,7 @@ export async function getCollectionDataUniqueByName(
         return {
           ...acc,
           [doc.id]: {
-            id: uuid.v4(),
+            id: getExistingOrNewUUID(doc.id, collectionName, mapping),
             name,
             churchId: doc.data()["ChurchId"]?.id ?? null,
           },
@@ -1352,7 +1600,7 @@ export async function getCollectionDataUniqueByName(
       return {
         ...acc,
         [doc.id]: {
-          id: uuid.v4(),
+          id: getExistingOrNewUUID(doc.id, collectionName, mapping),
           name,
         },
       };
@@ -1393,15 +1641,7 @@ export function toNearestDay(date?: Date): Date | null {
 
 export async function renamePhotosAndUpdateBlurhashes(
   dstStorageInstance: Storage,
-  idsMapping?: {
-    classes: Record<string, string>;
-    services: Record<string, string>;
-    areas: Record<string, string>;
-    streets: Record<string, string>;
-    families: Record<string, string>;
-    stores: Record<string, string>;
-    persons: Record<string, string>;
-  },
+  idsMapping?: IdsMapping,
   pageToken?: string,
   startOffset?: string,
   maxResults?: string
@@ -1437,7 +1677,7 @@ export async function renamePhotosAndUpdateBlurhashes(
     const id = file.name.match(/^(.+)Photos\/(.+$)/)![2];
 
     const newId = (
-      idsMapping?.[table.toLowerCase() as keyof typeof idsMapping] as
+      idsMapping?.[table as keyof IdsMapping] as
         | Record<string, string>
         | undefined
     )?.[id] as string | undefined;
@@ -1481,4 +1721,12 @@ function getUniqueValuesByName<T extends { name: string }>(objects: T[]): T[] {
     }
     return acc;
   }, [] as T[]);
+}
+
+function getExistingOrNewUUID(
+  firestoreId: string,
+  collectionName: string,
+  mapping?: Record<string, Record<string, string>> | null
+): string {
+  return mapping?.[collectionName]?.[firestoreId] ?? uuid.v4();
 }

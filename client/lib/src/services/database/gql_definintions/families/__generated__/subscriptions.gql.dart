@@ -698,17 +698,37 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
                 name: NameNode(value: 'orderBy'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    name: NameNode(value: 'street'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
                   )
                 ]),
               )
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Street'),
+              FieldNode(
+                name: NameNode(value: 'street'),
+                alias: null,
+                arguments: [],
                 directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Street'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -791,7 +811,7 @@ class Subscription_watchFamily_familiesByPk
     this.photoUpdatedAt,
     this.blurhash,
     this.areas,
-    this.streets,
+    required this.streets,
     this.geolocation,
     this.address,
     this.notes,
@@ -823,8 +843,9 @@ class Subscription_watchFamily_familiesByPk
       areas: (l$areas as List<dynamic>?)
           ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
           .toList(),
-      streets: (l$streets as List<dynamic>?)
-          ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
+      streets: (l$streets as List<dynamic>)
+          .map((e) => Subscription_watchFamily_familiesByPk_streets.fromJson(
+              (e as Map<String, dynamic>)))
           .toList(),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       address: (l$address as String?),
@@ -850,7 +871,7 @@ class Subscription_watchFamily_familiesByPk
 
   final List<Fragment_Area>? areas;
 
-  final List<Fragment_Street>? streets;
+  final List<Subscription_watchFamily_familiesByPk_streets> streets;
 
   final Map<String, dynamic>? geolocation;
 
@@ -878,7 +899,7 @@ class Subscription_watchFamily_familiesByPk
     final l$areas = areas;
     _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
     final l$streets = streets;
-    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
+    _resultData['streets'] = l$streets.map((e) => e.toJson()).toList();
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$address = address;
@@ -912,7 +933,7 @@ class Subscription_watchFamily_familiesByPk
       l$photoUpdatedAt,
       l$blurhash,
       l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
-      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
+      Object.hashAll(l$streets.map((v) => v)),
       l$geolocation,
       l$address,
       l$notes,
@@ -977,19 +998,15 @@ class Subscription_watchFamily_familiesByPk
     }
     final l$streets = streets;
     final lOther$streets = other.streets;
-    if (l$streets != null && lOther$streets != null) {
-      if (l$streets.length != lOther$streets.length) {
+    if (l$streets.length != lOther$streets.length) {
+      return false;
+    }
+    for (int i = 0; i < l$streets.length; i++) {
+      final l$streets$entry = l$streets[i];
+      final lOther$streets$entry = lOther$streets[i];
+      if (l$streets$entry != lOther$streets$entry) {
         return false;
       }
-      for (int i = 0; i < l$streets.length; i++) {
-        final l$streets$entry = l$streets[i];
-        final lOther$streets$entry = lOther$streets[i];
-        if (l$streets$entry != lOther$streets$entry) {
-          return false;
-        }
-      }
-    } else if (l$streets != lOther$streets) {
-      return false;
     }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
@@ -1042,7 +1059,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    List<Subscription_watchFamily_familiesByPk_streets>? streets,
     Map<String, dynamic>? geolocation,
     String? address,
     String? notes,
@@ -1053,8 +1070,10 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
               Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
           _fn);
   TRes streets(
-      Iterable<Fragment_Street>? Function(
-              Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
+      Iterable<Subscription_watchFamily_familiesByPk_streets> Function(
+              Iterable<
+                  CopyWith_Subscription_watchFamily_familiesByPk_streets<
+                      Subscription_watchFamily_familiesByPk_streets>>)
           _fn);
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
 }
@@ -1103,9 +1122,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         areas: areas == _undefined
             ? _instance.areas
             : (areas as List<Fragment_Area>?),
-        streets: streets == _undefined
+        streets: streets == _undefined || streets == null
             ? _instance.streets
-            : (streets as List<Fragment_Street>?),
+            : (streets as List<Subscription_watchFamily_familiesByPk_streets>),
         geolocation: geolocation == _undefined
             ? _instance.geolocation
             : (geolocation as Map<String, dynamic>?),
@@ -1128,14 +1147,17 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
               )))?.toList());
 
   TRes streets(
-          Iterable<Fragment_Street>? Function(
-                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
+          Iterable<Subscription_watchFamily_familiesByPk_streets> Function(
+                  Iterable<
+                      CopyWith_Subscription_watchFamily_familiesByPk_streets<
+                          Subscription_watchFamily_familiesByPk_streets>>)
               _fn) =>
       call(
-          streets: _fn(_instance.streets?.map((e) => CopyWith_Fragment_Street(
-                e,
-                (i) => i,
-              )))?.toList());
+          streets: _fn(_instance.streets.map(
+              (e) => CopyWith_Subscription_watchFamily_familiesByPk_streets(
+                    e,
+                    (i) => i,
+                  ))).toList());
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
@@ -1160,7 +1182,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    List<Subscription_watchFamily_familiesByPk_streets>? streets,
     Map<String, dynamic>? geolocation,
     String? address,
     String? notes,
@@ -1174,4 +1196,141 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
+}
+
+class Subscription_watchFamily_familiesByPk_streets {
+  Subscription_watchFamily_familiesByPk_streets({
+    required this.street,
+    this.$__typename = 'StreetsFamilies',
+  });
+
+  factory Subscription_watchFamily_familiesByPk_streets.fromJson(
+      Map<String, dynamic> json) {
+    final l$street = json['street'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchFamily_familiesByPk_streets(
+      street: Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment_Street street;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$street = street;
+    _resultData['street'] = l$street.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$street = street;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$street,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Subscription_watchFamily_familiesByPk_streets) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$street = street;
+    final lOther$street = other.street;
+    if (l$street != lOther$street) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchFamily_familiesByPk_streets
+    on Subscription_watchFamily_familiesByPk_streets {
+  CopyWith_Subscription_watchFamily_familiesByPk_streets<
+          Subscription_watchFamily_familiesByPk_streets>
+      get copyWith => CopyWith_Subscription_watchFamily_familiesByPk_streets(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchFamily_familiesByPk_streets<TRes> {
+  factory CopyWith_Subscription_watchFamily_familiesByPk_streets(
+    Subscription_watchFamily_familiesByPk_streets instance,
+    TRes Function(Subscription_watchFamily_familiesByPk_streets) then,
+  ) = _CopyWithImpl_Subscription_watchFamily_familiesByPk_streets;
+
+  factory CopyWith_Subscription_watchFamily_familiesByPk_streets.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_streets;
+
+  TRes call({
+    Fragment_Street? street,
+    String? $__typename,
+  });
+  CopyWith_Fragment_Street<TRes> get street;
+}
+
+class _CopyWithImpl_Subscription_watchFamily_familiesByPk_streets<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_streets<TRes> {
+  _CopyWithImpl_Subscription_watchFamily_familiesByPk_streets(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchFamily_familiesByPk_streets _instance;
+
+  final TRes Function(Subscription_watchFamily_familiesByPk_streets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? street = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchFamily_familiesByPk_streets(
+        street: street == _undefined || street == null
+            ? _instance.street
+            : (street as Fragment_Street),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_Street<TRes> get street {
+    final local$street = _instance.street;
+    return CopyWith_Fragment_Street(local$street, (e) => call(street: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_streets<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_streets<TRes> {
+  _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_streets(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment_Street? street,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_Street<TRes> get street =>
+      CopyWith_Fragment_Street.stub(_res);
 }

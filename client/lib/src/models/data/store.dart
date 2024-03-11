@@ -30,6 +30,7 @@ class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
     @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     List<Area>? areas,
+    @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
     List<Street>? streets,
     LastRecordedByInfo? lastEdit,
     DateTime? photoUpdatedAt,
@@ -43,3 +44,8 @@ class Store extends ViewableWithIDAndImage with _$Store implements ToJson {
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
 }
+
+List<Street>? streetsFromJson(List? data) =>
+    data?.map((e) => Street.fromJson(e['street'])).toList();
+List<Json>? streetsToJson(List<Street>? streets) =>
+    streets?.map((e) => {'street': e.toJson()}).toList();

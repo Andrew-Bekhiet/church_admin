@@ -12,7 +12,7 @@ part of 'store.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Store _$StoreFromJson(Map<String, dynamic> json) {
   return _Store.fromJson(json);
@@ -31,6 +31,7 @@ mixin _$Store {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $StoreCopyWith<$Res> {
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       List<Area>? areas,
+      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       List<Street>? streets,
       LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt,
@@ -183,6 +185,7 @@ abstract class _$$StoreImplCopyWith<$Res> implements $StoreCopyWith<$Res> {
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       List<Area>? areas,
+      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       List<Street>? streets,
       LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt,
@@ -283,6 +286,7 @@ class _$StoreImpl extends _Store {
       @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       final List<Area>? areas,
+      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       final List<Street>? streets,
       this.lastEdit,
       this.photoUpdatedAt,
@@ -323,6 +327,7 @@ class _$StoreImpl extends _Store {
 
   final List<Street>? _streets;
   @override
+  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets {
     final value = _streets;
     if (value == null) return null;
@@ -409,6 +414,7 @@ abstract class _Store extends Store {
       final Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final List<Area>? areas,
+      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       final List<Street>? streets,
       final LastRecordedByInfo? lastEdit,
       final DateTime? photoUpdatedAt,
@@ -437,6 +443,7 @@ abstract class _Store extends Store {
   @override
   List<Area>? get areas;
   @override
+  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets;
   @override
   LastRecordedByInfo? get lastEdit;

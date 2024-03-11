@@ -28,7 +28,7 @@ class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Area>? areas,
+    @JsonKey(fromJson: areasFromJson, toJson: areasToJson) List<Area>? areas,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
   }) = _Street;
@@ -40,3 +40,8 @@ class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
 }
+
+List<Area>? areasFromJson(List? data) =>
+    data?.map((e) => Area.fromJson(e['area'])).toList();
+List<Json>? areasToJson(List<Area>? areas) =>
+    areas?.map((e) => {'area': e.toJson()}).toList();
