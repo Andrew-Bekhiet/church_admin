@@ -1730,3 +1730,50 @@ function getExistingOrNewUUID(
 ): string {
   return mapping?.[collectionName]?.[firestoreId] ?? uuid.v4();
 }
+
+export async function createBlurhashesJSONToSQL(
+  json?: Record<string, Record<string, string>>
+) {
+  if (!json) {
+    const dir = fs.readdirSync("../../../migration/server");
+    for (const file of dir) {
+      if (file.match(/_blurhashes.json/)) {
+        json = {
+          ...(json ?? {}),
+          ...JSON.parse(
+            fs.readFileSync("../../../migration/server/" + file).toString()
+          ),
+        };
+      }
+    }
+  }
+
+  const result = Object.entries(json!)
+    .map(([table, values]) => {
+      const valuesEntries = (values as unknown as Array<Record<string, string>>)
+        .filter(
+          (o) =>
+            o["photo_updated_at"] &&
+            o["photo_updated_at"] != "null" &&
+            o["photo_updated_at"] != "" &&
+            o["blurhash"] &&
+            o["blurhash"] != "null" &&
+            o["blurhash"] != ""
+        )
+        .map((o) => `('${o["id"]}'::uuid, '${o["blurhash"]}')`)
+        .join(",\n");
+
+      if (valuesEntries.length == 0) return "";
+
+      return `
+UPDATE "${table}" SET "blurhash" = v."value"
+FROM (VALUES
+  ${valuesEntries}
+) AS v("key", "value")
+WHERE "${table}"."id" = v."key";
+    `;
+    })
+    .join("\n");
+
+  fs.writeFileSync("../../../migration/server/blurhashes.sql", result);
+}
