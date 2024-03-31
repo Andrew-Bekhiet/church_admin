@@ -268,7 +268,7 @@ Override _setUpCacheManager() {
 
 Override _setUpImageUrlCacheService() {
   final imageUrlCacheService = MockImageUrlCacheService();
-  when(imageUrlCacheService.getCachedImageUrl(any))
+  when(imageUrlCacheService.getNonExpiredCachedImageUrl(any))
       .thenReturn('cachedImageUrl');
   when(imageUrlCacheService.getImageUrl(any))
       .thenAnswer((_) => Future.value('imageUrl'));

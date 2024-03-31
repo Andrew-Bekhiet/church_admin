@@ -69,7 +69,7 @@ void main() {
   );
 
   test(
-    'Image Url Cache Service: getCachedImageUrl',
+    'Image Url Cache Service: getNonExpiredCachedImageUrl',
     () async {
       final fakeBox = FakeBox<String>();
       final unit = ImageUrlCacheService(
@@ -83,14 +83,14 @@ void main() {
         photoUpdatedAt: DateTime.now(),
       );
 
-      expect(unit.getCachedImageUrl(person), isNull);
+      expect(unit.getNonExpiredCachedImageUrl(person), isNull);
 
       await fakeBox.put(
         person.imageInfo.cacheKey,
         '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|url',
       );
 
-      expect(unit.getCachedImageUrl(person), 'url');
+      expect(unit.getNonExpiredCachedImageUrl(person), isNull);
     },
   );
 
@@ -101,8 +101,31 @@ void main() {
       final baseCacheManager =
           getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
 
-      const urlFromNetwork = 'https://example.com/file.jpg';
-      registerFunctionsService(getMockedFunctionsSrvc('id', urlFromNetwork));
+      final testExpiredUrl = Uri(
+        host: 'example.com',
+        path: 'file.jpg',
+        queryParameters: {
+          'X-Goog-Date': DateTime.now()
+              .subtract(const Duration(minutes: 3))
+              .toIso8601String(),
+          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
+        },
+      );
+
+      final testNotExpiredUrl = Uri(
+        host: 'example.com',
+        path: 'file.jpg',
+        queryParameters: {
+          'X-Goog-Date': DateTime.now()
+              .subtract(const Duration(minutes: 1))
+              .toIso8601String(),
+          'X-Goog-Expires': const Duration(minutes: 2).inSeconds.toString(),
+        },
+      );
+
+      registerFunctionsService(
+        getMockedFunctionsSrvc('id', testNotExpiredUrl.toString()),
+      );
 
       final box = FakeBox<String>();
       final unit = ImageUrlCacheService(
@@ -117,35 +140,22 @@ void main() {
       );
 
       // Test:
-      expect(await unit.getImageUrl(person), urlFromNetwork);
+      expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
       expect(
         box.get(person.imageInfo.cacheKey),
         person.imageInfo.lastUpdatedTime!.toIso8601String() +
             '|' +
-            urlFromNetwork,
+            testNotExpiredUrl.toString(),
       );
-      expect(await unit.getImageUrl(person), urlFromNetwork);
+      expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
 
       await box.put(
         person.imageInfo.cacheKey,
-        person.imageInfo.lastUpdatedTime!.toIso8601String() + '|cachedUrl',
+        person.imageInfo.lastUpdatedTime!.toIso8601String() +
+            '|' +
+            testExpiredUrl.toString(),
       );
-      expect(await unit.getImageUrl(person), 'cachedUrl');
-
-      await box.put(
-        person.imageInfo.cacheKey,
-        person.imageInfo.lastUpdatedTime!
-                .subtract(const Duration(days: 1))
-                .toIso8601String() +
-            '|cachedUrl',
-      );
-      expect(await unit.getImageUrl(person), urlFromNetwork);
-
-      await box.put(
-        person.imageInfo.cacheKey,
-        person.imageInfo.lastUpdatedTime!.toIso8601String() + '|uncachedUrl',
-      );
-      expect(await unit.getImageUrl(person), urlFromNetwork);
+      expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
     },
   );
 

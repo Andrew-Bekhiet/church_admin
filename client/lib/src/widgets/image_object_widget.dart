@@ -46,7 +46,7 @@ class ImageObjectWidget extends StatelessWidget {
           }
 
           final cachedImageUrl =
-              photoUrlCacheService.getCachedImageUrl(imageObject);
+              photoUrlCacheService.getNonExpiredCachedImageUrl(imageObject);
 
           return ConstrainedBox(
             constraints: constraints,
