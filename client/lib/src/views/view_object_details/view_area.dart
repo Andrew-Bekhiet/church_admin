@@ -42,8 +42,8 @@ class _ViewAreaState extends State<ViewArea> {
     objectsPaginatableStream: DatabaseService.I.streets.streamAll(
       where: [
         Input_StreetsBoolExp(
-          areas: Input_AreasStreetsBoolExp(
-            areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          areas: Input_AreasBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
         ),
       ],

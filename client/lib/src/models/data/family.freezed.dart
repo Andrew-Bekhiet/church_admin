@@ -31,7 +31,6 @@ mixin _$Family {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
   List<Area>? get areas => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets => throw _privateConstructorUsedError;
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
   List<Family>? get children => throw _privateConstructorUsedError;
@@ -59,7 +58,6 @@ abstract class $FamilyCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       String? blurhash,
       List<Area>? areas,
-      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       List<Family>? children,
@@ -183,7 +181,6 @@ abstract class _$$FamilyImplCopyWith<$Res> implements $FamilyCopyWith<$Res> {
       DateTime? photoUpdatedAt,
       String? blurhash,
       List<Area>? areas,
-      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       List<Family>? children,
@@ -290,7 +287,6 @@ class _$FamilyImpl extends _Family {
       this.photoUpdatedAt,
       this.blurhash,
       final List<Area>? areas,
-      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       final List<Family>? children,
@@ -336,7 +332,6 @@ class _$FamilyImpl extends _Family {
 
   final List<Street>? _streets;
   @override
-  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets {
     final value = _streets;
     if (value == null) return null;
@@ -443,7 +438,6 @@ abstract class _Family extends Family {
       final DateTime? photoUpdatedAt,
       final String? blurhash,
       final List<Area>? areas,
-      @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
       final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       final List<Family>? children,
@@ -475,7 +469,6 @@ abstract class _Family extends Family {
   @override
   List<Area>? get areas;
   @override
-  @JsonKey(fromJson: streetsFromJson, toJson: streetsToJson)
   List<Street>? get streets;
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)

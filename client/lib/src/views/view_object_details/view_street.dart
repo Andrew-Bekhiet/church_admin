@@ -41,8 +41,8 @@ class _ViewStreetState extends State<ViewStreet> {
     objectsPaginatableStream: DatabaseService.I.families.streamAll(
       where: [
         Input_FamiliesBoolExp(
-          streets: Input_StreetsFamiliesBoolExp(
-            streetId: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+          streets: Input_StreetsBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
           ),
         ),
       ],
@@ -53,8 +53,8 @@ class _ViewStreetState extends State<ViewStreet> {
     objectsPaginatableStream: DatabaseService.I.stores.streamAll(
       where: [
         Input_StoresBoolExp(
-          streets: Input_StreetsStoresBoolExp(
-            streetId: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+          streets: Input_StreetsBoolExp(
+            id: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
           ),
         ),
       ],

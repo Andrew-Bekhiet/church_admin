@@ -75,7 +75,9 @@ _$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
       areas: (json['areas'] as List<dynamic>?)
           ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
-      streets: streetsFromJson(json['streets'] as List?),
+      streets: (json['streets'] as List<dynamic>?)
+          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -96,7 +98,7 @@ Map<String, dynamic> _$$StoreImplToJson(_$StoreImpl instance) =>
       'geolocation': pointToJson(instance.geolocation),
       'color': colorToInt(instance.color),
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': streetsToJson(instance.streets),
+      'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'lastEdit': instance.lastEdit?.toJson(),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,

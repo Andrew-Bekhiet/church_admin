@@ -88,7 +88,9 @@ _$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
       areas: (json['areas'] as List<dynamic>?)
           ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
-      streets: streetsFromJson(json['streets'] as List?),
+      streets: (json['streets'] as List<dynamic>?)
+          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
       children: familyChildrenFromJson(json['children'] as List?),
       parents: familyParentsFromJson(json['parents'] as List?),
       lastEdit: json['lastEdit'] == null
@@ -108,7 +110,7 @@ Map<String, dynamic> _$$FamilyImplToJson(_$FamilyImpl instance) =>
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,
       'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': streetsToJson(instance.streets),
+      'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'children': familyChildrenToJson(instance.children),
       'parents': familyParentsToJson(instance.parents),
       'lastEdit': instance.lastEdit?.toJson(),
