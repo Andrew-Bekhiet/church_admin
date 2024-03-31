@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'viewable_object_app_bar_test.mocks.dart';
 

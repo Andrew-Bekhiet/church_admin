@@ -1,9 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'user_persistence_service_test.mocks.dart';

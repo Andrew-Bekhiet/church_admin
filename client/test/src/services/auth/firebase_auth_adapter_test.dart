@@ -9,12 +9,12 @@ import 'package:firebase_auth/firebase_auth.dart' as auth
     show MultiFactor, MultiFactorInfo, MultiFactorSession, User;
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart'
     hide MultiFactorInfo, MultiFactorSession;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_data/mock_data.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';

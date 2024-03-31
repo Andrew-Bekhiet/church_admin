@@ -6,12 +6,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'image_object_widget_test.mocks.dart';
 
