@@ -182,7 +182,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
     } on Exception catch (error, stackTrace) {
       scaffoldMessenger.hideCurrentSnackBar();
 
-      if (context.mounted) {
+      if (mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           context,
           error,

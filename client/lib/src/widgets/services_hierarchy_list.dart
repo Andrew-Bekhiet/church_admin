@@ -137,7 +137,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
               await _topController.animateBack(0);
             }
 
-            if (mounted) {
+            if (context.mounted) {
               PageStorage.maybeOf(context)?.writeState(
                 context,
                 _animationControllers[s]!.value,

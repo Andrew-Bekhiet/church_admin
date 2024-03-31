@@ -655,6 +655,7 @@ class Input_AreasBoolExp {
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -681,6 +682,7 @@ class Input_AreasBoolExp {
         if (isUserAllowedToWrite != null)
           r'isUserAllowedToWrite': isUserAllowedToWrite,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (lastVisit != null) r'lastVisit': lastVisit,
         if (name != null) r'name': name,
         if (persons != null) r'persons': persons,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -793,6 +795,13 @@ class Input_AreasBoolExp {
           : Input_HistoryLatestEditsBoolExp.fromJson(
               (l$lastEdit as Map<String, dynamic>));
     }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsBoolExp.fromJson(
+              (l$lastVisit as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -875,6 +884,9 @@ class Input_AreasBoolExp {
   Input_HistoryLatestEditsBoolExp? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
 
+  Input_HistoryLatestVisitsBoolExp? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsBoolExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -950,6 +962,10 @@ class Input_AreasBoolExp {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1139,6 +1155,15 @@ class Input_AreasBoolExp {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1200,6 +1225,7 @@ class Input_AreasBoolExp {
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     final l$name = name;
     final l$persons = persons;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1237,6 +1263,7 @@ class Input_AreasBoolExp {
           ? l$isUserAllowedToWrite
           : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -1271,6 +1298,7 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1299,6 +1327,7 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToRead;
   CopyWith_Input_BooleanComparisonExp<TRes> get isUserAllowedToWrite;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_PersonsBoolExp<TRes> get persons;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
@@ -1335,6 +1364,7 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
     Object? name = _undefined,
     Object? persons = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -1372,6 +1402,8 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
               (isUserAllowedToWrite as Input_BooleanComparisonExp?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+        if (lastVisit != _undefined)
+          'lastVisit': (lastVisit as Input_HistoryLatestVisitsBoolExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (persons != _undefined)
           'persons': (persons as Input_PersonsBoolExp?),
@@ -1507,6 +1539,14 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsBoolExp(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1566,6 +1606,7 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
     Input_BooleanComparisonExp? isUserAllowedToRead,
     Input_BooleanComparisonExp? isUserAllowedToWrite,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1618,6 +1659,9 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
 
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -1745,6 +1789,7 @@ class Input_AreasInsertInput {
     Input_HistoryEditHistoryArrRelInsertInput? editHistory,
     UuidValue? id,
     Input_HistoryLatestEditsObjRelInsertInput? lastEdit,
+    Input_HistoryLatestVisitsObjRelInsertInput? lastVisit,
     String? name,
     DateTime? photoUpdatedAt,
   }) =>
@@ -1756,6 +1801,7 @@ class Input_AreasInsertInput {
         if (editHistory != null) r'editHistory': editHistory,
         if (id != null) r'id': id,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (lastVisit != null) r'lastVisit': lastVisit,
         if (name != null) r'name': name,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
       });
@@ -1801,6 +1847,13 @@ class Input_AreasInsertInput {
           : Input_HistoryLatestEditsObjRelInsertInput.fromJson(
               (l$lastEdit as Map<String, dynamic>));
     }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsObjRelInsertInput.fromJson(
+              (l$lastVisit as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
@@ -1832,6 +1885,9 @@ class Input_AreasInsertInput {
 
   Input_HistoryLatestEditsObjRelInsertInput? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsObjRelInsertInput?);
+
+  Input_HistoryLatestVisitsObjRelInsertInput? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsObjRelInsertInput?);
 
   String? get name => (_$data['name'] as String?);
 
@@ -1866,6 +1922,10 @@ class Input_AreasInsertInput {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1954,6 +2014,15 @@ class Input_AreasInsertInput {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1983,6 +2052,7 @@ class Input_AreasInsertInput {
     final l$editHistory = editHistory;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     return Object.hashAll([
@@ -1993,6 +2063,7 @@ class Input_AreasInsertInput {
       _$data.containsKey('editHistory') ? l$editHistory : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
     ]);
@@ -2016,12 +2087,14 @@ abstract class CopyWith_Input_AreasInsertInput<TRes> {
     Input_HistoryEditHistoryArrRelInsertInput? editHistory,
     UuidValue? id,
     Input_HistoryLatestEditsObjRelInsertInput? lastEdit,
+    Input_HistoryLatestVisitsObjRelInsertInput? lastVisit,
     String? name,
     DateTime? photoUpdatedAt,
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith_Input_HistoryEditHistoryArrRelInsertInput<TRes> get editHistory;
   CopyWith_Input_HistoryLatestEditsObjRelInsertInput<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestVisitsObjRelInsertInput<TRes> get lastVisit;
 }
 
 class _CopyWithImpl_Input_AreasInsertInput<TRes>
@@ -2045,6 +2118,7 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
     Object? editHistory = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
   }) =>
@@ -2062,6 +2136,9 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
         if (id != _undefined) 'id': (id as UuidValue?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsObjRelInsertInput?),
+        if (lastVisit != _undefined)
+          'lastVisit':
+              (lastVisit as Input_HistoryLatestVisitsObjRelInsertInput?),
         if (name != _undefined) 'name': (name as String?),
         if (photoUpdatedAt != _undefined)
           'photoUpdatedAt': (photoUpdatedAt as DateTime?),
@@ -2093,6 +2170,15 @@ class _CopyWithImpl_Input_AreasInsertInput<TRes>
         : CopyWith_Input_HistoryLatestEditsObjRelInsertInput(
             local$lastEdit, (e) => call(lastEdit: e));
   }
+
+  CopyWith_Input_HistoryLatestVisitsObjRelInsertInput<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsObjRelInsertInput.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsObjRelInsertInput(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
@@ -2109,6 +2195,7 @@ class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
     Input_HistoryEditHistoryArrRelInsertInput? editHistory,
     UuidValue? id,
     Input_HistoryLatestEditsObjRelInsertInput? lastEdit,
+    Input_HistoryLatestVisitsObjRelInsertInput? lastVisit,
     String? name,
     DateTime? photoUpdatedAt,
   }) =>
@@ -2122,6 +2209,9 @@ class _CopyWithStubImpl_Input_AreasInsertInput<TRes>
 
   CopyWith_Input_HistoryLatestEditsObjRelInsertInput<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsObjRelInsertInput<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsObjRelInsertInput.stub(_res);
 }
 
 class Input_AreasMaxOrderBy {
@@ -2963,6 +3053,7 @@ class Input_AreasOrderBy {
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
@@ -2984,6 +3075,7 @@ class Input_AreasOrderBy {
         if (isUserAllowedToWrite != null)
           r'isUserAllowedToWrite': isUserAllowedToWrite,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (lastVisit != null) r'lastVisit': lastVisit,
         if (name != null) r'name': name,
         if (personsAggregate != null) r'personsAggregate': personsAggregate,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -3056,6 +3148,13 @@ class Input_AreasOrderBy {
           : Input_HistoryLatestEditsOrderBy.fromJson(
               (l$lastEdit as Map<String, dynamic>));
     }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsOrderBy.fromJson(
+              (l$lastVisit as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] =
@@ -3121,6 +3220,9 @@ class Input_AreasOrderBy {
   Input_HistoryLatestEditsOrderBy? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsOrderBy?);
 
+  Input_HistoryLatestVisitsOrderBy? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsOrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Input_PersonsAggregateOrderBy? get personsAggregate =>
@@ -3183,6 +3285,10 @@ class Input_AreasOrderBy {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -3310,6 +3416,15 @@ class Input_AreasOrderBy {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -3369,6 +3484,7 @@ class Input_AreasOrderBy {
     final l$isUserAllowedToRead = isUserAllowedToRead;
     final l$isUserAllowedToWrite = isUserAllowedToWrite;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     final l$name = name;
     final l$personsAggregate = personsAggregate;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -3393,6 +3509,7 @@ class Input_AreasOrderBy {
           ? l$isUserAllowedToWrite
           : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -3422,6 +3539,7 @@ abstract class CopyWith_Input_AreasOrderBy<TRes> {
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
@@ -3433,6 +3551,7 @@ abstract class CopyWith_Input_AreasOrderBy<TRes> {
       get editHistoryAggregate;
   CopyWith_Input_FamiliesAggregateOrderBy<TRes> get familiesAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit;
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate;
   CopyWith_Input_StreetsAggregateOrderBy<TRes> get streetsAggregate;
@@ -3462,6 +3581,7 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
     Object? isUserAllowedToRead = _undefined,
     Object? isUserAllowedToWrite = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
     Object? name = _undefined,
     Object? personsAggregate = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -3489,6 +3609,8 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
           'isUserAllowedToWrite': (isUserAllowedToWrite as Enum_OrderBy?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+        if (lastVisit != _undefined)
+          'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (personsAggregate != _undefined)
           'personsAggregate':
@@ -3537,6 +3659,14 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsOrderBy(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
     final local$personsAggregate = _instance.personsAggregate;
     return local$personsAggregate == null
@@ -3579,6 +3709,7 @@ class _CopyWithStubImpl_Input_AreasOrderBy<TRes>
     Enum_OrderBy? isUserAllowedToRead,
     Enum_OrderBy? isUserAllowedToWrite,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
     Enum_OrderBy? photoUpdatedAt,
@@ -3600,6 +3731,9 @@ class _CopyWithStubImpl_Input_AreasOrderBy<TRes>
 
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_res);
 
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
       CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
@@ -168199,7 +168333,7 @@ Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
 }
 
 enum Enum_PersonsConstraint {
-  personsMainPhoneBirthdateKey,
+  idxPersonsCleanNameMainPhoneBirthdate,
   personsPkey,
   personsUidKey,
   $unknown
@@ -168207,8 +168341,8 @@ enum Enum_PersonsConstraint {
 
 String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
   switch (e) {
-    case Enum_PersonsConstraint.personsMainPhoneBirthdateKey:
-      return r'personsMainPhoneBirthdateKey';
+    case Enum_PersonsConstraint.idxPersonsCleanNameMainPhoneBirthdate:
+      return r'idxPersonsCleanNameMainPhoneBirthdate';
     case Enum_PersonsConstraint.personsPkey:
       return r'personsPkey';
     case Enum_PersonsConstraint.personsUidKey:
@@ -168220,8 +168354,8 @@ String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
 
 Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
   switch (value) {
-    case r'personsMainPhoneBirthdateKey':
-      return Enum_PersonsConstraint.personsMainPhoneBirthdateKey;
+    case r'idxPersonsCleanNameMainPhoneBirthdate':
+      return Enum_PersonsConstraint.idxPersonsCleanNameMainPhoneBirthdate;
     case r'personsPkey':
       return Enum_PersonsConstraint.personsPkey;
     case r'personsUidKey':
