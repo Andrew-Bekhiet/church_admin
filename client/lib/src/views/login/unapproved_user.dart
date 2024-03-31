@@ -104,7 +104,7 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
     } on Exception catch (e, stackTrace) {
       navigator.pop();
 
-      if (context.mounted) {
+      if (navigator.mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           navigator.context,
           e,

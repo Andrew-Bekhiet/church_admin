@@ -484,7 +484,7 @@ class _ViewPersonState extends State<ViewPerson> {
         PhoneNumberService.I.formatInternational(number!),
       );
 
-      if (!mounted) return;
+      if (!context.mounted) return;
 
       final recordLastCall = await showDialog(
         context: context,
@@ -529,7 +529,7 @@ class _ViewPersonState extends State<ViewPerson> {
       final TextEditingController _name =
           TextEditingController(text: person.name);
 
-      if (!mounted) return;
+      if (!context.mounted) return;
 
       final dialogResult = await showDialog(
         context: context,
