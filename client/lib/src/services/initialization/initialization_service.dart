@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 final initializationServiceProvider = Provider<InitializationService>(
   (ref) => InitializationService(),

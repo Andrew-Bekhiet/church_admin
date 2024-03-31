@@ -12,7 +12,6 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
-      parent: globalProviderContainer,
       child: SentryScreenshotWidget(
         child: SentryUserInteractionWidget(
           child: const ChurchAdminApp(),

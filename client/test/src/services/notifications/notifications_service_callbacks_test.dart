@@ -6,10 +6,10 @@ import 'package:church_admin/src/services/notifications/notifications_storage.da
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'notifications_service_callbacks_test.mocks.dart';
 

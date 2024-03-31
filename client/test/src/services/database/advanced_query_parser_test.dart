@@ -5,11 +5,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/graphql/scalars/time.dart';
 import 'package:church_admin/src/services/database/advanced_query_parser.dart';
 import 'package:church_admin/src/services/database/gql_definintions/persons.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'advanced_query_parser_test.mocks.dart';
 

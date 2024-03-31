@@ -111,7 +111,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                     tooltipBorder: BorderSide(
                       color: colorScheme.outline,
                     ),
-                    tooltipBgColor: colorScheme.surface,
+                    getTooltipColor: (t) => colorScheme.surface,
                     getTooltipItems: (o) => o
                         .map(
                           (e) => LineTooltipItem(

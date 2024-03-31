@@ -87,6 +87,7 @@ class ColorField extends StatelessWidget {
         ColorPickerType.both: false,
         ColorPickerType.bw: false,
         ColorPickerType.custom: false,
+        ColorPickerType.customSecondary: false,
       },
       copyPasteBehavior: const ColorPickerCopyPasteBehavior(
         copyButton: true,
