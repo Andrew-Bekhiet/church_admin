@@ -205,9 +205,10 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i9.Future<String>);
 
   @override
-  String? getCachedImageUrl(_i8.IImage? imageObject) => (super.noSuchMethod(
+  String? getNonExpiredCachedImageUrl(_i8.IImage? imageObject) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #getCachedImageUrl,
+          #getNonExpiredCachedImageUrl,
           [imageObject],
         ),
         returnValueForMissingStub: null,

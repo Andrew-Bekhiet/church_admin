@@ -1,4 +1,6 @@
 import 'dart:async';
+// ignore: unused_import
+import 'dart:developer';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -28,7 +30,7 @@ class ImageUrlCacheService {
   Future<String> getImageUrl(IImage imageObject) async {
     if (!imageObject.hasImage) throw StateError('Object has no image');
 
-    final cachedImageUrl = getCachedImageUrl(imageObject);
+    final cachedImageUrl = getNonExpiredCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
         (await isUrlFileCachedAndValid(cachedImageUrl) ||
@@ -39,7 +41,12 @@ class ImageUrlCacheService {
     return _getUrlAndSaveToCache(imageObject);
   }
 
-  String? getCachedImageUrl(IImage imageObject) {
+  /// Retrieves the cached image URL for the given [imageObject].
+  ///
+  /// Throws a [StateError] if the [imageObject] has no image.
+  ///
+  /// Returns the cached URL if it exists and is not expired, otherwise returns null.
+  String? getNonExpiredCachedImageUrl(IImage imageObject) {
     if (!imageObject.hasImage) throw StateError('Object has no image');
 
     final imageInfo = imageObject.imageInfo;
@@ -51,7 +58,10 @@ class ImageUrlCacheService {
     final cacheLastUpdatedTime = DateTime.parse(cachedData.split('|').first);
     final cachedUrl = cachedData.split('|').last;
 
-    if (cacheLastUpdatedTime != imageInfo.lastUpdatedTime) return null;
+    if (cacheLastUpdatedTime != imageInfo.lastUpdatedTime ||
+        isUrlExpired(cachedUrl)) {
+      return null;
+    }
 
     return cachedUrl;
   }
