@@ -50,15 +50,15 @@ jobs:
         if: ${{ steps.run-tests.outputs.run-tests == 'true'}}
         run: flutter precache
 
-      - name: Get Cached .dart_tool
-        uses: actions/cache@v3
-        if: ${{ steps.run-tests.outputs.run-tests == 'true' }}
-        id: dart_tool_cache
-        with:
-          path: client/.dart_tool
-          key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
-          restore-keys: |
-            dart-tool-v1-
+      # - name: Get Cached .dart_tool
+      #   uses: actions/cache@v3
+      #   if: ${{ steps.run-tests.outputs.run-tests == 'true' }}
+      #   id: dart_tool_cache
+      #   with:
+      #     path: client/.dart_tool
+      #     key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
+      #     restore-keys: |
+      #       dart-tool-v1-
 
       - name: Override git ignored files for testing
         if: ${{ steps.run-tests.outputs.run-tests == 'true' }}
@@ -146,9 +146,8 @@ jobs:
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
         with:
-          working-directory: client
           name: Unit and Widget Tests
-          path: test-results.json
+          path: client/test-results.json
           reporter: flutter-json
 
       - name: Upload coverage to codecov
