@@ -33,7 +33,7 @@ jobs:
       - name: Check if testing is required
         id: run-tests
         env:
-          run_tests: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ipa]') || contains(github.event.head_commit.message, '[ci test]') }}
+          run_tests: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ios]') || contains(github.event.head_commit.message, '[ci test]') }}
         run: |
           echo "run-tests=$run_tests" >> $GITHUB_OUTPUT
 
@@ -167,10 +167,10 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         # Excludes ubuntu when building ipa only and macos when building apk only
         exclude:
-          - os: ${{ contains(github.event.head_commit.message, '[ci release ipa]') && 'ubuntu-latest' }}
+          - os: ${{ contains(github.event.head_commit.message, '[ci release ios]') && 'ubuntu-latest' }}
           - os: ${{ contains(github.event.head_commit.message, '[ci release apk]') && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
-    if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ipa]')))
+    if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ios]')))
 
     steps:
       - uses: actions/checkout@v4
@@ -264,10 +264,10 @@ jobs:
         working-directory: client
         run: flutter build apk
 
-      - name: Build ipa
+      - name: Build ios
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
-        run: flutter build ipa --no-codesign
+        run: flutter build ios --release
 
       - name: Get version from pubspec.yaml
         working-directory: client
@@ -276,7 +276,7 @@ jobs:
           version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
           echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: Compress IPA
+      - name: Compress ios
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
         run: |
@@ -301,7 +301,7 @@ jobs:
           path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
-      - name: Upload IPA to Google Cloud Storage
+      - name: Upload iOS dir to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
