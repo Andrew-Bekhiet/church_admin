@@ -33,7 +33,7 @@ jobs:
       - name: Check if testing is required
         id: run-tests
         env:
-          run_tests: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci test]') }}
+          run_tests: ${{ steps.source-changed.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ipa]') || contains(github.event.head_commit.message, '[ci test]') }}
         run: |
           echo "run-tests=$run_tests" >> $GITHUB_OUTPUT
 
@@ -89,6 +89,7 @@ jobs:
         run: flutter pub get
 
       - name: Run new builder
+        if: ${{ steps.run-tests.outputs.run-tests == 'true' }}
         working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
 
