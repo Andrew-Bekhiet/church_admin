@@ -135,19 +135,13 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Download test-results.json from artifacts
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
-        uses: actions/download-artifact@v2
-        with:
-          name: test-results
-          path: client/test-results.json
-
       - name: Report test results to run checks
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
         with:
+          artifact: test-results
           name: Unit and Widget Tests
-          path: client/test-results.json
+          path: "test-results.json"
           reporter: flutter-json
 
       - name: Upload coverage to codecov
@@ -209,21 +203,35 @@ jobs:
       - name: Decode and save secrets to files
         working-directory: client
         env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
+          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
+          echo $ENCRYPTION_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/encryption/encryption_service_impl.dart
+          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/secrets/secrets_service_impl.dart
+
+      - name: Decode and save android secrets
+        working-directory: client
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
           ANDROID_STRINGS: ${{ secrets.ANDROID_STRINGS }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
-          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
-          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
         run: |
           echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
           echo $ANDROID_STRINGS | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/src/main/res/values/strings.xml
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
-          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
-          echo $ENCRYPTION_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/encryption/encryption_service_impl.dart
-          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/secrets/secrets_service_impl.dart
+
+      - name: Decode and save ios secrets
+        working-directory: client
+        if: ${{ matrix.os == 'macos-latest' }}
+        env:
+          GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
+        run: |
+          echo $GOOGLE_SERVICES_PLIST | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./ios/Runner/GoogleService-Info.plist
 
       - name: Install dependencies
         working-directory: client
