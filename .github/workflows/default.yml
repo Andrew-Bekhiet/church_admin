@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload test-results.json to artifacts
         uses: actions/upload-artifact@v3
-        if: ${{ failure() || success() }}
+        if: ${{ (success() || failure()) && steps.run-tests.outputs.run-tests == 'true'}}
         with:
           name: test-results
           path: client/test-results.json
