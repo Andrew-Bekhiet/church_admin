@@ -135,7 +135,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: test-results
-          path: client/test-results.json
+          path: client/
 
       - name: Search for test-results.json
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
@@ -170,7 +170,7 @@ jobs:
           - os: ${{ contains(github.event.head_commit.message, '[ci release ipa]') && 'ubuntu-latest' }}
           - os: ${{ contains(github.event.head_commit.message, '[ci release apk]') && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
-    if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && contains(github.event.head_commit.message, '[ci release]'))
+    if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ipa]')))
 
     steps:
       - uses: actions/checkout@v4
