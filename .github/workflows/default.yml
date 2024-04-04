@@ -1,4 +1,4 @@
-name: Test Coverage Report
+name: Test Coverage Report and Release
 
 on:
   push:
@@ -162,7 +162,10 @@ jobs:
       contents: write
 
     needs: run-tests
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && contains(github.event.head_commit.message, '[ci release]'))
 
     steps:
@@ -237,8 +240,14 @@ jobs:
         run: dart run build_runner build
 
       - name: Build apk
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         working-directory: client
         run: flutter build apk
+
+      - name: Build ipa
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        run: flutter build ipa --no-codesign
 
       - name: Get version from pubspec.yaml
         working-directory: client
@@ -248,6 +257,7 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Add version to APK filename
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         working-directory: client
         run: |
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
@@ -259,11 +269,20 @@ jobs:
 
       - name: Upload APK to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
           path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
+      - name: Upload IPA to Google Cloud Storage
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        if: ${{ matrix.os == 'macos-latest' }}
+        with:
+          path: "client/build/ios/ipa/"
+          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
+
       - name: Create release
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
