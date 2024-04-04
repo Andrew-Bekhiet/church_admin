@@ -89,14 +89,8 @@ jobs:
         run: flutter pub get
 
       - name: Run new builder
-        if: ${{ steps.run-tests.outputs.run-tests == 'true' && steps.dart_tool_cache.outputs.cache-hit != 'true' }}
         working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
-
-      - name: Run cached builder
-        if: ${{ steps.run-tests.outputs.run-tests == 'true' && steps.dart_tool_cache.outputs.cache-hit == 'true' }}
-        working-directory: client
-        run: dart run build_runner build
 
       - name: Run Tests
         if: ${{ steps.run-tests.outputs.run-tests == 'true' }}
@@ -135,13 +129,19 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Download test-results.json from artifacts
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: test-results
+          path: client/test-results.json
+
       - name: Report test results to run checks
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
         with:
-          artifact: test-results
-          name: Unit and Widget Tests
-          path: "test-results.json"
+          name: "Unit and Widget Tests"
+          path: client/test-results.json
           reporter: flutter-json
 
       - name: Upload coverage to codecov
@@ -174,6 +174,14 @@ jobs:
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
+
+      - name: Set Up Java
+        uses: actions/setup-java@v4
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          cache: "gradle"
+          distribution: "corretto"
+          java-version: "17"
 
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
@@ -239,13 +247,7 @@ jobs:
 
       - name: Run new builder
         working-directory: client
-        if: ${{ steps.dart_tool_cache.outputs.cache-hit != 'true' }}
         run: dart run build_runner build --delete-conflicting-outputs
-
-      - name: Run cached builder
-        working-directory: client
-        if: ${{ steps.dart_tool_cache.outputs.cache-hit == 'true' }}
-        run: dart run build_runner build
 
       - name: Build apk
         if: ${{ matrix.os == 'ubuntu-latest' }}
