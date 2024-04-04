@@ -267,7 +267,7 @@ jobs:
       - name: Build ios
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
-        run: flutter build ios --release
+        run: flutter build ios --release --no-codesign
 
       - name: Get version from pubspec.yaml
         working-directory: client
