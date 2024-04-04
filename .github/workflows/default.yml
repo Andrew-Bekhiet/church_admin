@@ -184,14 +184,14 @@ jobs:
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
 
-      - name: Get Cached .dart_tool
-        uses: actions/cache@v3
-        id: dart_tool_cache
-        with:
-          path: client/.dart_tool
-          key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
-          restore-keys: |
-            dart-tool-v1-
+      # - name: Get Cached .dart_tool
+      #   uses: actions/cache@v3
+      #   id: dart_tool_cache
+      #   with:
+      #     path: client/.dart_tool
+      #     key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
+      #     restore-keys: |
+      #       dart-tool-v1-
 
       - name: Override git pubspec overrides
         env:
