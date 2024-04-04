@@ -136,6 +136,11 @@ jobs:
           name: test-results
           path: client/test-results.json
 
+      - name: Search for test-results.json
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        run: |
+          find . -name test-results.json
+
       - name: Report test results to run checks
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
