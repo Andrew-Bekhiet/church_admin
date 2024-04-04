@@ -1,4 +1,4 @@
-name: Test, Report Coverage and Release
+name: Test Coverage Report
 
 on:
   push:
@@ -112,6 +112,7 @@ jobs:
 
   upload-coverage:
     permissions:
+      actions: read
       checks: write
 
     runs-on: ubuntu-latest
@@ -124,14 +125,8 @@ jobs:
         with:
           name: test-results
 
-      - if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+      - if: ${{ steps.check-test-results.outputs.exists == 'false' }}
         run: echo "No test-results.json artifact found. Skipping job."
-
-      - name: Download test-results.json from artifacts
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
-        uses: actions/download-artifact@v2
-        with:
-          name: test-results
 
       - name: Checkout repository
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
@@ -139,7 +134,14 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Upload Test Report to Codecov
+      - name: Download test-results.json from artifacts
+        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        uses: actions/download-artifact@v2
+        with:
+          name: test-results
+          path: client/test-results.json
+
+      - name: Report test results to run checks
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         uses: dorny/test-reporter@v1
         with:
@@ -148,7 +150,8 @@ jobs:
           path: test-results.json
           reporter: flutter-json
 
-      - uses: codecov/codecov-action@v3
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
         if: ${{ steps.check-test-results.outputs.exists == 'true' }}
         with:
           directory: client
@@ -171,23 +174,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           cache: true
-          cache-key: "flutter-:channel:-:version:"
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
 
-      - name: Get Cached dependencies
-        uses: actions/cache@v3
-        id: flutter_cache
-        with:
-          path: ${{ env.PUB_CACHE }}
-          key: flutter-dependencies-v1-${{hashFiles('client/pubspec.yaml', 'client/pubspec.lock')}}
-          restore-keys: |
-            flutter-dependencies-v1-
-
       - name: Populate the Flutter tool's cache of binary artifacts
-        if: ${{ steps.flutter_cache.outputs.cache-hit != 'true' }}
-        run: |
-          flutter config --no-analytics
-          flutter precache
+        run: flutter precache
 
       - name: Get Cached .dart_tool
         uses: actions/cache@v3
