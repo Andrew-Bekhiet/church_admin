@@ -276,13 +276,18 @@ jobs:
           version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
           echo "version=$version" >> $GITHUB_OUTPUT
 
-      - name: Compress ios
+      - name: Compress ios src
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        run: tar -czf ios_dir-v${{ steps.version.outputs.version }}.tar.gz ios
+
+      - name: Create an ipa
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
         run: |
-          cd build
-          tar -czf ios_build-v${{ steps.version.outputs.version }}.tar.gz ios
-          tar -czf ios_dir-v${{ steps.version.outputs.version }}.tar.gz ../ios
+          cd build/ios
+          mv iphoneos Payload
+          zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -302,18 +307,18 @@ jobs:
           path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
-      - name: Upload iOS build dir to Google Cloud Storage
-        uses: "google-github-actions/upload-cloud-storage@v2"
-        if: ${{ matrix.os == 'macos-latest' }}
-        with:
-          path: "client/build/ios_build-v${{ steps.version.outputs.version }}.tar.gz"
-          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
-
-      - name: Upload iOS dir to Google Cloud Storage
+      - name: Upload iOS src to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
           path: "client/build/ios_dir-v${{ steps.version.outputs.version }}.tar.gz"
+          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
+
+      - name: Upload unsigned ipa to Google Cloud Storage
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        if: ${{ matrix.os == 'macos-latest' }}
+        with:
+          path: "client/build/ios/app-release-v${{ steps.version.outputs.version }}.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
