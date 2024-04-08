@@ -11,6 +11,7 @@ class ChurchAdminApp extends StatefulWidget {
     observers: [
       LoggingService.I.navigatorObserver,
     ],
+    // TODO: add extra codec
     refreshListenable: GoRouterRefreshStream.I,
     routes: [
       HomeScreen.route,
