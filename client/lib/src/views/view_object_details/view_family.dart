@@ -165,7 +165,7 @@ class _ViewFamilyState extends State<ViewFamily> {
                   for (final a in family.areas ?? <Area>[])
                     ViewableObjectWidget(
                       a,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     ),
                 ],
@@ -178,7 +178,7 @@ class _ViewFamilyState extends State<ViewFamily> {
                   for (final s in family.streets ?? <Street>[])
                     ViewableObjectWidget(
                       s,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     ),
                 ],

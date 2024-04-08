@@ -399,7 +399,6 @@ class _HomeBody extends StatelessWidget {
             tabController: tabController,
             builder: (context) => ViewableObjectList<Area>(
               viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-                circleCrop: false,
                 forceShowSecondLine: false,
               ),
               key: PageStorageKey(areasController),

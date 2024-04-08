@@ -93,7 +93,7 @@ class _EditServiceState extends State<EditService> {
                   ? IgnorePointer(
                       child: ViewableObjectWidget(
                         state.value!,
-                        dense: true,
+                        isDense: true,
                       ),
                     )
                   : null;

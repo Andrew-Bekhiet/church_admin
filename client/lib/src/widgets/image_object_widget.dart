@@ -7,12 +7,14 @@ import 'package:photo_view/photo_view.dart';
 class ImageObjectWidget extends StatelessWidget {
   static const defaultSize = 50.4;
   static const clipBorderRadius = BorderRadius.all(Radius.circular(10));
+  static const denseClipBorderRadius = BorderRadius.all(Radius.circular(10));
 
   ImageObjectWidget(
     this.imageObject, {
     ImageUrlCacheService? imageUrlCacheService,
     ViewableObjectService? viewableObjectService,
     this.circleCrop = true,
+    this.isDense = false,
     this.heroTag,
     this.size = defaultSize,
     super.key,
@@ -24,6 +26,7 @@ class ImageObjectWidget extends StatelessWidget {
   final ViewableObjectService viewableObjectService;
   final IImage imageObject;
   final bool circleCrop;
+  final bool isDense;
   // ignore: no-object-declaration
   final Object? heroTag;
   final double size;
@@ -77,7 +80,11 @@ class ImageObjectWidget extends StatelessWidget {
                 final inkWell = Material(
                   type: MaterialType.transparency,
                   shape: circleCrop ? const CircleBorder() : null,
-                  borderRadius: circleCrop ? null : clipBorderRadius,
+                  borderRadius: circleCrop
+                      ? null
+                      : isDense
+                          ? denseClipBorderRadius
+                          : clipBorderRadius,
                   child: InkWell(
                     onTap: _onImageTap(
                       context,
@@ -105,7 +112,7 @@ class ImageObjectWidget extends StatelessWidget {
     }
 
     return ClipRRect(
-      borderRadius: clipBorderRadius,
+      borderRadius: isDense ? denseClipBorderRadius : clipBorderRadius,
       child: image,
     );
   }

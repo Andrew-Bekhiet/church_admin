@@ -97,7 +97,7 @@ class _EditClassState extends State<EditClass> {
                   ? IgnorePointer(
                       child: ViewableObjectWidget(
                         state.value!,
-                        dense: true,
+                        isDense: true,
                       ),
                     )
                   : null;

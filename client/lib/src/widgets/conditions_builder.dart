@@ -455,7 +455,7 @@ class _SelectValueWidget<T> extends StatelessWidget {
         child: ViewableObjectWidget<ViewableWithID>(
           state.value!,
           wrapInCard: false,
-          dense: true,
+          isDense: true,
           forceShowSecondLine: false,
         ),
       );

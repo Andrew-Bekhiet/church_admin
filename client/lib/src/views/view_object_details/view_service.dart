@@ -92,7 +92,7 @@ class _ViewServiceState extends State<ViewService> {
               subtitle: service.nextService != null
                   ? ViewableObjectWidget(
                       service.nextService!,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     )
                   : const Text('لا يوجد'),

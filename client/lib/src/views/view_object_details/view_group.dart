@@ -78,7 +78,7 @@ class _ViewGroupState extends State<ViewGroup> {
               subtitle: group.service != null
                   ? ViewableObjectWidget(
                       group.service!,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     )
                   : const Text('لا يوجد'),

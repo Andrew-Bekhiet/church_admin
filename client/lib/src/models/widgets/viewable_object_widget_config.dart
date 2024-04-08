@@ -2,13 +2,16 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/widgets.dart';
 
 class ViewableObjectWidgetConfig<T extends Viewable> {
+  static bool _defaultShouldCircleCrop(IImage image) =>
+      image is Person || image is User;
+
   final bool selected;
   final bool forceShowSecondLine;
   final bool wrapInCard;
   final bool isThreeLine;
-  final bool dense;
+  final bool isDense;
   final bool enabled;
-  final bool circleCrop;
+  final bool Function(IImage) shouldCircleCrop;
 
   final Widget? photo;
   final Widget? trailing;
@@ -19,11 +22,11 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
   const ViewableObjectWidgetConfig({
     this.selected = false,
     this.wrapInCard = true,
-    this.dense = false,
+    this.isDense = false,
     this.enabled = true,
     this.forceShowSecondLine = true,
     this.isThreeLine = false,
-    this.circleCrop = true,
+    this.shouldCircleCrop = _defaultShouldCircleCrop,
     this.photo,
     this.trailing,
     this.onTap,
@@ -37,7 +40,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
     bool? enabled,
     bool? forceShowSecondLine,
     bool? isThreeLine,
-    bool? circleCrop,
+    bool Function(IImage)? shouldCircleCrop,
     Widget? photo,
     Widget? trailing,
     void Function(T)? onTap,
@@ -46,11 +49,11 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
       ViewableObjectWidgetConfig(
         selected: selected ?? this.selected,
         wrapInCard: wrapInCard ?? this.wrapInCard,
-        dense: dense ?? this.dense,
+        isDense: dense ?? this.isDense,
         enabled: enabled ?? this.enabled,
         forceShowSecondLine: forceShowSecondLine ?? this.forceShowSecondLine,
         isThreeLine: isThreeLine ?? this.isThreeLine,
-        circleCrop: circleCrop ?? this.circleCrop,
+        shouldCircleCrop: shouldCircleCrop ?? this.shouldCircleCrop,
         photo: photo ?? this.photo,
         trailing: trailing ?? this.trailing,
         onTap: onTap ?? this.onTap,

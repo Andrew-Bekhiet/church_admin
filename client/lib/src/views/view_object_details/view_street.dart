@@ -146,7 +146,7 @@ class _ViewStreetState extends State<ViewStreet> {
                   for (final a in street.areas ?? <Area>[])
                     ViewableObjectWidget(
                       a,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                       circleCrop: false,
                     ),

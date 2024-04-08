@@ -255,7 +255,7 @@ class _Classes extends StatelessWidget {
                                   ),
                                   forceShowSecondLine: false,
                                   wrapInCard: false,
-                                  dense: true,
+                                  isDense: true,
                                 ),
                           ),
                       ],

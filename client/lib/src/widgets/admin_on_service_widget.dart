@@ -52,7 +52,7 @@ class AdminOnServiceWidget extends StatelessWidget {
                   elevation: 0,
                   child: ViewableObjectWidget(
                     class$,
-                    dense: true,
+                    isDense: true,
                     forceShowSecondLine: false,
                     wrapInCard: false,
                     onTap: onTap,

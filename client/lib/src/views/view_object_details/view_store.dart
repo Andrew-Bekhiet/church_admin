@@ -89,7 +89,7 @@ class _ViewStoreState extends State<ViewStore> {
                   for (final a in store.areas ?? <Area>[])
                     ViewableObjectWidget(
                       a,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                       circleCrop: false,
                     ),
@@ -103,7 +103,7 @@ class _ViewStoreState extends State<ViewStore> {
                   for (final s in store.streets ?? <Street>[])
                     ViewableObjectWidget(
                       s,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                       circleCrop: false,
                     ),
@@ -115,7 +115,7 @@ class _ViewStoreState extends State<ViewStore> {
               subtitle: store.family != null
                   ? ViewableObjectWidget(
                       store.family!,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     )
                   : const Text('لا يوجد'),

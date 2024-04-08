@@ -116,7 +116,7 @@ class _NotificationSender extends StatelessWidget {
         return ViewableObjectWidget(
           sender,
           subtitle: const SizedBox(),
-          dense: true,
+          isDense: true,
         );
       },
     );

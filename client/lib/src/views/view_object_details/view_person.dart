@@ -320,7 +320,7 @@ class _ViewPersonState extends State<ViewPerson> {
                     for (final s in person.streets ?? <Street>[])
                       ViewableObjectWidget(
                         s,
-                        dense: true,
+                        isDense: true,
                         forceShowSecondLine: false,
                         circleCrop: false,
                       ),
@@ -332,7 +332,7 @@ class _ViewPersonState extends State<ViewPerson> {
                   title: const Text('العائلة'),
                   subtitle: ViewableObjectWidget<Family>(
                     person.family!,
-                    dense: true,
+                    isDense: true,
                     forceShowSecondLine: false,
                   ),
                 ),
@@ -626,7 +626,7 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
               children: [
                 ViewableObjectWidget(
                   o,
-                  dense: true,
+                  isDense: true,
                   forceShowSecondLine: _hasSubtitle(o),
                   subtitle: _hasSubtitle(o)
                       ? _ShowMoreSubtitle(
@@ -638,7 +638,7 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                 for (final o in listField.skip(visibleItemsLimit + 1))
                   ViewableObjectWidget(
                     o,
-                    dense: true,
+                    isDense: true,
                     forceShowSecondLine: _hasSubtitle(o),
                     subtitle: _hasSubtitle(o)
                         ? _ShowMoreSubtitle(
@@ -652,7 +652,7 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
           else
             ViewableObjectWidget(
               o,
-              dense: true,
+              isDense: true,
               circleCrop: o is Person || o is User,
               forceShowSecondLine: _hasSubtitle(o),
               subtitle: _hasSubtitle(o)

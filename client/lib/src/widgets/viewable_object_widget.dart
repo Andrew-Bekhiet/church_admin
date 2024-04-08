@@ -9,7 +9,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final bool? forceShowSecondLine;
   final bool? wrapInCard;
   final bool? isThreeLine;
-  final bool? dense;
+  final bool? isDense;
   final bool? enabled;
   final bool? circleCrop;
 
@@ -33,7 +33,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     this.photo,
     this.selected,
     this.wrapInCard,
-    this.dense,
+    this.isDense,
     this.enabled,
     this.forceShowSecondLine,
     this.isThreeLine,
@@ -59,7 +59,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
       iconColor: foregroundColor,
       textColor: foregroundColor,
       tileColor: object.color,
-      dense: dense ?? config.dense,
+      dense: isDense ?? config.isDense,
       enabled: enabled ?? config.enabled,
       leading: photo ??
           config.photo ??
@@ -67,7 +67,9 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
               ? ImageObjectWidget(
                   object as IImage,
                   heroTag: heroTag,
-                  circleCrop: circleCrop ?? config.circleCrop,
+                  isDense: isDense ?? config.isDense,
+                  circleCrop:
+                      circleCrop ?? config.shouldCircleCrop(object as IImage),
                 )
               : null),
       title: title ?? Text(object.name),
