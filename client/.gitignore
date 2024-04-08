@@ -37,3 +37,4 @@ theme.zip
 .graphqlconfig
 coverage
 **/failures/*.png
+ios-builds/
