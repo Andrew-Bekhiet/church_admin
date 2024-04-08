@@ -328,7 +328,7 @@ class _EditPersonState extends State<EditPerson> {
                         for (final s in combinedServices) ...[
                           ViewableObjectWidget(
                             s,
-                            dense: true,
+                            isDense: true,
                             forceShowSecondLine: false,
                           ),
                           for (final g in s.groups ?? <Group>[])
@@ -340,7 +340,7 @@ class _EditPersonState extends State<EditPerson> {
                                 elevation: 0,
                                 child: ViewableObjectWidget(
                                   g,
-                                  dense: true,
+                                  isDense: true,
                                   forceShowSecondLine: false,
                                   wrapInCard: false,
                                 ),
@@ -667,7 +667,7 @@ class _EditPersonState extends State<EditPerson> {
                       child: ViewableObjectWidget(
                         state.value!,
                         wrapInCard: false,
-                        dense: true,
+                        isDense: true,
                         forceShowSecondLine: false,
                         trailing: state.value?.color == null
                             ? null
@@ -813,7 +813,7 @@ class _EditPersonState extends State<EditPerson> {
                   ? IgnorePointer(
                       child: ViewableObjectWidget(
                         state.value!,
-                        dense: true,
+                        isDense: true,
                       ),
                     )
                   : null;

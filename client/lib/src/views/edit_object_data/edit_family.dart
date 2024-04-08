@@ -157,7 +157,7 @@ class _EditFamilyState extends State<EditFamily> {
                           for (final family in state.value!)
                             ViewableObjectWidget(
                               family,
-                              dense: true,
+                              isDense: true,
                             ),
                         ],
                       ),
@@ -209,7 +209,7 @@ class _EditFamilyState extends State<EditFamily> {
                           for (final family in state.value!)
                             ViewableObjectWidget(
                               family,
-                              dense: true,
+                              isDense: true,
                             ),
                         ],
                       ),

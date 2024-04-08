@@ -87,7 +87,7 @@ class _ViewClassState extends State<ViewClass> {
               subtitle: $class.service != null
                   ? ViewableObjectWidget(
                       $class.service!,
-                      dense: true,
+                      isDense: true,
                       forceShowSecondLine: false,
                     )
                   : const Text('لا يوجد'),
