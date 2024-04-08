@@ -41,6 +41,12 @@ class FirebaseInit implements Initializer {
       webProvider: ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey),
     );
 
+    if (kDebugMode) {
+      await FirebaseAuth.instance.setSettings(
+        forceRecaptchaFlow: kDebugMode,
+      );
+    }
+
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
   }
 
