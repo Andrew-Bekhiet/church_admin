@@ -50,54 +50,72 @@ void main() {
   testWidgets(
     'Image Object Widget => has image',
     (tester) async {
-      final unit =
+      final person =
           Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
+
+      final freshImageFinder = find.descendant(
+        of: find.byType(ImageObjectWidget),
+        matching: find.byWidgetPredicate(
+          (p) {
+            if (p is! Image || p.image is! ResizeImage) return false;
+
+            final imageProvider = (p.image as ResizeImage).imageProvider;
+
+            if (imageProvider is! CachedNetworkImageProvider) return false;
+
+            return imageProvider.url == 'imageUrl' &&
+                imageProvider.cacheKey == person.imageInfo.cacheKey &&
+                imageProvider.cacheManager ==
+                    globalProviderContainer.read(baseCacheManagerProvider);
+          },
+        ),
+      );
+
+      final staleImageFinder = find.descendant(
+        of: find.byType(ImageObjectWidget),
+        matching: find.byWidgetPredicate(
+          (p) {
+            if (p is! Image || p.image is! ResizeImage) return false;
+
+            final imageProvider = (p.image as ResizeImage).imageProvider;
+
+            if (imageProvider is! CachedNetworkImageProvider) return false;
+
+            return imageProvider.url == 'maybeExpiredImageUrl' &&
+                imageProvider.cacheKey == person.imageInfo.cacheKey &&
+                imageProvider.cacheManager ==
+                    globalProviderContainer.read(baseCacheManagerProvider);
+          },
+        ),
+      );
 
       await tester.pumpWidgetBuilder(
         Scaffold(
           body: ImageObjectWidget(
-            unit,
+            person,
           ),
         ),
         wrapper: materialAppWrapper(),
       );
 
       expect(
-        find.ancestor(
-          of: find.byWidgetPredicate(
-            (p) =>
-                p is Image &&
-                p.image is ResizeImage &&
-                (p.image as ResizeImage).imageProvider ==
-                    CachedNetworkImageProvider(
-                      'cachedImageUrl',
-                      cacheManager: globalProviderContainer
-                          .read(baseCacheManagerProvider),
-                    ),
-          ),
-          matching: find.byType(ImageObjectWidget),
-        ),
+        freshImageFinder,
         findsOneWidget,
+      );
+      expect(
+        staleImageFinder,
+        findsNothing,
       );
 
       await tester.pump(const Duration(milliseconds: 120));
 
       expect(
-        find.ancestor(
-          of: find.byWidgetPredicate(
-            (p) =>
-                p is Image &&
-                p.image is ResizeImage &&
-                (p.image as ResizeImage).imageProvider ==
-                    CachedNetworkImageProvider(
-                      'imageUrl',
-                      cacheManager: globalProviderContainer
-                          .read(baseCacheManagerProvider),
-                    ),
-          ),
-          matching: find.byType(ImageObjectWidget),
-        ),
+        freshImageFinder,
         findsOneWidget,
+      );
+      expect(
+        staleImageFinder,
+        findsNothing,
       );
     },
   );
@@ -270,6 +288,8 @@ Override _setUpImageUrlCacheService() {
   final imageUrlCacheService = MockImageUrlCacheService();
   when(imageUrlCacheService.getNonExpiredCachedImageUrl(any))
       .thenReturn('cachedImageUrl');
+  when(imageUrlCacheService.getCachedImageUrl(any))
+      .thenReturn('maybeExpiredImageUrl');
   when(imageUrlCacheService.getImageUrl(any))
       .thenAnswer((_) => Future.value('imageUrl'));
 

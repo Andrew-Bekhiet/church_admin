@@ -22,7 +22,10 @@ class ImageUrlCacheService {
   final BaseCacheManager cacheManager;
 
   Future<File> getImageFile(IImage imageObject) async {
-    return cacheManager.getSingleFile(await getImageUrl(imageObject));
+    return cacheManager.getSingleFile(
+      await getImageUrl(imageObject),
+      key: imageObject.imageInfo.cacheKey,
+    );
   }
 
   /// Returns cached url if available and its file is cached or if its not expired
@@ -30,10 +33,10 @@ class ImageUrlCacheService {
   Future<String> getImageUrl(IImage imageObject) async {
     if (!imageObject.hasImage) throw StateError('Object has no image');
 
-    final cachedImageUrl = getNonExpiredCachedImageUrl(imageObject);
+    final cachedImageUrl = getCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
-        (await isUrlFileCachedAndValid(cachedImageUrl) ||
+        (await isUrlFileCachedAndValid(imageObject.imageInfo.cacheKey) ||
             !isUrlExpired(cachedImageUrl))) {
       return cachedImageUrl;
     }
@@ -47,6 +50,16 @@ class ImageUrlCacheService {
   ///
   /// Returns the cached URL if it exists and is not expired, otherwise returns null.
   String? getNonExpiredCachedImageUrl(IImage imageObject) {
+    final cachedUrl = getCachedImageUrl(imageObject);
+
+    if (cachedUrl == null || isUrlExpired(cachedUrl)) {
+      return null;
+    }
+
+    return cachedUrl;
+  }
+
+  String? getCachedImageUrl(IImage imageObject) {
     if (!imageObject.hasImage) throw StateError('Object has no image');
 
     final imageInfo = imageObject.imageInfo;
@@ -58,16 +71,15 @@ class ImageUrlCacheService {
     final cacheLastUpdatedTime = DateTime.parse(cachedData.split('|').first);
     final cachedUrl = cachedData.split('|').last;
 
-    if (cacheLastUpdatedTime != imageInfo.lastUpdatedTime ||
-        isUrlExpired(cachedUrl)) {
+    if (cacheLastUpdatedTime != imageInfo.lastUpdatedTime) {
       return null;
     }
 
     return cachedUrl;
   }
 
-  Future<bool> isUrlFileCachedAndValid(String cachedUrl) async {
-    final cacheFile = await cacheManager.getFileFromCache(cachedUrl);
+  Future<bool> isUrlFileCachedAndValid(String cacheKey) async {
+    final cacheFile = await cacheManager.getFileFromCache(cacheKey);
     return cacheFile != null && cacheFile.validTill.isAfter(DateTime.now());
   }
 

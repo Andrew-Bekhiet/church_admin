@@ -215,11 +215,20 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  _i9.Future<bool> isUrlFileCachedAndValid(String? cachedUrl) =>
+  String? getCachedImageUrl(_i8.IImage? imageObject) => (super.noSuchMethod(
+        Invocation.method(
+          #getCachedImageUrl,
+          [imageObject],
+        ),
+        returnValueForMissingStub: null,
+      ) as String?);
+
+  @override
+  _i9.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
       (super.noSuchMethod(
         Invocation.method(
           #isUrlFileCachedAndValid,
-          [cachedUrl],
+          [cacheKey],
         ),
         returnValue: _i9.Future<bool>.value(false),
         returnValueForMissingStub: _i9.Future<bool>.value(false),

@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart';
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,7 @@ import 'firebase_init_test.mocks.dart';
   MockSpec<HiveInterface>(),
   MockSpec<Box>(),
   MockSpec<FirebasePlatform>(as: #FirebasePlatform_),
+  MockSpec<FirebaseAuthPlatform>(as: #FirebaseAuthPlatform_),
   MockSpec<FirebaseAppPlatform>(as: #MockFirebaseAppPlatform_),
   MockSpec<FirebaseAppCheckPlatform>(as: #FirebaseAppCheckPlatform_),
   MockSpec<FirebaseMessagingPlatform>(as: #FirebaseMessagingPlatform_),
@@ -51,6 +53,7 @@ void main() {
 void _setUp() {
   _setUpMockFirebaseCore();
   _setUpMockFirebaseAppCheck();
+  _setUpMockFirebaseAuth();
   _setUpMockFirebaseMessaging();
 
   initGlobalProviderContainer([_setUpMockHive()]);
@@ -84,6 +87,16 @@ void _setUpMockFirebaseAppCheck() {
   when(mock.setInitialValues()).thenReturn(mock);
 
   FirebaseAppCheckPlatform.instance = mock;
+}
+
+void _setUpMockFirebaseAuth() {
+  final mock = MockFirebaseAuthPlatform();
+  when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
+  when(mock.setInitialValues()).thenReturn(mock);
+  when(mock.setSettings(forceRecaptchaFlow: anyNamed('forceRecaptchaFlow')))
+      .thenAnswer((_) async {});
+
+  FirebaseAuthPlatform.instance = mock;
 }
 
 void _setUpMockFirebaseMessaging() {
@@ -122,4 +135,7 @@ class MockFirebaseAppCheckPlatform extends FirebaseAppCheckPlatform_
     with MockPlatformInterfaceMixin {}
 
 class MockFirebaseMessagingPlatform extends FirebaseMessagingPlatform_
+    with MockPlatformInterfaceMixin {}
+
+class MockFirebaseAuthPlatform extends FirebaseAuthPlatform_
     with MockPlatformInterfaceMixin {}
