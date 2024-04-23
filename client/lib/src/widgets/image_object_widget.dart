@@ -35,6 +35,7 @@ class ImageObjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final defaultIcon = viewableObjectService.getDefaultIconFor(imageObject);
     final constraints = BoxConstraints.expand(width: size, height: size);
+    final cacheKey = imageObject.imageInfo.cacheKey;
 
     return Hero(
       transitionOnUserGestures: true,
@@ -49,7 +50,7 @@ class ImageObjectWidget extends StatelessWidget {
           }
 
           final cachedImageUrl =
-              photoUrlCacheService.getNonExpiredCachedImageUrl(imageObject);
+              photoUrlCacheService.getCachedImageUrl(imageObject);
 
           return ConstrainedBox(
             constraints: constraints,
@@ -73,6 +74,7 @@ class ImageObjectWidget extends StatelessWidget {
                 final imageFromUrlWidget = _ImageFromUrlWidget(
                   defaultIcon: defaultIcon,
                   imageUrl: downloadUrlOrCache,
+                  cacheKey: cacheKey,
                   constraints: constraints,
                   imagePlaceholder: imagePlaceholder,
                 );
@@ -88,10 +90,11 @@ class ImageObjectWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: _onImageTap(
                       context,
-                      downloadUrlOrCache,
-                      constraints,
-                      defaultIcon,
-                      imagePlaceholder,
+                      downloadUrlOrCache: downloadUrlOrCache,
+                      cacheKey: cacheKey,
+                      constraints: constraints,
+                      defaultIcon: defaultIcon,
+                      imagePlaceholder: imagePlaceholder,
                     ),
                     child: imageFromUrlWidget,
                   ),
@@ -118,12 +121,13 @@ class ImageObjectWidget extends StatelessWidget {
   }
 
   void Function() _onImageTap(
-    BuildContext context,
-    String downloadUrlOrCache,
-    BoxConstraints constraints,
-    IconData defaultIcon,
-    Widget imagePlaceholder,
-  ) {
+    BuildContext context, {
+    required String downloadUrlOrCache,
+    required String cacheKey,
+    required BoxConstraints constraints,
+    required IconData defaultIcon,
+    required Widget imagePlaceholder,
+  }) {
     return () => Navigator.of(context).push(
           PageRouteBuilder(
             opaque: false,
@@ -142,6 +146,7 @@ class ImageObjectWidget extends StatelessWidget {
                   childSize: constraints.smallest,
                   wantKeepAlive: true,
                   child: _ImageFromUrlWidget(
+                    cacheKey: cacheKey,
                     defaultIcon: defaultIcon,
                     imageUrl: downloadUrlOrCache,
                     constraints: constraints,
@@ -161,6 +166,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
 
   const _ImageFromUrlWidget({
     required this.imageUrl,
+    required this.cacheKey,
     required this.defaultIcon,
     required this.constraints,
     required this.imagePlaceholder,
@@ -168,6 +174,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
   });
 
   final String imageUrl;
+  final String cacheKey;
   final Widget imagePlaceholder;
   final IconData defaultIcon;
   final BoxConstraints constraints;
@@ -181,6 +188,8 @@ class _ImageFromUrlWidget extends StatelessWidget {
       children: [
         imagePlaceholder,
         CachedNetworkImage(
+          key: ValueKey(imageUrl + cacheKey),
+          cacheKey: cacheKey,
           imageUrl: imageUrl,
           memCacheHeight: fullQuality
               ? null
