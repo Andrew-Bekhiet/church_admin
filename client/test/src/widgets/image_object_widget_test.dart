@@ -139,7 +139,12 @@ void main() {
         find.descendant(
           of: find.byType(ImageObjectWidget),
           matching: find.descendant(
-            of: find.byType(ClipOval),
+            of: find.byWidgetPredicate(
+              (w) =>
+                  w is Material &&
+                  w.shape is CircleBorder &&
+                  w.clipBehavior != Clip.none,
+            ),
             matching: find.byType(CachedNetworkImage),
           ),
         ),
@@ -152,7 +157,12 @@ void main() {
         find.descendant(
           of: find.byType(ImageObjectWidget),
           matching: find.descendant(
-            of: find.byType(ClipOval),
+            of: find.byWidgetPredicate(
+              (w) =>
+                  w is Material &&
+                  w.shape is CircleBorder &&
+                  w.clipBehavior != Clip.none,
+            ),
             matching: find.byType(CachedNetworkImage),
           ),
         ),
@@ -181,7 +191,12 @@ void main() {
         find.descendant(
           of: find.byType(ImageObjectWidget),
           matching: find.descendant(
-            of: find.byType(ClipRRect),
+            of: find.byWidgetPredicate(
+              (w) =>
+                  w is Material &&
+                  w.shape is RoundedRectangleBorder &&
+                  w.clipBehavior != Clip.none,
+            ),
             matching: find.byType(CachedNetworkImage),
           ),
         ),
@@ -194,7 +209,12 @@ void main() {
         find.descendant(
           of: find.byType(ImageObjectWidget),
           matching: find.descendant(
-            of: find.byType(ClipRRect),
+            of: find.byWidgetPredicate(
+              (w) =>
+                  w is Material &&
+                  w.shape is RoundedRectangleBorder &&
+                  w.clipBehavior != Clip.none,
+            ),
             matching: find.byType(CachedNetworkImage),
           ),
         ),
