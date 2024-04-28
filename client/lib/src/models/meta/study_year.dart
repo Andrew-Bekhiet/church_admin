@@ -8,7 +8,7 @@ part 'study_year.freezed.dart';
 part 'study_year.g.dart';
 
 @freezed
-@TypeMetadata()
+@TypeMetadata(addFields: {'id': String})
 class StudyYear extends ViewableWithID with _$StudyYear implements ToJson {
   static Map<String, FieldMetadata> get fieldsMetadata => _$StudyYearFields;
 

@@ -119,7 +119,7 @@ final _$PersonFields = <String, FieldMetadata>{
   ),
   'store': FieldMetadata<Store>(
     name: 'store',
-    label: 'store',
+    label: 'المتجر',
   ),
   'studyYear': FieldMetadata<StudyYear>(
     name: 'studyYear',
