@@ -180,7 +180,7 @@ packages:
   church_admin_generator:
     dependency: "direct dev"
     description:
-      path: "../../church_admin_generator"
+      path: "../church_admin_generator"
       relative: true
     source: path
     version: "1.0.0"
