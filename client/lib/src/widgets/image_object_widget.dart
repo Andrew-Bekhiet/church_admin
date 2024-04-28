@@ -33,9 +33,16 @@ class ImageObjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultIcon = viewableObjectService.getDefaultIconFor(imageObject);
-    final constraints = BoxConstraints.expand(width: size, height: size);
-    final cacheKey = imageObject.imageInfo.cacheKey;
+    final IconData defaultIcon =
+        viewableObjectService.getDefaultIconFor(imageObject);
+    final BoxConstraints constraints =
+        BoxConstraints.expand(width: size, height: size);
+    final String cacheKey = imageObject.imageInfo.cacheKey;
+    final BorderRadius? borderRadius = circleCrop
+        ? null
+        : isDense
+            ? denseClipBorderRadius
+            : clipBorderRadius;
 
     return Hero(
       transitionOnUserGestures: true,
@@ -54,40 +61,38 @@ class ImageObjectWidget extends StatelessWidget {
 
           return ConstrainedBox(
             constraints: constraints,
-            child: FutureBuilder<String>(
-              initialData: cachedImageUrl,
-              future: photoUrlCacheService.getImageUrl(imageObject),
-              builder: (context, downloadUrlData) {
-                final downloadUrlOrCache =
-                    downloadUrlData.data ?? cachedImageUrl;
+            child: Material(
+              type: MaterialType.transparency,
+              clipBehavior: Clip.antiAlias,
+              shape: circleCrop
+                  ? const CircleBorder()
+                  : RoundedRectangleBorder(borderRadius: borderRadius!),
+              child: FutureBuilder<String>(
+                initialData: cachedImageUrl,
+                future: photoUrlCacheService.getImageUrl(imageObject),
+                builder: (context, downloadUrlData) {
+                  final downloadUrlOrCache =
+                      downloadUrlData.data ?? cachedImageUrl;
 
-                final imagePlaceholder = _ImagePlaceholder(
-                  defaultIcon: defaultIcon,
-                  size: size,
-                  blurhash: imageObject.blurhash,
-                );
+                  final imagePlaceholder = _ImagePlaceholder(
+                    defaultIcon: defaultIcon,
+                    size: size,
+                    blurhash: imageObject.blurhash,
+                  );
 
-                if (downloadUrlData.hasError || downloadUrlOrCache == null) {
-                  return clipImage(imagePlaceholder);
-                }
+                  if (downloadUrlData.hasError || downloadUrlOrCache == null) {
+                    return imagePlaceholder;
+                  }
 
-                final imageFromUrlWidget = _ImageFromUrlWidget(
-                  defaultIcon: defaultIcon,
-                  imageUrl: downloadUrlOrCache,
-                  cacheKey: cacheKey,
-                  constraints: constraints,
-                  imagePlaceholder: imagePlaceholder,
-                );
+                  final imageFromUrlWidget = _ImageFromUrlWidget(
+                    defaultIcon: defaultIcon,
+                    imageUrl: downloadUrlOrCache,
+                    cacheKey: cacheKey,
+                    constraints: constraints,
+                    imagePlaceholder: imagePlaceholder,
+                  );
 
-                final inkWell = Material(
-                  type: MaterialType.transparency,
-                  shape: circleCrop ? const CircleBorder() : null,
-                  borderRadius: circleCrop
-                      ? null
-                      : isDense
-                          ? denseClipBorderRadius
-                          : clipBorderRadius,
-                  child: InkWell(
+                  return InkWell(
                     onTap: _onImageTap(
                       context,
                       downloadUrlOrCache: downloadUrlOrCache,
@@ -97,26 +102,13 @@ class ImageObjectWidget extends StatelessWidget {
                       imagePlaceholder: imagePlaceholder,
                     ),
                     child: imageFromUrlWidget,
-                  ),
-                );
-
-                return clipImage(inkWell);
-              },
+                  );
+                },
+              ),
             ),
           );
         },
       ),
-    );
-  }
-
-  Widget clipImage(Widget image) {
-    if (circleCrop) {
-      return ClipOval(child: image);
-    }
-
-    return ClipRRect(
-      borderRadius: isDense ? denseClipBorderRadius : clipBorderRadius,
-      child: image,
     );
   }
 
@@ -135,16 +127,15 @@ class ImageObjectWidget extends StatelessWidget {
             barrierColor: Colors.black45,
             pageBuilder: (context, _, __) => Dialog(
               backgroundColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
               child: Hero(
                 transitionOnUserGestures: true,
                 tag: heroTag ?? imageObject,
                 child: PhotoView.customChild(
-                  backgroundDecoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                  backgroundDecoration:
+                      const BoxDecoration(color: Colors.transparent),
                   tightMode: true,
                   childSize: constraints.smallest,
-                  wantKeepAlive: true,
                   child: _ImageFromUrlWidget(
                     cacheKey: cacheKey,
                     defaultIcon: defaultIcon,
