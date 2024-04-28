@@ -1,8 +1,7 @@
 import 'dart:async';
-// ignore: unused_import
-import 'dart:developer';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:universal_io/io.dart';
@@ -36,9 +35,9 @@ class ImageUrlCacheService {
     final cachedImageUrl = getCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
-        (await isUrlFileCachedAndValid(imageObject.imageInfo.cacheKey) ||
-            !isUrlExpired(cachedImageUrl))) {
-      return cachedImageUrl;
+        (!isUrlExpired(cachedImageUrl) ||
+            await isUrlFileCachedAndValid(imageObject.imageInfo.cacheKey))) {
+      return SynchronousFuture(cachedImageUrl);
     }
 
     return _getUrlAndSaveToCache(imageObject);
