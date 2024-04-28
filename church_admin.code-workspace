@@ -2,8 +2,7 @@
   "folders": [
     { "name": "church_admin", "path": "." },
     {
-      "name": "church_admin_generator",
-      "path": "../church_admin_generator"
+      "path": "."
     },
     {
       "name": "church_admin_db",

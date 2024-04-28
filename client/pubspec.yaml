@@ -99,7 +99,7 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.3.2
   church_admin_generator:
-    path: ../../church_admin_generator
+    path: ../church_admin_generator
   dart_code_metrics:
     git:
       url: https://github.com/rei-codes/dart-code-metrics
