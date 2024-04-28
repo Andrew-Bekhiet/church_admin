@@ -3,18 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i10;
 import 'dart:io' as _i4;
-import 'dart:typed_data' as _i11;
+import 'dart:typed_data' as _i12;
 
-import 'package:church_admin/church_admin.dart' as _i8;
-import 'package:file/file.dart' as _i7;
+import 'package:church_admin/church_admin.dart' as _i9;
+import 'package:file/file.dart' as _i8;
+import 'package:flutter/foundation.dart' as _i7;
 import 'package:flutter/material.dart' as _i6;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i3;
 import 'package:go_router/go_router.dart' as _i5;
 import 'package:hive_flutter/hive_flutter.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -81,7 +82,7 @@ class _FakeNavigatorState_4 extends _i1.SmartFake
         );
 
   @override
-  String toString({_i6.DiagnosticLevel? minLevel = _i6.DiagnosticLevel.info}) =>
+  String toString({_i7.DiagnosticLevel? minLevel = _i7.DiagnosticLevel.info}) =>
       super.toString();
 }
 
@@ -106,7 +107,7 @@ class _FakeIconData_6 extends _i1.SmartFake implements _i6.IconData {
         );
 }
 
-class _FakeFile_7 extends _i1.SmartFake implements _i7.File {
+class _FakeFile_7 extends _i1.SmartFake implements _i8.File {
   _FakeFile_7(
     Object parent,
     Invocation parentInvocation,
@@ -130,7 +131,7 @@ class _FakeFileInfo_8 extends _i1.SmartFake implements _i3.FileInfo {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockImageUrlCacheService extends _i1.Mock
-    implements _i8.ImageUrlCacheService {
+    implements _i9.ImageUrlCacheService {
   @override
   _i2.Box<String> get box => (super.noSuchMethod(
         Invocation.getter(#box),
@@ -158,36 +159,36 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i3.BaseCacheManager);
 
   @override
-  _i9.Future<_i4.File> getImageFile(_i8.IImage? imageObject) =>
+  _i10.Future<_i4.File> getImageFile(_i9.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
           [imageObject],
         ),
-        returnValue: _i9.Future<_i4.File>.value(_FakeFile_2(
+        returnValue: _i10.Future<_i4.File>.value(_FakeFile_2(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i4.File>.value(_FakeFile_2(
+        returnValueForMissingStub: _i10.Future<_i4.File>.value(_FakeFile_2(
           this,
           Invocation.method(
             #getImageFile,
             [imageObject],
           ),
         )),
-      ) as _i9.Future<_i4.File>);
+      ) as _i10.Future<_i4.File>);
 
   @override
-  _i9.Future<String> getImageUrl(_i8.IImage? imageObject) =>
+  _i10.Future<String> getImageUrl(_i9.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
           [imageObject],
         ),
-        returnValue: _i9.Future<String>.value(_i10.dummyValue<String>(
+        returnValue: _i10.Future<String>.value(_i11.dummyValue<String>(
           this,
           Invocation.method(
             #getImageUrl,
@@ -195,17 +196,17 @@ class MockImageUrlCacheService extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<String>.value(_i10.dummyValue<String>(
+            _i10.Future<String>.value(_i11.dummyValue<String>(
           this,
           Invocation.method(
             #getImageUrl,
             [imageObject],
           ),
         )),
-      ) as _i9.Future<String>);
+      ) as _i10.Future<String>);
 
   @override
-  String? getNonExpiredCachedImageUrl(_i8.IImage? imageObject) =>
+  String? getNonExpiredCachedImageUrl(_i9.IImage? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNonExpiredCachedImageUrl,
@@ -215,7 +216,7 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  String? getCachedImageUrl(_i8.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i9.IImage? imageObject) => (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
           [imageObject],
@@ -224,15 +225,15 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  _i9.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
+  _i10.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
       (super.noSuchMethod(
         Invocation.method(
           #isUrlFileCachedAndValid,
           [cacheKey],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i10.Future<bool>.value(false),
+        returnValueForMissingStub: _i10.Future<bool>.value(false),
+      ) as _i10.Future<bool>);
 
   @override
   bool isUrlExpired(String? url) => (super.noSuchMethod(
@@ -249,7 +250,7 @@ class MockImageUrlCacheService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockViewableObjectService extends _i1.Mock
-    implements _i8.ViewableObjectService {
+    implements _i9.ViewableObjectService {
   @override
   _i5.GoRouter get router => (super.noSuchMethod(
         Invocation.getter(#router),
@@ -290,7 +291,7 @@ class MockViewableObjectService extends _i1.Mock
       ) as _i6.GlobalKey<_i6.NavigatorState>);
 
   @override
-  void onTap(_i8.Viewable? object) => super.noSuchMethod(
+  void onTap(_i9.Viewable? object) => super.noSuchMethod(
         Invocation.method(
           #onTap,
           [object],
@@ -299,7 +300,7 @@ class MockViewableObjectService extends _i1.Mock
       );
 
   @override
-  String? getSecondLine(_i8.Viewable? object) => (super.noSuchMethod(
+  String? getSecondLine(_i9.Viewable? object) => (super.noSuchMethod(
         Invocation.method(
           #getSecondLine,
           [object],
@@ -308,7 +309,7 @@ class MockViewableObjectService extends _i1.Mock
       ) as String?);
 
   @override
-  _i6.IconData getDefaultIconFor<T extends _i8.IImage>([T? imageObject]) =>
+  _i6.IconData getDefaultIconFor<T extends _i9.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDefaultIconFor,
@@ -336,7 +337,7 @@ class MockViewableObjectService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
   @override
-  _i9.Future<_i7.File> getSingleFile(
+  _i10.Future<_i8.File> getSingleFile(
     String? url, {
     String? key,
     Map<String, String>? headers,
@@ -350,7 +351,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #headers: headers,
           },
         ),
-        returnValue: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValue: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #getSingleFile,
@@ -361,7 +362,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValueForMissingStub: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #getSingleFile,
@@ -372,10 +373,10 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-      ) as _i9.Future<_i7.File>);
+      ) as _i10.Future<_i8.File>);
 
   @override
-  _i9.Stream<_i3.FileInfo> getFile(
+  _i10.Stream<_i3.FileInfo> getFile(
     String? url, {
     String? key,
     Map<String, String>? headers,
@@ -389,12 +390,12 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #headers: headers,
           },
         ),
-        returnValue: _i9.Stream<_i3.FileInfo>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i3.FileInfo>.empty(),
-      ) as _i9.Stream<_i3.FileInfo>);
+        returnValue: _i10.Stream<_i3.FileInfo>.empty(),
+        returnValueForMissingStub: _i10.Stream<_i3.FileInfo>.empty(),
+      ) as _i10.Stream<_i3.FileInfo>);
 
   @override
-  _i9.Stream<_i3.FileResponse> getFileStream(
+  _i10.Stream<_i3.FileResponse> getFileStream(
     String? url, {
     String? key,
     Map<String, String>? headers,
@@ -410,12 +411,12 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #withProgress: withProgress,
           },
         ),
-        returnValue: _i9.Stream<_i3.FileResponse>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i3.FileResponse>.empty(),
-      ) as _i9.Stream<_i3.FileResponse>);
+        returnValue: _i10.Stream<_i3.FileResponse>.empty(),
+        returnValueForMissingStub: _i10.Stream<_i3.FileResponse>.empty(),
+      ) as _i10.Stream<_i3.FileResponse>);
 
   @override
-  _i9.Future<_i3.FileInfo> downloadFile(
+  _i10.Future<_i3.FileInfo> downloadFile(
     String? url, {
     String? key,
     Map<String, String>? authHeaders,
@@ -431,7 +432,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #force: force,
           },
         ),
-        returnValue: _i9.Future<_i3.FileInfo>.value(_FakeFileInfo_8(
+        returnValue: _i10.Future<_i3.FileInfo>.value(_FakeFileInfo_8(
           this,
           Invocation.method(
             #downloadFile,
@@ -444,7 +445,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
           ),
         )),
         returnValueForMissingStub:
-            _i9.Future<_i3.FileInfo>.value(_FakeFileInfo_8(
+            _i10.Future<_i3.FileInfo>.value(_FakeFileInfo_8(
           this,
           Invocation.method(
             #downloadFile,
@@ -456,10 +457,10 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-      ) as _i9.Future<_i3.FileInfo>);
+      ) as _i10.Future<_i3.FileInfo>);
 
   @override
-  _i9.Future<_i3.FileInfo?> getFileFromCache(
+  _i10.Future<_i3.FileInfo?> getFileFromCache(
     String? key, {
     bool? ignoreMemCache = false,
   }) =>
@@ -469,25 +470,25 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
           [key],
           {#ignoreMemCache: ignoreMemCache},
         ),
-        returnValue: _i9.Future<_i3.FileInfo?>.value(),
-        returnValueForMissingStub: _i9.Future<_i3.FileInfo?>.value(),
-      ) as _i9.Future<_i3.FileInfo?>);
+        returnValue: _i10.Future<_i3.FileInfo?>.value(),
+        returnValueForMissingStub: _i10.Future<_i3.FileInfo?>.value(),
+      ) as _i10.Future<_i3.FileInfo?>);
 
   @override
-  _i9.Future<_i3.FileInfo?> getFileFromMemory(String? key) =>
+  _i10.Future<_i3.FileInfo?> getFileFromMemory(String? key) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFileFromMemory,
           [key],
         ),
-        returnValue: _i9.Future<_i3.FileInfo?>.value(),
-        returnValueForMissingStub: _i9.Future<_i3.FileInfo?>.value(),
-      ) as _i9.Future<_i3.FileInfo?>);
+        returnValue: _i10.Future<_i3.FileInfo?>.value(),
+        returnValueForMissingStub: _i10.Future<_i3.FileInfo?>.value(),
+      ) as _i10.Future<_i3.FileInfo?>);
 
   @override
-  _i9.Future<_i7.File> putFile(
+  _i10.Future<_i8.File> putFile(
     String? url,
-    _i11.Uint8List? fileBytes, {
+    _i12.Uint8List? fileBytes, {
     String? key,
     String? eTag,
     Duration? maxAge = const Duration(days: 30),
@@ -507,7 +508,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #fileExtension: fileExtension,
           },
         ),
-        returnValue: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValue: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #putFile,
@@ -523,7 +524,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValueForMissingStub: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #putFile,
@@ -539,12 +540,12 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-      ) as _i9.Future<_i7.File>);
+      ) as _i10.Future<_i8.File>);
 
   @override
-  _i9.Future<_i7.File> putFileStream(
+  _i10.Future<_i8.File> putFileStream(
     String? url,
-    _i9.Stream<List<int>>? source, {
+    _i10.Stream<List<int>>? source, {
     String? key,
     String? eTag,
     Duration? maxAge = const Duration(days: 30),
@@ -564,7 +565,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             #fileExtension: fileExtension,
           },
         ),
-        returnValue: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValue: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #putFileStream,
@@ -580,7 +581,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-        returnValueForMissingStub: _i9.Future<_i7.File>.value(_FakeFile_7(
+        returnValueForMissingStub: _i10.Future<_i8.File>.value(_FakeFile_7(
           this,
           Invocation.method(
             #putFileStream,
@@ -596,35 +597,35 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
             },
           ),
         )),
-      ) as _i9.Future<_i7.File>);
+      ) as _i10.Future<_i8.File>);
 
   @override
-  _i9.Future<void> removeFile(String? key) => (super.noSuchMethod(
+  _i10.Future<void> removeFile(String? key) => (super.noSuchMethod(
         Invocation.method(
           #removeFile,
           [key],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> emptyCache() => (super.noSuchMethod(
+  _i10.Future<void> emptyCache() => (super.noSuchMethod(
         Invocation.method(
           #emptyCache,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> dispose() => (super.noSuchMethod(
+  _i10.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 }

@@ -18,6 +18,10 @@ final _$StudyYearFields = <String, FieldMetadata>{
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),
+  'id': FieldMetadata<StudyYear>(
+    name: 'id',
+    label: '=',
+  ),
 };
 
 // **************************************************************************
