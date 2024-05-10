@@ -4,14 +4,20 @@ defmodule ChurchAdminWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  @session_options [
-    store: :cookie,
-    key: "_church_admin_key",
-    signing_salt: "JhzGormA",
-    same_site: "Lax"
-  ]
+  # @session_options [
+  #   store: :cookie,
+  #   key: "_church_admin_key",
+  #   signing_salt: "JhzGormA",
+  #   same_site: "Lax"
+  # ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  # plug Plug.SSL, otp_app: :church_admin, exclude: []
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: true
+
+  socket "/socket", ChurchAdminWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -44,6 +50,5 @@ defmodule ChurchAdminWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-  plug Plug.Session, @session_options
   plug ChurchAdminWeb.Router
 end

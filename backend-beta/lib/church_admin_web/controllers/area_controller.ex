@@ -20,11 +20,11 @@ defmodule ChurchAdminWeb.AreaController do
     end
   end
 
-  defp select_fields(%{"full" => "true"}) do
+  def select_fields(%{"full" => "true"}) do
     {:ok, from(Area)}
   end
 
-  defp select_fields(%{"subtitle" => field}) when field not in ["id", "name"] do
+  def select_fields(%{"subtitle" => field}) when field not in ["id", "name"] do
     field_atom =
       Area.__schema__(:fields)
       |> Enum.find(fn f -> field == Atom.to_string(f) end)
@@ -49,7 +49,7 @@ defmodule ChurchAdminWeb.AreaController do
     end
   end
 
-  defp select_fields(_) do
+  def select_fields(_) do
     query = from(Area) |> select([a], %Area{id: a.id, name: a.name})
 
     {:ok, query}

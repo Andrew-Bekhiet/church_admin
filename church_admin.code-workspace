@@ -34,7 +34,7 @@
     },
     "peacock.color": "009688",
     "autoHide.autoHideSideBar": false,
-    "autoHide.autoHidePanel": true,
+    "autoHide.autoHidePanel": false,
     "autoHide.autoHideAuxiliaryBar": false
   }
 }

@@ -5,8 +5,19 @@ defmodule ChurchAdminWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  pipeline :require_auth do
+    plug ChurchAdminWeb.Plugs.Auth
+  end
+
+  scope "/healthz", ChurchAdminWeb do
+    pipe_through(:api)
+
+    get "/", HealthzController, :index
+  end
+
   scope "/api", ChurchAdminWeb do
     pipe_through(:api)
+    pipe_through(:require_auth)
 
     resources "/areas", AreaController, except: [:new, :edit]
   end

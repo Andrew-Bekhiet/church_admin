@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/firebase_options.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +28,11 @@ class FirebaseInit implements Initializer {
   }
 
   Future<void> _initFirebaseAppCheck() async {
+    await FirebaseAuth.instance.setSettings(
+      // appVerificationDisabledForTesting: kDebugMode,
+      forceRecaptchaFlow: kDebugMode,
+    );
+
     await FirebaseAppCheck.instance.activate(
       androidProvider:
           kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
