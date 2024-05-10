@@ -3,7 +3,6 @@ defmodule ChurchAdminWeb.Router do
 
   pipeline :api do
     plug(:accepts, ["json"])
-    plug ChurchAdminWeb.Plugs.Auth
   end
 
   pipeline :require_auth do
