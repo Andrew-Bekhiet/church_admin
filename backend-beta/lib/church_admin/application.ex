@@ -5,17 +5,20 @@ defmodule ChurchAdmin.Application do
 
   use Application
 
+  alias ChurchAdminWeb.{Plugs, Endpoint, Telemetry}
+
   @impl true
   def start(_type, _args) do
     children = [
-      ChurchAdminWeb.Telemetry,
+      Telemetry,
       ChurchAdmin.Repo,
       {DNSCluster, query: Application.get_env(:church_admin, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ChurchAdmin.PubSub},
+      {Plugs.Auth.FirebaseJWTStrategy, time_interval: 2_000},
       # Start a worker by calling: ChurchAdmin.Worker.start_link(arg)
       # {ChurchAdmin.Worker, arg},
       # Start to serve requests, typically the last entry
-      ChurchAdminWeb.Endpoint
+      Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

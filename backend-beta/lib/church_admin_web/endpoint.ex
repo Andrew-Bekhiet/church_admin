@@ -11,13 +11,9 @@ defmodule ChurchAdminWeb.Endpoint do
   #   same_site: "Lax"
   # ]
 
-  # plug Plug.SSL, otp_app: :church_admin, exclude: []
+  plug Plug.SSL, otp_app: :church_admin, exclude: []
 
   socket "/live", Phoenix.LiveView.Socket, websocket: true
-
-  socket "/socket", ChurchAdminWeb.UserSocket,
-    websocket: true,
-    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #

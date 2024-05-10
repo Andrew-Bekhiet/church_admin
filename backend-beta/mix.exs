@@ -43,6 +43,8 @@ defmodule ChurchAdmin.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
+      {:joken, "~> 2.6"},
+      {:joken_jwks, "~> 1.6.0"},
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"}
     ]
