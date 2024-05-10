@@ -9,7 +9,7 @@ defmodule ChurchAdminWeb.UserSocket do
 
   ## Channels
 
-  channel "areas", ChurchAdminWeb.AreasChannel
+  channel "areas:*", ChurchAdminWeb.AreasChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -27,26 +27,18 @@ defmodule ChurchAdminWeb.UserSocket do
   # performing token verification on connect.
   @impl true
   def connect(params, socket, _connect_info) do
-    "Bearer " <> token =
-      params
-      |> Map.get("Authorization")
+    with %{"Authorization" => "Bearer " <> token} <- params,
+         {:ok, claims} <- ChurchAdminWeb.Plugs.Auth.check_token(token),
+         %{"x-hasura-user-id" => user_id, "sub" => auth_id} <- claims do
+      new_socket =
+        socket
+        |> assign(:user_id, user_id)
+        |> assign(:auth_id, auth_id)
 
-    token
-    # TODO: refactor to clean code
-    |> ChurchAdminWeb.Plugs.Auth.check_token()
-    |> case do
-      {:ok, claims} ->
-        socket =
-          socket
-          |> assign(:user_id, claims |> Map.get("x-hasura-user-id"))
-          |> assign(:auth_id, claims |> Map.get("sub"))
+      Logger.info("Authenticated user with id: #{user_id}, auth_id: #{auth_id}")
 
-        Logger.info(
-          "Authenticated user with id: #{socket.assigns.user_id}, auth_id: #{socket.assigns.auth_id}"
-        )
-
-        {:ok, socket}
-
+      {:ok, new_socket}
+    else
       rslt ->
         Logger.error(
           "Unauthorized user, tried to connect to socket with params: #{inspect(params)}, got #{inspect(rslt)}"
@@ -67,5 +59,5 @@ defmodule ChurchAdminWeb.UserSocket do
   #
   # Returning `nil` makes this socket anonymous.
   @impl true
-  def id(socket), do: nil
+  def id(socket), do: socket.assigns.user_id
 end

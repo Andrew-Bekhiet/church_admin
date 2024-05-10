@@ -1,6 +1,8 @@
 defmodule ChurchAdminWeb.AreaController do
   use ChurchAdminWeb, :controller
+  require Logger
 
+  alias Phoenix.PubSub
   alias ChurchAdmin.Repo
   alias ChurchAdmin.Schemas
   alias Schemas.Area
@@ -62,6 +64,14 @@ defmodule ChurchAdminWeb.AreaController do
       |> Repo.insert()
 
     with {:ok, %Area{} = area} <- insert_rslt do
+      PubSub.broadcast(
+        ChurchAdmin.PubSub,
+        "areas_changed",
+        %{added: [area], updated: %{}, removed: []}
+      )
+
+      Logger.info("Broadcasted new area: #{inspect(area)}")
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/areas/#{area}")
@@ -79,14 +89,22 @@ defmodule ChurchAdminWeb.AreaController do
   end
 
   def update(conn, %{"id" => id, "area" => area_params}) do
-    area = Area |> Repo.get(id)
+    area = Area |> Repo.get!(id)
 
     update_rslt =
       area
       |> Area.changeset(area_params)
       |> Repo.update()
 
-    with {:ok, %Area{} = area} <- update_rslt do
+    with {:ok, %Area{id: id} = area} <- update_rslt do
+      PubSub.broadcast(
+        ChurchAdmin.PubSub,
+        "areas_changed",
+        %{added: [], updated: %{id => area}, removed: []}
+      )
+
+      Logger.info("Broadcasted updated area: #{inspect(area)}")
+
       render(conn, :show, area: area)
     end
   end
@@ -94,6 +112,14 @@ defmodule ChurchAdminWeb.AreaController do
   def delete(conn, %{"id" => id}) do
     with area <- Area |> Repo.get!(id),
          {:ok, %Area{}} <- Repo.delete(area) do
+      PubSub.broadcast(
+        ChurchAdmin.PubSub,
+        "areas_changed",
+        %{added: [], updated: %{}, removed: [id]}
+      )
+
+      Logger.info("Broadcasted deleted area: #{inspect(area)}")
+
       send_resp(conn, :no_content, "")
     end
   end
