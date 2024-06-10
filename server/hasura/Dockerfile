@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.39.1.ubuntu
+FROM hasura/graphql-engine:v2.40.0.ubuntu
 
 ENV HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION="graphql-default"
 ENV HASURA_GRAPHQL_ENABLE_TELEMETRY="false"
