@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
@@ -86,14 +86,15 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
   Widget _buildServiceTile(
     BuildContext context,
-    Service s,
+    Service service,
     ViewableObjectWidgetConfig? config,
   ) {
     final value = PageStorage.maybeOf(context)?.readState(
       context,
-      identifier: 'ServicesAnimationControllers:' + s.id,
+      identifier: 'ServicesAnimationControllers:' + service.id,
     );
-    final _topController = _animationControllers[s] ??= AnimationController(
+    final _topController =
+        _animationControllers[service] ??= AnimationController(
       duration: const Duration(milliseconds: 225),
       vsync: this,
       value: value,
@@ -105,25 +106,26 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           CurveTween(curve: Curves.easeIn),
         ),
       ),
-      builder: (context, child) => Card(
+      builder: (context, child) => Card.filled(
+        color: Theme.of(context).colorScheme.primaryContainer,
         elevation: _topController.value * 3,
         child: ExpansionTile(
-          key: PageStorageKey(s),
+          key: PageStorageKey(service),
           leading: ImageObjectWidget(
-            s,
+            service,
             circleCrop: false,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Transform.rotate(
-                angle: _topController.value * pi,
+                angle: _topController.value * math.pi,
                 child: const Icon(Icons.expand_more),
               ),
               if (widget.serviceTrailingBuilder != null)
                 widget.serviceTrailingBuilder!(
                   context,
-                  s,
+                  service,
                   onLongPress: config?.onLongPress,
                   onTap: config?.onTap,
                   trailing: config?.trailing,
@@ -140,8 +142,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             if (context.mounted) {
               PageStorage.maybeOf(context)?.writeState(
                 context,
-                _animationControllers[s]!.value,
-                identifier: 'ServicesAnimationControllers:' + s.id,
+                _animationControllers[service]!.value,
+                identifier: 'ServicesAnimationControllers:' + service.id,
               );
             }
           },
@@ -149,28 +151,29 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           maintainState: true,
           title: GestureDetector(
             onLongPress: config?.onLongPress != null
-                ? () => config!.onLongPress!(s)
+                ? () => config!.onLongPress!(service)
                 : null,
-            child: Text(s.name),
+            child: Text(service.name),
           ),
           children: [
             if (widget.showClasses)
               _Classes(
-                service: s,
+                service: service,
                 topController: _topController,
                 classBuilder: widget.classBuilder,
                 studyYearBuilder: widget.studyYearBuilder,
               ),
             if (widget.showClasses &&
                 widget.showGroups &&
-                s.studyYearFrom != null &&
-                s.studyYearTo != null &&
-                s.studyYearTo!.order - s.studyYearFrom!.order >= 1 &&
-                (s.groups?.isNotEmpty ?? false))
+                service.studyYearFrom != null &&
+                service.studyYearTo != null &&
+                service.studyYearTo!.order - service.studyYearFrom!.order >=
+                    1 &&
+                (service.groups?.isNotEmpty ?? false))
               const Divider(),
             if (widget.showGroups)
               _Groups(
-                service: s,
+                service: service,
                 topController: _topController,
                 groupBuilder: widget.groupBuilder,
               ),
@@ -217,33 +220,33 @@ class _Classes extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final sc
+        for (final MapEntry(key: studyYear, value: classes)
             in service.classes?.groupListsBy((c) => c.studyYear!).entries ??
                 <StudyYear, List<Class>>{}.entries)
-          if (sc.value.length > 1)
+          if (classes.length > 1)
             Padding(
               padding: EdgeInsets.only(right: topController.value * 20),
               child: studyYearBuilder?.call(
                     context,
                     service: service,
-                    studyYear: sc.key,
+                    studyYear: studyYear,
                   ) ??
                   Card(
                     elevation: 0,
                     child: ExpansionTile(
-                      key: PageStorageKey(sc.key),
-                      title: Text(sc.key.name),
+                      key: PageStorageKey(studyYear),
+                      title: Text(studyYear.name),
                       expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                       maintainState: true,
                       children: [
-                        for (final c in sc.value)
+                        for (final c in classes)
                           Padding(
                             padding: EdgeInsets.only(
                               right: topController.value * 20,
                             ),
                             child: classBuilder?.call(
                                   context,
-                                  studyYear: sc.key,
+                                  studyYear: studyYear,
                                   service: service,
                                   $class: c,
                                 ) ??
@@ -268,13 +271,13 @@ class _Classes extends StatelessWidget {
               child: classBuilder?.call(
                     context,
                     service: service,
-                    studyYear: sc.key,
-                    $class: sc.value.single,
+                    studyYear: studyYear,
+                    $class: classes.single,
                   ) ??
                   ViewableObjectWidget(
-                    sc.value.single,
+                    classes.single,
                     photo: ImageObjectWidget(
-                      sc.value.single,
+                      classes.single,
                       circleCrop: false,
                     ),
                     forceShowSecondLine: false,
