@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
@@ -76,42 +77,104 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
   @override
   Widget build(BuildContext context) {
-    return ViewableObjectGrid(
+    return ViewableObjectList(
       itemsExpandable: true,
       objectsController: listController,
-      itemBuilder: _buildServiceCard,
+      itemBuilder: _buildServiceTile,
     );
   }
 
-  Widget _buildServiceCard(
+  Widget _buildServiceTile(
     BuildContext context,
     Service s,
     ViewableObjectWidgetConfig? config,
   ) {
-    return Card(
-      elevation: 3,
-      color: Theme.of(context).colorScheme.secondaryContainer,
-      child: InkWell(
-        onLongPress:
-            config?.onLongPress != null ? () => config!.onLongPress!(s) : null,
-        onTap: config?.onTap != null ? () => config!.onTap!(s) : null,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+    final value = PageStorage.maybeOf(context)?.readState(
+      context,
+      identifier: 'ServicesAnimationControllers:' + s.id,
+    );
+    final _topController = _animationControllers[s] ??= AnimationController(
+      duration: const Duration(milliseconds: 225),
+      vsync: this,
+      value: value,
+    );
+
+    return AnimatedBuilder(
+      animation: _topController.drive(
+        Tween(begin: 0, end: 1).chain(
+          CurveTween(curve: Curves.easeIn),
+        ),
+      ),
+      builder: (contex, child) => Card(
+        elevation: _topController.value * 3,
+        child: ExpansionTile(
+          key: PageStorageKey(s),
+          leading: ImageObjectWidget(
+            s,
+            circleCrop: false,
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: IgnorePointer(
-                  child: ImageObjectWidget(
-                    s,
-                    circleCrop: false,
-                    size: 160,
-                  ),
-                ),
+              Transform.rotate(
+                angle: _topController.value * pi,
+                child: const Icon(Icons.expand_more),
               ),
-              const SizedBox(height: 8),
-              Text(s.name, textAlign: TextAlign.center),
+              if (widget.serviceTrailingBuilder != null)
+                widget.serviceTrailingBuilder!(
+                  context,
+                  s,
+                  onLongPress: config?.onLongPress,
+                  onTap: config?.onTap,
+                  trailing: config?.trailing,
+                ),
             ],
           ),
+          onExpansionChanged: (e) async {
+            if (e) {
+              await _topController.forward();
+            } else {
+              await _topController.animateBack(0);
+            }
+
+            if (context.mounted) {
+              PageStorage.maybeOf(context)?.writeState(
+                context,
+                _animationControllers[s]!.value,
+                identifier: 'ServicesAnimationControllers:' + s.id,
+              );
+            }
+          },
+          expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+          maintainState: true,
+          title: GestureDetector(
+            onLongPress: config?.onLongPress != null
+                ? () => config!.onLongPress!(s)
+                : null,
+            child: Text(s.name),
+          ),
+          children: [
+            if (widget.showClasses)
+              _Classes(
+                service: s,
+                topController: _topController,
+                classBuilder: widget.classBuilder,
+                studyYearBuilder: widget.studyYearBuilder,
+              ),
+            if (widget.showClasses &&
+                widget.showGroups &&
+                s.studyYearFrom != null &&
+                s.studyYearTo != null &&
+                s.studyYearTo!.order - s.studyYearFrom!.order >= 1 &&
+                (s.groups?.isNotEmpty ?? false))
+              const Divider(),
+            if (widget.showGroups)
+              _Groups(
+                service: s,
+                topController: _topController,
+                groupBuilder: widget.groupBuilder,
+              ),
+          ],
         ),
       ),
     );
