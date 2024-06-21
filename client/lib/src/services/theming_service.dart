@@ -175,10 +175,15 @@ class ThemingService with WidgetsBindingObserver {
       others: 'Roboto',
     );
 
-    final themeData = ThemeData.from(
+    final ThemeData rawThemeData = ThemeData.from(
       textTheme: isDark ? typography.white : typography.black,
       colorScheme: colorScheme,
       useMaterial3: true,
+    );
+
+    final ThemeData themeData = ThemeData.localize(
+      rawThemeData,
+      rawThemeData.typography.geometryThemeFor(ScriptCategory.tall),
     );
 
     return themeData.copyWith(
