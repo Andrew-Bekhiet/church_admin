@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class UserSettingsService {
@@ -24,7 +25,7 @@ class UserSettingsService {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
-  bool get useNewTheme => box.get('useNewTheme', defaultValue: false)!;
+  bool get useNewTheme => box.get('useNewTheme', defaultValue: kDebugMode)!;
   Future<void> setUseNewTheme(bool value) => box.put('useNewTheme', value);
 
   String? getSecondLineFor<T>([Type? type]) => box.get(
