@@ -94,9 +94,9 @@ void main() {
         ConnectivityResult.wifi: true,
         ConnectivityResult.bluetooth: true,
         ConnectivityResult.none: false,
-        ConnectivityResult.ethernet: false,
+        ConnectivityResult.ethernet: true,
         ConnectivityResult.vpn: true,
-        ConnectivityResult.mobile: false,
+        ConnectivityResult.mobile: true,
       };
 
       final unit = ConnectivityService.I;
@@ -104,7 +104,7 @@ void main() {
 
       expect(
         unit.connectivityStream,
-        emitsInOrder(responses.values),
+        emitsInOrder([false, ...responses.values]),
       );
 
       for (final response in responses.keys) {
