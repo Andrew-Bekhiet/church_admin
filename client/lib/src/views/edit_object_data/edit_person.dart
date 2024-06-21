@@ -223,7 +223,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: ElevatedButton.icon(
+                child: FilledButton.tonalIcon(
                   icon: const Icon(Icons.add),
                   label: const Text('اضافة رقم هاتف أخر'),
                   onPressed: () async {
