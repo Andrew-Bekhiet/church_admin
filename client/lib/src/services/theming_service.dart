@@ -195,7 +195,7 @@ class ThemingService with WidgetsBindingObserver {
       ),
       cardTheme: themeData.cardTheme.copyWith(
         clipBehavior: Clip.antiAlias,
-        color: themeData.colorScheme.primaryContainer,
+        color: themeData.colorScheme.inversePrimary,
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
