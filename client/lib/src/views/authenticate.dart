@@ -26,8 +26,9 @@ class AuthenticateScreen extends StatefulWidget {
       return MultiFactorLogin.route.path;
     } else if (LocalAuthService.I.shouldAuthenticate ||
         (_hasRedirect(state.uri.queryParameters) &&
-            LocalAuthService.I
-                .shouldAuthenticateForPath(state.uri.queryParameters['next']!))) {
+            LocalAuthService.I.shouldAuthenticateForPath(
+              state.uri.queryParameters['next']!,
+            ))) {
       return null;
     } else {
       return state.uri.queryParameters['next'] ?? '/';
@@ -58,28 +59,28 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      appBar: widget.next != null
-          ? AppBar(
-              leading: const BackButton(),
-              backgroundColor: Colors.transparent,
-            )
-          : null,
+      appBar: AppBar(
+        toolbarHeight: 0.40684931506849314 * size.height,
+        leading: widget.next != null ? const BackButton() : null,
+        backgroundColor: colorScheme.primary,
+        flexibleSpace: Image.asset(
+          _getAssetImage(),
+          fit: BoxFit.scaleDown,
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(35)),
+        ),
+      ),
       body: SafeArea(
         child: Form(
           key: _form,
           child: ListView(
             padding: const EdgeInsets.all(12),
             children: <Widget>[
-              SizedBox(
-                height: MediaQuery.of(context).size.shortestSide * 0.7,
-                width: MediaQuery.of(context).size.shortestSide * 0.7,
-                child: Image.asset(
-                  _getAssetImage(),
-                  fit: BoxFit.scaleDown,
-                ),
-              ),
-              const SizedBox(height: 10),
               PasswordFormField(
                 onFieldSubmitted: _submit,
                 controller: _passwordText,

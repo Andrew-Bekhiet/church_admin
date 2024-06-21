@@ -132,27 +132,15 @@ class _EditClassState extends State<EditClass> {
               return null;
             },
           ),
-          DropdownButtonFormField<bool>(
-            decoration: const InputDecoration(
-              labelText: 'النوع',
-            ),
-            items: const [
-              DropdownMenuItem(
-                child: Text('بنين وبنات'),
-              ),
-              DropdownMenuItem(
-                value: true,
-                child: Text('بنين'),
-              ),
-              DropdownMenuItem(
-                value: false,
-                child: Text('بنات'),
-              ),
-            ],
+          GenderField(
+            nullable: true,
+            maleLabel: 'بنين',
+            femaleLabel: 'بنات',
+            nullLabel: 'بنين وبنات',
+            initialValue: newClass.serviceGender,
             onChanged: (v) {
               setState(() => newClass = newClass.copyWith(serviceGender: v));
             },
-            value: newClass.serviceGender,
           ),
           ColorField(
             initialValue: newClass.color,

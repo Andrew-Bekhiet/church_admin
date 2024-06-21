@@ -223,7 +223,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: ElevatedButton.icon(
+                child: FilledButton.tonalIcon(
                   icon: const Icon(Icons.add),
                   label: const Text('اضافة رقم هاتف أخر'),
                   onPressed: () async {
@@ -512,20 +512,8 @@ class _EditPersonState extends State<EditPerson> {
             ),
           ],
           const Divider(thickness: 1),
-          DropdownButtonFormField<bool>(
-            decoration: const InputDecoration(
-              labelText: 'النوع',
-            ),
-            items: const [
-              DropdownMenuItem(
-                value: true,
-                child: Text('ذكر'),
-              ),
-              DropdownMenuItem(
-                value: false,
-                child: Text('أنثى'),
-              ),
-            ],
+          GenderField(
+            initialValue: newPerson.gender,
             onChanged: (v) {
               newPerson = v!
                   ? newPerson.copyWith(gender: v)
@@ -537,7 +525,6 @@ class _EditPersonState extends State<EditPerson> {
                     );
               setState(() {});
             },
-            value: newPerson.gender,
           ),
           ObjectSelectionField<PersonType, PersonType?>(
             initialValue: newPerson.personType,

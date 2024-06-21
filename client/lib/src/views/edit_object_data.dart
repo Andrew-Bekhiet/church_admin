@@ -47,7 +47,7 @@ class _EditObjectDataState<T extends ViewableWithID>
     final foregroundColor = newObjectData.color?.findInvert();
 
     return Theme(
-      data: ThemingService.getDefault(primaryOverride: newObjectData.color),
+      data: ThemingService.getDefault(seedOverride: newObjectData.color),
       child: Scaffold(
         body: Form(
           key: _controller.formKey,
