@@ -71,7 +71,7 @@ final _$ClassFields = <String, FieldMetadata>{
 _$ClassImpl _$$ClassImplFromJson(Map json) => _$ClassImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
@@ -84,7 +84,7 @@ _$ClassImpl _$$ClassImplFromJson(Map json) => _$ClassImpl(
           ? null
           : StudyYear.fromJson(
               Map<String, Object?>.from(json['studyYear'] as Map)),
-      serviceStudyYear: json['serviceStudyYear'] as int?,
+      serviceStudyYear: (json['serviceStudyYear'] as num?)?.toInt(),
       serviceGender: json['serviceGender'] as bool?,
       lastEdit: json['lastEdit'] == null
           ? null

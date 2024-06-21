@@ -409,28 +409,6 @@ class MockFirebaseDatabase extends _i1.Mock implements _i5.FirebaseDatabase {
       );
 
   @override
-  _i5.DatabaseReference reference() => (super.noSuchMethod(
-        Invocation.method(
-          #reference,
-          [],
-        ),
-        returnValue: _FakeDatabaseReference_3(
-          this,
-          Invocation.method(
-            #reference,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _FakeDatabaseReference_3(
-          this,
-          Invocation.method(
-            #reference,
-            [],
-          ),
-        ),
-      ) as _i5.DatabaseReference);
-
-  @override
   _i5.DatabaseReference ref([String? path]) => (super.noSuchMethod(
         Invocation.method(
           #ref,

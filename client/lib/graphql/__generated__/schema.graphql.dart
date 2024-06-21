@@ -165067,7 +165067,15 @@ class _CopyWithStubImpl_Input_storesAggregateBoolExpCount<TRes>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
 
-enum Enum_AreasConstraint { areasPkey, $unknown }
+enum Enum_AreasConstraint {
+  areasPkey,
+  $unknown;
+
+  factory Enum_AreasConstraint.fromJson(String value) =>
+      fromJson_Enum_AreasConstraint(value);
+
+  String toJson() => toJson_Enum_AreasConstraint(this);
+}
 
 String toJson_Enum_AreasConstraint(Enum_AreasConstraint e) {
   switch (e) {
@@ -165094,7 +165102,12 @@ enum Enum_AreasSelectColumn {
   id,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_AreasSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AreasSelectColumn(value);
+
+  String toJson() => toJson_Enum_AreasSelectColumn(this);
 }
 
 String toJson_Enum_AreasSelectColumn(Enum_AreasSelectColumn e) {
@@ -165142,7 +165155,12 @@ enum Enum_AreasUpdateColumn {
   id,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_AreasUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AreasUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AreasUpdateColumn(this);
 }
 
 String toJson_Enum_AreasUpdateColumn(Enum_AreasUpdateColumn e) {
@@ -165188,7 +165206,12 @@ enum Enum_AuthUsersAdminOnConstraint {
   usersAdminOnGroup,
   usersAdminOnPkey,
   usersAdminOnService,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnConstraint(value);
+
+  String toJson() => toJson_Enum_AuthUsersAdminOnConstraint(this);
 }
 
 String toJson_Enum_AuthUsersAdminOnConstraint(
@@ -165237,7 +165260,12 @@ enum Enum_AuthUsersAdminOnSelectColumn {
   serviceGender,
   serviceStudyYear,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnSelectColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersAdminOnSelectColumn(this);
 }
 
 String toJson_Enum_AuthUsersAdminOnSelectColumn(
@@ -165316,7 +165344,16 @@ enum Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andAr
   serviceAdminOnUsers,
   serviceAllowEdit,
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_andArgumentsColumns(
@@ -165389,7 +165426,16 @@ enum Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArg
   serviceAdminOnUsers,
   serviceAllowEdit,
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_AuthUsersAdminOnSelectColumnAuthUsersAdminOnAggregateBoolExpBool_orArgumentsColumns(
@@ -165468,7 +165514,12 @@ enum Enum_AuthUsersAdminOnUpdateColumn {
   serviceGender,
   serviceStudyYear,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersAdminOnUpdateColumn(this);
 }
 
 String toJson_Enum_AuthUsersAdminOnUpdateColumn(
@@ -165544,7 +165595,12 @@ enum Enum_AuthUsersDataConstraint {
   usersDataEmailKey,
   usersDataNameKey,
   usersDataPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersDataConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataConstraint(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataConstraint(this);
 }
 
 String toJson_Enum_AuthUsersDataConstraint(Enum_AuthUsersDataConstraint e) {
@@ -165585,7 +165641,12 @@ enum Enum_AuthUsersDataSelectColumn {
   name,
   photoUpdatedAt,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersDataSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataSelectColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataSelectColumn(this);
 }
 
 String toJson_Enum_AuthUsersDataSelectColumn(Enum_AuthUsersDataSelectColumn e) {
@@ -165634,7 +165695,12 @@ enum Enum_AuthUsersDataUpdateColumn {
   name,
   photoUpdatedAt,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersDataUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataUpdateColumn(this);
 }
 
 String toJson_Enum_AuthUsersDataUpdateColumn(Enum_AuthUsersDataUpdateColumn e) {
@@ -165679,7 +165745,12 @@ Enum_AuthUsersDataUpdateColumn fromJson_Enum_AuthUsersDataUpdateColumn(
 enum Enum_AuthUsersPermissionsConstraint {
   usersPermissionsPkey,
   usersPermissionsUidPermissionKey,
-  $unknown
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsConstraint(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsConstraint(this);
 }
 
 String toJson_Enum_AuthUsersPermissionsConstraint(
@@ -165707,7 +165778,16 @@ Enum_AuthUsersPermissionsConstraint
   }
 }
 
-enum Enum_AuthUsersPermissionsSelectColumn { permission, uid, $unknown }
+enum Enum_AuthUsersPermissionsSelectColumn {
+  permission,
+  uid,
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsSelectColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsSelectColumn(this);
+}
 
 String toJson_Enum_AuthUsersPermissionsSelectColumn(
     Enum_AuthUsersPermissionsSelectColumn e) {
@@ -165733,7 +165813,16 @@ Enum_AuthUsersPermissionsSelectColumn
   }
 }
 
-enum Enum_AuthUsersPermissionsUpdateColumn { permission, uid, $unknown }
+enum Enum_AuthUsersPermissionsUpdateColumn {
+  permission,
+  uid,
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsUpdateColumn(this);
+}
 
 String toJson_Enum_AuthUsersPermissionsUpdateColumn(
     Enum_AuthUsersPermissionsUpdateColumn e) {
@@ -165759,7 +165848,16 @@ Enum_AuthUsersPermissionsUpdateColumn
   }
 }
 
-enum Enum_ChurchesConstraint { churchesNameKey, churchesPkey, $unknown }
+enum Enum_ChurchesConstraint {
+  churchesNameKey,
+  churchesPkey,
+  $unknown;
+
+  factory Enum_ChurchesConstraint.fromJson(String value) =>
+      fromJson_Enum_ChurchesConstraint(value);
+
+  String toJson() => toJson_Enum_ChurchesConstraint(this);
+}
 
 String toJson_Enum_ChurchesConstraint(Enum_ChurchesConstraint e) {
   switch (e) {
@@ -165783,7 +165881,16 @@ Enum_ChurchesConstraint fromJson_Enum_ChurchesConstraint(String value) {
   }
 }
 
-enum Enum_ChurchesSelectColumn { id, name, $unknown }
+enum Enum_ChurchesSelectColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_ChurchesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ChurchesSelectColumn(value);
+
+  String toJson() => toJson_Enum_ChurchesSelectColumn(this);
+}
 
 String toJson_Enum_ChurchesSelectColumn(Enum_ChurchesSelectColumn e) {
   switch (e) {
@@ -165807,7 +165914,16 @@ Enum_ChurchesSelectColumn fromJson_Enum_ChurchesSelectColumn(String value) {
   }
 }
 
-enum Enum_ChurchesUpdateColumn { id, name, $unknown }
+enum Enum_ChurchesUpdateColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_ChurchesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ChurchesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_ChurchesUpdateColumn(this);
+}
 
 String toJson_Enum_ChurchesUpdateColumn(Enum_ChurchesUpdateColumn e) {
   switch (e) {
@@ -165831,7 +165947,15 @@ Enum_ChurchesUpdateColumn fromJson_Enum_ChurchesUpdateColumn(String value) {
   }
 }
 
-enum Enum_ClassesConstraint { classesPkey, $unknown }
+enum Enum_ClassesConstraint {
+  classesPkey,
+  $unknown;
+
+  factory Enum_ClassesConstraint.fromJson(String value) =>
+      fromJson_Enum_ClassesConstraint(value);
+
+  String toJson() => toJson_Enum_ClassesConstraint(this);
+}
 
 String toJson_Enum_ClassesConstraint(Enum_ClassesConstraint e) {
   switch (e) {
@@ -165860,7 +165984,12 @@ enum Enum_ClassesSelectColumn {
   serviceGender,
   serviceId,
   serviceStudyYear,
-  $unknown
+  $unknown;
+
+  factory Enum_ClassesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ClassesSelectColumn(value);
+
+  String toJson() => toJson_Enum_ClassesSelectColumn(this);
 }
 
 String toJson_Enum_ClassesSelectColumn(Enum_ClassesSelectColumn e) {
@@ -165911,7 +166040,16 @@ Enum_ClassesSelectColumn fromJson_Enum_ClassesSelectColumn(String value) {
 
 enum Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns {
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+          this);
 }
 
 String
@@ -165943,7 +166081,16 @@ Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
 
 enum Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+          this);
 }
 
 String
@@ -165982,7 +166129,12 @@ enum Enum_ClassesUpdateColumn {
   serviceGender,
   serviceId,
   serviceStudyYear,
-  $unknown
+  $unknown;
+
+  factory Enum_ClassesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ClassesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_ClassesUpdateColumn(this);
 }
 
 String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
@@ -166031,7 +166183,16 @@ Enum_ClassesUpdateColumn fromJson_Enum_ClassesUpdateColumn(String value) {
   }
 }
 
-enum Enum_CollegesConstraint { collegesNameKey, collegesPkey, $unknown }
+enum Enum_CollegesConstraint {
+  collegesNameKey,
+  collegesPkey,
+  $unknown;
+
+  factory Enum_CollegesConstraint.fromJson(String value) =>
+      fromJson_Enum_CollegesConstraint(value);
+
+  String toJson() => toJson_Enum_CollegesConstraint(this);
+}
 
 String toJson_Enum_CollegesConstraint(Enum_CollegesConstraint e) {
   switch (e) {
@@ -166055,7 +166216,17 @@ Enum_CollegesConstraint fromJson_Enum_CollegesConstraint(String value) {
   }
 }
 
-enum Enum_CollegesSelectColumn { id, name, universityId, $unknown }
+enum Enum_CollegesSelectColumn {
+  id,
+  name,
+  universityId,
+  $unknown;
+
+  factory Enum_CollegesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_CollegesSelectColumn(value);
+
+  String toJson() => toJson_Enum_CollegesSelectColumn(this);
+}
 
 String toJson_Enum_CollegesSelectColumn(Enum_CollegesSelectColumn e) {
   switch (e) {
@@ -166083,7 +166254,17 @@ Enum_CollegesSelectColumn fromJson_Enum_CollegesSelectColumn(String value) {
   }
 }
 
-enum Enum_CollegesUpdateColumn { id, name, universityId, $unknown }
+enum Enum_CollegesUpdateColumn {
+  id,
+  name,
+  universityId,
+  $unknown;
+
+  factory Enum_CollegesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_CollegesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_CollegesUpdateColumn(this);
+}
 
 String toJson_Enum_CollegesUpdateColumn(Enum_CollegesUpdateColumn e) {
   switch (e) {
@@ -166111,7 +166292,16 @@ Enum_CollegesUpdateColumn fromJson_Enum_CollegesUpdateColumn(String value) {
   }
 }
 
-enum Enum_CursorOrdering { ASC, DESC, $unknown }
+enum Enum_CursorOrdering {
+  ASC,
+  DESC,
+  $unknown;
+
+  factory Enum_CursorOrdering.fromJson(String value) =>
+      fromJson_Enum_CursorOrdering(value);
+
+  String toJson() => toJson_Enum_CursorOrdering(this);
+}
 
 String toJson_Enum_CursorOrdering(Enum_CursorOrdering e) {
   switch (e) {
@@ -166138,7 +166328,12 @@ Enum_CursorOrdering fromJson_Enum_CursorOrdering(String value) {
 enum Enum_FaceRecognitionPeronsLabelsConstraint {
   peronsLabelsPersonIdKey,
   peronsLabelsPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_FaceRecognitionPeronsLabelsConstraint.fromJson(String value) =>
+      fromJson_Enum_FaceRecognitionPeronsLabelsConstraint(value);
+
+  String toJson() => toJson_Enum_FaceRecognitionPeronsLabelsConstraint(this);
 }
 
 String toJson_Enum_FaceRecognitionPeronsLabelsConstraint(
@@ -166165,7 +166360,16 @@ Enum_FaceRecognitionPeronsLabelsConstraint
   }
 }
 
-enum Enum_FaceRecognitionPeronsLabelsSelectColumn { label, personId, $unknown }
+enum Enum_FaceRecognitionPeronsLabelsSelectColumn {
+  label,
+  personId,
+  $unknown;
+
+  factory Enum_FaceRecognitionPeronsLabelsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FaceRecognitionPeronsLabelsSelectColumn(value);
+
+  String toJson() => toJson_Enum_FaceRecognitionPeronsLabelsSelectColumn(this);
+}
 
 String toJson_Enum_FaceRecognitionPeronsLabelsSelectColumn(
     Enum_FaceRecognitionPeronsLabelsSelectColumn e) {
@@ -166191,7 +166395,16 @@ Enum_FaceRecognitionPeronsLabelsSelectColumn
   }
 }
 
-enum Enum_FaceRecognitionPeronsLabelsUpdateColumn { label, personId, $unknown }
+enum Enum_FaceRecognitionPeronsLabelsUpdateColumn {
+  label,
+  personId,
+  $unknown;
+
+  factory Enum_FaceRecognitionPeronsLabelsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FaceRecognitionPeronsLabelsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FaceRecognitionPeronsLabelsUpdateColumn(this);
+}
 
 String toJson_Enum_FaceRecognitionPeronsLabelsUpdateColumn(
     Enum_FaceRecognitionPeronsLabelsUpdateColumn e) {
@@ -166217,7 +166430,15 @@ Enum_FaceRecognitionPeronsLabelsUpdateColumn
   }
 }
 
-enum Enum_FamiliesConstraint { familiesPkey, $unknown }
+enum Enum_FamiliesConstraint {
+  familiesPkey,
+  $unknown;
+
+  factory Enum_FamiliesConstraint.fromJson(String value) =>
+      fromJson_Enum_FamiliesConstraint(value);
+
+  String toJson() => toJson_Enum_FamiliesConstraint(this);
+}
 
 String toJson_Enum_FamiliesConstraint(Enum_FamiliesConstraint e) {
   switch (e) {
@@ -166240,7 +166461,12 @@ Enum_FamiliesConstraint fromJson_Enum_FamiliesConstraint(String value) {
 enum Enum_FamiliesFamiliesConstraint {
   familiesFamiliesPkey,
   familiesFamiliesRelIdKey,
-  $unknown
+  $unknown;
+
+  factory Enum_FamiliesFamiliesConstraint.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesConstraint(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesConstraint(this);
 }
 
 String toJson_Enum_FamiliesFamiliesConstraint(
@@ -166271,7 +166497,12 @@ enum Enum_FamiliesFamiliesSelectColumn {
   childFamilyId,
   parentFamilyId,
   relId,
-  $unknown
+  $unknown;
+
+  factory Enum_FamiliesFamiliesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesSelectColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesSelectColumn(this);
 }
 
 String toJson_Enum_FamiliesFamiliesSelectColumn(
@@ -166306,7 +166537,12 @@ enum Enum_FamiliesFamiliesUpdateColumn {
   childFamilyId,
   parentFamilyId,
   relId,
-  $unknown
+  $unknown;
+
+  factory Enum_FamiliesFamiliesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesUpdateColumn(this);
 }
 
 String toJson_Enum_FamiliesFamiliesUpdateColumn(
@@ -166346,7 +166582,12 @@ enum Enum_FamiliesSelectColumn {
   name,
   notes,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_FamiliesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesSelectColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesSelectColumn(this);
 }
 
 String toJson_Enum_FamiliesSelectColumn(Enum_FamiliesSelectColumn e) {
@@ -166404,7 +166645,12 @@ enum Enum_FamiliesUpdateColumn {
   name,
   notes,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_FamiliesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesUpdateColumn(this);
 }
 
 String toJson_Enum_FamiliesUpdateColumn(Enum_FamiliesUpdateColumn e) {
@@ -166453,7 +166699,16 @@ Enum_FamiliesUpdateColumn fromJson_Enum_FamiliesUpdateColumn(String value) {
   }
 }
 
-enum Enum_FathersConstraint { fathersNameKey, fathersPkey, $unknown }
+enum Enum_FathersConstraint {
+  fathersNameKey,
+  fathersPkey,
+  $unknown;
+
+  factory Enum_FathersConstraint.fromJson(String value) =>
+      fromJson_Enum_FathersConstraint(value);
+
+  String toJson() => toJson_Enum_FathersConstraint(this);
+}
 
 String toJson_Enum_FathersConstraint(Enum_FathersConstraint e) {
   switch (e) {
@@ -166477,7 +166732,17 @@ Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
   }
 }
 
-enum Enum_FathersSelectColumn { churchId, id, name, $unknown }
+enum Enum_FathersSelectColumn {
+  churchId,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_FathersSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FathersSelectColumn(value);
+
+  String toJson() => toJson_Enum_FathersSelectColumn(this);
+}
 
 String toJson_Enum_FathersSelectColumn(Enum_FathersSelectColumn e) {
   switch (e) {
@@ -166505,7 +166770,17 @@ Enum_FathersSelectColumn fromJson_Enum_FathersSelectColumn(String value) {
   }
 }
 
-enum Enum_FathersUpdateColumn { churchId, id, name, $unknown }
+enum Enum_FathersUpdateColumn {
+  churchId,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_FathersUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FathersUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FathersUpdateColumn(this);
+}
 
 String toJson_Enum_FathersUpdateColumn(Enum_FathersUpdateColumn e) {
   switch (e) {
@@ -166533,7 +166808,15 @@ Enum_FathersUpdateColumn fromJson_Enum_FathersUpdateColumn(String value) {
   }
 }
 
-enum Enum_GroupsConstraint { groupsPkey, $unknown }
+enum Enum_GroupsConstraint {
+  groupsPkey,
+  $unknown;
+
+  factory Enum_GroupsConstraint.fromJson(String value) =>
+      fromJson_Enum_GroupsConstraint(value);
+
+  String toJson() => toJson_Enum_GroupsConstraint(this);
+}
 
 String toJson_Enum_GroupsConstraint(Enum_GroupsConstraint e) {
   switch (e) {
@@ -166561,7 +166844,12 @@ enum Enum_GroupsSelectColumn {
   photoUpdatedAt,
   serviceId,
   validity,
-  $unknown
+  $unknown;
+
+  factory Enum_GroupsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_GroupsSelectColumn(value);
+
+  String toJson() => toJson_Enum_GroupsSelectColumn(this);
 }
 
 String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
@@ -166614,7 +166902,12 @@ enum Enum_GroupsUpdateColumn {
   photoUpdatedAt,
   serviceId,
   validity,
-  $unknown
+  $unknown;
+
+  factory Enum_GroupsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_GroupsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_GroupsUpdateColumn(this);
 }
 
 String toJson_Enum_GroupsUpdateColumn(Enum_GroupsUpdateColumn e) {
@@ -166659,7 +166952,15 @@ Enum_GroupsUpdateColumn fromJson_Enum_GroupsUpdateColumn(String value) {
   }
 }
 
-enum Enum_HistoryAttendanceDaysConstraint { attendanceDaysPkey, $unknown }
+enum Enum_HistoryAttendanceDaysConstraint {
+  attendanceDaysPkey,
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceDaysConstraint(this);
+}
 
 String toJson_Enum_HistoryAttendanceDaysConstraint(
     Enum_HistoryAttendanceDaysConstraint e) {
@@ -166684,7 +166985,14 @@ Enum_HistoryAttendanceDaysConstraint
 enum Enum_HistoryAttendanceDaysConstraintsConstraint {
   attendanceDaysConstraintsDayServiceServiceStudyYearSKe,
   attendanceDaysConstraintsPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraintsConstraint.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraintsConstraint(value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceDaysConstraintsConstraint(this);
 }
 
 String toJson_Enum_HistoryAttendanceDaysConstraintsConstraint(
@@ -166722,7 +167030,14 @@ enum Enum_HistoryAttendanceDaysConstraintsSelectColumn {
   serviceGender,
   serviceId,
   serviceStudyYear,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraintsSelectColumn.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraintsSelectColumn(value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumn(this);
 }
 
 String toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumn(
@@ -166767,7 +167082,16 @@ Enum_HistoryAttendanceDaysConstraintsSelectColumn
 
 enum Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns {
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns(
@@ -166798,7 +167122,16 @@ Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraint
 
 enum Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns {
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns(
@@ -166834,7 +167167,14 @@ enum Enum_HistoryAttendanceDaysConstraintsUpdateColumn {
   serviceGender,
   serviceId,
   serviceStudyYear,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysConstraintsUpdateColumn.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryAttendanceDaysConstraintsUpdateColumn(
@@ -166877,7 +167217,16 @@ Enum_HistoryAttendanceDaysConstraintsUpdateColumn
   }
 }
 
-enum Enum_HistoryAttendanceDaysSelectColumn { day, notes, $unknown }
+enum Enum_HistoryAttendanceDaysSelectColumn {
+  day,
+  notes,
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceDaysSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceDaysSelectColumn(this);
+}
 
 String toJson_Enum_HistoryAttendanceDaysSelectColumn(
     Enum_HistoryAttendanceDaysSelectColumn e) {
@@ -166903,7 +167252,16 @@ Enum_HistoryAttendanceDaysSelectColumn
   }
 }
 
-enum Enum_HistoryAttendanceDaysUpdateColumn { day, notes, $unknown }
+enum Enum_HistoryAttendanceDaysUpdateColumn {
+  day,
+  notes,
+  $unknown;
+
+  factory Enum_HistoryAttendanceDaysUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceDaysUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceDaysUpdateColumn(this);
+}
 
 String toJson_Enum_HistoryAttendanceDaysUpdateColumn(
     Enum_HistoryAttendanceDaysUpdateColumn e) {
@@ -166932,7 +167290,12 @@ Enum_HistoryAttendanceDaysUpdateColumn
 enum Enum_HistoryAttendanceHistoryConstraint {
   attendanceHistoryDayIdServiceIdGroupIdPersonIdKey,
   attendanceHistoryPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceHistoryConstraint(this);
 }
 
 String toJson_Enum_HistoryAttendanceHistoryConstraint(
@@ -166972,7 +167335,12 @@ enum Enum_HistoryAttendanceHistorySelectColumn {
   serviceId,
   serviceStudyYear,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryAttendanceHistorySelectColumn(
@@ -167034,7 +167402,16 @@ Enum_HistoryAttendanceHistorySelectColumn
 enum Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns {
   asAdmin,
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
@@ -167072,7 +167449,16 @@ Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolEx
 enum Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns {
   asAdmin,
   serviceGender,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
+          this);
 }
 
 String toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
@@ -167118,7 +167504,12 @@ enum Enum_HistoryAttendanceHistoryUpdateColumn {
   serviceId,
   serviceStudyYear,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryAttendanceHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryAttendanceHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryAttendanceHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryAttendanceHistoryUpdateColumn(
@@ -167177,7 +167568,15 @@ Enum_HistoryAttendanceHistoryUpdateColumn
   }
 }
 
-enum Enum_HistoryCallHistoryConstraint { callHistoryPkey, $unknown }
+enum Enum_HistoryCallHistoryConstraint {
+  callHistoryPkey,
+  $unknown;
+
+  factory Enum_HistoryCallHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryCallHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryCallHistoryConstraint(this);
+}
 
 String toJson_Enum_HistoryCallHistoryConstraint(
     Enum_HistoryCallHistoryConstraint e) {
@@ -167204,7 +167603,12 @@ enum Enum_HistoryCallHistorySelectColumn {
   recordedBy,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryCallHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryCallHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryCallHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryCallHistorySelectColumn(
@@ -167244,7 +167648,12 @@ enum Enum_HistoryCallHistoryUpdateColumn {
   recordedBy,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryCallHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryCallHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryCallHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryCallHistoryUpdateColumn(
@@ -167282,7 +167691,12 @@ Enum_HistoryCallHistoryUpdateColumn
 enum Enum_HistoryConfessionHistoryConstraint {
   confessionHistoryDayIdPersonIdKey,
   confessionHistoryPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryConfessionHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryConfessionHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryConfessionHistoryConstraint(this);
 }
 
 String toJson_Enum_HistoryConfessionHistoryConstraint(
@@ -167317,7 +167731,12 @@ enum Enum_HistoryConfessionHistorySelectColumn {
   personId,
   recordedBy,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryConfessionHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryConfessionHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryConfessionHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryConfessionHistorySelectColumn(
@@ -167361,7 +167780,12 @@ enum Enum_HistoryConfessionHistoryUpdateColumn {
   id,
   personId,
   recordedBy,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryConfessionHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryConfessionHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryConfessionHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryConfessionHistoryUpdateColumn(
@@ -167396,7 +167820,15 @@ Enum_HistoryConfessionHistoryUpdateColumn
   }
 }
 
-enum Enum_HistoryEditHistoryConstraint { editHistoryPkey, $unknown }
+enum Enum_HistoryEditHistoryConstraint {
+  editHistoryPkey,
+  $unknown;
+
+  factory Enum_HistoryEditHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryEditHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryEditHistoryConstraint(this);
+}
 
 String toJson_Enum_HistoryEditHistoryConstraint(
     Enum_HistoryEditHistoryConstraint e) {
@@ -167425,7 +167857,12 @@ enum Enum_HistoryEditHistorySelectColumn {
   table,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryEditHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryEditHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryEditHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryEditHistorySelectColumn(
@@ -167475,7 +167912,12 @@ enum Enum_HistoryEditHistoryUpdateColumn {
   table,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryEditHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryEditHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryEditHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryEditHistoryUpdateColumn(
@@ -167521,7 +167963,12 @@ Enum_HistoryEditHistoryUpdateColumn
 enum Enum_HistoryKodasHistoryConstraint {
   kodasHistoryDayIdPersonIdKey,
   kodasHistoryPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryKodasHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryKodasHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryKodasHistoryConstraint(this);
 }
 
 String toJson_Enum_HistoryKodasHistoryConstraint(
@@ -167554,7 +168001,12 @@ enum Enum_HistoryKodasHistorySelectColumn {
   personId,
   recordedBy,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryKodasHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryKodasHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryKodasHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryKodasHistorySelectColumn(
@@ -167598,7 +168050,12 @@ enum Enum_HistoryKodasHistoryUpdateColumn {
   id,
   personId,
   recordedBy,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryKodasHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryKodasHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryKodasHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryKodasHistoryUpdateColumn(
@@ -167638,7 +168095,12 @@ enum Enum_HistoryLatestCallsSelectColumn {
   recordedBy,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryLatestCallsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryLatestCallsSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryLatestCallsSelectColumn(this);
 }
 
 String toJson_Enum_HistoryLatestCallsSelectColumn(
@@ -167677,7 +168139,12 @@ enum Enum_HistoryLatestConfessionsSelectColumn {
   personId,
   recordedBy,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryLatestConfessionsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryLatestConfessionsSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryLatestConfessionsSelectColumn(this);
 }
 
 String toJson_Enum_HistoryLatestConfessionsSelectColumn(
@@ -167715,7 +168182,12 @@ enum Enum_HistoryLatestEditsSelectColumn {
   table,
   time,
   userRole,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryLatestEditsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryLatestEditsSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryLatestEditsSelectColumn(this);
 }
 
 String toJson_Enum_HistoryLatestEditsSelectColumn(
@@ -167762,7 +168234,12 @@ enum Enum_HistoryLatestKodasesSelectColumn {
   personId,
   recordedBy,
   time,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryLatestKodasesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryLatestKodasesSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryLatestKodasesSelectColumn(this);
 }
 
 String toJson_Enum_HistoryLatestKodasesSelectColumn(
@@ -167799,7 +168276,12 @@ enum Enum_HistoryLatestVisitsSelectColumn {
   table,
   time,
   visitId,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryLatestVisitsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryLatestVisitsSelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryLatestVisitsSelectColumn(this);
 }
 
 String toJson_Enum_HistoryLatestVisitsSelectColumn(
@@ -167838,7 +168320,15 @@ Enum_HistoryLatestVisitsSelectColumn
   }
 }
 
-enum Enum_HistoryVisitHistoryConstraint { visitHistoryPkey, $unknown }
+enum Enum_HistoryVisitHistoryConstraint {
+  visitHistoryPkey,
+  $unknown;
+
+  factory Enum_HistoryVisitHistoryConstraint.fromJson(String value) =>
+      fromJson_Enum_HistoryVisitHistoryConstraint(value);
+
+  String toJson() => toJson_Enum_HistoryVisitHistoryConstraint(this);
+}
 
 String toJson_Enum_HistoryVisitHistoryConstraint(
     Enum_HistoryVisitHistoryConstraint e) {
@@ -167866,7 +168356,12 @@ enum Enum_HistoryVisitHistorySelectColumn {
   table,
   time,
   visitId,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryVisitHistorySelectColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryVisitHistorySelectColumn(value);
+
+  String toJson() => toJson_Enum_HistoryVisitHistorySelectColumn(this);
 }
 
 String toJson_Enum_HistoryVisitHistorySelectColumn(
@@ -167911,7 +168406,12 @@ enum Enum_HistoryVisitHistoryUpdateColumn {
   table,
   time,
   visitId,
-  $unknown
+  $unknown;
+
+  factory Enum_HistoryVisitHistoryUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HistoryVisitHistoryUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HistoryVisitHistoryUpdateColumn(this);
 }
 
 String toJson_Enum_HistoryVisitHistoryUpdateColumn(
@@ -167950,7 +168450,16 @@ Enum_HistoryVisitHistoryUpdateColumn
   }
 }
 
-enum Enum_HobbiesConstraint { hobbiesNameKey, hobbiesPkey, $unknown }
+enum Enum_HobbiesConstraint {
+  hobbiesNameKey,
+  hobbiesPkey,
+  $unknown;
+
+  factory Enum_HobbiesConstraint.fromJson(String value) =>
+      fromJson_Enum_HobbiesConstraint(value);
+
+  String toJson() => toJson_Enum_HobbiesConstraint(this);
+}
 
 String toJson_Enum_HobbiesConstraint(Enum_HobbiesConstraint e) {
   switch (e) {
@@ -167974,7 +168483,17 @@ Enum_HobbiesConstraint fromJson_Enum_HobbiesConstraint(String value) {
   }
 }
 
-enum Enum_HobbiesSelectColumn { color, id, name, $unknown }
+enum Enum_HobbiesSelectColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_HobbiesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_HobbiesSelectColumn(value);
+
+  String toJson() => toJson_Enum_HobbiesSelectColumn(this);
+}
 
 String toJson_Enum_HobbiesSelectColumn(Enum_HobbiesSelectColumn e) {
   switch (e) {
@@ -168002,7 +168521,17 @@ Enum_HobbiesSelectColumn fromJson_Enum_HobbiesSelectColumn(String value) {
   }
 }
 
-enum Enum_HobbiesUpdateColumn { color, id, name, $unknown }
+enum Enum_HobbiesUpdateColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_HobbiesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_HobbiesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_HobbiesUpdateColumn(this);
+}
 
 String toJson_Enum_HobbiesUpdateColumn(Enum_HobbiesUpdateColumn e) {
   switch (e) {
@@ -168030,7 +168559,16 @@ Enum_HobbiesUpdateColumn fromJson_Enum_HobbiesUpdateColumn(String value) {
   }
 }
 
-enum Enum_JobsConstraint { jobsNameKey, jobsPkey, $unknown }
+enum Enum_JobsConstraint {
+  jobsNameKey,
+  jobsPkey,
+  $unknown;
+
+  factory Enum_JobsConstraint.fromJson(String value) =>
+      fromJson_Enum_JobsConstraint(value);
+
+  String toJson() => toJson_Enum_JobsConstraint(this);
+}
 
 String toJson_Enum_JobsConstraint(Enum_JobsConstraint e) {
   switch (e) {
@@ -168054,7 +168592,16 @@ Enum_JobsConstraint fromJson_Enum_JobsConstraint(String value) {
   }
 }
 
-enum Enum_JobsSelectColumn { id, name, $unknown }
+enum Enum_JobsSelectColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_JobsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_JobsSelectColumn(value);
+
+  String toJson() => toJson_Enum_JobsSelectColumn(this);
+}
 
 String toJson_Enum_JobsSelectColumn(Enum_JobsSelectColumn e) {
   switch (e) {
@@ -168078,7 +168625,16 @@ Enum_JobsSelectColumn fromJson_Enum_JobsSelectColumn(String value) {
   }
 }
 
-enum Enum_JobsUpdateColumn { id, name, $unknown }
+enum Enum_JobsUpdateColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_JobsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_JobsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_JobsUpdateColumn(this);
+}
 
 String toJson_Enum_JobsUpdateColumn(Enum_JobsUpdateColumn e) {
   switch (e) {
@@ -168109,7 +168665,11 @@ enum Enum_OrderBy {
   DESC,
   DESC_NULLS_FIRST,
   DESC_NULLS_LAST,
-  $unknown
+  $unknown;
+
+  factory Enum_OrderBy.fromJson(String value) => fromJson_Enum_OrderBy(value);
+
+  String toJson() => toJson_Enum_OrderBy(this);
 }
 
 String toJson_Enum_OrderBy(Enum_OrderBy e) {
@@ -168154,7 +168714,12 @@ enum Enum_PersonStatesConstraint {
   statesColorKey,
   statesNameKey,
   statesPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonStatesConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonStatesConstraint(value);
+
+  String toJson() => toJson_Enum_PersonStatesConstraint(this);
 }
 
 String toJson_Enum_PersonStatesConstraint(Enum_PersonStatesConstraint e) {
@@ -168183,7 +168748,17 @@ Enum_PersonStatesConstraint fromJson_Enum_PersonStatesConstraint(String value) {
   }
 }
 
-enum Enum_PersonStatesSelectColumn { color, id, name, $unknown }
+enum Enum_PersonStatesSelectColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_PersonStatesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonStatesSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonStatesSelectColumn(this);
+}
 
 String toJson_Enum_PersonStatesSelectColumn(Enum_PersonStatesSelectColumn e) {
   switch (e) {
@@ -168212,7 +168787,17 @@ Enum_PersonStatesSelectColumn fromJson_Enum_PersonStatesSelectColumn(
   }
 }
 
-enum Enum_PersonStatesUpdateColumn { color, id, name, $unknown }
+enum Enum_PersonStatesUpdateColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_PersonStatesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonStatesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonStatesUpdateColumn(this);
+}
 
 String toJson_Enum_PersonStatesUpdateColumn(Enum_PersonStatesUpdateColumn e) {
   switch (e) {
@@ -168245,7 +168830,12 @@ enum Enum_PersonTypesConstraint {
   personTypesNameKey,
   personTypesOrderKey,
   personTypesPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonTypesConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonTypesConstraint(value);
+
+  String toJson() => toJson_Enum_PersonTypesConstraint(this);
 }
 
 String toJson_Enum_PersonTypesConstraint(Enum_PersonTypesConstraint e) {
@@ -168274,7 +168864,17 @@ Enum_PersonTypesConstraint fromJson_Enum_PersonTypesConstraint(String value) {
   }
 }
 
-enum Enum_PersonTypesSelectColumn { id, name, order, $unknown }
+enum Enum_PersonTypesSelectColumn {
+  id,
+  name,
+  order,
+  $unknown;
+
+  factory Enum_PersonTypesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonTypesSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonTypesSelectColumn(this);
+}
 
 String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
   switch (e) {
@@ -168303,7 +168903,17 @@ Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
   }
 }
 
-enum Enum_PersonTypesUpdateColumn { id, name, order, $unknown }
+enum Enum_PersonTypesUpdateColumn {
+  id,
+  name,
+  order,
+  $unknown;
+
+  factory Enum_PersonTypesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonTypesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonTypesUpdateColumn(this);
+}
 
 String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
   switch (e) {
@@ -168336,7 +168946,12 @@ enum Enum_PersonsConstraint {
   idxPersonsCleanNameMainPhoneBirthdate,
   personsPkey,
   personsUidKey,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsConstraint(this);
 }
 
 String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
@@ -168368,7 +168983,12 @@ Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
 enum Enum_PersonsGroupsConstraint {
   personsGroupsPersonIdGroupIdKey,
   personsGroupsPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsGroupsConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsGroupsConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsGroupsConstraint(this);
 }
 
 String toJson_Enum_PersonsGroupsConstraint(Enum_PersonsGroupsConstraint e) {
@@ -168394,7 +169014,17 @@ Enum_PersonsGroupsConstraint fromJson_Enum_PersonsGroupsConstraint(
   }
 }
 
-enum Enum_PersonsGroupsSelectColumn { groupId, personId, relId, $unknown }
+enum Enum_PersonsGroupsSelectColumn {
+  groupId,
+  personId,
+  relId,
+  $unknown;
+
+  factory Enum_PersonsGroupsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsGroupsSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonsGroupsSelectColumn(this);
+}
 
 String toJson_Enum_PersonsGroupsSelectColumn(Enum_PersonsGroupsSelectColumn e) {
   switch (e) {
@@ -168423,7 +169053,17 @@ Enum_PersonsGroupsSelectColumn fromJson_Enum_PersonsGroupsSelectColumn(
   }
 }
 
-enum Enum_PersonsGroupsUpdateColumn { groupId, personId, relId, $unknown }
+enum Enum_PersonsGroupsUpdateColumn {
+  groupId,
+  personId,
+  relId,
+  $unknown;
+
+  factory Enum_PersonsGroupsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsGroupsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsGroupsUpdateColumn(this);
+}
 
 String toJson_Enum_PersonsGroupsUpdateColumn(Enum_PersonsGroupsUpdateColumn e) {
   switch (e) {
@@ -168452,7 +169092,15 @@ Enum_PersonsGroupsUpdateColumn fromJson_Enum_PersonsGroupsUpdateColumn(
   }
 }
 
-enum Enum_PersonsHobbiesConstraint { personsHobbiesPkey, $unknown }
+enum Enum_PersonsHobbiesConstraint {
+  personsHobbiesPkey,
+  $unknown;
+
+  factory Enum_PersonsHobbiesConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsHobbiesConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsHobbiesConstraint(this);
+}
 
 String toJson_Enum_PersonsHobbiesConstraint(Enum_PersonsHobbiesConstraint e) {
   switch (e) {
@@ -168473,7 +169121,17 @@ Enum_PersonsHobbiesConstraint fromJson_Enum_PersonsHobbiesConstraint(
   }
 }
 
-enum Enum_PersonsHobbiesSelectColumn { hobbyId, personId, relId, $unknown }
+enum Enum_PersonsHobbiesSelectColumn {
+  hobbyId,
+  personId,
+  relId,
+  $unknown;
+
+  factory Enum_PersonsHobbiesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsHobbiesSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonsHobbiesSelectColumn(this);
+}
 
 String toJson_Enum_PersonsHobbiesSelectColumn(
     Enum_PersonsHobbiesSelectColumn e) {
@@ -168503,7 +169161,17 @@ Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
   }
 }
 
-enum Enum_PersonsHobbiesUpdateColumn { hobbyId, personId, relId, $unknown }
+enum Enum_PersonsHobbiesUpdateColumn {
+  hobbyId,
+  personId,
+  relId,
+  $unknown;
+
+  factory Enum_PersonsHobbiesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsHobbiesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsHobbiesUpdateColumn(this);
+}
 
 String toJson_Enum_PersonsHobbiesUpdateColumn(
     Enum_PersonsHobbiesUpdateColumn e) {
@@ -168563,7 +169231,12 @@ enum Enum_PersonsSelectColumn {
   storeId,
   studyYearId,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonsSelectColumn(this);
 }
 
 String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
@@ -168701,7 +169374,16 @@ enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
   isServant,
   isShammas,
   isStudent,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
+          this);
 }
 
 String
@@ -168754,7 +169436,16 @@ enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
   isServant,
   isShammas,
   isStudent,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+          this);
 }
 
 String
@@ -168805,7 +169496,12 @@ Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
 enum Enum_PersonsServicesConstraint {
   personsServicesPersonIdServiceIdKey,
   personsServicesPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsServicesConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsServicesConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsServicesConstraint(this);
 }
 
 String toJson_Enum_PersonsServicesConstraint(Enum_PersonsServicesConstraint e) {
@@ -168831,7 +169527,17 @@ Enum_PersonsServicesConstraint fromJson_Enum_PersonsServicesConstraint(
   }
 }
 
-enum Enum_PersonsServicesSelectColumn { personId, relId, serviceId, $unknown }
+enum Enum_PersonsServicesSelectColumn {
+  personId,
+  relId,
+  serviceId,
+  $unknown;
+
+  factory Enum_PersonsServicesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsServicesSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonsServicesSelectColumn(this);
+}
 
 String toJson_Enum_PersonsServicesSelectColumn(
     Enum_PersonsServicesSelectColumn e) {
@@ -168861,7 +169567,17 @@ Enum_PersonsServicesSelectColumn fromJson_Enum_PersonsServicesSelectColumn(
   }
 }
 
-enum Enum_PersonsServicesUpdateColumn { personId, relId, serviceId, $unknown }
+enum Enum_PersonsServicesUpdateColumn {
+  personId,
+  relId,
+  serviceId,
+  $unknown;
+
+  factory Enum_PersonsServicesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsServicesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsServicesUpdateColumn(this);
+}
 
 String toJson_Enum_PersonsServicesUpdateColumn(
     Enum_PersonsServicesUpdateColumn e) {
@@ -168891,7 +169607,15 @@ Enum_PersonsServicesUpdateColumn fromJson_Enum_PersonsServicesUpdateColumn(
   }
 }
 
-enum Enum_PersonsTagsConstraint { personsTagsPkey, $unknown }
+enum Enum_PersonsTagsConstraint {
+  personsTagsPkey,
+  $unknown;
+
+  factory Enum_PersonsTagsConstraint.fromJson(String value) =>
+      fromJson_Enum_PersonsTagsConstraint(value);
+
+  String toJson() => toJson_Enum_PersonsTagsConstraint(this);
+}
 
 String toJson_Enum_PersonsTagsConstraint(Enum_PersonsTagsConstraint e) {
   switch (e) {
@@ -168911,7 +169635,17 @@ Enum_PersonsTagsConstraint fromJson_Enum_PersonsTagsConstraint(String value) {
   }
 }
 
-enum Enum_PersonsTagsSelectColumn { personId, relId, tagId, $unknown }
+enum Enum_PersonsTagsSelectColumn {
+  personId,
+  relId,
+  tagId,
+  $unknown;
+
+  factory Enum_PersonsTagsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsTagsSelectColumn(value);
+
+  String toJson() => toJson_Enum_PersonsTagsSelectColumn(this);
+}
 
 String toJson_Enum_PersonsTagsSelectColumn(Enum_PersonsTagsSelectColumn e) {
   switch (e) {
@@ -168940,7 +169674,17 @@ Enum_PersonsTagsSelectColumn fromJson_Enum_PersonsTagsSelectColumn(
   }
 }
 
-enum Enum_PersonsTagsUpdateColumn { personId, relId, tagId, $unknown }
+enum Enum_PersonsTagsUpdateColumn {
+  personId,
+  relId,
+  tagId,
+  $unknown;
+
+  factory Enum_PersonsTagsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsTagsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsTagsUpdateColumn(this);
+}
 
 String toJson_Enum_PersonsTagsUpdateColumn(Enum_PersonsTagsUpdateColumn e) {
   switch (e) {
@@ -168999,7 +169743,12 @@ enum Enum_PersonsUpdateColumn {
   storeId,
   studyYearId,
   uid,
-  $unknown
+  $unknown;
+
+  factory Enum_PersonsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsUpdateColumn(this);
 }
 
 String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
@@ -169135,7 +169884,12 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
 enum Enum_QualificationsConstraint {
   qualificationsNameKey,
   qualificationsPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_QualificationsConstraint.fromJson(String value) =>
+      fromJson_Enum_QualificationsConstraint(value);
+
+  String toJson() => toJson_Enum_QualificationsConstraint(this);
 }
 
 String toJson_Enum_QualificationsConstraint(Enum_QualificationsConstraint e) {
@@ -169161,7 +169915,16 @@ Enum_QualificationsConstraint fromJson_Enum_QualificationsConstraint(
   }
 }
 
-enum Enum_QualificationsSelectColumn { id, name, $unknown }
+enum Enum_QualificationsSelectColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_QualificationsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_QualificationsSelectColumn(value);
+
+  String toJson() => toJson_Enum_QualificationsSelectColumn(this);
+}
 
 String toJson_Enum_QualificationsSelectColumn(
     Enum_QualificationsSelectColumn e) {
@@ -169187,7 +169950,16 @@ Enum_QualificationsSelectColumn fromJson_Enum_QualificationsSelectColumn(
   }
 }
 
-enum Enum_QualificationsUpdateColumn { id, name, $unknown }
+enum Enum_QualificationsUpdateColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_QualificationsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_QualificationsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_QualificationsUpdateColumn(this);
+}
 
 String toJson_Enum_QualificationsUpdateColumn(
     Enum_QualificationsUpdateColumn e) {
@@ -169213,7 +169985,16 @@ Enum_QualificationsUpdateColumn fromJson_Enum_QualificationsUpdateColumn(
   }
 }
 
-enum Enum_SchoolsConstraint { schoolsNameKey, schoolsPkey, $unknown }
+enum Enum_SchoolsConstraint {
+  schoolsNameKey,
+  schoolsPkey,
+  $unknown;
+
+  factory Enum_SchoolsConstraint.fromJson(String value) =>
+      fromJson_Enum_SchoolsConstraint(value);
+
+  String toJson() => toJson_Enum_SchoolsConstraint(this);
+}
 
 String toJson_Enum_SchoolsConstraint(Enum_SchoolsConstraint e) {
   switch (e) {
@@ -169237,7 +170018,16 @@ Enum_SchoolsConstraint fromJson_Enum_SchoolsConstraint(String value) {
   }
 }
 
-enum Enum_SchoolsSelectColumn { id, name, $unknown }
+enum Enum_SchoolsSelectColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_SchoolsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_SchoolsSelectColumn(value);
+
+  String toJson() => toJson_Enum_SchoolsSelectColumn(this);
+}
 
 String toJson_Enum_SchoolsSelectColumn(Enum_SchoolsSelectColumn e) {
   switch (e) {
@@ -169261,7 +170051,16 @@ Enum_SchoolsSelectColumn fromJson_Enum_SchoolsSelectColumn(String value) {
   }
 }
 
-enum Enum_SchoolsUpdateColumn { id, name, $unknown }
+enum Enum_SchoolsUpdateColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_SchoolsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_SchoolsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_SchoolsUpdateColumn(this);
+}
 
 String toJson_Enum_SchoolsUpdateColumn(Enum_SchoolsUpdateColumn e) {
   switch (e) {
@@ -169285,7 +170084,16 @@ Enum_SchoolsUpdateColumn fromJson_Enum_SchoolsUpdateColumn(String value) {
   }
 }
 
-enum Enum_ServicesConstraint { servicesNameKey, servicesPkey, $unknown }
+enum Enum_ServicesConstraint {
+  servicesNameKey,
+  servicesPkey,
+  $unknown;
+
+  factory Enum_ServicesConstraint.fromJson(String value) =>
+      fromJson_Enum_ServicesConstraint(value);
+
+  String toJson() => toJson_Enum_ServicesConstraint(this);
+}
 
 String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
   switch (e) {
@@ -169318,7 +170126,12 @@ enum Enum_ServicesSelectColumn {
   photoUpdatedAt,
   studyYearFromId,
   studyYearToId,
-  $unknown
+  $unknown;
+
+  factory Enum_ServicesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ServicesSelectColumn(value);
+
+  String toJson() => toJson_Enum_ServicesSelectColumn(this);
 }
 
 String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
@@ -169376,7 +170189,12 @@ enum Enum_ServicesUpdateColumn {
   photoUpdatedAt,
   studyYearFromId,
   studyYearToId,
-  $unknown
+  $unknown;
+
+  factory Enum_ServicesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ServicesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_ServicesUpdateColumn(this);
 }
 
 String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
@@ -169429,7 +170247,12 @@ enum Enum_ShammasLevelsConstraint {
   shammasLevelNameKey,
   shammasLevelOrderKey,
   shammasLevelPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_ShammasLevelsConstraint.fromJson(String value) =>
+      fromJson_Enum_ShammasLevelsConstraint(value);
+
+  String toJson() => toJson_Enum_ShammasLevelsConstraint(this);
 }
 
 String toJson_Enum_ShammasLevelsConstraint(Enum_ShammasLevelsConstraint e) {
@@ -169459,7 +170282,17 @@ Enum_ShammasLevelsConstraint fromJson_Enum_ShammasLevelsConstraint(
   }
 }
 
-enum Enum_ShammasLevelsSelectColumn { id, name, order, $unknown }
+enum Enum_ShammasLevelsSelectColumn {
+  id,
+  name,
+  order,
+  $unknown;
+
+  factory Enum_ShammasLevelsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ShammasLevelsSelectColumn(value);
+
+  String toJson() => toJson_Enum_ShammasLevelsSelectColumn(this);
+}
 
 String toJson_Enum_ShammasLevelsSelectColumn(Enum_ShammasLevelsSelectColumn e) {
   switch (e) {
@@ -169488,7 +170321,17 @@ Enum_ShammasLevelsSelectColumn fromJson_Enum_ShammasLevelsSelectColumn(
   }
 }
 
-enum Enum_ShammasLevelsUpdateColumn { id, name, order, $unknown }
+enum Enum_ShammasLevelsUpdateColumn {
+  id,
+  name,
+  order,
+  $unknown;
+
+  factory Enum_ShammasLevelsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ShammasLevelsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_ShammasLevelsUpdateColumn(this);
+}
 
 String toJson_Enum_ShammasLevelsUpdateColumn(Enum_ShammasLevelsUpdateColumn e) {
   switch (e) {
@@ -169517,7 +170360,15 @@ Enum_ShammasLevelsUpdateColumn fromJson_Enum_ShammasLevelsUpdateColumn(
   }
 }
 
-enum Enum_StoresConstraint { storesPkey, $unknown }
+enum Enum_StoresConstraint {
+  storesPkey,
+  $unknown;
+
+  factory Enum_StoresConstraint.fromJson(String value) =>
+      fromJson_Enum_StoresConstraint(value);
+
+  String toJson() => toJson_Enum_StoresConstraint(this);
+}
 
 String toJson_Enum_StoresConstraint(Enum_StoresConstraint e) {
   switch (e) {
@@ -169546,7 +170397,12 @@ enum Enum_StoresSelectColumn {
   id,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_StoresSelectColumn.fromJson(String value) =>
+      fromJson_Enum_StoresSelectColumn(value);
+
+  String toJson() => toJson_Enum_StoresSelectColumn(this);
 }
 
 String toJson_Enum_StoresSelectColumn(Enum_StoresSelectColumn e) {
@@ -169604,7 +170460,12 @@ enum Enum_StoresUpdateColumn {
   id,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_StoresUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_StoresUpdateColumn(value);
+
+  String toJson() => toJson_Enum_StoresUpdateColumn(this);
 }
 
 String toJson_Enum_StoresUpdateColumn(Enum_StoresUpdateColumn e) {
@@ -169653,7 +170514,15 @@ Enum_StoresUpdateColumn fromJson_Enum_StoresUpdateColumn(String value) {
   }
 }
 
-enum Enum_StreetsConstraint { streetsPkey, $unknown }
+enum Enum_StreetsConstraint {
+  streetsPkey,
+  $unknown;
+
+  factory Enum_StreetsConstraint.fromJson(String value) =>
+      fromJson_Enum_StreetsConstraint(value);
+
+  String toJson() => toJson_Enum_StreetsConstraint(this);
+}
 
 String toJson_Enum_StreetsConstraint(Enum_StreetsConstraint e) {
   switch (e) {
@@ -169680,7 +170549,12 @@ enum Enum_StreetsSelectColumn {
   line,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_StreetsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_StreetsSelectColumn(value);
+
+  String toJson() => toJson_Enum_StreetsSelectColumn(this);
 }
 
 String toJson_Enum_StreetsSelectColumn(Enum_StreetsSelectColumn e) {
@@ -169728,7 +170602,12 @@ enum Enum_StreetsUpdateColumn {
   line,
   name,
   photoUpdatedAt,
-  $unknown
+  $unknown;
+
+  factory Enum_StreetsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_StreetsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_StreetsUpdateColumn(this);
 }
 
 String toJson_Enum_StreetsUpdateColumn(Enum_StreetsUpdateColumn e) {
@@ -169773,7 +170652,12 @@ enum Enum_StudyYearsConstraint {
   studyYearsNameKey,
   studyYearsOrderKey,
   studyYearsPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_StudyYearsConstraint.fromJson(String value) =>
+      fromJson_Enum_StudyYearsConstraint(value);
+
+  String toJson() => toJson_Enum_StudyYearsConstraint(this);
 }
 
 String toJson_Enum_StudyYearsConstraint(Enum_StudyYearsConstraint e) {
@@ -169802,7 +170686,17 @@ Enum_StudyYearsConstraint fromJson_Enum_StudyYearsConstraint(String value) {
   }
 }
 
-enum Enum_StudyYearsSelectColumn { id, name, order, $unknown }
+enum Enum_StudyYearsSelectColumn {
+  id,
+  name,
+  order,
+  $unknown;
+
+  factory Enum_StudyYearsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_StudyYearsSelectColumn(value);
+
+  String toJson() => toJson_Enum_StudyYearsSelectColumn(this);
+}
 
 String toJson_Enum_StudyYearsSelectColumn(Enum_StudyYearsSelectColumn e) {
   switch (e) {
@@ -169830,7 +170724,16 @@ Enum_StudyYearsSelectColumn fromJson_Enum_StudyYearsSelectColumn(String value) {
   }
 }
 
-enum Enum_StudyYearsUpdateColumn { name, order, $unknown }
+enum Enum_StudyYearsUpdateColumn {
+  name,
+  order,
+  $unknown;
+
+  factory Enum_StudyYearsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_StudyYearsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_StudyYearsUpdateColumn(this);
+}
 
 String toJson_Enum_StudyYearsUpdateColumn(Enum_StudyYearsUpdateColumn e) {
   switch (e) {
@@ -169854,7 +170757,16 @@ Enum_StudyYearsUpdateColumn fromJson_Enum_StudyYearsUpdateColumn(String value) {
   }
 }
 
-enum Enum_TagsConstraint { tagsNameKey, tagsPkey, $unknown }
+enum Enum_TagsConstraint {
+  tagsNameKey,
+  tagsPkey,
+  $unknown;
+
+  factory Enum_TagsConstraint.fromJson(String value) =>
+      fromJson_Enum_TagsConstraint(value);
+
+  String toJson() => toJson_Enum_TagsConstraint(this);
+}
 
 String toJson_Enum_TagsConstraint(Enum_TagsConstraint e) {
   switch (e) {
@@ -169878,7 +170790,17 @@ Enum_TagsConstraint fromJson_Enum_TagsConstraint(String value) {
   }
 }
 
-enum Enum_TagsSelectColumn { color, id, name, $unknown }
+enum Enum_TagsSelectColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_TagsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_TagsSelectColumn(value);
+
+  String toJson() => toJson_Enum_TagsSelectColumn(this);
+}
 
 String toJson_Enum_TagsSelectColumn(Enum_TagsSelectColumn e) {
   switch (e) {
@@ -169906,7 +170828,17 @@ Enum_TagsSelectColumn fromJson_Enum_TagsSelectColumn(String value) {
   }
 }
 
-enum Enum_TagsUpdateColumn { color, id, name, $unknown }
+enum Enum_TagsUpdateColumn {
+  color,
+  id,
+  name,
+  $unknown;
+
+  factory Enum_TagsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_TagsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_TagsUpdateColumn(this);
+}
 
 String toJson_Enum_TagsUpdateColumn(Enum_TagsUpdateColumn e) {
   switch (e) {
@@ -169937,7 +170869,12 @@ Enum_TagsUpdateColumn fromJson_Enum_TagsUpdateColumn(String value) {
 enum Enum_UniversitiesConstraint {
   universitiesNameKey,
   universitiesPkey,
-  $unknown
+  $unknown;
+
+  factory Enum_UniversitiesConstraint.fromJson(String value) =>
+      fromJson_Enum_UniversitiesConstraint(value);
+
+  String toJson() => toJson_Enum_UniversitiesConstraint(this);
 }
 
 String toJson_Enum_UniversitiesConstraint(Enum_UniversitiesConstraint e) {
@@ -169962,7 +170899,16 @@ Enum_UniversitiesConstraint fromJson_Enum_UniversitiesConstraint(String value) {
   }
 }
 
-enum Enum_UniversitiesSelectColumn { id, name, $unknown }
+enum Enum_UniversitiesSelectColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_UniversitiesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_UniversitiesSelectColumn(value);
+
+  String toJson() => toJson_Enum_UniversitiesSelectColumn(this);
+}
 
 String toJson_Enum_UniversitiesSelectColumn(Enum_UniversitiesSelectColumn e) {
   switch (e) {
@@ -169987,7 +170933,16 @@ Enum_UniversitiesSelectColumn fromJson_Enum_UniversitiesSelectColumn(
   }
 }
 
-enum Enum_UniversitiesUpdateColumn { id, name, $unknown }
+enum Enum_UniversitiesUpdateColumn {
+  id,
+  name,
+  $unknown;
+
+  factory Enum_UniversitiesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_UniversitiesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_UniversitiesUpdateColumn(this);
+}
 
 String toJson_Enum_UniversitiesUpdateColumn(Enum_UniversitiesUpdateColumn e) {
   switch (e) {
@@ -170021,7 +170976,12 @@ enum Enum___TypeKind {
   INPUT_OBJECT,
   LIST,
   NON_NULL,
-  $unknown
+  $unknown;
+
+  factory Enum___TypeKind.fromJson(String value) =>
+      fromJson_Enum___TypeKind(value);
+
+  String toJson() => toJson_Enum___TypeKind(this);
 }
 
 String toJson_Enum___TypeKind(Enum___TypeKind e) {
@@ -170090,7 +171050,12 @@ enum Enum___DirectiveLocation {
   ENUM_VALUE,
   INPUT_OBJECT,
   INPUT_FIELD_DEFINITION,
-  $unknown
+  $unknown;
+
+  factory Enum___DirectiveLocation.fromJson(String value) =>
+      fromJson_Enum___DirectiveLocation(value);
+
+  String toJson() => toJson_Enum___DirectiveLocation(this);
 }
 
 String toJson_Enum___DirectiveLocation(Enum___DirectiveLocation e) {

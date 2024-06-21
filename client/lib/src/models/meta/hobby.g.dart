@@ -31,7 +31,7 @@ final _$HobbyFields = <String, FieldMetadata>{
 _$HobbyImpl _$$HobbyImplFromJson(Map json) => _$HobbyImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$$HobbyImplToJson(_$HobbyImpl instance) =>

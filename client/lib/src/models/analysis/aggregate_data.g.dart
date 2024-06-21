@@ -28,7 +28,7 @@ final _$AggregateDataFields = <String, FieldMetadata>{
 
 _$AggregateDataImpl _$$AggregateDataImplFromJson(Map json) =>
     _$AggregateDataImpl(
-      count: json['count'] as int?,
+      count: (json['count'] as num?)?.toInt(),
       max: _readLastRecordedByInfo(json, 'max') == null
           ? null
           : LastRecordedByInfo.fromJson(Map<String, Object?>.from(

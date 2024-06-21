@@ -29,7 +29,7 @@ final _$ShammasLevelFields = <String, FieldMetadata>{
 // **************************************************************************
 
 _$ShammasLevelImpl _$$ShammasLevelImplFromJson(Map json) => _$ShammasLevelImpl(
-      order: json['order'] as int,
+      order: (json['order'] as num).toInt(),
       name: json['name'] as String,
       id: json['id'] as String,
     );

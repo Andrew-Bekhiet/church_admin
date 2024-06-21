@@ -83,14 +83,14 @@ _$ServiceImpl _$$ServiceImplFromJson(Map json) => _$ServiceImpl(
           ? null
           : StudyYear.fromJson(
               Map<String, Object?>.from(json['studyYearTo'] as Map)),
-      studyYearFromId: json['studyYearFromId'] as int?,
-      studyYearToId: json['studyYearToId'] as int?,
+      studyYearFromId: (json['studyYearFromId'] as num?)?.toInt(),
+      studyYearToId: (json['studyYearToId'] as num?)?.toInt(),
       nextService: json['nextService'] == null
           ? null
           : Service.fromJson(
               Map<String, Object?>.from(json['nextService'] as Map)),
       nextServiceId: json['nextServiceId'] as String?,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

@@ -6,13 +6,14 @@
 import 'dart:async' as _i4;
 import 'dart:typed_data' as _i7;
 
-import 'package:church_admin/church_admin.dart' as _i10;
+import 'package:church_admin/church_admin.dart' as _i11;
+import 'package:flutter/foundation.dart' as _i10;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i3;
 import 'package:hive/src/box/default_compaction_strategy.dart' as _i6;
 import 'package:hive/src/box/default_key_comparator.dart' as _i5;
 import 'package:hive_flutter/adapters.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i12;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart'
     as _i8;
 import 'package:path_provider_platform_interface/src/enums.dart' as _i9;
@@ -608,6 +609,60 @@ class MockFlutterSecureStorage extends _i1.Mock
       ) as _i3.MacOsOptions);
 
   @override
+  void registerListener({
+    required String? key,
+    required _i10.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterListener({
+    required String? key,
+    required _i10.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListenersForKey({required String? key}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListenersForKey,
+          [],
+          {#key: key},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListeners() => super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i4.Future<void> write({
     required String? key,
     required String? value,
@@ -773,12 +828,22 @@ class MockFlutterSecureStorage extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
+        Invocation.method(
+          #isCupertinoProtectedDataAvailable,
+          [],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+        returnValueForMissingStub: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
 }
 
 /// A class which mocks [EncryptionService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
+class MockEncryptionService extends _i1.Mock implements _i11.EncryptionService {
   @override
   _i4.Future<String> hashPassword({
     required String? password,
@@ -793,7 +858,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
             #keyBytes: keyBytes,
           },
         ),
-        returnValue: _i4.Future<String>.value(_i11.dummyValue<String>(
+        returnValue: _i4.Future<String>.value(_i12.dummyValue<String>(
           this,
           Invocation.method(
             #hashPassword,
@@ -805,7 +870,7 @@ class MockEncryptionService extends _i1.Mock implements _i10.EncryptionService {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<String>.value(_i11.dummyValue<String>(
+            _i4.Future<String>.value(_i12.dummyValue<String>(
           this,
           Invocation.method(
             #hashPassword,

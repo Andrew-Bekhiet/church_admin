@@ -18,8 +18,9 @@ import 'package:church_admin/src/services/database/gql_definintions/persons/pers
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i6;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:flutter/material.dart' as _i2;
+import 'package:flutter/services.dart' as _i15;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    as _i15;
+    as _i16;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i11;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i5;
@@ -2574,6 +2575,45 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
       ) as _i10.Future<bool>);
 
   @override
+  bool handleStartBackGesture(_i15.PredictiveBackEvent? backEvent) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #handleStartBackGesture,
+          [backEvent],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  void handleUpdateBackGestureProgress(_i15.PredictiveBackEvent? backEvent) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #handleUpdateBackGestureProgress,
+          [backEvent],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCommitBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCommitBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCancelBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCancelBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i10.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
@@ -2855,7 +2895,7 @@ class MockNotificationsService extends _i1.Mock
   _i10.Future<void> notify(
     _i4.Notification? notification, {
     int? id,
-    _i15.NotificationDetails? notificationDetails,
+    _i16.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

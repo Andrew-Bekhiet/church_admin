@@ -31,7 +31,7 @@ final _$TagFields = <String, FieldMetadata>{
 _$TagImpl _$$TagImplFromJson(Map json) => _$TagImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{

@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+// TODO: replace Firebase Dynamic Links
+
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:share_plus/share_plus.dart';

@@ -31,7 +31,7 @@ final _$PersonStateFields = <String, FieldMetadata>{
 _$PersonStateImpl _$$PersonStateImplFromJson(Map json) => _$PersonStateImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
 Map<String, dynamic> _$$PersonStateImplToJson(_$PersonStateImpl instance) =>

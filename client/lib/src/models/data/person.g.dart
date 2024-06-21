@@ -317,8 +317,8 @@ _$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
           ? null
           : StudyYear.fromJson(
               Map<String, Object?>.from(json['studyYear'] as Map)),
-      studyYearId: json['studyYearId'] as int?,
-      color: colorFromInt(json['color'] as int?),
+      studyYearId: (json['studyYearId'] as num?)?.toInt(),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

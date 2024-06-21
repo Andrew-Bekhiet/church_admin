@@ -8,10 +8,11 @@ import 'dart:ui' as _i6;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter/foundation.dart' as _i4;
-import 'package:flutter/material.dart' as _i7;
-import 'package:go_router/src/state.dart' as _i8;
+import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/services.dart' as _i7;
+import 'package:go_router/src/state.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:mockito/src/dummies.dart' as _i10;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
 
 // ignore_for_file: type=lint
@@ -395,6 +396,45 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as _i5.Future<bool>);
 
   @override
+  bool handleStartBackGesture(_i7.PredictiveBackEvent? backEvent) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #handleStartBackGesture,
+          [backEvent],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  void handleUpdateBackGestureProgress(_i7.PredictiveBackEvent? backEvent) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #handleUpdateBackGestureProgress,
+          [backEvent],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCommitBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCommitBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCancelBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCancelBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i5.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
@@ -406,7 +446,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
 
   @override
   _i5.Future<bool> didPushRouteInformation(
-          _i7.RouteInformation? routeInformation) =>
+          _i8.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
@@ -487,7 +527,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
+class MockGoRouterState extends _i1.Mock implements _i9.GoRouterState {
   @override
   Uri get uri => (super.noSuchMethod(
         Invocation.getter(#uri),
@@ -504,11 +544,11 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
   @override
   String get matchedLocation => (super.noSuchMethod(
         Invocation.getter(#matchedLocation),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#matchedLocation),
         ),
-        returnValueForMissingStub: _i9.dummyValue<String>(
+        returnValueForMissingStub: _i10.dummyValue<String>(
           this,
           Invocation.getter(#matchedLocation),
         ),
@@ -549,7 +589,7 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
             #queryParameters: queryParameters,
           },
         ),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.method(
             #namedLocation,
@@ -560,7 +600,7 @@ class MockGoRouterState extends _i1.Mock implements _i8.GoRouterState {
             },
           ),
         ),
-        returnValueForMissingStub: _i9.dummyValue<String>(
+        returnValueForMissingStub: _i10.dummyValue<String>(
           this,
           Invocation.method(
             #namedLocation,
