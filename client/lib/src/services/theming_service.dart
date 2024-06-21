@@ -124,8 +124,8 @@ class ThemingService with WidgetsBindingObserver {
   }
 
   static ThemeData getDefault({
-    Color? primaryOverride,
-    bool? darkTheme,
+    Color? seedOverride,
+    bool? isDarkOverride,
     bool? greatFeastThemeOverride,
     bool? useNewThemeOverride,
     UserSettingsService? userSettingsService,
@@ -133,7 +133,7 @@ class ThemingService with WidgetsBindingObserver {
     late final _userSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark = darkTheme ??
+    bool isDark = isDarkOverride ??
         _userSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
@@ -143,32 +143,13 @@ class ThemingService with WidgetsBindingObserver {
     final bool useNewTheme =
         useNewThemeOverride ?? _userSettingsService.useNewTheme;
 
-    MaterialColor primary =
-        (primaryOverride is! MaterialColor && primaryOverride != null
-                ? MaterialColor(
-                    primaryOverride.value,
-                    {
-                      50: primaryOverride,
-                      100: primaryOverride,
-                      200: primaryOverride,
-                      300: primaryOverride,
-                      400: primaryOverride,
-                      500: primaryOverride,
-                      600: primaryOverride,
-                      700: primaryOverride,
-                      800: primaryOverride,
-                      900: primaryOverride,
-                    },
-                  )
-                : null) ??
-            Colors.teal;
-
+    Color seed = seedOverride ?? Colors.teal;
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now()
             .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
         DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      primary = black;
+      seed = black;
       isDark = true;
     } else if (greatFeastTheme &&
         DateTime.now()
@@ -177,24 +158,24 @@ class ThemingService with WidgetsBindingObserver {
       isDark = false;
     }
 
-    final colorScheme = ColorScheme.fromSeed(
+    final ColorScheme colorScheme = ColorScheme.fromSeed(
       brightness: isDark ? Brightness.dark : Brightness.light,
-      seedColor: primary,
+      seedColor: seed,
       outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
     );
 
-    final themeData = ThemeData(
-      typography: typographyWith3Fonts(
-        Typography.material2021(
-          platform: defaultTargetPlatform,
-          colorScheme: colorScheme,
-        ),
-        displayAndHeadline: 'Cairo',
-        titles: 'Changa',
-        others: 'Roboto',
+    final Typography typography = typographyWith3Fonts(
+      Typography.material2021(
+        platform: defaultTargetPlatform,
+        colorScheme: colorScheme,
       ),
-      brightness: isDark ? Brightness.dark : Brightness.light,
-      primarySwatch: primary,
+      displayAndHeadline: 'Cairo',
+      titles: 'Changa',
+      others: 'Roboto',
+    );
+
+    final themeData = ThemeData.from(
+      textTheme: isDark ? typography.white : typography.black,
       colorScheme: colorScheme,
       useMaterial3: true,
     );
@@ -206,7 +187,7 @@ class ThemingService with WidgetsBindingObserver {
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(15)),
-          borderSide: BorderSide(color: primary),
+          borderSide: BorderSide(color: seed),
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -252,7 +233,7 @@ class ThemingService with WidgetsBindingObserver {
   }
 
   void switchTheme(bool darkTheme) {
-    theme = getDefault(darkTheme: darkTheme);
+    theme = getDefault(isDarkOverride: darkTheme);
   }
 
   Future<void> dispose() async {
