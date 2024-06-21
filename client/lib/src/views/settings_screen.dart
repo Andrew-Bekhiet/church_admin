@@ -72,7 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                   SwitchListTile(
-                    value: userSettingsService.greatFeastTheme,
+                    value: greatFeastTheme,
                     onChanged: (v) => setState(() => greatFeastTheme = v),
                     title: const Text(
                       'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
