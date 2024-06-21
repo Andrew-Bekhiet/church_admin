@@ -34,7 +34,7 @@ void main() async {
         ),
         wrapper: materialAppWrapper(
           theme: ThemingService.getDefault(
-            darkTheme: false,
+            isDarkOverride: false,
             greatFeastThemeOverride: false,
           ),
         ),
