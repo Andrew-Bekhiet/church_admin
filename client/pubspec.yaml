@@ -110,6 +110,7 @@ dev_dependencies:
   firebase_auth_platform_interface: ^7.0.6
   firebase_core_platform_interface: ^5.0.0
   firebase_messaging_platform_interface: ^4.5.7
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2
@@ -142,3 +143,19 @@ flutter:
     - assets/risen.jpg
     - assets/holyweek.jpeg
     - assets/whatsapp.png
+
+flutter_launcher_icons:
+  image_path_android: "graphics/logo.png"
+  image_path_ios: "graphics/logo.png"
+  android: true
+  ios: true
+  adaptive_icon_background: "graphics/logo-bg.png"
+  adaptive_icon_foreground: "graphics/logo-fg.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  background_color_ios: "#ae0000"
+  web:
+    generate: true
+    image_path: "graphics/logo.png"
+    background_color: "#AE0000"
+    theme_color: "#124076"
