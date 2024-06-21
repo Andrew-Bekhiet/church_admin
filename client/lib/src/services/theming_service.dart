@@ -127,6 +127,7 @@ class ThemingService with WidgetsBindingObserver {
     Color? primaryOverride,
     bool? darkTheme,
     bool? greatFeastThemeOverride,
+    bool? useNewThemeOverride,
     UserSettingsService? userSettingsService,
   }) {
     late final _userSettingsService =
@@ -138,6 +139,9 @@ class ThemingService with WidgetsBindingObserver {
 
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
+
+    final bool useNewTheme =
+        useNewThemeOverride ?? _userSettingsService.useNewTheme;
 
     MaterialColor primary =
         (primaryOverride is! MaterialColor && primaryOverride != null
