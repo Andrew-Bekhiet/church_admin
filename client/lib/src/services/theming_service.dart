@@ -143,7 +143,8 @@ class ThemingService with WidgetsBindingObserver {
     final bool useNewTheme =
         useNewThemeOverride ?? _userSettingsService.useNewTheme;
 
-    Color seed = seedOverride ?? Colors.teal;
+    Color seed =
+        seedOverride ?? (useNewTheme ? const Color(0xff124076) : Colors.teal);
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now()
