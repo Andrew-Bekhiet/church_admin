@@ -107,7 +107,6 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
         ),
       ),
       builder: (context, child) => Card.filled(
-        color: Theme.of(context).colorScheme.primaryContainer,
         elevation: _topController.value * 3,
         child: ExpansionTile(
           key: PageStorageKey(service),
