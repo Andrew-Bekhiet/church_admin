@@ -187,6 +187,12 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     return themeData.copyWith(
+      dialogTheme: themeData.dialogTheme.copyWith(
+        titleTextStyle: themeData.textTheme.titleLarge!.copyWith(
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
+        ),
+      ),
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
