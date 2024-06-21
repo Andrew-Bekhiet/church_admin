@@ -357,56 +357,53 @@ class _HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4),
-      child: TabBarView(
-        controller: tabController,
-        children: [
-          LazyTabPage(
-            index: 0,
-            tabController: tabController,
-            builder: (context) => ViewableObjectList<Person>(
-              key: PageStorageKey(
-                personsController,
-              ),
-              objectsController: personsController(),
+    return TabBarView(
+      controller: tabController,
+      children: [
+        LazyTabPage(
+          index: 0,
+          tabController: tabController,
+          builder: (context) => ViewableObjectList<Person>(
+            key: PageStorageKey(
+              personsController,
+            ),
+            objectsController: personsController(),
+          ),
+        ),
+        LazyTabPage(
+          index: 1,
+          tabController: tabController,
+          builder: (context) => ServicesHierarchyList(
+            key: PageStorageKey(
+              servicesController,
+            ),
+            listController: servicesController(),
+            serviceTrailingBuilder: (
+              context,
+              s, {
+              onLongPress,
+              onTap,
+              subtitle,
+              trailing,
+            }) =>
+                IconButton(
+              onPressed: onTap != null ? () => onTap(s) : null,
+              icon: const Icon(Icons.info),
             ),
           ),
-          LazyTabPage(
-            index: 1,
-            tabController: tabController,
-            builder: (context) => ServicesHierarchyList(
-              key: PageStorageKey(
-                servicesController,
-              ),
-              listController: servicesController(),
-              serviceTrailingBuilder: (
-                context,
-                s, {
-                onLongPress,
-                onTap,
-                subtitle,
-                trailing,
-              }) =>
-                  IconButton(
-                onPressed: onTap != null ? () => onTap(s) : null,
-                icon: const Icon(Icons.info),
-              ),
+        ),
+        LazyTabPage(
+          index: 2,
+          tabController: tabController,
+          builder: (context) => ViewableObjectList<Area>(
+            viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+              forceShowSecondLine: false,
             ),
+            key: PageStorageKey(areasController),
+            objectsController: areasController(),
           ),
-          LazyTabPage(
-            index: 2,
-            tabController: tabController,
-            builder: (context) => ViewableObjectList<Area>(
-              viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-                forceShowSecondLine: false,
-              ),
-              key: PageStorageKey(areasController),
-              objectsController: areasController(),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
