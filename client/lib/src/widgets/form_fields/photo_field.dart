@@ -40,6 +40,8 @@ class PhotoField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double appBarHeight = MediaQuery.sizeOf(context).height * 0.41;
+
     return FormField<PhotoFieldState>(
       initialValue: initialValue,
       onSaved: onSaved,
@@ -48,7 +50,7 @@ class PhotoField extends StatelessWidget {
         foregroundColor: foregroundColor,
         stretch: true,
         pinned: true,
-        expandedHeight: MediaQuery.of(context).size.height * 0.4,
+        expandedHeight: appBarHeight,
         actions: [
           IconButton(
             onPressed: _changeImage(context, state),
@@ -57,63 +59,63 @@ class PhotoField extends StatelessWidget {
           ),
           ...addActions,
         ],
-        flexibleSpace: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final themeData = Theme.of(context);
+        flexibleSpace: LayoutBuilder(
+          builder: (context, constraints) {
+            final themeData = Theme.of(context);
 
-              return FlexibleSpaceBar(
-                centerTitle: false,
-                expandedTitleScale: 4,
-                titlePadding: const EdgeInsetsDirectional.only(
-                  bottom: 16,
-                  start: 72,
-                  end: 10,
-                ),
-                title: TransparentPointer(
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity:
-                        constraints.biggest.height > kToolbarHeight * 2 ? 0 : 1,
-                    child: Text(
-                      object.name,
-                      style: themeData.textTheme.titleLarge?.copyWith(
-                        color: foregroundColor,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+            return FlexibleSpaceBar(
+              centerTitle: false,
+              expandedTitleScale: 4,
+              titlePadding: const EdgeInsetsDirectional.only(
+                bottom: 16,
+                start: 72,
+                end: 10,
+              ),
+              title: TransparentPointer(
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity:
+                      constraints.biggest.height > kToolbarHeight * 2 ? 0 : 1,
+                  child: Text(
+                    object.name,
+                    style: themeData.textTheme.titleLarge?.copyWith(
+                      color: foregroundColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                background: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  child: ProgressIndicatorTheme(
-                    data: themeData.progressIndicatorTheme.copyWith(
-                      color: themeData.brightness == Brightness.light
-                          ? themeData.colorScheme.onPrimary
-                          : themeData.colorScheme.onSurface,
-                    ),
-                    child: IconTheme(
-                      data: IconTheme.of(context)
-                          .copyWith(color: foregroundColor),
-                      child: state.value!.hasChanged
-                          ? state.value!.deletePhoto
-                              ? ImageObjectWidget(
-                                  objectOnEmpty,
-                                  circleCrop: false,
-                                )
-                              : Image.file(
-                                  File(state.value!.newPhoto!.path),
-                                )
-                          : ImageObjectWidget(
-                              object,
-                              circleCrop: false,
-                            ),
-                    ),
+              ),
+              background: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                child: ProgressIndicatorTheme(
+                  data: themeData.progressIndicatorTheme.copyWith(
+                    color: themeData.brightness == Brightness.light
+                        ? themeData.colorScheme.onPrimary
+                        : themeData.colorScheme.onSurface,
+                  ),
+                  child: IconTheme(
+                    data:
+                        IconTheme.of(context).copyWith(color: foregroundColor),
+                    child: state.value!.hasChanged
+                        ? state.value!.deletePhoto
+                            ? ImageObjectWidget(
+                                objectOnEmpty,
+                                circleCrop: false,
+                                size: appBarHeight,
+                              )
+                            : Image.file(
+                                File(state.value!.newPhoto!.path),
+                              )
+                        : ImageObjectWidget(
+                            object,
+                            circleCrop: false,
+                            size: appBarHeight,
+                          ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
