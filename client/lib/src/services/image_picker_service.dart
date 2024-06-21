@@ -131,7 +131,7 @@ class ImagePickerService {
     final primaryColor = Theme.of(context).colorScheme.primary;
     final webUiSettings = WebUiSettings(
       context: context,
-      enableExif: true,
+      enableExif: false,
       enableResize: true,
       enableZoom: true,
     );
@@ -141,13 +141,12 @@ class ImagePickerService {
 
       if (cameraPermission != PermissionStatus.granted &&
           cameraPermission != PermissionStatus.limited) return null;
-    } else if (source == ImageSource.gallery) {
-      final storagePermission = await Permission.storage.request();
-
-      if (storagePermission != PermissionStatus.granted &&
-          storagePermission != PermissionStatus.limited) return null;
     }
-    final image = await _imagePicker.pickImage(source: source);
+
+    final image = await _imagePicker.pickImage(
+      source: source,
+      requestFullMetadata: false,
+    );
 
     if (image == null) return null;
 
