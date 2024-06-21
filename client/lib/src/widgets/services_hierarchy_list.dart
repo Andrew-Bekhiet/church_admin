@@ -105,7 +105,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           CurveTween(curve: Curves.easeIn),
         ),
       ),
-      builder: (contex, child) => Card(
+      builder: (context, child) => Card(
         elevation: _topController.value * 3,
         child: ExpansionTile(
           key: PageStorageKey(s),
