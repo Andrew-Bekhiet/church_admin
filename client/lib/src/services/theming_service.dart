@@ -182,6 +182,10 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     return themeData.copyWith(
+      appBarTheme: themeData.appBarTheme.copyWith(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+      ),
       cardTheme: themeData.cardTheme.copyWith(
         clipBehavior: Clip.antiAlias,
       ),
