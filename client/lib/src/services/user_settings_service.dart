@@ -24,6 +24,9 @@ class UserSettingsService {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
+  bool get useNewTheme => box.get('useNewTheme', defaultValue: false)!;
+  Future<void> setUseNewTheme(bool value) => box.put('useNewTheme', value);
+
   String? getSecondLineFor<T>([Type? type]) => box.get(
         _getTypeName(type ?? T) + 'SecondLine',
       );
