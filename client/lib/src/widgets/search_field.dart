@@ -22,15 +22,17 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final IconThemeData iconTheme = IconTheme.of(context);
+    final TextStyle defaultTextStyle = DefaultTextStyle.of(context).style;
+
     return TextField(
       autofocus: autofocus,
       textInputAction: TextInputAction.search,
-      style: DefaultTextStyle.of(context).style,
+      style: defaultTextStyle,
       decoration: InputDecoration(
         hintText: 'بحث ...',
-        hintStyle: DefaultTextStyle.of(context).style.copyWith(
-              color: Theme.of(context).hintColor,
-            ),
+        hintStyle: defaultTextStyle.copyWith(color: theme.hintColor),
         contentPadding: const EdgeInsets.all(10),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -39,6 +41,7 @@ class SearchField extends StatelessWidget {
             ? IconButton(
                 onPressed: () => searchSink.add(null),
                 icon: const Icon(Icons.clear),
+                color: iconTheme.color,
               )
             : null,
       ),
