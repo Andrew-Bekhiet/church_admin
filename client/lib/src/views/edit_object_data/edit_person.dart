@@ -512,55 +512,19 @@ class _EditPersonState extends State<EditPerson> {
             ),
           ],
           const Divider(thickness: 1),
-          FormField<bool>(
+          GenderField(
             initialValue: newPerson.gender,
-            builder: (state) => InputDecorator(
-              decoration: InputDecoration(
-                labelText: 'النوع',
-                errorText: state.errorText,
-              ),
-              child: Row(
-                children: [
-                  ...[true, false].map(
-                    (i) => Expanded(
-                      child: Row(
-                        children: [
-                          Radio<bool>(
-                            value: i,
-                            groupValue: newPerson.gender,
-                            onChanged: (v) {
-                              newPerson = v!
-                                  ? newPerson.copyWith(gender: v)
-                                  : newPerson.copyWith(
-                                      gender: v,
-                                      isShammas: false,
-                                      shammasLevel: null,
-                                      shammasLevelId: null,
-                                    );
-                              setState(() {});
-                            },
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              newPerson = i
-                                  ? newPerson.copyWith(gender: i)
-                                  : newPerson.copyWith(
-                                      gender: i,
-                                      isShammas: false,
-                                      shammasLevel: null,
-                                      shammasLevelId: null,
-                                    );
-                              setState(() {});
-                            },
-                            child: Text(i ? 'ذكر' : 'أنثى'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            onChanged: (v) {
+              newPerson = v!
+                  ? newPerson.copyWith(gender: v)
+                  : newPerson.copyWith(
+                      gender: v,
+                      isShammas: false,
+                      shammasLevel: null,
+                      shammasLevelId: null,
+                    );
+              setState(() {});
+            },
           ),
           ObjectSelectionField<PersonType, PersonType?>(
             initialValue: newPerson.personType,
