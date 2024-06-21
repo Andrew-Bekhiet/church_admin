@@ -55,7 +55,7 @@ _$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       line: lineFromJson(json['line']),
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

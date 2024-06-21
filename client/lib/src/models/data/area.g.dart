@@ -55,7 +55,7 @@ _$AreaImpl _$$AreaImplFromJson(Map json) => _$AreaImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       bounds: polygonFromJson(json['bounds']),
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

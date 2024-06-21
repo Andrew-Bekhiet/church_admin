@@ -29,7 +29,7 @@ final _$StudyYearFields = <String, FieldMetadata>{
 // **************************************************************************
 
 _$StudyYearImpl _$$StudyYearImplFromJson(Map json) => _$StudyYearImpl(
-      order: json['order'] as int,
+      order: (json['order'] as num).toInt(),
       name: json['name'] as String,
     );
 

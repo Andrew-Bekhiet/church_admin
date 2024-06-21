@@ -302,7 +302,6 @@ void main() {
                 .cropImage(
               sourcePath: '/path/foo/bar/XFile',
               aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-              cropStyle: CropStyle.circle,
               uiSettings: anyNamed('uiSettings'),
             ),
           ]);
@@ -346,7 +345,6 @@ Future<void> _setUpImageCropper() async {
     mockImageCropperPlatform.cropImage(
       sourcePath: '/path/foo/bar/XFile',
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-      cropStyle: anyNamed('cropStyle'),
       uiSettings: anyNamed('uiSettings'),
     ),
   ).thenAnswer((_) async => CroppedFile('/path/foo/bar/CroppedFile'));

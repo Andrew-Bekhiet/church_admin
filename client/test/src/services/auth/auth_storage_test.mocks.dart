@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
-import 'dart:typed_data' as _i6;
+import 'dart:async' as _i5;
+import 'dart:typed_data' as _i7;
 
-import 'package:church_admin/church_admin.dart' as _i5;
+import 'package:church_admin/church_admin.dart' as _i6;
+import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i2;
 import 'package:hive_flutter/adapters.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
+import 'package:mockito/src/dummies.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -181,7 +182,61 @@ class MockFlutterSecureStorage extends _i1.Mock
       ) as _i2.MacOsOptions);
 
   @override
-  _i4.Future<void> write({
+  void registerListener({
+    required String? key,
+    required _i4.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #registerListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterListener({
+    required String? key,
+    required _i4.ValueChanged<String?>? listener,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterListener,
+          [],
+          {
+            #key: key,
+            #listener: listener,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListenersForKey({required String? key}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListenersForKey,
+          [],
+          {#key: key},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void unregisterAllListeners() => super.noSuchMethod(
+        Invocation.method(
+          #unregisterAllListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> write({
     required String? key,
     required String? value,
     _i2.IOSOptions? iOptions,
@@ -206,12 +261,12 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<String?> read({
+  _i5.Future<String?> read({
     required String? key,
     _i2.IOSOptions? iOptions,
     _i2.AndroidOptions? aOptions,
@@ -234,12 +289,12 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<String?>.value(),
-        returnValueForMissingStub: _i4.Future<String?>.value(),
-      ) as _i4.Future<String?>);
+        returnValue: _i5.Future<String?>.value(),
+        returnValueForMissingStub: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
 
   @override
-  _i4.Future<bool> containsKey({
+  _i5.Future<bool> containsKey({
     required String? key,
     _i2.IOSOptions? iOptions,
     _i2.AndroidOptions? aOptions,
@@ -262,12 +317,12 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
-  _i4.Future<void> delete({
+  _i5.Future<void> delete({
     required String? key,
     _i2.IOSOptions? iOptions,
     _i2.AndroidOptions? aOptions,
@@ -290,12 +345,12 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<Map<String, String>> readAll({
+  _i5.Future<Map<String, String>> readAll({
     _i2.IOSOptions? iOptions,
     _i2.AndroidOptions? aOptions,
     _i2.LinuxOptions? lOptions,
@@ -316,13 +371,13 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<Map<String, String>>.value(<String, String>{}),
+        returnValue: _i5.Future<Map<String, String>>.value(<String, String>{}),
         returnValueForMissingStub:
-            _i4.Future<Map<String, String>>.value(<String, String>{}),
-      ) as _i4.Future<Map<String, String>>);
+            _i5.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i5.Future<Map<String, String>>);
 
   @override
-  _i4.Future<void> deleteAll({
+  _i5.Future<void> deleteAll({
     _i2.IOSOptions? iOptions,
     _i2.AndroidOptions? aOptions,
     _i2.LinuxOptions? lOptions,
@@ -343,19 +398,29 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
+        Invocation.method(
+          #isCupertinoProtectedDataAvailable,
+          [],
+        ),
+        returnValue: _i5.Future<bool?>.value(),
+        returnValueForMissingStub: _i5.Future<bool?>.value(),
+      ) as _i5.Future<bool?>);
 }
 
 /// A class which mocks [EncryptionService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
+class MockEncryptionService extends _i1.Mock implements _i6.EncryptionService {
   @override
-  _i4.Future<String> hashPassword({
+  _i5.Future<String> hashPassword({
     required String? password,
-    required _i6.Uint8List? keyBytes,
+    required _i7.Uint8List? keyBytes,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -366,7 +431,7 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
             #keyBytes: keyBytes,
           },
         ),
-        returnValue: _i4.Future<String>.value(_i7.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i8.dummyValue<String>(
           this,
           Invocation.method(
             #hashPassword,
@@ -378,7 +443,7 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<String>.value(_i7.dummyValue<String>(
+            _i5.Future<String>.value(_i8.dummyValue<String>(
           this,
           Invocation.method(
             #hashPassword,
@@ -389,10 +454,10 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
             },
           ),
         )),
-      ) as _i4.Future<String>);
+      ) as _i5.Future<String>);
 
   @override
-  _i4.Future<_i6.Uint8List> deriveKey({
+  _i5.Future<_i7.Uint8List> deriveKey({
     required String? password,
     required String? salt,
   }) =>
@@ -405,15 +470,15 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
             #salt: salt,
           },
         ),
-        returnValue: _i4.Future<_i6.Uint8List>.value(_i6.Uint8List(0)),
+        returnValue: _i5.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
         returnValueForMissingStub:
-            _i4.Future<_i6.Uint8List>.value(_i6.Uint8List(0)),
-      ) as _i4.Future<_i6.Uint8List>);
+            _i5.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
+      ) as _i5.Future<_i7.Uint8List>);
 
   @override
-  _i4.Future<bool> verifyPassword({
+  _i5.Future<bool> verifyPassword({
     required String? passwordToVerify,
-    required _i6.Uint8List? keyBytes,
+    required _i7.Uint8List? keyBytes,
     required String? storedPasswordHash,
   }) =>
       (super.noSuchMethod(
@@ -426,30 +491,30 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
             #storedPasswordHash: storedPasswordHash,
           },
         ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
-  _i4.Future<_i6.Uint8List> additionalDeviceInfo() => (super.noSuchMethod(
+  _i5.Future<_i7.Uint8List> additionalDeviceInfo() => (super.noSuchMethod(
         Invocation.method(
           #additionalDeviceInfo,
           [],
         ),
-        returnValue: _i4.Future<_i6.Uint8List>.value(_i6.Uint8List(0)),
+        returnValue: _i5.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
         returnValueForMissingStub:
-            _i4.Future<_i6.Uint8List>.value(_i6.Uint8List(0)),
-      ) as _i4.Future<_i6.Uint8List>);
+            _i5.Future<_i7.Uint8List>.value(_i7.Uint8List(0)),
+      ) as _i5.Future<_i7.Uint8List>);
 
   @override
-  _i4.Future<_i3.HiveCipher> getHiveCipher({String? boxName}) =>
+  _i5.Future<_i3.HiveCipher> getHiveCipher({String? boxName}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getHiveCipher,
           [],
           {#boxName: boxName},
         ),
-        returnValue: _i4.Future<_i3.HiveCipher>.value(_FakeHiveCipher_6(
+        returnValue: _i5.Future<_i3.HiveCipher>.value(_FakeHiveCipher_6(
           this,
           Invocation.method(
             #getHiveCipher,
@@ -458,7 +523,7 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i3.HiveCipher>.value(_FakeHiveCipher_6(
+            _i5.Future<_i3.HiveCipher>.value(_FakeHiveCipher_6(
           this,
           Invocation.method(
             #getHiveCipher,
@@ -466,5 +531,5 @@ class MockEncryptionService extends _i1.Mock implements _i5.EncryptionService {
             {#boxName: boxName},
           ),
         )),
-      ) as _i4.Future<_i3.HiveCipher>);
+      ) as _i5.Future<_i3.HiveCipher>);
 }

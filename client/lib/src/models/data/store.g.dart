@@ -71,7 +71,7 @@ _$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
       address: json['address'] as String?,
       familyId: json['adminFamily'] as String?,
       geolocation: pointFromJson(json['geolocation']),
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       areas: (json['areas'] as List<dynamic>?)
           ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),

@@ -834,6 +834,15 @@ class FirebaseAuthPlatform_ extends _i1.Mock
       );
 
   @override
+  set customAuthDomain(String? _customAuthDomain) => super.noSuchMethod(
+        Invocation.setter(
+          #customAuthDomain,
+          _customAuthDomain,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i4.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
         returnValue: _FakeFirebaseApp_3(

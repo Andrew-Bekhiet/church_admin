@@ -26,7 +26,7 @@ void main() {
         globalProviderContainer
             .read(connectivityPluginProvider)
             .checkConnectivity(),
-      ).thenAnswer((_) async => ConnectivityResult.wifi);
+      ).thenAnswer((_) async => [ConnectivityResult.wifi]);
 
       final unit = ConnectivityService.I;
       addTearDown(unit.dispose);
@@ -58,7 +58,7 @@ void main() {
         globalProviderContainer
             .read(connectivityPluginProvider)
             .checkConnectivity(),
-      ).thenAnswer((_) async => ConnectivityResult.none);
+      ).thenAnswer((_) async => [ConnectivityResult.none]);
 
       final unit = ConnectivityService.I;
       addTearDown(unit.dispose);
@@ -80,7 +80,8 @@ void main() {
   test(
     'Connectivity Service => internet connection => connectivityStream',
     () async {
-      final connectivityController = BehaviorSubject<ConnectivityResult>();
+      final connectivityController =
+          BehaviorSubject<List<ConnectivityResult>>();
       addTearDown(connectivityController.close);
 
       when(
@@ -112,7 +113,7 @@ void main() {
           (_) async =>
               _createMockResponse(responses[response] ?? false ? 200 : 500),
         );
-        connectivityController.add(response);
+        connectivityController.add([response]);
 
         await connectivityController.take(1).first;
       }

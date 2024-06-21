@@ -19,7 +19,7 @@ _$AdvancedQueryImpl _$$AdvancedQueryImplFromJson(Map json) =>
       orderBy: json['orderBy'] == null
           ? const []
           : orderBysFromJson(json['orderBy'] as List),
-      limit: json['limit'] as int?,
+      limit: (json['limit'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$AdvancedQueryImplToJson(_$AdvancedQueryImpl instance) =>

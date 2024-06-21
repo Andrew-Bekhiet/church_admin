@@ -121,25 +121,27 @@ class _FakeUri_7 extends _i1.SmartFake implements Uri {
 /// See the documentation for Mockito's code generation for more information.
 class MockConnectivity extends _i1.Mock implements _i8.Connectivity {
   @override
-  _i9.Stream<_i10.ConnectivityResult> get onConnectivityChanged =>
+  _i9.Stream<List<_i10.ConnectivityResult>> get onConnectivityChanged =>
       (super.noSuchMethod(
         Invocation.getter(#onConnectivityChanged),
-        returnValue: _i9.Stream<_i10.ConnectivityResult>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i10.ConnectivityResult>.empty(),
-      ) as _i9.Stream<_i10.ConnectivityResult>);
+        returnValue: _i9.Stream<List<_i10.ConnectivityResult>>.empty(),
+        returnValueForMissingStub:
+            _i9.Stream<List<_i10.ConnectivityResult>>.empty(),
+      ) as _i9.Stream<List<_i10.ConnectivityResult>>);
 
   @override
-  _i9.Future<_i10.ConnectivityResult> checkConnectivity() =>
+  _i9.Future<List<_i10.ConnectivityResult>> checkConnectivity() =>
       (super.noSuchMethod(
         Invocation.method(
           #checkConnectivity,
           [],
         ),
-        returnValue: _i9.Future<_i10.ConnectivityResult>.value(
-            _i10.ConnectivityResult.bluetooth),
-        returnValueForMissingStub: _i9.Future<_i10.ConnectivityResult>.value(
-            _i10.ConnectivityResult.bluetooth),
-      ) as _i9.Future<_i10.ConnectivityResult>);
+        returnValue: _i9.Future<List<_i10.ConnectivityResult>>.value(
+            <_i10.ConnectivityResult>[]),
+        returnValueForMissingStub:
+            _i9.Future<List<_i10.ConnectivityResult>>.value(
+                <_i10.ConnectivityResult>[]),
+      ) as _i9.Future<List<_i10.ConnectivityResult>>);
 }
 
 /// A class which mocks [Dio].

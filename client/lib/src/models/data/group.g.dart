@@ -63,7 +63,7 @@ final _$GroupFields = <String, FieldMetadata>{
 _$GroupImpl _$$GroupImplFromJson(Map json) => _$GroupImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

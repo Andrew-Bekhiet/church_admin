@@ -8,7 +8,8 @@ import 'dart:ui' as _i7;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:firebase_auth/firebase_auth.dart' as _i5;
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
+import 'package:flutter/services.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:rxdart_ext/rxdart_ext.dart' as _i3;
@@ -618,6 +619,45 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as _i4.Future<bool>);
 
   @override
+  bool handleStartBackGesture(_i8.PredictiveBackEvent? backEvent) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #handleStartBackGesture,
+          [backEvent],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  void handleUpdateBackGestureProgress(_i8.PredictiveBackEvent? backEvent) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #handleUpdateBackGestureProgress,
+          [backEvent],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCommitBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCommitBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void handleCancelBackGesture() => super.noSuchMethod(
+        Invocation.method(
+          #handleCancelBackGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i4.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
@@ -629,7 +669,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
 
   @override
   _i4.Future<bool> didPushRouteInformation(
-          _i8.RouteInformation? routeInformation) =>
+          _i9.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,

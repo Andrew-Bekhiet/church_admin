@@ -80,7 +80,7 @@ _$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
       address: json['address'] as String?,
       geolocation: pointFromJson(json['geolocation']),
       notes: json['notes'] as String?,
-      color: colorFromInt(json['color'] as int?),
+      color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),

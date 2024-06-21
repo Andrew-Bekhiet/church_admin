@@ -129,12 +129,7 @@ class ImagePickerService {
     bool lockAspectRatio = false,
   }) async {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final webUiSettings = WebUiSettings(
-      context: context,
-      enableExif: false,
-      enableResize: true,
-      enableZoom: true,
-    );
+    final webUiSettings = WebUiSettings(context: context);
 
     if (source == ImageSource.camera) {
       final cameraPermission = await Permission.camera.request();
@@ -153,15 +148,16 @@ class ImagePickerService {
     final croppedFile = await _imageCropper.cropImage(
       sourcePath: image.path,
       aspectRatio: aspectRatio,
-      cropStyle: cropStyle,
       uiSettings: [
         AndroidUiSettings(
+          cropStyle: cropStyle,
           toolbarTitle: 'قص الصورة',
           toolbarColor: primaryColor,
           initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: lockAspectRatio,
         ),
         IOSUiSettings(
+          cropStyle: cropStyle,
           aspectRatioLockEnabled: lockAspectRatio,
           resetAspectRatioEnabled: !lockAspectRatio,
           minimumAspectRatio: 1,

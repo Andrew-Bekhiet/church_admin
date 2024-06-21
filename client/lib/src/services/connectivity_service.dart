@@ -38,7 +38,7 @@ class ConnectivityService {
         .asBroadcastStream()
         .asyncMap(
           (state) async =>
-              state != ConnectivityResult.none && await _canPingUrl(),
+              state.isNotEmpty && state.singleOrNull != ConnectivityResult.none && await _canPingUrl(),
         )
         .startWithFuture(Future.sync(isConnected))
         .listen(
@@ -49,8 +49,8 @@ class ConnectivityService {
   }
 
   Future<bool> isConnected() async {
-    final isConnected = await _connectivityPlugin.checkConnectivity() !=
-        ConnectivityResult.none;
+    final state = await _connectivityPlugin.checkConnectivity();
+    final isConnected = state.isNotEmpty && state.singleOrNull != ConnectivityResult.none;
 
     if (!isConnected) return false;
 
