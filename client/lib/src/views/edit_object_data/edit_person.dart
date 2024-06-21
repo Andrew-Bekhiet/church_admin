@@ -512,32 +512,55 @@ class _EditPersonState extends State<EditPerson> {
             ),
           ],
           const Divider(thickness: 1),
-          DropdownButtonFormField<bool>(
-            decoration: const InputDecoration(
-              labelText: 'النوع',
+          FormField<bool>(
+            initialValue: newPerson.gender,
+            builder: (state) => InputDecorator(
+              decoration: InputDecoration(
+                labelText: 'النوع',
+                errorText: state.errorText,
+              ),
+              child: Row(
+                children: [
+                  ...[true, false].map(
+                    (i) => Expanded(
+                      child: Row(
+                        children: [
+                          Radio<bool>(
+                            value: i,
+                            groupValue: newPerson.gender,
+                            onChanged: (v) {
+                              newPerson = v!
+                                  ? newPerson.copyWith(gender: v)
+                                  : newPerson.copyWith(
+                                      gender: v,
+                                      isShammas: false,
+                                      shammasLevel: null,
+                                      shammasLevelId: null,
+                                    );
+                              setState(() {});
+                            },
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              newPerson = i
+                                  ? newPerson.copyWith(gender: i)
+                                  : newPerson.copyWith(
+                                      gender: i,
+                                      isShammas: false,
+                                      shammasLevel: null,
+                                      shammasLevelId: null,
+                                    );
+                              setState(() {});
+                            },
+                            child: Text(i ? 'ذكر' : 'أنثى'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            items: const [
-              DropdownMenuItem(
-                value: true,
-                child: Text('ذكر'),
-              ),
-              DropdownMenuItem(
-                value: false,
-                child: Text('أنثى'),
-              ),
-            ],
-            onChanged: (v) {
-              newPerson = v!
-                  ? newPerson.copyWith(gender: v)
-                  : newPerson.copyWith(
-                      gender: v,
-                      isShammas: false,
-                      shammasLevel: null,
-                      shammasLevelId: null,
-                    );
-              setState(() {});
-            },
-            value: newPerson.gender,
           ),
           ObjectSelectionField<PersonType, PersonType?>(
             initialValue: newPerson.personType,
