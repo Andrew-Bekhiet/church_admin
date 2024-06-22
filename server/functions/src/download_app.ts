@@ -3,12 +3,30 @@ import { storage } from "firebase-admin";
 import { https } from "firebase-functions/v2";
 import { assertUserAuthenticatedAndApproved } from "./common";
 
+type Version = {
+  major: number;
+  minor: number;
+  patch: number;
+};
+
 const expiryWindowMillis = 1000 * 60 * 20;
 
 export const getAppDownloadLink = https.onCall({}, async (context) => {
   const currentUser = await assertUserAuthenticatedAndApproved(context.auth);
+  const platform = context.data.platform ?? "android";
+  const extension = platform === "android" ? "apk" : "ipa";
 
-  console.log("Generating download link for user", currentUser.uid);
+  if (platform !== "android" && platform !== "ios") {
+    console.error("Invalid platform", platform);
+    throw new https.HttpsError("invalid-argument", "invalid platform");
+  }
+
+  console.log(
+    "Generating download link for user",
+    currentUser.uid,
+    "platform",
+    platform
+  );
 
   let nextPageToken: string | undefined;
   let response: GetFilesResponse;
@@ -21,7 +39,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
 
     maxVersion = response[0].reduce((maxResult, file) => {
       const versionMatch = file.name.match(
-        /app-release-v(\d+)\.(\d+)\.(\d+)\.apk/
+        `app-release-v(\\d+)\\.(\\d+)\\.(\\d+)\\.${extension}`
       );
       const maxVersion = maxResult.version;
 
@@ -64,7 +82,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
   return (
     await storage()
       .bucket(process.env["APP_RELEASE_GCS_BUCKET"])
-      .file(`app-release-v${maxVersionString}.apk`)
+      .file(`app-release-v${maxVersionString}.${extension}`)
       .getSignedUrl({
         queryParams: {
           "content-length": maxVersion.file!.metadata.size,
@@ -73,13 +91,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
         expires: Date.now() + expiryWindowMillis,
         version: "v4",
         action: "read",
-        promptSaveAs: `church-admin-v${maxVersionString}.apk`,
+        promptSaveAs: `church-admin-v${maxVersionString}.${extension}`,
       })
   )[0];
 });
-
-type Version = {
-  major: number;
-  minor: number;
-  patch: number;
-};
