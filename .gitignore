@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 migration/
+alt-store-server/
 
 # IntelliJ related
 *.iml
