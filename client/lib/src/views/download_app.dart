@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class DownloadAppScreen extends StatelessWidget {
   static final GoRoute route = GoRoute(
@@ -26,19 +27,15 @@ class DownloadAppScreen extends StatelessWidget {
               : Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
-              onPressed: () => _downloadAndroidApp(context),
-              child: const Text('تنزيل التطبيق لنظام Android'),
+            FilledButton.tonalIcon(
+              onPressed: () => _downloadAndroidApp(context, 'android'),
+              icon: const Icon(Symbols.android),
+              label: const Text('تنزيل التطبيق لنظام Android'),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const ElevatedButton(
-                  onPressed: null,
-                  child: Text('تنزيل التطبيق لنظام iOS/iPhone'),
-                ),
-                Text('قريبا', style: Theme.of(context).textTheme.bodySmall),
-              ],
+            FilledButton.tonalIcon(
+              onPressed: () => _downloadAndroidApp(context, 'ios'),
+              icon: const Icon(Symbols.ios),
+              label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),
             ),
           ],
         ),
@@ -46,10 +43,13 @@ class DownloadAppScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _downloadAndroidApp(BuildContext context) async {
+  Future<void> _downloadAndroidApp(
+    BuildContext context,
+    String platform,
+  ) async {
     final String url = await _showLoadingLinkDialog(
       context,
-      FunctionsService.I.getAppDownloadLink('android'),
+      FunctionsService.I.getAppDownloadLink(platform),
     );
 
     unawaited(LauncherService.I.launchUrl(Uri.parse(url)));
