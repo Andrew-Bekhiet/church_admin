@@ -142,7 +142,7 @@ jobs:
           directory: client
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  release:
+  release-mobile:
     permissions:
       contents: write
 
@@ -300,3 +300,66 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ steps.version.outputs.version }}
           generateReleaseNotes: true
+
+  release-web:
+    runs-on: ubuntu-latest
+    if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release web]')))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+          channel: "stable"
+
+      - name: Populate the Flutter tool's cache of binary artifacts
+        run: flutter precache
+
+      # - name: Get Cached .dart_tool
+      #   uses: actions/cache@v3
+      #   id: dart_tool_cache
+      #   with:
+      #     path: client/.dart_tool
+      #     key: dart-tool-v1-${{hashFiles('client/pubspec.yaml', 'client/build.yaml')}}
+      #     restore-keys: |
+      #       dart-tool-v1-
+
+      - name: Decode and save secrets to files
+        working-directory: client
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
+          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
+          echo $ENCRYPTION_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/encryption/encryption_service_impl.dart
+          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/services/secrets/secrets_service_impl.dart
+
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Run new builder
+        working-directory: client
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build web
+        working-directory: client
+        run: flutter build web
+
+      - name: Copy web build to public folder
+        run: cp -r ./client/build/web ./server/public
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_HOSTING_DEPLOYER_KEY }}
+          entryPoint: ./server/
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          channelId: live
