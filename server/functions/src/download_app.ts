@@ -85,8 +85,12 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
       .file(`app-release-v${maxVersionString}.${extension}`)
       .getSignedUrl({
         queryParams: {
-          "content-length": maxVersion.file!.metadata.size,
-          "response-content-type": maxVersion.file!.metadata.contentType,
+          "content-length": maxVersion.file!.metadata.size?.toString() ?? "",
+          "response-content-type":
+            maxVersion.file!.metadata.contentType ??
+            (platform === "android"
+              ? "application/vnd.android.package-archive"
+              : "application/octet-stream"),
         },
         expires: Date.now() + expiryWindowMillis,
         version: "v4",
