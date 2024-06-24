@@ -302,6 +302,7 @@ jobs:
           generateReleaseNotes: true
 
   release-web:
+    needs: run-tests
     runs-on: ubuntu-latest
     if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release web]')))
 
