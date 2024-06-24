@@ -62,8 +62,8 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                   errorText: state.errorText,
                   labelText: 'تاريخ أخر تناول',
                   suffixIcon: state.isValid
-                      ? const Icon(Icons.done, color: Colors.green)
-                      : const Icon(Icons.close, color: Colors.red),
+                      ? const Icon(Symbols.done, color: Colors.green)
+                      : const Icon(Symbols.close, color: Colors.red),
                 ),
                 initialValue: _userData.lastKodas?.time,
                 onTap: (state) async {
@@ -103,8 +103,8 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                   errorText: state.errorText,
                   labelText: 'تاريخ أخر اعتراف',
                   suffixIcon: state.isValid
-                      ? const Icon(Icons.done, color: Colors.green)
-                      : const Icon(Icons.close, color: Colors.red),
+                      ? const Icon(Symbols.done, color: Colors.green)
+                      : const Icon(Symbols.close, color: Colors.red),
                 ),
                 initialValue: _userData.lastConfession?.time,
                 onTap: (state) async {
@@ -145,7 +145,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
       floatingActionButton: FloatingActionButton(
         onPressed: _save,
         tooltip: 'حفظ',
-        child: const Icon(Icons.done),
+        child: const Icon(Symbols.done),
       ),
     );
   }

@@ -68,7 +68,10 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:
+          Theme.of(context).colorScheme.brightness == Brightness.light
+              ? Colors.white
+              : Colors.black,
       appBar: AppBar(
         toolbarHeight: 0.40684931506849314 * size.height,
         leading: widget.next != null ? const BackButton() : null,
@@ -116,7 +119,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 builder: (context, canCheckBiometricsData) {
                   if (canCheckBiometricsData.data ?? false) {
                     return FilledButton.tonalIcon(
-                      icon: const Icon(Icons.fingerprint),
+                      icon: const Icon(Symbols.fingerprint),
                       label: const Text(
                         'إعادة المحاولة عن طريق بصمة الاصبع/الوجه',
                       ),

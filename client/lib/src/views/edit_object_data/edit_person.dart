@@ -134,7 +134,7 @@ class _EditPersonState extends State<EditPerson> {
                     ? IconButton(
                         tooltip: 'اختيار من جهات الاتصال',
                         onPressed: _importFromContacts,
-                        icon: const Icon(Icons.contacts),
+                        icon: const Icon(Symbols.contacts),
                       )
                     : null,
               ),
@@ -179,7 +179,7 @@ class _EditPersonState extends State<EditPerson> {
                           labelText: phone.key,
                           hintText: 'مثال: 01234...',
                           suffixIcon: IconButton(
-                            icon: const Icon(Icons.edit),
+                            icon: const Icon(Symbols.edit),
                             tooltip: 'تعديل اسم الهاتف',
                             onPressed: _onEditPhoneFieldName(phone),
                           ),
@@ -224,7 +224,7 @@ class _EditPersonState extends State<EditPerson> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: FilledButton.tonalIcon(
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Symbols.add),
                   label: const Text('اضافة رقم هاتف أخر'),
                   onPressed: () async {
                     final name = await _renamePhoneFieldName();
@@ -1190,7 +1190,7 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
           IconButton(
             onPressed: () =>
                 Navigator.of(context).pop(selected.value.values.toSet()),
-            icon: const Icon(Icons.check),
+            icon: const Icon(Symbols.check),
           ),
         ],
       ),

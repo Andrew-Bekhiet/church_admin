@@ -69,7 +69,7 @@ class _EditAreaState extends State<EditArea> {
           ),
           FilledButton.tonalIcon(
             onPressed: _editGeolocation(context),
-            icon: const Icon(Icons.edit_location),
+            icon: const Icon(Symbols.edit_location),
             label: const Text('المكان على الخريطة'),
           ),
           DateTimeField(

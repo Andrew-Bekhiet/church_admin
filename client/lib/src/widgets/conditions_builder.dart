@@ -84,7 +84,7 @@ class ConditionsBuilder<T> extends StatelessWidget {
               ...conditions,
               _createNewCondition(),
             ],
-            icon: const Icon(Icons.filter_alt),
+            icon: const Icon(Symbols.filter_alt),
             label: Text(
               'إضافة شرط ل' +
                   queryableType.label.replaceFirst(RegExp('^ال'), 'ل'),
@@ -239,7 +239,7 @@ class ConditionBuilder<T> extends StatelessWidget {
                 ),
               IconButton(
                 onPressed: onConditionRemoved,
-                icon: const Icon(Icons.clear),
+                icon: const Icon(Symbols.clear),
               ),
             ],
           ),

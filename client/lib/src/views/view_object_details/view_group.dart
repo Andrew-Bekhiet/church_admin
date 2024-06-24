@@ -96,7 +96,7 @@ class _ViewGroupState extends State<ViewGroup> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add group analysis
                 onPressed: () {},
@@ -132,7 +132,7 @@ class _ViewGroupState extends State<ViewGroup> {
           ).toString(),
           extra: {'group': group},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
@@ -147,7 +147,7 @@ class _ViewGroupState extends State<ViewGroup> {
             },
           );
         },
-        child: const Icon(Icons.person_add_alt_1),
+        child: const Icon(Symbols.person_add),
       ),
     );
   }

@@ -30,7 +30,7 @@ class TitleSearchField extends StatelessWidget {
             Expanded(child: title),
             IconButton(
               onPressed: () => searchStream.add(''),
-              icon: const Icon(Icons.search),
+              icon: const Icon(Symbols.search),
             ),
           ],
         );

@@ -29,7 +29,7 @@ class ObjectMarkerWidget extends StatelessWidget {
             width: 50,
             height: 50,
             child: Icon(
-              Icons.location_pin,
+              Symbols.location_pin,
               size: 50,
               color: effectiveColor.darken(50),
             ),
@@ -38,7 +38,7 @@ class ObjectMarkerWidget extends StatelessWidget {
             width: 47,
             height: 47,
             child: Icon(
-              Icons.location_pin,
+              Symbols.location_pin,
               size: 47,
               color: effectiveColor.brighten(50),
             ),
@@ -48,7 +48,7 @@ class ObjectMarkerWidget extends StatelessWidget {
           width: 40,
           height: 40,
           child: Icon(
-            Icons.location_pin,
+            Symbols.location_pin,
             size: 40,
             shadows: [
               if (!isFocused)

@@ -76,7 +76,11 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
       title: title ?? Text(object.name),
       subtitle: subtitle ??
           (secondLine != null
-              ? Text(secondLine)
+              ? Text(
+                  secondLine,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                )
               : forceShowSecondLine ?? config.forceShowSecondLine
                   ? const SizedBox()
                   : null),

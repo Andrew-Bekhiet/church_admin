@@ -73,7 +73,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                     if (widget.canDeletePhoto(_controller))
                       IconButton(
                         onPressed: () => _controller.delete(context),
-                        icon: const Icon(Icons.delete),
+                        icon: const Icon(Symbols.delete),
                         tooltip: 'حذف',
                       ),
                   ],
@@ -102,7 +102,7 @@ class _EditObjectDataState<T extends ViewableWithID>
         floatingActionButton: FloatingActionButton(
           onPressed: () => _controller.save(context),
           tooltip: 'حفظ',
-          child: const Icon(Icons.save),
+          child: const Icon(Symbols.save),
         ),
       ),
     );

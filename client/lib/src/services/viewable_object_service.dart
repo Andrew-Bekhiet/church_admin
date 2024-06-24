@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class ViewableObjectService {
   static ViewableObjectService get I =>
@@ -189,7 +188,7 @@ class ViewableObjectService {
     } else if (imageObject is Store || _isSubtype<T, Store>()) {
       return Symbols.store;
     } else if (imageObject is Service || _isSubtype<T, Service>()) {
-      return Symbols.image;
+      return Symbols.volunteer_activism;
     } else if (imageObject is Class || _isSubtype<T, Class>()) {
       return Symbols.groups_2;
     } else if (imageObject is Group || _isSubtype<T, Group>()) {

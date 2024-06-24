@@ -60,7 +60,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
         title: const Text('المصادقة الثنائية'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Symbols.logout),
             onPressed: () {
               if (AuthService.I.isSignedIn) {
                 AuthService.I.signOut();

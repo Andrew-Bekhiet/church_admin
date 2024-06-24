@@ -27,7 +27,7 @@ class GeomapFAB extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 28),
           child: FloatingActionButton.small(
             onPressed: _onTap(location),
-            child: const Icon(Icons.map),
+            child: const Icon(Symbols.map),
           ),
         );
       },

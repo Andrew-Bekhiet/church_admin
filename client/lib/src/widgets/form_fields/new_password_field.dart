@@ -18,8 +18,8 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
   @override
   Widget build(BuildContext context) {
     return FancyPasswordField(
-      showPasswordIcon: const Icon(Icons.visibility_off),
-      hidePasswordIcon: const Icon(Icons.visibility),
+      showPasswordIcon: const Icon(Symbols.visibility_off),
+      hidePasswordIcon: const Icon(Symbols.visibility),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validationRules: {
         DigitValidationRule(customText: 'تحتوي على أرقام'),

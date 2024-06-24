@@ -128,7 +128,7 @@ class _ViewStreetState extends State<ViewStreet> {
                 ),
                 child: FilledButton.tonalIcon(
                   label: const Text('الموقع على الخريطة'),
-                  icon: const Icon(Icons.map),
+                  icon: const Icon(Symbols.map),
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ViewGeodataMap(
@@ -155,7 +155,7 @@ class _ViewStreetState extends State<ViewStreet> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add street analysis
                 onPressed: () {},
@@ -185,7 +185,7 @@ class _ViewStreetState extends State<ViewStreet> {
           ).toString(),
           extra: {'street': street},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -197,9 +197,9 @@ class _ViewStreetState extends State<ViewStreet> {
           SwitchingFloatingActionButton(
         tabController: tabController,
         icons: const {
-          0: Icon(Icons.group_add),
-          1: Icon(Icons.add_business),
-          2: Icon(Icons.person_add_alt_1),
+          0: Icon(Symbols.group_add),
+          1: Icon(Symbols.add_business),
+          2: Icon(Symbols.person_add),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {

@@ -32,25 +32,25 @@ void main() {
       await screenMatchesGolden(tester, 'title_search_field/initial');
 
       expect(find.text('Test Title'), findsOneWidget);
-      expect(find.byIcon(Icons.search), findsOneWidget);
+      expect(find.byIcon(Symbols.search), findsOneWidget);
       expect(find.byType(TextField), findsNothing);
 
-      await tester.tap(find.byIcon(Icons.search));
+      await tester.tap(find.byIcon(Symbols.search));
       await tester.pumpAndSettle();
 
       await screenMatchesGolden(tester, 'title_search_field/search');
 
       expect(find.text('Test Title'), findsNothing);
-      expect(find.byIcon(Icons.search), findsNothing);
+      expect(find.byIcon(Symbols.search), findsNothing);
       expect(find.byType(TextField), findsOneWidget);
 
-      await tester.tap(find.byIcon(Icons.clear));
+      await tester.tap(find.byIcon(Symbols.clear));
       await tester.pumpAndSettle();
 
       await screenMatchesGolden(tester, 'title_search_field/initial');
 
       expect(find.text('Test Title'), findsOneWidget);
-      expect(find.byIcon(Icons.search), findsOneWidget);
+      expect(find.byIcon(Symbols.search), findsOneWidget);
       expect(find.byType(TextField), findsNothing);
     },
   );

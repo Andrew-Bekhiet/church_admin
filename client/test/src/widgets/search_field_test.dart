@@ -27,13 +27,13 @@ void main() {
           );
 
           expect(find.byType(TextField), findsOneWidget);
-          expect(find.byIcon(Icons.clear), findsOneWidget);
+          expect(find.byIcon(Symbols.clear), findsOneWidget);
 
           await tester.enterText(find.byType(TextField), 'test');
           expect(find.text('test'), findsOneWidget);
           expect(sink.value, 'test');
 
-          await tester.tap(find.byIcon(Icons.clear));
+          await tester.tap(find.byIcon(Symbols.clear));
           expect(sink.value, isNull);
         },
       );
@@ -59,7 +59,7 @@ void main() {
           );
 
           expect(find.byType(TextField), findsOneWidget);
-          expect(find.byIcon(Icons.clear), findsNothing);
+          expect(find.byIcon(Symbols.clear), findsNothing);
 
           await tester.enterText(find.byType(TextField), 'test');
           expect(find.text('test'), findsOneWidget);

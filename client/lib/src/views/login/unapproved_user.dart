@@ -32,7 +32,7 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
         title: const Text('في انتظار الموافقة'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Symbols.logout),
             onPressed: AuthService.I.signOut,
           ),
         ],

@@ -98,7 +98,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                     state.didChange(null);
                     onChanged?.call(null);
                   },
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Symbols.delete),
                 )
               : null,
         );

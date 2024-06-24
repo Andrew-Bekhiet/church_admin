@@ -43,7 +43,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
 
   Set<IconData> toIcons() {
     if (!approved) {
-      return {Icons.person_off};
+      return {Symbols.person_off};
     } else if (length == 1) {
       return {};
     }

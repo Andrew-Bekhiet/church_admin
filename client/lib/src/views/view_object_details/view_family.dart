@@ -144,7 +144,7 @@ class _ViewFamilyState extends State<ViewFamily> {
               additionalOptions: [
                 if (family.geolocation != null)
                   IconButton(
-                    icon: const Icon(Icons.map),
+                    icon: const Icon(Symbols.map),
                     onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ViewGeodataMap(
@@ -191,7 +191,7 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add family analysis
                 onPressed: () {},
@@ -221,16 +221,16 @@ class _ViewFamilyState extends State<ViewFamily> {
           ).toString(),
           extra: {'family': family},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
           SwitchingFloatingActionButton(
         tabController: tabController,
         icons: const {
-          0: Icon(Icons.person_add_alt_1),
-          1: Icon(Icons.group_add),
-          2: Icon(Icons.group_add),
-          3: Icon(Icons.add_business),
+          0: Icon(Symbols.person_add),
+          1: Icon(Symbols.group_add),
+          2: Icon(Symbols.group_add),
+          3: Icon(Symbols.add_business),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {

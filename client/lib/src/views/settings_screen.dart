@@ -90,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 Brightness.dark,
                       );
                     },
-                    icon: const Icon(Icons.done),
+                    icon: const Icon(Symbols.done),
                     label: const Text('تغيير'),
                   ),
                 ],

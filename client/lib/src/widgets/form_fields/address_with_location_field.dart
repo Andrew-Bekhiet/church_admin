@@ -50,7 +50,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                       }
                     }
                   },
-                  icon: const Icon(Icons.edit_location),
+                  icon: const Icon(Symbols.edit_location),
                 ),
               ),
               initialValue: _currentAddress,
@@ -79,7 +79,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                     _suggestedAddress = null;
                   },
                 ),
-                icon: const Icon(Icons.done),
+                icon: const Icon(Symbols.done),
                 label: const Text('استخدام العنوان المقترح'),
               ),
             ),

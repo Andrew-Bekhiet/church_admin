@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class SearchField extends StatelessWidget {
   /// The sink to which the search query will be added
@@ -40,7 +41,7 @@ class SearchField extends StatelessWidget {
         suffixIcon: canHide
             ? IconButton(
                 onPressed: () => searchSink.add(null),
-                icon: const Icon(Icons.clear),
+                icon: const Icon(Symbols.clear),
                 color: iconTheme.color,
               )
             : null,

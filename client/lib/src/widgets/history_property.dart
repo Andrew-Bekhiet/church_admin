@@ -41,13 +41,13 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
         children: [
           IconButton(
             tooltip: 'السجل',
-            icon: const Icon(Icons.history),
+            icon: const Icon(Symbols.history),
             onPressed: _onHistoryTap(context),
           ),
           if (onRecordNow != null)
             IconButton(
               onPressed: onRecordNow,
-              icon: const Icon(Icons.task_alt),
+              icon: const Icon(Symbols.task_alt),
               tooltip: 'تسجيل $name',
             ),
         ],

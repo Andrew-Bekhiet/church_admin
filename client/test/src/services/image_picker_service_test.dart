@@ -50,21 +50,21 @@ void main() {
           expect(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.camera),
+              matching: find.byIcon(Symbols.camera),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.photo_library),
+              matching: find.byIcon(Symbols.photo_library),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(
               of: find.byType(IconButton),
-              matching: find.byIcon(Icons.delete),
+              matching: find.byIcon(Symbols.delete),
             ),
             findsOneWidget,
           );
@@ -81,21 +81,21 @@ void main() {
           expect(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.camera),
+              matching: find.byIcon(Symbols.camera),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.photo_library),
+              matching: find.byIcon(Symbols.photo_library),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(
               of: find.byType(IconButton),
-              matching: find.byIcon(Icons.delete),
+              matching: find.byIcon(Symbols.delete),
             ),
             findsNothing,
           );
@@ -121,7 +121,7 @@ void main() {
           await tester.tap(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.camera),
+              matching: find.byIcon(Symbols.camera),
             ),
           );
         },
@@ -144,7 +144,7 @@ void main() {
           await tester.tap(
             find.descendant(
               of: find.byType(InkWell),
-              matching: find.byIcon(Icons.photo_library),
+              matching: find.byIcon(Symbols.photo_library),
             ),
           );
         },
@@ -168,7 +168,7 @@ void main() {
               await tester.tap(
                 find.descendant(
                   of: find.byType(IconButton),
-                  matching: find.byIcon(Icons.delete),
+                  matching: find.byIcon(Symbols.delete),
                 ),
               );
               await tester.pumpAndSettle();
@@ -215,7 +215,7 @@ void main() {
               await tester.tap(
                 find.descendant(
                   of: find.byType(IconButton),
-                  matching: find.byIcon(Icons.delete),
+                  matching: find.byIcon(Symbols.delete),
                 ),
               );
               await tester.pumpAndSettle();
@@ -247,7 +247,7 @@ void main() {
               await tester.tap(
                 find.descendant(
                   of: find.byType(IconButton),
-                  matching: find.byIcon(Icons.delete),
+                  matching: find.byIcon(Symbols.delete),
                 ),
               );
               await tester.pumpAndSettle();

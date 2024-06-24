@@ -119,7 +119,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             children: [
               Transform.rotate(
                 angle: _topController.value * math.pi,
-                child: const Icon(Icons.expand_more),
+                child: const Icon(Symbols.expand_more),
               ),
               if (widget.serviceTrailingBuilder != null)
                 widget.serviceTrailingBuilder!(
