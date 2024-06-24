@@ -164,6 +164,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                     child: const Text('اختيار'),
                   ),
                 ),
+                const Divider(thickness: 1),
               ],
             ),
           ),

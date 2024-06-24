@@ -61,8 +61,14 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final inputBorder = OutlineInputBorder(
+      gapPadding: 8,
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      borderSide: BorderSide(color: colorScheme.primary),
+    );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 0.40684931506849314 * size.height,
         leading: widget.next != null ? const BackButton() : null,
@@ -84,6 +90,19 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               PasswordFormField(
                 onFieldSubmitted: _submit,
                 controller: _passwordText,
+                decoration: InputDecoration(
+                  labelText: 'كلمة السر',
+                  border: inputBorder,
+                  enabledBorder: inputBorder,
+                  focusedBorder: inputBorder,
+                  prefixIconColor: Colors.white,
+                  suffixIconColor: Colors.white,
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: colorScheme.primary),
+                  iconColor: Colors.white,
+                ),
                 validator: (p) =>
                     p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,
                 textInputAction: TextInputAction.done,

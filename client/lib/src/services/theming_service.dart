@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 class ThemingService with WidgetsBindingObserver {
   static ThemingService get I =>
@@ -158,6 +159,7 @@ class ThemingService with WidgetsBindingObserver {
       brightness: isDark ? Brightness.dark : Brightness.light,
       seedColor: seed,
       outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
+      error: const Color(0xffFF4B40),
     );
 
     final Typography typography = typographyWith3Fonts(
@@ -171,7 +173,7 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     final ThemeData rawThemeData = ThemeData.from(
-      textTheme: isDark ? typography.white : typography.black,
+      textTheme: typography.white,
       colorScheme: colorScheme,
       useMaterial3: true,
     );
@@ -181,24 +183,117 @@ class ThemingService with WidgetsBindingObserver {
       rawThemeData.typography.geometryThemeFor(ScriptCategory.tall),
     );
 
+    const radius15 = Radius.circular(15);
+    const inputBorder = OutlineInputBorder(
+      gapPadding: 8,
+      borderRadius: BorderRadius.only(
+        topLeft: radius15,
+        topRight: Radius.circular(2),
+        bottomLeft: radius15,
+        bottomRight: radius15,
+      ),
+      borderSide: BorderSide(color: Colors.white),
+    );
     return themeData.copyWith(
+      scaffoldBackgroundColor: seed,
+      appBarTheme: themeData.appBarTheme.copyWith(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+        ),
+        foregroundColor: Colors.white,
+        backgroundColor: seed,
+      ),
+      hintColor: Colors.white.withOpacity(0.5),
       dialogTheme: themeData.dialogTheme.copyWith(
-        titleTextStyle: themeData.textTheme.titleLarge!.copyWith(
+        backgroundColor: const Color(0xff1A477C),
+        elevation: 5,
+        surfaceTintColor: const Color(0xffD9D9D9),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
+        ),
+        titleTextStyle: themeData.textTheme.bodyLarge!.copyWith(
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.underline,
         ),
       ),
+      listTileTheme: themeData.listTileTheme.copyWith(
+        titleTextStyle: themeData.textTheme.bodyLarge!
+            .copyWith(fontWeight: FontWeight.bold),
+        iconColor: Colors.white,
+        textColor: Colors.white,
+      ),
+      expansionTileTheme: themeData.expansionTileTheme.copyWith(
+        collapsedIconColor: Colors.white,
+        collapsedTextColor: Colors.white,
+        iconColor: Colors.white.mix(seed, 20),
+        textColor: Colors.white.mix(seed, 20),
+      ),
       cardTheme: themeData.cardTheme.copyWith(
         clipBehavior: Clip.antiAlias,
-        color: themeData.colorScheme.inversePrimary,
+        color: seed,
+      ),
+      tabBarTheme: themeData.tabBarTheme.copyWith(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white.withOpacity(0.3),
+        indicatorColor: Colors.white,
+        indicatorSize: TabBarIndicatorSize.label,
+        labelStyle: themeData.textTheme.bodyLarge!
+            .copyWith(fontWeight: FontWeight.bold),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-          borderSide: BorderSide(color: seed),
+        border: inputBorder,
+        enabledBorder: inputBorder,
+        focusedBorder: inputBorder,
+        activeIndicatorBorder: inputBorder.borderSide,
+        outlineBorder: inputBorder.borderSide,
+        prefixIconColor: Colors.white,
+        suffixIconColor: Colors.white,
+        labelStyle:
+            themeData.textTheme.titleMedium?.copyWith(color: Colors.white),
+        iconColor: Colors.white,
+      ),
+      iconTheme: themeData.iconTheme.copyWith(
+        color: Colors.white,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          focusColor: Colors.white,
+          foregroundColor: Colors.white,
         ),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: seed,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: Colors.white),
+          disabledForegroundColor: Colors.white.withOpacity(0.5),
+          disabledIconColor: Colors.white.withOpacity(0.5),
+          foregroundColor: Colors.white,
+          iconColor: Colors.white,
+          backgroundColor: seed,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: seed,
+        ),
+      ),
+      checkboxTheme: themeData.checkboxTheme.copyWith(
+        side: const BorderSide(color: Colors.white, width: 2),
+        checkColor: const WidgetStatePropertyAll(Colors.white),
+      ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
+        backgroundColor: seed,
+        showUnselectedLabels: false,
+        unselectedItemColor: Colors.white.withOpacity(0.3),
+        selectedItemColor: Colors.white,
+      ),
       bottomAppBarTheme: const BottomAppBarTheme(
         shape: CircularNotchedRectangle(),
       ),
