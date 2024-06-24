@@ -106,7 +106,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           title: const Text('كنيسة السيدة العذراء مريم'),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor:
+          Theme.of(context).colorScheme.brightness == Brightness.light
+              ? Colors.white
+              : Colors.black,
       body: _HomeBody(
         tabController: _tabController,
         personsController: () => _ensureWillDispose(_personsController),
@@ -116,9 +119,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       floatingActionButton: SwitchingFloatingActionButton(
         tabController: _tabController,
         icons: const {
-          0: Icon(Icons.person_add_alt_1),
-          1: Icon(Icons.add),
-          2: Icon(Icons.add_location),
+          0: Icon(Symbols.person_add),
+          1: Icon(Symbols.add),
+          2: Icon(Symbols.add_location),
         },
         onTap: (i) {
           if (i == 0) {
@@ -145,18 +148,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             items: const [
               BottomNavigationBarItem(
                 label: 'المخدومين',
-                activeIcon: Icon(Icons.person),
-                icon: Icon(Icons.person_outlined),
+                activeIcon: Icon(Symbols.person, fill: 1),
+                icon: Icon(Symbols.person),
               ),
               BottomNavigationBarItem(
                 label: 'الخدمات',
-                activeIcon: Icon(Icons.miscellaneous_services),
-                icon: Icon(Icons.miscellaneous_services_outlined),
+                activeIcon: Icon(Symbols.volunteer_activism, fill: 1),
+                icon: Icon(Symbols.volunteer_activism),
               ),
               BottomNavigationBarItem(
                 label: 'المناطق',
-                activeIcon: Icon(Icons.pin_drop),
-                icon: Icon(Icons.pin_drop_outlined),
+                activeIcon: Icon(Symbols.pin_drop, fill: 1),
+                icon: Icon(Symbols.pin_drop),
               ),
             ],
           );
@@ -293,32 +296,32 @@ class _HomeDrawer extends StatelessWidget {
               },
               children: [
                 const NavigationDrawerDestination(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Symbols.home),
                   label: Text('الرئيسية'),
                 ),
                 if (AuthService.I.currentUser!.canManageSomeUsers)
                   const NavigationDrawerDestination(
-                    icon: Icon(Icons.manage_accounts),
+                    icon: Icon(Symbols.manage_accounts),
                     label: Text('إدارة الخدام'),
                   ),
                 const NavigationDrawerDestination(
-                  icon: Icon(Icons.search),
+                  icon: Icon(Symbols.search),
                   label: Text('البحث المتقدم'),
                 ),
                 const NavigationDrawerDestination(
-                  icon: Icon(Icons.settings),
+                  icon: Icon(Symbols.settings),
                   label: Text('الإعدادات'),
                 ),
                 if (kDebugMode)
                   const NavigationDrawerDestination(
-                    icon: Icon(Icons.developer_mode),
+                    icon: Icon(Symbols.developer_mode),
                     label: Text('gql cache'),
                   ),
               ],
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.info_outline),
+            leading: const Icon(Symbols.info),
             title: const Text('حول'),
             onTap: () {
               Scaffold.of(context).openEndDrawer();
@@ -326,7 +329,7 @@ class _HomeDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.logout),
+            leading: const Icon(Symbols.logout),
             title: const Text('تسجيل الخروج'),
             onTap: () async {
               Scaffold.of(context).openEndDrawer();
@@ -388,7 +391,7 @@ class _HomeBody extends StatelessWidget {
             }) =>
                 IconButton(
               onPressed: onTap != null ? () => onTap(s) : null,
-              icon: const Icon(Icons.info),
+              icon: const Icon(Symbols.info),
             ),
           ),
         ),

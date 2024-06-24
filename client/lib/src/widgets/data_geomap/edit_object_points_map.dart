@@ -64,7 +64,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
         actions: [
           IconButton(
             onPressed: () => widget.onSaved(resultObject.value),
-            icon: const Icon(Icons.save),
+            icon: const Icon(Symbols.save),
             tooltip: 'حفظ',
           ),
         ],
@@ -151,7 +151,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
             builder: (context, pos, isDragging) => _EditablePoint(
               markerSize: markerSize,
               color: resultObject.value.color,
-              icon: Icons.circle,
+              icon: Symbols.circle,
             ),
             onDragUpdate: (_, newPoint) => resultObject.value = widget.onModify(
               [
@@ -188,7 +188,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
             builder: (context, pos, isDragging) => _EditablePoint(
               markerSize: markerSize,
               color: resultObject.value.color,
-              icon: Icons.add_circle_outline,
+              icon: Symbols.add_circle_outline,
             ),
             onDragStart: (_, newPoint) => resultObject.value = widget.onModify(
               [

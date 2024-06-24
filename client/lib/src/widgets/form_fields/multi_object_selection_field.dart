@@ -107,7 +107,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                     state.didChange(null);
                     onChanged?.call(null);
                   },
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Symbols.delete),
                 )
               : null,
         );

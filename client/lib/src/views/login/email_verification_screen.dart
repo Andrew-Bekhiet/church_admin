@@ -26,7 +26,7 @@ class EmailVerificationScreen extends StatelessWidget {
         title: const Text('التحقق من البريد الإلكتروني'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Symbols.logout),
             onPressed: AuthService.I.signOut,
           ),
         ],

@@ -80,7 +80,7 @@ void main() {
             of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
             matching: find.bySubtype<FilledButton>(),
           ),
-          matching: find.byIcon(Icons.fingerprint),
+          matching: find.byIcon(Symbols.fingerprint),
         ),
         authVariant.currentValue != AuthenticationVariantEnum.password
             ? findsOneWidget
@@ -166,7 +166,7 @@ void main() {
               of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
               matching: find.bySubtype<FilledButton>(),
             ),
-            matching: find.byIcon(Icons.fingerprint),
+            matching: find.byIcon(Symbols.fingerprint),
           ),
         );
 

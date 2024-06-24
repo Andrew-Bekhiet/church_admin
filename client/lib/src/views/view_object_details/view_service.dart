@@ -106,7 +106,7 @@ class _ViewServiceState extends State<ViewService> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add service analysis
                 onPressed: () {},
@@ -172,15 +172,15 @@ class _ViewServiceState extends State<ViewService> {
           ).toString(),
           extra: {'service': service},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
           SwitchingFloatingActionButton(
         tabController: tabController,
         icons: const {
-          0: Icon(Icons.group_add_outlined),
-          1: Icon(Icons.group_add),
-          2: Icon(Icons.person_add_alt_1),
+          0: Icon(Symbols.group_add),
+          1: Icon(Symbols.group_add),
+          2: Icon(Symbols.person_add),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {

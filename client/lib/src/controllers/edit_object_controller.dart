@@ -91,7 +91,7 @@ class EditObjectController<T extends ViewableWithID> {
                 children: [
                   const Expanded(child: Text('تم بنجاح')),
                   Icon(
-                    Icons.done,
+                    Symbols.done,
                     color: themeData.primaryIconTheme.color,
                   ),
                 ],

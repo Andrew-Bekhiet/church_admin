@@ -1,3 +1,5 @@
+export  'package:material_symbols_icons/material_symbols_icons.dart';
+
 export 'fmtc/fmtc.dart';
 export 'src/controllers.dart';
 export 'src/models.dart';

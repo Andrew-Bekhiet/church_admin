@@ -90,13 +90,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                 }
               }
             },
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Symbols.edit),
             tooltip: 'تعديل البحث',
           ),
           if (options != null)
             IconButton(
               onPressed: () => setState(() {}),
-              icon: const Icon(Icons.refresh),
+              icon: const Icon(Symbols.refresh),
               tooltip: 'تحديث البيانات',
             ),
         ],

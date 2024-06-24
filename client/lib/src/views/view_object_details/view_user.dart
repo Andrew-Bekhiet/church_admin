@@ -70,7 +70,7 @@ class _ViewUserState extends State<ViewUser> {
             const Divider(thickness: 1),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات الحضور'),
                 onPressed: () => _attendanceAnalysis(context, user),
               ),
@@ -92,7 +92,7 @@ class _ViewUserState extends State<ViewUser> {
           '/viewUser/editUser?id=' + widget.userId,
           extra: {'user': user},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
         child: Text(

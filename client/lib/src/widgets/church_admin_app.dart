@@ -124,7 +124,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
               children: [
                 const Expanded(child: Text('تم استرجاع الاتصال بالانترنت')),
                 Icon(
-                  Icons.wifi,
+                  Symbols.wifi,
                   color: Theme.of(context).primaryIconTheme.color,
                 ),
               ],
@@ -139,7 +139,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
               children: [
                 const Expanded(child: Text('لا يوجد اتصال بالانترنت!')),
                 Icon(
-                  Icons.wifi_off,
+                  Symbols.wifi_off,
                   color: Theme.of(context).primaryIconTheme.color,
                 ),
               ],

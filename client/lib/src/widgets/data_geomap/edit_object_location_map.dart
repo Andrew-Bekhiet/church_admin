@@ -52,7 +52,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
         actions: [
           IconButton(
             onPressed: () => widget.onSaved(resultObject.value),
-            icon: const Icon(Icons.save),
+            icon: const Icon(Symbols.save),
             tooltip: 'حفظ',
           ),
         ],
@@ -135,7 +135,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
                         ),
                       );
                     },
-                    child: const Icon(Icons.my_location),
+                    child: const Icon(Symbols.my_location),
                   );
                 }
 

@@ -117,7 +117,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               ),
               ElevatedButton.icon(
                 onPressed: _onAddOrderByStatement,
-                icon: const Icon(Icons.sort),
+                icon: const Icon(Symbols.sort),
                 label: const Text('إضافة ترتيب'),
               ),
               const Divider(),
@@ -129,7 +129,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               FilledButton.icon(
                 onPressed: _execute,
                 label: const Text('ابحث'),
-                icon: const Icon(Icons.search),
+                icon: const Icon(Symbols.search),
               ),
             ],
           ),
@@ -175,7 +175,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               ),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.share),
+                  icon: const Icon(Symbols.share),
                   onPressed: () {
                     globalProviderContainer
                         .read(shareServiceProvider)
@@ -309,7 +309,7 @@ class _OrderByWidget extends StatelessWidget {
                             ),
                           IconButton(
                             onPressed: () => removeOrderBy(i),
-                            icon: const Icon(Icons.clear),
+                            icon: const Icon(Symbols.clear),
                           ),
                         ],
                       ),
@@ -388,7 +388,7 @@ class _QueryLimitWidget extends StatelessWidget {
               labelText: 'الحد الأقصى',
               suffixIcon: IconButton(
                 onPressed: () => onChangeLimit(null),
-                icon: const Icon(Icons.clear),
+                icon: const Icon(Symbols.clear),
               ),
             ),
             keyboardType: TextInputType.number,
@@ -399,7 +399,7 @@ class _QueryLimitWidget extends StatelessWidget {
 
         return ElevatedButton.icon(
           onPressed: () => onChangeLimit(100),
-          icon: const Icon(Icons.maximize),
+          icon: const Icon(Symbols.maximize),
           label: const Text('إضافة حد أقصى'),
         );
       },

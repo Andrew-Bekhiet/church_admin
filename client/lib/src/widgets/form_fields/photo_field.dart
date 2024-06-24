@@ -54,7 +54,7 @@ class PhotoField extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: _changeImage(context, state),
-            icon: const Icon(Icons.photo_camera),
+            icon: const Icon(Symbols.photo_camera),
             tooltip: 'اختيار صورة',
           ),
           ...addActions,

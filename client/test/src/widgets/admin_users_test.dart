@@ -86,7 +86,7 @@ Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Icons.person);
+      .thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

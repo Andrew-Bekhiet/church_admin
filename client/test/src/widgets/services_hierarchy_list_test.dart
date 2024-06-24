@@ -178,7 +178,7 @@ Future<void> main() async {
             trailing,
           }) =>
               Icon(
-            Icons.ac_unit,
+            Symbols.ac_unit,
             key: ValueKey(service.name),
           ),
           studyYearBuilder: (p0, {required service, required studyYear}) =>

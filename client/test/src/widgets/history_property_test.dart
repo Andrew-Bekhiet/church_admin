@@ -76,7 +76,7 @@ Future<void> main() async {
         expect(
           find.descendant(
             of: find.byType(IconButton),
-            matching: find.byIcon(Icons.history),
+            matching: find.byIcon(Symbols.history),
           ),
           findsOneWidget,
         );
@@ -84,7 +84,7 @@ Future<void> main() async {
         expect(
           find.descendant(
             of: find.byType(IconButton),
-            matching: find.byIcon(Icons.task_alt),
+            matching: find.byIcon(Symbols.task_alt),
           ),
           findsOneWidget,
         );
@@ -115,7 +115,7 @@ Future<void> main() async {
       await tester.tap(
         find.descendant(
           of: find.byType(IconButton),
-          matching: find.byIcon(Icons.task_alt),
+          matching: find.byIcon(Symbols.task_alt),
         ),
       );
 
@@ -169,7 +169,7 @@ Future<void> main() async {
         await tester.tap(
           find.descendant(
             of: find.byType(IconButton),
-            matching: find.byIcon(Icons.history),
+            matching: find.byIcon(Symbols.history),
           ),
         );
 
@@ -221,7 +221,7 @@ Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Icons.person);
+      .thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

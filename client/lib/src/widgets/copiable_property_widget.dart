@@ -21,14 +21,14 @@ class CopiablePropertyWidget extends StatelessWidget {
     final Widget? copyOrError;
     if (value != null && value!.isNotEmpty) {
       copyOrError = IconButton(
-        icon: const Icon(Icons.copy),
+        icon: const Icon(Symbols.content_copy),
         tooltip: 'نسخ',
         onPressed: () => Clipboard.setData(ClipboardData(text: value!)),
       );
     } else if (showErrorIfEmpty) {
       copyOrError = const Tooltip(
         message: 'بيانات غير كاملة',
-        child: Icon(Icons.warning),
+        child: Icon(Symbols.warning),
       );
     } else {
       copyOrError = null;
@@ -79,12 +79,12 @@ class PhoneNumberProperty extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: const Icon(Icons.phone),
+            icon: const Icon(Symbols.phone),
             tooltip: 'اجراء مكالمة',
             onPressed: () => phoneCall(value),
           ),
           IconButton(
-            icon: const Icon(Icons.person_add_alt),
+            icon: const Icon(Symbols.person_add_alt),
             tooltip: 'اضافة الى جهات الاتصال',
             onPressed: () => contactAdd(value),
           ),
@@ -123,7 +123,7 @@ class PhoneNumberProperty extends StatelessWidget {
     } else if (showErrorIfEmpty) {
       trailing = const Tooltip(
         message: 'بيانات غير كاملة',
-        child: Icon(Icons.warning),
+        child: Icon(Symbols.warning),
       );
     } else {
       trailing = null;

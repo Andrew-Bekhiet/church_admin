@@ -61,7 +61,7 @@ class DateTimeField extends StatelessWidget {
           errorText: state.errorText,
           suffixIcon: nullable && state.value != null
               ? IconButton(
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Symbols.delete),
                   tooltip: 'حذف التاريخ',
                   onPressed: () {
                     state.didChange(null);

@@ -1,5 +1,6 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class ColorField extends StatelessWidget {
   final Color? initialValue;
@@ -35,7 +36,7 @@ class ColorField extends StatelessWidget {
               labelText: 'اللون',
               suffixIcon: nullable
                   ? IconButton(
-                      icon: const Icon(Icons.delete),
+                      icon: const Icon(Symbols.delete),
                       onPressed: () {
                         state.didChange(null);
                         onChanged?.call(null);
@@ -44,7 +45,6 @@ class ColorField extends StatelessWidget {
                   : null,
             ),
             child: ColorIndicator(
-              hasBorder: true,
               width: 50,
               height: 50,
               borderRadius: 20,

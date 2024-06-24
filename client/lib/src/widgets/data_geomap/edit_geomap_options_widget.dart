@@ -44,7 +44,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                 onPressed: stagingMapOptions != widget.mapOptions
                     ? () => widget.apply(stagingMapOptions)
                     : null,
-                icon: const Icon(Icons.done),
+                icon: const Icon(Symbols.done),
                 label: const Text('تطبيق'),
               ),
               const SizedBox(width: 20),
@@ -350,19 +350,19 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.select_all),
+                icon: const Icon(Symbols.select_all),
                 onPressed: () => _controller.selectionController.selectAll(
                   _controller.objectsPaginatableStream.currentValue,
                 ),
                 tooltip: 'تحديد الكل',
               ),
               IconButton(
-                icon: const Icon(Icons.check_box_outline_blank),
+                icon: const Icon(Symbols.check_box_outline_blank),
                 onPressed: _controller.selectionController.selectNone,
                 tooltip: 'تحديد لا شئ',
               ),
               IconButton(
-                icon: const Icon(Icons.done),
+                icon: const Icon(Symbols.done),
                 onPressed: () => Navigator.of(context).pop(true),
                 tooltip: 'تم',
               ),

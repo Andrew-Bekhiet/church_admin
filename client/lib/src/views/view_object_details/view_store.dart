@@ -57,7 +57,7 @@ class _ViewStoreState extends State<ViewStore> {
           ).toString(),
           extra: {'store': store},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, store) => SliverList(
         delegate: SliverChildListDelegate(
@@ -68,7 +68,7 @@ class _ViewStoreState extends State<ViewStore> {
               additionalOptions: [
                 if (store.geolocation != null)
                   IconButton(
-                    icon: const Icon(Icons.map),
+                    icon: const Icon(Symbols.map),
                     onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ViewGeodataMap(
@@ -122,7 +122,7 @@ class _ViewStoreState extends State<ViewStore> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add store analysis
                 onPressed: () {},

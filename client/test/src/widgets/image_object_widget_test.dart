@@ -41,7 +41,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.widgetWithIcon(ImageObjectWidget, Icons.person),
+        find.widgetWithIcon(ImageObjectWidget, Symbols.person),
         findsOneWidget,
       );
     },
@@ -320,7 +320,7 @@ Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
   when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Icons.person);
+      .thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

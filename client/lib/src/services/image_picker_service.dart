@@ -59,7 +59,7 @@ class ImagePickerService {
                         child: Column(
                           children: [
                             const Icon(
-                              Icons.camera,
+                              Symbols.camera,
                               size: 30,
                             ),
                             const SizedBox(height: 3),
@@ -84,7 +84,7 @@ class ImagePickerService {
                         child: Column(
                           children: [
                             const Icon(
-                              Icons.photo_library,
+                              Symbols.photo_library,
                               size: 30,
                             ),
                             const SizedBox(height: 3),
@@ -126,7 +126,7 @@ class ImagePickerService {
                       if (rslt == true) navigator.pop(deleteImage);
                     },
                     color: primary,
-                    icon: const Icon(Icons.delete),
+                    icon: const Icon(Symbols.delete),
                     tooltip: 'حذف الصورة',
                   ),
               ],

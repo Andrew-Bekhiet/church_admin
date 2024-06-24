@@ -149,7 +149,7 @@ class _ViewAreaState extends State<ViewArea> {
                 ),
                 child: FilledButton.tonalIcon(
                   label: const Text('الموقع على الخريطة'),
-                  icon: const Icon(Icons.map),
+                  icon: const Icon(Symbols.map),
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ViewGeodataMap(
@@ -190,7 +190,7 @@ class _ViewAreaState extends State<ViewArea> {
           ).toString(),
           extra: {'area': area},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -202,10 +202,10 @@ class _ViewAreaState extends State<ViewArea> {
           SwitchingFloatingActionButton(
         tabController: tabController,
         icons: const {
-          0: Icon(Icons.add_road),
-          1: Icon(Icons.group_add),
-          2: Icon(Icons.add_business),
-          3: Icon(Icons.person_add_alt_1),
+          0: Icon(Symbols.add_road),
+          1: Icon(Symbols.group_add),
+          2: Icon(Symbols.add_business),
+          3: Icon(Symbols.person_add),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {

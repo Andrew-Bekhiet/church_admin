@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField({
@@ -52,7 +53,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                 ))
             .copyWith(
           suffixIcon: IconButton(
-            icon: Icon(visible ? Icons.visibility_off : Icons.visibility),
+            icon: Icon(visible ? Symbols.visibility_off : Symbols.visibility),
             onPressed: () => setState(() => visible = !visible),
           ),
         ),

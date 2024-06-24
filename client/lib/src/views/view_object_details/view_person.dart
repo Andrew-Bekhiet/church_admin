@@ -95,7 +95,7 @@ class _ViewPersonState extends State<ViewPerson> {
                 additionalOptions: [
                   if (person.geolocation != null)
                     IconButton(
-                      icon: const Icon(Icons.map),
+                      icon: const Icon(Symbols.map),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ViewGeodataMap(
@@ -230,7 +230,7 @@ class _ViewPersonState extends State<ViewPerson> {
                             'person': person,
                           },
                         ),
-                        icon: const Icon(Icons.manage_accounts),
+                        icon: const Icon(Symbols.manage_accounts),
                         tooltip: 'عرض بيانات الخادم',
                       )
                     : null,
@@ -348,7 +348,7 @@ class _ViewPersonState extends State<ViewPerson> {
               const Divider(thickness: 1),
               ListTile(
                 title: FilledButton.tonalIcon(
-                  icon: const Icon(Icons.query_stats),
+                  icon: const Icon(Symbols.query_stats),
                   label: const Text('احصائيات'),
                   onPressed: () => _analysis(context, person),
                 ),
@@ -423,7 +423,7 @@ class _ViewPersonState extends State<ViewPerson> {
           ).toString(),
           extra: {'person': person},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -465,12 +465,12 @@ class _ViewPersonState extends State<ViewPerson> {
         title: const Text('هل تريد اجراء مكالمة الأن'),
         actions: [
           OutlinedButton.icon(
-            icon: const Icon(Icons.call),
+            icon: const Icon(Symbols.call),
             label: const Text('اجراء مكالمة الأن'),
             onPressed: () => Navigator.of(context).pop(true),
           ),
           TextButton.icon(
-            icon: const Icon(Icons.dialpad),
+            icon: const Icon(Symbols.dialpad),
             label: const Text('نسخ في لوحة الاتصال فقط'),
             onPressed: () => Navigator.of(context).pop(false),
           ),

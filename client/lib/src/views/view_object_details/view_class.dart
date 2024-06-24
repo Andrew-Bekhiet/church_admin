@@ -77,7 +77,7 @@ class _ViewClassState extends State<ViewClass> {
           ).toString(),
           extra: {'class': $class},
         ),
-        icon: const Icon(Icons.edit),
+        icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, $class) => SliverList(
         delegate: SliverChildListDelegate(
@@ -98,7 +98,7 @@ class _ViewClassState extends State<ViewClass> {
             ),
             ListTile(
               title: FilledButton.tonalIcon(
-                icon: const Icon(Icons.query_stats),
+                icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add class analysis
                 onPressed: () {},
@@ -139,7 +139,7 @@ class _ViewClassState extends State<ViewClass> {
             },
           );
         },
-        child: const Icon(Icons.person_add_alt_1),
+        child: const Icon(Symbols.person_add),
       ),
     );
   }

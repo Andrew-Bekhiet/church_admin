@@ -276,7 +276,7 @@ void _setUp() {
 Override _setUpMockObjectService() {
   final mockCAViewableObjectService = MockViewableObjectService();
   when(mockCAViewableObjectService.getDefaultIconFor<Person>(any))
-      .thenAnswer((_) => Icons.person);
+      .thenAnswer((_) => Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(
     mockCAViewableObjectService,
