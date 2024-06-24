@@ -217,7 +217,7 @@ final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
 
 final localAuthServiceProvider = Provider<LocalAuthService>(
   (ref) {
-    final localAuthService = LocalAuthService.noInitialAuth(
+    final localAuthService = LocalAuthService(
       localAuthPlugin: ref.watch(localAuthPluginProvider),
       notificationService: ref.watch(notificationsServiceProvider),
     );
