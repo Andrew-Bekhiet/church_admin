@@ -90,6 +90,7 @@ class ImageObjectWidget extends StatelessWidget {
                     cacheKey: cacheKey,
                     constraints: constraints,
                     imagePlaceholder: imagePlaceholder,
+                    hasBlurhash: imageObject.blurhash != null,
                   );
 
                   return InkWell(
@@ -99,6 +100,7 @@ class ImageObjectWidget extends StatelessWidget {
                       cacheKey: cacheKey,
                       constraints: constraints,
                       defaultIcon: defaultIcon,
+                      hasBlurhash: imageObject.blurhash != null,
                       imagePlaceholder: imagePlaceholder,
                     ),
                     child: imageFromUrlWidget,
@@ -116,6 +118,7 @@ class ImageObjectWidget extends StatelessWidget {
     BuildContext context, {
     required String downloadUrlOrCache,
     required String cacheKey,
+    required bool hasBlurhash,
     required BoxConstraints constraints,
     required IconData defaultIcon,
     required Widget imagePlaceholder,
@@ -142,6 +145,7 @@ class ImageObjectWidget extends StatelessWidget {
                     imageUrl: downloadUrlOrCache,
                     constraints: constraints,
                     fullQuality: true,
+                    hasBlurhash: hasBlurhash,
                     imagePlaceholder: imagePlaceholder,
                   ),
                 ),
@@ -161,6 +165,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
     required this.defaultIcon,
     required this.constraints,
     required this.imagePlaceholder,
+    required this.hasBlurhash,
     this.fullQuality = false,
   });
 
@@ -170,6 +175,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
   final IconData defaultIcon;
   final BoxConstraints constraints;
   final bool fullQuality;
+  final bool hasBlurhash;
 
   @override
   Widget build(BuildContext context) {
@@ -177,11 +183,12 @@ class _ImageFromUrlWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        imagePlaceholder,
+        if (hasBlurhash) imagePlaceholder,
         CachedNetworkImage(
           key: ValueKey(imageUrl + cacheKey),
           cacheKey: cacheKey,
           imageUrl: imageUrl,
+          placeholder: (context, _) => imagePlaceholder,
           memCacheHeight: fullQuality
               ? null
               : (MediaQuery.of(context).devicePixelRatio *
