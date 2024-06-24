@@ -84,8 +84,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                           uid: o.recordedBy ?? '',
                         ),
                   ),
-                  title: Text(dateFormat.format(o.time)),
-                  subtitle: Text(o.user?.name ?? ''),
+                  subtitle: Text(dateFormat.format(o.time)),
                   onLongPress: config?.onLongPress != null
                       ? (_) => config!.onLongPress!(o)
                       : null,

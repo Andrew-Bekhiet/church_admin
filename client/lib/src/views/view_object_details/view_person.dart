@@ -789,128 +789,147 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
           },
         ),
         builder: (context, snapshot) {
-          return SingleChildScrollView(
+          return Padding(
             padding: const EdgeInsets.all(8),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  DateTimeRangeField(
-                    label: 'الفترة',
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    initialValue: dateRange,
-                    onSaved: (v) => dateRange = v!,
-                  ),
-                  for (final entry in snapshot.requireData.entries) ...[
-                    ViewableObjectWidget(
-                      entry.key,
-                      wrapInCard: false,
-                      forceShowSecondLine: false,
-                      onTap: (service) =>
-                          _toggle(service, !selected.value.contains(service)),
-                      trailing: StreamBuilder<bool>(
-                        initialData: false,
-                        stream: selected.map((set) => set.contains(entry.key)),
-                        builder: (context, entryChecked) => Checkbox(
-                          onChanged: (checked) => _toggle(
-                            entry.key,
-                            checked ?? false,
-                          ),
-                          value: entryChecked.requireData,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 26),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _formKey,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          for (final descendent in entry.value)
+                          DateTimeRangeField(
+                            label: 'الفترة',
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            initialValue: dateRange,
+                            onSaved: (v) => dateRange = v!,
+                          ),
+                          for (final entry in snapshot.requireData.entries) ...[
                             ViewableObjectWidget(
-                              descendent,
+                              entry.key,
                               wrapInCard: false,
                               forceShowSecondLine: false,
-                              onTap: (object) => _toggle(
-                                object,
-                                !selected.value.contains(object),
+                              onTap: (service) => _toggle(
+                                service,
+                                !selected.value.contains(service),
                               ),
                               trailing: StreamBuilder<bool>(
                                 initialData: false,
                                 stream: selected
-                                    .map((set) => set.contains(descendent)),
+                                    .map((set) => set.contains(entry.key)),
                                 builder: (context, entryChecked) => Checkbox(
                                   onChanged: (checked) => _toggle(
-                                    descendent,
+                                    entry.key,
                                     checked ?? false,
                                   ),
                                   value: entryChecked.requireData,
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 26),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  for (final descendent in entry.value)
+                                    ViewableObjectWidget(
+                                      descendent,
+                                      wrapInCard: false,
+                                      forceShowSecondLine: false,
+                                      onTap: (object) => _toggle(
+                                        object,
+                                        !selected.value.contains(object),
+                                      ),
+                                      trailing: StreamBuilder<bool>(
+                                        initialData: false,
+                                        stream: selected.map(
+                                          (set) => set.contains(descendent),
+                                        ),
+                                        builder: (context, entryChecked) =>
+                                            Checkbox(
+                                          onChanged: (checked) => _toggle(
+                                            descendent,
+                                            checked ?? false,
+                                          ),
+                                          value: entryChecked.requireData,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ],
+                          const Divider(thickness: 2, height: 5),
+                          CheckboxListTile(
+                            value: confessionAnalysis,
+                            title: const Text('الاعتراف'),
+                            onChanged: (v) =>
+                                setState(() => confessionAnalysis = v!),
+                          ),
+                          CheckboxListTile(
+                            value: kodasAnalysis,
+                            title: const Text('حضور القداس'),
+                            onChanged: (v) =>
+                                setState(() => kodasAnalysis = v!),
+                          ),
+                          const Divider(thickness: 1),
+                          CheckboxListTile(
+                            value: callHistoryAnalysis,
+                            title: const Text('خدمة المكالمات'),
+                            onChanged: (v) =>
+                                setState(() => callHistoryAnalysis = v!),
+                          ),
+                          CheckboxListTile(
+                            value: visitHistoryAnalysis,
+                            title: const Text('الافتقاد'),
+                            onChanged: (v) =>
+                                setState(() => visitHistoryAnalysis = v!),
+                          ),
+                          CheckboxListTile(
+                            value: editHistoryAnalysis,
+                            title: const Text('تحديث البيانات'),
+                            onChanged: (v) =>
+                                setState(() => editHistoryAnalysis = v!),
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                  const Divider(thickness: 2, height: 5),
-                  CheckboxListTile(
-                    value: confessionAnalysis,
-                    title: const Text('الاعتراف'),
-                    onChanged: (v) => setState(() => confessionAnalysis = v!),
                   ),
-                  CheckboxListTile(
-                    value: kodasAnalysis,
-                    title: const Text('حضور القداس'),
-                    onChanged: (v) => setState(() => kodasAnalysis = v!),
-                  ),
-                  const Divider(thickness: 1),
-                  CheckboxListTile(
-                    value: callHistoryAnalysis,
-                    title: const Text('خدمة المكالمات'),
-                    onChanged: (v) => setState(() => callHistoryAnalysis = v!),
-                  ),
-                  CheckboxListTile(
-                    value: visitHistoryAnalysis,
-                    title: const Text('الافتقاد'),
-                    onChanged: (v) => setState(() => visitHistoryAnalysis = v!),
-                  ),
-                  CheckboxListTile(
-                    value: editHistoryAnalysis,
-                    title: const Text('تحديث البيانات'),
-                    onChanged: (v) => setState(() => editHistoryAnalysis = v!),
-                  ),
-                ],
-              ),
+                ),
+                FilledButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+
+                      widget.onComplete(
+                        PersonAnalysisOptions(
+                          callHistoryAnalysis: callHistoryAnalysis,
+                          confessionAnalysis: confessionAnalysis,
+                          editHistoryAnalysis: editHistoryAnalysis,
+                          kodasAnalysis: kodasAnalysis,
+                          visitHistoryAnalysis: visitHistoryAnalysis,
+                          dateRange: dateRange,
+                          classes: selected.value.whereType<Class>().toList(),
+                          groups: selected.value.whereType<Group>().toList(),
+                          services:
+                              selected.value.whereType<Service>().toList(),
+                        ),
+                      );
+
+                      await selected.close();
+                    }
+                  },
+                  child: const Text('تحليل الحضور'),
+                ),
+              ],
             ),
           );
         },
       ),
-      persistentFooterButtons: [
-        TextButton(
-          onPressed: () async {
-            if (_formKey.currentState!.validate()) {
-              _formKey.currentState!.save();
-
-              widget.onComplete(
-                PersonAnalysisOptions(
-                  callHistoryAnalysis: callHistoryAnalysis,
-                  confessionAnalysis: confessionAnalysis,
-                  editHistoryAnalysis: editHistoryAnalysis,
-                  kodasAnalysis: kodasAnalysis,
-                  visitHistoryAnalysis: visitHistoryAnalysis,
-                  dateRange: dateRange,
-                  classes: selected.value.whereType<Class>().toList(),
-                  groups: selected.value.whereType<Group>().toList(),
-                  services: selected.value.whereType<Service>().toList(),
-                ),
-              );
-
-              await selected.close();
-            }
-          },
-          child: const Text('تحليل الحضور'),
-        ),
-      ],
     );
   }
 

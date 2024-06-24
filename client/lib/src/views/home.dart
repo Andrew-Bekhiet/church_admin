@@ -106,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           title: const Text('كنيسة السيدة العذراء مريم'),
         ),
       ),
+      backgroundColor: Colors.white,
       body: _HomeBody(
         tabController: _tabController,
         personsController: () => _ensureWillDispose(_personsController),
@@ -132,30 +133,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bottomNavigationBar: AnimatedBuilder(
         animation: _tabController.animation!,
         builder: (context, child) {
-          return NavigationBar(
-            onDestinationSelected: (v) {
+          return BottomNavigationBar(
+            onTap: (v) {
               _tabController.animateTo(v);
               _bottomNavBar.add(
                 _typeToIndex.keys.elementAt(_tabController.index),
               );
             },
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            selectedIndex:
+            currentIndex:
                 _tabController.animation?.value.round() ?? _tabController.index,
-            destinations: const [
-              NavigationDestination(
+            items: const [
+              BottomNavigationBarItem(
                 label: 'المخدومين',
-                selectedIcon: Icon(Icons.person),
+                activeIcon: Icon(Icons.person),
                 icon: Icon(Icons.person_outlined),
               ),
-              NavigationDestination(
+              BottomNavigationBarItem(
                 label: 'الخدمات',
-                selectedIcon: Icon(Icons.miscellaneous_services),
+                activeIcon: Icon(Icons.miscellaneous_services),
                 icon: Icon(Icons.miscellaneous_services_outlined),
               ),
-              NavigationDestination(
+              BottomNavigationBarItem(
                 label: 'المناطق',
-                selectedIcon: Icon(Icons.pin_drop),
+                activeIcon: Icon(Icons.pin_drop),
                 icon: Icon(Icons.pin_drop_outlined),
               ),
             ],

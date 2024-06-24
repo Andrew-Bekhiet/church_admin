@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class ViewableObjectService {
   static ViewableObjectService get I =>
@@ -180,26 +181,26 @@ class ViewableObjectService {
 
   IconData getDefaultIconFor<T extends IImage>([T? imageObject]) {
     if (imageObject is Area || _isSubtype<T, Area>()) {
-      return Icons.pin_drop;
+      return Symbols.pin_drop;
     } else if (imageObject is Street || _isSubtype<T, Street>()) {
-      return Icons.pin_drop;
+      return Symbols.pin_drop;
     } else if (imageObject is Family || _isSubtype<T, Family>()) {
-      return Icons.diversity_1;
+      return Symbols.diversity_1;
     } else if (imageObject is Store || _isSubtype<T, Store>()) {
-      return Icons.store;
+      return Symbols.store;
     } else if (imageObject is Service || _isSubtype<T, Service>()) {
-      return Icons.miscellaneous_services;
+      return Symbols.image;
     } else if (imageObject is Class || _isSubtype<T, Class>()) {
-      return Icons.groups_outlined;
+      return Symbols.groups_2;
     } else if (imageObject is Group || _isSubtype<T, Group>()) {
-      return Icons.groups;
+      return Symbols.groups;
     } else if (imageObject is Person || _isSubtype<T, Person>()) {
-      return Icons.person;
+      return Symbols.person;
     } else if (imageObject is User || _isSubtype<T, User>()) {
-      return Icons.person;
+      return Symbols.person;
     }
 
-    return Icons.image_not_supported;
+    return Symbols.image_not_supported;
   }
 
   bool _isSubtype<Type, Subtype>() => <Type>[] is List<Subtype>;

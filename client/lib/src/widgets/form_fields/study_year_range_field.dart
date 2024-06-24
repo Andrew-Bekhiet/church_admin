@@ -66,6 +66,8 @@ class StudyYearRangeField extends StatelessWidget {
                   decoration: const InputDecoration(
                     labelText: 'من',
                     border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
@@ -91,6 +93,8 @@ class StudyYearRangeField extends StatelessWidget {
                   decoration: const InputDecoration(
                     labelText: 'إلى',
                     border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,

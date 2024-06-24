@@ -102,6 +102,13 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     );
   }
 
+  @override
+  void reassemble() {
+    super.reassemble();
+
+    ThemingService.I.theme = ThemingService.getDefault();
+  }
+
   void _onConnectivityChanged(bool connected) {
     final isScaffoldMessengerMounted =
         scaffoldMessengerKey.currentState?.mounted ?? false;

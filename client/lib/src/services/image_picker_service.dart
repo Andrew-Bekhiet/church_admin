@@ -37,87 +37,103 @@ class ImagePickerService {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      builder: (context) {
+        final Color primary = Theme.of(context).colorScheme.primary;
+
+        return IconTheme(
+          data: IconThemeData(color: primary),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop(ImageSource.camera);
-                  },
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.camera,
-                          size: 30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop(ImageSource.camera);
+                      },
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Column(
+                          children: [
+                            const Icon(
+                              Icons.camera,
+                              size: 30,
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              'الكاميرا',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: primary),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 3),
-                        Text(
-                          'من الكاميرا',
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop(ImageSource.gallery);
-                  },
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.photo_library,
-                          size: 30,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop(ImageSource.gallery);
+                      },
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Column(
+                          children: [
+                            const Icon(
+                              Icons.photo_library,
+                              size: 30,
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              'من المعرض',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: primary),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 3),
-                        Text(
-                          'من المعرض',
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+                if (canDelete)
+                  IconButton(
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      final rslt = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('هل تريد حذف الصورة؟'),
+                          actions: [
+                            OutlinedButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: const Text('لا'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: const Text('نعم'),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (rslt == true) navigator.pop(deleteImage);
+                    },
+                    color: primary,
+                    icon: const Icon(Icons.delete),
+                    tooltip: 'حذف الصورة',
+                  ),
               ],
             ),
-            if (canDelete)
-              IconButton(
-                onPressed: () async {
-                  final navigator = Navigator.of(context);
-                  final rslt = await showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('هل تريد حذف الصورة؟'),
-                      actions: [
-                        OutlinedButton(
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: const Text('لا'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text('نعم'),
-                        ),
-                      ],
-                    ),
-                  );
-
-                  if (rslt == true) navigator.pop(deleteImage);
-                },
-                icon: const Icon(Icons.delete),
-                tooltip: 'حذف الصورة',
-              ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

@@ -51,7 +51,8 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foregroundColor = object.color?.findInvert();
+    final foregroundColor =
+        object.color?.findInvert() ?? ListTileTheme.of(context).textColor;
 
     final secondLine = viewableObjectService.getSecondLine(object);
 

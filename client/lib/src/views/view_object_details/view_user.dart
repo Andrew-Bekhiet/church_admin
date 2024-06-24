@@ -180,115 +180,132 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       appBar: AppBar(
         title: const Text('تحليل الحضور كخادم في'),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(8),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DateTimeRangeField(
-                label: 'الفترة',
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                initialValue: dateRange,
-                onSaved: (v) => dateRange = v!,
-              ),
-              ListTile(
-                title: Text(
-                  'الخدمات المسؤول عنها',
-                  style: themeData.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (final MapEntry(key: service, value: permissions)
-                        in (widget.user.adminOn
-                                    ?.where((a) => a.service != null) ??
-                                [])
-                            .groupListsBy((a) => a.service!)
-                            .entries)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Card(
-                          child: AdminOnServiceWidget(
-                            serviceData: (service, permissions),
-                            onTap: (s) =>
-                                _toggle(s, !selected.value.contains(s)),
-                            trailingBuilder: (context, s) =>
-                                StreamBuilder<bool>(
-                              initialData: false,
-                              stream: selected.map((o) => o.contains(s)),
-                              builder: (context, entryChecked) => Checkbox(
-                                onChanged: (checked) =>
-                                    _toggle(s, checked ?? false),
-                                value: entryChecked.requireData,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      DateTimeRangeField(
+                        label: 'الفترة',
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        initialValue: dateRange,
+                        onSaved: (v) => dateRange = v!,
+                      ),
+                      ListTile(
+                        title: Text(
+                          'الخدمات المسؤول عنها',
+                          style: themeData.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final MapEntry(
+                                  key: service,
+                                  value: permissions
+                                ) in (widget.user.adminOn
+                                            ?.where((a) => a.service != null) ??
+                                        [])
+                                    .groupListsBy((a) => a.service!)
+                                    .entries)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Card(
+                                  child: AdminOnServiceWidget(
+                                    serviceData: (service, permissions),
+                                    onTap: (s) =>
+                                        _toggle(s, !selected.value.contains(s)),
+                                    trailingBuilder: (context, s) =>
+                                        StreamBuilder<bool>(
+                                      initialData: false,
+                                      stream:
+                                          selected.map((o) => o.contains(s)),
+                                      builder: (context, entryChecked) =>
+                                          Checkbox(
+                                        onChanged: (checked) =>
+                                            _toggle(s, checked ?? false),
+                                        value: entryChecked.requireData,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                          ],
                         ),
                       ),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'المجموعات المسؤول عنها',
-                  style: themeData.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (final adminData
-                        in widget.user.adminOn?.where((a) => a.group != null) ??
-                            <AdminOnData>[])
-                      Card(
-                        child: ViewableObjectWidget(
-                          adminData.group!,
-                          wrapInCard: false,
-                          forceShowSecondLine: false,
-                          onTap: (g) => _toggle(g, !selected.value.contains(g)),
-                          trailing: StreamBuilder<bool>(
-                            initialData: false,
-                            stream: selected
-                                .map((o) => o.contains(adminData.group)),
-                            builder: (context, entryChecked) => Checkbox(
-                              onChanged: (checked) =>
-                                  _toggle(adminData.group!, checked ?? false),
-                              value: entryChecked.requireData,
-                            ),
-                          ),
+                      ListTile(
+                        title: Text(
+                          'المجموعات المسؤول عنها',
+                          style: themeData.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final adminData in widget.user.adminOn
+                                    ?.where((a) => a.group != null) ??
+                                <AdminOnData>[])
+                              Card(
+                                child: ViewableObjectWidget(
+                                  adminData.group!,
+                                  wrapInCard: false,
+                                  forceShowSecondLine: false,
+                                  onTap: (g) =>
+                                      _toggle(g, !selected.value.contains(g)),
+                                  trailing: StreamBuilder<bool>(
+                                    initialData: false,
+                                    stream: selected.map(
+                                      (o) => o.contains(adminData.group),
+                                    ),
+                                    builder: (context, entryChecked) =>
+                                        Checkbox(
+                                      onChanged: (checked) => _toggle(
+                                        adminData.group!,
+                                        checked ?? false,
+                                      ),
+                                      value: entryChecked.requireData,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                       ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+            FilledButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+
+                  widget.onComplete(
+                    PersonAnalysisOptions(
+                      dateRange: dateRange,
+                      classes: selected.value.whereType<Class>().toList(),
+                      groups: selected.value.whereType<Group>().toList(),
+                      services: selected.value.whereType<Service>().toList(),
+                    ),
+                  );
+
+                  await selected.close();
+                }
+              },
+              child: const Text('تحليل الحضور'),
+            ),
+          ],
         ),
       ),
-      persistentFooterButtons: [
-        TextButton(
-          onPressed: () async {
-            if (_formKey.currentState!.validate()) {
-              _formKey.currentState!.save();
-
-              widget.onComplete(
-                PersonAnalysisOptions(
-                  dateRange: dateRange,
-                  classes: selected.value.whereType<Class>().toList(),
-                  groups: selected.value.whereType<Group>().toList(),
-                  services: selected.value.whereType<Service>().toList(),
-                ),
-              );
-
-              await selected.close();
-            }
-          },
-          child: const Text('تحليل الحضور'),
-        ),
-      ],
     );
   }
 

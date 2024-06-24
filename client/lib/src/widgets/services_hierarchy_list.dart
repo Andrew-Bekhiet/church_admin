@@ -232,7 +232,6 @@ class _Classes extends StatelessWidget {
                   ) ??
                   Card(
                     elevation: 0,
-                    color: Theme.of(context).colorScheme.surface,
                     child: ExpansionTile(
                       key: PageStorageKey(studyYear),
                       title: Text(studyYear.name),
