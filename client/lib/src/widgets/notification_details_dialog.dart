@@ -46,7 +46,10 @@ class NotificationDetailsDialog extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                DateFormat('yyyy/M/d h:m a', 'ar-EG').format(
+                DateFormat(
+                  'التاريخ: yyyy/M/d\nالساعة: h:m a',
+                  'ar-EG',
+                ).format(
                   notification.sentTime,
                 ),
                 style: Theme.of(context).textTheme.bodySmall,
