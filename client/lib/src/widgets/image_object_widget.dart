@@ -17,6 +17,7 @@ class ImageObjectWidget extends StatelessWidget {
     this.isDense = false,
     this.heroTag,
     this.size = defaultSize,
+    this.blurhashSize,
     super.key,
   })  : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
         viewableObjectService =
@@ -30,6 +31,7 @@ class ImageObjectWidget extends StatelessWidget {
   // ignore: no-object-declaration
   final Object? heroTag;
   final double size;
+  final double? blurhashSize;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class ImageObjectWidget extends StatelessWidget {
 
                   final imagePlaceholder = _ImagePlaceholder(
                     defaultIcon: defaultIcon,
-                    size: size,
+                    size: blurhashSize ?? size,
                     blurhash: imageObject.blurhash,
                   );
 
@@ -88,7 +90,7 @@ class ImageObjectWidget extends StatelessWidget {
                     defaultIcon: defaultIcon,
                     imageUrl: downloadUrlOrCache,
                     cacheKey: cacheKey,
-                    constraints: constraints,
+                    maxHeight: constraints.maxHeight,
                     imagePlaceholder: imagePlaceholder,
                     hasBlurhash: imageObject.blurhash != null,
                   );
@@ -143,7 +145,7 @@ class ImageObjectWidget extends StatelessWidget {
                     cacheKey: cacheKey,
                     defaultIcon: defaultIcon,
                     imageUrl: downloadUrlOrCache,
-                    constraints: constraints,
+                    maxHeight: constraints.maxHeight,
                     fullQuality: true,
                     hasBlurhash: hasBlurhash,
                     imagePlaceholder: imagePlaceholder,
@@ -163,7 +165,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
     required this.imageUrl,
     required this.cacheKey,
     required this.defaultIcon,
-    required this.constraints,
+    required this.maxHeight,
     required this.imagePlaceholder,
     required this.hasBlurhash,
     this.fullQuality = false,
@@ -173,7 +175,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
   final String cacheKey;
   final Widget imagePlaceholder;
   final IconData defaultIcon;
-  final BoxConstraints constraints;
+  final double maxHeight;
   final bool fullQuality;
   final bool hasBlurhash;
 
@@ -191,9 +193,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
           placeholder: (context, _) => imagePlaceholder,
           memCacheHeight: fullQuality
               ? null
-              : (MediaQuery.of(context).devicePixelRatio *
-                      constraints.maxHeight)
-                  .floor(),
+              : (MediaQuery.of(context).devicePixelRatio * maxHeight).floor(),
           cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
           errorWidget: (context, url, error) => imagePlaceholder,
           fadeInDuration: animationsDuration,

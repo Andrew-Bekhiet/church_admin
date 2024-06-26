@@ -606,8 +606,10 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   final bool showTime;
   final int visibleItemsLimit;
 
-  DateFormat get dateFormat =>
-      DateFormat('yyyy/M/d' + (showTime ? '   h:m a' : ''), 'ar-EG');
+  DateFormat get dateFormat => DateFormat(
+        'التاريخ: yyyy/M/d' + (showTime ? '\nالساعة: h:m a' : ''),
+        'ar-EG',
+      );
 
   @override
   Widget build(BuildContext context) {

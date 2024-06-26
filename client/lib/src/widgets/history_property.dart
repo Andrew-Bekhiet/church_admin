@@ -18,8 +18,10 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final DelegatingPaginatableStream<T> Function() getHistoryStream;
   final void Function()? onRecordNow;
 
-  DateFormat get dateFormat =>
-      DateFormat('yyyy/M/d' + (showTime ? '   h:m a' : ''), 'ar-EG');
+  DateFormat get dateFormat => DateFormat(
+        'التاريخ: yyyy/M/d' + (showTime ? '\nالساعة: h:m a' : ''),
+        'ar-EG',
+      );
 
   @override
   Widget build(BuildContext context) {

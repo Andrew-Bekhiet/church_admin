@@ -102,6 +102,7 @@ class PhotoField extends StatelessWidget {
                                 objectOnEmpty,
                                 circleCrop: false,
                                 size: appBarHeight,
+                                blurhashSize: constraints.biggest.longestSide,
                               )
                             : Image.file(
                                 File(state.value!.newPhoto!.path),
@@ -110,6 +111,7 @@ class PhotoField extends StatelessWidget {
                             object,
                             circleCrop: false,
                             size: appBarHeight,
+                            blurhashSize: constraints.biggest.longestSide,
                           ),
                   ),
                 ),

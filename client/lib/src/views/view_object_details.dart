@@ -89,6 +89,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         final objectData = snapshot.requireData!;
 
         final foregroundColor = objectData.color?.findInvert();
+        final double appBarMaxHeight = MediaQuery.sizeOf(context).height * 0.41;
 
         final slivers = [
           SliverAppBar(
@@ -96,23 +97,41 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
             foregroundColor: foregroundColor,
             stretch: true,
             pinned: true,
-            expandedHeight: 280,
-            actions: [
-              if (snapshot.connectionState != ConnectionState.active)
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (AuthService.I.currentUser!.canEditObject(objectData))
-                editButtonBuilder(context, objectData),
-            ],
+            expandedHeight: appBarMaxHeight,
+            toolbarHeight: 0,
+            collapsedHeight: 0,
             flexibleSpace: ViewableObjectAppBar(
-              circleCrop: objectData is Person || objectData is User,
+              circleCrop: false,
               backgroundColor: objectData.color,
               foregroundColor: foregroundColor,
               viewable: object?.hasImage ?? false ? object! : objectData,
-              appBarMaxHeight: 280,
+              appBarMaxHeight: appBarMaxHeight,
               duration: const Duration(milliseconds: 450),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
+              child: Row(
+                children: [
+                  const BackButton(),
+                  Expanded(
+                    child: Text(
+                      objectData.name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                  if (snapshot.connectionState != ConnectionState.active)
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  else if (AuthService.I.currentUser!.canEditObject(objectData))
+                    editButtonBuilder(context, objectData),
+                ],
+              ),
             ),
           ),
           detailsBuilder(context, objectData),
