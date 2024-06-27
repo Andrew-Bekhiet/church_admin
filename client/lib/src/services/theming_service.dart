@@ -140,7 +140,7 @@ class ThemingService with WidgetsBindingObserver {
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
 
-    Color seed = seedOverride ?? const Color(0xff124076);
+    Color seed = seedOverride ?? Colors.indigo;
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now()
