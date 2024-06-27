@@ -16,6 +16,7 @@ class ImageObjectWidget extends StatelessWidget {
     this.circleCrop = true,
     this.isDense = false,
     this.heroTag,
+    this.borderRadius,
     this.size = defaultSize,
     this.blurhashSize,
     super.key,
@@ -31,6 +32,7 @@ class ImageObjectWidget extends StatelessWidget {
   // ignore: no-object-declaration
   final Object? heroTag;
   final double size;
+  final BorderRadius? borderRadius;
   final double? blurhashSize;
 
   @override
@@ -42,9 +44,8 @@ class ImageObjectWidget extends StatelessWidget {
     final String cacheKey = imageObject.imageInfo.cacheKey;
     final BorderRadius? borderRadius = circleCrop
         ? null
-        : isDense
-            ? denseClipBorderRadius
-            : clipBorderRadius;
+        : this.borderRadius ??
+            (isDense ? denseClipBorderRadius : clipBorderRadius);
 
     return Hero(
       transitionOnUserGestures: true,
