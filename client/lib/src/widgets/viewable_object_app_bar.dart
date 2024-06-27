@@ -7,18 +7,14 @@ class ViewableObjectAppBar extends StatefulWidget {
     required this.foregroundColor,
     required this.backgroundColor,
     required this.appBarMaxHeight,
-    this.duration,
-    this.scrollController,
     this.circleCrop = true,
     super.key,
-  }) : assert(scrollController == null || duration != null);
+  });
 
   final Color? foregroundColor;
   final Color? backgroundColor;
   final ViewableWithIDAndImage viewable;
   final double appBarMaxHeight;
-  final Duration? duration;
-  final ScrollController? scrollController;
   final bool circleCrop;
 
   @override
@@ -75,27 +71,6 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
         widget.foregroundColor ?? Theme.of(context).textTheme.titleLarge!.color,
   );
 
-  final _snapPositions = <double>[0, 0.85, 1];
-
-  @override
-  void initState() {
-    super.initState();
-    widget.scrollController?.position.isScrollingNotifier
-        .addListener(_scrollListener);
-  }
-
-  @override
-  void didUpdateWidget(ViewableObjectAppBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.scrollController != widget.scrollController) {
-      oldWidget.scrollController?.position.isScrollingNotifier
-          .removeListener(_scrollListener);
-      widget.scrollController?.position.isScrollingNotifier
-          .addListener(_scrollListener);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -144,40 +119,6 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
         },
       ),
     );
-  }
-
-  Future<void> _scrollListener() async {
-    if (widget.scrollController!.position.isScrollingNotifier.value) return;
-
-    final maxScroll = widget.appBarMaxHeight - kToolbarHeight;
-    final currentScroll = widget.scrollController!.offset;
-    final scrollPercent = currentScroll / maxScroll;
-
-    if (scrollPercent < 1) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final nearestSnap = _snapPositions.reduce(
-          (nearest, current) =>
-              (current - scrollPercent).abs() < (nearest - scrollPercent).abs()
-                  ? current
-                  : nearest,
-        );
-        if (widget.scrollController!.hasClients) {
-          widget.scrollController!.animateTo(
-            nearestSnap * maxScroll,
-            duration: widget.duration!,
-            curve: Curves.easeOutExpo,
-          );
-        }
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.scrollController?.position.isScrollingNotifier
-        .removeListener(_scrollListener);
-
-    super.dispose();
   }
 }
 

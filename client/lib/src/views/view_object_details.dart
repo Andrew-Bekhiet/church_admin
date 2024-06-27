@@ -1,4 +1,6 @@
 // ignore_for_file: avoid-returning-widgets
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
@@ -22,7 +24,7 @@ typedef WBuilderWithObject<T, W extends Widget> = W Function(
 );
 
 class ViewObjectDetails<T extends ViewableWithIDAndImage>
-    extends StatelessWidget {
+    extends StatefulWidget {
   final T? object;
   final String objectId;
 
@@ -53,12 +55,25 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         assert(childrenTypes.length == tabsContentBuilders.length);
 
   @override
+  State<ViewObjectDetails<T>> createState() => _ViewObjectDetailsState<T>();
+}
+
+class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
+    extends State<ViewObjectDetails<T>> {
+  static const _snapPositions = <double>[0, 0.85, 1];
+  static const _snapDuration = Duration(milliseconds: 300);
+
+  late final ScrollController _scrollController = TrackingScrollController();
+  late final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
+  Timer? _timer;
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     return StreamBuilder<T?>(
-      initialData: object,
-      stream: objectStream,
+      initialData: widget.object,
+      stream: widget.objectStream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Scaffold(
@@ -84,14 +99,13 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
             appBar: AppBar(
               backgroundColor: theme.scaffoldBackgroundColor,
             ),
-            body: notFoundBuilder(context),
+            body: widget.notFoundBuilder(context),
           );
         }
 
         final objectData = snapshot.requireData!;
 
         final Color? foregroundColor = objectData.color?.findInvert();
-        final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
 
         final slivers = [
           SliverAppBar(
@@ -107,38 +121,43 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
                   child: Center(child: CircularProgressIndicator()),
                 )
               else if (AuthService.I.currentUser!.canEditObject(objectData))
-                editButtonBuilder(context, objectData),
+                widget.editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(
               circleCrop: objectData is Person || objectData is User,
               backgroundColor: objectData.color,
               foregroundColor: foregroundColor,
-              viewable: object?.hasImage ?? false ? object! : objectData,
+              viewable: widget.object?.hasImage ?? false
+                  ? widget.object!
+                  : objectData,
               appBarMaxHeight: appBarMaxHeight,
-              duration: const Duration(milliseconds: 450),
             ),
           ),
-          detailsBuilder(context, objectData),
-          if (tabsHeaderBuilder != null)
+          widget.detailsBuilder(context, objectData),
+          if (widget.tabsHeaderBuilder != null)
             SliverPersistentHeader(
               pinned: true,
               delegate: PreferredSizePersistentHeaderDelegate(
-                child: tabsHeaderBuilder!(context, objectData),
+                child: widget.tabsHeaderBuilder!(context, objectData),
               ),
             ),
         ];
 
-        final body = childrenTypes.isEmpty
-            ? CustomScrollView(slivers: slivers)
+        final body = widget.childrenTypes.isEmpty
+            ? CustomScrollView(
+                controller: _scrollController,
+                slivers: slivers,
+              )
             : NestedScrollView(
+                controller: _scrollController,
                 headerSliverBuilder: (context, isBodyScrolled) => slivers,
                 body: TabBarView(
                   key: ValueKey(objectData.id),
-                  children: childrenTypes
+                  children: widget.childrenTypes
                       .mapIndexed(
                         (i, type) => LazyTabPage(
                           index: i,
-                          builder: tabsContentBuilders[type]!,
+                          builder: widget.tabsContentBuilders[type]!,
                         ),
                       )
                       .toList(),
@@ -148,13 +167,16 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         return Theme(
           data: ThemingService.getDefault(seedOverride: objectData.color),
           child: DefaultTabController(
-            length: childrenTypes.length,
+            length: widget.childrenTypes.length,
             child: Scaffold(
-              body: body,
-              floatingActionButton: floatingActionButtonBuilder != null
+              body: NotificationListener<ScrollEndNotification>(
+                onNotification: _onScrollEnd,
+                child: body,
+              ),
+              floatingActionButton: widget.floatingActionButtonBuilder != null
                   ? Builder(
                       builder: (context) {
-                        return floatingActionButtonBuilder!(
+                        return widget.floatingActionButtonBuilder!(
                           context,
                           DefaultTabController.of(context),
                           objectData,
@@ -167,5 +189,49 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         );
       },
     );
+  }
+
+  bool _onScrollEnd(ScrollEndNotification _) {
+    if (!_scrollController.hasClients) return false;
+
+    _timer?.cancel();
+    _timer = Timer(
+      _snapDuration,
+      () {
+        if (!_scrollController.hasClients ||
+            _scrollController.position.isScrollingNotifier.value) return;
+
+        final maxScroll = appBarMaxHeight - kToolbarHeight;
+        final currentScroll = _scrollController.offset;
+        final scrollPercent = currentScroll / maxScroll;
+
+        final nearestSnap = _snapPositions.reduce(
+          (nearest, element) =>
+              (element - scrollPercent).abs() < (nearest - scrollPercent).abs()
+                  ? element
+                  : nearest,
+        );
+
+        if (scrollPercent < 1 && scrollPercent != nearestSnap) {
+          Future.microtask(() {
+            if (_scrollController.hasClients && scrollPercent != nearestSnap) {
+              _scrollController.animateTo(
+                nearestSnap * maxScroll,
+                duration: _snapDuration,
+                curve: Curves.easeOutExpo,
+              );
+            }
+          });
+        }
+      },
+    );
+
+    return false;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
   }
 }
