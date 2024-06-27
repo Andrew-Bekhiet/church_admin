@@ -54,6 +54,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return StreamBuilder<T?>(
       initialData: object,
       stream: objectStream,
@@ -61,7 +63,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         if (snapshot.hasError) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: theme.scaffoldBackgroundColor,
             ),
             body: ErrorWidget.builder(
               FlutterErrorDetails(exception: snapshot.error!),
@@ -71,7 +73,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
             snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: theme.scaffoldBackgroundColor,
             ),
             body: const Center(
               child: CircularProgressIndicator(),
@@ -80,7 +82,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
         } else if (!snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: theme.scaffoldBackgroundColor,
             ),
             body: notFoundBuilder(context),
           );
@@ -88,8 +90,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
-        final foregroundColor = objectData.color?.findInvert();
-        final double appBarMaxHeight = MediaQuery.sizeOf(context).height * 0.41;
+        final Color? foregroundColor = objectData.color?.findInvert();
+        final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
 
         final slivers = [
           SliverAppBar(
@@ -98,40 +100,22 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
             stretch: true,
             pinned: true,
             expandedHeight: appBarMaxHeight,
-            toolbarHeight: 0,
-            collapsedHeight: 0,
+            actions: [
+              if (snapshot.connectionState != ConnectionState.active)
+                const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              else if (AuthService.I.currentUser!.canEditObject(objectData))
+                editButtonBuilder(context, objectData),
+            ],
             flexibleSpace: ViewableObjectAppBar(
-              circleCrop: false,
+              circleCrop: objectData is Person || objectData is User,
               backgroundColor: objectData.color,
               foregroundColor: foregroundColor,
               viewable: object?.hasImage ?? false ? object! : objectData,
               appBarMaxHeight: appBarMaxHeight,
               duration: const Duration(milliseconds: 450),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20)),
-              child: Row(
-                children: [
-                  const BackButton(),
-                  Expanded(
-                    child: Text(
-                      objectData.name,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ),
-                  if (snapshot.connectionState != ConnectionState.active)
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  else if (AuthService.I.currentUser!.canEditObject(objectData))
-                    editButtonBuilder(context, objectData),
-                ],
-              ),
             ),
           ),
           detailsBuilder(context, objectData),
