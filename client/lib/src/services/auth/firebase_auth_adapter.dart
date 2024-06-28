@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart'
         PhoneMultiFactorInfo;
 import 'package:firebase_auth/firebase_auth.dart' as auth
     show MultiFactorSession, User;
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 class FirebaseAuthAdapter extends AuthAdapter {
   static String _getHasuraUID(Json jwtClaims) => jwtClaims['x-hasura-user-id'];

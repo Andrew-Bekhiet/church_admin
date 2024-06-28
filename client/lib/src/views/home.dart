@@ -63,10 +63,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  final _search = StateSubject<String?>(null);
-  final _bottomNavBar = StateSubject<Type>(Service);
-  final _servicesListType =
-      StateSubject<ViewableObjectListType>(ViewableObjectListType.list);
+  final _search = BehaviorSubject<String?>.seeded(null);
+  final _bottomNavBar = BehaviorSubject<Type>.seeded(Service);
+  final _servicesListType = BehaviorSubject<ViewableObjectListType>.seeded(
+    ViewableObjectListType.list,
+  );
   late final StreamSubscription<void> _localAuthListener;
 
   late final TabController _tabController = TabController(
@@ -109,21 +110,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             builder: (context, snapshot) {
               final isSearchActive = snapshot.data ?? false;
 
-              if (!isSearchActive) {
-                return IconButton(
-                  onPressed: () => _search.add(''),
-                  icon: const Icon(Symbols.search),
-                );
+              if (isSearchActive) {
+                return const SizedBox.shrink();
               }
 
-              return const SizedBox.shrink();
+              return IconButton(
+                onPressed: () => _search.add(''),
+                icon: const Icon(Symbols.search),
+              );
             },
           ),
-          StreamBuilder<ViewableObjectListType>(
-            stream: _servicesListType,
+          StreamBuilder<ViewableObjectListType?>(
+            stream: _bottomNavBar.switchMap(
+              (t) => t == Service ? _servicesListType : Stream.value(null),
+            ),
             builder: (context, typeSnapshot) {
-              final typeValue =
-                  typeSnapshot.data ?? ViewableObjectListType.list;
+              final typeValue = typeSnapshot.data;
+
+              if (typeValue == null) {
+                return const SizedBox.shrink();
+              }
 
               return IconButton(
                 onPressed: typeValue == ViewableObjectListType.list

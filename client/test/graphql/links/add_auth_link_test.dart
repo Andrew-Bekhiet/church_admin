@@ -7,7 +7,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 import './add_auth_link_test.mocks.dart';
 

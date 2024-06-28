@@ -15,7 +15,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'firebase_auth_adapter_test.mocks.dart';
 

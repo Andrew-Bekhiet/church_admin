@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchController {
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
