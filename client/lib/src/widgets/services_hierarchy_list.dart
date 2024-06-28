@@ -230,7 +230,7 @@ class _Classes extends StatelessWidget {
                     service: service,
                     studyYear: studyYear,
                   ) ??
-                  Card(
+                  Card.outlined(
                     elevation: 0,
                     child: ExpansionTile(
                       key: PageStorageKey(studyYear),
