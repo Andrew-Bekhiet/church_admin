@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 class HomeScreen extends StatefulWidget {
   static final GoRoute route = GoRoute(
@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
+  final Set<Timer> _timers = {};
 
   @override
   void initState() {
@@ -247,7 +248,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _search,
       _bottomNavBar,
       (s, t) => t == T ? s : null,
-    ).debounceTime(const Duration(seconds: 1));
+    ).debounce((_) async* {
+      final completer = Completer<void>();
+      _timers.add(Timer(const Duration(seconds: 1), completer.complete));
+      await completer.future;
+
+      yield null;
+    });
   }
 
   void _tabControllerListener() {
@@ -282,17 +289,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     _tabController.dispose();
 
+    _search.close();
+    _bottomNavBar.close();
+    _servicesListType.close();
+    _localAuthListener.cancel();
+    _controllersToDispose.map((e) => e.dispose()).toList();
+    _timers.map((e) => e.cancel()).toList();
+
     super.dispose();
-
-    await _search.close();
-    await _bottomNavBar.close();
-
-    await _localAuthListener.cancel();
-
-    await Future.wait(_controllersToDispose.map((e) => e.dispose()));
   }
 }
 
