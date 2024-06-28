@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart_ext/rxdart_ext.dart';
+import 'package:rxdart/rxdart.dart';
 
 class GQLPaginatableStream<T> extends DelegatingPaginatableStream<T> {
   @visibleForTesting
