@@ -8,9 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+enum ViewableObjectListType { list, grid }
+
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   const ViewableObjectList({
     required this.objectsController,
+    this.type = ViewableObjectListType.list,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     this.scrollController,
@@ -25,6 +28,7 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final bool itemsExpandable;
+  final ViewableObjectListType type;
 
   @override
   State<ViewableObjectList> createState() => _ViewableObjectListState<T>();
@@ -93,46 +97,64 @@ class _ViewableObjectListState<T extends Viewable>
           return const Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(2),
-          controller: scrollController,
-          itemBuilder: (context, i) {
-            if (i == items.length) {
-              return StreamBuilder(
-                stream: objectsPaginatableStream.onLoadingChanged,
-                builder: (context, state) => state.hasData && state.requireData
-                    ? const Center(child: CircularProgressIndicator())
-                    : const SizedBox(height: 120),
-              );
-            }
-
-            return VisibilityDetector(
-              key: ValueKey(items[i]),
-              onVisibilityChanged: _onVisibilityChanged(i),
-              child: ViewableObjectListItem(
-                item: items[i],
-                selectionController: objectsController.selectionController,
-                itemBuilder: widget.itemBuilder,
-                viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
-              ),
+        //ignore: avoid-unused-parameters
+        Widget itemBuilder(BuildContext context, int i) {
+          if (i >= items.length) {
+            return StreamBuilder(
+              stream: objectsPaginatableStream.onLoadingChanged,
+              builder: (context, state) => state.hasData && state.requireData
+                  ? const Center(child: CircularProgressIndicator())
+                  : const SizedBox(height: 120),
             );
-          },
-          cacheExtent: 250,
-          itemCount: items.length + 1,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          prototypeItem: widget.itemsExpandable
-              ? null
-              : HeroMode(
-                  enabled: false,
-                  child: ViewableObjectListItem(
-                    item: items.first,
-                    selectionController: objectsController.selectionController,
-                    itemBuilder: widget.itemBuilder,
-                    viewableObjectWidgetConfig:
-                        widget.viewableObjectWidgetConfig,
+          }
+
+          return VisibilityDetector(
+            key: ValueKey(items[i]),
+            onVisibilityChanged: _onVisibilityChanged(i),
+            child: ViewableObjectListItem(
+              item: items[i],
+              selectionController: objectsController.selectionController,
+              itemBuilder: widget.itemBuilder,
+              viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
+            ),
+          );
+        }
+
+        if (widget.type == ViewableObjectListType.grid) {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            padding: const EdgeInsets.all(2),
+            controller: scrollController,
+            itemBuilder: itemBuilder,
+            cacheExtent: 250,
+            itemCount: items.length + 1,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          );
+        } else {
+          return ListView.builder(
+            padding: const EdgeInsets.all(2),
+            controller: scrollController,
+            itemBuilder: itemBuilder,
+            cacheExtent: 250,
+            itemCount: items.length + 1,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            prototypeItem: widget.itemsExpandable
+                ? null
+                : HeroMode(
+                    enabled: false,
+                    child: ViewableObjectListItem(
+                      item: items.first,
+                      selectionController:
+                          objectsController.selectionController,
+                      itemBuilder: widget.itemBuilder,
+                      viewableObjectWidgetConfig:
+                          widget.viewableObjectWidgetConfig,
+                    ),
                   ),
-                ),
-        );
+          );
+        }
       },
     );
   }
