@@ -65,6 +65,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _search = StateSubject<String?>(null);
   final _bottomNavBar = StateSubject<Type>(Service);
+  final _servicesListType =
+      StateSubject<ViewableObjectListType>(ViewableObjectListType.list);
   late final StreamSubscription<void> _localAuthListener;
 
   late final TabController _tabController = TabController(
@@ -101,9 +103,53 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       drawer: const _HomeDrawer(),
       appBar: AppBar(
-        title: TitleSearchField(
-          searchStream: _search,
-          title: const Text('كنيسة السيدة العذراء مريم'),
+        actions: [
+          StreamBuilder<bool>(
+            stream: _search.stream.map((s) => s != null),
+            builder: (context, snapshot) {
+              final isSearchActive = snapshot.data ?? false;
+
+              if (!isSearchActive) {
+                return IconButton(
+                  onPressed: () => _search.add(''),
+                  icon: const Icon(Symbols.search),
+                );
+              }
+
+              return const SizedBox.shrink();
+            },
+          ),
+          StreamBuilder<ViewableObjectListType>(
+            stream: _servicesListType,
+            builder: (context, typeSnapshot) {
+              final typeValue =
+                  typeSnapshot.data ?? ViewableObjectListType.list;
+
+              return IconButton(
+                onPressed: typeValue == ViewableObjectListType.list
+                    ? () => _servicesListType.add(ViewableObjectListType.grid)
+                    : () => _servicesListType.add(ViewableObjectListType.list),
+                icon: Icon(
+                  typeValue == ViewableObjectListType.list
+                      ? Symbols.lists
+                      : Symbols.grid_view,
+                ),
+              );
+            },
+          ),
+        ],
+        title: StreamBuilder<String?>(
+          stream: _search,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return SearchField(
+                searchSink: _search,
+                canHide: true,
+              );
+            }
+
+            return const Text('كنيسة السيدة العذراء مريم');
+          },
         ),
       ),
       backgroundColor:
@@ -112,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               : Colors.black,
       body: _HomeBody(
         tabController: _tabController,
+        servicesListTypeStream: _servicesListType,
         personsController: () => _ensureWillDispose(_personsController),
         servicesController: () => _ensureWillDispose(_servicesController),
         areasController: () => _ensureWillDispose(_areasController),
@@ -347,6 +394,7 @@ class _HomeDrawer extends StatelessWidget {
 class _HomeBody extends StatelessWidget {
   const _HomeBody({
     required this.tabController,
+    required this.servicesListTypeStream,
     required this.areasController,
     required this.personsController,
     required this.servicesController,
@@ -354,6 +402,7 @@ class _HomeBody extends StatelessWidget {
 
   final TabController tabController;
 
+  final Stream<ViewableObjectListType> servicesListTypeStream;
   final ViewableObjectListController<Person> Function() personsController;
   final ViewableObjectListController<Service> Function() servicesController;
   final ViewableObjectListController<Area> Function() areasController;
@@ -376,6 +425,7 @@ class _HomeBody extends StatelessWidget {
           tabController: tabController,
           builder: (context) => ServicesHierarchyList(
             key: const PageStorageKey('_HomeBody => ServicesTab'),
+            type: servicesListTypeStream,
             listController: servicesController(),
             serviceTrailingBuilder: (
               context,

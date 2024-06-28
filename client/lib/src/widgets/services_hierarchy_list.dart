@@ -47,6 +47,7 @@ class ServicesHierarchyList extends StatefulWidget {
 
   final ViewableObjectListController<Service>? listController;
   final Stream<String?>? search;
+  final Stream<ViewableObjectListType>? type;
 
   const ServicesHierarchyList({
     this.showClasses = true,
@@ -57,6 +58,7 @@ class ServicesHierarchyList extends StatefulWidget {
     this.groupBuilder,
     this.listController,
     this.search,
+    this.type,
     super.key,
   }) : assert(showClasses || showGroups);
 
@@ -67,6 +69,11 @@ class ServicesHierarchyList extends StatefulWidget {
 class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     with TickerProviderStateMixin {
   late final search = widget.search ?? BehaviorSubject<String?>.seeded(null);
+  late final type = widget.type ??
+      BehaviorSubject<ViewableObjectListType>.seeded(
+        ViewableObjectListType.list,
+      );
+
   late final listController = widget.listController ??
       ViewableObjectListController<Service>(
         objectsPaginatableStream:
@@ -77,14 +84,56 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
   @override
   Widget build(BuildContext context) {
-    return ViewableObjectList(
-      itemsExpandable: true,
-      objectsController: listController,
-      itemBuilder: _buildServiceTile,
+    return StreamBuilder<ViewableObjectListType>(
+      stream: type,
+      builder: (context, typeSnapshot) {
+        final typeValue = typeSnapshot.data ?? ViewableObjectListType.list;
+
+        return ViewableObjectList(
+          type: typeValue,
+          itemsExpandable: true,
+          objectsController: listController,
+          itemBuilder: typeValue == ViewableObjectListType.list
+              ? _buildHierarchyServiceTile
+              : _buildServiceTile,
+        );
+      },
     );
   }
 
   Widget _buildServiceTile(
+    BuildContext context,
+    Service service,
+    ViewableObjectWidgetConfig? config,
+  ) {
+    return Card.filled(
+      child: InkWell(
+        onTap: config?.onTap != null ? () => config!.onTap!(service) : null,
+        onLongPress: config?.onLongPress != null
+            ? () => config!.onLongPress!(service)
+            : null,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: AbsorbPointer(
+                  child: ImageObjectWidget(
+                    service,
+                    circleCrop: false,
+                    size: MediaQuery.sizeOf(context).width / 2 - 56,
+                  ),
+                ),
+              ),
+              Text(service.name, style: Theme.of(context).textTheme.bodyLarge),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHierarchyServiceTile(
     //ignore: avoid-unused-parameters
     BuildContext context,
     Service service,
