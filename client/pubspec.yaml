@@ -21,7 +21,6 @@ dependencies:
   cross_file: ^0.3.3+4
   cryptography: ^2.5.0
   cryptography_flutter: ^2.3.0
-  cupertino_icons: ^1.0.5
   derived_colors: ^0.4.0
   device_info_plus: ^10.1.0
   dio: ^5.1.1
@@ -64,7 +63,6 @@ dependencies:
   image_picker: ^1.0.1
   intl: ^0.19.0
   intl_phone_field: ^3.2.0
-  json_annotation: ^4.7.0
   latlong2: ^0.9.0
   local_auth: ^2.1.2
   map_launcher: ^3.1.0
@@ -88,7 +86,6 @@ dependencies:
   timeago: ^3.3.0
   tinycolor2: ^3.0.1
   transparent_pointer: ^1.0.0
-  tuple: ^2.0.1
   universal_io: ^2.2.2
   universal_platform: ^1.0.0+1
   url_launcher: ^6.1.11
