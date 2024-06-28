@@ -367,9 +367,7 @@ class _HomeBody extends StatelessWidget {
           index: 0,
           tabController: tabController,
           builder: (context) => ViewableObjectList<Person>(
-            key: PageStorageKey(
-              personsController,
-            ),
+            key: const PageStorageKey('_HomeBody => PersonsTab'),
             objectsController: personsController(),
           ),
         ),
@@ -377,9 +375,7 @@ class _HomeBody extends StatelessWidget {
           index: 1,
           tabController: tabController,
           builder: (context) => ServicesHierarchyList(
-            key: PageStorageKey(
-              servicesController,
-            ),
+            key: const PageStorageKey('_HomeBody => ServicesTab'),
             listController: servicesController(),
             serviceTrailingBuilder: (
               context,
@@ -399,11 +395,11 @@ class _HomeBody extends StatelessWidget {
           index: 2,
           tabController: tabController,
           builder: (context) => ViewableObjectList<Area>(
+            key: const PageStorageKey('_HomeBody => AreasTab'),
+            objectsController: areasController(),
             viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
               forceShowSecondLine: false,
             ),
-            key: PageStorageKey(areasController),
-            objectsController: areasController(),
           ),
         ),
       ],
