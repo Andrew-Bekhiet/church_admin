@@ -25,6 +25,9 @@ typedef WBuilderWithObject<T, W extends Widget> = W Function(
 
 class ViewObjectDetails<T extends ViewableWithIDAndImage>
     extends StatefulWidget {
+  static const snapPositions = <double>[0, 0.85, 1];
+  static const snapDuration = Duration(milliseconds: 300);
+
   final T? object;
   final String objectId;
 
@@ -60,9 +63,6 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
 class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     extends State<ViewObjectDetails<T>> {
-  static const _snapPositions = <double>[0, 0.85, 1];
-  static const _snapDuration = Duration(milliseconds: 300);
-
   late final ScrollController _scrollController = TrackingScrollController();
   late final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
   Timer? _timer;
@@ -196,7 +196,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
     _timer?.cancel();
     _timer = Timer(
-      _snapDuration,
+      ViewObjectDetails.snapDuration,
       () {
         if (!_scrollController.hasClients ||
             _scrollController.position.isScrollingNotifier.value) return;
@@ -205,7 +205,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
         final currentScroll = _scrollController.offset;
         final scrollPercent = currentScroll / maxScroll;
 
-        final nearestSnap = _snapPositions.reduce(
+        final nearestSnap = ViewObjectDetails.snapPositions.reduce(
           (nearest, element) =>
               (element - scrollPercent).abs() < (nearest - scrollPercent).abs()
                   ? element
@@ -217,7 +217,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             if (_scrollController.hasClients && scrollPercent != nearestSnap) {
               _scrollController.animateTo(
                 nearestSnap * maxScroll,
-                duration: _snapDuration,
+                duration: ViewObjectDetails.snapDuration,
                 curve: Curves.easeOutExpo,
               );
             }
