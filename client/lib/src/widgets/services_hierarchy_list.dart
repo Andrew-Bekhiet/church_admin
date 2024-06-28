@@ -85,19 +85,15 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   }
 
   Widget _buildServiceTile(
+    //ignore: avoid-unused-parameters
     BuildContext context,
     Service service,
     ViewableObjectWidgetConfig? config,
   ) {
-    final value = PageStorage.maybeOf(context)?.readState(
-      context,
-      identifier: 'ServicesAnimationControllers:' + service.id,
-    );
     final _topController =
         _animationControllers[service] ??= AnimationController(
       duration: const Duration(milliseconds: 225),
       vsync: this,
-      value: value,
     );
 
     return AnimatedBuilder(
@@ -137,14 +133,6 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             } else {
               await _topController.animateBack(0);
             }
-
-            if (context.mounted) {
-              PageStorage.maybeOf(context)?.writeState(
-                context,
-                _animationControllers[service]!.value,
-                identifier: 'ServicesAnimationControllers:' + service.id,
-              );
-            }
           },
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
           maintainState: true,
@@ -158,7 +146,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             if (widget.showClasses)
               _Classes(
                 service: service,
-                topController: _topController,
+                animationValue: _topController.value,
                 classBuilder: widget.classBuilder,
                 studyYearBuilder: widget.studyYearBuilder,
               ),
@@ -173,7 +161,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             if (widget.showGroups)
               _Groups(
                 service: service,
-                topController: _topController,
+                animationValue: _topController.value,
                 groupBuilder: widget.groupBuilder,
               ),
           ],
@@ -201,14 +189,14 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
 class _Classes extends StatelessWidget {
   final Service service;
-  final AnimationController topController;
+  final double animationValue;
 
   final StudyYearBuilder? studyYearBuilder;
 
   final ClassBuilder? classBuilder;
 
   const _Classes({
-    required this.topController,
+    required this.animationValue,
     required this.service,
     this.studyYearBuilder,
     this.classBuilder,
@@ -224,7 +212,7 @@ class _Classes extends StatelessWidget {
                 <StudyYear, List<Class>>{}.entries)
           if (classes.length > 1)
             Padding(
-              padding: EdgeInsets.only(right: topController.value * 20),
+              padding: EdgeInsets.only(right: animationValue * 20),
               child: studyYearBuilder?.call(
                     context,
                     service: service,
@@ -241,7 +229,7 @@ class _Classes extends StatelessWidget {
                         for (final c in classes)
                           Padding(
                             padding: EdgeInsets.only(
-                              right: topController.value * 20,
+                              right: animationValue * 20,
                             ),
                             child: classBuilder?.call(
                                   context,
@@ -266,7 +254,7 @@ class _Classes extends StatelessWidget {
             )
           else
             Padding(
-              padding: EdgeInsets.only(right: topController.value * 20),
+              padding: EdgeInsets.only(right: animationValue * 20),
               child: classBuilder?.call(
                     context,
                     service: service,
@@ -291,10 +279,10 @@ class _Classes extends StatelessWidget {
 class _Groups extends StatelessWidget {
   final Service service;
   final GroupBuilder? groupBuilder;
-  final AnimationController topController;
+  final double animationValue;
 
   const _Groups({
-    required this.topController,
+    required this.animationValue,
     required this.service,
     this.groupBuilder,
   });
@@ -306,7 +294,7 @@ class _Groups extends StatelessWidget {
       children: [
         for (final g in service.groups ?? <Group>[])
           Padding(
-            padding: EdgeInsets.only(right: topController.value * 20),
+            padding: EdgeInsets.only(right: animationValue * 20),
             child: groupBuilder?.call(context, group: g, service: service) ??
                 ViewableObjectWidget(
                   g,
