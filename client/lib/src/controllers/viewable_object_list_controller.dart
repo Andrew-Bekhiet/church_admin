@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:rxdart_ext/single.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewableObjectListController<T extends Viewable> {
   final PaginatableStreamBase<T> objectsPaginatableStream;

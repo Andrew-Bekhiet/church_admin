@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart_ext/operators.dart';
+import 'package:rxdart/rxdart.dart';
 
 class AddAuthLink extends Link {
   static HttpLink defaultCreateHttpLink(String url) => HttpLink(url);
