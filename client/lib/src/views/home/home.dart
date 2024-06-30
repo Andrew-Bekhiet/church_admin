@@ -145,6 +145,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             },
           ),
         ],
+        leadingWidth: kToolbarHeight * 2 - 12,
+        leading: Row(
+          children: [
+            Builder(
+              builder: (context) => IconButton(
+                icon: const Icon(Symbols.menu),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
+            Image.asset(
+              'assets/Logo.png',
+              width: kToolbarHeight - 12,
+              height: kToolbarHeight - 12,
+              fit: BoxFit.scaleDown,
+            ),
+          ],
+        ),
+        titleSpacing: 0,
         title: StreamBuilder<String?>(
           stream: _search,
           builder: (context, snapshot) {
