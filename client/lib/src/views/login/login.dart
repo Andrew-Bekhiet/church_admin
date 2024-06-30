@@ -49,9 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     child: Image.asset(
                       'assets/Logo.png',
-                      color: Theme.of(context).colorScheme.primary,
                       fit: BoxFit.scaleDown,
-                      colorBlendMode: BlendMode.softLight,
                     ),
                   ),
                 ),
