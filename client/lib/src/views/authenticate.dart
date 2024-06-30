@@ -68,10 +68,6 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     );
 
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.brightness == Brightness.light
-              ? Colors.white
-              : Colors.black,
       appBar: AppBar(
         toolbarHeight: size.width - 16,
         leading: widget.next != null ? const BackButton() : null,

@@ -40,10 +40,6 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.brightness == Brightness.light
-              ? Colors.white
-              : Colors.black,
       appBar: AppBar(
         title: TitleSearchField(
           searchStream: _search,
