@@ -73,12 +73,20 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               ? Colors.white
               : Colors.black,
       appBar: AppBar(
-        toolbarHeight: 0.40684931506849314 * size.height,
+        toolbarHeight: size.width - 16,
         leading: widget.next != null ? const BackButton() : null,
-        backgroundColor: colorScheme.primary,
-        flexibleSpace: Image.asset(
-          _getAssetImage(),
-          fit: BoxFit.scaleDown,
+        flexibleSpace: FlexibleSpaceBar(
+          expandedTitleScale: 2,
+          background: Image.asset(
+            _getAssetImage(),
+            alignment: Alignment.topCenter,
+            fit: BoxFit.scaleDown,
+          ),
+          centerTitle: true,
+          title: const Text(
+            'كنيسة السيدة العذراء مريم',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(35)),
