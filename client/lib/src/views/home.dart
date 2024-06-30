@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     DatabaseService.I.areas.streamAll,
   );
 
-  final Map<Type, int> _typeToIndex = {Person: 0, Service: 1, Area: 2};
+  final List<Type> _tabTypes = [Person, Service, Area];
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
   final Set<Timer> _timers = {};
@@ -193,9 +193,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           return BottomNavigationBar(
             onTap: (v) {
               _tabController.animateTo(v);
-              _bottomNavBar.add(
-                _typeToIndex.keys.elementAt(_tabController.index),
-              );
+              _bottomNavBar.add(_tabTypes[_tabController.index]);
             },
             currentIndex:
                 _tabController.animation?.value.round() ?? _tabController.index,
@@ -258,9 +256,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _tabControllerListener() {
-    if (_typeToIndex.keys.elementAt(_tabController.index) !=
-        _bottomNavBar.value) {
-      _bottomNavBar.add(_typeToIndex.keys.elementAt(_tabController.index));
+    if (_tabTypes[_tabController.index] != _bottomNavBar.value) {
+      _bottomNavBar.add(_tabTypes[_tabController.index]);
     }
   }
 
