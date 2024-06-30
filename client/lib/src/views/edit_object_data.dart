@@ -45,9 +45,15 @@ class _EditObjectDataState<T extends ViewableWithID>
   @override
   Widget build(BuildContext context) {
     final foregroundColor = newObjectData.color?.findInvert();
+    final newTheme = ThemingService.getDefault(
+      seedOverride: newObjectData.color,
+    );
 
     return Theme(
-      data: ThemingService.getDefault(seedOverride: newObjectData.color),
+      data: newTheme.copyWith(
+        scaffoldBackgroundColor:
+            newObjectData.color ?? newTheme.appBarTheme.backgroundColor,
+      ),
       child: Scaffold(
         body: Form(
           key: _controller.formKey,

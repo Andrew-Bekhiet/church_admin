@@ -65,7 +65,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     extends State<ViewObjectDetails<T>> {
   late final ScrollController _scrollController = TrackingScrollController();
   late final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
-  Timer? _timer;
+  Timer? _scrollTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -164,8 +164,15 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 ),
               );
 
+        final newTheme = ThemingService.getDefault(
+          seedOverride: objectData.color,
+        );
+
         return Theme(
-          data: ThemingService.getDefault(seedOverride: objectData.color),
+          data: newTheme.copyWith(
+            scaffoldBackgroundColor:
+                objectData.color ?? theme.appBarTheme.backgroundColor,
+          ),
           child: DefaultTabController(
             length: widget.childrenTypes.length,
             child: Scaffold(
@@ -194,8 +201,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
   bool _onScrollEnd(ScrollEndNotification _) {
     if (!_scrollController.hasClients) return false;
 
-    _timer?.cancel();
-    _timer = Timer(
+    _scrollTimer?.cancel();
+    _scrollTimer = Timer(
       ViewObjectDetails.snapDuration,
       () {
         if (!_scrollController.hasClients ||
@@ -232,6 +239,6 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
   @override
   void dispose() {
     super.dispose();
-    _timer?.cancel();
+    _scrollTimer?.cancel();
   }
 }
