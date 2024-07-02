@@ -79,7 +79,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   searchSink: searchSubject,
                   canHide: true,
                 )
-              : const Text('كنيسة السيدة العذراء مريم'),
+              : InkWell(
+                  onTap: () => searchSubject.add(''),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: kToolbarHeight,
+                    ),
+                    child: const Center(child: Text('بحث...')),
+                  ),
+                ),
         );
       },
     );
