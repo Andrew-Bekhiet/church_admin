@@ -182,7 +182,7 @@ class ViewableObjectService {
     if (imageObject is Area || _isSubtype<T, Area>()) {
       return Symbols.pin_drop;
     } else if (imageObject is Street || _isSubtype<T, Street>()) {
-      return Symbols.pin_drop;
+      return Symbols.road;
     } else if (imageObject is Family || _isSubtype<T, Family>()) {
       return Symbols.diversity_1;
     } else if (imageObject is Store || _isSubtype<T, Store>()) {

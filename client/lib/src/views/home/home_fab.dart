@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeFloatingActionButton extends StatelessWidget {
-  const HomeFloatingActionButton({super.key});
+  final bool isSundaySchool;
+
+  const HomeFloatingActionButton({required this.isSundaySchool, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +13,17 @@ class HomeFloatingActionButton extends StatelessWidget {
 
     return SwitchingFloatingActionButton(
       tabController: _tabController,
-      icons: const {
-        0: Icon(Symbols.person_add),
-        1: Icon(Symbols.add),
-        2: Icon(Symbols.add_location),
-      },
+      icons: [
+        const Icon(Symbols.add_location),
+        if (isSundaySchool)
+          const Icon(Symbols.add)
+        else ...[
+          const Icon(Symbols.add_road),
+          const Icon(Symbols.group_add),
+          const Icon(Symbols.add_business),
+        ],
+        const Icon(Symbols.person_add),
+      ].asMap(),
       onTap: (i) {
         if (i == 0) {
           context.push('/editPerson');

@@ -6,7 +6,14 @@ import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  final void Function(BuildContext, bool) onModeChanged;
+  final bool isSundaySchool;
+
+  const HomeDrawer({
+    required this.onModeChanged,
+    required this.isSundaySchool,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class HomeDrawer extends StatelessWidget {
 
                 switch (i) {
                   case 0:
-                    break;
+                    onModeChanged(context, !isSundaySchool);
                   case 1 when AuthService.I.currentUser!.canManageSomeUsers:
                     context.push('/manage_users');
                   case 1:
@@ -58,9 +65,11 @@ class HomeDrawer extends StatelessWidget {
                 }
               },
               children: [
-                const NavigationDrawerDestination(
-                  icon: Icon(Symbols.home),
-                  label: Text('الرئيسية'),
+                NavigationDrawerDestination(
+                  icon: const Icon(Symbols.home),
+                  label: isSundaySchool
+                      ? const Text('تبديل إلى الافتقاد')
+                      : const Text('تبديل إلى مدارس الأحد'),
                 ),
                 if (AuthService.I.currentUser!.canManageSomeUsers)
                   const NavigationDrawerDestination(

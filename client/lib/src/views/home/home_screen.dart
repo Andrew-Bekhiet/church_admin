@@ -6,6 +6,7 @@ import 'package:church_admin/src/views/home/home_body.dart';
 import 'package:church_admin/src/views/home/home_bottom_navbar.dart';
 import 'package:church_admin/src/views/home/home_drawer.dart';
 import 'package:church_admin/src/views/home/home_fab.dart';
+import 'package:church_admin/src/views/home/home_mode_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -74,9 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
   final Set<Timer> _timers = {};
 
-  final List<Type> _tabTypes = [Person, Service, Area];
-
   late final StreamSubscription<void> _localAuthListener;
+
+  List<Type> _tabTypes = [];
+  bool? _isSundaySchool;
 
   @override
   void initState() {
@@ -90,30 +92,77 @@ class _HomeScreenState extends State<HomeScreen> {
       length: _tabTypes.length,
       initialIndex: 1,
       child: Scaffold(
-        drawer: const HomeDrawer(),
+        drawer: _isSundaySchool != null
+            ? HomeDrawer(
+                isSundaySchool: _isSundaySchool!,
+                onModeChanged: _onModeChanged,
+              )
+            : null,
         appBar: HomeAppBar(
           searchSubject: _search,
           bottomNavBarStream: _bottomNavBar,
           servicesListTypeSubject: _servicesListType,
         ),
-        body: HomeBody(
-          servicesListTypeStream: _servicesListType,
-          personsController: () => _putControllerIfAbsentUsing<Person>(
-            DatabaseService.I.persons.streamAll,
-          ),
-          servicesController: () => _putControllerIfAbsentUsing<Service>(
-            DatabaseService.I.services.streamAll,
-          ),
-          areasController: () => _putControllerIfAbsentUsing<Area>(
-            DatabaseService.I.areas.streamAll,
-          ),
-        ),
-        floatingActionButton: const HomeFloatingActionButton(),
-        bottomNavigationBar: HomeBottomNavBar(
-          onTabChanged: (i) => _bottomNavBar.add(_tabTypes[i]),
-        ),
+        body: _isSundaySchool != null
+            ? HomeBody(
+                servicesListTypeStream: _servicesListType,
+                isSundaySchool: _isSundaySchool!,
+                areasController: () => _putControllerIfAbsentUsing<Area>(
+                  DatabaseService.I.areas.streamAll,
+                ),
+                servicesController: () => _putControllerIfAbsentUsing<Service>(
+                  DatabaseService.I.services.streamAll,
+                ),
+                streetsController: () => _putControllerIfAbsentUsing<Street>(
+                  DatabaseService.I.streets.streamAll,
+                ),
+                storesController: () => _putControllerIfAbsentUsing<Store>(
+                  DatabaseService.I.stores.streamAll,
+                ),
+                familiesController: () => _putControllerIfAbsentUsing<Family>(
+                  DatabaseService.I.families.streamAll,
+                ),
+                personsController: () => _putControllerIfAbsentUsing<Person>(
+                  DatabaseService.I.persons.streamAll,
+                ),
+              )
+            : HomeModeSelector(onModeChanged: _onModeChanged),
+        floatingActionButton: _isSundaySchool != null
+            ? HomeFloatingActionButton(isSundaySchool: _isSundaySchool!)
+            : null,
+        bottomNavigationBar: _isSundaySchool != null
+            ? HomeBottomNavBar(
+                isSundaySchool: _isSundaySchool!,
+                onTabChanged: (i) => _bottomNavBar.add(_tabTypes[i]),
+              )
+            : null,
       ),
     );
+  }
+
+  void _onModeChanged(BuildContext context, bool isSundaySchool) {
+    setState(() {
+      _isSundaySchool = isSundaySchool;
+      if (isSundaySchool) {
+        _tabTypes = [Area, Service, Person];
+      } else {
+        _tabTypes = [Area, Street, Family, Store, Person];
+      }
+    });
+
+    _syncBottomNavBar(context);
+  }
+
+  void _syncBottomNavBar(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final TabController tabController = DefaultTabController.of(context);
+
+      if (_bottomNavBar.value == Person || _bottomNavBar.value == Area) {
+        tabController.animateTo(_tabTypes.indexOf(_bottomNavBar.value));
+      } else {
+        _bottomNavBar.add(_tabTypes[tabController.index]);
+      }
+    });
   }
 
   void _listenToLocalAuth() {
