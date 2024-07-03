@@ -7,6 +7,8 @@ class HomeModeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     return Scaffold(
       body: Center(
         child: ListView(
@@ -21,7 +23,10 @@ class HomeModeSelector extends StatelessWidget {
                     height: 360,
                     fit: BoxFit.scaleDown,
                   ),
-                  const Text('خدمة مدارس الأحد'),
+                  Text(
+                    'خدمة مدارس الأحد',
+                    style: themeData.textTheme.headlineSmall,
+                  ),
                 ],
               ),
             ),
@@ -35,7 +40,10 @@ class HomeModeSelector extends StatelessWidget {
                     height: 360,
                     fit: BoxFit.scaleDown,
                   ),
-                  const Text('خدمة الافتقاد'),
+                  Text(
+                    'خدمة الافتقاد',
+                    style: themeData.textTheme.headlineSmall,
+                  ),
                 ],
               ),
             ),
