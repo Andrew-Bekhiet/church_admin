@@ -30,13 +30,25 @@ void main() {
 
   tearDown(resetGlobalProviderContainer);
 
+  const Size size = Size(100, 1365 * 3);
+
   testWidgets(
     'Authenticate Screen => Key elements',
     (tester) async {
-      await tester.binding.setSurfaceSize(const Size(1024, 1365 * 3));
+      await tester.binding.setSurfaceSize(size);
 
       await tester.pumpWidgetBuilder(
-        const AuthenticateScreen(),
+        SizedBox.fromSize(
+          size: size,
+          child: Builder(
+            builder: (context) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(size: size),
+                child: const AuthenticateScreen(),
+              );
+            },
+          ),
+        ),
         wrapper: materialAppWrapper(),
       );
       await tester.pumpAndSettle();
@@ -99,10 +111,18 @@ void main() {
       when(LocalAuthService.I.authenticate())
           .thenAnswer((_) async => authCompleter.future);
 
-      await tester.binding.setSurfaceSize(const Size(1024, 1365 * 5));
-
       await tester.pumpWidgetBuilder(
-        AuthenticateScreen(key: widgetKey),
+        SizedBox.fromSize(
+          size: size,
+          child: Builder(
+            builder: (context) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(size: size),
+                child: AuthenticateScreen(key: widgetKey),
+              );
+            },
+          ),
+        ),
         wrapper: materialAppWrapper(),
       );
       await tester.pumpAndSettle();
