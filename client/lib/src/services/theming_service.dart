@@ -161,8 +161,8 @@ class ThemingService with WidgetsBindingObserver {
       outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
       error: const Color(0xffFF4B40),
     );
-    final whiteOrBlack = isDark ? Colors.white : Colors.black;
-    final whiteOrBlackInverse = isDark ? Colors.black : Colors.white;
+
+    final whiteOrBlack = isDark ? Colors.black : Colors.white;
 
     final Typography typography = typographyWith3Fonts(
       Typography.material2021(
@@ -175,7 +175,7 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     final ThemeData rawThemeData = ThemeData.from(
-      textTheme: isDark ? typography.white : typography.black,
+      textTheme: isDark ? typography.black : typography.white,
       colorScheme: colorScheme,
       useMaterial3: true,
     );
@@ -184,6 +184,7 @@ class ThemingService with WidgetsBindingObserver {
       rawThemeData,
       rawThemeData.typography.geometryThemeFor(ScriptCategory.tall),
     );
+
     const radius15 = Radius.circular(15);
     final inputBorder = OutlineInputBorder(
       gapPadding: 8,
@@ -201,12 +202,14 @@ class ThemingService with WidgetsBindingObserver {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
-        foregroundColor: Colors.white,
+        foregroundColor: whiteOrBlack,
         backgroundColor: seed,
       ),
       hintColor: whiteOrBlack.withOpacity(0.5),
       dialogTheme: themeData.dialogTheme.copyWith(
+        backgroundColor: const Color(0xff1A477C),
         elevation: 5,
+        surfaceTintColor: const Color(0xffD9D9D9),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
         ),
@@ -229,7 +232,7 @@ class ThemingService with WidgetsBindingObserver {
       ),
       cardTheme: themeData.cardTheme.copyWith(
         clipBehavior: Clip.antiAlias,
-        color: themeData.colorScheme.inversePrimary,
+        color: seed,
       ),
       tabBarTheme: themeData.tabBarTheme.copyWith(
         labelColor: whiteOrBlack,
@@ -251,6 +254,37 @@ class ThemingService with WidgetsBindingObserver {
             themeData.textTheme.titleMedium?.copyWith(color: whiteOrBlack),
         iconColor: whiteOrBlack,
       ),
+      iconTheme: themeData.iconTheme.copyWith(
+        color: whiteOrBlack,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          focusColor: whiteOrBlack,
+          foregroundColor: whiteOrBlack,
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: whiteOrBlack,
+          backgroundColor: seed,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: whiteOrBlack),
+          disabledForegroundColor: whiteOrBlack.withOpacity(0.5),
+          disabledIconColor: whiteOrBlack.withOpacity(0.5),
+          foregroundColor: whiteOrBlack,
+          iconColor: whiteOrBlack,
+          backgroundColor: seed,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: whiteOrBlack,
+          backgroundColor: seed,
+        ),
+      ),
       checkboxTheme: themeData.checkboxTheme.copyWith(
         side: BorderSide(color: whiteOrBlack, width: 2),
         checkColor: WidgetStatePropertyAll(whiteOrBlack),
@@ -263,8 +297,8 @@ class ThemingService with WidgetsBindingObserver {
       bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
         backgroundColor: seed,
         showUnselectedLabels: false,
-        unselectedItemColor: whiteOrBlackInverse.withOpacity(0.3),
-        selectedItemColor: whiteOrBlackInverse,
+        unselectedItemColor: whiteOrBlack.withOpacity(0.3),
+        selectedItemColor: whiteOrBlack,
       ),
       bottomAppBarTheme: const BottomAppBarTheme(
         shape: CircularNotchedRectangle(),
