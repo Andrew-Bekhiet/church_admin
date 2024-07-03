@@ -88,54 +88,57 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isSundaySchool == null) {
+      return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('اختيار الخدمة'),
+        ),
+        body: HomeModeSelector(onModeChanged: _onModeChanged),
+      );
+    }
+
     return DefaultTabController(
       length: _tabTypes.length,
       initialIndex: 1,
       child: Scaffold(
-        drawer: _isSundaySchool != null
-            ? HomeDrawer(
-                isSundaySchool: _isSundaySchool!,
-                onModeChanged: _onModeChanged,
-              )
-            : null,
+        drawer: HomeDrawer(
+          isSundaySchool: _isSundaySchool!,
+          onModeChanged: _onModeChanged,
+        ),
         appBar: HomeAppBar(
           searchSubject: _search,
           bottomNavBarStream: _bottomNavBar,
           servicesListTypeSubject: _servicesListType,
         ),
-        body: _isSundaySchool != null
-            ? HomeBody(
-                servicesListTypeStream: _servicesListType,
-                isSundaySchool: _isSundaySchool!,
-                areasController: () => _putControllerIfAbsentUsing<Area>(
-                  DatabaseService.I.areas.streamAll,
-                ),
-                servicesController: () => _putControllerIfAbsentUsing<Service>(
-                  DatabaseService.I.services.streamAll,
-                ),
-                streetsController: () => _putControllerIfAbsentUsing<Street>(
-                  DatabaseService.I.streets.streamAll,
-                ),
-                storesController: () => _putControllerIfAbsentUsing<Store>(
-                  DatabaseService.I.stores.streamAll,
-                ),
-                familiesController: () => _putControllerIfAbsentUsing<Family>(
-                  DatabaseService.I.families.streamAll,
-                ),
-                personsController: () => _putControllerIfAbsentUsing<Person>(
-                  DatabaseService.I.persons.streamAll,
-                ),
-              )
-            : HomeModeSelector(onModeChanged: _onModeChanged),
-        floatingActionButton: _isSundaySchool != null
-            ? HomeFloatingActionButton(isSundaySchool: _isSundaySchool!)
-            : null,
-        bottomNavigationBar: _isSundaySchool != null
-            ? HomeBottomNavBar(
-                isSundaySchool: _isSundaySchool!,
-                onTabChanged: (i) => _bottomNavBar.add(_tabTypes[i]),
-              )
-            : null,
+        body: HomeBody(
+          servicesListTypeStream: _servicesListType,
+          isSundaySchool: _isSundaySchool!,
+          areasController: () => _putControllerIfAbsentUsing<Area>(
+            DatabaseService.I.areas.streamAll,
+          ),
+          servicesController: () => _putControllerIfAbsentUsing<Service>(
+            DatabaseService.I.services.streamAll,
+          ),
+          streetsController: () => _putControllerIfAbsentUsing<Street>(
+            DatabaseService.I.streets.streamAll,
+          ),
+          storesController: () => _putControllerIfAbsentUsing<Store>(
+            DatabaseService.I.stores.streamAll,
+          ),
+          familiesController: () => _putControllerIfAbsentUsing<Family>(
+            DatabaseService.I.families.streamAll,
+          ),
+          personsController: () => _putControllerIfAbsentUsing<Person>(
+            DatabaseService.I.persons.streamAll,
+          ),
+        ),
+        floatingActionButton:
+            HomeFloatingActionButton(isSundaySchool: _isSundaySchool!),
+        bottomNavigationBar: HomeBottomNavBar(
+          isSundaySchool: _isSundaySchool!,
+          onTabChanged: (i) => _bottomNavBar.add(_tabTypes[i]),
+        ),
       ),
     );
   }
@@ -155,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _syncBottomNavBar(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final TabController tabController = DefaultTabController.of(context);
+      final TabController? tabController =
+          context.mounted ? DefaultTabController.maybeOf(context) : null;
+
+      if (tabController == null) return;
 
       if (_bottomNavBar.value == Person || _bottomNavBar.value == Area) {
         tabController.animateTo(_tabTypes.indexOf(_bottomNavBar.value));
