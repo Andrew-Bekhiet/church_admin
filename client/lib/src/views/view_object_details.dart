@@ -5,6 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 export 'view_object_details/view_area.dart';
 export 'view_object_details/view_class.dart';
@@ -105,7 +106,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
-        final Color? foregroundColor = objectData.color?.findInvert();
+        final Color foregroundColor =
+            (objectData.color ?? theme.colorScheme.primary).findInvert();
 
         final slivers = [
           SliverAppBar(
@@ -166,6 +168,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final newTheme = ThemingService.getDefault(
           seedOverride: objectData.color,
+          isDarkOverride:
+              !(objectData.color ?? theme.colorScheme.primary).isDark,
         );
 
         return Theme(
