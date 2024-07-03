@@ -168,8 +168,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final newTheme = ThemingService.getDefault(
           seedOverride: objectData.color,
-          isDarkOverride:
-              !(objectData.color ?? theme.colorScheme.primary).isDark,
+          whiteOrBlackOverride: foregroundColor,
+          isDarkOverride: foregroundColor.isLight,
         );
 
         return Theme(

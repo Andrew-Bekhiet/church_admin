@@ -89,13 +89,19 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
       builder: (context, typeSnapshot) {
         final typeValue = typeSnapshot.data ?? ViewableObjectListType.list;
 
-        return ViewableObjectList(
-          type: typeValue,
-          itemsExpandable: true,
-          objectsController: listController,
-          itemBuilder: typeValue == ViewableObjectListType.list
-              ? _buildHierarchyServiceTile
-              : _buildServiceTile,
+        return Theme(
+          data: ThemingService.getDefault(
+            isDarkOverride: false,
+            whiteOrBlackOverride: Colors.white,
+          ),
+          child: ViewableObjectList(
+            type: typeValue,
+            itemsExpandable: true,
+            objectsController: listController,
+            itemBuilder: typeValue == ViewableObjectListType.list
+                ? _buildHierarchyServiceTile
+                : _buildServiceTile,
+          ),
         );
       },
     );
@@ -125,7 +131,13 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                   ),
                 ),
               ),
-              Text(service.name, style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                service.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: Colors.white),
+              ),
             ],
           ),
         ),

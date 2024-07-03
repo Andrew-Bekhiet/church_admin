@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -126,6 +127,7 @@ class ThemingService with WidgetsBindingObserver {
 
   static ThemeData getDefault({
     Color? seedOverride,
+    Color? whiteOrBlackOverride,
     bool? isDarkOverride,
     bool? greatFeastThemeOverride,
     UserSettingsService? userSettingsService,
@@ -162,7 +164,9 @@ class ThemingService with WidgetsBindingObserver {
       error: const Color(0xffFF4B40),
     );
 
-    final whiteOrBlack = isDark ? Colors.black : Colors.white;
+    final Color whiteOrBlack =
+        whiteOrBlackOverride ?? (isDark ? Colors.white : Colors.black);
+    final Color onSeed = seed.findInvert();
 
     final Typography typography = typographyWith3Fonts(
       Typography.material2021(
@@ -175,7 +179,7 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     final ThemeData rawThemeData = ThemeData.from(
-      textTheme: isDark ? typography.black : typography.white,
+      textTheme: isDark ? typography.white : typography.black,
       colorScheme: colorScheme,
       useMaterial3: true,
     );
@@ -202,7 +206,7 @@ class ThemingService with WidgetsBindingObserver {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
-        foregroundColor: whiteOrBlack,
+        foregroundColor: onSeed,
         backgroundColor: seed,
       ),
       hintColor: whiteOrBlack.withOpacity(0.5),
@@ -223,6 +227,9 @@ class ThemingService with WidgetsBindingObserver {
             .copyWith(fontWeight: FontWeight.bold),
         iconColor: whiteOrBlack,
         textColor: whiteOrBlack,
+      ),
+      progressIndicatorTheme: themeData.progressIndicatorTheme.copyWith(
+        color: whiteOrBlack,
       ),
       expansionTileTheme: themeData.expansionTileTheme.copyWith(
         collapsedIconColor: whiteOrBlack,
@@ -297,8 +304,8 @@ class ThemingService with WidgetsBindingObserver {
       bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
         backgroundColor: seed,
         showUnselectedLabels: false,
-        unselectedItemColor: whiteOrBlack.withOpacity(0.3),
-        selectedItemColor: whiteOrBlack,
+        unselectedItemColor: onSeed.withOpacity(0.3),
+        selectedItemColor: onSeed,
       ),
       bottomAppBarTheme: const BottomAppBarTheme(
         shape: CircularNotchedRectangle(),
