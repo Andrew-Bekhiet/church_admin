@@ -25,13 +25,20 @@ class HomeFloatingActionButton extends StatelessWidget {
         const Icon(Symbols.person_add),
       ].asMap(),
       onTap: (i) {
-        if (i == 0) {
-          context.push('/editPerson');
-        } else if (i == 1) {
-          context.push('/editService');
-        } else if (i == 2) {
-          context.push('/editArea');
-        }
+        context.push(
+          '/' +
+              [
+                EditArea.route.path,
+                if (isSundaySchool)
+                  EditService.route.path
+                else ...[
+                  EditStreet.route.path,
+                  EditFamily.route.path,
+                  EditStore.route.path,
+                ],
+                EditPerson.route.path,
+              ][i],
+        );
       },
     );
   }
