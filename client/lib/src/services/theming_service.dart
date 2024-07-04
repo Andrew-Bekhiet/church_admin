@@ -218,6 +218,7 @@ class ThemingService with WidgetsBindingObserver {
           borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
         ),
         titleTextStyle: themeData.textTheme.bodyLarge!.copyWith(
+          color: onSeed,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.underline,
         ),
@@ -266,13 +267,13 @@ class ThemingService with WidgetsBindingObserver {
       ),
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
-          focusColor: whiteOrBlack,
-          foregroundColor: whiteOrBlack,
+          focusColor: onSeed,
+          foregroundColor: onSeed,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: whiteOrBlack,
+          foregroundColor: onSeed,
           backgroundColor: seed,
         ),
       ),
@@ -281,14 +282,14 @@ class ThemingService with WidgetsBindingObserver {
           side: BorderSide(color: whiteOrBlack),
           disabledForegroundColor: whiteOrBlack.withOpacity(0.5),
           disabledIconColor: whiteOrBlack.withOpacity(0.5),
-          foregroundColor: whiteOrBlack,
-          iconColor: whiteOrBlack,
+          iconColor: onSeed,
+          foregroundColor: onSeed,
           backgroundColor: seed,
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: whiteOrBlack,
+          foregroundColor: onSeed,
           backgroundColor: seed,
         ),
       ),
