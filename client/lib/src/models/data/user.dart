@@ -70,14 +70,14 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
     if (permissions.readAllData) return true;
 
     switch (object) {
-      case Area _:
-        return adminOn!.any((a) => a.area?.id == object.id);
+      case Area(id: final id):
+        return adminOn?.any((a) => a.area?.id == id) ?? false;
 
-      case Service _:
-        return adminOn!.any((a) => a.service?.id == object.id);
+      case Service(id: final id):
+        return adminOn?.any((a) => a.service?.id == id) ?? false;
 
-      case Group _:
-        return adminOn!.any((a) => a.group?.id == object.id);
+      case Group(id: final id):
+        return adminOn?.any((a) => a.group?.id == id) ?? false;
 
       default:
         return false;
@@ -88,20 +88,23 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
     if (permissions.writeAllData) return true;
 
     switch (object) {
-      case Area _:
-        return adminOn!.any(
-          (a) => a.area?.id == object.id && (a.areaAllowEdit ?? false),
-        );
+      case Area(id: final id):
+        return adminOn?.any(
+              (a) => a.area?.id == id && (a.areaAllowEdit ?? false),
+            ) ??
+            false;
 
-      case Service _:
-        return adminOn!.any(
-          (a) => a.service?.id == object.id && (a.serviceAllowEdit ?? false),
-        );
+      case Service(id: final id):
+        return adminOn?.any(
+              (a) => a.service?.id == id && (a.serviceAllowEdit ?? false),
+            ) ??
+            false;
 
-      case Group _:
-        return adminOn!.any(
-          (a) => a.group?.id == object.id && (a.groupAllowEdit ?? false),
-        );
+      case Group(id: final id):
+        return adminOn?.any(
+              (a) => a.group?.id == id && (a.groupAllowEdit ?? false),
+            ) ??
+            false;
 
       default:
         return false;
@@ -112,20 +115,23 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
     if (permissions.manageAllUsers) return true;
 
     switch (object) {
-      case Area _:
-        return adminOn!.any(
-          (a) => a.area?.id == object.id && (a.areaAdminOnUsers ?? false),
-        );
+      case Area(id: final id):
+        return adminOn?.any(
+              (a) => a.area?.id == id && (a.areaAdminOnUsers ?? false),
+            ) ??
+            false;
 
-      case Service _:
-        return adminOn!.any(
-          (a) => a.service?.id == object.id && (a.serviceAdminOnUsers ?? false),
-        );
+      case Service(id: final id):
+        return adminOn?.any(
+              (a) => a.service?.id == id && (a.serviceAdminOnUsers ?? false),
+            ) ??
+            false;
 
-      case Group _:
-        return adminOn!.any(
-          (a) => a.group?.id == object.id && (a.groupAdminOnUsers ?? false),
-        );
+      case Group(id: final id):
+        return adminOn?.any(
+              (a) => a.group?.id == id && (a.groupAdminOnUsers ?? false),
+            ) ??
+            false;
 
       default:
         return false;
