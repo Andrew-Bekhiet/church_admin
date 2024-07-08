@@ -13,29 +13,25 @@ class SwitchingFloatingActionButton extends StatelessWidget {
   final Map<int, Icon> icons;
   final void Function(int) onTap;
 
-  double get offset => tabController.offset;
-  int get currentIndex => tabController.index;
-
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: tabController.animation!,
       builder: (context, child) {
-        final newIndex = getNewIndex();
+        final double offset = tabController.offset;
+        final int currentIndex = tabController.index;
+
+        final int newIndex = getNewIndex(offset, currentIndex);
 
         return AnimatedFloatingActionButton(
           offset: offset,
           newFAB: FloatingActionButton(
-            onPressed: () {
-              onTap(newIndex);
-            },
+            onPressed: () => onTap(newIndex),
             child: icons[newIndex],
           ),
           oldFAB: FloatingActionButton(
             heroTag: null,
-            onPressed: () {
-              onTap(currentIndex);
-            },
+            onPressed: () => onTap(currentIndex),
             child: icons[currentIndex],
           ),
         );
@@ -43,7 +39,7 @@ class SwitchingFloatingActionButton extends StatelessWidget {
     );
   }
 
-  int getNewIndex() {
+  int getNewIndex(double offset, int currentIndex) {
     return offset.isNegative
         ? (currentIndex + offset).floor()
         : (currentIndex + offset).ceil();
