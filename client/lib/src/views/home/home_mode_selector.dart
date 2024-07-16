@@ -19,7 +19,7 @@ class HomeModeSelector extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/sunday-school.png',
+                    'assets/Logo.png',
                     height: 360,
                     fit: BoxFit.scaleDown,
                   ),
