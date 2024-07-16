@@ -8,11 +8,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Subject<String?> searchSubject;
   final Subject<ViewableObjectListType?> servicesListTypeSubject;
   final Stream<Type> bottomNavBarStream;
+  final bool isSundaySchool;
+  final void Function(BuildContext, bool) onModeChanged;
 
   const HomeAppBar({
     required this.searchSubject,
     required this.servicesListTypeSubject,
     required this.bottomNavBarStream,
+    required this.isSundaySchool,
+    required this.onModeChanged,
     super.key,
   });
 
@@ -61,11 +65,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               ),
-              Image.asset(
-                'assets/Logo.png',
-                width: kToolbarHeight - 12,
-                height: kToolbarHeight - 12,
-                fit: BoxFit.scaleDown,
+              _HomeModeSwitcher(
+                isSundaySchool: isSundaySchool,
+                onChanged: (v) => onModeChanged(context, v),
               ),
             ],
           ),
@@ -87,6 +89,32 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
         );
       },
+    );
+  }
+}
+
+class _HomeModeSwitcher extends StatelessWidget {
+  final bool isSundaySchool;
+  final void Function(bool) onChanged;
+
+  const _HomeModeSwitcher({
+    required this.isSundaySchool,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      child: GestureDetector(
+        onTap: () => onChanged(!isSundaySchool),
+        child: Image.asset(
+          isSundaySchool ? 'assets/Logo.png' : 'assets/church-data.png',
+          width: kToolbarHeight - 12,
+          height: kToolbarHeight - 12,
+          fit: BoxFit.scaleDown,
+        ),
+      ),
     );
   }
 }
