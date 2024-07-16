@@ -55,10 +55,10 @@ class HomeBottomNavBar extends StatelessWidget {
                 icon: Icon(Symbols.store),
               ),
             ],
-            const BottomNavigationBarItem(
-              label: 'المخدومين',
-              activeIcon: Icon(Symbols.person, fill: 1),
-              icon: Icon(Symbols.person),
+            BottomNavigationBarItem(
+              label: isSundaySchool ? 'المخدومين' : 'الأفراد',
+              activeIcon: const Icon(Symbols.person, fill: 1),
+              icon: const Icon(Symbols.person),
             ),
           ],
         );
