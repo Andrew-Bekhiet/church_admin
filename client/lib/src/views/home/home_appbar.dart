@@ -49,11 +49,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                         servicesListTypeSubject.add(ViewableObjectListType.grid)
                     : () => servicesListTypeSubject
                         .add(ViewableObjectListType.list),
-                icon: Icon(
-                  listType == ViewableObjectListType.list
-                      ? Symbols.lists
-                      : Symbols.grid_view,
-                ),
+                icon: const Icon(Symbols.lists),
               ),
           ],
           leadingWidth: kToolbarHeight * 2 - 12,
