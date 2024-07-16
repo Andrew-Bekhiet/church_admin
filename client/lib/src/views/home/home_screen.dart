@@ -113,6 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
           searchSubject: _search,
           bottomNavBarStream: _bottomNavBar,
           servicesListTypeSubject: _servicesListType,
+          isSundaySchool: _isSundaySchool!,
+          onModeChanged: _onModeChanged,
         ),
         body: HomeBody(
           servicesListTypeStream: _servicesListType,
