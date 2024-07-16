@@ -12,6 +12,7 @@ class HomeModeSelector extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ListView(
+          padding: const EdgeInsets.all(8),
           children: [
             InkWell(
               onTap: () => onModeChanged(context, true),
