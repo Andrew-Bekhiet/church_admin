@@ -10,7 +10,6 @@ class _StreetsLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PolylineLayer(
-      polylineCulling: true,
       polylines: streets
           .where((s) => s.line != null && s.line!.coordinates.isNotEmpty)
           .map(
