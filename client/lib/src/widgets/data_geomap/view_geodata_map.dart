@@ -15,22 +15,11 @@ class ViewGeodataMap extends StatefulWidget {
   final Person? initialPerson;
   final GeomapOptions initialGeomapOptions;
 
-  ViewGeodataMap({
+  const ViewGeodataMap({
     required this.initialGeomapOptions,
     this.initialPerson,
     super.key,
-  }) : assert(
-          initialPerson != null ||
-              initialGeomapOptions.selectedAreas.isNotEmpty ||
-              initialGeomapOptions.selectedStreets.isNotEmpty ||
-              initialGeomapOptions.selectedStores.isNotEmpty ||
-              initialGeomapOptions.selectedFamilies.isNotEmpty ||
-              initialGeomapOptions.selectedClasses.isNotEmpty ||
-              initialGeomapOptions.selectedServices.isNotEmpty ||
-              initialGeomapOptions.selectedGroups.isNotEmpty,
-        ) /* ,
-        assert(editPerson || initialPerson != null) */
-  ;
+  });
 
   @override
   _ViewGeodataMapState createState() => _ViewGeodataMapState();

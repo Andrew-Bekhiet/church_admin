@@ -12,3 +12,4 @@ export 'views/manage_users_screen.dart';
 export 'views/settings_screen.dart';
 export 'views/update_user_spirit_data.dart';
 export 'views/view_object_details.dart';
+export 'views/visits_map_screen.dart';
