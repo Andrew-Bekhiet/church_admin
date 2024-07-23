@@ -5,6 +5,18 @@ import 'package:go_router/go_router.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+class _HomeDrawerDestination {
+  final Widget label;
+  final Widget icon;
+  final VoidCallback onTap;
+
+  const _HomeDrawerDestination({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
+}
+
 class HomeDrawer extends StatelessWidget {
   final void Function(BuildContext, bool) onModeChanged;
   final bool isSundaySchool;
@@ -17,6 +29,50 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<_HomeDrawerDestination> destinations = [
+      _HomeDrawerDestination(
+        label: Text(
+          isSundaySchool ? 'تبديل إلى الافتقاد' : 'تبديل إلى مدارس الأحد',
+        ),
+        icon: const Icon(Symbols.home),
+        onTap: () => onModeChanged(context, !isSundaySchool),
+      ),
+      if (AuthService.I.currentUser!.canManageSomeUsers)
+        _HomeDrawerDestination(
+          icon: const Icon(Symbols.manage_accounts),
+          label: const Text('إدارة الخدام'),
+          onTap: () => context.push('/manage_users'),
+        ),
+      _HomeDrawerDestination(
+        icon: const Icon(Symbols.search),
+        label: const Text('البحث المتقدم'),
+        onTap: () => context.push('/advanced_search'),
+      ),
+      _HomeDrawerDestination(
+        icon: const Icon(Symbols.settings),
+        label: const Text('الإعدادات'),
+        onTap: () => context.push('/settings'),
+      ),
+      if (kDebugMode)
+        _HomeDrawerDestination(
+          icon: const Icon(Symbols.developer_mode),
+          label: const Text('gql cache'),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                final gqlClient =
+                    graphQLClientProvider.read(globalProviderContainer);
+                return GraphqlCacheInspector(
+                  title: 'GraphQL Cache',
+                  data: (gqlClient.cache.store as HiveStore).box.toMap(),
+                  getCacheData: (gqlClient.cache.store as HiveStore).box.toMap,
+                );
+              },
+            ),
+          ),
+        ),
+    ];
+
     return Drawer(
       child: Column(
         children: [
@@ -31,65 +87,16 @@ class HomeDrawer extends StatelessWidget {
               onDestinationSelected: (i) {
                 Scaffold.of(context).openEndDrawer();
 
-                switch (i) {
-                  case 0:
-                    onModeChanged(context, !isSundaySchool);
-                  case 1 when AuthService.I.currentUser!.canManageSomeUsers:
-                    context.push('/manage_users');
-                  case 1:
-                  case 2 when AuthService.I.currentUser!.canManageSomeUsers:
-                    context.push('/advanced_search');
-                  case 2:
-                  case 3 when AuthService.I.currentUser!.canManageSomeUsers:
-                    context.push('/settings');
-                  case 3 when kDebugMode:
-                  case 4
-                      when kDebugMode &&
-                          AuthService.I.currentUser!.canManageSomeUsers:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          final gqlClient = graphQLClientProvider
-                              .read(globalProviderContainer);
-                          return GraphqlCacheInspector(
-                            title: 'GraphQL Cache',
-                            data: (gqlClient.cache.store as HiveStore)
-                                .box
-                                .toMap(),
-                            getCacheData:
-                                (gqlClient.cache.store as HiveStore).box.toMap,
-                          );
-                        },
-                      ),
-                    );
-                }
+                destinations[i].onTap();
               },
-              children: [
-                NavigationDrawerDestination(
-                  icon: const Icon(Symbols.home),
-                  label: isSundaySchool
-                      ? const Text('تبديل إلى الافتقاد')
-                      : const Text('تبديل إلى مدارس الأحد'),
-                ),
-                if (AuthService.I.currentUser!.canManageSomeUsers)
-                  const NavigationDrawerDestination(
-                    icon: Icon(Symbols.manage_accounts),
-                    label: Text('إدارة الخدام'),
-                  ),
-                const NavigationDrawerDestination(
-                  icon: Icon(Symbols.search),
-                  label: Text('البحث المتقدم'),
-                ),
-                const NavigationDrawerDestination(
-                  icon: Icon(Symbols.settings),
-                  label: Text('الإعدادات'),
-                ),
-                if (kDebugMode)
-                  const NavigationDrawerDestination(
-                    icon: Icon(Symbols.developer_mode),
-                    label: Text('gql cache'),
-                  ),
-              ],
+              children: destinations
+                  .map(
+                    (e) => NavigationDrawerDestination(
+                      icon: e.icon,
+                      label: e.label,
+                    ),
+                  )
+                  .toList(),
             ),
           ),
           ListTile(
