@@ -6,13 +6,14 @@ class ObjectMarkerWidget extends StatelessWidget {
   final Viewable object;
   final bool isFocused;
   final bool enableTap;
+  final bool ignoreOnFocused;
   final VoidCallback? afterTap;
 
   const ObjectMarkerWidget({
     required this.object,
     required this.isFocused,
+    this.ignoreOnFocused = true,
     this.afterTap,
-    // ignore: unused_element
     this.enableTap = true,
     super.key,
   });
@@ -31,6 +32,7 @@ class ObjectMarkerWidget extends StatelessWidget {
             child: Icon(
               Symbols.location_pin,
               size: 50,
+              fill: isFocused ? 1 : 0,
               color: effectiveColor.darken(50),
             ),
           ),
@@ -50,6 +52,7 @@ class ObjectMarkerWidget extends StatelessWidget {
           child: Icon(
             Symbols.location_pin,
             size: 40,
+            fill: isFocused ? 1 : 0,
             shadows: [
               if (!isFocused)
                 Shadow(
@@ -65,6 +68,10 @@ class ObjectMarkerWidget extends StatelessWidget {
     );
 
     if (!enableTap) return child;
+
+    if (isFocused && ignoreOnFocused) {
+      return IgnorePointer(child: child);
+    }
 
     return GestureDetector(
       onTap: () {
