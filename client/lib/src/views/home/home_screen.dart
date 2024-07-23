@@ -34,7 +34,9 @@ class HomeScreen extends StatefulWidget {
             EditStreet.route,
             ViewStore.route,
             EditStore.route,
+            // Drawer
             ManageUsersScreen.route,
+            VisitsMapScreen.route,
             AdvancedSearchScreen.route,
             SettingsScreen.route,
           ]

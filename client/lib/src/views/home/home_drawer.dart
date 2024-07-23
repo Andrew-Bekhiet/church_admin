@@ -49,6 +49,11 @@ class HomeDrawer extends StatelessWidget {
         onTap: () => context.push('/advanced_search'),
       ),
       _HomeDrawerDestination(
+        icon: const Icon(Symbols.map),
+        label: const Text('خريطة الافتقاد'),
+        onTap: () => context.push('/visits_map'),
+      ),
+      _HomeDrawerDestination(
         icon: const Icon(Symbols.settings),
         label: const Text('الإعدادات'),
         onTap: () => context.push('/settings'),

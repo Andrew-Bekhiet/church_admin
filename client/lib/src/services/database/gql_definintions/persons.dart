@@ -121,17 +121,6 @@ class PersonsDAO
     bool getPersons = false,
   }) {
     assert(
-      personId != null ||
-          areasIds.isNotEmpty ||
-          streetsIds.isNotEmpty ||
-          servicesIds.isNotEmpty ||
-          classesIds.isNotEmpty ||
-          groupsIds.isNotEmpty ||
-          familiesIds.isNotEmpty ||
-          storesIds.isNotEmpty,
-      'At least one condition should be given',
-    );
-    assert(
       getAreas || getStreets || getFamilies || getStores || getPersons,
       'At lease one type should be fetched',
     );
