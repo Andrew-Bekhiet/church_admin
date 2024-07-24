@@ -17,7 +17,7 @@ import 'package:church_admin/src/services/database/gql_definintions/persons/pers
 import 'package:church_admin/src/services/database/gql_parser.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i11;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i7;
+import 'package:rxdart/rxdart.dart' as _i7;
 import 'package:uuid/uuid.dart' as _i9;
 
 // ignore_for_file: type=lint

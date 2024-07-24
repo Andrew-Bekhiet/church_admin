@@ -415,7 +415,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           [error],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
             #stackTrace: stackTrace,
           },
         ),
@@ -435,7 +435,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           [flutterError],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
           },
         ),
         returnValue: _i7.Future<void>.value(),
@@ -459,7 +459,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           ],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
             #stackTrace: stackTrace,
           },
         ),
