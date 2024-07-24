@@ -80,7 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
   final Set<Timer> _timers = {};
 
+  final _authEntry = OverlayEntry(
+    builder: (context) => const AuthenticateScreen(),
+    opaque: true,
+  );
   late final StreamSubscription<void> _localAuthListener;
+
+  late final AppLifecycleListener _appLifecycleListener;
 
   List<Type> _tabTypes = [];
   bool? _isSundaySchool;
@@ -88,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     _listenToLocalAuth();
+    _appLifecycleListener =
+        AppLifecycleListener(onStateChange: _onAppLifecycleStateChanged);
   }
 
   @override
@@ -179,24 +188,33 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _listenToLocalAuth() {
-    final entry = OverlayEntry(
-      builder: (context) => const AuthenticateScreen(),
-      opaque: true,
-    );
-
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => !entry.mounted ? Overlay.of(context).insert(entry) : null,
+      (_) =>
+          !_authEntry.mounted ? Overlay.of(context).insert(_authEntry) : null,
     );
 
     _localAuthListener = LocalAuthService.I.refreshUIStream.listen(
       (_) {
-        if (LocalAuthService.I.shouldAuthenticate && !entry.mounted) {
-          Overlay.of(context).insert(entry);
+        if (LocalAuthService.I.shouldAuthenticate && !_authEntry.mounted) {
+          Overlay.of(context).insert(_authEntry);
         } else if (!LocalAuthService.I.shouldAuthenticate) {
-          entry.remove();
+          _authEntry.remove();
         }
       },
     );
+  }
+
+  void _onAppLifecycleStateChanged(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed when !_authEntry.mounted:
+        UserPersistenceService.I.recordActive();
+      case AppLifecycleState.resumed:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        UserPersistenceService.I.recordLastSeen();
+    }
   }
 
   ViewableObjectListController<T>
@@ -239,6 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
+    _appLifecycleListener.dispose();
+
     _search.close();
     _servicesListType.close();
     _bottomNavBar.close();
