@@ -23,7 +23,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i16;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i11;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i5;
+import 'package:rxdart/rxdart.dart' as _i5;
 import 'package:uuid/uuid.dart' as _i12;
 
 // ignore_for_file: type=lint
@@ -508,7 +508,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
           [error],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
             #stackTrace: stackTrace,
           },
         ),
@@ -528,7 +528,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
           [flutterError],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
           },
         ),
         returnValue: _i10.Future<void>.value(),
@@ -552,7 +552,7 @@ class MockLoggingService extends _i1.Mock implements _i4.LoggingService {
           ],
           {
             #data: data,
-            #extras: hints,
+            #hints: hints,
             #stackTrace: stackTrace,
           },
         ),

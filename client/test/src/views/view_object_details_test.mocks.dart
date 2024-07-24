@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart' as _i5;
 import 'package:hive_flutter/hive_flutter.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i11;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i9;
+import 'package:rxdart/rxdart.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

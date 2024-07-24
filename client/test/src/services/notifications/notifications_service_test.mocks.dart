@@ -41,7 +41,7 @@ import 'package:mockito/src/dummies.dart' as _i24;
 import 'package:permission_handler/permission_handler.dart' as _i14;
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart'
     as _i12;
-import 'package:rxdart_ext/rxdart_ext.dart' as _i5;
+import 'package:rxdart/rxdart.dart' as _i5;
 import 'package:timezone/timezone.dart' as _i20;
 
 // ignore_for_file: type=lint
@@ -830,6 +830,36 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
             #payload: payload,
             #androidAllowWhileIdle: androidAllowWhileIdle,
             #androidScheduleMode: androidScheduleMode,
+          },
+        ),
+        returnValue: _i13.Future<void>.value(),
+        returnValueForMissingStub: _i13.Future<void>.value(),
+      ) as _i13.Future<void>);
+
+  @override
+  _i13.Future<void> periodicallyShowWithDuration(
+    int? id,
+    String? title,
+    String? body,
+    Duration? repeatDurationInterval,
+    _i19.NotificationDetails? notificationDetails, {
+    _i22.AndroidScheduleMode? androidScheduleMode =
+        _i22.AndroidScheduleMode.exact,
+    String? payload,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #periodicallyShowWithDuration,
+          [
+            id,
+            title,
+            body,
+            repeatDurationInterval,
+            notificationDetails,
+          ],
+          {
+            #androidScheduleMode: androidScheduleMode,
+            #payload: payload,
           },
         ),
         returnValue: _i13.Future<void>.value(),
