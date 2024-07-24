@@ -406,7 +406,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   _i7.Future<void> reportError(
     dynamic error, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
     StackTrace? stackTrace,
   }) =>
       (super.noSuchMethod(
@@ -415,7 +415,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           [error],
           {
             #data: data,
-            #extras: extras,
+            #extras: hints,
             #stackTrace: stackTrace,
           },
         ),
@@ -427,7 +427,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   _i7.Future<void> reportFlutterError(
     _i5.FlutterErrorDetails? flutterError, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -435,7 +435,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           [flutterError],
           {
             #data: data,
-            #extras: extras,
+            #extras: hints,
           },
         ),
         returnValue: _i7.Future<void>.value(),
@@ -447,7 +447,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
     _i4.BuildContext? context,
     Object? error, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
     StackTrace? stackTrace,
   }) =>
       (super.noSuchMethod(
@@ -459,7 +459,7 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           ],
           {
             #data: data,
-            #extras: extras,
+            #extras: hints,
             #stackTrace: stackTrace,
           },
         ),
