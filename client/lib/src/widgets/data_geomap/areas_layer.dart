@@ -10,14 +10,12 @@ class _AreasLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PolygonLayer(
-      polygonCulling: true,
       polygons: areas
           .where((a) => a.bounds != null && a.bounds!.coordinates.isNotEmpty)
           .map(
             (a) => Polygon(
               rotateLabel: true,
               label: a.name,
-              isFilled: true,
               labelStyle: TextStyle(
                 color: Colors.black,
                 fontSize: 21,
