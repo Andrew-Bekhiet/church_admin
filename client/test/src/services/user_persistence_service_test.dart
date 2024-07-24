@@ -32,10 +32,42 @@ void main() {
 
       final mockRef =
           globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockOnDisconnect = mockRef.onDisconnect();
+
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
           mockRef.set('Active'),
+          mockRef.child('Users/uid/lastSeen'),
+          mockRef.onDisconnect(),
+          mockOnDisconnect.set(ServerValue.timestamp),
+        ],
+      );
+    },
+  );
+
+  test(
+    'Persistence Service => recordLastSeen',
+    () async {
+      final unit = UserPersistenceService(
+        firebaseDatabase:
+            globalProviderContainer.read(firebaseDatabaseProvider),
+      );
+      addTearDown(unit.dispose);
+
+      await unit.recordLastSeen();
+
+      final mockRef =
+          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockOnDisconnect = mockRef.onDisconnect();
+
+      verifyInOrder(
+        [
+          mockRef.child('Users/uid/lastSeen'),
+          mockRef.set(ServerValue.timestamp),
+          mockRef.child('Users/uid/lastSeen'),
+          mockRef.onDisconnect(),
+          mockOnDisconnect.cancel(),
         ],
       );
     },
@@ -54,15 +86,37 @@ void main() {
 
       final mockRef =
           globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockOnDisconnect = mockRef.onDisconnect();
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
           mockRef.onDisconnect(),
+          mockOnDisconnect.set(ServerValue.timestamp),
         ],
       );
+    },
+  );
+  test(
+    'Persistence Service => cancelOnDisconnect',
+    () async {
+      final unit = UserPersistenceService(
+        firebaseDatabase:
+            globalProviderContainer.read(firebaseDatabaseProvider),
+      );
+      addTearDown(unit.dispose);
 
+      await unit.cancelOnDisconnect();
+
+      final mockRef =
+          globalProviderContainer.read(firebaseDatabaseProvider).ref();
       final mockOnDisconnect = mockRef.onDisconnect();
-      verify(mockOnDisconnect.set(ServerValue.timestamp));
+      verifyInOrder(
+        [
+          mockRef.child('Users/uid/lastSeen'),
+          mockRef.onDisconnect(),
+          mockOnDisconnect.cancel(),
+        ],
+      );
     },
   );
 
@@ -82,16 +136,16 @@ void main() {
 
       final mockRef =
           globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockOnDisconnect = mockRef.onDisconnect();
+
       verifyInOrder(
         [
           mockRef.child('Users/uid/lastSeen'),
           mockRef.set('Active'),
           mockRef.onDisconnect(),
+          mockOnDisconnect.set(ServerValue.timestamp),
         ],
       );
-
-      final mockOnDisconnect = mockRef.onDisconnect();
-      verify(mockOnDisconnect.set(ServerValue.timestamp));
     },
   );
 }
