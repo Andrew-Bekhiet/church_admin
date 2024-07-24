@@ -54,6 +54,15 @@ class UserPersistenceService {
     }
   }
 
+  Future<void> recordLastSeen() async {
+    if (recordPersistence && _auth.isSignedIn) {
+      await _firebaseDatabase
+          .ref()
+          .child('Users/${_auth.currentUser!.uid}/lastSeen')
+          .set(ServerValue.timestamp);
+    }
+  }
+
   @mustCallSuper
   Future<void> dispose() async {
     await _connectivitySubscription.cancel();
