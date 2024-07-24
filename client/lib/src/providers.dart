@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -149,8 +148,6 @@ final userSettingsServiceProvider = Provider<UserSettingsService>(
 final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
-final firebaseDynamicLinksProvider =
-    Provider((_) => FirebaseDynamicLinks.instance);
 final firebaseFunctionsProvider =
     Provider((_) => FirebaseFunctions.instanceFor(region: 'europe-west6'));
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
