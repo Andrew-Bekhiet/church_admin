@@ -27,40 +27,51 @@ class UserPersistenceService {
         _connectivity.connectivityStream.listen(_onConnectivityChanged);
   }
 
+  bool get canRecordPersistence => recordPersistence && _auth.isSignedIn;
+
   Future<void> _onConnectivityChanged(bool connected) async {
-    if (connected) {
-      await recordActive();
-      await scheduleOnDisconnect();
-    }
+    if (!connected) return;
+
+    await recordActive();
   }
 
   Future<void> scheduleOnDisconnect() async {
-    if (recordPersistence && _auth.isSignedIn) {
-      await _firebaseDatabase
-          .ref()
-          .child('Users/${_auth.currentUser!.uid}/lastSeen')
-          .onDisconnect()
-          .set(ServerValue.timestamp)
-          .catchError((_) {});
-    }
+    if (!canRecordPersistence) return;
+
+    await _firebaseDatabase
+        .ref()
+        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .onDisconnect()
+        .set(ServerValue.timestamp)
+        .catchError((_) {});
+  }
+
+  Future<void> cancelOnDisconnect() async {
+    await _firebaseDatabase
+        .ref()
+        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .onDisconnect()
+        .cancel();
   }
 
   Future<void> recordActive() async {
-    if (recordPersistence && _auth.isSignedIn) {
-      await _firebaseDatabase
-          .ref()
-          .child('Users/${_auth.currentUser!.uid}/lastSeen')
-          .set('Active');
-    }
+    if (!canRecordPersistence) return;
+
+    await _firebaseDatabase
+        .ref()
+        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .set('Active');
+    await scheduleOnDisconnect();
   }
 
   Future<void> recordLastSeen() async {
-    if (recordPersistence && _auth.isSignedIn) {
-      await _firebaseDatabase
-          .ref()
-          .child('Users/${_auth.currentUser!.uid}/lastSeen')
-          .set(ServerValue.timestamp);
-    }
+    if (!canRecordPersistence) return;
+
+    await _firebaseDatabase
+        .ref()
+        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .set(ServerValue.timestamp);
+    await cancelOnDisconnect();
   }
 
   @mustCallSuper
