@@ -36,18 +36,17 @@ class LoggingService {
   Future<void> reportError(
     dynamic error, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
     StackTrace? stackTrace,
   }) async {
     await Sentry.captureException(
       error,
       stackTrace: stackTrace,
+      hint: hints != null ? Hint.withMap(hints) : null,
       withScope: (scope) {
         _maybeConfigureScopeUser(scope);
 
         _maybeConfigureScopeData(scope, data);
-
-        _maybeConfigureScopeExtras(scope, extras);
       },
     );
   }
@@ -78,23 +77,15 @@ class LoggingService {
     }
   }
 
-  void _maybeConfigureScopeExtras(Scope scope, Map<String, dynamic>? extras) {
-    if (extras != null) {
-      for (final entry in extras.entries) {
-        scope.setExtra(entry.key, entry.value);
-      }
-    }
-  }
-
   Future<void> reportFlutterError(
     FlutterErrorDetails flutterError, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
   }) {
     return reportError(
       flutterError.exception,
       data: data,
-      extras: extras,
+      hints: hints,
       stackTrace: flutterError.stack,
     );
   }
@@ -103,7 +94,7 @@ class LoggingService {
     BuildContext context,
     Object error, {
     Map<String, dynamic>? data,
-    Map<String, dynamic>? extras,
+    Map<String, dynamic>? hints,
     StackTrace? stackTrace,
   }) {
     showDialog(
@@ -114,7 +105,7 @@ class LoggingService {
     return reportError(
       error,
       data: data,
-      extras: extras,
+      hints: hints,
       stackTrace: stackTrace,
     );
   }
