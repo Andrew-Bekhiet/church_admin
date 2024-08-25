@@ -9,6 +9,10 @@ environment:
   flutter: ">=3.10.0"
 
 dependency_overrides:
+  flutter_compass:
+    git:
+      url: https://github.com/PikPakPik/flutter_compass
+      ref: master
 
 dependencies:
   android_alarm_manager_plus: ^4.0.1
@@ -20,7 +24,11 @@ dependencies:
   connectivity_plus: ^6.0.3
 
   cryptography: ^2.5.0
-  cryptography_flutter: ^2.3.0
+  cryptography_flutter: #^2.3.0
+    git:
+      url: https://github.com/mvarendorff/cryptography
+      ref: fix/compatibility-agp-8x
+      path: cryptography_flutter
   derived_colors: ^0.4.0
   device_info_plus: ^10.1.0
   dio: ^5.1.1
