@@ -322,15 +322,15 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   String expectedLocation() {
     switch (currentValue) {
       case FirstScreenVariantEnum.login:
-        return '/login';
+        return const LoginRoute().location;
       case FirstScreenVariantEnum.emailVerification:
-        return '/emailVerification';
+        return const EmailVerificationRoute().location;
       case FirstScreenVariantEnum.multiFactor:
-        return '/multiFactor';
+        return const MultiFactorLoginRoute().location;
       case FirstScreenVariantEnum.unapprovedUser:
-        return '/unapprovedUser';
+        return const UnapprovedUserRoute().location;
       case FirstScreenVariantEnum.updateUserSpiritData:
-        return '/updateUserSpiritData?forced=true';
+        return const UpdateUserSpiritDataRoute(forced: true).location;
       case FirstScreenVariantEnum.authenticate:
       case FirstScreenVariantEnum.home:
         return '/';
