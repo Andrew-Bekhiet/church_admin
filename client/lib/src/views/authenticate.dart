@@ -5,18 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AuthenticateScreen extends StatefulWidget {
-  static final route = GoRoute(
-    name: 'authenticate',
-    path: '/authenticate',
-    builder: (context, state) => AuthenticateScreen(
-      next: _hasRedirect(state.uri.queryParameters)
-          ? state.uri.queryParameters['next']
-          : null,
-    ),
-    redirect: (context, state) {
-      return redirect(state);
-    },
-  );
+  static const TypedGoRoute<AuthenticateRoute> route =
+      TypedGoRoute<AuthenticateRoute>(
+          name: 'authenticate', path: '/authenticate');
 
   @visibleForTesting
   static String? redirect(GoRouterState state) {

@@ -5,16 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class UnapprovedUser extends StatefulWidget {
-  static final route = GoRoute(
-    path: '/unapprovedUser',
-    builder: (context, state) => const UnapprovedUser(),
-    redirect: (context, state) {
-      if (AuthService.I.currentUser?.permissions.approved ?? false) {
-        return HomeScreen.route.path;
-      }
-      return null;
-    },
-  );
+  static const TypedGoRoute<UnapprovedUserRoute> route =
+      TypedGoRoute<UnapprovedUserRoute>(path: '/unapprovedUser');
 
   const UnapprovedUser({super.key});
 

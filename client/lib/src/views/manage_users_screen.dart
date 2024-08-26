@@ -4,23 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersScreen extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'manage_users',
-    builder: (context, state) => const ManageUsersScreen(),
-    routes: [
-      ViewUser.route,
-    ],
-    redirect: (context, state) {
-      if (!LocalAuthService.I.requestOneTimeAuthForPath('/manage_users')) {
-        return Uri(
-          path: '/authenticate',
-          queryParameters: {'next': '/manage_users'},
-        ).toString();
-      }
-
-      return null;
-    },
-  );
+  static const TypedGoRoute<ManageUsersRoute> route =
+      TypedGoRoute<ManageUsersRoute>(path: 'manage_users');
 
   const ManageUsersScreen({super.key});
 

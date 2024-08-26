@@ -26,18 +26,17 @@ class HomeFloatingActionButton extends StatelessWidget {
       ].asMap(),
       onTap: (i) {
         context.push(
-          '/' +
-              [
-                EditArea.route.path,
-                if (isSundaySchool)
-                  EditService.route.path
-                else ...[
-                  EditStreet.route.path,
-                  EditFamily.route.path,
-                  EditStore.route.path,
-                ],
-                EditPerson.route.path,
-              ][i],
+          [
+            const EditAreaRoute().location,
+            if (isSundaySchool)
+              const EditServiceRoute().location
+            else ...[
+              const EditStreetRoute().location,
+              const EditFamilyRoute().location,
+              const EditStoreRoute().location,
+            ],
+            const EditPersonRoute().location,
+          ][i],
         );
       },
     );

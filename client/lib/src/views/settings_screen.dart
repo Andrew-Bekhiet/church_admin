@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'settings',
-    builder: (context, state) => const SettingsScreen(),
-  );
+  static const TypedGoRoute<SettingsRoute> route =
+      TypedGoRoute<SettingsRoute>(path: 'settings');
 
   const SettingsScreen({super.key});
 

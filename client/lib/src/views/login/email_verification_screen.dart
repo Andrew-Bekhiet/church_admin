@@ -3,19 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
-  static final route = GoRoute(
-    path: '/emailVerification',
-    builder: (context, state) => const EmailVerificationScreen(),
-    redirect: (context, state) {
-      if (!AuthService.I.isSignedIn) {
-        return LoginScreen.route.path;
-      } else if (AuthService.I.currentUser!.emailVerified ?? false) {
-        return HomeScreen.route.path;
-      }
-
-      return null;
-    },
-  );
+  static const TypedGoRoute<EmailVerificationRoute> route =
+      TypedGoRoute<EmailVerificationRoute>(path: '/emailVerification');
 
   const EmailVerificationScreen({super.key});
 

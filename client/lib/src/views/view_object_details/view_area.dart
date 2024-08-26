@@ -3,26 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewArea extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'viewArea',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewArea(
-        areaId: state.uri.queryParameters['id']!,
-        area: (state.extra as Map?)?['area'] as Area?,
-      );
-    },
-    routes: [
-      EditArea.route,
-      EditStreet.route,
-      EditFamily.route,
-      EditStore.route,
-      EditPerson.route,
-    ],
-  );
+  static const TypedGoRoute<ViewAreaRoute> route =
+      TypedGoRoute<ViewAreaRoute>(path: 'viewArea');
 
   final Area? area;
   final String areaId;
@@ -183,13 +165,7 @@ class _ViewAreaState extends State<ViewArea> {
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewArea/editArea',
-            queryParameters: {'id': widget.areaId},
-          ).toString(),
-          extra: {'area': area},
-        ),
+        onPressed: () => EditAreaRoute($extra: area).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -209,13 +185,13 @@ class _ViewAreaState extends State<ViewArea> {
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
-            context.push('/viewArea/editStreet');
+            const EditStreetRoute().push(context);
           } else if (newIndex == 1) {
-            context.push('/viewArea/editFamily');
+            const EditFamilyRoute().push(context);
           } else if (newIndex == 2) {
-            context.push('/viewArea/editStore');
+            const EditStoreRoute().push(context);
           } else if (newIndex == 3) {
-            context.push('/viewArea/editPerson');
+            const EditPersonRoute().push(context);
           }
         },
       ),

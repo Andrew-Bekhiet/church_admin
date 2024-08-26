@@ -10,24 +10,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewPerson extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewPerson',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewPerson(
-        personId: state.uri.queryParameters['id']!,
-        person: (state.extra as Map?)?['person'] as Person?,
-      );
-    },
-    routes: [
-      EditPerson.route,
-      ViewUser.route,
-      PersonAnalysis.route,
-    ],
-  );
+  static const TypedGoRoute<ViewPersonRoute> route =
+      TypedGoRoute<ViewPersonRoute>(path: 'viewPerson');
 
   final Person? person;
   final String personId;
@@ -217,19 +201,10 @@ class _ViewPersonState extends State<ViewPerson> {
                 subtitle: Text(person.isServant ? 'نعم' : 'لا'),
                 trailing: person.isServant && person.user?.email != null
                     ? IconButton(
-                        onPressed: () => context.push(
-                          Uri(
-                            path: '/viewPerson/viewUser',
-                            queryParameters: {
-                              'id': person.id,
-                              'uid': person.user!.uid,
-                            },
-                          ).toString(),
-                          extra: {
-                            'user': person.user,
-                            'person': person,
-                          },
-                        ),
+                        onPressed: () => ViewUserRoute(
+                          uid: person.user!.uid,
+                          $extra: person.user,
+                        ).push(context),
                         icon: const Icon(Symbols.manage_accounts),
                         tooltip: 'عرض بيانات الخادم',
                       )
@@ -416,13 +391,16 @@ class _ViewPersonState extends State<ViewPerson> {
       },
       editButtonBuilder: (context, person) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewPerson/editPerson',
-            queryParameters: {'id': widget.personId},
-          ).toString(),
-          extra: {'person': person},
-        ),
+        onPressed: () => EditPersonRoute(
+          $extra: (
+            person: person,
+            family: null,
+            service: null,
+            group: null,
+            studyYear: null,
+            gender: null,
+          ),
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -435,16 +413,9 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   void _analysis(BuildContext context, Person person) {
-    context.push(
-      Uri(
-        path: '/viewPerson/personAnalysis',
-        queryParameters: {
-          'id': person.id,
-        },
-      ).toString(),
-      extra: {
-        'person': person,
-        'editOptionsBuilder': (
+    PersonAnalysisRoute(
+      $extra: (
+        editOptionsBuilder: (
           context,
           options,
           void Function(PersonAnalysisOptions) onComplete,
@@ -454,8 +425,11 @@ class _ViewPersonState extends State<ViewPerson> {
               onComplete: onComplete,
               options: options,
             ),
-      },
-    );
+        person: person,
+        user: null,
+        options: null,
+      ),
+    ).push(context);
   }
 
   Future<void> _phoneCall(BuildContext context, String? number) async {

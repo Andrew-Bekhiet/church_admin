@@ -4,15 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditStore extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'editStore',
-    builder: (context, state) {
-      return EditStore(
-        store: (state.extra as Map?)?['store'] as Store?,
-        family: (state.extra as Map?)?['family'] as Family?,
-      );
-    },
-  );
+  static const TypedGoRoute<EditStoreRoute> route =
+      TypedGoRoute<EditStoreRoute>(path: 'editStore');
 
   final Store? store;
   final Family? family;

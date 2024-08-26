@@ -4,23 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ViewGroup extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewGroup',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewGroup(
-        groupId: state.uri.queryParameters['id']!,
-        group: (state.extra as Map?)?['group'] as Group?,
-      );
-    },
-    routes: [
-      EditGroup.route,
-      EditPerson.route,
-    ],
-  );
+  static const TypedGoRoute<ViewGroupRoute> route =
+      TypedGoRoute<ViewGroupRoute>(path: 'viewGroup');
 
   final Group? group;
   final String groupId;
@@ -125,27 +110,27 @@ class _ViewGroupState extends State<ViewGroup> {
       ),
       editButtonBuilder: (context, group) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewGroup/editGroup',
-            queryParameters: {'id': widget.groupId},
-          ).toString(),
-          extra: {'group': group},
-        ),
+        onPressed: () => EditGroupRoute(
+          $extra: (
+            group: group,
+            service: null,
+          ),
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
         onPressed: () {
-          context.push(
-            Uri(
-              path: '/viewGroup/editPerson',
-            ).toString(),
-            extra: {
-              'service': group.service?.copyWith(groups: [group]),
-              'group': group,
-            },
-          );
+          EditPersonRoute(
+            $extra: (
+              service: group.service?.copyWith(groups: [group]),
+              group: group,
+              person: null,
+              family: null,
+              studyYear: null,
+              gender: null,
+            ),
+          ).push(context);
         },
         child: const Icon(Symbols.person_add),
       ),

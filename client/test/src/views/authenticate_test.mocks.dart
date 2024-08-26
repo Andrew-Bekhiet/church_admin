@@ -493,6 +493,15 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
+  void didChangeViewFocus(_i6.ViewFocusEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #didChangeViewFocus,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i5.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
           #didRequestAppExit,

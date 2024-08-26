@@ -18,101 +18,47 @@ class ViewableObjectService {
   NavigatorState get navigator =>
       router.routeInformationParser.configuration.navigatorKey.currentState!;
 
-  GlobalKey<NavigatorState> get navigatorKey => throw UnimplementedError();
+  GlobalKey<NavigatorState> get navigatorKey =>
+      router.routeInformationParser.configuration.navigatorKey;
 
   void onTap(Viewable object) {
     switch (object) {
-      case Person _:
-        router.push(
-          Uri(
-            path: '/viewPerson',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'person': object,
-          },
-        );
+      case final Person person:
+        ViewPersonRoute(id: object.id, $extra: person)
+            .push(navigatorKey.currentContext!);
 
-      case Service _:
-        router.push(
-          Uri(
-            path: '/viewService',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'service': object,
-          },
-        );
-      case Group _:
-        router.push(
-          Uri(
-            path: '/viewGroup',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'group': object,
-          },
-        );
-      case Class _:
-        router.push(
-          Uri(
-            path: '/viewClass',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'class': object,
-          },
-        );
-      case Area _:
-        router.push(
-          Uri(
-            path: '/viewArea',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'area': object,
-          },
-        );
-      case Street _:
-        router.push(
-          Uri(
-            path: '/viewStreet',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'street': object,
-          },
-        );
-      case Family _:
-        router.push(
-          Uri(
-            path: '/viewFamily',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'family': object,
-          },
-        );
-      case Store _:
-        router.push(
-          Uri(
-            path: '/viewStore',
-            queryParameters: {'id': object.id},
-          ).toString(),
-          extra: {
-            'store': object,
-          },
-        );
-      case User _:
-        router.push(
-          Uri(
-            path: '/viewUser',
-            queryParameters: {'uid': object.uid},
-          ).toString(),
-          extra: {
-            'user': object,
-          },
-        );
+      case final Service service:
+        ViewServiceRoute(id: object.id, $extra: service)
+            .push(navigatorKey.currentContext!);
+
+      case final Group group:
+        ViewGroupRoute(id: object.id, $extra: group)
+            .push(navigatorKey.currentContext!);
+
+      case final Class $class:
+        ViewClassRoute(id: object.id, $extra: $class)
+            .push(navigatorKey.currentContext!);
+
+      case final Area area:
+        ViewAreaRoute(id: object.id, $extra: area)
+            .push(navigatorKey.currentContext!);
+
+      case final Street street:
+        ViewStreetRoute(id: object.id, $extra: street)
+            .push(navigatorKey.currentContext!);
+
+      case final Family family:
+        ViewFamilyRoute(id: object.id, $extra: family)
+            .push(navigatorKey.currentContext!);
+
+      case final Store store:
+        ViewStoreRoute(id: object.id, $extra: store)
+            .push(navigatorKey.currentContext!);
+
+      case final User user:
+        ViewUserRoute(uid: object.uid, $extra: user)
+            .push(navigatorKey.currentContext!);
+
       case LastRecordedByInfo _:
         if (object.user != null) {
           onTap(object.user!);

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class NotificationDetailsDialog extends StatelessWidget {
@@ -84,7 +83,7 @@ class NotificationDetailsDialog extends StatelessWidget {
 
     final query = AdvancedQuery.fromJson(queryData);
 
-    return () => context.push('/advanced_search', extra: query);
+    return () => AdvancedSearchRoute($extra: query).push(context);
   }
 }
 

@@ -8,25 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchScreen extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'advanced_search',
-    routes: [
-      ViewPerson.route,
-      ViewArea.route,
-      ViewService.route,
-      ViewUser.route,
-      ViewGroup.route,
-      ViewClass.route,
-      ViewFamily.route,
-      ViewStreet.route,
-      ViewStore.route,
-    ],
-    builder: (context, state) => AdvancedSearchScreen(
-      key: PageStorageKey(state.uri),
-      initialQuery: state.extra as AdvancedQuery?,
-      autoExecuteInitialQuery: state.extra is AdvancedQuery,
-    ),
-  );
+  static const TypedGoRoute<AdvancedSearchRoute> route =
+      TypedGoRoute<AdvancedSearchRoute>(path: 'advanced_search');
 
   final AdvancedQuery? initialQuery;
   final bool autoExecuteInitialQuery;

@@ -6,15 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditFamily extends StatefulWidget {
-  static final route = GoRoute(
+  static const TypedGoRoute<EditFamilyRoute> route =
+      TypedGoRoute<EditFamilyRoute>(
     path: 'editFamily',
-    builder: (context, state) {
-      return EditFamily(
-        family: (state.extra as Map?)?['family'] as Family?,
-        children: (state.extra as Map?)?['children'] as Set<Family>?,
-        parents: (state.extra as Map?)?['parents'] as Set<Family>?,
-      );
-    },
   );
 
   final Family? family;
