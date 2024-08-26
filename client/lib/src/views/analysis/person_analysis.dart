@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 typedef EditOptionsBuiderFn = Widget Function(
   BuildContext,
@@ -9,9 +8,6 @@ typedef EditOptionsBuiderFn = Widget Function(
 );
 
 class PersonAnalysis extends StatefulWidget {
-  static const TypedGoRoute<PersonAnalysisRoute> route =
-      TypedGoRoute<PersonAnalysisRoute>(path: 'personAnalysis');
-
   final Person? person;
   final User? user;
   final PersonAnalysisOptions? options;

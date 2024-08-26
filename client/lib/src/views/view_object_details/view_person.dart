@@ -4,15 +4,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewPerson extends StatefulWidget {
-  static const TypedGoRoute<ViewPersonRoute> route =
-      TypedGoRoute<ViewPersonRoute>(path: 'viewPerson');
-
   final Person? person;
   final String personId;
 
@@ -231,7 +227,7 @@ class _ViewPersonState extends State<ViewPerson> {
                 subtitle: Wrap(
                   spacing: 3,
                   children: [
-                    for (final hobby in person.hobbies ?? <Tag>[])
+                    for (final hobby in person.hobbies ?? <Hobby>[])
                       Material(
                         type: MaterialType.transparency,
                         child: Chip(
@@ -392,13 +388,8 @@ class _ViewPersonState extends State<ViewPerson> {
       editButtonBuilder: (context, person) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditPersonRoute(
-          $extra: (
+          $extra: EditPersonExtra(
             person: person,
-            family: null,
-            service: null,
-            group: null,
-            studyYear: null,
-            gender: null,
           ),
         ).push(context),
         icon: const Icon(Symbols.edit),
@@ -414,20 +405,18 @@ class _ViewPersonState extends State<ViewPerson> {
 
   void _analysis(BuildContext context, Person person) {
     PersonAnalysisRoute(
-      $extra: (
+      $extra: PersonAnalysisExtra(
         editOptionsBuilder: (
           context,
           options,
           void Function(PersonAnalysisOptions) onComplete,
         ) =>
             _SelectAttendanceOptions(
-              person: person,
-              onComplete: onComplete,
-              options: options,
-            ),
+          person: person,
+          onComplete: onComplete,
+          options: options,
+        ),
         person: person,
-        user: null,
-        options: null,
       ),
     ).push(context);
   }
@@ -753,12 +742,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
           (p) {
             final groupedObjects = <ViewableWithIDAndImage>[
               ...p?.classes ?? [],
-              ...p?.groups ?? [],
+              ...p?.groups ?? []
             ].groupListsBy(
               (o) => o is Class ? o.service! : (o as Group).service!,
             );
 
-            return {
+            return <Service, List<ViewableWithIDAndImage>>{
               for (final s in p?.services ?? []) s: [],
               ...groupedObjects,
             };

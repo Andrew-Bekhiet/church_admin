@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
-  static const TypedGoRoute<EmailVerificationRoute> route =
-      TypedGoRoute<EmailVerificationRoute>(path: '/emailVerification');
-
   const EmailVerificationScreen({super.key});
 
   @override

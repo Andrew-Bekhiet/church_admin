@@ -2,12 +2,8 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DownloadAppScreen extends StatelessWidget {
-  static const TypedGoRoute<DownloadAppRoute> route =
-      TypedGoRoute<DownloadAppRoute>(path: '/download');
-
   const DownloadAppScreen({super.key});
 
   @override

@@ -12,7 +12,7 @@ part 'tag.g.dart';
 
 @freezed
 @TypeMetadata()
-class Tag extends ViewableWithID with _$Tag implements ToJson {
+class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$TagFields;
 
   static final QueryableType<Tag> queryableType = QueryableType<Tag>(
@@ -30,4 +30,7 @@ class Tag extends ViewableWithID with _$Tag implements ToJson {
   Tag._();
 
   factory Tag.fromJson(Map<String, Object?> json) => _$TagFromJson(json);
+
+  @override
+  String get typeName => Tag.queryableType.name;
 }

@@ -262,7 +262,7 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>(
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
   (ref) => ViewableObjectService(
-    router: ChurchAdminApp.router,
+    router: $appRouter,
     userSettingsService: ref.watch(userSettingsServiceProvider),
   ),
 );

@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewArea extends StatefulWidget {
-  static const TypedGoRoute<ViewAreaRoute> route =
-      TypedGoRoute<ViewAreaRoute>(path: 'viewArea');
-
   final Area? area;
   final String areaId;
 

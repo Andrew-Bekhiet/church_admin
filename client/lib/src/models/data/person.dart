@@ -11,7 +11,9 @@ part 'person.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['blurhash', 'otherPhones'])
-class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
+class Person extends ViewableWithIDAndImage
+    with _$Person
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$PersonFields;
 
   static final QueryableType<Person> queryableType = QueryableType<Person>(
@@ -124,6 +126,9 @@ class Person extends ViewableWithIDAndImage with _$Person implements ToJson {
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Person.queryableType.name;
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));

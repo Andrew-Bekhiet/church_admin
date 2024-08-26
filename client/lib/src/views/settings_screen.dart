@@ -2,12 +2,8 @@ import 'dart:ui';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatefulWidget {
-  static const TypedGoRoute<SettingsRoute> route =
-      TypedGoRoute<SettingsRoute>(path: 'settings');
-
   const SettingsScreen({super.key});
 
   @override

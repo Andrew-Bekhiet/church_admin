@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewClass extends StatefulWidget {
-  static const TypedGoRoute<ViewClassRoute> route =
-      TypedGoRoute<ViewClassRoute>(path: 'viewClass');
-
   final Class? $class;
   final String classId;
 
@@ -57,7 +53,7 @@ class _ViewClassState extends State<ViewClass> {
       editButtonBuilder: (context, $class) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditClassRoute(
-          $extra: ($class: $class, service: null),
+          $extra: EditClassExtra($class: $class),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -111,13 +107,10 @@ class _ViewClassState extends State<ViewClass> {
           FloatingActionButton(
         onPressed: () {
           EditPersonRoute(
-            $extra: (
+            $extra: EditPersonExtra(
               service: class$.service,
               studyYear: class$.studyYear,
               gender: class$.serviceGender,
-              person: null,
-              family: null,
-              group: null,
             ),
           ).push(context);
         },

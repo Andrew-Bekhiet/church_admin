@@ -11,7 +11,9 @@ part 'family.g.dart';
 
 @freezed
 @TypeMetadata()
-class Family extends ViewableWithIDAndImage with _$Family implements ToJson {
+class Family extends ViewableWithIDAndImage
+    with _$Family
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$FamilyFields;
 
   static final QueryableType<Family> queryableType = QueryableType<Family>(
@@ -45,6 +47,9 @@ class Family extends ViewableWithIDAndImage with _$Family implements ToJson {
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Family.queryableType.name;
 }
 
 List<Family>? familyChildrenFromJson(List? data) =>

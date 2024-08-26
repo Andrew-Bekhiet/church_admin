@@ -1,12 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditStreet extends StatefulWidget {
-  static const TypedGoRoute<EditStreetRoute> route =
-      TypedGoRoute<EditStreetRoute>(path: 'editStreet');
-
   final Street? street;
 
   const EditStreet({

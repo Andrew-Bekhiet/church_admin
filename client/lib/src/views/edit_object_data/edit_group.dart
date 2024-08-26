@@ -1,12 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditGroup extends StatefulWidget {
-  static const TypedGoRoute<EditGroupRoute> route =
-      TypedGoRoute<EditGroupRoute>(path: 'editGroup');
-
   final Group? group;
   final Service? service;
 

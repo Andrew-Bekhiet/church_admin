@@ -2,15 +2,9 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditFamily extends StatefulWidget {
-  static const TypedGoRoute<EditFamilyRoute> route =
-      TypedGoRoute<EditFamilyRoute>(
-    path: 'editFamily',
-  );
-
   final Family? family;
   final Set<Family>? children;
   final Set<Family>? parents;

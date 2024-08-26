@@ -2,15 +2,8 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AuthenticateScreen extends StatefulWidget {
-  static const TypedGoRoute<AuthenticateRoute> route =
-      TypedGoRoute<AuthenticateRoute>(
-    name: 'authenticate',
-    path: '/authenticate',
-  );
-
   final String? next;
 
   const AuthenticateScreen({this.next, super.key});

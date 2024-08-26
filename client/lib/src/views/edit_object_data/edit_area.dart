@@ -1,12 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditArea extends StatefulWidget {
-  static const TypedGoRoute<EditAreaRoute> route =
-      TypedGoRoute<EditAreaRoute>(path: 'editArea');
-
   final Area? area;
 
   const EditArea({

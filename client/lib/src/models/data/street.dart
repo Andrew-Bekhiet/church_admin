@@ -11,7 +11,9 @@ part 'street.g.dart';
 
 @freezed
 @TypeMetadata()
-class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
+class Street extends ViewableWithIDAndImage
+    with _$Street
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$StreetFields;
 
   static final QueryableType<Street> queryableType = QueryableType<Street>(
@@ -39,4 +41,7 @@ class Street extends ViewableWithIDAndImage with _$Street implements ToJson {
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Street.queryableType.name;
 }

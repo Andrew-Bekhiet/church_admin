@@ -11,7 +11,7 @@ part 'qualification.g.dart';
 @TypeMetadata()
 class Qualification extends ViewableWithID
     with _$Qualification
-    implements ToJson {
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$QualificationFields;
 
   static final QueryableType<Qualification> queryableType =
@@ -30,4 +30,7 @@ class Qualification extends ViewableWithID
 
   factory Qualification.fromJson(Map<String, Object?> json) =>
       _$QualificationFromJson(json);
+
+  @override
+  String get typeName => Qualification.queryableType.name;
 }

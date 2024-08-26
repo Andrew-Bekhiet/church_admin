@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewService extends StatefulWidget {
-  static const TypedGoRoute<ViewServiceRoute> route =
-      TypedGoRoute<ViewServiceRoute>(path: 'viewService');
-
   final Service? service;
   final String serviceId;
 
@@ -164,27 +160,20 @@ class _ViewServiceState extends State<ViewService> {
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditClassRoute(
-              $extra: (
-                $class: null,
+              $extra: EditClassExtra(
                 service: widget.service,
               ),
             ).push(context);
           } else if (newIndex == 1) {
             EditGroupRoute(
-              $extra: (
-                group: null,
+              $extra: EditGroupExtra(
                 service: widget.service,
               ),
             ).push(context);
           } else if (newIndex == 2) {
             EditPersonRoute(
-              $extra: (
-                person: null,
-                family: null,
+              $extra: EditPersonExtra(
                 service: widget.service,
-                group: null,
-                studyYear: null,
-                gender: null,
               ),
             ).push(context);
           }

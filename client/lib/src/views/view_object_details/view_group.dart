@@ -1,12 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class ViewGroup extends StatefulWidget {
-  static const TypedGoRoute<ViewGroupRoute> route =
-      TypedGoRoute<ViewGroupRoute>(path: 'viewGroup');
-
   final Group? group;
   final String groupId;
 
@@ -111,10 +107,7 @@ class _ViewGroupState extends State<ViewGroup> {
       editButtonBuilder: (context, group) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditGroupRoute(
-          $extra: (
-            group: group,
-            service: null,
-          ),
+          $extra: EditGroupExtra(group: group),
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
@@ -122,13 +115,9 @@ class _ViewGroupState extends State<ViewGroup> {
           FloatingActionButton(
         onPressed: () {
           EditPersonRoute(
-            $extra: (
+            $extra: EditPersonExtra(
               service: group.service?.copyWith(groups: [group]),
               group: group,
-              person: null,
-              family: null,
-              studyYear: null,
-              gender: null,
             ),
           ).push(context);
         },

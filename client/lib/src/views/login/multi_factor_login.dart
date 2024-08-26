@@ -8,9 +8,6 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 class MultiFactorLogin extends StatefulWidget {
-  static const TypedGoRoute<MultiFactorLoginRoute> route =
-      TypedGoRoute<MultiFactorLoginRoute>(path: '/multiFactor');
-
   const MultiFactorLogin({super.key});
 
   @override

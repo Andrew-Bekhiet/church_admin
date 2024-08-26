@@ -9,7 +9,7 @@ part 'church.g.dart';
 
 @freezed
 @TypeMetadata()
-class Church extends ViewableWithID with _$Church implements ToJson {
+class Church extends ViewableWithID with _$Church implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ChurchFields;
 
   static final QueryableType<Church> queryableType = QueryableType<Church>(
@@ -26,4 +26,7 @@ class Church extends ViewableWithID with _$Church implements ToJson {
   Church._();
 
   factory Church.fromJson(Map<String, Object?> json) => _$ChurchFromJson(json);
+
+  @override
+  String get typeName => Church.queryableType.name;
 }

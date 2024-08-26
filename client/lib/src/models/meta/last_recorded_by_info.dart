@@ -11,7 +11,7 @@ part 'last_recorded_by_info.g.dart';
 @TypeMetadata(ignoreFields: ['recordedBy'])
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
-    implements ToJson {
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata =>
       _$LastRecordedByInfoFields;
 
@@ -38,6 +38,9 @@ class LastRecordedByInfo extends ViewableWithID
 
   @override
   String get id => time.toIso8601String();
+
+  @override
+  String get typeName => LastRecordedByInfo.queryableType.name;
 }
 
 String? readRecordedBy(Map json, String _) =>

@@ -2,13 +2,9 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class UpdateUserSpiritData extends StatefulWidget {
-  static const TypedGoRoute<UpdateUserSpiritDataRoute> route =
-      TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/updateUserSpiritData');
-
   final Person? userData;
   const UpdateUserSpiritData({this.userData, super.key});
 

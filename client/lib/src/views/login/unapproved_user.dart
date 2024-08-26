@@ -2,12 +2,8 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class UnapprovedUser extends StatefulWidget {
-  static const TypedGoRoute<UnapprovedUserRoute> route =
-      TypedGoRoute<UnapprovedUserRoute>(path: '/unapprovedUser');
-
   const UnapprovedUser({super.key});
 
   @override
