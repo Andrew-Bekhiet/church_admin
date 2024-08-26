@@ -199,7 +199,7 @@ class _OrderByWidget extends StatelessWidget {
   final void Function(int, OrderBy) replaceOrderBy;
   final void Function(int) removeOrderBy;
 
-  Map<String, FieldMetadata<dynamic>> get fieldsMetadata =>
+  Map<String, FieldMetadata<Object>> get fieldsMetadata =>
       selectedQueryableType.fieldsMetadata;
 
   @override

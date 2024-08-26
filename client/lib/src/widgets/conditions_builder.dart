@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 
 import 'data_geomap/edit_object_points_map.dart';
 
-class ConditionsBuilder<T> extends StatelessWidget {
+class ConditionsBuilder<T extends Object> extends StatelessWidget {
   final QueryableType<T> queryableType;
 
   final bool canAddManyConditions;
@@ -153,7 +153,7 @@ class ConditionsBuilder<T> extends StatelessWidget {
   }
 }
 
-class ConditionBuilder<T> extends StatelessWidget {
+class ConditionBuilder<T extends Object> extends StatelessWidget {
   final QueryableType<T> queryableType;
   final Condition condition;
 
@@ -273,7 +273,7 @@ class ConditionBuilder<T> extends StatelessWidget {
   }
 }
 
-class _SelectValueWidget<T> extends StatelessWidget {
+class _SelectValueWidget<T extends Object> extends StatelessWidget {
   final QueryableType<T>? queryableType;
   final T dummyInstance;
   final Condition condition;
