@@ -24,8 +24,12 @@ mixin _$Father {
   String get name => throw _privateConstructorUsedError;
   String? get churchId => throw _privateConstructorUsedError;
 
+  /// Serializes this Father to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FatherCopyWith<Father> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -47,6 +51,8 @@ class _$FatherCopyWithImpl<$Res, $Val extends Father>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +95,8 @@ class __$$FatherImplCopyWithImpl<$Res>
       _$FatherImpl _value, $Res Function(_$FatherImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,11 +153,13 @@ class _$FatherImpl extends _Father {
                 other.churchId == churchId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, churchId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
@@ -178,8 +188,11 @@ abstract class _Father extends Father {
   String get name;
   @override
   String? get churchId;
+
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

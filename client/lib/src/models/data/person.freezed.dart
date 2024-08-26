@@ -101,8 +101,12 @@ mixin _$Person {
   HistoryAggregateData? get editHistoryAggregate =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonCopyWith<Person> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -216,6 +220,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -544,6 +550,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     ) as $Val);
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ShammasLevelCopyWith<$Res>? get shammasLevel {
@@ -556,6 +564,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SchoolCopyWith<$Res>? get school {
@@ -568,6 +578,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CollegeCopyWith<$Res>? get college {
@@ -580,6 +592,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ChurchCopyWith<$Res>? get church {
@@ -592,6 +606,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FatherCopyWith<$Res>? get father {
@@ -604,6 +620,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $JobCopyWith<$Res>? get job {
@@ -616,6 +634,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QualificationCopyWith<$Res>? get qualification {
@@ -628,6 +648,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonTypeCopyWith<$Res>? get personType {
@@ -640,6 +662,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PersonStateCopyWith<$Res>? get state {
@@ -652,6 +676,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FamilyCopyWith<$Res>? get family {
@@ -664,6 +690,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StoreCopyWith<$Res>? get store {
@@ -676,6 +704,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYear {
@@ -688,6 +718,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastConfession {
@@ -700,6 +732,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastKodas {
@@ -712,6 +746,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastCall {
@@ -724,6 +760,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
@@ -736,6 +774,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -748,6 +788,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get user {
@@ -760,6 +802,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get kodasHistoryAggregate {
@@ -773,6 +817,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get confessionHistoryAggregate {
@@ -786,6 +832,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get callHistoryAggregate {
@@ -799,6 +847,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get visitHistoryAggregate {
@@ -812,6 +862,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     });
   }
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get editHistoryAggregate {
@@ -959,6 +1011,8 @@ class __$$PersonImplCopyWithImpl<$Res>
       _$PersonImpl _value, $Res Function(_$PersonImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1738,7 +1792,7 @@ class _$PersonImpl extends _Person {
                 other.editHistoryAggregate == editHistoryAggregate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1808,7 +1862,9 @@ class _$PersonImpl extends _Person {
         editHistoryAggregate
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
@@ -2031,8 +2087,11 @@ abstract class _Person extends Person {
   HistoryAggregateData? get visitHistoryAggregate;
   @override
   HistoryAggregateData? get editHistoryAggregate;
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

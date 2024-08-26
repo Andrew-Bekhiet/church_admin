@@ -32,8 +32,12 @@ mixin _$Street {
   LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
+  /// Serializes this Street to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StreetCopyWith<Street> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -67,6 +71,8 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,6 +126,8 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     ) as $Val);
   }
 
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
@@ -132,6 +140,8 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     });
   }
 
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -177,6 +187,8 @@ class __$$StreetImplCopyWithImpl<$Res>
       _$StreetImpl _value, $Res Function(_$StreetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -304,7 +316,7 @@ class _$StreetImpl extends _Street {
                 other.lastEdit == lastEdit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -318,7 +330,9 @@ class _$StreetImpl extends _Street {
       lastVisit,
       lastEdit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
@@ -367,8 +381,11 @@ abstract class _Street extends Street {
   LastRecordedByInfo? get lastVisit;
   @override
   LastRecordedByInfo? get lastEdit;
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

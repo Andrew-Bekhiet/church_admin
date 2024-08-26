@@ -31,8 +31,12 @@ mixin _$AdvancedQuery {
   List<OrderBy> get orderBy => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
 
+  /// Serializes this AdvancedQuery to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AdvancedQueryCopyWith<AdvancedQuery> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$AdvancedQueryCopyWithImpl<$Res, $Val extends AdvancedQuery>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,6 +138,8 @@ class __$$AdvancedQueryImplCopyWithImpl<$Res>
       _$AdvancedQueryImpl _value, $Res Function(_$AdvancedQueryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,7 +248,7 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
             (identical(other.limit, limit) || other.limit == limit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -251,7 +259,9 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
       const DeepCollectionEquality().hash(_orderBy),
       limit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AdvancedQueryImplCopyWith<_$AdvancedQueryImpl> get copyWith =>
@@ -295,8 +305,11 @@ abstract class _AdvancedQuery implements AdvancedQuery {
   List<OrderBy> get orderBy;
   @override
   int? get limit;
+
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AdvancedQueryImplCopyWith<_$AdvancedQueryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

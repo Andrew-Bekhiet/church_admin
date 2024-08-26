@@ -23,8 +23,12 @@ mixin _$Church {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Church to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChurchCopyWith<Church> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -46,6 +50,8 @@ class _$ChurchCopyWithImpl<$Res, $Val extends Church>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +89,8 @@ class __$$ChurchImplCopyWithImpl<$Res>
       _$ChurchImpl _value, $Res Function(_$ChurchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,11 +137,13 @@ class _$ChurchImpl extends _Church {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
@@ -158,8 +168,11 @@ abstract class _Church extends Church {
   String get id;
   @override
   String get name;
+
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

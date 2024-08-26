@@ -26,8 +26,12 @@ mixin _$OrderBy {
   @JsonKey(fromJson: orderByValueFromJson, toJson: orderByValueToJson)
   Object get value => throw _privateConstructorUsedError;
 
+  /// Serializes this OrderBy to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OrderBy
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OrderByCopyWith<OrderBy> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -52,6 +56,8 @@ class _$OrderByCopyWithImpl<$Res, $Val extends OrderBy>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OrderBy
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +95,8 @@ class __$$OrderByImplCopyWithImpl<$Res>
       _$OrderByImpl _value, $Res Function(_$OrderByImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OrderBy
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,12 +149,14 @@ class _$OrderByImpl extends _OrderBy {
             const DeepCollectionEquality().equals(other.value, value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, fieldName, const DeepCollectionEquality().hash(value));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OrderBy
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OrderByImplCopyWith<_$OrderByImpl> get copyWith =>
@@ -171,13 +181,16 @@ abstract class _OrderBy extends OrderBy {
 
   @override
   String get fieldName;
-  @override
 
   /// [value] is either OrderBy or Enum_OrderBy
+  @override
   @JsonKey(fromJson: orderByValueFromJson, toJson: orderByValueToJson)
   Object get value;
+
+  /// Create a copy of OrderBy
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OrderByImplCopyWith<_$OrderByImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

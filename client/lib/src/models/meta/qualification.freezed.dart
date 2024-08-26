@@ -23,8 +23,12 @@ mixin _$Qualification {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Qualification to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Qualification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QualificationCopyWith<Qualification> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$QualificationCopyWithImpl<$Res, $Val extends Qualification>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Qualification
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$QualificationImplCopyWithImpl<$Res>
       _$QualificationImpl _value, $Res Function(_$QualificationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Qualification
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,11 +140,13 @@ class _$QualificationImpl extends _Qualification {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Qualification
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
@@ -163,8 +173,11 @@ abstract class _Qualification extends Qualification {
   String get id;
   @override
   String get name;
+
+  /// Create a copy of Qualification
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

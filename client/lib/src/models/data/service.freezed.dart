@@ -42,8 +42,12 @@ mixin _$Service {
   HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this Service to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ServiceCopyWith<Service> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -90,6 +94,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -184,6 +190,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     ) as $Val);
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYearFrom {
@@ -196,6 +204,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     });
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYearTo {
@@ -208,6 +218,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     });
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get nextService {
@@ -220,6 +232,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     });
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -232,6 +246,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     });
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
@@ -245,6 +261,8 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     });
   }
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
@@ -309,6 +327,8 @@ class __$$ServiceImplCopyWithImpl<$Res>
       _$ServiceImpl _value, $Res Function(_$ServiceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -540,7 +560,7 @@ class _$ServiceImpl extends _Service {
                     attendanceDaysConstraintsAggregate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -562,7 +582,9 @@ class _$ServiceImpl extends _Service {
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ServiceImplCopyWith<_$ServiceImpl> get copyWith =>
@@ -637,8 +659,11 @@ abstract class _Service extends Service {
   HistoryAggregateData? get attendanceHistoryAggregate;
   @override
   HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ServiceImplCopyWith<_$ServiceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

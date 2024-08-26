@@ -33,8 +33,12 @@ mixin _$Area {
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers => throw _privateConstructorUsedError;
 
+  /// Serializes this Area to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AreaCopyWith<Area> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -70,6 +74,8 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,6 +129,8 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     ) as $Val);
   }
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
@@ -135,6 +143,8 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     });
   }
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -181,6 +191,8 @@ class __$$AreaImplCopyWithImpl<$Res>
   __$$AreaImplCopyWithImpl(_$AreaImpl _value, $Res Function(_$AreaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -310,7 +322,7 @@ class _$AreaImpl extends _Area {
                 .equals(other._adminUsers, _adminUsers));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -324,7 +336,9 @@ class _$AreaImpl extends _Area {
       lastEdit,
       const DeepCollectionEquality().hash(_adminUsers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
@@ -376,8 +390,11 @@ abstract class _Area extends Area {
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   List<User>? get adminUsers;
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

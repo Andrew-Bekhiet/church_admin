@@ -38,8 +38,12 @@ mixin _$Family {
   List<Family>? get parents => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
 
+  /// Serializes this Family to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FamilyCopyWith<Family> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -78,6 +82,8 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,6 +157,8 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
     ) as $Val);
   }
 
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -200,6 +208,8 @@ class __$$FamilyImplCopyWithImpl<$Res>
       _$FamilyImpl _value, $Res Function(_$FamilyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -394,7 +404,7 @@ class _$FamilyImpl extends _Family {
                 other.lastEdit == lastEdit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -412,7 +422,9 @@ class _$FamilyImpl extends _Family {
       const DeepCollectionEquality().hash(_parents),
       lastEdit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FamilyImplCopyWith<_$FamilyImpl> get copyWith =>
@@ -478,8 +490,11 @@ abstract class _Family extends Family {
   List<Family>? get parents;
   @override
   LastRecordedByInfo? get lastEdit;
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FamilyImplCopyWith<_$FamilyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
