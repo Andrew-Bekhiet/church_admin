@@ -3,13 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:ui' as _i6;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i7;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter/foundation.dart' as _i4;
-import 'package:flutter/material.dart' as _i8;
-import 'package:flutter/services.dart' as _i7;
+import 'package:flutter/material.dart' as _i5;
+import 'package:flutter/services.dart' as _i8;
 import 'package:go_router/src/state.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i10;
@@ -80,6 +80,53 @@ class _FakeValueKey_4<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
         );
 }
 
+class _FakeWidget_5 extends _i1.SmartFake implements _i5.Widget {
+  _FakeWidget_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
+      super.toString();
+}
+
+class _FakeInheritedWidget_6 extends _i1.SmartFake
+    implements _i5.InheritedWidget {
+  _FakeInheritedWidget_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
+      super.toString();
+}
+
+class _FakeDiagnosticsNode_7 extends _i1.SmartFake
+    implements _i4.DiagnosticsNode {
+  _FakeDiagnosticsNode_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({
+    _i4.TextTreeConfiguration? parentConfiguration,
+    _i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info,
+  }) =>
+      super.toString();
+}
+
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -141,7 +188,7 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
       ) as _i3.ValueStream<String?>);
 
   @override
-  _i5.Future<bool> signInWithEmailPassword({
+  _i6.Future<bool> signInWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -154,12 +201,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<bool> reauthWithEmailPassword({
+  _i6.Future<bool> reauthWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -172,12 +219,12 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<bool> signUpWithEmailPassword({
+  _i6.Future<bool> signUpWithEmailPassword({
     required String? email,
     required String? password,
   }) =>
@@ -190,69 +237,69 @@ class MockAuthService extends _i1.Mock implements _i2.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<void> sendEmailVerification() => (super.noSuchMethod(
+  _i6.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
           #sendEmailVerification,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<void> reload() => (super.noSuchMethod(
+  _i6.Future<void> reload() => (super.noSuchMethod(
         Invocation.method(
           #reload,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<void> refreshToken() => (super.noSuchMethod(
+  _i6.Future<void> refreshToken() => (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
+  _i6.Future<String?> getStoredPasswordHash() => (super.noSuchMethod(
         Invocation.method(
           #getStoredPasswordHash,
           [],
         ),
-        returnValue: _i5.Future<String?>.value(),
-        returnValueForMissingStub: _i5.Future<String?>.value(),
-      ) as _i5.Future<String?>);
+        returnValue: _i6.Future<String?>.value(),
+        returnValueForMissingStub: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
 
   @override
-  _i5.Future<void> signOut() => (super.noSuchMethod(
+  _i6.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<void> dispose() => (super.noSuchMethod(
+  _i6.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
 
 /// A class which mocks [LocalAuthService].
@@ -280,11 +327,11 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as bool);
 
   @override
-  _i5.Stream<void> get refreshUIStream => (super.noSuchMethod(
+  _i6.Stream<void> get refreshUIStream => (super.noSuchMethod(
         Invocation.getter(#refreshUIStream),
-        returnValue: _i5.Stream<void>.empty(),
-        returnValueForMissingStub: _i5.Stream<void>.empty(),
-      ) as _i5.Stream<void>);
+        returnValue: _i6.Stream<void>.empty(),
+        returnValueForMissingStub: _i6.Stream<void>.empty(),
+      ) as _i6.Stream<void>);
 
   @override
   bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
@@ -307,7 +354,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as bool);
 
   @override
-  void didChangeAppLifecycleState(_i6.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i7.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -336,27 +383,27 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
-  _i5.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
+  _i6.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
         Invocation.method(
           #canCheckBiometrics,
           [],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<bool> authenticate() => (super.noSuchMethod(
+  _i6.Future<bool> authenticate() => (super.noSuchMethod(
         Invocation.method(
           #authenticate,
           [],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<bool> verifyPassword({
+  _i6.Future<bool> verifyPassword({
     required String? email,
     required String? password,
     String? storedPasswordHash,
@@ -371,32 +418,32 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
             #storedPasswordHash: storedPasswordHash,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<void> dispose() => (super.noSuchMethod(
+  _i6.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<bool> didPopRoute() => (super.noSuchMethod(
+  _i6.Future<bool> didPopRoute() => (super.noSuchMethod(
         Invocation.method(
           #didPopRoute,
           [],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  bool handleStartBackGesture(_i7.PredictiveBackEvent? backEvent) =>
+  bool handleStartBackGesture(_i8.PredictiveBackEvent? backEvent) =>
       (super.noSuchMethod(
         Invocation.method(
           #handleStartBackGesture,
@@ -407,7 +454,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       ) as bool);
 
   @override
-  void handleUpdateBackGestureProgress(_i7.PredictiveBackEvent? backEvent) =>
+  void handleUpdateBackGestureProgress(_i8.PredictiveBackEvent? backEvent) =>
       super.noSuchMethod(
         Invocation.method(
           #handleUpdateBackGestureProgress,
@@ -435,26 +482,26 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
-  _i5.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
+  _i6.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
         Invocation.method(
           #didPushRoute,
           [route],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i5.Future<bool> didPushRouteInformation(
-          _i8.RouteInformation? routeInformation) =>
+  _i6.Future<bool> didPushRouteInformation(
+          _i5.RouteInformation? routeInformation) =>
       (super.noSuchMethod(
         Invocation.method(
           #didPushRouteInformation,
           [routeInformation],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
   void didChangeMetrics() => super.noSuchMethod(
@@ -484,7 +531,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
-  void didChangeLocales(List<_i6.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i7.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -493,7 +540,7 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
-  void didChangeViewFocus(_i6.ViewFocusEvent? event) => super.noSuchMethod(
+  void didChangeViewFocus(_i7.ViewFocusEvent? event) => super.noSuchMethod(
         Invocation.method(
           #didChangeViewFocus,
           [event],
@@ -502,16 +549,16 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
       );
 
   @override
-  _i5.Future<_i6.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+  _i6.Future<_i7.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
           #didRequestAppExit,
           [],
         ),
         returnValue:
-            _i5.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
+            _i6.Future<_i7.AppExitResponse>.value(_i7.AppExitResponse.exit),
         returnValueForMissingStub:
-            _i5.Future<_i6.AppExitResponse>.value(_i6.AppExitResponse.exit),
-      ) as _i5.Future<_i6.AppExitResponse>);
+            _i6.Future<_i7.AppExitResponse>.value(_i7.AppExitResponse.exit),
+      ) as _i6.Future<_i7.AppExitResponse>);
 
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
@@ -621,4 +668,188 @@ class MockGoRouterState extends _i1.Mock implements _i9.GoRouterState {
           ),
         ),
       ) as String);
+}
+
+/// A class which mocks [BuildContext].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
+  @override
+  _i5.Widget get widget => (super.noSuchMethod(
+        Invocation.getter(#widget),
+        returnValue: _FakeWidget_5(
+          this,
+          Invocation.getter(#widget),
+        ),
+        returnValueForMissingStub: _FakeWidget_5(
+          this,
+          Invocation.getter(#widget),
+        ),
+      ) as _i5.Widget);
+
+  @override
+  bool get mounted => (super.noSuchMethod(
+        Invocation.getter(#mounted),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  bool get debugDoingBuild => (super.noSuchMethod(
+        Invocation.getter(#debugDoingBuild),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i5.InheritedWidget dependOnInheritedElement(
+    _i5.InheritedElement? ancestor, {
+    Object? aspect,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #dependOnInheritedElement,
+          [ancestor],
+          {#aspect: aspect},
+        ),
+        returnValue: _FakeInheritedWidget_6(
+          this,
+          Invocation.method(
+            #dependOnInheritedElement,
+            [ancestor],
+            {#aspect: aspect},
+          ),
+        ),
+        returnValueForMissingStub: _FakeInheritedWidget_6(
+          this,
+          Invocation.method(
+            #dependOnInheritedElement,
+            [ancestor],
+            {#aspect: aspect},
+          ),
+        ),
+      ) as _i5.InheritedWidget);
+
+  @override
+  void visitAncestorElements(_i5.ConditionalElementVisitor? visitor) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #visitAncestorElements,
+          [visitor],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void visitChildElements(_i5.ElementVisitor? visitor) => super.noSuchMethod(
+        Invocation.method(
+          #visitChildElements,
+          [visitor],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispatchNotification(_i5.Notification? notification) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #dispatchNotification,
+          [notification],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i4.DiagnosticsNode describeElement(
+    String? name, {
+    _i4.DiagnosticsTreeStyle? style = _i4.DiagnosticsTreeStyle.errorProperty,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #describeElement,
+          [name],
+          {#style: style},
+        ),
+        returnValue: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeElement,
+            [name],
+            {#style: style},
+          ),
+        ),
+        returnValueForMissingStub: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeElement,
+            [name],
+            {#style: style},
+          ),
+        ),
+      ) as _i4.DiagnosticsNode);
+
+  @override
+  _i4.DiagnosticsNode describeWidget(
+    String? name, {
+    _i4.DiagnosticsTreeStyle? style = _i4.DiagnosticsTreeStyle.errorProperty,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #describeWidget,
+          [name],
+          {#style: style},
+        ),
+        returnValue: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeWidget,
+            [name],
+            {#style: style},
+          ),
+        ),
+        returnValueForMissingStub: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeWidget,
+            [name],
+            {#style: style},
+          ),
+        ),
+      ) as _i4.DiagnosticsNode);
+
+  @override
+  List<_i4.DiagnosticsNode> describeMissingAncestor(
+          {required Type? expectedAncestorType}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #describeMissingAncestor,
+          [],
+          {#expectedAncestorType: expectedAncestorType},
+        ),
+        returnValue: <_i4.DiagnosticsNode>[],
+        returnValueForMissingStub: <_i4.DiagnosticsNode>[],
+      ) as List<_i4.DiagnosticsNode>);
+
+  @override
+  _i4.DiagnosticsNode describeOwnershipChain(String? name) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #describeOwnershipChain,
+          [name],
+        ),
+        returnValue: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeOwnershipChain,
+            [name],
+          ),
+        ),
+        returnValueForMissingStub: _FakeDiagnosticsNode_7(
+          this,
+          Invocation.method(
+            #describeOwnershipChain,
+            [name],
+          ),
+        ),
+      ) as _i4.DiagnosticsNode);
 }

@@ -9,14 +9,6 @@ class LoginScreen extends StatefulWidget {
   static const TypedGoRoute<LoginRoute> route =
       TypedGoRoute<LoginRoute>(path: '/login');
 
-  @visibleForTesting
-  static String? redirect() {
-    if (AuthService.I.isSignedIn) {
-      return '/';
-    }
-    return null;
-  }
-
   const LoginScreen({super.key});
 
   @override

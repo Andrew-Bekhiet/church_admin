@@ -45,25 +45,6 @@ class HomeScreen extends StatefulWidget {
   static const TypedGoRoute<HomeScreenWebRoute> webRoute =
       TypedGoRoute<HomeScreenWebRoute>(path: '/');
 
-  @visibleForTesting
-  static String? redirect(_) {
-    if (!AuthService.I.isSignedIn) {
-      return LoginScreen.route.path;
-    } else if (!(AuthService.I.currentUser!.emailVerified ?? false)) {
-      return EmailVerificationScreen.route.path;
-    } else if (!(AuthService.I.currentUser!.isMultiFactorEnrolled ?? false)) {
-      return MultiFactorLogin.route.path;
-    } else if (!AuthService.I.currentUser!.permissions.approved) {
-      return UnapprovedUser.route.path;
-    } else if (!AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
-      return Uri(
-        path: UpdateUserSpiritData.route.path,
-        queryParameters: {'forced': 'true'},
-      ).toString();
-    }
-    return null;
-  }
-
   const HomeScreen({super.key});
 
   @override
