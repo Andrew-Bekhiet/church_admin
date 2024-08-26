@@ -6,23 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class UpdateUserSpiritData extends StatefulWidget {
-  static final route = GoRoute(
-    path: '/updateUserSpiritData',
-    builder: (context, state) => const UpdateUserSpiritData(),
-    redirect: (context, state) {
-      if (!AuthService.I.isSignedIn) {
-        return LoginScreen.route.path;
-      } else if (AuthService.I.currentUser!.person!.spiritDataUpToDate()) {
-        return HomeScreen.route.path;
-      } else if (LocalAuthService.I.shouldAuthenticate) {
-        return Uri(
-          path: '/authenticate',
-          queryParameters: {'next': state.uri.toString()},
-        ).toString();
-      }
-      return null;
-    },
-  );
+  static const TypedGoRoute<UpdateUserSpiritDataRoute> route =
+      TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/updateUserSpiritData');
 
   final Person? userData;
   const UpdateUserSpiritData({this.userData, super.key});

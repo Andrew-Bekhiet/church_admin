@@ -11,19 +11,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
 class EditPerson extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'editPerson',
-    builder: (context, state) {
-      return EditPerson(
-        person: (state.extra as Map?)?['person'] as Person?,
-        family: (state.extra as Map?)?['family'] as Family?,
-        service: (state.extra as Map?)?['service'] as Service?,
-        group: (state.extra as Map?)?['group'] as Group?,
-        studyYear: (state.extra as Map?)?['studyYear'] as StudyYear?,
-        gender: (state.extra as Map?)?['gender'] as bool?,
-      );
-    },
-  );
+  static const TypedGoRoute<EditPersonRoute> route =
+      TypedGoRoute<EditPersonRoute>(path: 'editPerson');
 
   final Person? person;
   final Family? family;

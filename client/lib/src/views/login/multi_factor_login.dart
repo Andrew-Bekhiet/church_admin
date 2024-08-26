@@ -8,17 +8,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 class MultiFactorLogin extends StatefulWidget {
-  static final route = GoRoute(
-    path: '/multiFactor',
-    builder: (context, state) => const MultiFactorLogin(),
-    redirect: (context, state) {
-      if (!AuthService.I.multiFactorManager.hasPendingMultifactorLogin &&
-          (AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
-        return '/';
-      }
-      return null;
-    },
-  );
+  static const TypedGoRoute<MultiFactorLoginRoute> route =
+      TypedGoRoute<MultiFactorLoginRoute>(path: '/multiFactor');
 
   const MultiFactorLogin({super.key});
 

@@ -2,39 +2,20 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+typedef EditOptionsBuiderFn = Widget Function(
+  BuildContext,
+  PersonAnalysisOptions?,
+  void Function(PersonAnalysisOptions),
+);
+
 class PersonAnalysis extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'personAnalysis',
-    builder: (_, state) {
-      if (state.extra == null) {
-        throw ArgumentError.notNull('state.extra');
-      } else if (state.extra is! Map<String, dynamic>) {
-        throw ArgumentError.value(
-          state.extra,
-          'state.extra',
-          'expected a Map but got ' + state.extra.runtimeType.toString(),
-        );
-      }
-
-      final extra = state.extra! as Map<String, dynamic>;
-
-      return PersonAnalysis(
-        person: extra['person'],
-        user: extra['user'],
-        editOptionsBuilder: extra['editOptionsBuilder'],
-        options: extra['options'],
-      );
-    },
-  );
+  static const TypedGoRoute<PersonAnalysisRoute> route =
+      TypedGoRoute<PersonAnalysisRoute>(path: 'personAnalysis');
 
   final Person? person;
   final User? user;
   final PersonAnalysisOptions? options;
-  final Widget Function(
-    BuildContext,
-    PersonAnalysisOptions?,
-    void Function(PersonAnalysisOptions),
-  ) editOptionsBuilder;
+  final EditOptionsBuiderFn editOptionsBuilder;
 
   const PersonAnalysis({
     required this.editOptionsBuilder,

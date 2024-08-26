@@ -5,11 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DownloadAppScreen extends StatelessWidget {
-  static final GoRoute route = GoRoute(
-    path: '/download',
-    builder: (context, state) => const DownloadAppScreen(),
-    redirect: HomeScreen.route.redirect,
-  );
+  static const TypedGoRoute<DownloadAppRoute> route =
+      TypedGoRoute<DownloadAppRoute>(path: '/download');
 
   const DownloadAppScreen({super.key});
 

@@ -119,6 +119,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2
+  go_router_builder: ^2.7.1
   golden_toolkit: ^0.15.0
   graphql_codegen: ^0.14.0
   hive_generator: ^2.0.0

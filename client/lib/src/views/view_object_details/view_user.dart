@@ -5,22 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewUser extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewUser',
-    builder: (context, state) {
-      if (state.uri.queryParameters['uid'] == null) {
-        throw ArgumentError.notNull('uid');
-      }
-
-      return ViewUser(
-        userId: state.uri.queryParameters['uid']!,
-        user: (state.extra as Map?)?['user'] as User?,
-      );
-    },
-    routes: [
-      PersonAnalysis.route,
-    ],
-  );
+  static const TypedGoRoute<ViewUserRoute> route =
+      TypedGoRoute<ViewUserRoute>(path: 'viewUser');
 
   final User? user;
   final String userId;
@@ -88,10 +74,8 @@ class _ViewUserState extends State<ViewUser> {
       ),
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          '/viewUser/editUser?id=' + widget.userId,
-          extra: {'user': user},
-        ),
+        onPressed: () =>
+            ViewUserRoute(uid: widget.userId, $extra: user).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -104,19 +88,9 @@ class _ViewUserState extends State<ViewUser> {
   }
 
   void _attendanceAnalysis(BuildContext context, User user) {
-    context.push(
-      Uri(
-        path: '/viewUser/personAnalysis',
-        queryParameters: {
-          'id': user.person!.id,
-          'uid': user.id,
-        },
-      ).toString(),
-      extra: {
-        'user': user,
-        'person': user.person,
-        'asAdmin': true,
-        'editOptionsBuilder': (
+    PersonAnalysisRoute(
+      $extra: (
+        editOptionsBuilder: (
           context,
           options,
           void Function(PersonAnalysisOptions) onComplete,
@@ -126,8 +100,11 @@ class _ViewUserState extends State<ViewUser> {
               onComplete: onComplete,
               options: options,
             ),
-      },
-    );
+        person: user.person!,
+        user: user,
+        options: null,
+      ),
+    ).push(context);
   }
 
   @override

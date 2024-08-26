@@ -7,44 +7,43 @@ import 'package:church_admin/src/views/home/home_bottom_navbar.dart';
 import 'package:church_admin/src/views/home/home_drawer.dart';
 import 'package:church_admin/src/views/home/home_fab.dart';
 import 'package:church_admin/src/views/home/home_mode_selector.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeScreen extends StatefulWidget {
-  static final GoRoute route = GoRoute(
+  static const TypedGoRoute<HomeScreenRoute> route =
+      TypedGoRoute<HomeScreenRoute>(
     path: '/',
-    builder: (context, state) =>
-        kIsWeb ? const DownloadAppScreen() : const HomeScreen(),
-    routes: !kIsWeb
-        ? [
-            ViewPerson.route,
-            EditPerson.route,
-            ViewArea.route,
-            EditArea.route,
-            ViewService.route,
-            EditService.route,
-            ViewUser.route,
-            ViewGroup.route,
-            ViewClass.route,
-            ViewFamily.route,
-            EditFamily.route,
-            ViewStreet.route,
-            EditStreet.route,
-            ViewStore.route,
-            EditStore.route,
-            // Drawer
-            ManageUsersScreen.route,
-            VisitsMapScreen.route,
-            AdvancedSearchScreen.route,
-            SettingsScreen.route,
-          ]
-        : [],
-    redirect: (context, state) {
-      return redirect(state);
-    },
+    routes: [
+      ViewPerson.route,
+      EditPerson.route,
+      ViewArea.route,
+      EditArea.route,
+      ViewService.route,
+      EditService.route,
+      ViewUser.route,
+      ViewGroup.route,
+      EditGroup.route,
+      ViewClass.route,
+      EditClass.route,
+      ViewFamily.route,
+      EditFamily.route,
+      ViewStreet.route,
+      EditStreet.route,
+      ViewStore.route,
+      EditStore.route,
+      PersonAnalysis.route,
+      // Drawer
+      ManageUsersScreen.route,
+      VisitsMapScreen.route,
+      AdvancedSearchScreen.route,
+      SettingsScreen.route,
+    ],
   );
+
+  static const TypedGoRoute<HomeScreenWebRoute> webRoute =
+      TypedGoRoute<HomeScreenWebRoute>(path: '/');
 
   @visibleForTesting
   static String? redirect(_) {

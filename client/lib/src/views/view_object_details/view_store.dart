@@ -3,25 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewStore extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewStore',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewStore(
-        storeId: state.uri.queryParameters['id']!,
-        store: (state.extra as Map?)?['store'] as Store?,
-      );
-    },
-    routes: [
-      EditStore.route,
-    ],
-  );
+  static const TypedGoRoute<ViewStoreRoute> route =
+      TypedGoRoute<ViewStoreRoute>(path: 'viewStore');
 
   final Store? store;
   final String storeId;
+
   const ViewStore({
     required this.storeId,
     this.store,
@@ -50,13 +37,9 @@ class _ViewStoreState extends State<ViewStore> {
       ),
       editButtonBuilder: (context, store) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewStore/editStore',
-            queryParameters: {'id': widget.storeId},
-          ).toString(),
-          extra: {'store': store},
-        ),
+        onPressed: () =>
+            EditStoreRoute($extra: (street: null, store: store, family: null))
+                .push(context),
         icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, store) => SliverList(

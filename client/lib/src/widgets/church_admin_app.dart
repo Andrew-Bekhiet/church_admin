@@ -13,15 +13,11 @@ class ChurchAdminApp extends StatefulWidget {
     ],
     // TODO: add extra codec
     refreshListenable: GoRouterRefreshStream.I,
-    routes: [
-      HomeScreen.route,
-      LoginScreen.route,
-      EmailVerificationScreen.route,
-      MultiFactorLogin.route,
-      UnapprovedUser.route,
-      UpdateUserSpiritData.route,
-      AuthenticateScreen.route,
-    ],
+    routes: $appRoutes
+        .where(
+          (r) => kIsWeb ? r != $homeScreenRoute : r != $homeScreenWebRoute,
+        )
+        .toList(growable: false),
     errorBuilder: (context, state) {
       if (kReleaseMode) {
         LoggingService.I.reportError(

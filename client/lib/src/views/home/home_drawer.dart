@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -41,22 +40,22 @@ class HomeDrawer extends StatelessWidget {
         _HomeDrawerDestination(
           icon: const Icon(Symbols.manage_accounts),
           label: const Text('إدارة الخدام'),
-          onTap: () => context.push('/manage_users'),
+          onTap: () => const ManageUsersRoute().push(context),
         ),
       _HomeDrawerDestination(
         icon: const Icon(Symbols.search),
         label: const Text('البحث المتقدم'),
-        onTap: () => context.push('/advanced_search'),
+        onTap: () => const AdvancedSearchRoute().push(context),
       ),
       _HomeDrawerDestination(
         icon: const Icon(Symbols.map),
         label: const Text('خريطة الافتقاد'),
-        onTap: () => context.push('/visits_map'),
+        onTap: () => const VisitsMapRoute().push(context),
       ),
       _HomeDrawerDestination(
         icon: const Icon(Symbols.settings),
         label: const Text('الإعدادات'),
-        onTap: () => context.push('/settings'),
+        onTap: () => const SettingsRoute().push(context),
       ),
       if (kDebugMode)
         _HomeDrawerDestination(

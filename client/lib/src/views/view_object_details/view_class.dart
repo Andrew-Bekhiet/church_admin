@@ -3,26 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewClass extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewClass',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewClass(
-        classId: state.uri.queryParameters['id']!,
-        $class: (state.extra as Map?)?['class'] as Class?,
-      );
-    },
-    routes: [
-      EditClass.route,
-      EditPerson.route,
-    ],
-  );
+  static const TypedGoRoute<ViewClassRoute> route =
+      TypedGoRoute<ViewClassRoute>(path: 'viewClass');
 
   final Class? $class;
   final String classId;
+
   const ViewClass({
     required this.classId,
     this.$class,
@@ -70,13 +56,9 @@ class _ViewClassState extends State<ViewClass> {
       ),
       editButtonBuilder: (context, $class) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewClass/editClass',
-            queryParameters: {'id': widget.classId},
-          ).toString(),
-          extra: {'class': $class},
-        ),
+        onPressed: () => EditClassRoute(
+          $extra: ($class: $class, service: null),
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, $class) => SliverList(
@@ -128,16 +110,16 @@ class _ViewClassState extends State<ViewClass> {
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
         onPressed: () {
-          context.push(
-            Uri(
-              path: '/viewClass/editPerson',
-            ).toString(),
-            extra: {
-              'service': class$.service,
-              'studyYear': class$.studyYear,
-              'gender': class$.serviceGender,
-            },
-          );
+          EditPersonRoute(
+            $extra: (
+              service: class$.service,
+              studyYear: class$.studyYear,
+              gender: class$.serviceGender,
+              person: null,
+              family: null,
+              group: null,
+            ),
+          ).push(context);
         },
         child: const Icon(Symbols.person_add),
       ),

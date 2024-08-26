@@ -6,13 +6,8 @@ import 'package:go_router/go_router.dart';
 final emailRegex = RegExp(r'^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$');
 
 class LoginScreen extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: '/login',
-    builder: (context, state) => const LoginScreen(),
-    redirect: (context, state) {
-      return redirect();
-    },
-  );
+  static const TypedGoRoute<LoginRoute> route =
+      TypedGoRoute<LoginRoute>(path: '/login');
 
   @visibleForTesting
   static String? redirect() {
@@ -137,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await setupSettings();
       }
     } on MultiFactorException {
-      if (mounted) context.go('/multiFactor');
+      if (mounted) const MultiFactorLoginRoute().go(context);
     } on Exception catch (e, stackTrace) {
       if (mounted) {
         await LoggingService.I.showErrorDialogAndReport(

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class VisitsMapScreen extends StatelessWidget {
-  static final GoRoute route = GoRoute(
-    path: 'visits_map',
-    builder: (context, state) => const VisitsMapScreen(),
-  );
+  static const TypedGoRoute<VisitsMapRoute> route =
+      TypedGoRoute<VisitsMapRoute>(path: 'visits_map');
 
   const VisitsMapScreen({super.key});
 

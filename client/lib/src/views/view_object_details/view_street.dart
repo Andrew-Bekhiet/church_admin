@@ -3,25 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewStreet extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewStreet',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewStreet(
-        streetId: state.uri.queryParameters['id']!,
-        street: (state.extra as Map?)?['street'] as Street?,
-      );
-    },
-    routes: [
-      EditStreet.route,
-      EditFamily.route,
-      EditStore.route,
-      EditPerson.route,
-    ],
-  );
+  static const TypedGoRoute<ViewStreetRoute> route =
+      TypedGoRoute<ViewStreetRoute>(path: 'viewStreet');
 
   final Street? street;
   final String streetId;
@@ -178,13 +161,7 @@ class _ViewStreetState extends State<ViewStreet> {
       ),
       editButtonBuilder: (context, street) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewStreet/editStreet',
-            queryParameters: {'id': widget.streetId},
-          ).toString(),
-          extra: {'street': street},
-        ),
+        onPressed: () => EditStreetRoute($extra: street).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -203,11 +180,19 @@ class _ViewStreetState extends State<ViewStreet> {
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
-            context.push('/viewStreet/editFamily');
+            EditFamilyRoute(
+              $extra: (
+                street: street,
+                family: null,
+                children: null,
+                parents: null
+              ),
+            ).push(context);
           } else if (newIndex == 1) {
-            context.push('/viewStreet/editStore');
+            EditStoreRoute($extra: (store: null, family: null, street: street))
+                .push(context);
           } else if (newIndex == 2) {
-            context.push('/viewStreet/editPerson');
+            const EditPersonRoute().push(context);
           }
         },
       ),

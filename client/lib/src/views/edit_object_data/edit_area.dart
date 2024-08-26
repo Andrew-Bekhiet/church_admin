@@ -4,14 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditArea extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'editArea',
-    builder: (context, state) {
-      return EditArea(
-        area: (state.extra as Map?)?['area'] as Area?,
-      );
-    },
-  );
+  static const TypedGoRoute<EditAreaRoute> route =
+      TypedGoRoute<EditAreaRoute>(path: 'editArea');
 
   final Area? area;
 

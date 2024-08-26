@@ -3,24 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewFamily extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewFamily',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewFamily(
-        familyId: state.uri.queryParameters['id']!,
-        family: (state.extra as Map?)?['family'] as Family?,
-      );
-    },
-    routes: [
-      EditFamily.route,
-      EditStore.route,
-      EditPerson.route,
-    ],
-  );
+  static const TypedGoRoute<ViewFamilyRoute> route =
+      TypedGoRoute<ViewFamilyRoute>(path: 'viewFamily');
 
   final Family? family;
   final String familyId;
@@ -214,13 +198,14 @@ class _ViewFamilyState extends State<ViewFamily> {
       ),
       editButtonBuilder: (context, family) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewFamily/editFamily',
-            queryParameters: {'id': widget.familyId},
-          ).toString(),
-          extra: {'family': family},
-        ),
+        onPressed: () => EditFamilyRoute(
+          $extra: (
+            street: null,
+            family: family,
+            children: null,
+            parents: null,
+          ),
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
@@ -234,23 +219,42 @@ class _ViewFamilyState extends State<ViewFamily> {
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
-            context.push('/viewArea/editPerson', extra: {'family': family});
+            EditPersonRoute(
+              $extra: (
+                family: family,
+                person: null,
+                group: null,
+                service: null,
+                studyYear: null,
+                gender: null,
+              ),
+            ).push(context);
           } else if (newIndex == 1) {
-            context.push(
-              '/viewArea/editFamily',
-              extra: {
-                'parents': {family},
-              },
-            );
+            EditFamilyRoute(
+              $extra: (
+                street: null,
+                family: null,
+                children: null,
+                parents: {family},
+              ),
+            ).push(context);
           } else if (newIndex == 2) {
-            context.push(
-              '/viewArea/editFamily',
-              extra: {
-                'children': {family},
-              },
-            );
+            EditFamilyRoute(
+              $extra: (
+                street: null,
+                family: null,
+                children: {family},
+                parents: null,
+              ),
+            ).push(context);
           } else if (newIndex == 3) {
-            context.push('/viewArea/editStore', extra: {'family': family});
+            EditStoreRoute(
+              $extra: (
+                street: null,
+                family: family,
+                store: null,
+              ),
+            ).push(context);
           }
         },
       ),

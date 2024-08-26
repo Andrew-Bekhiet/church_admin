@@ -4,15 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 class EditGroup extends StatefulWidget {
-  static final route = GoRoute(
-    path: 'editGroup',
-    builder: (context, state) {
-      return EditGroup(
-        group: (state.extra as Map?)?['group'] as Group?,
-        service: (state.extra as Map?)?['service'] as Service?,
-      );
-    },
-  );
+  static const TypedGoRoute<EditGroupRoute> route =
+      TypedGoRoute<EditGroupRoute>(path: 'editGroup');
 
   final Group? group;
   final Service? service;

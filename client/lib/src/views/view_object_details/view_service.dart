@@ -3,25 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ViewService extends StatefulWidget {
-  static final GoRoute route = GoRoute(
-    path: 'viewService',
-    builder: (context, state) {
-      if (state.uri.queryParameters['id'] == null) {
-        throw ArgumentError.notNull('id');
-      }
-
-      return ViewService(
-        serviceId: state.uri.queryParameters['id']!,
-        service: (state.extra as Map?)?['service'] as Service?,
-      );
-    },
-    routes: [
-      EditClass.route,
-      EditGroup.route,
-      EditPerson.route,
-      EditService.route,
-    ],
-  );
+  static const TypedGoRoute<ViewServiceRoute> route =
+      TypedGoRoute<ViewServiceRoute>(path: 'viewService');
 
   final Service? service;
   final String serviceId;
@@ -165,13 +148,9 @@ class _ViewServiceState extends State<ViewService> {
       ),
       editButtonBuilder: (context, service) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () => context.push(
-          Uri(
-            path: '/viewService/editService',
-            queryParameters: {'id': widget.serviceId},
-          ).toString(),
-          extra: {'service': service},
-        ),
+        onPressed: () => EditServiceRoute(
+          $extra: service,
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
@@ -184,20 +163,30 @@ class _ViewServiceState extends State<ViewService> {
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
-            context.push(
-              '/viewService/editClass',
-              extra: {'service': widget.service},
-            );
+            EditClassRoute(
+              $extra: (
+                $class: null,
+                service: widget.service,
+              ),
+            ).push(context);
           } else if (newIndex == 1) {
-            context.push(
-              '/viewService/editGroup',
-              extra: {'service': widget.service},
-            );
+            EditGroupRoute(
+              $extra: (
+                group: null,
+                service: widget.service,
+              ),
+            ).push(context);
           } else if (newIndex == 2) {
-            context.push(
-              '/viewService/editPerson',
-              extra: {'service': widget.service},
-            );
+            EditPersonRoute(
+              $extra: (
+                person: null,
+                family: null,
+                service: widget.service,
+                group: null,
+                studyYear: null,
+                gender: null,
+              ),
+            ).push(context);
           }
         },
       ),
