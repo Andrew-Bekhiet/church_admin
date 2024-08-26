@@ -207,7 +207,10 @@ void main() {
       test(
         'No Signed In User',
         () async {
-          initGlobalProviderContainer([_setUpAuthService()]);
+          initGlobalProviderContainer([
+            _setUpAuthService(),
+            _setUpLocalAuth(),
+          ]);
 
           expect(
             const AuthenticateRoute()
@@ -260,13 +263,9 @@ void main() {
                 _setUpLocalAuth(shouldAuthenticate: false),
               ]);
 
-              final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.uri)
-                  .thenReturn(Uri(queryParameters: {'next': '/next'}));
-
               expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), mockGoRouterState),
+                const AuthenticateRoute(next: '/next')
+                    .redirect(MockBuildContext(), MockGoRouterState()),
                 '/next',
               );
             },
@@ -299,33 +298,26 @@ void main() {
                 _setUpLocalAuth(shouldAuthenticate: false),
               ]);
 
-              final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.uri)
-                  .thenReturn(Uri(queryParameters: {'next': '/test'}));
-
               expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), mockGoRouterState),
+                const AuthenticateRoute(next: '/test')
+                    .redirect(MockBuildContext(), MockGoRouterState()),
                 '/test',
               );
 
-              final mockGoRouterState2 = MockGoRouterState();
-              when(mockGoRouterState2.uri)
-                  .thenReturn(Uri(queryParameters: {'next': '/test'}));
               when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
                   .thenReturn(true);
 
               expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), mockGoRouterState),
+                const AuthenticateRoute(next: '/test')
+                    .redirect(MockBuildContext(), MockGoRouterState()),
                 null,
               );
               when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
                   .thenReturn(false);
 
               expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), mockGoRouterState),
+                const AuthenticateRoute(next: '/test')
+                    .redirect(MockBuildContext(), MockGoRouterState()),
                 '/test',
               );
             },
