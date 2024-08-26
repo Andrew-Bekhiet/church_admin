@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewStore extends StatefulWidget {
-  static const TypedGoRoute<ViewStoreRoute> route =
-      TypedGoRoute<ViewStoreRoute>(path: 'viewStore');
-
   final Store? store;
   final String storeId;
 
@@ -38,8 +34,7 @@ class _ViewStoreState extends State<ViewStore> {
       editButtonBuilder: (context, store) => IconButton(
         tooltip: 'تعديل',
         onPressed: () =>
-            EditStoreRoute($extra: (street: null, store: store, family: null))
-                .push(context),
+            EditStoreRoute($extra: EditStoreExtra(store: store)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, store) => SliverList(

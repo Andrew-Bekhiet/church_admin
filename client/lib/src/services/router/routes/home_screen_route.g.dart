@@ -1,266 +1,89 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of 'home_screen_route.dart';
 
 // **************************************************************************
 // GoRouterGenerator
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $loginRoute,
-      $multiFactorLoginRoute,
-      $emailVerificationRoute,
-      $unapprovedUserRoute,
-      $authenticateRoute,
-      $downloadAppRoute,
-      $updateUserSpiritDataRoute,
       $homeScreenRoute,
-      $homeScreenWebRoute,
     ];
-
-RouteBase get $loginRoute => GoRouteData.$route(
-      path: '/login',
-      factory: $LoginRouteExtension._fromState,
-    );
-
-extension $LoginRouteExtension on LoginRoute {
-  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
-
-  String get location => GoRouteData.$location(
-        '/login',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $multiFactorLoginRoute => GoRouteData.$route(
-      path: '/multiFactor',
-      factory: $MultiFactorLoginRouteExtension._fromState,
-    );
-
-extension $MultiFactorLoginRouteExtension on MultiFactorLoginRoute {
-  static MultiFactorLoginRoute _fromState(GoRouterState state) =>
-      const MultiFactorLoginRoute();
-
-  String get location => GoRouteData.$location(
-        '/multiFactor',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $emailVerificationRoute => GoRouteData.$route(
-      path: '/emailVerification',
-      factory: $EmailVerificationRouteExtension._fromState,
-    );
-
-extension $EmailVerificationRouteExtension on EmailVerificationRoute {
-  static EmailVerificationRoute _fromState(GoRouterState state) =>
-      const EmailVerificationRoute();
-
-  String get location => GoRouteData.$location(
-        '/emailVerification',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $unapprovedUserRoute => GoRouteData.$route(
-      path: '/unapprovedUser',
-      factory: $UnapprovedUserRouteExtension._fromState,
-    );
-
-extension $UnapprovedUserRouteExtension on UnapprovedUserRoute {
-  static UnapprovedUserRoute _fromState(GoRouterState state) =>
-      const UnapprovedUserRoute();
-
-  String get location => GoRouteData.$location(
-        '/unapprovedUser',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $authenticateRoute => GoRouteData.$route(
-      path: '/authenticate',
-      name: 'authenticate',
-      factory: $AuthenticateRouteExtension._fromState,
-    );
-
-extension $AuthenticateRouteExtension on AuthenticateRoute {
-  static AuthenticateRoute _fromState(GoRouterState state) => AuthenticateRoute(
-        next: state.uri.queryParameters['next'] ?? '/',
-      );
-
-  String get location => GoRouteData.$location(
-        '/authenticate',
-        queryParams: {
-          if (next != '/') 'next': next,
-        },
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $downloadAppRoute => GoRouteData.$route(
-      path: '/download',
-      factory: $DownloadAppRouteExtension._fromState,
-    );
-
-extension $DownloadAppRouteExtension on DownloadAppRoute {
-  static DownloadAppRoute _fromState(GoRouterState state) =>
-      const DownloadAppRoute();
-
-  String get location => GoRouteData.$location(
-        '/download',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $updateUserSpiritDataRoute => GoRouteData.$route(
-      path: '/updateUserSpiritData',
-      factory: $UpdateUserSpiritDataRouteExtension._fromState,
-    );
-
-extension $UpdateUserSpiritDataRouteExtension on UpdateUserSpiritDataRoute {
-  static UpdateUserSpiritDataRoute _fromState(GoRouterState state) =>
-      UpdateUserSpiritDataRoute(
-        $extra: state.extra as Person?,
-      );
-
-  String get location => GoRouteData.$location(
-        '/updateUserSpiritData',
-      );
-
-  void go(BuildContext context) => context.go(location, extra: $extra);
-
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: $extra);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: $extra);
-
-  void replace(BuildContext context) =>
-      context.replace(location, extra: $extra);
-}
 
 RouteBase get $homeScreenRoute => GoRouteData.$route(
       path: '/',
       factory: $HomeScreenRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'viewPerson',
+          path: 'view_person',
           factory: $ViewPersonRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editPerson',
+          path: 'edit_person',
           factory: $EditPersonRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewArea',
+          path: 'view_area',
           factory: $ViewAreaRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editArea',
+          path: 'edit_area',
           factory: $EditAreaRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewService',
+          path: 'view_service',
           factory: $ViewServiceRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editService',
+          path: 'edit_service',
           factory: $EditServiceRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewUser',
+          path: 'view_user',
           factory: $ViewUserRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewGroup',
+          path: 'view_group',
           factory: $ViewGroupRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editGroup',
+          path: 'edit_group',
           factory: $EditGroupRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewClass',
+          path: 'view_class',
           factory: $ViewClassRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editClass',
+          path: 'edit_class',
           factory: $EditClassRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewFamily',
+          path: 'view_family',
           factory: $ViewFamilyRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editFamily',
+          path: 'edit_family',
           factory: $EditFamilyRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewStreet',
+          path: 'view_street',
           factory: $ViewStreetRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editStreet',
+          path: 'edit_street',
           factory: $EditStreetRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'viewStore',
+          path: 'view_store',
           factory: $ViewStoreRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'editStore',
+          path: 'edit_store',
           factory: $EditStoreRouteExtension._fromState,
         ),
         GoRouteData.$route(
-          path: 'personAnalysis',
+          path: 'person_analysis',
           factory: $PersonAnalysisRouteExtension._fromState,
         ),
         GoRouteData.$route(
@@ -307,7 +130,7 @@ extension $ViewPersonRouteExtension on ViewPersonRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewPerson',
+        '/view_person',
         queryParams: {
           'id': id,
         },
@@ -327,18 +150,11 @@ extension $ViewPersonRouteExtension on ViewPersonRoute {
 
 extension $EditPersonRouteExtension on EditPersonRoute {
   static EditPersonRoute _fromState(GoRouterState state) => EditPersonRoute(
-        $extra: state.extra as ({
-          Family? family,
-          bool? gender,
-          Group? group,
-          Person? person,
-          Service? service,
-          StudyYear? studyYear
-        })?,
+        $extra: state.extra as EditPersonExtra?,
       );
 
   String get location => GoRouteData.$location(
-        '/editPerson',
+        '/edit_person',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -360,7 +176,7 @@ extension $ViewAreaRouteExtension on ViewAreaRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewArea',
+        '/view_area',
         queryParams: {
           'id': id,
         },
@@ -384,7 +200,7 @@ extension $EditAreaRouteExtension on EditAreaRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/editArea',
+        '/edit_area',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -406,7 +222,7 @@ extension $ViewServiceRouteExtension on ViewServiceRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewService',
+        '/view_service',
         queryParams: {
           'id': id,
         },
@@ -430,7 +246,7 @@ extension $EditServiceRouteExtension on EditServiceRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/editService',
+        '/edit_service',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -452,7 +268,7 @@ extension $ViewUserRouteExtension on ViewUserRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewUser',
+        '/view_user',
         queryParams: {
           'uid': uid,
         },
@@ -477,7 +293,7 @@ extension $ViewGroupRouteExtension on ViewGroupRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewGroup',
+        '/view_group',
         queryParams: {
           'id': id,
         },
@@ -497,11 +313,11 @@ extension $ViewGroupRouteExtension on ViewGroupRoute {
 
 extension $EditGroupRouteExtension on EditGroupRoute {
   static EditGroupRoute _fromState(GoRouterState state) => EditGroupRoute(
-        $extra: state.extra as ({Group? group, Service? service})?,
+        $extra: state.extra as EditGroupExtra?,
       );
 
   String get location => GoRouteData.$location(
-        '/editGroup',
+        '/edit_group',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -523,7 +339,7 @@ extension $ViewClassRouteExtension on ViewClassRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewClass',
+        '/view_class',
         queryParams: {
           'id': id,
         },
@@ -543,11 +359,11 @@ extension $ViewClassRouteExtension on ViewClassRoute {
 
 extension $EditClassRouteExtension on EditClassRoute {
   static EditClassRoute _fromState(GoRouterState state) => EditClassRoute(
-        $extra: state.extra as ({Class? $class, Service? service})?,
+        $extra: state.extra as EditClassExtra?,
       );
 
   String get location => GoRouteData.$location(
-        '/editClass',
+        '/edit_class',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -569,7 +385,7 @@ extension $ViewFamilyRouteExtension on ViewFamilyRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewFamily',
+        '/view_family',
         queryParams: {
           'id': id,
         },
@@ -589,16 +405,11 @@ extension $ViewFamilyRouteExtension on ViewFamilyRoute {
 
 extension $EditFamilyRouteExtension on EditFamilyRoute {
   static EditFamilyRoute _fromState(GoRouterState state) => EditFamilyRoute(
-        $extra: state.extra as ({
-          Set<Family>? children,
-          Family? family,
-          Set<Family>? parents,
-          Street? street
-        })?,
+        $extra: state.extra as EditFamilyExtra?,
       );
 
   String get location => GoRouteData.$location(
-        '/editFamily',
+        '/edit_family',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -620,7 +431,7 @@ extension $ViewStreetRouteExtension on ViewStreetRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewStreet',
+        '/view_street',
         queryParams: {
           'id': id,
         },
@@ -644,7 +455,7 @@ extension $EditStreetRouteExtension on EditStreetRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/editStreet',
+        '/edit_street',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -666,7 +477,7 @@ extension $ViewStoreRouteExtension on ViewStoreRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/viewStore',
+        '/view_store',
         queryParams: {
           'id': id,
         },
@@ -686,12 +497,11 @@ extension $ViewStoreRouteExtension on ViewStoreRoute {
 
 extension $EditStoreRouteExtension on EditStoreRoute {
   static EditStoreRoute _fromState(GoRouterState state) => EditStoreRoute(
-        $extra:
-            state.extra as ({Family? family, Store? store, Street? street})?,
+        $extra: state.extra as EditStoreExtra?,
       );
 
   String get location => GoRouteData.$location(
-        '/editStore',
+        '/edit_store',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -709,17 +519,11 @@ extension $EditStoreRouteExtension on EditStoreRoute {
 extension $PersonAnalysisRouteExtension on PersonAnalysisRoute {
   static PersonAnalysisRoute _fromState(GoRouterState state) =>
       PersonAnalysisRoute(
-        $extra: state.extra as ({
-          Widget Function(BuildContext, PersonAnalysisOptions?,
-              void Function(PersonAnalysisOptions)) editOptionsBuilder,
-          PersonAnalysisOptions? options,
-          Person? person,
-          User? user
-        }),
+        $extra: state.extra as PersonAnalysisExtra,
       );
 
   String get location => GoRouteData.$location(
-        '/personAnalysis',
+        '/person_analysis',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
@@ -797,29 +601,6 @@ extension $SettingsRouteExtension on SettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $homeScreenWebRoute => GoRouteData.$route(
-      path: '/',
-      factory: $HomeScreenWebRouteExtension._fromState,
-    );
-
-extension $HomeScreenWebRouteExtension on HomeScreenWebRoute {
-  static HomeScreenWebRoute _fromState(GoRouterState state) =>
-      const HomeScreenWebRoute();
-
-  String get location => GoRouteData.$location(
-        '/',
       );
 
   void go(BuildContext context) => context.go(location);

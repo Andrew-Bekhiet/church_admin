@@ -12,7 +12,7 @@ part 'hobby.g.dart';
 
 @freezed
 @TypeMetadata()
-class Hobby extends ViewableWithID with _$Hobby implements ToJson {
+class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$HobbyFields;
 
   static final QueryableType<Hobby> queryableType = QueryableType<Hobby>(
@@ -30,4 +30,7 @@ class Hobby extends ViewableWithID with _$Hobby implements ToJson {
   Hobby._();
 
   factory Hobby.fromJson(Map<String, Object?> json) => _$HobbyFromJson(json);
+
+  @override
+  String get typeName => Hobby.queryableType.name;
 }

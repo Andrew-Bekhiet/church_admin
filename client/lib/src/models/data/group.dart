@@ -13,7 +13,7 @@ part 'group.g.dart';
 @TypeMetadata(ignoreFields: ['validity'])
 class Group extends ViewableWithIDAndImage
     with _$Group
-    implements ToJson, AttendanceAnalyzable {
+    implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$GroupFields;
 
   static final QueryableType<Group> queryableType = QueryableType<Group>(
@@ -46,4 +46,7 @@ class Group extends ViewableWithIDAndImage
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('groups', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Group.queryableType.name;
 }

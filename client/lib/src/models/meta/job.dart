@@ -9,7 +9,7 @@ part 'job.g.dart';
 
 @freezed
 @TypeMetadata()
-class Job extends ViewableWithID with _$Job implements ToJson {
+class Job extends ViewableWithID with _$Job implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$JobFields;
 
   static final QueryableType<Job> queryableType = QueryableType<Job>(
@@ -26,4 +26,7 @@ class Job extends ViewableWithID with _$Job implements ToJson {
   Job._();
 
   factory Job.fromJson(Map<String, Object?> json) => _$JobFromJson(json);
+
+  @override
+  String get typeName => Job.queryableType.name;
 }

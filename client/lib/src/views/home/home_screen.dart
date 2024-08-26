@@ -8,43 +8,9 @@ import 'package:church_admin/src/views/home/home_drawer.dart';
 import 'package:church_admin/src/views/home/home_fab.dart';
 import 'package:church_admin/src/views/home/home_mode_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const TypedGoRoute<HomeScreenRoute> route =
-      TypedGoRoute<HomeScreenRoute>(
-    path: '/',
-    routes: [
-      ViewPerson.route,
-      EditPerson.route,
-      ViewArea.route,
-      EditArea.route,
-      ViewService.route,
-      EditService.route,
-      ViewUser.route,
-      ViewGroup.route,
-      EditGroup.route,
-      ViewClass.route,
-      EditClass.route,
-      ViewFamily.route,
-      EditFamily.route,
-      ViewStreet.route,
-      EditStreet.route,
-      ViewStore.route,
-      EditStore.route,
-      PersonAnalysis.route,
-      // Drawer
-      ManageUsersScreen.route,
-      VisitsMapScreen.route,
-      AdvancedSearchScreen.route,
-      SettingsScreen.route,
-    ],
-  );
-
-  static const TypedGoRoute<HomeScreenWebRoute> webRoute =
-      TypedGoRoute<HomeScreenWebRoute>(path: '/');
-
   const HomeScreen({super.key});
 
   @override

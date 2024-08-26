@@ -1,12 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersScreen extends StatefulWidget {
-  static const TypedGoRoute<ManageUsersRoute> route =
-      TypedGoRoute<ManageUsersRoute>(path: 'manage_users');
-
   const ManageUsersScreen({super.key});
 
   @override

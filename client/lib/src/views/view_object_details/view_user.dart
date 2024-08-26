@@ -1,13 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ViewUser extends StatefulWidget {
-  static const TypedGoRoute<ViewUserRoute> route =
-      TypedGoRoute<ViewUserRoute>(path: 'viewUser');
-
   final User? user;
   final String userId;
 
@@ -89,20 +85,19 @@ class _ViewUserState extends State<ViewUser> {
 
   void _attendanceAnalysis(BuildContext context, User user) {
     PersonAnalysisRoute(
-      $extra: (
+      $extra: PersonAnalysisExtra(
         editOptionsBuilder: (
           context,
           options,
           void Function(PersonAnalysisOptions) onComplete,
         ) =>
             _SelectAttendanceOptions(
-              user: user,
-              onComplete: onComplete,
-              options: options,
-            ),
-        person: user.person!,
+          user: user,
+          onComplete: onComplete,
+          options: options,
+        ),
+        person: user.person,
         user: user,
-        options: null,
       ),
     ).push(context);
   }

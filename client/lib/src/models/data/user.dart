@@ -20,7 +20,9 @@ part 'user.g.dart';
     'passwordKeyHash',
   ],
 )
-class User extends ViewableWithIDAndImage with _$User implements ToJson {
+class User extends ViewableWithIDAndImage
+    with _$User
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$UserFields;
 
   static final QueryableType<User> queryableType = QueryableType<User>(
@@ -62,6 +64,9 @@ class User extends ViewableWithIDAndImage with _$User implements ToJson {
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => User.queryableType.name;
 
   @override
   String get id => uid;

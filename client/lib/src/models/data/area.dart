@@ -11,7 +11,9 @@ part 'area.g.dart';
 
 @freezed
 @TypeMetadata()
-class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
+class Area extends ViewableWithIDAndImage
+    with _$Area
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$AreaFields;
 
   static final QueryableType<Area> queryableType = QueryableType<Area>(
@@ -40,6 +42,9 @@ class Area extends ViewableWithIDAndImage with _$Area implements ToJson {
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('areas', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Area.queryableType.name;
 }
 
 List<User>? adminUsersFromJson(List? data) =>

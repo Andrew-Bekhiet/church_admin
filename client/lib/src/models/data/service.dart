@@ -13,7 +13,7 @@ part 'service.g.dart';
 @TypeMetadata()
 class Service extends ViewableWithIDAndImage
     with _$Service
-    implements ToJson, AttendanceAnalyzable {
+    implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ServiceFields;
 
   static final QueryableType<Service> queryableType = QueryableType<Service>(
@@ -51,4 +51,7 @@ class Service extends ViewableWithIDAndImage
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Service.queryableType.name;
 }

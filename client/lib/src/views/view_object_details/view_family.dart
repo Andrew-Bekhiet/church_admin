@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewFamily extends StatefulWidget {
-  static const TypedGoRoute<ViewFamilyRoute> route =
-      TypedGoRoute<ViewFamilyRoute>(path: 'viewFamily');
-
   final Family? family;
   final String familyId;
 
@@ -199,11 +195,8 @@ class _ViewFamilyState extends State<ViewFamily> {
       editButtonBuilder: (context, family) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditFamilyRoute(
-          $extra: (
-            street: null,
+          $extra: EditFamilyExtra(
             family: family,
-            children: null,
-            parents: null,
           ),
         ).push(context),
         icon: const Icon(Symbols.edit),
@@ -220,39 +213,26 @@ class _ViewFamilyState extends State<ViewFamily> {
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditPersonRoute(
-              $extra: (
+              $extra: EditPersonExtra(
                 family: family,
-                person: null,
-                group: null,
-                service: null,
-                studyYear: null,
-                gender: null,
               ),
             ).push(context);
           } else if (newIndex == 1) {
             EditFamilyRoute(
-              $extra: (
-                street: null,
-                family: null,
-                children: null,
+              $extra: EditFamilyExtra(
                 parents: {family},
               ),
             ).push(context);
           } else if (newIndex == 2) {
             EditFamilyRoute(
-              $extra: (
-                street: null,
-                family: null,
+              $extra: EditFamilyExtra(
                 children: {family},
-                parents: null,
               ),
             ).push(context);
           } else if (newIndex == 3) {
             EditStoreRoute(
-              $extra: (
-                street: null,
+              $extra: EditStoreExtra(
                 family: family,
-                store: null,
               ),
             ).push(context);
           }

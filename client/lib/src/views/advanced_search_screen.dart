@@ -4,13 +4,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AdvancedSearchScreen extends StatefulWidget {
-  static const TypedGoRoute<AdvancedSearchRoute> route =
-      TypedGoRoute<AdvancedSearchRoute>(path: 'advanced_search');
-
   final AdvancedQuery? initialQuery;
   final bool autoExecuteInitialQuery;
 

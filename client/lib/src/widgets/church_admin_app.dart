@@ -1,51 +1,10 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
 
 class ChurchAdminApp extends StatefulWidget {
-  static final GoRouter router = GoRouter(
-    observers: [
-      LoggingService.I.navigatorObserver,
-    ],
-    // TODO: add extra codec
-    refreshListenable: GoRouterRefreshStream.I,
-    routes: $appRoutes
-        .where(
-          (r) => kIsWeb ? r != $homeScreenRoute : r != $homeScreenWebRoute,
-        )
-        .toList(growable: false),
-    errorBuilder: (context, state) {
-      if (kReleaseMode) {
-        LoggingService.I.reportError(
-          state.error,
-          hints: {'location': state.uri.toString()},
-        );
-      }
-
-      return Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            onPressed: () => context.go('/'),
-          ),
-          title: Text(
-            'حدث خطأ',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onErrorContainer,
-            ),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
-        ),
-        body: ErrorWidget.builder(
-          FlutterErrorDetails(exception: state.error!),
-        ),
-      );
-    },
-  );
-
   const ChurchAdminApp({super.key});
 
   @override
@@ -79,10 +38,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
           debugShowCheckedModeBanner: false,
           theme: themeData.requireData,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          routeInformationParser: ChurchAdminApp.router.routeInformationParser,
-          routeInformationProvider:
-              ChurchAdminApp.router.routeInformationProvider,
-          routerDelegate: ChurchAdminApp.router.routerDelegate,
+          routerConfig: $appRouter,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -150,8 +106,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         showDialog(
-          context:
-              ChurchAdminApp.router.routerDelegate.navigatorKey.currentContext!,
+          context: $appRouter.routerDelegate.navigatorKey.currentContext!,
           builder: (context) =>
               NotificationDetailsDialog(notification: notification),
         );

@@ -11,7 +11,7 @@ part 'shammas_level.g.dart';
 @TypeMetadata()
 class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
-    implements ToJson {
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ShammasLevelFields;
 
   static final QueryableType<ShammasLevel> queryableType =
@@ -31,4 +31,7 @@ class ShammasLevel extends ViewableWithID
 
   factory ShammasLevel.fromJson(Map<String, Object?> json) =>
       _$ShammasLevelFromJson(json);
+
+  @override
+  String get typeName => ShammasLevel.queryableType.name;
 }

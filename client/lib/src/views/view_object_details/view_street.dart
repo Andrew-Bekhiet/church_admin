@@ -1,11 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ViewStreet extends StatefulWidget {
-  static const TypedGoRoute<ViewStreetRoute> route =
-      TypedGoRoute<ViewStreetRoute>(path: 'viewStreet');
-
   final Street? street;
   final String streetId;
 
@@ -181,15 +177,12 @@ class _ViewStreetState extends State<ViewStreet> {
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditFamilyRoute(
-              $extra: (
+              $extra: EditFamilyExtra(
                 street: street,
-                family: null,
-                children: null,
-                parents: null
               ),
             ).push(context);
           } else if (newIndex == 1) {
-            EditStoreRoute($extra: (store: null, family: null, street: street))
+            EditStoreRoute($extra: EditStoreExtra(street: street))
                 .push(context);
           } else if (newIndex == 2) {
             const EditPersonRoute().push(context);

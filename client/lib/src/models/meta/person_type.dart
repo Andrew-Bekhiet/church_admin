@@ -12,7 +12,9 @@ part 'person_type.g.dart';
 
 @freezed
 @TypeMetadata()
-class PersonType extends ViewableWithID with _$PersonType implements ToJson {
+class PersonType extends ViewableWithID
+    with _$PersonType
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$PersonTypeFields;
 
   static final QueryableType<PersonType> queryableType =
@@ -32,4 +34,7 @@ class PersonType extends ViewableWithID with _$PersonType implements ToJson {
 
   factory PersonType.fromJson(Map<String, Object?> json) =>
       _$PersonTypeFromJson(json);
+
+  @override
+  String get typeName => PersonType.queryableType.name;
 }

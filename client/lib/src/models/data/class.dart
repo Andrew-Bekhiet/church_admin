@@ -13,7 +13,7 @@ part 'class.g.dart';
 @TypeMetadata(labelsOverrides: {'serviceStudyYear': 'ترتيب السنة الدراسية'})
 class Class extends ViewableWithIDAndImage
     with _$Class
-    implements ToJson, AttendanceAnalyzable {
+    implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ClassFields;
 
   static final QueryableType<Class> queryableType = QueryableType<Class>(
@@ -47,4 +47,7 @@ class Class extends ViewableWithIDAndImage
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('classes', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => Class.queryableType.name;
 }

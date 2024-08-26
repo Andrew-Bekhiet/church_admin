@@ -5,15 +5,11 @@ import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
 class EditPerson extends StatefulWidget {
-  static const TypedGoRoute<EditPersonRoute> route =
-      TypedGoRoute<EditPersonRoute>(path: 'editPerson');
-
   final Person? person;
   final Family? family;
   final Service? service;

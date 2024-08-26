@@ -1,14 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 final emailRegex = RegExp(r'^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$');
 
 class LoginScreen extends StatefulWidget {
-  static const TypedGoRoute<LoginRoute> route =
-      TypedGoRoute<LoginRoute>(path: '/login');
-
   const LoginScreen({super.key});
 
   @override
