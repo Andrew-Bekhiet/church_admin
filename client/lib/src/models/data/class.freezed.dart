@@ -39,8 +39,12 @@ mixin _$Class {
   HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this Class to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ClassCopyWith<Class> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -83,6 +87,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,6 +168,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     ) as $Val);
   }
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get service {
@@ -174,6 +182,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     });
   }
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYear {
@@ -186,6 +196,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     });
   }
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -198,6 +210,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     });
   }
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
@@ -211,6 +225,8 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     });
   }
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
@@ -270,6 +286,8 @@ class __$$ClassImplCopyWithImpl<$Res>
       _$ClassImpl _value, $Res Function(_$ClassImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -454,7 +472,7 @@ class _$ClassImpl extends _Class {
                     attendanceDaysConstraintsAggregate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -473,7 +491,9 @@ class _$ClassImpl extends _Class {
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ClassImplCopyWith<_$ClassImpl> get copyWith =>
@@ -539,8 +559,11 @@ abstract class _Class extends Class {
   HistoryAggregateData? get attendanceHistoryAggregate;
   @override
   HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+
+  /// Create a copy of Class
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ClassImplCopyWith<_$ClassImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

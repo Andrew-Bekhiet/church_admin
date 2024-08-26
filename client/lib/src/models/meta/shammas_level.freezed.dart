@@ -24,8 +24,12 @@ mixin _$ShammasLevel {
   String get name => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
 
+  /// Serializes this ShammasLevel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShammasLevelCopyWith<ShammasLevel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ShammasLevelCopyWithImpl<$Res, $Val extends ShammasLevel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$ShammasLevelImplCopyWithImpl<$Res>
       _$ShammasLevelImpl _value, $Res Function(_$ShammasLevelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,11 +156,13 @@ class _$ShammasLevelImpl extends _ShammasLevel {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, order, name, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
@@ -182,8 +192,11 @@ abstract class _ShammasLevel extends ShammasLevel {
   String get name;
   @override
   String get id;
+
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

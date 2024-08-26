@@ -23,8 +23,12 @@ mixin _$HistoryAggregateData {
   AggregateData get aggregate => throw _privateConstructorUsedError;
   List<LastRecordedByInfo> get nodes => throw _privateConstructorUsedError;
 
+  /// Serializes this HistoryAggregateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HistoryAggregateDataCopyWith<HistoryAggregateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$HistoryAggregateDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -69,6 +75,8 @@ class _$HistoryAggregateDataCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AggregateDataCopyWith<$Res> get aggregate {
@@ -100,6 +108,8 @@ class __$$HistoryAggregateDataImplCopyWithImpl<$Res>
       $Res Function(_$HistoryAggregateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -156,12 +166,14 @@ class _$HistoryAggregateDataImpl implements _HistoryAggregateData {
             const DeepCollectionEquality().equals(other._nodes, _nodes));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, aggregate, const DeepCollectionEquality().hash(_nodes));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HistoryAggregateDataImplCopyWith<_$HistoryAggregateDataImpl>
@@ -189,8 +201,11 @@ abstract class _HistoryAggregateData implements HistoryAggregateData {
   AggregateData get aggregate;
   @override
   List<LastRecordedByInfo> get nodes;
+
+  /// Create a copy of HistoryAggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HistoryAggregateDataImplCopyWith<_$HistoryAggregateDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

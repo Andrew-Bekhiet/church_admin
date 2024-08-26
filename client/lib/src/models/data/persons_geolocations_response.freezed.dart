@@ -27,8 +27,12 @@ mixin _$PersonsGeolocationsResponse {
   Set<Store> get stores => throw _privateConstructorUsedError;
   Set<Person> get persons => throw _privateConstructorUsedError;
 
+  /// Serializes this PersonsGeolocationsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonsGeolocationsResponseCopyWith<PersonsGeolocationsResponse>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$PersonsGeolocationsResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,6 +127,8 @@ class __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>
       $Res Function(_$PersonsGeolocationsResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -237,7 +245,7 @@ class _$PersonsGeolocationsResponseImpl
             const DeepCollectionEquality().equals(other._persons, _persons));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -247,7 +255,9 @@ class _$PersonsGeolocationsResponseImpl
       const DeepCollectionEquality().hash(_stores),
       const DeepCollectionEquality().hash(_persons));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
@@ -284,8 +294,11 @@ abstract class _PersonsGeolocationsResponse
   Set<Store> get stores;
   @override
   Set<Person> get persons;
+
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

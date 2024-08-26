@@ -25,8 +25,12 @@ mixin _$LastRecordedByInfo {
   String? get recordedBy => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
+  /// Serializes this LastRecordedByInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LastRecordedByInfoCopyWith<LastRecordedByInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$LastRecordedByInfoCopyWithImpl<$Res, $Val extends LastRecordedByInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +84,8 @@ class _$LastRecordedByInfoCopyWithImpl<$Res, $Val extends LastRecordedByInfo>
     ) as $Val);
   }
 
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get user {
@@ -116,6 +124,8 @@ class __$$LastRecordedByInfoImplCopyWithImpl<$Res>
       $Res Function(_$LastRecordedByInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,11 +186,13 @@ class _$LastRecordedByInfoImpl extends _LastRecordedByInfo {
             (identical(other.user, user) || other.user == user));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, time, recordedBy, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LastRecordedByInfoImplCopyWith<_$LastRecordedByInfoImpl> get copyWith =>
@@ -212,8 +224,11 @@ abstract class _LastRecordedByInfo extends LastRecordedByInfo {
   String? get recordedBy;
   @override
   User? get user;
+
+  /// Create a copy of LastRecordedByInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LastRecordedByInfoImplCopyWith<_$LastRecordedByInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

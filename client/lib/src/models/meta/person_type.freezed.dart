@@ -25,8 +25,12 @@ mixin _$PersonType {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
 
+  /// Serializes this PersonType to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PersonType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonTypeCopyWith<PersonType> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$PersonTypeCopyWithImpl<$Res, $Val extends PersonType>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PersonType
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$PersonTypeImplCopyWithImpl<$Res>
       _$PersonTypeImpl _value, $Res Function(_$PersonTypeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PersonType
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,11 +166,13 @@ class _$PersonTypeImpl extends _PersonType {
             (identical(other.color, color) || other.color == color));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, color);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PersonType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PersonTypeImplCopyWith<_$PersonTypeImpl> get copyWith =>
@@ -194,8 +204,11 @@ abstract class _PersonType extends PersonType {
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
+
+  /// Create a copy of PersonType
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PersonTypeImplCopyWith<_$PersonTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

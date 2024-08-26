@@ -38,8 +38,12 @@ mixin _$Group {
   HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this Group to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GroupCopyWith<Group> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -80,6 +84,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,6 +155,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     ) as $Val);
   }
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get service {
@@ -161,6 +169,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     });
   }
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -173,6 +183,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     });
   }
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
@@ -186,6 +198,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     });
   }
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
@@ -242,6 +256,8 @@ class __$$GroupImplCopyWithImpl<$Res>
       _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -408,7 +424,7 @@ class _$GroupImpl extends _Group {
                     attendanceDaysConstraintsAggregate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -425,7 +441,9 @@ class _$GroupImpl extends _Group {
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
@@ -487,8 +505,11 @@ abstract class _Group extends Group {
   HistoryAggregateData? get attendanceHistoryAggregate;
   @override
   HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

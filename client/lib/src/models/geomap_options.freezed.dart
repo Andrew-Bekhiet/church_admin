@@ -25,7 +25,9 @@ mixin _$GeomapOptions {
   Set<Class> get selectedClasses => throw _privateConstructorUsedError;
   Set<Group> get selectedGroups => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeomapOptionsCopyWith<GeomapOptions> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +59,8 @@ class _$GeomapOptionsCopyWithImpl<$Res, $Val extends GeomapOptions>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,6 +137,8 @@ class __$$GeoMapOptionsImplCopyWithImpl<$Res>
       _$GeoMapOptionsImpl _value, $Res Function(_$GeoMapOptionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -320,7 +326,9 @@ class _$GeoMapOptionsImpl implements _GeoMapOptions {
       const DeepCollectionEquality().hash(_selectedClasses),
       const DeepCollectionEquality().hash(_selectedGroups));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
@@ -354,8 +362,11 @@ abstract class _GeoMapOptions implements GeomapOptions {
   Set<Class> get selectedClasses;
   @override
   Set<Group> get selectedGroups;
+
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

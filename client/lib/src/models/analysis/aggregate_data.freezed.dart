@@ -26,8 +26,12 @@ mixin _$AggregateData {
   @JsonKey(readValue: _readLastRecordedByInfo)
   LastRecordedByInfo? get min => throw _privateConstructorUsedError;
 
+  /// Serializes this AggregateData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AggregateDataCopyWith<AggregateData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -57,6 +61,8 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
     ) as $Val);
   }
 
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get max {
@@ -92,6 +100,8 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
     });
   }
 
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get min {
@@ -132,6 +142,8 @@ class __$$AggregateDataImplCopyWithImpl<$Res>
       _$AggregateDataImpl _value, $Res Function(_$AggregateDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -191,11 +203,13 @@ class _$AggregateDataImpl implements _AggregateData {
             (identical(other.min, min) || other.min == min));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, count, max, min);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
@@ -228,8 +242,11 @@ abstract class _AggregateData implements AggregateData {
   @override
   @JsonKey(readValue: _readLastRecordedByInfo)
   LastRecordedByInfo? get min;
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

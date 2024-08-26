@@ -25,8 +25,12 @@ mixin _$Hobby {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
 
+  /// Serializes this Hobby to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HobbyCopyWith<Hobby> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -51,6 +55,8 @@ class _$HobbyCopyWithImpl<$Res, $Val extends Hobby>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,6 +102,8 @@ class __$$HobbyImplCopyWithImpl<$Res>
       _$HobbyImpl _value, $Res Function(_$HobbyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,11 +163,13 @@ class _$HobbyImpl extends _Hobby {
             (identical(other.color, color) || other.color == color));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, color);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
@@ -190,8 +200,11 @@ abstract class _Hobby extends Hobby {
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
+
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

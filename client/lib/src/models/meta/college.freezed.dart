@@ -24,8 +24,12 @@ mixin _$College {
   String get name => throw _privateConstructorUsedError;
   String? get universityId => throw _privateConstructorUsedError;
 
+  /// Serializes this College to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CollegeCopyWith<College> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -47,6 +51,8 @@ class _$CollegeCopyWithImpl<$Res, $Val extends College>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +95,8 @@ class __$$CollegeImplCopyWithImpl<$Res>
       _$CollegeImpl _value, $Res Function(_$CollegeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,11 +153,13 @@ class _$CollegeImpl extends _College {
                 other.universityId == universityId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, universityId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
@@ -178,8 +188,11 @@ abstract class _College extends College {
   String get name;
   @override
   String? get universityId;
+
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

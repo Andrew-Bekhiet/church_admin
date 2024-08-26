@@ -36,8 +36,12 @@ mixin _$Store {
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
 
+  /// Serializes this Store to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StoreCopyWith<Store> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -74,6 +78,8 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,6 +148,8 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
     ) as $Val);
   }
 
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FamilyCopyWith<$Res>? get family {
@@ -154,6 +162,8 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
     });
   }
 
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
@@ -202,6 +212,8 @@ class __$$StoreImplCopyWithImpl<$Res>
       _$StoreImpl _value, $Res Function(_$StoreImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -367,7 +379,7 @@ class _$StoreImpl extends _Store {
                 other.blurhash == blurhash));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -384,7 +396,9 @@ class _$StoreImpl extends _Store {
       photoUpdatedAt,
       blurhash);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StoreImplCopyWith<_$StoreImpl> get copyWith =>
@@ -444,8 +458,11 @@ abstract class _Store extends Store {
   DateTime? get photoUpdatedAt;
   @override
   String? get blurhash;
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StoreImplCopyWith<_$StoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

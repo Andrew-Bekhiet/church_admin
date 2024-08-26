@@ -34,8 +34,12 @@ mixin _$AdminOnData {
   bool? get groupAllowEdit => throw _privateConstructorUsedError;
   bool? get groupAdminOnUsers => throw _privateConstructorUsedError;
 
+  /// Serializes this AdminOnData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AdminOnDataCopyWith<AdminOnData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -77,6 +81,8 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +156,8 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
     ) as $Val);
   }
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AreaCopyWith<$Res>? get area {
@@ -162,6 +170,8 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
     });
   }
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get service {
@@ -174,6 +184,8 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
     });
   }
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get serviceStudyYearData {
@@ -186,6 +198,8 @@ class _$AdminOnDataCopyWithImpl<$Res, $Val extends AdminOnData>
     });
   }
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GroupCopyWith<$Res>? get group {
@@ -240,6 +254,8 @@ class __$$AdminOnDataImplCopyWithImpl<$Res>
       _$AdminOnDataImpl _value, $Res Function(_$AdminOnDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -405,7 +421,7 @@ class _$AdminOnDataImpl extends _AdminOnData {
                 other.groupAdminOnUsers == groupAdminOnUsers));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -423,7 +439,9 @@ class _$AdminOnDataImpl extends _AdminOnData {
       groupAllowEdit,
       groupAdminOnUsers);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AdminOnDataImplCopyWith<_$AdminOnDataImpl> get copyWith =>
@@ -483,8 +501,11 @@ abstract class _AdminOnData extends AdminOnData {
   bool? get groupAllowEdit;
   @override
   bool? get groupAdminOnUsers;
+
+  /// Create a copy of AdminOnData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AdminOnDataImplCopyWith<_$AdminOnDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
