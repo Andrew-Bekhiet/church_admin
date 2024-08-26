@@ -22,8 +22,7 @@ AdvancedQuery _$AdvancedQueryFromJson(Map<String, dynamic> json) {
 mixin _$AdvancedQuery {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  QueryableType<dynamic> get queryableType =>
-      throw _privateConstructorUsedError;
+  QueryableType<Object> get queryableType => throw _privateConstructorUsedError;
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
   List<Condition> get conditions => throw _privateConstructorUsedError;
   LogicalOperator get logicalOperator => throw _privateConstructorUsedError;
@@ -50,7 +49,7 @@ abstract class $AdvancedQueryCopyWith<$Res> {
   $Res call(
       {String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType<dynamic> queryableType,
+      QueryableType<Object> queryableType,
       @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
       List<Condition> conditions,
       LogicalOperator logicalOperator,
@@ -89,7 +88,7 @@ class _$AdvancedQueryCopyWithImpl<$Res, $Val extends AdvancedQuery>
       queryableType: null == queryableType
           ? _value.queryableType
           : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType<dynamic>,
+              as QueryableType<Object>,
       conditions: null == conditions
           ? _value.conditions
           : conditions // ignore: cast_nullable_to_non_nullable
@@ -121,7 +120,7 @@ abstract class _$$AdvancedQueryImplCopyWith<$Res>
   $Res call(
       {String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType<dynamic> queryableType,
+      QueryableType<Object> queryableType,
       @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
       List<Condition> conditions,
       LogicalOperator logicalOperator,
@@ -158,7 +157,7 @@ class __$$AdvancedQueryImplCopyWithImpl<$Res>
       queryableType: null == queryableType
           ? _value.queryableType
           : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType<dynamic>,
+              as QueryableType<Object>,
       conditions: null == conditions
           ? _value._conditions
           : conditions // ignore: cast_nullable_to_non_nullable
@@ -202,7 +201,7 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
   final String name;
   @override
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  final QueryableType<dynamic> queryableType;
+  final QueryableType<Object> queryableType;
   final List<Condition> _conditions;
   @override
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
@@ -279,7 +278,7 @@ abstract class _AdvancedQuery implements AdvancedQuery {
   const factory _AdvancedQuery(
       {required final String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      required final QueryableType<dynamic> queryableType,
+      required final QueryableType<Object> queryableType,
       @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
       final List<Condition> conditions,
       final LogicalOperator logicalOperator,
@@ -294,7 +293,7 @@ abstract class _AdvancedQuery implements AdvancedQuery {
   String get name;
   @override
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  QueryableType<dynamic> get queryableType;
+  QueryableType<Object> get queryableType;
   @override
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
   List<Condition> get conditions;

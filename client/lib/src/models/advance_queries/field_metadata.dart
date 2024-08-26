@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class FieldMetadata<T> with EquatableMixin {
+class FieldMetadata<T extends Object> with EquatableMixin {
   final Type? _type;
   final String name;
   final String label;
