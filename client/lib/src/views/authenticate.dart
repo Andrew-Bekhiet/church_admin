@@ -7,27 +7,9 @@ import 'package:go_router/go_router.dart';
 class AuthenticateScreen extends StatefulWidget {
   static const TypedGoRoute<AuthenticateRoute> route =
       TypedGoRoute<AuthenticateRoute>(
-          name: 'authenticate', path: '/authenticate');
-
-  @visibleForTesting
-  static String? redirect(GoRouterState state) {
-    if (!AuthService.I.isSignedIn) {
-      return LoginScreen.route.path;
-    } else if (!(AuthService.I.currentUser?.isMultiFactorEnrolled ?? false)) {
-      return MultiFactorLogin.route.path;
-    } else if (LocalAuthService.I.shouldAuthenticate ||
-        (_hasRedirect(state.uri.queryParameters) &&
-            LocalAuthService.I.shouldAuthenticateForPath(
-              state.uri.queryParameters['next']!,
-            ))) {
-      return null;
-    } else {
-      return state.uri.queryParameters['next'] ?? '/';
-    }
-  }
-
-  static bool _hasRedirect(Map<String, dynamic> queryParams) =>
-      (queryParams['next'] ?? '/') != '/';
+    name: 'authenticate',
+    path: '/authenticate',
+  );
 
   final String? next;
 

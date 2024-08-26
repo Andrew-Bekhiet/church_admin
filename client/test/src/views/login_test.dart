@@ -3,6 +3,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
@@ -20,6 +21,8 @@ import 'login_test.mocks.dart';
   MockSpec<UserSettingsService>(),
   MockSpec<HiveInterface>(),
   MockSpec<NotificationsService>(),
+  MockSpec<BuildContext>(),
+  MockSpec<GoRouterState>(),
 ])
 void main() {
   tearDown(resetGlobalProviderContainer);
@@ -131,7 +134,8 @@ void main() {
           initGlobalProviderContainer(overrides);
 
           expect(
-            LoginScreen.redirect(),
+            const LoginRoute()
+                .redirect(MockBuildContext(), MockGoRouterState()),
             null,
           );
         },
@@ -145,7 +149,8 @@ void main() {
           initGlobalProviderContainer(overrides);
 
           expect(
-            LoginScreen.redirect(),
+            const LoginRoute()
+                .redirect(MockBuildContext(), MockGoRouterState()),
             '/',
           );
         },
@@ -161,25 +166,33 @@ Override _setUpUserSettings() {
       type: Area,
       value: captureAnyNamed('value'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
   when(
     userSettings.setSecondLineFor(
       type: Street,
       value: captureAnyNamed('value'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
   when(
     userSettings.setSecondLineFor(
       type: Family,
       value: captureAnyNamed('value'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
   when(
     userSettings.setSecondLineFor(
       type: Person,
       value: captureAnyNamed('value'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
 
   return userSettingsServiceProvider.overrideWithValue(userSettings);
 }
