@@ -236,6 +236,11 @@ jobs:
         working-directory: client
         run: flutter build apk
 
+      - name: Run pod repo update
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        run: pod repo update
+
       - name: Build ios
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
