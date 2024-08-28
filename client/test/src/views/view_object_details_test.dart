@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
@@ -18,8 +19,7 @@ import './view_object_details_test.mocks.dart';
     MockSpec<AuthService>(),
   ],
 )
-Future<void> main() async {
-  await loadAppFonts();
+void main() {
   group(
     'ViewObjectDetails =>',
     () {
@@ -259,6 +259,12 @@ Future<void> _pumpWidget(
     ),
     surfaceSize: size,
     wrapper: materialAppWrapper(
+      localeOverrides: [const Locale('ar', 'EG')],
+      localizations: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: ThemingService.getDefault(
         isDarkOverride: false,
         greatFeastThemeOverride: false,
