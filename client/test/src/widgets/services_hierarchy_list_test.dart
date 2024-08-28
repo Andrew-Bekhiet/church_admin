@@ -36,37 +36,91 @@ Future<void> main() async {
       );
       addTearDown(viewableObjectListController.dispose);
 
-      await tester.pumpWidgetBuilder(
-        ServicesHierarchyList(
-          listController: viewableObjectListController,
-        ),
-        wrapper: materialAppWrapper(
+      final deviceBuilder = DeviceBuilder(
+        wrap: materialAppWrapper(
           theme: ThemingService.getDefault(
             isDarkOverride: false,
             greatFeastThemeOverride: false,
           ),
         ),
-      );
+      )
+        ..addScenario(
+          widget: ServicesHierarchyList(
+            listController: viewableObjectListController,
+          ),
+          name: 'collapsed',
+        )
+        ..addScenario(
+          widget: ServicesHierarchyList(
+            listController: viewableObjectListController,
+          ),
+          name: 'service_1_expanded',
+          onCreate: (key) async => tester.tap(
+            find.descendant(
+              of: find.byKey(key),
+              matching: find.text('Service 1'),
+            ),
+          ),
+        )
+        ..addScenario(
+          widget: ServicesHierarchyList(
+            listController: viewableObjectListController,
+          ),
+          name: 'study_year_expanded',
+          onCreate: (key) async {
+            await tester.tap(
+              find.descendant(
+                of: find.byKey(key),
+                matching: find.text('Service 1'),
+              ),
+            );
 
-      await screenMatchesGolden(tester, 'services_hierarchy_list/collapsed');
+            await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Service 1'));
-      await screenMatchesGolden(
-        tester,
-        'services_hierarchy_list/service_1_expanded',
-      );
+            await tester.tap(
+              find.descendant(
+                of: find.byKey(key),
+                matching: find.text('First Primary'),
+              ),
+            );
+          },
+        )
+        ..addScenario(
+          widget: ServicesHierarchyList(
+            listController: viewableObjectListController,
+          ),
+          name: 'service_2_expanded',
+          onCreate: (key) async {
+            await tester.tap(
+              find.descendant(
+                of: find.byKey(key),
+                matching: find.text('Service 1'),
+              ),
+            );
 
-      await tester.tap(find.text('First Primary'));
-      await screenMatchesGolden(
-        tester,
-        'services_hierarchy_list/study_year_expanded',
-      );
+            await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Service 2'));
-      await screenMatchesGolden(
-        tester,
-        'services_hierarchy_list/service_2_expanded',
-      );
+            await tester.tap(
+              find.descendant(
+                of: find.byKey(key),
+                matching: find.text('First Primary'),
+              ),
+            );
+
+            await tester.pumpAndSettle();
+
+            await tester.tap(
+              find.descendant(
+                of: find.byKey(key),
+                matching: find.text('Service 2'),
+              ),
+            );
+          },
+        );
+
+      await tester.pumpDeviceBuilder(deviceBuilder);
+
+      await screenMatchesGolden(tester, 'services_hierarchy_list');
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
