@@ -295,7 +295,7 @@ final launcherServiceProvider = Provider<LauncherService>(
 );
 
 final locationParsingServiceProvider = Provider<LocationParsingService>(
-  (ref) => LocationParsingService(),
+  (ref) => const LocationParsingService(),
 );
 
 final packageInfoPluginProvider = Provider<PackageInfo>(
