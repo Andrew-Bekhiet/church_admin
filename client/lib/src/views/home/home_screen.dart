@@ -134,15 +134,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _listenToLocalAuth() {
+    final overlay = Overlay.of(context);
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) =>
-          !_authEntry.mounted ? Overlay.of(context).insert(_authEntry) : null,
+      (_) => !_authEntry.mounted ? overlay.insert(_authEntry) : null,
     );
 
     _localAuthListener = LocalAuthService.I.refreshUIStream.listen(
       (_) {
         if (LocalAuthService.I.shouldAuthenticate && !_authEntry.mounted) {
-          Overlay.of(context).insert(_authEntry);
+          overlay.insert(_authEntry);
         } else if (!LocalAuthService.I.shouldAuthenticate) {
           _authEntry.remove();
         }
