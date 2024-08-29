@@ -92,12 +92,12 @@ void main() {
                       MaterialPageRoute(
                         builder: (context) => Form(
                           canPop: false,
-                          onPopInvoked: (didPop) async {
+                          onPopInvokedWithResult: (didPop, result) async {
                             if (didPop) return;
 
                             final navigator = Navigator.of(context);
                             if (await unit.confirmExit(context)) {
-                              navigator.pop();
+                              navigator.pop(result);
                             }
                           },
                           key: unit.formKey,
@@ -136,12 +136,12 @@ void main() {
                       MaterialPageRoute(
                         builder: (context) => Form(
                           canPop: false,
-                          onPopInvoked: (didPop) async {
+                          onPopInvokedWithResult: (didPop, result) async {
                             if (didPop) return;
 
                             final navigator = Navigator.of(context);
                             if (await unit.confirmExit(context)) {
-                              navigator.pop();
+                              navigator.pop(result);
                             }
                           },
                           key: unit.formKey,

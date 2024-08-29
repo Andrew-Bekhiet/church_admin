@@ -63,11 +63,11 @@ class _EditObjectDataState<T extends ViewableWithID>
         body: Form(
           key: _controller.formKey,
           canPop: false,
-          onPopInvoked: (didPop) async {
+          onPopInvokedWithResult: (didPop, result) async {
             if (didPop) return;
 
             final navigator = Navigator.of(context);
-            if (await _controller.confirmExit(context)) navigator.pop();
+            if (await _controller.confirmExit(context)) navigator.pop(result);
           },
           child: CustomScrollView(
             slivers: [
