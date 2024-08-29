@@ -58,111 +58,41 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             subtitle: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ListTile(
-                  title: const Text('المناطق'),
-                  subtitle: stagingMapOptions.selectedAreas.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedAreas
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectAreas,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'المناطق',
+                  selected: stagingMapOptions.selectedAreas,
+                  onSelect: _selectAreas,
                 ),
-                ListTile(
-                  title: const Text('الشوارع'),
-                  subtitle: stagingMapOptions.selectedStreets.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedStreets
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectStreets,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'الشوارع',
+                  selected: stagingMapOptions.selectedStreets,
+                  onSelect: _selectStreets,
                 ),
-                ListTile(
-                  title: const Text('العائلات'),
-                  subtitle: stagingMapOptions.selectedFamilies.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedFamilies
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectFamilies,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'العائلات',
+                  selected: stagingMapOptions.selectedFamilies,
+                  onSelect: _selectFamilies,
                 ),
-                ListTile(
-                  title: const Text('المتاجر'),
-                  subtitle: stagingMapOptions.selectedStores.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedStores
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectStores,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'المتاجر',
+                  selected: stagingMapOptions.selectedStores,
+                  onSelect: _selectStores,
                 ),
                 const Divider(thickness: 1),
-                ListTile(
-                  title: const Text('الخدمات'),
-                  subtitle: stagingMapOptions.selectedServices.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedServices
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectServices,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'الخدمات',
+                  selected: stagingMapOptions.selectedServices,
+                  onSelect: _selectServices,
                 ),
-                ListTile(
-                  title: const Text('الفصول'),
-                  subtitle: stagingMapOptions.selectedClasses.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedClasses
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectClasses,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'الفصول',
+                  selected: stagingMapOptions.selectedClasses,
+                  onSelect: _selectClasses,
                 ),
-                ListTile(
-                  title: const Text('المجموعات'),
-                  subtitle: stagingMapOptions.selectedGroups.isEmpty
-                      ? const Text('الكل')
-                      : Text(
-                          stagingMapOptions.selectedGroups
-                              .take(10)
-                              .map((e) => e.name)
-                              .join(','),
-                        ),
-                  trailing: TextButton(
-                    onPressed: _selectGroups,
-                    child: const Text('اختيار'),
-                  ),
+                _DataSelectionTile(
+                  title: 'المجموعات',
+                  selected: stagingMapOptions.selectedGroups,
+                  onSelect: _selectGroups,
                 ),
                 const Divider(thickness: 1),
               ],
@@ -180,7 +110,18 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                     (e) => CheckboxListTile(
                       title: Text(e.label),
                       value: stagingMapOptions.layers.contains(e),
-                      onChanged: _onChanged(e),
+                      onChanged: stagingMapOptions.layers.length == 1 &&
+                              stagingMapOptions.layers.single == e
+                          ? null
+                          : (v) => setState(
+                                () => stagingMapOptions =
+                                    stagingMapOptions.copyWith(
+                                  layers: v ?? false
+                                      ? stagingMapOptions.layers.union({e})
+                                      : stagingMapOptions.layers
+                                          .difference({e}),
+                                ),
+                              ),
                     ),
                   )
                   .toList(),
@@ -296,19 +237,6 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     }
   }
 
-  void Function(bool?)? _onChanged(GeoMapLayer value) =>
-      stagingMapOptions.layers.length == 1 &&
-              stagingMapOptions.layers.single == value
-          ? null
-          : (v) => setState(
-                () => stagingMapOptions = stagingMapOptions.copyWith(
-                  layers: v ?? false
-                      ? stagingMapOptions.layers.union({value})
-                      : stagingMapOptions.layers
-                          .difference(<GeoMapLayer>{value}),
-                ),
-              );
-
   Future<List<T>?> _select<T extends ViewableWithID>({
     required DelegatingPaginatableStream<T> stream,
     required List<T> selected,
@@ -370,5 +298,31 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     });
 
     return null;
+  }
+}
+
+class _DataSelectionTile extends StatelessWidget {
+  const _DataSelectionTile({
+    required this.title,
+    required this.selected,
+    required this.onSelect,
+  });
+
+  final String title;
+  final Set<ViewableWithID> selected;
+  final Future<void> Function() onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      subtitle: selected.isEmpty
+          ? const Text('الكل')
+          : Text(selected.take(10).map((e) => e.name).join(',')),
+      trailing: TextButton(
+        onPressed: onSelect,
+        child: const Text('اختيار'),
+      ),
+    );
   }
 }
