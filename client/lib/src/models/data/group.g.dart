@@ -27,12 +27,6 @@ final _$GroupFields = <String, FieldMetadata>{
     label: 'أخر تحديث للصورة',
     operators: Operator.comparitive.union({Operator.isNull}),
   ),
-  'blurhash': FieldMetadata<String>(
-    name: 'blurhash',
-    label: 'blurhash',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
   'service': FieldMetadata<Service>(
     name: 'service',
     label: 'الخدمة',
