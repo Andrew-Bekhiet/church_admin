@@ -175,34 +175,15 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             ),
             subtitle: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                CheckboxListTile(
-                  title: const Text('المناطق'),
-                  value: stagingMapOptions.layers.contains(GeoMapLayer.areas),
-                  onChanged: _onChanged(GeoMapLayer.areas),
-                ),
-                CheckboxListTile(
-                  title: const Text('الشوارع'),
-                  value: stagingMapOptions.layers.contains(GeoMapLayer.streets),
-                  onChanged: _onChanged(GeoMapLayer.streets),
-                ),
-                CheckboxListTile(
-                  title: const Text('العائلات'),
-                  value:
-                      stagingMapOptions.layers.contains(GeoMapLayer.families),
-                  onChanged: _onChanged(GeoMapLayer.families),
-                ),
-                CheckboxListTile(
-                  title: const Text('المتاجر'),
-                  value: stagingMapOptions.layers.contains(GeoMapLayer.stores),
-                  onChanged: _onChanged(GeoMapLayer.stores),
-                ),
-                CheckboxListTile(
-                  title: const Text('المخدومين'),
-                  value: stagingMapOptions.layers.contains(GeoMapLayer.persons),
-                  onChanged: _onChanged(GeoMapLayer.persons),
-                ),
-              ],
+              children: GeoMapLayer.values
+                  .map(
+                    (e) => CheckboxListTile(
+                      title: Text(e.label),
+                      value: stagingMapOptions.layers.contains(e),
+                      onChanged: _onChanged(e),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         ],
