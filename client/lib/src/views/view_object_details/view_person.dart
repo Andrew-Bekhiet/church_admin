@@ -742,7 +742,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
           (p) {
             final groupedObjects = <ViewableWithIDAndImage>[
               ...p?.classes ?? [],
-              ...p?.groups ?? []
+              ...p?.groups ?? [],
             ].groupListsBy(
               (o) => o is Class ? o.service! : (o as Group).service!,
             );
