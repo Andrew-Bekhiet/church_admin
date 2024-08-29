@@ -294,6 +294,10 @@ final launcherServiceProvider = Provider<LauncherService>(
   (ref) => LauncherService(),
 );
 
+final locationParsingServiceProvider = Provider<LocationParsingService>(
+  (ref) => LocationParsingService(),
+);
+
 final packageInfoPluginProvider = Provider<PackageInfo>(
   (ref) => packageInfoPluginInstance,
 );

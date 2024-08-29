@@ -120,8 +120,23 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ),
       ),
-      floatingActionButton: widget.showSetToCurrentLocation
-          ? StreamBuilder<Position?>(
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton.small(
+            onPressed: () async {
+              final location = await _getLocationFromGMapsLinkWithProgress();
+
+              if (location == null) return;
+
+              resultObject.value =
+                  widget.copyWithNewLocation(resultObject.value, location);
+            },
+            child: const Icon(Symbols.link),
+          ),
+          if (widget.showSetToCurrentLocation) const SizedBox(height: 10),
+          if (widget.showSetToCurrentLocation)
+            StreamBuilder<Position?>(
               stream: _userLocationSubject,
               builder: (context, locationSnapshot) {
                 if (locationSnapshot.hasData) {
@@ -141,9 +156,86 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
                 return const SizedBox();
               },
-            )
-          : null,
+            ),
+        ],
+      ),
     );
+  }
+
+  Future<Point?> _getLocationFromGMapsLinkWithProgress() async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    final controller = TextEditingController();
+
+    final result = await showDialog<String?>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('تحديد الموقع من لينك Google Maps'),
+        content: TextField(
+          autofocus: true,
+          autofillHints: const [AutofillHints.url],
+          textInputAction: TextInputAction.done,
+          controller: controller,
+          onSubmitted: Navigator.of(context).pop,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: const Text('تم'),
+          ),
+        ],
+      ),
+    );
+
+    if (result == null) return null;
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            Expanded(child: Text('جار تحميل الموقع')),
+            CircularProgressIndicator(color: Colors.white),
+          ],
+        ),
+      ),
+    );
+
+    final locationResult = Uri.tryParse(result) != null
+        ? await LocationParsingService.I
+            .maybeParseLocationUri(Uri.parse(result))
+        : null;
+
+    scaffoldMessenger.hideCurrentSnackBar();
+
+    if (locationResult == null) {
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              Expanded(
+                child: Text('لم يتم العثور على الموقع'),
+              ),
+              Icon(Symbols.error, color: Colors.red),
+            ],
+          ),
+        ),
+      );
+    } else {
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              Expanded(
+                child: Text('تم العثور على الموقع'),
+              ),
+              Icon(Symbols.check, color: Colors.green),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return locationResult;
   }
 
   @override
