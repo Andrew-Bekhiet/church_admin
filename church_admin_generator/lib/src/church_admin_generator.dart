@@ -112,8 +112,9 @@ class ChurchAdminGenerator extends GeneratorForAnnotation<TypeMetadata> {
     bool isList = false,
   }) {
     final typeName = type
-        .getDisplayString(withNullability: false)
-        .replaceFirst(RegExp('^History'), '');
+        .getDisplayString()
+        .replaceFirst(RegExp('^History'), '')
+        .replaceAll('?', '');
 
     final fieldBuffer = StringBuffer()
       ..write("'")
@@ -163,7 +164,7 @@ class ChurchAdminGenerator extends GeneratorForAnnotation<TypeMetadata> {
   }
 
   String? getOperatorsStringForType(DartType type, String fieldName) {
-    final typeName = type.getDisplayString(withNullability: false);
+    final typeName = type.getDisplayString().replaceAll('?', '');
 
     final operators = <String>[];
 
