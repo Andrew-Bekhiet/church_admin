@@ -10,7 +10,7 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['validity'])
+@TypeMetadata(ignoreFields: ['validity', 'blurhash'])
 class Group extends ViewableWithIDAndImage
     with _$Group
     implements SerializableExtra, AttendanceAnalyzable {
