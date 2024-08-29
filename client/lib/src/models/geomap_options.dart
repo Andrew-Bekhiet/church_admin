@@ -13,22 +13,25 @@ class GeomapOptions with _$GeomapOptions {
       GeoMapLayer.families,
       GeoMapLayer.persons,
     })
-        Set<GeoMapLayer> layers,
-    @Default({})
-        Set<Area> selectedAreas,
-    @Default({})
-        Set<Street> selectedStreets,
-    @Default({})
-        Set<Family> selectedFamilies,
-    @Default({})
-        Set<Store> selectedStores,
-    @Default({})
-        Set<Service> selectedServices,
-    @Default({})
-        Set<Class> selectedClasses,
-    @Default({})
-        Set<Group> selectedGroups,
+    Set<GeoMapLayer> layers,
+    @Default({}) Set<Area> selectedAreas,
+    @Default({}) Set<Street> selectedStreets,
+    @Default({}) Set<Family> selectedFamilies,
+    @Default({}) Set<Store> selectedStores,
+    @Default({}) Set<Service> selectedServices,
+    @Default({}) Set<Class> selectedClasses,
+    @Default({}) Set<Group> selectedGroups,
   }) = _GeoMapOptions;
 }
 
-enum GeoMapLayer { areas, streets, families, stores, persons }
+enum GeoMapLayer {
+  areas('المناطق'),
+  streets('الشوارع'),
+  families('العائلات'),
+  stores('المتاجر'),
+  persons('المخدومين');
+
+  const GeoMapLayer(this.label);
+
+  final String label;
+}
