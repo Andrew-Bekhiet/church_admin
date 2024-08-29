@@ -13,6 +13,7 @@ export 'services/image_url_cache_service.dart';
 export 'services/initialization.dart';
 export 'services/launcher_service.dart';
 export 'services/local_auth_service.dart';
+export 'services/location_parsing_service.dart';
 export 'services/logging_service.dart';
 export 'services/notifications/notifications_service.dart';
 export 'services/notifications/notifications_service_callbacks.dart';
