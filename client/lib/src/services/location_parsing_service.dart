@@ -7,6 +7,8 @@ class LocationParsingService {
   static LocationParsingService get I =>
       locationParsingServiceProvider.read(globalProviderContainer);
 
+  const LocationParsingService();
+
   Future<Point?> maybeParseLocationUri(Uri uri) async {
     try {
       switch (uri) {
@@ -42,7 +44,8 @@ class LocationParsingService {
 
           return Point(double.parse(lat), double.parse(lng));
 
-        case Uri(scheme: 'https', host: 'maps.app.goo.gl' || 'goo.gl'):
+        case Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
+              Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]):
           Uri? redirectLocation;
 
           try {
