@@ -3,10 +3,111 @@
     {
       "path": "."
     },
-    {
-      "path": "../church_admin_db"
-    }
+    { "name": "client", "path": "./client" },
+    { "name": "server", "path": "./server" }
   ],
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "church_admin",
+        "request": "launch",
+        "type": "dart",
+        "cwd": "${workspaceFolder}/client/",
+        "args": ["--device-user", "0"]
+      },
+      {
+        "name": "church_admin (profile mode)",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "profile",
+        "cwd": "${workspaceFolder}/client/",
+        "args": ["--device-user", "0"]
+      },
+      {
+        "name": "church_admin (release mode)",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "release",
+        "cwd": "${workspaceFolder}/client/",
+        "args": ["--device-user", "0"]
+      },
+      {
+        "name": "church_admin (web debug mode)",
+        "request": "launch",
+        "type": "dart",
+        "cwd": "${workspaceFolder}/client/",
+        "args": ["--web-port", "5083"]
+      },
+      {
+        "name": "Debug Build Generator",
+        "request": "launch",
+        "program": ".dart_tool/build/entrypoint/build.dart",
+        "type": "dart",
+        "args": ["build"],
+        "cwd": "${workspaceFolder}/client/"
+      },
+      {
+        "name": "Golden",
+        "request": "launch",
+        "type": "dart",
+        "codeLens": {
+          "for": ["run-test", "run-test-file"]
+        },
+        "args": ["--update-goldens"],
+        "cwd": "${workspaceFolder}/client/"
+      },
+      {
+        "name": "Debug /server/functions/src/firestore_migration.ts",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/server/functions/src/firestore_migration.ts",
+        "cwd": "${workspaceFolder}/server/functions/src",
+        "runtimeExecutable": "node",
+        // "runtimeArgs": ["--nolazy", "-r", "source-map-support/register"],
+        // "console": "integratedTerminal",
+        // "internalConsoleOptions": "neverOpen",
+        "skipFiles": ["<node_internals>/**"]
+      }
+    ],
+    "compounds": []
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "label": "Flutter test coverage",
+        "type": "shell",
+        "options": {
+          "cwd": "./client/"
+        },
+        "command": "flutter",
+        "args": [
+          "test;",
+          "flutter",
+          "pub",
+          "global",
+          "run",
+          "remove_from_coverage:remove_from_coverage",
+          "-f",
+          "coverage/lcov.info",
+          "-r",
+          "'.g.dart$'",
+          "-r",
+          "'.graphql.dart$'",
+          "-r",
+          "'.gql.dart$'",
+          "-r",
+          "'.freezed.dart$'"
+        ],
+        "problemMatcher": []
+      }
+    ]
+  },
   "settings": {
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#00c9b6",
@@ -26,7 +127,8 @@
       "titleBar.activeForeground": "#e7e7e7",
       "titleBar.inactiveBackground": "#00968899",
       "titleBar.inactiveForeground": "#e7e7e799",
-      "commandCenter.border": "#e7e7e799"
+      "commandCenter.border": "#e7e7e799",
+      "elixirLS.projectDir": "./backend-beta"
     },
     "peacock.color": "009688",
     "autoHide.autoHideSideBar": false,
