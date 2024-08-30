@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for church-admin on 2023-09-08T14:44:48+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "church-admin"
+primary_region = "cdg"
+
+[build]
+
+[mounts]
+  source = "tailscale_data"
+  destination = "/var/lib/tailscale"
+
+[http_service]
+  internal_port = 443
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 0
+  [concurrency]
+    hard_limit = 400
+    soft_limit = 300
+
+
