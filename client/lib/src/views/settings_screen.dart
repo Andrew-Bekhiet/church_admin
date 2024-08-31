@@ -22,10 +22,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Person.queryableType,
   ];
 
+  final _formKey = GlobalKey<FormState>();
+
   final userSettingsService = UserSettingsService.I;
 
   late bool? darkTheme = userSettingsService.darkTheme;
   late bool greatFeastTheme = userSettingsService.greatFeastTheme;
+
+  bool _needsSaving = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,115 +37,177 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('الإعدادات'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ExpansionTile(
-                title: const Text('المظهر'),
-                subtitle: const Text('المظهر العام للبرنامج'),
-                expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      ChoiceChip(
-                        label: const Text('المظهر الداكن'),
-                        // ignore: use_if_null_to_convert_nulls_to_bools
-                        selected: darkTheme == true,
-                        onSelected: _onDarkThemeChanged(true),
-                      ),
-                      ChoiceChip(
-                        label: const Text('المظهر الفاتح'),
-                        selected: darkTheme == false,
-                        onSelected: _onDarkThemeChanged(false),
-                      ),
-                      ChoiceChip(
-                        label: const Text('حسب النظام'),
-                        selected: darkTheme == null,
-                        onSelected: _onDarkThemeChanged(null),
-                      ),
-                    ],
-                  ),
-                  SwitchListTile(
-                    value: greatFeastTheme,
-                    onChanged: (v) => setState(() => greatFeastTheme = v),
-                    title: const Text(
-                      'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
+      body: Form(
+        key: _formKey,
+        onChanged: () => setState(() => _needsSaving = true),
+        canPop: !_needsSaving,
+        onPopInvokedWithResult: _onPopWithResult,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ExpansionTile(
+                  title: const Text('المظهر'),
+                  subtitle: const Text('المظهر العام للبرنامج'),
+                  expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        ChoiceChip(
+                          label: const Text('المظهر الداكن'),
+                          // ignore: use_if_null_to_convert_nulls_to_bools
+                          selected: darkTheme == true,
+                          onSelected: _onDarkThemeChanged(true),
+                        ),
+                        ChoiceChip(
+                          label: const Text('المظهر الفاتح'),
+                          selected: darkTheme == false,
+                          onSelected: _onDarkThemeChanged(false),
+                        ),
+                        ChoiceChip(
+                          label: const Text('حسب النظام'),
+                          selected: darkTheme == null,
+                          onSelected: _onDarkThemeChanged(null),
+                        ),
+                      ],
                     ),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () async {
-                      await userSettingsService.setDarkTheme(darkTheme);
-                      await userSettingsService
-                          .setGreatFeastTheme(greatFeastTheme);
-
-                      ThemingService.I.switchTheme(
-                        darkTheme ??
-                            PlatformDispatcher.instance.platformBrightness ==
-                                Brightness.dark,
-                      );
-                    },
-                    icon: const Icon(Symbols.done),
-                    label: const Text('تغيير'),
-                  ),
-                ],
-              ),
-              ExpansionTile(
-                title: const Text('مظهر البيانات'),
-                children: [
-                  ..._secondLineTypes.map(
-                    (qtype) => Container(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: DropdownButtonFormField<String?>(
-                        value: userSettingsService.getSecondLineFor(qtype.type),
-                        items: [
-                          const DropdownMenuItem(
-                            child: Text(''),
-                          ),
-                          ...qtype.fieldsMetadata.values
-                              .where(
-                                (element) =>
-                                    element.name != 'id' &&
-                                    element.name != 'color',
-                              )
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e.name,
-                                  child: Text(e.label),
+                    SwitchListTile(
+                      value: greatFeastTheme,
+                      onChanged: (v) => setState(() {
+                        greatFeastTheme = v;
+                        _needsSaving = true;
+                      }),
+                      title: const Text(
+                        'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: _applyThemeChange,
+                      icon: const Icon(Symbols.done),
+                      label: const Text('تغيير'),
+                    ),
+                  ],
+                ),
+                ExpansionTile(
+                  title: const Text('مظهر البيانات'),
+                  children: [
+                    ..._secondLineTypes.map(
+                      (qtype) => Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: DropdownButtonFormField<String?>(
+                          value:
+                              userSettingsService.getSecondLineFor(qtype.type),
+                          items: [
+                            const DropdownMenuItem(
+                              child: Text(''),
+                            ),
+                            ...qtype.fieldsMetadata.values
+                                .where(
+                                  (element) =>
+                                      element.name != 'id' &&
+                                      element.name != 'color',
+                                )
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e.name,
+                                    child: Text(e.label),
+                                  ),
                                 ),
-                              ),
-                        ],
-                        onChanged: (value) {},
-                        onSaved: (value) {
-                          userSettingsService.setSecondLineFor(
-                            type: qtype.type,
-                            value: value,
-                          );
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'السطر الثاني لل' +
-                              qtype.label.replaceFirst(RegExp('^ال'), 'ل'),
+                          ],
+                          onChanged: (_) {},
+                          onSaved: (value) {
+                            userSettingsService.setSecondLineFor(
+                              type: qtype.type,
+                              value: value,
+                            );
+                            _needsSaving = false;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'السطر الثاني لل' +
+                                qtype.label.replaceFirst(RegExp('^ال'), 'ل'),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const ExpansionTile(
-                title: Text('الاشعارات'),
-                subtitle: Text('اعدادات الاشعارات'),
-                // TODO: Implement notifications settings
-              ),
-            ],
+                  ],
+                ),
+                const ExpansionTile(
+                  title: Text('الاشعارات'),
+                  subtitle: Text('اعدادات الاشعارات'),
+                  // TODO: Implement notifications settings
+                ),
+              ],
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'حفظ',
+        onPressed: _save,
+        child: const Icon(Symbols.save),
       ),
     );
   }
 
-  void Function(bool _) _onDarkThemeChanged(bool? value) =>
-      (_) => setState(() => darkTheme = value);
+  void Function(bool _) _onDarkThemeChanged(bool? value) => (_) => setState(() {
+        darkTheme = value;
+        _needsSaving = true;
+      });
+
+  Future<void> _applyThemeChange() async {
+    await userSettingsService.setDarkTheme(darkTheme);
+    await userSettingsService.setGreatFeastTheme(greatFeastTheme);
+
+    ThemingService.I.switchTheme(
+      darkTheme ??
+          PlatformDispatcher.instance.platformBrightness == Brightness.dark,
+    );
+  }
+
+  Future<void> _save() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    _formKey.currentState!.save();
+
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    await _applyThemeChange();
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(content: Text('تم حفظ التغييرات')),
+    );
+  }
+
+  Future<void> _onPopWithResult(bool didPop, Object? result) async {
+    if (didPop) return;
+
+    final navigator = Navigator.of(context);
+
+    if (_needsSaving) {
+      final confirmExit = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('هل أنت متأكد من الخروج؟'),
+          content: const Text('لم يتم حفظ التغييرات الجديدة'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('لا'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('نعم'),
+            ),
+          ],
+        ),
+      );
+
+      if (!(confirmExit ?? false)) return;
+    }
+
+    navigator.pop(result);
+  }
 }
