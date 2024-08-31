@@ -87,7 +87,8 @@
         },
         "command": "flutter",
         "args": [
-          "test;",
+          "test",
+          "--coverage;",
           "flutter",
           "pub",
           "global",
