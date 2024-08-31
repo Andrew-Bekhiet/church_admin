@@ -53,8 +53,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   subtitle: const Text('المظهر العام للبرنامج'),
                   expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Wrap(
+                      alignment: WrapAlignment.spaceAround,
                       children: <Widget>[
                         ChoiceChip(
                           label: const Text('المظهر الداكن'),
@@ -108,6 +108,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 .where(
                                   (element) =>
                                       element.name != 'id' &&
+                                      element.name != 'name' &&
                                       element.name != 'color',
                                 )
                                 .map(
