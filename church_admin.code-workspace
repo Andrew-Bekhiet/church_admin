@@ -16,7 +16,7 @@
         "name": "church_admin",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder}/client/",
+        "cwd": "${workspaceFolder:client}",
         "args": ["--device-user", "0"]
       },
       {
@@ -24,7 +24,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "cwd": "${workspaceFolder}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--device-user", "0"]
       },
       {
@@ -32,14 +32,14 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "cwd": "${workspaceFolder}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--device-user", "0"]
       },
       {
         "name": "church_admin (web debug mode)",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--web-port", "5083"]
       },
       {
@@ -48,7 +48,7 @@
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
         "args": ["build"],
-        "cwd": "${workspaceFolder}/client/"
+        "cwd": "${workspaceFolder:client}/"
       },
       {
         "name": "Golden",
@@ -58,14 +58,14 @@
           "for": ["run-test", "run-test-file"]
         },
         "args": ["--update-goldens"],
-        "cwd": "${workspaceFolder}/client/"
+        "cwd": "${workspaceFolder:client}/"
       },
       {
         "name": "Debug /server/functions/src/firestore_migration.ts",
         "type": "node",
         "request": "launch",
-        "program": "${workspaceFolder}/server/functions/src/firestore_migration.ts",
-        "cwd": "${workspaceFolder}/server/functions/src",
+        "program": "${workspaceFolder:server}/functions/src/firestore_migration.ts",
+        "cwd": "${workspaceFolder:server}/functions/src",
         "runtimeExecutable": "node",
         // "runtimeArgs": ["--nolazy", "-r", "source-map-support/register"],
         // "console": "integratedTerminal",
@@ -86,7 +86,7 @@
         "label": "Flutter test coverage",
         "type": "shell",
         "options": {
-          "cwd": "./client/"
+          "cwd": "${workspaceFolder:client}"
         },
         "command": "flutter",
         "args": [
