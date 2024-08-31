@@ -23,7 +23,7 @@ void main() {
                 canHide: true,
               ),
             ),
-            wrapper: materialWithCATheme(),
+            wrapper: materialAppWithThemeAndLocale(),
           );
 
           expect(find.byType(TextField), findsOneWidget);
