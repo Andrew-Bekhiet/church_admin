@@ -120,5 +120,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
     await _connectivityListener.cancel();
     await _notificationsListener.cancel();
+
+    globalProviderContainer.dispose();
   }
 }

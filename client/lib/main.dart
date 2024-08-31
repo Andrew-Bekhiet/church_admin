@@ -11,7 +11,8 @@ Future<void> main() async {
   await InitializationService.I.initialize();
 
   runApp(
-    ProviderScope(
+    UncontrolledProviderScope(
+      container: globalProviderContainer,
       child: SentryScreenshotWidget(
         child: SentryUserInteractionWidget(
           child: const ChurchAdminApp(),
