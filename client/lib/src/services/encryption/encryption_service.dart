@@ -53,8 +53,9 @@ abstract class EncryptionService {
       Argon2Parameters.ARGON2_id,
       saltHash,
       desiredKeyLength: 32,
+      iterations: 4,
       lanes: 4,
-      memory: 64,
+      memory: 128,
       additional: await additionalDeviceInfo(),
     );
 
