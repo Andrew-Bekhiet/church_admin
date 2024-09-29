@@ -349,7 +349,7 @@ final themingServiceProvider = Provider<ThemingService>(
 final fmtcProvider = Provider((_) => FMTC.instance);
 
 final shareServiceProvider = Provider<ShareService>(
-  (ref) => ShareService(),
+  (ref) => const ShareService(),
 );
 
 final authAdapterProvider = Provider<AuthAdapter>(
