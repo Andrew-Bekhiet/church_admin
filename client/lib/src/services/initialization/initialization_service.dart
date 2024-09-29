@@ -38,8 +38,6 @@ class InitializationService {
       await step.initialize();
     }
 
-    await AuthService.I.userStream.first;
-
     return _initializationCompleter.complete();
   }
 }

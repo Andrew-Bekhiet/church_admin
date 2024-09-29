@@ -10,13 +10,13 @@ Future<void> main() async {
 
   await InitializationService.I.initialize();
 
+  await AuthService.I.userStream.first;
+
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
-      child: SentryScreenshotWidget(
-        child: SentryUserInteractionWidget(
-          child: const ChurchAdminApp(),
-        ),
+      child: const SentryWidget(
+        child: ChurchAdminApp(),
       ),
     ),
   );
