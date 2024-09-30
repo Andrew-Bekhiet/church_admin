@@ -9,9 +9,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
-import 'data_geomap.dart';
-import 'edit_geomap_options_widget.dart';
-import 'snapping_sheet.dart';
 
 class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   final T initialObject;

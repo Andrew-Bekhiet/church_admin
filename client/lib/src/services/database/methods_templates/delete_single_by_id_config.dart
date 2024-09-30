@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
-import 'package:uuid/uuid.dart';
 
 @immutable
 class DeleteSingleByIdConfig<T> extends DAOMethodTemplate<T?> {

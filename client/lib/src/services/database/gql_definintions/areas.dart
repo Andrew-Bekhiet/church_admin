@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
-import 'package:uuid/uuid.dart';
 
 import 'areas/__generated__/mutations.gql.dart';
 import 'areas/helpers.dart';

@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:church_admin/church_admin.dart' as ca show Polygon;
 import 'package:flutter/material.dart';
 
-import 'edit_object_points_map.dart';
 
 class EditAreaPolygonMap extends StatelessWidget {
   final Area initialArea;

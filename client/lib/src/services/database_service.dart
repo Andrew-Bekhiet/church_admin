@@ -1,8 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'database/advanced_query_parser.dart';
-import 'database/gql_definintions.dart';
-import 'database/gql_parser.dart';
 
 export '../../graphql/__generated__/schema.graphql.dart';
 export 'database/dao_base.dart';

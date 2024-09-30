@@ -6,10 +6,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 import 'package:snapping_sheet_2/src/sheet_position_data.dart';
 
-import 'data_geomap.dart';
-import 'edit_geomap_options_widget.dart';
-import 'fab.dart';
-import 'snapping_sheet.dart';
 
 class ViewGeodataMap extends StatefulWidget {
   final Person? initialPerson;

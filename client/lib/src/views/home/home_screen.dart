@@ -1,12 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/views/home/home_appbar.dart';
-import 'package:church_admin/src/views/home/home_body.dart';
-import 'package:church_admin/src/views/home/home_bottom_navbar.dart';
-import 'package:church_admin/src/views/home/home_drawer.dart';
-import 'package:church_admin/src/views/home/home_fab.dart';
-import 'package:church_admin/src/views/home/home_mode_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

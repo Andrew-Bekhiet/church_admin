@@ -3,7 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import 'data_geomap/edit_object_points_map.dart';
 
 class ConditionsBuilder<T extends Object> extends StatelessWidget {
   final QueryableType<T> queryableType;

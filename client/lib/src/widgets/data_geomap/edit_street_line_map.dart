@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 
-import 'edit_object_points_map.dart';
 
 class EditStreetLineMap extends StatelessWidget {
   final Street initialStreet;

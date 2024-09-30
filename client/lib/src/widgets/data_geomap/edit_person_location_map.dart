@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart' hide Polygon;
-import 'package:church_admin/src/widgets/data_geomap/edit_object_location_map.dart';
 import 'package:flutter/material.dart';
 
 class EditPersonLocationMap extends StatelessWidget {

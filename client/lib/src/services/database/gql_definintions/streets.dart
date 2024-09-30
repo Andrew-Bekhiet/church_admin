@@ -1,9 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/streets/helpers.dart';
-import 'package:uuid/uuid.dart';
 
-import 'streets/__generated__/mutations.gql.dart';
-import 'streets/__generated__/subscriptions.gql.dart';
 
 export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';

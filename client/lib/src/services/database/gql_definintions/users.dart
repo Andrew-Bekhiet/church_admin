@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
-import 'package:uuid/uuid.dart';
 
 import 'users/__generated__/queries.gql.dart';
 import 'users/__generated__/subscriptions.gql.dart';

@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/gql_definintions.dart';
 
 import '../helpers.dart';
 

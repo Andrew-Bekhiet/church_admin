@@ -1,6 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/scalars.dart';
-import 'package:church_admin/graphql/scalars/time.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
