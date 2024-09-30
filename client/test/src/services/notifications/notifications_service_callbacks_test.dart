@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/advanced_query_parser.dart';
-import 'package:church_admin/src/services/notifications/notifications_storage.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;

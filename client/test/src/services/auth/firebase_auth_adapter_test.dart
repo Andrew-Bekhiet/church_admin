@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:firebase_auth/firebase_auth.dart'
     hide MultiFactorInfo, MultiFactorSession, User;
 import 'package:firebase_auth/firebase_auth.dart' as auth

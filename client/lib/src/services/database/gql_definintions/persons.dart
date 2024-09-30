@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
-import 'package:uuid/uuid.dart';
 
 import 'persons/__generated__/mutations.gql.dart';
 import 'persons/__generated__/queries.gql.dart';

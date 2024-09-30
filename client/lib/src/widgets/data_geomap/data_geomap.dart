@@ -10,8 +10,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'object_marker_widget.dart';
-import 'utils.dart';
 
 part 'areas_layer.dart';
 part 'locations_layer.dart';

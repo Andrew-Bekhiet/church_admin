@@ -1,7 +1,6 @@
 // ignore_for_file: discarded_futures, avoid_redundant_argument_values
 
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/services/database/gql_definintions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';

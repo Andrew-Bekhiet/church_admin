@@ -7,11 +7,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
-import 'data_geomap.dart';
-import 'edit_geomap_options_widget.dart';
-import 'object_marker_widget.dart';
-import 'snapping_sheet.dart';
-import 'utils.dart';
 
 class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
   final bool showSetToCurrentLocation;

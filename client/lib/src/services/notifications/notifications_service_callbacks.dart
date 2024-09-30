@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
 
-import 'notifications_storage.dart';
 
 class NotificationsServiceCallbacks {
   @pragma('vm:entry-point')

@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/graphql/scalars.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'person_state.freezed.dart';
