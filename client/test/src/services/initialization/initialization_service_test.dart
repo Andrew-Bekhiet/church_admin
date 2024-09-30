@@ -57,7 +57,7 @@ void main() {
           await unit.initialize();
           await unit.initialize();
 
-          verifyZeroInteractions(AuthService.I.userStream);
+          verifyNever(AuthService.I.userStream);
         },
       );
     },
