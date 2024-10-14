@@ -4,6 +4,7 @@ export 'fmtc/fmtc.dart';
 export 'graphql/links.dart';
 export 'graphql/scalars.dart';
 export 'src/controllers.dart';
+export 'src/features.dart';
 export 'src/models.dart';
 export 'src/providers.dart';
 export 'src/services.dart';

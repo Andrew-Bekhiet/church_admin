@@ -1,6 +1,5 @@
 export 'services/about_app_service.dart';
 export 'services/advanced_queries_metadata.dart';
-export 'services/auth.dart';
 export 'services/connectivity_service.dart';
 export 'services/contacts_service.dart';
 export 'services/current_platform_service.dart';

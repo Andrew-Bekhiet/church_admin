@@ -1,6 +1,7 @@
 // suggest good class name for this class that will be a part of AuthService
 import 'package:church_admin/church_admin.dart';
 
+
 class MultiFactorManager {
   final MultiFactorManagerAdapter _adapter;
   final AuthService _authService;
