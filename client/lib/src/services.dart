@@ -10,7 +10,6 @@ export 'services/encryption.dart';
 export 'services/functions_service.dart';
 export 'services/image_picker_service.dart';
 export 'services/image_url_cache_service.dart';
-export 'services/initialization.dart';
 export 'services/launcher_service.dart';
 export 'services/local_auth_service.dart';
 export 'services/location_parsing_service.dart';

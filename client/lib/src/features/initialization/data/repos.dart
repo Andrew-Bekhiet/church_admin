@@ -1,0 +1,11 @@
+export 'repos/android_alarm_manager_init.dart';
+export 'repos/device_info_init.dart';
+export 'repos/firebase_init.dart';
+export 'repos/flutter_local_notifications_init.dart';
+export 'repos/fmtc_init.dart';
+export 'repos/hive_init.dart';
+export 'repos/initializer.dart';
+export 'repos/intl_locale_messages_init.dart';
+export 'repos/package_info_init.dart';
+export 'repos/sentry_init.dart';
+export 'repos/web_navigation_init.dart';
