@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+import 'home_controller.dart';
+import 'home_mode.dart';
+
 class _HomeDrawerDestination {
   final Widget label;
   final Widget icon;
@@ -17,12 +20,10 @@ class _HomeDrawerDestination {
 }
 
 class HomeDrawer extends StatelessWidget {
-  final void Function(BuildContext, bool) onModeChanged;
-  final bool isSundaySchool;
+  final HomeController homeController;
 
   const HomeDrawer({
-    required this.onModeChanged,
-    required this.isSundaySchool,
+    required this.homeController,
     super.key,
   });
 
@@ -30,11 +31,18 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<_HomeDrawerDestination> destinations = [
       _HomeDrawerDestination(
-        label: Text(
-          isSundaySchool ? 'تبديل إلى الافتقاد' : 'تبديل إلى مدارس الأحد',
+        label: StreamBuilder<HomeMode>(
+          stream: homeController.modeStream,
+          builder: (context, modeSnapshot) {
+            return Text(
+              modeSnapshot.data == HomeMode.sundaySchool
+                  ? 'تبديل إلى الافتقاد'
+                  : 'تبديل إلى مدارس الأحد',
+            );
+          },
         ),
         icon: const Icon(Symbols.home),
-        onTap: () => onModeChanged(context, !isSundaySchool),
+        onTap: homeController.switchHomeMode,
       ),
       if (AuthService.I.currentUser!.canManageSomeUsers)
         _HomeDrawerDestination(

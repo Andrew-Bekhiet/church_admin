@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'home_mode.dart';
+
 class HomeModeSelector extends StatelessWidget {
-  final void Function(BuildContext, bool) onModeChanged;
+  final void Function(HomeMode) onModeChanged;
 
   const HomeModeSelector({required this.onModeChanged, super.key});
 
@@ -15,7 +17,7 @@ class HomeModeSelector extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           children: [
             InkWell(
-              onTap: () => onModeChanged(context, true),
+              onTap: () => onModeChanged(HomeMode.sundaySchool),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -32,7 +34,7 @@ class HomeModeSelector extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () => onModeChanged(context, false),
+              onTap: () => onModeChanged(HomeMode.churchData),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

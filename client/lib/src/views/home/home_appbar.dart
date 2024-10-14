@@ -4,19 +4,14 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'home_controller.dart';
+import 'home_mode.dart';
+
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Subject<String?> searchSubject;
-  final Subject<ViewableObjectListType?> servicesListTypeSubject;
-  final Stream<Type> bottomNavBarStream;
-  final bool isSundaySchool;
-  final void Function(BuildContext, bool) onModeChanged;
+  final HomeController homeController;
 
   const HomeAppBar({
-    required this.searchSubject,
-    required this.servicesListTypeSubject,
-    required this.bottomNavBarStream,
-    required this.isSundaySchool,
-    required this.onModeChanged,
+    required this.homeController,
     super.key,
   });
 
@@ -25,33 +20,34 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<(bool, ViewableObjectListType?)>(
-      stream: Rx.combineLatest2(
-        searchSubject.map((s) => s != null),
-        bottomNavBarStream.switchMap(
+    return StreamBuilder(
+      stream: Rx.combineLatest2<bool, ViewableObjectListType?,
+          ({bool isSearchActive, ViewableObjectListType? listType})>(
+        homeController.searchSubject.map((s) => s != null),
+        homeController.tabTypeSubject.switchMap(
           (t) => t == Service
-              ? servicesListTypeSubject.stream
+              ? homeController.servicesListTypeSubject.stream
               : Stream.value(null),
         ),
-        (a, b) => (a, b),
+        (a, b) => (isSearchActive: a, listType: b),
       ),
       builder: (context, snapshot) {
-        final bool isSearchActive = snapshot.data?.$1 ?? false;
-        final ViewableObjectListType? listType = snapshot.data?.$2;
+        final bool isSearchActive = snapshot.data?.isSearchActive ?? false;
+        final ViewableObjectListType? listType = snapshot.data?.listType;
 
         return AppBar(
           actions: [
             if (!isSearchActive)
               IconButton(
-                onPressed: () => searchSubject.add(''),
+                onPressed: () => homeController.searchSubject.add(''),
                 icon: const Icon(Symbols.search),
               ),
             if (listType != null)
               IconButton(
                 onPressed: listType == ViewableObjectListType.list
-                    ? () =>
-                        servicesListTypeSubject.add(ViewableObjectListType.grid)
-                    : () => servicesListTypeSubject
+                    ? () => homeController.servicesListTypeSubject
+                        .add(ViewableObjectListType.grid)
+                    : () => homeController.servicesListTypeSubject
                         .add(ViewableObjectListType.list),
                 icon: const Icon(Symbols.lists),
               ),
@@ -65,20 +61,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               ),
-              _HomeModeSwitcher(
-                isSundaySchool: isSundaySchool,
-                onChanged: (v) => onModeChanged(context, v),
-              ),
+              _HomeModeSwitcher(homeController: homeController),
             ],
           ),
           titleSpacing: 0,
-          title: snapshot.data?.$1 ?? false
+          title: isSearchActive
               ? SearchField(
-                  searchSink: searchSubject,
+                  searchSink: homeController.searchSubject,
                   canHide: true,
                 )
               : InkWell(
-                  onTap: () => searchSubject.add(''),
+                  onTap: () => homeController.searchSubject.add(''),
                   child: ConstrainedBox(
                     constraints: BoxConstraints.tightFor(
                       width: MediaQuery.sizeOf(context).width,
@@ -94,27 +87,35 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _HomeModeSwitcher extends StatelessWidget {
-  final bool isSundaySchool;
-  final void Function(bool) onChanged;
+  final HomeController homeController;
 
-  const _HomeModeSwitcher({
-    required this.isSundaySchool,
-    required this.onChanged,
-  });
+  const _HomeModeSwitcher({required this.homeController});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
-      child: GestureDetector(
-        onTap: () => onChanged(!isSundaySchool),
-        child: Image.asset(
-          isSundaySchool ? 'assets/Logo.png' : 'assets/church-data.png',
-          width: kToolbarHeight - 12,
-          height: kToolbarHeight - 12,
-          fit: BoxFit.scaleDown,
-        ),
-      ),
+    return StreamBuilder<HomeMode>(
+      stream: homeController.modeStream,
+      builder: (context, modeSnapshot) {
+        if (modeSnapshot.data == null ||
+            modeSnapshot.data == HomeMode.unspecified) {
+          return const SizedBox.shrink();
+        }
+
+        return ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          child: GestureDetector(
+            onTap: homeController.switchHomeMode,
+            child: Image.asset(
+              modeSnapshot.data == HomeMode.sundaySchool
+                  ? 'assets/Logo.png'
+                  : 'assets/church-data.png',
+              width: kToolbarHeight - 12,
+              height: kToolbarHeight - 12,
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+        );
+      },
     );
   }
 }
