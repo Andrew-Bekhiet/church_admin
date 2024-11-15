@@ -4,9 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'home_controller.dart';
-import 'home_mode.dart';
-
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final HomeController homeController;
 
@@ -61,7 +58,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
               ),
-              _HomeModeSwitcher(homeController: homeController),
+              HomeModeSwitcher(homeController: homeController),
             ],
           ),
           titleSpacing: 0,
@@ -80,40 +77,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: const Center(child: Text('بحث...')),
                   ),
                 ),
-        );
-      },
-    );
-  }
-}
-
-class _HomeModeSwitcher extends StatelessWidget {
-  final HomeController homeController;
-
-  const _HomeModeSwitcher({required this.homeController});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<HomeMode>(
-      stream: homeController.modeStream,
-      builder: (context, modeSnapshot) {
-        if (modeSnapshot.data == null ||
-            modeSnapshot.data == HomeMode.unspecified) {
-          return const SizedBox.shrink();
-        }
-
-        return ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          child: GestureDetector(
-            onTap: homeController.switchHomeMode,
-            child: Image.asset(
-              modeSnapshot.data == HomeMode.sundaySchool
-                  ? 'assets/Logo.png'
-                  : 'assets/church-data.png',
-              width: kToolbarHeight - 12,
-              height: kToolbarHeight - 12,
-              fit: BoxFit.scaleDown,
-            ),
-          ),
         );
       },
     );

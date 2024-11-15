@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_mode.dart';
+import '../../application/models/home_mode.dart';
 
 class HomeModeSelector extends StatelessWidget {
   final void Function(HomeMode) onModeChanged;

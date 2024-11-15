@@ -4,21 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import 'home_controller.dart';
-import 'home_mode.dart';
-
-class _HomeDrawerDestination {
-  final Widget label;
-  final Widget icon;
-  final VoidCallback onTap;
-
-  const _HomeDrawerDestination({
-    required this.label,
-    required this.icon,
-    required this.onTap,
-  });
-}
-
 class HomeDrawer extends StatelessWidget {
   final HomeController homeController;
 
@@ -29,8 +14,8 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<_HomeDrawerDestination> destinations = [
-      _HomeDrawerDestination(
+    final List<HomeDrawerDestination> destinations = [
+      HomeDrawerDestination(
         label: StreamBuilder<HomeMode>(
           stream: homeController.modeStream,
           builder: (context, modeSnapshot) {
@@ -45,28 +30,28 @@ class HomeDrawer extends StatelessWidget {
         onTap: homeController.switchHomeMode,
       ),
       if (AuthService.I.currentUser!.canManageSomeUsers)
-        _HomeDrawerDestination(
+        HomeDrawerDestination(
           icon: const Icon(Symbols.manage_accounts),
           label: const Text('إدارة الخدام'),
           onTap: () => const ManageUsersRoute().push(context),
         ),
-      _HomeDrawerDestination(
+      HomeDrawerDestination(
         icon: const Icon(Symbols.search),
         label: const Text('البحث المتقدم'),
         onTap: () => const AdvancedSearchRoute().push(context),
       ),
-      _HomeDrawerDestination(
+      HomeDrawerDestination(
         icon: const Icon(Symbols.map),
         label: const Text('خريطة الافتقاد'),
         onTap: () => const VisitsMapRoute().push(context),
       ),
-      _HomeDrawerDestination(
+      HomeDrawerDestination(
         icon: const Icon(Symbols.settings),
         label: const Text('الإعدادات'),
         onTap: () => const SettingsRoute().push(context),
       ),
       if (kDebugMode)
-        _HomeDrawerDestination(
+        HomeDrawerDestination(
           icon: const Icon(Symbols.developer_mode),
           label: const Text('gql cache'),
           onTap: () => Navigator.of(context).push(

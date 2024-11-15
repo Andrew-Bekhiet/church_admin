@@ -4,8 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'home_mode.dart';
-
 class HomeController {
   final TickerProvider vsync;
 

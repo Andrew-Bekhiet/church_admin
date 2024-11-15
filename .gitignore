@@ -21,3 +21,4 @@ alt-store-server/
 .env
 .env.*
 .vscode
+client/resources/

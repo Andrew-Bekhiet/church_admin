@@ -9,8 +9,6 @@ export 'routes/edit_person_route.dart';
 export 'routes/edit_service_route.dart';
 export 'routes/edit_store_route.dart';
 export 'routes/edit_street_route.dart';
-export 'routes/home_screen_route.dart' hide $appRoutes;
-export 'routes/home_screen_web_route.dart' hide $appRoutes;
 export 'routes/manage_users_route.dart';
 export 'routes/person_analysis_route.dart';
 export 'routes/settings_route.dart';

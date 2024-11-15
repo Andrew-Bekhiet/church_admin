@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-import 'home_controller.dart';
-import 'home_mode.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

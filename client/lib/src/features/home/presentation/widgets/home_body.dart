@@ -1,8 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/views/home/home_mode.dart';
 import 'package:flutter/material.dart';
-
-import 'home_controller.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
