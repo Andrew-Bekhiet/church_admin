@@ -57,7 +57,7 @@ class _ViewPersonState extends State<ViewPerson> {
             [
               PhoneNumberProperty(
                 'رقم الهاتف',
-                person.mainPhone,
+                person.mainPhone ?? '',
                 (n) => _phoneCall(context, n),
                 (n) => _contactAdd(context, n, person),
               ),
@@ -422,7 +422,7 @@ class _ViewPersonState extends State<ViewPerson> {
   }
 
   Future<void> _phoneCall(BuildContext context, String? number) async {
-    final result = await showDialog(
+    final doMakeCallResult = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('هل تريد اجراء مكالمة الأن'),
@@ -440,105 +440,99 @@ class _ViewPersonState extends State<ViewPerson> {
         ],
       ),
     );
-    if (result == null) return;
-    if (result) {
-      await Permission.phone.request();
-      await LauncherService.I.launchCall(
-        PhoneNumberService.I.formatInternational(number!),
-      );
 
-      if (!context.mounted) return;
+    if (doMakeCallResult == null) return;
 
-      final recordLastCall = await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('نعم'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('لا'),
-            ),
-          ],
-        ),
-      );
-      if (recordLastCall == true) {
-        await DatabaseService.I.history.updatePersonLastCall(
-          personId: widget.personId,
-          lastCall: DateTime.now(),
-        );
-        scaffoldMessenger.showSnackBar(
-          const SnackBar(
-            content: Text('تم بنجاح'),
+    if (doMakeCallResult) await Permission.phone.request();
+    await LauncherService.I.launchCall(
+      PhoneNumberService.I.formatInternational(number!),
+    );
+
+    if (!doMakeCallResult || !context.mounted) return;
+
+    final recordLastCall = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('نعم'),
           ),
-        );
-      }
-    } else {
-      await LauncherService.I.launchCall(
-        PhoneNumberService.I.formatInternational(number!),
-      );
-    }
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('لا'),
+          ),
+        ],
+      ),
+    );
+
+    if (recordLastCall != true) return;
+
+    await DatabaseService.I.history.updatePersonLastCall(
+      personId: widget.personId,
+      lastCall: DateTime.now(),
+    );
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(
+        content: Text('تم بنجاح'),
+      ),
+    );
   }
 
   Future<void> _contactAdd(
     BuildContext context,
-    String? phone,
+    String phone,
     Person person,
   ) async {
-    if ((await Permission.contacts.request()).isGranted) {
-      final TextEditingController _name =
-          TextEditingController(text: person.name);
+    if (!(await Permission.contacts.request()).isGranted) return;
 
-      if (!context.mounted) return;
+    final TextEditingController _name =
+        TextEditingController(text: person.name);
 
-      final dialogResult = await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('ادخل اسم جهة الاتصال:'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(controller: _name),
-              Container(height: 10),
-              Text(phone ?? ''),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('حفظ جهة الاتصال'),
-            ),
+    if (!context.mounted) return;
+
+    final dialogResult = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('ادخل اسم جهة الاتصال:'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextFormField(controller: _name),
+            Container(height: 10),
+            Text(phone),
           ],
         ),
-      );
-
-      if (dialogResult == true) {
-        final imageFile = person.hasImage
-            ? await ImageUrlCacheService.I.getImageFile(person)
-            : null;
-
-        await ContactsService.I.insertContact(
-          Contact(
-            addresses: [
-              if (person.address != null)
-                Address(
-                  person.address!,
-                ),
-            ],
-            name: Name(first: _name.text),
-            photo:
-                imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
-                    ? await imageFile.readAsBytes()
-                    : null,
-            phones: [Phone(phone ?? '')],
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('حفظ جهة الاتصال'),
           ),
-        );
-      }
-    }
+        ],
+      ),
+    );
+
+    if (dialogResult != true) return;
+
+    final imageFile = person.hasImage
+        ? await ImageUrlCacheService.I.getImageFile(person)
+        : null;
+
+    await ContactsService.I.insertContact(
+      Contact(
+        addresses: [
+          if (person.address != null) Address(person.address!),
+        ],
+        name: Name(first: _name.text),
+        photo: imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
+            ? await imageFile.readAsBytes()
+            : null,
+        phones: [Phone(phone)],
+      ),
+    );
   }
 
   @override

@@ -1,0 +1,17 @@
+export 'navigation/edit_area_route.dart';
+export 'navigation/edit_class_route.dart';
+export 'navigation/edit_family_route.dart';
+export 'navigation/edit_group_route.dart';
+export 'navigation/edit_person_route.dart';
+export 'navigation/edit_service_route.dart';
+export 'navigation/edit_store_route.dart';
+export 'navigation/edit_street_route.dart';
+export 'navigation/person_analysis_route.dart';
+export 'navigation/view_area_route.dart';
+export 'navigation/view_class_route.dart';
+export 'navigation/view_family_route.dart';
+export 'navigation/view_group_route.dart';
+export 'navigation/view_person_route.dart';
+export 'navigation/view_service_route.dart';
+export 'navigation/view_store_route.dart';
+export 'navigation/view_street_route.dart';

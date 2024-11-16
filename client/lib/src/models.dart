@@ -1,6 +1,5 @@
 export 'models/advanced_queries.dart';
 export 'models/analysis.dart';
-export 'models/bases.dart';
 export 'models/data.dart';
 export 'models/geomap_options.dart';
 export 'models/meta.dart';
@@ -9,4 +8,3 @@ export 'models/notification_setting.dart';
 export 'models/person_analysis_options.dart';
 export 'models/postgis.dart';
 export 'models/viewables_enum.dart';
-export 'models/widgets.dart';

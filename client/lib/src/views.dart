@@ -1,12 +1,8 @@
-export 'features/home.dart';
-export 'features/home/presentation/screens/home_screen.dart';
 export 'views/advanced_search_screen.dart';
 export 'views/analysis.dart';
 export 'views/authenticate.dart';
 export 'views/download_app.dart';
-export 'views/edit_object_data.dart';
 export 'views/manage_users_screen.dart';
 export 'views/settings_screen.dart';
 export 'views/update_user_spirit_data.dart';
-export 'views/view_object_details.dart';
 export 'views/visits_map_screen.dart';

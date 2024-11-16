@@ -67,14 +67,15 @@ class PhoneNumberProperty extends StatelessWidget {
 
   final bool showErrorIfEmpty;
   final String propName;
-  final String? value;
-  final void Function(String?) phoneCall;
-  final void Function(String?) contactAdd;
+  final String value;
+  final void Function(String) phoneCall;
+  final void Function(String) contactAdd;
 
   @override
   Widget build(BuildContext context) {
     final Widget? trailing;
-    if (value != null && value!.isNotEmpty) {
+
+    if (value.isNotEmpty) {
       trailing = Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -94,7 +95,7 @@ class PhoneNumberProperty extends StatelessWidget {
             ),
             tooltip: 'ارسال رسالة (واتساب)',
             onPressed: () => LauncherService.I.launchWhatsappChat(
-              PhoneNumberService.I.formatInternational(value!),
+              PhoneNumberService.I.formatInternational(value),
             ),
           ),
           PopupMenuButton(
@@ -111,10 +112,10 @@ class PhoneNumberProperty extends StatelessWidget {
             onSelected: (v) {
               if (v == 'SMS') {
                 LauncherService.I.launchSMSChat(
-                  PhoneNumberService.I.formatInternational(value!),
+                  PhoneNumberService.I.formatInternational(value),
                 );
               } else if (v == 'Copy') {
-                Clipboard.setData(ClipboardData(text: value!));
+                Clipboard.setData(ClipboardData(text: value));
               }
             },
           ),
@@ -131,7 +132,7 @@ class PhoneNumberProperty extends StatelessWidget {
 
     return ListTile(
       title: Text(propName),
-      subtitle: value != null ? Text(value!) : null,
+      subtitle: Text(value),
       trailing: trailing,
     );
   }

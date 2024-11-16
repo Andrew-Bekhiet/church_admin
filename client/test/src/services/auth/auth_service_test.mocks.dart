@@ -27,9 +27,9 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeFirebaseMultiFactorManagerAdapter_0 extends _i1.SmartFake
-    implements _i2.FirebaseMultiFactorManagerAdapter {
-  _FakeFirebaseMultiFactorManagerAdapter_0(
+class _FakeMultiFactorManagerAdapter_0 extends _i1.SmartFake
+    implements _i2.MultiFactorManagerAdapter {
+  _FakeMultiFactorManagerAdapter_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -158,18 +158,18 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthAdapter extends _i1.Mock implements _i2.AuthAdapter {
   @override
-  _i2.FirebaseMultiFactorManagerAdapter get multiFactorManagerAdapter =>
+  _i2.MultiFactorManagerAdapter get multiFactorManagerAdapter =>
       (super.noSuchMethod(
         Invocation.getter(#multiFactorManagerAdapter),
-        returnValue: _FakeFirebaseMultiFactorManagerAdapter_0(
+        returnValue: _FakeMultiFactorManagerAdapter_0(
           this,
           Invocation.getter(#multiFactorManagerAdapter),
         ),
-        returnValueForMissingStub: _FakeFirebaseMultiFactorManagerAdapter_0(
+        returnValueForMissingStub: _FakeMultiFactorManagerAdapter_0(
           this,
           Invocation.getter(#multiFactorManagerAdapter),
         ),
-      ) as _i2.FirebaseMultiFactorManagerAdapter);
+      ) as _i2.MultiFactorManagerAdapter);
 
   @override
   _i4.Stream<_i2.User?> get userStream => (super.noSuchMethod(
