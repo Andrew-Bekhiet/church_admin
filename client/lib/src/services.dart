@@ -1,5 +1,5 @@
+export 'features/advanced_search/application/advanced_queries_metadata.dart';
 export 'services/about_app_service.dart';
-export 'services/advanced_queries_metadata.dart';
 export 'services/connectivity_service.dart';
 export 'services/current_platform_service.dart';
 export 'services/database.dart';

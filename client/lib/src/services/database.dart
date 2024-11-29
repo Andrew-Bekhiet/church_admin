@@ -1,4 +1,4 @@
-export 'database/advanced_query_parser.dart';
+export '../features/advanced_search/application/advanced_query_parser.dart';
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
 export 'database/db_gql_client.dart';
