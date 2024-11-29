@@ -5,4 +5,5 @@ export 'features/data_entry.dart';
 export 'features/home.dart';
 export 'features/initialization.dart';
 export 'features/local_auth.dart';
+export 'features/maps.dart';
 export 'features/user_management.dart';
