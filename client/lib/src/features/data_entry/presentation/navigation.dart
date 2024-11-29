@@ -6,7 +6,6 @@ export 'navigation/edit_person_route.dart';
 export 'navigation/edit_service_route.dart';
 export 'navigation/edit_store_route.dart';
 export 'navigation/edit_street_route.dart';
-export 'navigation/person_analysis_route.dart';
 export 'navigation/view_area_route.dart';
 export 'navigation/view_class_route.dart';
 export 'navigation/view_family_route.dart';
