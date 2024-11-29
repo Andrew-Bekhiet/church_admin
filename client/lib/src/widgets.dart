@@ -1,6 +1,5 @@
 export 'widgets/animated_fab.dart';
 export 'widgets/church_admin_app.dart';
-export 'widgets/conditions_builder.dart';
 export 'widgets/copiable_property_widget.dart';
 export 'widgets/data_geomap.dart';
 export 'widgets/error_dialog.dart';
