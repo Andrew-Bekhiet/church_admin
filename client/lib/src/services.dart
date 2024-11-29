@@ -14,4 +14,3 @@ export 'services/secrets/secrets_service_impl.dart';
 export 'services/share_service.dart';
 export 'services/theming_service.dart';
 export 'services/user_persistence_service.dart';
-export 'services/user_settings_service.dart';
