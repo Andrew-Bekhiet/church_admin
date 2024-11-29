@@ -1,6 +1,5 @@
 export 'views/advanced_search_screen.dart';
 export 'views/analysis.dart';
-export 'views/authenticate.dart';
 export 'views/download_app.dart';
 export 'views/manage_users_screen.dart';
 export 'views/settings_screen.dart';

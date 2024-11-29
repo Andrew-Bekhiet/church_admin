@@ -8,7 +8,6 @@ export 'services/device_info_service.dart';
 export 'services/encryption.dart';
 export 'services/functions_service.dart';
 export 'services/launcher_service.dart';
-export 'services/local_auth_service.dart';
 export 'services/logging_service.dart';
 export 'services/notifications.dart';
 export 'services/notifications/notifications_service.dart';
