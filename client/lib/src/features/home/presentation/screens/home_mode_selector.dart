@@ -1,6 +1,5 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-
-import '../../application/models/home_mode.dart';
 
 class HomeModeSelector extends StatelessWidget {
   final void Function(HomeMode) onModeChanged;
