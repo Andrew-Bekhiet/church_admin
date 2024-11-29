@@ -1,4 +1,3 @@
-export 'features/advanced_search/application/advanced_queries_metadata.dart';
 export 'services/about_app_service.dart';
 export 'services/connectivity_service.dart';
 export 'services/current_platform_service.dart';
@@ -9,11 +8,6 @@ export 'services/encryption.dart';
 export 'services/functions_service.dart';
 export 'services/launcher_service.dart';
 export 'services/logging_service.dart';
-export 'services/notifications.dart';
-export 'services/notifications/notifications_service.dart';
-export 'services/notifications/notifications_service_callbacks.dart';
-export 'services/notifications/notifications_settings_storage.dart';
-export 'services/notifications/notifications_storage_impl.dart';
 export 'services/router.dart';
 export 'services/secrets/secrets_service.dart';
 export 'services/secrets/secrets_service_impl.dart';

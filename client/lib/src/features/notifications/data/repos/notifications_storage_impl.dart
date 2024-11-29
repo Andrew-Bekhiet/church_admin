@@ -1,5 +1,4 @@
-import 'package:church_admin/src/models/notification.dart';
-import 'package:church_admin/src/services/notifications/notifications_storage.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class NotificationsStorageImpl implements NotificationsStorage {

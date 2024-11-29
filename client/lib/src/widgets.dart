@@ -4,7 +4,6 @@ export 'widgets/copiable_property_widget.dart';
 export 'widgets/error_dialog.dart';
 export 'widgets/history_property.dart';
 export 'widgets/lazy_tab_page.dart';
-export 'widgets/notification_details_dialog.dart';
 export 'widgets/preferred_size_persistent_header_delegate.dart';
 export 'widgets/search_field.dart';
 export 'widgets/services_hierarchy_list.dart';

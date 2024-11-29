@@ -6,4 +6,5 @@ export 'features/home.dart';
 export 'features/initialization.dart';
 export 'features/local_auth.dart';
 export 'features/maps.dart';
+export 'features/notifications.dart';
 export 'features/user_management.dart';
