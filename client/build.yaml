@@ -17,7 +17,7 @@ targets:
               type: UuidValue
               fromJsonFunctionName: stringToUuid
               toJsonFunctionName: uuidToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Name:
               type: String
             Bigint:
@@ -28,32 +28,32 @@ targets:
               type: DateTime
               fromJsonFunctionName: dateFromString
               toJsonFunctionName: dateToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Daterange:
               type: DateTimeRange
               fromJsonFunctionName: dateRangeFromString
               toJsonFunctionName: dateRangeToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Timetz:
               type: DateTime
               fromJsonFunctionName: tstzFromString
               toJsonFunctionName: tstzToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Time:
               type: DateTime
               fromJsonFunctionName: tstzFromString
               toJsonFunctionName: tstzToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Timestamp:
               type: DateTime
               fromJsonFunctionName: tstzFromString
               toJsonFunctionName: tstzToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Timestamptz:
               type: DateTime
               fromJsonFunctionName: tstzFromString
               toJsonFunctionName: tstzToString
-              import: package:church_admin/graphql/scalars.dart
+              import: package:church_admin/src/core/graphql/scalars.dart
             Json:
               type: Json
             Jsonb:
