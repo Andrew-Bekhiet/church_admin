@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   ViewableObjectListItem({
     required this.item,
-    required this.selectionController,
+    this.selectionController,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     ViewableObjectService? viewableObjectService,
@@ -12,7 +12,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   final T item;
-  final SelectionController<T> selectionController;
+  final SelectionController<T>? selectionController;
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final ViewableObjectService viewableObjectService;
@@ -26,9 +26,11 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool?>(
-      initialData: selectionController.currentValue?.contains(item),
-      stream:
-          selectionController.stream.map((s) => s?.contains(item)).distinct(),
+      initialData: selectionController?.currentValue?.contains(item),
+      stream: selectionController?.stream
+              .map((s) => s?.contains(item))
+              .distinct() ??
+          Stream.value(null),
       builder: (context, selectionData) {
         final config = effectiveConfig.copyWith(
           selected: selectionData.data,
@@ -55,18 +57,18 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   }
 
   void _onSelect(bool isSelected) => isSelected
-      ? selectionController.deselect(item)
-      : selectionController.select(item);
+      ? selectionController!.deselect(item)
+      : selectionController!.select(item);
 
   void _onTap(T item) {
-    if (!selectionController.isSelecting) {
+    if (selectionController == null || !selectionController!.isSelecting) {
       final effectiveOnTap = viewableObjectWidgetConfig?.onTap ??
           ViewableObjectWidgetConfig<T>().onTap ??
           viewableObjectService.onTap;
 
       effectiveOnTap(item);
     } else {
-      _onSelect(selectionController.isSelected(item));
+      _onSelect(selectionController!.isSelected(item));
     }
   }
 
@@ -76,10 +78,12 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
     if (effectiveOnLongPress != null) {
       effectiveOnLongPress(item);
-    } else if (!selectionController.isSelecting) {
-      selectionController.toggle(item);
-    } else {
-      selectionController.clear();
+    } else if (selectionController != null) {
+      if (!selectionController!.isSelecting) {
+        selectionController!.toggle(item);
+      } else {
+        selectionController!.clear();
+      }
     }
   }
 }
