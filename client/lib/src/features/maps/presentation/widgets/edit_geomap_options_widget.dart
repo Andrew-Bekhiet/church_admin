@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class EditGeomapOptionsWidget extends StatefulWidget {

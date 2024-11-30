@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:uuid/uuid.dart';
-
 
 class ConditionsBuilder<T extends Object> extends StatelessWidget {
   final QueryableType<T> queryableType;

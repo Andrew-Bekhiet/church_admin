@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_cache_inspector/graphql_cache_inspector.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeDrawer extends StatelessWidget {
   final HomeController homeController;

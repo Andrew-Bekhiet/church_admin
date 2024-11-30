@@ -1,4 +1,4 @@
-import 'package:church_admin/graphql/links.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';

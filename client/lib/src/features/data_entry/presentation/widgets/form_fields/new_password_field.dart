@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:zxcvbn/zxcvbn.dart';
 
 class NewPasswordField extends StatefulWidget {

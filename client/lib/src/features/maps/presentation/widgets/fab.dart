@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GeomapFAB extends StatelessWidget {

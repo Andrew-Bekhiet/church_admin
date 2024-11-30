@@ -1,13 +1,2 @@
-export  'package:material_symbols_icons/material_symbols_icons.dart';
-
-export 'fmtc/fmtc.dart';
-export 'graphql/links.dart';
-export 'graphql/scalars.dart';
-export 'src/controllers.dart';
+export 'src/core.dart';
 export 'src/features.dart';
-export 'src/models.dart';
-export 'src/providers.dart';
-export 'src/services.dart';
-export 'src/utils.dart';
-export 'src/views.dart';
-export 'src/widgets.dart';

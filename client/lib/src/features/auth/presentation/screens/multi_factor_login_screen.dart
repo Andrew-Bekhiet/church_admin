@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class MultiFactorLogin extends StatefulWidget {
   const MultiFactorLogin({super.key});

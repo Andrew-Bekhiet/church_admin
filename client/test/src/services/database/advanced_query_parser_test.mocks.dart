@@ -6,9 +6,9 @@
 import 'dart:async' as _i5;
 
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:church_admin/src/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
     as _i6;
-import 'package:church_admin/src/services/database/gql_definintions/persons/persons_notifications_queries.dart'
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
