@@ -23,6 +23,8 @@ class DatabaseService {
   final DBVarsTransformer varsTransformer;
   final AdvancedQueryParser advancedQueryParser;
 
+  late final home = HomeDAO(db: this);
+
   late final areas = AreasDAO(db: this);
   late final streets = StreetsDAO(db: this);
   late final families = FamiliesDAO(db: this);

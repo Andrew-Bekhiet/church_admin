@@ -102,34 +102,25 @@ _$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
           .toList(),
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) {
-  final val = <String, dynamic>{
-    'uid': instance.uid,
-    'name': instance.name,
-    'email': instance.email,
-    'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-    'blurhash': instance.blurhash,
-    'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
-    'permissions': permissionsSetToJson(instance.permissions),
-    'authId': instance.authId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('isMultiFactorEnrolled', instance.isMultiFactorEnrolled);
-  writeNotNull('idToken', instance.idToken);
-  writeNotNull('emailVerified', instance.emailVerified);
-  val['lastEdit'] = instance.lastEdit?.toJson();
-  val['person'] = instance.person?.toJson();
-  val['servicesHistory'] =
-      instance.servicesHistory?.map((e) => e.toJson()).toList();
-  val['classesHistory'] =
-      instance.classesHistory?.map((e) => e.toJson()).toList();
-  val['groupsHistory'] =
-      instance.groupsHistory?.map((e) => e.toJson()).toList();
-  return val;
-}
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+    <String, dynamic>{
+      'uid': instance.uid,
+      'name': instance.name,
+      'email': instance.email,
+      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+      'blurhash': instance.blurhash,
+      'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
+      'permissions': permissionsSetToJson(instance.permissions),
+      'authId': instance.authId,
+      if (instance.isMultiFactorEnrolled case final value?)
+        'isMultiFactorEnrolled': value,
+      if (instance.idToken case final value?) 'idToken': value,
+      if (instance.emailVerified case final value?) 'emailVerified': value,
+      'lastEdit': instance.lastEdit?.toJson(),
+      'person': instance.person?.toJson(),
+      'servicesHistory':
+          instance.servicesHistory?.map((e) => e.toJson()).toList(),
+      'classesHistory':
+          instance.classesHistory?.map((e) => e.toJson()).toList(),
+      'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
+    };

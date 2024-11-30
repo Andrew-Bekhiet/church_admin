@@ -18,28 +18,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: Rx.combineLatest2<bool, ViewableObjectListType?,
-          ({bool isSearchActive, ViewableObjectListType? listType})>(
-        homeController.searchSubject.map((s) => s != null),
-        homeController.tabTypeSubject.switchMap(
-          (t) => t == Service
-              ? homeController.servicesListTypeSubject.stream
-              : Stream.value(null),
-        ),
-        (a, b) => (isSearchActive: a, listType: b),
+    return StreamBuilder<ViewableObjectListType?>(
+      stream: homeController.tabTypeSubject.switchMap(
+        (t) => t == Service
+            ? homeController.servicesListTypeSubject.stream
+            : Stream.value(null),
       ),
       builder: (context, snapshot) {
-        final bool isSearchActive = snapshot.data?.isSearchActive ?? false;
-        final ViewableObjectListType? listType = snapshot.data?.listType;
+        final ViewableObjectListType? listType = snapshot.data;
 
         return AppBar(
           actions: [
-            if (!isSearchActive)
-              IconButton(
-                onPressed: () => homeController.searchSubject.add(''),
-                icon: const Icon(Symbols.search),
-              ),
+            IconButton(
+              onPressed: () => onSearch(context),
+              icon: const Icon(Symbols.search),
+            ),
             if (listType != null)
               IconButton(
                 onPressed: listType == ViewableObjectListType.list
@@ -63,23 +56,25 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           titleSpacing: 0,
-          title: isSearchActive
-              ? SearchField(
-                  searchSink: homeController.searchSubject,
-                  canHide: true,
-                )
-              : InkWell(
-                  onTap: () => homeController.searchSubject.add(''),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: kToolbarHeight,
-                    ),
-                    child: const Center(child: Text('بحث...')),
-                  ),
-                ),
+          title: InkWell(
+            onTap: () => onSearch(context),
+            child: ConstrainedBox(
+              constraints: BoxConstraints.tightFor(
+                width: MediaQuery.sizeOf(context).width,
+                height: kToolbarHeight,
+              ),
+              child: const Center(child: Text('بحث...')),
+            ),
+          ),
         );
       },
+    );
+  }
+
+  void onSearch(BuildContext context) {
+    showSearch(
+      context: context,
+      delegate: HomeSearchDelegate(DatabaseService.I.home),
     );
   }
 }

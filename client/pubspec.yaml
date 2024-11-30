@@ -120,7 +120,7 @@ dev_dependencies:
   freezed: ^2.3.2
   go_router_builder: ^2.7.1
   golden_toolkit: ^0.15.0
-  graphql_codegen: ^0.14.0
+  graphql_codegen: ^1.1.0
   hive_generator: ^2.0.0
   http: ^1.0.0
   image_cropper_platform_interface: ^6.0.3

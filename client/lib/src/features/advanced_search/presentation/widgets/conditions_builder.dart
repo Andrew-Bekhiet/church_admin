@@ -483,7 +483,7 @@ class _SelectPolygon extends StatelessWidget {
     return TappableFormField<Polygon?>(
       onTap: (state) async {
         final initialArea = Area(
-          id: Uuid.NAMESPACE_NIL,
+          id: Namespace.nil.value,
           name: '',
           bounds: state.value,
           color: Theme.of(state.context).colorScheme.primary,

@@ -9,8 +9,6 @@ class HomeController {
 
   HomeController(this.vsync);
 
-  final BehaviorSubject<String?> searchSubject = BehaviorSubject.seeded(null);
-
   final BehaviorSubject<ViewableObjectListType> servicesListTypeSubject =
       BehaviorSubject.seeded(ViewableObjectListType.list);
 
@@ -105,48 +103,17 @@ class HomeController {
 
   ViewableObjectListController<T>
       _putControllerIfAbsentUsing<T extends Viewable>(
-    GQLPaginatableStream<T> Function({Stream<String?>? searchQuery})
-        paginatableStreamFactory,
+    GQLPaginatableStream<T> Function() paginatableStreamFactory,
   ) {
     return _initializedControllers.putIfAbsent(
       T,
-      () {
-        final searchStream = _getSearchStreamFor<T>().asBroadcastStream();
-        final paginatableStream =
-            paginatableStreamFactory(searchQuery: searchStream);
-
-        final filterStream = paginatableStream.onLoadingChanged.switchMap(
-          (isLoading) => isLoading ? searchStream : Stream.value(null),
-        );
-
-        return ViewableObjectListController<T>(
-          filterStream: filterStream,
-          objectsPaginatableStream: paginatableStream,
-        );
-      },
+      () => ViewableObjectListController<T>(
+        objectsPaginatableStream: paginatableStreamFactory(),
+      ),
     ) as ViewableObjectListController<T>;
   }
 
-  Stream<String?> _getSearchStreamFor<T>() {
-    return Rx.combineLatest2<String?, Type, String?>(
-      searchSubject,
-      tabTypeSubject,
-      (s, t) => t == T ? s : null,
-    ).debounce((_) async* {
-      final completer = Completer<void>();
-      final timer = Timer(const Duration(seconds: 1), completer.complete);
-
-      _timers.add(timer);
-      await completer.future;
-      timer.cancel();
-      _timers.remove(timer);
-
-      yield null;
-    });
-  }
-
   void dispose() {
-    searchSubject.close();
     servicesListTypeSubject.close();
     tabTypeSubject.close();
     _modeSubject.close();

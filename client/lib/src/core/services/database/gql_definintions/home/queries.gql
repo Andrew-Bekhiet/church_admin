@@ -1,0 +1,26 @@
+query homeSearch($query: String!) {
+  persons(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Person
+  }
+  classes(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Class
+  }
+  groups(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Group
+  }
+  families(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Family
+  }
+  services(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Service
+  }
+  streets(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Street
+  }
+  stores(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Store
+  }
+  areas(where: { name: { _ilike: $query } }, limit: 5) {
+    ...Area
+  }
+}
