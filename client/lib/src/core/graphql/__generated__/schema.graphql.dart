@@ -1,4 +1,4 @@
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/src/core/graphql/scalars.dart';
 
 class Input_AreasAggregateOrderBy {
   factory Input_AreasAggregateOrderBy({

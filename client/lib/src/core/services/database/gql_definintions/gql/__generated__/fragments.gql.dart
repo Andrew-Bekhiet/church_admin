@@ -1,5 +1,5 @@
 import '../../users/__generated__/fragments.gql.dart';
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Fragment_EditHistory {

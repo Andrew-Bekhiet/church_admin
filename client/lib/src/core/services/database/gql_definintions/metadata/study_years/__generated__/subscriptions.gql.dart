@@ -1,4 +1,4 @@
-import '../../../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../../../../../graphql/__generated__/schema.graphql.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Subscription_watchAllStudyYears {

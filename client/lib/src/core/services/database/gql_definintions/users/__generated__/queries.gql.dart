@@ -2,7 +2,7 @@ import '../../classes/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
-import 'package:church_admin/graphql/scalars.dart';
+import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_analyzeUserAttendance {
