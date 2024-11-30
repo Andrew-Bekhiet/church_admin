@@ -1,0 +1,159 @@
+test
+└── src
+    ├── core
+    │   ├── controllers
+    │   │   ├── delegating_paginatable_stream_test.dart
+    │   │   ├── go_router_refresh_stream_test.dart
+    │   │   ├── gql_paginatable_stream_test.dart
+    │   │   ├── paginatable_stream_base_test.dart
+    │   │   └── paginatable_stream_base_test.mocks.dart
+    │   ├── graphql
+    │   │   ├── links
+    │   │   │   ├── add_auth_link_test.dart
+    │   │   │   ├── add_auth_link_test.mocks.dart
+    │   │   │   ├── logging_link_test.dart
+    │   │   │   └── logging_link_test.mocks.dart
+    │   │   └── scalars
+    │   │       ├── color_test.dart
+    │   │       ├── date_range_test.dart
+    │   │       ├── timestamptz_test.dart
+    │   │       ├── time_test.dart
+    │   │       └── uuid_test.dart
+    │   └── widgets
+    │       ├── search_field_test.dart
+    │       ├── services_hierarchy_list_test.dart
+    │       ├── services_hierarchy_list_test.mocks.dart
+    │       └── title_search_field_test.dart
+    ├── fakes
+    │   ├── fake_box.dart
+    │   └── fake_device_info.dart
+    ├── features
+    │   ├── auth
+    │   │   └── data
+    │   │       └── repos
+    │   │           ├── auth_service_test.dart
+    │   │           ├── auth_service_test.mocks.dart
+    │   │           ├── auth_storage_test.dart
+    │   │           ├── auth_storage_test.mocks.dart
+    │   │           ├── firebase_auth_adapter_test.dart
+    │   │           ├── firebase_auth_adapter_test.mocks.dart
+    │   │           ├── multi_factor_manager_test.dart
+    │   │           └── multi_factor_manager_test.mocks.dart
+    │   ├── initialization
+    │   │   └── data
+    │   │       └── repos
+    │   │           ├── device_info_init_test.dart
+    │   │           ├── firebase_init_test.dart
+    │   │           ├── firebase_init_test.mocks.dart
+    │   │           ├── hive_init_test.dart
+    │   │           ├── hive_init_test.mocks.dart
+    │   │           ├── initialization_service_test.dart
+    │   │           ├── initialization_service_test.mocks.dart
+    │   │           └── package_info_init_test.dart
+    │   ├── local_auth
+    │   │   └── application
+    │   │       ├── local_auth_service_test.dart
+    │   │       └── local_auth_service_test.mocks.dart
+    │   └── notifications
+    │       └── data
+    │           └── repos
+    │               ├── notifications_service_callbacks_test.dart
+    │               ├── notifications_service_callbacks_test.mocks.dart
+    │               ├── notifications_service_test.dart
+    │               ├── notifications_service_test.mocks.dart
+    │               ├── notifications_settings_storage_test.dart
+    │               ├── notifications_settings_storage_test.mocks.dart
+    │               ├── notifications_storage_impl_test.dart
+    │               └── notifications_storage_impl_test.mocks.dart
+    ├── remaining
+    │   ├── advance_queries
+    │   │   └── condition_test.dart
+    │   ├── bases
+    │   │   ├── functions_object_image_info_test.dart
+    │   │   └── functions_object_image_info_test.mocks.dart
+    │   ├── database
+    │   │   ├── advanced_query_parser_test.dart
+    │   │   └── advanced_query_parser_test.mocks.dart
+    │   ├── goldens
+    │   │   └── about_app_service_dialog.png
+    │   ├── secrets
+    │   │   └── secrets_service_test.dart
+    │   ├── about_app_service_test.dart
+    │   ├── admin_users_test.dart
+    │   ├── admin_users_test.mocks.dart
+    │   ├── advanced_queries_metadata_test.dart
+    │   ├── advanced_search_controller_test.dart
+    │   ├── authenticate_test.dart
+    │   ├── authenticate_test.mocks.dart
+    │   ├── church_admin_app_test.dart
+    │   ├── church_admin_app_test.mocks.dart
+    │   ├── connectivity_service_test.dart
+    │   ├── connectivity_service_test.mocks.dart
+    │   ├── edit_object_controller_test.dart
+    │   ├── edit_object_controller_test.mocks.dart
+    │   ├── history_property_test.dart
+    │   ├── history_property_test.mocks.dart
+    │   ├── image_object_widget_test.dart
+    │   ├── image_object_widget_test.mocks.dart
+    │   ├── image_picker_service_test.dart
+    │   ├── image_picker_service_test.mocks.dart
+    │   ├── image_url_cache_service_test.dart
+    │   ├── image_url_cache_service_test.mocks.dart
+    │   ├── launcher_service_test.dart
+    │   ├── launcher_service_test.mocks.dart
+    │   ├── location_parsing_service_test.dart
+    │   ├── location_parsing_service_test.mocks.dart
+    │   ├── login_test.dart
+    │   ├── login_test.mocks.dart
+    │   ├── phone_number_service_test.dart
+    │   ├── selection_controller_test.dart
+    │   ├── settings_screen_test.dart
+    │   ├── settings_screen_test.mocks.dart
+    │   ├── user_persistence_service_test.dart
+    │   ├── user_persistence_service_test.mocks.dart
+    │   ├── user_settings_service_test.dart
+    │   ├── viewable_object_app_bar_test.dart
+    │   ├── viewable_object_app_bar_test.mocks.dart
+    │   ├── viewable_object_list_controller_test.dart
+    │   ├── viewable_object_list_item_test.dart
+    │   ├── viewable_object_list_item_test.mocks.dart
+    │   ├── viewable_object_list_test.dart
+    │   ├── viewable_object_list_test.mocks.dart
+    │   ├── view_object_details_test.dart
+    │   └── view_object_details_test.mocks.dart
+    ├── utils
+    │   └── extensions_test.dart
+    ├── views
+    │   └── goldens
+    │       ├── view_object_details
+    │       │   └── structure
+    │       │       ├── collapsed_0.0.png
+    │       │       ├── collapsed_0.85.png
+    │       │       ├── collapsed_1.0.png
+    │       │       └── expanded.png
+    │       └── settings_screen.png
+    ├── widgets
+    │   └── goldens
+    │       ├── viewable_object_app_bar
+    │       │   ├── no-cropping
+    │       │   │   ├── collapsed_15.png
+    │       │   │   ├── collapsed_30.png
+    │       │   │   ├── collapsed_75.png
+    │       │   │   └── expanded.png
+    │       │   └── non-snapping
+    │       │       ├── collapsed_15.png
+    │       │       ├── collapsed_30.png
+    │       │       ├── collapsed_75.png
+    │       │       └── expanded.png
+    │       ├── viewable_object_list_item
+    │       │   ├── default.png
+    │       │   ├── selection_mode.png
+    │       │   └── selection_mode_selected.png
+    │       ├── history_property.png
+    │       ├── image_object_widget_has_image.png
+    │       ├── services_hierarchy_list.png
+    │       └── title_search_field.png
+    ├── dummy_named_location.dart
+    └── utils.dart
+
+38 directories, 119 files
