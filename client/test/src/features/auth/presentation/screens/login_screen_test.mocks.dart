@@ -97,8 +97,8 @@ class _FakeAdvancedQueryParser_5 extends _i1.SmartFake
         );
 }
 
-class _FakeAreasDAO_6 extends _i1.SmartFake implements _i2.AreasDAO {
-  _FakeAreasDAO_6(
+class _FakeHomeDAO_6 extends _i1.SmartFake implements _i2.HomeDAO {
+  _FakeHomeDAO_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -107,8 +107,8 @@ class _FakeAreasDAO_6 extends _i1.SmartFake implements _i2.AreasDAO {
         );
 }
 
-class _FakeStreetsDAO_7 extends _i1.SmartFake implements _i2.StreetsDAO {
-  _FakeStreetsDAO_7(
+class _FakeAreasDAO_7 extends _i1.SmartFake implements _i2.AreasDAO {
+  _FakeAreasDAO_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -117,8 +117,8 @@ class _FakeStreetsDAO_7 extends _i1.SmartFake implements _i2.StreetsDAO {
         );
 }
 
-class _FakeFamiliesDAO_8 extends _i1.SmartFake implements _i2.FamiliesDAO {
-  _FakeFamiliesDAO_8(
+class _FakeStreetsDAO_8 extends _i1.SmartFake implements _i2.StreetsDAO {
+  _FakeStreetsDAO_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -127,8 +127,8 @@ class _FakeFamiliesDAO_8 extends _i1.SmartFake implements _i2.FamiliesDAO {
         );
 }
 
-class _FakeStoresDAO_9 extends _i1.SmartFake implements _i2.StoresDAO {
-  _FakeStoresDAO_9(
+class _FakeFamiliesDAO_9 extends _i1.SmartFake implements _i2.FamiliesDAO {
+  _FakeFamiliesDAO_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -137,8 +137,8 @@ class _FakeStoresDAO_9 extends _i1.SmartFake implements _i2.StoresDAO {
         );
 }
 
-class _FakePersonsDAO_10 extends _i1.SmartFake implements _i2.PersonsDAO {
-  _FakePersonsDAO_10(
+class _FakeStoresDAO_10 extends _i1.SmartFake implements _i2.StoresDAO {
+  _FakeStoresDAO_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -147,8 +147,8 @@ class _FakePersonsDAO_10 extends _i1.SmartFake implements _i2.PersonsDAO {
         );
 }
 
-class _FakeServicesDAO_11 extends _i1.SmartFake implements _i2.ServicesDAO {
-  _FakeServicesDAO_11(
+class _FakePersonsDAO_11 extends _i1.SmartFake implements _i2.PersonsDAO {
+  _FakePersonsDAO_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -157,8 +157,8 @@ class _FakeServicesDAO_11 extends _i1.SmartFake implements _i2.ServicesDAO {
         );
 }
 
-class _FakeClassesDAO_12 extends _i1.SmartFake implements _i2.ClassesDAO {
-  _FakeClassesDAO_12(
+class _FakeServicesDAO_12 extends _i1.SmartFake implements _i2.ServicesDAO {
+  _FakeServicesDAO_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -167,8 +167,8 @@ class _FakeClassesDAO_12 extends _i1.SmartFake implements _i2.ClassesDAO {
         );
 }
 
-class _FakeGroupsDAO_13 extends _i1.SmartFake implements _i2.GroupsDAO {
-  _FakeGroupsDAO_13(
+class _FakeClassesDAO_13 extends _i1.SmartFake implements _i2.ClassesDAO {
+  _FakeClassesDAO_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -177,8 +177,8 @@ class _FakeGroupsDAO_13 extends _i1.SmartFake implements _i2.GroupsDAO {
         );
 }
 
-class _FakeUsersDAO_14 extends _i1.SmartFake implements _i2.UsersDAO {
-  _FakeUsersDAO_14(
+class _FakeGroupsDAO_14 extends _i1.SmartFake implements _i2.GroupsDAO {
+  _FakeGroupsDAO_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -187,8 +187,8 @@ class _FakeUsersDAO_14 extends _i1.SmartFake implements _i2.UsersDAO {
         );
 }
 
-class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_15(
+class _FakeUsersDAO_15 extends _i1.SmartFake implements _i2.UsersDAO {
+  _FakeUsersDAO_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -197,8 +197,8 @@ class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
         );
 }
 
-class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_16(
+class _FakeMetadataDAO_16 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -207,8 +207,8 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
         );
 }
 
-class _FakeBox_17<E> extends _i1.SmartFake implements _i4.Box<E> {
-  _FakeBox_17(
+class _FakeHistoryDAO_17 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_17(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -217,8 +217,8 @@ class _FakeBox_17<E> extends _i1.SmartFake implements _i4.Box<E> {
         );
 }
 
-class _FakeLazyBox_18<E1> extends _i1.SmartFake implements _i4.LazyBox<E1> {
-  _FakeLazyBox_18(
+class _FakeBox_18<E> extends _i1.SmartFake implements _i4.Box<E> {
+  _FakeBox_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -227,8 +227,18 @@ class _FakeLazyBox_18<E1> extends _i1.SmartFake implements _i4.LazyBox<E1> {
         );
 }
 
-class _FakeWidget_19 extends _i1.SmartFake implements _i5.Widget {
-  _FakeWidget_19(
+class _FakeLazyBox_19<E1> extends _i1.SmartFake implements _i4.LazyBox<E1> {
+  _FakeLazyBox_19(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeWidget_20 extends _i1.SmartFake implements _i5.Widget {
+  _FakeWidget_20(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -241,9 +251,9 @@ class _FakeWidget_19 extends _i1.SmartFake implements _i5.Widget {
       super.toString();
 }
 
-class _FakeInheritedWidget_20 extends _i1.SmartFake
+class _FakeInheritedWidget_21 extends _i1.SmartFake
     implements _i5.InheritedWidget {
-  _FakeInheritedWidget_20(
+  _FakeInheritedWidget_21(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -256,9 +266,9 @@ class _FakeInheritedWidget_20 extends _i1.SmartFake
       super.toString();
 }
 
-class _FakeDiagnosticsNode_21 extends _i1.SmartFake
+class _FakeDiagnosticsNode_22 extends _i1.SmartFake
     implements _i5.DiagnosticsNode {
-  _FakeDiagnosticsNode_21(
+  _FakeDiagnosticsNode_22(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -274,8 +284,8 @@ class _FakeDiagnosticsNode_21 extends _i1.SmartFake
       super.toString();
 }
 
-class _FakeUri_22 extends _i1.SmartFake implements Uri {
-  _FakeUri_22(
+class _FakeUri_23 extends _i1.SmartFake implements Uri {
+  _FakeUri_23(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -284,8 +294,8 @@ class _FakeUri_22 extends _i1.SmartFake implements Uri {
         );
 }
 
-class _FakeValueKey_23<T> extends _i1.SmartFake implements _i5.ValueKey<T> {
-  _FakeValueKey_23(
+class _FakeValueKey_24<T> extends _i1.SmartFake implements _i5.ValueKey<T> {
+  _FakeValueKey_24(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -640,13 +650,26 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
       ) as _i2.AdvancedQueryParser);
 
   @override
+  _i2.HomeDAO get home => (super.noSuchMethod(
+        Invocation.getter(#home),
+        returnValue: _FakeHomeDAO_6(
+          this,
+          Invocation.getter(#home),
+        ),
+        returnValueForMissingStub: _FakeHomeDAO_6(
+          this,
+          Invocation.getter(#home),
+        ),
+      ) as _i2.HomeDAO);
+
+  @override
   _i2.AreasDAO get areas => (super.noSuchMethod(
         Invocation.getter(#areas),
-        returnValue: _FakeAreasDAO_6(
+        returnValue: _FakeAreasDAO_7(
           this,
           Invocation.getter(#areas),
         ),
-        returnValueForMissingStub: _FakeAreasDAO_6(
+        returnValueForMissingStub: _FakeAreasDAO_7(
           this,
           Invocation.getter(#areas),
         ),
@@ -655,11 +678,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.StreetsDAO get streets => (super.noSuchMethod(
         Invocation.getter(#streets),
-        returnValue: _FakeStreetsDAO_7(
+        returnValue: _FakeStreetsDAO_8(
           this,
           Invocation.getter(#streets),
         ),
-        returnValueForMissingStub: _FakeStreetsDAO_7(
+        returnValueForMissingStub: _FakeStreetsDAO_8(
           this,
           Invocation.getter(#streets),
         ),
@@ -668,11 +691,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.FamiliesDAO get families => (super.noSuchMethod(
         Invocation.getter(#families),
-        returnValue: _FakeFamiliesDAO_8(
+        returnValue: _FakeFamiliesDAO_9(
           this,
           Invocation.getter(#families),
         ),
-        returnValueForMissingStub: _FakeFamiliesDAO_8(
+        returnValueForMissingStub: _FakeFamiliesDAO_9(
           this,
           Invocation.getter(#families),
         ),
@@ -681,11 +704,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.StoresDAO get stores => (super.noSuchMethod(
         Invocation.getter(#stores),
-        returnValue: _FakeStoresDAO_9(
+        returnValue: _FakeStoresDAO_10(
           this,
           Invocation.getter(#stores),
         ),
-        returnValueForMissingStub: _FakeStoresDAO_9(
+        returnValueForMissingStub: _FakeStoresDAO_10(
           this,
           Invocation.getter(#stores),
         ),
@@ -694,11 +717,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_10(
+        returnValue: _FakePersonsDAO_11(
           this,
           Invocation.getter(#persons),
         ),
-        returnValueForMissingStub: _FakePersonsDAO_10(
+        returnValueForMissingStub: _FakePersonsDAO_11(
           this,
           Invocation.getter(#persons),
         ),
@@ -707,11 +730,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_11(
+        returnValue: _FakeServicesDAO_12(
           this,
           Invocation.getter(#services),
         ),
-        returnValueForMissingStub: _FakeServicesDAO_11(
+        returnValueForMissingStub: _FakeServicesDAO_12(
           this,
           Invocation.getter(#services),
         ),
@@ -720,11 +743,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_12(
+        returnValue: _FakeClassesDAO_13(
           this,
           Invocation.getter(#classes),
         ),
-        returnValueForMissingStub: _FakeClassesDAO_12(
+        returnValueForMissingStub: _FakeClassesDAO_13(
           this,
           Invocation.getter(#classes),
         ),
@@ -733,11 +756,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_13(
+        returnValue: _FakeGroupsDAO_14(
           this,
           Invocation.getter(#groups),
         ),
-        returnValueForMissingStub: _FakeGroupsDAO_13(
+        returnValueForMissingStub: _FakeGroupsDAO_14(
           this,
           Invocation.getter(#groups),
         ),
@@ -746,11 +769,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_14(
+        returnValue: _FakeUsersDAO_15(
           this,
           Invocation.getter(#users),
         ),
-        returnValueForMissingStub: _FakeUsersDAO_14(
+        returnValueForMissingStub: _FakeUsersDAO_15(
           this,
           Invocation.getter(#users),
         ),
@@ -759,11 +782,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_15(
+        returnValue: _FakeMetadataDAO_16(
           this,
           Invocation.getter(#metadata),
         ),
-        returnValueForMissingStub: _FakeMetadataDAO_15(
+        returnValueForMissingStub: _FakeMetadataDAO_16(
           this,
           Invocation.getter(#metadata),
         ),
@@ -772,11 +795,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.HistoryDAO get history => (super.noSuchMethod(
         Invocation.getter(#history),
-        returnValue: _FakeHistoryDAO_16(
+        returnValue: _FakeHistoryDAO_17(
           this,
           Invocation.getter(#history),
         ),
-        returnValueForMissingStub: _FakeHistoryDAO_16(
+        returnValueForMissingStub: _FakeHistoryDAO_17(
           this,
           Invocation.getter(#history),
         ),
@@ -799,11 +822,11 @@ class MockUserSettingsService extends _i1.Mock
   @override
   _i4.Box<dynamic> get box => (super.noSuchMethod(
         Invocation.getter(#box),
-        returnValue: _FakeBox_17<dynamic>(
+        returnValue: _FakeBox_18<dynamic>(
           this,
           Invocation.getter(#box),
         ),
-        returnValueForMissingStub: _FakeBox_17<dynamic>(
+        returnValueForMissingStub: _FakeBox_18<dynamic>(
           this,
           Invocation.getter(#box),
         ),
@@ -921,7 +944,7 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
             #encryptionKey: encryptionKey,
           },
         ),
-        returnValue: _i7.Future<_i4.Box<E>>.value(_FakeBox_17<E>(
+        returnValue: _i7.Future<_i4.Box<E>>.value(_FakeBox_18<E>(
           this,
           Invocation.method(
             #openBox,
@@ -938,7 +961,7 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
             },
           ),
         )),
-        returnValueForMissingStub: _i7.Future<_i4.Box<E>>.value(_FakeBox_17<E>(
+        returnValueForMissingStub: _i7.Future<_i4.Box<E>>.value(_FakeBox_18<E>(
           this,
           Invocation.method(
             #openBox,
@@ -982,7 +1005,7 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
             #encryptionKey: encryptionKey,
           },
         ),
-        returnValue: _i7.Future<_i4.LazyBox<E>>.value(_FakeLazyBox_18<E>(
+        returnValue: _i7.Future<_i4.LazyBox<E>>.value(_FakeLazyBox_19<E>(
           this,
           Invocation.method(
             #openLazyBox,
@@ -999,7 +1022,7 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<_i4.LazyBox<E>>.value(_FakeLazyBox_18<E>(
+            _i7.Future<_i4.LazyBox<E>>.value(_FakeLazyBox_19<E>(
           this,
           Invocation.method(
             #openLazyBox,
@@ -1023,14 +1046,14 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
           #box,
           [name],
         ),
-        returnValue: _FakeBox_17<E>(
+        returnValue: _FakeBox_18<E>(
           this,
           Invocation.method(
             #box,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeBox_17<E>(
+        returnValueForMissingStub: _FakeBox_18<E>(
           this,
           Invocation.method(
             #box,
@@ -1045,14 +1068,14 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
           #lazyBox,
           [name],
         ),
-        returnValue: _FakeLazyBox_18<E>(
+        returnValue: _FakeLazyBox_19<E>(
           this,
           Invocation.method(
             #lazyBox,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeLazyBox_18<E>(
+        returnValueForMissingStub: _FakeLazyBox_19<E>(
           this,
           Invocation.method(
             #lazyBox,
@@ -1373,11 +1396,11 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
   @override
   _i5.Widget get widget => (super.noSuchMethod(
         Invocation.getter(#widget),
-        returnValue: _FakeWidget_19(
+        returnValue: _FakeWidget_20(
           this,
           Invocation.getter(#widget),
         ),
-        returnValueForMissingStub: _FakeWidget_19(
+        returnValueForMissingStub: _FakeWidget_20(
           this,
           Invocation.getter(#widget),
         ),
@@ -1408,7 +1431,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
           [ancestor],
           {#aspect: aspect},
         ),
-        returnValue: _FakeInheritedWidget_20(
+        returnValue: _FakeInheritedWidget_21(
           this,
           Invocation.method(
             #dependOnInheritedElement,
@@ -1416,7 +1439,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
             {#aspect: aspect},
           ),
         ),
-        returnValueForMissingStub: _FakeInheritedWidget_20(
+        returnValueForMissingStub: _FakeInheritedWidget_21(
           this,
           Invocation.method(
             #dependOnInheritedElement,
@@ -1466,7 +1489,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
           [name],
           {#style: style},
         ),
-        returnValue: _FakeDiagnosticsNode_21(
+        returnValue: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeElement,
@@ -1474,7 +1497,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
             {#style: style},
           ),
         ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_21(
+        returnValueForMissingStub: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeElement,
@@ -1495,7 +1518,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
           [name],
           {#style: style},
         ),
-        returnValue: _FakeDiagnosticsNode_21(
+        returnValue: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeWidget,
@@ -1503,7 +1526,7 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
             {#style: style},
           ),
         ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_21(
+        returnValueForMissingStub: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeWidget,
@@ -1533,14 +1556,14 @@ class MockBuildContext extends _i1.Mock implements _i5.BuildContext {
           #describeOwnershipChain,
           [name],
         ),
-        returnValue: _FakeDiagnosticsNode_21(
+        returnValue: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeOwnershipChain,
             [name],
           ),
         ),
-        returnValueForMissingStub: _FakeDiagnosticsNode_21(
+        returnValueForMissingStub: _FakeDiagnosticsNode_22(
           this,
           Invocation.method(
             #describeOwnershipChain,
@@ -1558,11 +1581,11 @@ class MockGoRouterState extends _i1.Mock implements _i13.GoRouterState {
   @override
   Uri get uri => (super.noSuchMethod(
         Invocation.getter(#uri),
-        returnValue: _FakeUri_22(
+        returnValue: _FakeUri_23(
           this,
           Invocation.getter(#uri),
         ),
-        returnValueForMissingStub: _FakeUri_22(
+        returnValueForMissingStub: _FakeUri_23(
           this,
           Invocation.getter(#uri),
         ),
@@ -1591,11 +1614,11 @@ class MockGoRouterState extends _i1.Mock implements _i13.GoRouterState {
   @override
   _i5.ValueKey<String> get pageKey => (super.noSuchMethod(
         Invocation.getter(#pageKey),
-        returnValue: _FakeValueKey_23<String>(
+        returnValue: _FakeValueKey_24<String>(
           this,
           Invocation.getter(#pageKey),
         ),
-        returnValueForMissingStub: _FakeValueKey_23<String>(
+        returnValueForMissingStub: _FakeValueKey_24<String>(
           this,
           Invocation.getter(#pageKey),
         ),
