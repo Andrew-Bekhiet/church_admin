@@ -3,6 +3,7 @@ import 'package:church_admin/church_admin.dart';
 enum ViewablesEnum {
   area,
   street,
+  store,
   family,
   service,
   class$,
@@ -13,6 +14,7 @@ enum ViewablesEnum {
   static const Map<Type, ViewablesEnum> typeToEnum = {
     Area: ViewablesEnum.area,
     Street: ViewablesEnum.street,
+    Store: ViewablesEnum.store,
     Family: ViewablesEnum.family,
     Service: ViewablesEnum.service,
     Class: ViewablesEnum.class$,
