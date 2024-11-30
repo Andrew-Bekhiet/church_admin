@@ -241,6 +241,11 @@ jobs:
         working-directory: client
         run: pod repo update
 
+      - name: Update podfile.lock
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client/ios
+        run: pod install --repo-update
+
       - name: Build ios
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
