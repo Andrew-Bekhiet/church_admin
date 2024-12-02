@@ -217,6 +217,8 @@ class ThemingService with WidgetsBindingObserver {
       bottomAppBarTheme: const BottomAppBarTheme(
         shape: CircularNotchedRectangle(),
       ),
+      floatingActionButtonTheme: themeData.floatingActionButtonTheme
+          .copyWith(shape: const CircleBorder()),
     );
   }
 
