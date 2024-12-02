@@ -27,11 +27,6 @@ class HomeBottomNavBar extends StatelessWidget {
               onTap: homeController.onTabIndexChanged,
               currentIndex: tabAnimation.value.round(),
               items: [
-                const BottomNavigationBarItem(
-                  label: 'المناطق',
-                  activeIcon: Icon(Symbols.pin_drop, fill: 1),
-                  icon: Icon(Symbols.pin_drop),
-                ),
                 if (isSundaySchool)
                   const BottomNavigationBarItem(
                     label: 'الخدمات',
@@ -39,6 +34,11 @@ class HomeBottomNavBar extends StatelessWidget {
                     icon: Icon(Symbols.volunteer_activism),
                   )
                 else ...[
+                  const BottomNavigationBarItem(
+                    label: 'المناطق',
+                    activeIcon: Icon(Symbols.pin_drop, fill: 1),
+                    icon: Icon(Symbols.pin_drop),
+                  ),
                   const BottomNavigationBarItem(
                     label: 'الشوراع',
                     activeIcon: Icon(Symbols.road, fill: 1),

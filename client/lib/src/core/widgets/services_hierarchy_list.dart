@@ -92,17 +92,18 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
         return ViewableObjectList(
           type: typeValue,
+          addSeparator: false,
           itemsExpandable: true,
           objectsController: listController,
           itemBuilder: typeValue == ViewableObjectListType.list
               ? _buildHierarchyServiceTile
-              : _buildServiceTile,
+              : _buildServiceCard,
         );
       },
     );
   }
 
-  Widget _buildServiceTile(
+  Widget _buildServiceCard(
     BuildContext context,
     Service service,
     ViewableObjectWidgetConfig? config,
@@ -272,7 +273,7 @@ class _Classes extends StatelessWidget {
                     studyYear: studyYear,
                   ) ??
                   Card.outlined(
-                    elevation: 0,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     child: ExpansionTile(
                       key: PageStorageKey(studyYear),
                       title: Text(studyYear.name),

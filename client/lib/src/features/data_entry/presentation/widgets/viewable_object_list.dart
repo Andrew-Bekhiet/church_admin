@@ -19,6 +19,7 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
     this.scrollController,
     this.offsetFromIndex = defaultOffsetFromIndex,
     this.itemsExpandable = false,
+    this.addSeparator = true,
     super.key,
   });
 
@@ -28,6 +29,7 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final bool itemsExpandable;
+  final bool addSeparator;
   final ViewableObjectListType type;
 
   @override
@@ -116,7 +118,9 @@ class _ViewableObjectListState<T extends Viewable>
               selectionController: objectsController.selectionController,
               itemBuilder: widget.itemBuilder,
               viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
-              addSeparator: i < items.length - 1,
+              addSeparator: widget.addSeparator &&
+                  i < items.length - 1 &&
+                  widget.type == ViewableObjectListType.list,
             ),
           );
         }

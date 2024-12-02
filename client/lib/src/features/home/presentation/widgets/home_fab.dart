@@ -22,10 +22,10 @@ class HomeFloatingActionButton extends StatelessWidget {
         return SwitchingFloatingActionButton(
           tabController: homeController.tabController!,
           icons: [
-            const Icon(Symbols.add_location),
             if (isSundaySchool)
               const Icon(Symbols.add)
             else ...[
+              const Icon(Symbols.add_location),
               const Icon(Symbols.add_road),
               const Icon(Symbols.group_add),
               const Icon(Symbols.add_business),
@@ -35,10 +35,10 @@ class HomeFloatingActionButton extends StatelessWidget {
           onTap: (i) {
             context.push(
               [
-                const EditAreaRoute().location,
                 if (isSundaySchool)
                   const EditServiceRoute().location
                 else ...[
+                  const EditAreaRoute().location,
                   const EditStreetRoute().location,
                   const EditFamilyRoute().location,
                   const EditStoreRoute().location,

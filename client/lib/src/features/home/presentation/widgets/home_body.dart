@@ -21,21 +21,10 @@ class HomeBody extends StatelessWidget {
         return TabBarView(
           controller: tabController,
           children: [
-            LazyTabPage(
-              tabController: tabController,
-              index: 0,
-              builder: (context) => ViewableObjectList<Area>(
-                key: const PageStorageKey('_HomeBody => AreasTab'),
-                objectsController: homeController.areasController,
-                viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-                  forceShowSecondLine: false,
-                ),
-              ),
-            ),
             if (modeSnapshot.data == HomeMode.sundaySchool)
               LazyTabPage(
                 tabController: tabController,
-                index: 1,
+                index: 0,
                 builder: (context) => ServicesHierarchyList(
                   key: const PageStorageKey('_HomeBody => ServicesTab'),
                   type: homeController.servicesListTypeSubject,
@@ -55,6 +44,17 @@ class HomeBody extends StatelessWidget {
                 ),
               )
             else ...[
+              LazyTabPage(
+                tabController: tabController,
+                index: 0,
+                builder: (context) => ViewableObjectList<Area>(
+                  key: const PageStorageKey('_HomeBody => AreasTab'),
+                  objectsController: homeController.areasController,
+                  viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+                    forceShowSecondLine: false,
+                  ),
+                ),
+              ),
               LazyTabPage(
                 tabController: tabController,
                 index: 1,
@@ -82,7 +82,7 @@ class HomeBody extends StatelessWidget {
             ],
             LazyTabPage(
               tabController: tabController,
-              index: modeSnapshot.data == HomeMode.sundaySchool ? 2 : 4,
+              index: modeSnapshot.data == HomeMode.sundaySchool ? 1 : 4,
               builder: (context) => ViewableObjectList<Person>(
                 key: const PageStorageKey('_HomeBody => PersonsTab'),
                 objectsController: homeController.personsController,

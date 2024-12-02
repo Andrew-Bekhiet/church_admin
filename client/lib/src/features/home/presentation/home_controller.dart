@@ -10,7 +10,7 @@ class HomeController {
   HomeController(this.vsync);
 
   final BehaviorSubject<ViewableObjectListType> servicesListTypeSubject =
-      BehaviorSubject.seeded(ViewableObjectListType.list);
+      BehaviorSubject.seeded(ViewableObjectListType.grid);
 
   final BehaviorSubject<Type> tabTypeSubject = BehaviorSubject.seeded(Service);
 
@@ -35,7 +35,7 @@ class HomeController {
 
   List<Type> _typesForMode(HomeMode currentMode) {
     return switch (currentMode) {
-      HomeMode.sundaySchool => [Area, Service, Person],
+      HomeMode.sundaySchool => [Service, Person],
       HomeMode.churchData => [Area, Street, Family, Store, Person],
       _ => [],
     };
@@ -57,12 +57,9 @@ class HomeController {
     final oldTabController = _tabController;
 
     final newTypes = _typesForMode(newValue);
-    final newIndex = switch (tabTypeSubject.value) {
-      final t when t == Area || t == Person => newTypes.indexOf(t),
-      _ when newValue == HomeMode.sundaySchool => 1,
-      _ when newValue == HomeMode.churchData => 0,
-      _ => 0,
-    };
+    final newIndex = tabTypeSubject.value == Person
+        ? newTypes.indexOf(tabTypeSubject.value)
+        : 0;
 
     _tabController = TabController(
       vsync: vsync,

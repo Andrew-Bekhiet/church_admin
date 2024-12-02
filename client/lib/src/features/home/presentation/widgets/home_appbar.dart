@@ -29,10 +29,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
         return AppBar(
           actions: [
-            IconButton(
-              onPressed: () => onSearch(context),
-              icon: const Icon(Symbols.search),
-            ),
             if (listType != null)
               IconButton(
                 onPressed: listType == ViewableObjectListType.list
@@ -58,12 +54,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           titleSpacing: 0,
           title: InkWell(
             onTap: () => onSearch(context),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(
-                width: MediaQuery.sizeOf(context).width,
-                height: kToolbarHeight,
+            child: const SizedBox(
+              height: kToolbarHeight,
+              child: Row(
+                children: [
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text('بحث ...'),
+                    ),
+                  ),
+                  Icon(Symbols.search),
+                  SizedBox(width: 8),
+                ],
               ),
-              child: const Center(child: Text('بحث...')),
             ),
           ),
         );
