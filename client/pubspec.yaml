@@ -138,12 +138,20 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
+    - family: Hacen Algeria
+      fonts:
+        - asset: assets/fonts/Hacen-Algeria-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Hacen-Algeria-Bd-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Hacen-Algeria-Hd-Regular.ttf
+          weight: 700
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo-VariableFont.ttf
-    - family: Changa
+    - family: Inter
       fonts:
-        - asset: assets/fonts/Changa-VariableFont.ttf
+        - asset: assets/fonts/Inter-VariableFont.ttf
   assets:
     - assets/Logo.png
     - assets/google_logo.png

@@ -21,7 +21,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
 
   const ViewableObjectWidgetConfig({
     this.selected = false,
-    this.wrapInCard = true,
+    this.wrapInCard = false,
     this.isDense = false,
     this.enabled = true,
     this.forceShowSecondLine = true,

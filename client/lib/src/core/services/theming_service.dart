@@ -32,64 +32,52 @@ class ThemingService with WidgetsBindingObserver {
 
   static TextTheme textThemeWith3Fonts(
     TextTheme base, {
-    String? displayAndHeadline,
-    String? titles,
-    String? others,
+    required String displayAndHeadline,
+    required String titles,
+    required String others,
   }) {
     return base.copyWith(
       displayLarge: base.displayLarge?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
       displayMedium: base.displayMedium?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
       displaySmall: base.displaySmall?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
       headlineLarge: base.headlineLarge?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
       headlineMedium: base.headlineMedium?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
       headlineSmall: base.headlineSmall?.copyWith(
-        fontFamily: displayAndHeadline ?? 'Cairo',
+        fontFamily: displayAndHeadline,
+        fontWeight: FontWeight.w700,
       ),
-      titleLarge: base.titleLarge?.copyWith(
-        fontFamily: titles ?? 'Changa',
-      ),
-      titleMedium: base.titleMedium?.copyWith(
-        fontFamily: titles ?? 'Changa',
-      ),
-      titleSmall: base.titleSmall?.copyWith(
-        fontFamily: titles ?? 'Changa',
-      ),
-      bodyLarge: base.bodyLarge?.copyWith(
-        fontFamily: titles ?? 'Roboto',
-      ),
-      bodyMedium: base.bodyMedium?.copyWith(
-        fontFamily: titles ?? 'Roboto',
-      ),
-      bodySmall: base.bodySmall?.copyWith(
-        fontFamily: others ?? 'Roboto',
-      ),
-      labelLarge: base.labelLarge?.copyWith(
-        fontFamily: others ?? 'Roboto',
-      ),
-      labelMedium: base.labelMedium?.copyWith(
-        fontFamily: others ?? 'Roboto',
-      ),
-      labelSmall: base.labelSmall?.copyWith(
-        fontFamily: others ?? 'Roboto',
-      ),
+      titleLarge: base.titleLarge?.copyWith(fontFamily: titles),
+      titleMedium: base.titleMedium?.copyWith(fontFamily: titles),
+      titleSmall: base.titleSmall?.copyWith(fontFamily: titles),
+      bodyLarge: base.bodyLarge?.copyWith(fontFamily: titles),
+      bodyMedium: base.bodyMedium?.copyWith(fontFamily: others),
+      bodySmall: base.bodySmall?.copyWith(fontFamily: others),
+      labelLarge: base.labelLarge?.copyWith(fontFamily: others),
+      labelMedium: base.labelMedium?.copyWith(fontFamily: others),
+      labelSmall: base.labelSmall?.copyWith(fontFamily: others),
     );
   }
 
   static Typography typographyWith3Fonts(
     Typography base, {
-    String? displayAndHeadline,
-    String? titles,
-    String? others,
+    required String displayAndHeadline,
+    required String titles,
+    required String others,
   }) {
     return Typography(
       englishLike: textThemeWith3Fonts(
@@ -127,7 +115,6 @@ class ThemingService with WidgetsBindingObserver {
 
   static ThemeData getDefault({
     Color? seedOverride,
-    Color? whiteOrBlackOverride,
     bool? isDarkOverride,
     bool? greatFeastThemeOverride,
     UserSettingsService? userSettingsService,
@@ -142,7 +129,12 @@ class ThemingService with WidgetsBindingObserver {
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
 
-    Color seed = seedOverride ?? Colors.indigo;
+    Color seed = seedOverride ?? const Color(0xff98651E);
+    final scaffoldBackgroundColor = ColorScheme.fromSeed(
+      seedColor: seed,
+      brightness: isDark ? Brightness.dark : Brightness.light,
+    ).surfaceContainerHighest;
+
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now()
@@ -160,26 +152,25 @@ class ThemingService with WidgetsBindingObserver {
     final ColorScheme colorScheme = ColorScheme.fromSeed(
       brightness: isDark ? Brightness.dark : Brightness.light,
       seedColor: seed,
+      primary: seed,
+      primaryContainer: seed.mix(scaffoldBackgroundColor, 36),
+      dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
       outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
       error: const Color(0xffFF4B40),
     );
-
-    final Color whiteOrBlack =
-        whiteOrBlackOverride ?? (isDark ? Colors.white : Colors.black);
-    final Color onSeed = seed.findInvert();
 
     final Typography typography = typographyWith3Fonts(
       Typography.material2021(
         platform: defaultTargetPlatform,
         colorScheme: colorScheme,
       ),
-      displayAndHeadline: 'Cairo',
-      titles: 'Changa',
-      others: 'Roboto',
+      displayAndHeadline: 'Hacen Algeria',
+      titles: 'Cairo',
+      others: 'Inter',
     );
 
     final ThemeData rawThemeData = ThemeData.from(
-      textTheme: isDark ? typography.white : typography.black,
+      textTheme: !isDark ? typography.black : typography.white,
       colorScheme: colorScheme,
       useMaterial3: true,
     );
@@ -189,125 +180,40 @@ class ThemingService with WidgetsBindingObserver {
       rawThemeData.typography.geometryThemeFor(ScriptCategory.tall),
     );
 
-    const radius15 = Radius.circular(15);
     final inputBorder = OutlineInputBorder(
-      gapPadding: 8,
-      borderRadius: const BorderRadius.only(
-        topLeft: radius15,
-        topRight: Radius.circular(2),
-        bottomLeft: radius15,
-        bottomRight: radius15,
-      ),
-      borderSide: BorderSide(color: whiteOrBlack),
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(color: colorScheme.primary),
     );
 
     return themeData.copyWith(
       appBarTheme: themeData.appBarTheme.copyWith(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-        ),
-        foregroundColor: onSeed,
-        backgroundColor: seed,
-      ),
-      hintColor: whiteOrBlack.withOpacity(0.5),
-      dialogTheme: themeData.dialogTheme.copyWith(
-        backgroundColor: const Color(0xff1A477C),
-        elevation: 5,
-        surfaceTintColor: const Color(0xffD9D9D9),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
-        ),
-        titleTextStyle: themeData.textTheme.bodyLarge!.copyWith(
-          color: onSeed,
-          fontWeight: FontWeight.bold,
-          decoration: TextDecoration.underline,
-        ),
-      ),
-      listTileTheme: themeData.listTileTheme.copyWith(
-        titleTextStyle: themeData.textTheme.bodyLarge!
-            .copyWith(fontWeight: FontWeight.bold),
-        iconColor: whiteOrBlack,
-        textColor: whiteOrBlack,
-      ),
-      progressIndicatorTheme: themeData.progressIndicatorTheme.copyWith(
-        color: whiteOrBlack,
-      ),
-      expansionTileTheme: themeData.expansionTileTheme.copyWith(
-        collapsedIconColor: whiteOrBlack,
-        collapsedTextColor: whiteOrBlack,
-        iconColor: whiteOrBlack.mix(seed, 20),
-        textColor: whiteOrBlack.mix(seed, 20),
+        backgroundColor: scaffoldBackgroundColor,
+        elevation: 0,
+        foregroundColor: scaffoldBackgroundColor.findInvert(),
       ),
       cardTheme: themeData.cardTheme.copyWith(
+        color: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
-        color: seed,
       ),
-      tabBarTheme: themeData.tabBarTheme.copyWith(
-        labelColor: whiteOrBlack,
-        unselectedLabelColor: whiteOrBlack.withOpacity(0.3),
-        indicatorColor: whiteOrBlack,
-        indicatorSize: TabBarIndicatorSize.label,
-        labelStyle: themeData.textTheme.bodyLarge!
-            .copyWith(fontWeight: FontWeight.bold),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        border: inputBorder,
+      inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
         enabledBorder: inputBorder,
-        focusedBorder: inputBorder,
-        activeIndicatorBorder: inputBorder.borderSide,
-        outlineBorder: inputBorder.borderSide,
-        prefixIconColor: whiteOrBlack,
-        suffixIconColor: whiteOrBlack,
-        labelStyle:
-            themeData.textTheme.titleMedium?.copyWith(color: whiteOrBlack),
-        iconColor: whiteOrBlack,
+        border: inputBorder,
       ),
-      iconTheme: themeData.iconTheme.copyWith(
-        color: whiteOrBlack,
-      ),
-      iconButtonTheme: IconButtonThemeData(
-        style: IconButton.styleFrom(
-          focusColor: onSeed,
-          foregroundColor: onSeed,
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: onSeed,
-          backgroundColor: seed,
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(color: whiteOrBlack),
-          disabledForegroundColor: whiteOrBlack.withOpacity(0.5),
-          disabledIconColor: whiteOrBlack.withOpacity(0.5),
-          iconColor: onSeed,
-          foregroundColor: onSeed,
-          backgroundColor: seed,
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: onSeed,
-          backgroundColor: seed,
-        ),
-      ),
-      checkboxTheme: themeData.checkboxTheme.copyWith(
-        side: BorderSide(color: whiteOrBlack, width: 2),
-        checkColor: WidgetStatePropertyAll(whiteOrBlack),
-      ),
-      radioTheme: themeData.radioTheme.copyWith(
-        fillColor: WidgetStatePropertyAll(whiteOrBlack),
-        overlayColor: WidgetStatePropertyAll(whiteOrBlack.withOpacity(0.5)),
+      dividerTheme: themeData.dividerTheme.copyWith(
+        thickness: 1,
+        space: 0,
+        indent: 16,
+        endIndent: 16,
+        color: colorScheme.secondary.withOpacity(0.54),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
-        backgroundColor: seed,
+        backgroundColor: colorScheme.primaryContainer,
+        selectedItemColor: colorScheme.onPrimaryContainer,
+        unselectedItemColor: colorScheme.onPrimaryContainer.withOpacity(0.5),
         showUnselectedLabels: false,
-        unselectedItemColor: onSeed.withOpacity(0.3),
-        selectedItemColor: onSeed,
       ),
+      scaffoldBackgroundColor: scaffoldBackgroundColor,
       bottomAppBarTheme: const BottomAppBarTheme(
         shape: CircularNotchedRectangle(),
       ),

@@ -116,6 +116,7 @@ class _ViewableObjectListState<T extends Viewable>
               selectionController: objectsController.selectionController,
               itemBuilder: widget.itemBuilder,
               viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
+              addSeparator: i < items.length - 1,
             ),
           );
         }
@@ -140,19 +141,10 @@ class _ViewableObjectListState<T extends Viewable>
             cacheExtent: 250,
             itemCount: items.length + 1,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            prototypeItem: widget.itemsExpandable
-                ? null
-                : HeroMode(
-                    enabled: false,
-                    child: ViewableObjectListItem(
-                      item: items.first,
-                      selectionController:
-                          objectsController.selectionController,
-                      itemBuilder: widget.itemBuilder,
-                      viewableObjectWidgetConfig:
-                          widget.viewableObjectWidgetConfig,
-                    ),
-                  ),
+            prototypeItem: !widget.itemsExpandable
+                // ignore: avoid-returning-widgets
+                ? HeroMode(enabled: false, child: itemBuilder(context, 0))
+                : null,
           );
         }
       },

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class HomeSearchDelegate extends SearchDelegate {
@@ -20,13 +21,8 @@ class HomeSearchDelegate extends SearchDelegate {
     final theme = Theme.of(context);
 
     return theme.copyWith(
-      textTheme: theme.textTheme.copyWith(
-        titleLarge: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
-      ),
       inputDecorationTheme: searchFieldDecorationTheme ??
-          InputDecorationTheme(
-            hintStyle:
-                theme.textTheme.titleLarge?.copyWith(color: Colors.white),
+          const InputDecorationTheme(
             border: InputBorder.none,
           ),
     );
@@ -104,7 +100,10 @@ class HomeSearchDelegate extends SearchDelegate {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 10,
+                      ),
                       child: Text(
                         AdvancedQueriesMetadata.queryableTypes[type]!.label,
                         style: Theme.of(context).textTheme.headlineSmall,
@@ -128,6 +127,11 @@ class HomeSearchDelegate extends SearchDelegate {
                                   forceShowSecondLine: false,
                                 ),
                               ),
+                            )
+                            .expandIndexed(
+                              (i, w) => i != sectionItems.length - 1
+                                  ? [w, const Divider()]
+                                  : [w],
                             )
                             .toList(),
                       ),

@@ -93,7 +93,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     );
 
     if (wrapInCard ?? config.wrapInCard) {
-      return Card.filled(
+      return Card.outlined(
         elevation: selected ?? config.selected ? 4 : 1,
         color: object.color,
         child: tile,

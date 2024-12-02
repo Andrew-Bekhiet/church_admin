@@ -27,12 +27,6 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final inputBorder = OutlineInputBorder(
-      gapPadding: 8,
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
-      borderSide: BorderSide(color: colorScheme.primary),
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -46,10 +40,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
             fit: BoxFit.scaleDown,
           ),
           centerTitle: true,
-          title: const Text(
-            'كنيسة السيدة العذراء مريم',
-            style: TextStyle(color: Colors.white),
-          ),
+          title: const Text('كنيسة السيدة العذراء مريم'),
         ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(35)),
@@ -64,18 +55,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               PasswordFormField(
                 onFieldSubmitted: _submit,
                 controller: _passwordText,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'كلمة السر',
-                  border: inputBorder,
-                  enabledBorder: inputBorder,
-                  focusedBorder: inputBorder,
-                  prefixIconColor: Colors.white,
-                  suffixIconColor: Colors.white,
-                  labelStyle: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(color: colorScheme.primary),
-                  iconColor: Colors.white,
                 ),
                 validator: (p) =>
                     p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,

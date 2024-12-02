@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:tinycolor2/tinycolor2.dart';
 
 export 'view_object_details/view_area.dart';
 export 'view_object_details/view_class.dart';
@@ -106,13 +105,14 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
-        final Color foregroundColor =
-            (objectData.color ?? theme.colorScheme.primary).findInvert();
+        final Color? appBarForegroundColor =
+            (objectData.color ?? theme.appBarTheme.backgroundColor)
+                ?.findInvert();
 
         final slivers = [
           SliverAppBar(
             backgroundColor: objectData.color,
-            foregroundColor: foregroundColor,
+            foregroundColor: appBarForegroundColor,
             stretch: true,
             pinned: true,
             expandedHeight: appBarMaxHeight,
@@ -128,7 +128,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             flexibleSpace: ViewableObjectAppBar(
               circleCrop: objectData is Person || objectData is User,
               backgroundColor: objectData.color,
-              foregroundColor: foregroundColor,
+              foregroundColor: appBarForegroundColor,
               viewable: widget.object?.hasImage ?? false
                   ? widget.object!
                   : objectData,
@@ -166,17 +166,11 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 ),
               );
 
-        final newTheme = ThemingService.getDefault(
-          seedOverride: objectData.color,
-          whiteOrBlackOverride: foregroundColor,
-          isDarkOverride: foregroundColor.isLight,
-        );
+        final newTheme =
+            ThemingService.getDefault(seedOverride: objectData.color);
 
         return Theme(
-          data: newTheme.copyWith(
-            scaffoldBackgroundColor:
-                objectData.color ?? theme.appBarTheme.backgroundColor,
-          ),
+          data: newTheme,
           child: DefaultTabController(
             length: widget.childrenTypes.length,
             child: Scaffold(

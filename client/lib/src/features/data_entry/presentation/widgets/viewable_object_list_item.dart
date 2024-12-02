@@ -7,6 +7,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
     this.selectionController,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
+    this.addSeparator = true,
     ViewableObjectService? viewableObjectService,
     super.key,
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
@@ -16,6 +17,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   final ItemBuilder<T>? itemBuilder;
   final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
   final ViewableObjectService viewableObjectService;
+  final bool addSeparator;
 
   late final ViewableObjectWidgetConfig<T> effectiveConfig =
       (viewableObjectWidgetConfig ?? ViewableObjectWidgetConfig<T>()).copyWith(
@@ -42,16 +44,28 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
               : null,
         );
 
-        return itemBuilder?.call(
-              context,
-              item,
-              config,
-            ) ??
-            ViewableObjectWidget(
-              item,
-              config: config,
-              viewableObjectService: viewableObjectService,
-            );
+        final Widget itemWidget = itemBuilder != null
+            ? itemBuilder!(
+                context,
+                item,
+                config,
+              )
+            : ViewableObjectWidget(
+                item,
+                config: config,
+                viewableObjectService: viewableObjectService,
+              );
+
+        if (!addSeparator) return itemWidget;
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            itemWidget,
+            const Divider(),
+          ],
+        );
       },
     );
   }

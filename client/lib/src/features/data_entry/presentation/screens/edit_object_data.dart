@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:tinycolor2/tinycolor2.dart';
 
 export 'edit_object_data/edit_area.dart';
 export 'edit_object_data/edit_class.dart';
@@ -46,20 +45,15 @@ class _EditObjectDataState<T extends ViewableWithID>
 
   @override
   Widget build(BuildContext context) {
+    final newTheme =
+        ThemingService.getDefault(seedOverride: newObjectData.color);
+
     final foregroundColor =
-        (newObjectData.color ?? Theme.of(context).colorScheme.primary)
-            .findInvert();
-    final newTheme = ThemingService.getDefault(
-      seedOverride: newObjectData.color,
-      whiteOrBlackOverride: foregroundColor,
-      isDarkOverride: foregroundColor.isLight,
-    );
+        (newObjectData.color ?? Theme.of(context).appBarTheme.backgroundColor)
+            ?.findInvert();
 
     return Theme(
-      data: newTheme.copyWith(
-        scaffoldBackgroundColor:
-            newObjectData.color ?? newTheme.appBarTheme.backgroundColor,
-      ),
+      data: newTheme,
       child: Scaffold(
         body: Form(
           key: _controller.formKey,
