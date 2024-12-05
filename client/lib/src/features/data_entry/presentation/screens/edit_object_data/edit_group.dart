@@ -56,7 +56,6 @@ class _EditGroupState extends State<EditGroup> {
     return EditObjectData(
       objectData: widget.group,
       getController: () => _controller,
-      objectOnEmptyPhoto: Group(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

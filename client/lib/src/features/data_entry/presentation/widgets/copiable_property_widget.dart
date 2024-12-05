@@ -40,8 +40,8 @@ class CopiablePropertyWidget extends StatelessWidget {
       trailing = Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (copyOrError != null) copyOrError,
           ...additionalOptions!,
+          if (copyOrError != null) copyOrError,
         ],
       );
     } else {

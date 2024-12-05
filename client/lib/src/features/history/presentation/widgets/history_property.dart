@@ -35,7 +35,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
           ),
           Text(
             value != null ? dateFormat.format(value!) : '',
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
         ],
       ),

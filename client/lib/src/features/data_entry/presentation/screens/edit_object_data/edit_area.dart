@@ -47,7 +47,6 @@ class _EditAreaState extends State<EditArea> {
     return EditObjectData(
       objectData: widget.area,
       getController: () => _controller,
-      objectOnEmptyPhoto: Area(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

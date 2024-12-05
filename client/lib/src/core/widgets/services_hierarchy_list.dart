@@ -117,6 +117,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 child: AbsorbPointer(
@@ -130,6 +131,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
               Text(
                 service.name,
                 style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
               ),
             ],
           ),

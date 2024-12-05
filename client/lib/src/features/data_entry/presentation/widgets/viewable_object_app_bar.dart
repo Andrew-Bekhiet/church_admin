@@ -4,18 +4,20 @@ import 'package:flutter/material.dart';
 class ViewableObjectAppBar extends StatefulWidget {
   const ViewableObjectAppBar({
     required this.viewable,
-    required this.foregroundColor,
-    required this.backgroundColor,
     required this.appBarMaxHeight,
+    this.foregroundColor,
     this.circleCrop = true,
+    this.onTap,
+    this.overrideImage,
     super.key,
   });
 
   final Color? foregroundColor;
-  final Color? backgroundColor;
   final ViewableWithIDAndImage viewable;
   final double appBarMaxHeight;
   final bool circleCrop;
+  final void Function()? onTap;
+  final Widget? overrideImage;
 
   @override
   State<ViewableObjectAppBar> createState() => ViewableObjectAppBarState();
@@ -92,11 +94,13 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
               _AppBarPhoto(
                 foregroundColor: _foregroundColorTween.lerp(animationValue),
                 viewable: widget.viewable,
-                height: constraints.biggest.height,
+                height: 4 * constraints.biggest.height / 5,
                 photoAlign: _photoAlignTween.lerp(animationValue),
                 borderRadius: borderRadiusValue,
-                circleCrop: widget.circleCrop && animationValue > 0.75,
+                circleCrop: widget.circleCrop,
                 blurhashSize: widget.appBarMaxHeight + kToolbarHeight,
+                onTap: widget.onTap,
+                overrideImage: widget.overrideImage,
               ),
               Align(
                 alignment: textAlignValue,
@@ -131,6 +135,8 @@ class _AppBarPhoto extends StatelessWidget {
     required this.viewable,
     required this.foregroundColor,
     required this.circleCrop,
+    required this.onTap,
+    required this.overrideImage,
   });
 
   final ViewableWithIDAndImage viewable;
@@ -141,6 +147,8 @@ class _AppBarPhoto extends StatelessWidget {
   final Color? foregroundColor;
   final bool circleCrop;
   final BorderRadius? borderRadius;
+  final void Function()? onTap;
+  final Widget? overrideImage;
 
   @override
   Widget build(BuildContext context) {
@@ -156,12 +164,19 @@ class _AppBarPhoto extends StatelessWidget {
         ),
         child: IconTheme(
           data: IconTheme.of(context).copyWith(color: foregroundColor),
-          child: ImageObjectWidget(
-            viewable,
-            circleCrop: circleCrop,
-            size: height,
-            borderRadius: borderRadius,
-            blurhashSize: blurhashSize,
+          child: GestureDetector(
+            onTap: onTap,
+            child: AbsorbPointer(
+              absorbing: onTap != null,
+              child: overrideImage ??
+                  ImageObjectWidget(
+                    viewable,
+                    circleCrop: circleCrop,
+                    size: height,
+                    borderRadius: borderRadius,
+                    blurhashSize: blurhashSize,
+                  ),
+            ),
           ),
         ),
       ),

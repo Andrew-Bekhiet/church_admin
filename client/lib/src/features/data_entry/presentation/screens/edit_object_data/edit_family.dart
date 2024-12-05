@@ -63,7 +63,6 @@ class _EditFamilyState extends State<EditFamily> {
   Widget build(BuildContext context) {
     return EditObjectData(
       objectData: widget.family,
-      objectOnEmptyPhoto: Family(id: '', name: ''),
       getController: () => _controller,
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

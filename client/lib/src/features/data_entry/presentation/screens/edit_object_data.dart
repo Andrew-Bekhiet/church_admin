@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -18,7 +17,6 @@ class EditObjectData<T extends ViewableWithID> extends StatefulWidget {
 
   final T? objectData;
   final EditObjectController<T> Function() getController;
-  final T? objectOnEmptyPhoto;
   final Widget Function(BuildContext, EditObjectController<T>) builder;
   final bool Function(EditObjectController<T>) canDeletePhoto;
 
@@ -26,7 +24,6 @@ class EditObjectData<T extends ViewableWithID> extends StatefulWidget {
     required this.objectData,
     required this.getController,
     required this.builder,
-    this.objectOnEmptyPhoto,
     this.canDeletePhoto = defaultCanDeletePhoto,
     super.key,
   });
@@ -48,10 +45,6 @@ class _EditObjectDataState<T extends ViewableWithID>
     final newTheme =
         ThemingService.getDefault(seedOverride: newObjectData.color);
 
-    final foregroundColor =
-        (newObjectData.color ?? Theme.of(context).appBarTheme.backgroundColor)
-            ?.findInvert();
-
     return Theme(
       data: newTheme,
       child: Scaffold(
@@ -67,15 +60,11 @@ class _EditObjectDataState<T extends ViewableWithID>
           child: CustomScrollView(
             slivers: [
               if (newObjectData is ViewableWithIDAndImage)
-                PhotoField(
-                  object: newObjectData as ViewableWithIDAndImage,
-                  initialValue: _controller.photoFieldState,
-                  objectOnEmpty:
-                      widget.objectOnEmptyPhoto! as ViewableWithIDAndImage,
-                  canDelete: _controller.isUpdate,
-                  backgroundColor: newObjectData.color,
-                  foregroundColor: foregroundColor,
-                  addActions: [
+                SliverAppBar(
+                  stretch: true,
+                  pinned: true,
+                  expandedHeight: MediaQuery.sizeOf(context).width,
+                  actions: [
                     if (widget.canDeletePhoto(_controller))
                       IconButton(
                         onPressed: () => _controller.delete(context),
@@ -83,9 +72,17 @@ class _EditObjectDataState<T extends ViewableWithID>
                         tooltip: 'حذف',
                       ),
                   ],
-                  onSaved: (v) => v?.hasChanged ?? false
-                      ? _controller.photoFieldState = v!
-                      : null,
+                  flexibleSpace: PhotoField(
+                    circleCrop:
+                        newObjectData is Person || newObjectData is User,
+                    object: newObjectData as ViewableWithIDAndImage,
+                    initialValue: _controller.photoFieldState,
+                    canDelete: _controller.isUpdate,
+                    backgroundColor: newObjectData.color,
+                    onSaved: (v) => v?.hasChanged ?? false
+                        ? _controller.photoFieldState = v!
+                        : null,
+                  ),
                 ),
               SliverFillRemaining(
                 hasScrollBody: false,

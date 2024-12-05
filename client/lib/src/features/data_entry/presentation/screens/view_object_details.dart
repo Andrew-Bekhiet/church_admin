@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
-import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
 
 export 'view_object_details/view_area.dart';
@@ -105,14 +104,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
-        final Color? appBarForegroundColor =
-            (objectData.color ?? theme.appBarTheme.backgroundColor)
-                ?.findInvert();
-
         final slivers = [
           SliverAppBar(
-            backgroundColor: objectData.color,
-            foregroundColor: appBarForegroundColor,
             stretch: true,
             pinned: true,
             expandedHeight: appBarMaxHeight,
@@ -127,8 +120,6 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             ],
             flexibleSpace: ViewableObjectAppBar(
               circleCrop: objectData is Person || objectData is User,
-              backgroundColor: objectData.color,
-              foregroundColor: appBarForegroundColor,
               viewable: widget.object?.hasImage ?? false
                   ? widget.object!
                   : objectData,

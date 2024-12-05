@@ -47,7 +47,6 @@ class _EditStreetState extends State<EditStreet> {
     return EditObjectData(
       objectData: widget.street,
       getController: () => _controller,
-      objectOnEmptyPhoto: Street(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

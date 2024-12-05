@@ -49,7 +49,6 @@ Future<void> main() async {
                       flexibleSpace: ViewableObjectAppBar(
                         viewable: viewable,
                         appBarMaxHeight: expandedHeight,
-                        backgroundColor: viewable.color,
                         foregroundColor: foregroundColor,
                       ),
                     ),
@@ -127,7 +126,6 @@ Future<void> main() async {
                       flexibleSpace: ViewableObjectAppBar(
                         viewable: viewable,
                         appBarMaxHeight: expandedHeight,
-                        backgroundColor: viewable.color,
                         foregroundColor: foregroundColor,
                         circleCrop: false,
                       ),

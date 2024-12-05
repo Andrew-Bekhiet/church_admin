@@ -55,7 +55,6 @@ class _EditServiceState extends State<EditService> {
     return EditObjectData(
       objectData: widget.service,
       getController: () => _controller,
-      objectOnEmptyPhoto: Service(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

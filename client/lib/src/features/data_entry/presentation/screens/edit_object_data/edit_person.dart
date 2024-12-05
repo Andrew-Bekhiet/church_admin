@@ -97,7 +97,6 @@ class _EditPersonState extends State<EditPerson> {
     return EditObjectData(
       objectData: widget.person,
       getController: () => _controller,
-      objectOnEmptyPhoto: Person(id: '', name: ''),
       canDeletePhoto: (_) =>
           widget.person != null && widget.person?.user?.email == null,
       builder: (context, _controller) => Column(
@@ -229,7 +228,6 @@ class _EditPersonState extends State<EditPerson> {
               ),
             ],
           ),
-          const Divider(thickness: 1),
           AddressWithLocationField(
             initialAddress: newPerson.address,
             onAddressChanged: (value) => newPerson = newPerson.copyWith(
@@ -237,7 +235,6 @@ class _EditPersonState extends State<EditPerson> {
             ),
             onEditLocation: _editGeoLocation,
           ),
-          const Divider(thickness: 1),
           DateTimeField(
             withTime: false,
             label: 'تاريخ الميلاد',
@@ -248,7 +245,7 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
-          const Divider(thickness: 1),
+          const Divider(),
           TappableFormField<(Set<Service>, Set<Group>)>(
             key: ValueKey(
               (
@@ -497,7 +494,7 @@ class _EditPersonState extends State<EditPerson> {
               const EdgeInsets.symmetric(vertical: 8),
             ),
           ],
-          const Divider(thickness: 1),
+          const Divider(),
           GenderField(
             initialValue: newPerson.gender,
             onChanged: (v) {
@@ -511,7 +508,7 @@ class _EditPersonState extends State<EditPerson> {
                     );
               setState(() {});
             },
-          ),
+          ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
           ObjectSelectionField<PersonType, PersonType?>(
             initialValue: newPerson.personType,
             listController: (s) => ViewableObjectListController(
@@ -531,46 +528,7 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
-          const Divider(thickness: 1),
-          if (newPerson.gender)
-            FormField<bool>(
-              initialValue: newPerson.isShammas,
-              builder: (state) => CheckboxListTile(
-                title: const Text('شماس؟'),
-                value: state.value,
-                onChanged: (v) {
-                  state.didChange(v);
-                  newPerson = v!
-                      ? newPerson.copyWith(isShammas: v)
-                      : newPerson.copyWith(
-                          isShammas: v,
-                          shammasLevel: null,
-                          shammasLevelId: null,
-                        );
-                  setState(() {});
-                },
-              ),
-            ),
-          if (newPerson.gender && newPerson.isShammas)
-            ObjectSelectionField<ShammasLevel, ShammasLevel?>(
-              initialValue: newPerson.shammasLevel,
-              listController: (s) => ViewableObjectListController(
-                objectsPaginatableStream: DatabaseService
-                    .I.metadata.shammasLevels
-                    .streamAll(searchQuery: s),
-              ),
-              labelText: 'رتبة الشموسية',
-              onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
-                shammasLevel: value,
-                //... and its id to send it in the mutation
-                shammasLevelId: value?.id,
-              ),
-              builder: (context, state) {
-                return state.value != null ? Text(state.value!.name) : null;
-              },
-            ),
+          const Divider(),
           ObjectSelectionField<Church, Church?>(
             initialValue: newPerson.church,
             listController: (s) => ViewableObjectListController(
@@ -620,6 +578,45 @@ class _EditPersonState extends State<EditPerson> {
               },
             ),
           ),
+          if (newPerson.gender)
+            FormField<bool>(
+              initialValue: newPerson.isShammas,
+              builder: (state) => CheckboxListTile(
+                title: const Text('شماس؟'),
+                value: state.value,
+                onChanged: (v) {
+                  state.didChange(v);
+                  newPerson = v!
+                      ? newPerson.copyWith(isShammas: v)
+                      : newPerson.copyWith(
+                          isShammas: v,
+                          shammasLevel: null,
+                          shammasLevelId: null,
+                        );
+                  setState(() {});
+                },
+              ),
+            ),
+          if (newPerson.gender && newPerson.isShammas)
+            ObjectSelectionField<ShammasLevel, ShammasLevel?>(
+              initialValue: newPerson.shammasLevel,
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService
+                    .I.metadata.shammasLevels
+                    .streamAll(searchQuery: s),
+              ),
+              labelText: 'رتبة الشموسية',
+              onChanged: (value) => newPerson = newPerson.copyWith(
+                //Store the selected object
+                //so we can build the widget based on it ...
+                shammasLevel: value,
+                //... and its id to send it in the mutation
+                shammasLevelId: value?.id,
+              ),
+              builder: (context, state) {
+                return state.value != null ? Text(state.value!.name) : null;
+              },
+            ),
           ObjectSelectionField<PersonState, PersonState?>(
             initialValue: newPerson.state,
             listController: (s) => ViewableObjectListController(
@@ -660,7 +657,7 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
-          const Divider(thickness: 1),
+          const Divider(),
           MultiObjectSelectionField<Hobby>(
             validator: _personGeneralCheckValidator,
             decoration: const InputDecoration(
@@ -746,12 +743,6 @@ class _EditPersonState extends State<EditPerson> {
                   : const Text('لا يوجد شارات');
             },
           ),
-          ColorField(
-            initialValue: newPerson.color,
-            onChanged: (value) => setState(
-              () => newPerson = newPerson.copyWith(color: value),
-            ),
-          ),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'ملاحظات',
@@ -764,7 +755,13 @@ class _EditPersonState extends State<EditPerson> {
             maxLines: null,
             validator: (value) => null,
           ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
-          const Divider(thickness: 1),
+          ColorField(
+            initialValue: newPerson.color,
+            onChanged: (value) => setState(
+              () => newPerson = newPerson.copyWith(color: value),
+            ),
+          ),
+          const Divider(),
           ObjectSelectionField<Family, Family?>(
             validator: _personGeneralCheckValidator,
             decoration: const InputDecoration(errorMaxLines: 2),
@@ -801,7 +798,7 @@ class _EditPersonState extends State<EditPerson> {
                                           forceShowSecondLine: false,
                                         ),
                                       ), */
-          const Divider(thickness: 1),
+          const Divider(),
           DateTimeField(
             withTime: false,
             label: 'أخر تناول',
@@ -834,7 +831,7 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
-          const Divider(thickness: 1),
+          const Divider(),
           DateTimeField(
             label: 'أخر افتقاد',
             initialValue: newPerson.lastVisit?.time,

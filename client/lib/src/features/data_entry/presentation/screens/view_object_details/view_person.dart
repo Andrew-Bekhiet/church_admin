@@ -76,7 +76,7 @@ class _ViewPersonState extends State<ViewPerson> {
                 additionalOptions: [
                   if (person.geolocation != null)
                     IconButton(
-                      icon: const Icon(Symbols.map),
+                      icon: const Icon(Symbols.location_pin),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ViewGeodataMap(
@@ -112,7 +112,7 @@ class _ViewPersonState extends State<ViewPerson> {
               ),
               const Divider(thickness: 1),
               ListTile(
-                title: const Text('الخدمات المشارك بها'),
+                title: const Text('الخدمات التي يوجد بها'),
                 subtitle: _ShowMore<Service>(
                   person: person,
                   getField: (p) => p?.services,
@@ -120,7 +120,7 @@ class _ViewPersonState extends State<ViewPerson> {
                 ),
               ),
               ListTile(
-                title: const Text('الفصول التي يظهر بها'),
+                title: const Text('الفصول التي يوجد بها'),
                 subtitle: _ShowMore<Class>(
                   person: person,
                   getField: (p) => p?.classes,
@@ -128,13 +128,14 @@ class _ViewPersonState extends State<ViewPerson> {
                 ),
               ),
               ListTile(
-                title: const Text('المجموعات المشارك بها'),
+                title: const Text('المجموعات التي يشارك بها'),
                 subtitle: _ShowMore<Group>(
                   person: person,
                   getField: (p) => p?.groups,
                   loadAll: () => _groupsLimit.add(null),
                 ),
               ),
+              const Divider(),
               if (person.isStudent) ...[
                 ListTile(
                   title: const Text('السنة الدراسية'),
@@ -175,16 +176,6 @@ class _ViewPersonState extends State<ViewPerson> {
                 subtitle: Text(person.personType?.name ?? ''),
               ),
               const Divider(thickness: 1),
-              if (person.gender)
-                ListTile(
-                  title: const Text('شماس؟'),
-                  subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
-                ),
-              if (person.gender && person.isShammas)
-                ListTile(
-                  title: const Text('رتبة الشموسية'),
-                  subtitle: Text(person.shammasLevel?.name ?? ''),
-                ),
               ListTile(
                 title: const Text('الكنيسة'),
                 subtitle: Text(person.church?.name ?? ''),
@@ -207,7 +198,16 @@ class _ViewPersonState extends State<ViewPerson> {
                       )
                     : null,
               ),
-              const Divider(thickness: 1),
+              if (person.gender)
+                ListTile(
+                  title: const Text('شماس؟'),
+                  subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
+                ),
+              if (person.gender && person.isShammas)
+                ListTile(
+                  title: const Text('رتبة الشموسية'),
+                  subtitle: Text(person.shammasLevel?.name ?? ''),
+                ),
               ListTile(
                 title: const Text('الحالة الروحية'),
                 subtitle: Text(person.state?.name ?? ''),
@@ -223,6 +223,7 @@ class _ViewPersonState extends State<ViewPerson> {
                         ),
                       ),
               ),
+              const Divider(),
               ListTile(
                 title: const Text('الهوايات'),
                 subtitle: Wrap(
@@ -276,54 +277,6 @@ class _ViewPersonState extends State<ViewPerson> {
                 'ملاحظات',
                 person.notes,
                 showErrorIfEmpty: false,
-              ),
-              const Divider(thickness: 1),
-              ListTile(
-                title: const Text('المناطق التي يظهر بها'),
-                subtitle: _ShowMore<Area>(
-                  person: person,
-                  getField: (p) => p?.areas,
-                ),
-              ),
-              ListTile(
-                title: const Text('الشوارع التي يظهر بها'),
-                subtitle: Column(
-                  children: [
-                    for (final s in person.streets ?? <Street>[])
-                      ViewableObjectWidget(
-                        s,
-                        isDense: true,
-                        forceShowSecondLine: false,
-                        circleCrop: false,
-                      ),
-                  ],
-                ),
-              ),
-              if (person.family != null)
-                ListTile(
-                  title: const Text('العائلة'),
-                  subtitle: ViewableObjectWidget<Family>(
-                    person.family!,
-                    isDense: true,
-                    forceShowSecondLine: false,
-                  ),
-                ),
-              /* if (person.store != null)
-                      ListTile(
-                        title: const Text('داخل متجر'),
-                        subtitle: ViewableObjectWidget<Store>(
-                          person.store!,
-                          dense: true,
-                          forceShowSecondLine: false,
-                        ),
-                      ), */
-              const Divider(thickness: 1),
-              ListTile(
-                title: FilledButton.tonalIcon(
-                  icon: const Icon(Symbols.query_stats),
-                  label: const Text('احصائيات'),
-                  onPressed: () => _analysis(context, person),
-                ),
               ),
               const Divider(thickness: 1),
               HistoryProperty(
@@ -381,6 +334,53 @@ class _ViewPersonState extends State<ViewPerson> {
                 getHistoryStream: () => DatabaseService.I.history
                     .paginateEditHistory<Person>(id: person.id),
               ),
+              ListTile(
+                title: FilledButton.icon(
+                  icon: const Icon(Symbols.query_stats),
+                  label: const Text('احصائيات'),
+                  onPressed: () => _analysis(context, person),
+                ),
+              ),
+              const Divider(thickness: 1),
+              ListTile(
+                title: const Text('المناطق التي يوجد بها'),
+                subtitle: _ShowMore<Area>(
+                  person: person,
+                  getField: (p) => p?.areas,
+                ),
+              ),
+              ListTile(
+                title: const Text('الشوارع التي يوجد بها'),
+                subtitle: Column(
+                  children: [
+                    for (final s in person.streets ?? <Street>[])
+                      ViewableObjectWidget(
+                        s,
+                        isDense: true,
+                        forceShowSecondLine: false,
+                        circleCrop: false,
+                      ),
+                  ],
+                ),
+              ),
+              if (person.family != null)
+                ListTile(
+                  title: const Text('العائلة'),
+                  subtitle: ViewableObjectWidget<Family>(
+                    person.family!,
+                    isDense: true,
+                    forceShowSecondLine: false,
+                  ),
+                ),
+              /* if (person.store != null)
+                      ListTile(
+                        title: const Text('داخل متجر'),
+                        subtitle: ViewableObjectWidget<Store>(
+                          person.store!,
+                          dense: true,
+                          forceShowSecondLine: false,
+                        ),
+                      ), */
               const SizedBox(height: 50),
             ],
           ),

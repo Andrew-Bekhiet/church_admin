@@ -199,7 +199,7 @@ class EditObjectController<T extends ViewableWithID> {
   Future<bool> confirmExit(BuildContext context) async {
     formKey.currentState!.save();
 
-    return newObject == initialObject ||
+    return newObject == initialObject && !photoFieldState.hasChanged ||
         (await showDialog(
               context: context,
               builder: (context) => AlertDialog(

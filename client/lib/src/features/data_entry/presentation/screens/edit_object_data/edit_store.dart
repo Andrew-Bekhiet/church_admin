@@ -53,7 +53,6 @@ class _EditStoreState extends State<EditStore> {
     return EditObjectData(
       objectData: widget.store,
       getController: () => _controller,
-      objectOnEmptyPhoto: Store(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

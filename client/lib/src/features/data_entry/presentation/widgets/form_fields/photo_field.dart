@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:transparent_pointer/transparent_pointer.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:universal_io/io.dart';
 
 class PhotoFieldState {
@@ -16,7 +15,6 @@ class PhotoFieldState {
 
 class PhotoField extends StatelessWidget {
   final ViewableWithIDAndImage object;
-  final ViewableWithIDAndImage objectOnEmpty;
 
   final PhotoFieldState? initialValue;
   final void Function(PhotoFieldState?)? onSaved;
@@ -24,16 +22,14 @@ class PhotoField extends StatelessWidget {
 
   final Color? backgroundColor;
   final Color? foregroundColor;
-
-  final List<Widget> addActions;
+  final bool circleCrop;
 
   const PhotoField({
     required this.object,
-    required this.objectOnEmpty,
+    required this.circleCrop,
     required this.canDelete,
     this.backgroundColor,
     this.foregroundColor,
-    this.addActions = const [],
     this.onSaved,
     this.initialValue,
     super.key,
@@ -41,82 +37,65 @@ class PhotoField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double appBarHeight = MediaQuery.sizeOf(context).height * 0.41;
+    final double appBarMaxHeight = MediaQuery.sizeOf(context).width;
 
     return FormField<PhotoFieldState>(
       initialValue: initialValue,
       onSaved: onSaved,
-      builder: (state) => SliverAppBar(
-        backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
-        stretch: true,
-        pinned: true,
-        expandedHeight: appBarHeight,
-        actions: [
-          IconButton(
-            onPressed: _changeImage(context, state),
-            icon: const Icon(Symbols.photo_camera),
-            tooltip: 'اختيار صورة',
-          ),
-          ...addActions,
-        ],
-        flexibleSpace: LayoutBuilder(
+      builder: (state) => SafeArea(
+        child: LayoutBuilder(
           builder: (context, constraints) {
-            final themeData = Theme.of(context);
+            final photoSize = 4 * constraints.biggest.height / 5;
+            final colorScheme = Theme.of(context).colorScheme;
 
-            return FlexibleSpaceBar(
-              centerTitle: false,
-              expandedTitleScale: 4,
-              titlePadding: const EdgeInsetsDirectional.only(
-                bottom: 16,
-                start: 72,
-                end: 10,
-              ),
-              title: TransparentPointer(
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 300),
-                  opacity:
-                      constraints.biggest.height > kToolbarHeight * 2 ? 0 : 1,
-                  child: Text(
-                    object.name,
-                    style: themeData.textTheme.titleLarge?.copyWith(
-                      color: foregroundColor,
+            return ViewableObjectAppBar(
+              viewable: object,
+              appBarMaxHeight: appBarMaxHeight,
+              foregroundColor: foregroundColor,
+              circleCrop: circleCrop,
+              onTap: _changeImage(context, state),
+              overrideImage: switch ((
+                state.value!.hasChanged,
+                state.value!.deletePhoto,
+                object.hasImage,
+              )) {
+                (true, false, _) => ClipPath(
+                    clipper: ShapeBorderClipper(
+                      shape: circleCrop
+                          ? const CircleBorder()
+                          : const RoundedRectangleBorder(
+                              borderRadius: ImageObjectWidget.clipBorderRadius,
+                            ),
+                      textDirection: Directionality.maybeOf(context),
                     ),
-                    overflow: TextOverflow.ellipsis,
+                    child: Image.file(
+                      File(state.value!.newPhoto!.path),
+                      height: photoSize,
+                    ),
                   ),
-                ),
-              ),
-              background: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                child: ProgressIndicatorTheme(
-                  data: themeData.progressIndicatorTheme.copyWith(
-                    color: themeData.brightness == Brightness.light
-                        ? themeData.colorScheme.onPrimary
-                        : themeData.colorScheme.onSurface,
+                (true, true, _) || (_, _, false) => DecoratedBox(
+                    decoration: ShapeDecoration(
+                      shape: circleCrop
+                          ? const CircleBorder()
+                          : const RoundedRectangleBorder(
+                              borderRadius: ImageObjectWidget.clipBorderRadius,
+                            ),
+                      color: colorScheme.primaryContainer,
+                    ),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints.expand(
+                        height: photoSize,
+                        width: photoSize,
+                      ),
+                      child: Icon(
+                        Symbols.camera_alt,
+                        size: 2 * photoSize / 3,
+                        color: colorScheme.onPrimaryContainer,
+                      ),
+                    ),
                   ),
-                  child: IconTheme(
-                    data:
-                        IconTheme.of(context).copyWith(color: foregroundColor),
-                    child: state.value!.hasChanged
-                        ? state.value!.deletePhoto
-                            ? ImageObjectWidget(
-                                objectOnEmpty,
-                                circleCrop: false,
-                                size: appBarHeight,
-                                blurhashSize: constraints.biggest.longestSide,
-                              )
-                            : Image.file(
-                                File(state.value!.newPhoto!.path),
-                              )
-                        : ImageObjectWidget(
-                            object,
-                            circleCrop: false,
-                            size: appBarHeight,
-                            blurhashSize: constraints.biggest.longestSide,
-                          ),
-                  ),
-                ),
-              ),
+                (_, _, _) => null,
+              },
             );
           },
         ),

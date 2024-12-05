@@ -85,7 +85,7 @@ class _ViewServiceState extends State<ViewService> {
               ),
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add service analysis

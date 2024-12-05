@@ -57,7 +57,6 @@ class _EditClassState extends State<EditClass> {
     return EditObjectData(
       objectData: widget.class$,
       getController: () => _controller,
-      objectOnEmptyPhoto: Class(id: '', name: ''),
       builder: (context, _controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
