@@ -109,11 +109,11 @@ class ImagePickerService {
                         builder: (context) => AlertDialog(
                           title: const Text('هل تريد حذف الصورة؟'),
                           actions: [
-                            OutlinedButton(
+                            FilledButton(
                               onPressed: () => Navigator.of(context).pop(false),
                               child: const Text('لا'),
                             ),
-                            TextButton(
+                            FilledButton(
                               onPressed: () => Navigator.of(context).pop(true),
                               child: const Text('نعم'),
                             ),

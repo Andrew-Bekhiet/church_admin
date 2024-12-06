@@ -57,14 +57,14 @@ class NotificationDetailsDialog extends StatelessWidget {
       ),
       actions: [
         if (notification.additionalData?['query'] != null)
-          TextButton(
+          FilledButton(
             onPressed: _onQueryTap(
               context,
               notification.additionalData!['query'],
             ),
             child: const Text('فتح نتائج البحث'),
           ),
-        TextButton(
+        FilledButton(
           onPressed: Navigator.of(context).pop,
           child: const Text('حسنًا'),
         ),

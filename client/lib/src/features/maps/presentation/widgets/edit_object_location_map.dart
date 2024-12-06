@@ -8,7 +8,6 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
-
 class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
   final bool showSetToCurrentLocation;
   final T initialObject;
@@ -175,9 +174,9 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           onSubmitted: Navigator.of(context).pop,
         ),
         actions: [
-          TextButton(
+          OutlinedButton(
             onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('تم'),
+            child: const Text('تحديد الموقع'),
           ),
         ],
       ),

@@ -195,13 +195,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: const Text('هل أنت متأكد من الخروج؟'),
           content: const Text('لم يتم حفظ التغييرات الجديدة'),
           actions: [
-            TextButton(
+            FilledButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('لا'),
+              child: const Text('البقاء'),
             ),
-            TextButton(
+            FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('نعم'),
+              child: const Text('خروج بدون حفظ'),
             ),
           ],
         ),

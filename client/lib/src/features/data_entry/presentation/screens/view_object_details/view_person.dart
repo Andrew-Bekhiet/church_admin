@@ -424,12 +424,12 @@ class _ViewPersonState extends State<ViewPerson> {
       builder: (context) => AlertDialog(
         title: const Text('هل تريد اجراء مكالمة الأن'),
         actions: [
-          OutlinedButton.icon(
+          FilledButton.icon(
             icon: const Icon(Symbols.call),
             label: const Text('اجراء مكالمة الأن'),
             onPressed: () => Navigator.of(context).pop(true),
           ),
-          TextButton.icon(
+          FilledButton.tonalIcon(
             icon: const Icon(Symbols.dialpad),
             label: const Text('نسخ في لوحة الاتصال فقط'),
             onPressed: () => Navigator.of(context).pop(false),
@@ -452,11 +452,11 @@ class _ViewPersonState extends State<ViewPerson> {
       builder: (context) => AlertDialog(
         title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
         actions: [
-          TextButton(
+          FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('نعم'),
           ),
-          TextButton(
+          FilledButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: const Text('لا'),
           ),
@@ -504,7 +504,7 @@ class _ViewPersonState extends State<ViewPerson> {
           ],
         ),
         actions: [
-          TextButton(
+          OutlinedButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('حفظ جهة الاتصال'),
           ),

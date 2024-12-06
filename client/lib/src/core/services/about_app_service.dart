@@ -27,32 +27,32 @@ class AboutAppService {
   }) : _launchUrl = urlLauncher;
 
   Future<void> showAboutDialog(BuildContext context) async {
+    final theme = Theme.of(context);
+
     return m.showAboutDialog(
       context: context,
       applicationIcon: appIcon,
       applicationName: 'كنيسة السيدة العذراء مريم',
-      applicationLegalese: 'جميع الحقوق محفوظة © 2023',
       applicationVersion: version,
       children: [
-        const SizedBox(height: 20),
+        const Text('جميع الحقوق محفوظة © 2022-2024'),
         RichText(
-          textAlign: TextAlign.center,
           text: TextSpan(
             children: [
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium,
                 text: 'التطبيق مفتوح المصدر ومتاح على ',
               ),
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.blue,
-                    ),
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  color: Colors.blue,
+                ),
                 text: 'GitHub',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _launchUrl(githubUrl),
               ),
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium,
                 text: ' تحت ترخيص Apache License 2.0',
               ),
             ],
@@ -60,25 +60,24 @@ class AboutAppService {
         ),
         const SizedBox(height: 10),
         RichText(
-          textAlign: TextAlign.center,
           text: TextSpan(
             children: [
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.blue,
-                    ),
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  color: Colors.blue,
+                ),
                 text: 'شروط الاستخدام',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _launchUrl(termsOfServiceUrl),
               ),
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium,
                 text: ' • ',
               ),
               TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.blue,
-                    ),
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  color: Colors.blue,
+                ),
                 text: 'سياسة الخصوصية',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _launchUrl(privacyPolicyUrl),

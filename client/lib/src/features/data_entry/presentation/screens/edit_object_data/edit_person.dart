@@ -1032,7 +1032,7 @@ class _EditPersonState extends State<EditPerson> {
           },
         ),
         actions: [
-          TextButton(
+          OutlinedButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('تم'),
           ),

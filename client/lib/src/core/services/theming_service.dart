@@ -195,6 +195,12 @@ class ThemingService with WidgetsBindingObserver {
         color: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
       ),
+      dialogTheme: themeData.dialogTheme.copyWith(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        backgroundColor: colorScheme.surfaceContainerHighest,
+      ),
       inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
         enabledBorder: inputBorder,
         border: inputBorder,

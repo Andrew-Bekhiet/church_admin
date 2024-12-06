@@ -176,11 +176,11 @@ class EditObjectController<T extends ViewableWithID> {
       builder: (context) => AlertDialog(
         title: Text('هل تريد حذف ' + initialObject!.name + '؟'),
         actions: [
-          OutlinedButton(
+          FilledButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: const Text('لا'),
           ),
-          TextButton(
+          FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('نعم'),
           ),
@@ -205,11 +205,11 @@ class EditObjectController<T extends ViewableWithID> {
               builder: (context) => AlertDialog(
                 title: const Text('هل تريد تجاهل التغييرات؟'),
                 actions: [
-                  OutlinedButton(
+                  FilledButton(
                     onPressed: () => Navigator.of(context).pop(false),
                     child: const Text('البقاء'),
                   ),
-                  TextButton(
+                  FilledButton(
                     onPressed: () => Navigator.of(context).pop(true),
                     child: const Text('تجاهل'),
                   ),

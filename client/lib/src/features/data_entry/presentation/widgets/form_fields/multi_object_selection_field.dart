@@ -56,7 +56,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
             return AlertDialog(
               title: Text('اختيار ' + labelText),
               actions: [
-                TextButton(
+                OutlinedButton(
                   onPressed: () => Navigator.of(context)
                       .pop(controller.selectionController.currentValue ?? {}),
                   child: const Text('تم'),
