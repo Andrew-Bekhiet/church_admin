@@ -74,7 +74,6 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                       child: ViewableObjectList<T>(
                         objectsController: controller,
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                          wrapInCard: false,
                           forceShowSecondLine: false,
                           onLongPress: (_) {},
                         ),

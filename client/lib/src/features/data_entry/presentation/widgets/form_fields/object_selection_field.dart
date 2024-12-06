@@ -68,7 +68,6 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                         objectsController: controller,
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                           onTap: Navigator.of(context).pop,
-                          wrapInCard: false,
                           forceShowSecondLine: false,
                         ),
                       ),

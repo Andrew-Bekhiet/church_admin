@@ -27,6 +27,7 @@ class AdminOnDataWidget extends StatelessWidget {
               for (final adminOnData in adminOn.where((a) => a.area != null))
                 ViewableObjectWidget(
                   adminOnData.area!,
+                  wrapInCard: true,
                   forceShowSecondLine: false,
                   trailing: AdminOnDataIndicator(adminOnData: adminOnData),
                 ),

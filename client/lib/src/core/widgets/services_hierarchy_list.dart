@@ -108,35 +108,17 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     Service service,
     ViewableObjectWidgetConfig? config,
   ) {
-    return Card.filled(
-      child: InkWell(
-        onTap: config?.onTap != null ? () => config!.onTap!(service) : null,
-        onLongPress: config?.onLongPress != null
-            ? () => config!.onLongPress!(service)
-            : null,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: AbsorbPointer(
-                  child: ImageObjectWidget(
-                    service,
-                    circleCrop: false,
-                    size: MediaQuery.sizeOf(context).width / 2 - 56,
-                  ),
-                ),
-              ),
-              Text(
-                service.name,
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
+    return ViewableObjectCard(
+      service,
+      title: Text(
+        service.name,
+        style: Theme.of(context).textTheme.headlineMedium,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
+      config: config,
+      size: null,
     );
   }
 

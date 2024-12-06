@@ -141,27 +141,19 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
             ListTile(
               title: const Text('المناطق التي تظهر بها'),
-              subtitle: Column(
+              subtitle: Wrap(
                 children: [
                   for (final a in family.areas ?? <Area>[])
-                    ViewableObjectWidget(
-                      a,
-                      isDense: true,
-                      forceShowSecondLine: false,
-                    ),
+                    ViewableObjectCard(a),
                 ],
               ),
             ),
             ListTile(
               title: const Text('الشوارع التي تظهر بها'),
-              subtitle: Column(
+              subtitle: Wrap(
                 children: [
                   for (final s in family.streets ?? <Street>[])
-                    ViewableObjectWidget(
-                      s,
-                      isDense: true,
-                      forceShowSecondLine: false,
-                    ),
+                    ViewableObjectCard(s),
                 ],
               ),
             ),

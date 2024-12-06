@@ -64,10 +64,9 @@ class _ViewClassState extends State<ViewClass> {
             ListTile(
               title: const Text('الخدمة'),
               subtitle: $class.service != null
-                  ? ViewableObjectWidget(
-                      $class.service!,
-                      isDense: true,
-                      forceShowSecondLine: false,
+                  ? Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ViewableObjectCard($class.service!),
                     )
                   : const Text('لا يوجد'),
             ),

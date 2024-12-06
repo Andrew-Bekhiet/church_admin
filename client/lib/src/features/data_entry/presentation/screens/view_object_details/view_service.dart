@@ -70,10 +70,9 @@ class _ViewServiceState extends State<ViewService> {
             ListTile(
               title: const Text('الخدمة التالية'),
               subtitle: service.nextService != null
-                  ? ViewableObjectWidget(
-                      service.nextService!,
-                      isDense: true,
-                      forceShowSecondLine: false,
+                  ? Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ViewableObjectCard(service.nextService!),
                     )
                   : const Text('لا يوجد'),
             ),

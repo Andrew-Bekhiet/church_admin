@@ -58,10 +58,9 @@ class _ViewGroupState extends State<ViewGroup> {
             ListTile(
               title: const Text('الخدمة'),
               subtitle: group.service != null
-                  ? ViewableObjectWidget(
-                      group.service!,
-                      isDense: true,
-                      forceShowSecondLine: false,
+                  ? Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ViewableObjectCard(group.service!),
                     )
                   : const Text('لا يوجد'),
             ),

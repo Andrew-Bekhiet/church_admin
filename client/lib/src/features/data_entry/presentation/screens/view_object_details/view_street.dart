@@ -121,15 +121,10 @@ class _ViewStreetState extends State<ViewStreet> {
               ),
             ListTile(
               title: const Text('المناطق التي يظهر بها'),
-              subtitle: Column(
+              subtitle: Wrap(
                 children: [
                   for (final a in street.areas ?? <Area>[])
-                    ViewableObjectWidget(
-                      a,
-                      isDense: true,
-                      forceShowSecondLine: false,
-                      circleCrop: false,
-                    ),
+                    ViewableObjectCard(a),
                 ],
               ),
             ),

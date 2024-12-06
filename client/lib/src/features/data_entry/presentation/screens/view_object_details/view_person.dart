@@ -351,25 +351,21 @@ class _ViewPersonState extends State<ViewPerson> {
               ),
               ListTile(
                 title: const Text('الشوارع التي يوجد بها'),
-                subtitle: Column(
+                subtitle: Wrap(
                   children: [
                     for (final s in person.streets ?? <Street>[])
-                      ViewableObjectWidget(
-                        s,
-                        isDense: true,
-                        forceShowSecondLine: false,
-                        circleCrop: false,
-                      ),
+                      ViewableObjectCard(s),
                   ],
                 ),
               ),
               if (person.family != null)
                 ListTile(
                   title: const Text('العائلة'),
-                  subtitle: ViewableObjectWidget<Family>(
-                    person.family!,
-                    isDense: true,
-                    forceShowSecondLine: false,
+                  subtitle: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: ViewableObjectCard(
+                      person.family!,
+                    ),
                   ),
                 ),
               /* if (person.store != null)
@@ -573,7 +569,7 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   Widget build(BuildContext context) {
     final listField = getField(person) ?? <T>[];
 
-    return Column(
+    return Wrap(
       children: [
         for (final o in listField.take(visibleItemsLimit + 1))
           if (listField.length >= visibleItemsLimit + 1 &&
@@ -584,87 +580,19 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
                   : null,
               title: const Text('اظهار المزيد'),
               children: [
-                ViewableObjectWidget(
+                ViewableObjectCard(
                   o,
-                  isDense: true,
-                  forceShowSecondLine: _hasSubtitle(o),
-                  subtitle: _hasSubtitle(o)
-                      ? _ShowMoreSubtitle(
-                          viewable: o,
-                          dateFormat: dateFormat,
-                        )
-                      : null,
                 ),
                 for (final o in listField.skip(visibleItemsLimit + 1))
-                  ViewableObjectWidget(
+                  ViewableObjectCard(
                     o,
-                    isDense: true,
-                    forceShowSecondLine: _hasSubtitle(o),
-                    subtitle: _hasSubtitle(o)
-                        ? _ShowMoreSubtitle(
-                            viewable: o,
-                            dateFormat: dateFormat,
-                          )
-                        : null,
                   ),
               ],
             )
           else
-            ViewableObjectWidget(
+            ViewableObjectCard(
               o,
-              isDense: true,
-              circleCrop: o is Person || o is User,
-              forceShowSecondLine: _hasSubtitle(o),
-              subtitle: _hasSubtitle(o)
-                  ? _ShowMoreSubtitle(
-                      viewable: o,
-                      dateFormat: dateFormat,
-                    )
-                  : null,
             ),
-      ],
-    );
-  }
-
-  bool _hasSubtitle(T o) =>
-      o is AttendanceAnalyzable &&
-      (o as AttendanceAnalyzable).attendanceHistoryAggregate?.aggregate.max !=
-          null;
-}
-
-class _ShowMoreSubtitle<T extends Viewable> extends StatelessWidget {
-  const _ShowMoreSubtitle({
-    required this.dateFormat,
-    required this.viewable,
-  });
-
-  final T viewable;
-  final DateFormat dateFormat;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            (viewable as AttendanceAnalyzable)
-                .attendanceHistoryAggregate!
-                .aggregate
-                .max!
-                .time
-                .toDurationString(),
-          ),
-        ),
-        Text(
-          dateFormat.format(
-            (viewable as AttendanceAnalyzable)
-                .attendanceHistoryAggregate!
-                .aggregate
-                .max!
-                .time,
-          ),
-          style: Theme.of(context).textTheme.labelSmall,
-        ),
       ],
     );
   }

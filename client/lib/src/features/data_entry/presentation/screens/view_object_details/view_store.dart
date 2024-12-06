@@ -63,39 +63,28 @@ class _ViewStoreState extends State<ViewStore> {
             ),
             ListTile(
               title: const Text('المناطق التي يظهر بها'),
-              subtitle: Column(
+              subtitle: Wrap(
                 children: [
                   for (final a in store.areas ?? <Area>[])
-                    ViewableObjectWidget(
-                      a,
-                      isDense: true,
-                      forceShowSecondLine: false,
-                      circleCrop: false,
-                    ),
+                    ViewableObjectCard(a),
                 ],
               ),
             ),
             ListTile(
               title: const Text('الشوارع التي يظهر بها'),
-              subtitle: Column(
+              subtitle: Wrap(
                 children: [
                   for (final s in store.streets ?? <Street>[])
-                    ViewableObjectWidget(
-                      s,
-                      isDense: true,
-                      forceShowSecondLine: false,
-                      circleCrop: false,
-                    ),
+                    ViewableObjectCard(s),
                 ],
               ),
             ),
             ListTile(
               title: const Text('العائلة المسؤولة'),
               subtitle: store.family != null
-                  ? ViewableObjectWidget(
-                      store.family!,
-                      isDense: true,
-                      forceShowSecondLine: false,
+                  ? Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: ViewableObjectCard(store.family!),
                     )
                   : const Text('لا يوجد'),
             ),
@@ -113,6 +102,7 @@ class _ViewStoreState extends State<ViewStore> {
               getHistoryStream: () => DatabaseService.I.history
                   .paginateEditHistory<Store>(id: store.id),
             ),
+            const SizedBox(height: 40),
           ],
         ),
       ),
