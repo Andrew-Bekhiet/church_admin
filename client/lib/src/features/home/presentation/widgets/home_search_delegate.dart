@@ -119,10 +119,9 @@ class HomeSearchDelegate extends SearchDelegate {
                         mainAxisSize: MainAxisSize.min,
                         children: sectionItems
                             .map(
-                              (item) => ViewableObjectListItem(
-                                item: item,
-                                viewableObjectWidgetConfig:
-                                    const ViewableObjectWidgetConfig(
+                              (item) => ViewableObjectWidget(
+                                item,
+                                config: const ViewableObjectWidgetConfig(
                                   isDense: true,
                                   forceShowSecondLine: false,
                                 ),
