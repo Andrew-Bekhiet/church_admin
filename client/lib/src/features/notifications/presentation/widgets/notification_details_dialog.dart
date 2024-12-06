@@ -19,12 +19,10 @@ class NotificationDetailsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-
     return AlertDialog(
       title: Text(notification.title),
       content: SizedBox(
-        width: mediaQuery.size.width * 0.85,
+        width: MediaQuery.sizeOf(context).width * 0.85,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -134,13 +132,13 @@ class _NotificationPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    final screenSize = MediaQuery.sizeOf(context);
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
 
     return CachedNetworkImage(
       imageUrl: notification.imageURL!,
       useOldImageOnUrlChange: true,
-      memCacheWidth:
-          mediaQuery.devicePixelRatio * mediaQuery.size.width * 85 ~/ 100,
+      memCacheWidth: devicePixelRatio * screenSize.width * 85 ~/ 100,
       cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
       progressIndicatorBuilder: (context, url, downloadProgress) => Center(
         child: CircularProgressIndicator(

@@ -39,7 +39,8 @@ class ImagePickerService {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        final Color primary = Theme.of(context).colorScheme.primary;
+        final theme = Theme.of(context);
+        final Color primary = theme.colorScheme.primary;
 
         return IconTheme(
           data: IconThemeData(color: primary),
@@ -56,7 +57,7 @@ class ImagePickerService {
                         Navigator.of(context).pop(ImageSource.camera);
                       },
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 3,
+                        width: MediaQuery.sizeOf(context).width / 3,
                         child: Column(
                           children: [
                             const Icon(
@@ -66,9 +67,7 @@ class ImagePickerService {
                             const SizedBox(height: 3),
                             Text(
                               'الكاميرا',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
+                              style: theme.textTheme.bodyMedium!
                                   .copyWith(color: primary),
                               textAlign: TextAlign.center,
                             ),
@@ -81,7 +80,7 @@ class ImagePickerService {
                         Navigator.of(context).pop(ImageSource.gallery);
                       },
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 3,
+                        width: MediaQuery.sizeOf(context).width / 3,
                         child: Column(
                           children: [
                             const Icon(
@@ -91,9 +90,7 @@ class ImagePickerService {
                             const SizedBox(height: 3),
                             Text(
                               'من المعرض',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
+                              style: theme.textTheme.bodyMedium!
                                   .copyWith(color: primary),
                               textAlign: TextAlign.center,
                             ),

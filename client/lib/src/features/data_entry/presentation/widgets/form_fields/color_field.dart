@@ -97,7 +97,7 @@ class ColorField extends StatelessWidget {
       ),
       barrierColor: Colors.black54,
       constraints: BoxConstraints(
-        minWidth: MediaQuery.of(context).size.height * 0.7,
+        minWidth: MediaQuery.sizeOf(context).height * 0.7,
       ),
     );
 

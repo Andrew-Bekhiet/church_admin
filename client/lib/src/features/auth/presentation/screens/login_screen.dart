@@ -16,6 +16,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final screenSize = MediaQuery.sizeOf(context);
+
     return Scaffold(
       appBar: const _LoginTitle(),
       body: SafeArea(
@@ -26,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 const SizedBox(height: 5),
                 SizedBox(
-                  height: MediaQuery.of(context).size.shortestSide * 0.5,
-                  width: MediaQuery.of(context).size.shortestSide * 0.5,
+                  height: screenSize.shortestSide * 0.5,
+                  width: screenSize.shortestSide * 0.5,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     child: Image.asset(
@@ -40,10 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: Text(
                     'قم بتسجيل الدخول أو إنشاء حساب',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontSize: 16),
+                    style: theme.textTheme.titleLarge?.copyWith(fontSize: 16),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -71,19 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       Text(
                         _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall,
                       ),
                       const SizedBox(width: 10),
                       InkWell(
                         onTap: () => setState(() => _isLogin = !_isLogin),
                         child: Text(
                           _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
                         ),
                       ),
                     ],
@@ -150,19 +147,17 @@ class _LoginTitle extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.all(16),
         child: Center(
           child: Text(
             'كنيسة السيدة العذراء مريم',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Theme.of(context)
-                      .textTheme
-                      .headlineMedium
-                      ?.color
-                      ?.withOpacity(1),
-                ),
+            style: theme.textTheme.headlineMedium?.copyWith(
+              color: theme.textTheme.headlineMedium?.color?.withOpacity(1),
+            ),
           ),
         ),
       ),
@@ -193,6 +188,8 @@ class _SignUpViewState extends State<_SignUpView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -235,7 +232,7 @@ class _SignUpViewState extends State<_SignUpView> {
                 ? const Center(child: CircularProgressIndicator())
                 : const Text('إنشاء حساب جديد'),
           ),
-          Container(height: MediaQuery.of(context).size.height / 38),
+          Container(height: MediaQuery.sizeOf(context).height / 38),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -245,13 +242,13 @@ class _SignUpViewState extends State<_SignUpView> {
               ),
               children: [
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                   text: 'بإنشائك حساب فإنك توافق على ',
                 ),
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.blue,
-                      ),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.blue,
+                  ),
                   text: 'شروط الاستخدام',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
@@ -259,13 +256,13 @@ class _SignUpViewState extends State<_SignUpView> {
                     },
                 ),
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                   text: ' و',
                 ),
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.blue,
-                      ),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.blue,
+                  ),
                   text: 'سياسة الخصوصية',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {

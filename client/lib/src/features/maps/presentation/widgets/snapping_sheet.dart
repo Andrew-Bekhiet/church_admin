@@ -46,8 +46,8 @@ class MapSnappingSheet extends StatelessWidget {
                     Divider(
                       height: 50,
                       thickness: 3,
-                      indent: MediaQuery.of(context).size.width * 1 / 3,
-                      endIndent: MediaQuery.of(context).size.width * 1 / 3,
+                      indent: MediaQuery.sizeOf(context).width * 1 / 3,
+                      endIndent: MediaQuery.sizeOf(context).width * 1 / 3,
                     ),
                   ],
                 ),

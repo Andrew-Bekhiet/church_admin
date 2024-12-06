@@ -56,7 +56,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
             return AlertDialog(
               title: Text('اختيار ' + labelText),
               content: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.sizeOf(context).width * 0.9,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

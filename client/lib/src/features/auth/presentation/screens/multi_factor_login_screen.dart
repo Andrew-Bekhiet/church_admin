@@ -130,13 +130,15 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Form(
       key: _formKey,
       child: Column(
         children: [
           Text(
             'قم بتسجيل رقم هاتفك لإستخدامه في المصادقة الثنائية',
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
           const Text(
@@ -279,6 +281,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final screenSize = MediaQuery.sizeOf(context);
+
     return FutureBuilder<(String, int?)>(
       future: initiateMultifactorLogin,
       builder: (context, snapshot) {
@@ -293,12 +298,12 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                           : widget.multiFactorInfo?.displayName) ??
                       'هاتفك'),
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: theme.textTheme.bodyLarge,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 35, bottom: 15),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: screenSize.width * 0.4,
                 child: TextFormField(
                   maxLength: 6,
                   controller: _code,

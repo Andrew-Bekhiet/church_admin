@@ -88,8 +88,8 @@ class PersonAttendanceIndicator extends StatelessWidget {
           builder: (context, current, _) {
             return SizedBox(
               height: current == CalendarFormat.week
-                  ? MediaQuery.of(context).size.height * 0.3
-                  : MediaQuery.of(context).size.height * 0.6,
+                  ? MediaQuery.sizeOf(context).height * 0.3
+                  : MediaQuery.sizeOf(context).height * 0.6,
               child: PageView(
                 onPageChanged: (i) =>
                     i == 0 ? _calendarFormat.value = CalendarFormat.week : null,

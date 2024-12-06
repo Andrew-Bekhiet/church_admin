@@ -194,7 +194,7 @@ class _ImageFromUrlWidget extends StatelessWidget {
           placeholder: (context, _) => imagePlaceholder,
           memCacheHeight: fullQuality
               ? null
-              : (MediaQuery.of(context).devicePixelRatio * maxHeight).floor(),
+              : (MediaQuery.devicePixelRatioOf(context) * maxHeight).floor(),
           cacheManager: globalProviderContainer.read(baseCacheManagerProvider),
           errorWidget: (context, url, error) => imagePlaceholder,
           fadeInDuration: animationsDuration,

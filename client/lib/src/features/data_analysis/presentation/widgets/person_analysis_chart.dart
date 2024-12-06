@@ -79,7 +79,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
           style: themeData.textTheme.headlineSmall,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.sizeOf(context).height * 0.4,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
             child: LineChart(
@@ -121,9 +121,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                                   ),
                                 ) +
                                 '\n',
-                            Theme.of(context)
-                                .textTheme
-                                .bodySmall!
+                            themeData.textTheme.bodySmall!
                                 .copyWith(color: colorScheme.onSurface),
                             children: [
                               TextSpan(
@@ -146,17 +144,13 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                 minY: 0,
                 gridData: FlGridData(
                   getDrawingHorizontalLine: (_) => FlLine(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
+                    color: themeData.colorScheme.primary
                         .desaturate(50)
                         .withOpacity(0.15),
                     strokeWidth: 1,
                   ),
                   getDrawingVerticalLine: (_) => FlLine(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary
+                    color: themeData.colorScheme.primary
                         .desaturate(50)
                         .withOpacity(0.15),
                     strokeWidth: 1,

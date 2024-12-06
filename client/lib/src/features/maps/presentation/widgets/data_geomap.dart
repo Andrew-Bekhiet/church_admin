@@ -121,7 +121,7 @@ class DataGeomapState extends State<DataGeomap> {
                   ': ' +
                   CurrentPlatformService.I.effectiveValue.name,
               maxZoom: 19,
-              retinaMode: MediaQuery.of(context).devicePixelRatio > 1.0,
+              retinaMode: MediaQuery.devicePixelRatioOf(context) > 1,
             ),
             if (_currentMapOptions.layers.contains(GeoMapLayer.areas))
               _AreasLayer(areas: areas),

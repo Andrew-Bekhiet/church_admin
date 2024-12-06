@@ -15,7 +15,7 @@ class DownloadAppScreen extends StatelessWidget {
       ),
       body: Center(
         child: Flex(
-          direction: MediaQuery.of(context).orientation == Orientation.portrait
+          direction: MediaQuery.orientationOf(context) == Orientation.portrait
               ? Axis.vertical
               : Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
