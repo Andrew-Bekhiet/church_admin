@@ -69,7 +69,7 @@ void main() {
               expect(
                 find.descendant(
                   of: find.byType(ViewObjectDetails<Area>),
-                  matching: find.byKey(const ValueKey('tabsHeader')),
+                  matching: find.byType(ChipTabBar),
                 ),
                 findsOneWidget,
               );
@@ -131,7 +131,7 @@ void main() {
               expect(
                 find.descendant(
                   of: find.byType(ViewObjectDetails<Area>),
-                  matching: find.byKey(const ValueKey('tabsHeader')),
+                  matching: find.byType(ChipTabBar),
                 ),
                 findsNothing,
               );
@@ -238,12 +238,11 @@ Future<void> _pumpWidget(
           fallbackHeight: 70,
         ),
       ),
-      tabsHeaderBuilder: (context, person) => const TabBar(
-        key: ValueKey('tabsHeader'),
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
-          Tab(
-            text: 'المخدومين',
-            icon: Icon(Symbols.person),
+          (
+            label: 'المخدومين',
+            icon: const Icon(Symbols.person),
           ),
         ],
       ),

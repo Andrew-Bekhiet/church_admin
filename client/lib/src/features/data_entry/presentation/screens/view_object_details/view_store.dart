@@ -89,7 +89,7 @@ class _ViewStoreState extends State<ViewStore> {
                   : const Text('لا يوجد'),
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add store analysis

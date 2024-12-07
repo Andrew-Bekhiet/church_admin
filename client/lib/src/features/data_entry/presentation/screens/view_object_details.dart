@@ -39,7 +39,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final WidgetBuilder notFoundBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
-  final WBuilderWithObject<T, PreferredSizeWidget>? tabsHeaderBuilder;
+  final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
 
   const ViewObjectDetails({
     required this.objectId,
@@ -48,12 +48,14 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.editButtonBuilder,
     required this.detailsBuilder,
     this.childrenTypes = const [],
-    this.tabsHeaderBuilder,
+    this.sliverPersistentHeaderDelegate,
     this.tabsContentBuilders = const {},
     this.floatingActionButtonBuilder,
     this.object,
     super.key,
-  })  : assert(childrenTypes.length == 0 || tabsHeaderBuilder != null),
+  })  : assert(
+          childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
+        ),
         assert(childrenTypes.length == tabsContentBuilders.length);
 
   @override
@@ -127,12 +129,10 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             ),
           ),
           widget.detailsBuilder(context, objectData),
-          if (widget.tabsHeaderBuilder != null)
+          if (widget.sliverPersistentHeaderDelegate != null)
             SliverPersistentHeader(
               pinned: true,
-              delegate: PreferredSizePersistentHeaderDelegate(
-                child: widget.tabsHeaderBuilder!(context, objectData),
-              ),
+              delegate: widget.sliverPersistentHeaderDelegate!,
             ),
         ];
 

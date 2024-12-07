@@ -96,22 +96,22 @@ class _ViewFamilyState extends State<ViewFamily> {
               objectsController: _ensureWillDispose(_storesController),
             ),
       },
-      tabsHeaderBuilder: (context, family) => TabBar(
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
-          Tab(
-            text: 'المخدومين',
+          (
+            label: 'المخدومين',
             icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
           ),
-          Tab(
-            text: 'الأبناء',
+          (
+            label: 'الأبناء',
             icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
           ),
-          Tab(
-            text: 'الأباء',
+          (
+            label: 'الأباء',
             icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
           ),
-          Tab(
-            text: 'المتاجر',
+          (
+            label: 'المتاجر',
             icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
           ),
         ],
@@ -163,7 +163,7 @@ class _ViewFamilyState extends State<ViewFamily> {
               showErrorIfEmpty: false,
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add family analysis

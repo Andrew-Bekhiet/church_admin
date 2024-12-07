@@ -1,3 +1,5 @@
+export 'widgets/chip_tab_bar.dart';
+export 'widgets/chip_tab_bar_persistent_header_delegate.dart';
 export 'widgets/copiable_property_widget.dart';
 export 'widgets/form_fields.dart';
 export 'widgets/image_object_widget.dart';

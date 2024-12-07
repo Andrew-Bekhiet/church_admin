@@ -106,18 +106,18 @@ class _ViewServiceState extends State<ViewService> {
           ],
         ),
       ),
-      tabsHeaderBuilder: (context, service) => TabBar(
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
-          Tab(
-            text: 'الفصول',
+          (
+            label: 'الفصول',
             icon: Icon(viewableObjectService.getDefaultIconFor<Class>()),
           ),
-          Tab(
-            text: 'المجموعات',
+          (
+            label: 'المجموعات',
             icon: Icon(viewableObjectService.getDefaultIconFor<Group>()),
           ),
-          Tab(
-            text: 'المخدومين',
+          (
+            label: 'المخدومين',
             icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
           ),
         ],

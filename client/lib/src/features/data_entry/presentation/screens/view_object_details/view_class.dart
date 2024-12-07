@@ -75,7 +75,7 @@ class _ViewClassState extends State<ViewClass> {
               subtitle: Text($class.studyYear?.name ?? 'لا يوجد'),
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add class analysis
@@ -97,11 +97,13 @@ class _ViewClassState extends State<ViewClass> {
           ],
         ),
       ),
-      tabsHeaderBuilder: (context, $class) => Tab(
-        text: 'المخدومين',
-        icon: Icon(
-          ViewableObjectService.I.getDefaultIconFor<Person>(),
-        ),
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        tabs: [
+          (
+            icon: Icon(ViewableObjectService.I.getDefaultIconFor<Person>()),
+            label: 'المخدومين'
+          ),
+        ],
       ),
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(

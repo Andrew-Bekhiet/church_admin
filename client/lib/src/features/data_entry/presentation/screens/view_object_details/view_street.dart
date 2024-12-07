@@ -66,34 +66,34 @@ class _ViewStreetState extends State<ViewStreet> {
       objectId: widget.streetId,
       object: widget.street,
       objectStream: stream,
-      childrenTypes: const [Family, Store, Person],
+      childrenTypes: const [Family, Person, Store],
       tabsContentBuilders: {
         Family: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_familiesController),
             ),
-        Store: (context) => ViewableObjectList<Store>(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_storesController),
-            ),
         Person: (context) => ViewableObjectList<Person>(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_personsController),
             ),
+        Store: (context) => ViewableObjectList<Store>(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _ensureWillDispose(_storesController),
+            ),
       },
-      tabsHeaderBuilder: (context, family) => TabBar(
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
-          Tab(
-            text: 'العائلات',
+          (
             icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            label: 'العائلات'
           ),
-          Tab(
-            text: 'المتاجر',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
-          ),
-          Tab(
-            text: 'المخدومين',
+          (
             icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            label: 'المخدومين'
+          ),
+          (
+            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
+            label: 'المتاجر'
           ),
         ],
       ),
@@ -129,7 +129,7 @@ class _ViewStreetState extends State<ViewStreet> {
               ),
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add street analysis
@@ -167,8 +167,8 @@ class _ViewStreetState extends State<ViewStreet> {
         tabController: tabController,
         icons: const {
           0: Icon(Symbols.group_add),
-          1: Icon(Symbols.add_business),
-          2: Icon(Symbols.person_add),
+          1: Icon(Symbols.person_add),
+          2: Icon(Symbols.add_business),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
@@ -178,10 +178,10 @@ class _ViewStreetState extends State<ViewStreet> {
               ),
             ).push(context);
           } else if (newIndex == 1) {
+            const EditPersonRoute().push(context);
+          } else if (newIndex == 2) {
             EditStoreRoute($extra: EditStoreExtra(street: street))
                 .push(context);
-          } else if (newIndex == 2) {
-            const EditPersonRoute().push(context);
           }
         },
       ),

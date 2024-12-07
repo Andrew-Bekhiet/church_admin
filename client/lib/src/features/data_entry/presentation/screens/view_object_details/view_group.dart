@@ -42,9 +42,13 @@ class _ViewGroupState extends State<ViewGroup> {
       objectId: widget.groupId,
       objectStream: stream,
       childrenTypes: const [Group],
-      tabsHeaderBuilder: (context, group) => Tab(
-        text: 'المخدومين',
-        icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        tabs: [
+          (
+            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            label: 'المخدومين'
+          ),
+        ],
       ),
       tabsContentBuilders: {
         Group: (context) => ViewableObjectList(
@@ -76,7 +80,7 @@ class _ViewGroupState extends State<ViewGroup> {
                   : const Text('لا يوجد'),
             ),
             ListTile(
-              title: FilledButton.tonalIcon(
+              title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
                 // TODO: add group analysis

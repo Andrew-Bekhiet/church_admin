@@ -78,7 +78,7 @@ class _ViewAreaState extends State<ViewArea> {
       objectId: widget.areaId,
       object: widget.area,
       objectStream: stream,
-      childrenTypes: const [Street, Family, Store, Person],
+      childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
         Street: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
@@ -88,32 +88,32 @@ class _ViewAreaState extends State<ViewArea> {
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_familiesController),
             ),
-        Store: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_storesController),
-            ),
         Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_personsController),
             ),
+        Store: (context) => ViewableObjectList(
+              scrollController: PrimaryScrollController.maybeOf(context),
+              objectsController: _ensureWillDispose(_storesController),
+            ),
       },
-      tabsHeaderBuilder: (context, area) => TabBar(
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
-          Tab(
-            text: 'الشوارع',
+          (
             icon: Icon(viewableObjectService.getDefaultIconFor<Street>()),
+            label: 'الشوارع'
           ),
-          Tab(
-            text: 'العائلات',
+          (
             icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            label: 'العائلات'
           ),
-          Tab(
-            text: 'المتاجر',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
-          ),
-          Tab(
-            text: 'المخدومين',
+          (
             icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            label: 'المخدومين'
+          ),
+          (
+            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
+            label: 'المتاجر'
           ),
         ],
       ),
@@ -126,7 +126,7 @@ class _ViewAreaState extends State<ViewArea> {
                   horizontal: 16,
                   vertical: 8,
                 ),
-                child: FilledButton.tonalIcon(
+                child: FilledButton.icon(
                   label: const Text('الموقع على الخريطة'),
                   icon: const Icon(Symbols.map),
                   onPressed: () => Navigator.of(context).push(
@@ -177,8 +177,8 @@ class _ViewAreaState extends State<ViewArea> {
         icons: const {
           0: Icon(Symbols.add_road),
           1: Icon(Symbols.group_add),
-          2: Icon(Symbols.add_business),
-          3: Icon(Symbols.person_add),
+          2: Icon(Symbols.person_add),
+          3: Icon(Symbols.add_business),
         },
         onTap: (newIndex) {
           if (newIndex == 0) {
@@ -186,9 +186,9 @@ class _ViewAreaState extends State<ViewArea> {
           } else if (newIndex == 1) {
             const EditFamilyRoute().push(context);
           } else if (newIndex == 2) {
-            const EditStoreRoute().push(context);
-          } else if (newIndex == 3) {
             const EditPersonRoute().push(context);
+          } else if (newIndex == 3) {
+            const EditStoreRoute().push(context);
           }
         },
       ),
