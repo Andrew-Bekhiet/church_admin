@@ -43,7 +43,7 @@ void main() {
       );
       expect(find.text('1.0.0', findRichText: true), findsOneWidget);
       expect(
-        find.text('جميع الحقوق محفوظة © 2023', findRichText: true),
+        find.text('جميع الحقوق محفوظة © 2022-${DateTime.now().year}', findRichText: true),
         findsOneWidget,
       );
       expect(

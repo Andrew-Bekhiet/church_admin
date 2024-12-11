@@ -82,7 +82,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 1',
                 ),
               ),
@@ -93,7 +93,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 2',
                 ),
               ),
@@ -104,7 +104,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Family',
                 ),
               ),
@@ -120,13 +120,16 @@ Future<void> main() async {
             ),
           ),
           onCreate: (key) async {
-            await tester.pump(HomeSearchDelegate.debounceDuration);
+            await tester.pump(
+              HomeSearchDelegate.debounceDuration +
+                  const Duration(milliseconds: 100),
+            );
 
             expect(
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 1',
                 ),
               ),
@@ -137,7 +140,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 2',
                 ),
               ),
@@ -148,7 +151,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Family',
                 ),
               ),
@@ -170,7 +173,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 1',
                 ),
               ),
@@ -181,7 +184,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Area 2',
                 ),
               ),
@@ -192,7 +195,7 @@ Future<void> main() async {
               find.descendant(
                 of: find.byKey(key),
                 matching: find.widgetWithText(
-                  ViewableObjectWidget,
+                  ViewableObjectWidget<ViewableWithIDAndImage>,
                   'Test Family',
                 ),
               ),

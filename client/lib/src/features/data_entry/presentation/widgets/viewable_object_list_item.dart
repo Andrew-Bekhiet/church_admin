@@ -48,7 +48,7 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
                 item,
                 config,
               )
-            : ViewableObjectWidget(
+            : ViewableObjectWidget<T>(
                 item,
                 config: config,
                 viewableObjectService: viewableObjectService,
