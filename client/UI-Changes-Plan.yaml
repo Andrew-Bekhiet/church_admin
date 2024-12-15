@@ -1,0 +1,21 @@
+UI Changes Plan:
+  - Data Entry:
+      - EditObjectData:
+          - EditArea
+          - EditClass
+          - EditGroup
+          - EditPerson
+          - EditService
+          - EditStore
+          - EditStreet
+  - ManageUsers:
+      - ViewUser
+  - Settings
+  - App Icon and Splash Screen (using flutter_launcher_icons and flutter_native_splash from dev dependencies)
+  - Advanced Search: Remove complex operators
+  - Home Screen/Mode Switcher: Implement new design containing daily verse
+  - !Authentication: Requires refactoring auth flow
+    - Login
+    - Signup
+    - Forgot Password
+  - !Person Structured Address: Requires backend changes
