@@ -57,7 +57,7 @@ class ObjectMarkerWidget extends StatelessWidget {
             shadows: [
               if (!isFocused)
                 Shadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   offset: const Offset(4, 3),
                   blurRadius: 3,
                 ),

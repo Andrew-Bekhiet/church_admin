@@ -485,7 +485,7 @@ class _ViewPersonState extends State<ViewPerson> {
   ) async {
     if (!(await Permission.contacts.request()).isGranted) return;
 
-    final TextEditingController _name =
+    final _name =
         TextEditingController(text: person.name);
 
     if (!context.mounted) return;

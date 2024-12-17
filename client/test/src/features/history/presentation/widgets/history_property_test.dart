@@ -98,7 +98,7 @@ Future<void> main() async {
   testWidgets(
     'HistoryProperty => onRecordNow',
     (tester) async {
-      bool called = false;
+      var called = false;
 
       final historyProperty = HistoryProperty(
         name: 'name',
@@ -128,7 +128,7 @@ Future<void> main() async {
     'HistoryProperty => getHistoryStream',
     (tester) async {
       await withClock(Clock.fixed(DateTime(2050)), () async {
-        bool called = false;
+        var called = false;
         final lastRecordedByInfo = LastRecordedByInfo(
           time: clock.now(),
           recordedBy: 'id',

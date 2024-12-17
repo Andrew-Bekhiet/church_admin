@@ -36,7 +36,7 @@ class GeomapFAB extends StatelessWidget {
   }
 
   Future<void> Function() _onTap(Point location) => () async {
-        bool launched = false;
+        var launched = false;
 
         try {
           if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {

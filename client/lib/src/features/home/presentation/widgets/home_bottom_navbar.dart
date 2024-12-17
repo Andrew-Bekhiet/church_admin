@@ -16,7 +16,7 @@ class HomeBottomNavBar extends StatelessWidget {
       initialData: homeController.currentMode,
       stream: homeController.modeStream,
       builder: (context, modeSnapshot) {
-        final bool isSundaySchool = modeSnapshot.data == HomeMode.sundaySchool;
+        final isSundaySchool = modeSnapshot.data == HomeMode.sundaySchool;
         final Animation<double>? tabAnimation = homeController.tabAnimation;
 
         return AnimatedBuilder(

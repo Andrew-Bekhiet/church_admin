@@ -334,7 +334,7 @@ Future<Override> _setUpMockAuthStorage({User? initialUser}) async {
 }
 
 Future<Override> _setUpMockAuthAdapter({User? userOnSignIn}) async {
-  final StreamController<User?> _controller =
+  final _controller =
       StreamController<User?>.broadcast(sync: true);
 
   final mock = MockAuthAdapter();

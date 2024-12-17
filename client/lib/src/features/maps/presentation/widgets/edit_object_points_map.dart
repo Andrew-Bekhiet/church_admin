@@ -10,7 +10,6 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
 
-
 class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   final T initialObject;
   final GeomapOptions geomapOptions;
@@ -256,7 +255,7 @@ class _EditablePoint extends StatelessWidget {
             size: markerSize,
             shadows: [
               Shadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 // offset: const Offset(4, 3),
                 blurRadius: 3,
               ),

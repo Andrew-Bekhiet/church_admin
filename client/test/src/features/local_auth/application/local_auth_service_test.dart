@@ -343,7 +343,7 @@ void _setUp() {
 }
 
 Override _setUpCANotificationsService() {
-  bool isPaused = false;
+  var isPaused = false;
 
   final mockCANotificationsService = MockNotificationsService();
 

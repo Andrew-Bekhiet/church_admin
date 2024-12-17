@@ -195,7 +195,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
       ViewObjectDetails.snapDuration,
       () {
         if (!_scrollController.hasClients ||
-            _scrollController.position.isScrollingNotifier.value) return;
+            _scrollController.position.isScrollingNotifier.value) {
+          return;
+        }
 
         final maxScroll = appBarMaxHeight - kToolbarHeight;
         final currentScroll = _scrollController.offset;

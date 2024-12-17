@@ -7,7 +7,7 @@ class WebNavigationInit implements Initializer {
   const WebNavigationInit();
 
   @override
-  void initialize() {
+  Null initialize() {
     if (!kIsWeb) return;
 
     GoRouter.optionURLReflectsImperativeAPIs = true;

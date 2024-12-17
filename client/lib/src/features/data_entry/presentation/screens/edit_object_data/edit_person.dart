@@ -980,7 +980,7 @@ class _EditPersonState extends State<EditPerson> {
     final contact = await ContactsService.I.pickContact();
     if (contact == null) return;
 
-    bool importName = false;
+    var importName = false;
     final Set<(String, String)> numbersToImport = {};
 
     if (!mounted) return;

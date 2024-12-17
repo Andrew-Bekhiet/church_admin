@@ -21,13 +21,13 @@ class _AreasLayer extends StatelessWidget {
                 fontSize: 21,
                 shadows: [
                   Shadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     offset: const Offset(4, 3),
                     blurRadius: 1.5,
                   ),
                 ],
               ),
-              color: a.color?.withOpacity(0.2) ?? Colors.transparent,
+              color: a.color?.withValues(alpha: 0.2) ?? Colors.transparent,
               borderStrokeWidth: 3,
               borderColor: a.color ?? Colors.black54,
               points: a.bounds?.coordinates

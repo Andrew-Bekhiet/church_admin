@@ -15,7 +15,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<HomeDrawerDestination> destinations = [
+    final destinations = [
       HomeDrawerDestination(
         label: StreamBuilder<HomeMode>(
           stream: homeController.modeStream,

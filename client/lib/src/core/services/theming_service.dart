@@ -149,7 +149,7 @@ class ThemingService with WidgetsBindingObserver {
       isDark = false;
     }
 
-    final ColorScheme colorScheme = ColorScheme.fromSeed(
+    final colorScheme = ColorScheme.fromSeed(
       brightness: isDark ? Brightness.dark : Brightness.light,
       seedColor: seed,
       primary: seed,
@@ -169,7 +169,7 @@ class ThemingService with WidgetsBindingObserver {
       others: 'Inter',
     );
 
-    final ThemeData rawThemeData = ThemeData.from(
+    final rawThemeData = ThemeData.from(
       textTheme: !isDark ? typography.black : typography.white,
       colorScheme: colorScheme,
       useMaterial3: true,
@@ -210,13 +210,14 @@ class ThemingService with WidgetsBindingObserver {
         space: 0,
         indent: 16,
         endIndent: 16,
-        color: colorScheme.secondary.withOpacity(0.54),
+        color: colorScheme.secondary.withValues(alpha: 0.54),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
         backgroundColor: colorScheme.primaryContainer,
         selectedItemColor: colorScheme.onPrimaryContainer,
-        unselectedItemColor: colorScheme.onPrimaryContainer.withOpacity(0.5),
+        unselectedItemColor:
+            colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
         showUnselectedLabels: false,
       ),
       scaffoldBackgroundColor: scaffoldBackgroundColor,

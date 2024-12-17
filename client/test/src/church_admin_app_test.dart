@@ -25,7 +25,7 @@ import 'church_admin_app_test.mocks.dart';
   MockSpec<NotificationsService>(),
 ])
 void main() {
-  final FirstScreenVariant firstScreenVariant = FirstScreenVariant();
+  final firstScreenVariant = FirstScreenVariant();
 
   setUp(_setUp);
 

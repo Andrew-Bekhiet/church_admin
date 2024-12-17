@@ -98,7 +98,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
                     child: CircularPercentIndicator(
                       radius: 90,
                       lineWidth: 12,
-                      backgroundColor: Colors.grey.withOpacity(0.2),
+                      backgroundColor: Colors.grey.withValues(alpha: 0.2),
                       circularStrokeCap: CircularStrokeCap.round,
                       animation: true,
                       animateFromLastPercent: true,

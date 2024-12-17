@@ -89,7 +89,7 @@ void _setUp() {
 Override _setUpMockSecureStorage() {
   final mockFlutterSecureStorage = MockFlutterSecureStorage();
 
-  final Map<String, String> localStorage = {};
+  final localStorage = <String, String>{};
 
   when(
     mockFlutterSecureStorage.write(

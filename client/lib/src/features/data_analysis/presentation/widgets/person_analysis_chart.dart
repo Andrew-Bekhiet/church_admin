@@ -146,13 +146,13 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                   getDrawingHorizontalLine: (_) => FlLine(
                     color: themeData.colorScheme.primary
                         .desaturate(50)
-                        .withOpacity(0.15),
+                        .withValues(alpha: 0.15),
                     strokeWidth: 1,
                   ),
                   getDrawingVerticalLine: (_) => FlLine(
                     color: themeData.colorScheme.primary
                         .desaturate(50)
-                        .withOpacity(0.15),
+                        .withValues(alpha: 0.15),
                     strokeWidth: 1,
                   ),
                   // verticalInterval: groupedAnalysisData.length / 4,
@@ -212,7 +212,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                     isStrokeJoinRound: true,
                     belowBarData: BarAreaData(
                       show: true,
-                      color: chartColor.withOpacity(0.3),
+                      color: chartColor.withValues(alpha: 0.3),
                     ),
                     color: chartColor,
                   ),

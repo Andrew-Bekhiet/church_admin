@@ -207,7 +207,7 @@ void main() {
           testWidgets(
             'shows confirmation dialog',
             (tester) async {
-              bool deleted = false;
+              var deleted = false;
 
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
@@ -384,8 +384,8 @@ void main() {
           testWidgets(
             'validation and saving form',
             (tester) async {
-              bool validated = false;
-              bool saved = false;
+              var validated = false;
+              var saved = false;
 
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
@@ -424,7 +424,7 @@ void main() {
           testWidgets(
             'calls onCreate',
             (tester) async {
-              bool onCreateCalled = false;
+              var onCreateCalled = false;
 
               final unit = createEditObjectController(
                 onCreate: (person) async {
@@ -451,9 +451,9 @@ void main() {
           testWidgets(
             'calls onUpdate',
             (tester) async {
-              bool onUpdateCalled = false;
-              bool onCreateCalled = false;
-              bool onDeleteCalled = false;
+              var onUpdateCalled = false;
+              var onCreateCalled = false;
+              var onDeleteCalled = false;
 
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name_old'),

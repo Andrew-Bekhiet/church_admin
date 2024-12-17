@@ -32,7 +32,7 @@ void main() {
 
   tearDown(resetGlobalProviderContainer);
 
-  const Size size = Size(100, 1365 * 3);
+  const size = Size(100, 1365 * 3);
 
   testWidgets(
     'Authenticate Screen => Key elements',

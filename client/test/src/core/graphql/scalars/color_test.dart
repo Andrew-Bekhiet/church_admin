@@ -10,7 +10,7 @@ void main() {
     'colorFromInt',
     () {
       final color = Color(random.nextInt(0xffffffff));
-      expect(colorFromInt(color.value), color);
+      expect(colorFromInt(color.argbValue), color);
 
       expect(colorFromInt(null), null);
     },
@@ -20,7 +20,7 @@ void main() {
     'colorToInt',
     () {
       final color = Color(random.nextInt(0xffffffff));
-      expect(colorToInt(color), color.value);
+      expect(colorToInt(color), color.argbValue);
 
       expect(colorToInt(null), null);
     },
@@ -33,7 +33,7 @@ void main() {
 
       expect(colorFromInt(colorToInt(color)), color);
 
-      expect(colorToInt(colorFromInt(color.value)), color.value);
+      expect(colorToInt(colorFromInt(color.argbValue)), color.argbValue);
 
       expect(colorToInt(colorFromInt(null)), null);
     },

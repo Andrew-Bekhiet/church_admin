@@ -156,7 +156,8 @@ class _LoginTitle extends StatelessWidget implements PreferredSizeWidget {
           child: Text(
             'كنيسة السيدة العذراء مريم',
             style: theme.textTheme.headlineMedium?.copyWith(
-              color: theme.textTheme.headlineMedium?.color?.withOpacity(1),
+              color:
+                  theme.textTheme.headlineMedium?.color?.withValues(alpha: 1),
             ),
           ),
         ),

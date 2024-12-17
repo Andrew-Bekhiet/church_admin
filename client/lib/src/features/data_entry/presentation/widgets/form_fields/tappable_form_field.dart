@@ -17,7 +17,7 @@ class TappableFormField<T> extends StatefulWidget {
   }) : assert(labelText != null || decoration != null);
 
   final T initialValue;
-  final FutureOr<void> Function(FormFieldState<T>) onTap;
+  final Future<void>? Function(FormFieldState<T>) onTap;
   final String? labelText;
   final Widget? Function(BuildContext, FormFieldState<T>) builder;
   final String? Function(T?)? validator;

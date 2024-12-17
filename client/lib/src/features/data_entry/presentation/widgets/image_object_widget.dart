@@ -39,7 +39,7 @@ class ImageObjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData defaultIcon =
         viewableObjectService.getDefaultIconFor(imageObject);
-    final BoxConstraints constraints =
+    final constraints =
         BoxConstraints.expand(width: size, height: size);
     final String cacheKey = imageObject.imageInfo.cacheKey;
     final BorderRadius? borderRadius = circleCrop

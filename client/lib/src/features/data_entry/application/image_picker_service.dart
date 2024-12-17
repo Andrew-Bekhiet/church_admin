@@ -149,7 +149,9 @@ class ImagePickerService {
       final cameraPermission = await Permission.camera.request();
 
       if (cameraPermission != PermissionStatus.granted &&
-          cameraPermission != PermissionStatus.limited) return null;
+          cameraPermission != PermissionStatus.limited) {
+        return null;
+      }
     }
 
     final image = await _imagePicker.pickImage(
