@@ -8,12 +8,6 @@ environment:
   sdk: ">=3.2.0 <4.0.0"
   flutter: ">=3.10.0"
 
-dependency_overrides:
-  flutter_compass:
-    git:
-      url: https://github.com/PikPakPik/flutter_compass
-      ref: master
-
 dependencies:
   android_alarm_manager_plus: ^4.0.1
   async: ^2.9.0
@@ -22,7 +16,6 @@ dependencies:
   cloud_functions: ^5.0.1
   collection: ^1.17.0
   connectivity_plus: ^6.0.3
-
   cryptography: ^2.5.0
   cryptography_flutter: #^2.3.0
     git:
