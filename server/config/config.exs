@@ -14,6 +14,14 @@ config :ash,
   policies: [no_filter_static_forbidden_reads?: false],
   custom_types: [ticket_status: ChurchAdmin.Support.Ticket.Types.Status]
 
+config :geo_postgis, json_library: Jason
+
+# Ash: Type shorthands
+config :ash, :custom_types,
+  point: ChurchAdmin.Type.Point,
+  line: ChurchAdmin.Type.Line,
+  polygon: ChurchAdmin.Type.Polygon
+
 config :spark,
   formatter: [
     remove_parens?: true,
@@ -42,7 +50,7 @@ config :spark,
 config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true],
-  ash_domains: [ChurchAdmin.Support]
+  ash_domains: [ChurchAdmin.Person, ChurchAdmin.Support]
 
 # Configures the endpoint
 config :church_admin, ChurchAdminWeb.Endpoint,

@@ -97,3 +97,11 @@ if config_env() == :prod do
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
 end
+
+Postgrex.Types.define(
+  ChurchAdmin.PostgresTypes,
+  [Geo.PostGIS.Extension | Ecto.Adapters.Postgres.extensions()],
+  json: Jason
+)
+
+config :church_admin, ChurchAdmin.Repo, types: ChurchAdmin.PostgresTypes
