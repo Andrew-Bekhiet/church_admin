@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :church_admin, ChurchAdmin.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "^postgresql}=",
   hostname: "localhost",
   database: "church_admin_dev",
   stacktrace: true,

@@ -7,6 +7,10 @@
 # General application configuration
 import Config
 
+config :mime,
+  extensions: %{"json" => "application/vnd.api+json"},
+  types: %{"application/vnd.api+json" => ["json"]}
+
 config :ash,
   include_embedded_source_by_default?: false,
   show_keysets_for_all_actions?: false,
@@ -20,13 +24,15 @@ config :geo_postgis, json_library: Jason
 config :ash, :custom_types,
   point: ChurchAdmin.Type.Point,
   line: ChurchAdmin.Type.Line,
-  polygon: ChurchAdmin.Type.Polygon
+  polygon: ChurchAdmin.Type.Polygon,
+  color: ChurchAdmin.Type.Color
 
 config :spark,
   formatter: [
     remove_parens?: true,
     "Ash.Resource": [
       section_order: [
+        :json_api,
         :postgres,
         :resource,
         :code_interface,
@@ -44,13 +50,15 @@ config :spark,
         :identities
       ]
     ],
-    "Ash.Domain": [section_order: [:resources, :policies, :authorization, :domain, :execution]]
+    "Ash.Domain": [
+      section_order: [:json_api, :resources, :policies, :authorization, :domain, :execution]
+    ]
   ]
 
 config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true],
-  ash_domains: [ChurchAdmin.Person, ChurchAdmin.Support]
+  ash_domains: [ChurchAdmin.Person, ChurchAdmin.GeoEntities]
 
 # Configures the endpoint
 config :church_admin, ChurchAdminWeb.Endpoint,

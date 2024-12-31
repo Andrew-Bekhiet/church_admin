@@ -4,7 +4,7 @@ defmodule ChurchAdmin.Repo do
 
   def installed_extensions do
     # Add extensions here, and the migration generator will install them.
-    ["ash-functions"]
+    ["ash-functions", "uuid-ossp"]
   end
 
   # Don't open unnecessary transactions
