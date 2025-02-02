@@ -85,7 +85,7 @@ class Variables_Subscription_watchAllStores {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllStores) ||
+    if (other is! Variables_Subscription_watchAllStores ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -247,7 +247,7 @@ class Subscription_watchAllStores {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllStores) ||
+    if (other is! Subscription_watchAllStores ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -460,7 +460,7 @@ class Variables_Subscription_watchStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchStore) ||
+    if (other is! Variables_Subscription_watchStore ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -552,8 +552,7 @@ class Subscription_watchStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchStore) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Subscription_watchStore || runtimeType != other.runtimeType) {
       return false;
     }
     final l$storesByPk = storesByPk;
@@ -937,7 +936,7 @@ class Subscription_watchStore_storesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchStore_storesByPk) ||
+    if (other is! Subscription_watchStore_storesByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }

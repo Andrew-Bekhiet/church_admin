@@ -18,15 +18,18 @@ class UpdateUserSpiritDataRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final AuthService authService = AuthService.I;
+    final AuthBloc authBloc = AuthBloc.I;
 
-    if (!authService.isSignedIn) {
-      return const LoginRoute().location;
-    } else if (authService.currentUser!.person!.spiritDataUpToDate()) {
-      return '/';
-    } else if (LocalAuthService.I.shouldAuthenticate) {
-      return AuthenticateRoute(next: state.uri.toString()).location;
+    switch (authBloc.state.unwrapped) {
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      case AuthAuthenticated(userData: User(:final person))
+          when person?.spiritDataUpToDate() ?? false:
+        return const HomeScreenRoute().location;
+
+      case _:
+        return null;
     }
-    return null;
   }
 }

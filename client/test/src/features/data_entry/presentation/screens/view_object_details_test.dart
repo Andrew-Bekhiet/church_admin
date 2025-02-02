@@ -17,7 +17,7 @@ import './view_object_details_test.mocks.dart';
     MockSpec<UserSettingsService>(),
     MockSpec<ImageUrlCacheService>(),
     MockSpec<ViewableObjectService>(),
-    MockSpec<AuthService>(),
+    MockSpec<AuthBloc>(),
   ],
 )
 void main() {
@@ -278,7 +278,7 @@ void _setUp() {
     _mockUserSettingsService(),
     _mockImageUrlCacheService(),
     _mockViewableObjectService(),
-    _mockAuthService(),
+    _mockAuthBloc(),
   ]);
 }
 
@@ -307,10 +307,10 @@ Override _mockViewableObjectService() {
   return viewableObjectServiceProvider.overrideWithValue(mock);
 }
 
-Override _mockAuthService() {
-  final mock = MockAuthService();
+Override _mockAuthBloc() {
+  final mock = MockAuthBloc();
 
-  when(mock.currentUser).thenReturn(
+  when(mock.currentUserData).thenReturn(
     User(
       uid: 'id',
       name: 'name',
@@ -318,5 +318,5 @@ Override _mockAuthService() {
     ),
   );
 
-  return authServiceProvider.overrideWithValue(mock);
+  return authBlocProvider.overrideWithValue(mock);
 }

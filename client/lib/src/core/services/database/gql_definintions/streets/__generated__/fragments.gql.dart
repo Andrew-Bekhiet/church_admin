@@ -82,7 +82,7 @@ class Fragment_Street implements Fragment_StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Street) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Street || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -303,8 +303,7 @@ class Fragment_StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_StreetNoPhoto) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment_StreetNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

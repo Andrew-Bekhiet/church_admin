@@ -22,6 +22,7 @@ class InitializationService {
         IntlLocaleMessagesInit(),
         AndroidAlarmManagerPluginInit(),
         FlutterLocalNotificationsPluginInit(),
+        BlocObserverInit(),
       };
 
   InitializationService();

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class UnapprovedUser extends StatefulWidget {
   const UnapprovedUser({super.key});
@@ -13,37 +12,37 @@ class UnapprovedUser extends StatefulWidget {
 
 class _UnapprovedUserState extends State<UnapprovedUser> {
   final TextEditingController _codeController = TextEditingController();
+  final authBloc = AuthBloc.I;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('في انتظار الموافقة'),
-        actions: [
-          IconButton(
-            icon: const Icon(Symbols.logout),
-            onPressed: AuthService.I.signOut,
-          ),
-        ],
+        actions: const [SignOutButton()],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 15,
           children: [
             Text(
               'يجب ان يتم الموافقة على دخولك للبيانات '
               'من قبل أحد '
               'المشرفين أو المسؤلين في البرنامج',
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            Text(
+              'أو',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            const Text('أو'),
             Text(
               'يمكنك ادخال كود الدعوة هنا',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Container(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'كود الدعوة',
@@ -76,18 +75,22 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
       unawaited(
         showDialog(
           context: context,
-          builder: (context) => const Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircularProgressIndicator(),
-              Text('جار تفعيل الحساب...'),
-            ],
+          builder: (context) => const AlertDialog(
+            content: Row(
+              spacing: 10,
+              children: [
+                CircularProgressIndicator(),
+                Text('جار تفعيل الحساب...'),
+              ],
+            ),
           ),
         ),
       );
 
       await FunctionsService.I.registerUserWithCode(registerCode);
-      await AuthService.I.refreshToken();
+      authBloc.add(const ReloadUser());
+
+      await authBloc.stream.first;
 
       navigator.pop();
     } on Exception catch (e, stackTrace) {

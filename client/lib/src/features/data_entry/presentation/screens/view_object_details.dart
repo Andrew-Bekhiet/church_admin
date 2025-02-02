@@ -117,7 +117,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else if (AuthService.I.currentUser!.canEditObject(objectData))
+              else if (AuthBloc.I.currentUserData!.canEditObject(objectData))
                 widget.editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(

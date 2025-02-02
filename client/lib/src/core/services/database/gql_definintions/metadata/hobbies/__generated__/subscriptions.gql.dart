@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllHobbies) ||
+    if (other is! Variables_Subscription_watchAllHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllHobbies) ||
+    if (other is! Subscription_watchAllHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -501,7 +501,7 @@ class Subscription_watchAllHobbies_hobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllHobbies_hobbies) ||
+    if (other is! Subscription_watchAllHobbies_hobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }

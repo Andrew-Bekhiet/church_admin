@@ -14,7 +14,7 @@ import 'package:riverpod/riverpod.dart';
 import 'local_auth_service_test.mocks.dart';
 
 @GenerateMocks(
-  [NotificationsService, AuthService],
+  [NotificationsService, AuthBloc],
   customMocks: [
     MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
   ],
@@ -336,7 +336,7 @@ void main() {
 void _setUp() {
   final overrides = [
     _setUpCANotificationsService(),
-    _setUpAuthService(),
+    _setUpAuthBloc(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -362,12 +362,12 @@ Override _setUpCANotificationsService() {
       .overrideWithValue(mockCANotificationsService);
 }
 
-Override _setUpAuthService() {
-  final auth = MockAuthService();
+Override _setUpAuthBloc() {
+  final auth = MockAuthBloc();
 
   when(auth.isSignedIn).thenReturn(true);
 
-  return authServiceProvider.overrideWithValue(auth);
+  return authBlocProvider.overrideWithValue(auth);
 }
 
 class MockLocalAuthPlatform extends LocalAuthPlatformMock

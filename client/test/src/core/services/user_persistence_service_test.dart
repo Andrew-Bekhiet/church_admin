@@ -10,7 +10,7 @@ import 'user_persistence_service_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<ConnectivityService>(),
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
   MockSpec<FirebaseDatabase>(),
   MockSpec<DatabaseReference>(),
   MockSpec<OnDisconnect>(),
@@ -153,7 +153,7 @@ void main() {
 Future<void> _setUp() async {
   final overrides = [
     await _setUpFirebaseDatabase(),
-    _setUpAuthService(),
+    _setUpAuthBloc(),
     _setUpConnectivityService(),
   ];
 
@@ -177,7 +177,9 @@ Future<MockDatabaseReference> _setUpMockDBReference() async {
 
   when(mockDatabaseReference.onDisconnect()).thenReturn(mockOnDisconnect);
   when(mockDatabaseReference.child(any)).thenReturn(mockDatabaseReference);
-  when(mockDatabaseReference.set(any)).thenAnswer((_) async {});
+  when(mockDatabaseReference.set(any)).thenAnswer((_) async {
+    return;
+  });
 
   return mockDatabaseReference;
 }
@@ -185,18 +187,36 @@ Future<MockDatabaseReference> _setUpMockDBReference() async {
 Future<MockOnDisconnect> _setUpMockOnDisconnect() async {
   final mock = MockOnDisconnect();
 
-  when(mock.set(any)).thenAnswer((_) async {});
+  when(mock.set(any)).thenAnswer((_) async {
+    return;
+  });
 
   return mock;
 }
 
-Override _setUpAuthService() {
-  final mock = MockAuthService();
+Override _setUpAuthBloc() {
+  final mock = MockAuthBloc();
 
   when(mock.isSignedIn).thenReturn(true);
-  when(mock.currentUser).thenReturn(User(uid: 'uid', name: 'name'));
+  when(mock.currentUser).thenReturn(
+    const AuthUser(
+      uid: 'auth-uid',
+      email: 'email',
+      emailVerified: true,
+      idToken: 'idToken',
+      claims: {},
+    ),
+  );
+  when(mock.currentUserData).thenReturn(
+    User(
+      uid: 'uid',
+      email: 'email',
+      name: 'name',
+      permissions: const PermissionsSet.fromSet({UserPermission.writeAllData}),
+    ),
+  );
 
-  return authServiceProvider.overrideWithValue(mock);
+  return authBlocProvider.overrideWithValue(mock);
 }
 
 Override _setUpConnectivityService() {

@@ -14,7 +14,8 @@ class UpdateUserSpiritData extends StatefulWidget {
 }
 
 class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
-  late Person _userData = widget.userData ?? AuthService.I.currentUser!.person!;
+  late Person _userData =
+      widget.userData ?? AuthBloc.I.currentUserData!.person!;
   final _formKey = GlobalKey<FormState>();
   bool _isSaving = false;
 
@@ -67,7 +68,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.I.currentUser!.uid,
+                    recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
@@ -108,7 +109,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.I.currentUser!.uid,
+                    recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null

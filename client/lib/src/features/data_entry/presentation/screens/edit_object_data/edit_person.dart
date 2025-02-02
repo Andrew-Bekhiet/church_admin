@@ -808,7 +808,7 @@ class _EditPersonState extends State<EditPerson> {
                 newPerson = newPerson.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }
@@ -824,7 +824,7 @@ class _EditPersonState extends State<EditPerson> {
                 newPerson = newPerson.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }
@@ -840,7 +840,7 @@ class _EditPersonState extends State<EditPerson> {
                 newPerson = newPerson.copyWith(
                   lastVisit: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }
@@ -855,7 +855,7 @@ class _EditPersonState extends State<EditPerson> {
                 newPerson = newPerson.copyWith(
                   lastCall: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }

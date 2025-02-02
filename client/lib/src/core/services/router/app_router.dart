@@ -12,6 +12,7 @@ final GoRouter $appRouter = GoRouter(
     $loginRoute,
     $emailVerificationRoute,
     $multiFactorLoginRoute,
+    $authLoadingRoute,
     $unapprovedUserRoute,
     $updateUserSpiritDataRoute,
     $authenticateRoute,

@@ -14,10 +14,6 @@ part 'user.g.dart';
     'email',
     'blurhash',
     'authId',
-    'isMultiFactorEnrolled',
-    'idToken',
-    'emailVerified',
-    'passwordKeyHash',
   ],
 )
 class User extends ViewableWithIDAndImage
@@ -46,11 +42,6 @@ class User extends ViewableWithIDAndImage
     @Default(PermissionsSet.empty())
     PermissionsSet permissions,
     String? authId,
-    @JsonKey(includeIfNull: false) bool? isMultiFactorEnrolled,
-    @JsonKey(includeIfNull: false) String? idToken,
-    @JsonKey(includeIfNull: false) bool? emailVerified,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    String? passwordKeyHash,
     LastRecordedByInfo? lastEdit,
     Person? person,
     List<AdminOnData>? servicesHistory,

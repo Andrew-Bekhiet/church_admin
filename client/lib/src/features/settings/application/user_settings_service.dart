@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class UserSettingsService {
+class UserSettingsService extends BlocObserver {
   static UserSettingsService get I =>
       globalProviderContainer.read(userSettingsServiceProvider);
 
@@ -38,11 +39,27 @@ class UserSettingsService {
       (t.toString().replaceAll(RegExp(r'_|\$|(Impl)'), ''));
 
   Future<void> setupDefaults() async {
-    await setGreatFeastTheme(true);
-    await setSecondLineFor(type: Area, value: null);
-    await setSecondLineFor(type: Street, value: null);
-    await setSecondLineFor(type: Family, value: 'address');
-    await setSecondLineFor(type: Person, value: 'birthdate');
-    await setSecondLineFor(type: User, value: 'permissions');
+    await Future.wait([
+      setGreatFeastTheme(true),
+      setSecondLineFor(type: Area, value: null),
+      setSecondLineFor(type: Street, value: null),
+      setSecondLineFor(type: Family, value: 'address'),
+      setSecondLineFor(type: Person, value: 'birthdate'),
+      setSecondLineFor(type: User, value: 'permissions'),
+    ]);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+
+    if (bloc is! AuthBloc) return;
+
+    final currentState = transition.currentState;
+    final nextState = transition.nextState;
+
+    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
+      setupDefaults();
+    }
   }
 }

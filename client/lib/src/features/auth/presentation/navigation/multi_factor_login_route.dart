@@ -15,12 +15,19 @@ class MultiFactorLoginRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final AuthService authService = AuthService.I;
+    final AuthBloc authBloc = AuthBloc.I;
+    final authState = authBloc.state.unwrapped;
 
-    if (!authService.multiFactorManager.hasPendingMultifactorLogin &&
-        (authService.currentUser?.isMultiFactorEnrolled ?? false)) {
-      return '/';
+    switch (authState) {
+      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
+      case AuthMultiFactorChallengeInProgress():
+        return null;
+
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      default:
+        return const HomeScreenRoute().location;
     }
-    return null;
   }
 }

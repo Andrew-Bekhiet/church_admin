@@ -65,7 +65,7 @@ class Variables_Subscription_editHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_editHistory) ||
+    if (other is! Variables_Subscription_editHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -200,7 +200,7 @@ class Subscription_editHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_editHistory) ||
+    if (other is! Subscription_editHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -427,7 +427,7 @@ class Variables_Subscription_visitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_visitHistory) ||
+    if (other is! Variables_Subscription_visitHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -563,7 +563,7 @@ class Subscription_visitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_visitHistory) ||
+    if (other is! Subscription_visitHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -799,7 +799,7 @@ class Variables_Subscription_personCallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_personCallHistory) ||
+    if (other is! Variables_Subscription_personCallHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -946,7 +946,7 @@ class Subscription_personCallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_personCallHistory) ||
+    if (other is! Subscription_personCallHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1209,7 +1209,7 @@ class Variables_Subscription_personVisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_personVisitHistory) ||
+    if (other is! Variables_Subscription_personVisitHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1357,7 +1357,7 @@ class Subscription_personVisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_personVisitHistory) ||
+    if (other is! Subscription_personVisitHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1635,7 +1635,7 @@ class Variables_Subscription_personConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_personConfessionHistory) ||
+    if (other is! Variables_Subscription_personConfessionHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1786,7 +1786,7 @@ class Subscription_personConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_personConfessionHistory) ||
+    if (other is! Subscription_personConfessionHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2059,7 +2059,7 @@ class Variables_Subscription_personKodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_personKodasHistory) ||
+    if (other is! Variables_Subscription_personKodasHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2207,7 +2207,7 @@ class Subscription_personKodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_personKodasHistory) ||
+    if (other is! Subscription_personKodasHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }

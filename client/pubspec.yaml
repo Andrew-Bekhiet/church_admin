@@ -36,6 +36,7 @@ dependencies:
   flex_color_picker: ^3.0.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.6
   flutter_blurhash: ^0.8.2
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^1.1.5
@@ -93,6 +94,7 @@ dependencies:
   zxcvbn: ^1.0.0
 
 dev_dependencies:
+  bloc_test: ^9.1.7
   build_runner: ^2.3.2
   church_admin_generator:
     path: ../church_admin_generator

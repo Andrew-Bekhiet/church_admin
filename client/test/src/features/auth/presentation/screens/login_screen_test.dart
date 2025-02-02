@@ -1,5 +1,7 @@
 // ignore_for_file: discarded_futures
 
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,10 +13,11 @@ import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../utils.dart';
 import 'login_screen_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
   MockSpec<AuthStorage>(),
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
@@ -25,11 +28,20 @@ import 'login_screen_test.mocks.dart';
   MockSpec<GoRouterState>(),
 ])
 void main() {
-  tearDown(resetGlobalProviderContainer);
+  setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
+
+  tearDown(defaultTearDown);
 
   testWidgets(
     'Login Screen => Key elements',
     (tester) async {
+      final overrides = [
+        _setUpAuthBloc(),
+        _setUpAuthStorage(),
+      ];
+
+      initGlobalProviderContainer(overrides);
+
       tester.view.physicalSize = const Size(800, 1400 * 4);
 
       await tester.pumpWidgetBuilder(
@@ -90,8 +102,8 @@ void main() {
     (tester) async {
       final overrides = [
         _setUpNotificationsService(),
-        _setUpUserSettings(),
-        _setUpAuthService(),
+        _setUpAuthBloc(),
+        _setUpAuthStorage(),
       ];
 
       initGlobalProviderContainer(overrides);
@@ -115,9 +127,11 @@ void main() {
       );
 
       verify(
-        AuthService.I.signInWithEmailPassword(
-          email: 'email@example.com',
-          password: 'password',
+        AuthBloc.I.add(
+          const SignInWithEmailPassword(
+            email: 'email@example.com',
+            password: 'password',
+          ),
         ),
       );
     },
@@ -129,7 +143,10 @@ void main() {
       test(
         'No Signed In User',
         () async {
-          final overrides = [_setUpAuthService(isSignedIn: false)];
+          final overrides = [
+            _setUpAuthBloc(isSignedIn: false),
+            _setUpAuthStorage(),
+          ];
 
           initGlobalProviderContainer(overrides);
 
@@ -144,7 +161,10 @@ void main() {
       test(
         'Signed In User',
         () async {
-          final overrides = [_setUpAuthService()];
+          final overrides = [
+            _setUpAuthBloc(),
+            _setUpAuthStorage(),
+          ];
 
           initGlobalProviderContainer(overrides);
 
@@ -159,71 +179,64 @@ void main() {
   );
 }
 
-Override _setUpUserSettings() {
-  final userSettings = MockUserSettingsService();
-  when(
-    userSettings.setSecondLineFor(
-      type: Area,
-      value: captureAnyNamed('value'),
-    ),
-  ).thenAnswer((_) async {
-    return;
-  });
-  when(
-    userSettings.setSecondLineFor(
-      type: Street,
-      value: captureAnyNamed('value'),
-    ),
-  ).thenAnswer((_) async {
-    return;
-  });
-  when(
-    userSettings.setSecondLineFor(
-      type: Family,
-      value: captureAnyNamed('value'),
-    ),
-  ).thenAnswer((_) async {
-    return;
-  });
-  when(
-    userSettings.setSecondLineFor(
-      type: Person,
-      value: captureAnyNamed('value'),
-    ),
-  ).thenAnswer((_) async {
-    return;
-  });
+Override _setUpAuthStorage() {
+  final mock = MockAuthStorage();
+  when(mock.getPasswordHash()).thenAnswer((_) async => 'hash-password1234');
 
-  return userSettingsServiceProvider.overrideWithValue(userSettings);
+  return authStorageProvider.overrideWithValue(mock);
 }
 
-Override _setUpAuthService({bool isSignedIn = true}) {
-  final authRepo = MockAuthService();
+Override _setUpAuthBloc({bool isSignedIn = true}) {
+  final authBloc = MockAuthBloc();
+  final streamController = StreamController<AuthState>();
+
   if (isSignedIn) {
-    final user = User(
+    const user = AuthUser(
       uid: 'uid',
-      name: '',
       email: 'email',
-      authId: 'firebaseAuthUID',
+      emailVerified: true,
+      idToken: 'token',
+      claims: {},
     );
-    when(authRepo.userStream).thenAnswer(
+    when(authBloc.userStream).thenAnswer(
       (_) => BehaviorSubject.seeded(
         user,
       ),
     );
-    when(authRepo.currentUser).thenReturn(
+    when(authBloc.currentUser).thenReturn(
       user,
     );
-  }
-  when(authRepo.isSignedIn).thenReturn(isSignedIn);
-  when(
-    authRepo.signInWithEmailPassword(
-      email: 'email@example.com',
-      password: 'password',
-    ),
-  ).thenAnswer((_) async => true);
 
-  return authServiceProvider.overrideWithValue(authRepo);
+    when(authBloc.state).thenReturn(const AuthAuthenticated(authUser: user));
+  }
+
+  when(authBloc.isSignedIn).thenReturn(isSignedIn);
+  when(
+    authBloc.add(
+      const SignInWithEmailPassword(
+        email: 'email@example.com',
+        password: 'password',
+      ),
+    ),
+  ).thenAnswer((_) {
+    streamController.add(
+      const AuthAuthenticated(
+        authUser: AuthUser(
+          uid: 'uid',
+          email: 'email',
+          emailVerified: true,
+          idToken: 'token',
+          claims: {},
+        ),
+      ),
+    );
+  });
+
+  return authBlocProvider.overrideWith((ref) {
+    ref.onDispose(streamController.close);
+
+    return authBloc;
+  });
 }
 
 Override _setUpNotificationsService() {

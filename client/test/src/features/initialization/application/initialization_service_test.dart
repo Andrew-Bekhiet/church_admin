@@ -2,11 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rxdart/rxdart.dart';
 
 import 'initialization_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Initializer>(), MockSpec<AuthService>()])
+@GenerateNiceMocks([MockSpec<Initializer>(), MockSpec<AuthBloc>()])
 void main() {
   group(
     'InitializationService',
@@ -28,6 +27,7 @@ void main() {
             IntlLocaleMessagesInit,
             AndroidAlarmManagerPluginInit,
             FlutterLocalNotificationsPluginInit,
+            BlocObserverInit,
           };
 
           expect(
@@ -57,7 +57,7 @@ void main() {
           await unit.initialize();
           await unit.initialize();
 
-          verifyNever(AuthService.I.userStream);
+          verifyNever(AuthBloc.I.userStream);
         },
       );
     },
@@ -65,12 +65,10 @@ void main() {
 }
 
 void _setUp() {
-  final mockAuthService = MockAuthService();
-  when(mockAuthService.userStream)
-      .thenAnswer((_) => Stream<User?>.value(null).shareValue());
+  final mockAuthBloc = MockAuthBloc();
 
   initGlobalProviderContainer([
-    authServiceProvider.overrideWithValue(mockAuthService),
+    authBlocProvider.overrideWithValue(mockAuthBloc),
   ]);
 }
 

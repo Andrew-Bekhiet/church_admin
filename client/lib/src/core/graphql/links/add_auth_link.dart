@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:church_admin/church_admin.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -16,20 +15,19 @@ class AddAuthLink extends Link {
   final String url;
   final HttpLink Function(String) createHttpLink;
   final WebSocketLink Function(String, SocketClientConfig) createWSLink;
+  final Stream<String?> Function() getIdTokenStream;
 
-  final AuthService Function() _getAuthService;
-
-  late final AuthService _authService = _getAuthService();
+  late final Stream<String?> _idTokenStream = getIdTokenStream();
 
   HttpLink? _httpLink;
   WebSocketLink? _wsLink;
 
   AddAuthLink({
     required this.url,
-    AuthService Function()? getAuthService,
+    required this.getIdTokenStream,
     this.createHttpLink = defaultCreateHttpLink,
     this.createWSLink = defaultCreateWSLink,
-  }) : _getAuthService = getAuthService ?? (() => AuthService.I);
+  });
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
@@ -45,7 +43,7 @@ class AddAuthLink extends Link {
   ]) {
     _httpLink ??= createHttpLink(url);
 
-    return _authService.idTokenStream.whereNotNull().switchMap(
+    return _idTokenStream.whereNotNull().switchMap(
           (t) => _httpLink!.request(
             request
                 .updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
@@ -95,7 +93,7 @@ class AddAuthLink extends Link {
       initialPayload: () async => {
         'headers': {
           'Authorization':
-              'Bearer ${await _authService.idTokenStream.whereNotNull().take(1).first}',
+              'Bearer ${await _idTokenStream.whereNotNull().first}',
           'content-type': 'application/json',
         },
       },

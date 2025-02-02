@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:mockito/mockito.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 void flushVisibilityDetectors() {
@@ -22,3 +23,8 @@ WidgetWrapper materialAppWithThemeAndLocale() => materialAppWrapper(
         greatFeastThemeOverride: false,
       ),
     );
+
+void defaultTearDown() {
+  resetGlobalProviderContainer();
+  resetMockitoState();
+}

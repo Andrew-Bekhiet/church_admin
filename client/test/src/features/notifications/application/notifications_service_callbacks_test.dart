@@ -14,7 +14,7 @@ import 'notifications_service_callbacks_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<NotificationsStorage>(),
   MockSpec<InitializationService>(),
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
   MockSpec<NotificationsService>(),
   MockSpec<DatabaseService>(),
   MockSpec<AdvancedQueryParser>(),
@@ -180,7 +180,7 @@ Future<void> _testNotificationMethod({
 
   final paginatableStreamCall = verifyInOrder([
     InitializationService.I.initialize(),
-    AuthService.I.isSignedIn,
+    AuthBloc.I.isSignedIn,
     advancedQueryParser.createPaginatableStream(captureAny),
     (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
       argThat(matchExpectedNotification(expectedNotification)),
@@ -229,7 +229,7 @@ Matcher matchExpectedNotification(Notification expectedNotification) =>
 void _setUp() {
   final overrides = [
     _setUpMockInitializationService(),
-    _setUpMockAuthService(),
+    _setUpMockAuthBloc(),
     _setUpMockNotificationsStorage(),
     _setUpMockNotificationsService(),
     _setUpMockDatabaseService(),
@@ -245,12 +245,23 @@ Override _setUpMockInitializationService() {
       .overrideWithValue(mockInitializationService);
 }
 
-Override _setUpMockAuthService() {
-  final mockAuthService = MockAuthService();
+Override _setUpMockAuthBloc() {
+  final mockAuthBloc = MockAuthBloc();
 
-  when(mockAuthService.isSignedIn).thenReturn(true);
+  when(mockAuthBloc.isSignedIn).thenReturn(true);
+  when(mockAuthBloc.userStream).thenAnswer(
+    (_) => Stream.value(
+      const AuthUser(
+        uid: 'uid',
+        email: 'email',
+        emailVerified: true,
+        idToken: 'idToken',
+        claims: {},
+      ),
+    ),
+  );
 
-  return authServiceProvider.overrideWithValue(mockAuthService);
+  return authBlocProvider.overrideWithValue(mockAuthBloc);
 }
 
 Override _setUpMockNotificationsStorage() {
@@ -269,7 +280,9 @@ Override _setUpMockNotificationsService() {
       id: anyNamed('id'),
       notificationDetails: anyNamed('notificationDetails'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
 
   return notificationsServiceProvider
       .overrideWithValue(mockNotificationsService);

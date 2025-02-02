@@ -4,12 +4,12 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
 
-
-class NotificationsService {
+class NotificationsService extends BlocObserver {
   static NotificationsService get I =>
       globalProviderContainer.read(notificationsServiceProvider);
 
@@ -76,7 +76,7 @@ class NotificationsService {
     required FlutterLocalNotificationsPlugin localNotificationsPlugin,
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
-    AuthService Function()? getAuthService,
+    required AuthBloc authBloc,
     UserSettingsService? userSettingsService,
     FunctionsService? functionsService,
     NotificationsStorage? storage,
@@ -85,7 +85,7 @@ class NotificationsService {
         _settings = settings ?? NotificationsSettingsStorage.I,
         _firebaseMessaging = firebaseMessaging,
         _localNotificationsPlugin = localNotificationsPlugin,
-        _getAuthService = getAuthService ?? (() => AuthService.I),
+        _authBloc = authBloc,
         _userSettingsService = userSettingsService ?? UserSettingsService.I,
         _functionsService = functionsService ?? FunctionsService.I {
     //
@@ -104,7 +104,7 @@ class NotificationsService {
   final FirebaseMessaging _firebaseMessaging;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
-  final AuthService Function() _getAuthService;
+  final AuthBloc _authBloc;
   final UserSettingsService _userSettingsService;
   final FunctionsService _functionsService;
 
@@ -275,29 +275,32 @@ class NotificationsService {
   Future<bool> registerFCMTokenAndListenForChanges({
     String? cachedToken,
   }) async {
-    if (_getAuthService().isSignedIn &&
-        await _firebaseMessaging.isSupported()) {
-      final permissionGranted = await requestNotificationsPermission();
-
-      if (permissionGranted) {
-        final token = cachedToken ?? await _firebaseMessaging.getToken();
-
-        if (token != null && _userSettingsService.registeredFCMToken != token) {
-          await _functionsService.registerFCMToken(token);
-
-          await _userSettingsService.setRegisteredFCMToken(token);
-
-          _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
-              .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
-              .listen(
-                (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
-              );
-
-          return true;
-        }
-      }
+    if (!_authBloc.isSignedIn || !await _firebaseMessaging.isSupported()) {
+      return false;
     }
-    return false;
+
+    final permissionGranted = await requestNotificationsPermission();
+
+    if (!permissionGranted) {
+      return false;
+    }
+
+    final token = cachedToken ?? await _firebaseMessaging.getToken();
+
+    if (token == null || _userSettingsService.registeredFCMToken == token) {
+      return false;
+    }
+
+    await _functionsService.registerFCMToken(token);
+    await _userSettingsService.setRegisteredFCMToken(token);
+
+    _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
+        .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))
+        .listen(
+          (t) => registerFCMTokenAndListenForChanges(cachedToken: t),
+        );
+
+    return true;
   }
 
   Future<bool> requestNotificationsPermission() async {
@@ -312,6 +315,24 @@ class NotificationsService {
           fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
     }
     return false;
+  }
+
+  @override
+  Future<void> onTransition(Bloc bloc, Transition transition) async {
+    super.onTransition(bloc, transition);
+
+    if (bloc is! AuthBloc) return;
+
+    final nextState = transition.nextState;
+    final currentState = transition.currentState;
+
+    if (currentState is! AuthAuthenticated &&
+        nextState is AuthUnauthenticated) {
+      if (await requestNotificationsPermission()) {
+        await scheduleDefaultNotifications();
+        await registerFCMTokenAndListenForChanges();
+      }
+    }
   }
 
   Future<void> dispose() async {

@@ -40,7 +40,7 @@ class Variables_Mutation_deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deletePerson) ||
+    if (other is! Variables_Mutation_deletePerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deletePerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deletePerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deletePersonsByPk = deletePersonsByPk;
@@ -719,7 +719,7 @@ class Variables_Mutation_updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updatePerson) ||
+    if (other is! Variables_Mutation_updatePerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1556,7 +1556,7 @@ class Mutation_updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updatePerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updatePersonsByPk = updatePersonsByPk;
@@ -3092,7 +3092,7 @@ class Mutation_updatePerson_insertPersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsServices) ||
+    if (other is! Mutation_updatePerson_insertPersonsServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3219,7 +3219,7 @@ class Mutation_updatePerson_insertPersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsGroups) ||
+    if (other is! Mutation_updatePerson_insertPersonsGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3346,7 +3346,7 @@ class Mutation_updatePerson_insertPersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsHobbies) ||
+    if (other is! Mutation_updatePerson_insertPersonsHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3473,7 +3473,7 @@ class Mutation_updatePerson_insertPersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsTags) ||
+    if (other is! Mutation_updatePerson_insertPersonsTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3600,7 +3600,7 @@ class Mutation_updatePerson_deletePersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsTags) ||
+    if (other is! Mutation_updatePerson_deletePersonsTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3727,7 +3727,7 @@ class Mutation_updatePerson_deletePersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsHobbies) ||
+    if (other is! Mutation_updatePerson_deletePersonsHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3854,7 +3854,7 @@ class Mutation_updatePerson_deletePersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsGroups) ||
+    if (other is! Mutation_updatePerson_deletePersonsGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3981,7 +3981,7 @@ class Mutation_updatePerson_deletePersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsServices) ||
+    if (other is! Mutation_updatePerson_deletePersonsServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4109,7 +4109,7 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryConfessionHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4269,8 +4269,8 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePerson_insertHistoryConfessionHistoryOne_person) ||
+    if (other
+            is! Mutation_updatePerson_insertHistoryConfessionHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4422,7 +4422,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4579,7 +4579,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne_person) ||
+    if (other is! Mutation_updatePerson_insertHistoryKodasHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4728,7 +4728,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryCallHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4885,7 +4885,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne_person) ||
+    if (other is! Mutation_updatePerson_insertHistoryCallHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5033,7 +5033,7 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryVisitHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryVisitHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5162,7 +5162,7 @@ class Variables_Mutation_insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPerson) ||
+    if (other is! Variables_Mutation_insertPerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5269,7 +5269,7 @@ class Mutation_insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertPerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertPersonsOne = insertPersonsOne;
@@ -5472,7 +5472,7 @@ class Variables_Mutation_updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updatePersonSpiritData) ||
+    if (other is! Variables_Mutation_updatePersonSpiritData ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5634,7 +5634,7 @@ class Mutation_updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePersonSpiritData) ||
+    if (other is! Mutation_updatePersonSpiritData ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6034,8 +6034,8 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne) ||
+    if (other
+            is! Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6185,8 +6185,8 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne) ||
+    if (other
+            is! Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }

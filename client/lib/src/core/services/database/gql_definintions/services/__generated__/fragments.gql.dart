@@ -82,7 +82,7 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Service) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Service || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -347,7 +347,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_ServiceWithStudyYears) ||
+    if (other is! Fragment_ServiceWithStudyYears ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -670,7 +670,7 @@ class Fragment_ServiceWithStudyYears_studyYearFrom {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_ServiceWithStudyYears_studyYearFrom) ||
+    if (other is! Fragment_ServiceWithStudyYears_studyYearFrom ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -817,7 +817,7 @@ class Fragment_ServiceWithStudyYears_studyYearTo {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_ServiceWithStudyYears_studyYearTo) ||
+    if (other is! Fragment_ServiceWithStudyYears_studyYearTo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -972,8 +972,7 @@ class Fragment_ServiceNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_ServiceNoPhoto) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment_ServiceNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

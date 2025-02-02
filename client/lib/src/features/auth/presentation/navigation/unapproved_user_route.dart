@@ -15,9 +15,19 @@ class UnapprovedUserRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    if (AuthService.I.currentUser?.permissions.approved ?? false) {
-      return const HomeScreenRoute().location;
+    final authState = AuthBloc.I.state.unwrapped;
+
+    switch (authState) {
+      case AuthAuthenticated(
+          userData: User(permissions: PermissionsSet(approved: true))
+        ):
+        return const HomeScreenRoute().location;
+
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      default:
+        return null;
     }
-    return null;
   }
 }

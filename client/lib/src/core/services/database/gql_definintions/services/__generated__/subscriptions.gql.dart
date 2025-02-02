@@ -152,7 +152,7 @@ class Variables_Subscription_watchAllServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllServices) ||
+    if (other is! Variables_Subscription_watchAllServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -440,7 +440,7 @@ class Subscription_watchAllServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices) ||
+    if (other is! Subscription_watchAllServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -932,7 +932,7 @@ class Subscription_watchAllServices_services
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices_services) ||
+    if (other is! Subscription_watchAllServices_services ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1239,7 +1239,7 @@ class Subscription_watchAllServices_services_studyYearFrom
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices_services_studyYearFrom) ||
+    if (other is! Subscription_watchAllServices_services_studyYearFrom ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1395,7 +1395,7 @@ class Subscription_watchAllServices_services_studyYearTo
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices_services_studyYearTo) ||
+    if (other is! Subscription_watchAllServices_services_studyYearTo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1589,7 +1589,7 @@ class Subscription_watchAllServices_services_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices_services_classes) ||
+    if (other is! Subscription_watchAllServices_services_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1791,7 +1791,7 @@ class Subscription_watchAllServices_services_classes_studyYear {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllServices_services_classes_studyYear) ||
+    if (other is! Subscription_watchAllServices_services_classes_studyYear ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1936,7 +1936,7 @@ class Variables_Subscription_watchService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchService) ||
+    if (other is! Variables_Subscription_watchService ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2028,7 +2028,7 @@ class Subscription_watchService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchService) ||
+    if (other is! Subscription_watchService ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2374,7 +2374,7 @@ class Subscription_watchService_servicesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchService_servicesByPk) ||
+    if (other is! Subscription_watchService_servicesByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2694,7 +2694,7 @@ class Subscription_watchService_servicesByPk_studyYearFrom
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchService_servicesByPk_studyYearFrom) ||
+    if (other is! Subscription_watchService_servicesByPk_studyYearFrom ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2850,7 +2850,7 @@ class Subscription_watchService_servicesByPk_studyYearTo
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchService_servicesByPk_studyYearTo) ||
+    if (other is! Subscription_watchService_servicesByPk_studyYearTo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2994,7 +2994,7 @@ class Subscription_watchService_servicesByPk_adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchService_servicesByPk_adminUsers) ||
+    if (other is! Subscription_watchService_servicesByPk_adminUsers ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -8,6 +8,7 @@ import 'dart:io' as _i7;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:flutter/material.dart' as _i4;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i10;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i6;
 import 'package:go_router/go_router.dart' as _i3;
 import 'package:hive_flutter/hive_flutter.dart' as _i5;
@@ -456,4 +457,88 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  void onTransition(
+    _i10.Bloc<dynamic, dynamic>? bloc,
+    _i10.Transition<dynamic, dynamic>? transition,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [
+            bloc,
+            transition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onCreate(_i10.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onCreate,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(
+    _i10.Bloc<dynamic, dynamic>? bloc,
+    Object? event,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [
+            bloc,
+            event,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(
+    _i10.BlocBase<dynamic>? bloc,
+    _i10.Change<dynamic>? change,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [
+            bloc,
+            change,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    _i10.BlocBase<dynamic>? bloc,
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            bloc,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose(_i10.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

@@ -83,7 +83,7 @@ class Variables_Subscription_watchAllClasses {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllClasses) ||
+    if (other is! Variables_Subscription_watchAllClasses ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -246,7 +246,7 @@ class Subscription_watchAllClasses {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllClasses) ||
+    if (other is! Subscription_watchAllClasses ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -460,7 +460,7 @@ class Variables_Subscription_watchClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchClass) ||
+    if (other is! Variables_Subscription_watchClass ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -552,8 +552,7 @@ class Subscription_watchClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchClass) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Subscription_watchClass || runtimeType != other.runtimeType) {
       return false;
     }
     final l$classesByPk = classesByPk;
@@ -927,7 +926,7 @@ class Subscription_watchClass_classesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchClass_classesByPk) ||
+    if (other is! Subscription_watchClass_classesByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1218,7 +1217,7 @@ class Subscription_watchClass_classesByPk_studyYear {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchClass_classesByPk_studyYear) ||
+    if (other is! Subscription_watchClass_classesByPk_studyYear ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1357,7 +1356,7 @@ class Subscription_watchClass_classesByPk_adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchClass_classesByPk_adminUsers) ||
+    if (other is! Subscription_watchClass_classesByPk_adminUsers ||
         runtimeType != other.runtimeType) {
       return false;
     }

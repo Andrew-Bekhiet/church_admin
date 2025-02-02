@@ -129,9 +129,9 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       return;
     }
 
-    final storedPasswordHash = await AuthService.I.getStoredPasswordHash();
+    final storedPasswordHash = await AuthStorage.I.getPasswordHash();
     final isPasswordValid = await LocalAuthService.I.verifyPassword(
-      email: AuthService.I.currentUser!.email!,
+      email: AuthBloc.I.currentUser!.email,
       password: password,
       storedPasswordHash: storedPasswordHash,
     );

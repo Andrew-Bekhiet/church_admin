@@ -11,7 +11,7 @@ class UserPersistenceService {
   bool recordPersistence = true;
 
   final ConnectivityService _connectivity;
-  final AuthService _auth;
+  final AuthBloc _auth;
   final FirebaseDatabase _firebaseDatabase;
 
   late final StreamSubscription<bool> _connectivitySubscription;
@@ -19,15 +19,16 @@ class UserPersistenceService {
   UserPersistenceService({
     required FirebaseDatabase firebaseDatabase,
     ConnectivityService? connectivityService,
-    AuthService? auth,
+    AuthBloc? auth,
   })  : _connectivity = connectivityService ?? ConnectivityService.I,
-        _auth = auth ?? AuthService.I,
+        _auth = auth ?? AuthBloc.I,
         _firebaseDatabase = firebaseDatabase {
     _connectivitySubscription =
         _connectivity.connectivityStream.listen(_onConnectivityChanged);
   }
 
-  bool get canRecordPersistence => recordPersistence && _auth.isSignedIn;
+  bool get canRecordPersistence =>
+      recordPersistence && _auth.currentUserData != null;
 
   Future<void> _onConnectivityChanged(bool connected) async {
     if (!connected) return;
@@ -40,7 +41,7 @@ class UserPersistenceService {
 
     await _firebaseDatabase
         .ref()
-        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .onDisconnect()
         .set(ServerValue.timestamp)
         .catchError((_) {});
@@ -49,7 +50,7 @@ class UserPersistenceService {
   Future<void> cancelOnDisconnect() async {
     await _firebaseDatabase
         .ref()
-        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .onDisconnect()
         .cancel();
   }
@@ -59,7 +60,7 @@ class UserPersistenceService {
 
     await _firebaseDatabase
         .ref()
-        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .set('Active');
     await scheduleOnDisconnect();
   }
@@ -69,7 +70,7 @@ class UserPersistenceService {
 
     await _firebaseDatabase
         .ref()
-        .child('Users/${_auth.currentUser!.uid}/lastSeen')
+        .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .set(ServerValue.timestamp);
     await cancelOnDisconnect();
   }

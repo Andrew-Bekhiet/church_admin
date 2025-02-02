@@ -78,7 +78,7 @@ class Variables_Subscription_watchAllStudyYears {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllStudyYears) ||
+    if (other is! Variables_Subscription_watchAllStudyYears ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -242,7 +242,7 @@ class Subscription_watchAllStudyYears {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllStudyYears) ||
+    if (other is! Subscription_watchAllStudyYears ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -485,7 +485,7 @@ class Subscription_watchAllStudyYears_studyYears {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllStudyYears_studyYears) ||
+    if (other is! Subscription_watchAllStudyYears_studyYears ||
         runtimeType != other.runtimeType) {
       return false;
     }

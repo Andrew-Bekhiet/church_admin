@@ -13,8 +13,7 @@ import 'church_admin_app_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<LoggingService>(),
-  MockSpec<AuthService>(),
-  MockSpec<MultiFactorManager>(),
+  MockSpec<AuthBloc>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
   MockSpec<PersonsDAO>(),
@@ -112,18 +111,21 @@ void main() {
   );
 }
 
-Override _setUpAuthService() {
-  final mock = MockAuthService();
+Override _setUpAuthBloc() {
+  final mock = MockAuthBloc();
+
+  provideDummy<AuthState>(const AuthUnauthenticated());
 
   when(mock.isSignedIn).thenReturn(false);
   when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(null));
+  when(mock.state).thenReturn(const AuthUnauthenticated());
 
-  return authServiceProvider.overrideWithValue(mock);
+  return authBlocProvider.overrideWithValue(mock);
 }
 
 List<Override> _setUp() {
   final overrides = [
-    _setUpAuthService(),
+    _setUpAuthBloc(),
     _setUpLoggingService(),
     userSettingsServiceProvider.overrideWithValue(FakeUserSettings()),
     _setUpGoRouterRefreshStream(),
@@ -255,7 +257,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
 
     final overrides = [
       ..._setUp(),
-      _setUpAuthService(value),
+      _setUpAuthBloc(value),
     ];
 
     if (value != FirstScreenVariantEnum.login) {
@@ -278,44 +280,80 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
 
-  Override _setUpAuthService(FirstScreenVariantEnum value) {
-    final mock = MockAuthService();
+  Override _setUpAuthBloc(FirstScreenVariantEnum value) {
+    final mock = MockAuthBloc();
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
 
-    final user = User(
-      uid: 'uid',
-      name: 'name',
-      permissions: PermissionsSet.fromSet(
-        {
-          if (value != FirstScreenVariantEnum.unapprovedUser)
-            UserPermission.approved,
-        },
-      ),
-      isMultiFactorEnrolled: value != FirstScreenVariantEnum.multiFactor,
-      emailVerified: value != FirstScreenVariantEnum.emailVerification,
-      passwordKeyHash: 'passwordKeyHash',
-      person: Person(
-        id: 'id',
-        name: 'name',
-        otherPhones: const {},
-        gender: true,
-        isShammas: false,
-        isStudent: false,
-        isServant: false,
-        lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
-            ? null
-            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
-        lastConfession: value == FirstScreenVariantEnum.updateUserSpiritData
-            ? null
-            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
-      ),
-    );
+    final user = value != FirstScreenVariantEnum.login
+        ? AuthUser(
+            uid: 'uid',
+            email: 'email',
+            emailVerified: value != FirstScreenVariantEnum.emailVerification,
+            isMultiFactorEnabled: value != FirstScreenVariantEnum.multiFactor,
+            idToken: 'idToken',
+            claims: {},
+          )
+        : null;
+
+    final userData = value != FirstScreenVariantEnum.login
+        ? User(
+            uid: 'uid',
+            name: 'name',
+            permissions: PermissionsSet.fromSet(
+              {
+                if (value != FirstScreenVariantEnum.unapprovedUser)
+                  UserPermission.approved,
+              },
+            ),
+            person: Person(
+              id: 'id',
+              name: 'name',
+              otherPhones: const {},
+              gender: true,
+              isShammas: false,
+              isStudent: false,
+              isServant: false,
+              lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
+                  ? null
+                  : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
+              lastConfession: value ==
+                      FirstScreenVariantEnum.updateUserSpiritData
+                  ? null
+                  : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
+            ),
+          )
+        : null;
+
     when(mock.currentUser).thenReturn(user);
-    when(mock.multiFactorManager).thenReturn(MockMultiFactorManager());
+    when(mock.currentUserData).thenReturn(userData);
+
+    when(mock.state).thenAnswer(
+      (_) => user != null
+          ? AuthAuthenticated(
+              authUser: user,
+              userData: userData,
+            )
+          : value == FirstScreenVariantEnum.multiFactor
+              ? AuthMultiFactorChallengeInProgress(
+                  challenge: MultiFactorChallenge(
+                    verificationId: 'verificationId',
+                    createdAt: DateTime.now(),
+                  ),
+                  session: const MultiFactorSession(
+                    id: 'id',
+                    email: 'email',
+                    password: 'password',
+                    enrolledFactors: [],
+                  ),
+                )
+              : const AuthUnauthenticated(),
+    );
 
     when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
+    when(mock.userDataStream)
+        .thenAnswer((_) => BehaviorSubject.seeded(userData));
 
-    return authServiceProvider.overrideWithValue(mock);
+    return authBlocProvider.overrideWithValue(mock);
   }
 
   String expectedLocation() {

@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllChurches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllChurches) ||
+    if (other is! Variables_Subscription_watchAllChurches ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllChurches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllChurches) ||
+    if (other is! Subscription_watchAllChurches ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -485,7 +485,7 @@ class Subscription_watchAllChurches_churches {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllChurches_churches) ||
+    if (other is! Subscription_watchAllChurches_churches ||
         runtimeType != other.runtimeType) {
       return false;
     }

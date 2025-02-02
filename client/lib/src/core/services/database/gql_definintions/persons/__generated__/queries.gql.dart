@@ -85,7 +85,7 @@ class Variables_Query_personsNames {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_personsNames) ||
+    if (other is! Variables_Query_personsNames ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -263,7 +263,7 @@ class Query_personsNames {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsNames) || runtimeType != other.runtimeType) {
+    if (other is! Query_personsNames || runtimeType != other.runtimeType) {
       return false;
     }
     final l$persons = persons;
@@ -528,7 +528,7 @@ class Query_personsNames_persons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsNames_persons) ||
+    if (other is! Query_personsNames_persons ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -788,7 +788,7 @@ class Variables_Query_personsGeolocations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_personsGeolocations) ||
+    if (other is! Variables_Query_personsGeolocations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1175,7 +1175,7 @@ class Query_personsGeolocations {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations) ||
+    if (other is! Query_personsGeolocations ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2205,7 +2205,7 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations_areas) ||
+    if (other is! Query_personsGeolocations_areas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2387,7 +2387,7 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations_streets) ||
+    if (other is! Query_personsGeolocations_streets ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2569,7 +2569,7 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations_families) ||
+    if (other is! Query_personsGeolocations_families ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2751,7 +2751,7 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations_stores) ||
+    if (other is! Query_personsGeolocations_stores ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2933,7 +2933,7 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personsGeolocations_persons) ||
+    if (other is! Query_personsGeolocations_persons ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3222,7 +3222,7 @@ class Variables_Query_personHistoryAnalysis {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_personHistoryAnalysis) ||
+    if (other is! Variables_Query_personHistoryAnalysis ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3559,7 +3559,7 @@ class Query_personHistoryAnalysis {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis) ||
+    if (other is! Query_personHistoryAnalysis ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5279,7 +5279,7 @@ class Query_personHistoryAnalysis_personsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5714,8 +5714,8 @@ class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_callHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5930,8 +5930,8 @@ class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6107,8 +6107,8 @@ class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6250,8 +6250,8 @@ class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_callHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6411,8 +6411,8 @@ class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6627,8 +6627,8 @@ class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6804,8 +6804,8 @@ class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_ma
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6947,8 +6947,8 @@ class Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_visitHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7109,8 +7109,8 @@ class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_editHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7325,8 +7325,8 @@ class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7502,8 +7502,8 @@ class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7645,8 +7645,8 @@ class Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_editHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7806,8 +7806,8 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8022,8 +8022,8 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8199,8 +8199,8 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_ma
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8342,8 +8342,8 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8503,8 +8503,8 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8721,8 +8721,8 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8898,8 +8898,8 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9041,8 +9041,8 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9186,7 +9186,7 @@ class Query_personHistoryAnalysis_personsByPk_services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk_services) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_services ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9378,7 +9378,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk_services_service) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_services_service ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9622,8 +9622,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9843,8 +9843,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10020,8 +10020,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10163,8 +10163,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10327,8 +10327,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysCon
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10535,8 +10535,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysCon
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10680,8 +10680,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysCon
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_services_service_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10874,7 +10874,7 @@ class Query_personHistoryAnalysis_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk_classes) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11107,8 +11107,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11328,8 +11328,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11505,8 +11505,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11648,8 +11648,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11812,8 +11812,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12020,8 +12020,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12165,8 +12165,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12311,7 +12311,7 @@ class Query_personHistoryAnalysis_personsByPk_groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk_groups) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_groups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12501,7 +12501,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personHistoryAnalysis_personsByPk_groups_group) ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_groups_group ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12741,8 +12741,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggr
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12962,8 +12962,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggr
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13139,8 +13139,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggr
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13282,8 +13282,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggr
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13446,8 +13446,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstra
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13654,8 +13654,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstra
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13799,8 +13799,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstra
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_personHistoryAnalysis_personsByPk_groups_group_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13940,7 +13940,7 @@ class Variables_Query_personServicesClassesGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_personServicesClassesGroups) ||
+    if (other is! Variables_Query_personServicesClassesGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14047,7 +14047,7 @@ class Query_personServicesClassesGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personServicesClassesGroups) ||
+    if (other is! Query_personServicesClassesGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14468,7 +14468,7 @@ class Query_personServicesClassesGroups_personsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personServicesClassesGroups_personsByPk) ||
+    if (other is! Query_personServicesClassesGroups_personsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14730,7 +14730,7 @@ class Query_personServicesClassesGroups_personsByPk_services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personServicesClassesGroups_personsByPk_services) ||
+    if (other is! Query_personServicesClassesGroups_personsByPk_services ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14924,7 +14924,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personServicesClassesGroups_personsByPk_classes) ||
+    if (other is! Query_personServicesClassesGroups_personsByPk_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15121,7 +15121,7 @@ class Query_personServicesClassesGroups_personsByPk_groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_personServicesClassesGroups_personsByPk_groups) ||
+    if (other is! Query_personServicesClassesGroups_personsByPk_groups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15320,8 +15320,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_personServicesClassesGroups_personsByPk_groups_group) ||
+    if (other is! Query_personServicesClassesGroups_personsByPk_groups_group ||
         runtimeType != other.runtimeType) {
       return false;
     }

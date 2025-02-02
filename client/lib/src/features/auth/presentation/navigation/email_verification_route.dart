@@ -15,14 +15,17 @@ class EmailVerificationRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final AuthService authService = AuthService.I;
+    final authState = AuthBloc.I.state.unwrapped;
 
-    if (!authService.isSignedIn) {
-      return const LoginRoute().location;
-    } else if (authService.currentUser!.emailVerified ?? false) {
-      return '/';
+    switch (authState) {
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      case AuthAuthenticated(authUser: AuthUser(emailVerified: true)):
+        return const HomeScreenRoute().location;
+
+      default:
+        return null;
     }
-
-    return null;
   }
 }

@@ -29,14 +29,6 @@ mixin _$User {
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
   PermissionsSet get permissions => throw _privateConstructorUsedError;
   String? get authId => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
-  bool? get isMultiFactorEnrolled => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
-  String? get idToken => throw _privateConstructorUsedError;
-  @JsonKey(includeIfNull: false)
-  bool? get emailVerified => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  String? get passwordKeyHash => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   Person? get person => throw _privateConstructorUsedError;
   List<AdminOnData>? get servicesHistory => throw _privateConstructorUsedError;
@@ -67,11 +59,6 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       PermissionsSet permissions,
       String? authId,
-      @JsonKey(includeIfNull: false) bool? isMultiFactorEnrolled,
-      @JsonKey(includeIfNull: false) String? idToken,
-      @JsonKey(includeIfNull: false) bool? emailVerified,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      String? passwordKeyHash,
       LastRecordedByInfo? lastEdit,
       Person? person,
       List<AdminOnData>? servicesHistory,
@@ -105,10 +92,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? adminOn = freezed,
     Object? permissions = null,
     Object? authId = freezed,
-    Object? isMultiFactorEnrolled = freezed,
-    Object? idToken = freezed,
-    Object? emailVerified = freezed,
-    Object? passwordKeyHash = freezed,
     Object? lastEdit = freezed,
     Object? person = freezed,
     Object? servicesHistory = freezed,
@@ -147,22 +130,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       authId: freezed == authId
           ? _value.authId
           : authId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isMultiFactorEnrolled: freezed == isMultiFactorEnrolled
-          ? _value.isMultiFactorEnrolled
-          : isMultiFactorEnrolled // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      idToken: freezed == idToken
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailVerified: freezed == emailVerified
-          ? _value.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      passwordKeyHash: freezed == passwordKeyHash
-          ? _value.passwordKeyHash
-          : passwordKeyHash // ignore: cast_nullable_to_non_nullable
               as String?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
@@ -233,11 +200,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       PermissionsSet permissions,
       String? authId,
-      @JsonKey(includeIfNull: false) bool? isMultiFactorEnrolled,
-      @JsonKey(includeIfNull: false) String? idToken,
-      @JsonKey(includeIfNull: false) bool? emailVerified,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      String? passwordKeyHash,
       LastRecordedByInfo? lastEdit,
       Person? person,
       List<AdminOnData>? servicesHistory,
@@ -270,10 +232,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? adminOn = freezed,
     Object? permissions = null,
     Object? authId = freezed,
-    Object? isMultiFactorEnrolled = freezed,
-    Object? idToken = freezed,
-    Object? emailVerified = freezed,
-    Object? passwordKeyHash = freezed,
     Object? lastEdit = freezed,
     Object? person = freezed,
     Object? servicesHistory = freezed,
@@ -313,22 +271,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.authId
           : authId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isMultiFactorEnrolled: freezed == isMultiFactorEnrolled
-          ? _value.isMultiFactorEnrolled
-          : isMultiFactorEnrolled // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      idToken: freezed == idToken
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emailVerified: freezed == emailVerified
-          ? _value.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      passwordKeyHash: freezed == passwordKeyHash
-          ? _value.passwordKeyHash
-          : passwordKeyHash // ignore: cast_nullable_to_non_nullable
-              as String?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -366,11 +308,6 @@ class _$UserImpl extends _User {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       this.permissions = const PermissionsSet.empty(),
       this.authId,
-      @JsonKey(includeIfNull: false) this.isMultiFactorEnrolled,
-      @JsonKey(includeIfNull: false) this.idToken,
-      @JsonKey(includeIfNull: false) this.emailVerified,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      this.passwordKeyHash,
       this.lastEdit,
       this.person,
       final List<AdminOnData>? servicesHistory,
@@ -411,18 +348,6 @@ class _$UserImpl extends _User {
   @override
   final String? authId;
   @override
-  @JsonKey(includeIfNull: false)
-  final bool? isMultiFactorEnrolled;
-  @override
-  @JsonKey(includeIfNull: false)
-  final String? idToken;
-  @override
-  @JsonKey(includeIfNull: false)
-  final bool? emailVerified;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  final String? passwordKeyHash;
-  @override
   final LastRecordedByInfo? lastEdit;
   @override
   final Person? person;
@@ -458,7 +383,7 @@ class _$UserImpl extends _User {
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, isMultiFactorEnrolled: $isMultiFactorEnrolled, idToken: $idToken, emailVerified: $emailVerified, passwordKeyHash: $passwordKeyHash, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
   }
 
   @override
@@ -477,13 +402,6 @@ class _$UserImpl extends _User {
             const DeepCollectionEquality()
                 .equals(other.permissions, permissions) &&
             (identical(other.authId, authId) || other.authId == authId) &&
-            (identical(other.isMultiFactorEnrolled, isMultiFactorEnrolled) ||
-                other.isMultiFactorEnrolled == isMultiFactorEnrolled) &&
-            (identical(other.idToken, idToken) || other.idToken == idToken) &&
-            (identical(other.emailVerified, emailVerified) ||
-                other.emailVerified == emailVerified) &&
-            (identical(other.passwordKeyHash, passwordKeyHash) ||
-                other.passwordKeyHash == passwordKeyHash) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.person, person) || other.person == person) &&
@@ -507,10 +425,6 @@ class _$UserImpl extends _User {
       const DeepCollectionEquality().hash(_adminOn),
       const DeepCollectionEquality().hash(permissions),
       authId,
-      isMultiFactorEnrolled,
-      idToken,
-      emailVerified,
-      passwordKeyHash,
       lastEdit,
       person,
       const DeepCollectionEquality().hash(_servicesHistory),
@@ -544,11 +458,6 @@ abstract class _User extends User {
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
       final PermissionsSet permissions,
       final String? authId,
-      @JsonKey(includeIfNull: false) final bool? isMultiFactorEnrolled,
-      @JsonKey(includeIfNull: false) final String? idToken,
-      @JsonKey(includeIfNull: false) final bool? emailVerified,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final String? passwordKeyHash,
       final LastRecordedByInfo? lastEdit,
       final Person? person,
       final List<AdminOnData>? servicesHistory,
@@ -575,18 +484,6 @@ abstract class _User extends User {
   PermissionsSet get permissions;
   @override
   String? get authId;
-  @override
-  @JsonKey(includeIfNull: false)
-  bool? get isMultiFactorEnrolled;
-  @override
-  @JsonKey(includeIfNull: false)
-  String? get idToken;
-  @override
-  @JsonKey(includeIfNull: false)
-  bool? get emailVerified;
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  String? get passwordKeyHash;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

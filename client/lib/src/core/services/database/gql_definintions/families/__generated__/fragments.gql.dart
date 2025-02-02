@@ -82,7 +82,7 @@ class Fragment_Family implements Fragment_FamilyNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Family) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Family || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -303,8 +303,7 @@ class Fragment_FamilyNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_FamilyNoPhoto) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Fragment_FamilyNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

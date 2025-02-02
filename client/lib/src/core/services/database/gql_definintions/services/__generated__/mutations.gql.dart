@@ -40,7 +40,7 @@ class Variables_Mutation_deleteService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteService) ||
+    if (other is! Variables_Mutation_deleteService ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,8 +147,7 @@ class Mutation_deleteService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteService) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteService || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteServicesByPk = deleteServicesByPk;
@@ -334,7 +333,7 @@ class Variables_Mutation_insertService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertService) ||
+    if (other is! Variables_Mutation_insertService ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -441,8 +440,7 @@ class Mutation_insertService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertService) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertService || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertServicesOne = insertServicesOne;
@@ -637,7 +635,7 @@ class Variables_Mutation_updateService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateService) ||
+    if (other is! Variables_Mutation_updateService ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -765,8 +763,7 @@ class Mutation_updateService {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateService) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateService || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateServicesByPk = updateServicesByPk;

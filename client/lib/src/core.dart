@@ -1,3 +1,4 @@
+export 'core/application.dart';
 export 'core/controllers.dart';
 export 'core/graphql.dart';
 export 'core/models.dart';

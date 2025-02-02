@@ -77,7 +77,7 @@ class Variables_Subscription_watchAllJobs {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllJobs) ||
+    if (other is! Variables_Subscription_watchAllJobs ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -240,7 +240,7 @@ class Subscription_watchAllJobs {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllJobs) ||
+    if (other is! Subscription_watchAllJobs ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -480,7 +480,7 @@ class Subscription_watchAllJobs_jobs {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllJobs_jobs) ||
+    if (other is! Subscription_watchAllJobs_jobs ||
         runtimeType != other.runtimeType) {
       return false;
     }

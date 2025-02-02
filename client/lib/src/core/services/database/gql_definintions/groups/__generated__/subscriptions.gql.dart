@@ -83,7 +83,7 @@ class Variables_Subscription_watchAllGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllGroups) ||
+    if (other is! Variables_Subscription_watchAllGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -245,7 +245,7 @@ class Subscription_watchAllGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllGroups) ||
+    if (other is! Subscription_watchAllGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -458,7 +458,7 @@ class Variables_Subscription_watchGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchGroup) ||
+    if (other is! Variables_Subscription_watchGroup ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -550,8 +550,7 @@ class Subscription_watchGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchGroup) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Subscription_watchGroup || runtimeType != other.runtimeType) {
       return false;
     }
     final l$groupsByPk = groupsByPk;
@@ -886,7 +885,7 @@ class Subscription_watchGroup_groupsByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchGroup_groupsByPk) ||
+    if (other is! Subscription_watchGroup_groupsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1147,7 +1146,7 @@ class Subscription_watchGroup_groupsByPk_adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchGroup_groupsByPk_adminUsers) ||
+    if (other is! Subscription_watchGroup_groupsByPk_adminUsers ||
         runtimeType != other.runtimeType) {
       return false;
     }
