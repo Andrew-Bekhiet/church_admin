@@ -57,184 +57,174 @@ class _LoginScreenState extends State<LoginScreen> {
         final loading = state is AuthLoading;
 
         return Scaffold(
-          appBar: const _LoginTitle(),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 5),
-                    SizedBox(
-                      height: screenSize.shortestSide * 0.5,
-                      width: screenSize.shortestSide * 0.5,
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        child: Image.asset(
-                          'assets/Logo.png',
-                          fit: BoxFit.scaleDown,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const _LoginTitle(),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    height: screenSize.shortestSide,
+                    width: screenSize.shortestSide,
+                    child: Image.asset(
+                      'assets/images/login-signup.png',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Text(
+                      'قم بتسجيل الدخول أو إنشاء حساب',
+                      style: theme.textTheme.titleLarge?.copyWith(fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'البريد الإلكتروني',
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                          textInputAction: TextInputAction.next,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
+                              return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
+                            } else if (!emailRegex.hasMatch(email)) {
+                              return 'البريد الإلكتروني غير صالح';
+                            }
+                            return null;
+                          },
+                          controller: _emailController,
+                        ).withPadding(
+                          const EdgeInsets.symmetric(vertical: 10),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: Text(
-                        'قم بتسجيل الدخول أو إنشاء حساب',
-                        style:
-                            theme.textTheme.titleLarge?.copyWith(fontSize: 16),
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: 'البريد الإلكتروني',
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                            autofillHints: const [AutofillHints.email],
-                            textInputAction: TextInputAction.next,
-                            autovalidateMode:
+                        if (_isLogin)
+                          PasswordFormField(
+                            labelText: 'كلمة المرور',
+                            autoValidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (email) {
-                              if (email == null || email.isEmpty) {
-                                return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
-                              } else if (!emailRegex.hasMatch(email)) {
-                                return 'البريد الإلكتروني غير صالح';
+                            textInputAction: TextInputAction.done,
+                            controller: _passwordController,
+                            onFieldSubmitted: _submit,
+                            validator: (password) {
+                              if (password?.isEmpty ?? true) {
+                                return 'كلمة المرور لا يمكن أن تكون فارغة';
                               }
                               return null;
                             },
-                            controller: _emailController,
+                          )
+                        else ...[
+                          NewPasswordField(
+                            controller: _passwordController,
+                            getEmail: () => _emailController.text,
                           ).withPadding(
                             const EdgeInsets.symmetric(vertical: 10),
                           ),
-                          if (_isLogin)
-                            PasswordFormField(
-                              labelText: 'كلمة المرور',
-                              autoValidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              textInputAction: TextInputAction.done,
-                              controller: _passwordController,
-                              onFieldSubmitted: _submit,
-                              validator: (password) {
-                                if (password?.isEmpty ?? true) {
-                                  return 'كلمة المرور لا يمكن أن تكون فارغة';
-                                }
-                                return null;
-                              },
-                            )
-                          else ...[
-                            NewPasswordField(
-                              controller: _passwordController,
-                              getEmail: () => _emailController.text,
-                            ).withPadding(
-                              const EdgeInsets.symmetric(vertical: 10),
-                            ),
-                            PasswordFormField(
-                              labelText: 'تأكيد كلمة المرور',
-                              autoFillHints: const [AutofillHints.newPassword],
-                              controller: _passwordConfirmationController,
-                              textInputAction: TextInputAction.done,
-                              onFieldSubmitted: _submit,
-                              validator: (password) {
-                                if (password != _passwordController.text) {
-                                  return 'كلمتا المرور غير متطابقتين';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                          FilledButton(
-                            onPressed: loading ? null : _submit,
-                            child: loading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : Text(
-                                    _isLogin
-                                        ? 'تسجيل الدخول'
-                                        : 'إنشاء حساب جديد',
-                                  ),
+                          PasswordFormField(
+                            labelText: 'تأكيد كلمة المرور',
+                            autoFillHints: const [AutofillHints.newPassword],
+                            controller: _passwordConfirmationController,
+                            textInputAction: TextInputAction.done,
+                            onFieldSubmitted: _submit,
+                            validator: (password) {
+                              if (password != _passwordController.text) {
+                                return 'كلمتا المرور غير متطابقتين';
+                              }
+                              return null;
+                            },
                           ),
-                          if (!_isLogin) ...[
-                            Container(
-                              height: MediaQuery.sizeOf(context).height / 38,
-                            ),
-                            RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
+                        ],
+                        FilledButton(
+                          onPressed: loading ? null : _submit,
+                          child: loading
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : Text(
+                                  _isLogin ? 'تسجيل الدخول' : 'إنشاء حساب جديد',
                                 ),
-                                children: [
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall,
-                                    text: 'بإنشائك حساب فإنك توافق على ',
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue,
-                                    ),
-                                    text: 'شروط الاستخدام',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        //TODO: TOS
-                                      },
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall,
-                                    text: ' و',
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue,
-                                    ),
-                                    text: 'سياسة الخصوصية',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        //TODO: Privacy Policy
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 20),
-                      padding: const EdgeInsets.all(15),
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
-                            style: theme.textTheme.bodySmall,
+                        ),
+                        if (!_isLogin) ...[
+                          Container(
+                            height: MediaQuery.sizeOf(context).height / 38,
                           ),
-                          const SizedBox(width: 10),
-                          InkWell(
-                            onTap: () => setState(() => _isLogin = !_isLogin),
-                            child: Text(
-                              _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.primary,
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
                               ),
+                              children: [
+                                TextSpan(
+                                  style: theme.textTheme.bodySmall,
+                                  text: 'بإنشائك حساب فإنك توافق على ',
+                                ),
+                                TextSpan(
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.blue,
+                                  ),
+                                  text: 'شروط الاستخدام',
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      //TODO: TOS
+                                    },
+                                ),
+                                TextSpan(
+                                  style: theme.textTheme.bodySmall,
+                                  text: ' و',
+                                ),
+                                TextSpan(
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.blue,
+                                  ),
+                                  text: 'سياسة الخصوصية',
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      //TODO: Privacy Policy
+                                    },
+                                ),
+                              ],
                             ),
                           ),
                         ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 30),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.all(15),
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        const SizedBox(width: 10),
+                        InkWell(
+                          onTap: () => setState(() => _isLogin = !_isLogin),
+                          child: Text(
+                            _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
