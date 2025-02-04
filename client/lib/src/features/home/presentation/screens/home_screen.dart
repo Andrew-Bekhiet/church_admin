@@ -38,10 +38,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       builder: (context, modeSnapshot) {
         if (modeSnapshot.data == HomeMode.unspecified) {
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: const Text('اختيار الخدمة'),
-            ),
             body: HomeModeSelector(onModeChanged: _controller.onModeChanged),
           );
         }

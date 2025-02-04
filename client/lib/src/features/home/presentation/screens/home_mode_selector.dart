@@ -9,45 +9,149 @@ class HomeModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-
     return Scaffold(
+      backgroundColor: themeData.colorScheme.secondary,
       body: Center(
         child: ListView(
-          padding: const EdgeInsets.all(8),
           children: [
-            InkWell(
-              onTap: () => onModeChanged(HomeMode.sundaySchool),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/Logo.png',
-                    height: 360,
-                    fit: BoxFit.scaleDown,
+            Image.asset(
+              'assets/images/High way to God 1.png',
+              height: MediaQuery.of(context).size.height * 0.24,
+              fit: BoxFit.fill,
+            ),
+            Container(
+              padding: const EdgeInsets.only(
+                left: 7,
+                right: 7,
+                top: 9,
+                bottom: 22,
+              ),
+              margin: const EdgeInsets.only(left: 16, right: 16, top: 14),
+              clipBehavior: Clip.antiAlias,
+              decoration: const ShapeDecoration(
+                color: Color(0x96B38A58),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Color(0xFFB38A58),
                   ),
-                  Text(
-                    'خدمة مدارس الأحد',
-                    style: themeData.textTheme.headlineSmall,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+              ),
+              child: Column(
+                spacing: 6,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      spacing: 6,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          color: themeData.colorScheme.primary,
+                          child: Center(
+                            child: Text(
+                              'الايه',
+                              style: themeData.textTheme.headlineSmall,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '“أَمَا أَمَرْتُكَ؟ تَشَدَّدْ وَتَشَجَّعْ! لاَ تَرْهَبْ وَلاَ تَرْتَعِبْ لأَنَّ الرَّبَّ إِلهَكَ مَعَكَ حَيْثُمَا تَذْهَبُ.” (يشوع 9:1)',
+                          textAlign: TextAlign.center,
+                          style: themeData.textTheme.titleMedium?.copyWith(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      spacing: 6,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          color: themeData.colorScheme.primary,
+                          child: Center(
+                            child: Text(
+                              'السنكسار',
+                              style: themeData.textTheme.headlineSmall,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'الخميس, 18 يوليو 2024 --- 11 أبيب 1740\n+ استشهاد القديس يوحنا وسمعان ابن عمه +\n+ نياحة القديس أشعيا المتوحد +',
+                          textAlign: TextAlign.center,
+                          style: themeData.textTheme.titleMedium?.copyWith(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Column(
+                      spacing: 6,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          color: themeData.colorScheme.primary,
+                          child: Center(
+                            child: Text(
+                              'اقوال اباء',
+                              style: themeData.textTheme.headlineSmall,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'ليست خطيئةٌ بلا مغفرةٍ، إلا التي بلا توبة.\nوليست موهبةٌ بلا زيادةٍ، إلا التي بلا شُكر.\nالقديس إسحق السوري (السرياني)',
+                          textAlign: TextAlign.center,
+                          style: themeData.textTheme.titleMedium?.copyWith(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            InkWell(
-              onTap: () => onModeChanged(HomeMode.churchData),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/church-data.png',
-                    height: 360,
-                    fit: BoxFit.scaleDown,
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () => onModeChanged(HomeMode.churchData),
+                    child: AspectRatio(
+                      aspectRatio: 0.98,
+                      child: Image.asset(
+                        'assets/images/missing_family_image.png',
+                        // height: 159,
+                        // width: 156,
+                        fit: BoxFit.scaleDown,
+                      ),
+                    ),
                   ),
-                  Text(
-                    'خدمة الافتقاد',
-                    style: themeData.textTheme.headlineSmall,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () => onModeChanged(HomeMode.sundaySchool),
+                    child: AspectRatio(
+                      aspectRatio: 0.98,
+                      child: Image.asset(
+                        'assets/images/sunday_school_services_image.png',
+                        // height: 159,
+                        // width: 156,
+                        fit: BoxFit.scaleDown,
+                      ),
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

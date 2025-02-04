@@ -152,6 +152,7 @@ flutter:
     - assets/holyweek.jpeg
     - assets/whatsapp.png
     - assets/church-data.png
+    - assets/images/
 
 flutter_launcher_icons:
   image_path_android: "graphics/logo.png"
