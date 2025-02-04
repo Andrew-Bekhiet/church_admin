@@ -129,8 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             )
                           else ...[
-                            NewPasswordField(controller: _passwordController)
-                                .withPadding(
+                            NewPasswordField(
+                              controller: _passwordController,
+                              getEmail: () => _emailController.text,
+                            ).withPadding(
                               const EdgeInsets.symmetric(vertical: 10),
                             ),
                             PasswordFormField(
