@@ -21,6 +21,9 @@ class FirebaseAuthRepository implements AuthRepository {
               // TODO: support totp
               type: MultiFactorType.phone,
               displayName: hint.displayName,
+              phoneNumber: hint is firebase_auth.PhoneMultiFactorInfo
+                  ? hint.phoneNumber
+                  : null,
               enrolledAt: DateTime.fromMillisecondsSinceEpoch(
                 hint.enrollmentTimestamp.round(),
               ),
