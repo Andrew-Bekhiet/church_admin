@@ -15,6 +15,11 @@ class EmailVerificationScreen extends StatelessWidget {
       builder: (context, state) {
         final isLoading = state is AuthLoading;
 
+        final email = switch (state.unwrapped) {
+          AuthAuthenticated(:final authUser) => authUser.email,
+          _ => 'بريدك الإلكتروني',
+        };
+
         return Scaffold(
           appBar: AppBar(
             title: const Text('التحقق من البريد الإلكتروني'),
@@ -23,14 +28,16 @@ class EmailVerificationScreen extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              spacing: 20,
+              spacing: 10,
               children: [
+                Image.asset(
+                  'assets/images/email-verification.png',
+                ),
                 Text(
-                  'تم إرسال رسالة إلى بريدك الإلكتروني \n'
-                  'افتحها واضغط على الرابط للتحقق من بريدك الإلكتروني',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  'تم إرسال رسالة إلى $email \n'
+                  'افتحها واضغط على الرابط، ثم ارجع للتطبيق واضغط على تأكيد البريد الإلكتروني',
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 if (isLoading)
@@ -47,14 +54,13 @@ class EmailVerificationScreen extends StatelessWidget {
                       : () async {
                           final scaffoldMessenger =
                               ScaffoldMessenger.of(context);
+                          final theme = Theme.of(context);
 
                           authBloc.add(const SendEmailVerification());
                           final nextState = await authBloc.stream
                               .firstWhere((state) => state is! AuthLoading);
 
                           if (nextState is AuthExceptionState) {
-                            final theme = Theme.of(context);
-
                             scaffoldMessenger.showSnackBar(
                               SnackBar(
                                 backgroundColor: theme.colorScheme.error,
