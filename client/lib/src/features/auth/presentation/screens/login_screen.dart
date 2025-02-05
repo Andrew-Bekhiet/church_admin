@@ -56,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: <Widget>[
                   const _LoginTitle(),
-                  const SizedBox(height: 5),
                   SizedBox(
                     height: screenSize.shortestSide,
                     width: screenSize.shortestSide,
@@ -65,14 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-                  const SizedBox(height: 20),
                   Center(
                     child: Text(
                       'قم بتسجيل الدخول أو إنشاء حساب',
                       style: theme.textTheme.titleLarge?.copyWith(fontSize: 16),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   Form(
                     key: _formKey,
                     child: Column(
@@ -97,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           controller: _emailController,
                         ).withPadding(
-                          const EdgeInsets.symmetric(vertical: 10),
+                          const EdgeInsets.symmetric(vertical: 8),
                         ),
                         if (_isLogin)
                           Column(
@@ -169,9 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                         ),
                         if (!_isLogin) ...[
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height / 38,
-                          ),
+                          const SizedBox(height: 10),
                           RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
@@ -215,9 +211,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     padding: const EdgeInsets.all(15),
                     alignment: Alignment.bottomCenter,
                     child: Row(
@@ -225,14 +220,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         Text(
                           _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
-                          style: theme.textTheme.bodySmall,
+                          style: theme.textTheme.bodyMedium,
                         ),
                         const SizedBox(width: 10),
                         InkWell(
                           onTap: () => setState(() => _isLogin = !_isLogin),
                           child: Text(
                             _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
-                            style: theme.textTheme.bodySmall?.copyWith(
+                            style: theme.textTheme.bodyMedium?.copyWith(
                               color: theme.colorScheme.primary,
                             ),
                           ),
