@@ -52,7 +52,7 @@ void main() {
       expect(find.text('كنيسة السيدة العذراء مريم'), findsOneWidget);
 
       expect(
-        find.image(const AssetImage('assets/Logo.png')),
+        find.image(const AssetImage('assets/images/login-signup.png')),
         findsOneWidget,
       );
 
