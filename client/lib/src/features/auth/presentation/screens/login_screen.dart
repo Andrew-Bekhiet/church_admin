@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/symbols.dart';
 
 final emailRegex = RegExp(r'^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$');
 
@@ -34,22 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state is AuthExceptionState) {
           switch (state.exception) {
-            case IncorrectCredentialsException():
-              final theme = Theme.of(context);
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: theme.colorScheme.error,
-                  content: Row(
-                    spacing: 10,
-                    children: [
-                      Icon(Symbols.error, color: theme.colorScheme.onError),
-                      const Text('كلمة سر أو بريد إلكتروني غير صحيح'),
-                    ],
-                  ),
-                  duration: const Duration(seconds: 8),
-                ),
+            case IncorrectCredentialsException() when _isLogin:
+              ScaffoldMessenger.of(context).showErrorSnackBar(
+                'كلمة سر أو بريد إلكتروني غير صحيح',
               );
+
+            case IncorrectCredentialsException():
+              ScaffoldMessenger.of(context).showInfoSnackBar(
+                'الحساب مسجل بالفعل. قم بتسجيل الدخول',
+              );
+              setState(() => _isLogin = true);
           }
         }
       },
@@ -107,19 +100,42 @@ class _LoginScreenState extends State<LoginScreen> {
                           const EdgeInsets.symmetric(vertical: 10),
                         ),
                         if (_isLogin)
-                          PasswordFormField(
-                            labelText: 'كلمة المرور',
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            textInputAction: TextInputAction.done,
-                            controller: _passwordController,
-                            onFieldSubmitted: _submit,
-                            validator: (password) {
-                              if (password?.isEmpty ?? true) {
-                                return 'كلمة المرور لا يمكن أن تكون فارغة';
-                              }
-                              return null;
-                            },
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              PasswordFormField(
+                                labelText: 'كلمة المرور',
+                                autoValidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                textInputAction: TextInputAction.done,
+                                controller: _passwordController,
+                                onFieldSubmitted: _submit,
+                                validator: (password) {
+                                  if (password?.isEmpty ?? true) {
+                                    return 'كلمة المرور لا يمكن أن تكون فارغة';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              Container(
+                                alignment: AlignmentDirectional.centerStart,
+                                padding: const EdgeInsetsDirectional.only(
+                                  bottom: 20,
+                                  start: 8,
+                                ),
+                                child: InkWell(
+                                  onTap: () =>
+                                      const ForgotPasswordRoute().push(context),
+                                  child: Text(
+                                    'نسيت كلمة المرور؟',
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           )
                         else ...[
                           NewPasswordField(
@@ -153,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                         ),
                         if (!_isLogin) ...[
-                          Container(
+                          SizedBox(
                             height: MediaQuery.sizeOf(context).height / 38,
                           ),
                           RichText(

@@ -223,6 +223,50 @@ void main() {
       );
     });
 
+    group('password reset =>', () {
+      blocTest<AuthBloc, AuthState>(
+        'unauthenticated user',
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) =>
+            bloc.add(const SendPasswordResetEmail(email: 'email@example.com')),
+        wait: const Duration(milliseconds: 10),
+        expect: () => [
+          isA<AuthUnauthenticated>(),
+          isA<AuthLoading>(),
+          isA<AuthUnauthenticated>(),
+        ],
+        verify: (bloc) {
+          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
+              as MockFirebaseAuthRepository;
+          verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
+        },
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'authenticated user',
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const SendPasswordResetEmail(email: 'email@example.com'));
+        },
+        wait: const Duration(milliseconds: 10),
+        expect: () => [
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser, 'authUser', initialAuthUser)
+              .having((s) => s.userData, 'userData', initialUserData),
+          isA<AuthLoading>(),
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser, 'authUser', initialAuthUser)
+              .having((s) => s.userData, 'userData', initialUserData),
+        ],
+        verify: (bloc) {
+          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
+              as MockFirebaseAuthRepository;
+          verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
+        },
+      );
+    });
+
     group('token management =>', () {
       late BehaviorSubject<bool> connectivityController;
 

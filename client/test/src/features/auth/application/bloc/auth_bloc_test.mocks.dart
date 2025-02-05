@@ -450,6 +450,18 @@ class MockFirebaseAuthRepository extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
+  _i4.Future<void> sendPasswordResetEmail({required String? email}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendPasswordResetEmail,
+          [],
+          {#email: email},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
   _i4.Future<void> completeMultiFactorChallenge({
     required _i2.MultiFactorChallenge? challenge,
     required String? verificationCode,

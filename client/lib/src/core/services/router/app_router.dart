@@ -9,6 +9,7 @@ final GoRouter $appRouter = GoRouter(
   refreshListenable: GoRouterRefreshStream.I,
   routes: [
     if (kIsWeb) $homeScreenWebRoute else $homeScreenRoute,
+    $forgotPasswordRoute,
     $loginRoute,
     $emailVerificationRoute,
     $multiFactorLoginRoute,

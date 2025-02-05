@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/symbols.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key});
@@ -54,38 +53,18 @@ class EmailVerificationScreen extends StatelessWidget {
                       : () async {
                           final scaffoldMessenger =
                               ScaffoldMessenger.of(context);
-                          final theme = Theme.of(context);
 
                           authBloc.add(const SendEmailVerification());
                           final nextState = await authBloc.stream
                               .firstWhere((state) => state is! AuthLoading);
 
                           if (nextState is AuthExceptionState) {
-                            scaffoldMessenger.showSnackBar(
-                              SnackBar(
-                                backgroundColor: theme.colorScheme.error,
-                                content: Row(
-                                  spacing: 10,
-                                  children: [
-                                    Icon(
-                                      Symbols.error,
-                                      color: theme.colorScheme.onError,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        nextState.exception.toString(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                duration: const Duration(seconds: 8),
-                              ),
+                            scaffoldMessenger.showErrorSnackBar(
+                              nextState.exception.toString(),
                             );
                           } else {
-                            scaffoldMessenger.showSnackBar(
-                              const SnackBar(
-                                content: Text('تم إعادة إرسال رسالة التحقق'),
-                              ),
+                            scaffoldMessenger.showInfoSnackBar(
+                              'تم إعادة إرسال رسالة التحقق',
                             );
                           }
                         },

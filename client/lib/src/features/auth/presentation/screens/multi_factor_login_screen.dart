@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rxdart/rxdart.dart';
@@ -87,38 +86,14 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
   void _showAuthException(BuildContext context, AuthExceptionState state) {
     switch (state.exception) {
       case IncorrectCredentialsException():
-        final theme = Theme.of(context);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: theme.colorScheme.error,
-            content: Row(
-              spacing: 10,
-              children: [
-                Icon(Symbols.error, color: theme.colorScheme.onError),
-                const Text('كلمة سر خاطئة'),
-              ],
-            ),
-            duration: const Duration(seconds: 8),
-          ),
+        ScaffoldMessenger.of(context).showErrorSnackBar(
+          'كلمة سر خاطئة',
         );
 
       case MultiFactorEnrollmentFailedException():
       case MultiFactorVerificationFailedException():
-        final theme = Theme.of(context);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: theme.colorScheme.error,
-            content: Row(
-              spacing: 10,
-              children: [
-                Icon(Symbols.error, color: theme.colorScheme.onError),
-                const Text('رمز التحقق خاطئ'),
-              ],
-            ),
-            duration: const Duration(seconds: 8),
-          ),
+        ScaffoldMessenger.of(context).showErrorSnackBar(
+          'رمز التحقق خاطئ',
         );
     }
   }

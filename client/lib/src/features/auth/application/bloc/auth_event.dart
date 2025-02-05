@@ -117,3 +117,12 @@ final class CompleteMultiFactorChallenge extends AuthEvent {
         selectedFactor,
       ];
 }
+
+final class SendPasswordResetEmail extends AuthEvent {
+  const SendPasswordResetEmail({required this.email});
+
+  final String email;
+
+  @override
+  List<Object?> get props => [email];
+}

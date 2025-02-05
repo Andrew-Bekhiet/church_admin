@@ -111,6 +111,11 @@ class FirebaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
   Future<void> completeMultiFactorChallenge({
     required MultiFactorChallenge challenge,
     required String verificationCode,
