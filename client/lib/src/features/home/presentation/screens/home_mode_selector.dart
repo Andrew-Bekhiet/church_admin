@@ -13,6 +13,7 @@ class HomeModeSelector extends StatelessWidget {
       backgroundColor: themeData.colorScheme.secondary,
       body: Center(
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Image.asset(
               'assets/images/High way to God 1.png',
@@ -129,9 +130,7 @@ class HomeModeSelector extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 0.98,
                       child: Image.asset(
-                        'assets/images/missing_family_image.png',
-                        // height: 159,
-                        // width: 156,
+                        'assets/images/church_data.png',
                         fit: BoxFit.scaleDown,
                       ),
                     ),
@@ -144,8 +143,6 @@ class HomeModeSelector extends StatelessWidget {
                       aspectRatio: 0.98,
                       child: Image.asset(
                         'assets/images/sunday_school_services_image.png',
-                        // height: 159,
-                        // width: 156,
                         fit: BoxFit.scaleDown,
                       ),
                     ),
