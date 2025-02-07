@@ -1,15 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MultiBlocObserver extends BlocObserver {
-  final List<BlocObserver> observers;
+  final Set<BlocObserver> _observers;
 
-  const MultiBlocObserver({required this.observers});
+  MultiBlocObserver() : _observers = {};
+
+  void addObserver(BlocObserver observer) {
+    _observers.add(observer);
+  }
+
+  void removeObserver(BlocObserver observer) {
+    _observers.remove(observer);
+  }
 
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onCreate(bloc);
     }
   }
@@ -18,7 +26,7 @@ class MultiBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onChange(bloc, change);
     }
   }
@@ -27,7 +35,7 @@ class MultiBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onEvent(bloc, event);
     }
   }
@@ -36,7 +44,7 @@ class MultiBlocObserver extends BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onTransition(bloc, transition);
     }
   }
@@ -45,7 +53,7 @@ class MultiBlocObserver extends BlocObserver {
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onError(bloc, error, stackTrace);
     }
   }
@@ -54,7 +62,7 @@ class MultiBlocObserver extends BlocObserver {
   void onClose(BlocBase bloc) {
     super.onClose(bloc);
 
-    for (final observer in observers) {
+    for (final observer in _observers) {
       observer.onClose(bloc);
     }
   }

@@ -8,11 +8,13 @@ class BlocObserverInit implements Initializer {
 
   @override
   Future<void> initialize() async {
-    Bloc.observer = MultiBlocObserver(
-      observers: [
-        UserSettingsService.I,
-        NotificationsService.I,
-      ],
-    );
+    final multiBlocObserver = MultiBlocObserver();
+
+    // Must be set before initializing any bloc
+    Bloc.observer = multiBlocObserver;
+
+    multiBlocObserver
+      ..addObserver(UserSettingsService.I)
+      ..addObserver(NotificationsService.I);
   }
 }
