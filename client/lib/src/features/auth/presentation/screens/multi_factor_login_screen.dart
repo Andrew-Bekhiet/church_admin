@@ -14,12 +14,15 @@ class MultiFactorLogin extends StatefulWidget {
 }
 
 class _MultifactorStateLogin extends State<MultiFactorLogin> {
+  bool _isEnrollmentInProgress = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: AuthBloc.I,
       listener: (context, state) {
         if (state is AuthExceptionState) {
+          setState(() => _isEnrollmentInProgress = false);
           _showAuthException(context, state);
         }
       },
@@ -48,6 +51,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                         resendToken: resendToken,
                       ),
                     );
+                    setState(() => _isEnrollmentInProgress = false);
                   },
                   onVerificationCodeSubmitted: (code) {
                     AuthBloc.I.add(
@@ -58,6 +62,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                         selectedFactor: session.enrolledFactors.firstOrNull,
                       ),
                     );
+                    setState(() => _isEnrollmentInProgress = false);
                   },
                   loading: state is AuthLoading,
                 ),
@@ -72,8 +77,9 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                         phoneNumber: phoneNumber,
                       ),
                     );
+                    setState(() => _isEnrollmentInProgress = true);
                   },
-                  loading: state is AuthLoading,
+                  loading: state is AuthLoading || _isEnrollmentInProgress,
                 ),
               _ => const Center(child: CircularProgressIndicator()),
             },

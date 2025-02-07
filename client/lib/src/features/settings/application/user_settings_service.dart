@@ -53,10 +53,12 @@ class UserSettingsService extends BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
 
-    if (bloc is! AuthBloc) return;
+    if (bloc is! AuthBloc || transition is! Transition<AuthEvent, AuthState>) {
+      return;
+    }
 
-    final currentState = transition.currentState;
-    final nextState = transition.nextState;
+    final currentState = transition.currentState.unwrapped;
+    final nextState = transition.nextState.unwrapped;
 
     if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
       setupDefaults();

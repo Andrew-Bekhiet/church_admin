@@ -321,13 +321,14 @@ class NotificationsService extends BlocObserver {
   Future<void> onTransition(Bloc bloc, Transition transition) async {
     super.onTransition(bloc, transition);
 
-    if (bloc is! AuthBloc) return;
+    if (bloc is! AuthBloc || transition is! Transition<AuthEvent, AuthState>) {
+      return;
+    }
 
-    final nextState = transition.nextState;
-    final currentState = transition.currentState;
+    final nextState = transition.nextState.unwrapped;
+    final currentState = transition.currentState.unwrapped;
 
-    if (currentState is! AuthAuthenticated &&
-        nextState is AuthUnauthenticated) {
+    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
       if (await requestNotificationsPermission()) {
         await scheduleDefaultNotifications();
         await registerFCMTokenAndListenForChanges();
