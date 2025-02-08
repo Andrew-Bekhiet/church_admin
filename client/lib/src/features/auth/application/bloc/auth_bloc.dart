@@ -17,7 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _databaseService = databaseService,
         _authStorage = authStorage,
         _connectivityStream = connectivityStream,
-        super(const AuthLoading(previousState: null)) {
+        super(const AuthInitial()) {
     on<ListenToSubscriptions>(
       _onListenToSubscriptions,
       transformer: (events, mapper) => events

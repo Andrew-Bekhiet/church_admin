@@ -22,6 +22,10 @@ final class AuthLoading extends AuthState {
   List<Object?> get props => [previousState];
 }
 
+final class AuthInitial extends AuthLoading {
+  const AuthInitial() : super(previousState: null);
+}
+
 final class AuthUnauthenticated extends AuthState {
   const AuthUnauthenticated();
 

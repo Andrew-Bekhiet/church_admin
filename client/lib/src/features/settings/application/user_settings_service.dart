@@ -60,6 +60,10 @@ class UserSettingsService extends BlocObserver {
     final currentState = transition.currentState.unwrapped;
     final nextState = transition.nextState.unwrapped;
 
+    if (currentState is AuthInitial) {
+      return;
+    }
+
     if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
       setupDefaults();
     }
