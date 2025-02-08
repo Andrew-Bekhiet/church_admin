@@ -160,7 +160,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                   if (value.isoCode == IsoCode.EG &&
                       value.nsn.startsWith('01')) {
                     _phoneNumberController.changeNationalNumber(
-                      value.nsn.replaceFirst(RegExp(r'^01'), ''),
+                      value.nsn.replaceFirst(RegExp(r'^01'), '1'),
                     );
                   }
                 },
@@ -241,98 +241,102 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
               session.enrolledFactors.firstOrNull?.phoneNumber ??
               'هاتفك';
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 10,
-            children: [
-              Image.asset('assets/images/otp-verification.png'),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'قم بإدخال رمز التحقق الذي تم إرساله إلى',
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.titleLarge,
-                    ),
-                    Text(
-                      phoneNumber,
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.titleLarge,
-                    ),
-                  ],
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 10,
+              children: [
+                Image.asset('assets/images/otp-verification.png'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'قم بإدخال رمز التحقق الذي تم إرساله إلى',
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      Text(
+                        phoneNumber,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: Pinput(
-                  length: 6,
-                  controller: _code,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  onCompleted: (_) {
-                    if (!widget.loading) {
-                      widget.onVerificationCodeSubmitted(_code.text);
-                    }
-                  },
-                  isCursorAnimationEnabled: false,
-                  defaultPinTheme: PinTheme(
-                    height: 56,
-                    width: 56,
-                    textStyle: theme.textTheme.titleLarge!.copyWith(
-                      color: theme.colorScheme.onSurface,
-                    ),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainer,
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Pinput(
+                    length: 6,
+                    controller: _code,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onCompleted: (_) {
+                      if (!widget.loading) {
+                        widget.onVerificationCodeSubmitted(_code.text);
+                      }
+                    },
+                    isCursorAnimationEnabled: false,
+                    defaultPinTheme: PinTheme(
+                      height: 56,
+                      width: 56,
+                      textStyle: theme.textTheme.titleLarge!.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainer,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (widget.loading)
-                const FilledButton(
-                  onPressed: null,
-                  child: CircularProgressIndicator(),
-                )
-              else
-                FilledButton(
-                  onPressed: () {
-                    widget.onVerificationCodeSubmitted(_code.text);
-                  },
-                  child: const Text('تسجيل الدخول'),
-                ),
-              StreamBuilder<int>(
-                stream: Rx.range(1, 30)
-                    .delayWhen((i) => Rx.timer(null, Duration(seconds: i)))
-                    .map(
-                      (i) =>
-                          30 -
-                          DateTime.now()
-                              .difference(challenge.createdAt)
-                              .inSeconds,
-                    ),
-                builder: (context, remainingSecondsSnapshot) {
-                  final remainingSeconds = remainingSecondsSnapshot.data ?? 30;
-
-                  if (remainingSeconds <= 0) {
-                    return OutlinedButton(
-                      onPressed: () {
-                        widget.onResendCode(challenge.resendToken);
-                      },
-                      child: const Text('إعادة إرسال الرمز'),
-                    );
-                  }
-
-                  return OutlinedButton(
+                if (widget.loading)
+                  const FilledButton(
                     onPressed: null,
-                    child: Text(
-                      'إعادة إرسال الرمز بعد $remainingSeconds ثانية',
-                    ),
-                  );
-                },
-              ),
-            ],
+                    child: CircularProgressIndicator(),
+                  )
+                else
+                  FilledButton(
+                    onPressed: () {
+                      widget.onVerificationCodeSubmitted(_code.text);
+                    },
+                    child: const Text('تسجيل الدخول'),
+                  ),
+                StreamBuilder<int>(
+                  stream: Rx.range(1, 30)
+                      .delayWhen((i) => Rx.timer(null, Duration(seconds: i)))
+                      .map(
+                        (i) =>
+                            30 -
+                            DateTime.now()
+                                .difference(challenge.createdAt)
+                                .inSeconds,
+                      ),
+                  builder: (context, remainingSecondsSnapshot) {
+                    final remainingSeconds =
+                        remainingSecondsSnapshot.data ?? 30;
+
+                    if (remainingSeconds <= 0) {
+                      return OutlinedButton(
+                        onPressed: () {
+                          widget.onResendCode(challenge.resendToken);
+                        },
+                        child: const Text('إعادة إرسال الرمز'),
+                      );
+                    }
+
+                    return OutlinedButton(
+                      onPressed: null,
+                      child: Text(
+                        'إعادة إرسال الرمز بعد $remainingSeconds ثانية',
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           );
         }
 
