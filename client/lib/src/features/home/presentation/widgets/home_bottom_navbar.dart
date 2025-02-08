@@ -135,20 +135,27 @@ class HomeBottomNavBar extends StatelessWidget {
               ];
 
         return CurvedNavigationBar(
+          animationCurve: Curves.easeInOutCirc,
           height: 60,
-          key: ValueKey(isSundaySchool), // ✅ إضافة مفتاح فريد
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          color: Theme.of(context).colorScheme.primary,
-          buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+          key: ValueKey(isSundaySchool),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          color: Theme.of(context).colorScheme.primaryContainer,
+          buttonBackgroundColor: Theme.of(context).colorScheme.primaryContainer,
           onTap: homeController.onTabIndexChanged,
           index: tabController?.index ?? 0,
           items: navItems
               .map(
                 (item) => BottomNavigationBarItemWidget(
-                  key: ValueKey(item['key']), // ✅ إضافة مفتاح فريد
+                  key: ValueKey(item['key']),
                   label: item['label'],
-                  icon: Icon(item['icon']),
-                  activeIcon: Icon(item['icon'], fill: 1),
+                  icon: Icon(
+                    item['icon'],
+                  ),
+                  activeIcon: Icon(
+                    item['icon'],
+                    fill: 1,
+                    color: Colors.white,
+                  ),
                 ),
               )
               .toList(),
@@ -162,7 +169,6 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
   final Widget icon;
   final String? label;
   final Widget? activeIcon;
-  final Color? backgroundColor;
   // final String? tooltip;
 
   const BottomNavigationBarItemWidget({
@@ -170,25 +176,22 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
     required this.icon,
     this.label,
     this.activeIcon,
-    this.backgroundColor,
-    // this.tooltip,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: backgroundColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          activeIcon ?? icon,
-          // Tooltip(
-          //   message: tooltip ?? '',
-          //   child: activeIcon ?? icon,
-          // ),
-          if (label != null) Text(label!),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        activeIcon ?? icon,
+        if (label != null)
+          Text(
+            label!,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Colors.white,
+                ),
+          ),
+      ],
     );
   }
 }
