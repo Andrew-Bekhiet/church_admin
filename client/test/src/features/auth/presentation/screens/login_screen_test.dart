@@ -14,7 +14,6 @@ import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 import 'package:spot/spot.dart';
 
-import '../../../../church_admin_app_test.mocks.dart' show MockLoggingService;
 import '../../../../utils.dart';
 import 'login_screen_test.mocks.dart';
 
@@ -28,6 +27,7 @@ import 'login_screen_test.mocks.dart';
   MockSpec<NotificationsService>(),
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
+  MockSpec<LoggingService>(),
 ])
 void main() {
   loadAppFonts();

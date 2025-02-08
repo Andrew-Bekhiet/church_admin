@@ -294,6 +294,17 @@ class _FakeValueKey_23<T> extends _i1.SmartFake implements _i5.ValueKey<T> {
         );
 }
 
+class _FakeNavigatorObserver_24 extends _i1.SmartFake
+    implements _i5.NavigatorObserver {
+  _FakeNavigatorObserver_24(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1853,4 +1864,121 @@ class MockGoRouterState extends _i1.Mock implements _i14.GoRouterState {
           ),
         ),
       ) as String);
+}
+
+/// A class which mocks [LoggingService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
+  @override
+  _i5.NavigatorObserver get navigatorObserver => (super.noSuchMethod(
+        Invocation.getter(#navigatorObserver),
+        returnValue: _FakeNavigatorObserver_24(
+          this,
+          Invocation.getter(#navigatorObserver),
+        ),
+        returnValueForMissingStub: _FakeNavigatorObserver_24(
+          this,
+          Invocation.getter(#navigatorObserver),
+        ),
+      ) as _i5.NavigatorObserver);
+
+  @override
+  _i7.Future<void> onFlutterError(_i5.FlutterErrorDetails? flutterError) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #onFlutterError,
+          [flutterError],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i5.Widget errorWidgetBuilder(_i5.FlutterErrorDetails? error) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #errorWidgetBuilder,
+          [error],
+        ),
+        returnValue: _FakeWidget_19(
+          this,
+          Invocation.method(
+            #errorWidgetBuilder,
+            [error],
+          ),
+        ),
+        returnValueForMissingStub: _FakeWidget_19(
+          this,
+          Invocation.method(
+            #errorWidgetBuilder,
+            [error],
+          ),
+        ),
+      ) as _i5.Widget);
+
+  @override
+  _i7.Future<void> reportError(
+    dynamic error, {
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? hints,
+    StackTrace? stackTrace,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reportError,
+          [error],
+          {
+            #data: data,
+            #hints: hints,
+            #stackTrace: stackTrace,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> reportFlutterError(
+    _i5.FlutterErrorDetails? flutterError, {
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? hints,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reportFlutterError,
+          [flutterError],
+          {
+            #data: data,
+            #hints: hints,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> showErrorDialogAndReport(
+    _i5.BuildContext? context,
+    Object? error, {
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? hints,
+    StackTrace? stackTrace,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #showErrorDialogAndReport,
+          [
+            context,
+            error,
+          ],
+          {
+            #data: data,
+            #hints: hints,
+            #stackTrace: stackTrace,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
