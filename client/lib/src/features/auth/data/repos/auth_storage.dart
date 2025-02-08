@@ -48,8 +48,8 @@ interface class AuthStorage {
   Future<void> saveUserPasswordHash(String email, String password) async {
     if (await _secureStorage.containsKey(key: passwordHashKey)) return;
 
-    final derivedKey =
-        await EncryptionService.I.deriveKey(password: password, salt: email);
+    final derivedKey = await EncryptionService.I
+        .deriveKey(password: password, salt: email.toLowerCase());
 
     final hashedPassword = await EncryptionService.I.hashPassword(
       password: password,

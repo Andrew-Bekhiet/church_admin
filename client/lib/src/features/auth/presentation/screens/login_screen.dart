@@ -250,11 +250,11 @@ class _LoginScreenState extends State<LoginScreen> {
         authBloc.add(
           _isLogin
               ? SignInWithEmailPassword(
-                  email: _emailController.text,
+                  email: _emailController.text.toLowerCase(),
                   password: _passwordController.text,
                 )
               : SignUpWithEmailPassword(
-                  email: _emailController.text,
+                  email: _emailController.text.toLowerCase(),
                   password: _passwordController.text,
                 ),
         );
