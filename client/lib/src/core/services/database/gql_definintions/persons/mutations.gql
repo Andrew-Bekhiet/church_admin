@@ -132,32 +132,37 @@ mutation updatePersonSpiritData(
   $lastConfession: Date!
   $lastKodas: Date!
 ) {
+  _c: insertHistoryAttendanceDaysOne(
+    object: { day: $lastConfession }
+    onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+  ) {
+    day
+  }
+  _k: insertHistoryAttendanceDaysOne(
+    object: { day: $lastKodas }
+    onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+  ) {
+    day
+  }
   insertHistoryConfessionHistoryOne(
-    object: {
-      personId: $personId
-      day: {
-        data: { day: $lastConfession }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
-      }
-    }
+    object: { personId: $personId, dayId: $lastConfession }
     onConflict: { constraint: confessionHistoryDayIdPersonIdKey }
   ) {
     person {
       ...Person
+      __typename
     }
+    __typename
   }
   insertHistoryKodasHistoryOne(
-    object: {
-      personId: $personId
-      day: {
-        data: { day: $lastKodas }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
-      }
-    }
+    object: { personId: $personId, dayId: $lastKodas }
     onConflict: { constraint: kodasHistoryDayIdPersonIdKey }
   ) {
     person {
       ...Person
+      __typename
     }
+    __typename
   }
+  __typename
 }
