@@ -5,6 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 final emailRegex = RegExp(r'^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$');
 
+abstract final class LoginScreenKeys {
+  static const Key emailFieldKey = ValueKey('Email Field Key');
+  static const Key passwordFieldKey = ValueKey('Password Field Key');
+  static const Key passwordConfirmationFieldKey =
+      ValueKey('PasswordConfirmationFieldKey');
+  static const Key forgotPasswordButtonKey =
+      ValueKey('Forgot Password Button Key');
+  static const Key loginSignupButtonKey = ValueKey('Login/Signup Button Key');
+  static const Key switchLoginSignupButtonKey =
+      ValueKey('SwitchLogin/Signup Button Key');
+}
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -78,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TextFormField(
+                          key: LoginScreenKeys.emailFieldKey,
                           decoration: const InputDecoration(
                             labelText: 'البريد الإلكتروني',
                           ),
@@ -103,6 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               PasswordFormField(
+                                key: LoginScreenKeys.passwordFieldKey,
                                 labelText: 'كلمة المرور',
                                 autoValidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -123,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   start: 8,
                                 ),
                                 child: InkWell(
+                                  key: LoginScreenKeys.forgotPasswordButtonKey,
                                   onTap: () =>
                                       const ForgotPasswordRoute().push(context),
                                   child: Text(
@@ -137,12 +152,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         else ...[
                           NewPasswordField(
+                            key: LoginScreenKeys.passwordFieldKey,
                             controller: _passwordController,
                             getEmail: () => _emailController.text,
                           ).withPadding(
                             const EdgeInsets.symmetric(vertical: 10),
                           ),
                           PasswordFormField(
+                            key: LoginScreenKeys.passwordConfirmationFieldKey,
                             labelText: 'تأكيد كلمة المرور',
                             autoFillHints: const [AutofillHints.newPassword],
                             controller: _passwordConfirmationController,
@@ -157,6 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                         FilledButton(
+                          key: LoginScreenKeys.loginSignupButtonKey,
                           onPressed: loading ? null : _submit,
                           child: loading
                               ? const Center(
@@ -224,6 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(width: 10),
                         InkWell(
+                          key: LoginScreenKeys.switchLoginSignupButtonKey,
                           onTap: () => setState(() => _isLogin = !_isLogin),
                           child: Text(
                             _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
@@ -281,7 +300,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class _LoginTitle extends StatelessWidget implements PreferredSizeWidget {
+class _LoginTitle extends StatelessWidget {
   const _LoginTitle();
 
   @override
@@ -303,7 +322,4 @@ class _LoginTitle extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 30);
 }

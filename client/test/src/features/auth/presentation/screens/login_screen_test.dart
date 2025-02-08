@@ -6,13 +6,15 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
+import 'package:spot/spot.dart';
 
+import '../../../../church_admin_app_test.mocks.dart' show MockLoggingService;
 import '../../../../utils.dart';
 import 'login_screen_test.mocks.dart';
 
@@ -28,155 +30,234 @@ import 'login_screen_test.mocks.dart';
   MockSpec<GoRouterState>(),
 ])
 void main() {
+  loadAppFonts();
+
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 
   tearDown(defaultTearDown);
 
-  testWidgets(
-    'Login Screen => Key elements',
-    (tester) async {
-      final overrides = [
-        _setUpAuthBloc(),
-        _setUpAuthStorage(),
-      ];
+  group('Login Screen =>', () {
+    testGoldens(
+      'UI',
+      (tester) async {
+        final overrides = [
+          _setUpAuthBloc(),
+          _setUpAuthStorage(),
+        ];
 
-      initGlobalProviderContainer(overrides);
+        initGlobalProviderContainer(overrides);
 
-      tester.view.physicalSize = const Size(800, 1400 * 4);
+        final builder = DeviceBuilder(
+          wrap: materialAppWithThemeAndLocale(),
+        )
+          ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+          ..addScenario(
+            widget: const LoginScreen(),
+            name: 'login_screen',
+          )
+          ..addScenario(
+            widget: const LoginScreen(),
+            name: 'login_screen_signup',
+            onCreate: (key) async {
+              await act.dragUntilVisible(
+                dragTarget: spotKey(
+                  LoginScreenKeys.switchLoginSignupButtonKey,
+                  parents: [spotKey(key)],
+                ),
+                dragStart: spotKey(
+                  LoginScreenKeys.emailFieldKey,
+                  parents: [spotKey(key)],
+                ),
+                moveStep: const Offset(0, -100),
+              );
 
-      await tester.pumpWidgetBuilder(
-        const LoginScreen(),
-        wrapper: materialAppWrapper(),
-      );
+              await act.tap(
+                spotKey(
+                  LoginScreenKeys.switchLoginSignupButtonKey,
+                  parents: [spotKey(key)],
+                ),
+              );
+            },
+          );
 
-      expect(find.text('كنيسة السيدة العذراء مريم'), findsOneWidget);
+        await tester.pumpDeviceBuilder(
+          builder,
+          wrapper: materialAppWrapper(),
+        );
 
-      expect(
-        find.image(const AssetImage('assets/images/login-signup.png')),
-        findsOneWidget,
-      );
+        await screenMatchesGolden(tester, 'login_screen');
+      },
+    );
 
-      expect(find.byType(TextField), findsNWidgets(2));
-      expect(
-        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
-        findsOneWidget,
-      );
-      expect(find.widgetWithText(InkWell, 'إنشاء حساب جديد'), findsOneWidget);
+    testWidgets(
+      'Can login with Email and Password',
+      (tester) async {
+        final overrides = [
+          _setUpNotificationsService(),
+          _setUpAuthBloc(isSignedIn: false),
+          _setUpAuthStorage(),
+        ];
 
-      await tester.scrollUntilVisible(
-        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
-        20,
-        scrollable: find.byType(Scrollable).first,
-      );
+        initGlobalProviderContainer(overrides);
 
-      await tester.tap(find.widgetWithText(InkWell, 'إنشاء حساب جديد'));
-      await tester.pumpAndSettle();
+        await tester.pumpWidgetBuilder(
+          const LoginScreen(),
+          wrapper: materialAppWrapper(),
+        );
+        await act.enterText(
+          spotKey(LoginScreenKeys.emailFieldKey),
+          'email@example.com',
+        );
+        await act.enterText(
+          spotKey(LoginScreenKeys.passwordFieldKey),
+          'password',
+        );
 
-      expect(find.byType(TextField), findsNWidgets(3));
-      expect(
-        find.widgetWithText(FilledButton, 'إنشاء حساب جديد'),
-        findsOneWidget,
-      );
-      expect(find.widgetWithText(InkWell, 'تسجيل الدخول'), findsOneWidget);
+        spotKey(LoginScreenKeys.loginSignupButtonKey).existsOnce();
 
-      await tester.scrollUntilVisible(
-        find.widgetWithText(FilledButton, 'إنشاء حساب جديد'),
-        20,
-        scrollable: find.byType(Scrollable).first,
-      );
+        await act.dragUntilVisible(
+          dragTarget: spotKey(LoginScreenKeys.loginSignupButtonKey),
+          dragStart: spot<Scrollable>().first(),
+          moveStep: const Offset(0, -150),
+        );
+        await act.tap(spotKey(LoginScreenKeys.loginSignupButtonKey));
 
-      await tester.tap(find.widgetWithText(InkWell, 'تسجيل الدخول'));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(TextField), findsNWidgets(2));
-      expect(
-        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
-        findsOneWidget,
-      );
-      expect(find.textContaining('إنشاء حساب جديد'), findsOneWidget);
-    },
-  );
-
-  testWidgets(
-    'Login Screen => Can login with Email and Password',
-    (tester) async {
-      final overrides = [
-        _setUpNotificationsService(),
-        _setUpAuthBloc(),
-        _setUpAuthStorage(),
-      ];
-
-      initGlobalProviderContainer(overrides);
-
-      await tester.pumpWidgetBuilder(
-        const LoginScreen(),
-        wrapper: materialAppWrapper(),
-      );
-      await tester.enterText(find.byType(TextField).first, 'email@example.com');
-      await tester.enterText(find.byType(TextField).last, 'password');
-
-      expect(find.bySubtype<FilledButton>(), findsOneWidget);
-
-      await tester.scrollUntilVisible(
-        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
-        20,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.tap(
-        find.widgetWithText(FilledButton, 'تسجيل الدخول'),
-      );
-
-      verify(
-        AuthBloc.I.add(
-          const SignInWithEmailPassword(
-            email: 'email@example.com',
-            password: 'password',
+        verify(
+          AuthBloc.I.add(
+            const SignInWithEmailPassword(
+              email: 'email@example.com',
+              password: 'password',
+            ),
           ),
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
 
-  group(
-    'Login Screen => Route =>',
-    () {
-      test(
-        'No Signed In User',
-        () async {
-          final overrides = [
-            _setUpAuthBloc(isSignedIn: false),
-            _setUpAuthStorage(),
-          ];
+    testWidgets(
+      'Can signup with Email and Password',
+      (tester) async {
+        final overrides = [
+          _setUpNotificationsService(),
+          _setUpAuthBloc(isSignedIn: false),
+          _setUpAuthStorage(),
+        ];
 
-          initGlobalProviderContainer(overrides);
+        initGlobalProviderContainer(overrides);
 
-          expect(
-            const LoginRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
-            null,
-          );
-        },
-      );
+        await tester.pumpWidgetBuilder(
+          const LoginScreen(),
+          wrapper: materialAppWrapper(),
+        );
 
-      test(
-        'Signed In User',
-        () async {
-          final overrides = [
-            _setUpAuthBloc(),
-            _setUpAuthStorage(),
-          ];
+        await act.dragUntilVisible(
+          dragTarget: spotKey(LoginScreenKeys.switchLoginSignupButtonKey),
+          dragStart: spot<Scrollable>().first(),
+          moveStep: const Offset(0, -150),
+        );
+        await act.tap(
+          spotKey(LoginScreenKeys.switchLoginSignupButtonKey),
+        );
 
-          initGlobalProviderContainer(overrides);
+        await act.enterText(
+          spotKey(LoginScreenKeys.emailFieldKey),
+          'email@example.com',
+        );
+        await act.enterText(
+          spotKey(LoginScreenKeys.passwordFieldKey),
+          r'1StrongPa$sword',
+        );
+        await act.enterText(
+          spotKey(LoginScreenKeys.passwordConfirmationFieldKey),
+          r'1StrongPa$sword',
+        );
 
-          expect(
-            const LoginRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
-            '/',
-          );
-        },
-      );
-    },
-  );
+        await act.tap(spotKey(LoginScreenKeys.loginSignupButtonKey));
+
+        verify(
+          AuthBloc.I.add(
+            const SignUpWithEmailPassword(
+              email: 'email@example.com',
+              password: r'1StrongPa$sword',
+            ),
+          ),
+        );
+      },
+    );
+
+    testWidgets(
+      'Forgot Password',
+      (tester) async {
+        final overrides = [
+          _setUpAuthBloc(isSignedIn: false),
+          _setUpAuthStorage(),
+          _setUpGoRouterRefreshStream(),
+          _setUpLoggingService(),
+        ];
+
+        initGlobalProviderContainer(overrides);
+
+        await tester.pumpWidgetBuilder(
+          MaterialApp.router(
+            routerConfig: $appRouter,
+          ),
+        );
+
+        await act.dragUntilVisible(
+          dragTarget: spotKey(LoginScreenKeys.forgotPasswordButtonKey),
+          dragStart: spot<Scrollable>().first(),
+          moveStep: const Offset(0, -150),
+        );
+
+        await act.tap(
+          spotKey(LoginScreenKeys.forgotPasswordButtonKey),
+        );
+
+        await tester.pumpAndSettle();
+
+        spot<ForgotPasswordScreen>().existsOnce();
+      },
+    );
+    group(
+      'Route =>',
+      () {
+        test(
+          'No Signed In User',
+          () async {
+            final overrides = [
+              _setUpAuthBloc(isSignedIn: false),
+              _setUpAuthStorage(),
+            ];
+
+            initGlobalProviderContainer(overrides);
+
+            expect(
+              const LoginRoute()
+                  .redirect(MockBuildContext(), MockGoRouterState()),
+              null,
+            );
+          },
+        );
+
+        test(
+          'Signed In User',
+          () async {
+            final overrides = [
+              _setUpAuthBloc(),
+              _setUpAuthStorage(),
+            ];
+
+            initGlobalProviderContainer(overrides);
+
+            expect(
+              const LoginRoute()
+                  .redirect(MockBuildContext(), MockGoRouterState()),
+              const HomeScreenRoute().location,
+            );
+          },
+        );
+      },
+    );
+  });
 }
 
 Override _setUpAuthStorage() {
@@ -243,4 +324,18 @@ Override _setUpNotificationsService() {
   final notifications = MockNotificationsService();
 
   return notificationsServiceProvider.overrideWithValue(notifications);
+}
+
+Override _setUpGoRouterRefreshStream() {
+  return goRouterRefreshStreamProvider.overrideWithValue(
+    GoRouterRefreshStream(const Stream<void>.empty()),
+  );
+}
+
+Override _setUpLoggingService() {
+  final loggingService = MockLoggingService();
+
+  when(loggingService.navigatorObserver).thenReturn(NavigatorObserver());
+
+  return loggingServiceProvider.overrideWithValue(loggingService);
 }
