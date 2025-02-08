@@ -2,6 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+final class EmailVerificationScreenKeys {
+  static const confirmEmailButtonKey = Key('Confirm Email Button Key');
+  static const resendEmailButtonKey = Key('Resend Email Button Key');
+}
+
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key});
 
@@ -26,51 +31,55 @@ class EmailVerificationScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              spacing: 10,
-              children: [
-                Image.asset(
-                  'assets/images/email-verification.png',
-                ),
-                Text(
-                  'تم إرسال رسالة إلى $email \n'
-                  'افتحها واضغط على الرابط، ثم ارجع للتطبيق واضغط على تأكيد البريد الإلكتروني',
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                ),
-                if (isLoading)
-                  const Center(child: CircularProgressIndicator())
-                else
-                  const SizedBox(height: 10),
-                FilledButton(
-                  onPressed: () => authBloc.add(const ReloadUser()),
-                  child: const Text('تأكيد البريد الإلكتروني'),
-                ),
-                FilledButton.tonal(
-                  onPressed: isLoading
-                      ? null
-                      : () async {
-                          final scaffoldMessenger =
-                              ScaffoldMessenger.of(context);
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 10,
+                children: [
+                  Image.asset(
+                    'assets/images/email-verification.png',
+                  ),
+                  Text(
+                    'تم إرسال رسالة إلى $email \n'
+                    'افتحها واضغط على الرابط، ثم ارجع للتطبيق واضغط على تأكيد البريد الإلكتروني',
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                  if (isLoading)
+                    const Center(child: CircularProgressIndicator())
+                  else
+                    const SizedBox(height: 10),
+                  FilledButton(
+                    key: EmailVerificationScreenKeys.confirmEmailButtonKey,
+                    onPressed: () => authBloc.add(const ReloadUser()),
+                    child: const Text('تأكيد البريد الإلكتروني'),
+                  ),
+                  FilledButton.tonal(
+                    key: EmailVerificationScreenKeys.resendEmailButtonKey,
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            final scaffoldMessenger =
+                                ScaffoldMessenger.of(context);
 
-                          authBloc.add(const SendEmailVerification());
-                          final nextState = await authBloc.stream
-                              .firstWhere((state) => state is! AuthLoading);
+                            authBloc.add(const SendEmailVerification());
+                            final nextState = await authBloc.stream
+                                .firstWhere((state) => state is! AuthLoading);
 
-                          if (nextState is AuthExceptionState) {
-                            scaffoldMessenger.showErrorSnackBar(
-                              nextState.exception.toString(),
-                            );
-                          } else {
-                            scaffoldMessenger.showInfoSnackBar(
-                              'تم إعادة إرسال رسالة التحقق',
-                            );
-                          }
-                        },
-                  child: const Text('إعادة إرسال رسالة التحقق'),
-                ),
-              ],
+                            if (nextState is AuthExceptionState) {
+                              scaffoldMessenger.showErrorSnackBar(
+                                nextState.exception.toString(),
+                              );
+                            } else {
+                              scaffoldMessenger.showInfoSnackBar(
+                                'تم إعادة إرسال رسالة التحقق',
+                              );
+                            }
+                          },
+                    child: const Text('إعادة إرسال رسالة التحقق'),
+                  ),
+                ],
+              ),
             ),
           ),
         );
