@@ -2,6 +2,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+final class ForgotPasswordScreenKeys {
+  static const emailFieldKey = Key('Email Field Key');
+  static const sendResetLinkButtonKey = Key('Send Reset Link Button Key');
+  static const backButtonKey = Key('Back Button Key');
+}
+
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -32,54 +38,61 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             bloc: _authBloc,
             selector: (state) => state is AuthLoading,
             builder: (context, loading) {
-              return Column(
-                spacing: 20,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: !_sent
-                    ? [
-                        Image.asset('assets/images/forgot-password.png'),
-                        Text(
-                          'سيتم إرسال لينك لتغيير كلمة المرور على بريدك الإلكتروني المسجل بالتطبيق',
-                          style: theme.textTheme.titleLarge,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: 'البريد الإلكتروني',
+              return SingleChildScrollView(
+                child: Column(
+                  spacing: 20,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: !_sent
+                      ? [
+                          Image.asset('assets/images/forgot-password.png'),
+                          Text(
+                            'سيتم إرسال لينك لتغيير كلمة المرور على بريدك الإلكتروني المسجل بالتطبيق',
+                            style: theme.textTheme.titleLarge,
                           ),
-                          keyboardType: TextInputType.emailAddress,
-                          autofillHints: const [AutofillHints.email],
-                          textInputAction: TextInputAction.done,
-                          onFieldSubmitted: (value) => _sendResetLink(),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (email) {
-                            if (email == null || email.isEmpty) {
-                              return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
-                            } else if (!emailRegex.hasMatch(email)) {
-                              return 'البريد الإلكتروني غير صالح';
-                            }
+                          TextFormField(
+                            key: ForgotPasswordScreenKeys.emailFieldKey,
+                            decoration: const InputDecoration(
+                              labelText: 'البريد الإلكتروني',
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            autofillHints: const [AutofillHints.email],
+                            textInputAction: TextInputAction.done,
+                            onFieldSubmitted: (value) => _sendResetLink(),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (email) {
+                              if (email == null || email.isEmpty) {
+                                return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
+                              } else if (!emailRegex.hasMatch(email)) {
+                                return 'البريد الإلكتروني غير صالح';
+                              }
 
-                            return null;
-                          },
-                          controller: _emailController,
-                        ),
-                        FilledButton(
-                          onPressed: loading ? null : _sendResetLink,
-                          child: loading
-                              ? const CircularProgressIndicator()
-                              : const Text('إرسال'),
-                        ),
-                      ]
-                    : [
-                        Image.asset('assets/images/email-verification.png'),
-                        Text(
-                          'إذا كان ${_emailController.text} مسجلاً بالفعل في التطبيق، سيتم إرسال لينك لتغيير كلمة المرور على بريدك الإلكتروني',
-                          style: theme.textTheme.titleLarge,
-                        ),
-                        FilledButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('رجوع'),
-                        ),
-                      ],
+                              return null;
+                            },
+                            controller: _emailController,
+                          ),
+                          FilledButton(
+                            key:
+                                ForgotPasswordScreenKeys.sendResetLinkButtonKey,
+                            onPressed: loading ? null : _sendResetLink,
+                            child: loading
+                                ? const CircularProgressIndicator()
+                                : const Text('إرسال'),
+                          ),
+                        ]
+                      : [
+                          Image.asset('assets/images/email-verification.png'),
+                          Text(
+                            'إذا كان ${_emailController.text} مسجلاً بالفعل في التطبيق، سيتم إرسال لينك لتغيير كلمة المرور على بريدك الإلكتروني',
+                            style: theme.textTheme.titleLarge,
+                          ),
+                          FilledButton(
+                            key: ForgotPasswordScreenKeys.backButtonKey,
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('رجوع'),
+                          ),
+                        ],
+                ),
               );
             },
           ),
