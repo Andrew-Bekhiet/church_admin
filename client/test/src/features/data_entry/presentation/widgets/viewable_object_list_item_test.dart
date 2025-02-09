@@ -14,11 +14,11 @@ import 'viewable_object_list_item_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-void main() async {
+void main() {
+  loadAppFonts();
+
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
-
-  await loadAppFonts();
 
   testGoldens(
     'Viewable Object List Item => Goldens test',

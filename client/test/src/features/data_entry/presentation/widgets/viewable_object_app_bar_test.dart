@@ -15,8 +15,8 @@ import 'viewable_object_app_bar_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-Future<void> main() async {
-  await loadAppFonts();
+void main() {
+  loadAppFonts();
 
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
