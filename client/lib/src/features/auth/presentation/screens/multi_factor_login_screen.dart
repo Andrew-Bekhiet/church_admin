@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +7,21 @@ import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rxdart/rxdart.dart';
 
+final class MultiFactorLoginScreenKeys {
+  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
+  static const passwordFieldKey = ValueKey('Password Field Key');
+  static const enrollButtonKey = ValueKey('Enroll Button Key');
+
+  static const verificationCodeFieldKey =
+      ValueKey('Verification Code Field Key');
+  static const verifyButtonKey = ValueKey('Verify Button Key');
+  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
+}
+
 class MultiFactorLogin extends StatefulWidget {
-  const MultiFactorLogin({super.key});
+  final Clock clock;
+
+  const MultiFactorLogin({super.key, this.clock = const Clock()});
 
   @override
   State<MultiFactorLogin> createState() => _MultifactorStateLogin();
@@ -40,6 +54,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                 :final challenge,
               ) =>
                 _VerifyMultiFactor(
+                  clock: clock,
                   selectedFactor: session.enrolledFactors.firstOrNull,
                   session: session,
                   onResendCode: (resendToken) {
@@ -150,6 +165,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
             Directionality(
               textDirection: TextDirection.ltr,
               child: PhoneFormField(
+                key: MultiFactorLoginScreenKeys.phoneNumberFieldKey,
                 controller: _phoneNumberController,
                 decoration: const InputDecoration(labelText: 'رقم الهاتف'),
                 validator: PhoneValidator.compose([
@@ -167,6 +183,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
               ),
             ),
             PasswordFormField(
+              key: MultiFactorLoginScreenKeys.passwordFieldKey,
               labelText: 'أعد إدخال كلمة المرور',
               controller: _passwordController,
               validator: (password) {
@@ -184,6 +201,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
               )
             else
               FilledButton(
+                key: MultiFactorLoginScreenKeys.enrollButtonKey,
                 onPressed: _sendCode,
                 child: const Text('ارسال رمز التحقق'),
               ),
@@ -204,11 +222,14 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
 }
 
 class _VerifyMultiFactor extends StatefulWidget {
+  final Clock clock;
+
   const _VerifyMultiFactor({
     required this.session,
     required this.onVerificationCodeSubmitted,
     required this.onResendCode,
     required this.loading,
+    required this.clock,
     this.selectedFactor,
   });
 
@@ -269,6 +290,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                 Directionality(
                   textDirection: TextDirection.ltr,
                   child: Pinput(
+                    key: MultiFactorLoginScreenKeys.verificationCodeFieldKey,
                     length: 6,
                     controller: _code,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -294,11 +316,13 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                 ),
                 if (widget.loading)
                   const FilledButton(
+                    key: MultiFactorLoginScreenKeys.verifyButtonKey,
                     onPressed: null,
                     child: CircularProgressIndicator(),
                   )
                 else
                   FilledButton(
+                    key: MultiFactorLoginScreenKeys.verifyButtonKey,
                     onPressed: () {
                       widget.onVerificationCodeSubmitted(_code.text);
                     },
@@ -310,7 +334,8 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                       .map(
                         (i) =>
                             30 -
-                            DateTime.now()
+                            widget.clock
+                                .now()
                                 .difference(challenge.createdAt)
                                 .inSeconds,
                       ),
@@ -320,6 +345,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
 
                     if (remainingSeconds <= 0) {
                       return OutlinedButton(
+                        key: MultiFactorLoginScreenKeys.resendCodeButtonKey,
                         onPressed: () {
                           widget.onResendCode(challenge.resendToken);
                         },
@@ -328,6 +354,7 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                     }
 
                     return OutlinedButton(
+                      key: MultiFactorLoginScreenKeys.resendCodeButtonKey,
                       onPressed: null,
                       child: Text(
                         'إعادة إرسال الرمز بعد $remainingSeconds ثانية',

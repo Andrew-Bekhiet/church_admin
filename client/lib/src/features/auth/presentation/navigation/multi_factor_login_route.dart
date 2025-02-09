@@ -19,7 +19,9 @@ class MultiFactorLoginRoute extends GoRouteData {
     final authState = authBloc.state.unwrapped;
 
     switch (authState) {
-      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
+      case AuthAuthenticated(
+          authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false)
+        ):
       case AuthMultiFactorChallengeInProgress():
         return null;
 
