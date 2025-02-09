@@ -82,7 +82,7 @@ class Fragment_Area implements Fragment_AreaNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Area) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Area || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -302,7 +302,7 @@ class Fragment_AreaNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AreaNoPhoto) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_AreaNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

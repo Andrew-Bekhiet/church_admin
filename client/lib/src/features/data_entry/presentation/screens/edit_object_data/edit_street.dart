@@ -70,7 +70,7 @@ class _EditStreetState extends State<EditStreet> {
                 newStreet = newStreet.copyWith(
                   lastVisit: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }

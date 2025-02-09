@@ -197,7 +197,7 @@ class Input_AreasAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasAggregateOrderBy) ||
+    if (other is! Input_AreasAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -577,7 +577,7 @@ class Input_AreasAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasAvgOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -1001,7 +1001,7 @@ class Input_AreasBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -1719,7 +1719,7 @@ class Input_AreasIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -1950,8 +1950,7 @@ class Input_AreasInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasInsertInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_AreasInsertInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsers = adminUsers;
@@ -2317,7 +2316,7 @@ class Input_AreasMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasMaxOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -2550,7 +2549,7 @@ class Input_AreasMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasMinOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -2736,7 +2735,7 @@ class Input_AreasObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasObjRelInsertInput) ||
+    if (other is! Input_AreasObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2916,7 +2915,7 @@ class Input_AreasOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasOnConflict) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -3326,7 +3325,7 @@ class Input_AreasOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsersAggregate = adminUsersAggregate;
@@ -3782,7 +3781,7 @@ class Input_AreasPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasPkColumnsInput) ||
+    if (other is! Input_AreasPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3947,7 +3946,7 @@ class Input_AreasSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -4134,7 +4133,7 @@ class Input_AreasStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasStddevOrderBy) ||
+    if (other is! Input_AreasStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4239,7 +4238,7 @@ class Input_AreasStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasStddevPopOrderBy) ||
+    if (other is! Input_AreasStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4345,7 +4344,7 @@ class Input_AreasStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasStddevSampOrderBy) ||
+    if (other is! Input_AreasStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4465,7 +4464,7 @@ class Input_AreasStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasStreamCursorInput) ||
+    if (other is! Input_AreasStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4668,7 +4667,7 @@ class Input_AreasStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasStreamCursorValueInput) ||
+    if (other is! Input_AreasStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4856,7 +4855,7 @@ class Input_AreasSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasSumOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -4985,7 +4984,7 @@ class Input_AreasUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_AreasUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -5156,7 +5155,7 @@ class Input_AreasVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasVarPopOrderBy) ||
+    if (other is! Input_AreasVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5261,7 +5260,7 @@ class Input_AreasVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasVarSampOrderBy) ||
+    if (other is! Input_AreasVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5366,7 +5365,7 @@ class Input_AreasVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AreasVarianceOrderBy) ||
+    if (other is! Input_AreasVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5510,7 +5509,7 @@ class Input_AuthUsersAdminOnAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnAggregateBoolExp) ||
+    if (other is! Input_AuthUsersAdminOnAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5862,7 +5861,7 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnAggregateOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6270,7 +6269,7 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnArrRelInsertInput) ||
+    if (other is! Input_AuthUsersAdminOnArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6442,7 +6441,7 @@ class Input_AuthUsersAdminOnAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnAvgOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnAvgOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6903,7 +6902,7 @@ class Input_AuthUsersAdminOnBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnBoolExp) ||
+    if (other is! Input_AuthUsersAdminOnBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7685,7 +7684,7 @@ class Input_AuthUsersAdminOnIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnIncInput) ||
+    if (other is! Input_AuthUsersAdminOnIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8046,7 +8045,7 @@ class Input_AuthUsersAdminOnInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnInsertInput) ||
+    if (other is! Input_AuthUsersAdminOnInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8600,7 +8599,7 @@ class Input_AuthUsersAdminOnMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnMaxOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8875,7 +8874,7 @@ class Input_AuthUsersAdminOnMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnMinOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9103,7 +9102,7 @@ class Input_AuthUsersAdminOnOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnOnConflict) ||
+    if (other is! Input_AuthUsersAdminOnOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9563,7 +9562,7 @@ class Input_AuthUsersAdminOnOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10031,7 +10030,7 @@ class Input_AuthUsersAdminOnPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnPkColumnsInput) ||
+    if (other is! Input_AuthUsersAdminOnPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10288,7 +10287,7 @@ class Input_AuthUsersAdminOnSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnSetInput) ||
+    if (other is! Input_AuthUsersAdminOnSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10603,7 +10602,7 @@ class Input_AuthUsersAdminOnStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnStddevOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10719,7 +10718,7 @@ class Input_AuthUsersAdminOnStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnStddevPopOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10835,7 +10834,7 @@ class Input_AuthUsersAdminOnStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnStddevSampOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10962,7 +10961,7 @@ class Input_AuthUsersAdminOnStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnStreamCursorInput) ||
+    if (other is! Input_AuthUsersAdminOnStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11258,7 +11257,7 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnStreamCursorValueInput) ||
+    if (other is! Input_AuthUsersAdminOnStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11570,7 +11569,7 @@ class Input_AuthUsersAdminOnSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnSumOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnSumOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11710,7 +11709,7 @@ class Input_AuthUsersAdminOnUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnUpdates) ||
+    if (other is! Input_AuthUsersAdminOnUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11893,7 +11892,7 @@ class Input_AuthUsersAdminOnVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnVarPopOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12009,7 +12008,7 @@ class Input_AuthUsersAdminOnVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnVarSampOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12125,7 +12124,7 @@ class Input_AuthUsersAdminOnVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersAdminOnVarianceOrderBy) ||
+    if (other is! Input_AuthUsersAdminOnVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12497,7 +12496,7 @@ class Input_AuthUsersDataBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataBoolExp) ||
+    if (other is! Input_AuthUsersDataBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13245,7 +13244,7 @@ class Input_AuthUsersDataInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataInsertInput) ||
+    if (other is! Input_AuthUsersDataInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13563,7 +13562,7 @@ class Input_AuthUsersDataObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataObjRelInsertInput) ||
+    if (other is! Input_AuthUsersDataObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -13747,7 +13746,7 @@ class Input_AuthUsersDataOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataOnConflict) ||
+    if (other is! Input_AuthUsersDataOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14094,7 +14093,7 @@ class Input_AuthUsersDataOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataOrderBy) ||
+    if (other is! Input_AuthUsersDataOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14430,7 +14429,7 @@ class Input_AuthUsersDataPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataPkColumnsInput) ||
+    if (other is! Input_AuthUsersDataPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14595,7 +14594,7 @@ class Input_AuthUsersDataSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataSetInput) ||
+    if (other is! Input_AuthUsersDataSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14800,7 +14799,7 @@ class Input_AuthUsersDataStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataStreamCursorInput) ||
+    if (other is! Input_AuthUsersDataStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15004,7 +15003,7 @@ class Input_AuthUsersDataStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataStreamCursorValueInput) ||
+    if (other is! Input_AuthUsersDataStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15206,7 +15205,7 @@ class Input_AuthUsersDataUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersDataUpdates) ||
+    if (other is! Input_AuthUsersDataUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15361,7 +15360,7 @@ class Input_AuthUsersPermissionsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsAggregateBoolExp) ||
+    if (other is! Input_AuthUsersPermissionsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15517,7 +15516,7 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsAggregateOrderBy) ||
+    if (other is! Input_AuthUsersPermissionsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15704,7 +15703,7 @@ class Input_AuthUsersPermissionsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsArrRelInsertInput) ||
+    if (other is! Input_AuthUsersPermissionsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -15957,7 +15956,7 @@ class Input_AuthUsersPermissionsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsBoolExp) ||
+    if (other is! Input_AuthUsersPermissionsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16295,7 +16294,7 @@ class Input_AuthUsersPermissionsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsInsertInput) ||
+    if (other is! Input_AuthUsersPermissionsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16470,7 +16469,7 @@ class Input_AuthUsersPermissionsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsMaxOrderBy) ||
+    if (other is! Input_AuthUsersPermissionsMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16619,7 +16618,7 @@ class Input_AuthUsersPermissionsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsMinOrderBy) ||
+    if (other is! Input_AuthUsersPermissionsMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16786,7 +16785,7 @@ class Input_AuthUsersPermissionsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsOnConflict) ||
+    if (other is! Input_AuthUsersPermissionsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -16991,7 +16990,7 @@ class Input_AuthUsersPermissionsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsOrderBy) ||
+    if (other is! Input_AuthUsersPermissionsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17153,7 +17152,7 @@ class Input_AuthUsersPermissionsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsPkColumnsInput) ||
+    if (other is! Input_AuthUsersPermissionsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17291,7 +17290,7 @@ class Input_AuthUsersPermissionsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsSetInput) ||
+    if (other is! Input_AuthUsersPermissionsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17439,7 +17438,7 @@ class Input_AuthUsersPermissionsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsStreamCursorInput) ||
+    if (other is! Input_AuthUsersPermissionsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17596,7 +17595,7 @@ class Input_AuthUsersPermissionsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsStreamCursorValueInput) ||
+    if (other is! Input_AuthUsersPermissionsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17742,7 +17741,7 @@ class Input_AuthUsersPermissionsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_AuthUsersPermissionsUpdates) ||
+    if (other is! Input_AuthUsersPermissionsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -17990,7 +17989,7 @@ class Input_BigintComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_BigintComparisonExp) ||
+    if (other is! Input_BigintComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -18345,7 +18344,7 @@ class Input_BooleanComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_BooleanComparisonExp) ||
+    if (other is! Input_BooleanComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -18729,7 +18728,7 @@ class Input_ChurchesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_ChurchesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -19151,7 +19150,7 @@ class Input_ChurchesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesInsertInput) ||
+    if (other is! Input_ChurchesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19348,7 +19347,7 @@ class Input_ChurchesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesObjRelInsertInput) ||
+    if (other is! Input_ChurchesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19529,7 +19528,7 @@ class Input_ChurchesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesOnConflict) ||
+    if (other is! Input_ChurchesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -19744,7 +19743,7 @@ class Input_ChurchesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_ChurchesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$fathersAggregate = fathersAggregate;
@@ -19924,7 +19923,7 @@ class Input_ChurchesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesPkColumnsInput) ||
+    if (other is! Input_ChurchesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -20038,8 +20037,7 @@ class Input_ChurchesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesSetInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ChurchesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -20181,7 +20179,7 @@ class Input_ChurchesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesStreamCursorInput) ||
+    if (other is! Input_ChurchesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -20335,7 +20333,7 @@ class Input_ChurchesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesStreamCursorValueInput) ||
+    if (other is! Input_ChurchesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -20476,7 +20474,7 @@ class Input_ChurchesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ChurchesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_ChurchesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -20658,7 +20656,7 @@ class Input_ClassesAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesAggregateBoolExp) ||
+    if (other is! Input_ClassesAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -20999,7 +20997,7 @@ class Input_ClassesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesAggregateOrderBy) ||
+    if (other is! Input_ClassesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21395,7 +21393,7 @@ class Input_ClassesArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesArrRelInsertInput) ||
+    if (other is! Input_ClassesArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -21581,8 +21579,7 @@ class Input_ClassesAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesAvgOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -22103,7 +22100,7 @@ class Input_ClassesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -22964,7 +22961,7 @@ class Input_ClassesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -23300,7 +23297,7 @@ class Input_ClassesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesInsertInput) ||
+    if (other is! Input_ClassesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -23829,8 +23826,7 @@ class Input_ClassesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -24126,8 +24122,7 @@ class Input_ClassesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -24345,7 +24340,7 @@ class Input_ClassesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesObjRelInsertInput) ||
+    if (other is! Input_ClassesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -24525,8 +24520,7 @@ class Input_ClassesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -24966,7 +24960,7 @@ class Input_ClassesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsersAggregate = adminUsersAggregate;
@@ -25449,7 +25443,7 @@ class Input_ClassesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesPkColumnsInput) ||
+    if (other is! Input_ClassesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -25639,7 +25633,7 @@ class Input_ClassesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -25878,7 +25872,7 @@ class Input_ClassesStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesStddevOrderBy) ||
+    if (other is! Input_ClassesStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26028,7 +26022,7 @@ class Input_ClassesStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesStddevPopOrderBy) ||
+    if (other is! Input_ClassesStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26178,7 +26172,7 @@ class Input_ClassesStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesStddevSampOrderBy) ||
+    if (other is! Input_ClassesStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26323,7 +26317,7 @@ class Input_ClassesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesStreamCursorInput) ||
+    if (other is! Input_ClassesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26552,7 +26546,7 @@ class Input_ClassesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesStreamCursorValueInput) ||
+    if (other is! Input_ClassesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -26792,8 +26786,7 @@ class Input_ClassesSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesSumOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -26950,7 +26943,7 @@ class Input_ClassesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_ClassesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -27140,7 +27133,7 @@ class Input_ClassesVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesVarPopOrderBy) ||
+    if (other is! Input_ClassesVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27290,7 +27283,7 @@ class Input_ClassesVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesVarSampOrderBy) ||
+    if (other is! Input_ClassesVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27440,7 +27433,7 @@ class Input_ClassesVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ClassesVarianceOrderBy) ||
+    if (other is! Input_ClassesVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27574,7 +27567,7 @@ class Input_CollegesAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesAggregateBoolExp) ||
+    if (other is! Input_CollegesAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27725,7 +27718,7 @@ class Input_CollegesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesAggregateOrderBy) ||
+    if (other is! Input_CollegesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -27906,7 +27899,7 @@ class Input_CollegesArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesArrRelInsertInput) ||
+    if (other is! Input_CollegesArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28203,7 +28196,7 @@ class Input_CollegesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_CollegesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -28640,7 +28633,7 @@ class Input_CollegesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesInsertInput) ||
+    if (other is! Input_CollegesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -28869,7 +28862,7 @@ class Input_CollegesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesMaxOrderBy) ||
+    if (other is! Input_CollegesMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29043,7 +29036,7 @@ class Input_CollegesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesMinOrderBy) ||
+    if (other is! Input_CollegesMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29202,7 +29195,7 @@ class Input_CollegesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesObjRelInsertInput) ||
+    if (other is! Input_CollegesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29383,7 +29376,7 @@ class Input_CollegesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesOnConflict) ||
+    if (other is! Input_CollegesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29613,7 +29606,7 @@ class Input_CollegesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_CollegesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -29808,7 +29801,7 @@ class Input_CollegesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesPkColumnsInput) ||
+    if (other is! Input_CollegesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -29936,8 +29929,7 @@ class Input_CollegesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesSetInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_CollegesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -30095,7 +30087,7 @@ class Input_CollegesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesStreamCursorInput) ||
+    if (other is! Input_CollegesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30263,7 +30255,7 @@ class Input_CollegesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesStreamCursorValueInput) ||
+    if (other is! Input_CollegesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -30420,7 +30412,7 @@ class Input_CollegesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_CollegesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_CollegesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -30664,8 +30656,7 @@ class Input_DateComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_DateComparisonExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_DateComparisonExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -31024,7 +31015,7 @@ class Input_DaterangeComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_DaterangeComparisonExp) ||
+    if (other is! Input_DaterangeComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31351,7 +31342,7 @@ class Input_FaceRecognitionPeronsLabelsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsBoolExp) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31636,7 +31627,7 @@ class Input_FaceRecognitionPeronsLabelsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsIncInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31758,7 +31749,7 @@ class Input_FaceRecognitionPeronsLabelsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsInsertInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -31926,7 +31917,7 @@ class Input_FaceRecognitionPeronsLabelsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsOnConflict) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32119,7 +32110,7 @@ class Input_FaceRecognitionPeronsLabelsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsOrderBy) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32246,7 +32237,7 @@ class Input_FaceRecognitionPeronsLabelsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsPkColumnsInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32366,7 +32357,7 @@ class Input_FaceRecognitionPeronsLabelsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsSetInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32516,7 +32507,7 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsStreamCursorInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32683,7 +32674,7 @@ class Input_FaceRecognitionPeronsLabelsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsStreamCursorValueInput) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -32853,7 +32844,7 @@ class Input_FaceRecognitionPeronsLabelsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FaceRecognitionPeronsLabelsUpdates) ||
+    if (other is! Input_FaceRecognitionPeronsLabelsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33190,7 +33181,7 @@ class Input_FamiliesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesAggregateOrderBy) ||
+    if (other is! Input_FamiliesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -33570,7 +33561,7 @@ class Input_FamiliesAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesAvgOrderBy) ||
+    if (other is! Input_FamiliesAvgOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -34074,7 +34065,7 @@ class Input_FamiliesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -34935,7 +34926,7 @@ class Input_FamiliesFamiliesAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesAggregateBoolExp) ||
+    if (other is! Input_FamiliesFamiliesAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -35091,7 +35082,7 @@ class Input_FamiliesFamiliesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesAggregateOrderBy) ||
+    if (other is! Input_FamiliesFamiliesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -35278,7 +35269,7 @@ class Input_FamiliesFamiliesArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesArrRelInsertInput) ||
+    if (other is! Input_FamiliesFamiliesArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -35560,7 +35551,7 @@ class Input_FamiliesFamiliesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesBoolExp) ||
+    if (other is! Input_FamiliesFamiliesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -35982,7 +35973,7 @@ class Input_FamiliesFamiliesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesInsertInput) ||
+    if (other is! Input_FamiliesFamiliesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -36217,7 +36208,7 @@ class Input_FamiliesFamiliesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesMaxOrderBy) ||
+    if (other is! Input_FamiliesFamiliesMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -36398,7 +36389,7 @@ class Input_FamiliesFamiliesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesMinOrderBy) ||
+    if (other is! Input_FamiliesFamiliesMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -36578,7 +36569,7 @@ class Input_FamiliesFamiliesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesOnConflict) ||
+    if (other is! Input_FamiliesFamiliesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -36814,7 +36805,7 @@ class Input_FamiliesFamiliesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesOrderBy) ||
+    if (other is! Input_FamiliesFamiliesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37007,7 +36998,7 @@ class Input_FamiliesFamiliesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesPkColumnsInput) ||
+    if (other is! Input_FamiliesFamiliesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37138,7 +37129,7 @@ class Input_FamiliesFamiliesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesSetInput) ||
+    if (other is! Input_FamiliesFamiliesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37302,7 +37293,7 @@ class Input_FamiliesFamiliesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesStreamCursorInput) ||
+    if (other is! Input_FamiliesFamiliesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37473,7 +37464,7 @@ class Input_FamiliesFamiliesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesStreamCursorValueInput) ||
+    if (other is! Input_FamiliesFamiliesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37634,7 +37625,7 @@ class Input_FamiliesFamiliesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesFamiliesUpdates) ||
+    if (other is! Input_FamiliesFamiliesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -37781,8 +37772,7 @@ class Input_FamiliesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesIncInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -38069,7 +38059,7 @@ class Input_FamiliesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesInsertInput) ||
+    if (other is! Input_FamiliesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -38546,7 +38536,7 @@ class Input_FamiliesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesMaxOrderBy) ||
+    if (other is! Input_FamiliesMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -38837,7 +38827,7 @@ class Input_FamiliesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesMinOrderBy) ||
+    if (other is! Input_FamiliesMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -39053,7 +39043,7 @@ class Input_FamiliesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesObjRelInsertInput) ||
+    if (other is! Input_FamiliesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -39234,7 +39224,7 @@ class Input_FamiliesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesOnConflict) ||
+    if (other is! Input_FamiliesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -39673,7 +39663,7 @@ class Input_FamiliesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -40155,7 +40145,7 @@ class Input_FamiliesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesPkColumnsInput) ||
+    if (other is! Input_FamiliesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -40344,8 +40334,7 @@ class Input_FamiliesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesSetInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -40562,7 +40551,7 @@ class Input_FamiliesStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesStddevOrderBy) ||
+    if (other is! Input_FamiliesStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -40668,7 +40657,7 @@ class Input_FamiliesStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesStddevPopOrderBy) ||
+    if (other is! Input_FamiliesStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -40774,7 +40763,7 @@ class Input_FamiliesStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesStddevSampOrderBy) ||
+    if (other is! Input_FamiliesStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -40894,7 +40883,7 @@ class Input_FamiliesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesStreamCursorInput) ||
+    if (other is! Input_FamiliesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41123,7 +41112,7 @@ class Input_FamiliesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesStreamCursorValueInput) ||
+    if (other is! Input_FamiliesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41341,7 +41330,7 @@ class Input_FamiliesSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesSumOrderBy) ||
+    if (other is! Input_FamiliesSumOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41473,7 +41462,7 @@ class Input_FamiliesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_FamiliesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -41644,7 +41633,7 @@ class Input_FamiliesVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesVarPopOrderBy) ||
+    if (other is! Input_FamiliesVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41750,7 +41739,7 @@ class Input_FamiliesVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesVarSampOrderBy) ||
+    if (other is! Input_FamiliesVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41856,7 +41845,7 @@ class Input_FamiliesVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FamiliesVarianceOrderBy) ||
+    if (other is! Input_FamiliesVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -41965,7 +41954,7 @@ class Input_FathersAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersAggregateBoolExp) ||
+    if (other is! Input_FathersAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -42116,7 +42105,7 @@ class Input_FathersAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersAggregateOrderBy) ||
+    if (other is! Input_FathersAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -42297,7 +42286,7 @@ class Input_FathersArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersArrRelInsertInput) ||
+    if (other is! Input_FathersArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -42590,7 +42579,7 @@ class Input_FathersBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_FathersBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -43023,7 +43012,7 @@ class Input_FathersInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersInsertInput) ||
+    if (other is! Input_FathersInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -43250,8 +43239,7 @@ class Input_FathersMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FathersMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$churchId = churchId;
@@ -43423,8 +43411,7 @@ class Input_FathersMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FathersMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$churchId = churchId;
@@ -43581,7 +43568,7 @@ class Input_FathersObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersObjRelInsertInput) ||
+    if (other is! Input_FathersObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -43761,8 +43748,7 @@ class Input_FathersOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_FathersOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -43990,7 +43976,7 @@ class Input_FathersOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_FathersOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$church = church;
@@ -44181,7 +44167,7 @@ class Input_FathersPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersPkColumnsInput) ||
+    if (other is! Input_FathersPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -44309,7 +44295,7 @@ class Input_FathersSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_FathersSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$churchId = churchId;
@@ -44466,7 +44452,7 @@ class Input_FathersStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersStreamCursorInput) ||
+    if (other is! Input_FathersStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -44633,7 +44619,7 @@ class Input_FathersStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersStreamCursorValueInput) ||
+    if (other is! Input_FathersStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -44789,7 +44775,7 @@ class Input_FathersUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_FathersUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_FathersUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -44937,8 +44923,7 @@ class Input_GeographyCastExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GeographyCastExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GeographyCastExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Geometry = Geometry;
@@ -45204,7 +45189,7 @@ class Input_GeographyComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GeographyComparisonExp) ||
+    if (other is! Input_GeographyComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -45532,7 +45517,7 @@ class Input_GeometryCastExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GeometryCastExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_GeometryCastExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$Geography = Geography;
@@ -45906,7 +45891,7 @@ class Input_GeometryComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GeometryComparisonExp) ||
+    if (other is! Input_GeometryComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -46375,7 +46360,7 @@ class Input_GroupsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsAggregateBoolExp) ||
+    if (other is! Input_GroupsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -46648,7 +46633,7 @@ class Input_GroupsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsAggregateOrderBy) ||
+    if (other is! Input_GroupsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -47044,7 +47029,7 @@ class Input_GroupsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsArrRelInsertInput) ||
+    if (other is! Input_GroupsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -47211,8 +47196,7 @@ class Input_GroupsAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsAvgOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -47707,7 +47691,7 @@ class Input_GroupsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -48551,7 +48535,7 @@ class Input_GroupsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -48851,8 +48835,7 @@ class Input_GroupsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsInsertInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsInsertInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsers = adminUsers;
@@ -49345,8 +49328,7 @@ class Input_GroupsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -49609,8 +49591,7 @@ class Input_GroupsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -49812,7 +49793,7 @@ class Input_GroupsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsObjRelInsertInput) ||
+    if (other is! Input_GroupsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -49992,8 +49973,7 @@ class Input_GroupsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -50416,7 +50396,7 @@ class Input_GroupsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsersAggregate = adminUsersAggregate;
@@ -50883,7 +50863,7 @@ class Input_GroupsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsPkColumnsInput) ||
+    if (other is! Input_GroupsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -51063,7 +51043,7 @@ class Input_GroupsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -51266,7 +51246,7 @@ class Input_GroupsStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsStddevOrderBy) ||
+    if (other is! Input_GroupsStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -51371,7 +51351,7 @@ class Input_GroupsStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsStddevPopOrderBy) ||
+    if (other is! Input_GroupsStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -51477,7 +51457,7 @@ class Input_GroupsStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsStddevSampOrderBy) ||
+    if (other is! Input_GroupsStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -51597,7 +51577,7 @@ class Input_GroupsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsStreamCursorInput) ||
+    if (other is! Input_GroupsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -51816,7 +51796,7 @@ class Input_GroupsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsStreamCursorValueInput) ||
+    if (other is! Input_GroupsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -52020,8 +52000,7 @@ class Input_GroupsSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsSumOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -52150,7 +52129,7 @@ class Input_GroupsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_GroupsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -52321,7 +52300,7 @@ class Input_GroupsVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsVarPopOrderBy) ||
+    if (other is! Input_GroupsVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -52426,7 +52405,7 @@ class Input_GroupsVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsVarSampOrderBy) ||
+    if (other is! Input_GroupsVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -52532,7 +52511,7 @@ class Input_GroupsVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_GroupsVarianceOrderBy) ||
+    if (other is! Input_GroupsVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -52865,7 +52844,7 @@ class Input_HistoryAttendanceDaysBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysBoolExp) ||
+    if (other is! Input_HistoryAttendanceDaysBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -53484,7 +53463,7 @@ class Input_HistoryAttendanceDaysConstraintsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsAggregateBoolExp) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -53864,7 +53843,7 @@ class Input_HistoryAttendanceDaysConstraintsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsAggregateOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -54319,7 +54298,7 @@ class Input_HistoryAttendanceDaysConstraintsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsArrRelInsertInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -54508,7 +54487,7 @@ class Input_HistoryAttendanceDaysConstraintsAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsAvgOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsAvgOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -54845,7 +54824,7 @@ class Input_HistoryAttendanceDaysConstraintsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsBoolExp) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -55409,7 +55388,7 @@ class Input_HistoryAttendanceDaysConstraintsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsIncInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -55651,7 +55630,7 @@ class Input_HistoryAttendanceDaysConstraintsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsInsertInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -56020,7 +55999,7 @@ class Input_HistoryAttendanceDaysConstraintsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsMaxOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -56259,7 +56238,7 @@ class Input_HistoryAttendanceDaysConstraintsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsMinOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -56474,7 +56453,7 @@ class Input_HistoryAttendanceDaysConstraintsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsOnConflict) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -56825,7 +56804,7 @@ class Input_HistoryAttendanceDaysConstraintsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57157,7 +57136,7 @@ class Input_HistoryAttendanceDaysConstraintsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsPkColumnsInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57333,7 +57312,7 @@ class Input_HistoryAttendanceDaysConstraintsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsSetInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57531,7 +57510,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsStddevOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57656,7 +57635,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57781,7 +57760,7 @@ class Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -57920,7 +57899,7 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsStreamCursorInput) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58140,8 +58119,8 @@ class Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput) ||
+    if (other
+            is! Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58348,7 +58327,7 @@ class Input_HistoryAttendanceDaysConstraintsSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsSumOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsSumOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58492,7 +58471,7 @@ class Input_HistoryAttendanceDaysConstraintsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsUpdates) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58679,7 +58658,7 @@ class Input_HistoryAttendanceDaysConstraintsVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsVarPopOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58803,7 +58782,7 @@ class Input_HistoryAttendanceDaysConstraintsVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsVarSampOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -58927,7 +58906,7 @@ class Input_HistoryAttendanceDaysConstraintsVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysConstraintsVarianceOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysConstraintsVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -59125,7 +59104,7 @@ class Input_HistoryAttendanceDaysInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysInsertInput) ||
+    if (other is! Input_HistoryAttendanceDaysInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -59400,7 +59379,7 @@ class Input_HistoryAttendanceDaysObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysObjRelInsertInput) ||
+    if (other is! Input_HistoryAttendanceDaysObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -59588,7 +59567,7 @@ class Input_HistoryAttendanceDaysOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysOnConflict) ||
+    if (other is! Input_HistoryAttendanceDaysOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -59872,7 +59851,7 @@ class Input_HistoryAttendanceDaysOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysOrderBy) ||
+    if (other is! Input_HistoryAttendanceDaysOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60162,7 +60141,7 @@ class Input_HistoryAttendanceDaysPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysPkColumnsInput) ||
+    if (other is! Input_HistoryAttendanceDaysPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60279,7 +60258,7 @@ class Input_HistoryAttendanceDaysSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysSetInput) ||
+    if (other is! Input_HistoryAttendanceDaysSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60426,7 +60405,7 @@ class Input_HistoryAttendanceDaysStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysStreamCursorInput) ||
+    if (other is! Input_HistoryAttendanceDaysStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60584,7 +60563,7 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysStreamCursorValueInput) ||
+    if (other is! Input_HistoryAttendanceDaysStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60734,7 +60713,7 @@ class Input_HistoryAttendanceDaysUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceDaysUpdates) ||
+    if (other is! Input_HistoryAttendanceDaysUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -60924,7 +60903,7 @@ class Input_HistoryAttendanceHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryAttendanceHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -61289,7 +61268,7 @@ class Input_HistoryAttendanceHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -61711,7 +61690,7 @@ class Input_HistoryAttendanceHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryAttendanceHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -61889,7 +61868,7 @@ class Input_HistoryAttendanceHistoryAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryAvgOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryAvgOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -62335,7 +62314,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryBoolExp) ||
+    if (other is! Input_HistoryAttendanceHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -63079,7 +63058,7 @@ class Input_HistoryAttendanceHistoryIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryIncInput) ||
+    if (other is! Input_HistoryAttendanceHistoryIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -63419,7 +63398,7 @@ class Input_HistoryAttendanceHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryInsertInput) ||
+    if (other is! Input_HistoryAttendanceHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -63965,7 +63944,7 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -64291,7 +64270,7 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryMinOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -64548,7 +64527,7 @@ class Input_HistoryAttendanceHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryOnConflict) ||
+    if (other is! Input_HistoryAttendanceHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -65000,7 +64979,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -65464,7 +65443,7 @@ class Input_HistoryAttendanceHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryAttendanceHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -65685,7 +65664,7 @@ class Input_HistoryAttendanceHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistorySetInput) ||
+    if (other is! Input_HistoryAttendanceHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -65939,7 +65918,7 @@ class Input_HistoryAttendanceHistoryStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryStddevOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66055,7 +66034,7 @@ class Input_HistoryAttendanceHistoryStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryStddevPopOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66172,7 +66151,7 @@ class Input_HistoryAttendanceHistoryStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryStddevSampOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66301,7 +66280,7 @@ class Input_HistoryAttendanceHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryAttendanceHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66565,7 +66544,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryAttendanceHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66826,7 +66805,7 @@ class Input_HistoryAttendanceHistorySumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistorySumOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistorySumOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -66968,7 +66947,7 @@ class Input_HistoryAttendanceHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryUpdates) ||
+    if (other is! Input_HistoryAttendanceHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67151,7 +67130,7 @@ class Input_HistoryAttendanceHistoryVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryVarPopOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67267,7 +67246,7 @@ class Input_HistoryAttendanceHistoryVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryVarSampOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67383,7 +67362,7 @@ class Input_HistoryAttendanceHistoryVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryAttendanceHistoryVarianceOrderBy) ||
+    if (other is! Input_HistoryAttendanceHistoryVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67499,7 +67478,7 @@ class Input_HistoryCallHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryCallHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67655,7 +67634,7 @@ class Input_HistoryCallHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryCallHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -67842,7 +67821,7 @@ class Input_HistoryCallHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryCallHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -68142,7 +68121,7 @@ class Input_HistoryCallHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryBoolExp) ||
+    if (other is! Input_HistoryCallHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -68607,7 +68586,7 @@ class Input_HistoryCallHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryInsertInput) ||
+    if (other is! Input_HistoryCallHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -68869,7 +68848,7 @@ class Input_HistoryCallHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryCallHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -69078,7 +69057,7 @@ class Input_HistoryCallHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryMinOrderBy) ||
+    if (other is! Input_HistoryCallHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -69275,7 +69254,7 @@ class Input_HistoryCallHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryOnConflict) ||
+    if (other is! Input_HistoryCallHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -69524,7 +69503,7 @@ class Input_HistoryCallHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryOrderBy) ||
+    if (other is! Input_HistoryCallHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -69731,7 +69710,7 @@ class Input_HistoryCallHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryCallHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -69874,7 +69853,7 @@ class Input_HistoryCallHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistorySetInput) ||
+    if (other is! Input_HistoryCallHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70052,7 +70031,7 @@ class Input_HistoryCallHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryCallHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70237,7 +70216,7 @@ class Input_HistoryCallHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryCallHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70412,7 +70391,7 @@ class Input_HistoryCallHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryCallHistoryUpdates) ||
+    if (other is! Input_HistoryCallHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70567,7 +70546,7 @@ class Input_HistoryConfessionHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryConfessionHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70727,7 +70706,7 @@ class Input_HistoryConfessionHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryConfessionHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -70917,7 +70896,7 @@ class Input_HistoryConfessionHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryConfessionHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -71250,7 +71229,7 @@ class Input_HistoryConfessionHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryBoolExp) ||
+    if (other is! Input_HistoryConfessionHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -71778,7 +71757,7 @@ class Input_HistoryConfessionHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryInsertInput) ||
+    if (other is! Input_HistoryConfessionHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72079,7 +72058,7 @@ class Input_HistoryConfessionHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryConfessionHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72313,7 +72292,7 @@ class Input_HistoryConfessionHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryMinOrderBy) ||
+    if (other is! Input_HistoryConfessionHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72525,7 +72504,7 @@ class Input_HistoryConfessionHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryOnConflict) ||
+    if (other is! Input_HistoryConfessionHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72804,7 +72783,7 @@ class Input_HistoryConfessionHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryOrderBy) ||
+    if (other is! Input_HistoryConfessionHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73052,7 +73031,7 @@ class Input_HistoryConfessionHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryConfessionHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73197,7 +73176,7 @@ class Input_HistoryConfessionHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistorySetInput) ||
+    if (other is! Input_HistoryConfessionHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73374,7 +73353,7 @@ class Input_HistoryConfessionHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryConfessionHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73574,7 +73553,7 @@ class Input_HistoryConfessionHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryConfessionHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73770,7 +73749,7 @@ class Input_HistoryConfessionHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryConfessionHistoryUpdates) ||
+    if (other is! Input_HistoryConfessionHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -73925,7 +73904,7 @@ class Input_HistoryEditHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryEditHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -74081,7 +74060,7 @@ class Input_HistoryEditHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryEditHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -74268,7 +74247,7 @@ class Input_HistoryEditHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryEditHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -74601,7 +74580,7 @@ class Input_HistoryEditHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryBoolExp) ||
+    if (other is! Input_HistoryEditHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -75134,7 +75113,7 @@ class Input_HistoryEditHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryInsertInput) ||
+    if (other is! Input_HistoryEditHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -75412,7 +75391,7 @@ class Input_HistoryEditHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryEditHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -75650,7 +75629,7 @@ class Input_HistoryEditHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryMinOrderBy) ||
+    if (other is! Input_HistoryEditHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -75861,7 +75840,7 @@ class Input_HistoryEditHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryOnConflict) ||
+    if (other is! Input_HistoryEditHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -76142,7 +76121,7 @@ class Input_HistoryEditHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryOrderBy) ||
+    if (other is! Input_HistoryEditHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -76371,7 +76350,7 @@ class Input_HistoryEditHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryEditHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -76541,7 +76520,7 @@ class Input_HistoryEditHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistorySetInput) ||
+    if (other is! Input_HistoryEditHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -76747,7 +76726,7 @@ class Input_HistoryEditHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryEditHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -76958,7 +76937,7 @@ class Input_HistoryEditHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryEditHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -77161,7 +77140,7 @@ class Input_HistoryEditHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryEditHistoryUpdates) ||
+    if (other is! Input_HistoryEditHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -77316,7 +77295,7 @@ class Input_HistoryKodasHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryKodasHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -77472,7 +77451,7 @@ class Input_HistoryKodasHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryKodasHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -77659,7 +77638,7 @@ class Input_HistoryKodasHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryKodasHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -77987,7 +77966,7 @@ class Input_HistoryKodasHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryBoolExp) ||
+    if (other is! Input_HistoryKodasHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -78515,7 +78494,7 @@ class Input_HistoryKodasHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryInsertInput) ||
+    if (other is! Input_HistoryKodasHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -78816,7 +78795,7 @@ class Input_HistoryKodasHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryKodasHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -79050,7 +79029,7 @@ class Input_HistoryKodasHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryMinOrderBy) ||
+    if (other is! Input_HistoryKodasHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -79260,7 +79239,7 @@ class Input_HistoryKodasHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryOnConflict) ||
+    if (other is! Input_HistoryKodasHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -79537,7 +79516,7 @@ class Input_HistoryKodasHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryOrderBy) ||
+    if (other is! Input_HistoryKodasHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -79784,7 +79763,7 @@ class Input_HistoryKodasHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryKodasHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -79928,7 +79907,7 @@ class Input_HistoryKodasHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistorySetInput) ||
+    if (other is! Input_HistoryKodasHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -80105,7 +80084,7 @@ class Input_HistoryKodasHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryKodasHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -80302,7 +80281,7 @@ class Input_HistoryKodasHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryKodasHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -80490,7 +80469,7 @@ class Input_HistoryKodasHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryKodasHistoryUpdates) ||
+    if (other is! Input_HistoryKodasHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -80771,7 +80750,7 @@ class Input_HistoryLatestCallsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsBoolExp) ||
+    if (other is! Input_HistoryLatestCallsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -81236,7 +81215,7 @@ class Input_HistoryLatestCallsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsInsertInput) ||
+    if (other is! Input_HistoryLatestCallsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -81449,7 +81428,7 @@ class Input_HistoryLatestCallsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsObjRelInsertInput) ||
+    if (other is! Input_HistoryLatestCallsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -81640,7 +81619,7 @@ class Input_HistoryLatestCallsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsOrderBy) ||
+    if (other is! Input_HistoryLatestCallsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -81869,7 +81848,7 @@ class Input_HistoryLatestCallsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsStreamCursorInput) ||
+    if (other is! Input_HistoryLatestCallsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -82054,7 +82033,7 @@ class Input_HistoryLatestCallsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestCallsStreamCursorValueInput) ||
+    if (other is! Input_HistoryLatestCallsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -82331,7 +82310,7 @@ class Input_HistoryLatestConfessionsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsBoolExp) ||
+    if (other is! Input_HistoryLatestConfessionsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -82754,7 +82733,7 @@ class Input_HistoryLatestConfessionsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsInsertInput) ||
+    if (other is! Input_HistoryLatestConfessionsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -82952,7 +82931,7 @@ class Input_HistoryLatestConfessionsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsObjRelInsertInput) ||
+    if (other is! Input_HistoryLatestConfessionsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -83131,7 +83110,7 @@ class Input_HistoryLatestConfessionsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsOrderBy) ||
+    if (other is! Input_HistoryLatestConfessionsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -83345,7 +83324,7 @@ class Input_HistoryLatestConfessionsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsStreamCursorInput) ||
+    if (other is! Input_HistoryLatestConfessionsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -83521,7 +83500,7 @@ class Input_HistoryLatestConfessionsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestConfessionsStreamCursorValueInput) ||
+    if (other is! Input_HistoryLatestConfessionsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -83837,7 +83816,7 @@ class Input_HistoryLatestEditsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsBoolExp) ||
+    if (other is! Input_HistoryLatestEditsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -84370,7 +84349,7 @@ class Input_HistoryLatestEditsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsInsertInput) ||
+    if (other is! Input_HistoryLatestEditsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -84584,7 +84563,7 @@ class Input_HistoryLatestEditsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsObjRelInsertInput) ||
+    if (other is! Input_HistoryLatestEditsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -84807,7 +84786,7 @@ class Input_HistoryLatestEditsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsOrderBy) ||
+    if (other is! Input_HistoryLatestEditsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85057,7 +85036,7 @@ class Input_HistoryLatestEditsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsStreamCursorInput) ||
+    if (other is! Input_HistoryLatestEditsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85268,7 +85247,7 @@ class Input_HistoryLatestEditsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestEditsStreamCursorValueInput) ||
+    if (other is! Input_HistoryLatestEditsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85572,7 +85551,7 @@ class Input_HistoryLatestKodasesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesBoolExp) ||
+    if (other is! Input_HistoryLatestKodasesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -85995,7 +85974,7 @@ class Input_HistoryLatestKodasesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesInsertInput) ||
+    if (other is! Input_HistoryLatestKodasesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -86193,7 +86172,7 @@ class Input_HistoryLatestKodasesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesObjRelInsertInput) ||
+    if (other is! Input_HistoryLatestKodasesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -86370,7 +86349,7 @@ class Input_HistoryLatestKodasesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesOrderBy) ||
+    if (other is! Input_HistoryLatestKodasesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -86584,7 +86563,7 @@ class Input_HistoryLatestKodasesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesStreamCursorInput) ||
+    if (other is! Input_HistoryLatestKodasesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -86757,7 +86736,7 @@ class Input_HistoryLatestKodasesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestKodasesStreamCursorValueInput) ||
+    if (other is! Input_HistoryLatestKodasesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87051,7 +87030,7 @@ class Input_HistoryLatestVisitsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsBoolExp) ||
+    if (other is! Input_HistoryLatestVisitsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87544,7 +87523,7 @@ class Input_HistoryLatestVisitsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsInsertInput) ||
+    if (other is! Input_HistoryLatestVisitsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87743,7 +87722,7 @@ class Input_HistoryLatestVisitsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsObjRelInsertInput) ||
+    if (other is! Input_HistoryLatestVisitsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -87951,7 +87930,7 @@ class Input_HistoryLatestVisitsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsOrderBy) ||
+    if (other is! Input_HistoryLatestVisitsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88186,7 +88165,7 @@ class Input_HistoryLatestVisitsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsStreamCursorInput) ||
+    if (other is! Input_HistoryLatestVisitsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88385,7 +88364,7 @@ class Input_HistoryLatestVisitsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryLatestVisitsStreamCursorValueInput) ||
+    if (other is! Input_HistoryLatestVisitsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88564,7 +88543,7 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryAggregateBoolExp) ||
+    if (other is! Input_HistoryVisitHistoryAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88720,7 +88699,7 @@ class Input_HistoryVisitHistoryAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryAggregateOrderBy) ||
+    if (other is! Input_HistoryVisitHistoryAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -88907,7 +88886,7 @@ class Input_HistoryVisitHistoryArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryArrRelInsertInput) ||
+    if (other is! Input_HistoryVisitHistoryArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -89241,7 +89220,7 @@ class Input_HistoryVisitHistoryBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryBoolExp) ||
+    if (other is! Input_HistoryVisitHistoryBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -89765,7 +89744,7 @@ class Input_HistoryVisitHistoryInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryInsertInput) ||
+    if (other is! Input_HistoryVisitHistoryInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90013,7 +89992,7 @@ class Input_HistoryVisitHistoryMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryMaxOrderBy) ||
+    if (other is! Input_HistoryVisitHistoryMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90221,7 +90200,7 @@ class Input_HistoryVisitHistoryMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryMinOrderBy) ||
+    if (other is! Input_HistoryVisitHistoryMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90417,7 +90396,7 @@ class Input_HistoryVisitHistoryOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryOnConflict) ||
+    if (other is! Input_HistoryVisitHistoryOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90701,7 +90680,7 @@ class Input_HistoryVisitHistoryOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryOrderBy) ||
+    if (other is! Input_HistoryVisitHistoryOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -90933,7 +90912,7 @@ class Input_HistoryVisitHistoryPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryPkColumnsInput) ||
+    if (other is! Input_HistoryVisitHistoryPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91092,7 +91071,7 @@ class Input_HistoryVisitHistorySetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistorySetInput) ||
+    if (other is! Input_HistoryVisitHistorySetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91283,7 +91262,7 @@ class Input_HistoryVisitHistoryStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryStreamCursorInput) ||
+    if (other is! Input_HistoryVisitHistoryStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91482,7 +91461,7 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryStreamCursorValueInput) ||
+    if (other is! Input_HistoryVisitHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91670,7 +91649,7 @@ class Input_HistoryVisitHistoryUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HistoryVisitHistoryUpdates) ||
+    if (other is! Input_HistoryVisitHistoryUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -91932,7 +91911,7 @@ class Input_HobbiesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -92278,7 +92257,7 @@ class Input_HobbiesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -92422,7 +92401,7 @@ class Input_HobbiesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesInsertInput) ||
+    if (other is! Input_HobbiesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -92606,7 +92585,7 @@ class Input_HobbiesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesObjRelInsertInput) ||
+    if (other is! Input_HobbiesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -92786,8 +92765,7 @@ class Input_HobbiesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -92999,7 +92977,7 @@ class Input_HobbiesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -93164,7 +93142,7 @@ class Input_HobbiesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesPkColumnsInput) ||
+    if (other is! Input_HobbiesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -93290,7 +93268,7 @@ class Input_HobbiesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -93446,7 +93424,7 @@ class Input_HobbiesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesStreamCursorInput) ||
+    if (other is! Input_HobbiesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -93611,7 +93589,7 @@ class Input_HobbiesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesStreamCursorValueInput) ||
+    if (other is! Input_HobbiesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -93781,7 +93759,7 @@ class Input_HobbiesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_HobbiesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_HobbiesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -94050,8 +94028,7 @@ class Input_IntComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_IntComparisonExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_IntComparisonExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -94400,7 +94377,7 @@ class Input_JobsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -94748,7 +94725,7 @@ class Input_JobsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsInsertInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsInsertInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -94916,7 +94893,7 @@ class Input_JobsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsObjRelInsertInput) ||
+    if (other is! Input_JobsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -95096,7 +95073,7 @@ class Input_JobsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsOnConflict) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -95294,7 +95271,7 @@ class Input_JobsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -95445,7 +95422,7 @@ class Input_JobsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsPkColumnsInput) ||
+    if (other is! Input_JobsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -95559,7 +95536,7 @@ class Input_JobsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -95701,7 +95678,7 @@ class Input_JobsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsStreamCursorInput) ||
+    if (other is! Input_JobsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -95852,7 +95829,7 @@ class Input_JobsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsStreamCursorValueInput) ||
+    if (other is! Input_JobsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -95992,7 +95969,7 @@ class Input_JobsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JobsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_JobsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -96140,7 +96117,7 @@ class Input_JsonbCastExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JsonbCastExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_JsonbCastExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$String = $String;
@@ -96434,7 +96411,7 @@ class Input_JsonbComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_JsonbComparisonExp) ||
+    if (other is! Input_JsonbComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -96921,8 +96898,7 @@ class Input_NameComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_NameComparisonExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_NameComparisonExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -97291,7 +97267,7 @@ class Input_PersonStatesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesBoolExp) ||
+    if (other is! Input_PersonStatesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -97649,7 +97625,7 @@ class Input_PersonStatesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesIncInput) ||
+    if (other is! Input_PersonStatesIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -97795,7 +97771,7 @@ class Input_PersonStatesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesInsertInput) ||
+    if (other is! Input_PersonStatesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -97981,7 +97957,7 @@ class Input_PersonStatesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesObjRelInsertInput) ||
+    if (other is! Input_PersonStatesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98165,7 +98141,7 @@ class Input_PersonStatesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesOnConflict) ||
+    if (other is! Input_PersonStatesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98380,7 +98356,7 @@ class Input_PersonStatesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesOrderBy) ||
+    if (other is! Input_PersonStatesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98546,7 +98522,7 @@ class Input_PersonStatesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesPkColumnsInput) ||
+    if (other is! Input_PersonStatesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98673,7 +98649,7 @@ class Input_PersonStatesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesSetInput) ||
+    if (other is! Input_PersonStatesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98833,7 +98809,7 @@ class Input_PersonStatesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesStreamCursorInput) ||
+    if (other is! Input_PersonStatesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -98999,7 +98975,7 @@ class Input_PersonStatesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesStreamCursorValueInput) ||
+    if (other is! Input_PersonStatesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -99172,7 +99148,7 @@ class Input_PersonStatesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonStatesUpdates) ||
+    if (other is! Input_PersonStatesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -99459,7 +99435,7 @@ class Input_PersonTypesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesBoolExp) ||
+    if (other is! Input_PersonTypesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -99813,7 +99789,7 @@ class Input_PersonTypesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesIncInput) ||
+    if (other is! Input_PersonTypesIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -99958,7 +99934,7 @@ class Input_PersonTypesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesInsertInput) ||
+    if (other is! Input_PersonTypesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100144,7 +100120,7 @@ class Input_PersonTypesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesObjRelInsertInput) ||
+    if (other is! Input_PersonTypesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100327,7 +100303,7 @@ class Input_PersonTypesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesOnConflict) ||
+    if (other is! Input_PersonTypesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100541,7 +100517,7 @@ class Input_PersonTypesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesOrderBy) ||
+    if (other is! Input_PersonTypesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100707,7 +100683,7 @@ class Input_PersonTypesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesPkColumnsInput) ||
+    if (other is! Input_PersonTypesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100834,7 +100810,7 @@ class Input_PersonTypesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesSetInput) ||
+    if (other is! Input_PersonTypesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -100994,7 +100970,7 @@ class Input_PersonTypesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesStreamCursorInput) ||
+    if (other is! Input_PersonTypesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -101160,7 +101136,7 @@ class Input_PersonTypesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesStreamCursorValueInput) ||
+    if (other is! Input_PersonTypesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -101333,7 +101309,7 @@ class Input_PersonTypesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonTypesUpdates) ||
+    if (other is! Input_PersonTypesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -101544,7 +101520,7 @@ class Input_PersonsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsAggregateBoolExp) ||
+    if (other is! Input_PersonsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -101885,7 +101861,7 @@ class Input_PersonsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsAggregateOrderBy) ||
+    if (other is! Input_PersonsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -102263,7 +102239,7 @@ class Input_PersonsAppendInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsAppendInput) ||
+    if (other is! Input_PersonsAppendInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -102387,7 +102363,7 @@ class Input_PersonsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsArrRelInsertInput) ||
+    if (other is! Input_PersonsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -102571,8 +102547,7 @@ class Input_PersonsAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsAvgOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -103890,7 +103865,7 @@ class Input_PersonsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -106128,7 +106103,7 @@ class Input_PersonsDeleteAtPathInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsDeleteAtPathInput) ||
+    if (other is! Input_PersonsDeleteAtPathInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106251,7 +106226,7 @@ class Input_PersonsDeleteElemInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsDeleteElemInput) ||
+    if (other is! Input_PersonsDeleteElemInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106357,7 +106332,7 @@ class Input_PersonsDeleteKeyInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsDeleteKeyInput) ||
+    if (other is! Input_PersonsDeleteKeyInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106470,7 +106445,7 @@ class Input_PersonsGroupsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsAggregateBoolExp) ||
+    if (other is! Input_PersonsGroupsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106626,7 +106601,7 @@ class Input_PersonsGroupsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsAggregateOrderBy) ||
+    if (other is! Input_PersonsGroupsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -106811,7 +106786,7 @@ class Input_PersonsGroupsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsArrRelInsertInput) ||
+    if (other is! Input_PersonsGroupsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -107092,7 +107067,7 @@ class Input_PersonsGroupsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsBoolExp) ||
+    if (other is! Input_PersonsGroupsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -107511,7 +107486,7 @@ class Input_PersonsGroupsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsInsertInput) ||
+    if (other is! Input_PersonsGroupsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -107741,7 +107716,7 @@ class Input_PersonsGroupsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsMaxOrderBy) ||
+    if (other is! Input_PersonsGroupsMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -107917,7 +107892,7 @@ class Input_PersonsGroupsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsMinOrderBy) ||
+    if (other is! Input_PersonsGroupsMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108094,7 +108069,7 @@ class Input_PersonsGroupsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsOnConflict) ||
+    if (other is! Input_PersonsGroupsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108327,7 +108302,7 @@ class Input_PersonsGroupsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsOrderBy) ||
+    if (other is! Input_PersonsGroupsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108516,7 +108491,7 @@ class Input_PersonsGroupsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsPkColumnsInput) ||
+    if (other is! Input_PersonsGroupsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108647,7 +108622,7 @@ class Input_PersonsGroupsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsSetInput) ||
+    if (other is! Input_PersonsGroupsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108808,7 +108783,7 @@ class Input_PersonsGroupsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsStreamCursorInput) ||
+    if (other is! Input_PersonsGroupsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -108978,7 +108953,7 @@ class Input_PersonsGroupsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsStreamCursorValueInput) ||
+    if (other is! Input_PersonsGroupsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109136,7 +109111,7 @@ class Input_PersonsGroupsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsGroupsUpdates) ||
+    if (other is! Input_PersonsGroupsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109291,7 +109266,7 @@ class Input_PersonsHobbiesAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesAggregateBoolExp) ||
+    if (other is! Input_PersonsHobbiesAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109447,7 +109422,7 @@ class Input_PersonsHobbiesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesAggregateOrderBy) ||
+    if (other is! Input_PersonsHobbiesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109632,7 +109607,7 @@ class Input_PersonsHobbiesArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesArrRelInsertInput) ||
+    if (other is! Input_PersonsHobbiesArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -109913,7 +109888,7 @@ class Input_PersonsHobbiesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesBoolExp) ||
+    if (other is! Input_PersonsHobbiesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -110333,7 +110308,7 @@ class Input_PersonsHobbiesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesInsertInput) ||
+    if (other is! Input_PersonsHobbiesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -110563,7 +110538,7 @@ class Input_PersonsHobbiesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesMaxOrderBy) ||
+    if (other is! Input_PersonsHobbiesMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -110739,7 +110714,7 @@ class Input_PersonsHobbiesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesMinOrderBy) ||
+    if (other is! Input_PersonsHobbiesMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -110916,7 +110891,7 @@ class Input_PersonsHobbiesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesOnConflict) ||
+    if (other is! Input_PersonsHobbiesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111149,7 +111124,7 @@ class Input_PersonsHobbiesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesOrderBy) ||
+    if (other is! Input_PersonsHobbiesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111339,7 +111314,7 @@ class Input_PersonsHobbiesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesPkColumnsInput) ||
+    if (other is! Input_PersonsHobbiesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111470,7 +111445,7 @@ class Input_PersonsHobbiesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesSetInput) ||
+    if (other is! Input_PersonsHobbiesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111631,7 +111606,7 @@ class Input_PersonsHobbiesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesStreamCursorInput) ||
+    if (other is! Input_PersonsHobbiesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111801,7 +111776,7 @@ class Input_PersonsHobbiesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesStreamCursorValueInput) ||
+    if (other is! Input_PersonsHobbiesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -111959,7 +111934,7 @@ class Input_PersonsHobbiesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsHobbiesUpdates) ||
+    if (other is! Input_PersonsHobbiesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -112121,7 +112096,7 @@ class Input_PersonsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -113046,7 +113021,7 @@ class Input_PersonsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsInsertInput) ||
+    if (other is! Input_PersonsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -114684,8 +114659,7 @@ class Input_PersonsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -115459,8 +115433,7 @@ class Input_PersonsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -115916,7 +115889,7 @@ class Input_PersonsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsObjRelInsertInput) ||
+    if (other is! Input_PersonsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -116096,8 +116069,7 @@ class Input_PersonsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -117226,7 +117198,7 @@ class Input_PersonsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -118676,7 +118648,7 @@ class Input_PersonsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsPkColumnsInput) ||
+    if (other is! Input_PersonsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -118776,7 +118748,7 @@ class Input_PersonsPrependInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsPrependInput) ||
+    if (other is! Input_PersonsPrependInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -118889,7 +118861,7 @@ class Input_PersonsServicesAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesAggregateBoolExp) ||
+    if (other is! Input_PersonsServicesAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119045,7 +119017,7 @@ class Input_PersonsServicesAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesAggregateOrderBy) ||
+    if (other is! Input_PersonsServicesAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119230,7 +119202,7 @@ class Input_PersonsServicesArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesArrRelInsertInput) ||
+    if (other is! Input_PersonsServicesArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119512,7 +119484,7 @@ class Input_PersonsServicesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesBoolExp) ||
+    if (other is! Input_PersonsServicesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -119935,7 +119907,7 @@ class Input_PersonsServicesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesInsertInput) ||
+    if (other is! Input_PersonsServicesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120166,7 +120138,7 @@ class Input_PersonsServicesMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesMaxOrderBy) ||
+    if (other is! Input_PersonsServicesMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120343,7 +120315,7 @@ class Input_PersonsServicesMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesMinOrderBy) ||
+    if (other is! Input_PersonsServicesMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120521,7 +120493,7 @@ class Input_PersonsServicesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesOnConflict) ||
+    if (other is! Input_PersonsServicesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120755,7 +120727,7 @@ class Input_PersonsServicesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesOrderBy) ||
+    if (other is! Input_PersonsServicesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -120948,7 +120920,7 @@ class Input_PersonsServicesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesPkColumnsInput) ||
+    if (other is! Input_PersonsServicesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -121079,7 +121051,7 @@ class Input_PersonsServicesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesSetInput) ||
+    if (other is! Input_PersonsServicesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -121241,7 +121213,7 @@ class Input_PersonsServicesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesStreamCursorInput) ||
+    if (other is! Input_PersonsServicesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -121411,7 +121383,7 @@ class Input_PersonsServicesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesStreamCursorValueInput) ||
+    if (other is! Input_PersonsServicesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -121570,7 +121542,7 @@ class Input_PersonsServicesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsServicesUpdates) ||
+    if (other is! Input_PersonsServicesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -122081,7 +122053,7 @@ class Input_PersonsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -122629,7 +122601,7 @@ class Input_PersonsStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsStddevOrderBy) ||
+    if (other is! Input_PersonsStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -122777,7 +122749,7 @@ class Input_PersonsStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsStddevPopOrderBy) ||
+    if (other is! Input_PersonsStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -122925,7 +122897,7 @@ class Input_PersonsStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsStddevSampOrderBy) ||
+    if (other is! Input_PersonsStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -123070,7 +123042,7 @@ class Input_PersonsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsStreamCursorInput) ||
+    if (other is! Input_PersonsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -123572,7 +123544,7 @@ class Input_PersonsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsStreamCursorValueInput) ||
+    if (other is! Input_PersonsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -124121,8 +124093,7 @@ class Input_PersonsSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsSumOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -124256,7 +124227,7 @@ class Input_PersonsTagsAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsAggregateBoolExp) ||
+    if (other is! Input_PersonsTagsAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -124410,7 +124381,7 @@ class Input_PersonsTagsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsAggregateOrderBy) ||
+    if (other is! Input_PersonsTagsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -124593,7 +124564,7 @@ class Input_PersonsTagsArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsArrRelInsertInput) ||
+    if (other is! Input_PersonsTagsArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -124873,7 +124844,7 @@ class Input_PersonsTagsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsBoolExp) ||
+    if (other is! Input_PersonsTagsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -125285,7 +125256,7 @@ class Input_PersonsTagsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsInsertInput) ||
+    if (other is! Input_PersonsTagsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -125512,7 +125483,7 @@ class Input_PersonsTagsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsMaxOrderBy) ||
+    if (other is! Input_PersonsTagsMaxOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -125687,7 +125658,7 @@ class Input_PersonsTagsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsMinOrderBy) ||
+    if (other is! Input_PersonsTagsMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -125863,7 +125834,7 @@ class Input_PersonsTagsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsOnConflict) ||
+    if (other is! Input_PersonsTagsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126093,7 +126064,7 @@ class Input_PersonsTagsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsOrderBy) ||
+    if (other is! Input_PersonsTagsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126281,7 +126252,7 @@ class Input_PersonsTagsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsPkColumnsInput) ||
+    if (other is! Input_PersonsTagsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126410,7 +126381,7 @@ class Input_PersonsTagsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsSetInput) ||
+    if (other is! Input_PersonsTagsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126571,7 +126542,7 @@ class Input_PersonsTagsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsStreamCursorInput) ||
+    if (other is! Input_PersonsTagsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126739,7 +126710,7 @@ class Input_PersonsTagsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsStreamCursorValueInput) ||
+    if (other is! Input_PersonsTagsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -126897,7 +126868,7 @@ class Input_PersonsTagsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsTagsUpdates) ||
+    if (other is! Input_PersonsTagsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -127153,7 +127124,7 @@ class Input_PersonsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_PersonsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_append = $_append;
@@ -127480,7 +127451,7 @@ class Input_PersonsVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsVarPopOrderBy) ||
+    if (other is! Input_PersonsVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -127628,7 +127599,7 @@ class Input_PersonsVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsVarSampOrderBy) ||
+    if (other is! Input_PersonsVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -127776,7 +127747,7 @@ class Input_PersonsVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_PersonsVarianceOrderBy) ||
+    if (other is! Input_PersonsVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -128004,7 +127975,7 @@ class Input_QualificationsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsBoolExp) ||
+    if (other is! Input_QualificationsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -128367,7 +128338,7 @@ class Input_QualificationsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsInsertInput) ||
+    if (other is! Input_QualificationsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -128539,7 +128510,7 @@ class Input_QualificationsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsObjRelInsertInput) ||
+    if (other is! Input_QualificationsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -128723,7 +128694,7 @@ class Input_QualificationsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsOnConflict) ||
+    if (other is! Input_QualificationsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -128925,7 +128896,7 @@ class Input_QualificationsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsOrderBy) ||
+    if (other is! Input_QualificationsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129079,7 +129050,7 @@ class Input_QualificationsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsPkColumnsInput) ||
+    if (other is! Input_QualificationsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129194,7 +129165,7 @@ class Input_QualificationsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsSetInput) ||
+    if (other is! Input_QualificationsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129340,7 +129311,7 @@ class Input_QualificationsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsStreamCursorInput) ||
+    if (other is! Input_QualificationsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129494,7 +129465,7 @@ class Input_QualificationsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsStreamCursorValueInput) ||
+    if (other is! Input_QualificationsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129637,7 +129608,7 @@ class Input_QualificationsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_QualificationsUpdates) ||
+    if (other is! Input_QualificationsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -129882,7 +129853,7 @@ class Input_SchoolsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_SchoolsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -130232,7 +130203,7 @@ class Input_SchoolsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsInsertInput) ||
+    if (other is! Input_SchoolsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -130402,7 +130373,7 @@ class Input_SchoolsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsObjRelInsertInput) ||
+    if (other is! Input_SchoolsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -130582,8 +130553,7 @@ class Input_SchoolsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_SchoolsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -130781,7 +130751,7 @@ class Input_SchoolsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_SchoolsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -130932,7 +130902,7 @@ class Input_SchoolsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsPkColumnsInput) ||
+    if (other is! Input_SchoolsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -131046,7 +131016,7 @@ class Input_SchoolsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_SchoolsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -131188,7 +131158,7 @@ class Input_SchoolsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsStreamCursorInput) ||
+    if (other is! Input_SchoolsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -131341,7 +131311,7 @@ class Input_SchoolsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsStreamCursorValueInput) ||
+    if (other is! Input_SchoolsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -131482,7 +131452,7 @@ class Input_SchoolsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SchoolsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_SchoolsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -132130,7 +132100,7 @@ class Input_ServicesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_ServicesBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -133197,8 +133167,7 @@ class Input_ServicesIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesIncInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ServicesIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -133614,7 +133583,7 @@ class Input_ServicesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesInsertInput) ||
+    if (other is! Input_ServicesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -134177,7 +134146,7 @@ class Input_ServicesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesObjRelInsertInput) ||
+    if (other is! Input_ServicesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -134358,7 +134327,7 @@ class Input_ServicesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesOnConflict) ||
+    if (other is! Input_ServicesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -134864,7 +134833,7 @@ class Input_ServicesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_ServicesOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminUsersAggregate = adminUsersAggregate;
@@ -135463,7 +135432,7 @@ class Input_ServicesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesPkColumnsInput) ||
+    if (other is! Input_ServicesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -135653,8 +135622,7 @@ class Input_ServicesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesSetInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_ServicesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -135889,7 +135857,7 @@ class Input_ServicesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesStreamCursorInput) ||
+    if (other is! Input_ServicesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -136119,7 +136087,7 @@ class Input_ServicesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesStreamCursorValueInput) ||
+    if (other is! Input_ServicesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -136368,7 +136336,7 @@ class Input_ServicesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ServicesUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_ServicesUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -136620,7 +136588,7 @@ class Input_ShammasLevelsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsBoolExp) ||
+    if (other is! Input_ShammasLevelsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -136922,7 +136890,7 @@ class Input_ShammasLevelsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsIncInput) ||
+    if (other is! Input_ShammasLevelsIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137052,7 +137020,7 @@ class Input_ShammasLevelsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsInsertInput) ||
+    if (other is! Input_ShammasLevelsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137211,7 +137179,7 @@ class Input_ShammasLevelsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsObjRelInsertInput) ||
+    if (other is! Input_ShammasLevelsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137395,7 +137363,7 @@ class Input_ShammasLevelsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsOnConflict) ||
+    if (other is! Input_ShammasLevelsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137595,7 +137563,7 @@ class Input_ShammasLevelsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsOrderBy) ||
+    if (other is! Input_ShammasLevelsOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137733,7 +137701,7 @@ class Input_ShammasLevelsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsPkColumnsInput) ||
+    if (other is! Input_ShammasLevelsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -137860,7 +137828,7 @@ class Input_ShammasLevelsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsSetInput) ||
+    if (other is! Input_ShammasLevelsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -138020,7 +137988,7 @@ class Input_ShammasLevelsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsStreamCursorInput) ||
+    if (other is! Input_ShammasLevelsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -138186,7 +138154,7 @@ class Input_ShammasLevelsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsStreamCursorValueInput) ||
+    if (other is! Input_ShammasLevelsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -138359,7 +138327,7 @@ class Input_ShammasLevelsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_ShammasLevelsUpdates) ||
+    if (other is! Input_ShammasLevelsUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -138634,7 +138602,7 @@ class Input_SmallintComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_SmallintComparisonExp) ||
+    if (other is! Input_SmallintComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -138894,7 +138862,7 @@ class Input_StoresAggregateBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresAggregateBoolExp) ||
+    if (other is! Input_StoresAggregateBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -139167,7 +139135,7 @@ class Input_StoresAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresAggregateOrderBy) ||
+    if (other is! Input_StoresAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -139563,7 +139531,7 @@ class Input_StoresArrRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresArrRelInsertInput) ||
+    if (other is! Input_StoresArrRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -139730,8 +139698,7 @@ class Input_StoresAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresAvgOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -140123,7 +140090,7 @@ class Input_StoresBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_StoresBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -140779,7 +140746,7 @@ class Input_StoresIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_StoresIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -141020,8 +140987,7 @@ class Input_StoresInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresInsertInput) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresInsertInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -141416,8 +141382,7 @@ class Input_StoresMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -141710,8 +141675,7 @@ class Input_StoresMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -141944,8 +141908,7 @@ class Input_StoresOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -142335,7 +142298,7 @@ class Input_StoresOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_StoresOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -142729,7 +142692,7 @@ class Input_StoresPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresPkColumnsInput) ||
+    if (other is! Input_StoresPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -142920,7 +142883,7 @@ class Input_StoresSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_StoresSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$address = address;
@@ -143139,7 +143102,7 @@ class Input_StoresStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresStddevOrderBy) ||
+    if (other is! Input_StoresStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143244,7 +143207,7 @@ class Input_StoresStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresStddevPopOrderBy) ||
+    if (other is! Input_StoresStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143350,7 +143313,7 @@ class Input_StoresStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresStddevSampOrderBy) ||
+    if (other is! Input_StoresStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143470,7 +143433,7 @@ class Input_StoresStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresStreamCursorInput) ||
+    if (other is! Input_StoresStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143700,7 +143663,7 @@ class Input_StoresStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresStreamCursorValueInput) ||
+    if (other is! Input_StoresStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143920,8 +143883,7 @@ class Input_StoresSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresSumOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StoresSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -144050,7 +144012,7 @@ class Input_StoresUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_StoresUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -144221,7 +144183,7 @@ class Input_StoresVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresVarPopOrderBy) ||
+    if (other is! Input_StoresVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -144326,7 +144288,7 @@ class Input_StoresVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresVarSampOrderBy) ||
+    if (other is! Input_StoresVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -144432,7 +144394,7 @@ class Input_StoresVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StoresVarianceOrderBy) ||
+    if (other is! Input_StoresVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -144696,7 +144658,7 @@ class Input_StreetsAggregateOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsAggregateOrderBy) ||
+    if (other is! Input_StreetsAggregateOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -145076,8 +145038,7 @@ class Input_StreetsAvgOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsAvgOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsAvgOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -145452,7 +145413,7 @@ class Input_StreetsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -146081,7 +146042,7 @@ class Input_StreetsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -146279,7 +146240,7 @@ class Input_StreetsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsInsertInput) ||
+    if (other is! Input_StreetsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -146586,8 +146547,7 @@ class Input_StreetsMaxOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsMaxOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsMaxOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -146820,8 +146780,7 @@ class Input_StreetsMinOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsMinOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -147024,8 +146983,7 @@ class Input_StreetsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsOnConflict) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -147400,7 +147358,7 @@ class Input_StreetsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$areasAggregate = areasAggregate;
@@ -147794,7 +147752,7 @@ class Input_StreetsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsPkColumnsInput) ||
+    if (other is! Input_StreetsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147958,7 +147916,7 @@ class Input_StreetsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;
@@ -148145,7 +148103,7 @@ class Input_StreetsStddevOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsStddevOrderBy) ||
+    if (other is! Input_StreetsStddevOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148251,7 +148209,7 @@ class Input_StreetsStddevPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsStddevPopOrderBy) ||
+    if (other is! Input_StreetsStddevPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148357,7 +148315,7 @@ class Input_StreetsStddevSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsStddevSampOrderBy) ||
+    if (other is! Input_StreetsStddevSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148477,7 +148435,7 @@ class Input_StreetsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsStreamCursorInput) ||
+    if (other is! Input_StreetsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148680,7 +148638,7 @@ class Input_StreetsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsStreamCursorValueInput) ||
+    if (other is! Input_StreetsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -148868,8 +148826,7 @@ class Input_StreetsSumOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsSumOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsSumOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -149000,7 +148957,7 @@ class Input_StreetsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_StreetsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -149171,7 +149128,7 @@ class Input_StreetsVarPopOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsVarPopOrderBy) ||
+    if (other is! Input_StreetsVarPopOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149277,7 +149234,7 @@ class Input_StreetsVarSampOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsVarSampOrderBy) ||
+    if (other is! Input_StreetsVarSampOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149383,7 +149340,7 @@ class Input_StreetsVarianceOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StreetsVarianceOrderBy) ||
+    if (other is! Input_StreetsVarianceOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149707,7 +149664,7 @@ class Input_StringComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StringComparisonExp) ||
+    if (other is! Input_StringComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -150297,8 +150254,7 @@ class Input_StudyYearsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsBoolExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StudyYearsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -150786,7 +150742,7 @@ class Input_StudyYearsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsIncInput) ||
+    if (other is! Input_StudyYearsIncInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -150956,7 +150912,7 @@ class Input_StudyYearsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsInsertInput) ||
+    if (other is! Input_StudyYearsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -151193,7 +151149,7 @@ class Input_StudyYearsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsObjRelInsertInput) ||
+    if (other is! Input_StudyYearsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -151375,7 +151331,7 @@ class Input_StudyYearsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsOnConflict) ||
+    if (other is! Input_StudyYearsOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -151630,8 +151586,7 @@ class Input_StudyYearsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsOrderBy) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StudyYearsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$attendanceDaysConstraintsAggregate =
@@ -151870,7 +151825,7 @@ class Input_StudyYearsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsPkColumnsInput) ||
+    if (other is! Input_StudyYearsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -151985,7 +151940,7 @@ class Input_StudyYearsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsSetInput) ||
+    if (other is! Input_StudyYearsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -152130,7 +152085,7 @@ class Input_StudyYearsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsStreamCursorInput) ||
+    if (other is! Input_StudyYearsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -152296,7 +152251,7 @@ class Input_StudyYearsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsStreamCursorValueInput) ||
+    if (other is! Input_StudyYearsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -152469,8 +152424,7 @@ class Input_StudyYearsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_StudyYearsUpdates) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StudyYearsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -152751,7 +152705,7 @@ class Input_TagsBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsBoolExp) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_and = $_and;
@@ -153095,7 +153049,7 @@ class Input_TagsIncInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsIncInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsIncInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -153239,7 +153193,7 @@ class Input_TagsInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsInsertInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsInsertInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -153421,7 +153375,7 @@ class Input_TagsObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsObjRelInsertInput) ||
+    if (other is! Input_TagsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -153601,7 +153555,7 @@ class Input_TagsOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsOnConflict) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsOnConflict || runtimeType != other.runtimeType) {
       return false;
     }
     final l$constraint = constraint;
@@ -153813,7 +153767,7 @@ class Input_TagsOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsOrderBy) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -153978,7 +153932,7 @@ class Input_TagsPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsPkColumnsInput) ||
+    if (other is! Input_TagsPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -154104,7 +154058,7 @@ class Input_TagsSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsSetInput) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsSetInput || runtimeType != other.runtimeType) {
       return false;
     }
     final l$color = color;
@@ -154260,7 +154214,7 @@ class Input_TagsStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsStreamCursorInput) ||
+    if (other is! Input_TagsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -154423,7 +154377,7 @@ class Input_TagsStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsStreamCursorValueInput) ||
+    if (other is! Input_TagsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -154591,7 +154545,7 @@ class Input_TagsUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TagsUpdates) || runtimeType != other.runtimeType) {
+    if (other is! Input_TagsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_inc = $_inc;
@@ -154860,7 +154814,7 @@ class Input_TimestampComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TimestampComparisonExp) ||
+    if (other is! Input_TimestampComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -155215,7 +155169,7 @@ class Input_TimestamptzComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_TimestamptzComparisonExp) ||
+    if (other is! Input_TimestamptzComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -155570,7 +155524,7 @@ class Input_UniversitiesBoolExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesBoolExp) ||
+    if (other is! Input_UniversitiesBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -155934,7 +155888,7 @@ class Input_UniversitiesInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesInsertInput) ||
+    if (other is! Input_UniversitiesInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156107,7 +156061,7 @@ class Input_UniversitiesObjRelInsertInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesObjRelInsertInput) ||
+    if (other is! Input_UniversitiesObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156291,7 +156245,7 @@ class Input_UniversitiesOnConflict {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesOnConflict) ||
+    if (other is! Input_UniversitiesOnConflict ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156492,7 +156446,7 @@ class Input_UniversitiesOrderBy {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesOrderBy) ||
+    if (other is! Input_UniversitiesOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156644,7 +156598,7 @@ class Input_UniversitiesPkColumnsInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesPkColumnsInput) ||
+    if (other is! Input_UniversitiesPkColumnsInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156759,7 +156713,7 @@ class Input_UniversitiesSetInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesSetInput) ||
+    if (other is! Input_UniversitiesSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -156905,7 +156859,7 @@ class Input_UniversitiesStreamCursorInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesStreamCursorInput) ||
+    if (other is! Input_UniversitiesStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157059,7 +157013,7 @@ class Input_UniversitiesStreamCursorValueInput {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesStreamCursorValueInput) ||
+    if (other is! Input_UniversitiesStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157202,7 +157156,7 @@ class Input_UniversitiesUpdates {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UniversitiesUpdates) ||
+    if (other is! Input_UniversitiesUpdates ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157449,8 +157403,7 @@ class Input_UuidComparisonExp {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_UuidComparisonExp) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_UuidComparisonExp || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -157749,7 +157702,7 @@ class Input_authUsersAdminOnAggregateBoolExpBool_and {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_authUsersAdminOnAggregateBoolExpBool_and) ||
+    if (other is! Input_authUsersAdminOnAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -157973,7 +157926,7 @@ class Input_authUsersAdminOnAggregateBoolExpBool_or {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_authUsersAdminOnAggregateBoolExpBool_or) ||
+    if (other is! Input_authUsersAdminOnAggregateBoolExpBool_or ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158200,7 +158153,7 @@ class Input_authUsersAdminOnAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_authUsersAdminOnAggregateBoolExpCount) ||
+    if (other is! Input_authUsersAdminOnAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158442,7 +158395,7 @@ class Input_authUsersPermissionsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_authUsersPermissionsAggregateBoolExpCount) ||
+    if (other is! Input_authUsersPermissionsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158682,7 +158635,7 @@ class Input_classesAggregateBoolExpBool_and {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_classesAggregateBoolExpBool_and) ||
+    if (other is! Input_classesAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -158902,7 +158855,7 @@ class Input_classesAggregateBoolExpBool_or {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_classesAggregateBoolExpBool_or) ||
+    if (other is! Input_classesAggregateBoolExpBool_or ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159123,7 +159076,7 @@ class Input_classesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_classesAggregateBoolExpCount) ||
+    if (other is! Input_classesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159360,7 +159313,7 @@ class Input_collegesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_collegesAggregateBoolExpCount) ||
+    if (other is! Input_collegesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159600,7 +159553,7 @@ class Input_familiesFamiliesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_familiesFamiliesAggregateBoolExpCount) ||
+    if (other is! Input_familiesFamiliesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -159839,7 +159792,7 @@ class Input_fathersAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_fathersAggregateBoolExpCount) ||
+    if (other is! Input_fathersAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160074,7 +160027,7 @@ class Input_groupsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_groupsAggregateBoolExpCount) ||
+    if (other is! Input_groupsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160313,8 +160266,8 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and) ||
+    if (other
+            is! Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160553,8 +160506,8 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or) ||
+    if (other
+            is! Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -160797,8 +160750,7 @@ class Input_historyAttendanceDaysConstraintsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Input_historyAttendanceDaysConstraintsAggregateBoolExpCount) ||
+    if (other is! Input_historyAttendanceDaysConstraintsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -161052,7 +161004,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyAttendanceHistoryAggregateBoolExpBool_and) ||
+    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -161283,7 +161235,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyAttendanceHistoryAggregateBoolExpBool_or) ||
+    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_or ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -161517,7 +161469,7 @@ class Input_historyAttendanceHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyAttendanceHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyAttendanceHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -161767,7 +161719,7 @@ class Input_historyCallHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyCallHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyCallHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -162012,7 +161964,7 @@ class Input_historyConfessionHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyConfessionHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyConfessionHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -162262,7 +162214,7 @@ class Input_historyEditHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyEditHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyEditHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -162506,7 +162458,7 @@ class Input_historyKodasHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyKodasHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyKodasHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -162750,7 +162702,7 @@ class Input_historyVisitHistoryAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_historyVisitHistoryAggregateBoolExpCount) ||
+    if (other is! Input_historyVisitHistoryAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -162990,7 +162942,7 @@ class Input_personsAggregateBoolExpBool_and {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsAggregateBoolExpBool_and) ||
+    if (other is! Input_personsAggregateBoolExpBool_and ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -163210,7 +163162,7 @@ class Input_personsAggregateBoolExpBool_or {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsAggregateBoolExpBool_or) ||
+    if (other is! Input_personsAggregateBoolExpBool_or ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -163431,7 +163383,7 @@ class Input_personsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsAggregateBoolExpCount) ||
+    if (other is! Input_personsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -163670,7 +163622,7 @@ class Input_personsGroupsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsGroupsAggregateBoolExpCount) ||
+    if (other is! Input_personsGroupsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -163911,7 +163863,7 @@ class Input_personsHobbiesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsHobbiesAggregateBoolExpCount) ||
+    if (other is! Input_personsHobbiesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -164152,7 +164104,7 @@ class Input_personsServicesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsServicesAggregateBoolExpCount) ||
+    if (other is! Input_personsServicesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -164393,7 +164345,7 @@ class Input_personsTagsAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_personsTagsAggregateBoolExpCount) ||
+    if (other is! Input_personsTagsAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -164606,7 +164558,7 @@ class Input_st_d_within_geography_input {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_st_d_within_geography_input) ||
+    if (other is! Input_st_d_within_geography_input ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -164750,8 +164702,7 @@ class Input_st_d_within_input {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_st_d_within_input) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_st_d_within_input || runtimeType != other.runtimeType) {
       return false;
     }
     final l$distance = distance;
@@ -164916,7 +164867,7 @@ class Input_storesAggregateBoolExpCount {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Input_storesAggregateBoolExpCount) ||
+    if (other is! Input_storesAggregateBoolExpCount ||
         runtimeType != other.runtimeType) {
       return false;
     }

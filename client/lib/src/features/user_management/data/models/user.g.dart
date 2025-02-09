@@ -78,9 +78,6 @@ _$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
           ? const PermissionsSet.empty()
           : permissionsSetFromJson(json['permissions']),
       authId: json['authId'] as String?,
-      isMultiFactorEnrolled: json['isMultiFactorEnrolled'] as bool?,
-      idToken: json['idToken'] as String?,
-      emailVerified: json['emailVerified'] as bool?,
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -112,10 +109,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
       'permissions': permissionsSetToJson(instance.permissions),
       'authId': instance.authId,
-      if (instance.isMultiFactorEnrolled case final value?)
-        'isMultiFactorEnrolled': value,
-      if (instance.idToken case final value?) 'idToken': value,
-      if (instance.emailVerified case final value?) 'emailVerified': value,
       'lastEdit': instance.lastEdit?.toJson(),
       'person': instance.person?.toJson(),
       'servicesHistory':

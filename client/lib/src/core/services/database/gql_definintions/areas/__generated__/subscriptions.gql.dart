@@ -80,7 +80,7 @@ class Variables_Subscription_watchAllAreas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllAreas) ||
+    if (other is! Variables_Subscription_watchAllAreas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllAreas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllAreas) ||
+    if (other is! Subscription_watchAllAreas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -521,7 +521,7 @@ class Subscription_watchAllAreas_areas
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllAreas_areas) ||
+    if (other is! Subscription_watchAllAreas_areas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -690,7 +690,7 @@ class Variables_Subscription_watchArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchArea) ||
+    if (other is! Variables_Subscription_watchArea ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -782,8 +782,7 @@ class Subscription_watchArea {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchArea) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Subscription_watchArea || runtimeType != other.runtimeType) {
       return false;
     }
     final l$areasByPk = areasByPk;
@@ -1085,7 +1084,7 @@ class Subscription_watchArea_areasByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchArea_areasByPk) ||
+    if (other is! Subscription_watchArea_areasByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1323,7 +1322,7 @@ class Subscription_watchArea_areasByPk_adminUsers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchArea_areasByPk_adminUsers) ||
+    if (other is! Subscription_watchArea_areasByPk_adminUsers ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -1,0 +1,29 @@
+{
+"language": "Dart, GraphQL, TypeScript",
+"guide": [
+{
+"context": "GraphQL Code Generation",
+      "rules": "Use graphql_codegen for generating GraphQL queries and the database service module for backend access. Ensure the generated code is kept up to date with schema changes."
+    },
+    {
+      "context": "Backend Transition",
+      "rules": "During migration from Hasura to Ash Phoenix, abstract the database service module to accommodate both systems, minimizing interruptions."
+    },
+    {
+      "context": "UI/UX Improvement",
+      "rules": "Always try to refactor UI components to be more modular and reusable. Ensure a mobile-first responsive design approach."
+    },
+    {
+      "context": "Auth and Database Service Refactoring",
+      "rules": "Refactor services to improve code readability and maintainability. Use SOLID principles and design patterns and ensure service patterns can be extended easily."
+    },
+    {
+      "context": "Error Handling and Validation",
+      "rules": "Implement comprehensive error handling using Dart exceptions and ensure user-friendly messages can be localized in the future using error codes."
+    },
+    {
+      "context": "Testing and Validation",
+      "rules": "Use standard widget testing for Flutter and run integration tests for each API module to ensure reliability across the app."
+    }
+  ]
+}

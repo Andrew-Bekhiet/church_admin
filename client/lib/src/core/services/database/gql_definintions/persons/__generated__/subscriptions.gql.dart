@@ -88,7 +88,7 @@ class Variables_Subscription_watchAllPersons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllPersons) ||
+    if (other is! Variables_Subscription_watchAllPersons ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -251,7 +251,7 @@ class Subscription_watchAllPersons {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllPersons) ||
+    if (other is! Subscription_watchAllPersons ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -504,7 +504,7 @@ class Variables_Subscription_watchPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchPerson) ||
+    if (other is! Variables_Subscription_watchPerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -651,7 +651,7 @@ class Subscription_watchPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson) ||
+    if (other is! Subscription_watchPerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2385,7 +2385,7 @@ class Subscription_watchPerson_personsByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk) ||
+    if (other is! Subscription_watchPerson_personsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3417,7 +3417,7 @@ class Subscription_watchPerson_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_classes) ||
+    if (other is! Subscription_watchPerson_personsByPk_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3619,8 +3619,8 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3789,8 +3789,8 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3955,8 +3955,8 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4107,7 +4107,7 @@ class Subscription_watchPerson_personsByPk_church {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_church) ||
+    if (other is! Subscription_watchPerson_personsByPk_church ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4252,7 +4252,7 @@ class Subscription_watchPerson_personsByPk_college {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_college) ||
+    if (other is! Subscription_watchPerson_personsByPk_college ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4409,7 +4409,7 @@ class Subscription_watchPerson_personsByPk_father {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_father) ||
+    if (other is! Subscription_watchPerson_personsByPk_father ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4580,7 +4580,7 @@ class Subscription_watchPerson_personsByPk_father_church {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_father_church) ||
+    if (other is! Subscription_watchPerson_personsByPk_father_church ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4723,7 +4723,7 @@ class Subscription_watchPerson_personsByPk_groups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_groups) ||
+    if (other is! Subscription_watchPerson_personsByPk_groups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4912,7 +4912,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_groups_group) ||
+    if (other is! Subscription_watchPerson_personsByPk_groups_group ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5120,8 +5120,8 @@ class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5290,8 +5290,8 @@ class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5456,8 +5456,8 @@ class Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_groups_group_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5608,7 +5608,7 @@ class Subscription_watchPerson_personsByPk_job {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_job) ||
+    if (other is! Subscription_watchPerson_personsByPk_job ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5753,7 +5753,7 @@ class Subscription_watchPerson_personsByPk_personType {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_personType) ||
+    if (other is! Subscription_watchPerson_personsByPk_personType ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5899,7 +5899,7 @@ class Subscription_watchPerson_personsByPk_qualification {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_qualification) ||
+    if (other is! Subscription_watchPerson_personsByPk_qualification ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6050,7 +6050,7 @@ class Subscription_watchPerson_personsByPk_school {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_school) ||
+    if (other is! Subscription_watchPerson_personsByPk_school ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6187,7 +6187,7 @@ class Subscription_watchPerson_personsByPk_services {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_services) ||
+    if (other is! Subscription_watchPerson_personsByPk_services ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6408,7 +6408,7 @@ class Subscription_watchPerson_personsByPk_services_service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_services_service) ||
+    if (other is! Subscription_watchPerson_personsByPk_services_service ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6688,8 +6688,8 @@ class Subscription_watchPerson_personsByPk_services_service_studyYearFrom
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_services_service_studyYearFrom) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_services_service_studyYearFrom ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6853,8 +6853,8 @@ class Subscription_watchPerson_personsByPk_services_service_studyYearTo
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_services_service_studyYearTo) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_services_service_studyYearTo ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7010,8 +7010,8 @@ class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7180,8 +7180,8 @@ class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7346,8 +7346,8 @@ class Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Subscription_watchPerson_personsByPk_services_service_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7507,7 +7507,7 @@ class Subscription_watchPerson_personsByPk_shammasLevel {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_shammasLevel) ||
+    if (other is! Subscription_watchPerson_personsByPk_shammasLevel ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7678,7 +7678,7 @@ class Subscription_watchPerson_personsByPk_state {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_state) ||
+    if (other is! Subscription_watchPerson_personsByPk_state ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7834,7 +7834,7 @@ class Subscription_watchPerson_personsByPk_studyYear {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_studyYear) ||
+    if (other is! Subscription_watchPerson_personsByPk_studyYear ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7974,7 +7974,7 @@ class Subscription_watchPerson_personsByPk_hobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_hobbies) ||
+    if (other is! Subscription_watchPerson_personsByPk_hobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8129,7 +8129,7 @@ class Subscription_watchPerson_personsByPk_hobbies_hobby {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_hobbies_hobby) ||
+    if (other is! Subscription_watchPerson_personsByPk_hobbies_hobby ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8281,7 +8281,7 @@ class Subscription_watchPerson_personsByPk_tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_tags) ||
+    if (other is! Subscription_watchPerson_personsByPk_tags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8436,7 +8436,7 @@ class Subscription_watchPerson_personsByPk_tags_tag {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_tags_tag) ||
+    if (other is! Subscription_watchPerson_personsByPk_tags_tag ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8600,7 +8600,7 @@ class Subscription_watchPerson_personsByPk_user {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchPerson_personsByPk_user) ||
+    if (other is! Subscription_watchPerson_personsByPk_user ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8782,7 +8782,7 @@ class Variables_Subscription_personAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_personAttendance) ||
+    if (other is! Variables_Subscription_personAttendance ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8948,7 +8948,7 @@ class Subscription_personAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_personAttendance) ||
+    if (other is! Subscription_personAttendance ||
         runtimeType != other.runtimeType) {
       return false;
     }

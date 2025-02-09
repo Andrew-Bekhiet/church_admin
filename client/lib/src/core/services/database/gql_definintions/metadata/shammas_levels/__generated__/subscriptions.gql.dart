@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllShammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllShammasLevels) ||
+    if (other is! Variables_Subscription_watchAllShammasLevels ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -246,7 +246,7 @@ class Subscription_watchAllShammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllShammasLevels) ||
+    if (other is! Subscription_watchAllShammasLevels ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -511,7 +511,7 @@ class Subscription_watchAllShammasLevels_shammasLevels {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllShammasLevels_shammasLevels) ||
+    if (other is! Subscription_watchAllShammasLevels_shammasLevels ||
         runtimeType != other.runtimeType) {
       return false;
     }

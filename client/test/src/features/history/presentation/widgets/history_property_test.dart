@@ -19,10 +19,10 @@ import 'history_property_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-Future<void> main() async {
-  await initializeDateFormatting();
+void main() {
+  initializeDateFormatting();
   setLocaleMessages('ar', ArMessages());
-  await loadAppFonts();
+  loadAppFonts();
 
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);

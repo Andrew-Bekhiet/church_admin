@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllFathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllFathers) ||
+    if (other is! Variables_Subscription_watchAllFathers ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllFathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllFathers) ||
+    if (other is! Subscription_watchAllFathers ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -485,7 +485,7 @@ class Subscription_watchAllFathers_fathers {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllFathers_fathers) ||
+    if (other is! Subscription_watchAllFathers_fathers ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -40,7 +40,7 @@ class Variables_Mutation_deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deletePerson) ||
+    if (other is! Variables_Mutation_deletePerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deletePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deletePerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deletePerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deletePersonsByPk = deletePersonsByPk;
@@ -719,7 +719,7 @@ class Variables_Mutation_updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updatePerson) ||
+    if (other is! Variables_Mutation_updatePerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1556,7 +1556,7 @@ class Mutation_updatePerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updatePerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updatePersonsByPk = updatePersonsByPk;
@@ -3092,7 +3092,7 @@ class Mutation_updatePerson_insertPersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsServices) ||
+    if (other is! Mutation_updatePerson_insertPersonsServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3219,7 +3219,7 @@ class Mutation_updatePerson_insertPersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsGroups) ||
+    if (other is! Mutation_updatePerson_insertPersonsGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3346,7 +3346,7 @@ class Mutation_updatePerson_insertPersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsHobbies) ||
+    if (other is! Mutation_updatePerson_insertPersonsHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3473,7 +3473,7 @@ class Mutation_updatePerson_insertPersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertPersonsTags) ||
+    if (other is! Mutation_updatePerson_insertPersonsTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3600,7 +3600,7 @@ class Mutation_updatePerson_deletePersonsTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsTags) ||
+    if (other is! Mutation_updatePerson_deletePersonsTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3727,7 +3727,7 @@ class Mutation_updatePerson_deletePersonsHobbies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsHobbies) ||
+    if (other is! Mutation_updatePerson_deletePersonsHobbies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3854,7 +3854,7 @@ class Mutation_updatePerson_deletePersonsGroups {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsGroups) ||
+    if (other is! Mutation_updatePerson_deletePersonsGroups ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3981,7 +3981,7 @@ class Mutation_updatePerson_deletePersonsServices {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_deletePersonsServices) ||
+    if (other is! Mutation_updatePerson_deletePersonsServices ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4109,7 +4109,7 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryConfessionHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4269,8 +4269,8 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePerson_insertHistoryConfessionHistoryOne_person) ||
+    if (other
+            is! Mutation_updatePerson_insertHistoryConfessionHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4422,7 +4422,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4579,7 +4579,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryKodasHistoryOne_person) ||
+    if (other is! Mutation_updatePerson_insertHistoryKodasHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4728,7 +4728,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryCallHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4885,7 +4885,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryCallHistoryOne_person) ||
+    if (other is! Mutation_updatePerson_insertHistoryCallHistoryOne_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5033,7 +5033,7 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePerson_insertHistoryVisitHistoryOne) ||
+    if (other is! Mutation_updatePerson_insertHistoryVisitHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5162,7 +5162,7 @@ class Variables_Mutation_insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPerson) ||
+    if (other is! Variables_Mutation_insertPerson ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5269,7 +5269,7 @@ class Mutation_insertPerson {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPerson) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertPerson || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertPersonsOne = insertPersonsOne;
@@ -5472,7 +5472,7 @@ class Variables_Mutation_updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updatePersonSpiritData) ||
+    if (other is! Variables_Mutation_updatePersonSpiritData ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5568,17 +5568,29 @@ class _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData<TRes>
 
 class Mutation_updatePersonSpiritData {
   Mutation_updatePersonSpiritData({
+    this.$_c,
+    this.$_k,
     this.insertHistoryConfessionHistoryOne,
     this.insertHistoryKodasHistoryOne,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updatePersonSpiritData.fromJson(Map<String, dynamic> json) {
+    final l$$_c = json['_c'];
+    final l$$_k = json['_k'];
     final l$insertHistoryConfessionHistoryOne =
         json['insertHistoryConfessionHistoryOne'];
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData(
+      $_c: l$$_c == null
+          ? null
+          : Mutation_updatePersonSpiritData__c.fromJson(
+              (l$$_c as Map<String, dynamic>)),
+      $_k: l$$_k == null
+          ? null
+          : Mutation_updatePersonSpiritData__k.fromJson(
+              (l$$_k as Map<String, dynamic>)),
       insertHistoryConfessionHistoryOne: l$insertHistoryConfessionHistoryOne ==
               null
           ? null
@@ -5594,6 +5606,10 @@ class Mutation_updatePersonSpiritData {
     );
   }
 
+  final Mutation_updatePersonSpiritData__c? $_c;
+
+  final Mutation_updatePersonSpiritData__k? $_k;
+
   final Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
       insertHistoryConfessionHistoryOne;
 
@@ -5604,6 +5620,10 @@ class Mutation_updatePersonSpiritData {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$$_c = $_c;
+    _resultData['_c'] = l$$_c?.toJson();
+    final l$$_k = $_k;
+    _resultData['_k'] = l$$_k?.toJson();
     final l$insertHistoryConfessionHistoryOne =
         insertHistoryConfessionHistoryOne;
     _resultData['insertHistoryConfessionHistoryOne'] =
@@ -5618,11 +5638,15 @@ class Mutation_updatePersonSpiritData {
 
   @override
   int get hashCode {
+    final l$$_c = $_c;
+    final l$$_k = $_k;
     final l$insertHistoryConfessionHistoryOne =
         insertHistoryConfessionHistoryOne;
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      l$$_c,
+      l$$_k,
       l$insertHistoryConfessionHistoryOne,
       l$insertHistoryKodasHistoryOne,
       l$$__typename,
@@ -5634,8 +5658,18 @@ class Mutation_updatePersonSpiritData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updatePersonSpiritData) ||
+    if (other is! Mutation_updatePersonSpiritData ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_c = $_c;
+    final lOther$$_c = other.$_c;
+    if (l$$_c != lOther$$_c) {
+      return false;
+    }
+    final l$$_k = $_k;
+    final lOther$$_k = other.$_k;
+    if (l$$_k != lOther$$_k) {
       return false;
     }
     final l$insertHistoryConfessionHistoryOne =
@@ -5680,12 +5714,16 @@ abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
       _CopyWithStubImpl_Mutation_updatePersonSpiritData;
 
   TRes call({
+    Mutation_updatePersonSpiritData__c? $_c,
+    Mutation_updatePersonSpiritData__k? $_k,
     Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
         insertHistoryKodasHistoryOne,
     String? $__typename,
   });
+  CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c;
+  CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k;
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne;
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
@@ -5706,11 +5744,19 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? $_c = _undefined,
+    Object? $_k = _undefined,
     Object? insertHistoryConfessionHistoryOne = _undefined,
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updatePersonSpiritData(
+        $_c: $_c == _undefined
+            ? _instance.$_c
+            : ($_c as Mutation_updatePersonSpiritData__c?),
+        $_k: $_k == _undefined
+            ? _instance.$_k
+            : ($_k as Mutation_updatePersonSpiritData__k?),
         insertHistoryConfessionHistoryOne: insertHistoryConfessionHistoryOne ==
                 _undefined
             ? _instance.insertHistoryConfessionHistoryOne
@@ -5724,6 +5770,22 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
             ? _instance.$__typename
             : ($__typename as String),
       ));
+
+  CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c {
+    final local$$_c = _instance.$_c;
+    return local$$_c == null
+        ? CopyWith_Mutation_updatePersonSpiritData__c.stub(_then(_instance))
+        : CopyWith_Mutation_updatePersonSpiritData__c(
+            local$$_c, (e) => call($_c: e));
+  }
+
+  CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k {
+    final local$$_k = _instance.$_k;
+    return local$$_k == null
+        ? CopyWith_Mutation_updatePersonSpiritData__k.stub(_then(_instance))
+        : CopyWith_Mutation_updatePersonSpiritData__k(
+            local$$_k, (e) => call($_k: e));
+  }
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
       TRes> get insertHistoryConfessionHistoryOne {
@@ -5757,6 +5819,8 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
   TRes _res;
 
   call({
+    Mutation_updatePersonSpiritData__c? $_c,
+    Mutation_updatePersonSpiritData__k? $_k,
     Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
         insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
@@ -5764,6 +5828,12 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
     String? $__typename,
   }) =>
       _res;
+
+  CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c =>
+      CopyWith_Mutation_updatePersonSpiritData__c.stub(_res);
+
+  CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k =>
+      CopyWith_Mutation_updatePersonSpiritData__k.stub(_res);
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
           TRes>
@@ -5813,6 +5883,98 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
+        name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
+        alias: NameNode(value: '_c'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'day'),
+                value: VariableNode(name: NameNode(value: 'lastConfession')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'onConflict'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'constraint'),
+                value:
+                    EnumValueNode(name: NameNode(value: 'attendanceDaysPkey')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'updateColumns'),
+                value: EnumValueNode(name: NameNode(value: 'day')),
+              ),
+            ]),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'day'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
+        alias: NameNode(value: '_k'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'day'),
+                value: VariableNode(name: NameNode(value: 'lastKodas')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'onConflict'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'constraint'),
+                value:
+                    EnumValueNode(name: NameNode(value: 'attendanceDaysPkey')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'updateColumns'),
+                value: EnumValueNode(name: NameNode(value: 'day')),
+              ),
+            ]),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'day'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
         name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
         alias: null,
         arguments: [
@@ -5824,33 +5986,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                 value: VariableNode(name: NameNode(value: 'personId')),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'data'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: VariableNode(
-                            name: NameNode(value: 'lastConfession')),
-                      )
-                    ]),
-                  ),
-                  ObjectFieldNode(
-                    name: NameNode(value: 'onConflict'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'updateColumns'),
-                        value: EnumValueNode(name: NameNode(value: 'day')),
-                      ),
-                    ]),
-                  ),
-                ]),
+                name: NameNode(value: 'dayId'),
+                value: VariableNode(name: NameNode(value: 'lastConfession')),
               ),
             ]),
           ),
@@ -5907,32 +6044,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
                 value: VariableNode(name: NameNode(value: 'personId')),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'data'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: VariableNode(name: NameNode(value: 'lastKodas')),
-                      )
-                    ]),
-                  ),
-                  ObjectFieldNode(
-                    name: NameNode(value: 'onConflict'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'updateColumns'),
-                        value: EnumValueNode(name: NameNode(value: 'day')),
-                      ),
-                    ]),
-                  ),
-                ]),
+                name: NameNode(value: 'dayId'),
+                value: VariableNode(name: NameNode(value: 'lastKodas')),
               ),
             ]),
           ),
@@ -5990,6 +6103,260 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
+class Mutation_updatePersonSpiritData__c {
+  Mutation_updatePersonSpiritData__c({
+    required this.day,
+    this.$__typename = 'HistoryAttendanceDays',
+  });
+
+  factory Mutation_updatePersonSpiritData__c.fromJson(
+      Map<String, dynamic> json) {
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updatePersonSpiritData__c(
+      day: dateFromString(l$day),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$day = day;
+    _resultData['day'] = dateToString(l$day);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updatePersonSpiritData__c ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updatePersonSpiritData__c
+    on Mutation_updatePersonSpiritData__c {
+  CopyWith_Mutation_updatePersonSpiritData__c<
+          Mutation_updatePersonSpiritData__c>
+      get copyWith => CopyWith_Mutation_updatePersonSpiritData__c(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
+  factory CopyWith_Mutation_updatePersonSpiritData__c(
+    Mutation_updatePersonSpiritData__c instance,
+    TRes Function(Mutation_updatePersonSpiritData__c) then,
+  ) = _CopyWithImpl_Mutation_updatePersonSpiritData__c;
+
+  factory CopyWith_Mutation_updatePersonSpiritData__c.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePersonSpiritData__c;
+
+  TRes call({
+    DateTime? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updatePersonSpiritData__c<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
+  _CopyWithImpl_Mutation_updatePersonSpiritData__c(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updatePersonSpiritData__c _instance;
+
+  final TRes Function(Mutation_updatePersonSpiritData__c) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updatePersonSpiritData__c(
+        day: day == _undefined || day == null
+            ? _instance.day
+            : (day as DateTime),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updatePersonSpiritData__c<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
+  _CopyWithStubImpl_Mutation_updatePersonSpiritData__c(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Mutation_updatePersonSpiritData__k {
+  Mutation_updatePersonSpiritData__k({
+    required this.day,
+    this.$__typename = 'HistoryAttendanceDays',
+  });
+
+  factory Mutation_updatePersonSpiritData__k.fromJson(
+      Map<String, dynamic> json) {
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updatePersonSpiritData__k(
+      day: dateFromString(l$day),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$day = day;
+    _resultData['day'] = dateToString(l$day);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$day,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updatePersonSpiritData__k ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updatePersonSpiritData__k
+    on Mutation_updatePersonSpiritData__k {
+  CopyWith_Mutation_updatePersonSpiritData__k<
+          Mutation_updatePersonSpiritData__k>
+      get copyWith => CopyWith_Mutation_updatePersonSpiritData__k(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
+  factory CopyWith_Mutation_updatePersonSpiritData__k(
+    Mutation_updatePersonSpiritData__k instance,
+    TRes Function(Mutation_updatePersonSpiritData__k) then,
+  ) = _CopyWithImpl_Mutation_updatePersonSpiritData__k;
+
+  factory CopyWith_Mutation_updatePersonSpiritData__k.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updatePersonSpiritData__k;
+
+  TRes call({
+    DateTime? day,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updatePersonSpiritData__k<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
+  _CopyWithImpl_Mutation_updatePersonSpiritData__k(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updatePersonSpiritData__k _instance;
+
+  final TRes Function(Mutation_updatePersonSpiritData__k) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updatePersonSpiritData__k(
+        day: day == _undefined || day == null
+            ? _instance.day
+            : (day as DateTime),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updatePersonSpiritData__k<TRes>
+    implements CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
+  _CopyWithStubImpl_Mutation_updatePersonSpiritData__k(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? day,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne({
     required this.person,
@@ -6034,8 +6401,8 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne) ||
+    if (other
+            is! Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6185,8 +6552,8 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne) ||
+    if (other
+            is! Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }

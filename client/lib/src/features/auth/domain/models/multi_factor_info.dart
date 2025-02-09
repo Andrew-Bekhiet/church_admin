@@ -1,18 +1,22 @@
 import 'package:equatable/equatable.dart';
 
-class MultiFactorInfo extends Equatable {
-  final String uid;
-  final String? displayName;
-  final String factorId;
-  final int enrollmentTimestamp;
+enum MultiFactorType { phone }
 
+class MultiFactorInfo extends Equatable {
   const MultiFactorInfo({
-    required this.uid,
+    required this.id,
+    required this.type,
     required this.displayName,
-    required this.factorId,
-    required this.enrollmentTimestamp,
+    required this.enrolledAt,
+    this.phoneNumber,
   });
 
+  final String id;
+  final MultiFactorType type;
+  final String? displayName;
+  final DateTime enrolledAt;
+  final String? phoneNumber;
+
   @override
-  List<Object?> get props => [uid, displayName, factorId, enrollmentTimestamp];
+  List<Object?> get props => [id, type, displayName, enrolledAt, phoneNumber];
 }

@@ -70,7 +70,7 @@ class _EditAreaState extends State<EditArea> {
                 newArea = newArea.copyWith(
                   lastVisit: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }

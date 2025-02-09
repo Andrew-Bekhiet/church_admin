@@ -14,20 +14,38 @@ class HomeScreenWebRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final authService = AuthService.I;
+    final AuthState authState = AuthBloc.I.state.unwrapped;
 
-    if (!authService.isSignedIn) {
-      return const LoginRoute().location;
-    } else if (!(authService.currentUser!.emailVerified ?? false)) {
-      return const EmailVerificationRoute().location;
-    } else if (!(authService.currentUser!.isMultiFactorEnrolled ?? false)) {
-      return const MultiFactorLoginRoute().location;
-    } else if (!authService.currentUser!.permissions.approved) {
-      return const UnapprovedUserRoute().location;
-    } else if (!authService.currentUser!.person!.spiritDataUpToDate()) {
-      return const UpdateUserSpiritDataRoute(forced: true).location;
+    switch (authState) {
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      case AuthAuthenticated(authUser: AuthUser(emailVerified: false)):
+        return const EmailVerificationRoute().location;
+
+      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
+        return const MultiFactorLoginRoute().location;
+
+      case AuthAuthenticated(userData: null):
+        return const AuthLoadingRoute().location;
+
+      case AuthAuthenticated(
+          userData: User(permissions: PermissionsSet(approved: false))
+        ):
+        return const UnapprovedUserRoute().location;
+
+      case AuthAuthenticated(userData: User(person: final person))
+          when !(person?.spiritDataUpToDate() ?? false):
+        return Uri(
+          path: const UpdateUserSpiritDataRoute().location,
+          queryParameters: {'forced': 'true'},
+        ).toString();
+
+      case AuthMultiFactorChallengeInProgress():
+        return const MultiFactorLoginRoute().location;
+
+      case _:
+        return null;
     }
-
-    return null;
   }
 }

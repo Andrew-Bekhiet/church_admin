@@ -15,8 +15,9 @@ import 'home_search_delegate_test.mocks.dart';
   MockSpec<ImageUrlCacheService>(),
   MockSpec<UserSettingsService>(),
 ])
-Future<void> main() async {
-  await loadAppFonts();
+void main() {
+  loadAppFonts();
+
   setUp(
     () => initGlobalProviderContainer([
       goRouterRefreshStreamProvider

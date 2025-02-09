@@ -77,7 +77,7 @@ class Variables_Subscription_watchAllTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllTags) ||
+    if (other is! Variables_Subscription_watchAllTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -240,7 +240,7 @@ class Subscription_watchAllTags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllTags) ||
+    if (other is! Subscription_watchAllTags ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -490,7 +490,7 @@ class Subscription_watchAllTags_tags {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllTags_tags) ||
+    if (other is! Subscription_watchAllTags_tags ||
         runtimeType != other.runtimeType) {
       return false;
     }

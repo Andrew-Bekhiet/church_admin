@@ -42,7 +42,7 @@ class Variables_Query_getFamilyRelatedFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_getFamilyRelatedFamilies) ||
+    if (other is! Variables_Query_getFamilyRelatedFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149,7 +149,7 @@ class Query_getFamilyRelatedFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getFamilyRelatedFamilies) ||
+    if (other is! Query_getFamilyRelatedFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -505,7 +505,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getFamilyRelatedFamilies_familiesByPk) ||
+    if (other is! Query_getFamilyRelatedFamilies_familiesByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -751,7 +751,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk_children {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getFamilyRelatedFamilies_familiesByPk_children) ||
+    if (other is! Query_getFamilyRelatedFamilies_familiesByPk_children ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -895,7 +895,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk_parents {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getFamilyRelatedFamilies_familiesByPk_parents) ||
+    if (other is! Query_getFamilyRelatedFamilies_familiesByPk_parents ||
         runtimeType != other.runtimeType) {
       return false;
     }

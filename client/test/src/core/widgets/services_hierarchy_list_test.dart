@@ -20,8 +20,8 @@ import 'services_hierarchy_list_test.mocks.dart';
     MockSpec<UserSettingsService>(),
   ],
 )
-Future<void> main() async {
-  await loadAppFonts();
+void main() {
+  loadAppFonts();
 
   setUp(_setUp);
 

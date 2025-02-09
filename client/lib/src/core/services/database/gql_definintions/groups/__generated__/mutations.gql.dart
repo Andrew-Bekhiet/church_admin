@@ -40,7 +40,7 @@ class Variables_Mutation_deleteGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteGroup) ||
+    if (other is! Variables_Mutation_deleteGroup ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deleteGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteGroup) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteGroup || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteGroupsByPk = deleteGroupsByPk;
@@ -333,7 +333,7 @@ class Variables_Mutation_insertGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertGroup) ||
+    if (other is! Variables_Mutation_insertGroup ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -440,7 +440,7 @@ class Mutation_insertGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertGroup) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertGroup || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertGroupsOne = insertGroupsOne;
@@ -635,7 +635,7 @@ class Variables_Mutation_updateGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateGroup) ||
+    if (other is! Variables_Mutation_updateGroup ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -763,7 +763,7 @@ class Mutation_updateGroup {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateGroup) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateGroup || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateGroupsByPk = updateGroupsByPk;
