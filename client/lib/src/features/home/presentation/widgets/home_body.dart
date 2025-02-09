@@ -21,7 +21,7 @@ class HomeBody extends StatelessWidget {
         return TabBarView(
           controller: tabController,
           children: [
-            HomeModeSelector(onModeChanged: homeController.onModeChanged),
+            HomeModeSelector(homeController: homeController),
             if (modeSnapshot.data == HomeMode.sundaySchool)
               LazyTabPage(
                 tabController: tabController,
