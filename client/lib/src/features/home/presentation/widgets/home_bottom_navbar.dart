@@ -27,6 +27,7 @@ class HomeBottomNavBar extends StatelessWidget {
         final theme = Theme.of(context);
 
         final items = [
+          (label: 'الرئيسية', icon: Symbols.home),
           if (isSundaySchool)
             (
               label: 'الخدمات',

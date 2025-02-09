@@ -9,12 +9,14 @@ class HomeModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final size = MediaQuery.sizeOf(context);
+
     return Scaffold(
       body: ListView(
         children: [
           Image.asset(
             'assets/images/High way to God 1.png',
-            height: MediaQuery.of(context).size.height * 0.24,
+            height: size.height * 0.24,
             fit: BoxFit.fill,
           ),
           Container(

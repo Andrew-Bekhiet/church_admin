@@ -7,15 +7,17 @@ import 'package:rxdart/rxdart.dart';
 class HomeController {
   final TickerProvider vsync;
 
-  HomeController(this.vsync);
+  HomeController(this.vsync) {
+    onModeChanged(HomeMode.sundaySchool);
+  }
 
   final BehaviorSubject<ViewableObjectListType> servicesListTypeSubject =
       BehaviorSubject.seeded(ViewableObjectListType.grid);
 
-  final BehaviorSubject<Type> tabTypeSubject = BehaviorSubject.seeded(Service);
+  final BehaviorSubject<Type> tabTypeSubject = BehaviorSubject.seeded(HomeMode);
 
   final BehaviorSubject<HomeMode> _modeSubject =
-      BehaviorSubject.seeded(HomeMode.unspecified);
+      BehaviorSubject.seeded(HomeMode.sundaySchool);
 
   Stream<HomeMode> get modeStream => _modeSubject.stream;
 
@@ -35,9 +37,8 @@ class HomeController {
 
   List<Type> _typesForMode(HomeMode currentMode) {
     return switch (currentMode) {
-      HomeMode.sundaySchool => [Service, Person],
-      HomeMode.churchData => [Area, Street, Family, Store, Person],
-      _ => [],
+      HomeMode.sundaySchool => [HomeMode, Service, Person],
+      HomeMode.churchData => [HomeMode, Area, Street, Family, Store, Person],
     };
   }
 
@@ -45,19 +46,16 @@ class HomeController {
     final newValue = switch (currentMode) {
       HomeMode.churchData => HomeMode.sundaySchool,
       HomeMode.sundaySchool => HomeMode.churchData,
-      _ => HomeMode.unspecified,
     };
 
     onModeChanged(newValue);
   }
 
   void onModeChanged(HomeMode newValue) {
-    assert(newValue != HomeMode.unspecified);
-
     final oldTabController = _tabController;
 
     final newTypes = _typesForMode(newValue);
-    final newIndex = tabTypeSubject.value == Person
+    final newIndex = newTypes.contains(tabTypeSubject.value)
         ? newTypes.indexOf(tabTypeSubject.value)
         : 0;
 

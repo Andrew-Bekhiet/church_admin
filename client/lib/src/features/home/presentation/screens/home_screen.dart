@@ -32,26 +32,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<HomeMode>(
-      initialData: HomeMode.unspecified,
-      stream: _controller.modeStream,
-      builder: (context, modeSnapshot) {
-        if (modeSnapshot.data == HomeMode.unspecified) {
-          return Scaffold(
-            body: HomeModeSelector(onModeChanged: _controller.onModeChanged),
-          );
-        }
-
-        return Scaffold(
-          drawer: HomeDrawer(homeController: _controller),
-          appBar: HomeAppBar(homeController: _controller),
-          body: HomeBody(homeController: _controller),
-          floatingActionButton:
-              HomeFloatingActionButton(homeController: _controller),
-          bottomNavigationBar: HomeBottomNavBar(homeController: _controller),
-          extendBody: true,
-        );
-      },
+    return Scaffold(
+      drawer: HomeDrawer(homeController: _controller),
+      appBar: HomeAppBar(homeController: _controller),
+      body: HomeBody(homeController: _controller),
+      floatingActionButton:
+          HomeFloatingActionButton(homeController: _controller),
+      bottomNavigationBar: HomeBottomNavBar(homeController: _controller),
+      extendBody: true,
     );
   }
 

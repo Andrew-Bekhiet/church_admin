@@ -21,10 +21,11 @@ class HomeBody extends StatelessWidget {
         return TabBarView(
           controller: tabController,
           children: [
+            HomeModeSelector(onModeChanged: homeController.onModeChanged),
             if (modeSnapshot.data == HomeMode.sundaySchool)
               LazyTabPage(
                 tabController: tabController,
-                index: 0,
+                index: 1,
                 builder: (context) => ServicesHierarchyList(
                   key: const PageStorageKey('_HomeBody => ServicesTab'),
                   type: homeController.servicesListTypeSubject,
@@ -46,7 +47,7 @@ class HomeBody extends StatelessWidget {
             else ...[
               LazyTabPage(
                 tabController: tabController,
-                index: 0,
+                index: 1,
                 builder: (context) => ViewableObjectList<Area>(
                   key: const PageStorageKey('_HomeBody => AreasTab'),
                   objectsController: homeController.areasController,
@@ -57,7 +58,7 @@ class HomeBody extends StatelessWidget {
               ),
               LazyTabPage(
                 tabController: tabController,
-                index: 1,
+                index: 2,
                 builder: (context) => ViewableObjectList<Street>(
                   key: const PageStorageKey('_HomeBody => StreetsTab'),
                   objectsController: homeController.streetsController,
@@ -65,7 +66,7 @@ class HomeBody extends StatelessWidget {
               ),
               LazyTabPage(
                 tabController: tabController,
-                index: 2,
+                index: 3,
                 builder: (context) => ViewableObjectList<Family>(
                   key: const PageStorageKey('_HomeBody => FamiliesTab'),
                   objectsController: homeController.familiesController,
@@ -73,7 +74,7 @@ class HomeBody extends StatelessWidget {
               ),
               LazyTabPage(
                 tabController: tabController,
-                index: 3,
+                index: 4,
                 builder: (context) => ViewableObjectList<Store>(
                   key: const PageStorageKey('_HomeBody => StoresTab'),
                   objectsController: homeController.storesController,
@@ -82,7 +83,7 @@ class HomeBody extends StatelessWidget {
             ],
             LazyTabPage(
               tabController: tabController,
-              index: modeSnapshot.data == HomeMode.sundaySchool ? 1 : 4,
+              index: modeSnapshot.data == HomeMode.sundaySchool ? 2 : 5,
               builder: (context) => ViewableObjectList<Person>(
                 key: const PageStorageKey('_HomeBody => PersonsTab'),
                 objectsController: homeController.personsController,

@@ -11,8 +11,7 @@ class HomeModeSwitcher extends StatelessWidget {
     return StreamBuilder<HomeMode>(
       stream: homeController.modeStream,
       builder: (context, modeSnapshot) {
-        if (modeSnapshot.data == null ||
-            modeSnapshot.data == HomeMode.unspecified) {
+        if (modeSnapshot.data == null) {
           return const SizedBox.shrink();
         }
 

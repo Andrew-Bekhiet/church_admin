@@ -9,8 +9,8 @@ class AnimatedFloatingActionButton extends StatelessWidget {
   });
 
   final double offset;
-  final Widget newFAB;
-  final Widget oldFAB;
+  final Widget? newFAB;
+  final Widget? oldFAB;
 
   @override
   Widget build(BuildContext context) {
