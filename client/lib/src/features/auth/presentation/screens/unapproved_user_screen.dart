@@ -3,14 +3,19 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-class UnapprovedUser extends StatefulWidget {
-  const UnapprovedUser({super.key});
-
-  @override
-  State<UnapprovedUser> createState() => _UnapprovedUserState();
+abstract final class UnapprovedUserScreenKeys {
+  static const Key codeField = ValueKey('Code Field Key');
+  static const Key registerButton = ValueKey('Register Button Key');
 }
 
-class _UnapprovedUserState extends State<UnapprovedUser> {
+class UnapprovedUserScreen extends StatefulWidget {
+  const UnapprovedUserScreen({super.key});
+
+  @override
+  State<UnapprovedUserScreen> createState() => _UnapprovedUserScreenState();
+}
+
+class _UnapprovedUserScreenState extends State<UnapprovedUserScreen> {
   final TextEditingController _codeController = TextEditingController();
   final authBloc = AuthBloc.I;
 
@@ -45,6 +50,7 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
               ),
               const SizedBox(height: 10),
               TextFormField(
+                key: UnapprovedUserScreenKeys.codeField,
                 decoration: const InputDecoration(
                   labelText: 'كود الدعوة',
                   helperText: 'يمكنك أن تسأل أحد المشرفين ليعطيك كود دعوة',
@@ -61,6 +67,7 @@ class _UnapprovedUserState extends State<UnapprovedUser> {
                 },
               ),
               FilledButton(
+                key: UnapprovedUserScreenKeys.registerButton,
                 onPressed: () => _registerUserWithCode(_codeController.text),
                 child: const Text('تفعيل الحساب بالكود'),
               ),

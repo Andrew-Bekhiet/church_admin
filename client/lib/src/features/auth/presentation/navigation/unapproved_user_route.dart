@@ -10,7 +10,7 @@ class UnapprovedUserRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const UnapprovedUser();
+    return const UnapprovedUserScreen();
   }
 
   @override
