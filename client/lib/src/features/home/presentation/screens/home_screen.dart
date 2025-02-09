@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           floatingActionButton:
               HomeFloatingActionButton(homeController: _controller),
           bottomNavigationBar: HomeBottomNavBar(homeController: _controller),
+          extendBody: true,
         );
       },
     );
