@@ -48,7 +48,7 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
           onLongPress:
               _onLongPress != null ? () => _onLongPress!(object) : null,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,

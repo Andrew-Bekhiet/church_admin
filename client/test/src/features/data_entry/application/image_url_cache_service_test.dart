@@ -143,17 +143,13 @@ void main() {
       expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
       expect(
         box.get(person.imageInfo.cacheKey),
-        person.imageInfo.lastUpdatedTime!.toIso8601String() +
-            '|' +
-            testNotExpiredUrl.toString(),
+        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$testNotExpiredUrl',
       );
       expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
 
       await box.put(
         person.imageInfo.cacheKey,
-        person.imageInfo.lastUpdatedTime!.toIso8601String() +
-            '|' +
-            testExpiredUrl.toString(),
+        '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$testExpiredUrl',
       );
       expect(await unit.getImageUrl(person), testNotExpiredUrl.toString());
     },
@@ -200,7 +196,7 @@ MockBaseCacheManager getMockedCacheManager(
   String? uncachedUrl,
 }) {
   final baseCacheManager = MockBaseCacheManager();
-  // ignore: discarded_futures
+
   when(baseCacheManager.getFileFromCache(cachedUrl)).thenAnswer(
     (_) async => FileInfo(
       MemoryFileSystem().file('path'),
@@ -209,16 +205,15 @@ MockBaseCacheManager getMockedCacheManager(
       cachedUrl,
     ),
   );
-  // ignore: discarded_futures
+
   when(baseCacheManager.getSingleFile(cachedUrl)).thenAnswer(
     (_) async => MemoryFileSystem().file(cachedUrl),
   );
   if (uncachedUrl != null) {
-    // ignore: discarded_futures
     when(baseCacheManager.getFileFromCache(uncachedUrl)).thenAnswer(
       (_) async => null,
     );
-    // ignore: discarded_futures
+
     when(baseCacheManager.getSingleFile(uncachedUrl)).thenAnswer(
       (_) async => MemoryFileSystem().file(uncachedUrl),
     );
@@ -237,7 +232,7 @@ MockFunctionsService getMockedFunctionsSrvc(
   String urlFromNetwork,
 ) {
   final mockFunctionsService = MockFunctionsService();
-  // ignore: discarded_futures
+
   when(mockFunctionsService.getDownloadUrl('persons', personId))
       .thenAnswer((_) async => urlFromNetwork);
   return mockFunctionsService;

@@ -464,9 +464,9 @@ void main() {
                 onDelete: (_) async {
                   onDeleteCalled = true;
                 },
-                onUpdate: (old, _new) async {
+                onUpdate: (old, $new) async {
                   onUpdateCalled = true;
-                  return _new;
+                  return $new;
                 },
               );
 
@@ -506,8 +506,8 @@ void main() {
                       return person;
                     },
                     onDelete: (_) async {},
-                    onUpdate: (old, _new) async {
-                      return _new;
+                    onUpdate: (old, $new) async {
+                      return $new;
                     },
                   );
 
@@ -545,8 +545,8 @@ void main() {
                       return person;
                     },
                     onDelete: (_) async {},
-                    onUpdate: (old, _new) async {
-                      return _new;
+                    onUpdate: (old, $new) async {
+                      return $new;
                     },
                   );
 

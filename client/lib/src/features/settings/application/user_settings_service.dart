@@ -10,9 +10,7 @@ class UserSettingsService extends BlocObserver {
 
   final Box box;
 
-  UserSettingsService({required this.box}) {
-    assert(box.isOpen);
-  }
+  UserSettingsService({required this.box}) : assert(box.isOpen);
 
   bool? get darkTheme => box.get('darkTheme');
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
@@ -26,11 +24,11 @@ class UserSettingsService extends BlocObserver {
       box.put('greatFeastTheme', value);
 
   String? getSecondLineFor<T>([Type? type]) => box.get(
-        _getTypeName(type ?? T) + 'SecondLine',
+        '${_getTypeName(type ?? T)}SecondLine',
       );
   Future<void> setSecondLineFor<T>({required String? value, Type? type}) =>
       box.put(
-        _getTypeName(type ?? T) + 'SecondLine',
+        '${_getTypeName(type ?? T)}SecondLine',
         value,
       );
 

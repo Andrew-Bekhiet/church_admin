@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import '../helpers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
 class StreetInsertHelper {
   static final _mutationNonExistentVars = {

@@ -84,7 +84,7 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
             .join('\n');
 
         if (reason.isNotEmpty) {
-          return 'يجب على كلمة المرور أن:\n' + reason.trim();
+          return 'يجب على كلمة المرور أن:\n${reason.trim()}';
         }
 
         return null;

@@ -50,13 +50,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 ),
                 initialValue: _userData.lastKodas?.time,
                 onTap: (state) async {
-                  final _picked = await _selectDate(
+                  final picked = await _selectDate(
                     'تاريخ أخر تناول',
                     state.value ?? DateTime.now(),
                   );
-                  if (_picked != null) {
+                  if (picked != null) {
                     state.didChange(
-                      _picked,
+                      picked,
                     );
                   }
                 },
@@ -91,13 +91,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 ),
                 initialValue: _userData.lastConfession?.time,
                 onTap: (state) async {
-                  final _picked = await _selectDate(
+                  final picked = await _selectDate(
                     'تاريخ أخر اعتراف',
                     state.value ?? DateTime.now(),
                   );
-                  if (_picked != null) {
+                  if (picked != null) {
                     state.didChange(
-                      _picked,
+                      picked,
                     );
                   }
                 },

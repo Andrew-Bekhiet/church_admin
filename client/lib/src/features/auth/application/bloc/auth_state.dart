@@ -4,7 +4,9 @@ import 'package:equatable/equatable.dart';
 sealed class AuthState extends Equatable {
   const AuthState();
 
-  /// Returns the [previousState] if this state is a wrapper state (e.g. [AuthLoading], [AuthExceptionState])
+  /// Returns the [AuthLoading.previousState] or [AuthExceptionState.previousState] if
+  /// this state is a wrapper state (e.g. [AuthLoading], [AuthExceptionState])
+  /// returns `this` if it is not a wrapper state
   AuthState get unwrapped => switch (this) {
         AuthLoading(:final previousState) ||
         AuthExceptionState(:final previousState) =>

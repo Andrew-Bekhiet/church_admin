@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'dart:ui';
 
 import 'package:church_admin/annotations.dart';

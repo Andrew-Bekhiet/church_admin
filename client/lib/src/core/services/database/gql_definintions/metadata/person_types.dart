@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'person_types/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types/__generated__/subscriptions.gql.dart';
 
 class PersonTypesDAO extends DAOBase<PersonType>
     with

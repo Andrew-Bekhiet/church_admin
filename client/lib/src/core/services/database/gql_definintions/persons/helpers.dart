@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:collection/collection.dart';
-
-import '../helpers.dart';
-import '__generated__/mutations.gql.dart';
 
 class PersonInsertHelper {
   static final _mutationNonExistentVars = {
@@ -215,7 +214,7 @@ class PersonUpdateHelper {
         insertHistoryVisitHistoryOne: _insertHistoryVisitHistoryOne,
       );
 
-  DateTime? _getLast(String name) => _personDelta['last' + name] != null
-      ? LastRecordedByInfo.fromJson(_personDelta['last' + name]).time
+  DateTime? _getLast(String name) => _personDelta['last$name'] != null
+      ? LastRecordedByInfo.fromJson(_personDelta['last$name']).time
       : null;
 }

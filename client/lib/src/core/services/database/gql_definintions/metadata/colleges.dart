@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'colleges/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/colleges/__generated__/subscriptions.gql.dart';
 
 class CollegesDAO extends DAOBase<College>
     with StreamableDAO<College, Input_CollegesBoolExp, Input_CollegesOrderBy> {

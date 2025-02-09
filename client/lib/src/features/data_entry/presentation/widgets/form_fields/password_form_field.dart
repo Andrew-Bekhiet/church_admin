@@ -35,7 +35,7 @@ class PasswordFormField extends StatefulWidget {
   final InputDecoration? decoration;
 
   @override
-  _PasswordFormFieldState createState() => _PasswordFormFieldState();
+  State<PasswordFormField> createState() => _PasswordFormFieldState();
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
@@ -65,9 +65,9 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         textInputAction: widget.textInputAction ?? TextInputAction.done,
         initialValue: widget.initialValue,
         onChanged: widget.onChanged,
-        onFieldSubmitted: (_) {
+        onFieldSubmitted: (value) {
           FocusScope.of(context).nextFocus();
-          widget.onFieldSubmitted?.call(_);
+          widget.onFieldSubmitted?.call(value);
         },
         onSaved: widget.onSaved,
         validator: widget.validator ??

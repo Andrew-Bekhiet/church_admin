@@ -1,7 +1,6 @@
+import 'package:church_admin/src/core/services/database/iterable_difference_result.dart';
 import 'package:gql/ast.dart';
 import 'package:uuid/uuid.dart';
-
-import 'iterable_difference_result.dart';
 
 IterableDifferenceResult<T> diff<T>(Set<T> old, Set<T> $new) {
   return IterableDifferenceResult(

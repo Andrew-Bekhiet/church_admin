@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 import 'package:collection/collection.dart';
-
-import '../helpers.dart';
-import '__generated__/mutations.gql.dart';
 
 class FamilyInsertHelper {
   static final _mutationNonExistentVars = {

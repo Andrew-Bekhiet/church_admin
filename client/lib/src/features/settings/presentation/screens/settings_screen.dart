@@ -45,7 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onPopInvokedWithResult: _onPopWithResult,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -59,6 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: <Widget>[
                         ChoiceChip(
                           label: const Text('المظهر الداكن'),
+                          // Ignored to keep selected argument consistent
                           // ignore: use_if_null_to_convert_nulls_to_bools
                           selected: darkTheme == true,
                           onSelected: _onDarkThemeChanged(true),
@@ -97,7 +98,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: [
                     ..._secondLineTypes.map(
                       (qtype) => Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(vertical: 4),
                         child: DropdownButtonFormField<String?>(
                           value:
                               userSettingsService.getSecondLineFor(qtype.type),
@@ -128,8 +129,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             _needsSaving = false;
                           },
                           decoration: InputDecoration(
-                            labelText: 'السطر الثاني لل' +
-                                qtype.label.replaceFirst(RegExp('^ال'), 'ل'),
+                            labelText:
+                                'السطر الثاني لل${qtype.label.replaceFirst(RegExp('^ال'), 'ل')}',
                           ),
                         ),
                       ),

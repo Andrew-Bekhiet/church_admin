@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
-
-import 'groups/__generated__/mutations.gql.dart';
-import 'groups/__generated__/subscriptions.gql.dart';
 
 class GroupsDAO
     extends FullCRUDDAO<Group, Input_GroupsBoolExp, Input_GroupsOrderBy> {

@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'tags/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/tags/__generated__/subscriptions.gql.dart';
 
 class TagsDAO extends DAOBase<Tag>
     with StreamableDAO<Tag, Input_TagsBoolExp, Input_TagsOrderBy> {

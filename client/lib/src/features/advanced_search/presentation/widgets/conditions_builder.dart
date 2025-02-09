@@ -46,27 +46,26 @@ class ConditionsBuilder<T extends Object> extends StatelessWidget {
                 );
 
                 conditions = conditions.mapIndexed(
-                  (_i, e) {
-                    return i == _i ? newCondition : e;
+                  (j, e) {
+                    return i == j ? newCondition : e;
                   },
                 ).toList();
               },
               onOperatorChanged: (operator) {
                 conditions = conditions
                     .mapIndexed(
-                      (_i, e) =>
-                          i == _i ? condition.copyWith(operator: operator) : e,
+                      (j, e) =>
+                          i == j ? condition.copyWith(operator: operator) : e,
                     )
                     .toList();
               },
               onConditionRemoved: () {
-                conditions =
-                    conditions.whereIndexed((_i, e) => i != _i).toList();
+                conditions = conditions.whereIndexed((j, e) => i != j).toList();
               },
               onValueChanged: (value, isNested) {
                 conditions = conditions
                     .mapIndexed(
-                      (_i, e) => i == _i
+                      (j, e) => i == j
                           ? isNested
                               ? condition.copyWith(value: value)
                               : value.single
@@ -85,8 +84,7 @@ class ConditionsBuilder<T extends Object> extends StatelessWidget {
             ],
             icon: const Icon(Symbols.filter_alt),
             label: Text(
-              'إضافة شرط ل' +
-                  queryableType.label.replaceFirst(RegExp('^ال'), 'ل'),
+              'إضافة شرط ل${queryableType.label.replaceFirst(RegExp('^ال'), 'ل')}',
             ),
           ),
       ],

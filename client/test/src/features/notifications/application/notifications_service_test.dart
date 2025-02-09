@@ -556,7 +556,7 @@ void main() {
                 globalProviderContainer
                     .read(userSettingsServiceProvider)
                     .registeredFCMToken,
-              ).thenReturn(expectedToken + 'something else');
+              ).thenReturn('${expectedToken}something else');
 
               await expectLater(
                 unit.registerFCMTokenAndListenForChanges(),

@@ -1,6 +1,5 @@
+import 'package:church_admin/src/core/graphql/scalars/date.dart' as date;
 import 'package:flutter/material.dart';
-
-import './date.dart' as date;
 
 export 'package:flutter/material.dart' show DateTimeRange;
 

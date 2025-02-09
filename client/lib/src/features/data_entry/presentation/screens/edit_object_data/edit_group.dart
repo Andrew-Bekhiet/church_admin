@@ -23,7 +23,7 @@ class _EditGroupState extends State<EditGroup> {
   void initState() {
     super.initState();
 
-    final Group? _oldGroup = widget.group?.copyWith(
+    final Group? oldGroup = widget.group?.copyWith(
       serviceId: widget.service?.id,
     );
 
@@ -36,14 +36,14 @@ class _EditGroupState extends State<EditGroup> {
       ),
       onDelete: (object) => DatabaseService.I.groups.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldGroup ??
+      newObject: oldGroup ??
           Group(
             id: const Uuid().v4(),
             name: 'مجموعة جديدة',
             service: widget.service,
             serviceId: widget.service?.id,
           ),
-      initialObject: _oldGroup,
+      initialObject: oldGroup,
     );
   }
 
@@ -56,7 +56,7 @@ class _EditGroupState extends State<EditGroup> {
     return EditObjectData(
       objectData: widget.group,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(

@@ -243,11 +243,11 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     required List<T> selected,
     required String title,
   }) async {
-    final _search = BehaviorSubject<String?>.seeded(null);
+    final search = BehaviorSubject<String?>.seeded(null);
 
-    final _controller = ViewableObjectListController<T>(
+    final controller = ViewableObjectListController<T>(
       objectsPaginatableStream: stream,
-      filterStream: _search.map((s) => s ?? ''),
+      filterStream: search.map((s) => s ?? ''),
     )..selectionController.selectAll(selected);
 
     final rslt = await Navigator.of(context).push(
@@ -255,20 +255,20 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
         builder: (context) => Scaffold(
           appBar: AppBar(
             title: TitleSearchField(
-              searchStream: _search,
+              searchStream: search,
               title: Text(title),
             ),
             actions: [
               IconButton(
                 icon: const Icon(Symbols.select_all),
-                onPressed: () => _controller.selectionController.selectAll(
-                  _controller.objectsPaginatableStream.currentValue,
+                onPressed: () => controller.selectionController.selectAll(
+                  controller.objectsPaginatableStream.currentValue,
                 ),
                 tooltip: 'تحديد الكل',
               ),
               IconButton(
                 icon: const Icon(Symbols.check_box_outline_blank),
-                onPressed: _controller.selectionController.selectNone,
+                onPressed: controller.selectionController.selectNone,
                 tooltip: 'تحديد لا شئ',
               ),
               IconButton(
@@ -278,24 +278,24 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
               ),
             ],
           ),
-          body: ViewableObjectList(objectsController: _controller),
+          body: ViewableObjectList(objectsController: controller),
         ),
       ),
     );
 
     if (rslt == true) {
       unawaited(
-        _controller.dispose().then((_) async {
-          if (!_search.isClosed) await _search.close();
+        controller.dispose().then((_) async {
+          if (!search.isClosed) await search.close();
         }),
       );
 
-      return _controller.selectionController.currentValue
+      return controller.selectionController.currentValue
           ?.whereType<T>()
           .toList();
     }
-    await _controller.dispose().then((_) async {
-      if (!_search.isClosed) await _search.close();
+    await controller.dispose().then((_) async {
+      if (!search.isClosed) await search.close();
     });
 
     return null;

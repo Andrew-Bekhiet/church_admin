@@ -1,5 +1,3 @@
-// ignore_for_file: discarded_futures, avoid_redundant_argument_values
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -90,11 +88,11 @@ void main() {
   testWidgets(
     'Church Admin App => Shows SnackBar on connectivity changed',
     (tester) async {
-      final _connectivityController = BehaviorSubject.seeded(true);
-      addTearDown(_connectivityController.close);
+      final connectivityController = BehaviorSubject.seeded(true);
+      addTearDown(connectivityController.close);
 
       when(ConnectivityService.I.connectivityStream)
-          .thenAnswer((_) => _connectivityController);
+          .thenAnswer((_) => connectivityController);
 
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
@@ -102,7 +100,7 @@ void main() {
 
       expect(find.byType(SnackBar), findsNothing);
 
-      _connectivityController.add(false);
+      connectivityController.add(false);
 
       await tester.pumpAndSettle();
 
@@ -308,11 +306,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
             person: Person(
               id: 'id',
               name: 'name',
-              otherPhones: const {},
-              gender: true,
-              isShammas: false,
-              isStudent: false,
-              isServant: false,
               lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
                   ? null
                   : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),

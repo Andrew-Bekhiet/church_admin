@@ -1,10 +1,9 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/helpers.dart';
 import 'package:graphql/client.dart';
-
-import 'families/__generated__/mutations.gql.dart';
-import 'families/__generated__/queries.gql.dart';
-import 'families/__generated__/subscriptions.gql.dart';
 
 class FamiliesDAO
     extends FullCRUDDAO<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy> {

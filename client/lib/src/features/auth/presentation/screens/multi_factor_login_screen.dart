@@ -176,7 +176,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                   if (value.isoCode == IsoCode.EG &&
                       value.nsn.startsWith('01')) {
                     _phoneNumberController.changeNationalNumber(
-                      value.nsn.replaceFirst(RegExp(r'^01'), '1'),
+                      value.nsn.replaceFirst(RegExp('^01'), '1'),
                     );
                   }
                 },

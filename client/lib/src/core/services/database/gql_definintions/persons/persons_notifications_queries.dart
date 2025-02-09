@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
 import 'package:graphql/client.dart';
-
-import '__generated__/queries.gql.dart';
 
 class PersonsNotificationsQueries {
   final DatabaseService db;

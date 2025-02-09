@@ -39,7 +39,7 @@ class _EditPersonState extends State<EditPerson> {
   void initState() {
     super.initState();
 
-    final Person? _oldPerson = widget.person?.copyWith(
+    final Person? oldPerson = widget.person?.copyWith(
       familyId: widget.person?.family?.id,
       churchId: widget.person?.church?.id,
       collegeId: widget.person?.college?.id,
@@ -64,7 +64,7 @@ class _EditPersonState extends State<EditPerson> {
       ),
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldPerson ??
+      newObject: oldPerson ??
           Person(
             id: const Uuid().v4(),
             name: 'مخدوم جديد',
@@ -77,7 +77,7 @@ class _EditPersonState extends State<EditPerson> {
             isStudent: widget.studyYear != null,
             gender: widget.gender ?? true,
           ),
-      initialObject: _oldPerson,
+      initialObject: oldPerson,
     );
 
     _loadPersonServicesClassesGroups();
@@ -99,7 +99,7 @@ class _EditPersonState extends State<EditPerson> {
       getController: () => _controller,
       canDeletePhoto: (_) =>
           widget.person != null && widget.person?.user?.email == null,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(

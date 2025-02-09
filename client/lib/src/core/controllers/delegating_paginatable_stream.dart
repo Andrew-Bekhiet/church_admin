@@ -19,7 +19,7 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
       isLogging
           ? _offset.map(
               (o) {
-                log('Listening to offset ' + o.toString());
+                log('Listening to offset $o');
                 return o;
               },
             )
@@ -102,15 +102,15 @@ class DelegatingPaginatableStream<T> extends PaginatableStreamBase<T> {
   }
 
   T? getCursorForOffset(int offset) {
-    final _currentValueOrNull = currentValueOrNull;
+    final currentValueOrNull = this.currentValueOrNull;
 
-    if (_currentValueOrNull == null) return null;
+    if (currentValueOrNull == null) return null;
 
     final index = offset * limit + limit - 1;
 
-    if (index >= _currentValueOrNull.length || index < 0) return null;
+    if (index >= currentValueOrNull.length || index < 0) return null;
 
-    return _currentValueOrNull[index];
+    return currentValueOrNull[index];
   }
 
   @override

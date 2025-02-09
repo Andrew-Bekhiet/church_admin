@@ -27,7 +27,7 @@ class LoggingService {
       type: MaterialType.card,
       child: Center(
         child: Text(
-          'حدث خطأ:\n' + error.summary.toString(),
+          'حدث خطأ:\n${error.summary}',
         ),
       ),
     );

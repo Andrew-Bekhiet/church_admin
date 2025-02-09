@@ -39,7 +39,7 @@ enum ViewablesEnum {
     } else if (this == ViewablesEnum.class$) {
       return 'classes';
     } else {
-      return name + 's';
+      return '${name}s';
     }
   }
 

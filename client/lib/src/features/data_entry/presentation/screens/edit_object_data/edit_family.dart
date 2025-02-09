@@ -33,7 +33,7 @@ class _EditFamilyState extends State<EditFamily> {
   void initState() {
     super.initState();
 
-    final _oldFamily = widget.family;
+    final oldFamily = widget.family;
 
     _controller = EditObjectController(
       onCreate: (object) =>
@@ -46,14 +46,14 @@ class _EditFamilyState extends State<EditFamily> {
       onDelete: (object) =>
           DatabaseService.I.families.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldFamily ??
+      newObject: oldFamily ??
           Family(
             id: const Uuid().v4(),
             name: 'عائلة جديدة',
             children: widget.children?.toList() ?? [],
             parents: widget.parents?.toList() ?? [],
           ),
-      initialObject: _oldFamily,
+      initialObject: oldFamily,
     );
 
     _loadRelatedFamilies();
@@ -64,7 +64,7 @@ class _EditFamilyState extends State<EditFamily> {
     return EditObjectData(
       objectData: widget.family,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(

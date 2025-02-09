@@ -65,7 +65,7 @@ class ViewableObjectService {
           onTap(object.user!);
         }
       default:
-        throw UnimplementedError('Unexpected object:\n' + object.toString());
+        throw UnimplementedError('Unexpected object:\n$object');
     }
   }
 
@@ -86,9 +86,7 @@ class ViewableObjectService {
     } else if (DateTime.tryParse(value.toString()) != null) {
       final parsed = DateTime.parse(value.toString());
 
-      return parsed.toDurationString(appendSince: false) +
-          '\t\t\t\t\u202D' +
-          DateFormat('yyyy/M/d').format(parsed);
+      return '${parsed.toDurationString(appendSince: false)}\t\t\t\t\u202D${DateFormat('yyyy/M/d').format(parsed)}';
     } else if (key == 'gender') {
       if (value as bool? ?? false) {
         return 'ذكر';
@@ -106,7 +104,7 @@ class ViewableObjectService {
         return 'غير محدد';
       }
     } else if (key == 'color') {
-      return '#' + (value as int).toRadixString(16);
+      return '#${(value as int).toRadixString(16)}';
     }
 
     return value.toString();

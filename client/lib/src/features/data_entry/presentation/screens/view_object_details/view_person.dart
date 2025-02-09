@@ -485,8 +485,7 @@ class _ViewPersonState extends State<ViewPerson> {
   ) async {
     if (!(await Permission.contacts.request()).isGranted) return;
 
-    final _name =
-        TextEditingController(text: person.name);
+    final nameController = TextEditingController(text: person.name);
 
     if (!context.mounted) return;
 
@@ -498,7 +497,7 @@ class _ViewPersonState extends State<ViewPerson> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(controller: _name),
+            TextFormField(controller: nameController),
             Container(height: 10),
             Text(phone),
           ],
@@ -523,7 +522,7 @@ class _ViewPersonState extends State<ViewPerson> {
         addresses: [
           if (person.address != null) Address(person.address!),
         ],
-        name: Name(first: _name.text),
+        name: Name(first: nameController.text),
         photo: imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
             ? await imageFile.readAsBytes()
             : null,
@@ -561,7 +560,7 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   final int visibleItemsLimit;
 
   DateFormat get dateFormat => DateFormat(
-        'التاريخ: yyyy/M/d' + (showTime ? '\nالساعة: h:m a' : ''),
+        'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
         'ar-EG',
       );
 

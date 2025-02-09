@@ -17,13 +17,13 @@ class FieldMetadata<T extends Object> with EquatableMixin {
       AdvancedQueriesMetadata.queryableTypes[type] as QueryableType<T>?;
 
   bool get isNestabale {
-    final _instance = dummyInstance;
+    final dummyInstance = this.dummyInstance;
 
-    return _instance is ViewableWithID &&
-            _instance is! UserPermission &&
+    return dummyInstance is ViewableWithID &&
+            dummyInstance is! UserPermission &&
             name != 'id' ||
-        _instance is HistoryAggregateData ||
-        _instance is AggregateData;
+        dummyInstance is HistoryAggregateData ||
+        dummyInstance is AggregateData;
   }
 
   @override

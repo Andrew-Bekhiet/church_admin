@@ -50,7 +50,7 @@ class DataGeomapState extends State<DataGeomap> {
 
   final _locationMemoizer = AsyncMemoizer<Position?>();
 
-  late final Stream<_MapStreamResponse>? stream = Rx.combineLatest2(
+  late final Stream<_MapStreamResponse> _stream = Rx.combineLatest2(
     _getUserLocationStream(),
     _getObjectsLocationsStream(),
     _MapStreamResponse.new,
@@ -86,7 +86,7 @@ class DataGeomapState extends State<DataGeomap> {
                 areas: _currentMapOptions.selectedAreas,
               ),
       ),
-      stream: stream,
+      stream: _stream,
       builder: (context, data) {
         if (data.requireData.personsGeolocationsResponse == null) {
           return const Center(child: CircularProgressIndicator());
@@ -115,11 +115,8 @@ class DataGeomapState extends State<DataGeomap> {
             TileLayer(
               tileProvider: const FMTCStore('default').getTileProvider(),
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: (packageName.isEmpty
-                      ? 'com.AndroidQuartz.church_admin'
-                      : packageName) +
-                  ': ' +
-                  CurrentPlatformService.I.effectiveValue.name,
+              userAgentPackageName:
+                  '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}: ${CurrentPlatformService.I.effectiveValue.name}',
               maxZoom: 19,
               retinaMode: MediaQuery.devicePixelRatioOf(context) > 1,
             ),

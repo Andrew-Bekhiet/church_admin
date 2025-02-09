@@ -449,7 +449,7 @@ Future<Override> _setUpMockAuthStorage() async {
       .thenAnswer((i) async => user = i.positionalArguments[0]);
   when(mock.saveUserPasswordHash(captureAny, captureAny)).thenAnswer(
     (i) async => passwordHash =
-        i.positionalArguments[0] + '-hash-' + i.positionalArguments[1],
+        '${i.positionalArguments[0]}-hash-${i.positionalArguments[1]}',
   );
   when(mock.getAuthDataFromCache()).thenAnswer((_) async => authUser);
   when(mock.getUserFromCache()).thenAnswer((_) async => user);
@@ -459,18 +459,18 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  final _controller = StreamController<AuthUser?>.broadcast(sync: true);
+  final controller = StreamController<AuthUser?>.broadcast(sync: true);
 
   final mock = MockFirebaseAuthRepository();
 
   when(mock.signInWithEmailPassword(email: 'email', password: 'password'))
-      .thenAnswer((_) async => _controller.add(initialAuthUser));
+      .thenAnswer((_) async => controller.add(initialAuthUser));
   when(mock.signUpWithEmailPassword(email: 'email', password: 'password'))
-      .thenAnswer((_) async => _controller.add(initialAuthUser));
+      .thenAnswer((_) async => controller.add(initialAuthUser));
 
-  when(mock.signOut()).thenAnswer((_) async => _controller.add(null));
+  when(mock.signOut()).thenAnswer((_) async => controller.add(null));
   when(mock.refreshToken()).thenAnswer(
-    (_) async => _controller.add(
+    (_) async => controller.add(
       initialAuthUser.copyWith(
         idToken: 'refreshed',
         claims: {
@@ -484,12 +484,12 @@ Future<Override> _setUpMockAuthRepository() async {
     ),
   );
   when(mock.reload()).thenAnswer(
-    (_) async => _controller.add(initialAuthUser.copyWith(idToken: 'reloaded')),
+    (_) async => controller.add(initialAuthUser.copyWith(idToken: 'reloaded')),
   );
 
-  when(mock.userChanges).thenAnswer((_) => _controller.stream);
+  when(mock.userChanges).thenAnswer((_) => controller.stream);
 
-  when(mock.dispose()).thenAnswer((_) => _controller.close());
+  when(mock.dispose()).thenAnswer((_) => controller.close());
 
   return authRepositoryProvider.overrideWithValue(mock);
 }

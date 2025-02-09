@@ -231,6 +231,7 @@ void main() {
             ),
             OrderBy(
               fieldName: 'address',
+              // Ignored to make sure value is ASC
               // ignore: avoid_redundant_argument_values
               value: Enum_OrderBy.ASC,
             ),

@@ -54,7 +54,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
           context: state.context,
           builder: (context) {
             return AlertDialog(
-              title: Text('اختيار ' + labelText),
+              title: Text('اختيار $labelText'),
               content: SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.9,
                 child: Column(

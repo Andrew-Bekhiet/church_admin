@@ -1,5 +1,3 @@
-// ignore_for_file: discarded_futures
-
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';

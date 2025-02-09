@@ -23,7 +23,7 @@ class _EditClassState extends State<EditClass> {
   void initState() {
     super.initState();
 
-    final Class? _oldClass = widget.class$?.copyWith(
+    final Class? oldClass = widget.class$?.copyWith(
       serviceId: widget.service?.id,
       serviceStudyYear: widget.class$?.studyYear?.order,
     );
@@ -37,14 +37,14 @@ class _EditClassState extends State<EditClass> {
       ),
       onDelete: (object) => DatabaseService.I.classes.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldClass ??
+      newObject: oldClass ??
           Class(
             id: const Uuid().v4(),
             name: 'فصل جديد',
             service: widget.service,
             serviceId: widget.service?.id,
           ),
-      initialObject: _oldClass,
+      initialObject: oldClass,
     );
   }
 
@@ -57,7 +57,7 @@ class _EditClassState extends State<EditClass> {
     return EditObjectData(
       objectData: widget.class$,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(

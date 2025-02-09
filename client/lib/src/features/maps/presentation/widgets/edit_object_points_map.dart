@@ -35,7 +35,7 @@ class EditObjectPointsMap<T extends ViewableWithID> extends StatefulWidget {
   });
 
   @override
-  _EditObjectPointsMap createState() => _EditObjectPointsMap<T>();
+  State<EditObjectPointsMap<T>> createState() => _EditObjectPointsMap<T>();
 }
 
 class _EditObjectPointsMap<T extends ViewableWithID>

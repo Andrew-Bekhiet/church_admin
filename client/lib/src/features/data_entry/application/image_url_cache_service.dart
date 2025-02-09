@@ -13,9 +13,7 @@ class ImageUrlCacheService {
   ImageUrlCacheService({
     required this.box,
     required this.cacheManager,
-  }) {
-    assert(box.isOpen);
-  }
+  }) : assert(box.isOpen);
 
   final Box<String> box;
   final BaseCacheManager cacheManager;
@@ -113,7 +111,7 @@ class ImageUrlCacheService {
   ) async {
     await box.put(
       imageObject.imageInfo.cacheKey,
-      imageObject.imageInfo.lastUpdatedTime!.toIso8601String() + '|' + url,
+      '${imageObject.imageInfo.lastUpdatedTime!.toIso8601String()}|$url',
     );
 
     return url;

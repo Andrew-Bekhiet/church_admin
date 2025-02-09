@@ -286,8 +286,8 @@ void _setUp() {
 Override _setUpCacheManager() {
   final mockBaseCacheManager = MockBaseCacheManager();
 
-  when(mockBaseCacheManager.getFileStream(any)).thenAnswer((_) async* {
-    final url = _.positionalArguments.first;
+  when(mockBaseCacheManager.getFileStream(any)).thenAnswer((i) async* {
+    final url = i.positionalArguments.first;
     final length = transparentImage.length;
 
     yield DownloadProgress(url, length, length);

@@ -32,11 +32,10 @@ class EditObjectController<T extends ViewableWithID> {
   EditObjectController({
     required this.toJson,
     required this.newObject,
-    this.initialObject,
-    // ignore: always_put_required_named_parameters_first
     required this.onCreate,
     this.onUpdate,
     this.onDelete,
+    this.initialObject,
   }) : assert(
           initialObject == null || (onUpdate != null && onDelete != null),
           'You must provide update and delete functions when editing an existing object',
@@ -174,7 +173,7 @@ class EditObjectController<T extends ViewableWithID> {
     final rslt = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('هل تريد حذف ' + initialObject!.name + '؟'),
+        title: Text('هل تريد حذف ${initialObject!.name}؟'),
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(context).pop(false),

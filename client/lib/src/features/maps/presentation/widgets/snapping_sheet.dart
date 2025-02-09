@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
+// Ignored because the package doesn't expose [SheetPositionData]
+// which is needed here to keep the widgets modular
+// ignore: implementation_imports
 import 'package:snapping_sheet_2/src/sheet_position_data.dart';
 
 class MapSnappingSheet extends StatelessWidget {

@@ -1,17 +1,16 @@
 import 'package:church_admin/church_admin.dart';
-
-import 'metadata/churches.dart';
-import 'metadata/colleges.dart';
-import 'metadata/fathers.dart';
-import 'metadata/hobbies.dart';
-import 'metadata/jobs.dart';
-import 'metadata/person_states.dart';
-import 'metadata/person_types.dart';
-import 'metadata/qualifications.dart';
-import 'metadata/schools.dart';
-import 'metadata/shammas_levels.dart';
-import 'metadata/study_years.dart';
-import 'metadata/tags.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/churches.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/colleges.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_states.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/person_types.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/qualifications.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/schools.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/shammas_levels.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/tags.dart';
 
 class MetadataDAO {
   final DatabaseService db;

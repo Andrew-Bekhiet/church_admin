@@ -128,20 +128,20 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     Service service,
     ViewableObjectWidgetConfig? config,
   ) {
-    final _topController =
+    final topController =
         _animationControllers[service] ??= AnimationController(
       duration: const Duration(milliseconds: 225),
       vsync: this,
     );
 
     return AnimatedBuilder(
-      animation: _topController.drive(
+      animation: topController.drive(
         Tween(begin: 0, end: 1).chain(
           CurveTween(curve: Curves.easeIn),
         ),
       ),
       builder: (context, child) => Card.filled(
-        elevation: _topController.value * 3,
+        elevation: topController.value * 3,
         child: ExpansionTile(
           key: PageStorageKey(service),
           leading: ImageObjectWidget(
@@ -152,7 +152,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             mainAxisSize: MainAxisSize.min,
             children: [
               Transform.rotate(
-                angle: _topController.value * math.pi,
+                angle: topController.value * math.pi,
                 child: const Icon(Symbols.expand_more),
               ),
               if (widget.serviceTrailingBuilder != null)
@@ -167,9 +167,9 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           ),
           onExpansionChanged: (e) async {
             if (e) {
-              await _topController.forward();
+              await topController.forward();
             } else {
-              await _topController.animateBack(0);
+              await topController.animateBack(0);
             }
           },
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -184,7 +184,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             if (widget.showClasses)
               _Classes(
                 service: service,
-                animationValue: _topController.value,
+                animationValue: topController.value,
                 classBuilder: widget.classBuilder,
                 studyYearBuilder: widget.studyYearBuilder,
               ),
@@ -199,7 +199,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             if (widget.showGroups)
               _Groups(
                 service: service,
-                animationValue: _topController.value,
+                animationValue: topController.value,
                 groupBuilder: widget.groupBuilder,
               ),
           ],

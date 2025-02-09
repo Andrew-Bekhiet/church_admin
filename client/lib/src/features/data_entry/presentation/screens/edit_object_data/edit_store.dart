@@ -22,7 +22,7 @@ class _EditStoreState extends State<EditStore> {
   @override
   void initState() {
     super.initState();
-    final Store? _oldStore = widget.store;
+    final Store? oldStore = widget.store;
 
     _controller = EditObjectController(
       onCreate: (object) =>
@@ -33,14 +33,14 @@ class _EditStoreState extends State<EditStore> {
       ),
       onDelete: (object) => DatabaseService.I.stores.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldStore ??
+      newObject: oldStore ??
           Store(
             id: const Uuid().v4(),
             name: 'متجر جديد',
             family: widget.family,
             familyId: widget.family?.id,
           ),
-      initialObject: _oldStore,
+      initialObject: oldStore,
     );
   }
 
@@ -53,7 +53,7 @@ class _EditStoreState extends State<EditStore> {
     return EditObjectData(
       objectData: widget.store,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(

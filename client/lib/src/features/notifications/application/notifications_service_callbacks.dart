@@ -166,7 +166,7 @@ class NotificationsServiceCallbacks {
       ],
       orderBy: [
         OrderBy(
-          fieldName: field + 'Aggregate',
+          fieldName: '${field}Aggregate',
           value: OrderBy(
             fieldName: 'max',
             value: OrderBy(
@@ -268,9 +268,8 @@ class NotificationsServiceCallbacks {
           queryableType: Person.queryableType,
           field: 'birthday',
           operator: Operator.eq,
-          value: now.month.toString().padLeft(2, '0') +
-              '-' +
-              now.day.toString().padLeft(2, '0'),
+          value:
+              '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
         ),
       ],
       orderBy: [

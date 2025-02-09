@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:snapping_sheet_2/snapping_sheet.dart';
+// Ignored because the package doesn't expose [SheetPositionData]
+// which is needed here to keep the widgets modular
+// ignore: implementation_imports
 import 'package:snapping_sheet_2/src/sheet_position_data.dart';
-
 
 class ViewGeodataMap extends StatefulWidget {
   final Person? initialPerson;
@@ -19,7 +21,7 @@ class ViewGeodataMap extends StatefulWidget {
   });
 
   @override
-  _ViewGeodataMapState createState() => _ViewGeodataMapState();
+  State<ViewGeodataMap> createState() => _ViewGeodataMapState();
 }
 
 class _ViewGeodataMapState extends State<ViewGeodataMap>
