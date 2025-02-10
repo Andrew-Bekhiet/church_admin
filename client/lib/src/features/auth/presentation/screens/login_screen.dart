@@ -83,150 +83,157 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TextFormField(
-                          key: LoginScreenKeys.emailFieldKey,
-                          decoration: const InputDecoration(
-                            labelText: 'البريد الإلكتروني',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          autofillHints: const [AutofillHints.email],
-                          textInputAction: TextInputAction.next,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (email) {
-                            if (email == null || email.isEmpty) {
-                              return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
-                            } else if (!emailRegex.hasMatch(email)) {
-                              return 'البريد الإلكتروني غير صالح';
-                            }
-                            return null;
-                          },
-                          controller: _emailController,
-                        ).withPadding(
-                          const EdgeInsets.symmetric(vertical: 8),
-                        ),
-                        if (_isLogin)
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              PasswordFormField(
-                                key: LoginScreenKeys.passwordFieldKey,
-                                labelText: 'كلمة المرور',
-                                autoValidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                textInputAction: TextInputAction.done,
-                                controller: _passwordController,
-                                onFieldSubmitted: _submit,
-                                validator: (password) {
-                                  if (password?.isEmpty ?? true) {
-                                    return 'كلمة المرور لا يمكن أن تكون فارغة';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              Container(
-                                alignment: AlignmentDirectional.centerStart,
-                                padding: const EdgeInsetsDirectional.only(
-                                  bottom: 20,
-                                  start: 8,
-                                ),
-                                child: InkWell(
-                                  key: LoginScreenKeys.forgotPasswordButtonKey,
-                                  onTap: () =>
-                                      const ForgotPasswordRoute().push(context),
-                                  child: Text(
-                                    'نسيت كلمة المرور؟',
-                                    style: theme.textTheme.bodyLarge?.copyWith(
-                                      color: theme.colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        else ...[
-                          NewPasswordField(
-                            key: LoginScreenKeys.passwordFieldKey,
-                            controller: _passwordController,
-                            getEmail: () => _emailController.text,
-                          ).withPadding(
-                            const EdgeInsets.symmetric(vertical: 10),
-                          ),
-                          PasswordFormField(
-                            key: LoginScreenKeys.passwordConfirmationFieldKey,
-                            labelText: 'تأكيد كلمة المرور',
-                            autoFillHints: const [AutofillHints.newPassword],
-                            controller: _passwordConfirmationController,
-                            textInputAction: TextInputAction.done,
-                            onFieldSubmitted: _submit,
-                            validator: (password) {
-                              if (password != _passwordController.text) {
-                                return 'كلمتا المرور غير متطابقتين';
+                  AutofillGroup(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextFormField(
+                            key: LoginScreenKeys.emailFieldKey,
+                            decoration: const InputDecoration(
+                              labelText: 'البريد الإلكتروني',
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            autofillHints: const [AutofillHints.email],
+                            textInputAction: TextInputAction.next,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (email) {
+                              if (email == null || email.isEmpty) {
+                                return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
+                              } else if (!emailRegex.hasMatch(email)) {
+                                return 'البريد الإلكتروني غير صالح';
                               }
                               return null;
                             },
+                            controller: _emailController,
+                          ).withPadding(
+                            const EdgeInsets.symmetric(vertical: 8),
                           ),
-                        ],
-                        FilledButton(
-                          key: LoginScreenKeys.loginSignupButtonKey,
-                          onPressed: loading ? null : _submit,
-                          child: loading
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : Text(
-                                  _isLogin ? 'تسجيل الدخول' : 'إنشاء حساب جديد',
-                                ),
-                        ),
-                        if (!_isLogin) ...[
-                          const SizedBox(height: 10),
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          if (_isLogin)
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                TextSpan(
-                                  style: theme.textTheme.bodySmall,
-                                  text: 'بإنشائك حساب فإنك توافق على ',
+                                PasswordFormField(
+                                  key: LoginScreenKeys.passwordFieldKey,
+                                  labelText: 'كلمة المرور',
+                                  autoValidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  textInputAction: TextInputAction.done,
+                                  controller: _passwordController,
+                                  onFieldSubmitted: _submit,
+                                  validator: (password) {
+                                    if (password?.isEmpty ?? true) {
+                                      return 'كلمة المرور لا يمكن أن تكون فارغة';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                TextSpan(
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: Colors.blue,
+                                Container(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  padding: const EdgeInsetsDirectional.only(
+                                    bottom: 20,
+                                    start: 8,
                                   ),
-                                  text: 'شروط الاستخدام',
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      //TODO: TOS
-                                    },
-                                ),
-                                TextSpan(
-                                  style: theme.textTheme.bodySmall,
-                                  text: ' و',
-                                ),
-                                TextSpan(
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: Colors.blue,
+                                  child: InkWell(
+                                    key:
+                                        LoginScreenKeys.forgotPasswordButtonKey,
+                                    onTap: () => const ForgotPasswordRoute()
+                                        .push(context),
+                                    child: Text(
+                                      'نسيت كلمة المرور؟',
+                                      style:
+                                          theme.textTheme.bodyLarge?.copyWith(
+                                        color: theme.colorScheme.primary,
+                                      ),
+                                    ),
                                   ),
-                                  text: 'سياسة الخصوصية',
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      //TODO: Privacy Policy
-                                    },
                                 ),
                               ],
+                            )
+                          else ...[
+                            NewPasswordField(
+                              key: LoginScreenKeys.passwordFieldKey,
+                              controller: _passwordController,
+                              getEmail: () => _emailController.text,
+                            ).withPadding(
+                              const EdgeInsets.symmetric(vertical: 10),
                             ),
+                            PasswordFormField(
+                              key: LoginScreenKeys.passwordConfirmationFieldKey,
+                              labelText: 'تأكيد كلمة المرور',
+                              autoFillHints: const [AutofillHints.newPassword],
+                              controller: _passwordConfirmationController,
+                              textInputAction: TextInputAction.done,
+                              onFieldSubmitted: _submit,
+                              validator: (password) {
+                                if (password != _passwordController.text) {
+                                  return 'كلمتا المرور غير متطابقتين';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                          FilledButton(
+                            key: LoginScreenKeys.loginSignupButtonKey,
+                            onPressed: loading ? null : _submit,
+                            child: loading
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Text(
+                                    _isLogin
+                                        ? 'تسجيل الدخول'
+                                        : 'إنشاء حساب جديد',
+                                  ),
                           ),
+                          if (!_isLogin) ...[
+                            const SizedBox(height: 10),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    style: theme.textTheme.bodySmall,
+                                    text: 'بإنشائك حساب فإنك توافق على ',
+                                  ),
+                                  TextSpan(
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: Colors.blue,
+                                    ),
+                                    text: 'شروط الاستخدام',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        //TODO: TOS
+                                      },
+                                  ),
+                                  TextSpan(
+                                    style: theme.textTheme.bodySmall,
+                                    text: ' و',
+                                  ),
+                                  TextSpan(
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: Colors.blue,
+                                    ),
+                                    text: 'سياسة الخصوصية',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        //TODO: Privacy Policy
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ],
-                      ],
+                      ),
                     ),
                   ),
                   Container(
