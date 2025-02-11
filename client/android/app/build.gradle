@@ -29,9 +29,7 @@ if (flutterVersionName == null) {
 android {
     namespace 'com.AndroidQuartz.church_admin'
     
-    compileSdk 34
-    setBuildToolsVersion('34.0.0')
-    ndkVersion '26.1.10909125'
+    compileSdk 35
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -49,7 +47,7 @@ android {
 
     defaultConfig {
         applicationId "com.AndroidQuartz.church_admin"
-        targetSdkVersion 34
+        targetSdkVersion 35
         minSdkVersion 23
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
