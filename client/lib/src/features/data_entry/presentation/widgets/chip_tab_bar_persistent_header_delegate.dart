@@ -14,7 +14,7 @@ class ChipTabBarPersistentHeaderDelegate
   @override
   double get minExtent => kToolbarHeight - 6;
   @override
-  double get maxExtent => kToolbarHeight * 2;
+  double get maxExtent => kToolbarHeight * 1.2;
 
   @override
   Widget build(

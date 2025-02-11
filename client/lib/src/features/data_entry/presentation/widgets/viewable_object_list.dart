@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-enum ViewableObjectListType { list, grid }
+enum ViewableObjectListType { list, grid, custom }
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   const ViewableObjectList({
@@ -129,6 +129,9 @@ class _ViewableObjectListState<T extends Viewable>
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 40,
+              childAspectRatio: 1.13,
             ),
             padding: const EdgeInsets.all(2),
             controller: scrollController,
@@ -137,7 +140,7 @@ class _ViewableObjectListState<T extends Viewable>
             itemCount: items.length + 1,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
-        } else {
+        } else if (widget.type == ViewableObjectListType.list) {
           return ListView.builder(
             padding: const EdgeInsets.all(2),
             controller: scrollController,
@@ -149,6 +152,20 @@ class _ViewableObjectListState<T extends Viewable>
                 // ignore: avoid-returning-widgets
                 ? HeroMode(enabled: false, child: itemBuilder(context, 0))
                 : null,
+          );
+        } else {
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 9,
+            ),
+            padding: const EdgeInsets.all(2),
+            controller: scrollController,
+            itemBuilder: itemBuilder,
+            cacheExtent: 250,
+            itemCount: items.length + 1,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
         }
       },

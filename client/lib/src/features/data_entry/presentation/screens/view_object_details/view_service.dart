@@ -67,42 +67,60 @@ class _ViewServiceState extends State<ViewService> {
       detailsBuilder: (context, service) => SliverList(
         delegate: SliverChildListDelegate(
           [
-            ListTile(
-              title: const Text('الخدمة التالية'),
-              subtitle: service.nextService != null
-                  ? Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: ViewableObjectCard(service.nextService!),
-                    )
-                  : const Text('لا يوجد'),
-            ),
-            ListTile(
-              title: const Text('السنوات الدراسية'),
-              subtitle: Text(
-                'من ${service.studyYearFrom?.name ?? ''} '
-                'إلى ${service.studyYearTo?.name ?? ''}',
-              ),
-            ),
-            ListTile(
-              title: FilledButton.icon(
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('احصائيات'),
-                // TODO: add service analysis
-                onPressed: () {},
-              ),
-            ),
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: service.lastEdit?.time,
               getHistoryStream: () => DatabaseService.I.history
                   .paginateEditHistory<Service>(id: service.id),
             ),
+            // ListTile(
+            //   title: const Text('الخدمة التالية'),
+            //   subtitle: service.nextService != null
+            //       ? Align(
+            //           alignment: AlignmentDirectional.centerStart,
+            //           child: ViewableObjectCard(service.nextService!),
+            //         )
+            //       : const Text('لا يوجد'),
+            // ),
             ListTile(
-              title: const Text('الخدام المسؤولين'),
-              subtitle: service.adminUsers?.isNotEmpty ?? false
-                  ? AdminUsers(users: service.adminUsers!)
-                  : const Text('لا يوجد خدام محددين للخدمة'),
+              title: FilledButton.icon(
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 8),
+                  ),
+                  backgroundColor: WidgetStateProperty.all(
+                    Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                ),
+                icon: const Icon(Symbols.query_stats),
+                label: Text(
+                  'الاحصائيات',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white,
+                      ),
+                ),
+                // TODO: add service analysis
+                onPressed: () {},
+              ),
             ),
+            // ListTile(
+            //   title: const Text('السنوات الدراسية'),
+            //   subtitle: Text(
+            //     'من ${service.studyYearFrom?.name ?? ''} '
+            //     'إلى ${service.studyYearTo?.name ?? ''}',
+            //   ),
+            // ),
+            // ListTile(
+            //   title: const Text('الخدام المسؤولين'),
+            //   subtitle: service.adminUsers?.isNotEmpty ?? false
+            //       ? AdminUsers(users: service.adminUsers!)
+            //       : const Text('لا يوجد خدام محددين للخدمة'),
+            // ),
           ],
         ),
       ),
@@ -110,20 +128,45 @@ class _ViewServiceState extends State<ViewService> {
         tabs: [
           (
             label: 'الفصول',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Class>()),
+            icon: Icon(
+              viewableObjectService.getDefaultIconFor<Class>(),
+              size: 22,
+            ),
           ),
           (
             label: 'المجموعات',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Group>()),
+            icon: Icon(
+              viewableObjectService.getDefaultIconFor<Group>(),
+              size: 22,
+            ),
           ),
           (
             label: 'المخدومين',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: Icon(
+              viewableObjectService.getDefaultIconFor<Person>(),
+              size: 22,
+            ),
           ),
         ],
       ),
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
+          itemBuilder: (context, class_, config) => ViewableObjectCard<Class>(
+                class_,
+                title: Text(
+                  class_.name,
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color:Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                config: config,
+                size: null,
+          ),
+              type: ViewableObjectListType.custom,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
             ),

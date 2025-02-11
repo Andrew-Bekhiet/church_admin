@@ -94,7 +94,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
               _AppBarPhoto(
                 foregroundColor: _foregroundColorTween.lerp(animationValue),
                 viewable: widget.viewable,
-                height: 4 * constraints.biggest.height / 5,
+                height: 3 * constraints.biggest.height / 5,
                 photoAlign: _photoAlignTween.lerp(animationValue),
                 borderRadius: borderRadiusValue,
                 circleCrop: widget.circleCrop,
@@ -171,7 +171,7 @@ class _AppBarPhoto extends StatelessWidget {
               child: overrideImage ??
                   ImageObjectWidget(
                     viewable,
-                    circleCrop: circleCrop,
+                    // circleCrop: true,
                     size: height,
                     borderRadius: borderRadius,
                     blurhashSize: blurhashSize,

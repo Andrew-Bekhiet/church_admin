@@ -18,7 +18,7 @@ class ChipTabBar extends StatelessWidget {
       (states) => states.contains(
         WidgetState.selected,
       )
-          ? null
+          ? theme.colorScheme.primaryContainer
           : theme.scaffoldBackgroundColor,
     );
 
@@ -26,7 +26,7 @@ class ChipTabBar extends StatelessWidget {
       (states) => states.contains(
         WidgetState.selected,
       )
-          ? BorderSide(color: theme.colorScheme.outline)
+          ? BorderSide(color: theme.colorScheme.primaryContainer)
           : BorderSide.none,
     );
 
@@ -43,8 +43,17 @@ class ChipTabBar extends StatelessWidget {
                   showCheckmark: false,
                   color: chipColor,
                   side: chipSide,
-                  label: Text(tab.label),
-                  labelStyle: theme.textTheme.titleMedium,
+                  label: Text(
+                    tab.label,
+                    style: tabController.animation!.value.round() == i
+                        ? theme.textTheme.titleMedium!.copyWith(
+                            color: Colors.white,
+                          )
+                        : theme.textTheme.titleMedium!.copyWith(
+                            color: Colors.black,
+                          ),
+                  ),
+                  // labelStyle: labelColor,
                   avatar: tab.icon,
                 ),
               )

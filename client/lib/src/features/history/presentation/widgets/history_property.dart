@@ -10,10 +10,12 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     this.onRecordNow,
     this.showTime = true,
     this.value,
+    this.style,
     super.key,
   });
 
   final String name;
+  final TextStyle? style;
   final bool showTime;
   final DateTime? value;
   final DelegatingPaginatableStream<T> Function() getHistoryStream;
@@ -27,24 +29,26 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(name),
+      title: Text(
+        name,
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
       subtitle: Row(
         children: <Widget>[
           Expanded(
-            child: Text(value?.toDurationString() ?? ''),
+            child: Text(
+              value?.toDurationString() ?? '',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ),
           Text(
             value != null ? dateFormat.format(value!) : '',
             style: Theme.of(context).textTheme.labelMedium,
           ),
-        ],
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
           IconButton(
+            padding: const EdgeInsets.only(right: 42),
             tooltip: 'السجل',
-            icon: const Icon(Symbols.history),
+            icon: const Icon(Symbols.history, size: 36),
             onPressed: _onHistoryTap(context),
           ),
           if (onRecordNow != null)
@@ -55,6 +59,22 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
             ),
         ],
       ),
+      // trailing: Row(
+      // mainAxisSize: MainAxisSize.min,
+      // children: [
+      // IconButton(padding: EdgeInsets.zero,
+      //   tooltip: 'السجل',
+      //   icon: const Icon(Symbols.history , size: 28),
+      //   onPressed: _onHistoryTap(context),
+      // ),
+      // if (onRecordNow != null)
+      //   IconButton(
+      //     onPressed: onRecordNow,
+      //     icon: const Icon(Symbols.task_alt),
+      //     tooltip: 'تسجيل $name',
+      //   ),
+      // ],
+      // ),
     );
   }
 
