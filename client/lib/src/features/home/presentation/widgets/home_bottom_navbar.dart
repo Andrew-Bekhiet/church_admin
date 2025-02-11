@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -60,46 +62,41 @@ class HomeBottomNavBar extends StatelessWidget {
         return AnimatedBuilder(
           animation: tabAnimation!,
           builder: (context, child) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: additionalBottomPadding),
-              child: MediaQuery.removePadding(
-                context: context,
-                removeBottom: true,
-                child: DefaultTextStyle.merge(
-                  overflow: TextOverflow.ellipsis,
-                  child: CurvedNavigationBar(
-                    animationCurve: Curves.easeInOutCirc,
-                    height:
-                        kBottomNavigationBarHeight + additionalBottomPadding,
-                    key: ValueKey(isSundaySchool),
-                    color: theme.colorScheme.primaryContainer,
-                    buttonBackgroundColor: theme.colorScheme.primaryContainer,
-                    onTap: homeController.onTabIndexChanged,
-                    index: tabAnimation.value.floor(),
-                    animationDuration: kTabScrollDuration,
-                    backgroundColor: Colors.transparent,
-                    items: items.mapIndexed(
-                      (index, item) {
-                        final isActive = index == tabAnimation.value.round();
-                        final fgColor = theme.colorScheme.onPrimaryContainer
-                            .withValues(alpha: isActive ? 1 : 0.7);
-
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(item.icon, color: fgColor, fill: 1),
-                            if (isActive)
-                              Text(
-                                item.label,
-                                style: theme.textTheme.labelMedium
-                                    ?.copyWith(color: fgColor),
-                              ),
-                          ],
-                        );
-                      },
-                    ).toList(),
-                  ),
+            return DefaultTextStyle.merge(
+              overflow: TextOverflow.ellipsis,
+              child: CurvedNavigationBar(
+                animationCurve: Curves.easeInOutCirc,
+                height: min(
+                  kBottomNavigationBarHeight + additionalBottomPadding,
+                  75,
                 ),
+                key: ValueKey(isSundaySchool),
+                color: theme.colorScheme.primaryContainer,
+                buttonBackgroundColor: theme.colorScheme.primaryContainer,
+                onTap: homeController.onTabIndexChanged,
+                index: tabAnimation.value.floor(),
+                animationDuration: kTabScrollDuration,
+                backgroundColor: Colors.transparent,
+                items: items.mapIndexed(
+                  (index, item) {
+                    final isActive = index == tabAnimation.value.round();
+                    final fgColor = theme.colorScheme.onPrimaryContainer
+                        .withValues(alpha: isActive ? 1 : 0.7);
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(item.icon, color: fgColor, fill: 1),
+                        if (isActive)
+                          Text(
+                            item.label,
+                            style: theme.textTheme.labelMedium
+                                ?.copyWith(color: fgColor),
+                          ),
+                      ],
+                    );
+                  },
+                ).toList(),
               ),
             );
           },
