@@ -18,7 +18,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
-import 'package:zxcvbn/zxcvbn.dart';
 
 ProviderContainer? _globalProviderContainer;
 
@@ -43,6 +42,9 @@ void initGlobalProviderContainer(List<Override> overrides) {
 late final PackageInfo packageInfoPluginInstance;
 
 late final DeviceInfoService deviceInfoServiceInstance;
+
+late final String sneksarCSVData;
+const String sayingsCSVData = '';
 
 final deviceInfoServiceProvider = Provider<DeviceInfoService>(
   (ref) => deviceInfoServiceInstance,
@@ -361,4 +363,30 @@ final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
   (ref) => const CurrentPlatformService(),
 );
 
-final zxcvbnProvider = Provider<Zxcvbn>((ref) => Zxcvbn());
+final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
+  (ref) => HomeDailyDataRepository(
+    currentIndexes: ref.watch(hiveProvider).box<Map>('HomeDailyDataIndexes'),
+    versesData: kVersesData,
+    // Chunks the sneksar data into a list of list of 30 strings or less
+    // each corresponding to a day in the coptic calendar month
+    sneksarData: kRawSneksarData.fold(
+      [[]],
+      (acc, c) => [
+        ...acc.take(acc.length - 1),
+        if (acc.last.length < 30)
+          [...acc.last, c]
+        else ...[
+          acc.last,
+          [c],
+        ],
+      ],
+    ),
+    sayingData: sayingsCSVData.split('\n'),
+  ),
+);
+
+final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
+  (ref) => HomeDailyDataBloc(
+    homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+  ),
+);

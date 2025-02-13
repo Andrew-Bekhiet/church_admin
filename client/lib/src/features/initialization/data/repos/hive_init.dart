@@ -46,6 +46,7 @@ class HiveInit implements Initializer {
             .getHiveCipher(boxName: 'ImageUrlsCache'),
       ),
       hiveInstance.openBox<NotificationSetting>('NotificationsSettings'),
+      hiveInstance.openBox<Map>('HomeDailyDataIndexes'),
     ]);
   }
 }
