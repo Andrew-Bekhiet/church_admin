@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:uuid/uuid.dart';
 
 class EditService extends StatefulWidget {
@@ -56,17 +57,32 @@ class _EditServiceState extends State<EditService> {
       objectData: widget.service,
       getController: () => _controller,
       builder: (context, _controller) => Column(
+        spacing: 24,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
-            initialValue: newService.name,
+            hintText: 'اسم الخدمة',
             onValueChanged: (value) => newService = newService.copyWith(
               name: value.trim(),
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           ObjectSelectionField<Service, Service?>(
-            decoration: const InputDecoration(errorMaxLines: 2),
+            decoration: InputDecoration(
+              hintText: 'الخدمة التالية',
+              hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+              errorMaxLines: 2,
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              floatingLabelStyle:
+                  Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                      ),
+              border: outLineInputBorder(context),
+              enabledBorder: outLineInputBorder(context),
+              focusedBorder: outLineInputBorder(context),
+            ),
             initialValue: newService.nextService,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
@@ -89,6 +105,11 @@ class _EditServiceState extends State<EditService> {
             },
           ),
           StudyYearRangeField(
+            decoration: InputDecoration(
+              border: outLineInputBorder(context),
+              enabledBorder: outLineInputBorder(context),
+              focusedBorder: outLineInputBorder(context),
+            ),
             label: 'السنوات الدراسية',
             initialValue: (newService.studyYearFrom, newService.studyYearTo),
             nullable: true,
@@ -116,8 +137,78 @@ class _EditServiceState extends State<EditService> {
               () => newService = newService.copyWith(color: value),
             ),
           ),
+          Row(
+            spacing: 16,
+            children: [
+              Expanded(
+                child: FilledButton.icon(
+                  icon: const Icon(Symbols.save),
+                  label: Text(
+                    'حــفــظ',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Colors.white,
+                          fontSize: 22,
+                        ),
+                  ),
+                  onPressed: () => _controller.save(context),
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                    backgroundColor: WidgetStateProperty.all(
+                      Theme.of(context).colorScheme.primaryContainer,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FilledButton.icon(
+                  icon: const Icon(Symbols.cancel_rounded),
+                  label: Text(
+                    'الــــغـــــاء',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Colors.white,
+                          fontSize: 22,
+                        ),
+                  ),
+                  onPressed: () {
+                    _controller.confirmExit(context).then(
+                      (value) {
+                        if (value) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    );
+                  },
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                    backgroundColor: WidgetStateProperty.all(
+                      Theme.of(context).colorScheme.primaryContainer,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 80),
         ],
+      ),
+    );
+  }
+
+  OutlineInputBorder outLineInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primaryContainer,
       ),
     );
   }

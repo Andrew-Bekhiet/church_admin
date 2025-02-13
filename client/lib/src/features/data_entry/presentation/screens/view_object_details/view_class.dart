@@ -61,27 +61,6 @@ class _ViewClassState extends State<ViewClass> {
       detailsBuilder: (context, $class) => SliverList(
         delegate: SliverChildListDelegate(
           [
-            ListTile(
-              title: const Text('الخدمة'),
-              subtitle: $class.service != null
-                  ? Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: ViewableObjectCard($class.service!),
-                    )
-                  : const Text('لا يوجد'),
-            ),
-            ListTile(
-              title: const Text('السنة الدراسية'),
-              subtitle: Text($class.studyYear?.name ?? 'لا يوجد'),
-            ),
-            ListTile(
-              title: FilledButton.icon(
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('احصائيات'),
-                // TODO: add class analysis
-                onPressed: () {},
-              ),
-            ),
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: $class.lastEdit?.time,
@@ -89,10 +68,30 @@ class _ViewClassState extends State<ViewClass> {
                   .paginateEditHistory<Class>(id: $class.id),
             ),
             ListTile(
-              title: const Text('الخدام المسؤولين'),
-              subtitle: $class.adminUsers?.isNotEmpty ?? false
-                  ? AdminUsers(users: $class.adminUsers!)
-                  : const Text('لا يوجد خدام محددين للفصل'),
+              title: FilledButton.icon(
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 8),
+                  ),
+                  backgroundColor: WidgetStateProperty.all(
+                    Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                ),
+                icon: const Icon(Symbols.query_stats),
+                label: Text(
+                  'الاحصائيات',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white,
+                      ),
+                ),
+                // TODO: add service analysis
+                onPressed: () {},
+              ),
             ),
           ],
         ),

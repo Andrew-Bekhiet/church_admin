@@ -45,7 +45,7 @@ class PhotoField extends StatelessWidget {
       builder: (state) => SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final photoSize = 4 * constraints.biggest.height / 5;
+            final photoSize = 2 * constraints.biggest.height / 5;
             final colorScheme = Theme.of(context).colorScheme;
 
             return ViewableObjectAppBar(
@@ -75,11 +75,7 @@ class PhotoField extends StatelessWidget {
                   ),
                 (true, true, _) || (_, _, false) => DecoratedBox(
                     decoration: ShapeDecoration(
-                      shape: circleCrop
-                          ? const CircleBorder()
-                          : const RoundedRectangleBorder(
-                              borderRadius: ImageObjectWidget.clipBorderRadius,
-                            ),
+                      shape: const CircleBorder(),
                       color: colorScheme.primaryContainer,
                     ),
                     child: ConstrainedBox(

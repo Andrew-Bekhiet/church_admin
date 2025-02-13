@@ -22,8 +22,8 @@ class HomeModeSwitcher extends StatelessWidget {
             onTap: homeController.switchHomeMode,
             child: Image.asset(
               modeSnapshot.data == HomeMode.sundaySchool
-                  ? 'assets/Logo.png'
-                  : 'assets/church-data.png',
+                  ? 'assets/images/sunday_school_services_image.png'
+                  : 'assets/images/church_data.png',
               width: kToolbarHeight - 12,
               height: kToolbarHeight - 12,
               fit: BoxFit.scaleDown,

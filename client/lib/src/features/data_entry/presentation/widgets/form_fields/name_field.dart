@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 class NameField extends StatelessWidget {
   final String? initialValue;
+  final String? hintText;
+
   final void Function(String) onValueChanged;
   final EdgeInsetsGeometry? padding;
 
   const NameField({
-    required this.initialValue,
     required this.onValueChanged,
+    this.initialValue,
+    this.hintText,
     this.padding,
     super.key,
   });
@@ -16,8 +19,19 @@ class NameField extends StatelessWidget {
   Widget build(BuildContext context) {
     final field = TextFormField(
       key: ValueKey(initialValue),
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.outline,
+            ),
         labelText: 'الاسم',
+        floatingLabelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: outLineInputBorder(context),
+        enabledBorder: outLineInputBorder(context),
+        focusedBorder: outLineInputBorder(context),
       ),
       initialValue: initialValue,
       keyboardType: TextInputType.name,
@@ -39,5 +53,16 @@ class NameField extends StatelessWidget {
             child: field,
           )
         : field;
+  }
+
+  OutlineInputBorder outLineInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primaryContainer,
+      ),
+    );
   }
 }

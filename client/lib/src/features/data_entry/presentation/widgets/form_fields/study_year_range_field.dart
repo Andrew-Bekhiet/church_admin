@@ -38,11 +38,17 @@ class StudyYearRangeField extends StatelessWidget {
       builder: (state) {
         return InputDecorator(
           decoration: InputDecoration(
+            border: outLineInputBorder(context),
+            enabledBorder: outLineInputBorder(context),
+            focusedBorder: outLineInputBorder(context),
             labelText: label,
+            labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
             errorText: state.errorText,
             suffixIcon: nullable && state.value != null
                 ? IconButton(
-                    icon: const Icon(Symbols.delete),
+                    icon: Icon(Symbols.delete , color: Theme.of(context).colorScheme.primaryContainer,),
                     tooltip: 'حذف القيمة',
                     onPressed: () {
                       state.didChange(null);
@@ -52,7 +58,14 @@ class StudyYearRangeField extends StatelessWidget {
                 : null,
           ),
           child: Row(
+            spacing: 8,
             children: [
+              Text(
+                'من',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+              ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
@@ -64,11 +77,11 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: 'من',
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
+                  decoration: InputDecoration(
+                    border: outLineInputBorder(context),
+                    enabledBorder: outLineInputBorder(context),
+                    focusedBorder: outLineInputBorder(context),
+                    labelText: '',
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
@@ -79,7 +92,13 @@ class StudyYearRangeField extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 2),
+              Text(
+                'الي',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+              ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
@@ -91,11 +110,11 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: 'إلى',
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
+                  decoration: InputDecoration(
+                    border: outLineInputBorder(context),
+                    enabledBorder: outLineInputBorder(context),
+                    focusedBorder: outLineInputBorder(context),
+                    labelText: '',
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
@@ -110,6 +129,17 @@ class StudyYearRangeField extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  OutlineInputBorder outLineInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primaryContainer,
+      ),
     );
   }
 }

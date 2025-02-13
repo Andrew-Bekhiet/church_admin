@@ -34,10 +34,18 @@ class ColorField extends StatelessWidget {
           onTap: () => _selectColor(context, state),
           child: InputDecorator(
             decoration: InputDecoration(
+              floatingLabelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: outLineInputBorder(context),
+        enabledBorder: outLineInputBorder(context),
+        focusedBorder: outLineInputBorder(context),
               labelText: 'اللون',
               suffixIcon: nullable
                   ? IconButton(
-                      icon: const Icon(Symbols.delete),
+                      icon: Icon(Symbols.delete ,
+                    color: Theme.of(context).colorScheme.primaryContainer,),
                       onPressed: () {
                         state.didChange(null);
                         onChanged?.call(null);
@@ -106,5 +114,16 @@ class ColorField extends StatelessWidget {
       onChanged?.call(newColor);
       focusScope.nextFocus();
     }
+  }
+
+  OutlineInputBorder outLineInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primaryContainer,
+      ),
+    );
   }
 }
