@@ -134,7 +134,7 @@ class _ViewableObjectListState<T extends Viewable>
             controller: scrollController,
             itemBuilder: itemBuilder,
             cacheExtent: 250,
-            itemCount: items.length + 1,
+            itemCount: items.length + (items.length % 2) + 2,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
         } else {

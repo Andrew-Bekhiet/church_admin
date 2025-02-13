@@ -11,6 +11,8 @@ class HomeController {
     onModeChanged(HomeMode.sundaySchool);
   }
 
+  final HomeDailyDataBloc dailyDataBloc = HomeDailyDataBloc.I;
+
   final BehaviorSubject<ViewableObjectListType> servicesListTypeSubject =
       BehaviorSubject.seeded(ViewableObjectListType.grid);
 
