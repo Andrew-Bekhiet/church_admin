@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/widgets/save_and_cancel_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:uuid/uuid.dart';
 
 class EditService extends StatefulWidget {
@@ -41,7 +41,7 @@ class _EditServiceState extends State<EditService> {
       newObject: _oldService ??
           Service(
             id: const Uuid().v4(),
-            name: 'خدمة جديدة',
+            name: 'اضافة خدمة',
           ),
       initialObject: _oldService,
     );
@@ -137,64 +137,17 @@ class _EditServiceState extends State<EditService> {
               () => newService = newService.copyWith(color: value),
             ),
           ),
-          Row(
-            spacing: 16,
-            children: [
-              Expanded(
-                child: FilledButton.icon(
-                  icon: const Icon(Symbols.save),
-                  label: Text(
-                    'حــفــظ',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Colors.white,
-                          fontSize: 22,
-                        ),
-                  ),
-                  onPressed: () => _controller.save(context),
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                    ),
-                    backgroundColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.primaryContainer,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: FilledButton.icon(
-                  icon: const Icon(Symbols.cancel_rounded),
-                  label: Text(
-                    'الــــغـــــاء',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Colors.white,
-                          fontSize: 22,
-                        ),
-                  ),
-                  onPressed: () {
-                    _controller.confirmExit(context).then(
-                      (value) {
-                        if (value) {
-                          Navigator.of(context).pop();
-                        }
-                      },
-                    );
-                  },
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                    ),
-                    backgroundColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.primaryContainer,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          SaveAndCancelButtonRow(
+            onSave: () => _controller.save(context),
+            onCancel: () {
+              _controller.confirmExit(context).then(
+                (value) {
+                  if (value) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              );
+            },
           ),
           const SizedBox(height: 80),
         ],

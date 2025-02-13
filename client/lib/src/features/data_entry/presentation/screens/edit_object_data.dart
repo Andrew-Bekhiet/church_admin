@@ -102,11 +102,6 @@ class _EditObjectDataState<T extends ViewableWithID>
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => _controller.save(context),
-        //   tooltip: 'حفظ',
-        //   child: const Icon(Symbols.save),
-        // ),
       ),
     );
   }

@@ -34,18 +34,21 @@ class ColorField extends StatelessWidget {
           onTap: () => _selectColor(context, state),
           child: InputDecorator(
             decoration: InputDecoration(
-              floatingLabelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Theme.of(context).colorScheme.primaryContainer,
-            ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: outLineInputBorder(context),
-        enabledBorder: outLineInputBorder(context),
-        focusedBorder: outLineInputBorder(context),
+              floatingLabelStyle:
+                  Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                      ),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              border: outLineInputBorder(context),
+              enabledBorder: outLineInputBorder(context),
+              focusedBorder: outLineInputBorder(context),
               labelText: 'اللون',
               suffixIcon: nullable
                   ? IconButton(
-                      icon: Icon(Symbols.delete ,
-                    color: Theme.of(context).colorScheme.primaryContainer,),
+                      icon: Icon(
+                        Symbols.delete,
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                      ),
                       onPressed: () {
                         state.didChange(null);
                         onChanged?.call(null);
