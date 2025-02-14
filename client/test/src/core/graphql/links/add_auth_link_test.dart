@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
@@ -59,7 +61,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        getIdTokenStream: () => AuthBloc.I.idTokenStream,
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -92,6 +94,60 @@ void main() {
   );
 
   test(
+    'Add Auth Link => request => gets latest idTokenStream data',
+    () async {
+      late final idTokenStreamController = BehaviorSubject<String>();
+      addTearDown(idTokenStreamController.close);
+
+      dynamic Function()? capturedInitialPayload;
+
+      final mockRequest = _createMockRequest();
+      final mockResponse = MockResponse();
+      final mockHttpLink = _createMockHttpLink(mockResponse);
+      final mockWebSocketLink = _createMockWSLink(mockResponse);
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokenStreamController.stream.startWith('seedIdToken'),
+        url: 'url',
+        createHttpLink: (url) => mockHttpLink,
+        createWSLink: (url, config) {
+          capturedInitialPayload = config.initialPayload;
+
+          return mockWebSocketLink;
+        },
+      );
+      addTearDown(unit.dispose);
+
+      unit.request(mockRequest, forward);
+
+      expect(
+        await capturedInitialPayload!(),
+        containsPair(
+          'headers',
+          containsPair(
+            'Authorization',
+            'Bearer seedIdToken',
+          ),
+        ),
+      );
+
+      idTokenStreamController.add('newIdToken');
+      await Future.delayed(Duration.zero);
+
+      expect(
+        await capturedInitialPayload!(),
+        containsPair(
+          'headers',
+          containsPair(
+            'Authorization',
+            'Bearer newIdToken',
+          ),
+        ),
+      );
+    },
+  );
+
+  test(
     'Add Auth Link => request => query',
     () async {
       final mockRequest = _createMockRequest(isSubscription: false);
@@ -100,7 +156,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        getIdTokenStream: () => AuthBloc.I.idTokenStream,
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) => mockWebSocketLink,
@@ -129,7 +185,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        getIdTokenStream: () => AuthBloc.I.idTokenStream,
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'https://example.com',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -172,7 +228,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        getIdTokenStream: () => AuthBloc.I.idTokenStream,
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'https://example.com',
         createHttpLink: (url) {
           expect(url, 'https://example.com');

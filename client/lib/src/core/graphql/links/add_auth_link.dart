@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:graphql/client.dart';
@@ -15,19 +16,22 @@ class AddAuthLink extends Link {
   final String url;
   final HttpLink Function(String) createHttpLink;
   final WebSocketLink Function(String, SocketClientConfig) createWSLink;
-  final Stream<String?> Function() getIdTokenStream;
 
-  late final Stream<String?> _idTokenStream = getIdTokenStream();
+  late final ValueConnectableStream<String?> _idTokenStream;
+  late final StreamSubscription<String?> _idTokenSubscription;
 
   HttpLink? _httpLink;
   WebSocketLink? _wsLink;
 
   AddAuthLink({
     required this.url,
-    required this.getIdTokenStream,
+    required Stream<String?> idTokenStream,
     this.createHttpLink = defaultCreateHttpLink,
     this.createWSLink = defaultCreateWSLink,
-  });
+  }) {
+    _idTokenStream = idTokenStream.publishValue();
+    _idTokenSubscription = _idTokenStream.connect();
+  }
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
@@ -102,6 +106,7 @@ class AddAuthLink extends Link {
 
   @override
   Future<void> dispose() async {
+    await _idTokenSubscription.cancel();
     await _httpLink?.dispose();
     await _wsLink?.dispose();
   }
