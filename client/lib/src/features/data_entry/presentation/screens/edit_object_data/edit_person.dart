@@ -67,7 +67,7 @@ class _EditPersonState extends State<EditPerson> {
       newObject: _oldPerson ??
           Person(
             id: const Uuid().v4(),
-            name: 'مخدوم جديد',
+            name: 'اضافة مخدوم',
             family: widget.family,
             familyId: widget.family?.id,
             services: widget.service != null ? [widget.service!] : [],
@@ -103,7 +103,7 @@ class _EditPersonState extends State<EditPerson> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
-            initialValue: newPerson.name,
+            hintText: 'اسم المخدوم',
             onValueChanged: (value) => newPerson = newPerson.copyWith(
               name: value.trim(),
             ),
@@ -113,13 +113,28 @@ class _EditPersonState extends State<EditPerson> {
             builder: (context) => TextFormField(
               key: ValueKey(newPerson.mainPhone),
               decoration: InputDecoration(
+                hintText: '20+',
+                hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                floatingLabelStyle:
+                    Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        ),
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                border: outLineInputBorder(context),
+                enabledBorder: outLineInputBorder(context),
+                focusedBorder: outLineInputBorder(context),
                 labelText: 'رقم الهاتف',
                 suffixIcon: CurrentPlatformService.I.isAndroid ||
                         CurrentPlatformService.I.isIOS
                     ? IconButton(
                         tooltip: 'اختيار من جهات الاتصال',
                         onPressed: _importFromContacts,
-                        icon: const Icon(Symbols.contacts),
+                        icon: Icon(
+                          Symbols.contacts,
+                          color: themeData.colorScheme.primaryContainer,
+                        ),
                       )
                     : null,
               ),
@@ -209,8 +224,29 @@ class _EditPersonState extends State<EditPerson> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: FilledButton.tonalIcon(
-                  icon: const Icon(Symbols.add),
-                  label: const Text('اضافة رقم هاتف أخر'),
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    padding: WidgetStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                    backgroundColor: WidgetStateProperty.all(
+                      Theme.of(context).colorScheme.primaryContainer,
+                    ),
+                  ),
+                  icon: Icon(
+                    Symbols.add,
+                    color: themeData.colorScheme.onPrimaryContainer,
+                  ),
+                  label: Text(
+                    'رقم أخر',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: themeData.colorScheme.onPrimaryContainer,
+                        ),
+                  ),
                   onPressed: () async {
                     final name = await _renamePhoneFieldName();
                     if (name is String) {
@@ -1129,6 +1165,17 @@ class _EditPersonState extends State<EditPerson> {
           .entries
           .map((e) => e.key.copyWith(groups: e.value)),
     ).union(services.toSet()).toList();
+  }
+
+  OutlineInputBorder outLineInputBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primaryContainer,
+      ),
+    );
   }
 }
 

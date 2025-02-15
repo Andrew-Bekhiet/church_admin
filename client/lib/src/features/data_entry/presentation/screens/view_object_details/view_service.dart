@@ -101,7 +101,7 @@ class _ViewServiceState extends State<ViewService> {
                 label: Text(
                   'الاحصائيات',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                 ),
                 // TODO: add service analysis
@@ -156,7 +156,7 @@ class _ViewServiceState extends State<ViewService> {
                 title: Text(
                   class_.name,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color:Colors.white,
+                    color:Theme.of(context).colorScheme.onPrimaryContainer,
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.center,

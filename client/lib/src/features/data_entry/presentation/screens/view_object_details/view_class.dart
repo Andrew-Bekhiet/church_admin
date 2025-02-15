@@ -34,6 +34,8 @@ class _ViewClassState extends State<ViewClass> {
 
   @override
   Widget build(BuildContext context) {
+        final themeData = Theme.of(context);
+
     return ViewObjectDetails(
       objectId: widget.classId,
       object: widget.$class,
@@ -86,7 +88,7 @@ class _ViewClassState extends State<ViewClass> {
                 label: Text(
                   'الاحصائيات',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Colors.white,
+                        color: themeData.colorScheme.onPrimaryContainer,
                       ),
                 ),
                 // TODO: add service analysis

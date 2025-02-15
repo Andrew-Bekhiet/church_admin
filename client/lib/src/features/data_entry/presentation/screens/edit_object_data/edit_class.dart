@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 import 'package:church_admin/src/core/widgets/save_and_cancel_buttons.dart';
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class EditClass extends StatefulWidget {

@@ -21,7 +21,7 @@ class SaveAndCancelButtonRow extends StatelessWidget {
             label: Text(
               'حــفــظ',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     fontSize: 22,
                   ),
             ),
@@ -44,7 +44,7 @@ class SaveAndCancelButtonRow extends StatelessWidget {
             label: Text(
               'الــــغـــــاء',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     fontSize: 22,
                   ),
             ),

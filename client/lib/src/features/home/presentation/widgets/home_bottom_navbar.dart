@@ -154,7 +154,7 @@ class HomeBottomNavBar extends StatelessWidget {
                   activeIcon: Icon(
                     item['icon'],
                     fill: 1,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),
                 ),
               )
@@ -188,7 +188,7 @@ class BottomNavigationBarItemWidget extends StatelessWidget {
           Text(
             label!,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
           ),
       ],
