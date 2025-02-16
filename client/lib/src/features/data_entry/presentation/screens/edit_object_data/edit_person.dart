@@ -888,7 +888,6 @@ class _EditPersonState extends State<EditPerson> {
             },
             validator: (v) => null,
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

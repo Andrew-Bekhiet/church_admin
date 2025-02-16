@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/widgets/save_and_cancel_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -80,20 +79,9 @@ class _EditClassState extends State<EditClass> {
             },
           ),
           ObjectSelectionField<Service, Service?>(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               errorMaxLines: 2,
               labelText: 'الخدمة الحالية',
-              hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              floatingLabelStyle:
-                  Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                      ),
-              border: outLineInputBorder(context),
-              enabledBorder: outLineInputBorder(context),
-              focusedBorder: outLineInputBorder(context),
             ),
             initialValue: newClass.service,
             listController: (s) => ViewableObjectListController(
@@ -117,66 +105,42 @@ class _EditClassState extends State<EditClass> {
                   : null;
             },
           ),
-          // ObjectSelectionField<StudyYear, StudyYear?>(
-          //   initialValue: newClass.studyYear,
-          //   listController: (s) => ViewableObjectListController(
-          //     objectsPaginatableStream: DatabaseService.I.metadata.studyYears
-          //         .streamAll(searchQuery: s),
-          //   ),
-          //   labelText: 'السنة الدراسية',
-          //   onChanged: (value) => newClass = newClass.copyWith(
-          //     //Store the selected object
-          //     //so we can build the widget based on it ...
-          //     studyYear: value,
-          //     //... and its id to send it in the mutation
-          //     serviceStudyYear: value?.order,
-          //   ),
-          //   builder: (context, state) {
-          //     return state.value != null ? Text(state.value!.name) : null;
-          //   },
-          //   validator: (value) {
-          //     if (value == null) {
-          //       return 'يجب اختيار السنة الدراسية';
-          //     } else if (newClass.service != null &&
-          //         (value.order < newClass.service!.studyYearFrom!.order ||
-          //             value.order > newClass.service!.studyYearTo!.order)) {
-          //       return 'السنة الدراسية يجب ان تكون بين '
-          //           '${newClass.service!.studyYearFrom!.name} و${newClass.service!.studyYearTo!.name}';
-          //     }
-          //     return null;
-          //   },
-          // ),
+          ObjectSelectionField<StudyYear, StudyYear?>(
+            initialValue: newClass.studyYear,
+            listController: (s) => ViewableObjectListController(
+              objectsPaginatableStream: DatabaseService.I.metadata.studyYears
+                  .streamAll(searchQuery: s),
+            ),
+            labelText: 'السنة الدراسية',
+            onChanged: (value) => newClass = newClass.copyWith(
+              //Store the selected object
+              //so we can build the widget based on it ...
+              studyYear: value,
+              //... and its id to send it in the mutation
+              serviceStudyYear: value?.order,
+            ),
+            builder: (context, state) {
+              return state.value != null ? Text(state.value!.name) : null;
+            },
+            validator: (value) {
+              if (value == null) {
+                return 'يجب اختيار السنة الدراسية';
+              } else if (newClass.service != null &&
+                  (value.order < newClass.service!.studyYearFrom!.order ||
+                      value.order > newClass.service!.studyYearTo!.order)) {
+                return 'السنة الدراسية يجب ان تكون بين '
+                    '${newClass.service!.studyYearFrom!.name} و${newClass.service!.studyYearTo!.name}';
+              }
+              return null;
+            },
+          ),
           ColorField(
             initialValue: newClass.color,
             onChanged: (value) => setState(
               () => newClass = newClass.copyWith(color: value),
             ),
           ),
-          SaveAndCancelButtonRow(
-            onSave: () => _controller.save(context),
-            onCancel: () {
-              _controller.confirmExit(context).then(
-                (value) {
-                  if (value) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              );
-            },
-          ),
-          const SizedBox(height: 80),
         ],
-      ),
-    );
-  }
-
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
       ),
     );
   }

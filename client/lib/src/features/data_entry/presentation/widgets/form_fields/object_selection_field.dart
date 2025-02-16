@@ -116,15 +116,4 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       builder: builder,
     );
   }
-
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
-    );
-  }
 }

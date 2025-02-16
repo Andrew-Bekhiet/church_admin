@@ -99,6 +99,29 @@ class _EditObjectDataState<T extends ViewableWithID>
                   ),
                 ),
               ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 16,
+                  ),
+                  child: SaveAndCancelButtonRow(
+                    onSave: () => _controller.save(context),
+                    onCancel: () {
+                      _controller.confirmExit(context).then(
+                        (value) {
+                          if (value) {
+                            Navigator.of(context).pop();
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 80),
+              ),
             ],
           ),
         ),

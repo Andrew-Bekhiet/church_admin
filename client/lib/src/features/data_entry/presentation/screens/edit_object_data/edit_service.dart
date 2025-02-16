@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/widgets/save_and_cancel_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -70,18 +69,9 @@ class _EditServiceState extends State<EditService> {
           ObjectSelectionField<Service, Service?>(
             decoration: InputDecoration(
               hintText: 'الخدمة التالية',
-              hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
+              
               errorMaxLines: 2,
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              floatingLabelStyle:
-                  Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                      ),
-              border: outLineInputBorder(context),
-              enabledBorder: outLineInputBorder(context),
-              focusedBorder: outLineInputBorder(context),
+            
             ),
             initialValue: newService.nextService,
             listController: (s) => ViewableObjectListController(
@@ -105,11 +95,6 @@ class _EditServiceState extends State<EditService> {
             },
           ),
           StudyYearRangeField(
-            decoration: InputDecoration(
-              border: outLineInputBorder(context),
-              enabledBorder: outLineInputBorder(context),
-              focusedBorder: outLineInputBorder(context),
-            ),
             label: 'السنوات الدراسية',
             initialValue: (newService.studyYearFrom, newService.studyYearTo),
             nullable: true,
@@ -137,32 +122,10 @@ class _EditServiceState extends State<EditService> {
               () => newService = newService.copyWith(color: value),
             ),
           ),
-          SaveAndCancelButtonRow(
-            onSave: () => _controller.save(context),
-            onCancel: () {
-              _controller.confirmExit(context).then(
-                (value) {
-                  if (value) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              );
-            },
-          ),
-          const SizedBox(height: 80),
         ],
       ),
     );
   }
 
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
-    );
-  }
+
 }
