@@ -117,23 +117,9 @@ class _ViewServiceState extends State<ViewService> {
       ),
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
-              itemBuilder: (context, class_, config) =>
-                  ViewableObjectCard<Class>(
-                class_,
-                title: Text(
-                  class_.name,
-                  style: themeData.textTheme.headlineSmall!.copyWith(
-                    color: themeData.colorScheme.onPrimaryContainer,
-                    fontSize: 18,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                config: config,
-                size: null,
-              ),
-              type: ViewableObjectListType.grid3,
+itemBuilder: (context, class_, config) =>
+ViewableObjectCard<Class>(class_, config: config),
+type: ViewableObjectListType.grid3,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
             ),

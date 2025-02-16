@@ -104,6 +104,7 @@ class _EditPersonState extends State<EditPerson> {
         children: [
           NameField(
             hintText: 'اسم المخدوم',
+            initialValue: newPerson.name,
             onValueChanged: (value) => newPerson = newPerson.copyWith(
               name: value.trim(),
             ),

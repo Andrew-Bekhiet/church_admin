@@ -60,7 +60,8 @@ class _EditServiceState extends State<EditService> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
-            hintText: 'اسم الخدمة',
+initialValue: newService.name,
+hintText: 'اسم الخدمة',
             onValueChanged: (value) => newService = newService.copyWith(
               name: value.trim(),
             ),
