@@ -94,7 +94,7 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
               _AppBarPhoto(
                 foregroundColor: _foregroundColorTween.lerp(animationValue),
                 viewable: widget.viewable,
-                height: 2.5 * constraints.biggest.height / 5,
+                height: 5 * constraints.biggest.height / 5,
                 photoAlign: _photoAlignTween.lerp(animationValue),
                 borderRadius: borderRadiusValue,
                 circleCrop: widget.circleCrop,
