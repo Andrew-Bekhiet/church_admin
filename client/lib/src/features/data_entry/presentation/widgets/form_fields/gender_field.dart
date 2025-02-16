@@ -42,13 +42,9 @@ class GenderField extends StatelessWidget {
         final theme = Theme.of(context);
         return InputDecorator(
           decoration: InputDecoration(
-            border: outLineInputBorder(context),
-            enabledBorder: outLineInputBorder(context),
-            focusedBorder: outLineInputBorder(context),
+    
             labelText: label,
-            labelStyle: theme.textTheme.titleMedium!.copyWith(
-              color: theme.colorScheme.primaryContainer,
-            ),
+            
             errorText: state.errorText,
           ),
           child: Row(
@@ -145,16 +141,5 @@ class GenderField extends StatelessWidget {
     if (onChanged != null) {
       onChanged?.call(value);
     }
-  }
-
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
-    );
   }
 }

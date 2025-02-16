@@ -181,8 +181,8 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     final inputBorder = OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(20)),
-      borderSide: BorderSide(color: colorScheme.primary),
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      borderSide: BorderSide(color: colorScheme.primaryContainer),
     );
 
     return themeData.copyWith(
@@ -204,6 +204,14 @@ class ThemingService with WidgetsBindingObserver {
       inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
         enabledBorder: inputBorder,
         border: inputBorder,
+        focusedBorder: inputBorder,
+        hintStyle: themeData.textTheme.titleMedium!.copyWith(
+          color: colorScheme.outline,
+        ),
+        floatingLabelStyle: themeData.textTheme.titleMedium!.copyWith(
+          color: colorScheme.primaryContainer,
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       dividerTheme: themeData.dividerTheme.copyWith(
         thickness: 1,

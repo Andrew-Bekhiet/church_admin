@@ -21,17 +21,7 @@ class NameField extends StatelessWidget {
       key: ValueKey(initialValue),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Theme.of(context).colorScheme.outline,
-            ),
         labelText: 'الاسم',
-        floatingLabelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Theme.of(context).colorScheme.primaryContainer,
-            ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: outLineInputBorder(context),
-        enabledBorder: outLineInputBorder(context),
-        focusedBorder: outLineInputBorder(context),
       ),
       initialValue: initialValue,
       keyboardType: TextInputType.name,
@@ -53,16 +43,5 @@ class NameField extends StatelessWidget {
             child: field,
           )
         : field;
-  }
-
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
-    );
   }
 }

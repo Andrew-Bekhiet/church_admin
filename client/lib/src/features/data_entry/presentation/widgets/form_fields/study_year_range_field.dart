@@ -38,13 +38,7 @@ class StudyYearRangeField extends StatelessWidget {
       builder: (state) {
         return InputDecorator(
           decoration: InputDecoration(
-            border: outLineInputBorder(context),
-            enabledBorder: outLineInputBorder(context),
-            focusedBorder: outLineInputBorder(context),
             labelText: label,
-            labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
             errorText: state.errorText,
             suffixIcon: nullable && state.value != null
                 ? IconButton(
@@ -77,10 +71,7 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: InputDecoration(
-                    border: outLineInputBorder(context),
-                    enabledBorder: outLineInputBorder(context),
-                    focusedBorder: outLineInputBorder(context),
+                  decoration: const InputDecoration(
                     labelText: '',
                   ),
                   nullable: false,
@@ -110,11 +101,8 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: InputDecoration(
-                    border: outLineInputBorder(context),
-                    enabledBorder: outLineInputBorder(context),
-                    focusedBorder: outLineInputBorder(context),
-                    labelText: '',
+                  decoration: const InputDecoration(
+                                    labelText: '',
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
@@ -129,17 +117,6 @@ class StudyYearRangeField extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
     );
   }
 }

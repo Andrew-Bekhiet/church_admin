@@ -114,17 +114,6 @@ class _EditPersonState extends State<EditPerson> {
               key: ValueKey(newPerson.mainPhone),
               decoration: InputDecoration(
                 hintText: '20+',
-                hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                floatingLabelStyle:
-                    Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                        ),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: outLineInputBorder(context),
-                enabledBorder: outLineInputBorder(context),
-                focusedBorder: outLineInputBorder(context),
                 labelText: 'رقم الهاتف',
                 suffixIcon: CurrentPlatformService.I.isAndroid ||
                         CurrentPlatformService.I.isIOS
@@ -226,8 +215,8 @@ class _EditPersonState extends State<EditPerson> {
                 child: FilledButton.tonalIcon(
                   style: ButtonStyle(
                     shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
                     padding: WidgetStateProperty.all(
@@ -265,6 +254,7 @@ class _EditPersonState extends State<EditPerson> {
             ],
           ),
           AddressWithLocationField(
+            
             initialAddress: newPerson.address,
             onAddressChanged: (value) => newPerson = newPerson.copyWith(
               address: value.trim(),
@@ -1167,16 +1157,7 @@ class _EditPersonState extends State<EditPerson> {
     ).union(services.toSet()).toList();
   }
 
-  OutlineInputBorder outLineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primaryContainer,
-      ),
-    );
-  }
+  
 }
 
 class _SelectServicesPage extends StatefulWidget {
