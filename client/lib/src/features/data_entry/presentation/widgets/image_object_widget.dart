@@ -39,8 +39,7 @@ class ImageObjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData defaultIcon =
         viewableObjectService.getDefaultIconFor(imageObject);
-    final constraints =
-        BoxConstraints.expand(width: size, height: size);
+    final constraints = BoxConstraints.expand(width: size, height: size);
     final String cacheKey = imageObject.imageInfo.cacheKey;
     final BorderRadius? borderRadius = circleCrop
         ? null
@@ -186,11 +185,6 @@ class _ImageFromUrlWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
-        ),
         if (hasBlurhash) imagePlaceholder,
         CachedNetworkImage(
           key: ValueKey(imageUrl + cacheKey),
@@ -207,7 +201,6 @@ class _ImageFromUrlWidget extends StatelessWidget {
           fadeOutDuration: animationsDuration,
           useOldImageOnUrlChange: true,
         ),
-        
       ],
     );
   }
