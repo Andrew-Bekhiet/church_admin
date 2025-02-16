@@ -8,7 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-enum ViewableObjectListType { list, grid, custom }
+enum ViewableObjectListType {
+  list(numOfColumn: 0),
+  grid(numOfColumn: 2),
+  grid3(numOfColumn: 3);
+
+  final int numOfColumn;
+
+  const ViewableObjectListType({
+    required this.numOfColumn,
+  });
+}
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   const ViewableObjectList({
@@ -125,10 +135,10 @@ class _ViewableObjectListState<T extends Viewable>
           );
         }
 
-        if (widget.type == ViewableObjectListType.grid) {
+        if (widget.type == ViewableObjectListType.grid || widget.type == ViewableObjectListType.grid3 ) {
           return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: widget.type.numOfColumn,
               crossAxisSpacing: 15,
               mainAxisSpacing: 40,
               childAspectRatio: 1.13,
@@ -140,8 +150,8 @@ class _ViewableObjectListState<T extends Viewable>
             itemCount: items.length + 1,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
-        } else if (widget.type == ViewableObjectListType.list) {
-          return ListView.builder(
+        }else {
+        return ListView.builder(
             padding: const EdgeInsets.all(2),
             controller: scrollController,
             itemBuilder: itemBuilder,
@@ -152,20 +162,6 @@ class _ViewableObjectListState<T extends Viewable>
                 // ignore: avoid-returning-widgets
                 ? HeroMode(enabled: false, child: itemBuilder(context, 0))
                 : null,
-          );
-        } else {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 9,
-            ),
-            padding: const EdgeInsets.all(2),
-            controller: scrollController,
-            itemBuilder: itemBuilder,
-            cacheExtent: 250,
-            itemCount: items.length + 1,
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
         }
       },

@@ -145,7 +145,7 @@ class _ViewServiceState extends State<ViewService> {
                 config: config,
                 size: null,
               ),
-              type: ViewableObjectListType.custom,
+              type: ViewableObjectListType.grid3,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
             ),
