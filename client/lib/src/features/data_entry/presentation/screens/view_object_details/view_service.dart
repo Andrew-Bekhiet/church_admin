@@ -76,19 +76,6 @@ class _ViewServiceState extends State<ViewService> {
             ),
             ListTile(
               title: FilledButton.icon(
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all(
-                    const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                  ),
-                  padding: WidgetStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  backgroundColor: WidgetStateProperty.all(
-                    themeData.colorScheme.primaryContainer,
-                  ),
-                ),
                 icon: const Icon(Symbols.query_stats),
                 label: Text(
                   'الاحصائيات',
@@ -137,6 +124,7 @@ class _ViewServiceState extends State<ViewService> {
                   class_.name,
                   style: themeData.textTheme.headlineSmall!.copyWith(
                     color: themeData.colorScheme.onPrimaryContainer,
+                    fontSize: 18,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,

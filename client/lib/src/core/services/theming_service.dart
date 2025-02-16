@@ -188,11 +188,6 @@ class ThemingService with WidgetsBindingObserver {
     return themeData.copyWith(
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.all<TextStyle>(
-            themeData.textTheme.titleLarge!.copyWith(
-              color: colorScheme.onPrimaryContainer,
-            ),
-          ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),

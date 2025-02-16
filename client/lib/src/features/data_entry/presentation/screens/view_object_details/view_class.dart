@@ -70,8 +70,11 @@ class _ViewClassState extends State<ViewClass> {
             ListTile(
               title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
-                label: const Text(
+                label: Text(
                   'الاحصائيات',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
                 ),
                 // TODO: add service analysis
                 onPressed: () {},
