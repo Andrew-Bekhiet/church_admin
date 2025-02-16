@@ -59,6 +59,7 @@ class _ViewServiceState extends State<ViewService> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return ViewObjectDetails(
       objectId: widget.serviceId,
       object: widget.service,
@@ -78,22 +79,22 @@ class _ViewServiceState extends State<ViewService> {
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all(
                     const RoundedRectangleBorder(
-                      borderRadius:BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
                   padding: WidgetStateProperty.all(
                     const EdgeInsets.symmetric(vertical: 8),
                   ),
                   backgroundColor: WidgetStateProperty.all(
-                    Theme.of(context).colorScheme.primaryContainer,
+                    themeData.colorScheme.primaryContainer,
                   ),
                 ),
                 icon: const Icon(Symbols.query_stats),
                 label: Text(
                   'الاحصائيات',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
+                  style: themeData.textTheme.titleLarge!.copyWith(
+                    color: themeData.colorScheme.onPrimaryContainer,
+                  ),
                 ),
                 // TODO: add service analysis
                 onPressed: () {},
@@ -129,12 +130,13 @@ class _ViewServiceState extends State<ViewService> {
       ),
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
-          itemBuilder: (context, class_, config) => ViewableObjectCard<Class>(
+              itemBuilder: (context, class_, config) =>
+                  ViewableObjectCard<Class>(
                 class_,
                 title: Text(
                   class_.name,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color:Theme.of(context).colorScheme.onPrimaryContainer,
+                  style: themeData.textTheme.headlineSmall!.copyWith(
+                    color: themeData.colorScheme.onPrimaryContainer,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
@@ -142,7 +144,7 @@ class _ViewServiceState extends State<ViewService> {
                 ),
                 config: config,
                 size: null,
-          ),
+              ),
               type: ViewableObjectListType.custom,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
@@ -159,7 +161,7 @@ class _ViewServiceState extends State<ViewService> {
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على الخدمة',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: themeData.textTheme.titleLarge,
         ),
       ),
       editButtonBuilder: (context, service) => IconButton(

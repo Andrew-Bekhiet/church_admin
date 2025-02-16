@@ -50,7 +50,7 @@ class HomeModeSelector extends StatelessWidget {
                           child: Text(
                             'الايه',
                             style: themeData.textTheme.headlineSmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              color: themeData.colorScheme.onPrimaryContainer,
                               fontSize: 20,
                             ),
                           ),
@@ -78,7 +78,7 @@ class HomeModeSelector extends StatelessWidget {
                           child: Text(
                             'السنكسار',
                             style: themeData.textTheme.headlineSmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              color: themeData.colorScheme.onPrimaryContainer,
                               fontSize: 20,
                             ),
                           ),
@@ -106,7 +106,7 @@ class HomeModeSelector extends StatelessWidget {
                           child: Text(
                             'اقوال اباء',
                             style: themeData.textTheme.headlineSmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                              color: themeData.colorScheme.onPrimaryContainer,
                               fontSize: 20,
                             ),
                           ),
@@ -154,7 +154,7 @@ class HomeModeSelector extends StatelessWidget {
                               style:
                                   themeData.textTheme.headlineSmall?.copyWith(
                                 fontSize: 18,
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                color: themeData.colorScheme.onPrimaryContainer,
                               ),
                             ),
                           ],
@@ -182,7 +182,7 @@ class HomeModeSelector extends StatelessWidget {
                               style:
                                   themeData.textTheme.headlineSmall?.copyWith(
                                 fontSize: 18,
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                color: themeData.colorScheme.onPrimaryContainer,
                               ),
                             ),
                           ],

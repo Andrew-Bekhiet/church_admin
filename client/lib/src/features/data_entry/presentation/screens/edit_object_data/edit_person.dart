@@ -223,7 +223,7 @@ class _EditPersonState extends State<EditPerson> {
                       const EdgeInsets.symmetric(vertical: 8),
                     ),
                     backgroundColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.primaryContainer,
+                      themeData.colorScheme.primaryContainer,
                     ),
                   ),
                   icon: Icon(
@@ -232,7 +232,7 @@ class _EditPersonState extends State<EditPerson> {
                   ),
                   label: Text(
                     'رقم أخر',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    style: themeData.textTheme.titleMedium!.copyWith(
                           color: themeData.colorScheme.onPrimaryContainer,
                         ),
                   ),

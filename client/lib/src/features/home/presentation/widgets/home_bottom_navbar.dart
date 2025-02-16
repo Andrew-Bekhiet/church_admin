@@ -80,6 +80,7 @@ class HomeBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return StreamBuilder<HomeMode>(
       initialData: homeController.currentMode,
       stream: homeController.modeStream,
@@ -138,9 +139,9 @@ class HomeBottomNavBar extends StatelessWidget {
           animationCurve: Curves.easeInOutCirc,
           height: 60,
           key: ValueKey(isSundaySchool),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          color: Theme.of(context).colorScheme.primaryContainer,
-          buttonBackgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: themeData.scaffoldBackgroundColor,
+          color: themeData.colorScheme.primaryContainer,
+          buttonBackgroundColor: themeData.colorScheme.primaryContainer,
           onTap: homeController.onTabIndexChanged,
           index: tabController?.index ?? 0,
           items: navItems
@@ -154,7 +155,7 @@ class HomeBottomNavBar extends StatelessWidget {
                   activeIcon: Icon(
                     item['icon'],
                     fill: 1,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    color: themeData.colorScheme.onPrimaryContainer,
                   ),
                 ),
               )
