@@ -73,21 +73,12 @@ class _ViewServiceState extends State<ViewService> {
               getHistoryStream: () => DatabaseService.I.history
                   .paginateEditHistory<Service>(id: service.id),
             ),
-            // ListTile(
-            //   title: const Text('الخدمة التالية'),
-            //   subtitle: service.nextService != null
-            //       ? Align(
-            //           alignment: AlignmentDirectional.centerStart,
-            //           child: ViewableObjectCard(service.nextService!),
-            //         )
-            //       : const Text('لا يوجد'),
-            // ),
             ListTile(
               title: FilledButton.icon(
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                    const RoundedRectangleBorder(
+                      borderRadius:BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
                   padding: WidgetStateProperty.all(
@@ -108,19 +99,6 @@ class _ViewServiceState extends State<ViewService> {
                 onPressed: () {},
               ),
             ),
-            // ListTile(
-            //   title: const Text('السنوات الدراسية'),
-            //   subtitle: Text(
-            //     'من ${service.studyYearFrom?.name ?? ''} '
-            //     'إلى ${service.studyYearTo?.name ?? ''}',
-            //   ),
-            // ),
-            // ListTile(
-            //   title: const Text('الخدام المسؤولين'),
-            //   subtitle: service.adminUsers?.isNotEmpty ?? false
-            //       ? AdminUsers(users: service.adminUsers!)
-            //       : const Text('لا يوجد خدام محددين للخدمة'),
-            // ),
           ],
         ),
       ),
@@ -157,7 +135,6 @@ class _ViewServiceState extends State<ViewService> {
                   class_.name,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     color:Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontSize: 20,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,

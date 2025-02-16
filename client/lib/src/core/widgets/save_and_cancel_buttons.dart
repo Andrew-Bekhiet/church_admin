@@ -18,47 +18,19 @@ class SaveAndCancelButtonRow extends StatelessWidget {
         Expanded(
           child: FilledButton.icon(
             icon: const Icon(Symbols.save),
-            label: Text(
+            label: const Text(
               'حــفــظ',
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontSize: 22,
-                  ),
             ),
             onPressed: onSave,
-            style: ButtonStyle(
-              shape: WidgetStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-              ),
-              backgroundColor: WidgetStateProperty.all(
-                Theme.of(context).colorScheme.primaryContainer,
-              ),
-            ),
           ),
         ),
         Expanded(
           child: FilledButton.icon(
             icon: const Icon(Symbols.cancel_rounded),
-            label: Text(
+            label: const Text(
               'الــــغـــــاء',
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontSize: 22,
-                  ),
             ),
             onPressed: onCancel,
-            style: ButtonStyle(
-              shape: WidgetStateProperty.all(
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-              ),
-              backgroundColor: WidgetStateProperty.all(
-                Theme.of(context).colorScheme.primaryContainer,
-              ),
-            ),
           ),
         ),
       ],

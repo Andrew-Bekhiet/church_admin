@@ -34,8 +34,6 @@ class _ViewClassState extends State<ViewClass> {
 
   @override
   Widget build(BuildContext context) {
-        final themeData = Theme.of(context);
-
     return ViewObjectDetails(
       objectId: widget.classId,
       object: widget.$class,
@@ -71,25 +69,9 @@ class _ViewClassState extends State<ViewClass> {
             ),
             ListTile(
               title: FilledButton.icon(
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  padding: WidgetStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  backgroundColor: WidgetStateProperty.all(
-                    Theme.of(context).colorScheme.primaryContainer,
-                  ),
-                ),
                 icon: const Icon(Symbols.query_stats),
-                label: Text(
+                label: const Text(
                   'الاحصائيات',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: themeData.colorScheme.onPrimaryContainer,
-                      ),
                 ),
                 // TODO: add service analysis
                 onPressed: () {},

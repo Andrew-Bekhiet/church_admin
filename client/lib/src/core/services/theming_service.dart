@@ -186,6 +186,26 @@ class ThemingService with WidgetsBindingObserver {
     );
 
     return themeData.copyWith(
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.all<TextStyle>(
+            themeData.textTheme.titleLarge!.copyWith(
+              color: colorScheme.onPrimaryContainer,
+            ),
+          ),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          padding: WidgetStateProperty.all<EdgeInsets>(
+            const EdgeInsets.symmetric(vertical: 8),
+          ),
+          backgroundColor: WidgetStateProperty.all<Color>(
+            colorScheme.primaryContainer,
+          ),
+        ),
+      ),
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: scaffoldBackgroundColor,
         elevation: 0,
