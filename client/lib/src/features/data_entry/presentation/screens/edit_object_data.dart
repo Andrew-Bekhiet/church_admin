@@ -107,14 +107,11 @@ class _EditObjectDataState<T extends ViewableWithID>
                   ),
                   child: SaveAndCancelButtonRow(
                     onSave: () => _controller.save(context),
-                    onCancel: () {
-                      _controller.confirmExit(context).then(
-                        (value) {
-                          if (value) {
-                            Navigator.of(context).pop();
-                          }
-                        },
-                      );
+                    onCancel: () async {
+                      final bool value = await _controller.confirmExit(context);
+                      if (value && context.mounted) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ),
