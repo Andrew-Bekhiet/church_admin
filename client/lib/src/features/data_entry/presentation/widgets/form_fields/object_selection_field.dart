@@ -100,7 +100,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                   },
                   icon: Icon(
                     Symbols.delete,
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).inputDecorationTheme.iconColor,
                   ),
                 )
               : null,
