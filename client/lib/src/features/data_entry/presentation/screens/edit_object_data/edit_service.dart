@@ -60,19 +60,17 @@ class _EditServiceState extends State<EditService> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
-initialValue: newService.name,
-hintText: 'اسم الخدمة',
+            initialValue: newService.name,
+            hintText: 'اسم الخدمة',
             onValueChanged: (value) => newService = newService.copyWith(
               name: value.trim(),
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           ObjectSelectionField<Service, Service?>(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'الخدمة التالية',
-              
               errorMaxLines: 2,
-            
             ),
             initialValue: newService.nextService,
             listController: (s) => ViewableObjectListController(
@@ -127,6 +125,4 @@ hintText: 'اسم الخدمة',
       ),
     );
   }
-
-
 }

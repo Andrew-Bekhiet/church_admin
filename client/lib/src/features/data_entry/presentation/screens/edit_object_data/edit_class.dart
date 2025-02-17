@@ -62,8 +62,8 @@ class _EditClassState extends State<EditClass> {
         spacing: 24,
         children: [
           NameField(
-hintText: 'اسم الفصل',
-initialValue: newClass.name,
+            hintText: 'اسم الفصل',
+            initialValue: newClass.name,
             onValueChanged: (value) => newClass = newClass.copyWith(
               name: value.trim(),
             ),
