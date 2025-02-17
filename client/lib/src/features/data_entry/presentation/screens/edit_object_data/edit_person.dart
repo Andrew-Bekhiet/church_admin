@@ -214,28 +214,12 @@ class _EditPersonState extends State<EditPerson> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: FilledButton.tonalIcon(
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                    ),
-                    padding: WidgetStateProperty.all(
-                      const EdgeInsets.symmetric(vertical: 8),
-                    ),
-                    backgroundColor: WidgetStateProperty.all(
-                      themeData.colorScheme.primaryContainer,
-                    ),
-                  ),
                   icon: Icon(
                     Symbols.add,
                     color: themeData.colorScheme.onPrimaryContainer,
                   ),
-                  label: Text(
+                  label: const Text(
                     'رقم أخر',
-                    style: themeData.textTheme.titleMedium!.copyWith(
-                      color: themeData.colorScheme.onPrimaryContainer,
-                    ),
                   ),
                   onPressed: () async {
                     final name = await _renamePhoneFieldName();
