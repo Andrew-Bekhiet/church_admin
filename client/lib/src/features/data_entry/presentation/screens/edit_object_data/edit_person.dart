@@ -121,10 +121,7 @@ class _EditPersonState extends State<EditPerson> {
                     ? IconButton(
                         tooltip: 'اختيار من جهات الاتصال',
                         onPressed: _importFromContacts,
-                        icon: Icon(
-                          Symbols.contacts,
-                          color: themeData.inputDecorationTheme.iconColor,
-                        ),
+                        icon: const Icon(Symbols.contacts),
                       )
                     : null,
               ),

@@ -98,10 +98,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                     state.didChange(null);
                     onChanged?.call(null);
                   },
-                  icon: Icon(
-                    Symbols.delete,
-                    color: Theme.of(context).inputDecorationTheme.iconColor,
-                  ),
+                  icon: const Icon(Symbols.delete),
                 )
               : null,
         );

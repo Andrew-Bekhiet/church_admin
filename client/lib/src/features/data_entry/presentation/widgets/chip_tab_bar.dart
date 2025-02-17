@@ -53,7 +53,6 @@ class ChipTabBar extends StatelessWidget {
                             color: Colors.black,
                           ),
                   ),
-                  // labelStyle: labelColor,
                   avatar: tab.icon,
                 ),
               )

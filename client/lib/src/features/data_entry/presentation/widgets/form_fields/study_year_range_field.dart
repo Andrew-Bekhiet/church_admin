@@ -42,10 +42,7 @@ class StudyYearRangeField extends StatelessWidget {
             errorText: state.errorText,
             suffixIcon: nullable && state.value != null
                 ? IconButton(
-                    icon: Icon(
-                      Symbols.delete,
-                      color: Theme.of(context).inputDecorationTheme.iconColor,
-                    ),
+                    icon: const Icon(Symbols.delete),
                     tooltip: 'حذف القيمة',
                     onPressed: () {
                       state.didChange(null);
