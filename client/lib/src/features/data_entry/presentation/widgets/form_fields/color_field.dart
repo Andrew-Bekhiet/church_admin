@@ -37,10 +37,10 @@ class ColorField extends StatelessWidget {
               labelText: 'اللون',
               suffixIcon: nullable
                   ? IconButton(
-                      icon: Icon(
+                        icon: Icon(
                         Symbols.delete,
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                      ),
+                        color: Theme.of(context).inputDecorationTheme.iconColor,
+                        ),
                       onPressed: () {
                         state.didChange(null);
                         onChanged?.call(null);
