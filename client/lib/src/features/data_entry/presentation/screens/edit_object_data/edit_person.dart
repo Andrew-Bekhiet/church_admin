@@ -123,7 +123,7 @@ class _EditPersonState extends State<EditPerson> {
                         onPressed: _importFromContacts,
                         icon: Icon(
                           Symbols.contacts,
-                          color: themeData.colorScheme.primaryContainer,
+                          color: themeData.inputDecorationTheme.iconColor,
                         ),
                       )
                     : null,
@@ -234,8 +234,8 @@ class _EditPersonState extends State<EditPerson> {
                   label: Text(
                     'رقم أخر',
                     style: themeData.textTheme.titleMedium!.copyWith(
-                          color: themeData.colorScheme.onPrimaryContainer,
-                        ),
+                      color: themeData.colorScheme.onPrimaryContainer,
+                    ),
                   ),
                   onPressed: () async {
                     final name = await _renamePhoneFieldName();
@@ -255,7 +255,6 @@ class _EditPersonState extends State<EditPerson> {
             ],
           ),
           AddressWithLocationField(
-            
             initialAddress: newPerson.address,
             onAddressChanged: (value) => newPerson = newPerson.copyWith(
               address: value.trim(),
@@ -1156,8 +1155,6 @@ class _EditPersonState extends State<EditPerson> {
           .map((e) => e.key.copyWith(groups: e.value)),
     ).union(services.toSet()).toList();
   }
-
-  
 }
 
 class _SelectServicesPage extends StatefulWidget {
