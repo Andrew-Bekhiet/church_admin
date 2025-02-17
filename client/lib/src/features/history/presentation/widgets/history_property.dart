@@ -10,12 +10,10 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     this.onRecordNow,
     this.showTime = true,
     this.value,
-    this.style,
     super.key,
   });
 
   final String name;
-  final TextStyle? style;
   final bool showTime;
   final DateTime? value;
   final DelegatingPaginatableStream<T> Function() getHistoryStream;
@@ -59,22 +57,6 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
             ),
         ],
       ),
-      // trailing: Row(
-      // mainAxisSize: MainAxisSize.min,
-      // children: [
-      // IconButton(padding: EdgeInsets.zero,
-      //   tooltip: 'السجل',
-      //   icon: const Icon(Symbols.history , size: 28),
-      //   onPressed: _onHistoryTap(context),
-      // ),
-      // if (onRecordNow != null)
-      //   IconButton(
-      //     onPressed: onRecordNow,
-      //     icon: const Icon(Symbols.task_alt),
-      //     tooltip: 'تسجيل $name',
-      //   ),
-      // ],
-      // ),
     );
   }
 
