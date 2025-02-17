@@ -135,13 +135,13 @@ class _ViewableObjectListState<T extends Viewable>
           );
         }
 
-        if (widget.type == ViewableObjectListType.grid || widget.type == ViewableObjectListType.grid3 ) {
+        if (widget.type == ViewableObjectListType.grid ||
+            widget.type == ViewableObjectListType.grid3) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.type.columns,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 40,
-              childAspectRatio: 1.13,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 30,
             ),
             padding: const EdgeInsets.all(2),
             controller: scrollController,
@@ -150,8 +150,8 @@ class _ViewableObjectListState<T extends Viewable>
             itemCount: items.length + 1,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
-        }else {
-        return ListView.builder(
+        } else {
+          return ListView.builder(
             padding: const EdgeInsets.all(2),
             controller: scrollController,
             itemBuilder: itemBuilder,
