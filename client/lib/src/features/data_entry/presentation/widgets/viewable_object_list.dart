@@ -9,14 +9,14 @@ import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 enum ViewableObjectListType {
-  list(numOfColumn: 0),
-  grid(numOfColumn: 2),
-  grid3(numOfColumn: 3);
+  list(columns: 0),
+  grid(columns: 2),
+  grid3(columns: 3);
 
-  final int numOfColumn;
+  final int columns;
 
   const ViewableObjectListType({
-    required this.numOfColumn,
+    required this.columns,
   });
 }
 
@@ -138,7 +138,7 @@ class _ViewableObjectListState<T extends Viewable>
         if (widget.type == ViewableObjectListType.grid || widget.type == ViewableObjectListType.grid3 ) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: widget.type.numOfColumn,
+              crossAxisCount: widget.type.columns,
               crossAxisSpacing: 15,
               mainAxisSpacing: 40,
               childAspectRatio: 1.13,
