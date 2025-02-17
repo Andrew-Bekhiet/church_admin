@@ -117,9 +117,9 @@ class _ViewServiceState extends State<ViewService> {
       ),
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
-itemBuilder: (context, class_, config) =>
-ViewableObjectCard<Class>(class_, config: config),
-type: ViewableObjectListType.grid3,
+              itemBuilder: (context, class_, config) =>
+                  ViewableObjectCard<Class>(class_, config: config),
+              type: ViewableObjectListType.grid3,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
             ),
