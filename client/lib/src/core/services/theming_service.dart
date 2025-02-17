@@ -188,8 +188,12 @@ class ThemingService with WidgetsBindingObserver {
     return themeData.copyWith(
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          textStyle: themeData.textTheme.titleMedium!.copyWith(
+            color: themeData.colorScheme.onPrimaryContainer,
+          ),
+          foregroundColor: colorScheme.onPrimaryContainer,
           shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           padding: const EdgeInsets.symmetric(vertical: 8),
           backgroundColor: colorScheme.primaryContainer,
