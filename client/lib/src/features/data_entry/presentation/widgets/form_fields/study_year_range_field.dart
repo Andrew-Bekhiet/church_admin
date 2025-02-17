@@ -74,12 +74,9 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: '',
-                  ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: 'من',
+                  labelText: '',
                   onChanged: (newValue) {
                     state.didChange((newValue, state.value?.$2));
                     onChanged?.call(state.value);
@@ -104,12 +101,9 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: '',
-                  ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: 'إلى',
+                  labelText: '',
                   onChanged: (newValue) {
                     state.didChange((state.value?.$1, newValue));
                     onChanged?.call(state.value);
