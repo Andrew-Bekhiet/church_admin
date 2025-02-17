@@ -225,6 +225,7 @@ class ThemingService with WidgetsBindingObserver {
           color: colorScheme.primaryContainer,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        iconColor: colorScheme.primaryContainer,
       ),
       dividerTheme: themeData.dividerTheme.copyWith(
         thickness: 1,
