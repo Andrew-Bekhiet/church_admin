@@ -1236,30 +1236,30 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i11.BaseCacheManager);
 
   @override
-  _i3.Future<_i12.File> getImageFile(_i13.IImage? imageObject) =>
+  _i3.Future<_i12.File> getImageFile(_i13.ObjectImageInfo? imageInfo) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
-          [imageObject],
+          [imageInfo],
         ),
         returnValue: _i3.Future<_i12.File>.value(_FakeFile_11(
           this,
           Invocation.method(
             #getImageFile,
-            [imageObject],
+            [imageInfo],
           ),
         )),
         returnValueForMissingStub: _i3.Future<_i12.File>.value(_FakeFile_11(
           this,
           Invocation.method(
             #getImageFile,
-            [imageObject],
+            [imageInfo],
           ),
         )),
       ) as _i3.Future<_i12.File>);
 
   @override
-  _i3.Future<String> getImageUrl(_i13.IImage? imageObject) =>
+  _i3.Future<String> getImageUrl(_i13.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
@@ -1283,7 +1283,7 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i3.Future<String>);
 
   @override
-  String? getNonExpiredCachedImageUrl(_i13.IImage? imageObject) =>
+  String? getNonExpiredCachedImageUrl(_i13.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNonExpiredCachedImageUrl,
@@ -1293,10 +1293,11 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  String? getCachedImageUrl(_i13.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i13.ObjectImageInfo? imageInfo) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
-          [imageObject],
+          [imageInfo],
         ),
         returnValueForMissingStub: null,
       ) as String?);

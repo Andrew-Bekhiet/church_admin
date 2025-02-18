@@ -39,8 +39,7 @@ class ImageObjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData defaultIcon =
         viewableObjectService.getDefaultIconFor(imageObject);
-    final constraints =
-        BoxConstraints.expand(width: size, height: size);
+    final constraints = BoxConstraints.expand(width: size, height: size);
     final String cacheKey = imageObject.imageInfo.cacheKey;
     final BorderRadius? borderRadius = circleCrop
         ? null
@@ -60,7 +59,7 @@ class ImageObjectWidget extends StatelessWidget {
           }
 
           final cachedImageUrl =
-              photoUrlCacheService.getCachedImageUrl(imageObject);
+              photoUrlCacheService.getCachedImageUrl(imageObject.imageInfo);
 
           return ConstrainedBox(
             constraints: constraints,
@@ -72,7 +71,7 @@ class ImageObjectWidget extends StatelessWidget {
                   : RoundedRectangleBorder(borderRadius: borderRadius!),
               child: FutureBuilder<String>(
                 initialData: cachedImageUrl,
-                future: photoUrlCacheService.getImageUrl(imageObject),
+                future: photoUrlCacheService.getImageUrl(imageObject.imageInfo),
                 builder: (context, downloadUrlData) {
                   final downloadUrlOrCache =
                       downloadUrlData.data ?? cachedImageUrl;

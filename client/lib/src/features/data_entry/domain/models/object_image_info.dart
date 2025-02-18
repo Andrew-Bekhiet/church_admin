@@ -32,7 +32,7 @@ class FunctionsObjectImageInfo extends ObjectImageInfo {
   });
 
   @override
-  String get cacheKey => '$_table/$_id-${lastUpdatedTime?.toIso8601String()}';
+  String get cacheKey => '$_table/$_id';
 
   @override
   Future<String> getDownloadUrl() =>

@@ -514,7 +514,7 @@ class _ViewPersonState extends State<ViewPerson> {
     if (dialogResult != true) return;
 
     final imageFile = person.hasImage
-        ? await ImageUrlCacheService.I.getImageFile(person)
+        ? await ImageUrlCacheService.I.getImageFile(person.imageInfo)
         : null;
 
     await ContactsService.I.insertContact(
