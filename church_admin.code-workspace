@@ -1,9 +1,9 @@
 {
   "folders": [
     {
+      "name": "church_admin",
       "path": "."
     },
-    { "name": "client", "path": "./client" },
     { "name": "server", "path": "./server" }
   ],
   "launch": {
@@ -13,7 +13,7 @@
         "name": "church_admin",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:client}",
+        "cwd": "${workspaceFolder:church_admin}/client",
         "args": ["--device-user", "0"]
       },
       {
@@ -21,7 +21,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "cwd": "${workspaceFolder:client}/",
+        "cwd": "${workspaceFolder:church_admin}/client/",
         "args": ["--device-user", "0"]
       },
       {
@@ -29,14 +29,14 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "cwd": "${workspaceFolder:client}/",
+        "cwd": "${workspaceFolder:church_admin}/client/",
         "args": ["--device-user", "0"]
       },
       {
         "name": "church_admin (web debug mode)",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:client}/",
+        "cwd": "${workspaceFolder:church_admin}/client/",
         "args": ["--web-port", "5083"]
       },
       {
@@ -45,7 +45,7 @@
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
         "args": ["build"],
-        "cwd": "${workspaceFolder:client}/"
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "Golden",
@@ -55,7 +55,7 @@
           "for": ["run-test", "run-test-file"]
         },
         "args": ["--update-goldens"],
-        "cwd": "${workspaceFolder:client}/"
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "Debug /server/functions/src/firestore_migration.ts",
@@ -83,7 +83,7 @@
         "label": "Flutter test coverage",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:client}"
+          "cwd": "${workspaceFolder:church_admin}/client"
         },
         "command": "flutter",
         "args": [
