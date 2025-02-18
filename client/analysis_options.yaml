@@ -37,6 +37,5 @@ linter:
     prefer_void_to_null: true
     unnecessary_null_aware_operator_on_extension_on_nullable: true
     unreachable_from_main: true
-    unsafe_html: true
     use_decorated_box: true
     use_truncating_division: true
