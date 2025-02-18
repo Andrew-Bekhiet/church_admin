@@ -172,20 +172,18 @@ flutter_launcher_icons:
     background_color: "#E2CABF"
     theme_color: "#E2CABF"
 
-
 flutter_native_splash:
   color: "#E2CABF"
-  background_image: assets/images/splash.png
-  android_gravity: fill
-  color_dark: "#E2CABF"
-  image_dark: assets/images/splash.png
-  
+  image: graphics/logo.png
+  branding: graphics/branding.png
+  branding_bottom_padding: 24
+
+  android_gravity: center
+
   android_12:
     color: "#E2CABF"
-    image: assets/images/splash.png
-    # icon_background_color: "#E2CABF"
-    color_dark: "#E2CABF"
-    image_dark: assets/images/splash.png
+    image: graphics/android12-splash.png
+    branding: graphics/branding.png
 
   ios: true
   android: true
