@@ -43,9 +43,6 @@ late final PackageInfo packageInfoPluginInstance;
 
 late final DeviceInfoService deviceInfoServiceInstance;
 
-late final String sneksarCSVData;
-const String sayingsCSVData = '';
-
 final deviceInfoServiceProvider = Provider<DeviceInfoService>(
   (ref) => deviceInfoServiceInstance,
 );
@@ -375,7 +372,7 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
         ],
       ],
     ),
-    sayingData: sayingsCSVData.split('\n'),
+    sayingData: kSayings,
   ),
 );
 
