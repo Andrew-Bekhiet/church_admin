@@ -2889,3 +2889,140 @@ class MockNotificationsService extends _i1.Mock
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [HomeDailyDataBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHomeDailyDataBloc extends _i1.Mock implements _i4.HomeDailyDataBloc {
+  @override
+  _i4.HomeDailyDataState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _i8.dummyValue<_i4.HomeDailyDataState>(
+          this,
+          Invocation.getter(#state),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<_i4.HomeDailyDataState>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i4.HomeDailyDataState);
+
+  @override
+  _i7.Stream<_i4.HomeDailyDataState> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i7.Stream<_i4.HomeDailyDataState>.empty(),
+        returnValueForMissingStub: _i7.Stream<_i4.HomeDailyDataState>.empty(),
+      ) as _i7.Stream<_i4.HomeDailyDataState>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  void add(_i4.HomeDailyDataEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(_i4.HomeDailyDataEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i4.HomeDailyDataState? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i4.HomeDailyDataEvent>(
+    _i9.EventHandler<E, _i4.HomeDailyDataState>? handler, {
+    _i9.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i9.Transition<_i4.HomeDailyDataEvent, _i4.HomeDailyDataState>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i7.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  void onChange(_i9.Change<_i4.HomeDailyDataState>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+}

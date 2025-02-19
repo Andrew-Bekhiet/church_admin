@@ -1928,6 +1928,7 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
     bool? criticalAlert = false,
     bool? provisional = false,
     bool? sound = true,
+    bool? providesAppNotificationSettings = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1941,6 +1942,7 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
             #criticalAlert: criticalAlert,
             #provisional: provisional,
             #sound: sound,
+            #providesAppNotificationSettings: providesAppNotificationSettings,
           },
         ),
         returnValue: _i8.Future<_i7.NotificationSettings>.value(
@@ -1957,6 +1959,7 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
               #criticalAlert: criticalAlert,
               #provisional: provisional,
               #sound: sound,
+              #providesAppNotificationSettings: providesAppNotificationSettings,
             },
           ),
         )),
@@ -1974,6 +1977,7 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
               #criticalAlert: criticalAlert,
               #provisional: provisional,
               #sound: sound,
+              #providesAppNotificationSettings: providesAppNotificationSettings,
             },
           ),
         )),

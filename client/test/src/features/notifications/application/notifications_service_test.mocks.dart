@@ -435,6 +435,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i14.FirebaseMessaging {
     bool? criticalAlert = false,
     bool? provisional = false,
     bool? sound = true,
+    bool? providesAppNotificationSettings = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -448,6 +449,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i14.FirebaseMessaging {
             #criticalAlert: criticalAlert,
             #provisional: provisional,
             #sound: sound,
+            #providesAppNotificationSettings: providesAppNotificationSettings,
           },
         ),
         returnValue: _i12.Future<_i3.NotificationSettings>.value(
@@ -464,6 +466,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i14.FirebaseMessaging {
               #criticalAlert: criticalAlert,
               #provisional: provisional,
               #sound: sound,
+              #providesAppNotificationSettings: providesAppNotificationSettings,
             },
           ),
         )),
@@ -481,6 +484,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i14.FirebaseMessaging {
               #criticalAlert: criticalAlert,
               #provisional: provisional,
               #sound: sound,
+              #providesAppNotificationSettings: providesAppNotificationSettings,
             },
           ),
         )),
@@ -655,6 +659,14 @@ class MockNotificationSettings extends _i1.Mock
         returnValue: _i3.AppleNotificationSetting.disabled,
         returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
       ) as _i3.AppleNotificationSetting);
+
+  @override
+  _i3.AppleNotificationSetting get providesAppNotificationSettings =>
+      (super.noSuchMethod(
+        Invocation.getter(#providesAppNotificationSettings),
+        returnValue: _i3.AppleNotificationSetting.disabled,
+        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+      ) as _i3.AppleNotificationSetting);
 }
 
 /// A class which mocks [FlutterLocalNotificationsPlugin].
@@ -754,8 +766,7 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     _i18.NotificationDetails? notificationDetails, {
     required _i20.UILocalNotificationDateInterpretation?
         uiLocalNotificationDateInterpretation,
-    bool? androidAllowWhileIdle = false,
-    _i21.AndroidScheduleMode? androidScheduleMode,
+    required _i21.AndroidScheduleMode? androidScheduleMode,
     String? payload,
     _i22.DateTimeComponents? matchDateTimeComponents,
   }) =>
@@ -772,7 +783,6 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
           {
             #uiLocalNotificationDateInterpretation:
                 uiLocalNotificationDateInterpretation,
-            #androidAllowWhileIdle: androidAllowWhileIdle,
             #androidScheduleMode: androidScheduleMode,
             #payload: payload,
             #matchDateTimeComponents: matchDateTimeComponents,
@@ -789,9 +799,8 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     String? body,
     _i17.RepeatInterval? repeatInterval,
     _i18.NotificationDetails? notificationDetails, {
+    required _i21.AndroidScheduleMode? androidScheduleMode,
     String? payload,
-    bool? androidAllowWhileIdle = false,
-    _i21.AndroidScheduleMode? androidScheduleMode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -804,9 +813,8 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
             notificationDetails,
           ],
           {
-            #payload: payload,
-            #androidAllowWhileIdle: androidAllowWhileIdle,
             #androidScheduleMode: androidScheduleMode,
+            #payload: payload,
           },
         ),
         returnValue: _i12.Future<void>.value(),
