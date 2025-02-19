@@ -48,12 +48,14 @@ class HomeDailyDataRepository {
 
   String getVerse({bool forceRefresh = false}) {
     return _versesData[
-        _getOrGenerateRandomFor(HomeDailyDataType.verse, forceRefresh)];
+            _getOrGenerateRandomFor(HomeDailyDataType.verse, forceRefresh)]
+        .trim();
   }
 
   String getSaying({bool forceRefresh = false}) {
     return _sayingData[
-        _getOrGenerateRandomFor(HomeDailyDataType.saying, forceRefresh)];
+            _getOrGenerateRandomFor(HomeDailyDataType.saying, forceRefresh)]
+        .trim();
   }
 
   String getTodaysSneksar() {
