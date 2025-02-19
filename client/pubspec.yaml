@@ -8,6 +8,9 @@ environment:
   sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.10.0"
 
+dependency_overrides:
+  js: ^0.7.1
+
 dependencies:
   android_alarm_manager_plus: ^4.0.1
   async: ^2.9.0
@@ -16,12 +19,8 @@ dependencies:
   cloud_functions: ^5.0.1
   collection: ^1.17.0
   connectivity_plus: ^6.0.3
-  cryptography: ^2.5.0
-  cryptography_flutter:
-    git:
-      url: https://github.com/mvarendorff/cryptography
-      ref: fix/compatibility-agp-8x
-      path: cryptography_flutter
+  cryptography_flutter_plus: ^2.3.4
+  cryptography_plus: ^2.7.1
   curved_navigation_bar: ^1.0.6
   derived_colors: ^0.4.0
   device_info_plus: ^10.1.0
