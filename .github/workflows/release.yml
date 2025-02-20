@@ -99,35 +99,27 @@ jobs:
     needs: run-tests
 
     steps:
-      - name: Check if test-results.json exists
-        uses: xSAVIKx/artifact-exists-action@v0
+      - name: Download test-results.json from artifacts
         id: check-test-results
+        uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: test-results
-
-      - if: ${{ steps.check-test-results.outputs.exists == 'false' }}
-        run: echo "No test-results.json artifact found. Skipping job."
+          path: /tmp/
 
       - name: Checkout repository
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        if: ${{ steps.check-test-results.outcome == 'success' }}
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Download test-results.json from artifacts
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
-        uses: actions/download-artifact@v4.1.7
-        with:
-          name: test-results
-          path: client/
-
-      - name: Search for test-results.json
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+      - name: Copy test-results.json from artifacts
+        if: ${{ steps.check-test-results.outcome == 'success' }}
         run: |
-          find . -name test-results.json
+          cp /tmp/test-results.json client/test-results.json
 
       - name: Report test results to run checks
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        if: ${{ steps.check-test-results.outcome == 'success' }}
         uses: dorny/test-reporter@v1
         with:
           name: "Unit and Widget Tests"
@@ -136,7 +128,7 @@ jobs:
 
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v3
-        if: ${{ steps.check-test-results.outputs.exists == 'true' }}
+        if: ${{ steps.check-test-results.outcome == 'success' }}
         with:
           directory: client
           token: ${{ secrets.CODECOV_TOKEN }}
