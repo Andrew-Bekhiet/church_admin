@@ -55,9 +55,7 @@ class GeomapFAB extends StatelessWidget {
                 pathSegments: ['maps', 'search', ''],
                 queryParameters: {
                   'api': '1',
-                  'query': location.latitude.toString() +
-                      ',' +
-                      location.longitude.toString(),
+                  'query': '${location.latitude},${location.longitude}',
                 },
               ),
             );

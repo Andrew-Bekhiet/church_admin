@@ -4,8 +4,8 @@
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:cryptography/cryptography.dart';
-import 'package:cryptography_flutter/cryptography_flutter.dart';
+import 'package:cryptography_flutter_plus/cryptography_flutter_plus.dart';
+import 'package:cryptography_plus/cryptography_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -46,8 +46,9 @@ abstract class EncryptionService {
     required String password,
     required String salt,
   }) async {
-    final saltHash =
-        SHA3Digest(256).process(Uint8List.fromList(utf8.encode(salt)));
+    final saltHash = SHA3Digest(
+      256,
+    ).process(Uint8List.fromList(utf8.encode(salt)));
 
     final argon2Parameters = Argon2Parameters(
       Argon2Parameters.ARGON2_id,
@@ -72,8 +73,10 @@ abstract class EncryptionService {
     required String? storedPasswordHash,
   }) async {
     if (storedPasswordHash != null) {
-      final passwordHashToVerify =
-          await hashPassword(password: passwordToVerify, keyBytes: keyBytes);
+      final passwordHashToVerify = await hashPassword(
+        password: passwordToVerify,
+        keyBytes: keyBytes,
+      );
 
       return storedPasswordHash == passwordHashToVerify;
     }
@@ -117,9 +120,7 @@ abstract class EncryptionService {
       final linuxDeviceInfo = await deviceInfoPlugin.linuxInfo;
 
       computedInfo.addAll(
-        utf8.encode(
-          (linuxDeviceInfo.machineId ?? '') + linuxDeviceInfo.id,
-        ),
+        utf8.encode((linuxDeviceInfo.machineId ?? '') + linuxDeviceInfo.id),
       );
     } else if (UniversalPlatform.isMacOS) {
       final macDeviceInfo = await deviceInfoPlugin.macOsInfo;
@@ -134,11 +135,7 @@ abstract class EncryptionService {
     } else if (UniversalPlatform.isWindows) {
       final macDeviceInfo = await deviceInfoPlugin.windowsInfo;
 
-      computedInfo.addAll(
-        utf8.encode(
-          macDeviceInfo.numberOfCores.toString(),
-        ),
-      );
+      computedInfo.addAll(utf8.encode(macDeviceInfo.numberOfCores.toString()));
     }
 
     return Uint8List.fromList(computedInfo);

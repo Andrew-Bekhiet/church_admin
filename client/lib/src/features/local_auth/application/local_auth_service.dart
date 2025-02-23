@@ -83,7 +83,7 @@ class LocalAuthService with WidgetsBindingObserver {
       if (shouldAuthenticate) _refreshUI.add(null);
       _timer?.cancel();
       _timer = null;
-    } else if (AuthService.I.isSignedIn && !shouldAuthenticate) {
+    } else if (AuthBloc.I.isSignedIn && !shouldAuthenticate) {
       _timer ??= _createTimer();
     }
   }

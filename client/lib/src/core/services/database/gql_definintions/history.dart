@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
-
-import 'history/__generated__/mutations.gql.dart';
-import 'history/__generated__/subscriptions.gql.dart';
 
 class HistoryDAO {
   final DatabaseService db;

@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-
-import 'study_years/__generated__/subscriptions.gql.dart';
 
 class StudyYearsDAO extends DAOBase<StudyYear>
     with

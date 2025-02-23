@@ -39,24 +39,6 @@ class HomeScreenRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
 
   @override
-  String? redirect(BuildContext context, GoRouterState state) {
-    final authService = AuthService.I;
-
-    if (!authService.isSignedIn) {
-      return const LoginRoute().location;
-    } else if (!(authService.currentUser!.emailVerified ?? false)) {
-      return const EmailVerificationRoute().location;
-    } else if (!(authService.currentUser!.isMultiFactorEnrolled ?? false)) {
-      return const MultiFactorLoginRoute().location;
-    } else if (!authService.currentUser!.permissions.approved) {
-      return const UnapprovedUserRoute().location;
-    } else if (!authService.currentUser!.person!.spiritDataUpToDate()) {
-      return Uri(
-        path: const UpdateUserSpiritDataRoute().location,
-        queryParameters: {'forced': 'true'},
-      ).toString();
-    }
-
-    return null;
-  }
+  String? redirect(BuildContext context, GoRouterState state) =>
+      const HomeScreenWebRoute().redirect(context, state);
 }

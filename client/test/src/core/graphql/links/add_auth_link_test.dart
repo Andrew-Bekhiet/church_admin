@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
@@ -11,7 +13,7 @@ import 'package:rxdart/rxdart.dart';
 import 'add_auth_link_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
   MockSpec<Request>(),
   MockSpec<Response>(),
   MockSpec<Operation>(),
@@ -59,6 +61,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -69,7 +72,7 @@ void main() {
                 'headers',
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthService.I.currentUser!.idToken}',
+                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
                 ),
               ),
             ),
@@ -91,6 +94,60 @@ void main() {
   );
 
   test(
+    'Add Auth Link => request => gets latest idTokenStream data',
+    () async {
+      late final idTokenStreamController = BehaviorSubject<String>();
+      addTearDown(idTokenStreamController.close);
+
+      dynamic Function()? capturedInitialPayload;
+
+      final mockRequest = _createMockRequest();
+      final mockResponse = MockResponse();
+      final mockHttpLink = _createMockHttpLink(mockResponse);
+      final mockWebSocketLink = _createMockWSLink(mockResponse);
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokenStreamController.stream.startWith('seedIdToken'),
+        url: 'url',
+        createHttpLink: (url) => mockHttpLink,
+        createWSLink: (url, config) {
+          capturedInitialPayload = config.initialPayload;
+
+          return mockWebSocketLink;
+        },
+      );
+      addTearDown(unit.dispose);
+
+      unit.request(mockRequest, forward);
+
+      expect(
+        await capturedInitialPayload!(),
+        containsPair(
+          'headers',
+          containsPair(
+            'Authorization',
+            'Bearer seedIdToken',
+          ),
+        ),
+      );
+
+      idTokenStreamController.add('newIdToken');
+      await Future.delayed(Duration.zero);
+
+      expect(
+        await capturedInitialPayload!(),
+        containsPair(
+          'headers',
+          containsPair(
+            'Authorization',
+            'Bearer newIdToken',
+          ),
+        ),
+      );
+    },
+  );
+
+  test(
     'Add Auth Link => request => query',
     () async {
       final mockRequest = _createMockRequest(isSubscription: false);
@@ -99,6 +156,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) => mockWebSocketLink,
@@ -111,7 +169,7 @@ void main() {
       );
 
       verifyInOrder([
-        AuthService.I.idTokenStream,
+        AuthBloc.I.idTokenStream,
         mockHttpLink.request(mockRequest, forward),
       ]);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
@@ -127,6 +185,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'https://example.com',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -138,7 +197,7 @@ void main() {
                 'headers',
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthService.I.currentUser!.idToken}',
+                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
                 ),
               ),
             ),
@@ -155,7 +214,7 @@ void main() {
       );
 
       verify(mockWebSocketLink.request(mockRequest, forward));
-      verifyNever(AuthService.I.userStream);
+      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockHttpLink.request(mockRequest, forward));
     },
   );
@@ -169,6 +228,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
+        idTokenStream: AuthBloc.I.idTokenStream,
         url: 'https://example.com',
         createHttpLink: (url) {
           expect(url, 'https://example.com');
@@ -197,14 +257,14 @@ void main() {
             return containsPair('foo', 'bar').matches(returnedHeaders, {}) &&
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthService.I.currentUser!.idToken}',
+                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
                 ).matches(returnedHeaders, {});
           }),
         ),
       );
 
       verify(mockHttpLink.request(mockRequest, forward));
-      verifyNever(AuthService.I.userStream);
+      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
   );
@@ -251,23 +311,36 @@ MockOperation _createMockOperation(bool isSubscription) {
 }
 
 void _setUp() {
-  final overrides = [_setUpAuthService()];
+  final overrides = [_setUpAuthBloc()];
 
   initGlobalProviderContainer(overrides);
 }
 
-Override _setUpAuthService() {
-  final mock = MockAuthService();
+Override _setUpAuthBloc() {
+  final mock = MockAuthBloc();
   when(mock.userStream).thenAnswer(
     (_) => BehaviorSubject.seeded(
-      User(uid: 'uid', name: 'name', idToken: 'idToken'),
+      const AuthUser(
+        uid: 'uid',
+        email: 'email',
+        emailVerified: true,
+        idToken: 'idToken',
+        claims: {},
+      ),
     ),
   );
   when(mock.idTokenStream).thenAnswer(
     (_) => BehaviorSubject.seeded('idToken'),
   );
-  when(mock.currentUser)
-      .thenReturn(User(uid: 'uid', name: 'name', idToken: 'idToken'));
+  when(mock.currentUser).thenReturn(
+    const AuthUser(
+      uid: 'uid',
+      email: 'email',
+      emailVerified: true,
+      idToken: 'idToken',
+      claims: {},
+    ),
+  );
 
-  return authServiceProvider.overrideWithValue(mock);
+  return authBlocProvider.overrideWithValue(mock);
 }

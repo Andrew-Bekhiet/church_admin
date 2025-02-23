@@ -34,7 +34,7 @@ class StudyYearRangeField extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       onSaved: onSaved,
       validator: validator ??
-          (v) => v == null && !nullable ? 'برجاء ادخال ' + label : null,
+          (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
       builder: (state) {
         return InputDecorator(
           decoration: InputDecoration(

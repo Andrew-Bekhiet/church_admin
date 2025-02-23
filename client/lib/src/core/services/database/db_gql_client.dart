@@ -11,8 +11,9 @@ class DBGraphQLClient extends GraphQLClient {
     super.defaultPolicies,
   }) : _fetchPolicyStream = connectivityStream
             .map(
-              (connected) =>
-                  connected ? FetchPolicy.networkOnly : FetchPolicy.cacheFirst,
+              (connected) => connected
+                  ? FetchPolicy.cacheAndNetwork
+                  : FetchPolicy.cacheFirst,
             )
             .distinct()
             .shareValueSeeded(FetchPolicy.cacheAndNetwork);

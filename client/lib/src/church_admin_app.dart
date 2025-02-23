@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 class ChurchAdminApp extends StatefulWidget {
   const ChurchAdminApp({super.key});
@@ -44,6 +45,7 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
+            ...PhoneFieldLocalization.delegates,
           ],
           supportedLocales: const [
             Locale('ar', 'EG'),

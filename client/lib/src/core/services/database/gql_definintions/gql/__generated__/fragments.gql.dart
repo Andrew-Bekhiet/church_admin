@@ -56,7 +56,7 @@ class Fragment_EditHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_EditHistory) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_EditHistory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -257,7 +257,7 @@ class Fragment_AttendanceHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceHistory) ||
+    if (other is! Fragment_AttendanceHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -462,7 +462,7 @@ class Fragment_CallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_CallHistory) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_CallHistory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -665,7 +665,7 @@ class Fragment_VisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_VisitHistory) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_VisitHistory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -866,7 +866,7 @@ class Fragment_KodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_KodasHistory) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_KodasHistory || runtimeType != other.runtimeType) {
       return false;
     }
     final l$time = time;
@@ -1065,7 +1065,7 @@ class Fragment_ConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_ConfessionHistory) ||
+    if (other is! Fragment_ConfessionHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1268,7 +1268,7 @@ class Fragment_LatestEditHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_LatestEditHistory) ||
+    if (other is! Fragment_LatestEditHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1471,7 +1471,7 @@ class Fragment_LatestCallHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_LatestCallHistory) ||
+    if (other is! Fragment_LatestCallHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1674,7 +1674,7 @@ class Fragment_LatestVisitHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_LatestVisitHistory) ||
+    if (other is! Fragment_LatestVisitHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1877,7 +1877,7 @@ class Fragment_LatestKodasHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_LatestKodasHistory) ||
+    if (other is! Fragment_LatestKodasHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2080,7 +2080,7 @@ class Fragment_LatestConfessionHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_LatestConfessionHistory) ||
+    if (other is! Fragment_LatestConfessionHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }

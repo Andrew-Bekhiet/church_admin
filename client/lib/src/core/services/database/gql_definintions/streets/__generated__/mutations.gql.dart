@@ -42,7 +42,7 @@ class Variables_Mutation_deleteStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteStreet) ||
+    if (other is! Variables_Mutation_deleteStreet ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -149,7 +149,7 @@ class Mutation_deleteStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteStreet) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteStreet || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteStreetsByPk = deleteStreetsByPk;
@@ -335,7 +335,7 @@ class Variables_Mutation_insertStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertStreet) ||
+    if (other is! Variables_Mutation_insertStreet ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -442,7 +442,7 @@ class Mutation_insertStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertStreet) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertStreet || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertStreetsOne = insertStreetsOne;
@@ -659,7 +659,7 @@ class Variables_Mutation_updateStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateStreet) ||
+    if (other is! Variables_Mutation_updateStreet ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -827,7 +827,7 @@ class Mutation_updateStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateStreet) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateStreet || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateStreetsByPk = updateStreetsByPk;

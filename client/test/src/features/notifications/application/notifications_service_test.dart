@@ -25,7 +25,7 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<FirebaseMessaging>(),
   MockSpec<NotificationSettings>(),
   MockSpec<FlutterLocalNotificationsPlugin>(),
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
   MockSpec<UserSettingsService>(),
   MockSpec<FunctionsService>(),
   MockSpec<InitializationService>(),
@@ -398,6 +398,7 @@ void main() {
                   StreamController<RemoteMessage>();
 
               final unit = NotificationsService(
+                authBloc: MockAuthBloc(),
                 settings: MockNotificationsSettingsStorage(),
                 localNotificationsPlugin: globalProviderContainer
                     .read(localNotificationsPluginProvider),
@@ -555,7 +556,7 @@ void main() {
                 globalProviderContainer
                     .read(userSettingsServiceProvider)
                     .registeredFCMToken,
-              ).thenReturn(expectedToken + 'something else');
+              ).thenReturn('${expectedToken}something else');
 
               await expectLater(
                 unit.registerFCMTokenAndListenForChanges(),
@@ -829,6 +830,7 @@ List<Object> _callArgumentsMatchFor({
 
 NotificationsService _createNewUnit() {
   return NotificationsService(
+    authBloc: AuthBloc.I,
     localNotificationsPlugin:
         globalProviderContainer.read(localNotificationsPluginProvider),
     firebaseMessaging: globalProviderContainer.read(firebaseMessagingProvider),
@@ -844,7 +846,7 @@ Future<void> _setUp() async {
     _setUpInitializationService(),
     await _setUpFirebaseMessaging(),
     _setUpLocalNotificationsPlugin(),
-    _setUpAuthService(),
+    _setUpAuthBloc(),
     _setUpUserSettingsService(),
     _setUpFunctionsService(),
     _setUpStorage(),
@@ -876,12 +878,12 @@ Override _setUpUserSettingsService() {
       .overrideWithValue(MockUserSettingsService());
 }
 
-Override _setUpAuthService() {
-  final mockAuthService = MockAuthService();
+Override _setUpAuthBloc() {
+  final mockAuthBloc = MockAuthBloc();
 
-  when(mockAuthService.isSignedIn).thenReturn(true);
+  when(mockAuthBloc.isSignedIn).thenReturn(true);
 
-  return authServiceProvider.overrideWithValue(mockAuthService);
+  return authBlocProvider.overrideWithValue(mockAuthBloc);
 }
 
 Override _setUpLocalNotificationsPlugin() {

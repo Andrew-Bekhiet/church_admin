@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
-
-import 'users/__generated__/queries.gql.dart';
-import 'users/__generated__/subscriptions.gql.dart';
 
 class UsersDAO extends DAOBase<User>
     with
@@ -29,8 +28,7 @@ class UsersDAO extends DAOBase<User>
       event,
       where: where?.map((o) => o.toJson()).toList() ?? [],
       orderBy: [
-        // ignore: unnecessary_parenthesis
-        ...(orderBy ?? <Input_AuthUsersDataOrderBy>[]),
+        ...?orderBy,
         Input_AuthUsersDataOrderBy(
           permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
             count: Enum_OrderBy.DESC,

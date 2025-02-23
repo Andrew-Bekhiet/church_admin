@@ -13,30 +13,26 @@ class ImageUrlCacheService {
   ImageUrlCacheService({
     required this.box,
     required this.cacheManager,
-  }) {
-    assert(box.isOpen);
-  }
+  }) : assert(box.isOpen);
 
   final Box<String> box;
   final BaseCacheManager cacheManager;
 
-  Future<File> getImageFile(IImage imageObject) async {
+  Future<File> getImageFile(ObjectImageInfo imageInfo) async {
     return cacheManager.getSingleFile(
-      await getImageUrl(imageObject),
-      key: imageObject.imageInfo.cacheKey,
+      await getImageUrl(imageInfo),
+      key: imageInfo.cacheKey,
     );
   }
 
   /// Returns cached url if available and its file is cached or if its not expired
   /// otherwise returns a fresh download url
-  Future<String> getImageUrl(IImage imageObject) async {
-    if (!imageObject.hasImage) throw StateError('Object has no image');
-
+  Future<String> getImageUrl(ObjectImageInfo imageObject) async {
     final cachedImageUrl = getCachedImageUrl(imageObject);
 
     if (cachedImageUrl != null &&
         (!isUrlExpired(cachedImageUrl) ||
-            await isUrlFileCachedAndValid(imageObject.imageInfo.cacheKey))) {
+            await isUrlFileCachedAndValid(imageObject.cacheKey))) {
       return SynchronousFuture(cachedImageUrl);
     }
 
@@ -48,7 +44,7 @@ class ImageUrlCacheService {
   /// Throws a [StateError] if the [imageObject] has no image.
   ///
   /// Returns the cached URL if it exists and is not expired, otherwise returns null.
-  String? getNonExpiredCachedImageUrl(IImage imageObject) {
+  String? getNonExpiredCachedImageUrl(ObjectImageInfo imageObject) {
     final cachedUrl = getCachedImageUrl(imageObject);
 
     if (cachedUrl == null || isUrlExpired(cachedUrl)) {
@@ -58,11 +54,7 @@ class ImageUrlCacheService {
     return cachedUrl;
   }
 
-  String? getCachedImageUrl(IImage imageObject) {
-    if (!imageObject.hasImage) throw StateError('Object has no image');
-
-    final imageInfo = imageObject.imageInfo;
-
+  String? getCachedImageUrl(ObjectImageInfo imageInfo) {
     final cachedData = box.get(imageInfo.cacheKey);
 
     if (cachedData == null) return null;
@@ -99,23 +91,33 @@ class ImageUrlCacheService {
     return expiresAt.isBefore(DateTime.now());
   }
 
-  Future<String> _getUrlAndSaveToCache(IImage imageObject) async {
-    final downloadUrl = await imageObject.imageInfo.getDownloadUrl();
+  Future<String> _getUrlAndSaveToCache(ObjectImageInfo imageInfo) async {
+    final downloadUrl = await imageInfo.getDownloadUrl();
 
-    await _saveUrlToCache(imageObject, downloadUrl);
+    await _updateFileAndUrlCache(imageInfo, downloadUrl);
 
     return downloadUrl;
   }
 
-  Future<String> _saveUrlToCache(
-    IImage imageObject,
+  Future<void> _updateFileAndUrlCache(
+    ObjectImageInfo imageInfo,
     String url,
   ) async {
+    final cacheKey = imageInfo.cacheKey;
+
+    final oldCache = box.get(cacheKey);
+
     await box.put(
-      imageObject.imageInfo.cacheKey,
-      imageObject.imageInfo.lastUpdatedTime!.toIso8601String() + '|' + url,
+      cacheKey,
+      '${imageInfo.lastUpdatedTime!.toIso8601String()}|$url',
     );
 
-    return url;
+    if (oldCache == null) return;
+
+    final [oldUpdatedTime, _] = oldCache.split('|');
+
+    if (oldUpdatedTime == imageInfo.lastUpdatedTime?.toIso8601String()) return;
+
+    await cacheManager.removeFile(cacheKey);
   }
 }

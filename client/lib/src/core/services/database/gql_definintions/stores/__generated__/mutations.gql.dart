@@ -40,7 +40,7 @@ class Variables_Mutation_deleteStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteStore) ||
+    if (other is! Variables_Mutation_deleteStore ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deleteStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteStore) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteStore || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteStoresByPk = deleteStoresByPk;
@@ -333,7 +333,7 @@ class Variables_Mutation_insertStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertStore) ||
+    if (other is! Variables_Mutation_insertStore ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -440,7 +440,7 @@ class Mutation_insertStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertStore) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertStore || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertStoresOne = insertStoresOne;
@@ -635,7 +635,7 @@ class Variables_Mutation_updateStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateStore) ||
+    if (other is! Variables_Mutation_updateStore ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -763,7 +763,7 @@ class Mutation_updateStore {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateStore) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateStore || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateStoresByPk = updateStoresByPk;

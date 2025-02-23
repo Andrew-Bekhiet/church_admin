@@ -20,7 +20,7 @@ class _EditServiceState extends State<EditService> {
   @override
   void initState() {
     super.initState();
-    final Service? _oldService = widget.service?.copyWith(
+    final Service? oldService = widget.service?.copyWith(
       nextServiceId: widget.service?.nextService?.id,
       studyYearFromId: widget.service?.studyYearFrom?.order,
       studyYearToId: widget.service?.studyYearTo?.order,
@@ -37,12 +37,12 @@ class _EditServiceState extends State<EditService> {
       onDelete: (object) =>
           DatabaseService.I.services.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldService ??
+      newObject: oldService ??
           Service(
             id: const Uuid().v4(),
             name: 'خدمة جديدة',
           ),
-      initialObject: _oldService,
+      initialObject: oldService,
     );
   }
 
@@ -55,7 +55,7 @@ class _EditServiceState extends State<EditService> {
     return EditObjectData(
       objectData: widget.service,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         spacing: 24,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

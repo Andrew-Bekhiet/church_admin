@@ -11,8 +11,9 @@ import '../../../../utils.dart';
 import 'settings_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<UserSettingsService>()])
-Future<void> main() async {
-  await loadAppFonts();
+void main() {
+  loadAppFonts();
+
   group(
     'SettingsScreen',
     () {

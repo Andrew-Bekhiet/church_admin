@@ -27,7 +27,7 @@ class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
   });
 
   @override
-  _EditObjectLocationMap createState() => _EditObjectLocationMap<T>();
+  State<EditObjectLocationMap<T>> createState() => _EditObjectLocationMap<T>();
 }
 
 class _EditObjectLocationMap<T extends ViewableWithID>

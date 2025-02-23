@@ -1,130 +1,144 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_form_field/phone_form_field.dart';
+import 'package:pinput/pinput.dart';
+import 'package:rxdart/rxdart.dart';
+
+final class MultiFactorLoginScreenKeys {
+  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
+  static const passwordFieldKey = ValueKey('Password Field Key');
+  static const enrollButtonKey = ValueKey('Enroll Button Key');
+
+  static const verificationCodeFieldKey =
+      ValueKey('Verification Code Field Key');
+  static const verifyButtonKey = ValueKey('Verify Button Key');
+  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
+}
 
 class MultiFactorLogin extends StatefulWidget {
-  const MultiFactorLogin({super.key});
+  final Clock clock;
+
+  const MultiFactorLogin({super.key, this.clock = const Clock()});
 
   @override
   State<MultiFactorLogin> createState() => _MultifactorStateLogin();
 }
 
 class _MultifactorStateLogin extends State<MultiFactorLogin> {
-  late MultiFactorSession? _session =
-      AuthService.I.multiFactorManager.pendingMultifactorLogin;
-
-  MultiFactorInfo? _multiFactorInfo;
-
-  Future<(String, int?)>? initiateMultifactorLogin;
-
-  String? _phoneNumber;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (_session != null) {
-      _multiFactorInfo = AuthService.I.multiFactorManager
-          .getMultiFactorInfoForPendingSession();
-
-      initiateMultifactorLogin = AuthService.I.multiFactorManager
-          .initiateMultifactorLogin(
-            _session!,
-            factor: _multiFactorInfo,
-          )
-          .onError(onMultiFactorLoginError);
-    }
-  }
+  bool _isEnrollmentInProgress = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('المصادقة الثنائية'),
-        actions: [
-          IconButton(
-            icon: const Icon(Symbols.logout),
-            onPressed: () {
-              if (AuthService.I.isSignedIn) {
-                AuthService.I.signOut();
-              } else {
-                context.go('/');
-              }
+    return BlocConsumer<AuthBloc, AuthState>(
+      bloc: AuthBloc.I,
+      listener: (context, state) {
+        if (state is AuthExceptionState) {
+          setState(() => _isEnrollmentInProgress = false);
+          _showAuthException(context, state);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('المصادقة الثنائية'),
+            actions: const [SignOutButton()],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: switch (state.unwrapped) {
+              AuthMultiFactorChallengeInProgress(
+                :final session,
+                :final challenge,
+              ) =>
+                _VerifyMultiFactor(
+                  clock: clock,
+                  selectedFactor: session.enrolledFactors.firstOrNull,
+                  session: session,
+                  onResendCode: (resendToken) {
+                    AuthBloc.I.add(
+                      StartMultiFactorChallenge(
+                        session: session,
+                        selectedFactor: session.enrolledFactors.firstOrNull,
+                        phoneNumber: session.phoneNumber,
+                        resendToken: resendToken,
+                      ),
+                    );
+                    setState(() => _isEnrollmentInProgress = false);
+                  },
+                  onVerificationCodeSubmitted: (code) {
+                    AuthBloc.I.add(
+                      CompleteMultiFactorChallenge(
+                        session: session,
+                        challenge: challenge,
+                        verificationCode: code,
+                        selectedFactor: session.enrolledFactors.firstOrNull,
+                      ),
+                    );
+                    setState(() => _isEnrollmentInProgress = false);
+                  },
+                  loading: state is AuthLoading,
+                ),
+              AuthAuthenticated(
+                authUser: AuthUser(isMultiFactorEnabled: false)
+              ) =>
+                _EnrollMultiFactor(
+                  onPhoneNumberSubmitted: (phoneNumber, password) {
+                    AuthBloc.I.add(
+                      EnrollMultiFactor(
+                        password: password,
+                        phoneNumber: phoneNumber,
+                      ),
+                    );
+                    setState(() => _isEnrollmentInProgress = true);
+                  },
+                  loading: state is AuthLoading || _isEnrollmentInProgress,
+                ),
+              _ => const Center(child: CircularProgressIndicator()),
             },
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Builder(
-          builder: (context) {
-            if (_session == null) {
-              return _EnrollMultiFactor(
-                onSessionInitiated: (phoneNumber, newSession) {
-                  _session = newSession;
-                  _phoneNumber = phoneNumber;
-
-                  initiateMultifactorLogin = AuthService.I.multiFactorManager
-                      .initiateMultifactorLogin(
-                        _session!,
-                        phoneNumber: _phoneNumber,
-                      )
-                      .onError(onMultiFactorLoginError);
-
-                  if (mounted) setState(() {});
-                },
-              );
-            } else {
-              return _VerifyMultiFactor(
-                session: _session!,
-                multiFactorInfo: _multiFactorInfo,
-                phoneNumber: _phoneNumber,
-                initiateMultifactorLogin: initiateMultifactorLogin!,
-              );
-            }
-          },
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Future<(String, int?)> onMultiFactorLoginError(
-    Exception error,
-    StackTrace stackTrace,
-  ) async {
-    if (mounted) setState(() {});
+  void _showAuthException(BuildContext context, AuthExceptionState state) {
+    switch (state.exception) {
+      case IncorrectCredentialsException():
+        ScaffoldMessenger.of(context).showErrorSnackBar(
+          'كلمة سر خاطئة',
+        );
 
-    await LoggingService.I.showErrorDialogAndReport(
-      context,
-      error,
-      stackTrace: stackTrace,
-    );
-
-    throw error;
+      case MultiFactorEnrollmentFailedException():
+      case MultiFactorVerificationFailedException():
+        ScaffoldMessenger.of(context).showErrorSnackBar(
+          'رمز التحقق خاطئ',
+        );
+    }
   }
 }
 
 class _EnrollMultiFactor extends StatefulWidget {
-  const _EnrollMultiFactor({required this.onSessionInitiated});
+  const _EnrollMultiFactor({
+    required this.onPhoneNumberSubmitted,
+    required this.loading,
+  });
 
-  final void Function(String, MultiFactorSession) onSessionInitiated;
+  final void Function(String phoneNumber, String password)
+      onPhoneNumberSubmitted;
+  final bool loading;
 
   @override
   State<_EnrollMultiFactor> createState() => _EnrollMultiFactorState();
 }
 
 class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
-  late String _phoneNumber;
-  final _phoneNumberController = TextEditingController();
+  final _phoneNumberController = PhoneController(
+    initialValue: const PhoneNumber(isoCode: IsoCode.EG, nsn: ''),
+  );
   final _passwordController = TextEditingController();
-
-  bool _loading = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -134,141 +148,96 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
 
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          Text(
-            'قم بتسجيل رقم هاتفك لإستخدامه في المصادقة الثنائية',
-            style: theme.textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'سيتم إرسال رمز التحقق إلى رقم هاتفك في كل مرة تقوم فيها بتسجيل الدخول',
-          ),
-          const SizedBox(height: 15),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: IntlPhoneField(
-              controller: _phoneNumberController,
-              dropdownIconPosition: IconPosition.trailing,
-              initialCountryCode: 'EG',
-              invalidNumberMessage: 'رقم هاتف غير صالح',
-              decoration: const InputDecoration(
-                labelText: 'رقم الهاتف',
-              ),
-              validator: (value) {
-                try {
-                  if (value == null || value.completeNumber.isEmpty) {
-                    return 'من فضلك أدخل رقم الهاتف';
-                  } else if (!value.isValidNumber()) {
-                    return 'رقم هاتف غير صالح';
+      child: SingleChildScrollView(
+        child: Column(
+          spacing: 15,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image.asset('assets/images/otp-verification.png'),
+            Text(
+              'قم بتسجيل رقم هاتفك لإستخدامه في المصادقة الثنائية',
+              style: theme.textTheme.titleLarge,
+            ),
+            Text(
+              'سيتم إرسال رمز التحقق إلى رقم هاتفك في كل مرة تقوم فيها بتسجيل الدخول',
+              style: theme.textTheme.titleMedium,
+            ),
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: PhoneFormField(
+                key: MultiFactorLoginScreenKeys.phoneNumberFieldKey,
+                controller: _phoneNumberController,
+                decoration: const InputDecoration(labelText: 'رقم الهاتف'),
+                validator: PhoneValidator.compose([
+                  PhoneValidator.required(context),
+                  PhoneValidator.validMobile(context),
+                ]),
+                onChanged: (value) {
+                  if (value.isoCode == IsoCode.EG &&
+                      value.nsn.startsWith('01')) {
+                    _phoneNumberController.changeNationalNumber(
+                      value.nsn.replaceFirst(RegExp('^01'), '1'),
+                    );
                   }
-                } on Exception {
-                  return 'رقم هاتف غير صالح';
+                },
+              ),
+            ),
+            PasswordFormField(
+              key: MultiFactorLoginScreenKeys.passwordFieldKey,
+              labelText: 'أعد إدخال كلمة المرور',
+              controller: _passwordController,
+              validator: (password) {
+                if (password == null || password.isEmpty) {
+                  return 'من فضلك أدخل كلمة المرور';
                 }
                 return null;
               },
-              onChanged: (value) {
-                if (value.countryISOCode == 'EG' &&
-                    value.number.startsWith('01')) {
-                  _formatEGNumber(value);
-                } else {
-                  _phoneNumber = value.completeNumber;
-                }
-              },
+              onFieldSubmitted: (_) => _sendCode(),
             ),
-          ),
-          PasswordFormField(
-            labelText: 'أعد إدخال كلمة المرور',
-            controller: _passwordController,
-            validator: (password) {
-              if (password == null || password.isEmpty) {
-                return 'من فضلك أدخل كلمة المرور';
-              }
-
-              return null;
-            },
-          ),
-          if (_loading)
-            const FilledButton(
-              onPressed: null,
-              child: CircularProgressIndicator(),
-            )
-          else
-            FilledButton(
-              onPressed: _sendCode,
-              child: const Text('ارسال رمز التحقق'),
-            ),
-        ],
+            if (widget.loading)
+              const FilledButton(
+                onPressed: null,
+                child: CircularProgressIndicator(),
+              )
+            else
+              FilledButton(
+                key: MultiFactorLoginScreenKeys.enrollButtonKey,
+                onPressed: _sendCode,
+                child: const Text('ارسال رمز التحقق'),
+              ),
+          ],
+        ),
       ),
     );
   }
 
-  Future<void> _sendCode() async {
+  void _sendCode() {
     if (!_formKey.currentState!.validate()) return;
 
-    try {
-      _loading = true;
-      if (mounted) setState(() {});
-
-      await AuthService.I.reauthWithEmailPassword(
-        email: AuthService.I.currentUser!.email!,
-        password: _passwordController.text,
-      );
-
-      final multiFactorSession =
-          await AuthService.I.multiFactorManager.enrollNewMultiFactor(
-        password: _passwordController.text,
-      );
-
-      _loading = false;
-      if (mounted) setState(() {});
-
-      widget.onSessionInitiated(
-        _phoneNumber,
-        multiFactorSession,
-      );
-    } on Exception catch (error, stackTrace) {
-      _loading = false;
-      if (mounted) {
-        setState(() {});
-
-        await LoggingService.I.showErrorDialogAndReport(
-          context,
-          error,
-          stackTrace: stackTrace,
-        );
-      }
-    }
-  }
-
-  void _formatEGNumber(PhoneNumber value) {
-    _phoneNumberController.value = _phoneNumberController.value.copyWith(
-      text: '1',
-      selection: const TextSelection(
-        baseOffset: 1,
-        extentOffset: 1,
-      ),
+    widget.onPhoneNumberSubmitted(
+      _phoneNumberController.value.international,
+      _passwordController.text,
     );
-    _phoneNumber =
-        value.countryCode + value.number.substring(1, value.number.length);
   }
 }
 
 class _VerifyMultiFactor extends StatefulWidget {
+  final Clock clock;
+
   const _VerifyMultiFactor({
     required this.session,
-    required this.initiateMultifactorLogin,
-    this.multiFactorInfo,
-    this.phoneNumber,
-  }) : assert(
-          (multiFactorInfo == null) != (phoneNumber == null),
-          'One of "factor" or "phoneNumber" must be provided',
-        );
+    required this.onVerificationCodeSubmitted,
+    required this.onResendCode,
+    required this.loading,
+    required this.clock,
+    this.selectedFactor,
+  });
 
   final MultiFactorSession session;
-  final MultiFactorInfo? multiFactorInfo;
-  final String? phoneNumber;
-  final Future<(String, int?)> initiateMultifactorLogin;
+  final MultiFactorInfo? selectedFactor;
+  final void Function(String code) onVerificationCodeSubmitted;
+  final void Function(int? resendToken) onResendCode;
+  final bool loading;
 
   @override
   State<_VerifyMultiFactor> createState() => _VerifyMultiFactorState();
@@ -276,115 +245,130 @@ class _VerifyMultiFactor extends StatefulWidget {
 
 class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
   final _code = TextEditingController();
-  late Future<(String, int?)> initiateMultifactorLogin =
-      widget.initiateMultifactorLogin;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenSize = MediaQuery.sizeOf(context);
 
-    return FutureBuilder<(String, int?)>(
-      future: initiateMultifactorLogin,
-      builder: (context, snapshot) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'قم بإدخال رمز التحقق الذي تم إرساله إلى ' +
-                  (widget.phoneNumber ??
-                      (widget.multiFactorInfo?.displayName == ''
-                          ? null
-                          : widget.multiFactorInfo?.displayName) ??
-                      'هاتفك'),
-              textAlign: TextAlign.center,
-              style: theme.textTheme.bodyLarge,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 35, bottom: 15),
-              child: SizedBox(
-                width: screenSize.width * 0.4,
-                child: TextFormField(
-                  maxLength: 6,
-                  controller: _code,
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    labelText: 'رمز التحقق',
+    return BlocBuilder<AuthBloc, AuthState>(
+      bloc: AuthBloc.I,
+      builder: (context, state) {
+        if (state.unwrapped
+            case AuthMultiFactorChallengeInProgress(
+              :final session,
+              :final challenge
+            )) {
+          final phoneNumber = session.phoneNumber ??
+              session.enrolledFactors.firstOrNull?.phoneNumber ??
+              'هاتفك';
+
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 10,
+              children: [
+                Image.asset('assets/images/otp-verification.png'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'قم بإدخال رمز التحقق الذي تم إرساله إلى',
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      Text(
+                        phoneNumber,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                    ],
                   ),
-                  keyboardType: TextInputType.number,
-                  autofillHints: const [AutofillHints.oneTimeCode],
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  onFieldSubmitted: (_) {
-                    _finishSignIn(snapshot.requireData.$1);
+                ),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Pinput(
+                    key: MultiFactorLoginScreenKeys.verificationCodeFieldKey,
+                    length: 6,
+                    controller: _code,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onCompleted: (_) {
+                      if (!widget.loading) {
+                        widget.onVerificationCodeSubmitted(_code.text);
+                      }
+                    },
+                    isCursorAnimationEnabled: false,
+                    defaultPinTheme: PinTheme(
+                      height: 56,
+                      width: 56,
+                      textStyle: theme.textTheme.titleLarge!.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainer,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ),
+                ),
+                if (widget.loading)
+                  const FilledButton(
+                    key: MultiFactorLoginScreenKeys.verifyButtonKey,
+                    onPressed: null,
+                    child: CircularProgressIndicator(),
+                  )
+                else
+                  FilledButton(
+                    key: MultiFactorLoginScreenKeys.verifyButtonKey,
+                    onPressed: () {
+                      widget.onVerificationCodeSubmitted(_code.text);
+                    },
+                    child: const Text('تسجيل الدخول'),
+                  ),
+                StreamBuilder<int>(
+                  stream: Rx.range(1, 30)
+                      .delayWhen((i) => Rx.timer(null, Duration(seconds: i)))
+                      .map(
+                        (i) =>
+                            30 -
+                            widget.clock
+                                .now()
+                                .difference(challenge.createdAt)
+                                .inSeconds,
+                      ),
+                  builder: (context, remainingSecondsSnapshot) {
+                    final remainingSeconds =
+                        remainingSecondsSnapshot.data ?? 30;
+
+                    if (remainingSeconds <= 0) {
+                      return OutlinedButton(
+                        key: MultiFactorLoginScreenKeys.resendCodeButtonKey,
+                        onPressed: () {
+                          widget.onResendCode(challenge.resendToken);
+                        },
+                        child: const Text('إعادة إرسال الرمز'),
+                      );
+                    }
+
+                    return OutlinedButton(
+                      key: MultiFactorLoginScreenKeys.resendCodeButtonKey,
+                      onPressed: null,
+                      child: Text(
+                        'إعادة إرسال الرمز بعد $remainingSeconds ثانية',
+                      ),
+                    );
                   },
                 ),
-              ),
+              ],
             ),
-            FilledButton(
-              onPressed: () {
-                _finishSignIn(snapshot.requireData.$1);
-              },
-              child: const Text('تسجيل الدخول'),
-            ),
-            StreamBuilder<int>(
-              stream: snapshot.data?.$1 != null
-                  ? Stream.periodic(
-                      const Duration(seconds: 1),
-                      (i) => i,
-                    )
-                  : null,
-              builder: (context, s) {
-                if ((s.data ?? 0) >= 30) {
-                  return OutlinedButton(
-                    onPressed: () {
-                      initiateMultifactorLogin = AuthService
-                          .I.multiFactorManager
-                          .initiateMultifactorLogin(
-                        widget.session,
-                        factor: widget.multiFactorInfo,
-                        phoneNumber: widget.phoneNumber,
-                        forceResendingToken: snapshot.requireData.$2,
-                      );
-                      setState(() {});
-                    },
-                    child: const Text('إعادة إرسال الرمز'),
-                  );
-                }
+          );
+        }
 
-                return OutlinedButton(
-                  onPressed: null,
-                  child: Text(
-                    'إعادة إرسال الرمز بعد ${30 - (s.data ?? 0)} ثانية',
-                  ),
-                );
-              },
-            ),
-          ],
-        );
+        return const Center(child: CircularProgressIndicator());
       },
     );
-  }
-
-  Future<void> _finishSignIn(String verificationId) async {
-    try {
-      await AuthService.I.multiFactorManager.finishMultiFactorSession(
-        verificationId,
-        _code.text,
-        widget.session,
-      );
-
-      await AuthService.I.userStream.nextNonNullStrict;
-
-      await UserSettingsService.I.setupDefaults();
-
-      if (await NotificationsService.I.requestNotificationsPermission()) {
-        await NotificationsService.I.scheduleDefaultNotifications();
-      }
-    } catch (err, stack) {
-      if (mounted) {
-        await LoggingService.I
-            .showErrorDialogAndReport(context, err, stackTrace: stack);
-      }
-    }
   }
 }

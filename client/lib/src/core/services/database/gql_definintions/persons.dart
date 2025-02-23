@@ -1,11 +1,10 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/helpers.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
-
-import 'persons/__generated__/mutations.gql.dart';
-import 'persons/__generated__/queries.gql.dart';
-import 'persons/__generated__/subscriptions.gql.dart';
-import 'persons/helpers.dart';
 
 class PersonsDAO
     extends FullCRUDDAO<Person, Input_PersonsBoolExp, Input_PersonsOrderBy> {

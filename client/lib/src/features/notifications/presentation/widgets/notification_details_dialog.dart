@@ -72,7 +72,9 @@ class NotificationDetailsDialog extends StatelessWidget {
     );
   }
 
-  void Function() _onQueryTap(BuildContext context, dynamic queryData) {
+  void Function() _onQueryTap(BuildContext context, dynamic rawQueryData) {
+    var queryData = rawQueryData;
+
     if (queryData is String) {
       queryData = json.decode(queryData);
     } else if (queryData is Map) {

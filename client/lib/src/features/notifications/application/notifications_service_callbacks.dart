@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
 
-
 class NotificationsServiceCallbacks {
   @pragma('vm:entry-point')
   static Future<void> onBackgroundMessageReceived(RemoteMessage message) async {
@@ -61,7 +60,9 @@ class NotificationsServiceCallbacks {
   }) async {
     await InitializationService.I.initialize();
 
-    if (!AuthService.I.isSignedIn) return;
+    await AuthBloc.I.loaded;
+
+    if (!AuthBloc.I.isSignedIn) return;
 
     final persons = await DatabaseService.I.advancedQueryParser
         .createPaginatableStream(query)
@@ -165,7 +166,7 @@ class NotificationsServiceCallbacks {
       ],
       orderBy: [
         OrderBy(
-          fieldName: field + 'Aggregate',
+          fieldName: '${field}Aggregate',
           value: OrderBy(
             fieldName: 'max',
             value: OrderBy(
@@ -267,9 +268,8 @@ class NotificationsServiceCallbacks {
           queryableType: Person.queryableType,
           field: 'birthday',
           operator: Operator.eq,
-          value: now.month.toString().padLeft(2, '0') +
-              '-' +
-              now.day.toString().padLeft(2, '0'),
+          value:
+              '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
         ),
       ],
       orderBy: [

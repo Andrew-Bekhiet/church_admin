@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllSchools {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllSchools) ||
+    if (other is! Variables_Subscription_watchAllSchools ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllSchools {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllSchools) ||
+    if (other is! Subscription_watchAllSchools ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -479,7 +479,7 @@ class Subscription_watchAllSchools_schools {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllSchools_schools) ||
+    if (other is! Subscription_watchAllSchools_schools ||
         runtimeType != other.runtimeType) {
       return false;
     }

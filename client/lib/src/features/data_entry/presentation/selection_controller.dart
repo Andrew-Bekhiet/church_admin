@@ -26,7 +26,7 @@ class SelectionController<T> {
     }
   }
 
-  bool isSelected(item) {
+  bool isSelected(T item) {
     return currentValue?.contains(item) ?? false;
   }
 

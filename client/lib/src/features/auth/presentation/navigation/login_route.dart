@@ -15,9 +15,12 @@ class LoginRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    if (AuthService.I.isSignedIn) {
-      return '/';
+    switch (AuthBloc.I.state.unwrapped) {
+      case AuthUnauthenticated():
+        return null;
+
+      default:
+        return const HomeScreenRoute().location;
     }
-    return null;
   }
 }

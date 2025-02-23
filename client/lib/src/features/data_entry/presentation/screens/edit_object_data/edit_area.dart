@@ -22,7 +22,7 @@ class _EditAreaState extends State<EditArea> {
   void initState() {
     super.initState();
 
-    final Area? _oldArea = widget.area;
+    final Area? oldArea = widget.area;
 
     _controller = EditObjectController(
       onCreate: (object) =>
@@ -33,8 +33,8 @@ class _EditAreaState extends State<EditArea> {
       ),
       onDelete: (object) => DatabaseService.I.areas.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldArea ?? Area(id: const Uuid().v4(), name: 'منطقة جديدة'),
-      initialObject: _oldArea,
+      newObject: oldArea ?? Area(id: const Uuid().v4(), name: 'منطقة جديدة'),
+      initialObject: oldArea,
     );
   }
 
@@ -47,7 +47,7 @@ class _EditAreaState extends State<EditArea> {
     return EditObjectData(
       objectData: widget.area,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
@@ -71,7 +71,7 @@ class _EditAreaState extends State<EditArea> {
                 newArea = newArea.copyWith(
                   lastVisit: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }

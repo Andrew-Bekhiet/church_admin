@@ -14,7 +14,8 @@ class UpdateUserSpiritData extends StatefulWidget {
 }
 
 class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
-  late Person _userData = widget.userData ?? AuthService.I.currentUser!.person!;
+  late Person _userData =
+      widget.userData ?? AuthBloc.I.currentUserData!.person!;
   final _formKey = GlobalKey<FormState>();
   bool _isSaving = false;
 
@@ -49,13 +50,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 ),
                 initialValue: _userData.lastKodas?.time,
                 onTap: (state) async {
-                  final _picked = await _selectDate(
+                  final picked = await _selectDate(
                     'تاريخ أخر تناول',
                     state.value ?? DateTime.now(),
                   );
-                  if (_picked != null) {
+                  if (picked != null) {
                     state.didChange(
-                      _picked,
+                      picked,
                     );
                   }
                 },
@@ -67,7 +68,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.I.currentUser!.uid,
+                    recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null
@@ -90,13 +91,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 ),
                 initialValue: _userData.lastConfession?.time,
                 onTap: (state) async {
-                  final _picked = await _selectDate(
+                  final picked = await _selectDate(
                     'تاريخ أخر اعتراف',
                     state.value ?? DateTime.now(),
                   );
-                  if (_picked != null) {
+                  if (picked != null) {
                     state.didChange(
-                      _picked,
+                      picked,
                     );
                   }
                 },
@@ -108,7 +109,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
                     time: v!,
-                    recordedBy: AuthService.I.currentUser!.uid,
+                    recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
                 validator: (value) => value == null

@@ -1,4 +1,5 @@
 export 'repos/android_alarm_manager_init.dart';
+export 'repos/bloc_observer_init.dart';
 export 'repos/device_info_init.dart';
 export 'repos/firebase_init.dart';
 export 'repos/flutter_local_notifications_init.dart';

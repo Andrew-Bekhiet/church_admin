@@ -1,5 +1,3 @@
-// ignore_for_file: discarded_futures
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -17,10 +15,31 @@ import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../fakes/fake_device_info.dart';
+import '../../../../utils.dart';
 import 'authenticate_screen_test.mocks.dart';
 
+const testPassword = r'password\1234';
+const testPasswordHash = 'hash-password1234';
+const email = 'email';
+
+const AuthUser _fakeUser = AuthUser(
+  uid: 'uid',
+  email: email,
+  emailVerified: true,
+  idToken: 'idToken',
+  claims: {},
+  isMultiFactorEnabled: true,
+);
+
+final User _fakeUserData = User(
+  uid: 'uid',
+  email: email,
+  name: 'name',
+);
+
 @GenerateNiceMocks([
-  MockSpec<AuthService>(),
+  MockSpec<AuthBloc>(),
+  MockSpec<AuthStorage>(),
   MockSpec<LocalAuthService>(),
   MockSpec<GoRouterState>(),
   MockSpec<BuildContext>(),
@@ -30,7 +49,7 @@ void main() {
 
   setUp(_setUp);
 
-  tearDown(resetGlobalProviderContainer);
+  tearDown(defaultTearDown);
 
   const size = Size(100, 1365 * 3);
 
@@ -161,9 +180,9 @@ void main() {
 
         verifyInOrder([
           LocalAuthService.I.verifyPassword(
-            email: _fakeUser.email!,
+            email: _fakeUser.email,
             password: testPassword,
-            storedPasswordHash: anyNamed('storedPasswordHash'),
+            storedPasswordHash: testPasswordHash,
           ),
           LocalAuthService.I.resetAuthState(),
         ]);
@@ -209,7 +228,7 @@ void main() {
         'No Signed In User',
         () async {
           initGlobalProviderContainer([
-            _setUpAuthService(),
+            _setUpAuthBloc(),
             _setUpLocalAuth(),
           ]);
 
@@ -227,8 +246,9 @@ void main() {
             'No Person',
             () async {
               initGlobalProviderContainer([
-                _setUpAuthService(
-                  currentUser: _fakeUser.copyWith(person: null),
+                _setUpAuthBloc(
+                  currentUser: _fakeUser,
+                  currentUserData: _fakeUserData.copyWith(person: null),
                 ),
                 _setUpLocalAuth(),
               ]);
@@ -245,7 +265,13 @@ void main() {
             'Should Authenticate',
             () async {
               initGlobalProviderContainer(
-                [_setUpAuthService(currentUser: _fakeUser), _setUpLocalAuth()],
+                [
+                  _setUpAuthBloc(
+                    currentUser: _fakeUser,
+                    currentUserData: _fakeUserData,
+                  ),
+                  _setUpLocalAuth(),
+                ],
               );
 
               expect(
@@ -260,7 +286,10 @@ void main() {
             'Should not Authenticate (with redirection)',
             () async {
               initGlobalProviderContainer([
-                _setUpAuthService(currentUser: _fakeUser),
+                _setUpAuthBloc(
+                  currentUser: _fakeUser,
+                  currentUserData: _fakeUserData,
+                ),
                 _setUpLocalAuth(shouldAuthenticate: false),
               ]);
 
@@ -276,7 +305,10 @@ void main() {
             'Should not Authenticate (without redirection)',
             () async {
               initGlobalProviderContainer([
-                _setUpAuthService(currentUser: _fakeUser),
+                _setUpAuthBloc(
+                  currentUser: _fakeUser,
+                  currentUserData: _fakeUserData,
+                ),
                 _setUpLocalAuth(shouldAuthenticate: false),
               ]);
 
@@ -295,7 +327,10 @@ void main() {
             'Should authenticate for path',
             () async {
               initGlobalProviderContainer([
-                _setUpAuthService(currentUser: _fakeUser),
+                _setUpAuthBloc(
+                  currentUser: _fakeUser,
+                  currentUserData: _fakeUserData,
+                ),
                 _setUpLocalAuth(shouldAuthenticate: false),
               ]);
 
@@ -336,30 +371,27 @@ Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
   return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
 }
 
-//Changing these values will change the precomputed password hash
-const testPassword = r'password\1234';
-const email = 'email';
-
-final User _fakeUser = User(
-  uid: 'uid',
-  name: '',
-  permissions: const PermissionsSet.fromSet({UserPermission.approved}),
-  isMultiFactorEnrolled: true,
-  email: email,
-  authId: 'firebaseAuthUID',
-);
-
-Override _setUpAuthService({
-  User? currentUser,
+Override _setUpAuthBloc({
+  AuthUser? currentUser,
+  User? currentUserData,
 }) {
-  final mockAuthService = MockAuthService();
+  final mockAuthBloc = MockAuthBloc();
 
-  when(mockAuthService.isSignedIn).thenReturn(currentUser != null);
+  when(mockAuthBloc.isSignedIn).thenReturn(currentUser != null);
   if (currentUser != null) {
-    when(mockAuthService.currentUser).thenReturn(currentUser);
+    when(mockAuthBloc.currentUser).thenReturn(currentUser);
   }
 
-  return authServiceProvider.overrideWithValue(mockAuthService);
+  if (currentUserData != null) {
+    when(mockAuthBloc.currentUserData).thenReturn(currentUserData);
+  }
+  when(mockAuthBloc.state).thenReturn(
+    currentUser != null
+        ? AuthAuthenticated(authUser: currentUser, userData: currentUserData)
+        : const AuthUnauthenticated(),
+  );
+
+  return authBlocProvider.overrideWithValue(mockAuthBloc);
 }
 
 class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
@@ -375,8 +407,9 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
 
     final overrides = [
       encryptionServiceProvider.overrideWithValue(encryptionService),
-      await _setUpAuthService(encryptionService),
+      _setUpAuthBloc(),
       _setUpLocalAuthService(value),
+      _setUpAuthStorage(encryptionService),
     ];
 
     initGlobalProviderContainer(overrides);
@@ -384,22 +417,19 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     return value;
   }
 
-  Future<Override> _setUpAuthService(
-    EncryptionService encryptionService,
-  ) async {
-    final mock = MockAuthService();
+  Override _setUpAuthStorage(EncryptionService encryptionService) {
+    final mock = MockAuthStorage();
+    when(mock.getPasswordHash()).thenAnswer((_) async => testPasswordHash);
 
-    when(mock.currentUser).thenReturn(
-      User(
-        uid: 'uid',
-        name: '',
-        passwordKeyHash: 'asdasdasdas',
-        email: email,
-        authId: 'firebaseAuthUID',
-      ),
-    );
+    return authStorageProvider.overrideWithValue(mock);
+  }
 
-    return authServiceProvider.overrideWithValue(mock);
+  Override _setUpAuthBloc() {
+    final mock = MockAuthBloc();
+
+    when(mock.currentUser).thenReturn(_fakeUser);
+
+    return authBlocProvider.overrideWithValue(mock);
   }
 
   Override _setUpLocalAuthService(AuthenticationVariantEnum value) {
@@ -414,7 +444,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
         password: anyNamed('password'),
         storedPasswordHash: anyNamed('storedPasswordHash'),
       ),
-    ).thenAnswer((_) async => _.namedArguments[#password] == testPassword);
+    ).thenAnswer((i) async => i.namedArguments[#password] == testPassword);
 
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
@@ -423,6 +453,8 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
 enum AuthenticationVariantEnum { password, biometrics }
 
 void _setUp() {
+  provideDummy<AuthState>(const AuthUnauthenticated());
+
   _setUpDeviceInfo();
 }
 

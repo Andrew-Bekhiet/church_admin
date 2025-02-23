@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
-import 'stores/__generated__/mutations.gql.dart';
-import 'stores/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
 
 class StoresDAO
     extends FullCRUDDAO<Store, Input_StoresBoolExp, Input_StoresOrderBy> {

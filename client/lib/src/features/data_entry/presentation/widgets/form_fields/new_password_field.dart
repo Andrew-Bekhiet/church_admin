@@ -1,12 +1,14 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:zxcvbn/zxcvbn.dart';
 
 class NewPasswordField extends StatefulWidget {
   final TextEditingController? controller;
-  const NewPasswordField({super.key, this.controller});
+
+  /// If given, the password will be checked to not be similar to the email.
+  final String Function()? getEmail;
+
+  const NewPasswordField({super.key, this.controller, this.getEmail});
 
   @override
   State<NewPasswordField> createState() => _NewPasswordFieldState();
@@ -23,6 +25,8 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
       hidePasswordIcon: const Icon(Symbols.visibility),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validationRules: {
+        if (widget.getEmail != null)
+          PreventEmailSimilarityRule(getEmail: widget.getEmail),
         DigitValidationRule(customText: 'تحتوي على أرقام'),
         UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة'),
         LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة'),
@@ -36,6 +40,7 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
       decoration: const InputDecoration(
         labelText: 'كلمة المرور',
         errorMaxLines: 6,
+        errorStyle: TextStyle(fontSize: 14),
       ),
       autofillHints: const [AutofillHints.newPassword],
       passwordController: _passwordRulesController,
@@ -52,12 +57,6 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
                 >= 0.7 => Colors.yellow,
                 >= 0.5 => Colors.orange,
                 _ => Colors.red,
-              },
-              backgroundColor: switch (score) {
-                >= 0.9 => Colors.greenAccent,
-                >= 0.7 => Colors.yellowAccent,
-                >= 0.5 => Colors.orangeAccent,
-                _ => Colors.redAccent,
               },
             ),
             const SizedBox(height: 10),
@@ -77,39 +76,40 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
       validator: (password) {
         if (password?.isEmpty ?? true) return 'يجب ادخال كلمة المرور';
 
-        final passwordStrength = _evaluatePasswordStrength();
-        final score = passwordStrength.score!;
+        // Required to reevaluate rules
+        _passwordRulesController.onChange(password!);
 
-        final msg = switch (score) {
-          >= 3 => null,
-          >= 2 => 'كلمة المرور متوسطة القوة',
-          >= 1 => 'كلمة المرور ضعيفة',
-          >= 0 => 'كلمة المرور ضعيفة جداً',
-          _ => '',
-        };
-        final reason = (passwordStrength.feedback.warning ?? '') +
-            '\n' +
-            _passwordRulesController.ofendingRules
-                .map((e) => 'لا ' + e.name)
-                .join('\n');
+        final reason = _passwordRulesController.ofendingRules
+            .map((e) => e.name)
+            .join('\n');
 
-        if (msg != null && msg.isNotEmpty) {
-          return msg + '\nالسبب: $reason';
-        } else if (_passwordRulesController.ofendingRules.isNotEmpty) {
-          return 'يجب على كلمة المرور أن:\n' +
-              _passwordRulesController.ofendingRules
-                  .map((e) => e.name)
-                  .join('\n');
+        if (reason.isNotEmpty) {
+          return 'يجب على كلمة المرور أن:\n${reason.trim()}';
         }
 
         return null;
       },
     );
   }
+}
 
-  Result _evaluatePasswordStrength() {
-    return globalProviderContainer
-        .read(zxcvbnProvider)
-        .evaluate(_passwordController.text);
+class PreventEmailSimilarityRule extends ValidationRule {
+  final String Function()? getEmail;
+
+  PreventEmailSimilarityRule({required this.getEmail});
+
+  @override
+  String get name => 'لا تحتوي على اسم المستخدم';
+
+  @override
+  bool validate(String value) {
+    final email = getEmail!();
+
+    if (!email.contains('@')) return true;
+
+    final [username, _] = email.split('@');
+
+    return !value.toLowerCase().contains(username.toLowerCase()) &&
+        !value.toLowerCase().contains(email.toLowerCase());
   }
 }

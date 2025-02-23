@@ -79,7 +79,7 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
             ),
         ],
         title:
-            Text('تحليل الحضور ل' + (widget.user?.name ?? widget.person!.name)),
+            Text('تحليل الحضور ل${widget.user?.name ?? widget.person!.name}'),
       ),
       body: ListView(
         children: [

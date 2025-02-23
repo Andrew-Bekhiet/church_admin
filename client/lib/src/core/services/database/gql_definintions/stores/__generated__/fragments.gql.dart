@@ -82,7 +82,7 @@ class Fragment_Store implements Fragment_StoreNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Store) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Store || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -303,7 +303,7 @@ class Fragment_StoreNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_StoreNoPhoto) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_StoreNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

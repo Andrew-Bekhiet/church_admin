@@ -83,7 +83,7 @@ class Variables_Subscription_watchAllStreets {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllStreets) ||
+    if (other is! Variables_Subscription_watchAllStreets ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -247,7 +247,7 @@ class Subscription_watchAllStreets {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllStreets) ||
+    if (other is! Subscription_watchAllStreets ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -527,7 +527,7 @@ class Subscription_watchAllStreets_streets
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllStreets_streets) ||
+    if (other is! Subscription_watchAllStreets_streets ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -699,7 +699,7 @@ class Variables_Subscription_watchStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchStreet) ||
+    if (other is! Variables_Subscription_watchStreet ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -791,7 +791,7 @@ class Subscription_watchStreet {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchStreet) ||
+    if (other is! Subscription_watchStreet ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1088,7 +1088,7 @@ class Subscription_watchStreet_streetsByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchStreet_streetsByPk) ||
+    if (other is! Subscription_watchStreet_streetsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }

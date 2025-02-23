@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-
-import 'shammas_levels/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/shammas_levels/__generated__/subscriptions.gql.dart';
 
 class ShammasLevelsDAO extends DAOBase<ShammasLevel>
     with

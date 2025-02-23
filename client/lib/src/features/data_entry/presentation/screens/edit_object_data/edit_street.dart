@@ -21,7 +21,7 @@ class _EditStreetState extends State<EditStreet> {
   @override
   void initState() {
     super.initState();
-    final Street? _oldStreet = widget.street;
+    final Street? oldStreet = widget.street;
 
     _controller = EditObjectController(
       onCreate: (object) =>
@@ -33,8 +33,8 @@ class _EditStreetState extends State<EditStreet> {
       ),
       onDelete: (object) => DatabaseService.I.streets.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: _oldStreet ?? Street(id: const Uuid().v4(), name: 'شارع جديد'),
-      initialObject: _oldStreet,
+      newObject: oldStreet ?? Street(id: const Uuid().v4(), name: 'شارع جديد'),
+      initialObject: oldStreet,
     );
   }
 
@@ -47,7 +47,7 @@ class _EditStreetState extends State<EditStreet> {
     return EditObjectData(
       objectData: widget.street,
       getController: () => _controller,
-      builder: (context, _controller) => Column(
+      builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
@@ -71,7 +71,7 @@ class _EditStreetState extends State<EditStreet> {
                 newStreet = newStreet.copyWith(
                   lastVisit: LastRecordedByInfo(
                     time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
                   ),
                 );
               }

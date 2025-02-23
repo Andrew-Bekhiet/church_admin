@@ -115,12 +115,11 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                     getTooltipItems: (o) => o
                         .map(
                           (e) => LineTooltipItem(
-                            DateFormat('M/d', 'ar_EG').format(
-                                  groupedAnalysisData.keys.first.add(
-                                    Duration(days: e.x.toInt()),
-                                  ),
-                                ) +
-                                '\n',
+                            '${DateFormat('M/d', 'ar_EG').format(
+                              groupedAnalysisData.keys.first.add(
+                                Duration(days: e.x.toInt()),
+                              ),
+                            )}\n',
                             themeData.textTheme.bodySmall!
                                 .copyWith(color: colorScheme.onSurface),
                             children: [

@@ -40,7 +40,7 @@ class Variables_Mutation_deleteFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteFamily) ||
+    if (other is! Variables_Mutation_deleteFamily ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deleteFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteFamily) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteFamily || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
@@ -333,7 +333,7 @@ class Variables_Mutation_insertFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertFamily) ||
+    if (other is! Variables_Mutation_insertFamily ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -440,7 +440,7 @@ class Mutation_insertFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertFamily) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertFamily || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertFamiliesOne = insertFamiliesOne;
@@ -695,7 +695,7 @@ class Variables_Mutation_updateFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateFamily) ||
+    if (other is! Variables_Mutation_updateFamily ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -943,7 +943,7 @@ class Mutation_updateFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateFamily) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateFamily || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateFamiliesByPk = updateFamiliesByPk;
@@ -1408,7 +1408,7 @@ class Mutation_updateFamily_deleteFamiliesFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateFamily_deleteFamiliesFamilies) ||
+    if (other is! Mutation_updateFamily_deleteFamiliesFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1535,7 +1535,7 @@ class Mutation_updateFamily_insertFamiliesFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateFamily_insertFamiliesFamilies) ||
+    if (other is! Mutation_updateFamily_insertFamiliesFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }

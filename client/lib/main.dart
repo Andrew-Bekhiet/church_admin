@@ -16,7 +16,7 @@ Future<void> main() async {
 
   await InitializationService.I.initialize();
 
-  await AuthService.I.userStream.first;
+  await AuthBloc.I.loaded;
 
   runApp(
     UncontrolledProviderScope(

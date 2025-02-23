@@ -88,7 +88,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_User) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_User || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -312,7 +312,7 @@ class Fragment_UserNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserNoPhoto) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_UserNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -563,7 +563,7 @@ class Fragment_UserOverview
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserOverview) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_UserOverview || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -894,7 +894,7 @@ class Fragment_UserOverview_permissions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserOverview_permissions) ||
+    if (other is! Fragment_UserOverview_permissions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1082,7 +1082,7 @@ class Fragment_UserOverview_person
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserOverview_person) ||
+    if (other is! Fragment_UserOverview_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1384,7 +1384,7 @@ class Fragment_UserDetails
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserDetails) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_UserDetails || runtimeType != other.runtimeType) {
       return false;
     }
     final l$uid = uid;
@@ -1744,7 +1744,7 @@ class Fragment_UserDetails_permissions
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserDetails_permissions) ||
+    if (other is! Fragment_UserDetails_permissions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1935,7 +1935,7 @@ class Fragment_UserDetails_person
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserDetails_person) ||
+    if (other is! Fragment_UserDetails_person ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2264,7 +2264,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserDetails_adminOn) ||
+    if (other is! Fragment_UserDetails_adminOn ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2600,7 +2600,7 @@ class Fragment_UserDetails_adminOn_serviceStudyYearData
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserDetails_adminOn_serviceStudyYearData) ||
+    if (other is! Fragment_UserDetails_adminOn_serviceStudyYearData ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2746,7 +2746,7 @@ class Fragment_UserPermissions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserPermissions) ||
+    if (other is! Fragment_UserPermissions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2944,7 +2944,7 @@ class Fragment_UserPermissions_permissions {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserPermissions_permissions) ||
+    if (other is! Fragment_UserPermissions_permissions ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3073,7 +3073,7 @@ class Fragment_UserAdminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserAdminOn) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_UserAdminOn || runtimeType != other.runtimeType) {
       return false;
     }
     final l$adminOn = adminOn;
@@ -3628,7 +3628,7 @@ class Fragment_UserAdminOn_adminOn {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserAdminOn_adminOn) ||
+    if (other is! Fragment_UserAdminOn_adminOn ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3963,7 +3963,7 @@ class Fragment_UserAdminOn_adminOn_serviceStudyYearData {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_UserAdminOn_adminOn_serviceStudyYearData) ||
+    if (other is! Fragment_UserAdminOn_adminOn_serviceStudyYearData ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4182,7 +4182,7 @@ class Variables_Fragment_AttendanceFields {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Fragment_AttendanceFields) ||
+    if (other is! Variables_Fragment_AttendanceFields ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4450,7 +4450,7 @@ class Fragment_AttendanceFields {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields) ||
+    if (other is! Fragment_AttendanceFields ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5536,7 +5536,7 @@ class Fragment_AttendanceFields_servicesHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_servicesHistory) ||
+    if (other is! Fragment_AttendanceFields_servicesHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5757,7 +5757,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_servicesHistory_service) ||
+    if (other is! Fragment_AttendanceFields_servicesHistory_service ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6016,8 +6016,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6237,8 +6237,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6414,8 +6414,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6557,8 +6557,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6721,8 +6721,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6929,8 +6929,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7074,8 +7074,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7231,7 +7231,7 @@ class Fragment_AttendanceFields_classesHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_classesHistory) ||
+    if (other is! Fragment_AttendanceFields_classesHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7467,7 +7467,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_classesHistory_classes) ||
+    if (other is! Fragment_AttendanceFields_classesHistory_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7721,8 +7721,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -7942,8 +7942,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8119,8 +8119,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8262,8 +8262,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8426,8 +8426,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8634,8 +8634,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8779,8 +8779,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -8936,7 +8936,7 @@ class Fragment_AttendanceFields_groupsHistory {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_groupsHistory) ||
+    if (other is! Fragment_AttendanceFields_groupsHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9156,7 +9156,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_AttendanceFields_groupsHistory_group) ||
+    if (other is! Fragment_AttendanceFields_groupsHistory_group ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9410,8 +9410,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9631,8 +9631,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9808,8 +9808,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -9951,8 +9951,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_n
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10115,8 +10115,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10323,8 +10323,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10468,8 +10468,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }

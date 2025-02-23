@@ -17,18 +17,23 @@ class AuthenticateRoute extends GoRouteData {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final AuthService authService = AuthService.I;
+    final AuthBloc authBloc = AuthBloc.I;
     final LocalAuthService localAuthService = LocalAuthService.I;
 
-    if (!authService.isSignedIn) {
-      return const LoginRoute().location;
-    } else if (!(authService.currentUser?.isMultiFactorEnrolled ?? false)) {
-      return const MultiFactorLoginRoute().location;
-    } else if (localAuthService.shouldAuthenticate ||
-        (next != '/' && localAuthService.shouldAuthenticateForPath(next))) {
-      return null;
-    } else {
-      return next;
+    switch (authBloc.state.unwrapped) {
+      case AuthUnauthenticated():
+        return const LoginRoute().location;
+
+      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
+        return const MultiFactorLoginRoute().location;
+
+      case _
+          when localAuthService.shouldAuthenticate ||
+              (next != '/' && localAuthService.shouldAuthenticateForPath(next)):
+        return null;
+
+      case _:
+        return next;
     }
   }
 }

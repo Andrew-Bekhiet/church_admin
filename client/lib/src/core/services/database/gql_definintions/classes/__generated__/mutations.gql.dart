@@ -40,7 +40,7 @@ class Variables_Mutation_deleteClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_deleteClass) ||
+    if (other is! Variables_Mutation_deleteClass ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -147,7 +147,7 @@ class Mutation_deleteClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_deleteClass) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_deleteClass || runtimeType != other.runtimeType) {
       return false;
     }
     final l$deleteClassesByPk = deleteClassesByPk;
@@ -333,7 +333,7 @@ class Variables_Mutation_insertClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertClass) ||
+    if (other is! Variables_Mutation_insertClass ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -440,7 +440,7 @@ class Mutation_insertClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertClass) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_insertClass || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertClassesOne = insertClassesOne;
@@ -635,7 +635,7 @@ class Variables_Mutation_updateClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_updateClass) ||
+    if (other is! Variables_Mutation_updateClass ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -763,7 +763,7 @@ class Mutation_updateClass {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_updateClass) || runtimeType != other.runtimeType) {
+    if (other is! Mutation_updateClass || runtimeType != other.runtimeType) {
       return false;
     }
     final l$updateClassesByPk = updateClassesByPk;

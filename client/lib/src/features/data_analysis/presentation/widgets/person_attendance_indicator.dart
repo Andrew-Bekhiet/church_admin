@@ -54,7 +54,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           Text(
-            'نسبة الحضور في ' + name,
+            'نسبة الحضور في $name',
             style: themeData.textTheme.headlineSmall,
           ),
           const SizedBox(height: 10),
@@ -80,7 +80,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         Text(
-          'نسبة الحضور في ' + name,
+          'نسبة الحضور في $name',
           style: themeData.textTheme.headlineSmall,
         ),
         ValueListenableBuilder<CalendarFormat>(
@@ -103,10 +103,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
                       animation: true,
                       animateFromLastPercent: true,
                       center: Text(
-                        (percent * 100)
-                                .toStringAsFixed(1)
-                                .replaceAll('.0', '') +
-                            '%',
+                        '${(percent * 100).toStringAsFixed(1).replaceAll('.0', '')}%',
                       ),
                       percent: percent,
                       progressColor: color ?? primaryColor,
@@ -199,7 +196,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
           ),
         ),
         HistoryProperty(
-          name: 'أخر حضور ' + name,
+          name: 'أخر حضور $name',
           value: analysisData.aggregate.max?.time,
           getHistoryStream: getHistoryStream,
           showTime: showTime,

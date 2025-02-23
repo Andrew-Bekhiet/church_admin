@@ -115,7 +115,7 @@ class Variables_Query_analyzeUserAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_analyzeUserAttendance) ||
+    if (other is! Variables_Query_analyzeUserAttendance ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -360,7 +360,7 @@ class Query_analyzeUserAttendance {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_analyzeUserAttendance) ||
+    if (other is! Query_analyzeUserAttendance ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -715,7 +715,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_analyzeUserAttendance_authUsersDataByPk) ||
+    if (other is! Query_analyzeUserAttendance_authUsersDataByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1027,8 +1027,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1271,8 +1271,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1544,8 +1544,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1767,8 +1767,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1946,8 +1946,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2091,8 +2091,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2257,8 +2257,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2467,8 +2467,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2614,8 +2614,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_atte
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2775,8 +2775,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3029,8 +3029,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3302,8 +3302,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3525,8 +3525,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3704,8 +3704,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3849,8 +3849,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4015,8 +4015,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4225,8 +4225,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4372,8 +4372,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_atten
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4531,8 +4531,7 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory) ||
+    if (other is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -4773,8 +4772,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5043,8 +5042,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5266,8 +5265,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5445,8 +5444,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate_max) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5590,8 +5589,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5756,8 +5755,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -5966,8 +5965,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -6113,8 +6112,8 @@ class Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendan
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes) ||
+    if (other
+            is! Query_analyzeUserAttendance_authUsersDataByPk_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }

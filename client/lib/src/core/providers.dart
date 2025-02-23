@@ -18,7 +18,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart' hide Notification;
-import 'package:zxcvbn/zxcvbn.dart';
 
 ProviderContainer? _globalProviderContainer;
 
@@ -77,7 +76,13 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
     link: Link.concat(
       const LoggingLink(),
       AddAuthLink(
-        getAuthService: () => globalProviderContainer.read(authServiceProvider),
+        idTokenStream: ref
+            .watch(authStorageProvider)
+            .getAuthDataFromCache()
+            .asStream()
+            .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
+          (u) => u?.idToken,
+        ),
         url: ref.watch(secretsServiceProvider).hasuraServer,
       ),
     ),
@@ -114,24 +119,20 @@ final secretsServiceProvider = Provider<SecretsService>(
   (ref) => SecretsServiceImpl(),
 );
 
-final authServiceProvider = Provider<AuthService>(
+final authBlocProvider = Provider<AuthBloc>(
   (ref) {
-    final authService = AuthService(
-      storage: AuthStorage(secureStorage: ref.watch(secureStorageProvider)),
-      adapter: ref.watch(authAdapterProvider),
-      connectivityService: ref.watch(connectivityServiceProvider),
+    final authBloc = AuthBloc(
+      authRepository: ref.watch(authRepositoryProvider),
+      authStorage: ref.watch(authStorageProvider),
+      databaseService: ref.watch(databaseServiceProvider),
+      connectivityStream:
+          ref.watch(connectivityServiceProvider).connectivityStream,
     );
 
-    ref.onDispose(authService.dispose);
+    ref.onDispose(authBloc.close);
 
-    return authService;
+    return authBloc;
   },
-);
-
-final multiFactorManagerAdapterProvider = Provider<MultiFactorManagerAdapter>(
-  (ref) => FirebaseMultiFactorManagerAdapter(
-    firebaseAuth: ref.watch(firebaseAuthProvider),
-  ),
 );
 
 final loggingServiceProvider = Provider<LoggingService>(
@@ -185,9 +186,9 @@ final notificationsServiceProvider = Provider<NotificationsService>(
     final notificationsService = NotificationsService(
       localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
       firebaseMessaging: ref.watch(firebaseMessagingProvider),
+      authBloc: ref.watch(authBlocProvider),
       userSettingsService: ref.watch(userSettingsServiceProvider),
       functionsService: ref.watch(functionsServiceProvider),
-      getAuthService: () => ref.watch(authServiceProvider),
       storage: ref.watch(notificationsStorageProvider),
       onForegroundMessageStream: FirebaseMessaging.onMessage,
       onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
@@ -211,14 +212,14 @@ final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
 
 final localAuthServiceProvider = Provider<LocalAuthService>(
   (ref) {
-    final localAuthService = LocalAuthService(
+    final localAuthBloc = LocalAuthService(
       localAuthPlugin: ref.watch(localAuthPluginProvider),
       notificationService: ref.watch(notificationsServiceProvider),
     );
 
-    ref.onDispose(localAuthService.dispose);
+    ref.onDispose(localAuthBloc.dispose);
 
-    return localAuthService;
+    return localAuthBloc;
   },
 );
 
@@ -229,7 +230,7 @@ final localAuthPluginProvider = Provider<LocalAuthentication>(
 final userPersistenceServiceProvider = Provider<UserPersistenceService>(
   (ref) {
     final userPersistenceService = UserPersistenceService(
-      auth: ref.watch(authServiceProvider),
+      auth: ref.watch(authBlocProvider),
       connectivityService: ref.watch(connectivityServiceProvider),
       firebaseDatabase: ref.watch(firebaseDatabaseProvider),
     );
@@ -244,7 +245,7 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>(
   (ref) {
     final goRouterRefreshStream = GoRouterRefreshStream(
       Rx.combineLatest2(
-        ref.watch(authServiceProvider).userStream,
+        ref.watch(authBlocProvider).stream,
         ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
         //Just notify when any stream emits
         (_, __) => Object(),
@@ -347,19 +348,8 @@ final shareServiceProvider = Provider<ShareService>(
   (ref) => const ShareService(),
 );
 
-final authAdapterProvider = Provider<AuthAdapter>(
-  (ref) {
-    final firebaseAuthAdapter = FirebaseAuthAdapter(
-      firebaseAuth: ref.watch(firebaseAuthProvider),
-      databaseService: ref.watch(databaseServiceProvider),
-      multiFactorManagerAdapter: ref.watch(multiFactorManagerAdapterProvider)
-          as FirebaseMultiFactorManagerAdapter,
-    );
-
-    ref.onDispose(firebaseAuthAdapter.dispose);
-
-    return firebaseAuthAdapter;
-  },
+final authRepositoryProvider = Provider<AuthRepository>(
+  (ref) => FirebaseAuthRepository(auth: ref.watch(firebaseAuthProvider)),
 );
 
 final authStorageProvider = Provider<AuthStorage>(
@@ -370,4 +360,30 @@ final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
   (ref) => const CurrentPlatformService(),
 );
 
-final zxcvbnProvider = Provider<Zxcvbn>((ref) => Zxcvbn());
+final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
+  (ref) => HomeDailyDataRepository(
+    currentIndexes: ref.watch(hiveProvider).box<Map>('HomeDailyDataIndexes'),
+    versesData: kVersesData,
+    // Chunks the sneksar data into a list of list of 30 strings or less
+    // each corresponding to a day in the coptic calendar month
+    sneksarData: kRawSneksarData.fold(
+      [[]],
+      (acc, c) => [
+        ...acc.take(acc.length - 1),
+        if (acc.last.length < 30)
+          [...acc.last, c]
+        else ...[
+          acc.last,
+          [c],
+        ],
+      ],
+    ),
+    sayingData: kSayings,
+  ),
+);
+
+final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
+  (ref) => HomeDailyDataBloc(
+    homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+  ),
+);

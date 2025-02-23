@@ -27,7 +27,7 @@ class LoggingService {
       type: MaterialType.card,
       child: Center(
         child: Text(
-          'حدث خطأ:\n' + error.summary.toString(),
+          'حدث خطأ:\n${error.summary}',
         ),
       ),
     );
@@ -52,23 +52,23 @@ class LoggingService {
   }
 
   void _maybeConfigureScopeUser(Scope scope) {
-    if (AuthService.I.isSignedIn) {
-      final currentUser = AuthService.I.currentUser!;
+    final state = AuthBloc.I.state.unwrapped;
 
-      scope.setUser(
-        SentryUser(
-          id: currentUser.uid,
-          email: currentUser.email,
-          name: currentUser.name,
-          data: currentUser.toJson().map(
-                (key, value) => MapEntry(
-                  key,
-                  value is Set ? value.toList() : value,
-                ),
-              ),
-        ),
-      );
-    }
+    scope.setUser(
+      state is AuthAuthenticated
+          ? SentryUser(
+              id: state.authUser.uid,
+              email: state.authUser.email,
+              name: state.userData?.name,
+              data: state.authUser.toJson().map(
+                    (key, value) => MapEntry(
+                      key,
+                      value is Set ? value.toList() : value,
+                    ),
+                  ),
+            )
+          : null,
+    );
   }
 
   void _maybeConfigureScopeData(Scope scope, Map<String, dynamic>? data) {

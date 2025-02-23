@@ -22,7 +22,7 @@ class LauncherService {
       Uri(
         scheme: 'whatsapp',
         host: 'send',
-        queryParameters: {'phone': '+' + fomattedPhone},
+        queryParameters: {'phone': '+$fomattedPhone'},
       ),
     );
   }

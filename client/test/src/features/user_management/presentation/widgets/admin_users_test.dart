@@ -13,7 +13,7 @@ import 'admin_users_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-Future<void> main() async {
+void main() {
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
 

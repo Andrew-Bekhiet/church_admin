@@ -54,7 +54,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
           context: state.context,
           builder: (context) {
             return AlertDialog(
-              title: Text('اختيار ' + labelText),
+              title: Text('اختيار $labelText'),
               actions: [
                 OutlinedButton(
                   onPressed: () => Navigator.of(context)

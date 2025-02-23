@@ -8,6 +8,7 @@ import 'dart:io' as _i12;
 
 import 'package:church_admin/church_admin.dart' as _i13;
 import 'package:flutter/material.dart' as _i5;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i17;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart' as _i11;
 import 'package:go_router/src/configuration.dart' as _i4;
 import 'package:go_router/src/delegate.dart' as _i6;
@@ -1235,30 +1236,30 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i11.BaseCacheManager);
 
   @override
-  _i3.Future<_i12.File> getImageFile(_i13.IImage? imageObject) =>
+  _i3.Future<_i12.File> getImageFile(_i13.ObjectImageInfo? imageInfo) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageFile,
-          [imageObject],
+          [imageInfo],
         ),
         returnValue: _i3.Future<_i12.File>.value(_FakeFile_11(
           this,
           Invocation.method(
             #getImageFile,
-            [imageObject],
+            [imageInfo],
           ),
         )),
         returnValueForMissingStub: _i3.Future<_i12.File>.value(_FakeFile_11(
           this,
           Invocation.method(
             #getImageFile,
-            [imageObject],
+            [imageInfo],
           ),
         )),
       ) as _i3.Future<_i12.File>);
 
   @override
-  _i3.Future<String> getImageUrl(_i13.IImage? imageObject) =>
+  _i3.Future<String> getImageUrl(_i13.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImageUrl,
@@ -1282,7 +1283,7 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as _i3.Future<String>);
 
   @override
-  String? getNonExpiredCachedImageUrl(_i13.IImage? imageObject) =>
+  String? getNonExpiredCachedImageUrl(_i13.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNonExpiredCachedImageUrl,
@@ -1292,10 +1293,11 @@ class MockImageUrlCacheService extends _i1.Mock
       ) as String?);
 
   @override
-  String? getCachedImageUrl(_i13.IImage? imageObject) => (super.noSuchMethod(
+  String? getCachedImageUrl(_i13.ObjectImageInfo? imageInfo) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getCachedImageUrl,
-          [imageObject],
+          [imageInfo],
         ),
         returnValueForMissingStub: null,
       ) as String?);
@@ -1404,4 +1406,88 @@ class MockUserSettingsService extends _i1.Mock
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+
+  @override
+  void onTransition(
+    _i17.Bloc<dynamic, dynamic>? bloc,
+    _i17.Transition<dynamic, dynamic>? transition,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [
+            bloc,
+            transition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onCreate(_i17.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onCreate,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(
+    _i17.Bloc<dynamic, dynamic>? bloc,
+    Object? event,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [
+            bloc,
+            event,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(
+    _i17.BlocBase<dynamic>? bloc,
+    _i17.Change<dynamic>? change,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [
+            bloc,
+            change,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    _i17.BlocBase<dynamic>? bloc,
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            bloc,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose(_i17.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

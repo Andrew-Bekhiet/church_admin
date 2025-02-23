@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'fathers/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers/__generated__/subscriptions.gql.dart';
 
 class FathersDAO extends DAOBase<Father>
     with StreamableDAO<Father, Input_FathersBoolExp, Input_FathersOrderBy> {

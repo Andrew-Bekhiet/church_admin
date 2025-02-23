@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
-
-import 'areas/__generated__/mutations.gql.dart';
-import 'areas/helpers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/areas/helpers.dart';
 
 class AreasDAO
     extends FullCRUDDAO<Area, Input_AreasBoolExp, Input_AreasOrderBy> {

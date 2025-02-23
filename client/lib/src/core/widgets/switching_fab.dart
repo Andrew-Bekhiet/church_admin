@@ -10,7 +10,7 @@ class SwitchingFloatingActionButton extends StatelessWidget {
   }) : assert(tabController.length == icons.length);
 
   final TabController tabController;
-  final Map<int, Icon> icons;
+  final Map<int, Widget?> icons;
   final void Function(int) onTap;
 
   @override
@@ -25,15 +25,19 @@ class SwitchingFloatingActionButton extends StatelessWidget {
 
         return AnimatedFloatingActionButton(
           offset: offset,
-          newFAB: FloatingActionButton(
-            onPressed: () => onTap(newIndex),
-            child: icons[newIndex],
-          ),
-          oldFAB: FloatingActionButton(
-            heroTag: null,
-            onPressed: () => onTap(currentIndex),
-            child: icons[currentIndex],
-          ),
+          newFAB: icons[newIndex] != null
+              ? FloatingActionButton(
+                  onPressed: () => onTap(newIndex),
+                  child: icons[newIndex],
+                )
+              : null,
+          oldFAB: icons[currentIndex] != null
+              ? FloatingActionButton(
+                  heroTag: null,
+                  onPressed: () => onTap(currentIndex),
+                  child: icons[currentIndex],
+                )
+              : null,
         );
       },
     );

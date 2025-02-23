@@ -82,7 +82,7 @@ class Fragment_Group implements Fragment_GroupNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_Group) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_Group || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;
@@ -303,7 +303,7 @@ class Fragment_GroupNoPhoto {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Fragment_GroupNoPhoto) || runtimeType != other.runtimeType) {
+    if (other is! Fragment_GroupNoPhoto || runtimeType != other.runtimeType) {
       return false;
     }
     final l$id = id;

@@ -35,9 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('الإعدادات'),
-      ),
+      appBar: AppBar(title: const Text('الإعدادات')),
       body: Form(
         key: _formKey,
         onChanged: () => setState(() => _needsSaving = true),
@@ -45,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onPopInvokedWithResult: _onPopWithResult,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -59,6 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: <Widget>[
                         ChoiceChip(
                           label: const Text('المظهر الداكن'),
+                          // Ignored to keep selected argument consistent
                           // ignore: use_if_null_to_convert_nulls_to_bools
                           selected: darkTheme == true,
                           onSelected: _onDarkThemeChanged(true),
@@ -77,10 +76,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     SwitchListTile(
                       value: greatFeastTheme,
-                      onChanged: (v) => setState(() {
-                        greatFeastTheme = v;
-                        _needsSaving = true;
-                      }),
+                      onChanged:
+                          (v) => setState(() {
+                            greatFeastTheme = v;
+                            _needsSaving = true;
+                          }),
                       title: const Text(
                         'تغيير لون البرنامج حسب أسبوع الآلام وفترة الخمسين',
                       ),
@@ -97,14 +97,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: [
                     ..._secondLineTypes.map(
                       (qtype) => Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(vertical: 4),
                         child: DropdownButtonFormField<String?>(
-                          value:
-                              userSettingsService.getSecondLineFor(qtype.type),
+                          value: userSettingsService.getSecondLineFor(
+                            qtype.type,
+                          ),
                           items: [
-                            const DropdownMenuItem(
-                              child: Text(''),
-                            ),
+                            const DropdownMenuItem(child: Text('')),
                             ...qtype.fieldsMetadata.values
                                 .where(
                                   (element) =>
@@ -128,8 +127,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             _needsSaving = false;
                           },
                           decoration: InputDecoration(
-                            labelText: 'السطر الثاني لل' +
-                                qtype.label.replaceFirst(RegExp('^ال'), 'ل'),
+                            labelText:
+                                'السطر الثاني لل${qtype.label.replaceFirst(RegExp('^ال'), 'ل')}',
                           ),
                         ),
                       ),
@@ -154,7 +153,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void Function(bool _) _onDarkThemeChanged(bool? value) => (_) => setState(() {
+  void Function(bool _) _onDarkThemeChanged(bool? value) =>
+      (_) => setState(() {
         darkTheme = value;
         _needsSaving = true;
       });
@@ -178,6 +178,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     await _applyThemeChange();
 
+    _needsSaving = false;
+
     scaffoldMessenger.showSnackBar(
       const SnackBar(content: Text('تم حفظ التغييرات')),
     );
@@ -191,20 +193,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (_needsSaving) {
       final confirmExit = await showDialog<bool>(
         context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('هل أنت متأكد من الخروج؟'),
-          content: const Text('لم يتم حفظ التغييرات الجديدة'),
-          actions: [
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('البقاء'),
+        builder:
+            (context) => AlertDialog(
+              title: const Text('هل أنت متأكد من الخروج؟'),
+              content: const Text('لم يتم حفظ التغييرات الجديدة'),
+              actions: [
+                FilledButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('البقاء'),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('خروج بدون حفظ'),
+                ),
+              ],
             ),
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('خروج بدون حفظ'),
-            ),
-          ],
-        ),
       );
 
       if (!(confirmExit ?? false)) return;

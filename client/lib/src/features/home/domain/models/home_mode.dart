@@ -1,5 +1,1 @@
-enum HomeMode {
-  sundaySchool,
-  churchData,
-  unspecified,
-}
+enum HomeMode { sundaySchool, churchData }

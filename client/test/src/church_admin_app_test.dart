@@ -1,5 +1,3 @@
-// ignore_for_file: discarded_futures, avoid_redundant_argument_values
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,8 +11,7 @@ import 'church_admin_app_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<LoggingService>(),
-  MockSpec<AuthService>(),
-  MockSpec<MultiFactorManager>(),
+  MockSpec<AuthBloc>(),
   MockSpec<DatabaseService>(),
   MockSpec<UsersDAO>(),
   MockSpec<PersonsDAO>(),
@@ -23,6 +20,7 @@ import 'church_admin_app_test.mocks.dart';
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<NotificationsService>(),
+  MockSpec<HomeDailyDataBloc>(),
 ])
 void main() {
   final firstScreenVariant = FirstScreenVariant();
@@ -31,99 +29,94 @@ void main() {
 
   tearDown(resetGlobalProviderContainer);
 
-  testWidgets(
-    'Church Admin App => First Screen',
-    (tester) async {
-      await tester.pumpWidget(const ChurchAdminApp());
-      await tester.pump();
+  testWidgets('Church Admin App => First Screen', (tester) async {
+    await tester.pumpWidget(const ChurchAdminApp());
+    await tester.pump();
 
-      if (firstScreenVariant.currentValue ==
-          FirstScreenVariantEnum.values.first) {
-        verify(LoggingService.I.navigatorObserver);
-      }
+    if (firstScreenVariant.currentValue ==
+        FirstScreenVariantEnum.values.first) {
+      verify(LoggingService.I.navigatorObserver);
+    }
 
-      final goRouter = tester
-          .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
-          .goRouter;
+    final goRouter =
+        tester
+            .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
+            .goRouter;
 
-      final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
+    final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
 
-      final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
-          ? lastMatch.matches
-          : goRouter.routerDelegate.currentConfiguration;
+    final RouteMatchList matchList =
+        lastMatch is ImperativeRouteMatch
+            ? lastMatch.matches
+            : goRouter.routerDelegate.currentConfiguration;
 
+    expect(matchList.uri.toString(), firstScreenVariant.expectedLocation());
+
+    if (firstScreenVariant.currentValue ==
+        FirstScreenVariantEnum.authenticate) {
       expect(
-        matchList.uri.toString(),
-        firstScreenVariant.expectedLocation(),
+        find.byType(AuthenticateScreen, skipOffstage: false),
+        findsOneWidget,
       );
+    }
+  }, variant: firstScreenVariant);
 
-      if (firstScreenVariant.currentValue ==
-          FirstScreenVariantEnum.authenticate) {
-        expect(
-          find.byType(AuthenticateScreen, skipOffstage: false),
-          findsOneWidget,
-        );
-      }
-    },
-    variant: firstScreenVariant,
-  );
+  testWidgets('Church Admin App => Observes ThemingService', (tester) async {
+    await tester.pumpWidget(const ChurchAdminApp());
 
-  testWidgets(
-    'Church Admin App => Observes ThemingService',
-    (tester) async {
-      await tester.pumpWidget(const ChurchAdminApp());
+    expect(
+      tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+      ThemingService.I.theme,
+    );
 
-      expect(
-        tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        ThemingService.I.theme,
-      );
+    ThemingService.I.theme = ThemeData.dark();
+    await tester.pumpAndSettle();
 
-      ThemingService.I.theme = ThemeData.dark();
-      await tester.pumpAndSettle();
+    expect(
+      tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
+      ThemingService.I.theme,
+    );
+  });
 
-      expect(
-        tester.firstWidget<MaterialApp>(find.byType(MaterialApp)).theme,
-        ThemingService.I.theme,
-      );
-    },
-  );
+  testWidgets('Church Admin App => Shows SnackBar on connectivity changed', (
+    tester,
+  ) async {
+    final connectivityController = BehaviorSubject.seeded(true);
+    addTearDown(connectivityController.close);
 
-  testWidgets(
-    'Church Admin App => Shows SnackBar on connectivity changed',
-    (tester) async {
-      final _connectivityController = BehaviorSubject.seeded(true);
-      addTearDown(_connectivityController.close);
+    when(
+      ConnectivityService.I.connectivityStream,
+    ).thenAnswer((_) => connectivityController);
 
-      when(ConnectivityService.I.connectivityStream)
-          .thenAnswer((_) => _connectivityController);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
-      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpWidget(const ChurchAdminApp());
 
-      await tester.pumpWidget(const ChurchAdminApp());
+    expect(find.byType(SnackBar), findsNothing);
 
-      expect(find.byType(SnackBar), findsNothing);
+    connectivityController.add(false);
 
-      _connectivityController.add(false);
+    await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
-
-      expect(find.byType(SnackBar), findsOneWidget);
-    },
-  );
+    expect(find.byType(SnackBar), findsOneWidget);
+  });
 }
 
-Override _setUpAuthService() {
-  final mock = MockAuthService();
+Override _setUpAuthBloc() {
+  final mock = MockAuthBloc();
+
+  provideDummy<AuthState>(const AuthUnauthenticated());
 
   when(mock.isSignedIn).thenReturn(false);
   when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(null));
+  when(mock.state).thenReturn(const AuthUnauthenticated());
 
-  return authServiceProvider.overrideWithValue(mock);
+  return authBlocProvider.overrideWithValue(mock);
 }
 
 List<Override> _setUp() {
   final overrides = [
-    _setUpAuthService(),
+    _setUpAuthBloc(),
     _setUpLoggingService(),
     userSettingsServiceProvider.overrideWithValue(FakeUserSettings()),
     _setUpGoRouterRefreshStream(),
@@ -131,6 +124,7 @@ List<Override> _setUp() {
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
     _setUpNotificationsService(),
+    _setUpHomeDailyDataBloc(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -141,8 +135,9 @@ List<Override> _setUp() {
 Override _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
-  when(mock.connectivityStream)
-      .thenAnswer((_) => BehaviorSubject.seeded(false));
+  when(
+    mock.connectivityStream,
+  ).thenAnswer((_) => BehaviorSubject.seeded(false));
 
   return connectivityServiceProvider.overrideWithValue(mock);
 }
@@ -179,14 +174,8 @@ MockUsersDAO _setUpUsersDAO() {
 
 MockServicesDAO _setUpServiceDAO() {
   final servicesDAO = MockServicesDAO();
-  when(
-    servicesDAO.streamAll(
-      searchQuery: anyNamed('searchQuery'),
-    ),
-  ).thenAnswer(
-    (_) => GQLPaginatableStream(
-      subscriptionStreamCallback: (_) async* {},
-    ),
+  when(servicesDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
+    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
   );
 
   return servicesDAO;
@@ -194,14 +183,8 @@ MockServicesDAO _setUpServiceDAO() {
 
 MockPersonsDAO _setUpPersonsDAO() {
   final personsDAO = MockPersonsDAO();
-  when(
-    personsDAO.streamAll(
-      searchQuery: anyNamed('searchQuery'),
-    ),
-  ).thenAnswer(
-    (_) => GQLPaginatableStream(
-      subscriptionStreamCallback: (_) async* {},
-    ),
+  when(personsDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
+    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
   );
 
   return personsDAO;
@@ -209,14 +192,8 @@ MockPersonsDAO _setUpPersonsDAO() {
 
 MockAreasDAO _setUpAreasDAO() {
   final areasDAO = MockAreasDAO();
-  when(
-    areasDAO.streamAll(
-      searchQuery: anyNamed('searchQuery'),
-    ),
-  ).thenAnswer(
-    (_) => GQLPaginatableStream(
-      subscriptionStreamCallback: (_) async* {},
-    ),
+  when(areasDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
+    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
   );
 
   return areasDAO;
@@ -233,9 +210,7 @@ Override _setUpThemingService(UserSettingsService userSettingsService) {
 
 Override _setUpGoRouterRefreshStream() {
   return goRouterRefreshStreamProvider.overrideWithValue(
-    GoRouterRefreshStream(
-      const Stream.empty(),
-    ),
+    GoRouterRefreshStream(const Stream.empty()),
   );
 }
 
@@ -246,6 +221,17 @@ Override _setUpLoggingService() {
   return loggingServiceProvider.overrideWithValue(mockLoggingService);
 }
 
+Override _setUpHomeDailyDataBloc() {
+  provideDummy<HomeDailyDataState>(
+    const HomeDailyDataLoaded(
+      data: HomeDailyData(saying: '', verse: '', sneksar: ''),
+    ),
+  );
+  final mockHomeDailyDataBloc = MockHomeDailyDataBloc();
+
+  return homeDailyDataBlocProvider.overrideWithValue(mockHomeDailyDataBloc);
+}
+
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   FirstScreenVariant() : super(FirstScreenVariantEnum.values.toSet());
 
@@ -253,10 +239,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    final overrides = [
-      ..._setUp(),
-      _setUpAuthService(value),
-    ];
+    final overrides = [..._setUp(), _setUpAuthBloc(value)];
 
     if (value != FirstScreenVariantEnum.login) {
       overrides.add(_setUpLocalAuthService(value));
@@ -270,69 +253,114 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Override _setUpLocalAuthService(FirstScreenVariantEnum value) {
     final mockLocalAuthService = MockLocalAuthService();
 
-    when(mockLocalAuthService.shouldAuthenticate)
-        .thenReturn(value == FirstScreenVariantEnum.authenticate);
-    when(mockLocalAuthService.canCheckBiometrics())
-        .thenAnswer((_) async => false);
+    when(
+      mockLocalAuthService.shouldAuthenticate,
+    ).thenReturn(value == FirstScreenVariantEnum.authenticate);
+    when(
+      mockLocalAuthService.canCheckBiometrics(),
+    ).thenAnswer((_) async => false);
 
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
 
-  Override _setUpAuthService(FirstScreenVariantEnum value) {
-    final mock = MockAuthService();
+  Override _setUpAuthBloc(FirstScreenVariantEnum value) {
+    final mock = MockAuthBloc();
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
 
-    final user = User(
-      uid: 'uid',
-      name: 'name',
-      permissions: PermissionsSet.fromSet(
-        {
-          if (value != FirstScreenVariantEnum.unapprovedUser)
-            UserPermission.approved,
-        },
-      ),
-      isMultiFactorEnrolled: value != FirstScreenVariantEnum.multiFactor,
-      emailVerified: value != FirstScreenVariantEnum.emailVerification,
-      passwordKeyHash: 'passwordKeyHash',
-      person: Person(
-        id: 'id',
-        name: 'name',
-        otherPhones: const {},
-        gender: true,
-        isShammas: false,
-        isStudent: false,
-        isServant: false,
-        lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
-            ? null
-            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
-        lastConfession: value == FirstScreenVariantEnum.updateUserSpiritData
-            ? null
-            : LastRecordedByInfo(time: DateTime.now(), recordedBy: 'uid'),
-      ),
-    );
+    final user =
+        value != FirstScreenVariantEnum.login
+            ? AuthUser(
+              uid: 'uid',
+              email: 'email',
+              emailVerified: value != FirstScreenVariantEnum.emailVerification,
+              isMultiFactorEnabled: value != FirstScreenVariantEnum.multiFactor,
+              idToken: 'idToken',
+              claims: {},
+            )
+            : null;
+
+    final userData =
+        value != FirstScreenVariantEnum.login
+            ? User(
+              uid: 'uid',
+              name: 'name',
+              permissions: PermissionsSet.fromSet({
+                if (value != FirstScreenVariantEnum.unapprovedUser)
+                  UserPermission.approved,
+              }),
+              person: Person(
+                id: 'id',
+                name: 'name',
+                lastKodas:
+                    value == FirstScreenVariantEnum.updateUserSpiritData
+                        ? null
+                        : LastRecordedByInfo(
+                          time: DateTime.now(),
+                          recordedBy: 'uid',
+                        ),
+                lastConfession:
+                    value == FirstScreenVariantEnum.updateUserSpiritData
+                        ? null
+                        : LastRecordedByInfo(
+                          time: DateTime.now(),
+                          recordedBy: 'uid',
+                        ),
+              ),
+            )
+            : null;
+
     when(mock.currentUser).thenReturn(user);
-    when(mock.multiFactorManager).thenReturn(MockMultiFactorManager());
+    when(mock.currentUserData).thenReturn(userData);
+
+    when(mock.state).thenAnswer(
+      (_) =>
+          user != null
+              ? AuthAuthenticated(authUser: user, userData: userData)
+              : value == FirstScreenVariantEnum.multiFactor
+              ? AuthMultiFactorChallengeInProgress(
+                challenge: MultiFactorChallenge(
+                  verificationId: 'verificationId',
+                  createdAt: DateTime.now(),
+                ),
+                session: const MultiFactorSession(
+                  id: 'id',
+                  email: 'email',
+                  password: 'password',
+                  enrolledFactors: [],
+                ),
+              )
+              : const AuthUnauthenticated(),
+    );
 
     when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
+    when(
+      mock.userDataStream,
+    ).thenAnswer((_) => BehaviorSubject.seeded(userData));
 
-    return authServiceProvider.overrideWithValue(mock);
+    return authBlocProvider.overrideWithValue(mock);
   }
 
   String expectedLocation() {
     switch (currentValue) {
       case FirstScreenVariantEnum.login:
         return const LoginRoute().location;
+
       case FirstScreenVariantEnum.emailVerification:
         return const EmailVerificationRoute().location;
+
       case FirstScreenVariantEnum.multiFactor:
         return const MultiFactorLoginRoute().location;
+
       case FirstScreenVariantEnum.unapprovedUser:
         return const UnapprovedUserRoute().location;
+
       case FirstScreenVariantEnum.updateUserSpiritData:
         return const UpdateUserSpiritDataRoute(forced: true).location;
+
       case FirstScreenVariantEnum.authenticate:
       case FirstScreenVariantEnum.home:
         return '/';
+
       case null:
         throw Exception('currentValue is null');
     }
@@ -354,7 +382,7 @@ enum FirstScreenVariantEnum {
   unapprovedUser,
   updateUserSpiritData,
   authenticate,
-  home
+  home,
 }
 
 class FakeUserSettings extends Fake implements UserSettingsService {

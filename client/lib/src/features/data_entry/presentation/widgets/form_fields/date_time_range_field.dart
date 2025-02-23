@@ -108,7 +108,7 @@ class DateTimeRangeField extends StatelessWidget {
             : null;
       },
       validator: validator ??
-          (v) => v == null && !nullable ? 'برجاء ادخال ' + label : null,
+          (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
     );
   }
 }

@@ -37,7 +37,7 @@ class Variables_Query_getStudyYearName {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Query_getStudyYearName) ||
+    if (other is! Variables_Query_getStudyYearName ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -143,8 +143,7 @@ class Query_getStudyYearName {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getStudyYearName) ||
-        runtimeType != other.runtimeType) {
+    if (other is! Query_getStudyYearName || runtimeType != other.runtimeType) {
       return false;
     }
     final l$studyYearsByPk = studyYearsByPk;
@@ -351,7 +350,7 @@ class Query_getStudyYearName_studyYearsByPk {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query_getStudyYearName_studyYearsByPk) ||
+    if (other is! Query_getStudyYearName_studyYearsByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }

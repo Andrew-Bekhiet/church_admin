@@ -52,7 +52,7 @@ class Variables_Mutation_insertPersonLastConfession {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPersonLastConfession) ||
+    if (other is! Variables_Mutation_insertPersonLastConfession ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -189,7 +189,7 @@ class Mutation_insertPersonLastConfession {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPersonLastConfession) ||
+    if (other is! Mutation_insertPersonLastConfession ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -466,8 +466,8 @@ class Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne) ||
+    if (other
+            is! Mutation_insertPersonLastConfession_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -625,7 +625,7 @@ class Variables_Mutation_insertPersonLastKodas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPersonLastKodas) ||
+    if (other is! Variables_Mutation_insertPersonLastKodas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -756,7 +756,7 @@ class Mutation_insertPersonLastKodas {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPersonLastKodas) ||
+    if (other is! Mutation_insertPersonLastKodas ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1026,8 +1026,7 @@ class Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne) ||
+    if (other is! Mutation_insertPersonLastKodas_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1180,7 +1179,7 @@ class Variables_Mutation_insertPersonLastCall {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPersonLastCall) ||
+    if (other is! Variables_Mutation_insertPersonLastCall ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1310,7 +1309,7 @@ class Mutation_insertPersonLastCall {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPersonLastCall) ||
+    if (other is! Mutation_insertPersonLastCall ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1546,7 +1545,7 @@ class Mutation_insertPersonLastCall_insertHistoryCallHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPersonLastCall_insertHistoryCallHistoryOne) ||
+    if (other is! Mutation_insertPersonLastCall_insertHistoryCallHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1699,7 +1698,7 @@ class Variables_Mutation_insertPersonLastVisit {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Mutation_insertPersonLastVisit) ||
+    if (other is! Variables_Mutation_insertPersonLastVisit ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -1830,7 +1829,7 @@ class Mutation_insertPersonLastVisit {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Mutation_insertPersonLastVisit) ||
+    if (other is! Mutation_insertPersonLastVisit ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2044,8 +2043,7 @@ class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other
-            is Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne) ||
+    if (other is! Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne ||
         runtimeType != other.runtimeType) {
       return false;
     }

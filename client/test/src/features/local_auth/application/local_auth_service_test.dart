@@ -1,5 +1,3 @@
-// ignore_for_file: close_sinks
-
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
@@ -14,7 +12,7 @@ import 'package:riverpod/riverpod.dart';
 import 'local_auth_service_test.mocks.dart';
 
 @GenerateMocks(
-  [NotificationsService, AuthService],
+  [NotificationsService, AuthBloc],
   customMocks: [
     MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
   ],
@@ -148,7 +146,7 @@ void main() {
       test(
         'Authentication (all finish true)',
         () async {
-          final _authCompleter = Completer<bool>();
+          final authCompleter = Completer<bool>();
 
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin:
@@ -165,13 +163,13 @@ void main() {
               localizedReason: 'برجاء التحقق للمتابعة',
               options: anyNamed('options'),
             ),
-          ).thenAnswer((_) async => _authCompleter.future);
+          ).thenAnswer((_) async => authCompleter.future);
 
           final future1 = unit.authenticate();
           final future2 = unit.authenticate();
           final future3 = unit.authenticate();
 
-          _authCompleter.complete(true);
+          authCompleter.complete(true);
 
           final result1 = await future1;
           final result2 = await future2;
@@ -221,7 +219,7 @@ void main() {
       testWidgets(
         'Authentication (all finish false)',
         (tester) async {
-          final _authCompleter = Completer<bool>();
+          final authCompleter = Completer<bool>();
 
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin:
@@ -236,13 +234,13 @@ void main() {
               localizedReason: 'برجاء التحقق للمتابعة',
               options: anyNamed('options'),
             ),
-          ).thenAnswer((_) async => _authCompleter.future);
+          ).thenAnswer((_) async => authCompleter.future);
 
           final future1 = unit.authenticate();
           final future2 = unit.authenticate();
           final future3 = unit.authenticate();
 
-          _authCompleter.complete(false);
+          authCompleter.complete(false);
 
           final result1 = await future1;
           final result2 = await future2;
@@ -336,7 +334,7 @@ void main() {
 void _setUp() {
   final overrides = [
     _setUpCANotificationsService(),
-    _setUpAuthService(),
+    _setUpAuthBloc(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -362,12 +360,12 @@ Override _setUpCANotificationsService() {
       .overrideWithValue(mockCANotificationsService);
 }
 
-Override _setUpAuthService() {
-  final auth = MockAuthService();
+Override _setUpAuthBloc() {
+  final auth = MockAuthBloc();
 
   when(auth.isSignedIn).thenReturn(true);
 
-  return authServiceProvider.overrideWithValue(auth);
+  return authBlocProvider.overrideWithValue(auth);
 }
 
 class MockLocalAuthPlatform extends LocalAuthPlatformMock

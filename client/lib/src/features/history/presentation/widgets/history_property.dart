@@ -20,7 +20,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final void Function()? onRecordNow;
 
   DateFormat get dateFormat => DateFormat(
-        'التاريخ: yyyy/M/d' + (showTime ? '\nالساعة: h:m a' : ''),
+        'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
         'ar-EG',
       );
 

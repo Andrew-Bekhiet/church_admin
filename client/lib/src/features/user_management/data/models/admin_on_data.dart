@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -37,12 +35,9 @@ class AdminOnData with _$AdminOnData implements ToJson {
           ? '(جميع البنين في الخدمة)'
           : '(جميع البنات داخل الخدمة)';
     } else if (serviceGender != null) {
-      return '(' +
-          serviceStudyYearData!.name +
-          (serviceGender! ? ' بنين' : ' بنات') +
-          ')';
+      return '(${serviceStudyYearData!.name}${serviceGender! ? ' بنين' : ' بنات'})';
     } else {
-      return '(جميع بيانات ' + serviceStudyYearData!.name + ')';
+      return '(جميع بيانات ${serviceStudyYearData!.name})';
     }
   }
 }

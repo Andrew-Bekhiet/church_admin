@@ -116,7 +116,7 @@ class _RemainingAdmins extends StatelessWidget {
             ),
             Center(
               child: Text(
-                '+' + remainingCount.toString(),
+                '+$remainingCount',
                 style: Theme.of(context).primaryTextTheme.titleMedium,
               ),
             ),

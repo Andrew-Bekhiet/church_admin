@@ -106,15 +106,15 @@ class ThemingService with WidgetsBindingObserver {
     bool? greatFeastThemeOverride,
     UserSettingsService? userSettingsService,
   }) {
-    late final _userSettingsService =
+    late final effectiveUserSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
     bool isDark = isDarkOverride ??
-        _userSettingsService.darkTheme ??
+        effectiveUserSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
-        greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
+        greatFeastThemeOverride ?? effectiveUserSettingsService.greatFeastTheme;
 
     final riseDay = getRiseDay();
     if (greatFeastTheme &&

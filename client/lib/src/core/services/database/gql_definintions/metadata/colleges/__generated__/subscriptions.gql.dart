@@ -79,7 +79,7 @@ class Variables_Subscription_watchAllColleges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllColleges) ||
+    if (other is! Variables_Subscription_watchAllColleges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -243,7 +243,7 @@ class Subscription_watchAllColleges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllColleges) ||
+    if (other is! Subscription_watchAllColleges ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -485,7 +485,7 @@ class Subscription_watchAllColleges_colleges {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllColleges_colleges) ||
+    if (other is! Subscription_watchAllColleges_colleges ||
         runtimeType != other.runtimeType) {
       return false;
     }

@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-
-import '../helpers.dart';
-import '__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
 class AreaInsertHelper {
   static final _mutationNonExistentVars = {

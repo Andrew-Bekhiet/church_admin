@@ -84,7 +84,7 @@ class Variables_Subscription_watchAllFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchAllFamilies) ||
+    if (other is! Variables_Subscription_watchAllFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -247,7 +247,7 @@ class Subscription_watchAllFamilies {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchAllFamilies) ||
+    if (other is! Subscription_watchAllFamilies ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -462,7 +462,7 @@ class Variables_Subscription_watchFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables_Subscription_watchFamily) ||
+    if (other is! Variables_Subscription_watchFamily ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -554,7 +554,7 @@ class Subscription_watchFamily {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchFamily) ||
+    if (other is! Subscription_watchFamily ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -925,7 +925,7 @@ class Subscription_watchFamily_familiesByPk
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Subscription_watchFamily_familiesByPk) ||
+    if (other is! Subscription_watchFamily_familiesByPk ||
         runtimeType != other.runtimeType) {
       return false;
     }

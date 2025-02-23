@@ -7,7 +7,7 @@ import Foundation
 
 import cloud_functions
 import connectivity_plus
-import cryptography_flutter
+import cryptography_flutter_plus
 import device_info_plus
 import file_selector_macos
 import firebase_app_check

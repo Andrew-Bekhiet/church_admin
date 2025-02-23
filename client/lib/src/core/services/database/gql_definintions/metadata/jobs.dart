@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'jobs/__generated__/subscriptions.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs/__generated__/subscriptions.gql.dart';
 
 class JobsDAO extends DAOBase<Job>
     with StreamableDAO<Job, Input_JobsBoolExp, Input_JobsOrderBy> {

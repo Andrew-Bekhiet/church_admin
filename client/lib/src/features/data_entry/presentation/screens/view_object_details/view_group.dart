@@ -72,10 +72,7 @@ class _ViewGroupState extends State<ViewGroup> {
               title: const Text('الصلاحية'),
               subtitle: group.validity != null
                   ? Text(
-                      'من ' +
-                          DateFormat('yyyy/M/d').format(group.validity!.start) +
-                          ' إلى ' +
-                          DateFormat('yyyy/M/d').format(group.validity!.end),
+                      'من ${DateFormat('yyyy/M/d').format(group.validity!.start)} إلى ${DateFormat('yyyy/M/d').format(group.validity!.end)}',
                     )
                   : const Text('لا يوجد'),
             ),
