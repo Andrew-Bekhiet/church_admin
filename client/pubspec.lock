@@ -33,10 +33,11 @@ packages:
   android_alarm_manager_plus:
     dependency: "direct main"
     description:
-      name: android_alarm_manager_plus
-      sha256: f6334b4a04d3a50e22ab65c501284a62c0f244c27ef073ee4fb251977e2e3d18
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/android_alarm_manager_plus"
+      ref: "2a24dd637e0303208dd86cccd705f7b8d075a49e"
+      resolved-ref: "2a24dd637e0303208dd86cccd705f7b8d075a49e"
+      url: "https://github.com/fluttercommunity/plus_plugins"
+    source: git
     version: "4.0.6"
   ansicolor:
     dependency: transitive
