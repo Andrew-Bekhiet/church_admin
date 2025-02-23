@@ -77,7 +77,7 @@ class _EditStoreState extends State<EditStore> {
               objectsPaginatableStream:
                   DatabaseService.I.families.streamAll(searchQuery: s),
             ),
-            labelText: 'العائلة المسؤولة',
+            dialogFieldLabel: 'العائلة المسؤولة',
             onChanged: (value) => newStore = newStore.copyWith(
               family: value,
               familyId: value?.id,

@@ -8,7 +8,7 @@ class ChipTabBarPersistentHeaderDelegate
     ViewableObjectService? viewableObjectService,
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
-  final List<({String label, Icon icon})> tabs;
+  final List<({String label, IconData icon})> tabs;
   final ViewableObjectService viewableObjectService;
 
   @override

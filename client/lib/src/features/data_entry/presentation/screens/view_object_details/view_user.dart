@@ -53,6 +53,7 @@ class _ViewUserState extends State<ViewUser> {
             const Divider(thickness: 1),
             ListTile(
               title: FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات الحضور'),
                 onPressed: () => _attendanceAnalysis(context, user),

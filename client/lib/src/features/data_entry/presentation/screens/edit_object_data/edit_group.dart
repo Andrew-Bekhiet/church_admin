@@ -73,7 +73,7 @@ class _EditGroupState extends State<EditGroup> {
               objectsPaginatableStream:
                   DatabaseService.I.services.streamAll(searchQuery: s),
             ),
-            labelText: 'الخدمة',
+            dialogFieldLabel: 'الخدمة',
             onChanged: (value) => newGroup = newGroup.copyWith(
               service: value,
               serviceId: value?.id,

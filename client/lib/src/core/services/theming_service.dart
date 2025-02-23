@@ -1,34 +1,21 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:derived_colors/derived_colors.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
+abstract final class AppColors {
+  static const Color primary = Color(0xFFB38A58);
+  static const Color secondary = Color(0xFFC7A483);
+  static const Color tertiary = Color(0xFFE2CABF);
+}
+
 class ThemingService with WidgetsBindingObserver {
   static ThemingService get I =>
       globalProviderContainer.read(themingServiceProvider);
-
-  static const MaterialColor black = MaterialColor(0xFF000000, <int, Color>{
-    50: Color(0xFFE0E0E0),
-    100: Color(0xFFB3B3B3),
-    200: Color(0xFF808080),
-    300: Color(0xFF4D4D4D),
-    400: Color(0xFF262626),
-    500: Color(0xFF000000),
-    600: Color(0xFF000000),
-    700: Color(0xFF000000),
-    800: Color(0xFF000000),
-    900: Color(0xFF000000),
-  });
-
-  static const MaterialColor blackAccent =
-      MaterialColor(0xFF8C8C8C, <int, Color>{
-    100: Color(0xFFA6A6A6),
-    200: Color(0xFF8C8C8C),
-    400: Color(0xFF737373),
-    700: Color(0xFF666666),
-  });
 
   static TextTheme textThemeWith3Fonts(
     TextTheme base, {
@@ -129,35 +116,95 @@ class ThemingService with WidgetsBindingObserver {
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? _userSettingsService.greatFeastTheme;
 
-    Color seed = seedOverride ?? const Color(0xff98651E);
-    final scaffoldBackgroundColor = ColorScheme.fromSeed(
-      seedColor: seed,
-      brightness: isDark ? Brightness.dark : Brightness.light,
-    ).surfaceContainerHighest;
-
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now()
             .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
         DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      seed = black;
+      seedOverride = Colors.black;
       isDark = true;
     } else if (greatFeastTheme &&
         DateTime.now()
             .isBefore(riseDay.add(const Duration(days: 50, seconds: 20))) &&
         DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
+      seedOverride = Colors.white;
       isDark = false;
     }
 
-    final colorScheme = ColorScheme.fromSeed(
-      brightness: isDark ? Brightness.dark : Brightness.light,
-      seedColor: seed,
-      primary: seed,
-      primaryContainer: seed.mix(scaffoldBackgroundColor, 36),
-      dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
-      outline: isDark ? const Color(0xFF938F99) : const Color(0xFF79747E),
-      error: const Color(0xffFF4B40),
+    final bool isLight = !isDark;
+
+    final flexThemeDataFactory =
+        isDark ? FlexThemeData.dark : FlexThemeData.light;
+
+    final flexSchemeColor = seedOverride != null
+        ? FlexSchemeColor.from(
+            primary: seedOverride,
+            tertiary: seedOverride.desaturate(90),
+          )
+        : FlexSchemeColor.from(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
+            tertiary: AppColors.tertiary,
+          );
+
+    final rawThemeData = flexThemeDataFactory(
+      colors: isLight ? flexSchemeColor : flexSchemeColor.toDark(),
+      usedColors: 7,
+      surfaceMode: isLight ? FlexSurfaceMode.level : null,
+      blendLevel: isLight ? 1 : 0,
+      surfaceTint: isLight ? const Color(0xFF98651E) : null,
+      subThemesData: FlexSubThemesData(
+        interactionEffects: true,
+        tintedDisabledControls: true,
+        scaffoldBackgroundBaseColor: FlexScaffoldBaseColor.surfaceContainer,
+        scaffoldBackgroundSchemeColor:
+            isLight ? SchemeColor.tertiaryFixed : SchemeColor.onTertiary,
+        useM2StyleDividerInM3: true,
+        defaultRadius: 10.0,
+        switchThumbSchemeColor: SchemeColor.secondaryContainer,
+        inputDecoratorBorderType: FlexInputBorderType.outline,
+        inputDecoratorUnfocusedBorderIsColored: true,
+        inputDecoratorPrefixIconSchemeColor:
+            isLight ? SchemeColor.primary : null,
+        inputDecoratorSuffixIconSchemeColor:
+            isLight ? SchemeColor.primary : null,
+        fabUseShape: true,
+        fabAlwaysCircular: true,
+        fabForegroundSchemeColor: SchemeColor.onPrimary,
+        chipSchemeColor: SchemeColor.transparent,
+        chipSelectedSchemeColor: SchemeColor.primary,
+        chipSecondarySelectedSchemeColor: SchemeColor.primary,
+        chipIconSize: 22,
+        chipRadius: 5.0,
+        alignedDropdown: true,
+        dialogBackgroundSchemeColor:
+            isLight ? SchemeColor.secondaryContainer : null,
+        appBarBackgroundSchemeColor: isLight ? SchemeColor.tertiary : null,
+        useInputDecoratorThemeInDialogs: true,
+        bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.onPrimary,
+        bottomNavigationBarMutedUnselectedLabel: true,
+        bottomNavigationBarSelectedIconSchemeColor: SchemeColor.onPrimary,
+        bottomNavigationBarMutedUnselectedIcon: true,
+        bottomNavigationBarBackgroundSchemeColor: SchemeColor.primary,
+        bottomNavigationBarShowUnselectedLabels: false,
+        menuRadius: 10.0,
+        navigationRailUseIndicator: true,
+        navigationRailLabelType: NavigationRailLabelType.all,
+      ),
+      keyColors: FlexKeyColors(
+        useSecondary: true,
+        useTertiary: true,
+        useError: true,
+        keepPrimary: isLight,
+        keepSecondary: isLight,
+        keepTertiary: isLight,
+      ),
+      variant: FlexSchemeVariant.fidelity,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),
     );
+
+    final colorScheme = rawThemeData.colorScheme;
 
     final Typography typography = typographyWith3Fonts(
       Typography.material2021(
@@ -169,34 +216,20 @@ class ThemingService with WidgetsBindingObserver {
       others: 'Inter',
     );
 
-    final rawThemeData = ThemeData.from(
-      textTheme: !isDark ? typography.black : typography.white,
-      colorScheme: colorScheme,
-      useMaterial3: true,
-    );
-
     final ThemeData themeData = ThemeData.localize(
-      rawThemeData,
-      rawThemeData.typography.geometryThemeFor(ScriptCategory.tall),
+      rawThemeData.copyWith(
+        textTheme: isLight ? typography.black : typography.white,
+        typography: typography,
+      ),
+      typography.geometryThemeFor(ScriptCategory.tall),
     );
 
-    final inputBorder = OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
-      borderSide: BorderSide(color: colorScheme.primaryContainer),
-    );
+    final scaffoldBackgroundColor = themeData.scaffoldBackgroundColor;
 
     return themeData.copyWith(
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          textStyle: themeData.textTheme.titleMedium!.copyWith(
-            color: themeData.colorScheme.onPrimaryContainer,
-          ),
-          foregroundColor: colorScheme.onPrimaryContainer,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          backgroundColor: colorScheme.primaryContainer,
+        style: themeData.filledButtonTheme.style!.copyWith(
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       appBarTheme: themeData.appBarTheme.copyWith(
@@ -208,23 +241,7 @@ class ThemingService with WidgetsBindingObserver {
         color: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
       ),
-      dialogTheme: themeData.dialogTheme.copyWith(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        backgroundColor: colorScheme.surfaceContainerHighest,
-      ),
       inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
-        enabledBorder: inputBorder,
-        border: inputBorder,
-        focusedBorder: inputBorder,
-        hintStyle: themeData.textTheme.titleMedium!.copyWith(
-          color: colorScheme.outline,
-        ),
-        floatingLabelStyle: themeData.textTheme.titleMedium!.copyWith(
-          color: colorScheme.primaryContainer,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIconColor: colorScheme.primaryContainer,
         prefixIconColor: colorScheme.primaryContainer,
       ),
@@ -235,20 +252,20 @@ class ThemingService with WidgetsBindingObserver {
         endIndent: 16,
         color: colorScheme.secondary.withValues(alpha: 0.54),
       ),
+      chipTheme: themeData.chipTheme.copyWith(
+        color: WidgetStateProperty.resolveWith(
+          (states) => states.contains(
+            WidgetState.selected,
+          )
+              ? themeData.colorScheme.primary
+              : themeData.scaffoldBackgroundColor,
+        ),
+        labelStyle: themeData.textTheme.titleMedium,
+        secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
+          color: colorScheme.onPrimary,
+        ),
+      ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      bottomNavigationBarTheme: themeData.bottomNavigationBarTheme.copyWith(
-        backgroundColor: colorScheme.primaryContainer,
-        selectedItemColor: colorScheme.onPrimaryContainer,
-        unselectedItemColor:
-            colorScheme.onPrimaryContainer.withValues(alpha: 0.5),
-        showUnselectedLabels: false,
-      ),
-      scaffoldBackgroundColor: scaffoldBackgroundColor,
-      bottomAppBarTheme: const BottomAppBarTheme(
-        shape: CircularNotchedRectangle(),
-      ),
-      floatingActionButtonTheme: themeData.floatingActionButtonTheme
-          .copyWith(shape: const CircleBorder()),
     );
   }
 
@@ -294,4 +311,19 @@ class ThemingService with WidgetsBindingObserver {
   Future<void> dispose() async {
     await _themeData.close();
   }
+}
+
+extension ChurchAdminTheming on ThemeData {
+  /// Workaround for flutter issue [#118063](https://github.com/flutter/flutter/issues/118063)
+  ButtonStyle? get filledTonalButtonStyleWorkaround =>
+      brightness == Brightness.light
+          ? filledButtonTheme.style?.copyWith(
+              backgroundColor:
+                  WidgetStateProperty.all(colorScheme.primaryFixed),
+            )
+          : filledButtonTheme.style;
+
+  ButtonStyle get largeFilledButtonStyle => filledButtonTheme.style!.copyWith(
+        textStyle: WidgetStateProperty.all(textTheme.titleLarge),
+      );
 }

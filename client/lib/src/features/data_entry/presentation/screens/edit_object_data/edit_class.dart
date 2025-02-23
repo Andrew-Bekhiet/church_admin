@@ -40,7 +40,7 @@ class _EditClassState extends State<EditClass> {
       newObject: _oldClass ??
           Class(
             id: const Uuid().v4(),
-            name: 'اضافة فصل',
+            name: 'فصل جديد',
             service: widget.service,
             serviceId: widget.service?.id,
           ),
@@ -80,16 +80,13 @@ class _EditClassState extends State<EditClass> {
             },
           ),
           ObjectSelectionField<Service, Service?>(
-            decoration: const InputDecoration(
-              errorMaxLines: 2,
-              labelText: 'الخدمة الحالية',
-            ),
+            decoration: const InputDecoration(errorMaxLines: 2),
+            dialogFieldLabel: 'الخدمة الحالية',
             initialValue: newClass.service,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.services.streamAll(searchQuery: s),
             ),
-            labelText: 'الخدمة الحالية',
             onChanged: (value) => newClass = newClass.copyWith(
               service: value,
               serviceId: value?.id,
@@ -112,7 +109,7 @@ class _EditClassState extends State<EditClass> {
               objectsPaginatableStream: DatabaseService.I.metadata.studyYears
                   .streamAll(searchQuery: s),
             ),
-            labelText: 'السنة الدراسية',
+            dialogFieldLabel: 'السنة الدراسية',
             onChanged: (value) => newClass = newClass.copyWith(
               //Store the selected object
               //so we can build the widget based on it ...

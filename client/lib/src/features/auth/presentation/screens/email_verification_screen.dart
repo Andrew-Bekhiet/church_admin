@@ -7,6 +7,8 @@ class EmailVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('التحقق من البريد الإلكتروني'),
@@ -24,7 +26,7 @@ class EmailVerificationScreen extends StatelessWidget {
             Text(
               'تم إرسال رسالة إلى بريدك الإلكتروني '
               'افتحها واضغط على الرابط للتحقق من بريدك الإلكتروني',
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: themeData.textTheme.bodyLarge,
             ),
             const SizedBox(height: 10),
             FilledButton(
@@ -33,6 +35,7 @@ class EmailVerificationScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             FilledButton.tonal(
+              style: themeData.filledTonalButtonStyleWorkaround,
               onPressed: () async {
                 final scaffoldMessenger = ScaffoldMessenger.of(context);
 

@@ -27,6 +27,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final themeData = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,6 +72,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 builder: (context, canCheckBiometricsData) {
                   if (canCheckBiometricsData.data ?? false) {
                     return FilledButton.tonalIcon(
+                      style: themeData.filledTonalButtonStyleWorkaround,
                       icon: const Icon(Symbols.fingerprint),
                       label: const Text(
                         'إعادة المحاولة عن طريق بصمة الاصبع/الوجه',

@@ -58,6 +58,7 @@ class _EditStreetState extends State<EditStreet> {
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           FilledButton.tonalIcon(
+            style: Theme.of(context).filledTonalButtonStyleWorkaround,
             onPressed: _editGeolocation(context),
             icon: const Icon(Symbols.edit_location),
             label: const Text('المكان على الخريطة'),

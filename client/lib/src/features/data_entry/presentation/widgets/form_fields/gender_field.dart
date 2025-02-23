@@ -42,9 +42,7 @@ class GenderField extends StatelessWidget {
         final theme = Theme.of(context);
         return InputDecorator(
           decoration: InputDecoration(
-    
             labelText: label,
-            
             errorText: state.errorText,
           ),
           child: Row(
@@ -54,12 +52,6 @@ class GenderField extends StatelessWidget {
                   child: Row(
                     children: [
                       Radio<bool?>(
-                        activeColor: theme.colorScheme.primaryContainer,
-                        focusColor: theme.colorScheme.primaryContainer,
-                        hoverColor: theme.colorScheme.primaryContainer,
-                        fillColor: WidgetStateProperty.all(
-                          theme.colorScheme.primaryContainer,
-                        ),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         value: null,
                         groupValue: state.value,
@@ -69,9 +61,7 @@ class GenderField extends StatelessWidget {
                         onTap: () => _onChanged(state, null),
                         child: Text(
                           nullLabel,
-                          style: theme.textTheme.titleSmall!.copyWith(
-                            color: theme.colorScheme.outline,
-                          ),
+                          style: theme.textTheme.titleMedium,
                         ),
                       ),
                     ],
@@ -81,12 +71,6 @@ class GenderField extends StatelessWidget {
                 child: Row(
                   children: [
                     Radio<bool?>(
-                      activeColor: theme.colorScheme.primaryContainer,
-                      focusColor: theme.colorScheme.primaryContainer,
-                      hoverColor: theme.colorScheme.primaryContainer,
-                      fillColor: WidgetStateProperty.all(
-                        theme.colorScheme.primaryContainer,
-                      ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       value: true,
                       groupValue: state.value,
@@ -94,10 +78,9 @@ class GenderField extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => _onChanged(state, true),
-                      child: Text(maleLabel,
-                        style: theme.textTheme.titleSmall!.copyWith(
-                          color: theme.colorScheme.outline,
-                        ),
+                      child: Text(
+                        maleLabel,
+                        style: theme.textTheme.titleMedium,
                       ),
                     ),
                   ],
@@ -107,12 +90,6 @@ class GenderField extends StatelessWidget {
                 child: Row(
                   children: [
                     Radio<bool?>(
-                      activeColor: theme.colorScheme.primaryContainer,
-                      focusColor: theme.colorScheme.primaryContainer,
-                      hoverColor: theme.colorScheme.primaryContainer,
-                      fillColor: WidgetStateProperty.all(
-                        theme.colorScheme.primaryContainer,
-                      ),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       value: false,
                       groupValue: state.value,
@@ -120,10 +97,9 @@ class GenderField extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => _onChanged(state, false),
-                      child: Text(femaleLabel,
-                        style: theme.textTheme.titleSmall!.copyWith(
-                          color: theme.colorScheme.outline,
-                        ),
+                      child: Text(
+                        femaleLabel,
+                        style: theme.textTheme.titleMedium,
                       ),
                     ),
                   ],

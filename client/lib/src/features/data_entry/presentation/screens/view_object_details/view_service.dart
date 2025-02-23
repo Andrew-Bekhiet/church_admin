@@ -59,7 +59,6 @@ class _ViewServiceState extends State<ViewService> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     return ViewObjectDetails(
       objectId: widget.serviceId,
       object: widget.service,
@@ -76,13 +75,9 @@ class _ViewServiceState extends State<ViewService> {
             ),
             ListTile(
               title: FilledButton.icon(
+                style: Theme.of(context).largeFilledButtonStyle,
                 icon: const Icon(Symbols.query_stats),
-                label: Text(
-                  'الاحصائيات',
-                  style: themeData.textTheme.titleLarge!.copyWith(
-                    color: themeData.colorScheme.onPrimaryContainer,
-                  ),
-                ),
+                label: const Text('الاحصائيات'),
                 // TODO: add service analysis
                 onPressed: () {},
               ),
@@ -94,24 +89,15 @@ class _ViewServiceState extends State<ViewService> {
         tabs: [
           (
             label: 'الفصول',
-            icon: Icon(
-              viewableObjectService.getDefaultIconFor<Class>(),
-              size: 22,
-            ),
+            icon: viewableObjectService.getDefaultIconFor<Class>(),
           ),
           (
             label: 'المجموعات',
-            icon: Icon(
-              viewableObjectService.getDefaultIconFor<Group>(),
-              size: 22,
-            ),
+            icon: viewableObjectService.getDefaultIconFor<Group>(),
           ),
           (
             label: 'المخدومين',
-            icon: Icon(
-              viewableObjectService.getDefaultIconFor<Person>(),
-              size: 22,
-            ),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
           ),
         ],
       ),
@@ -135,7 +121,7 @@ class _ViewServiceState extends State<ViewService> {
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على الخدمة',
-          style: themeData.textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
       editButtonBuilder: (context, service) => IconButton(

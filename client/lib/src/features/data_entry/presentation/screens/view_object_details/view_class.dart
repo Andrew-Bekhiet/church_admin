@@ -69,13 +69,9 @@ class _ViewClassState extends State<ViewClass> {
             ),
             ListTile(
               title: FilledButton.icon(
+                style: Theme.of(context).largeFilledButtonStyle,
                 icon: const Icon(Symbols.query_stats),
-                label: Text(
-                  'الاحصائيات',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                ),
+                label: const Text('الاحصائيات'),
                 // TODO: add service analysis
                 onPressed: () {},
               ),
@@ -86,7 +82,7 @@ class _ViewClassState extends State<ViewClass> {
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
-            icon: Icon(ViewableObjectService.I.getDefaultIconFor<Person>()),
+            icon: ViewableObjectService.I.getDefaultIconFor<Person>(),
             label: 'المخدومين'
           ),
         ],

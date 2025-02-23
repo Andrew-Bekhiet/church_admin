@@ -40,7 +40,7 @@ class _EditServiceState extends State<EditService> {
       newObject: _oldService ??
           Service(
             id: const Uuid().v4(),
-            name: 'اضافة خدمة',
+            name: 'خدمة جديدة',
           ),
       initialObject: _oldService,
     );
@@ -69,15 +69,14 @@ class _EditServiceState extends State<EditService> {
           ),
           ObjectSelectionField<Service, Service?>(
             decoration: const InputDecoration(
-              hintText: 'الخدمة التالية',
               errorMaxLines: 2,
             ),
+            dialogFieldLabel: 'الخدمة التالية',
             initialValue: newService.nextService,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.services.streamAll(searchQuery: s),
             ),
-            labelText: 'الخدمة التالية',
             onChanged: (value) => newService = newService.copyWith(
               nextService: value,
               nextServiceId: value?.id,

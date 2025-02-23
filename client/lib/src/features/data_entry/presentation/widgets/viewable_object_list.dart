@@ -140,8 +140,8 @@ class _ViewableObjectListState<T extends Viewable>
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.type.columns,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 30,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
             ),
             padding: const EdgeInsets.all(2),
             controller: scrollController,

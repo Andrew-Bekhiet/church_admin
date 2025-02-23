@@ -7,20 +7,12 @@ class ChipTabBar extends StatelessWidget {
     super.key,
   });
 
-  final List<({String label, Icon icon})> tabs;
+  final List<({String label, IconData icon})> tabs;
 
   @override
   Widget build(BuildContext context) {
     final tabController = DefaultTabController.of(context);
     final theme = Theme.of(context);
-
-    final chipColor = WidgetStateProperty.resolveWith(
-      (states) => states.contains(
-        WidgetState.selected,
-      )
-          ? theme.colorScheme.primaryContainer
-          : theme.scaffoldBackgroundColor,
-    );
 
     final chipSide = WidgetStateBorderSide.resolveWith(
       (states) => states.contains(
@@ -35,28 +27,22 @@ class ChipTabBar extends StatelessWidget {
       builder: (context, _) {
         final row = Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: tabs
-              .mapIndexed(
-                (i, tab) => ChoiceChip(
-                  selected: tabController.animation!.value.round() == i,
-                  onSelected: (_) => tabController.animateTo(i),
-                  showCheckmark: false,
-                  color: chipColor,
-                  side: chipSide,
-                  label: Text(
-                    tab.label,
-                    style: tabController.animation!.value.round() == i
-                        ? theme.textTheme.titleMedium!.copyWith(
-                            color: Colors.white,
-                          )
-                        : theme.textTheme.titleMedium!.copyWith(
-                            color: Colors.black,
-                          ),
-                  ),
-                  avatar: tab.icon,
+          children: tabs.mapIndexed(
+            (i, tab) {
+              final selected = tabController.animation!.value.round() == i;
+              return ChoiceChip(
+                selected: selected,
+                onSelected: (_) => tabController.animateTo(i),
+                showCheckmark: false,
+                side: chipSide,
+                label: Text(tab.label),
+                avatar: Icon(
+                  tab.icon,
+                  color: selected ? theme.colorScheme.onPrimary : null,
                 ),
-              )
-              .toList(),
+              );
+            },
+          ).toList(),
         );
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),

@@ -100,19 +100,19 @@ class _ViewFamilyState extends State<ViewFamily> {
         tabs: [
           (
             label: 'المخدومين',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
           ),
           (
             label: 'الأبناء',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            icon: viewableObjectService.getDefaultIconFor<Family>(),
           ),
           (
             label: 'الأباء',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            icon: viewableObjectService.getDefaultIconFor<Family>(),
           ),
           (
             label: 'المتاجر',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
+            icon: viewableObjectService.getDefaultIconFor<Store>(),
           ),
         ],
       ),

@@ -21,11 +21,13 @@ class DownloadAppScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FilledButton.tonalIcon(
+              style: Theme.of(context).filledTonalButtonStyleWorkaround,
               onPressed: () => _downloadAndroidApp(context, 'android'),
               icon: const Icon(Symbols.android),
               label: const Text('تنزيل التطبيق لنظام Android'),
             ),
             FilledButton.tonalIcon(
+              style: Theme.of(context).filledTonalButtonStyleWorkaround,
               onPressed: () => _downloadAndroidApp(context, 'ios'),
               icon: const Icon(Symbols.ios),
               label: const Text('تنزيل التطبيق لنظام iOS (.ipa)'),

@@ -67,7 +67,7 @@ class _EditPersonState extends State<EditPerson> {
       newObject: _oldPerson ??
           Person(
             id: const Uuid().v4(),
-            name: 'اضافة مخدوم',
+            name: 'مخدوم جديد',
             family: widget.family,
             familyId: widget.family?.id,
             services: widget.service != null ? [widget.service!] : [],
@@ -93,311 +93,313 @@ class _EditPersonState extends State<EditPerson> {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     return EditObjectData(
       objectData: widget.person,
       getController: () => _controller,
       canDeletePhoto: (_) =>
           widget.person != null && widget.person?.user?.email == null,
-      builder: (context, _controller) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          NameField(
-            hintText: 'اسم المخدوم',
-            initialValue: newPerson.name,
-            onValueChanged: (value) => newPerson = newPerson.copyWith(
-              name: value.trim(),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 8),
-          ),
-          Builder(
-            builder: (context) => TextFormField(
-              key: ValueKey(newPerson.mainPhone),
-              decoration: InputDecoration(
-                hintText: '20+',
-                labelText: 'رقم الهاتف',
-                suffixIcon: CurrentPlatformService.I.isAndroid ||
-                        CurrentPlatformService.I.isIOS
-                    ? IconButton(
-                        tooltip: 'اختيار من جهات الاتصال',
-                        onPressed: _importFromContacts,
-                        icon: const Icon(Symbols.contacts),
-                      )
-                    : null,
+      builder: (context, _controller) {
+        final themeData = Theme.of(context);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            NameField(
+              hintText: 'اسم المخدوم',
+              initialValue: newPerson.name,
+              onValueChanged: (value) => newPerson = newPerson.copyWith(
+                name: value.trim(),
               ),
-              onFieldSubmitted: (_) {
-                FocusScope.of(context).nextFocus();
-                if (newPerson.otherPhones.isEmpty) {
+              padding: const EdgeInsets.symmetric(vertical: 8),
+            ),
+            Builder(
+              builder: (context) => TextFormField(
+                key: ValueKey(newPerson.mainPhone),
+                decoration: InputDecoration(
+                  labelText: 'رقم الهاتف',
+                  suffixIcon: CurrentPlatformService.I.isAndroid ||
+                          CurrentPlatformService.I.isIOS
+                      ? IconButton(
+                          tooltip: 'اختيار من جهات الاتصال',
+                          onPressed: _importFromContacts,
+                          icon: const Icon(Symbols.contacts),
+                        )
+                      : null,
+                ),
+                onFieldSubmitted: (_) {
                   FocusScope.of(context).nextFocus();
-                }
-              },
-              initialValue: newPerson.mainPhone,
-              keyboardType: TextInputType.phone,
-              autofillHints: const [
-                AutofillHints.telephoneNumber,
-              ],
-              textInputAction: TextInputAction.next,
-              onChanged: (value) => newPerson = newPerson.copyWith(
-                mainPhone: PhoneNumberService.I
-                    .formatInternational(value)
-                    .replaceAll('+20', '0'),
-              ),
-              validator: (v) =>
-                  v != null && v.isNotEmpty ? _validatePhoneField(v) : null,
-              inputFormatters: [
-                TextInputFormatter.withFunction(
-                  (oldValue, newValue) => newValue.copyWith(
-                    text: newValue.text.replaceAll(RegExp(r'[^\d\+]'), ''),
-                  ),
-                ),
-              ],
-            ),
-          ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ...newPerson.otherPhones.entries.mapIndexed(
-                (i, phone) {
-                  return Builder(
-                    builder: (context) {
-                      return TextFormField(
-                        decoration: InputDecoration(
-                          labelText: phone.key,
-                          hintText: 'مثال: 01234...',
-                          suffixIcon: IconButton(
-                            icon: const Icon(Symbols.edit),
-                            tooltip: 'تعديل اسم الهاتف',
-                            onPressed: _onEditPhoneFieldName(phone),
-                          ),
-                        ),
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context).nextFocus();
-                          if (i == newPerson.otherPhones.length - 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        keyboardType: TextInputType.phone,
-                        autofillHints: const [
-                          AutofillHints.telephoneNumber,
-                        ],
-                        initialValue: phone.value,
-                        onChanged: (value) => newPerson = newPerson.copyWith(
-                          otherPhones: {
-                            ...newPerson.otherPhones,
-                            phone.key: PhoneNumberService.I
-                                .formatInternational(
-                                  value,
-                                )
-                                .replaceAll('+20', '0'),
-                          },
-                        ),
-                        validator: _validatePhoneField,
-                        inputFormatters: [
-                          TextInputFormatter.withFunction(
-                            (oldValue, newValue) => newValue.copyWith(
-                              text: newValue.text.replaceAll(r'[^\d\+]', ''),
-                            ),
-                          ),
-                        ],
-                        textInputAction: TextInputAction.next,
-                      );
-                    },
-                  ).withPadding(
-                    const EdgeInsets.symmetric(vertical: 8),
-                  );
+                  if (newPerson.otherPhones.isEmpty) {
+                    FocusScope.of(context).nextFocus();
+                  }
                 },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: FilledButton.tonalIcon(
-                  icon: Icon(
-                    Symbols.add,
-                    color: themeData.colorScheme.onPrimaryContainer,
-                  ),
-                  label: const Text(
-                    'رقم أخر',
-                  ),
-                  onPressed: () async {
-                    final name = await _renamePhoneFieldName();
-                    if (name is String) {
-                      newPerson = newPerson.copyWith(
-                        otherPhones: {
-                          ...newPerson.otherPhones,
-                          name: '',
-                        },
-                      );
-
-                      if (mounted) setState(() {});
-                    }
-                  },
+                initialValue: newPerson.mainPhone,
+                keyboardType: TextInputType.phone,
+                autofillHints: const [
+                  AutofillHints.telephoneNumber,
+                ],
+                textInputAction: TextInputAction.next,
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  mainPhone: PhoneNumberService.I
+                      .formatInternational(value)
+                      .replaceAll('+20', '0'),
                 ),
-              ),
-            ],
-          ),
-          AddressWithLocationField(
-            initialAddress: newPerson.address,
-            onAddressChanged: (value) => newPerson = newPerson.copyWith(
-              address: value.trim(),
-            ),
-            onEditLocation: _editGeoLocation,
-          ),
-          DateTimeField(
-            withTime: false,
-            label: 'تاريخ الميلاد',
-            initialValue: newPerson.birthdate,
-            nullable: true,
-            onChanged: (v) {
-              newPerson = newPerson.copyWith(birthdate: v);
-            },
-            validator: (v) => null,
-          ),
-          const Divider(),
-          TappableFormField<(Set<Service>, Set<Group>)>(
-            key: ValueKey(
-              (
-                newPerson.services?.toSet() ?? {},
-                newPerson.groups?.toSet() ?? {}
-              ),
-            ),
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (v) {
-              //Checks if the person is student and studyYear != null,
-              //if so check that person studyYear falls between all services
-              //that have studyYear range
-              //
-              //Then invoke the general check
-
-              if (newPerson.isStudent &&
-                  newPerson.studyYear != null &&
-                  v!.$1.any(
-                    (s) =>
-                        s.studyYearFrom == null ||
-                        s.studyYearTo == null ||
-                        (newPerson.studyYear!.order < s.studyYearFrom!.order ||
-                            newPerson.studyYear!.order > s.studyYearTo!.order),
-                  )) {
-                return 'بعض الخدمات لا تناسب السنة الدراسية للمخدوم'
-                    '\nيرجى تغيير السنة الدراسية او ازالة التحديد من احدى الخدمات';
-              }
-              return _personGeneralCheckValidator();
-            },
-            decoration: (context, state) => InputDecoration(
-              prefixIcon: !_classesAndGroupsLoaded
-                  ? const Center(
-                      heightFactor: 1,
-                      widthFactor: 1,
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : null,
-              errorText: state.errorText,
-              labelText: 'الخدمات والمجموعات المشارك بها',
-              errorMaxLines: 3,
-            ),
-            initialValue: (
-              newPerson.services?.toSet() ?? {},
-              newPerson.groups?.toSet() ?? {},
-            ),
-            onTap: _selectServices,
-            builder: (context, state) {
-              if (state.value != null && state.value!.$1.isNotEmpty) {
-                final combinedServices = _combineGroupsWithServices(
-                  state.value!.$1,
-                  state.value!.$2,
-                );
-
-                return ExcludeFocus(
-                  child: IgnorePointer(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        for (final s in combinedServices) ...[
-                          ViewableObjectWidget(
-                            s,
-                            isDense: true,
-                            forceShowSecondLine: false,
-                          ),
-                          for (final g in s.groups ?? <Group>[])
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                right: 26,
-                              ),
-                              child: Card(
-                                elevation: 0,
-                                child: ViewableObjectWidget(
-                                  g,
-                                  isDense: true,
-                                  forceShowSecondLine: false,
-                                  wrapInCard: false,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ],
+                validator: (v) =>
+                    v != null && v.isNotEmpty ? _validatePhoneField(v) : null,
+                inputFormatters: [
+                  TextInputFormatter.withFunction(
+                    (oldValue, newValue) => newValue.copyWith(
+                      text: newValue.text.replaceAll(RegExp(r'[^\d\+]'), ''),
                     ),
                   ),
-                );
-              }
+                ],
+              ),
+            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ...newPerson.otherPhones.entries.mapIndexed(
+                  (i, phone) {
+                    return Builder(
+                      builder: (context) {
+                        return TextFormField(
+                          decoration: InputDecoration(
+                            labelText: phone.key,
+                            hintText: 'مثال: 01234...',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Symbols.edit),
+                              tooltip: 'تعديل اسم الهاتف',
+                              onPressed: _onEditPhoneFieldName(phone),
+                            ),
+                          ),
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).nextFocus();
+                            if (i == newPerson.otherPhones.length - 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          keyboardType: TextInputType.phone,
+                          autofillHints: const [
+                            AutofillHints.telephoneNumber,
+                          ],
+                          initialValue: phone.value,
+                          onChanged: (value) => newPerson = newPerson.copyWith(
+                            otherPhones: {
+                              ...newPerson.otherPhones,
+                              phone.key: PhoneNumberService.I
+                                  .formatInternational(
+                                    value,
+                                  )
+                                  .replaceAll('+20', '0'),
+                            },
+                          ),
+                          validator: _validatePhoneField,
+                          inputFormatters: [
+                            TextInputFormatter.withFunction(
+                              (oldValue, newValue) => newValue.copyWith(
+                                text: newValue.text.replaceAll(r'[^\d\+]', ''),
+                              ),
+                            ),
+                          ],
+                          textInputAction: TextInputAction.next,
+                        );
+                      },
+                    ).withPadding(
+                      const EdgeInsets.symmetric(vertical: 8),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: FilledButton.tonalIcon(
+                    style: themeData.filledTonalButtonStyleWorkaround,
+                    icon: const Icon(Symbols.add),
+                    label: const Text(
+                      'إضافة رقم هاتف أخر',
+                    ),
+                    onPressed: () async {
+                      final name = await _renamePhoneFieldName();
+                      if (name is String) {
+                        newPerson = newPerson.copyWith(
+                          otherPhones: {
+                            ...newPerson.otherPhones,
+                            name: '',
+                          },
+                        );
 
-              return const Text('لا يوجد خدمات أو مجموعات');
-            },
-          ),
-          FormField<bool>(
-            initialValue: newPerson.isStudent,
-            builder: (state) => CheckboxListTile(
-              title: const Text('طالب؟'),
-              value: state.value,
-              onChanged: (v) {
-                state.didChange(v);
-                newPerson = v!
-                    ? newPerson.copyWith(
-                        isStudent: v,
-                        qualification: null,
-                        qualificationId: null,
-                        job: null,
-                        jobId: null,
-                        jobDescription: null,
-                      )
-                    : newPerson.copyWith(
-                        isStudent: v,
-                        studyYear: null,
-                        studyYearId: null,
-                        college: null,
-                        collegeId: null,
-                        school: null,
-                        schoolId: null,
-                      );
-                setState(() {});
-              },
+                        if (mounted) setState(() {});
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-          if (newPerson.isStudent) ...[
-            ObjectSelectionField<StudyYear, StudyYear?>(
-              initialValue: newPerson.studyYear,
-              listController: (s) => ViewableObjectListController(
-                objectsPaginatableStream: DatabaseService.I.metadata.studyYears
-                    .streamAll(searchQuery: s),
+            AddressWithLocationField(
+              initialAddress: newPerson.address,
+              onAddressChanged: (value) => newPerson = newPerson.copyWith(
+                address: value.trim(),
               ),
-              labelText: 'السنة الدراسية',
-              onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
-                studyYear: value,
-                //... and its id to send it in the mutation
-                studyYearId: value?.order,
-              ),
-              builder: (context, state) {
-                return state.value != null ? Text(state.value!.name) : null;
+              onEditLocation: _editGeoLocation,
+            ),
+            DateTimeField(
+              withTime: false,
+              label: 'تاريخ الميلاد',
+              initialValue: newPerson.birthdate,
+              nullable: true,
+              onChanged: (v) {
+                newPerson = newPerson.copyWith(birthdate: v);
               },
               validator: (v) => null,
             ),
-            if (newPerson.studyYear?.order != null &&
-                newPerson.studyYear!.order > 12) ...[
-              /* ObjectSelectionField<University, University?>(
+            const Divider(),
+            TappableFormField<(Set<Service>, Set<Group>)>(
+              key: ValueKey(
+                (
+                  newPerson.services?.toSet() ?? {},
+                  newPerson.groups?.toSet() ?? {}
+                ),
+              ),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (v) {
+                //Checks if the person is student and studyYear != null,
+                //if so check that person studyYear falls between all services
+                //that have studyYear range
+                //
+                //Then invoke the general check
+
+                if (newPerson.isStudent &&
+                    newPerson.studyYear != null &&
+                    v!.$1.any(
+                      (s) =>
+                          s.studyYearFrom == null ||
+                          s.studyYearTo == null ||
+                          (newPerson.studyYear!.order <
+                                  s.studyYearFrom!.order ||
+                              newPerson.studyYear!.order >
+                                  s.studyYearTo!.order),
+                    )) {
+                  return 'بعض الخدمات لا تناسب السنة الدراسية للمخدوم'
+                      '\nيرجى تغيير السنة الدراسية او ازالة التحديد من احدى الخدمات';
+                }
+                return _personGeneralCheckValidator();
+              },
+              decoration: (context, state) => InputDecoration(
+                prefixIcon: !_classesAndGroupsLoaded
+                    ? const Center(
+                        heightFactor: 1,
+                        widthFactor: 1,
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : null,
+                errorText: state.errorText,
+                labelText: 'الخدمات والمجموعات المشارك بها',
+                errorMaxLines: 3,
+              ),
+              initialValue: (
+                newPerson.services?.toSet() ?? {},
+                newPerson.groups?.toSet() ?? {},
+              ),
+              onTap: _selectServices,
+              builder: (context, state) {
+                if (state.value != null && state.value!.$1.isNotEmpty) {
+                  final combinedServices = _combineGroupsWithServices(
+                    state.value!.$1,
+                    state.value!.$2,
+                  );
+
+                  return ExcludeFocus(
+                    child: IgnorePointer(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          for (final s in combinedServices) ...[
+                            ViewableObjectWidget(
+                              s,
+                              isDense: true,
+                              forceShowSecondLine: false,
+                            ),
+                            for (final g in s.groups ?? <Group>[])
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 26,
+                                ),
+                                child: Card(
+                                  elevation: 0,
+                                  child: ViewableObjectWidget(
+                                    g,
+                                    isDense: true,
+                                    forceShowSecondLine: false,
+                                    wrapInCard: false,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                return const Text('لا يوجد خدمات أو مجموعات');
+              },
+            ),
+            FormField<bool>(
+              initialValue: newPerson.isStudent,
+              builder: (state) => CheckboxListTile(
+                title: const Text('طالب؟'),
+                value: state.value,
+                onChanged: (v) {
+                  state.didChange(v);
+                  newPerson = v!
+                      ? newPerson.copyWith(
+                          isStudent: v,
+                          qualification: null,
+                          qualificationId: null,
+                          job: null,
+                          jobId: null,
+                          jobDescription: null,
+                        )
+                      : newPerson.copyWith(
+                          isStudent: v,
+                          studyYear: null,
+                          studyYearId: null,
+                          college: null,
+                          collegeId: null,
+                          school: null,
+                          schoolId: null,
+                        );
+                  setState(() {});
+                },
+              ),
+            ),
+            if (newPerson.isStudent) ...[
+              ObjectSelectionField<StudyYear, StudyYear?>(
+                initialValue: newPerson.studyYear,
+                listController: (s) => ViewableObjectListController(
+                  objectsPaginatableStream: DatabaseService
+                      .I.metadata.studyYears
+                      .streamAll(searchQuery: s),
+                ),
+                dialogFieldLabel: 'السنة الدراسية',
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  //Store the selected object
+                  //so we can build the widget based on it ...
+                  studyYear: value,
+                  //... and its id to send it in the mutation
+                  studyYearId: value?.order,
+                ),
+                builder: (context, state) {
+                  return state.value != null ? Text(state.value!.name) : null;
+                },
+                validator: (v) => null,
+              ),
+              if (newPerson.studyYear?.order != null &&
+                  newPerson.studyYear!.order > 12) ...[
+                /* ObjectSelectionField<University, University?>(
                 initialValue: newPerson.college?.university,
                 listController: (s)=>ListControllerBase( objectsPaginatableStream:CADatabaseRepository.I.metadata.universities.watchAllUniversities(searchQuery:s),),
                 labelText: 'الجامعةpaginate                                    onC: (value) => newPerson =
@@ -408,288 +410,288 @@ class _EditPersonState extends State<EditPerson> {
                       : null;
                 },
               ), */
-              ObjectSelectionField<College, College?>(
-                initialValue: newPerson.college,
+                ObjectSelectionField<College, College?>(
+                  initialValue: newPerson.college,
+                  listController: (s) => ViewableObjectListController(
+                    objectsPaginatableStream: DatabaseService
+                        .I.metadata.colleges
+                        .streamAll(searchQuery: s),
+                  ),
+                  dialogFieldLabel: 'الكلية',
+                  onChanged: (value) => newPerson = newPerson.copyWith(
+                    //Store the selected object
+                    //so we can build the widget based on it ...
+                    college: value,
+                    //... and its id to send it in the mutation
+                    collegeId: value?.id,
+                  ),
+                  builder: (context, state) {
+                    return state.value != null ? Text(state.value!.name) : null;
+                  },
+                  validator: (v) => null,
+                ),
+              ] else
+                ObjectSelectionField<School, School?>(
+                  initialValue: newPerson.school,
+                  listController: (s) => ViewableObjectListController(
+                    objectsPaginatableStream: DatabaseService.I.metadata.schools
+                        .streamAll(searchQuery: s),
+                  ),
+                  dialogFieldLabel: 'المدرسة',
+                  onChanged: (value) => newPerson = newPerson.copyWith(
+                    //Store the selected object
+                    //so we can build the widget based on it ...
+                    school: value,
+                    //... and its id to send it in the mutation
+                    schoolId: value?.id,
+                  ),
+                  builder: (context, state) {
+                    return state.value != null ? Text(state.value!.name) : null;
+                  },
+                  validator: (v) => null,
+                ),
+            ] else ...[
+              ObjectSelectionField<Qualification, Qualification?>(
+                initialValue: newPerson.qualification,
                 listController: (s) => ViewableObjectListController(
-                  objectsPaginatableStream: DatabaseService.I.metadata.colleges
+                  objectsPaginatableStream: DatabaseService
+                      .I.metadata.qualifications
                       .streamAll(searchQuery: s),
                 ),
-                labelText: 'الكلية',
+                dialogFieldLabel: 'المؤهل',
                 onChanged: (value) => newPerson = newPerson.copyWith(
                   //Store the selected object
                   //so we can build the widget based on it ...
-                  college: value,
+                  qualification: value,
                   //... and its id to send it in the mutation
-                  collegeId: value?.id,
+                  qualificationId: value?.id,
                 ),
                 builder: (context, state) {
                   return state.value != null ? Text(state.value!.name) : null;
                 },
                 validator: (v) => null,
               ),
-            ] else
-              ObjectSelectionField<School, School?>(
-                initialValue: newPerson.school,
+              ObjectSelectionField<Job, Job?>(
+                initialValue: newPerson.job,
                 listController: (s) => ViewableObjectListController(
-                  objectsPaginatableStream: DatabaseService.I.metadata.schools
-                      .streamAll(searchQuery: s),
+                  objectsPaginatableStream:
+                      DatabaseService.I.metadata.jobs.streamAll(searchQuery: s),
                 ),
-                labelText: 'المدرسة',
+                dialogFieldLabel: 'الوظيفة',
                 onChanged: (value) => newPerson = newPerson.copyWith(
                   //Store the selected object
                   //so we can build the widget based on it ...
-                  school: value,
+                  job: value,
                   //... and its id to send it in the mutation
-                  schoolId: value?.id,
+                  jobId: value?.id,
                 ),
                 builder: (context, state) {
                   return state.value != null ? Text(state.value!.name) : null;
                 },
                 validator: (v) => null,
               ),
-          ] else ...[
-            ObjectSelectionField<Qualification, Qualification?>(
-              initialValue: newPerson.qualification,
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'تفاصيل الوظيفة',
+                ),
+                initialValue: newPerson.jobDescription,
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  jobDescription: value.trim(),
+                ),
+                textInputAction: TextInputAction.next,
+                validator: (value) => null,
+              ).withPadding(
+                const EdgeInsets.symmetric(vertical: 8),
+              ),
+            ],
+            const Divider(),
+            GenderField(
+              initialValue: newPerson.gender,
+              onChanged: (v) {
+                newPerson = v!
+                    ? newPerson.copyWith(gender: v)
+                    : newPerson.copyWith(
+                        gender: v,
+                        isShammas: false,
+                        shammasLevel: null,
+                        shammasLevelId: null,
+                      );
+                setState(() {});
+              },
+            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ObjectSelectionField<PersonType, PersonType?>(
+              initialValue: newPerson.personType,
               listController: (s) => ViewableObjectListController(
-                objectsPaginatableStream: DatabaseService
-                    .I.metadata.qualifications
+                objectsPaginatableStream: DatabaseService.I.metadata.personTypes
                     .streamAll(searchQuery: s),
               ),
-              labelText: 'المؤهل',
+              dialogFieldLabel: 'الحالة الاجتماعية',
               onChanged: (value) => newPerson = newPerson.copyWith(
                 //Store the selected object
                 //so we can build the widget based on it ...
-                qualification: value,
+                personType: value,
                 //... and its id to send it in the mutation
-                qualificationId: value?.id,
+                personTypeId: value?.id,
               ),
               builder: (context, state) {
                 return state.value != null ? Text(state.value!.name) : null;
               },
               validator: (v) => null,
             ),
-            ObjectSelectionField<Job, Job?>(
-              initialValue: newPerson.job,
+            const Divider(),
+            ObjectSelectionField<Church, Church?>(
+              initialValue: newPerson.church,
               listController: (s) => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.metadata.jobs.streamAll(searchQuery: s),
+                objectsPaginatableStream: DatabaseService.I.metadata.churches
+                    .streamAll(searchQuery: s),
               ),
-              labelText: 'الوظيفة',
+              dialogFieldLabel: 'الكنيسة',
               onChanged: (value) => newPerson = newPerson.copyWith(
                 //Store the selected object
                 //so we can build the widget based on it ...
-                job: value,
+                church: value,
                 //... and its id to send it in the mutation
-                jobId: value?.id,
+                churchId: value?.id,
               ),
               builder: (context, state) {
                 return state.value != null ? Text(state.value!.name) : null;
               },
               validator: (v) => null,
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'تفاصيل الوظيفة',
+            ObjectSelectionField<Father, Father?>(
+              initialValue: newPerson.father,
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService.I.metadata.fathers
+                    .streamAll(searchQuery: s),
               ),
-              initialValue: newPerson.jobDescription,
+              dialogFieldLabel: 'أب الاعتراف',
               onChanged: (value) => newPerson = newPerson.copyWith(
-                jobDescription: value.trim(),
+                //Store the selected object
+                //so we can build the widget based on it ...
+                father: value,
+                //... and its id to send it in the mutation
+                fatherId: value?.id,
               ),
-              textInputAction: TextInputAction.next,
-              validator: (value) => null,
-            ).withPadding(
-              const EdgeInsets.symmetric(vertical: 8),
-            ),
-          ],
-          const Divider(),
-          GenderField(
-            initialValue: newPerson.gender,
-            onChanged: (v) {
-              newPerson = v!
-                  ? newPerson.copyWith(gender: v)
-                  : newPerson.copyWith(
-                      gender: v,
-                      isShammas: false,
-                      shammasLevel: null,
-                      shammasLevelId: null,
-                    );
-              setState(() {});
-            },
-          ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
-          ObjectSelectionField<PersonType, PersonType?>(
-            initialValue: newPerson.personType,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.metadata.personTypes
-                  .streamAll(searchQuery: s),
-            ),
-            labelText: 'الحالة الاجتماعية',
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
-              personType: value,
-              //... and its id to send it in the mutation
-              personTypeId: value?.id,
-            ),
-            builder: (context, state) {
-              return state.value != null ? Text(state.value!.name) : null;
-            },
-            validator: (v) => null,
-          ),
-          const Divider(),
-          ObjectSelectionField<Church, Church?>(
-            initialValue: newPerson.church,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.metadata.churches.streamAll(searchQuery: s),
-            ),
-            labelText: 'الكنيسة',
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
-              church: value,
-              //... and its id to send it in the mutation
-              churchId: value?.id,
-            ),
-            builder: (context, state) {
-              return state.value != null ? Text(state.value!.name) : null;
-            },
-            validator: (v) => null,
-          ),
-          ObjectSelectionField<Father, Father?>(
-            initialValue: newPerson.father,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.metadata.fathers.streamAll(searchQuery: s),
-            ),
-            labelText: 'أب الاعتراف',
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
-              father: value,
-              //... and its id to send it in the mutation
-              fatherId: value?.id,
-            ),
-            builder: (context, state) {
-              return state.value != null ? Text(state.value!.name) : null;
-            },
-            validator: (v) => null,
-          ),
-          FormField<bool>(
-            initialValue: newPerson.isServant,
-            builder: (state) => CheckboxListTile(
-              title: const Text('خادم؟'),
-              value: state.value,
-              onChanged: (v) {
-                state.didChange(v);
-                newPerson = newPerson.copyWith(isServant: v!);
+              builder: (context, state) {
+                return state.value != null ? Text(state.value!.name) : null;
               },
+              validator: (v) => null,
             ),
-          ),
-          if (newPerson.gender)
             FormField<bool>(
-              initialValue: newPerson.isShammas,
+              initialValue: newPerson.isServant,
               builder: (state) => CheckboxListTile(
-                title: const Text('شماس؟'),
+                title: const Text('خادم؟'),
                 value: state.value,
                 onChanged: (v) {
                   state.didChange(v);
-                  newPerson = v!
-                      ? newPerson.copyWith(isShammas: v)
-                      : newPerson.copyWith(
-                          isShammas: v,
-                          shammasLevel: null,
-                          shammasLevelId: null,
-                        );
-                  setState(() {});
+                  newPerson = newPerson.copyWith(isServant: v!);
                 },
               ),
             ),
-          if (newPerson.gender && newPerson.isShammas)
-            ObjectSelectionField<ShammasLevel, ShammasLevel?>(
-              initialValue: newPerson.shammasLevel,
+            if (newPerson.gender)
+              FormField<bool>(
+                initialValue: newPerson.isShammas,
+                builder: (state) => CheckboxListTile(
+                  title: const Text('شماس؟'),
+                  value: state.value,
+                  onChanged: (v) {
+                    state.didChange(v);
+                    newPerson = v!
+                        ? newPerson.copyWith(isShammas: v)
+                        : newPerson.copyWith(
+                            isShammas: v,
+                            shammasLevel: null,
+                            shammasLevelId: null,
+                          );
+                    setState(() {});
+                  },
+                ),
+              ),
+            if (newPerson.gender && newPerson.isShammas)
+              ObjectSelectionField<ShammasLevel, ShammasLevel?>(
+                initialValue: newPerson.shammasLevel,
+                listController: (s) => ViewableObjectListController(
+                  objectsPaginatableStream: DatabaseService
+                      .I.metadata.shammasLevels
+                      .streamAll(searchQuery: s),
+                ),
+                dialogFieldLabel: 'رتبة الشموسية',
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  //Store the selected object
+                  //so we can build the widget based on it ...
+                  shammasLevel: value,
+                  //... and its id to send it in the mutation
+                  shammasLevelId: value?.id,
+                ),
+                builder: (context, state) {
+                  return state.value != null ? Text(state.value!.name) : null;
+                },
+              ),
+            ObjectSelectionField<PersonState, PersonState?>(
+              initialValue: newPerson.state,
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService
-                    .I.metadata.shammasLevels
+                    .I.metadata.personStates
                     .streamAll(searchQuery: s),
               ),
-              labelText: 'رتبة الشموسية',
+              dialogFieldLabel: 'الحالة الروحية',
               onChanged: (value) => newPerson = newPerson.copyWith(
                 //Store the selected object
                 //so we can build the widget based on it ...
-                shammasLevel: value,
+                state: value,
                 //... and its id to send it in the mutation
-                shammasLevelId: value?.id,
+                stateId: value?.id,
               ),
               builder: (context, state) {
-                return state.value != null ? Text(state.value!.name) : null;
+                return state.value != null
+                    ? IgnorePointer(
+                        child: ViewableObjectWidget(
+                          state.value!,
+                          wrapInCard: false,
+                          isDense: true,
+                          forceShowSecondLine: false,
+                          trailing: state.value?.color == null
+                              ? null
+                              : ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    color: state.value!.color,
+                                  ),
+                                ),
+                        ),
+                      )
+                    : null;
               },
+              validator: (v) => null,
             ),
-          ObjectSelectionField<PersonState, PersonState?>(
-            initialValue: newPerson.state,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.metadata.personStates
-                  .streamAll(searchQuery: s),
-            ),
-            labelText: 'الحالة الروحية',
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
-              state: value,
-              //... and its id to send it in the mutation
-              stateId: value?.id,
-            ),
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        wrapInCard: false,
-                        isDense: true,
-                        forceShowSecondLine: false,
-                        trailing: state.value?.color == null
-                            ? null
-                            : ClipRRect(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  color: state.value!.color,
-                                ),
-                              ),
-                      ),
-                    )
-                  : null;
-            },
-            validator: (v) => null,
-          ),
-          const Divider(),
-          MultiObjectSelectionField<Hobby>(
-            validator: _personGeneralCheckValidator,
-            decoration: const InputDecoration(
+            const Divider(),
+            MultiObjectSelectionField<Hobby>(
+              validator: _personGeneralCheckValidator,
+              decoration: const InputDecoration(
+                labelText: 'الهوايات',
+                errorMaxLines: 2,
+              ),
+              onChanged: (s) =>
+                  newPerson = newPerson.copyWith(hobbies: s?.toList()),
+              initialValue: newPerson.hobbies?.toSet() ?? {},
+              nullable: false,
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService.I.metadata.hobbies
+                    .streamAll(searchQuery: s),
+              ),
               labelText: 'الهوايات',
-              errorMaxLines: 2,
-            ),
-            onChanged: (s) =>
-                newPerson = newPerson.copyWith(hobbies: s?.toList()),
-            initialValue: newPerson.hobbies?.toSet() ?? {},
-            nullable: false,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.metadata.hobbies.streamAll(searchQuery: s),
-            ),
-            labelText: 'الهوايات',
-            builder: (context, state) {
-              final labelStyle = themeData.textTheme.labelSmall!;
-              return state.value != null && state.value!.isNotEmpty
-                  ? Wrap(
-                      spacing: 3,
-                      children: [
-                        for (final hobby in state.value ?? <Hobby>[])
-                          Material(
-                            type: MaterialType.transparency,
-                            child: Chip(
+              builder: (context, state) {
+                final labelStyle = themeData.textTheme.labelSmall!;
+                return state.value != null && state.value!.isNotEmpty
+                    ? Wrap(
+                        spacing: 3,
+                        children: [
+                          for (final hobby in state.value ?? <Hobby>[])
+                            Chip(
                               side: BorderSide(
                                 color: hobby.color?.findInvert() ??
                                     labelStyle.color!,
@@ -700,38 +702,36 @@ class _EditPersonState extends State<EditPerson> {
                                   color: hobby.color?.findInvert(),
                                 ),
                               ),
-                              backgroundColor: hobby.color,
+                              color: WidgetStateProperty.all(hobby.color),
                             ),
-                          ),
-                      ],
-                    )
-                  : const Text('لا يوجد هوايات');
-            },
-          ),
-          MultiObjectSelectionField<Tag>(
-            validator: _personGeneralCheckValidator,
-            decoration: const InputDecoration(
+                        ],
+                      )
+                    : const Text('لا يوجد هوايات');
+              },
+            ),
+            MultiObjectSelectionField<Tag>(
+              validator: _personGeneralCheckValidator,
+              decoration: const InputDecoration(
+                labelText: 'الشارات',
+                errorMaxLines: 2,
+              ),
+              onChanged: (s) =>
+                  newPerson = newPerson.copyWith(tags: s?.toList()),
+              initialValue: newPerson.tags?.toSet() ?? {},
+              nullable: false,
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream:
+                    DatabaseService.I.metadata.tags.streamAll(searchQuery: s),
+              ),
               labelText: 'الشارات',
-              errorMaxLines: 2,
-            ),
-            onChanged: (s) => newPerson = newPerson.copyWith(tags: s?.toList()),
-            initialValue: newPerson.tags?.toSet() ?? {},
-            nullable: false,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.metadata.tags.streamAll(searchQuery: s),
-            ),
-            labelText: 'الشارات',
-            builder: (context, state) {
-              final labelStyle = themeData.textTheme.labelSmall!;
-              return state.value != null && state.value!.isNotEmpty
-                  ? Wrap(
-                      spacing: 3,
-                      children: [
-                        for (final tag in state.value ?? <Tag>[])
-                          Material(
-                            type: MaterialType.transparency,
-                            child: Chip(
+              builder: (context, state) {
+                final labelStyle = themeData.textTheme.labelSmall!;
+                return state.value != null && state.value!.isNotEmpty
+                    ? Wrap(
+                        spacing: 3,
+                        children: [
+                          for (final tag in state.value ?? <Tag>[])
+                            Chip(
                               side: BorderSide(
                                 color: tag.color?.findInvert() ??
                                     labelStyle.color!,
@@ -742,61 +742,60 @@ class _EditPersonState extends State<EditPerson> {
                                   color: tag.color?.findInvert(),
                                 ),
                               ),
-                              backgroundColor: tag.color,
+                              color: WidgetStateProperty.all(tag.color),
                             ),
-                          ),
-                      ],
-                    )
-                  : const Text('لا يوجد شارات');
-            },
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'ملاحظات',
+                        ],
+                      )
+                    : const Text('لا يوجد شارات');
+              },
             ),
-            initialValue: newPerson.notes,
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              notes: value.trim(),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'ملاحظات',
+              ),
+              initialValue: newPerson.notes,
+              onChanged: (value) => newPerson = newPerson.copyWith(
+                notes: value.trim(),
+              ),
+              textInputAction: TextInputAction.next,
+              maxLines: null,
+              validator: (value) => null,
+            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ColorField(
+              initialValue: newPerson.color,
+              onChanged: (value) => setState(
+                () => newPerson = newPerson.copyWith(color: value),
+              ),
             ),
-            textInputAction: TextInputAction.next,
-            maxLines: null,
-            validator: (value) => null,
-          ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
-          ColorField(
-            initialValue: newPerson.color,
-            onChanged: (value) => setState(
-              () => newPerson = newPerson.copyWith(color: value),
+            const Divider(),
+            ObjectSelectionField<Family, Family?>(
+              validator: _personGeneralCheckValidator,
+              decoration: const InputDecoration(errorMaxLines: 2),
+              initialValue: newPerson.family,
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream:
+                    DatabaseService.I.families.streamAll(searchQuery: s),
+              ),
+              dialogFieldLabel: 'العائلة',
+              onChanged: (value) => newPerson = newPerson.copyWith(
+                //Store the selected object
+                //so we can build the widget based on it ...
+                family: value,
+                //... and its id to send it in the mutation
+                familyId: value?.id,
+              ),
+              builder: (context, state) {
+                return state.value != null
+                    ? IgnorePointer(
+                        child: ViewableObjectWidget(
+                          state.value!,
+                          isDense: true,
+                        ),
+                      )
+                    : null;
+              },
             ),
-          ),
-          const Divider(),
-          ObjectSelectionField<Family, Family?>(
-            validator: _personGeneralCheckValidator,
-            decoration: const InputDecoration(errorMaxLines: 2),
-            initialValue: newPerson.family,
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.families.streamAll(searchQuery: s),
-            ),
-            labelText: 'العائلة',
-            onChanged: (value) => newPerson = newPerson.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
-              family: value,
-              //... and its id to send it in the mutation
-              familyId: value?.id,
-            ),
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
-            },
-          ),
-          /* if (person.store != null)
+            /* if (person.store != null)
                                       ListTile(
                                         title: const Text('داخل متجر'),
                                         subtitle: ViewableObjectWidget<Store>(
@@ -805,72 +804,73 @@ class _EditPersonState extends State<EditPerson> {
                                           forceShowSecondLine: false,
                                         ),
                                       ), */
-          const Divider(),
-          DateTimeField(
-            withTime: false,
-            label: 'أخر تناول',
-            initialValue: newPerson.lastKodas?.time,
-            onChanged: (v) {
-              if (v != null) {
-                newPerson = newPerson.copyWith(
-                  lastKodas: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
-                  ),
-                );
-              }
-            },
-            validator: (v) => null,
-          ),
-          DateTimeField(
-            withTime: false,
-            label: 'أخر اعتراف',
-            initialValue: newPerson.lastConfession?.time,
-            onChanged: (v) {
-              if (v != null) {
-                newPerson = newPerson.copyWith(
-                  lastConfession: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
-                  ),
-                );
-              }
-            },
-            validator: (v) => null,
-          ),
-          const Divider(),
-          DateTimeField(
-            label: 'أخر افتقاد',
-            initialValue: newPerson.lastVisit?.time,
-            onChanged: (v) {
-              if (v != null) {
-                newPerson = newPerson.copyWith(
-                  lastVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
-                  ),
-                );
-              }
-            },
-            validator: (v) => null,
-          ),
-          DateTimeField(
-            label: 'أخر مكالمة',
-            initialValue: newPerson.lastCall?.time,
-            onChanged: (v) {
-              if (v != null) {
-                newPerson = newPerson.copyWith(
-                  lastCall: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthService.I.currentUser?.uid,
-                  ),
-                );
-              }
-            },
-            validator: (v) => null,
-          ),
-        ],
-      ),
+            const Divider(),
+            DateTimeField(
+              withTime: false,
+              label: 'أخر تناول',
+              initialValue: newPerson.lastKodas?.time,
+              onChanged: (v) {
+                if (v != null) {
+                  newPerson = newPerson.copyWith(
+                    lastKodas: LastRecordedByInfo(
+                      time: v,
+                      recordedBy: AuthService.I.currentUser?.uid,
+                    ),
+                  );
+                }
+              },
+              validator: (v) => null,
+            ),
+            DateTimeField(
+              withTime: false,
+              label: 'أخر اعتراف',
+              initialValue: newPerson.lastConfession?.time,
+              onChanged: (v) {
+                if (v != null) {
+                  newPerson = newPerson.copyWith(
+                    lastConfession: LastRecordedByInfo(
+                      time: v,
+                      recordedBy: AuthService.I.currentUser?.uid,
+                    ),
+                  );
+                }
+              },
+              validator: (v) => null,
+            ),
+            const Divider(),
+            DateTimeField(
+              label: 'أخر افتقاد',
+              initialValue: newPerson.lastVisit?.time,
+              onChanged: (v) {
+                if (v != null) {
+                  newPerson = newPerson.copyWith(
+                    lastVisit: LastRecordedByInfo(
+                      time: v,
+                      recordedBy: AuthService.I.currentUser?.uid,
+                    ),
+                  );
+                }
+              },
+              validator: (v) => null,
+            ),
+            DateTimeField(
+              label: 'أخر مكالمة',
+              initialValue: newPerson.lastCall?.time,
+              onChanged: (v) {
+                if (v != null) {
+                  newPerson = newPerson.copyWith(
+                    lastCall: LastRecordedByInfo(
+                      time: v,
+                      recordedBy: AuthService.I.currentUser?.uid,
+                    ),
+                  );
+                }
+              },
+              validator: (v) => null,
+            ),
+          ],
+        );
+      },
     );
   }
 

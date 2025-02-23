@@ -408,7 +408,7 @@ class _SelectValueWidget<T extends Object> extends StatelessWidget {
         listController: _listControllerForType,
         builder: _buildViewableObject,
         initialValue: condition.value,
-        labelText: '',
+        dialogFieldLabel: '',
         onChanged: (v) => onChanged([
           condition.copyWith(
             field: 'id',

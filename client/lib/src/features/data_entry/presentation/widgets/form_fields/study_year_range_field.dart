@@ -73,7 +73,8 @@ class StudyYearRangeField extends StatelessWidget {
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: '',
+                  decoration: const InputDecoration(labelText: ''),
+                  dialogFieldLabel: 'السنة الدراسية من',
                   onChanged: (newValue) {
                     state.didChange((newValue, state.value?.$2));
                     onChanged?.call(state.value);
@@ -82,7 +83,7 @@ class StudyYearRangeField extends StatelessWidget {
               ),
               const SizedBox(width: 2),
               Text(
-                'الي',
+                'إلى',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.primaryContainer,
                     ),
@@ -100,7 +101,8 @@ class StudyYearRangeField extends StatelessWidget {
                   ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: '',
+                  decoration: const InputDecoration(labelText: ''),
+                  dialogFieldLabel: 'السنة الدراسية إلى',
                   onChanged: (newValue) {
                     state.didChange((state.value?.$1, newValue));
                     onChanged?.call(state.value);
