@@ -109,25 +109,30 @@ class ThemingService with WidgetsBindingObserver {
     late final effectiveUserSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark = isDarkOverride ??
+    bool isDark =
+        isDarkOverride ??
         effectiveUserSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
         greatFeastThemeOverride ?? effectiveUserSettingsService.greatFeastTheme;
 
+    Color? effectiveSeedOverride = seedOverride;
+
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
-        DateTime.now()
-            .isAfter(riseDay.subtract(const Duration(days: 7, seconds: 20))) &&
+        DateTime.now().isAfter(
+          riseDay.subtract(const Duration(days: 7, seconds: 20)),
+        ) &&
         DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      seedOverride = Colors.black;
+      effectiveSeedOverride = Colors.black;
       isDark = true;
     } else if (greatFeastTheme &&
-        DateTime.now()
-            .isBefore(riseDay.add(const Duration(days: 50, seconds: 20))) &&
+        DateTime.now().isBefore(
+          riseDay.add(const Duration(days: 50, seconds: 20)),
+        ) &&
         DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      seedOverride = Colors.white;
+      effectiveSeedOverride = Colors.white;
       isDark = false;
     }
 
@@ -136,16 +141,17 @@ class ThemingService with WidgetsBindingObserver {
     final flexThemeDataFactory =
         isDark ? FlexThemeData.dark : FlexThemeData.light;
 
-    final flexSchemeColor = seedOverride != null
-        ? FlexSchemeColor.from(
-            primary: seedOverride,
-            tertiary: seedOverride.desaturate(90),
-          )
-        : FlexSchemeColor.from(
-            primary: AppColors.primary,
-            secondary: AppColors.secondary,
-            tertiary: AppColors.tertiary,
-          );
+    final flexSchemeColor =
+        effectiveSeedOverride != null
+            ? FlexSchemeColor.from(
+              primary: effectiveSeedOverride,
+              tertiary: effectiveSeedOverride.desaturate(90),
+            )
+            : FlexSchemeColor.from(
+              primary: AppColors.primary,
+              secondary: AppColors.secondary,
+              tertiary: AppColors.tertiary,
+            );
 
     final rawThemeData = flexThemeDataFactory(
       colors: isLight ? flexSchemeColor : flexSchemeColor.toDark(),
@@ -160,7 +166,7 @@ class ThemingService with WidgetsBindingObserver {
         scaffoldBackgroundSchemeColor:
             isLight ? SchemeColor.tertiaryFixed : SchemeColor.onTertiary,
         useM2StyleDividerInM3: true,
-        defaultRadius: 10.0,
+        defaultRadius: 10,
         switchThumbSchemeColor: SchemeColor.secondaryContainer,
         inputDecoratorBorderType: FlexInputBorderType.outline,
         inputDecoratorUnfocusedBorderIsColored: true,
@@ -175,7 +181,7 @@ class ThemingService with WidgetsBindingObserver {
         chipSelectedSchemeColor: SchemeColor.primary,
         chipSecondarySelectedSchemeColor: SchemeColor.primary,
         chipIconSize: 22,
-        chipRadius: 5.0,
+        chipRadius: 5,
         alignedDropdown: true,
         dialogBackgroundSchemeColor:
             isLight ? SchemeColor.secondaryContainer : null,
@@ -187,7 +193,7 @@ class ThemingService with WidgetsBindingObserver {
         bottomNavigationBarMutedUnselectedIcon: true,
         bottomNavigationBarBackgroundSchemeColor: SchemeColor.primary,
         bottomNavigationBarShowUnselectedLabels: false,
-        menuRadius: 10.0,
+        menuRadius: 10,
         navigationRailUseIndicator: true,
         navigationRailLabelType: NavigationRailLabelType.all,
       ),
@@ -254,11 +260,10 @@ class ThemingService with WidgetsBindingObserver {
       ),
       chipTheme: themeData.chipTheme.copyWith(
         color: WidgetStateProperty.resolveWith(
-          (states) => states.contains(
-            WidgetState.selected,
-          )
-              ? themeData.colorScheme.primary
-              : themeData.scaffoldBackgroundColor,
+          (states) =>
+              states.contains(WidgetState.selected)
+                  ? themeData.colorScheme.primary
+                  : themeData.scaffoldBackgroundColor,
         ),
         labelStyle: themeData.textTheme.titleMedium,
         secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
@@ -271,9 +276,7 @@ class ThemingService with WidgetsBindingObserver {
 
   final UserSettingsService _userSettingsService;
 
-  factory ThemingService({
-    required UserSettingsService userSettingsService,
-  }) =>
+  factory ThemingService({required UserSettingsService userSettingsService}) =>
       ThemingService.withInitialThemeata(
         userSettingsService: userSettingsService,
         initialTheme: getDefault(userSettingsService: userSettingsService),
@@ -282,8 +285,8 @@ class ThemingService with WidgetsBindingObserver {
   ThemingService.withInitialThemeata({
     required UserSettingsService userSettingsService,
     required ThemeData initialTheme,
-  })  : _userSettingsService = userSettingsService,
-        _themeData = BehaviorSubject.seeded(initialTheme) {
+  }) : _userSettingsService = userSettingsService,
+       _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -318,12 +321,11 @@ extension ChurchAdminTheming on ThemeData {
   ButtonStyle? get filledTonalButtonStyleWorkaround =>
       brightness == Brightness.light
           ? filledButtonTheme.style?.copyWith(
-              backgroundColor:
-                  WidgetStateProperty.all(colorScheme.primaryFixed),
-            )
+            backgroundColor: WidgetStateProperty.all(colorScheme.primaryFixed),
+          )
           : filledButtonTheme.style;
 
   ButtonStyle get largeFilledButtonStyle => filledButtonTheme.style!.copyWith(
-        textStyle: WidgetStateProperty.all(textTheme.titleLarge),
-      );
+    textStyle: WidgetStateProperty.all(textTheme.titleLarge),
+  );
 }
