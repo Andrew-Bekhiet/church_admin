@@ -35,7 +35,7 @@ class AboutAppService {
       applicationName: 'كنيسة السيدة العذراء مريم',
       applicationVersion: version,
       children: [
-        const Text('جميع الحقوق محفوظة © 2022-2024'),
+        const Text('جميع الحقوق محفوظة © 2022-2025'),
         RichText(
           text: TextSpan(
             children: [
