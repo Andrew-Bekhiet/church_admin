@@ -100,19 +100,19 @@ class _ViewAreaState extends State<ViewArea> {
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Street>()),
+            icon: viewableObjectService.getDefaultIconFor<Street>(),
             label: 'الشوارع'
           ),
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            icon: viewableObjectService.getDefaultIconFor<Family>(),
             label: 'العائلات'
           ),
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
             label: 'المخدومين'
           ),
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
+            icon: viewableObjectService.getDefaultIconFor<Store>(),
             label: 'المتاجر'
           ),
         ],

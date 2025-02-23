@@ -9,7 +9,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       listController;
   final Widget? Function(BuildContext, FormFieldState<F>) builder;
   final F initialValue;
-  final String labelText;
+  final String dialogFieldLabel;
   final bool nullable;
 
   final String? Function(F?)? validator;
@@ -23,7 +23,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
     required this.listController,
     required this.builder,
     required this.initialValue,
-    required this.labelText,
+    required this.dialogFieldLabel,
     this.nullable = true,
     this.validator,
     this.autovalidateMode,
@@ -36,6 +36,9 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
 
   @override
   Widget build(BuildContext context) {
+    final String effectiveFieldLabel =
+        decoration?.labelText ?? dialogFieldLabel;
+
     return TappableFormField<F>(
       initialValue: initialValue,
       autovalidateMode: autovalidateMode,
@@ -44,7 +47,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       validator: validator ??
           (nullable
               ? (_) => null
-              : (v) => v == null ? 'برجاء اختيار $labelText' : null),
+              : (v) => v == null ? 'برجاء اختيار $effectiveFieldLabel' : null),
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
         final search = BehaviorSubject<String?>.seeded(null);
@@ -54,7 +57,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
           context: state.context,
           builder: (context) {
             return AlertDialog(
-              title: Text('اختيار $labelText'),
+              title: Text('اختيار $dialogFieldLabel'),
               content: SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.9,
                 child: Column(
@@ -89,7 +92,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       },
       decoration: (context, state) {
         final inputDecoration = InputDecoration(
-          labelText: labelText,
+          labelText: effectiveFieldLabel,
           errorText: state.errorText,
           suffixIcon: nullable && state.value != null
               ? IconButton(
@@ -104,7 +107,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
         );
 
         return decoration?.copyWith(
-              labelText: decoration?.labelText ?? labelText,
+              labelText: decoration?.labelText ?? dialogFieldLabel,
               errorText: inputDecoration.errorText,
               suffixIcon: inputDecoration.suffixIcon,
             ) ??

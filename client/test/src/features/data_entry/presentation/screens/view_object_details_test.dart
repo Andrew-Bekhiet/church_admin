@@ -242,7 +242,7 @@ Future<void> _pumpWidget(
         tabs: [
           (
             label: 'المخدومين',
-            icon: const Icon(Symbols.person),
+            icon: Symbols.person,
           ),
         ],
       ),

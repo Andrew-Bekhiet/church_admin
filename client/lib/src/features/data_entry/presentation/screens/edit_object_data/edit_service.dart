@@ -56,23 +56,27 @@ class _EditServiceState extends State<EditService> {
       objectData: widget.service,
       getController: () => _controller,
       builder: (context, controller) => Column(
+        spacing: 24,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
             initialValue: newService.name,
+            hintText: 'اسم الخدمة',
             onValueChanged: (value) => newService = newService.copyWith(
               name: value.trim(),
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           ObjectSelectionField<Service, Service?>(
-            decoration: const InputDecoration(errorMaxLines: 2),
+            decoration: const InputDecoration(
+              errorMaxLines: 2,
+            ),
+            dialogFieldLabel: 'الخدمة التالية',
             initialValue: newService.nextService,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.services.streamAll(searchQuery: s),
             ),
-            labelText: 'الخدمة التالية',
             onChanged: (value) => newService = newService.copyWith(
               nextService: value,
               nextServiceId: value?.id,
@@ -116,7 +120,6 @@ class _EditServiceState extends State<EditService> {
               () => newService = newService.copyWith(color: value),
             ),
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

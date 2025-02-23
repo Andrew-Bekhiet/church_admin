@@ -84,15 +84,15 @@ class _ViewStreetState extends State<ViewStreet> {
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Family>()),
+            icon: viewableObjectService.getDefaultIconFor<Family>(),
             label: 'العائلات'
           ),
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
             label: 'المخدومين'
           ),
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Store>()),
+            icon: viewableObjectService.getDefaultIconFor<Store>(),
             label: 'المتاجر'
           ),
         ],
@@ -107,6 +107,7 @@ class _ViewStreetState extends State<ViewStreet> {
                   vertical: 8,
                 ),
                 child: FilledButton.tonalIcon(
+                  style: Theme.of(context).filledTonalButtonStyleWorkaround,
                   label: const Text('الموقع على الخريطة'),
                   icon: const Icon(Symbols.map),
                   onPressed: () => Navigator.of(context).push(

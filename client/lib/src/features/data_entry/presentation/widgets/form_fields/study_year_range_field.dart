@@ -52,7 +52,14 @@ class StudyYearRangeField extends StatelessWidget {
                 : null,
           ),
           child: Row(
+            spacing: 8,
             children: [
+              Text(
+                'من',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+              ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
@@ -64,22 +71,23 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: 'من',
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                  ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: 'من',
+                  decoration: const InputDecoration(labelText: ''),
+                  dialogFieldLabel: 'السنة الدراسية من',
                   onChanged: (newValue) {
                     state.didChange((newValue, state.value?.$2));
                     onChanged?.call(state.value);
                   },
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 2),
+              Text(
+                'إلى',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+              ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
@@ -91,15 +99,10 @@ class StudyYearRangeField extends StatelessWidget {
                     state.value?.name ?? '',
                     textAlign: TextAlign.center,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: 'إلى',
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                  ),
                   nullable: false,
                   initialValue: state.value?.$1,
-                  labelText: 'إلى',
+                  decoration: const InputDecoration(labelText: ''),
+                  dialogFieldLabel: 'السنة الدراسية إلى',
                   onChanged: (newValue) {
                     state.didChange((state.value?.$1, newValue));
                     onChanged?.call(state.value);

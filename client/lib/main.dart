@@ -2,11 +2,17 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+   final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await InitializationService.I.initialize();
 
@@ -20,4 +26,6 @@ Future<void> main() async {
       ),
     ),
   );
+
+  Future.delayed(const Duration(seconds:2), FlutterNativeSplash.remove);
 }

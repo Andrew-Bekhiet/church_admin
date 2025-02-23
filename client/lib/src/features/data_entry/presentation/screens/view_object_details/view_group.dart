@@ -45,7 +45,7 @@ class _ViewGroupState extends State<ViewGroup> {
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
             label: 'المخدومين'
           ),
         ],

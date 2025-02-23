@@ -13,6 +13,7 @@ class EmailVerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authBloc = AuthBloc.I;
+    final themeData = Theme.of(context);
 
     return BlocBuilder<AuthBloc, AuthState>(
       bloc: authBloc,
@@ -42,7 +43,7 @@ class EmailVerificationScreen extends StatelessWidget {
                   Text(
                     'تم إرسال رسالة إلى $email \n'
                     'افتحها واضغط على الرابط، ثم ارجع للتطبيق واضغط على تأكيد البريد الإلكتروني',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: themeData.textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   if (isLoading)
@@ -56,6 +57,7 @@ class EmailVerificationScreen extends StatelessWidget {
                   ),
                   FilledButton.tonal(
                     key: EmailVerificationScreenKeys.resendEmailButtonKey,
+                    style: themeData.filledTonalButtonStyleWorkaround,
                     onPressed: isLoading
                         ? null
                         : () async {

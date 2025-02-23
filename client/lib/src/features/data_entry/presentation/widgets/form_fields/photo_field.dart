@@ -75,11 +75,7 @@ class PhotoField extends StatelessWidget {
                   ),
                 (true, true, _) || (_, _, false) => DecoratedBox(
                     decoration: ShapeDecoration(
-                      shape: circleCrop
-                          ? const CircleBorder()
-                          : const RoundedRectangleBorder(
-                              borderRadius: ImageObjectWidget.clipBorderRadius,
-                            ),
+                      shape: const CircleBorder(),
                       color: colorScheme.primaryContainer,
                     ),
                     child: ConstrainedBox(

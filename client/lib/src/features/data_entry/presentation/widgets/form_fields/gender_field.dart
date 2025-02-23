@@ -38,62 +38,77 @@ class GenderField extends StatelessWidget {
       onSaved: onSaved,
       validator: validator,
       enabled: enabled,
-      builder: (state) => InputDecorator(
-        decoration: InputDecoration(
-          labelText: label,
-          errorText: state.errorText,
-        ),
-        child: Row(
-          children: [
-            if (nullable)
+      builder: (state) {
+        final theme = Theme.of(context);
+        return InputDecorator(
+          decoration: InputDecoration(
+            labelText: label,
+            errorText: state.errorText,
+          ),
+          child: Row(
+            children: [
+              if (nullable)
+                Expanded(
+                  child: Row(
+                    children: [
+                      Radio<bool?>(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        value: null,
+                        groupValue: state.value,
+                        onChanged: (v) => _onChanged(state, v),
+                      ),
+                      GestureDetector(
+                        onTap: () => _onChanged(state, null),
+                        child: Text(
+                          nullLabel,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               Expanded(
                 child: Row(
                   children: [
                     Radio<bool?>(
-                      value: null,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      value: true,
                       groupValue: state.value,
                       onChanged: (v) => _onChanged(state, v),
                     ),
                     GestureDetector(
-                      onTap: () => _onChanged(state, null),
-                      child: Text(nullLabel),
+                      onTap: () => _onChanged(state, true),
+                      child: Text(
+                        maleLabel,
+                        style: theme.textTheme.titleMedium,
+                      ),
                     ),
                   ],
                 ),
               ),
-            Expanded(
-              child: Row(
-                children: [
-                  Radio<bool?>(
-                    value: true,
-                    groupValue: state.value,
-                    onChanged: (v) => _onChanged(state, v),
-                  ),
-                  GestureDetector(
-                    onTap: () => _onChanged(state, true),
-                    child: Text(maleLabel),
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    Radio<bool?>(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      value: false,
+                      groupValue: state.value,
+                      onChanged: (v) => _onChanged(state, v),
+                    ),
+                    GestureDetector(
+                      onTap: () => _onChanged(state, false),
+                      child: Text(
+                        femaleLabel,
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Radio<bool?>(
-                    value: false,
-                    groupValue: state.value,
-                    onChanged: (v) => _onChanged(state, v),
-                  ),
-                  GestureDetector(
-                    onTap: () => _onChanged(state, false),
-                    child: Text(femaleLabel),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 

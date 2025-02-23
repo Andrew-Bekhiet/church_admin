@@ -8,13 +8,13 @@ class ChipTabBarPersistentHeaderDelegate
     ViewableObjectService? viewableObjectService,
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
-  final List<({String label, Icon icon})> tabs;
+  final List<({String label, IconData icon})> tabs;
   final ViewableObjectService viewableObjectService;
 
   @override
   double get minExtent => kToolbarHeight - 6;
   @override
-  double get maxExtent => kToolbarHeight * 2;
+  double get maxExtent => kToolbarHeight * 1.2;
 
   @override
   Widget build(

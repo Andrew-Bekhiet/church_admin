@@ -171,7 +171,6 @@ class _AppBarPhoto extends StatelessWidget {
               child: overrideImage ??
                   ImageObjectWidget(
                     viewable,
-                    circleCrop: circleCrop,
                     size: height,
                     borderRadius: borderRadius,
                     blurhashSize: blurhashSize,

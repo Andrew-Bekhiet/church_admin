@@ -59,22 +59,34 @@ class _EditClassState extends State<EditClass> {
       getController: () => _controller,
       builder: (context, controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 24,
         children: [
           NameField(
+            hintText: 'اسم الفصل',
             initialValue: newClass.name,
             onValueChanged: (value) => newClass = newClass.copyWith(
               name: value.trim(),
             ),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
+          GenderField(
+            nullable: true,
+            maleLabel: 'بنيــن',
+            femaleLabel: 'بنات',
+            nullLabel: 'بنيــن و بنات ',
+            initialValue: newClass.serviceGender,
+            onChanged: (v) {
+              setState(() => newClass = newClass.copyWith(serviceGender: v));
+            },
+          ),
           ObjectSelectionField<Service, Service?>(
             decoration: const InputDecoration(errorMaxLines: 2),
+            dialogFieldLabel: 'الخدمة الحالية',
             initialValue: newClass.service,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   DatabaseService.I.services.streamAll(searchQuery: s),
             ),
-            labelText: 'الخدمة',
             onChanged: (value) => newClass = newClass.copyWith(
               service: value,
               serviceId: value?.id,
@@ -97,7 +109,7 @@ class _EditClassState extends State<EditClass> {
               objectsPaginatableStream: DatabaseService.I.metadata.studyYears
                   .streamAll(searchQuery: s),
             ),
-            labelText: 'السنة الدراسية',
+            dialogFieldLabel: 'السنة الدراسية',
             onChanged: (value) => newClass = newClass.copyWith(
               //Store the selected object
               //so we can build the widget based on it ...
@@ -120,23 +132,12 @@ class _EditClassState extends State<EditClass> {
               return null;
             },
           ),
-          GenderField(
-            nullable: true,
-            maleLabel: 'بنين',
-            femaleLabel: 'بنات',
-            nullLabel: 'بنين وبنات',
-            initialValue: newClass.serviceGender,
-            onChanged: (v) {
-              setState(() => newClass = newClass.copyWith(serviceGender: v));
-            },
-          ),
           ColorField(
             initialValue: newClass.color,
             onChanged: (value) => setState(
               () => newClass = newClass.copyWith(color: value),
             ),
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

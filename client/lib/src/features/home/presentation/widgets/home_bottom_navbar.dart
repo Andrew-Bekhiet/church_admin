@@ -9,10 +9,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class HomeBottomNavBar extends StatelessWidget {
   final HomeController homeController;
 
-  const HomeBottomNavBar({
-    required this.homeController,
-    super.key,
-  });
+  const HomeBottomNavBar({required this.homeController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +28,12 @@ class HomeBottomNavBar extends StatelessWidget {
         final items = [
           (label: 'الرئيسية', icon: Symbols.home),
           if (isSundaySchool)
-            (
-              label: 'الخدمات',
-              icon: Symbols.volunteer_activism,
-            )
+            (label: 'الخدمات', icon: Symbols.volunteer_activism)
           else ...[
-            (
-              label: 'المناطق',
-              icon: Symbols.pin_drop,
-            ),
-            (
-              label: 'الشوراع',
-              icon: Symbols.road,
-            ),
-            (
-              label: 'العائلات',
-              icon: Symbols.diversity_1,
-            ),
-            (
-              label: 'المتاجر',
-              icon: Symbols.store,
-            ),
+            (label: 'المناطق', icon: Symbols.pin_drop),
+            (label: 'الشوراع', icon: Symbols.road),
+            (label: 'العائلات', icon: Symbols.diversity_1),
+            (label: 'المتاجر', icon: Symbols.store),
           ],
           (
             label: isSundaySchool ? 'المخدومين' : 'الأفراد',
@@ -77,26 +59,27 @@ class HomeBottomNavBar extends StatelessWidget {
                 index: tabAnimation.value.floor(),
                 animationDuration: kTabScrollDuration,
                 backgroundColor: Colors.transparent,
-                items: items.mapIndexed(
-                  (index, item) {
-                    final isActive = index == tabAnimation.value.round();
-                    final fgColor = theme.colorScheme.onPrimaryContainer
-                        .withValues(alpha: isActive ? 1 : 0.7);
+                items:
+                    items.mapIndexed((index, item) {
+                      final isActive = index == tabAnimation.value.round();
+                      final fgColor = theme.colorScheme.onPrimary.withValues(
+                        alpha: isActive ? 1 : 0.7,
+                      );
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(item.icon, color: fgColor, fill: 1),
-                        if (isActive)
-                          Text(
-                            item.label,
-                            style: theme.textTheme.labelMedium
-                                ?.copyWith(color: fgColor),
-                          ),
-                      ],
-                    );
-                  },
-                ).toList(),
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(item.icon, color: fgColor, fill: 1),
+                          if (isActive)
+                            Text(
+                              item.label,
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: fgColor,
+                              ),
+                            ),
+                        ],
+                      );
+                    }).toList(),
               ),
             );
           },

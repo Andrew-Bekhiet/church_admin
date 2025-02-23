@@ -67,30 +67,6 @@ class _ViewServiceState extends State<ViewService> {
       detailsBuilder: (context, service) => SliverList(
         delegate: SliverChildListDelegate(
           [
-            ListTile(
-              title: const Text('الخدمة التالية'),
-              subtitle: service.nextService != null
-                  ? Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: ViewableObjectCard(service.nextService!),
-                    )
-                  : const Text('لا يوجد'),
-            ),
-            ListTile(
-              title: const Text('السنوات الدراسية'),
-              subtitle: Text(
-                'من ${service.studyYearFrom?.name ?? ''} '
-                'إلى ${service.studyYearTo?.name ?? ''}',
-              ),
-            ),
-            ListTile(
-              title: FilledButton.icon(
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('احصائيات'),
-                // TODO: add service analysis
-                onPressed: () {},
-              ),
-            ),
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: service.lastEdit?.time,
@@ -98,10 +74,13 @@ class _ViewServiceState extends State<ViewService> {
                   .paginateEditHistory<Service>(id: service.id),
             ),
             ListTile(
-              title: const Text('الخدام المسؤولين'),
-              subtitle: service.adminUsers?.isNotEmpty ?? false
-                  ? AdminUsers(users: service.adminUsers!)
-                  : const Text('لا يوجد خدام محددين للخدمة'),
+              title: FilledButton.icon(
+                style: Theme.of(context).largeFilledButtonStyle,
+                icon: const Icon(Symbols.query_stats),
+                label: const Text('الاحصائيات'),
+                // TODO: add service analysis
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -110,20 +89,23 @@ class _ViewServiceState extends State<ViewService> {
         tabs: [
           (
             label: 'الفصول',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Class>()),
+            icon: viewableObjectService.getDefaultIconFor<Class>(),
           ),
           (
             label: 'المجموعات',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Group>()),
+            icon: viewableObjectService.getDefaultIconFor<Group>(),
           ),
           (
             label: 'المخدومين',
-            icon: Icon(viewableObjectService.getDefaultIconFor<Person>()),
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
           ),
         ],
       ),
       tabsContentBuilders: {
         Class: (context) => ViewableObjectList(
+              itemBuilder: (context, class_, config) =>
+                  ViewableObjectCard<Class>(class_, config: config),
+              type: ViewableObjectListType.grid3,
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_classesController),
             ),

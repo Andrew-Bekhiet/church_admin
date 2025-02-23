@@ -27,24 +27,26 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(name),
+      title: Text(
+        name,
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
       subtitle: Row(
         children: <Widget>[
           Expanded(
-            child: Text(value?.toDurationString() ?? ''),
+            child: Text(
+              value?.toDurationString() ?? '',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ),
           Text(
             value != null ? dateFormat.format(value!) : '',
             style: Theme.of(context).textTheme.labelMedium,
           ),
-        ],
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
           IconButton(
+            padding: const EdgeInsets.only(right: 42),
             tooltip: 'السجل',
-            icon: const Icon(Symbols.history),
+            icon: const Icon(Symbols.history, size: 36),
             onPressed: _onHistoryTap(context),
           ),
           if (onRecordNow != null)

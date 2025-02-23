@@ -95,9 +95,10 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
           addSeparator: false,
           itemsExpandable: true,
           objectsController: listController,
-          itemBuilder: typeValue == ViewableObjectListType.list
-              ? _buildHierarchyServiceTile
-              : _buildServiceCard,
+          itemBuilder: typeValue == ViewableObjectListType.grid ||
+                  typeValue == ViewableObjectListType.grid3
+              ? _buildServiceCard
+              : _buildHierarchyServiceTile,
         );
       },
     );

@@ -230,21 +230,17 @@ class _ViewPersonState extends State<ViewPerson> {
                   spacing: 3,
                   children: [
                     for (final hobby in person.hobbies ?? <Hobby>[])
-                      Material(
-                        type: MaterialType.transparency,
-                        child: Chip(
-                          side: BorderSide(
-                            color:
-                                hobby.color?.findInvert() ?? labelSmall.color!,
-                          ),
-                          label: Text(
-                            hobby.name,
-                            style: labelSmall.copyWith(
-                              color: hobby.color?.findInvert(),
-                            ),
-                          ),
-                          backgroundColor: hobby.color,
+                      Chip(
+                        side: BorderSide(
+                          color: hobby.color?.findInvert() ?? labelSmall.color!,
                         ),
+                        label: Text(
+                          hobby.name,
+                          style: labelSmall.copyWith(
+                            color: hobby.color?.findInvert(),
+                          ),
+                        ),
+                        color: WidgetStateProperty.all(hobby.color),
                       ),
                   ],
                 ),
@@ -255,20 +251,17 @@ class _ViewPersonState extends State<ViewPerson> {
                   spacing: 3,
                   children: [
                     for (final tag in person.tags ?? <Tag>[])
-                      Material(
-                        type: MaterialType.transparency,
-                        child: Chip(
-                          side: BorderSide(
-                            color: tag.color?.findInvert() ?? labelSmall.color!,
-                          ),
-                          label: Text(
-                            tag.name,
-                            style: labelSmall.copyWith(
-                              color: tag.color?.findInvert(),
-                            ),
-                          ),
-                          backgroundColor: tag.color,
+                      Chip(
+                        side: BorderSide(
+                          color: tag.color?.findInvert() ?? labelSmall.color!,
                         ),
+                        label: Text(
+                          tag.name,
+                          style: labelSmall.copyWith(
+                            color: tag.color?.findInvert(),
+                          ),
+                        ),
+                        color: WidgetStateProperty.all(tag.color),
                       ),
                   ],
                 ),
@@ -430,6 +423,7 @@ class _ViewPersonState extends State<ViewPerson> {
             onPressed: () => Navigator.of(context).pop(true),
           ),
           FilledButton.tonalIcon(
+            style: Theme.of(context).filledTonalButtonStyleWorkaround,
             icon: const Icon(Symbols.dialpad),
             label: const Text('نسخ في لوحة الاتصال فقط'),
             onPressed: () => Navigator.of(context).pop(false),

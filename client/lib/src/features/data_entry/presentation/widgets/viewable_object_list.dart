@@ -8,7 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-enum ViewableObjectListType { list, grid }
+enum ViewableObjectListType {
+  list(columns: 0),
+  grid(columns: 2),
+  grid3(columns: 3);
+
+  final int columns;
+
+  const ViewableObjectListType({
+    required this.columns,
+  });
+}
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   const ViewableObjectList({
@@ -125,10 +135,13 @@ class _ViewableObjectListState<T extends Viewable>
           );
         }
 
-        if (widget.type == ViewableObjectListType.grid) {
+        if (widget.type == ViewableObjectListType.grid ||
+            widget.type == ViewableObjectListType.grid3) {
           return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: widget.type.columns,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
             ),
             padding: const EdgeInsets.all(2),
             controller: scrollController,
