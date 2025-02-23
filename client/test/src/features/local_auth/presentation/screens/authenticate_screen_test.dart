@@ -31,11 +31,7 @@ const AuthUser _fakeUser = AuthUser(
   isMultiFactorEnabled: true,
 );
 
-final User _fakeUserData = User(
-  uid: 'uid',
-  email: email,
-  name: 'name',
-);
+final User _fakeUserData = User(uid: 'uid', email: email, name: 'name');
 
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),
@@ -53,61 +49,142 @@ void main() {
 
   const size = Size(100, 1365 * 3);
 
-  testWidgets(
-    'Authenticate Screen => Key elements',
-    (tester) async {
-      await tester.binding.setSurfaceSize(size);
+  testWidgets('Authenticate Screen => Key elements', (tester) async {
+    await tester.binding.setSurfaceSize(size);
 
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Builder(
-            builder: (context) {
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(size: size),
-                child: const AuthenticateScreen(),
-              );
-            },
-          ),
+    await tester.pumpWidgetBuilder(
+      SizedBox.fromSize(
+        size: size,
+        child: Builder(
+          builder: (context) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(size: size),
+              child: const AuthenticateScreen(),
+            );
+          },
         ),
-        wrapper: materialAppWrapper(),
-      );
+      ),
+      wrapper: materialAppWrapper(),
+    );
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byElementPredicate((e) {
+        final Widget widget = e.widget;
+        if (widget is Image) {
+          return widget.image == const AssetImage('assets/holyweek.jpeg') ||
+              widget.image == const AssetImage('assets/risen.jpg') ||
+              widget.image == const AssetImage('assets/logo.png');
+        }
+        return false;
+      }, skipOffstage: false),
+      findsOneWidget,
+    );
+
+    expect(find.byType(PasswordFormField), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.bySubtype<FilledButton>(),
+        matching: find.text('تسجيل الدخول'),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.bySubtype<FilledButton>(),
+        matching: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
+      ),
+      authVariant.currentValue != AuthenticationVariantEnum.password
+          ? findsOneWidget
+          : findsNothing,
+    );
+    expect(
+      find.descendant(
+        of: find.ancestor(
+          of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
+          matching: find.bySubtype<FilledButton>(),
+        ),
+        matching: find.byIcon(Symbols.fingerprint),
+      ),
+      authVariant.currentValue != AuthenticationVariantEnum.password
+          ? findsOneWidget
+          : findsNothing,
+    );
+  }, variant: authVariant);
+
+  testWidgets('Authenticate Screen => Authentication', (tester) async {
+    final authCompleter = Completer<bool>();
+    final widgetKey = GlobalKey();
+
+    when(
+      LocalAuthService.I.authenticate(),
+    ).thenAnswer((_) async => authCompleter.future);
+
+    await tester.pumpWidgetBuilder(
+      SizedBox.fromSize(
+        size: size,
+        child: Builder(
+          builder: (context) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(size: size),
+              child: AuthenticateScreen(key: widgetKey),
+            );
+          },
+        ),
+      ),
+      wrapper: materialAppWrapper(),
+    );
+    await tester.pumpAndSettle();
+
+    verify(LocalAuthService.I.canCheckBiometrics());
+
+    if (authVariant.currentValue == AuthenticationVariantEnum.password) {
+      await tester.enterText(find.byType(PasswordFormField), 'wrong password');
+      await tester.tap(find.bySubtype<FilledButton>());
+
       await tester.pumpAndSettle();
 
       expect(
-        find.byElementPredicate(
-          (e) {
-            final Widget widget = e.widget;
-            if (widget is Image) {
-              return widget.image == const AssetImage('assets/holyweek.jpeg') ||
-                  widget.image == const AssetImage('assets/risen.jpg') ||
-                  widget.image == const AssetImage('assets/Logo.png');
-            }
-            return false;
-          },
-          skipOffstage: false,
+        find.descendant(
+          of: find.bySubtype<AlertDialog>(),
+          matching: find.text('كلمة سر خاطئة!'),
         ),
         findsOneWidget,
       );
 
-      expect(find.byType(PasswordFormField), findsOneWidget);
-      expect(
-        find.descendant(
-          of: find.bySubtype<FilledButton>(),
-          matching: find.text('تسجيل الدخول'),
+      Navigator.of(widgetKey.currentContext!).pop();
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(PasswordFormField), r'password\1234');
+      await tester.tap(find.bySubtype<FilledButton>());
+
+      await tester.pumpAndSettle();
+
+      verifyInOrder([
+        LocalAuthService.I.verifyPassword(
+          email: _fakeUser.email,
+          password: testPassword,
+          storedPasswordHash: testPasswordHash,
         ),
-        findsOneWidget,
-      );
-      expect(
-        find.descendant(
-          of: find.bySubtype<FilledButton>(),
-          matching: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-        ),
-        authVariant.currentValue != AuthenticationVariantEnum.password
-            ? findsOneWidget
-            : findsNothing,
-      );
-      expect(
+        LocalAuthService.I.resetAuthState(),
+      ]);
+      verifyNever(LocalAuthService.I.authenticate());
+    } else {
+      verify(LocalAuthService.I.authenticate());
+
+      authCompleter.complete(false);
+
+      await tester.pumpAndSettle();
+
+      verifyNever(LocalAuthService.I.resetAuthState());
+
+      final authCompleter2 = Completer<bool>();
+
+      when(
+        LocalAuthService.I.authenticate(),
+      ).thenAnswer((_) async => authCompleter2.future);
+
+      await tester.tap(
         find.descendant(
           of: find.ancestor(
             of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
@@ -115,253 +192,142 @@ void main() {
           ),
           matching: find.byIcon(Symbols.fingerprint),
         ),
-        authVariant.currentValue != AuthenticationVariantEnum.password
-            ? findsOneWidget
-            : findsNothing,
       );
-    },
-    variant: authVariant,
-  );
 
-  testWidgets(
-    'Authenticate Screen => Authentication',
-    (tester) async {
-      final authCompleter = Completer<bool>();
-      final widgetKey = GlobalKey();
+      authCompleter2.complete(true);
 
-      when(LocalAuthService.I.authenticate())
-          .thenAnswer((_) async => authCompleter.future);
-
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Builder(
-            builder: (context) {
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(size: size),
-                child: AuthenticateScreen(key: widgetKey),
-              );
-            },
-          ),
-        ),
-        wrapper: materialAppWrapper(),
-      );
       await tester.pumpAndSettle();
 
-      verify(LocalAuthService.I.canCheckBiometrics());
+      verify(LocalAuthService.I.resetAuthState());
+    }
+  }, variant: authVariant);
 
-      if (authVariant.currentValue == AuthenticationVariantEnum.password) {
-        await tester.enterText(
-          find.byType(PasswordFormField),
-          'wrong password',
-        );
-        await tester.tap(find.bySubtype<FilledButton>());
+  group('Authenticate Screen => Route =>', () {
+    test('No Signed In User', () async {
+      initGlobalProviderContainer([_setUpAuthBloc(), _setUpLocalAuth()]);
 
-        await tester.pumpAndSettle();
+      expect(
+        const AuthenticateRoute().redirect(
+          MockBuildContext(),
+          MockGoRouterState(),
+        ),
+        '/login',
+      );
+    });
+    group('Signed In User =>', () {
+      test('No Person', () async {
+        initGlobalProviderContainer([
+          _setUpAuthBloc(
+            currentUser: _fakeUser,
+            currentUserData: _fakeUserData.copyWith(person: null),
+          ),
+          _setUpLocalAuth(),
+        ]);
 
         expect(
-          find.descendant(
-            of: find.bySubtype<AlertDialog>(),
-            matching: find.text('كلمة سر خاطئة!'),
+          const AuthenticateRoute().redirect(
+            MockBuildContext(),
+            MockGoRouterState(),
           ),
-          findsOneWidget,
+          isNull,
         );
+      });
 
-        Navigator.of(widgetKey.currentContext!).pop();
-        await tester.pumpAndSettle();
-
-        await tester.enterText(
-          find.byType(PasswordFormField),
-          r'password\1234',
-        );
-        await tester.tap(find.bySubtype<FilledButton>());
-
-        await tester.pumpAndSettle();
-
-        verifyInOrder([
-          LocalAuthService.I.verifyPassword(
-            email: _fakeUser.email,
-            password: testPassword,
-            storedPasswordHash: testPasswordHash,
+      test('Should Authenticate', () async {
+        initGlobalProviderContainer([
+          _setUpAuthBloc(
+            currentUser: _fakeUser,
+            currentUserData: _fakeUserData,
           ),
-          LocalAuthService.I.resetAuthState(),
+          _setUpLocalAuth(),
         ]);
-        verifyNever(LocalAuthService.I.authenticate());
-      } else {
-        verify(LocalAuthService.I.authenticate());
 
-        authCompleter.complete(false);
-
-        await tester.pumpAndSettle();
-
-        verifyNever(LocalAuthService.I.resetAuthState());
-
-        final authCompleter2 = Completer<bool>();
-
-        when(LocalAuthService.I.authenticate())
-            .thenAnswer((_) async => authCompleter2.future);
-
-        await tester.tap(
-          find.descendant(
-            of: find.ancestor(
-              of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-              matching: find.bySubtype<FilledButton>(),
-            ),
-            matching: find.byIcon(Symbols.fingerprint),
+        expect(
+          const AuthenticateRoute().redirect(
+            MockBuildContext(),
+            MockGoRouterState(),
           ),
+          null,
+        );
+      });
+
+      test('Should not Authenticate (with redirection)', () async {
+        initGlobalProviderContainer([
+          _setUpAuthBloc(
+            currentUser: _fakeUser,
+            currentUserData: _fakeUserData,
+          ),
+          _setUpLocalAuth(shouldAuthenticate: false),
+        ]);
+
+        expect(
+          const AuthenticateRoute(
+            next: '/next',
+          ).redirect(MockBuildContext(), MockGoRouterState()),
+          '/next',
+        );
+      });
+
+      test('Should not Authenticate (without redirection)', () async {
+        initGlobalProviderContainer([
+          _setUpAuthBloc(
+            currentUser: _fakeUser,
+            currentUserData: _fakeUserData,
+          ),
+          _setUpLocalAuth(shouldAuthenticate: false),
+        ]);
+
+        final mockGoRouterState = MockGoRouterState();
+        when(mockGoRouterState.uri).thenReturn(Uri());
+
+        expect(
+          const AuthenticateRoute().redirect(
+            MockBuildContext(),
+            mockGoRouterState,
+          ),
+          '/',
+        );
+      });
+
+      test('Should authenticate for path', () async {
+        initGlobalProviderContainer([
+          _setUpAuthBloc(
+            currentUser: _fakeUser,
+            currentUserData: _fakeUserData,
+          ),
+          _setUpLocalAuth(shouldAuthenticate: false),
+        ]);
+
+        expect(
+          const AuthenticateRoute(
+            next: '/test',
+          ).redirect(MockBuildContext(), MockGoRouterState()),
+          '/test',
         );
 
-        authCompleter2.complete(true);
+        when(
+          LocalAuthService.I.shouldAuthenticateForPath('/test'),
+        ).thenReturn(true);
 
-        await tester.pumpAndSettle();
+        expect(
+          const AuthenticateRoute(
+            next: '/test',
+          ).redirect(MockBuildContext(), MockGoRouterState()),
+          null,
+        );
+        when(
+          LocalAuthService.I.shouldAuthenticateForPath('/test'),
+        ).thenReturn(false);
 
-        verify(LocalAuthService.I.resetAuthState());
-      }
-    },
-    variant: authVariant,
-  );
-
-  group(
-    'Authenticate Screen => Route =>',
-    () {
-      test(
-        'No Signed In User',
-        () async {
-          initGlobalProviderContainer([
-            _setUpAuthBloc(),
-            _setUpLocalAuth(),
-          ]);
-
-          expect(
-            const AuthenticateRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
-            '/login',
-          );
-        },
-      );
-      group(
-        'Signed In User =>',
-        () {
-          test(
-            'No Person',
-            () async {
-              initGlobalProviderContainer([
-                _setUpAuthBloc(
-                  currentUser: _fakeUser,
-                  currentUserData: _fakeUserData.copyWith(person: null),
-                ),
-                _setUpLocalAuth(),
-              ]);
-
-              expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                isNull,
-              );
-            },
-          );
-
-          test(
-            'Should Authenticate',
-            () async {
-              initGlobalProviderContainer(
-                [
-                  _setUpAuthBloc(
-                    currentUser: _fakeUser,
-                    currentUserData: _fakeUserData,
-                  ),
-                  _setUpLocalAuth(),
-                ],
-              );
-
-              expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                null,
-              );
-            },
-          );
-
-          test(
-            'Should not Authenticate (with redirection)',
-            () async {
-              initGlobalProviderContainer([
-                _setUpAuthBloc(
-                  currentUser: _fakeUser,
-                  currentUserData: _fakeUserData,
-                ),
-                _setUpLocalAuth(shouldAuthenticate: false),
-              ]);
-
-              expect(
-                const AuthenticateRoute(next: '/next')
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                '/next',
-              );
-            },
-          );
-
-          test(
-            'Should not Authenticate (without redirection)',
-            () async {
-              initGlobalProviderContainer([
-                _setUpAuthBloc(
-                  currentUser: _fakeUser,
-                  currentUserData: _fakeUserData,
-                ),
-                _setUpLocalAuth(shouldAuthenticate: false),
-              ]);
-
-              final mockGoRouterState = MockGoRouterState();
-              when(mockGoRouterState.uri).thenReturn(Uri());
-
-              expect(
-                const AuthenticateRoute()
-                    .redirect(MockBuildContext(), mockGoRouterState),
-                '/',
-              );
-            },
-          );
-
-          test(
-            'Should authenticate for path',
-            () async {
-              initGlobalProviderContainer([
-                _setUpAuthBloc(
-                  currentUser: _fakeUser,
-                  currentUserData: _fakeUserData,
-                ),
-                _setUpLocalAuth(shouldAuthenticate: false),
-              ]);
-
-              expect(
-                const AuthenticateRoute(next: '/test')
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                '/test',
-              );
-
-              when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
-                  .thenReturn(true);
-
-              expect(
-                const AuthenticateRoute(next: '/test')
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                null,
-              );
-              when(LocalAuthService.I.shouldAuthenticateForPath('/test'))
-                  .thenReturn(false);
-
-              expect(
-                const AuthenticateRoute(next: '/test')
-                    .redirect(MockBuildContext(), MockGoRouterState()),
-                '/test',
-              );
-            },
-          );
-        },
-      );
-    },
-  );
+        expect(
+          const AuthenticateRoute(
+            next: '/test',
+          ).redirect(MockBuildContext(), MockGoRouterState()),
+          '/test',
+        );
+      });
+    });
+  });
 }
 
 Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
@@ -371,10 +337,7 @@ Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
   return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
 }
 
-Override _setUpAuthBloc({
-  AuthUser? currentUser,
-  User? currentUserData,
-}) {
+Override _setUpAuthBloc({AuthUser? currentUser, User? currentUserData}) {
   final mockAuthBloc = MockAuthBloc();
 
   when(mockAuthBloc.isSignedIn).thenReturn(currentUser != null);
@@ -435,8 +398,9 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
   Override _setUpLocalAuthService(AuthenticationVariantEnum value) {
     final mockLocalAuthService = MockLocalAuthService();
 
-    when(mockLocalAuthService.canCheckBiometrics())
-        .thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
+    when(
+      mockLocalAuthService.canCheckBiometrics(),
+    ).thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
     when(mockLocalAuthService.authenticate()).thenAnswer((_) async => true);
     when(
       mockLocalAuthService.verifyPassword(

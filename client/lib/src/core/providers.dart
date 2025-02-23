@@ -52,26 +52,21 @@ final hiveProvider = Provider<HiveInterface>((ref) {
   return Hive;
 });
 
-final encryptionServiceProvider =
-    Provider<EncryptionService>((ref) => EncryptionServiceImpl());
+final encryptionServiceProvider = Provider<EncryptionService>(
+  (ref) => EncryptionServiceImpl(),
+);
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-  (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
-);
+      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+    );
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) => DBGraphQLClient(
     defaultPolicies: DefaultPolicies(
-      query: Policies(
-        fetch: FetchPolicy.cacheAndNetwork,
-      ),
-      watchQuery: Policies(
-        fetch: FetchPolicy.cacheAndNetwork,
-      ),
-      subscribe: Policies(
-        fetch: FetchPolicy.cacheAndNetwork,
-      ),
+      query: Policies(fetch: FetchPolicy.cacheAndNetwork),
+      watchQuery: Policies(fetch: FetchPolicy.cacheAndNetwork),
+      subscribe: Policies(fetch: FetchPolicy.cacheAndNetwork),
     ),
     link: Link.concat(
       const LoggingLink(),
@@ -80,15 +75,12 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
             .watch(authStorageProvider)
             .getAuthDataFromCache()
             .asStream()
-            .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
-          (u) => u?.idToken,
-        ),
+            .concatWith([ref.watch(authRepositoryProvider).userChanges])
+            .map((u) => u?.idToken),
         url: ref.watch(secretsServiceProvider).hasuraServer,
       ),
     ),
-    cache: GraphQLCache(
-      store: ref.watch(graphQLCacheStore),
-    ),
+    cache: GraphQLCache(store: ref.watch(graphQLCacheStore)),
     connectivityStream:
         ref.watch(connectivityServiceProvider).connectivityStream,
   ),
@@ -98,42 +90,39 @@ final graphQLCacheStore = Provider<HiveStore>(
   (ref) => HiveStore(ref.watch(hiveProvider).box('GQLCache')),
 );
 
-final connectivityPluginProvider =
-    Provider<Connectivity>((ref) => Connectivity());
-
-final connectivityServiceProvider = Provider<ConnectivityService>(
-  (ref) {
-    final service = ConnectivityService(
-      connectivityPlugin: ref.watch(connectivityPluginProvider),
-      dio: ref.watch(dioProvider),
-      secretsService: ref.watch(secretsServiceProvider),
-    );
-
-    ref.onDispose(service.dispose);
-
-    return service;
-  },
+final connectivityPluginProvider = Provider<Connectivity>(
+  (ref) => Connectivity(),
 );
+
+final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
+  final service = ConnectivityService(
+    connectivityPlugin: ref.watch(connectivityPluginProvider),
+    dio: ref.watch(dioProvider),
+    secretsService: ref.watch(secretsServiceProvider),
+  );
+
+  ref.onDispose(service.dispose);
+
+  return service;
+});
 
 final secretsServiceProvider = Provider<SecretsService>(
   (ref) => SecretsServiceImpl(),
 );
 
-final authBlocProvider = Provider<AuthBloc>(
-  (ref) {
-    final authBloc = AuthBloc(
-      authRepository: ref.watch(authRepositoryProvider),
-      authStorage: ref.watch(authStorageProvider),
-      databaseService: ref.watch(databaseServiceProvider),
-      connectivityStream:
-          ref.watch(connectivityServiceProvider).connectivityStream,
-    );
+final authBlocProvider = Provider<AuthBloc>((ref) {
+  final authBloc = AuthBloc(
+    authRepository: ref.watch(authRepositoryProvider),
+    authStorage: ref.watch(authStorageProvider),
+    databaseService: ref.watch(databaseServiceProvider),
+    connectivityStream:
+        ref.watch(connectivityServiceProvider).connectivityStream,
+  );
 
-    ref.onDispose(authBloc.close);
+  ref.onDispose(authBloc.close);
 
-    return authBloc;
-  },
-);
+  return authBloc;
+});
 
 final loggingServiceProvider = Provider<LoggingService>(
   (ref) => LoggingService(),
@@ -146,8 +135,9 @@ final userSettingsServiceProvider = Provider<UserSettingsService>(
 final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
-final firebaseFunctionsProvider =
-    Provider((_) => FirebaseFunctions.instanceFor(region: 'europe-west6'));
+final firebaseFunctionsProvider = Provider(
+  (_) => FirebaseFunctions.instanceFor(region: 'europe-west6'),
+);
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
 
 final dioProvider = Provider((_) => Dio());
@@ -158,17 +148,19 @@ final functionsServiceProvider = Provider<FunctionsService>(
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => FlutterSecureStorage(
-    aOptions: ref.watch(currentPlatformServiceProvider).isAndroid
-        ? AndroidOptions(
-            sharedPreferencesName: 'secure_storage',
-            encryptedSharedPreferences: ref
-                    .read(deviceInfoServiceProvider)
-                    .androidDeviceInfo!
-                    .version
-                    .sdkInt >=
-                23,
-          )
-        : AndroidOptions.defaultOptions,
+    aOptions:
+        ref.watch(currentPlatformServiceProvider).isAndroid
+            ? AndroidOptions(
+              sharedPreferencesName: 'secure_storage',
+              encryptedSharedPreferences:
+                  ref
+                      .read(deviceInfoServiceProvider)
+                      .androidDeviceInfo!
+                      .version
+                      .sdkInt >=
+                  23,
+            )
+            : AndroidOptions.defaultOptions,
     webOptions: const WebOptions(
       dbName: 'secure_storage',
       publicKey: 'secure_storage_pub_key',
@@ -178,27 +170,25 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
 
 final localNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>(
-  (ref) => FlutterLocalNotificationsPlugin(),
-);
-
-final notificationsServiceProvider = Provider<NotificationsService>(
-  (ref) {
-    final notificationsService = NotificationsService(
-      localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
-      firebaseMessaging: ref.watch(firebaseMessagingProvider),
-      authBloc: ref.watch(authBlocProvider),
-      userSettingsService: ref.watch(userSettingsServiceProvider),
-      functionsService: ref.watch(functionsServiceProvider),
-      storage: ref.watch(notificationsStorageProvider),
-      onForegroundMessageStream: FirebaseMessaging.onMessage,
-      onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
+      (ref) => FlutterLocalNotificationsPlugin(),
     );
 
-    ref.onDispose(notificationsService.dispose);
+final notificationsServiceProvider = Provider<NotificationsService>((ref) {
+  final notificationsService = NotificationsService(
+    localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
+    firebaseMessaging: ref.watch(firebaseMessagingProvider),
+    authBloc: ref.watch(authBlocProvider),
+    userSettingsService: ref.watch(userSettingsServiceProvider),
+    functionsService: ref.watch(functionsServiceProvider),
+    storage: ref.watch(notificationsStorageProvider),
+    onForegroundMessageStream: FirebaseMessaging.onMessage,
+    onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
+  );
 
-    return notificationsService;
-  },
-);
+  ref.onDispose(notificationsService.dispose);
+
+  return notificationsService;
+});
 
 final notificationsStorageProvider = Provider<NotificationsStorage>(
   (ref) => NotificationsStorageImpl(ref.watch(hiveProvider), 'Notifications'),
@@ -210,53 +200,47 @@ final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
   ),
 );
 
-final localAuthServiceProvider = Provider<LocalAuthService>(
-  (ref) {
-    final localAuthBloc = LocalAuthService(
-      localAuthPlugin: ref.watch(localAuthPluginProvider),
-      notificationService: ref.watch(notificationsServiceProvider),
-    );
+final localAuthServiceProvider = Provider<LocalAuthService>((ref) {
+  final localAuthBloc = LocalAuthService(
+    localAuthPlugin: ref.watch(localAuthPluginProvider),
+    notificationService: ref.watch(notificationsServiceProvider),
+  );
 
-    ref.onDispose(localAuthBloc.dispose);
+  ref.onDispose(localAuthBloc.dispose);
 
-    return localAuthBloc;
-  },
-);
+  return localAuthBloc;
+});
 
 final localAuthPluginProvider = Provider<LocalAuthentication>(
   (ref) => LocalAuthentication(),
 );
 
-final userPersistenceServiceProvider = Provider<UserPersistenceService>(
-  (ref) {
-    final userPersistenceService = UserPersistenceService(
-      auth: ref.watch(authBlocProvider),
-      connectivityService: ref.watch(connectivityServiceProvider),
-      firebaseDatabase: ref.watch(firebaseDatabaseProvider),
-    );
+final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
+  final userPersistenceService = UserPersistenceService(
+    auth: ref.watch(authBlocProvider),
+    connectivityService: ref.watch(connectivityServiceProvider),
+    firebaseDatabase: ref.watch(firebaseDatabaseProvider),
+  );
 
-    ref.onDispose(userPersistenceService.dispose);
+  ref.onDispose(userPersistenceService.dispose);
 
-    return userPersistenceService;
-  },
-);
+  return userPersistenceService;
+});
 
-final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>(
-  (ref) {
-    final goRouterRefreshStream = GoRouterRefreshStream(
-      Rx.combineLatest2(
-        ref.watch(authBlocProvider).stream,
-        ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
-        //Just notify when any stream emits
-        (_, __) => Object(),
-      ),
-    );
+final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
+  final goRouterRefreshStream = GoRouterRefreshStream(
+    Rx.combineLatest2(
+      ref.watch(authBlocProvider).stream,
+      ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
+      //Just notify when any stream emits
+      (_, __) => Object(),
+    ),
+  );
 
-    ref.onDispose(goRouterRefreshStream.dispose);
+  ref.onDispose(goRouterRefreshStream.dispose);
 
-    return goRouterRefreshStream;
-  },
-);
+  return goRouterRefreshStream;
+});
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
   (ref) => ViewableObjectService(
@@ -265,21 +249,19 @@ final viewableObjectServiceProvider = Provider<ViewableObjectService>(
   ),
 );
 
-final baseCacheManagerProvider = Provider<BaseCacheManager>(
-  (ref) {
-    final cacheManager = CacheManager(
-      Config(
-        'cachedImages',
-        maxNrOfCacheObjects: 500,
-        stalePeriod: const Duration(days: 365),
-      ),
-    );
+final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
+  final cacheManager = CacheManager(
+    Config(
+      'cachedImages',
+      maxNrOfCacheObjects: 500,
+      stalePeriod: const Duration(days: 365),
+    ),
+  );
 
-    ref.onDispose(cacheManager.dispose);
+  ref.onDispose(cacheManager.dispose);
 
-    return cacheManager;
-  },
-);
+  return cacheManager;
+});
 
 final imageUrlCacheServiceProvider = Provider<ImageUrlCacheService>(
   (ref) => ImageUrlCacheService(
@@ -304,7 +286,7 @@ final aboutAppServiceProvider = Provider<AboutAppService>(
   (ref) => AboutAppService(
     urlLauncher: ref.watch(launcherServiceProvider).launchUrl,
     version: ref.watch(packageInfoPluginProvider).version,
-    appIcon: Image.asset('assets/Logo.png', width: 50, height: 50),
+    appIcon: Image.asset('assets/logo.png', width: 50, height: 50),
     privacyPolicyUrl: Uri(),
     termsOfServiceUrl: Uri(),
     githubUrl: Uri(
@@ -322,9 +304,7 @@ final imagePickerServiceProvider = Provider<ImagePickerService>(
   ),
 );
 
-final imagePickerPluginProvider = Provider<ImagePicker>(
-  (ref) => ImagePicker(),
-);
+final imagePickerPluginProvider = Provider<ImagePicker>((ref) => ImagePicker());
 
 final imageCropperPluginProvider = Provider<ImageCropper>(
   (ref) => ImageCropper(),

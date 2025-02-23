@@ -148,7 +148,7 @@ flutter:
       fonts:
         - asset: assets/fonts/Inter-VariableFont.ttf
   assets:
-    - assets/Logo.png
+    - assets/logo.png
     - assets/google_logo.png
     - assets/risen.jpg
     - assets/holyweek.jpeg

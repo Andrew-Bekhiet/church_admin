@@ -9,10 +9,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class HomeDrawer extends StatelessWidget {
   final HomeController homeController;
 
-  const HomeDrawer({
-    required this.homeController,
-    super.key,
-  });
+  const HomeDrawer({required this.homeController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,20 +59,23 @@ class HomeDrawer extends StatelessWidget {
             HomeDrawerDestination(
               icon: const Icon(Symbols.developer_mode),
               label: const Text('gql cache'),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    final gqlClient =
-                        graphQLClientProvider.read(globalProviderContainer);
-                    return GraphqlCacheInspector(
-                      title: 'GraphQL Cache',
-                      data: (gqlClient.cache.store as HiveStore).box.toMap(),
-                      getCacheData:
-                          (gqlClient.cache.store as HiveStore).box.toMap,
-                    );
-                  },
-                ),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        final gqlClient = graphQLClientProvider.read(
+                          globalProviderContainer,
+                        );
+                        return GraphqlCacheInspector(
+                          title: 'GraphQL Cache',
+                          data:
+                              (gqlClient.cache.store as HiveStore).box.toMap(),
+                          getCacheData:
+                              (gqlClient.cache.store as HiveStore).box.toMap,
+                        );
+                      },
+                    ),
+                  ),
             ),
         ];
 
@@ -84,7 +84,7 @@ class HomeDrawer extends StatelessWidget {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/Logo.png')),
+                  image: DecorationImage(image: AssetImage('assets/logo.png')),
                 ),
                 child: SizedBox.expand(),
               ),
@@ -95,14 +95,15 @@ class HomeDrawer extends StatelessWidget {
 
                     destinations[i].onTap();
                   },
-                  children: destinations
-                      .map(
-                        (e) => NavigationDrawerDestination(
-                          icon: e.icon,
-                          label: e.label,
-                        ),
-                      )
-                      .toList(),
+                  children:
+                      destinations
+                          .map(
+                            (e) => NavigationDrawerDestination(
+                              icon: e.icon,
+                              label: e.label,
+                            ),
+                          )
+                          .toList(),
                 ),
               ),
               ListTile(
