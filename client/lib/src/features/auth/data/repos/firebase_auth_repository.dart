@@ -14,55 +14,57 @@ class FirebaseAuthRepository implements AuthRepository {
       id: e.resolver.session.id,
       email: email,
       password: password,
-      enrolledFactors: e.resolver.hints
-          .map(
-            (hint) => MultiFactorInfo(
-              id: hint.uid,
-              // TODO: support totp
-              type: MultiFactorType.phone,
-              displayName: hint.displayName,
-              phoneNumber: hint is firebase_auth.PhoneMultiFactorInfo
-                  ? hint.phoneNumber
-                  : null,
-              enrolledAt: DateTime.fromMillisecondsSinceEpoch(
-                hint.enrollmentTimestamp.round(),
-              ),
-            ),
-          )
-          .toList(),
+      enrolledFactors:
+          e.resolver.hints
+              .map(
+                (hint) => MultiFactorInfo(
+                  id: hint.uid,
+                  // TODO: support totp
+                  type: MultiFactorType.phone,
+                  displayName: hint.displayName,
+                  phoneNumber:
+                      hint is firebase_auth.PhoneMultiFactorInfo
+                          ? hint.phoneNumber
+                          : null,
+                  enrolledAt: DateTime.fromMillisecondsSinceEpoch(
+                    hint.enrollmentTimestamp.round(),
+                  ),
+                ),
+              )
+              .toList(),
     );
   }
 
   FirebaseAuthRepository({required firebase_auth.FirebaseAuth auth})
-      : _auth = auth;
+    : _auth = auth;
 
   final firebase_auth.FirebaseAuth _auth;
-
+  // On web, verify phone number must receive the same instance of MultiFactorSession
+  // because it contains a js implementation object
+  final Map<String, firebase_auth.MultiFactorSession> _pendingSessions = {};
   firebase_auth.MultiFactorResolver? _pendingMultiFactorResolver;
 
   @override
   Stream<AuthUser?> get userChanges {
-    return _auth.userChanges().asyncMap(
-      (user) async {
-        if (user == null) return null;
+    return _auth.userChanges().asyncMap((user) async {
+      if (user == null) return null;
 
-        _pendingMultiFactorResolver = null;
+      _pendingMultiFactorResolver = null;
 
-        final [enrolledFactors, idTokenResult] = await Future.wait([
-          user.multiFactor.getEnrolledFactors(),
-          user.getIdTokenResult(),
-        ]);
+      final [enrolledFactors, idTokenResult] = await Future.wait([
+        user.multiFactor.getEnrolledFactors(),
+        user.getIdTokenResult(),
+      ]);
 
-        return AuthUser(
-          uid: user.uid,
-          email: user.email!,
-          emailVerified: user.emailVerified,
-          idToken: (idTokenResult as firebase_auth.IdTokenResult?)!.token!,
-          claims: (idTokenResult as firebase_auth.IdTokenResult?)!.claims!,
-          isMultiFactorEnabled: (enrolledFactors as List).isNotEmpty,
-        );
-      },
-    );
+      return AuthUser(
+        uid: user.uid,
+        email: user.email!,
+        emailVerified: user.emailVerified,
+        idToken: (idTokenResult as firebase_auth.IdTokenResult?)!.token!,
+        claims: (idTokenResult as firebase_auth.IdTokenResult?)!.claims!,
+        isMultiFactorEnabled: (enrolledFactors as List).isNotEmpty,
+      );
+    });
   }
 
   @override
@@ -86,10 +88,7 @@ class FirebaseAuthRepository implements AuthRepository {
     required String password,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on firebase_auth.FirebaseAuthMultiFactorException catch (e, stackTrace) {
       _pendingMultiFactorResolver = e.resolver;
 
@@ -124,15 +123,15 @@ class FirebaseAuthRepository implements AuthRepository {
     try {
       final firebase_auth.MultiFactorAssertion assertion =
           switch (selectedFactor?.type ?? MultiFactorType.phone) {
-        MultiFactorType.phone =>
-          firebase_auth.PhoneMultiFactorGenerator.getAssertion(
-            firebase_auth.PhoneAuthProvider.credential(
-              verificationId: challenge.verificationId,
-              smsCode: verificationCode,
+            MultiFactorType.phone => firebase_auth
+                .PhoneMultiFactorGenerator.getAssertion(
+              firebase_auth.PhoneAuthProvider.credential(
+                verificationId: challenge.verificationId,
+                smsCode: verificationCode,
+              ),
             ),
-          ),
-        // TODO: support totp
-      };
+            // TODO: support totp
+          };
 
       if (_pendingMultiFactorResolver != null) {
         await _pendingMultiFactorResolver!.resolveSignIn(assertion);
@@ -171,6 +170,8 @@ class FirebaseAuthRepository implements AuthRepository {
     final multiFactorSession =
         await _auth.currentUser!.multiFactor.getSession();
 
+    _pendingSessions[multiFactorSession.id] = multiFactorSession;
+
     return MultiFactorSession(
       id: multiFactorSession.id,
       email: _auth.currentUser!.email!,
@@ -193,32 +194,36 @@ class FirebaseAuthRepository implements AuthRepository {
 
     final completer = Completer<MultiFactorChallenge>();
 
-    final multiFactorInfo = selectedFactor == null
-        ? null
-        : _pendingMultiFactorResolver!.hints.firstWhere(
-            (f) => f.uid == selectedFactor.id,
-          ) as firebase_auth.PhoneMultiFactorInfo;
+    final multiFactorInfo =
+        selectedFactor == null
+            ? null
+            : _pendingMultiFactorResolver!.hints.firstWhere(
+                  (f) => f.uid == selectedFactor.id,
+                )
+                as firebase_auth.PhoneMultiFactorInfo;
 
     MultiFactorChallenge? challenge;
 
     _auth.verifyPhoneNumber(
       forceResendingToken: resendToken,
       phoneNumber: phoneNumber,
-      multiFactorSession: firebase_auth.MultiFactorSession(session.id),
+      multiFactorSession: _pendingSessions[session.id],
       multiFactorInfo: multiFactorInfo,
       verificationCompleted: (credential) {
         completeMultiFactorChallenge(
-          challenge: challenge ??= MultiFactorChallenge(
-            verificationId: credential.verificationId!,
-            createdAt: DateTime.now(),
-          ),
+          challenge:
+              challenge ??= MultiFactorChallenge(
+                verificationId: credential.verificationId!,
+                createdAt: DateTime.now(),
+              ),
           verificationCode: credential.smsCode!,
           selectedFactor: selectedFactor,
         );
       },
-      verificationFailed: (e) => completer.completeError(
-        MultiFactorVerificationFailedException(e, StackTrace.current),
-      ),
+      verificationFailed:
+          (e) => completer.completeError(
+            MultiFactorVerificationFailedException(e, StackTrace.current),
+          ),
       codeSent: (verificationId, resendToken) {
         if (completer.isCompleted) {
           return;
@@ -245,6 +250,8 @@ class FirebaseAuthRepository implements AuthRepository {
         );
       },
     );
+
+    _pendingSessions.remove(session.id);
 
     return completer.future;
   }
@@ -288,11 +295,13 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void> signOut() async {
     await _auth.signOut();
     _pendingMultiFactorResolver = null;
+    _pendingSessions.clear();
   }
 
   @override
   Future<void> dispose() async {
     _pendingMultiFactorResolver = null;
+    _pendingSessions.clear();
     return SynchronousFuture(null);
   }
 }
