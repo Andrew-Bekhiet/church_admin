@@ -6,6 +6,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -243,10 +244,13 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
 });
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
-  (ref) => ViewableObjectService(
-    router: $appRouter,
-    userSettingsService: ref.watch(userSettingsServiceProvider),
-  ),
+  (ref) =>
+      kIsWeb
+          ? throw Exception('Web version does not support viewing data')
+          : ViewableObjectService(
+            router: $appRouter,
+            userSettingsService: ref.watch(userSettingsServiceProvider),
+          ),
 );
 
 final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {

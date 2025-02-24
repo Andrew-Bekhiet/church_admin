@@ -19,9 +19,9 @@ class UnapprovedUserRoute extends GoRouteData {
 
     switch (authState) {
       case AuthAuthenticated(
-          userData: User(permissions: PermissionsSet(approved: true))
-        ):
-        return const HomeScreenRoute().location;
+        userData: User(permissions: PermissionsSet(approved: true)),
+      ):
+        return const HomeScreenWebRoute().location;
 
       case AuthUnauthenticated():
         return const LoginRoute().location;

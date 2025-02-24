@@ -20,8 +20,8 @@ class MultiFactorLoginRoute extends GoRouteData {
 
     switch (authState) {
       case AuthAuthenticated(
-          authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false)
-        ):
+        authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false),
+      ):
       case AuthMultiFactorChallengeInProgress():
         return null;
 
@@ -29,7 +29,7 @@ class MultiFactorLoginRoute extends GoRouteData {
         return const LoginRoute().location;
 
       default:
-        return const HomeScreenRoute().location;
+        return const HomeScreenWebRoute().location;
     }
   }
 }

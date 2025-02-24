@@ -22,7 +22,7 @@ class EmailVerificationRoute extends GoRouteData {
         return const LoginRoute().location;
 
       case AuthAuthenticated(authUser: AuthUser(emailVerified: true)):
-        return const HomeScreenRoute().location;
+        return const HomeScreenWebRoute().location;
 
       default:
         return null;

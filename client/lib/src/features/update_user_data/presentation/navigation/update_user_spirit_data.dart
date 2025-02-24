@@ -26,7 +26,7 @@ class UpdateUserSpiritDataRoute extends GoRouteData {
 
       case AuthAuthenticated(userData: User(:final person))
           when person?.spiritDataUpToDate() ?? false:
-        return const HomeScreenRoute().location;
+        return const HomeScreenWebRoute().location;
 
       case _:
         return null;

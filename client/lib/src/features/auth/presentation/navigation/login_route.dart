@@ -20,7 +20,7 @@ class LoginRoute extends GoRouteData {
         return null;
 
       default:
-        return const HomeScreenRoute().location;
+        return const HomeScreenWebRoute().location;
     }
   }
 }
