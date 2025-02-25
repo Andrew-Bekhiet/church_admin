@@ -4,6 +4,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
+abstract final class AuthenticateScreenKeys {
+  static const Key passwordFieldKey = Key('password_text_field');
+  static const Key biometricsButtonKey = Key('biometrics_button');
+  static const Key submitButtonKey = Key('submit_button');
+}
+
 class AuthenticateScreen extends StatefulWidget {
   final String? next;
 
@@ -49,6 +55,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
             padding: const EdgeInsets.all(12),
             children: <Widget>[
               PasswordFormField(
+                key: AuthenticateScreenKeys.passwordFieldKey,
                 onFieldSubmitted: _submit,
                 controller: _passwordText,
                 decoration: const InputDecoration(labelText: 'كلمة السر'),
@@ -58,6 +65,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 textInputAction: TextInputAction.done,
               ),
               FilledButton(
+                key: AuthenticateScreenKeys.submitButtonKey,
                 onPressed: () => _submit(_passwordText.text),
                 child: const Text('تسجيل الدخول'),
               ),
@@ -66,6 +74,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 builder: (context, canCheckBiometricsData) {
                   if (canCheckBiometricsData.data ?? false) {
                     return FilledButton.tonalIcon(
+                      key: AuthenticateScreenKeys.biometricsButtonKey,
                       style: themeData.filledTonalButtonStyleWorkaround,
                       icon: const Icon(Symbols.fingerprint),
                       label: const Text(

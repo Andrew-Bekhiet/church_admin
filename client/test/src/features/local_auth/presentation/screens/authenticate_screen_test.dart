@@ -9,10 +9,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_device_info.dart';
 import '../../../../utils.dart';
@@ -81,35 +81,19 @@ void main() {
       findsOneWidget,
     );
 
-    expect(find.byType(PasswordFormField), findsOneWidget);
-    expect(
-      find.descendant(
-        of: find.bySubtype<FilledButton>(),
-        matching: find.text('تسجيل الدخول'),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: find.bySubtype<FilledButton>(),
-        matching: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-      ),
-      authVariant.currentValue != AuthenticationVariantEnum.password
-          ? findsOneWidget
-          : findsNothing,
-    );
-    expect(
-      find.descendant(
-        of: find.ancestor(
-          of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-          matching: find.bySubtype<FilledButton>(),
-        ),
-        matching: find.byIcon(Symbols.fingerprint),
-      ),
-      authVariant.currentValue != AuthenticationVariantEnum.password
-          ? findsOneWidget
-          : findsNothing,
-    );
+    spotKey(
+      AuthenticateScreenKeys.passwordFieldKey,
+    ).spot<PasswordFormField>().existsOnce();
+
+    spotKey(AuthenticateScreenKeys.submitButtonKey).existsOnce();
+
+    spotKey(AuthenticateScreenKeys.biometricsButtonKey)
+        .spotFinder(find.bySubtype<FilledButton>())
+        .existsExactlyNTimes(
+          authVariant.currentValue == AuthenticationVariantEnum.password
+              ? 0
+              : 1,
+        );
   }, variant: authVariant);
 
   testWidgets('Authenticate Screen => Authentication', (tester) async {
@@ -139,24 +123,24 @@ void main() {
     verify(LocalAuthService.I.canCheckBiometrics());
 
     if (authVariant.currentValue == AuthenticationVariantEnum.password) {
-      await tester.enterText(find.byType(PasswordFormField), 'wrong password');
-      await tester.tap(find.bySubtype<FilledButton>());
+      await act.enterText(
+        spotKey(AuthenticateScreenKeys.passwordFieldKey),
+        'wrong password',
+      );
+      await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
 
       await tester.pumpAndSettle();
 
-      expect(
-        find.descendant(
-          of: find.bySubtype<AlertDialog>(),
-          matching: find.text('كلمة سر خاطئة!'),
-        ),
-        findsOneWidget,
-      );
+      spot<AlertDialog>().spotText('كلمة سر خاطئة!').existsOnce();
 
       Navigator.of(widgetKey.currentContext!).pop();
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byType(PasswordFormField), r'password\1234');
-      await tester.tap(find.bySubtype<FilledButton>());
+      await act.enterText(
+        spotKey(AuthenticateScreenKeys.passwordFieldKey),
+        testPassword,
+      );
+      await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
 
       await tester.pumpAndSettle();
 
@@ -184,15 +168,7 @@ void main() {
         LocalAuthService.I.authenticate(),
       ).thenAnswer((_) async => authCompleter2.future);
 
-      await tester.tap(
-        find.descendant(
-          of: find.ancestor(
-            of: find.text('إعادة المحاولة عن طريق بصمة الاصبع/الوجه'),
-            matching: find.bySubtype<FilledButton>(),
-          ),
-          matching: find.byIcon(Symbols.fingerprint),
-        ),
-      );
+      await act.tap(spotKey(AuthenticateScreenKeys.biometricsButtonKey));
 
       authCompleter2.complete(true);
 
