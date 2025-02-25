@@ -31,17 +31,12 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: size.width - 16,
+        toolbarHeight: size.width,
         leading: widget.next != null ? const BackButton() : null,
         flexibleSpace: FlexibleSpaceBar(
-          expandedTitleScale: 2,
-          background: Image.asset(
-            _getAssetImage(),
-            alignment: Alignment.topCenter,
-            fit: BoxFit.scaleDown,
+          background: SafeArea(
+            child: Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
           ),
-          centerTitle: true,
-          title: const Text('كنيسة السيدة العذراء مريم'),
         ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(35)),
@@ -74,7 +69,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                       style: themeData.filledTonalButtonStyleWorkaround,
                       icon: const Icon(Symbols.fingerprint),
                       label: const Text(
-                        'إعادة المحاولة عن طريق بصمة الاصبع/الوجه',
+                        'إعادة المحاولة عن طريق البصمة',
+                        textAlign: TextAlign.center,
                       ),
                       onPressed: _authenticate,
                     );
