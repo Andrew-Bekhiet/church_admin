@@ -10,3 +10,9 @@ ENV HASURA_GRAPHQL_EVENTS_FETCH_INTERVAL="3600000"
 ENV HASURA_FF_NAMING_CONVENTION_SEP_2023="True"
 
 EXPOSE ${HASURA_GRAPHQL_SERVER_PORT}
+
+RUN apt-get install -y curl gnupg2 \
+    && echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+    && curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+    && apt-get update \
+    && apt-get install -y postgresql-client-17
