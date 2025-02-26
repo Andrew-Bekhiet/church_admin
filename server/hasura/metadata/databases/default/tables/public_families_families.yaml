@@ -2,38 +2,38 @@ table:
   name: families_families
   schema: public
 object_relationships:
-  - name: innerFamily
+  - name: child
     using:
-      foreign_key_constraint_on: inner_family_id
-  - name: outerFamily
+      foreign_key_constraint_on: child_family_id
+  - name: parent
     using:
-      foreign_key_constraint_on: outer_family_id
+      foreign_key_constraint_on: parent_family_id
 insert_permissions:
   - role: user
     permission:
       check:
         _and:
-          - outerFamily:
+          - parent:
               isUserAllowedToWrite:
                 _eq: true
-          - innerFamily:
+          - child:
               isUserAllowedToWrite:
                 _eq: true
       columns:
-        - inner_family_id
-        - outer_family_id
+        - child_family_id
+        - parent_family_id
 select_permissions:
   - role: user
     permission:
       columns:
-        - outer_family_id
-        - inner_family_id
+        - parent_family_id
+        - child_family_id
       filter:
         _and:
-          - outerFamily:
+          - parent:
               isUserAllowedToRead:
                 _eq: true
-          - innerFamily:
+          - child:
               isUserAllowedToRead:
                 _eq: true
       limit: 200
@@ -41,22 +41,22 @@ update_permissions:
   - role: user
     permission:
       columns:
-        - outer_family_id
-        - inner_family_id
+        - parent_family_id
+        - child_family_id
       filter:
         _and:
-          - outerFamily:
+          - parent:
               isUserAllowedToWrite:
                 _eq: true
-          - innerFamily:
+          - child:
               isUserAllowedToWrite:
                 _eq: true
       check:
         _and:
-          - outerFamily:
+          - parent:
               isUserAllowedToWrite:
                 _eq: true
-          - innerFamily:
+          - child:
               isUserAllowedToWrite:
                 _eq: true
 delete_permissions:
@@ -64,9 +64,9 @@ delete_permissions:
     permission:
       filter:
         _and:
-          - outerFamily:
+          - parent:
               isUserAllowedToWrite:
                 _eq: true
-          - innerFamily:
+          - child:
               isUserAllowedToWrite:
                 _eq: true

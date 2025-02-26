@@ -1,6 +1,26 @@
 table:
   name: streets
   schema: public
+object_relationships:
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
+array_relationships:
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
 computed_fields:
   - name: areas
     definition:
@@ -25,12 +45,6 @@ computed_fields:
       function:
         name: user_allowed_to_write_street
         schema: public
-      session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_street_last_edit
-        schema: history
       session_argument: hasura_session
   - name: persons
     definition:
@@ -58,13 +72,12 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - blurhash
         - color
         - id
         - line
         - name
         - photo_updated_at
-      computed_fields:
-        - lastEdit
       filter:
         isUserAllowedToRead:
           _eq: true

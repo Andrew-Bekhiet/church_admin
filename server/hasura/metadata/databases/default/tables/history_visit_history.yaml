@@ -2,31 +2,45 @@ table:
   name: visit_history
   schema: history
 object_relationships:
-  - name: person
-    using:
-      foreign_key_constraint_on: person_id
   - name: user
     using:
       foreign_key_constraint_on: recorded_by
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_visit
+        schema: history
+      session_argument: hasura_session
+  - name: isUserAllowedToWrite
+    definition:
+      function:
+        name: user_allowed_to_write_visit
+        schema: history
+      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
       check:
-        person:
-          isUserAllowedToWrite:
-            _eq: true
+        isUserAllowedToWrite:
+          _eq: true
+      set:
+        recorded_by: x-hasura-User-Id
       columns:
-        - person_id
+        - record_id
+        - table
         - time
+    comment: ""
 select_permissions:
   - role: user
     permission:
       columns:
-        - person_id
-        - time
+        - record_id
         - recorded_by
+        - table
+        - time
+        - visit_id
       filter:
-        person:
-          isUserAllowedToRead:
-            _eq: true
+        isUserAllowedToRead:
+          _eq: true
       allow_aggregations: true

@@ -1,0 +1,38 @@
+table:
+  name: hobbies
+  schema: public
+array_relationships:
+  - name: persons
+    using:
+      foreign_key_constraint_on:
+        column: hobby_id
+        table:
+          name: persons_hobbies
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - color
+        - name
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - name
+        - id
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - color
+        - name
+      filter: {}
+      check: {}
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}

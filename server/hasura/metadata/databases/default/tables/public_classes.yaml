@@ -2,6 +2,15 @@ table:
   name: classes
   schema: public
 object_relationships:
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
   - name: service
     using:
       foreign_key_constraint_on: service_id
@@ -9,6 +18,17 @@ object_relationships:
     using:
       foreign_key_constraint_on: service_study_year
 array_relationships:
+  - name: adminUsers
+    using:
+      manual_configuration:
+        column_mapping:
+          service_gender: service_gender
+          service_id: admin_on_service
+          service_study_year: service_study_year
+        insertion_order: null
+        remote_table:
+          name: users_admin_on
+          schema: auth
   - name: attendanceDaysConstraints
     using:
       manual_configuration:
@@ -30,6 +50,15 @@ array_relationships:
         insertion_order: null
         remote_table:
           name: attendance_history
+          schema: history
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
           schema: history
 computed_fields:
   - name: isUserAllowedToRead
@@ -54,6 +83,9 @@ insert_permissions:
       columns:
         - color
         - name
+        - service_gender
+        - service_id
+        - service_study_year
 select_permissions:
   - role: user
     permission:
@@ -62,6 +94,7 @@ select_permissions:
         - id
         - name
         - photo_updated_at
+        - blurhash
         - service_id
         - service_study_year
         - service_gender
@@ -76,6 +109,7 @@ update_permissions:
         - color
         - name
         - photo_updated_at
+        - blurhash
         - service_id
         - service_study_year
         - service_gender

@@ -2,18 +2,36 @@ table:
   name: families
   schema: public
 object_relationships:
-  - name: family
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
+array_relationships:
+  - name: children
     using:
       foreign_key_constraint_on:
-        column: inner_family_id
+        column: parent_family_id
         table:
           name: families_families
           schema: public
-array_relationships:
-  - name: families
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
+  - name: parents
     using:
       foreign_key_constraint_on:
-        column: outer_family_id
+        column: child_family_id
         table:
           name: families_families
           schema: public
@@ -52,12 +70,6 @@ computed_fields:
         name: user_allowed_to_write_family
         schema: public
       session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_family_last_edit
-        schema: history
-      session_argument: hasura_session
   - name: streets
     definition:
       function:
@@ -82,14 +94,13 @@ select_permissions:
     permission:
       columns:
         - address
+        - blurhash
         - color
         - geolocation
         - id
         - name
         - notes
         - photo_updated_at
-      computed_fields:
-        - lastEdit
       filter:
         _and:
           - isUserAllowedToRead:

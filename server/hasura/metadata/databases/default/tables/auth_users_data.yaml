@@ -2,6 +2,15 @@ table:
   name: users_data
   schema: auth
 object_relationships:
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          uid: recorded_by
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
   - name: person
     using:
       foreign_key_constraint_on:
@@ -37,12 +46,6 @@ computed_fields:
         name: user_allowed_to_read_user
         schema: public
       session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_user_last_edit
-        schema: history
-      session_argument: hasura_session
 select_permissions:
   - role: user
     permission:
@@ -50,9 +53,8 @@ select_permissions:
         - email
         - name
         - photo_updated_at
+        - blurhash
         - uid
-      computed_fields:
-        - lastEdit
       filter:
         isUserAllowedToRead:
           _eq: true

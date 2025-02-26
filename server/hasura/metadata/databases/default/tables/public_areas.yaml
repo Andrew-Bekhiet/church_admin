@@ -1,6 +1,16 @@
 table:
   name: areas
   schema: public
+object_relationships:
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
 array_relationships:
   - name: adminUsers
     using:
@@ -9,6 +19,15 @@ array_relationships:
         table:
           name: users_admin_on
           schema: auth
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
 computed_fields:
   - name: families
     definition:
@@ -27,12 +46,6 @@ computed_fields:
       function:
         name: user_allowed_to_write_area
         schema: public
-      session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_area_last_edit
-        schema: history
       session_argument: hasura_session
   - name: persons
     definition:
@@ -66,13 +79,12 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - blurhash
         - bounds
         - color
         - id
         - name
         - photo_updated_at
-      computed_fields:
-        - lastEdit
       filter:
         isUserAllowedToRead:
           _eq: true

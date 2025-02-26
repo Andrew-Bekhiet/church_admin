@@ -17,6 +17,51 @@ object_relationships:
   - name: job
     using:
       foreign_key_constraint_on: job_id
+  - name: lastCall
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: latest_calls
+          schema: history
+  - name: lastConfession
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: latest_confessions
+          schema: history
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
+  - name: lastKodas
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: latest_kodases
+          schema: history
+  - name: lastVisit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_visits
+          schema: history
   - name: personType
     using:
       foreign_key_constraint_on: person_type_id
@@ -78,6 +123,13 @@ array_relationships:
         remote_table:
           name: persons_groups
           schema: public
+  - name: hobbies
+    using:
+      foreign_key_constraint_on:
+        column: person_id
+        table:
+          name: persons_hobbies
+          schema: public
   - name: kodasHistory
     using:
       foreign_key_constraint_on:
@@ -105,9 +157,11 @@ array_relationships:
           schema: public
   - name: visitHistory
     using:
-      foreign_key_constraint_on:
-        column: person_id
-        table:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
           name: visit_history
           schema: history
 computed_fields:
@@ -140,41 +194,6 @@ computed_fields:
       function:
         name: user_allowed_to_write_person
         schema: public
-      session_argument: hasura_session
-  - name: lastAttendance
-    definition:
-      function:
-        name: get_person_last_attendance
-        schema: history
-  - name: lastCall
-    definition:
-      function:
-        name: get_person_last_call
-        schema: history
-      session_argument: hasura_session
-  - name: lastConfession
-    definition:
-      function:
-        name: get_person_last_confession
-        schema: history
-      session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_person_last_edit
-        schema: history
-      session_argument: hasura_session
-  - name: lastKodas
-    definition:
-      function:
-        name: get_person_last_kodas
-        schema: history
-      session_argument: hasura_session
-  - name: lastVisit
-    definition:
-      function:
-        name: get_person_last_visit
-        schema: history
       session_argument: hasura_session
   - name: streets
     definition:
@@ -243,6 +262,7 @@ select_permissions:
         - other_phones
         - person_type_id
         - photo_updated_at
+        - blurhash
         - qualification_id
         - school_id
         - shammas_level_id
@@ -252,12 +272,6 @@ select_permissions:
         - uid
       computed_fields:
         - birthday
-        - lastAttendance
-        - lastCall
-        - lastConfession
-        - lastEdit
-        - lastKodas
-        - lastVisit
       filter:
         isUserAllowedToRead:
           _eq: true
@@ -291,19 +305,11 @@ update_permissions:
         - store_id
         - study_year_id
       filter:
-        _and:
-          - _and:
-              - uid:
-                  _eq: null
-          - isUserAllowedToWrite:
-              _eq: true
+        isUserAllowedToWrite:
+          _eq: true
       check:
-        _and:
-          - _and:
-              - uid:
-                  _eq: null
-          - isUserAllowedToWrite:
-              _eq: true
+        isUserAllowedToWrite:
+          _eq: true
 delete_permissions:
   - role: user
     permission:

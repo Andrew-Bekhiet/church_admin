@@ -1,0 +1,36 @@
+table:
+  name: latest_kodases
+  schema: history
+object_relationships:
+  - name: person
+    using:
+      manual_configuration:
+        column_mapping:
+          person_id: id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public
+  - name: user
+    using:
+      manual_configuration:
+        column_mapping:
+          recorded_by: uid
+        insertion_order: null
+        remote_table:
+          name: users_data
+          schema: auth
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - time
+        - person_id
+        - recorded_by
+      filter:
+        person:
+          isUserAllowedToRead:
+            _eq: true
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []

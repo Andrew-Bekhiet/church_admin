@@ -2,16 +2,34 @@ table:
   name: services
   schema: public
 object_relationships:
-  - name: fromStudyYear
+  - name: lastEdit
     using:
-      foreign_key_constraint_on: study_year_from
-  - name: nextServiceObject
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
+  - name: nextService
     using:
-      foreign_key_constraint_on: next_service
-  - name: toStudyYear
+      foreign_key_constraint_on: next_service_id
+  - name: studyYearFrom
     using:
-      foreign_key_constraint_on: study_year_to
+      foreign_key_constraint_on: study_year_from_id
+  - name: studyYearTo
+    using:
+      foreign_key_constraint_on: study_year_to_id
 array_relationships:
+  - name: adminUsers
+    using:
+      manual_configuration:
+        column_mapping:
+          id: admin_on_service
+        insertion_order: null
+        remote_table:
+          name: users_admin_on
+          schema: auth
   - name: attendanceDaysConstraints
     using:
       manual_configuration:
@@ -35,6 +53,15 @@ array_relationships:
         table:
           name: classes
           schema: public
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
   - name: groups
     using:
       foreign_key_constraint_on:
@@ -49,13 +76,6 @@ array_relationships:
         table:
           name: persons_services
           schema: public
-  - name: users
-    using:
-      foreign_key_constraint_on:
-        column: admin_on_service
-        table:
-          name: users_admin_on
-          schema: auth
 computed_fields:
   - name: isUserAllowedToRead
     definition:
@@ -69,12 +89,6 @@ computed_fields:
         name: user_allowed_to_write_service
         schema: public
       session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_service_last_edit
-        schema: history
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
@@ -85,9 +99,9 @@ insert_permissions:
       columns:
         - color
         - name
-        - next_service
-        - study_year_from
-        - study_year_to
+        - next_service_id
+        - study_year_from_id
+        - study_year_to_id
 select_permissions:
   - role: user
     permission:
@@ -95,12 +109,11 @@ select_permissions:
         - color
         - id
         - name
-        - next_service
+        - next_service_id
         - photo_updated_at
-        - study_year_from
-        - study_year_to
-      computed_fields:
-        - lastEdit
+        - blurhash
+        - study_year_from_id
+        - study_year_to_id
       filter:
         isUserAllowedToRead:
           _eq: true
@@ -111,9 +124,9 @@ update_permissions:
       columns:
         - color
         - name
-        - next_service
-        - study_year_from
-        - study_year_to
+        - next_service_id
+        - study_year_from_id
+        - study_year_to_id
       filter:
         _and:
           - isUserAllowedToWrite:

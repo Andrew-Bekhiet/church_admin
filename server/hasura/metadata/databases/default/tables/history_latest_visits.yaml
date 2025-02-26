@@ -1,0 +1,35 @@
+table:
+  name: latest_visits
+  schema: history
+object_relationships:
+  - name: user
+    using:
+      manual_configuration:
+        column_mapping:
+          recorded_by: uid
+        insertion_order: null
+        remote_table:
+          name: users_data
+          schema: auth
+computed_fields:
+  - name: isUserAllowedToRead
+    definition:
+      function:
+        name: user_allowed_to_read_latest_visit
+        schema: history
+      session_argument: hasura_session
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - record_id
+        - recorded_by
+        - table
+        - time
+        - visit_id
+      filter:
+        isUserAllowedToRead:
+          _eq: true
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []

@@ -5,6 +5,25 @@ object_relationships:
   - name: family
     using:
       foreign_key_constraint_on: admin_family
+  - name: lastEdit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_edits
+          schema: history
+array_relationships:
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
 computed_fields:
   - name: areas
     definition:
@@ -23,12 +42,6 @@ computed_fields:
       function:
         name: user_allowed_to_write_store
         schema: public
-      session_argument: hasura_session
-  - name: lastEdit
-    definition:
-      function:
-        name: get_store_last_edit
-        schema: history
       session_argument: hasura_session
   - name: streets
     definition:
@@ -50,6 +63,7 @@ insert_permissions:
                   isUserAllowedToWrite:
                     _eq: true
       columns:
+        - address
         - admin_family
         - color
         - geolocation
@@ -58,14 +72,14 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - address
         - admin_family
+        - blurhash
         - color
         - geolocation
         - id
         - name
         - photo_updated_at
-      computed_fields:
-        - lastEdit
       filter:
         _and:
           - isUserAllowedToRead:
@@ -75,6 +89,7 @@ update_permissions:
   - role: user
     permission:
       columns:
+        - address
         - admin_family
         - color
         - geolocation

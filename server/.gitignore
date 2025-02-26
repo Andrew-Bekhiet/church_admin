@@ -70,4 +70,4 @@ church-data-admin.json
 backup-script.sh
 
 public/
-migration*
+migration/
