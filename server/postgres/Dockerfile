@@ -1,4 +1,4 @@
-FROM ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg16-ts2.13
+FROM ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17
 
 ENV POSTGRES_DB="church_admin"
 ENV POSTGRES_USER=${POSTGRES_USER:-"postgres"}
