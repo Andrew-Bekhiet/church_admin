@@ -1,7 +1,6 @@
 - "!include auth_users_admin_on.yaml"
 - "!include auth_users_data.yaml"
 - "!include auth_users_permissions.yaml"
-- "!include face_recognition_perons_labels.yaml"
 - "!include history_attendance_days.yaml"
 - "!include history_attendance_days_constraints.yaml"
 - "!include history_attendance_history.yaml"
