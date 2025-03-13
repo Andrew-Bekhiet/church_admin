@@ -248,7 +248,7 @@ const documentNodeMutationdeleteArea = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'areaId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -948,7 +948,7 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'areaId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -966,7 +966,7 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastVisit')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),

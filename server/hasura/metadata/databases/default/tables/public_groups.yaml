@@ -52,25 +52,22 @@ array_relationships:
         table:
           name: persons_groups
           schema: public
-computed_fields:
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_group
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_group
-        schema: public
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - entity_type:
+                  _eq: group
       columns:
         - color
         - name
@@ -88,8 +85,33 @@ select_permissions:
         - service_id
         - validity
       filter:
-        isUserAllowedToRead:
-          _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
       limit: 200
 update_permissions:
   - role: user
@@ -100,14 +122,89 @@ update_permissions:
         - service_id
         - validity
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id
 delete_permissions:
   - role: user
     permission:
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: any
+                  - entity_id:
+                      _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - id

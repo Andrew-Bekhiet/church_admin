@@ -23,8 +23,7 @@ class Person extends ViewableWithIDAndImage
   factory Person({
     required String id,
     required String name,
-    String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    Address? address,
     String? mainPhone,
     @Default({}) Json otherPhones,
     DateTime? birthdate,
@@ -67,13 +66,12 @@ class Person extends ViewableWithIDAndImage
     LastRecordedByInfo? lastCall,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
     List<Class>? classes,
     @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
     List<Group>? groups,
     @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
     List<Service>? services,
-    List<Area>? areas,
-    List<Street>? streets,
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
     List<Tag>? tags,
     @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -93,6 +91,8 @@ class Person extends ViewableWithIDAndImage
   Person._() : super();
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
+
+  Point? get geolocation => address?.geolocation;
 
   @override
   LastRecordedByInfo? get lastConfession =>
@@ -132,14 +132,15 @@ class Person extends ViewableWithIDAndImage
 
     return lastKodas != null &&
         lastConfession != null &&
-        !lastKodas!.time.isBefore(
-          thirtyDaysAgo,
-        ) &&
-        !lastConfession!.time.isBefore(
-          thirtyDaysAgo,
-        );
+        !lastKodas!.time.isBefore(thirtyDaysAgo) &&
+        !lastConfession!.time.isBefore(thirtyDaysAgo);
   }
 }
+
+List<Class>? personsClassesFromJson(List? data) =>
+    data?.map((e) => Class.fromJson(e['class'])).toList();
+List<Json>? personsClassesToJson(List<Class>? classes) =>
+    classes?.map((e) => {'class': e.toJson()}).toList();
 
 List<Group>? personsGroupsFromJson(List? data) =>
     data?.map((e) => Group.fromJson(e['group'])).toList();

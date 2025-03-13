@@ -23,14 +23,11 @@ class Family extends ViewableWithIDAndImage
   factory Family({
     required String id,
     required String name,
-    String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    Address? address,
     String? notes,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Area>? areas,
-    List<Street>? streets,
     @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
     List<Family>? children,
     @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
@@ -41,12 +38,33 @@ class Family extends ViewableWithIDAndImage
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
 
+  Point? get geolocation => address?.geolocation;
+
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
   String get typeName => Family.queryableType.name;
+
+  Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
+    name: name,
+    address:
+        address != null
+            ? Input_AddressesObjRelInsertInput(
+              data: address!.copyWith(family: null).toInsertInput(),
+            )
+            : null,
+    notes: notes,
+    color: colorToInt(color),
+  );
+
+  Input_FamiliesSetInput toUpdateInput(Family oldFamily) =>
+      Input_FamiliesSetInput(
+        name: name != oldFamily.name ? name : null,
+        notes: notes != oldFamily.notes ? notes : null,
+        color: color != oldFamily.color ? colorToInt(color) : null,
+      );
 }
 
 List<Family>? familyChildrenFromJson(List? data) =>

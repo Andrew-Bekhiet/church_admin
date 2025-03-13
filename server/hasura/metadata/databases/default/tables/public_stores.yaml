@@ -2,6 +2,13 @@ table:
   name: stores
   schema: public
 object_relationships:
+  - name: address
+    using:
+      foreign_key_constraint_on:
+        column: store_id
+        table:
+          name: addresses
+          schema: public
   - name: family
     using:
       foreign_key_constraint_on: admin_family
@@ -24,46 +31,59 @@ array_relationships:
         remote_table:
           name: edit_history
           schema: history
-computed_fields:
-  - name: areas
-    definition:
-      function:
-        name: store_areas
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_store
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_store
-        schema: public
-      session_argument: hasura_session
-  - name: streets
-    definition:
-      function:
-        name: store_streets
-        schema: public
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
       check:
         _and:
-          - isUserAllowedToWrite:
-              _eq: true
-          - _or:
-              - admin_family:
-                  _eq: null
-              - family:
-                  isUserAllowedToWrite:
-                    _eq: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: store
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - admin_family
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
       columns:
-        - address
+        - address_text
         - admin_family
         - color
         - geolocation
@@ -72,7 +92,7 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - admin_family
         - blurhash
         - color
@@ -81,34 +101,135 @@ select_permissions:
         - name
         - photo_updated_at
       filter:
-        _and:
-          - isUserAllowedToRead:
-              _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       limit: 100
 update_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - admin_family
         - color
         - geolocation
         - name
       filter:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       check:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
 delete_permissions:
   - role: user
     permission:
       filter:
         _and:
-          - isUserAllowedToWrite:
-              _eq: true
-          - family:
-              isUserAllowedToWrite:
-                _eq: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: store
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - admin_family
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true

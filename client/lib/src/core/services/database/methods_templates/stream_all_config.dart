@@ -9,13 +9,17 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
   final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? transformVars;
   final SubscriptionOptions<Iterable<T>>? operationOptions;
 
+  @override
+  Iterable<T> Function(Json)? get parserFn =>
+      super.parserFn as Iterable<T> Function(Json)?;
+
   const StreamAllConfig({
     required super.document,
     this.transformVars,
     this.operationOptions,
     super.operationName,
     super.variables,
-    super.parserFn,
+    Iterable<T> Function(Json)? super.parserFn,
   });
 
   StreamAllConfig<T, TBoolExp, TOrderByExp> copyWith({
@@ -37,9 +41,9 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
   }
 }
 
-typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> = Json
-    Function({
-  required GQLPaginatableStreamEvent<T> event,
-  List<TBoolExp>? where,
-  List<TOrderByExp>? orderBy,
-});
+typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> =
+    Json Function({
+      required GQLPaginatableStreamEvent<T> event,
+      List<TBoolExp>? where,
+      List<TOrderByExp>? orderBy,
+    });

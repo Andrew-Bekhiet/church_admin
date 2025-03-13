@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 
-
 class EditFamilyLocationMap extends StatelessWidget {
   final Family initialFamily;
   final GeomapOptions geomapOptions;
@@ -21,7 +20,11 @@ class EditFamilyLocationMap extends StatelessWidget {
       onSaved: onSaved,
       initialObject: initialFamily,
       getLocation: (f) => f.geolocation,
-      copyWithNewLocation: (f, l) => f.copyWith(geolocation: l),
+      copyWithNewLocation:
+          (f, l) => f.copyWith(
+            address:
+                f.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
+          ),
       geomapOptions: geomapOptions,
     );
   }

@@ -8,50 +8,37 @@ class GQLParser {
     return data.cast<String, Object?>();
   }
 
-  Iterable<T> Function(Json d) singleListParser<T>(T Function(Json) mapper) {
-    return (d) => d.values.whereType<List>().first.map(
-          (o) => mapper(
-            castMapToJson(o),
-          ),
-        );
+  Iterable<T> Function(Json d) singleListParser<T>(
+    T Function(Json) mapper, [
+    String? key,
+  ]) {
+    return (d) {
+      final value =
+          key != null
+              ? d[key] as List?
+              : d.values.whereType<List?>().singleOrNull;
+      if (value == null) return [];
+
+      return value.map((o) => mapper(castMapToJson(o)));
+    };
   }
 
-  ParserFn<T?> singleOrNullParser<T>(
-    ParserFn<T?> fromJson,
-  ) {
+  ParserFn<T?> singleOrNullParser<T>(ParserFn<T?> fromJson, [String? key]) {
     return (data) {
-      final value = data.values.whereType<Map?>().singleOrNull;
+      final value =
+          key != null
+              ? data[key] as Map?
+              : data.values.whereType<Map?>().singleOrNull;
       if (value == null) return null;
 
       return fromJson(value.cast<String, Object?>());
     };
   }
 
-  ParserFn<T> singleParser<T>(
-    ParserFn<T> fromJson,
-  ) {
+  ParserFn<T> singleParser<T>(ParserFn<T> fromJson, [String? key]) {
     return (data) {
-      final value = data.values.whereType<Map>().single;
-      return fromJson(value.cast<String, Object?>());
-    };
-  }
-
-  ParserFn<T?> lastOrNullParser<T>(
-    ParserFn<T?> fromJson,
-  ) {
-    return (data) {
-      final value = data.values.whereType<Map?>().lastOrNull;
-      if (value == null) return null;
-
-      return fromJson(value.cast<String, Object?>());
-    };
-  }
-
-  ParserFn<T> lastParser<T>(
-    ParserFn<T> fromJson,
-  ) {
-    return (data) {
-      final value = data.values.whereType<Map>().last;
+      final value =
+          key != null ? data[key] as Map : data.values.whereType<Map>().single;
       return fromJson(value.cast<String, Object?>());
     };
   }

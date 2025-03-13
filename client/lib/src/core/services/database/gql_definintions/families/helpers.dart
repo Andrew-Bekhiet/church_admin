@@ -2,34 +2,19 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 import 'package:collection/collection.dart';
+import 'package:uuid/enums.dart';
 
 class FamilyInsertHelper {
-  static final _mutationNonExistentVars = {
-    'id',
-    'parents',
-    'children',
-  };
-
   final Family newFamily;
 
-  final Map<String, dynamic> _familyDelta;
-
-  FamilyInsertHelper({
-    required this.newFamily,
-    Family? oldFamily,
-  }) : _familyDelta = computeObjectDelta(
-          newFamily.toJson(),
-          (oldFamily ?? Family(id: '', name: '')).toJson(),
-          ignoreFields: _mutationNonExistentVars,
-        );
+  FamilyInsertHelper({required this.newFamily, Family? oldFamily});
 
   Input_FamiliesFamiliesArrRelInsertInput get _childrenFamilies =>
       Input_FamiliesFamiliesArrRelInsertInput(
         data: [
           ...(newFamily.children ?? []).map(
-            (e) => Input_FamiliesFamiliesInsertInput(
-              childFamilyId: e.id.toUuid(),
-            ),
+            (e) =>
+                Input_FamiliesFamiliesInsertInput(childFamilyId: e.id.toUuid()),
           ),
         ],
       );
@@ -47,7 +32,7 @@ class FamilyInsertHelper {
 
   Variables_Mutation_insertFamily get variables =>
       Variables_Mutation_insertFamily(
-        newFamily: Input_FamiliesInsertInput.fromJson(_familyDelta).copyWith(
+        newFamily: newFamily.toInsertInput().copyWith(
           children: _childrenFamilies,
           parents: _parentsFamilies,
         ),
@@ -63,11 +48,11 @@ class FamilyUpdateHelper {
   late final IterableDifferenceResult<ID> _childrenDiff;
   late final IterableDifferenceResult<ID> _parentsDiff;
 
-  FamilyUpdateHelper({
-    required this.newFamily,
-    required this.oldFamily,
-  }) : _familyDelta =
-            computeObjectDelta(newFamily.toJson(), oldFamily.toJson()) {
+  FamilyUpdateHelper({required this.newFamily, required this.oldFamily})
+    : _familyDelta = computeObjectDelta(
+        newFamily.toJson(),
+        oldFamily.toJson(),
+      ) {
     _childrenDiff = _getDifferenceUsing((p) => p.children);
     _parentsDiff = _getDifferenceUsing((p) => p.parents);
   }
@@ -94,25 +79,28 @@ class FamilyUpdateHelper {
       _parentsDiff.removed.map((s) => s.id.toUuid()).toList();
 
   List<Input_FamiliesFamiliesInsertInput> get _addRelatedFamilies => [
-        ..._childrenDiff.added.map(
-          (e) => Input_FamiliesFamiliesInsertInput(
-            parentFamilyId: newFamily.id.toUuid(),
-            childFamilyId: e.id.toUuid(),
-          ),
-        ),
-        ..._parentsDiff.added.map(
-          (e) => Input_FamiliesFamiliesInsertInput(
-            parentFamilyId: e.id.toUuid(),
-            childFamilyId: newFamily.id.toUuid(),
-          ),
-        ),
-      ];
+    ..._childrenDiff.added.map(
+      (e) => Input_FamiliesFamiliesInsertInput(
+        parentFamilyId: newFamily.id.toUuid(),
+        childFamilyId: e.id.toUuid(),
+      ),
+    ),
+    ..._parentsDiff.added.map(
+      (e) => Input_FamiliesFamiliesInsertInput(
+        parentFamilyId: e.id.toUuid(),
+        childFamilyId: newFamily.id.toUuid(),
+      ),
+    ),
+  ];
 
   Variables_Mutation_updateFamily get variables =>
       Variables_Mutation_updateFamily(
         familyId: newFamily.id.toUuid(),
-        newFamily: Input_FamiliesSetInput.fromJson(_familyDelta),
+        newFamily: newFamily.toUpdateInput(oldFamily),
         updateFamily: _updateFamily,
+        addressId: newFamily.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
+        newAddress: newFamily.address?.toUpdateInput(oldFamily.address!),
+        updateAddress: newFamily.address != oldFamily.address,
         addRelatedFamilies: _addRelatedFamilies,
         insertRelatedFamilies: _insertRelatedFamilies,
         deleteRelatedFamilies: _deleteRelatedFamilies,

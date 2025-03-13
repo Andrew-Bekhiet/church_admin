@@ -1,0 +1,194 @@
+table:
+  name: addresses
+  schema: public
+object_relationships:
+  - name: area
+    using:
+      foreign_key_constraint_on: area_id
+  - name: district
+    using:
+      foreign_key_constraint_on: district_id
+  - name: family
+    using:
+      foreign_key_constraint_on: family_id
+  - name: store
+    using:
+      foreign_key_constraint_on: store_id
+  - name: street
+    using:
+      foreign_key_constraint_on: street_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+      columns:
+        - apartment_number
+        - area_id
+        - country_iso_code
+        - district_id
+        - family_id
+        - geolocation
+        - house_number
+        - special_landmark
+        - store_id
+        - storey_number
+        - street_id
+        - substreet_name
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - apartment_number
+        - area_id
+        - country_iso_code
+        - district_id
+        - family_id
+        - geolocation
+        - house_number
+        - id
+        - special_landmark
+        - store_id
+        - storey_number
+        - street_id
+        - substreet_name
+      filter:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+      limit: 100
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - apartment_number
+        - area_id
+        - country_iso_code
+        - district_id
+        - family_id
+        - geolocation
+        - house_number
+        - special_landmark
+        - store_id
+        - storey_number
+        - street_id
+        - substreet_name
+      filter:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+      check:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+    comment: ""

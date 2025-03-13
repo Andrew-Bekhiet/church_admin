@@ -6,11 +6,7 @@ class ViewArea extends StatefulWidget {
   final Area? area;
   final String areaId;
 
-  const ViewArea({
-    required this.areaId,
-    this.area,
-    super.key,
-  });
+  const ViewArea({required this.areaId, this.area, super.key});
 
   @override
   State<ViewArea> createState() => _ViewAreaState();
@@ -21,8 +17,8 @@ class _ViewAreaState extends State<ViewArea> {
     objectsPaginatableStream: DatabaseService.I.streets.streamAll(
       where: [
         Input_StreetsBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          areas: Input_AreasStreetsBoolExp(
+            areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
         ),
       ],
@@ -33,8 +29,8 @@ class _ViewAreaState extends State<ViewArea> {
     objectsPaginatableStream: DatabaseService.I.families.streamAll(
       where: [
         Input_FamiliesBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          address: Input_AddressesBoolExp(
+            areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
         ),
       ],
@@ -45,8 +41,8 @@ class _ViewAreaState extends State<ViewArea> {
     objectsPaginatableStream: DatabaseService.I.stores.streamAll(
       where: [
         Input_StoresBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          address: Input_AddressesBoolExp(
+            areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
         ),
       ],
@@ -57,8 +53,8 @@ class _ViewAreaState extends State<ViewArea> {
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
       where: [
         Input_PersonsBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+          address: Input_AddressesBoolExp(
+            areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
           ),
         ),
       ],
@@ -67,8 +63,9 @@ class _ViewAreaState extends State<ViewArea> {
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final Stream<Area?> stream =
-      DatabaseService.I.areas.streamSingleById(id: widget.areaId);
+  late final Stream<Area?> stream = DatabaseService.I.areas.streamSingleById(
+    id: widget.areaId,
+  );
 
   late final viewableObjectService = ViewableObjectService.I;
 
@@ -80,19 +77,23 @@ class _ViewAreaState extends State<ViewArea> {
       objectStream: stream,
       childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
-        Street: (context) => ViewableObjectList(
+        Street:
+            (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_streetsController),
             ),
-        Family: (context) => ViewableObjectList(
+        Family:
+            (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_familiesController),
             ),
-        Person: (context) => ViewableObjectList(
+        Person:
+            (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_personsController),
             ),
-        Store: (context) => ViewableObjectList(
+        Store:
+            (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _ensureWillDispose(_storesController),
             ),
@@ -101,104 +102,112 @@ class _ViewAreaState extends State<ViewArea> {
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Street>(),
-            label: 'الشوارع'
+            label: 'الشوارع',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Family>(),
-            label: 'العائلات'
+            label: 'العائلات',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Person>(),
-            label: 'المخدومين'
+            label: 'المخدومين',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Store>(),
-            label: 'المتاجر'
+            label: 'المتاجر',
           ),
         ],
       ),
-      detailsBuilder: (context, area) => SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            if (area.bounds != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: FilledButton.icon(
-                  label: const Text('الموقع على الخريطة'),
-                  icon: const Icon(Symbols.map),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ViewGeodataMap(
-                        initialGeomapOptions:
-                            GeomapOptions(selectedAreas: {area}),
-                      ),
-                    ),
+      detailsBuilder:
+          (context, area) => SliverList(
+            delegate: SliverChildListDelegate([
+              if (area.bounds != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: FilledButton.icon(
+                    label: const Text('الموقع على الخريطة'),
+                    icon: const Icon(Symbols.map),
+                    onPressed:
+                        () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder:
+                                (context) => ViewGeodataMap(
+                                  initialGeomapOptions: GeomapOptions(
+                                    selectedAreas: {area},
+                                  ),
+                                ),
+                          ),
+                        ),
                   ),
                 ),
+              HistoryProperty(
+                name: 'أخر افتقاد',
+                value: area.lastVisit?.time,
+                getHistoryStream:
+                    () => DatabaseService.I.history.paginateVisitHistory<Area>(
+                      id: area.id,
+                    ),
               ),
-            HistoryProperty(
-              name: 'أخر افتقاد',
-              value: area.lastVisit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateVisitHistory<Area>(id: area.id),
+              HistoryProperty(
+                name: 'أخر تحديث للبيانات',
+                value: area.lastEdit?.time,
+                getHistoryStream:
+                    () => DatabaseService.I.history.paginateEditHistory<Area>(
+                      id: area.id,
+                    ),
+              ),
+              ListTile(
+                title: const Text('الخدام المسؤولين'),
+                subtitle:
+                    area.adminUsers?.isNotEmpty ?? false
+                        ? AdminUsers(users: area.adminUsers!)
+                        : const Text('لا يوجد خدام محددين للمنطقة'),
+              ),
+            ]),
+          ),
+      editButtonBuilder:
+          (context, area) => IconButton(
+            tooltip: 'تعديل',
+            onPressed: () => EditAreaRoute($extra: area).push(context),
+            icon: const Icon(Symbols.edit),
+          ),
+      notFoundBuilder:
+          (context) => Center(
+            child: Text(
+              'لم يتم العثور على المنطقة',
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            HistoryProperty(
-              name: 'أخر تحديث للبيانات',
-              value: area.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Area>(id: area.id),
-            ),
-            ListTile(
-              title: const Text('الخدام المسؤولين'),
-              subtitle: area.adminUsers?.isNotEmpty ?? false
-                  ? AdminUsers(users: area.adminUsers!)
-                  : const Text('لا يوجد خدام محددين للمنطقة'),
-            ),
-          ],
-        ),
-      ),
-      editButtonBuilder: (context, area) => IconButton(
-        tooltip: 'تعديل',
-        onPressed: () => EditAreaRoute($extra: area).push(context),
-        icon: const Icon(Symbols.edit),
-      ),
-      notFoundBuilder: (context) => Center(
-        child: Text(
-          'لم يتم العثور على المنطقة',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-      ),
-      floatingActionButtonBuilder: (context, tabController, area) =>
-          SwitchingFloatingActionButton(
-        tabController: tabController,
-        icons: const {
-          0: Icon(Symbols.add_road),
-          1: Icon(Symbols.group_add),
-          2: Icon(Symbols.person_add),
-          3: Icon(Symbols.add_business),
-        },
-        onTap: (newIndex) {
-          if (newIndex == 0) {
-            const EditStreetRoute().push(context);
-          } else if (newIndex == 1) {
-            const EditFamilyRoute().push(context);
-          } else if (newIndex == 2) {
-            const EditPersonRoute().push(context);
-          } else if (newIndex == 3) {
-            const EditStoreRoute().push(context);
-          }
-        },
-      ),
+          ),
+      floatingActionButtonBuilder:
+          (context, tabController, area) => SwitchingFloatingActionButton(
+            tabController: tabController,
+            icons: const {
+              0: Icon(Symbols.add_road),
+              1: Icon(Symbols.group_add),
+              2: Icon(Symbols.person_add),
+              3: Icon(Symbols.add_business),
+            },
+            onTap: (newIndex) {
+              if (newIndex == 0) {
+                const EditStreetRoute().push(context);
+              } else if (newIndex == 1) {
+                const EditFamilyRoute().push(context);
+              } else if (newIndex == 2) {
+                const EditPersonRoute().push(context);
+              } else if (newIndex == 3) {
+                const EditStoreRoute().push(context);
+              }
+            },
+          ),
     );
   }
 
-  ViewableObjectListController<T>
-      _ensureWillDispose<T extends ViewableWithIDAndImage>(
-    ViewableObjectListController<T> controller,
-  ) {
+  ViewableObjectListController<T> _ensureWillDispose<
+    T extends ViewableWithIDAndImage
+  >(ViewableObjectListController<T> controller) {
     _controllersToDispose.add(controller);
     return controller;
   }

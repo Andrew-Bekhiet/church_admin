@@ -1,4 +1,4 @@
-query getFamilyRelatedFamilies($familyId: Uuid!) {
+query getFamilyRelatedFamilies($familyId: uuid!) {
   familiesByPk(id: $familyId) {
     ...Family
     children(orderBy: { child: { name: ASC } }) {

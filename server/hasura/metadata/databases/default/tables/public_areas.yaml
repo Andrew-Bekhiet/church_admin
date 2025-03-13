@@ -12,6 +12,13 @@ object_relationships:
           name: latest_edits
           schema: history
 array_relationships:
+  - name: addresses
+    using:
+      foreign_key_constraint_on:
+        column: area_id
+        table:
+          name: addresses
+          schema: public
   - name: adminUsers
     using:
       foreign_key_constraint_on:
@@ -28,49 +35,27 @@ array_relationships:
         remote_table:
           name: edit_history
           schema: history
-computed_fields:
-  - name: families
-    definition:
-      function:
-        name: area_families
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_area
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_area
-        schema: public
-      session_argument: hasura_session
-  - name: persons
-    definition:
-      function:
-        name: area_persons
-        schema: public
-      session_argument: hasura_session
-  - name: stores
-    definition:
-      function:
-        name: area_stores
-        schema: public
-      session_argument: hasura_session
   - name: streets
-    definition:
-      function:
-        name: area_streets
-        schema: public
-      session_argument: hasura_session
+    using:
+      foreign_key_constraint_on:
+        column: area_id
+        table:
+          name: areas_streets
+          schema: public
 insert_permissions:
   - role: user
     permission:
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: writeAllData
       columns:
         - bounds
         - color
@@ -85,9 +70,7 @@ select_permissions:
         - id
         - name
         - photo_updated_at
-      filter:
-        isUserAllowedToRead:
-          _eq: true
+      filter: {}
       limit: 200
 update_permissions:
   - role: user
@@ -97,14 +80,64 @@ update_permissions:
         - color
         - name
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: area
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: area
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
 delete_permissions:
   - role: user
     permission:
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: writeAllData

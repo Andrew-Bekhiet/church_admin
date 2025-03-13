@@ -8,17 +8,25 @@ subscription watchAllFamilies(
   }
 }
 
-subscription watchFamily($id: Uuid!) {
+subscription watchAllFamiliesWithAddresses(
+  $limit: Int = 200
+  $orderBy: [FamiliesOrderBy!] = { name: ASC }
+  $where: [FamiliesBoolExp!] = {}
+) {
+  families(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
+    ...Family
+    address {
+      ...Address
+    }
+  }
+}
+
+subscription watchFamily($id: uuid!) {
   familiesByPk(id: $id) {
     ...Family
-    areas(orderBy: { name: ASC }) {
-      ...Area
+    address {
+      ...Address
     }
-    streets(orderBy: { name: ASC }) {
-      ...Street
-    }
-    geolocation
-    address
     notes
     lastEdit {
       ...LatestEditHistory

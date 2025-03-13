@@ -22,32 +22,58 @@ select_permissions:
         - hobby_id
         - person_id
       filter:
-        _and:
-          - person:
-              isUserAllowedToRead:
-                _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       limit: 100
 update_permissions:
   - role: user
     permission:
-      columns:
-        - hobby_id
-        - person_id
-      filter:
-        _and:
-          - person:
-              isUserAllowedToWrite:
-                _eq: true
-      check:
-        _and:
-          - person:
-              isUserAllowedToWrite:
-                _eq: true
+      columns: []
+      filter: {}
+      check: {}
 delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
-          - person:
-              isUserAllowedToWrite:
-                _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true

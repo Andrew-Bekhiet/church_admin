@@ -12,13 +12,14 @@ fragment PersonNoPhoto on Persons {
 
 fragment FullPersonData on Persons {
   ...Person
-  address
   birthdate
-  areas(limit: 6, orderBy: { name: ASC }) {
-    ...Area
+  address {
+    ...Address
   }
-  classes(limit: 6, orderBy: { name: ASC }) {
-    ...Class
+  classes(limit: 6, orderBy: { class: { name: ASC } }) {
+    class {
+      ...Class
+    }
   }
   church {
     id
@@ -40,7 +41,6 @@ fragment FullPersonData on Persons {
     }
   }
   gender
-  geolocation
   groups(limit: 6, orderBy: { group: { name: ASC } }) {
     group {
       ...Group
@@ -99,9 +99,6 @@ fragment FullPersonData on Persons {
     color
     name
   }
-  streets {
-    ...Street
-  }
   studyYear {
     name
     order
@@ -130,13 +127,15 @@ fragment FullPersonData on Persons {
 
 fragment FullPersonDataWithAttendance on Persons {
   ...FullPersonData
-  classes(limit: 6, orderBy: { name: ASC }) {
-    ...Class
+  classes(limit: 6, orderBy: { class: { name: ASC } }) {
+    class {
+      ...Class
 
-    attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
-      aggregate {
-        max {
-          time
+      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
+        aggregate {
+          max {
+            time
+          }
         }
       }
     }

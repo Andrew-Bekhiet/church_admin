@@ -1,0 +1,2 @@
+schema: "client/lib/src/core/graphql/schema.graphql"
+documents: "**/*.{graphql,gql}"

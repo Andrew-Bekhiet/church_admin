@@ -1,13 +1,13 @@
-mutation insertPersonLastConfession($personId: Uuid!, $lastConfession: Date!) {
+mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
   insertHistoryConfessionHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confessionHistoryDayIdPersonIdKey }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) {
     person {
       ...Person
@@ -15,16 +15,16 @@ mutation insertPersonLastConfession($personId: Uuid!, $lastConfession: Date!) {
   }
 }
 
-mutation insertPersonLastKodas($personId: Uuid!, $lastKodas: Date!) {
+mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
   insertHistoryKodasHistoryOne(
     object: {
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodasHistoryDayIdPersonIdKey }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) {
     person {
       ...Person
@@ -32,7 +32,7 @@ mutation insertPersonLastKodas($personId: Uuid!, $lastKodas: Date!) {
   }
 }
 
-mutation insertPersonLastCall($personId: Uuid!, $lastCall: Timestamptz!) {
+mutation insertPersonLastCall($personId: uuid!, $lastCall: timestamptz!) {
   insertHistoryCallHistoryOne(
     object: { personId: $personId, time: $lastCall }
   ) {
@@ -42,10 +42,13 @@ mutation insertPersonLastCall($personId: Uuid!, $lastCall: Timestamptz!) {
   }
 }
 
-mutation insertPersonLastVisit($personId: Uuid!, $lastVisit: Timestamptz!) {
+mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
   insertHistoryVisitHistoryOne(
     object: { table: "persons", recordId: $personId, time: $lastVisit }
   ) {
-    ...LatestVisitHistory
+    time
+    user {
+      ...User
+    }
   }
 }

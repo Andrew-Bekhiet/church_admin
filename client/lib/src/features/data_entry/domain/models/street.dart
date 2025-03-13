@@ -27,6 +27,7 @@ class Street extends ViewableWithIDAndImage
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
     List<Area>? areas,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
@@ -42,3 +43,8 @@ class Street extends ViewableWithIDAndImage
   @override
   String get typeName => Street.queryableType.name;
 }
+
+List<Area>? streetsAreasFromJson(List? data) =>
+    data?.map((e) => Area.fromJson(e['area'])).toList();
+List<Json>? streetsAreasToJson(List<Area>? areas) =>
+    areas?.map((e) => {'area': e.toJson()}).toList();

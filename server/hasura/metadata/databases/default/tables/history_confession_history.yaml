@@ -15,9 +15,29 @@ insert_permissions:
   - role: user
     permission:
       check:
-        person:
-          isUserAllowedToWrite:
-            _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       columns:
         - day_id
         - person_id
@@ -31,7 +51,27 @@ select_permissions:
         - recorded_by
         - time
       filter:
-        person:
-          isUserAllowedToRead:
-            _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       allow_aggregations: true

@@ -17,7 +17,7 @@ class TappableFormField<T> extends StatefulWidget {
   }) : assert(labelText != null || decoration != null);
 
   final T initialValue;
-  final Future<void>? Function(FormFieldState<T>) onTap;
+  final Future<void>? Function(FormFieldState<T>)? onTap;
   final String? labelText;
   final Widget? Function(BuildContext, FormFieldState<T>) builder;
   final String? Function(T?)? validator;
@@ -31,45 +31,67 @@ class TappableFormField<T> extends StatefulWidget {
 }
 
 class _TappableFormFieldState<T> extends State<TappableFormField<T>> {
-  late final FocusNode _effectiveFocusNode = widget.focusNode ??
+  late final FocusNode _effectiveFocusNode =
+      widget.focusNode ??
       FocusNode(debugLabel: 'TappableFormField<$T>:${widget.labelText}');
 
   @override
   Widget build(BuildContext context) {
+    final enabled = widget.onTap != null;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: FormField<T>(
         autovalidateMode: widget.autovalidateMode,
         initialValue: widget.initialValue,
-        builder: (state) => InkWell(
-          focusNode: _effectiveFocusNode,
-          onTap: () async {
-            _effectiveFocusNode.requestFocus();
+        enabled: enabled,
+        builder:
+            (state) => InkWell(
+              focusNode: _effectiveFocusNode,
+              onTap:
+                  enabled
+                      ? () async {
+                        _effectiveFocusNode.requestFocus();
 
-            final previousValue = state.value;
+                        final previousValue = state.value;
 
-            await widget.onTap(state);
+                        await widget.onTap!(state);
 
-            if (state.value != previousValue) _effectiveFocusNode.nextFocus();
-          },
-          child: AnimatedBuilder(
-            animation: _effectiveFocusNode,
-            child: widget.builder(context, state),
-            builder: (context, child) => InputDecorator(
-              isFocused: _effectiveFocusNode.hasFocus,
-              decoration: widget.decoration != null
-                  ? widget.decoration!(context, state)
-                  : InputDecoration(
-                      errorText: state.errorText,
-                      labelText: widget.labelText,
+                        if (state.value != previousValue &&
+                            (_effectiveFocusNode.context?.mounted ?? false)) {
+                          _effectiveFocusNode.nextFocus();
+                        }
+                      }
+                      : null,
+              child: AnimatedBuilder(
+                animation: _effectiveFocusNode,
+                child: widget.builder(context, state),
+
+                builder:
+                    (context, child) => InputDecorator(
+                      isFocused: _effectiveFocusNode.hasFocus,
+                      decoration:
+                          widget.decoration != null
+                              ? widget.decoration!(context, state)
+                              : InputDecoration(
+                                errorText: state.errorText,
+                                labelText: widget.labelText,
+                                enabled: enabled,
+                              ),
+                      isEmpty: state.value == null,
+                      child:
+                          child != null
+                              ? Opacity(
+                                opacity: enabled ? 1 : 0.38,
+                                child: child,
+                              )
+                              : null,
                     ),
-              isEmpty: state.value == null,
-              child: child,
+              ),
             ),
-          ),
-        ),
         onSaved: widget.onSaved,
-        validator: widget.validator ??
+        validator:
+            widget.validator ??
             (value) => value == null ? 'هذا الحقل مطلوب' : null,
       ),
     );

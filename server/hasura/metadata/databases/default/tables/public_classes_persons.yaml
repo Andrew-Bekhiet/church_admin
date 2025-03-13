@@ -1,0 +1,73 @@
+table:
+  name: classes_persons
+  schema: public
+object_relationships:
+  - name: class
+    using:
+      manual_configuration:
+        column_mapping:
+          class_id: id
+        insertion_order: null
+        remote_table:
+          name: classes
+          schema: public
+  - name: person
+    using:
+      manual_configuration:
+        column_mapping:
+          person_id: id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - class_id
+        - person_id
+      filter:
+        _and:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: class
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - class_id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: person
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - person_id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+      limit: 200

@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 
-
 class EditStoreLocationMap extends StatelessWidget {
   final Store initialStore;
   final GeomapOptions geomapOptions;
@@ -20,7 +19,11 @@ class EditStoreLocationMap extends StatelessWidget {
       onSaved: onSaved,
       initialObject: initialStore,
       getLocation: (s) => s.geolocation,
-      copyWithNewLocation: (s, l) => s.copyWith(geolocation: l),
+      copyWithNewLocation:
+          (s, l) => s.copyWith(
+            address:
+                s.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
+          ),
       geomapOptions: geomapOptions,
     );
   }

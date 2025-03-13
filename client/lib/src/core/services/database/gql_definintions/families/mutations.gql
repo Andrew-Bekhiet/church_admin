@@ -1,4 +1,4 @@
-mutation deleteFamily($familyId: Uuid!) {
+mutation deleteFamily($familyId: uuid!) {
   deleteFamiliesByPk(id: $familyId) {
     ...Family
   }
@@ -11,18 +11,26 @@ mutation insertFamily($newFamily: FamiliesInsertInput!) {
 }
 
 mutation updateFamily(
-  $familyId: Uuid!
+  $familyId: uuid!
   $newFamily: FamiliesSetInput!
-  $deleteParents: [Uuid!]!
-  $deleteChildren: [Uuid!]!
+  $addressId: uuid!
+  $newAddress: AddressesSetInput
+  $deleteParents: [uuid!]!
+  $deleteChildren: [uuid!]!
   $addRelatedFamilies: [FamiliesFamiliesInsertInput!]!
   $updateFamily: Boolean!
+  $updateAddress: Boolean!
   $deleteRelatedFamilies: Boolean!
   $insertRelatedFamilies: Boolean!
 ) {
   updateFamiliesByPk(pkColumns: { id: $familyId }, _set: $newFamily)
     @include(if: $updateFamily) {
     ...Family
+  }
+
+  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
+    @include(if: $updateAddress) {
+    ...Address
   }
 
   deleteFamiliesFamilies(

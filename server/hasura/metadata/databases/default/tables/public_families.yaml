@@ -2,6 +2,13 @@ table:
   name: families
   schema: public
 object_relationships:
+  - name: address
+    using:
+      foreign_key_constraint_on:
+        column: family_id
+        table:
+          name: addresses
+          schema: public
   - name: lastEdit
     using:
       manual_configuration:
@@ -51,40 +58,35 @@ array_relationships:
         table:
           name: stores
           schema: public
-computed_fields:
-  - name: areas
-    definition:
-      function:
-        name: family_areas
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_family
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_family
-        schema: public
-      session_argument: hasura_session
-  - name: streets
-    definition:
-      function:
-        name: family_streets
-        schema: public
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
       check:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: family
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       columns:
-        - address
+        - address_text
         - color
         - geolocation
         - name
@@ -93,7 +95,7 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - blurhash
         - color
         - geolocation
@@ -102,31 +104,119 @@ select_permissions:
         - notes
         - photo_updated_at
       filter:
-        _and:
-          - isUserAllowedToRead:
-              _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
       limit: 200
 update_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - color
         - geolocation
         - name
         - notes
       filter:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: writeAllData
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
       check:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: writeAllData
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: family
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
 delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
-          - isUserAllowedToWrite:
-              _eq: true
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: writeAllData

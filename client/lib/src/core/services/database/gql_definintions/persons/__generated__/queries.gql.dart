@@ -1515,7 +1515,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'areasIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1527,7 +1527,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'streetsIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1539,7 +1539,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'familiesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1551,7 +1551,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'storesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -1601,7 +1601,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'streets'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'streetId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1615,29 +1615,42 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'families'),
+                      name: NameNode(value: 'addresses'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'familiesIds')),
-                            )
+                          name: NameNode(value: '_or'),
+                          value: ListValueNode(values: [
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'familyId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'familiesIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'family'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: 'persons'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                        name: NameNode(value: '_and'),
+                                        value: VariableNode(
+                                            name: NameNode(
+                                                value: 'personsConditions')),
+                                      )
+                                    ]),
+                                  )
+                                ]),
+                              )
+                            ]),
                           ]),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'persons'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_and'),
-                          value: VariableNode(
-                              name: NameNode(value: 'personsConditions')),
                         )
                       ]),
                     )
@@ -1715,7 +1728,7 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                       name: NameNode(value: 'areas'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
+                          name: NameNode(value: 'areaId'),
                           value: ObjectValueNode(fields: [
                             ObjectFieldNode(
                               name: NameNode(value: '_in'),
@@ -1729,29 +1742,42 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'families'),
+                      name: NameNode(value: 'addresses'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'familiesIds')),
-                            )
+                          name: NameNode(value: '_or'),
+                          value: ListValueNode(values: [
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'familyId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'familiesIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'family'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: 'persons'),
+                                    value: ObjectValueNode(fields: [
+                                      ObjectFieldNode(
+                                        name: NameNode(value: '_and'),
+                                        value: VariableNode(
+                                            name: NameNode(
+                                                value: 'personsConditions')),
+                                      )
+                                    ]),
+                                  )
+                                ]),
+                              )
+                            ]),
                           ]),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'persons'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_and'),
-                          value: VariableNode(
-                              name: NameNode(value: 'personsConditions')),
                         )
                       ]),
                     )
@@ -1826,33 +1852,35 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'areas'),
+                      name: NameNode(value: 'address'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'areasIds')),
-                            )
-                          ]),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'streets'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'streetsIds')),
-                            )
+                          name: NameNode(value: '_or'),
+                          value: ListValueNode(values: [
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'areaId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'areasIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'streetId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'streetsIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
                           ]),
                         )
                       ]),
@@ -1974,33 +2002,35 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                   ]),
                   ObjectValueNode(fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'streets'),
+                      name: NameNode(value: 'address'),
                       value: ObjectValueNode(fields: [
                         ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'streetsIds')),
-                            )
-                          ]),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'areas'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: 'id'),
-                          value: ObjectValueNode(fields: [
-                            ObjectFieldNode(
-                              name: NameNode(value: '_in'),
-                              value: VariableNode(
-                                  name: NameNode(value: 'areasIds')),
-                            )
+                          name: NameNode(value: '_or'),
+                          value: ListValueNode(values: [
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'areaId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'areasIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
+                            ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'streetId'),
+                                value: ObjectValueNode(fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_in'),
+                                    value: VariableNode(
+                                        name: NameNode(value: 'streetsIds')),
+                                  )
+                                ]),
+                              )
+                            ]),
                           ]),
                         )
                       ]),
@@ -3662,7 +3692,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateFrom')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3671,7 +3701,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'dateTo')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3680,7 +3710,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'timeFrom')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3689,7 +3719,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'timeTo')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3698,7 +3728,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -3708,7 +3738,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'groupsIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -3720,7 +3750,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'classesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -3732,7 +3762,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'servicesIds')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -4623,7 +4653,7 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
                 name: NameNode(value: 'where'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'id'),
+                    name: NameNode(value: 'classId'),
                     value: ObjectValueNode(fields: [
                       ObjectFieldNode(
                         name: NameNode(value: '_in'),
@@ -4637,71 +4667,108 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'ClassNoPhoto'),
-                directives: [],
-              ),
               FieldNode(
-                name: NameNode(value: 'attendanceHistoryAggregate'),
+                name: NameNode(value: 'class'),
                 alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'where'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'dayId'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: '_gte'),
-                            value:
-                                VariableNode(name: NameNode(value: 'dateFrom')),
-                          ),
-                          ObjectFieldNode(
-                            name: NameNode(value: '_lte'),
-                            value:
-                                VariableNode(name: NameNode(value: 'dateTo')),
-                          ),
-                        ]),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: '_eq'),
-                            value:
-                                VariableNode(name: NameNode(value: 'personId')),
-                          )
-                        ]),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'asAdmin'),
-                        value: ObjectValueNode(fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: '_eq'),
-                            value: BooleanValueNode(value: false),
-                          )
-                        ]),
-                      ),
-                    ]),
-                  )
-                ],
+                arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'ClassNoPhoto'),
+                    directives: [],
+                  ),
                   FieldNode(
-                    name: NameNode(value: 'aggregate'),
+                    name: NameNode(value: 'attendanceHistoryAggregate'),
                     alias: null,
-                    arguments: [],
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'dayId'),
+                            value: ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateFrom')),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: '_lte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateTo')),
+                              ),
+                            ]),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_eq'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'personId')),
+                              )
+                            ]),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'asAdmin'),
+                            value: ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_eq'),
+                                value: BooleanValueNode(value: false),
+                              )
+                            ]),
+                          ),
+                        ]),
+                      )
+                    ],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
-                        name: NameNode(value: 'count'),
+                        name: NameNode(value: 'aggregate'),
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: null,
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: 'max'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: SelectionSetNode(selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ]),
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
                       ),
                       FieldNode(
-                        name: NameNode(value: 'max'),
+                        name: NameNode(value: 'nodes'),
                         alias: null,
                         arguments: [],
                         directives: [],
@@ -4732,97 +4799,75 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(definitions: [
                     ]),
                   ),
                   FieldNode(
-                    name: NameNode(value: 'nodes'),
+                    name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
                     alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: SelectionSetNode(selections: [
-                      FieldNode(
-                        name: NameNode(value: 'dayId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ]),
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
-                alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'where'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'dayId'),
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_gte'),
-                            value:
-                                VariableNode(name: NameNode(value: 'dateFrom')),
-                          ),
-                          ObjectFieldNode(
-                            name: NameNode(value: '_lte'),
-                            value:
-                                VariableNode(name: NameNode(value: 'dateTo')),
-                          ),
+                            name: NameNode(value: 'dayId'),
+                            value: ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_gte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateFrom')),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: '_lte'),
+                                value: VariableNode(
+                                    name: NameNode(value: 'dateTo')),
+                              ),
+                            ]),
+                          )
                         ]),
                       )
-                    ]),
-                  )
-                ],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'aggregate'),
-                    alias: null,
-                    arguments: [],
+                    ],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
-                        name: NameNode(value: 'count'),
+                        name: NameNode(value: 'aggregate'),
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: null,
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'count'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
                       ),
                       FieldNode(
-                        name: NameNode(value: '__typename'),
+                        name: NameNode(value: 'nodes'),
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: null,
-                      ),
-                    ]),
-                  ),
-                  FieldNode(
-                    name: NameNode(value: 'nodes'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: SelectionSetNode(selections: [
-                      FieldNode(
-                        name: NameNode(value: 'dayId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                            name: NameNode(value: 'dayId'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                          FieldNode(
+                            name: NameNode(value: '__typename'),
+                            alias: null,
+                            arguments: [],
+                            directives: [],
+                            selectionSet: null,
+                          ),
+                        ]),
                       ),
                       FieldNode(
                         name: NameNode(value: '__typename'),
@@ -5134,7 +5179,7 @@ class Query_personHistoryAnalysis_personsByPk {
     this.kodasHistoryAggregate,
     this.confessionHistoryAggregate,
     required this.services,
-    this.classes,
+    required this.classes,
     required this.groups,
     this.$__typename = 'Persons',
   });
@@ -5179,8 +5224,8 @@ class Query_personHistoryAnalysis_personsByPk {
           .map((e) => Query_personHistoryAnalysis_personsByPk_services.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
-      classes: (l$classes as List<dynamic>?)
-          ?.map((e) => Query_personHistoryAnalysis_personsByPk_classes.fromJson(
+      classes: (l$classes as List<dynamic>)
+          .map((e) => Query_personHistoryAnalysis_personsByPk_classes.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       groups: (l$groups as List<dynamic>)
@@ -5212,7 +5257,7 @@ class Query_personHistoryAnalysis_personsByPk {
 
   final List<Query_personHistoryAnalysis_personsByPk_services> services;
 
-  final List<Query_personHistoryAnalysis_personsByPk_classes>? classes;
+  final List<Query_personHistoryAnalysis_personsByPk_classes> classes;
 
   final List<Query_personHistoryAnalysis_personsByPk_groups> groups;
 
@@ -5238,7 +5283,7 @@ class Query_personHistoryAnalysis_personsByPk {
     final l$services = services;
     _resultData['services'] = l$services.map((e) => e.toJson()).toList();
     final l$classes = classes;
-    _resultData['classes'] = l$classes?.map((e) => e.toJson()).toList();
+    _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$groups = groups;
     _resultData['groups'] = l$groups.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -5268,7 +5313,7 @@ class Query_personHistoryAnalysis_personsByPk {
       l$kodasHistoryAggregate,
       l$confessionHistoryAggregate,
       Object.hashAll(l$services.map((v) => v)),
-      l$classes == null ? null : Object.hashAll(l$classes.map((v) => v)),
+      Object.hashAll(l$classes.map((v) => v)),
       Object.hashAll(l$groups.map((v) => v)),
       l$$__typename,
     ]);
@@ -5332,19 +5377,15 @@ class Query_personHistoryAnalysis_personsByPk {
     }
     final l$classes = classes;
     final lOther$classes = other.classes;
-    if (l$classes != null && lOther$classes != null) {
-      if (l$classes.length != lOther$classes.length) {
+    if (l$classes.length != lOther$classes.length) {
+      return false;
+    }
+    for (int i = 0; i < l$classes.length; i++) {
+      final l$classes$entry = l$classes[i];
+      final lOther$classes$entry = lOther$classes[i];
+      if (l$classes$entry != lOther$classes$entry) {
         return false;
       }
-      for (int i = 0; i < l$classes.length; i++) {
-        final l$classes$entry = l$classes[i];
-        final lOther$classes$entry = lOther$classes[i];
-        if (l$classes$entry != lOther$classes$entry) {
-          return false;
-        }
-      }
-    } else if (l$classes != lOther$classes) {
-      return false;
     }
     final l$groups = groups;
     final lOther$groups = other.groups;
@@ -5421,10 +5462,10 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
                       Query_personHistoryAnalysis_personsByPk_services>>)
           _fn);
   TRes classes(
-      Iterable<Query_personHistoryAnalysis_personsByPk_classes>? Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes> Function(
               Iterable<
                   CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-                      Query_personHistoryAnalysis_personsByPk_classes>>?)
+                      Query_personHistoryAnalysis_personsByPk_classes>>)
           _fn);
   TRes groups(
       Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
@@ -5489,10 +5530,10 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
             ? _instance.services
             : (services
                 as List<Query_personHistoryAnalysis_personsByPk_services>),
-        classes: classes == _undefined
+        classes: classes == _undefined || classes == null
             ? _instance.classes
             : (classes
-                as List<Query_personHistoryAnalysis_personsByPk_classes>?),
+                as List<Query_personHistoryAnalysis_personsByPk_classes>),
         groups: groups == _undefined || groups == null
             ? _instance.groups
             : (groups as List<Query_personHistoryAnalysis_personsByPk_groups>),
@@ -5567,17 +5608,17 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
                   ))).toList());
 
   TRes classes(
-          Iterable<Query_personHistoryAnalysis_personsByPk_classes>? Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes> Function(
                   Iterable<
                       CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-                          Query_personHistoryAnalysis_personsByPk_classes>>?)
+                          Query_personHistoryAnalysis_personsByPk_classes>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes?.map(
+          classes: _fn(_instance.classes.map(
               (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
                     e,
                     (i) => i,
-                  )))?.toList());
+                  ))).toList());
 
   TRes groups(
           Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
@@ -10781,9 +10822,158 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service
       _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes
-    implements Fragment_ClassNoPhoto {
+class Query_personHistoryAnalysis_personsByPk_classes {
   Query_personHistoryAnalysis_personsByPk_classes({
+    this.$class,
+    this.$__typename = 'ClassesPersons',
+  });
+
+  factory Query_personHistoryAnalysis_personsByPk_classes.fromJson(
+      Map<String, dynamic> json) {
+    final l$$class = json['class'];
+    final l$$__typename = json['__typename'];
+    return Query_personHistoryAnalysis_personsByPk_classes(
+      $class: l$$class == null
+          ? null
+          : Query_personHistoryAnalysis_personsByPk_classes_class.fromJson(
+              (l$$class as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_personHistoryAnalysis_personsByPk_classes_class? $class;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$class = $class;
+    _resultData['class'] = l$$class?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$class = $class;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$$class,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personHistoryAnalysis_personsByPk_classes ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$class = $class;
+    final lOther$$class = other.$class;
+    if (l$$class != lOther$$class) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes
+    on Query_personHistoryAnalysis_personsByPk_classes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
+          Query_personHistoryAnalysis_personsByPk_classes>
+      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
+    Query_personHistoryAnalysis_personsByPk_classes instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_classes) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes;
+
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes.stub(
+          TRes res) =
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes;
+
+  TRes call({
+    Query_personHistoryAnalysis_personsByPk_classes_class? $class,
+    String? $__typename,
+  });
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
+      get $class;
+}
+
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personHistoryAnalysis_personsByPk_classes _instance;
+
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_classes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $class = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query_personHistoryAnalysis_personsByPk_classes(
+        $class: $class == _undefined
+            ? _instance.$class
+            : ($class
+                as Query_personHistoryAnalysis_personsByPk_classes_class?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
+      get $class {
+    final local$$class = _instance.$class;
+    return local$$class == null
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class.stub(
+            _then(_instance))
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class(
+            local$$class, (e) => call($class: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
+    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes(this._res);
+
+  TRes _res;
+
+  call({
+    Query_personHistoryAnalysis_personsByPk_classes_class? $class,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
+      get $class =>
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class.stub(
+              _res);
+}
+
+class Query_personHistoryAnalysis_personsByPk_classes_class
+    implements Fragment_ClassNoPhoto {
+  Query_personHistoryAnalysis_personsByPk_classes_class({
     required this.id,
     required this.name,
     this.color,
@@ -10792,7 +10982,7 @@ class Query_personHistoryAnalysis_personsByPk_classes
     required this.attendanceDaysConstraintsAggregate,
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -10801,16 +10991,16 @@ class Query_personHistoryAnalysis_personsByPk_classes
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
         json['attendanceDaysConstraintsAggregate'];
-    return Query_personHistoryAnalysis_personsByPk_classes(
+    return Query_personHistoryAnalysis_personsByPk_classes_class(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
       attendanceDaysConstraintsAggregate:
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
               .fromJson((l$attendanceDaysConstraintsAggregate
                   as Map<String, dynamic>)),
     );
@@ -10824,10 +11014,10 @@ class Query_personHistoryAnalysis_personsByPk_classes
 
   final String $__typename;
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
       attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
@@ -10874,7 +11064,7 @@ class Query_personHistoryAnalysis_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personHistoryAnalysis_personsByPk_classes ||
+    if (other is! Query_personHistoryAnalysis_personsByPk_classes_class ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -10915,52 +11105,56 @@ class Query_personHistoryAnalysis_personsByPk_classes
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes
-    on Query_personHistoryAnalysis_personsByPk_classes {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-          Query_personHistoryAnalysis_personsByPk_classes>
-      get copyWith => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class
+    on Query_personHistoryAnalysis_personsByPk_classes_class {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<
+          Query_personHistoryAnalysis_personsByPk_classes_class>
+      get copyWith =>
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
-    Query_personHistoryAnalysis_personsByPk_classes instance,
-    TRes Function(Query_personHistoryAnalysis_personsByPk_classes) then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes;
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<
+    TRes> {
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class(
+    Query_personHistoryAnalysis_personsByPk_classes_class instance,
+    TRes Function(Query_personHistoryAnalysis_personsByPk_classes_class) then,
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class;
 
   TRes call({
     UuidValue? id,
     String? name,
     int? color,
     String? $__typename,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   });
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate;
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes(
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
+    implements
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<TRes> {
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes _instance;
+  final Query_personHistoryAnalysis_personsByPk_classes_class _instance;
 
-  final TRes Function(Query_personHistoryAnalysis_personsByPk_classes) _then;
+  final TRes Function(Query_personHistoryAnalysis_personsByPk_classes_class)
+      _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -10972,7 +11166,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
   }) =>
-      _then(Query_personHistoryAnalysis_personsByPk_classes(
+      _then(Query_personHistoryAnalysis_personsByPk_classes_class(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -10985,37 +11179,40 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate),
+                as Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate),
         attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
                     _undefined ||
                 attendanceDaysConstraintsAggregate == null
             ? _instance.attendanceDaysConstraintsAggregate
             : (attendanceDaysConstraintsAggregate
-                as Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate),
+                as Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate),
       ));
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
       TRes> get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
-    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+    return CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
         local$attendanceDaysConstraintsAggregate,
         (e) => call(attendanceDaysConstraintsAggregate: e));
   }
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes(this._res);
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class<
+        TRes>
+    implements
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<TRes> {
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class(
+      this._res);
 
   TRes _res;
 
@@ -11024,57 +11221,57 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
     String? name,
     int? color,
     String? $__typename,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate?
         attendanceDaysConstraintsAggregate,
   }) =>
       _res;
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
               .stub(_res);
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
           TRes>
       get attendanceDaysConstraintsAggregate =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
               .stub(_res);
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+          : Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
+              Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final List<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -11108,7 +11305,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11138,63 +11335,63 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate;
 
   TRes call({
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes> Function(
               Iterable<
-                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
-                      Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11205,89 +11402,89 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>),
+                Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes> Function(
                   Iterable<
-                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
-                          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
         aggregate,
-    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
               .stub(_res);
 
   nodes(_fn) => _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate({
     required this.count,
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+          : Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
@@ -11295,7 +11492,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
 
   final int count;
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -11329,7 +11526,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11352,56 +11549,56 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11412,66 +11609,66 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
         max: max == _undefined
             ? _instance.max
             : (max
-                as Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?),
+                as Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
     int? count,
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max({
     this.dayId,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
       dayId: l$dayId == null ? null : dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -11506,7 +11703,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11524,30 +11721,30 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? dayId,
@@ -11555,21 +11752,21 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendan
   });
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11579,7 +11776,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
         dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -11587,12 +11784,12 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
       ));
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;
@@ -11604,17 +11801,17 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendan
       _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -11649,7 +11846,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11667,30 +11864,30 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -11698,21 +11895,21 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendan
   });
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11722,7 +11919,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -11732,12 +11929,12 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHi
       ));
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceHistoryAggregate_nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -11749,37 +11946,37 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendan
       _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate({
     this.aggregate,
     required this.nodes,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregate',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+          : Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       nodes: (l$nodes as List<dynamic>)
           .map((e) =>
-              Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
+              Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes
                   .fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate?
       aggregate;
 
   final List<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>
       nodes;
 
   final String $__typename;
@@ -11813,7 +12010,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -11843,63 +12040,63 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate;
 
   TRes call({
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   });
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate;
   TRes nodes(
-      Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes> Function(
+      Iterable<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes> Function(
               Iterable<
-                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
-                      Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>>)
+                  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
+                      Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>>)
           _fn);
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -11910,83 +12107,83 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?),
+                as Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate?),
         nodes: nodes == _undefined || nodes == null
             ? _instance.nodes
             : (nodes as List<
-                Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>),
+                Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+        ? CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+        : CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 
   TRes nodes(
-          Iterable<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes> Function(
+          Iterable<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes> Function(
                   Iterable<
-                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
-                          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>>)
+                      CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
+                          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>>)
               _fn) =>
       call(
           nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+              CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
                 e,
                 (i) => i,
               ))).toList());
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate?
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate?
         aggregate,
-    List<Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>?
+    List<Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>?
         nodes,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
               .stub(_res);
 
   nodes(_fn) => _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate({
     required this.count,
     this.$__typename = 'HistoryAttendanceDaysConstraintsAggregateFields',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -12021,7 +12218,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12039,30 +12236,30 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate;
 
   TRes call({
     int? count,
@@ -12070,21 +12267,21 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendan
   });
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12094,7 +12291,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
         count: count == _undefined || count == null
             ? _instance.count
             : (count as int),
@@ -12104,12 +12301,12 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDa
       ));
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_aggregate(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_aggregate(
       this._res);
 
   TRes _res;
@@ -12121,17 +12318,17 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendan
       _res;
 }
 
-class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes {
-  Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes({
+class Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes {
+  Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes({
     required this.dayId,
     this.$__typename = 'HistoryAttendanceDaysConstraints',
   });
 
-  factory Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes.fromJson(
+  factory Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes.fromJson(
       Map<String, dynamic> json) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+    return Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
       dayId: dateFromString(l$dayId),
       $__typename: (l$$__typename as String),
     );
@@ -12166,7 +12363,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
       return true;
     }
     if (other
-            is! Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes ||
+            is! Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -12184,30 +12381,30 @@ class Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsA
   }
 }
 
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
-    on Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes>
+extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes
+    on Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes {
+  CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes>
       get copyWith =>
-          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+          CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
     TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
-    Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
+    Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes
         instance,
     TRes Function(
-            Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes)
+            Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes)
         then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes;
+  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes;
 
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes.stub(
+  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes;
+      _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes;
 
   TRes call({
     DateTime? dayId,
@@ -12215,21 +12412,21 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendan
   });
 }
 
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
-  final Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes
+  final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes
       _instance;
 
   final TRes Function(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes)
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -12239,7 +12436,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDa
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+          Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
         dayId: dayId == _undefined || dayId == null
             ? _instance.dayId
             : (dayId as DateTime),
@@ -12249,12 +12446,12 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDa
       ));
 }
 
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
         TRes>
     implements
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes<
+        CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes<
             TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_attendanceDaysConstraintsAggregate_nodes(
+  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class_attendanceDaysConstraintsAggregate_nodes(
       this._res);
 
   TRes _res;
@@ -14151,7 +14348,7 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -14242,27 +14439,47 @@ const documentNodeQuerypersonServicesClassesGroups = DocumentNode(definitions: [
                 name: NameNode(value: 'orderBy'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    name: NameNode(value: 'class'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
                   )
                 ]),
               )
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Class'),
-                directives: [],
-              ),
               FieldNode(
-                name: NameNode(value: 'service'),
+                name: NameNode(value: 'class'),
                 alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
                   FragmentSpreadNode(
-                    name: NameNode(value: 'ServiceWithStudyYears'),
+                    name: NameNode(value: 'Class'),
                     directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'service'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: SelectionSetNode(selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'ServiceWithStudyYears'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ]),
                   ),
                   FieldNode(
                     name: NameNode(value: '__typename'),
@@ -14381,7 +14598,7 @@ class Query_personServicesClassesGroups_personsByPk {
     required this.id,
     required this.name,
     required this.services,
-    this.classes,
+    required this.classes,
     required this.groups,
     this.$__typename = 'Persons',
   });
@@ -14402,8 +14619,8 @@ class Query_personServicesClassesGroups_personsByPk {
               Query_personServicesClassesGroups_personsByPk_services.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
-      classes: (l$classes as List<dynamic>?)
-          ?.map((e) =>
+      classes: (l$classes as List<dynamic>)
+          .map((e) =>
               Query_personServicesClassesGroups_personsByPk_classes.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
@@ -14422,7 +14639,7 @@ class Query_personServicesClassesGroups_personsByPk {
 
   final List<Query_personServicesClassesGroups_personsByPk_services> services;
 
-  final List<Query_personServicesClassesGroups_personsByPk_classes>? classes;
+  final List<Query_personServicesClassesGroups_personsByPk_classes> classes;
 
   final List<Query_personServicesClassesGroups_personsByPk_groups> groups;
 
@@ -14437,7 +14654,7 @@ class Query_personServicesClassesGroups_personsByPk {
     final l$services = services;
     _resultData['services'] = l$services.map((e) => e.toJson()).toList();
     final l$classes = classes;
-    _resultData['classes'] = l$classes?.map((e) => e.toJson()).toList();
+    _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$groups = groups;
     _resultData['groups'] = l$groups.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
@@ -14457,7 +14674,7 @@ class Query_personServicesClassesGroups_personsByPk {
       l$id,
       l$name,
       Object.hashAll(l$services.map((v) => v)),
-      l$classes == null ? null : Object.hashAll(l$classes.map((v) => v)),
+      Object.hashAll(l$classes.map((v) => v)),
       Object.hashAll(l$groups.map((v) => v)),
       l$$__typename,
     ]);
@@ -14496,19 +14713,15 @@ class Query_personServicesClassesGroups_personsByPk {
     }
     final l$classes = classes;
     final lOther$classes = other.classes;
-    if (l$classes != null && lOther$classes != null) {
-      if (l$classes.length != lOther$classes.length) {
+    if (l$classes.length != lOther$classes.length) {
+      return false;
+    }
+    for (int i = 0; i < l$classes.length; i++) {
+      final l$classes$entry = l$classes[i];
+      final lOther$classes$entry = lOther$classes[i];
+      if (l$classes$entry != lOther$classes$entry) {
         return false;
       }
-      for (int i = 0; i < l$classes.length; i++) {
-        final l$classes$entry = l$classes[i];
-        final lOther$classes$entry = lOther$classes[i];
-        if (l$classes$entry != lOther$classes$entry) {
-          return false;
-        }
-      }
-    } else if (l$classes != lOther$classes) {
-      return false;
     }
     final l$groups = groups;
     final lOther$groups = other.groups;
@@ -14566,10 +14779,10 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk<TRes> {
                       Query_personServicesClassesGroups_personsByPk_services>>)
           _fn);
   TRes classes(
-      Iterable<Query_personServicesClassesGroups_personsByPk_classes>? Function(
+      Iterable<Query_personServicesClassesGroups_personsByPk_classes> Function(
               Iterable<
                   CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
-                      Query_personServicesClassesGroups_personsByPk_classes>>?)
+                      Query_personServicesClassesGroups_personsByPk_classes>>)
           _fn);
   TRes groups(
       Iterable<Query_personServicesClassesGroups_personsByPk_groups> Function(
@@ -14609,10 +14822,10 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk<TRes>
             ? _instance.services
             : (services as List<
                 Query_personServicesClassesGroups_personsByPk_services>),
-        classes: classes == _undefined
+        classes: classes == _undefined || classes == null
             ? _instance.classes
-            : (classes as List<
-                Query_personServicesClassesGroups_personsByPk_classes>?),
+            : (classes
+                as List<Query_personServicesClassesGroups_personsByPk_classes>),
         groups: groups == _undefined || groups == null
             ? _instance.groups
             : (groups
@@ -14636,17 +14849,17 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk<TRes>
               ))).toList());
 
   TRes classes(
-          Iterable<Query_personServicesClassesGroups_personsByPk_classes>? Function(
+          Iterable<Query_personServicesClassesGroups_personsByPk_classes> Function(
                   Iterable<
                       CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
-                          Query_personServicesClassesGroups_personsByPk_classes>>?)
+                          Query_personServicesClassesGroups_personsByPk_classes>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes?.map((e) =>
+          classes: _fn(_instance.classes.map((e) =>
               CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
                 e,
                 (i) => i,
-              )))?.toList());
+              ))).toList());
 
   TRes groups(
           Iterable<Query_personServicesClassesGroups_personsByPk_groups> Function(
@@ -14831,9 +15044,165 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_services<
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
 }
 
-class Query_personServicesClassesGroups_personsByPk_classes
-    implements Fragment_Class, Fragment_ClassNoPhoto {
+class Query_personServicesClassesGroups_personsByPk_classes {
   Query_personServicesClassesGroups_personsByPk_classes({
+    this.$class,
+    this.$__typename = 'ClassesPersons',
+  });
+
+  factory Query_personServicesClassesGroups_personsByPk_classes.fromJson(
+      Map<String, dynamic> json) {
+    final l$$class = json['class'];
+    final l$$__typename = json['__typename'];
+    return Query_personServicesClassesGroups_personsByPk_classes(
+      $class: l$$class == null
+          ? null
+          : Query_personServicesClassesGroups_personsByPk_classes_class
+              .fromJson((l$$class as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query_personServicesClassesGroups_personsByPk_classes_class? $class;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$class = $class;
+    _resultData['class'] = l$$class?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$class = $class;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$$class,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personServicesClassesGroups_personsByPk_classes ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$class = $class;
+    final lOther$$class = other.$class;
+    if (l$$class != lOther$$class) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes
+    on Query_personServicesClassesGroups_personsByPk_classes {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+          Query_personServicesClassesGroups_personsByPk_classes>
+      get copyWith =>
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+    TRes> {
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
+    Query_personServicesClassesGroups_personsByPk_classes instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_classes) then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes;
+
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes.stub(
+          TRes res) =
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes;
+
+  TRes call({
+    Query_personServicesClassesGroups_personsByPk_classes_class? $class,
+    String? $__typename,
+  });
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<TRes>
+      get $class;
+}
+
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
+    implements
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personServicesClassesGroups_personsByPk_classes _instance;
+
+  final TRes Function(Query_personServicesClassesGroups_personsByPk_classes)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $class = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query_personServicesClassesGroups_personsByPk_classes(
+        $class: $class == _undefined
+            ? _instance.$class
+            : ($class
+                as Query_personServicesClassesGroups_personsByPk_classes_class?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<TRes>
+      get $class {
+    final local$$class = _instance.$class;
+    return local$$class == null
+        ? CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class
+            .stub(_then(_instance))
+        : CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class(
+            local$$class, (e) => call($class: e));
+  }
+}
+
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes<
+        TRes>
+    implements
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes(
+      this._res);
+
+  TRes _res;
+
+  call({
+    Query_personServicesClassesGroups_personsByPk_classes_class? $class,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<TRes>
+      get $class =>
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class
+              .stub(_res);
+}
+
+class Query_personServicesClassesGroups_personsByPk_classes_class
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Query_personServicesClassesGroups_personsByPk_classes_class({
     required this.id,
     required this.name,
     this.color,
@@ -14843,7 +15212,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     required this.service,
   });
 
-  factory Query_personServicesClassesGroups_personsByPk_classes.fromJson(
+  factory Query_personServicesClassesGroups_personsByPk_classes_class.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -14852,7 +15221,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$service = json['service'];
-    return Query_personServicesClassesGroups_personsByPk_classes(
+    return Query_personServicesClassesGroups_personsByPk_classes_class(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -14924,7 +15293,7 @@ class Query_personServicesClassesGroups_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Query_personServicesClassesGroups_personsByPk_classes ||
+    if (other is! Query_personServicesClassesGroups_personsByPk_classes_class ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -14967,27 +15336,28 @@ class Query_personServicesClassesGroups_personsByPk_classes
   }
 }
 
-extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes
-    on Query_personServicesClassesGroups_personsByPk_classes {
-  CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
-          Query_personServicesClassesGroups_personsByPk_classes>
+extension UtilityExtension_Query_personServicesClassesGroups_personsByPk_classes_class
+    on Query_personServicesClassesGroups_personsByPk_classes_class {
+  CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<
+          Query_personServicesClassesGroups_personsByPk_classes_class>
       get copyWith =>
-          CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
+          CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
+abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<
     TRes> {
-  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes(
-    Query_personServicesClassesGroups_personsByPk_classes instance,
-    TRes Function(Query_personServicesClassesGroups_personsByPk_classes) then,
-  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes;
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class(
+    Query_personServicesClassesGroups_personsByPk_classes_class instance,
+    TRes Function(Query_personServicesClassesGroups_personsByPk_classes_class)
+        then,
+  ) = _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_class;
 
-  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes.stub(
+  factory CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class.stub(
           TRes res) =
-      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes;
+      _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_class;
 
   TRes call({
     UuidValue? id,
@@ -15001,18 +15371,20 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes<
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
 }
 
-class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
+class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_class<
+        TRes>
     implements
-        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
-  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<
+            TRes> {
+  _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_class(
     this._instance,
     this._then,
   );
 
-  final Query_personServicesClassesGroups_personsByPk_classes _instance;
+  final Query_personServicesClassesGroups_personsByPk_classes_class _instance;
 
-  final TRes Function(Query_personServicesClassesGroups_personsByPk_classes)
-      _then;
+  final TRes Function(
+      Query_personServicesClassesGroups_personsByPk_classes_class) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -15025,7 +15397,7 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
     Object? blurhash = _undefined,
     Object? service = _undefined,
   }) =>
-      _then(Query_personServicesClassesGroups_personsByPk_classes(
+      _then(Query_personServicesClassesGroups_personsByPk_classes_class(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -15051,11 +15423,12 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes<TRes>
   }
 }
 
-class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes<
+class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_class<
         TRes>
     implements
-        CopyWith_Query_personServicesClassesGroups_personsByPk_classes<TRes> {
-  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes(
+        CopyWith_Query_personServicesClassesGroups_personsByPk_classes_class<
+            TRes> {
+  _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_class(
       this._res);
 
   TRes _res;

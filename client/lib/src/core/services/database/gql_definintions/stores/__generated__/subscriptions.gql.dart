@@ -632,7 +632,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -657,52 +657,13 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
-            name: NameNode(value: 'areas'),
+            name: NameNode(value: 'address'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
-                  )
-                ]),
-              )
-            ],
+            arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'Area'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'streets'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
-                  )
-                ]),
-              )
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Street'),
+                name: NameNode(value: 'Address'),
                 directives: [],
               ),
               FieldNode(
@@ -732,20 +693,6 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
                 selectionSet: null,
               ),
             ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'address'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'geolocation'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
           FieldNode(
             name: NameNode(value: 'family'),
@@ -779,6 +726,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
   ),
   fragmentDefinitionStore,
   fragmentDefinitionStoreNoPhoto,
+  fragmentDefinitionAddress,
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
   fragmentDefinitionStreet,
@@ -799,11 +747,8 @@ class Subscription_watchStore_storesByPk
     this.$__typename = 'Stores',
     this.photoUpdatedAt,
     this.blurhash,
-    this.areas,
-    this.streets,
-    this.lastEdit,
     this.address,
-    this.geolocation,
+    this.lastEdit,
     this.family,
   });
 
@@ -815,11 +760,8 @@ class Subscription_watchStore_storesByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
-    final l$areas = json['areas'];
-    final l$streets = json['streets'];
-    final l$lastEdit = json['lastEdit'];
     final l$address = json['address'];
-    final l$geolocation = json['geolocation'];
+    final l$lastEdit = json['lastEdit'];
     final l$family = json['family'];
     return Subscription_watchStore_storesByPk(
       id: stringToUuid(l$id),
@@ -829,18 +771,13 @@ class Subscription_watchStore_storesByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      streets: (l$streets as List<dynamic>?)
-          ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
-          .toList(),
+      address: l$address == null
+          ? null
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>)),
-      address: (l$address as String?),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
       family: l$family == null
           ? null
           : Fragment_Family.fromJson((l$family as Map<String, dynamic>)),
@@ -859,15 +796,9 @@ class Subscription_watchStore_storesByPk
 
   final String? blurhash;
 
-  final List<Fragment_Area>? areas;
-
-  final List<Fragment_Street>? streets;
+  final Fragment_Address? address;
 
   final Fragment_LatestEditHistory? lastEdit;
-
-  final String? address;
-
-  final Map<String, dynamic>? geolocation;
 
   final Fragment_Family? family;
 
@@ -886,16 +817,10 @@ class Subscription_watchStore_storesByPk
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
-    final l$areas = areas;
-    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
-    final l$streets = streets;
-    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
-    final l$address = address;
-    _resultData['address'] = l$address;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
     final l$family = family;
     _resultData['family'] = l$family?.toJson();
     return _resultData;
@@ -909,11 +834,8 @@ class Subscription_watchStore_storesByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
-    final l$areas = areas;
-    final l$streets = streets;
-    final l$lastEdit = lastEdit;
     final l$address = address;
-    final l$geolocation = geolocation;
+    final l$lastEdit = lastEdit;
     final l$family = family;
     return Object.hashAll([
       l$id,
@@ -922,11 +844,8 @@ class Subscription_watchStore_storesByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
-      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
-      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
-      l$lastEdit,
       l$address,
-      l$geolocation,
+      l$lastEdit,
       l$family,
     ]);
   }
@@ -970,51 +889,14 @@ class Subscription_watchStore_storesByPk
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
-    final l$areas = areas;
-    final lOther$areas = other.areas;
-    if (l$areas != null && lOther$areas != null) {
-      if (l$areas.length != lOther$areas.length) {
-        return false;
-      }
-      for (int i = 0; i < l$areas.length; i++) {
-        final l$areas$entry = l$areas[i];
-        final lOther$areas$entry = lOther$areas[i];
-        if (l$areas$entry != lOther$areas$entry) {
-          return false;
-        }
-      }
-    } else if (l$areas != lOther$areas) {
-      return false;
-    }
-    final l$streets = streets;
-    final lOther$streets = other.streets;
-    if (l$streets != null && lOther$streets != null) {
-      if (l$streets.length != lOther$streets.length) {
-        return false;
-      }
-      for (int i = 0; i < l$streets.length; i++) {
-        final l$streets$entry = l$streets[i];
-        final lOther$streets$entry = lOther$streets[i];
-        if (l$streets$entry != lOther$streets$entry) {
-          return false;
-        }
-      }
-    } else if (l$streets != lOther$streets) {
-      return false;
-    }
-    final l$lastEdit = lastEdit;
-    final lOther$lastEdit = other.lastEdit;
-    if (l$lastEdit != lOther$lastEdit) {
-      return false;
-    }
     final l$address = address;
     final lOther$address = other.address;
     if (l$address != lOther$address) {
       return false;
     }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
     final l$family = family;
@@ -1052,21 +934,11 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    Fragment_Address? address,
     Fragment_LatestEditHistory? lastEdit,
-    String? address,
-    Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   });
-  TRes areas(
-      Iterable<Fragment_Area>? Function(
-              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-          _fn);
-  TRes streets(
-      Iterable<Fragment_Street>? Function(
-              Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-          _fn);
+  CopyWith_Fragment_Address<TRes> get address;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   CopyWith_Fragment_Family<TRes> get family;
 }
@@ -1091,11 +963,8 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-    Object? areas = _undefined,
-    Object? streets = _undefined,
-    Object? lastEdit = _undefined,
     Object? address = _undefined,
-    Object? geolocation = _undefined,
+    Object? lastEdit = _undefined,
     Object? family = _undefined,
   }) =>
       _then(Subscription_watchStore_storesByPk(
@@ -1112,44 +981,23 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        areas: areas == _undefined
-            ? _instance.areas
-            : (areas as List<Fragment_Area>?),
-        streets: streets == _undefined
-            ? _instance.streets
-            : (streets as List<Fragment_Street>?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Fragment_Address?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
             : (lastEdit as Fragment_LatestEditHistory?),
-        address:
-            address == _undefined ? _instance.address : (address as String?),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
         family: family == _undefined
             ? _instance.family
             : (family as Fragment_Family?),
       ));
 
-  TRes areas(
-          Iterable<Fragment_Area>? Function(
-                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-              _fn) =>
-      call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
-                e,
-                (i) => i,
-              )))?.toList());
-
-  TRes streets(
-          Iterable<Fragment_Street>? Function(
-                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-              _fn) =>
-      call(
-          streets: _fn(_instance.streets?.map((e) => CopyWith_Fragment_Street(
-                e,
-                (i) => i,
-              )))?.toList());
+  CopyWith_Fragment_Address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
@@ -1180,18 +1028,14 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    Fragment_Address? address,
     Fragment_LatestEditHistory? lastEdit,
-    String? address,
-    Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   }) =>
       _res;
 
-  areas(_fn) => _res;
-
-  streets(_fn) => _res;
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);

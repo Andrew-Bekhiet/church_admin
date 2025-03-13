@@ -1,4 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../areas/__generated__/fragments.gql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
+import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -247,7 +250,7 @@ const documentNodeMutationdeletePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -297,6 +300,9 @@ class Variables_Mutation_updatePerson {
   factory Variables_Mutation_updatePerson({
     required UuidValue personId,
     required Input_PersonsSetInput newPerson,
+    required UuidValue addressId,
+    Input_AddressesSetInput? newAddress,
+    bool? updateAddressByPk,
     List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
     List<Input_PersonsServicesInsertInput>? newServices,
@@ -326,6 +332,9 @@ class Variables_Mutation_updatePerson {
       Variables_Mutation_updatePerson._({
         r'personId': personId,
         r'newPerson': newPerson,
+        r'addressId': addressId,
+        if (newAddress != null) r'newAddress': newAddress,
+        if (updateAddressByPk != null) r'updateAddressByPk': updateAddressByPk,
         if (newGroups != null) r'newGroups': newGroups,
         if (deleteGroups != null) r'deleteGroups': deleteGroups,
         if (newServices != null) r'newServices': newServices,
@@ -373,6 +382,19 @@ class Variables_Mutation_updatePerson {
     final l$newPerson = data['newPerson'];
     result$data['newPerson'] =
         Input_PersonsSetInput.fromJson((l$newPerson as Map<String, dynamic>));
+    final l$addressId = data['addressId'];
+    result$data['addressId'] = stringToUuid(l$addressId);
+    if (data.containsKey('newAddress')) {
+      final l$newAddress = data['newAddress'];
+      result$data['newAddress'] = l$newAddress == null
+          ? null
+          : Input_AddressesSetInput.fromJson(
+              (l$newAddress as Map<String, dynamic>));
+    }
+    if (data.containsKey('updateAddressByPk')) {
+      final l$updateAddressByPk = data['updateAddressByPk'];
+      result$data['updateAddressByPk'] = (l$updateAddressByPk as bool);
+    }
     if (data.containsKey('newGroups')) {
       final l$newGroups = data['newGroups'];
       result$data['newGroups'] = (l$newGroups as List<dynamic>)
@@ -514,6 +536,13 @@ class Variables_Mutation_updatePerson {
   Input_PersonsSetInput get newPerson =>
       (_$data['newPerson'] as Input_PersonsSetInput);
 
+  UuidValue get addressId => (_$data['addressId'] as UuidValue);
+
+  Input_AddressesSetInput? get newAddress =>
+      (_$data['newAddress'] as Input_AddressesSetInput?);
+
+  bool? get updateAddressByPk => (_$data['updateAddressByPk'] as bool?);
+
   List<Input_PersonsGroupsInsertInput>? get newGroups =>
       (_$data['newGroups'] as List<Input_PersonsGroupsInsertInput>?);
 
@@ -581,6 +610,16 @@ class Variables_Mutation_updatePerson {
     result$data['personId'] = uuidToString(l$personId);
     final l$newPerson = newPerson;
     result$data['newPerson'] = l$newPerson.toJson();
+    final l$addressId = addressId;
+    result$data['addressId'] = uuidToString(l$addressId);
+    if (_$data.containsKey('newAddress')) {
+      final l$newAddress = newAddress;
+      result$data['newAddress'] = l$newAddress?.toJson();
+    }
+    if (_$data.containsKey('updateAddressByPk')) {
+      final l$updateAddressByPk = updateAddressByPk;
+      result$data['updateAddressByPk'] = (l$updateAddressByPk as bool);
+    }
     if (_$data.containsKey('newGroups')) {
       final l$newGroups = newGroups;
       result$data['newGroups'] =
@@ -731,6 +770,29 @@ class Variables_Mutation_updatePerson {
     final l$newPerson = newPerson;
     final lOther$newPerson = other.newPerson;
     if (l$newPerson != lOther$newPerson) {
+      return false;
+    }
+    final l$addressId = addressId;
+    final lOther$addressId = other.addressId;
+    if (l$addressId != lOther$addressId) {
+      return false;
+    }
+    final l$newAddress = newAddress;
+    final lOther$newAddress = other.newAddress;
+    if (_$data.containsKey('newAddress') !=
+        other._$data.containsKey('newAddress')) {
+      return false;
+    }
+    if (l$newAddress != lOther$newAddress) {
+      return false;
+    }
+    final l$updateAddressByPk = updateAddressByPk;
+    final lOther$updateAddressByPk = other.updateAddressByPk;
+    if (_$data.containsKey('updateAddressByPk') !=
+        other._$data.containsKey('updateAddressByPk')) {
+      return false;
+    }
+    if (l$updateAddressByPk != lOther$updateAddressByPk) {
       return false;
     }
     final l$newGroups = newGroups;
@@ -1058,6 +1120,9 @@ class Variables_Mutation_updatePerson {
   int get hashCode {
     final l$personId = personId;
     final l$newPerson = newPerson;
+    final l$addressId = addressId;
+    final l$newAddress = newAddress;
+    final l$updateAddressByPk = updateAddressByPk;
     final l$newGroups = newGroups;
     final l$deleteGroups = deleteGroups;
     final l$newServices = newServices;
@@ -1087,6 +1152,9 @@ class Variables_Mutation_updatePerson {
     return Object.hashAll([
       l$personId,
       l$newPerson,
+      l$addressId,
+      _$data.containsKey('newAddress') ? l$newAddress : const {},
+      _$data.containsKey('updateAddressByPk') ? l$updateAddressByPk : const {},
       _$data.containsKey('newGroups')
           ? l$newGroups == null
               ? null
@@ -1180,6 +1248,9 @@ abstract class CopyWith_Variables_Mutation_updatePerson<TRes> {
   TRes call({
     UuidValue? personId,
     Input_PersonsSetInput? newPerson,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
+    bool? updateAddressByPk,
     List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
     List<Input_PersonsServicesInsertInput>? newServices,
@@ -1224,6 +1295,9 @@ class _CopyWithImpl_Variables_Mutation_updatePerson<TRes>
   TRes call({
     Object? personId = _undefined,
     Object? newPerson = _undefined,
+    Object? addressId = _undefined,
+    Object? newAddress = _undefined,
+    Object? updateAddressByPk = _undefined,
     Object? newGroups = _undefined,
     Object? deleteGroups = _undefined,
     Object? newServices = _undefined,
@@ -1256,6 +1330,12 @@ class _CopyWithImpl_Variables_Mutation_updatePerson<TRes>
           'personId': (personId as UuidValue),
         if (newPerson != _undefined && newPerson != null)
           'newPerson': (newPerson as Input_PersonsSetInput),
+        if (addressId != _undefined && addressId != null)
+          'addressId': (addressId as UuidValue),
+        if (newAddress != _undefined)
+          'newAddress': (newAddress as Input_AddressesSetInput?),
+        if (updateAddressByPk != _undefined && updateAddressByPk != null)
+          'updateAddressByPk': (updateAddressByPk as bool),
         if (newGroups != _undefined && newGroups != null)
           'newGroups': (newGroups as List<Input_PersonsGroupsInsertInput>),
         if (deleteGroups != _undefined)
@@ -1325,6 +1405,9 @@ class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
   call({
     UuidValue? personId,
     Input_PersonsSetInput? newPerson,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
+    bool? updateAddressByPk,
     List<Input_PersonsGroupsInsertInput>? newGroups,
     List<UuidValue>? deleteGroups,
     List<Input_PersonsServicesInsertInput>? newServices,
@@ -1357,6 +1440,7 @@ class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
 class Mutation_updatePerson {
   Mutation_updatePerson({
     this.updatePersonsByPk,
+    this.updateAddressesByPk,
     this.insertPersonsServices,
     this.insertPersonsGroups,
     this.insertPersonsHobbies,
@@ -1374,6 +1458,7 @@ class Mutation_updatePerson {
 
   factory Mutation_updatePerson.fromJson(Map<String, dynamic> json) {
     final l$updatePersonsByPk = json['updatePersonsByPk'];
+    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$insertPersonsServices = json['insertPersonsServices'];
     final l$insertPersonsGroups = json['insertPersonsGroups'];
     final l$insertPersonsHobbies = json['insertPersonsHobbies'];
@@ -1393,6 +1478,10 @@ class Mutation_updatePerson {
           ? null
           : Fragment_Person.fromJson(
               (l$updatePersonsByPk as Map<String, dynamic>)),
+      updateAddressesByPk: l$updateAddressesByPk == null
+          ? null
+          : Fragment_Address.fromJson(
+              (l$updateAddressesByPk as Map<String, dynamic>)),
       insertPersonsServices: l$insertPersonsServices == null
           ? null
           : Mutation_updatePerson_insertPersonsServices.fromJson(
@@ -1448,6 +1537,8 @@ class Mutation_updatePerson {
 
   final Fragment_Person? updatePersonsByPk;
 
+  final Fragment_Address? updateAddressesByPk;
+
   final Mutation_updatePerson_insertPersonsServices? insertPersonsServices;
 
   final Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups;
@@ -1482,6 +1573,8 @@ class Mutation_updatePerson {
     final _resultData = <String, dynamic>{};
     final l$updatePersonsByPk = updatePersonsByPk;
     _resultData['updatePersonsByPk'] = l$updatePersonsByPk?.toJson();
+    final l$updateAddressesByPk = updateAddressesByPk;
+    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$insertPersonsServices = insertPersonsServices;
     _resultData['insertPersonsServices'] = l$insertPersonsServices?.toJson();
     final l$insertPersonsGroups = insertPersonsGroups;
@@ -1519,6 +1612,7 @@ class Mutation_updatePerson {
   @override
   int get hashCode {
     final l$updatePersonsByPk = updatePersonsByPk;
+    final l$updateAddressesByPk = updateAddressesByPk;
     final l$insertPersonsServices = insertPersonsServices;
     final l$insertPersonsGroups = insertPersonsGroups;
     final l$insertPersonsHobbies = insertPersonsHobbies;
@@ -1535,6 +1629,7 @@ class Mutation_updatePerson {
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updatePersonsByPk,
+      l$updateAddressesByPk,
       l$insertPersonsServices,
       l$insertPersonsGroups,
       l$insertPersonsHobbies,
@@ -1562,6 +1657,11 @@ class Mutation_updatePerson {
     final l$updatePersonsByPk = updatePersonsByPk;
     final lOther$updatePersonsByPk = other.updatePersonsByPk;
     if (l$updatePersonsByPk != lOther$updatePersonsByPk) {
+      return false;
+    }
+    final l$updateAddressesByPk = updateAddressesByPk;
+    final lOther$updateAddressesByPk = other.updateAddressesByPk;
+    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$insertPersonsServices = insertPersonsServices;
@@ -1658,6 +1758,7 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
 
   TRes call({
     Fragment_Person? updatePersonsByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
     Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
     Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
@@ -1677,6 +1778,7 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
     String? $__typename,
   });
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk;
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices;
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
@@ -1716,6 +1818,7 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
 
   TRes call({
     Object? updatePersonsByPk = _undefined,
+    Object? updateAddressesByPk = _undefined,
     Object? insertPersonsServices = _undefined,
     Object? insertPersonsGroups = _undefined,
     Object? insertPersonsHobbies = _undefined,
@@ -1734,6 +1837,9 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
         updatePersonsByPk: updatePersonsByPk == _undefined
             ? _instance.updatePersonsByPk
             : (updatePersonsByPk as Fragment_Person?),
+        updateAddressesByPk: updateAddressesByPk == _undefined
+            ? _instance.updateAddressesByPk
+            : (updateAddressesByPk as Fragment_Address?),
         insertPersonsServices: insertPersonsServices == _undefined
             ? _instance.insertPersonsServices
             : (insertPersonsServices
@@ -1792,6 +1898,14 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
         ? CopyWith_Fragment_Person.stub(_then(_instance))
         : CopyWith_Fragment_Person(
             local$updatePersonsByPk, (e) => call(updatePersonsByPk: e));
+  }
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
+    final local$updateAddressesByPk = _instance.updateAddressesByPk;
+    return local$updateAddressesByPk == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(
+            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
   }
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
@@ -1929,6 +2043,7 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
 
   call({
     Fragment_Person? updatePersonsByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updatePerson_insertPersonsServices? insertPersonsServices,
     Mutation_updatePerson_insertPersonsGroups? insertPersonsGroups,
     Mutation_updatePerson_insertPersonsHobbies? insertPersonsHobbies,
@@ -1951,6 +2066,9 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
 
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
       get insertPersonsServices =>
@@ -2012,7 +2130,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2025,6 +2143,33 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'addressId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'uuid'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'newAddress')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'AddressesSetInput'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateAddressByPk')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
         directives: [],
       ),
       VariableDefinitionNode(
@@ -2043,7 +2188,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteGroups')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2067,7 +2212,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteServices')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2091,7 +2236,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteHobbies')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2115,7 +2260,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteTags')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: false,
@@ -2126,7 +2271,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2135,7 +2280,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2144,7 +2289,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastCall')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2153,7 +2298,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastVisit')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: false,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -2315,6 +2460,49 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
         selectionSet: SelectionSetNode(selections: [
           FragmentSpreadNode(
             name: NameNode(value: 'Person'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'updateAddressesByPk'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'pkColumns'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'addressId')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: '_set'),
+            value: VariableNode(name: NameNode(value: 'newAddress')),
+          ),
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateAddressByPk')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Address'),
             directives: [],
           ),
           FieldNode(
@@ -2735,7 +2923,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
+                            name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -2753,7 +2941,8 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
+                    name: NameNode(
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -2838,7 +3027,7 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
+                            name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -2856,7 +3045,8 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -3046,6 +3236,11 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
   ),
   fragmentDefinitionPerson,
   fragmentDefinitionPersonNoPhoto,
+  fragmentDefinitionAddress,
+  fragmentDefinitionArea,
+  fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
 ]);
 
 class Mutation_updatePerson_insertPersonsServices {
@@ -5855,7 +6050,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -5864,7 +6059,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -5873,7 +6068,7 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -5900,8 +6095,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
-                value:
-                    EnumValueNode(name: NameNode(value: 'attendanceDaysPkey')),
+                value: EnumValueNode(
+                    name: NameNode(value: 'attendance_days_pkey')),
               ),
               ObjectFieldNode(
                 name: NameNode(value: 'updateColumns'),
@@ -5946,8 +6141,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
             value: ObjectValueNode(fields: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
-                value:
-                    EnumValueNode(name: NameNode(value: 'attendanceDaysPkey')),
+                value: EnumValueNode(
+                    name: NameNode(value: 'attendance_days_pkey')),
               ),
               ObjectFieldNode(
                 name: NameNode(value: 'updateColumns'),
@@ -5997,7 +6192,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
+                    name: NameNode(
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -6055,7 +6251,8 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),

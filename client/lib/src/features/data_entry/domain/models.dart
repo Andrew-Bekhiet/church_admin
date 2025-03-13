@@ -1,8 +1,10 @@
+export 'models/address.dart';
 export 'models/area.dart';
 export 'models/attendance_analyzable.dart';
 export 'models/church.dart';
 export 'models/class.dart';
 export 'models/college.dart';
+export 'models/district.dart';
 export 'models/family.dart';
 export 'models/father.dart';
 export 'models/group.dart';

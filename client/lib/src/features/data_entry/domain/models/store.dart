@@ -23,13 +23,10 @@ class Store extends ViewableWithIDAndImage
   factory Store({
     required String id,
     required String name,
+    Address? address,
     Family? family,
-    String? address,
     @JsonKey(name: 'adminFamily') String? familyId,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
     @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    List<Area>? areas,
-    List<Street>? streets,
     LastRecordedByInfo? lastEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -38,10 +35,28 @@ class Store extends ViewableWithIDAndImage
 
   factory Store.fromJson(Map<String, Object?> json) => _$StoreFromJson(json);
 
+  Point? get geolocation => address?.geolocation;
+
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
   String get typeName => Store.queryableType.name;
+
+  Input_StoresInsertInput toInsertInput() => Input_StoresInsertInput(
+    name: name,
+    address:
+        address != null
+            ? Input_AddressesObjRelInsertInput(data: address!.toInsertInput())
+            : null,
+    adminFamily: familyId?.toUuid(),
+    color: colorToInt(color),
+  );
+
+  Input_StoresSetInput toUpdateInput(Store oldStore) => Input_StoresSetInput(
+    name: name != oldStore.name ? name : null,
+    adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
+    color: color != oldStore.color ? colorToInt(color) : null,
+  );
 }

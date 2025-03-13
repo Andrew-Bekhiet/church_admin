@@ -22,16 +22,12 @@ Store _$StoreFromJson(Map<String, dynamic> json) {
 mixin _$Store {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Address? get address => throw _privateConstructorUsedError;
   Family? get family => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'adminFamily')
   String? get familyId => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
-  List<Area>? get areas => throw _privateConstructorUsedError;
-  List<Street>? get streets => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
@@ -53,17 +49,15 @@ abstract class $StoreCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      Address? address,
       Family? family,
-      String? address,
       @JsonKey(name: 'adminFamily') String? familyId,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      List<Area>? areas,
-      List<Street>? streets,
       LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt,
       String? blurhash});
 
+  $AddressCopyWith<$Res>? get address;
   $FamilyCopyWith<$Res>? get family;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
@@ -85,13 +79,10 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? family = freezed,
     Object? address = freezed,
+    Object? family = freezed,
     Object? familyId = freezed,
-    Object? geolocation = freezed,
     Object? color = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -105,34 +96,22 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address?,
       family: freezed == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
       familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      areas: freezed == areas
-          ? _value.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value.streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -146,6 +125,20 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  /// Create a copy of Store
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_value.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.address!, (value) {
+      return _then(_value.copyWith(address: value) as $Val);
+    });
   }
 
   /// Create a copy of Store
@@ -187,17 +180,16 @@ abstract class _$$StoreImplCopyWith<$Res> implements $StoreCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      Address? address,
       Family? family,
-      String? address,
       @JsonKey(name: 'adminFamily') String? familyId,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      List<Area>? areas,
-      List<Street>? streets,
       LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt,
       String? blurhash});
 
+  @override
+  $AddressCopyWith<$Res>? get address;
   @override
   $FamilyCopyWith<$Res>? get family;
   @override
@@ -219,13 +211,10 @@ class __$$StoreImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? family = freezed,
     Object? address = freezed,
+    Object? family = freezed,
     Object? familyId = freezed,
-    Object? geolocation = freezed,
     Object? color = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -239,34 +228,22 @@ class __$$StoreImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address?,
       family: freezed == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as Family?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
       familyId: freezed == familyId
           ? _value.familyId
           : familyId // ignore: cast_nullable_to_non_nullable
               as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
-      areas: freezed == areas
-          ? _value._areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value._streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       lastEdit: freezed == lastEdit
           ? _value.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
@@ -289,19 +266,14 @@ class _$StoreImpl extends _Store {
   _$StoreImpl(
       {required this.id,
       required this.name,
-      this.family,
       this.address,
+      this.family,
       @JsonKey(name: 'adminFamily') this.familyId,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
-      final List<Area>? areas,
-      final List<Street>? streets,
       this.lastEdit,
       this.photoUpdatedAt,
       this.blurhash})
-      : _areas = areas,
-        _streets = streets,
-        super._();
+      : super._();
 
   factory _$StoreImpl.fromJson(Map<String, dynamic> json) =>
       _$$StoreImplFromJson(json);
@@ -311,38 +283,15 @@ class _$StoreImpl extends _Store {
   @override
   final String name;
   @override
-  final Family? family;
+  final Address? address;
   @override
-  final String? address;
+  final Family? family;
   @override
   @JsonKey(name: 'adminFamily')
   final String? familyId;
   @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  final Point? geolocation;
-  @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
-  final List<Area>? _areas;
-  @override
-  List<Area>? get areas {
-    final value = _areas;
-    if (value == null) return null;
-    if (_areas is EqualUnmodifiableListView) return _areas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Street>? _streets;
-  @override
-  List<Street>? get streets {
-    final value = _streets;
-    if (value == null) return null;
-    if (_streets is EqualUnmodifiableListView) return _streets;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   final LastRecordedByInfo? lastEdit;
   @override
@@ -352,7 +301,7 @@ class _$StoreImpl extends _Store {
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, family: $family, address: $address, familyId: $familyId, geolocation: $geolocation, color: $color, areas: $areas, streets: $streets, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash)';
+    return 'Store(id: $id, name: $name, address: $address, family: $family, familyId: $familyId, color: $color, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash)';
   }
 
   @override
@@ -362,15 +311,11 @@ class _$StoreImpl extends _Store {
             other is _$StoreImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.family, family) || other.family == family) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.family, family) || other.family == family) &&
             (identical(other.familyId, familyId) ||
                 other.familyId == familyId) &&
-            (identical(other.geolocation, geolocation) ||
-                other.geolocation == geolocation) &&
             (identical(other.color, color) || other.color == color) &&
-            const DeepCollectionEquality().equals(other._areas, _areas) &&
-            const DeepCollectionEquality().equals(other._streets, _streets) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
@@ -381,20 +326,8 @@ class _$StoreImpl extends _Store {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      family,
-      address,
-      familyId,
-      geolocation,
-      color,
-      const DeepCollectionEquality().hash(_areas),
-      const DeepCollectionEquality().hash(_streets),
-      lastEdit,
-      photoUpdatedAt,
-      blurhash);
+  int get hashCode => Object.hash(runtimeType, id, name, address, family,
+      familyId, color, lastEdit, photoUpdatedAt, blurhash);
 
   /// Create a copy of Store
   /// with the given fields replaced by the non-null parameter values.
@@ -416,14 +349,10 @@ abstract class _Store extends Store {
   factory _Store(
       {required final String id,
       required final String name,
+      final Address? address,
       final Family? family,
-      final String? address,
       @JsonKey(name: 'adminFamily') final String? familyId,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-      final Point? geolocation,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final List<Area>? areas,
-      final List<Street>? streets,
       final LastRecordedByInfo? lastEdit,
       final DateTime? photoUpdatedAt,
       final String? blurhash}) = _$StoreImpl;
@@ -436,22 +365,15 @@ abstract class _Store extends Store {
   @override
   String get name;
   @override
-  Family? get family;
+  Address? get address;
   @override
-  String? get address;
+  Family? get family;
   @override
   @JsonKey(name: 'adminFamily')
   String? get familyId;
   @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation;
-  @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
-  @override
-  List<Area>? get areas;
-  @override
-  List<Street>? get streets;
   @override
   LastRecordedByInfo? get lastEdit;
   @override

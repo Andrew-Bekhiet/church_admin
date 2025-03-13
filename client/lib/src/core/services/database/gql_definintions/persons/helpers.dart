@@ -2,10 +2,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:collection/collection.dart';
+import 'package:uuid/enums.dart';
 
 class PersonInsertHelper {
   static final _mutationNonExistentVars = {
     'id',
+    'address',
     'church',
     'college',
     'family',
@@ -23,66 +25,57 @@ class PersonInsertHelper {
 
   final Map<String, dynamic> _personDelta;
 
-  PersonInsertHelper({
-    required this.newPerson,
-    Person? oldPerson,
-  }) : _personDelta = computeObjectDelta(
-          newPerson.toJson(),
-          (oldPerson ?? Person(id: '', name: '')).toJson(),
-          ignoreFields: _mutationNonExistentVars,
-        );
+  PersonInsertHelper({required this.newPerson, Person? oldPerson})
+    : _personDelta = computeObjectDelta(
+        newPerson.toJson(),
+        (oldPerson ?? Person(id: '', name: '')).toJson(),
+        ignoreFields: _mutationNonExistentVars,
+      );
 
   List<Input_PersonsServicesInsertInput> get _newServices =>
       (newPerson.services ?? [])
           .map(
-            (e) => Input_PersonsServicesInsertInput(
-              serviceId: e.id.toUuid(),
-            ),
+            (e) => Input_PersonsServicesInsertInput(serviceId: e.id.toUuid()),
           )
           .toList();
 
   List<Input_PersonsGroupsInsertInput> get _newGroups =>
       (newPerson.groups ?? [])
-          .map(
-            (e) => Input_PersonsGroupsInsertInput(
-              groupId: e.id.toUuid(),
-            ),
-          )
+          .map((e) => Input_PersonsGroupsInsertInput(groupId: e.id.toUuid()))
           .toList();
 
   List<Input_PersonsHobbiesInsertInput> get _newHobbies =>
       (newPerson.hobbies ?? [])
-          .map(
-            (e) => Input_PersonsHobbiesInsertInput(
-              hobbyId: e.id.toUuid(),
-            ),
-          )
+          .map((e) => Input_PersonsHobbiesInsertInput(hobbyId: e.id.toUuid()))
           .toList();
 
-  List<Input_PersonsTagsInsertInput> get _newTags => (newPerson.tags ?? [])
-      .map(
-        (e) => Input_PersonsTagsInsertInput(
-          tagId: e.id.toUuid(),
-        ),
-      )
-      .toList();
+  List<Input_PersonsTagsInsertInput> get _newTags =>
+      (newPerson.tags ?? [])
+          .map((e) => Input_PersonsTagsInsertInput(tagId: e.id.toUuid()))
+          .toList();
 
-  Variables_Mutation_insertPerson get variables =>
-      Variables_Mutation_insertPerson(
-        newPerson: Input_PersonsInsertInput.fromJson(
-          {
-            ..._personDelta,
-            'services':
-                Input_PersonsServicesArrRelInsertInput(data: _newServices)
-                    .toJson(),
-            'groups':
-                Input_PersonsGroupsArrRelInsertInput(data: _newGroups).toJson(),
-            'hobbies': Input_PersonsHobbiesArrRelInsertInput(data: _newHobbies)
-                .toJson(),
-            'tags': Input_PersonsTagsArrRelInsertInput(data: _newTags).toJson(),
-          },
-        ),
-      );
+  Variables_Mutation_insertPerson
+  get variables => Variables_Mutation_insertPerson(
+    newPerson: Input_PersonsInsertInput.fromJson({
+      ..._personDelta,
+      if (!_personDelta.containsKey('familyId') && newPerson.address != null)
+        'family':
+            Input_FamiliesObjRelInsertInput(
+              data:
+                  Family(
+                    id: newPerson.family?.id ?? Namespace.nil.value,
+                    name: newPerson.name.split(' ').sublist(1).join(' '),
+                    address: newPerson.address!.copyWith(family: null),
+                  ).toInsertInput(),
+            ).toJson(),
+      'services':
+          Input_PersonsServicesArrRelInsertInput(data: _newServices).toJson(),
+      'groups': Input_PersonsGroupsArrRelInsertInput(data: _newGroups).toJson(),
+      'hobbies':
+          Input_PersonsHobbiesArrRelInsertInput(data: _newHobbies).toJson(),
+      'tags': Input_PersonsTagsArrRelInsertInput(data: _newTags).toJson(),
+    }),
+  );
 }
 
 class PersonUpdateHelper {
@@ -96,11 +89,11 @@ class PersonUpdateHelper {
   late final IterableDifferenceResult<ID> _hobbiesDiff;
   late final IterableDifferenceResult<ID> _tagsDiff;
 
-  PersonUpdateHelper({
-    required this.newPerson,
-    required this.oldPerson,
-  }) : _personDelta =
-            computeObjectDelta(newPerson.toJson(), oldPerson.toJson()) {
+  PersonUpdateHelper({required this.newPerson, required this.oldPerson})
+    : _personDelta = computeObjectDelta(
+        newPerson.toJson(),
+        oldPerson.toJson(),
+      ) {
     _servicesDiff = _getDifferenceUsing((p) => p.services);
     _groupsDiff = _getDifferenceUsing((p) => p.groups);
     _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);
@@ -116,12 +109,17 @@ class PersonUpdateHelper {
     );
   }
 
-  bool get _updatePersonsByPk => _personDelta.keys
-      .where(
-        (k) =>
-            k != 'services' && k != 'groups' && k != 'hobbies' && k != 'tags',
-      )
-      .isNotEmpty;
+  bool get _updatePersonsByPk =>
+      _personDelta.keys
+          .where(
+            (k) =>
+                k != 'address' &&
+                k != 'services' &&
+                k != 'groups' &&
+                k != 'hobbies' &&
+                k != 'tags',
+          )
+          .isNotEmpty;
 
   bool get _insertPersonsGroups => _groupsDiff.added.isNotEmpty;
   bool get _insertPersonsServices => _servicesDiff.added.isNotEmpty;
@@ -141,52 +139,65 @@ class PersonUpdateHelper {
 
   List<UuidValue> get _deleteServices =>
       _servicesDiff.removed.map((s) => s.id.toUuid()).toList();
-  List<Input_PersonsServicesInsertInput> get _newServices => _servicesDiff.added
-      .map(
-        (e) => Input_PersonsServicesInsertInput(
-          personId: newPerson.id.toUuid(),
-          serviceId: e.id.toUuid(),
-        ),
-      )
-      .toList();
+  List<Input_PersonsServicesInsertInput> get _newServices =>
+      _servicesDiff.added
+          .map(
+            (e) => Input_PersonsServicesInsertInput(
+              personId: newPerson.id.toUuid(),
+              serviceId: e.id.toUuid(),
+            ),
+          )
+          .toList();
 
   List<UuidValue> get _deleteGroups =>
       _groupsDiff.removed.map((g) => g.id.toUuid()).toList();
-  List<Input_PersonsGroupsInsertInput> get _newGroups => _groupsDiff.added
-      .map(
-        (g) => Input_PersonsGroupsInsertInput(
-          personId: newPerson.id.toUuid(),
-          groupId: g.id.toUuid(),
-        ),
-      )
-      .toList();
+  List<Input_PersonsGroupsInsertInput> get _newGroups =>
+      _groupsDiff.added
+          .map(
+            (g) => Input_PersonsGroupsInsertInput(
+              personId: newPerson.id.toUuid(),
+              groupId: g.id.toUuid(),
+            ),
+          )
+          .toList();
 
   List<UuidValue> get _deleteHobbies =>
       _hobbiesDiff.removed.map((t) => t.id.toUuid()).toList();
-  List<Input_PersonsHobbiesInsertInput> get _newHobbies => _hobbiesDiff.added
-      .map(
-        (h) => Input_PersonsHobbiesInsertInput(
-          personId: newPerson.id.toUuid(),
-          hobbyId: h.id.toUuid(),
-        ),
-      )
-      .toList();
+  List<Input_PersonsHobbiesInsertInput> get _newHobbies =>
+      _hobbiesDiff.added
+          .map(
+            (h) => Input_PersonsHobbiesInsertInput(
+              personId: newPerson.id.toUuid(),
+              hobbyId: h.id.toUuid(),
+            ),
+          )
+          .toList();
 
   List<UuidValue> get _deleteTags =>
       _tagsDiff.removed.map((t) => t.id.toUuid()).toList();
-  List<Input_PersonsTagsInsertInput> get _newTags => _tagsDiff.added
-      .map(
-        (t) => Input_PersonsTagsInsertInput(
-          personId: newPerson.id.toUuid(),
-          tagId: t.id.toUuid(),
-        ),
-      )
-      .toList();
+  List<Input_PersonsTagsInsertInput> get _newTags =>
+      _tagsDiff.added
+          .map(
+            (t) => Input_PersonsTagsInsertInput(
+              personId: newPerson.id.toUuid(),
+              tagId: t.id.toUuid(),
+            ),
+          )
+          .toList();
+
+  bool get _updateAddressByPk =>
+      _personDelta.containsKey('address') &&
+      !_personDelta.containsKey('familyId');
 
   Variables_Mutation_updatePerson get variables =>
       Variables_Mutation_updatePerson(
         personId: newPerson.id.toUuid(),
         newPerson: Input_PersonsSetInput.fromJson(_personDelta),
+        addressId: oldPerson.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
+        newAddress: newPerson.address?.toUpdateInput(
+          oldPerson.address ?? Address(),
+        ),
+        updateAddressByPk: _updateAddressByPk,
         deleteServices: _deleteServices,
         newServices: _newServices,
         deleteGroups: _deleteGroups,
@@ -214,7 +225,8 @@ class PersonUpdateHelper {
         insertHistoryVisitHistoryOne: _insertHistoryVisitHistoryOne,
       );
 
-  DateTime? _getLast(String name) => _personDelta['last$name'] != null
-      ? LastRecordedByInfo.fromJson(_personDelta['last$name']).time
-      : null;
+  DateTime? _getLast(String name) =>
+      _personDelta['last$name'] != null
+          ? LastRecordedByInfo.fromJson(_personDelta['last$name']).time
+          : null;
 }

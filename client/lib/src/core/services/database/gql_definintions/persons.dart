@@ -14,31 +14,33 @@ class PersonsDAO
 
   @override
   late final StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>
-      baseStreamAllConfig =
-      const StreamAllConfig(document: documentNodeSubscriptionwatchAllPersons);
+  baseStreamAllConfig = const StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllPersons,
+  );
   @override
   final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchPerson,
-  );
+        document: documentNodeSubscriptionwatchPerson,
+      );
   @override
   late final DeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeletePerson,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeletePerson,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Person> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdatePerson,
-    varsConstructor: _updatePersonVarsConstructor,
-  );
+        document: documentNodeMutationupdatePerson,
+        varsConstructor: _updatePersonVarsConstructor,
+        parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
+      );
   @override
   late final CreateObjectConfig<Person> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertPerson,
-    varsConstructor: _createPersonVarsConstructor,
-  );
+        document: documentNodeMutationinsertPerson,
+        varsConstructor: _createPersonVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({
     required UuidValue id,
@@ -88,15 +90,14 @@ class PersonsDAO
     );
   }
 
-  Future<Person?> personServicesClassesGroups({
-    required String personId,
-  }) {
+  Future<Person?> personServicesClassesGroups({required String personId}) {
     final queryOptions = QueryOptions(
       document: documentNodeQuerypersonServicesClassesGroups,
       operationName: 'personServicesClassesGroups',
       variables:
-          Variables_Query_personServicesClassesGroups(id: personId.toUuid())
-              .toJson(),
+          Variables_Query_personServicesClassesGroups(
+            id: personId.toUuid(),
+          ).toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
     );
 
@@ -126,87 +127,71 @@ class PersonsDAO
     final queryOptions = QueryOptions(
       document: documentNodeQuerypersonsGeolocations,
       operationName: 'personsGeolocations',
-      variables: Variables_Query_personsGeolocations(
-        getAreas: getAreas,
-        getStreets: getStreets,
-        getFamilies: getFamilies,
-        getStores: getStores,
-        getPersons: getPersons,
-        areasIds: areasIds,
-        familiesIds: familiesIds,
-        storesIds: storesIds,
-        streetsIds: streetsIds,
-        personsConditions: [
-          if (personId != null)
-            Input_PersonsBoolExp(
-              id: Input_UuidComparisonExp(
-                $_eq: personId.toUuid(),
-              ),
-            ),
-          if (areasIds.isNotEmpty ||
-              streetsIds.isNotEmpty ||
-              familiesIds.isNotEmpty)
-            Input_PersonsBoolExp(
-              $_or: [
-                if (areasIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    areas: Input_AreasBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: areasIds,
-                      ),
-                    ),
+      variables:
+          Variables_Query_personsGeolocations(
+            getAreas: getAreas,
+            getStreets: getStreets,
+            getFamilies: getFamilies,
+            getStores: getStores,
+            getPersons: getPersons,
+            areasIds: areasIds,
+            familiesIds: familiesIds,
+            storesIds: storesIds,
+            streetsIds: streetsIds,
+            personsConditions: [
+              if (personId != null)
+                Input_PersonsBoolExp(
+                  id: Input_UuidComparisonExp($_eq: personId.toUuid()),
+                ),
+              if (areasIds.isNotEmpty ||
+                  streetsIds.isNotEmpty ||
+                  familiesIds.isNotEmpty)
+                Input_PersonsBoolExp(
+                  address: Input_AddressesBoolExp(
+                    $_or: [
+                      if (areasIds.isNotEmpty)
+                        Input_AddressesBoolExp(
+                          areaId: Input_UuidComparisonExp($_in: areasIds),
+                        ),
+                      if (streetsIds.isNotEmpty)
+                        Input_AddressesBoolExp(
+                          streetId: Input_UuidComparisonExp($_in: streetsIds),
+                        ),
+                      if (familiesIds.isNotEmpty)
+                        Input_AddressesBoolExp(
+                          familyId: Input_UuidComparisonExp($_in: familiesIds),
+                        ),
+                    ],
                   ),
-                if (streetsIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    streets: Input_StreetsBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: streetsIds,
+                ),
+              if (servicesIds.isNotEmpty ||
+                  classesIds.isNotEmpty ||
+                  groupsIds.isNotEmpty)
+                Input_PersonsBoolExp(
+                  $_or: [
+                    if (servicesIds.isNotEmpty)
+                      Input_PersonsBoolExp(
+                        services: Input_PersonsServicesBoolExp(
+                          serviceId: Input_UuidComparisonExp($_in: servicesIds),
+                        ),
                       ),
-                    ),
-                  ),
-                if (familiesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    family: Input_FamiliesBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: familiesIds,
+                    if (classesIds.isNotEmpty)
+                      Input_PersonsBoolExp(
+                        classes: Input_ClassesPersonsBoolExp(
+                          classId: Input_UuidComparisonExp($_in: classesIds),
+                        ),
                       ),
-                    ),
-                  ),
-              ],
-            ),
-          if (servicesIds.isNotEmpty ||
-              classesIds.isNotEmpty ||
-              groupsIds.isNotEmpty)
-            Input_PersonsBoolExp(
-              $_or: [
-                if (servicesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    services: Input_PersonsServicesBoolExp(
-                      serviceId: Input_UuidComparisonExp(
-                        $_in: servicesIds,
+                    if (groupsIds.isNotEmpty)
+                      Input_PersonsBoolExp(
+                        groups: Input_PersonsGroupsBoolExp(
+                          groupId: Input_UuidComparisonExp($_in: groupsIds),
+                        ),
                       ),
-                    ),
-                  ),
-                if (classesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    classes: Input_ClassesBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: classesIds,
-                      ),
-                    ),
-                  ),
-                if (groupsIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    groups: Input_PersonsGroupsBoolExp(
-                      groupId: Input_UuidComparisonExp(
-                        $_in: groupsIds,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-        ],
-      ).toJson(),
+                  ],
+                ),
+            ],
+          ).toJson(),
+      queryRequestTimeout: const Duration(seconds: 30),
       parserFn: PersonsGeolocationsResponse.fromJson,
     );
 
@@ -220,32 +205,35 @@ class PersonsDAO
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            $class: Input_ClassesBoolExp(
-              id: Input_UuidComparisonExp($_eq: classId.toUuid()),
-            ),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (offset > 0)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+      vars:
+          (offset, instance) => Variables_Subscription_personAttendance(
+            limit: instance.limit + 1,
+            where: [
+              Input_HistoryAttendanceHistoryBoolExp(
+                personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
               ),
-            ),
-        ],
-      ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                $class: Input_ClassesBoolExp(
+                  id: Input_UuidComparisonExp($_eq: classId.toUuid()),
+                ),
+              ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
+              ),
+              if (where != null) ...where,
+              if (offset > 0)
+                Input_HistoryAttendanceHistoryBoolExp(
+                  time: Input_TimestampComparisonExp(
+                    $_lt:
+                        instance
+                            .currentValue[(offset - 1) * instance.limit +
+                                instance.limit -
+                                1]
+                            .time,
+                  ),
+                ),
+            ],
+          ),
     );
   }
 
@@ -256,30 +244,33 @@ class PersonsDAO
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            groupId: Input_UuidComparisonExp($_eq: groupId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (offset > 0)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+      vars:
+          (offset, instance) => Variables_Subscription_personAttendance(
+            limit: instance.limit + 1,
+            where: [
+              Input_HistoryAttendanceHistoryBoolExp(
+                personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
               ),
-            ),
-        ],
-      ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                groupId: Input_UuidComparisonExp($_eq: groupId.toUuid()),
+              ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
+              ),
+              if (where != null) ...where,
+              if (offset > 0)
+                Input_HistoryAttendanceHistoryBoolExp(
+                  time: Input_TimestampComparisonExp(
+                    $_lt:
+                        instance
+                            .currentValue[(offset - 1) * instance.limit +
+                                instance.limit -
+                                1]
+                            .time,
+                  ),
+                ),
+            ],
+          ),
     );
   }
 
@@ -290,30 +281,33 @@ class PersonsDAO
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            serviceId: Input_UuidComparisonExp($_eq: serviceId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (offset > 0)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+      vars:
+          (offset, instance) => Variables_Subscription_personAttendance(
+            limit: instance.limit + 1,
+            where: [
+              Input_HistoryAttendanceHistoryBoolExp(
+                personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
               ),
-            ),
-        ],
-      ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                serviceId: Input_UuidComparisonExp($_eq: serviceId.toUuid()),
+              ),
+              Input_HistoryAttendanceHistoryBoolExp(
+                asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
+              ),
+              if (where != null) ...where,
+              if (offset > 0)
+                Input_HistoryAttendanceHistoryBoolExp(
+                  time: Input_TimestampComparisonExp(
+                    $_lt:
+                        instance
+                            .currentValue[(offset - 1) * instance.limit +
+                                instance.limit -
+                                1]
+                            .time,
+                  ),
+                ),
+            ],
+          ),
     );
   }
 
@@ -321,7 +315,8 @@ class PersonsDAO
     required Variables_Subscription_personAttendance Function(
       int,
       GQLPaginatableStream<LastRecordedByInfo>,
-    ) vars,
+    )
+    vars,
     int? limit,
   }) {
     return GQLPaginatableStream<LastRecordedByInfo>(
@@ -347,21 +342,22 @@ class PersonsDAO
       errorPolicy: ErrorPolicy.all,
       document: documentNodeQuerypersonHistoryAnalysis,
       operationName: 'personHistoryAnalysis',
-      variables: Variables_Query_personHistoryAnalysis(
-        personId: personId.toUuid(),
-        dateFrom: options.dateRange.start,
-        dateTo: options.dateRange.end,
-        timeFrom: options.dateRange.start,
-        timeTo: options.dateRange.end,
-        classesIds: options.classes.map((e) => e.id.toUuid()).toList(),
-        groupsIds: options.groups.map((e) => e.id.toUuid()).toList(),
-        servicesIds: options.services.map((e) => e.id.toUuid()).toList(),
-        confessionHistory: options.confessionAnalysis,
-        kodasHistory: options.kodasAnalysis,
-        callHistory: options.callHistoryAnalysis,
-        visitHistory: options.visitHistoryAnalysis,
-        editHistory: options.editHistoryAnalysis,
-      ).toJson(),
+      variables:
+          Variables_Query_personHistoryAnalysis(
+            personId: personId.toUuid(),
+            dateFrom: options.dateRange.start,
+            dateTo: options.dateRange.end,
+            timeFrom: options.dateRange.start,
+            timeTo: options.dateRange.end,
+            classesIds: options.classes.map((e) => e.id.toUuid()).toList(),
+            groupsIds: options.groups.map((e) => e.id.toUuid()).toList(),
+            servicesIds: options.services.map((e) => e.id.toUuid()).toList(),
+            confessionHistory: options.confessionAnalysis,
+            kodasHistory: options.kodasAnalysis,
+            callHistory: options.callHistoryAnalysis,
+            visitHistory: options.visitHistoryAnalysis,
+            editHistory: options.editHistoryAnalysis,
+          ).toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
     );
 
@@ -377,11 +373,12 @@ class PersonsDAO
       MutationOptions(
         document: documentNodeMutationupdatePersonSpiritData,
         operationName: 'updatePersonSpiritData',
-        variables: Variables_Mutation_updatePersonSpiritData(
-          personId: personId.toUuid(),
-          lastKodas: lastKodas,
-          lastConfession: lastConfession,
-        ).toJson(),
+        variables:
+            Variables_Mutation_updatePersonSpiritData(
+              personId: personId.toUuid(),
+              lastKodas: lastKodas,
+              lastConfession: lastConfession,
+            ).toJson(),
         parserFn: (data) {
           final value = data.values.whereType<Map?>().lastOrNull?['person'];
           if (value == null) return null;

@@ -1,4 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../areas/__generated__/fragments.gql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
+import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -247,7 +250,7 @@ const documentNodeMutationdeleteStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'storeId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -590,10 +593,18 @@ class Variables_Mutation_updateStore {
   factory Variables_Mutation_updateStore({
     required UuidValue storeId,
     required Input_StoresSetInput newStore,
+    required UuidValue addressId,
+    Input_AddressesSetInput? newAddress,
+    required bool updateAddress,
+    required bool updateStore,
   }) =>
       Variables_Mutation_updateStore._({
         r'storeId': storeId,
         r'newStore': newStore,
+        r'addressId': addressId,
+        if (newAddress != null) r'newAddress': newAddress,
+        r'updateAddress': updateAddress,
+        r'updateStore': updateStore,
       });
 
   Variables_Mutation_updateStore._(this._$data);
@@ -605,6 +616,19 @@ class Variables_Mutation_updateStore {
     final l$newStore = data['newStore'];
     result$data['newStore'] =
         Input_StoresSetInput.fromJson((l$newStore as Map<String, dynamic>));
+    final l$addressId = data['addressId'];
+    result$data['addressId'] = stringToUuid(l$addressId);
+    if (data.containsKey('newAddress')) {
+      final l$newAddress = data['newAddress'];
+      result$data['newAddress'] = l$newAddress == null
+          ? null
+          : Input_AddressesSetInput.fromJson(
+              (l$newAddress as Map<String, dynamic>));
+    }
+    final l$updateAddress = data['updateAddress'];
+    result$data['updateAddress'] = (l$updateAddress as bool);
+    final l$updateStore = data['updateStore'];
+    result$data['updateStore'] = (l$updateStore as bool);
     return Variables_Mutation_updateStore._(result$data);
   }
 
@@ -615,12 +639,31 @@ class Variables_Mutation_updateStore {
   Input_StoresSetInput get newStore =>
       (_$data['newStore'] as Input_StoresSetInput);
 
+  UuidValue get addressId => (_$data['addressId'] as UuidValue);
+
+  Input_AddressesSetInput? get newAddress =>
+      (_$data['newAddress'] as Input_AddressesSetInput?);
+
+  bool get updateAddress => (_$data['updateAddress'] as bool);
+
+  bool get updateStore => (_$data['updateStore'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$storeId = storeId;
     result$data['storeId'] = uuidToString(l$storeId);
     final l$newStore = newStore;
     result$data['newStore'] = l$newStore.toJson();
+    final l$addressId = addressId;
+    result$data['addressId'] = uuidToString(l$addressId);
+    if (_$data.containsKey('newAddress')) {
+      final l$newAddress = newAddress;
+      result$data['newAddress'] = l$newAddress?.toJson();
+    }
+    final l$updateAddress = updateAddress;
+    result$data['updateAddress'] = l$updateAddress;
+    final l$updateStore = updateStore;
+    result$data['updateStore'] = l$updateStore;
     return result$data;
   }
 
@@ -649,6 +692,30 @@ class Variables_Mutation_updateStore {
     if (l$newStore != lOther$newStore) {
       return false;
     }
+    final l$addressId = addressId;
+    final lOther$addressId = other.addressId;
+    if (l$addressId != lOther$addressId) {
+      return false;
+    }
+    final l$newAddress = newAddress;
+    final lOther$newAddress = other.newAddress;
+    if (_$data.containsKey('newAddress') !=
+        other._$data.containsKey('newAddress')) {
+      return false;
+    }
+    if (l$newAddress != lOther$newAddress) {
+      return false;
+    }
+    final l$updateAddress = updateAddress;
+    final lOther$updateAddress = other.updateAddress;
+    if (l$updateAddress != lOther$updateAddress) {
+      return false;
+    }
+    final l$updateStore = updateStore;
+    final lOther$updateStore = other.updateStore;
+    if (l$updateStore != lOther$updateStore) {
+      return false;
+    }
     return true;
   }
 
@@ -656,9 +723,17 @@ class Variables_Mutation_updateStore {
   int get hashCode {
     final l$storeId = storeId;
     final l$newStore = newStore;
+    final l$addressId = addressId;
+    final l$newAddress = newAddress;
+    final l$updateAddress = updateAddress;
+    final l$updateStore = updateStore;
     return Object.hashAll([
       l$storeId,
       l$newStore,
+      l$addressId,
+      _$data.containsKey('newAddress') ? l$newAddress : const {},
+      l$updateAddress,
+      l$updateStore,
     ]);
   }
 }
@@ -675,6 +750,10 @@ abstract class CopyWith_Variables_Mutation_updateStore<TRes> {
   TRes call({
     UuidValue? storeId,
     Input_StoresSetInput? newStore,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
+    bool? updateAddress,
+    bool? updateStore,
   });
 }
 
@@ -694,6 +773,10 @@ class _CopyWithImpl_Variables_Mutation_updateStore<TRes>
   TRes call({
     Object? storeId = _undefined,
     Object? newStore = _undefined,
+    Object? addressId = _undefined,
+    Object? newAddress = _undefined,
+    Object? updateAddress = _undefined,
+    Object? updateStore = _undefined,
   }) =>
       _then(Variables_Mutation_updateStore._({
         ..._instance._$data,
@@ -701,6 +784,14 @@ class _CopyWithImpl_Variables_Mutation_updateStore<TRes>
           'storeId': (storeId as UuidValue),
         if (newStore != _undefined && newStore != null)
           'newStore': (newStore as Input_StoresSetInput),
+        if (addressId != _undefined && addressId != null)
+          'addressId': (addressId as UuidValue),
+        if (newAddress != _undefined)
+          'newAddress': (newAddress as Input_AddressesSetInput?),
+        if (updateAddress != _undefined && updateAddress != null)
+          'updateAddress': (updateAddress as bool),
+        if (updateStore != _undefined && updateStore != null)
+          'updateStore': (updateStore as bool),
       }));
 }
 
@@ -713,6 +804,10 @@ class _CopyWithStubImpl_Variables_Mutation_updateStore<TRes>
   call({
     UuidValue? storeId,
     Input_StoresSetInput? newStore,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
+    bool? updateAddress,
+    bool? updateStore,
   }) =>
       _res;
 }
@@ -720,22 +815,30 @@ class _CopyWithStubImpl_Variables_Mutation_updateStore<TRes>
 class Mutation_updateStore {
   Mutation_updateStore({
     this.updateStoresByPk,
+    this.updateAddressesByPk,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateStore.fromJson(Map<String, dynamic> json) {
     final l$updateStoresByPk = json['updateStoresByPk'];
+    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$$__typename = json['__typename'];
     return Mutation_updateStore(
       updateStoresByPk: l$updateStoresByPk == null
           ? null
           : Fragment_Store.fromJson(
               (l$updateStoresByPk as Map<String, dynamic>)),
+      updateAddressesByPk: l$updateAddressesByPk == null
+          ? null
+          : Fragment_Address.fromJson(
+              (l$updateAddressesByPk as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_Store? updateStoresByPk;
+
+  final Fragment_Address? updateAddressesByPk;
 
   final String $__typename;
 
@@ -743,6 +846,8 @@ class Mutation_updateStore {
     final _resultData = <String, dynamic>{};
     final l$updateStoresByPk = updateStoresByPk;
     _resultData['updateStoresByPk'] = l$updateStoresByPk?.toJson();
+    final l$updateAddressesByPk = updateAddressesByPk;
+    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -751,9 +856,11 @@ class Mutation_updateStore {
   @override
   int get hashCode {
     final l$updateStoresByPk = updateStoresByPk;
+    final l$updateAddressesByPk = updateAddressesByPk;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateStoresByPk,
+      l$updateAddressesByPk,
       l$$__typename,
     ]);
   }
@@ -769,6 +876,11 @@ class Mutation_updateStore {
     final l$updateStoresByPk = updateStoresByPk;
     final lOther$updateStoresByPk = other.updateStoresByPk;
     if (l$updateStoresByPk != lOther$updateStoresByPk) {
+      return false;
+    }
+    final l$updateAddressesByPk = updateAddressesByPk;
+    final lOther$updateAddressesByPk = other.updateAddressesByPk;
+    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -799,9 +911,11 @@ abstract class CopyWith_Mutation_updateStore<TRes> {
 
   TRes call({
     Fragment_Store? updateStoresByPk,
+    Fragment_Address? updateAddressesByPk,
     String? $__typename,
   });
   CopyWith_Fragment_Store<TRes> get updateStoresByPk;
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
 }
 
 class _CopyWithImpl_Mutation_updateStore<TRes>
@@ -819,12 +933,16 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
 
   TRes call({
     Object? updateStoresByPk = _undefined,
+    Object? updateAddressesByPk = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updateStore(
         updateStoresByPk: updateStoresByPk == _undefined
             ? _instance.updateStoresByPk
             : (updateStoresByPk as Fragment_Store?),
+        updateAddressesByPk: updateAddressesByPk == _undefined
+            ? _instance.updateAddressesByPk
+            : (updateAddressesByPk as Fragment_Address?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -837,6 +955,14 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
         : CopyWith_Fragment_Store(
             local$updateStoresByPk, (e) => call(updateStoresByPk: e));
   }
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
+    final local$updateAddressesByPk = _instance.updateAddressesByPk;
+    return local$updateAddressesByPk == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(
+            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateStore<TRes>
@@ -847,12 +973,16 @@ class _CopyWithStubImpl_Mutation_updateStore<TRes>
 
   call({
     Fragment_Store? updateStoresByPk,
+    Fragment_Address? updateAddressesByPk,
     String? $__typename,
   }) =>
       _res;
 
   CopyWith_Fragment_Store<TRes> get updateStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
+      CopyWith_Fragment_Address.stub(_res);
 }
 
 const documentNodeMutationupdateStore = DocumentNode(definitions: [
@@ -863,7 +993,7 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'storeId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -873,6 +1003,42 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'newStore')),
         type: NamedTypeNode(
           name: NameNode(value: 'StoresSetInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'addressId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'uuid'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'newAddress')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'AddressesSetInput'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateAddress')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateStore')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -899,10 +1065,63 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
             value: VariableNode(name: NameNode(value: 'newStore')),
           ),
         ],
-        directives: [],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateStore')),
+              )
+            ],
+          )
+        ],
         selectionSet: SelectionSetNode(selections: [
           FragmentSpreadNode(
             name: NameNode(value: 'Store'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'updateAddressesByPk'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'pkColumns'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'addressId')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: '_set'),
+            value: VariableNode(name: NameNode(value: 'newAddress')),
+          ),
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateAddress')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Address'),
             directives: [],
           ),
           FieldNode(
@@ -925,4 +1144,9 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
   ),
   fragmentDefinitionStore,
   fragmentDefinitionStoreNoPhoto,
+  fragmentDefinitionAddress,
+  fragmentDefinitionArea,
+  fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
 ]);

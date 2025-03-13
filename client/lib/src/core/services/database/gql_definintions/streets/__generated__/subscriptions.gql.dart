@@ -874,7 +874,7 @@ const documentNodeSubscriptionwatchStreet = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -906,17 +906,37 @@ const documentNodeSubscriptionwatchStreet = DocumentNode(definitions: [
                 name: NameNode(value: 'orderBy'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    name: NameNode(value: 'area'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
                   )
                 ]),
               )
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Area'),
+              FieldNode(
+                name: NameNode(value: 'area'),
+                alias: null,
+                arguments: [],
                 directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Area'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ]),
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -982,7 +1002,7 @@ class Subscription_watchStreet_streetsByPk
     this.$__typename = 'Streets',
     this.photoUpdatedAt,
     this.blurhash,
-    this.areas,
+    required this.areas,
     this.line,
     this.lastEdit,
   });
@@ -1006,8 +1026,9 @@ class Subscription_watchStreet_streetsByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
+      areas: (l$areas as List<dynamic>)
+          .map((e) => Subscription_watchStreet_streetsByPk_areas.fromJson(
+              (e as Map<String, dynamic>)))
           .toList(),
       line: (l$line as Map<String, dynamic>?),
       lastEdit: l$lastEdit == null
@@ -1029,7 +1050,7 @@ class Subscription_watchStreet_streetsByPk
 
   final String? blurhash;
 
-  final List<Fragment_Area>? areas;
+  final List<Subscription_watchStreet_streetsByPk_areas> areas;
 
   final Map<String, dynamic>? line;
 
@@ -1051,7 +1072,7 @@ class Subscription_watchStreet_streetsByPk
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$areas = areas;
-    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
+    _resultData['areas'] = l$areas.map((e) => e.toJson()).toList();
     final l$line = line;
     _resultData['line'] = l$line;
     final l$lastEdit = lastEdit;
@@ -1077,7 +1098,7 @@ class Subscription_watchStreet_streetsByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
-      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
+      Object.hashAll(l$areas.map((v) => v)),
       l$line,
       l$lastEdit,
     ]);
@@ -1124,19 +1145,15 @@ class Subscription_watchStreet_streetsByPk
     }
     final l$areas = areas;
     final lOther$areas = other.areas;
-    if (l$areas != null && lOther$areas != null) {
-      if (l$areas.length != lOther$areas.length) {
+    if (l$areas.length != lOther$areas.length) {
+      return false;
+    }
+    for (int i = 0; i < l$areas.length; i++) {
+      final l$areas$entry = l$areas[i];
+      final lOther$areas$entry = lOther$areas[i];
+      if (l$areas$entry != lOther$areas$entry) {
         return false;
       }
-      for (int i = 0; i < l$areas.length; i++) {
-        final l$areas$entry = l$areas[i];
-        final lOther$areas$entry = lOther$areas[i];
-        if (l$areas$entry != lOther$areas$entry) {
-          return false;
-        }
-      }
-    } else if (l$areas != lOther$areas) {
-      return false;
     }
     final l$line = line;
     final lOther$line = other.line;
@@ -1178,13 +1195,15 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
+    List<Subscription_watchStreet_streetsByPk_areas>? areas,
     Map<String, dynamic>? line,
     Fragment_LatestEditHistory? lastEdit,
   });
   TRes areas(
-      Iterable<Fragment_Area>? Function(
-              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
+      Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
+              Iterable<
+                  CopyWith_Subscription_watchStreet_streetsByPk_areas<
+                      Subscription_watchStreet_streetsByPk_areas>>)
           _fn);
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
 }
@@ -1227,9 +1246,9 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        areas: areas == _undefined
+        areas: areas == _undefined || areas == null
             ? _instance.areas
-            : (areas as List<Fragment_Area>?),
+            : (areas as List<Subscription_watchStreet_streetsByPk_areas>),
         line: line == _undefined
             ? _instance.line
             : (line as Map<String, dynamic>?),
@@ -1239,14 +1258,17 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
       ));
 
   TRes areas(
-          Iterable<Fragment_Area>? Function(
-                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
+          Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
+                  Iterable<
+                      CopyWith_Subscription_watchStreet_streetsByPk_areas<
+                          Subscription_watchStreet_streetsByPk_areas>>)
               _fn) =>
       call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
-                e,
-                (i) => i,
-              )))?.toList());
+          areas: _fn(_instance.areas
+              .map((e) => CopyWith_Subscription_watchStreet_streetsByPk_areas(
+                    e,
+                    (i) => i,
+                  ))).toList());
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
@@ -1270,7 +1292,7 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
+    List<Subscription_watchStreet_streetsByPk_areas>? areas,
     Map<String, dynamic>? line,
     Fragment_LatestEditHistory? lastEdit,
   }) =>
@@ -1280,4 +1302,139 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
+}
+
+class Subscription_watchStreet_streetsByPk_areas {
+  Subscription_watchStreet_streetsByPk_areas({
+    required this.area,
+    this.$__typename = 'AreasStreets',
+  });
+
+  factory Subscription_watchStreet_streetsByPk_areas.fromJson(
+      Map<String, dynamic> json) {
+    final l$area = json['area'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStreet_streetsByPk_areas(
+      area: Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment_Area area;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$area = area;
+    _resultData['area'] = l$area.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$area = area;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$area,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStreet_streetsByPk_areas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStreet_streetsByPk_areas
+    on Subscription_watchStreet_streetsByPk_areas {
+  CopyWith_Subscription_watchStreet_streetsByPk_areas<
+          Subscription_watchStreet_streetsByPk_areas>
+      get copyWith => CopyWith_Subscription_watchStreet_streetsByPk_areas(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStreet_streetsByPk_areas<TRes> {
+  factory CopyWith_Subscription_watchStreet_streetsByPk_areas(
+    Subscription_watchStreet_streetsByPk_areas instance,
+    TRes Function(Subscription_watchStreet_streetsByPk_areas) then,
+  ) = _CopyWithImpl_Subscription_watchStreet_streetsByPk_areas;
+
+  factory CopyWith_Subscription_watchStreet_streetsByPk_areas.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreet_streetsByPk_areas;
+
+  TRes call({
+    Fragment_Area? area,
+    String? $__typename,
+  });
+  CopyWith_Fragment_Area<TRes> get area;
+}
+
+class _CopyWithImpl_Subscription_watchStreet_streetsByPk_areas<TRes>
+    implements CopyWith_Subscription_watchStreet_streetsByPk_areas<TRes> {
+  _CopyWithImpl_Subscription_watchStreet_streetsByPk_areas(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStreet_streetsByPk_areas _instance;
+
+  final TRes Function(Subscription_watchStreet_streetsByPk_areas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? area = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchStreet_streetsByPk_areas(
+        area: area == _undefined || area == null
+            ? _instance.area
+            : (area as Fragment_Area),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_Area<TRes> get area {
+    final local$area = _instance.area;
+    return CopyWith_Fragment_Area(local$area, (e) => call(area: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk_areas<TRes>
+    implements CopyWith_Subscription_watchStreet_streetsByPk_areas<TRes> {
+  _CopyWithStubImpl_Subscription_watchStreet_streetsByPk_areas(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment_Area? area,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 }

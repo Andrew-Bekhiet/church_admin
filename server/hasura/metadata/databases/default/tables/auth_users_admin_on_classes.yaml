@@ -1,0 +1,3 @@
+table:
+  name: users_admin_on_classes
+  schema: auth
