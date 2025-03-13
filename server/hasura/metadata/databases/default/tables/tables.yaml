@@ -1,7 +1,4 @@
 - "!include auth_users_admin_on.yaml"
-- "!include auth_users_admin_on_classes.yaml"
-- "!include auth_users_admin_on_groups_persons.yaml"
-- "!include auth_users_admin_on_services_persons.yaml"
 - "!include auth_users_data.yaml"
 - "!include auth_users_permissions.yaml"
 - "!include auth_users_permissions_by_entity_id.yaml"
