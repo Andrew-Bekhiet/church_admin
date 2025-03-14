@@ -106,6 +106,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
+        final canEditObject =
+            AuthBloc.I.currentUserData!.canEditObject(objectData);
+
         final slivers = [
           SliverAppBar(
             stretch: true,
@@ -117,7 +120,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else if (AuthBloc.I.currentUserData!.canEditObject(objectData))
+              else if (canEditObject)
                 widget.editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(
@@ -169,17 +172,18 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 onNotification: _onScrollEnd,
                 child: body,
               ),
-              floatingActionButton: widget.floatingActionButtonBuilder != null
-                  ? Builder(
-                      builder: (context) {
-                        return widget.floatingActionButtonBuilder!(
-                          context,
-                          DefaultTabController.of(context),
-                          objectData,
-                        );
-                      },
-                    )
-                  : null,
+              floatingActionButton:
+                  widget.floatingActionButtonBuilder != null && canEditObject
+                      ? Builder(
+                          builder: (context) {
+                            return widget.floatingActionButtonBuilder!(
+                              context,
+                              DefaultTabController.of(context),
+                              objectData,
+                            );
+                          },
+                        )
+                      : null,
             ),
           ),
         );

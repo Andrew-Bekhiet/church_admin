@@ -337,26 +337,23 @@ class _EditPersonState extends State<EditPerson> {
 
                 final currentUserData = AuthBloc.I.currentUserData!;
 
-                final canEditFamily =
-                    newPerson.family == null ||
+                final canEditFamily = newPerson.family == null ||
                     currentUserData.canEditObject(newPerson.family!);
 
-                final canEditAddress =
-                    newPerson.address?.area == null ||
+                final canEditAddress = newPerson.address?.area == null ||
                     newPerson.address?.street == null ||
-                    (currentUserData.canEditObject(newPerson.address!.area!) &&
-                        currentUserData.canEditObject(
-                          newPerson.address!.street!,
-                        ));
+                    currentUserData.canEditObject(newPerson.address!.area!);
 
-                if (!canEditFamily && !canEditAddress) {
+                final servicesAndGroups =
+                    <ViewableWithID>{}.union(v?.$1 ?? {}).union(v?.$2 ?? {});
+
+                if (!canEditFamily &&
+                    !canEditAddress &&
+                    servicesAndGroups.isEmpty) {
                   return 'يجب اختيار خدمة أو مجموعة';
                 }
 
-                return <ViewableWithID>{}
-                        .union(v?.$1 ?? {})
-                        .union(v?.$2 ?? {})
-                        .every(currentUserData.canEditObject)
+                return servicesAndGroups.every(currentUserData.canEditObject)
                     ? null
                     : 'ليس لديك الصلاحية لتعديل بعض الخدمات او المجموعات';
               },
