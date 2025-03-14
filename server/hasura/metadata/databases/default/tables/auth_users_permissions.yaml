@@ -9,9 +9,29 @@ insert_permissions:
   - role: user
     permission:
       check:
-        user:
-          isUserAllowedToChange:
-            _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: any-user
+                      - entity_id:
+                          _is_null: true
+                  - _and:
+                      - entity_type:
+                          _eq: user
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - uid
       columns:
         - permission
         - uid
@@ -22,13 +42,51 @@ select_permissions:
         - permission
         - uid
       filter:
-        user:
-          isUserAllowedToRead:
-            _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: any-user
+                      - entity_id:
+                          _is_null: true
+                  - _and:
+                      - entity_type:
+                          _eq: user
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - uid
 delete_permissions:
   - role: user
     permission:
       filter:
-        user:
-          isUserAllowedToChange:
-            _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: any-user
+                      - entity_id:
+                          _is_null: true
+                  - _and:
+                      - entity_type:
+                          _eq: user
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - uid
