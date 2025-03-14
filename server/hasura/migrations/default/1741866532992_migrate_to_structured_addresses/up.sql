@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.districts
     name text COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT districts_pk PRIMARY KEY (id),
     CONSTRAINT districts_unique_name UNIQUE (name)
-)
+);
 
 CREATE TABLE IF NOT EXISTS public.addresses
 (
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS public.addresses
         ON UPDATE CASCADE
         ON DELETE RESTRICT,
     CONSTRAINT addresses_family_or_store_check CHECK ((family_id IS NOT NULL) <> (store_id IS NOT NULL))
-)
+);
 
 CREATE UNIQUE INDEX IF NOT EXISTS addresses_family_id_idx
     ON public.addresses USING btree
@@ -344,9 +344,9 @@ BEGIN
     DROP TABLE IF EXISTS migration_verification;
 END$$;
 
-ALTER TABLE IF EXISTS public.stores RENAME COLUMN IF EXISTS address TO address_text;
-ALTER TABLE IF EXISTS public.persons RENAME COLUMN IF EXISTS address TO address_text;
-ALTER TABLE IF EXISTS public.families RENAME COLUMN IF EXISTS address TO address_text;
+ALTER TABLE IF EXISTS public.stores RENAME COLUMN address TO address_text;
+ALTER TABLE IF EXISTS public.persons RENAME COLUMN address TO address_text;
+ALTER TABLE IF EXISTS public.families RENAME COLUMN address TO address_text;
 
 ALTER TABLE IF EXISTS public.stores DROP CONSTRAINT IF EXISTS stores_check_family_or_geolocation;
 
