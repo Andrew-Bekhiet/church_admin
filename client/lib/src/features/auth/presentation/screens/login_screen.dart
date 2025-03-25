@@ -292,6 +292,7 @@ class _LoginScreenState extends State<LoginScreen> {
             context,
             e,
             stackTrace: stackTrace,
+            data: {'email': _emailController.text},
           );
         }
       }

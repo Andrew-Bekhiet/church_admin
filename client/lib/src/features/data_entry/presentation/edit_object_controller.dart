@@ -6,18 +6,13 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mime/mime.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef UpdateFunc<T> = Future<T?> Function(
-  T oldObject,
-  T newObject,
-);
+typedef UpdateFunc<T> = Future<T?> Function(T oldObject, T newObject);
 
 class EditObjectController<T extends ViewableWithID> {
   bool _saveLock = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late PhotoFieldState photoFieldState = PhotoFieldState(
-    deletePhoto: false,
-  );
+  late PhotoFieldState photoFieldState = PhotoFieldState(deletePhoto: false);
 
   final T? initialObject;
 
@@ -74,11 +69,8 @@ class EditObjectController<T extends ViewableWithID> {
         if (isCreate) {
           returnedObject = await onCreate(newObject);
         } else {
-          returnedObject = await onUpdate!(
-                initialObject!,
-                newObject,
-              ) ??
-              newObject;
+          returnedObject =
+              await onUpdate!(initialObject!, newObject) ?? newObject;
         }
 
         await _handlePhotoChange(returnedObject, scaffoldMessenger);
@@ -90,10 +82,7 @@ class EditObjectController<T extends ViewableWithID> {
               content: Row(
                 children: [
                   const Expanded(child: Text('تم بنجاح')),
-                  Icon(
-                    Symbols.done,
-                    color: themeData.primaryIconTheme.color,
-                  ),
+                  Icon(Symbols.done, color: themeData.primaryIconTheme.color),
                 ],
               ),
             ),
@@ -111,7 +100,12 @@ class EditObjectController<T extends ViewableWithID> {
           context,
           e,
           stackTrace: stackTrace,
-          data: toJson(newObject),
+          data: {
+            'objectType': T.toString(),
+            'initialObject':
+                initialObject != null ? toJson(initialObject!) : null,
+            'newObject': toJson(newObject),
+          },
         );
       }
     }
@@ -136,17 +130,17 @@ class EditObjectController<T extends ViewableWithID> {
               const Expanded(child: Text('جار رفع الصورة ...')),
               StreamBuilder<double?>(
                 stream: uploadProgress.stream,
-                builder: (context, snapshot) => CircularProgressIndicator(
-                  value: snapshot.data,
-                ),
+                builder: (context, snapshot) =>
+                    CircularProgressIndicator(value: snapshot.data),
               ),
             ],
           ),
         ),
       );
 
-      final mimeType =
-          MimeTypeResolver().lookup(photoFieldState.newPhoto!.path);
+      final mimeType = MimeTypeResolver().lookup(
+        photoFieldState.newPhoto!.path,
+      );
 
       final uploadUrl = await (returnedObject as IImage).imageInfo.getUploadUrl(
             contentType: mimeType,
