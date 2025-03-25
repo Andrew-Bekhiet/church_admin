@@ -14,6 +14,7 @@ class BlocObserverInit implements Initializer {
     Bloc.observer = multiBlocObserver;
 
     multiBlocObserver
+      ..addObserver(LoggingService.I)
       ..addObserver(UserSettingsService.I)
       ..addObserver(NotificationsService.I);
   }

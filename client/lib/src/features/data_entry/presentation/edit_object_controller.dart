@@ -98,14 +98,16 @@ class EditObjectController<T extends ViewableWithID> {
       if (context.mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           context,
-          e,
-          stackTrace: stackTrace,
-          data: {
-            'objectType': T.toString(),
-            'initialObject':
-                initialObject != null ? toJson(initialObject!) : null,
-            'newObject': toJson(newObject),
-          },
+          LogRecord(
+            error: e,
+            stackTrace: stackTrace,
+            data: {
+              'objectType': T.toString(),
+              'initialObject':
+                  initialObject != null ? toJson(initialObject!) : null,
+              'newObject': toJson(newObject),
+            },
+          ),
         );
       }
     }

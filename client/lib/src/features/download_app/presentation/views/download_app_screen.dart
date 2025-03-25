@@ -60,7 +60,14 @@ class DownloadAppScreen extends StatelessWidget {
           future: future,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              LoggingService.I.reportError(snapshot.error);
+              LoggingService.I.error(
+                LogRecord(
+                  moduleName: '$DownloadAppScreen',
+                  eventName: 'getAppDownloadLink',
+                  error: snapshot.error,
+                  stackTrace: snapshot.stackTrace,
+                ),
+              );
 
               completer.completeError(snapshot.error!);
 

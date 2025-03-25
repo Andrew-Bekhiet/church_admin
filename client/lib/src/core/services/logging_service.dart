@@ -3,25 +3,115 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-class LoggingService {
+export 'logging/models.dart';
+
+class LoggingService extends BlocObserver {
   static LoggingService get I =>
       globalProviderContainer.read(loggingServiceProvider);
 
   final NavigatorObserver navigatorObserver = SentryNavigatorObserver();
 
   LoggingService() {
-    FlutterError.onError = onFlutterError;
-    ErrorWidget.builder = errorWidgetBuilder;
+    FlutterError.onError = _onFlutterError;
+    ErrorWidget.builder = _errorWidgetBuilder;
   }
 
-  Future<void> onFlutterError(FlutterErrorDetails flutterError) async {
-    await reportError(flutterError, stackTrace: flutterError.stack);
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
+
+    exception(
+      LogRecord(
+        moduleName: bloc.runtimeType.toString(),
+        error: error,
+        stackTrace: stackTrace,
+      ),
+    );
   }
 
-  Widget errorWidgetBuilder(FlutterErrorDetails error) {
-    if (kReleaseMode) onFlutterError(error);
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+
+    config(
+      LogRecord(
+        moduleName: bloc.runtimeType.toString(),
+        eventName: event.runtimeType.toString(),
+        data: {'event': event.toString()},
+      ),
+    );
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+
+    _maybeIdentifyUser(transition);
+
+    final event = transition.event;
+    final currentState = transition.currentState;
+    final nextState = transition.nextState;
+
+    info(
+      LogRecord(
+        moduleName: bloc.runtimeType.toString(),
+        eventName: event.runtimeType.toString(),
+        data: {
+          'event': event.toString(),
+          'previousState': currentState.toString(),
+          'currentState': nextState.toString(),
+        },
+      ),
+    );
+  }
+
+  void _maybeIdentifyUser(Transition transition) {
+    if (transition is! Transition<AuthEvent, AuthState>) {
+      return;
+    }
+
+    final nextState = transition.nextState.unwrapped;
+    final currentState = transition.currentState.unwrapped;
+
+    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
+      Sentry.configureScope(
+        (scope) => scope.setUser(
+          SentryUser(
+            id: nextState.authUser.uid,
+            email: nextState.authUser.email,
+            name: nextState.userData?.name,
+            data: {
+              'emailVerified': nextState.authUser.emailVerified,
+              'claims': nextState.authUser.claims,
+              'isMultiFactorEnabled': nextState.authUser.isMultiFactorEnabled,
+              'permissions': nextState.userData?.permissions.toList(),
+              'adminOn':
+                  nextState.userData?.adminOn?.map((a) => a.toJson()).toList(),
+            },
+          ),
+        ),
+      );
+    } else if (currentState is AuthAuthenticated &&
+        nextState is! AuthAuthenticated) {
+      Sentry.configureScope((scope) => scope.setUser(null));
+    }
+  }
+
+  Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
+    await error(
+      LogRecord(
+        message: flutterError.exceptionAsString(),
+        error: flutterError.exception,
+        stackTrace: flutterError.stack,
+      ),
+    );
+  }
+
+  Widget _errorWidgetBuilder(FlutterErrorDetails error) {
+    if (kReleaseMode) _onFlutterError(error);
 
     return Material(
       type: MaterialType.card,
@@ -33,80 +123,88 @@ class LoggingService {
     );
   }
 
-  Future<void> reportError(
-    dynamic error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-    StackTrace? stackTrace,
-  }) async {
-    await Sentry.captureException(
-      error,
-      stackTrace: stackTrace,
-      hint: hints != null ? Hint.withMap(hints) : null,
-      withScope: (scope) {
-        _maybeConfigureScopeUser(scope);
+  Future<void> log(LoggingLevel level, LogRecord record) async {
+    final msgBuilder = StringBuffer();
 
-        _maybeConfigureScopeData(scope, data);
-      },
-    );
-  }
+    if (record.moduleName != null) {
+      msgBuilder.write('[$record.moduleName]: ');
+    }
 
-  void _maybeConfigureScopeUser(Scope scope) {
-    final state = AuthBloc.I.state.unwrapped;
+    if (record.eventName != null) {
+      msgBuilder.write('$record.eventName: ');
+    }
 
-    scope.setUser(
-      state is AuthAuthenticated
-          ? SentryUser(
-              id: state.authUser.uid,
-              email: state.authUser.email,
-              name: state.userData?.name,
-              data: state.authUser.toJson().map(
-                    (key, value) => MapEntry(
-                      key,
-                      value is Set ? value.toList() : value,
-                    ),
-                  ),
-            )
-          : null,
-    );
-  }
+    if (record.message != null) {
+      msgBuilder.write(record.message);
+    }
 
-  void _maybeConfigureScopeData(Scope scope, Map<String, dynamic>? data) {
-    if (data != null) {
-      scope.setContexts('Data', data);
+    final msg = msgBuilder.toString();
+
+    if (msg.isNotEmpty) {
+      await Sentry.addBreadcrumb(
+        Breadcrumb(
+          level: level.sentryLevel,
+          message: msg,
+          data: record.data,
+        ),
+      );
+    }
+
+    if (level >= LoggingLevel.exception) {
+      await Sentry.captureException(
+        record.error,
+        stackTrace: record.stackTrace,
+        hint: Hint.withMap({'data': record.data}),
+        withScope: (scope) => _configureSentryScope(scope, record),
+      );
     }
   }
 
-  Future<void> reportFlutterError(
-    FlutterErrorDetails flutterError, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-  }) {
-    return reportError(
-      flutterError.exception,
-      data: data,
-      hints: hints,
-      stackTrace: flutterError.stack,
+  Future<void> _configureSentryScope(Scope scope, LogRecord record) async {
+    await Future.wait(
+      {
+        ...?record.data,
+        'moduleName': record.moduleName,
+        'eventName': record.eventName,
+      }.entries.map((e) => scope.setContexts(e.key, e.value)).toList(),
     );
+  }
+
+  Future<void> fine(LogRecord record) async {
+    await log(LoggingLevel.fine, record);
+  }
+
+  Future<void> config(LogRecord record) async {
+    await log(LoggingLevel.config, record);
+  }
+
+  Future<void> info(LogRecord record) async {
+    await log(LoggingLevel.info, record);
+  }
+
+  Future<void> warning(LogRecord record) async {
+    await log(LoggingLevel.warning, record);
+  }
+
+  Future<void> exception(LogRecord record) async {
+    await log(LoggingLevel.exception, record);
+  }
+
+  Future<void> error(LogRecord record) async {
+    await log(LoggingLevel.error, record);
   }
 
   Future<void> showErrorDialogAndReport(
     BuildContext context,
-    Object error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-    StackTrace? stackTrace,
-  }) {
-    showDialog(
-      context: context,
-      builder: (context) => CAErrorDialog(exception: error),
+    LogRecord record,
+  ) async {
+    unawaited(
+      showDialog(
+        context: context,
+        builder: (context) => CAErrorDialog(exception: record.error!),
+      ),
     );
 
-    return reportError(
-      error,
-      data: data,
-      hints: hints,
-      stackTrace: stackTrace,
-    );
+    await error(record);
   }
 }

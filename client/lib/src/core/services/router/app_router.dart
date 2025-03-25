@@ -20,12 +20,14 @@ final GoRouter $appRouter = GoRouter(
   ],
   errorBuilder: (context, state) {
     if (kReleaseMode) {
-      LoggingService.I.reportError(
-        state.error,
-        data: {
-          'location': state.uri.toString(),
-          'extra': state.extra.toString(),
-        },
+      LoggingService.I.error(
+        LogRecord(
+          error: state.error,
+          data: {
+            'location': state.uri.toString(),
+            'extra': state.extra.toString(),
+          },
+        ),
       );
     }
 

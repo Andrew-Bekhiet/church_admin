@@ -25,6 +25,10 @@ final class SignInWithEmailPassword extends AuthEvent {
 
   @override
   List<Object?> get props => [email, password];
+
+  @override
+  String toString() =>
+      '$SignInWithEmailPassword($email, ${password.isEmpty ? '' : '********'})';
 }
 
 final class SignUpWithEmailPassword extends AuthEvent {
@@ -38,6 +42,10 @@ final class SignUpWithEmailPassword extends AuthEvent {
 
   @override
   List<Object?> get props => [email, password];
+
+  @override
+  String toString() =>
+      '$SignUpWithEmailPassword($email, ${password.isEmpty ? '' : '********'})';
 }
 
 final class SignOut extends AuthEvent {
@@ -72,6 +80,10 @@ final class EnrollMultiFactor extends AuthEvent {
 
   @override
   List<Object?> get props => [password, phoneNumber];
+
+  @override
+  String toString() =>
+      '$EnrollMultiFactor($phoneNumber, ${password.isEmpty ? '' : '********'})';
 }
 
 final class StartMultiFactorChallenge extends AuthEvent {
