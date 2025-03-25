@@ -24,7 +24,8 @@ class DataGeomap extends StatefulWidget {
   final List<Widget> addLayers;
   final Stream<PersonsGeolocationsResponse?> Function(
     PersonsGeolocationsResponse?,
-  )? overrideResponseObjects;
+  )?
+  overrideResponseObjects;
 
   final bool showUserLocation;
   final void Function(Position?)? onUserLocationChanged;
@@ -64,7 +65,7 @@ class DataGeomapState extends State<DataGeomap> {
   late final _userLocationStream =
       const LocationMarkerDataStreamFactory().fromGeolocatorPositionStream();
   late final _userLocationHeadingStream =
-      const LocationMarkerDataStreamFactory().fromCompassHeadingStream();
+      const LocationMarkerDataStreamFactory().fromRotationSensorHeadingStream();
 
   @override
   Widget build(BuildContext context) {
@@ -73,18 +74,18 @@ class DataGeomapState extends State<DataGeomap> {
         null,
         widget.initialPerson != null
             ? PersonsGeolocationsResponse(
-                persons: {widget.initialPerson!},
-                streets: _currentMapOptions.selectedStreets,
-                families: _currentMapOptions.selectedFamilies,
-                stores: _currentMapOptions.selectedStores,
-                areas: _currentMapOptions.selectedAreas,
-              )
+              persons: {widget.initialPerson!},
+              streets: _currentMapOptions.selectedStreets,
+              families: _currentMapOptions.selectedFamilies,
+              stores: _currentMapOptions.selectedStores,
+              areas: _currentMapOptions.selectedAreas,
+            )
             : PersonsGeolocationsResponse(
-                streets: _currentMapOptions.selectedStreets,
-                families: _currentMapOptions.selectedFamilies,
-                stores: _currentMapOptions.selectedStores,
-                areas: _currentMapOptions.selectedAreas,
-              ),
+              streets: _currentMapOptions.selectedStreets,
+              families: _currentMapOptions.selectedFamilies,
+              stores: _currentMapOptions.selectedStores,
+              areas: _currentMapOptions.selectedAreas,
+            ),
       ),
       stream: _stream,
       builder: (context, data) {
@@ -138,16 +139,18 @@ class DataGeomapState extends State<DataGeomap> {
               focusedLocationStream: widget.focusedLocationStream,
             ),
             DefaultTextStyle(
-              style: Theme.of(context).textTheme.bodySmall ??
+              style:
+                  Theme.of(context).textTheme.bodySmall ??
                   const TextStyle(fontSize: 12),
               child: SimpleAttributionWidget(
                 alignment: Alignment.topLeft,
                 source: const Text('OpenStreetMap'),
-                onTap: () => globalProviderContainer
-                    .read(launcherServiceProvider)
-                    .launchUrl(
-                      Uri.parse('https://openstreetmap.org/copyright'),
-                    ),
+                onTap:
+                    () => globalProviderContainer
+                        .read(launcherServiceProvider)
+                        .launchUrl(
+                          Uri.parse('https://openstreetmap.org/copyright'),
+                        ),
               ),
             ),
             ...widget.addLayers,
@@ -194,9 +197,9 @@ class DataGeomapState extends State<DataGeomap> {
         .asStream()
         .startWith(null)
         .map((event) {
-      widget.onUserLocationChanged?.call(event);
-      return event;
-    });
+          widget.onUserLocationChanged?.call(event);
+          return event;
+        });
   }
 
   Future<Position?> _requestAndGetLocation() async {
@@ -223,14 +226,15 @@ class DataGeomapState extends State<DataGeomap> {
     GeomapOptions options,
   ) {
     return DatabaseService.I.persons.personsGeolocations(
-      personId: options.selectedAreas.isEmpty &&
-              options.selectedStreets.isEmpty &&
-              options.selectedFamilies.isEmpty &&
-              options.selectedClasses.isEmpty &&
-              options.selectedGroups.isEmpty &&
-              options.selectedServices.isEmpty
-          ? widget.initialPerson?.id
-          : null,
+      personId:
+          options.selectedAreas.isEmpty &&
+                  options.selectedStreets.isEmpty &&
+                  options.selectedFamilies.isEmpty &&
+                  options.selectedClasses.isEmpty &&
+                  options.selectedGroups.isEmpty &&
+                  options.selectedServices.isEmpty
+              ? widget.initialPerson?.id
+              : null,
       getAreas: options.layers.contains(GeoMapLayer.areas),
       getFamilies: options.layers.contains(GeoMapLayer.families),
       getStreets: options.layers.contains(GeoMapLayer.streets),

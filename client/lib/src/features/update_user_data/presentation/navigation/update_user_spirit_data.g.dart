@@ -46,7 +46,7 @@ extension $UpdateUserSpiritDataRouteExtension on UpdateUserSpiritDataRoute {
 T? _$convertMapValue<T>(
   String key,
   Map<String, String> map,
-  T Function(String) converter,
+  T? Function(String) converter,
 ) {
   final value = map[key];
   return value == null ? null : converter(value);
