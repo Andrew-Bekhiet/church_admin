@@ -17,6 +17,24 @@ class LoggingService extends BlocObserver {
   LoggingService() {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = _errorWidgetBuilder;
+
+    SentryFlutter.init(
+      (options) => options
+        ..dsn = SecretsService.I.sentryDSN
+        ..environment = kReleaseMode ? 'release' : 'debug'
+        ..enableAutoPerformanceTracing = true
+        ..enableTimeToFullDisplayTracing = true
+        ..anrEnabled = true
+        ..enableNativeCrashHandling = true
+        ..enableDeduplication = true
+        ..attachThreads = true
+        ..enableWindowMetricBreadcrumbs = true
+        ..reportSilentFlutterErrors = true
+        ..attachScreenshot = true
+        ..screenshotQuality = SentryScreenshotQuality.low
+        ..attachViewHierarchy = true
+        ..enableUserInteractionTracing = true,
+    );
   }
 
   @override
