@@ -1889,74 +1889,127 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
       ) as _i5.NavigatorObserver);
 
   @override
-  _i7.Future<void> onFlutterError(_i5.FlutterErrorDetails? flutterError) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #onFlutterError,
-          [flutterError],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i5.Widget errorWidgetBuilder(_i5.FlutterErrorDetails? error) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #errorWidgetBuilder,
-          [error],
-        ),
-        returnValue: _FakeWidget_19(
-          this,
-          Invocation.method(
-            #errorWidgetBuilder,
-            [error],
-          ),
-        ),
-        returnValueForMissingStub: _FakeWidget_19(
-          this,
-          Invocation.method(
-            #errorWidgetBuilder,
-            [error],
-          ),
-        ),
-      ) as _i5.Widget);
-
-  @override
-  _i7.Future<void> reportError(
-    dynamic error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
+  void onError(
+    _i9.BlocBase<dynamic>? bloc,
+    Object? error,
     StackTrace? stackTrace,
-  }) =>
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            bloc,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(
+    _i9.Bloc<dynamic, dynamic>? bloc,
+    Object? event,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [
+            bloc,
+            event,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+    _i9.Bloc<dynamic, dynamic>? bloc,
+    _i9.Transition<dynamic, dynamic>? transition,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [
+            bloc,
+            transition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i7.Future<void> log(
+    _i3.LoggingLevel? level,
+    _i3.LogRecord? record,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #reportError,
-          [error],
-          {
-            #data: data,
-            #hints: hints,
-            #stackTrace: stackTrace,
-          },
+          #log,
+          [
+            level,
+            record,
+          ],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> reportFlutterError(
-    _i5.FlutterErrorDetails? flutterError, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-  }) =>
-      (super.noSuchMethod(
+  _i7.Future<void> fine(_i3.LogRecord? record) => (super.noSuchMethod(
         Invocation.method(
-          #reportFlutterError,
-          [flutterError],
-          {
-            #data: data,
-            #hints: hints,
-          },
+          #fine,
+          [record],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> config(_i3.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #config,
+          [record],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> info(_i3.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #info,
+          [record],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> warning(_i3.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #warning,
+          [record],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> exception(_i3.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #exception,
+          [record],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> error(_i3.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #error,
+          [record],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
@@ -1965,25 +2018,51 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   @override
   _i7.Future<void> showErrorDialogAndReport(
     _i5.BuildContext? context,
-    Object? error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-    StackTrace? stackTrace,
-  }) =>
+    _i3.LogRecord? record,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #showErrorDialogAndReport,
           [
             context,
-            error,
+            record,
           ],
-          {
-            #data: data,
-            #hints: hints,
-            #stackTrace: stackTrace,
-          },
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
+  @override
+  void onCreate(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onCreate,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(
+    _i9.BlocBase<dynamic>? bloc,
+    _i9.Change<dynamic>? change,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [
+            bloc,
+            change,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

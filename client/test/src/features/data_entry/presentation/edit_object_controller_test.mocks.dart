@@ -3,15 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i6;
 
-import 'package:church_admin/church_admin.dart' as _i6;
+import 'package:church_admin/church_admin.dart' as _i5;
 import 'package:cloud_functions/cloud_functions.dart' as _i2;
 import 'package:dio/dio.dart' as _i3;
-import 'package:flutter/foundation.dart' as _i5;
 import 'package:flutter/material.dart' as _i4;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -69,24 +69,10 @@ class _FakeNavigatorObserver_3 extends _i1.SmartFake
         );
 }
 
-class _FakeWidget_4 extends _i1.SmartFake implements _i4.Widget {
-  _FakeWidget_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-
-  @override
-  String toString({_i5.DiagnosticLevel? minLevel = _i5.DiagnosticLevel.info}) =>
-      super.toString();
-}
-
 /// A class which mocks [FunctionsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
+class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
   @override
   _i2.HttpsCallable httpsCallable(
     String? functionName, {
@@ -117,14 +103,14 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
       ) as _i2.HttpsCallable);
 
   @override
-  _i7.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
+  _i6.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
           String? token) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerFCMToken,
           [token],
         ),
-        returnValue: _i7.Future<_i2.HttpsCallableResult<dynamic>>.value(
+        returnValue: _i6.Future<_i2.HttpsCallableResult<dynamic>>.value(
             _FakeHttpsCallableResult_1<dynamic>(
           this,
           Invocation.method(
@@ -133,7 +119,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<_i2.HttpsCallableResult<dynamic>>.value(
+            _i6.Future<_i2.HttpsCallableResult<dynamic>>.value(
                 _FakeHttpsCallableResult_1<dynamic>(
           this,
           Invocation.method(
@@ -141,10 +127,10 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             [token],
           ),
         )),
-      ) as _i7.Future<_i2.HttpsCallableResult<dynamic>>);
+      ) as _i6.Future<_i2.HttpsCallableResult<dynamic>>);
 
   @override
-  _i7.Future<String> getDownloadUrl(
+  _i6.Future<String> getDownloadUrl(
     String? table,
     String? id, {
     String? contentType,
@@ -158,7 +144,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ],
           {#contentType: contentType},
         ),
-        returnValue: _i7.Future<String>.value(_i8.dummyValue<String>(
+        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getDownloadUrl,
@@ -170,7 +156,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<String>.value(_i8.dummyValue<String>(
+            _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getDownloadUrl,
@@ -181,10 +167,10 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             {#contentType: contentType},
           ),
         )),
-      ) as _i7.Future<String>);
+      ) as _i6.Future<String>);
 
   @override
-  _i7.Future<String> getUploadUrl(
+  _i6.Future<String> getUploadUrl(
     String? table,
     String? id, {
     String? contentType,
@@ -198,7 +184,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ],
           {#contentType: contentType},
         ),
-        returnValue: _i7.Future<String>.value(_i8.dummyValue<String>(
+        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getUploadUrl,
@@ -210,7 +196,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<String>.value(_i8.dummyValue<String>(
+            _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getUploadUrl,
@@ -221,10 +207,10 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             {#contentType: contentType},
           ),
         )),
-      ) as _i7.Future<String>);
+      ) as _i6.Future<String>);
 
   @override
-  _i7.Future<void> deletePhoto(
+  _i6.Future<void> deletePhoto(
     String? table,
     String? id,
   ) =>
@@ -236,25 +222,25 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             id,
           ],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i7.Future<String?> getAddressFromLocation(_i6.Point? location) =>
+  _i6.Future<String?> getAddressFromLocation(_i5.Point? location) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAddressFromLocation,
           [location],
         ),
-        returnValue: _i7.Future<String?>.value(),
-        returnValueForMissingStub: _i7.Future<String?>.value(),
-      ) as _i7.Future<String?>);
+        returnValue: _i6.Future<String?>.value(),
+        returnValueForMissingStub: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
 
   @override
-  _i7.Future<_i3.Response<dynamic>> uploadPhoto({
+  _i6.Future<_i3.Response<dynamic>> uploadPhoto({
     required String? url,
-    required _i7.Stream<List<int>>? fileStream,
+    required _i6.Stream<List<int>>? fileStream,
     String? contentType,
     int? fileLength,
     void Function(
@@ -275,7 +261,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           },
         ),
         returnValue:
-            _i7.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i6.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -290,7 +276,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i6.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #uploadPhoto,
@@ -304,37 +290,37 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             },
           ),
         )),
-      ) as _i7.Future<_i3.Response<dynamic>>);
+      ) as _i6.Future<_i3.Response<dynamic>>);
 
   @override
-  _i7.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
+  _i6.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
         Invocation.method(
           #checkHasuraHealth,
           [],
         ),
-        returnValue: _i7.Future<bool>.value(false),
-        returnValueForMissingStub: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
 
   @override
-  _i7.Future<void> registerUserWithCode(String? registerCode) =>
+  _i6.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
         Invocation.method(
           #registerUserWithCode,
           [registerCode],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i7.Future<String> getAppDownloadLink(String? platform) =>
+  _i6.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAppDownloadLink,
           [platform],
         ),
-        returnValue: _i7.Future<String>.value(_i8.dummyValue<String>(
+        returnValue: _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getAppDownloadLink,
@@ -342,20 +328,20 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           ),
         )),
         returnValueForMissingStub:
-            _i7.Future<String>.value(_i8.dummyValue<String>(
+            _i6.Future<String>.value(_i7.dummyValue<String>(
           this,
           Invocation.method(
             #getAppDownloadLink,
             [platform],
           ),
         )),
-      ) as _i7.Future<String>);
+      ) as _i6.Future<String>);
 }
 
 /// A class which mocks [LoggingService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
+class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
   @override
   _i4.NavigatorObserver get navigatorObserver => (super.noSuchMethod(
         Invocation.getter(#navigatorObserver),
@@ -370,101 +356,180 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
       ) as _i4.NavigatorObserver);
 
   @override
-  _i7.Future<void> onFlutterError(_i5.FlutterErrorDetails? flutterError) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #onFlutterError,
-          [flutterError],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i4.Widget errorWidgetBuilder(_i5.FlutterErrorDetails? error) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #errorWidgetBuilder,
-          [error],
-        ),
-        returnValue: _FakeWidget_4(
-          this,
-          Invocation.method(
-            #errorWidgetBuilder,
-            [error],
-          ),
-        ),
-        returnValueForMissingStub: _FakeWidget_4(
-          this,
-          Invocation.method(
-            #errorWidgetBuilder,
-            [error],
-          ),
-        ),
-      ) as _i4.Widget);
-
-  @override
-  _i7.Future<void> reportError(
-    dynamic error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
+  void onError(
+    _i8.BlocBase<dynamic>? bloc,
+    Object? error,
     StackTrace? stackTrace,
-  }) =>
-      (super.noSuchMethod(
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
-          #reportError,
-          [error],
-          {
-            #data: data,
-            #hints: hints,
-            #stackTrace: stackTrace,
-          },
+          #onError,
+          [
+            bloc,
+            error,
+            stackTrace,
+          ],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i7.Future<void> reportFlutterError(
-    _i5.FlutterErrorDetails? flutterError, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-  }) =>
-      (super.noSuchMethod(
+  void onEvent(
+    _i8.Bloc<dynamic, dynamic>? bloc,
+    Object? event,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
-          #reportFlutterError,
-          [flutterError],
-          {
-            #data: data,
-            #hints: hints,
-          },
+          #onEvent,
+          [
+            bloc,
+            event,
+          ],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i7.Future<void> showErrorDialogAndReport(
+  void onTransition(
+    _i8.Bloc<dynamic, dynamic>? bloc,
+    _i8.Transition<dynamic, dynamic>? transition,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [
+            bloc,
+            transition,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i6.Future<void> log(
+    _i5.LoggingLevel? level,
+    _i5.LogRecord? record,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #log,
+          [
+            level,
+            record,
+          ],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> fine(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #fine,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> config(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #config,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> info(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #info,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> warning(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #warning,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> exception(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #exception,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> error(_i5.LogRecord? record) => (super.noSuchMethod(
+        Invocation.method(
+          #error,
+          [record],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> showErrorDialogAndReport(
     _i4.BuildContext? context,
-    Object? error, {
-    Map<String, dynamic>? data,
-    Map<String, dynamic>? hints,
-    StackTrace? stackTrace,
-  }) =>
+    _i5.LogRecord? record,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #showErrorDialogAndReport,
           [
             context,
-            error,
+            record,
           ],
-          {
-            #data: data,
-            #hints: hints,
-            #stackTrace: stackTrace,
-          },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  void onCreate(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onCreate,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(
+    _i8.BlocBase<dynamic>? bloc,
+    _i8.Change<dynamic>? change,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [
+            bloc,
+            change,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onClose(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+        Invocation.method(
+          #onClose,
+          [bloc],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
