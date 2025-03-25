@@ -25,6 +25,7 @@ class LoggingService extends BlocObserver {
         ..enableAutoPerformanceTracing = true
         ..enableTimeToFullDisplayTracing = true
         ..anrEnabled = true
+        ..debug = false
         ..enableNativeCrashHandling = true
         ..enableDeduplication = true
         ..attachThreads = true
