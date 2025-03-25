@@ -145,11 +145,11 @@ class LoggingService extends BlocObserver {
     final msgBuilder = StringBuffer();
 
     if (record.moduleName != null) {
-      msgBuilder.write('[$record.moduleName]: ');
+      msgBuilder.write('[${record.moduleName}]: ');
     }
 
     if (record.eventName != null) {
-      msgBuilder.write('$record.eventName: ');
+      msgBuilder.write('${record.eventName}: ');
     }
 
     if (record.message != null) {
