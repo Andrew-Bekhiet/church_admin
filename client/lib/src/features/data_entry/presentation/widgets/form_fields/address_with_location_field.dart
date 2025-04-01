@@ -39,15 +39,15 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     }
   }
 
-  ViewableObjectListController<T> _listControllerFor<T extends ViewableWithID>(
-    StreamableDAO dao,
-    Stream<String?> searchStream,
-  ) {
-    final stream = dao.streamAll(searchQuery: searchStream);
+  ViewableObjectListController<T>
+      _listControllerFor<T extends ViewableWithID, TBool, TOrderBy>(
+    StreamableDAO<T, TBool, TOrderBy> dao,
+    Stream<String?> searchStream, {
+    List<TBool> where = const [],
+  }) {
+    final stream = dao.streamAll(searchQuery: searchStream, where: where);
 
-    return ViewableObjectListController<T>(
-      objectsPaginatableStream: stream as GQLPaginatableStream<T>,
-    );
+    return ViewableObjectListController<T>(objectsPaginatableStream: stream);
   }
 
   @override
@@ -190,8 +190,21 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           ObjectSelectionField<Street, Street?>(
             key: ValueKey(_address.street),
             enabled: widget.enabled,
-            listController: (s) =>
-                _listControllerFor(DatabaseService.I.streets, s),
+            listController: (s) => _listControllerFor(
+              DatabaseService.I.streets,
+              s,
+              where: _address.area != null
+                  ? [
+                      Input_StreetsBoolExp(
+                        areas: Input_AreasStreetsBoolExp(
+                          areaId: Input_UuidComparisonExp(
+                            $_eq: _address.area!.id.toUuid(),
+                          ),
+                        ),
+                      ),
+                    ]
+                  : <Input_StreetsBoolExp>[],
+            ),
             initialValue: _address.street,
             dialogFieldLabel: 'الشارع الرئيسي',
             builder: (context, state) {
@@ -352,8 +365,21 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           ObjectSelectionField<Area, Area?>(
             key: ValueKey(_address.area),
             enabled: widget.enabled,
-            listController: (s) =>
-                _listControllerFor(DatabaseService.I.areas, s),
+            listController: (s) => _listControllerFor(
+              DatabaseService.I.areas,
+              s,
+              where: _address.street != null
+                  ? [
+                      Input_AreasBoolExp(
+                        streets: Input_AreasStreetsBoolExp(
+                          streetId: Input_UuidComparisonExp(
+                            $_eq: _address.street!.id.toUuid(),
+                          ),
+                        ),
+                      ),
+                    ]
+                  : <Input_AreasBoolExp>[],
+            ),
             initialValue: _address.area,
             dialogFieldLabel: 'المنطقة',
             builder: (context, state) {
