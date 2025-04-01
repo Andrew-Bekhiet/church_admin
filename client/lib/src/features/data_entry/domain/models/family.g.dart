@@ -17,16 +17,9 @@ final _$FamilyFields = <String, FieldMetadata>{
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),
-  'address': FieldMetadata<String>(
+  'address': FieldMetadata<Address>(
     name: 'address',
     label: 'العنوان',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'geolocation': FieldMetadata<Point>(
-    name: 'geolocation',
-    label: 'الموقع',
-    operators: Operator.spatial,
   ),
   'notes': FieldMetadata<String>(
     name: 'notes',
@@ -43,16 +36,6 @@ final _$FamilyFields = <String, FieldMetadata>{
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
     operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'areas': FieldMetadata<Area>(
-    name: 'areas',
-    label: 'المناطق',
-    isOrderable: false,
-  ),
-  'streets': FieldMetadata<Street>(
-    name: 'streets',
-    label: 'الشوارع',
-    isOrderable: false,
   ),
   'children': FieldMetadata<Family>(
     name: 'children',
@@ -77,20 +60,15 @@ final _$FamilyFields = <String, FieldMetadata>{
 _$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      address: json['address'] as String?,
-      geolocation: pointFromJson(json['geolocation']),
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
       notes: json['notes'] as String?,
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
       blurhash: json['blurhash'] as String?,
-      areas: (json['areas'] as List<dynamic>?)
-          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      streets: (json['streets'] as List<dynamic>?)
-          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
       children: familyChildrenFromJson(json['children'] as List?),
       parents: familyParentsFromJson(json['parents'] as List?),
       lastEdit: json['lastEdit'] == null
@@ -103,14 +81,11 @@ Map<String, dynamic> _$$FamilyImplToJson(_$FamilyImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'address': instance.address,
-      'geolocation': pointToJson(instance.geolocation),
+      'address': instance.address?.toJson(),
       'notes': instance.notes,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,
-      'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'children': familyChildrenToJson(instance.children),
       'parents': familyParentsToJson(instance.parents),
       'lastEdit': instance.lastEdit?.toJson(),

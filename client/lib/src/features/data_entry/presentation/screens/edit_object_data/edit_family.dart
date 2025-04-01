@@ -76,9 +76,8 @@ class _EditFamilyState extends State<EditFamily> {
           ),
           AddressWithLocationField(
             initialAddress: newFamily.address,
-            onAddressChanged: (value) => setState(
-              () => newFamily = newFamily.copyWith(address: value),
-            ),
+            onAddressChanged: (value) =>
+                newFamily = newFamily.copyWith(address: value),
             onEditLocation: _editGeolocation,
           ),
           TextFormField(

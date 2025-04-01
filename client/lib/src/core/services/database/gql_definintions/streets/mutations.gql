@@ -1,4 +1,4 @@
-mutation deleteStreet($streetId: Uuid!) {
+mutation deleteStreet($streetId: uuid!) {
   deleteStreetsByPk(id: $streetId) {
     ...Street
   }
@@ -11,9 +11,9 @@ mutation insertStreet($newStreet: StreetsInsertInput!) {
 }
 
 mutation updateStreet(
-  $streetId: Uuid!
+  $streetId: uuid!
   $newStreet: StreetsSetInput!
-  $lastVisit: Timestamptz
+  $lastVisit: timestamptz
   $updateLastVisit: Boolean!
 ) {
   updateStreetsByPk(pkColumns: { id: $streetId }, _set: $newStreet) {

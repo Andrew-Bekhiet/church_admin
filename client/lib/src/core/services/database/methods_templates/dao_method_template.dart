@@ -8,7 +8,7 @@ abstract class DAOMethodTemplate<TParsed> {
 
   final DocumentNode document;
   final Json? variables;
-  final TParsed Function(Json)? parserFn;
+  final TParsed? Function(Json)? parserFn;
 
   const DAOMethodTemplate({
     required this.document,

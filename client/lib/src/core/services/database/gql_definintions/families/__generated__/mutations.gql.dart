@@ -1,4 +1,7 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../areas/__generated__/fragments.gql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
+import '../../streets/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -247,7 +250,7 @@ const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'familyId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -590,20 +593,26 @@ class Variables_Mutation_updateFamily {
   factory Variables_Mutation_updateFamily({
     required UuidValue familyId,
     required Input_FamiliesSetInput newFamily,
+    required UuidValue addressId,
+    Input_AddressesSetInput? newAddress,
     required List<UuidValue> deleteParents,
     required List<UuidValue> deleteChildren,
     required List<Input_FamiliesFamiliesInsertInput> addRelatedFamilies,
     required bool updateFamily,
+    required bool updateAddress,
     required bool deleteRelatedFamilies,
     required bool insertRelatedFamilies,
   }) =>
       Variables_Mutation_updateFamily._({
         r'familyId': familyId,
         r'newFamily': newFamily,
+        r'addressId': addressId,
+        if (newAddress != null) r'newAddress': newAddress,
         r'deleteParents': deleteParents,
         r'deleteChildren': deleteChildren,
         r'addRelatedFamilies': addRelatedFamilies,
         r'updateFamily': updateFamily,
+        r'updateAddress': updateAddress,
         r'deleteRelatedFamilies': deleteRelatedFamilies,
         r'insertRelatedFamilies': insertRelatedFamilies,
       });
@@ -617,6 +626,15 @@ class Variables_Mutation_updateFamily {
     final l$newFamily = data['newFamily'];
     result$data['newFamily'] =
         Input_FamiliesSetInput.fromJson((l$newFamily as Map<String, dynamic>));
+    final l$addressId = data['addressId'];
+    result$data['addressId'] = stringToUuid(l$addressId);
+    if (data.containsKey('newAddress')) {
+      final l$newAddress = data['newAddress'];
+      result$data['newAddress'] = l$newAddress == null
+          ? null
+          : Input_AddressesSetInput.fromJson(
+              (l$newAddress as Map<String, dynamic>));
+    }
     final l$deleteParents = data['deleteParents'];
     result$data['deleteParents'] =
         (l$deleteParents as List<dynamic>).map((e) => stringToUuid(e)).toList();
@@ -631,6 +649,8 @@ class Variables_Mutation_updateFamily {
         .toList();
     final l$updateFamily = data['updateFamily'];
     result$data['updateFamily'] = (l$updateFamily as bool);
+    final l$updateAddress = data['updateAddress'];
+    result$data['updateAddress'] = (l$updateAddress as bool);
     final l$deleteRelatedFamilies = data['deleteRelatedFamilies'];
     result$data['deleteRelatedFamilies'] = (l$deleteRelatedFamilies as bool);
     final l$insertRelatedFamilies = data['insertRelatedFamilies'];
@@ -645,6 +665,11 @@ class Variables_Mutation_updateFamily {
   Input_FamiliesSetInput get newFamily =>
       (_$data['newFamily'] as Input_FamiliesSetInput);
 
+  UuidValue get addressId => (_$data['addressId'] as UuidValue);
+
+  Input_AddressesSetInput? get newAddress =>
+      (_$data['newAddress'] as Input_AddressesSetInput?);
+
   List<UuidValue> get deleteParents =>
       (_$data['deleteParents'] as List<UuidValue>);
 
@@ -656,6 +681,8 @@ class Variables_Mutation_updateFamily {
 
   bool get updateFamily => (_$data['updateFamily'] as bool);
 
+  bool get updateAddress => (_$data['updateAddress'] as bool);
+
   bool get deleteRelatedFamilies => (_$data['deleteRelatedFamilies'] as bool);
 
   bool get insertRelatedFamilies => (_$data['insertRelatedFamilies'] as bool);
@@ -666,6 +693,12 @@ class Variables_Mutation_updateFamily {
     result$data['familyId'] = uuidToString(l$familyId);
     final l$newFamily = newFamily;
     result$data['newFamily'] = l$newFamily.toJson();
+    final l$addressId = addressId;
+    result$data['addressId'] = uuidToString(l$addressId);
+    if (_$data.containsKey('newAddress')) {
+      final l$newAddress = newAddress;
+      result$data['newAddress'] = l$newAddress?.toJson();
+    }
     final l$deleteParents = deleteParents;
     result$data['deleteParents'] =
         l$deleteParents.map((e) => uuidToString(e)).toList();
@@ -677,6 +710,8 @@ class Variables_Mutation_updateFamily {
         l$addRelatedFamilies.map((e) => e.toJson()).toList();
     final l$updateFamily = updateFamily;
     result$data['updateFamily'] = l$updateFamily;
+    final l$updateAddress = updateAddress;
+    result$data['updateAddress'] = l$updateAddress;
     final l$deleteRelatedFamilies = deleteRelatedFamilies;
     result$data['deleteRelatedFamilies'] = l$deleteRelatedFamilies;
     final l$insertRelatedFamilies = insertRelatedFamilies;
@@ -707,6 +742,20 @@ class Variables_Mutation_updateFamily {
     final l$newFamily = newFamily;
     final lOther$newFamily = other.newFamily;
     if (l$newFamily != lOther$newFamily) {
+      return false;
+    }
+    final l$addressId = addressId;
+    final lOther$addressId = other.addressId;
+    if (l$addressId != lOther$addressId) {
+      return false;
+    }
+    final l$newAddress = newAddress;
+    final lOther$newAddress = other.newAddress;
+    if (_$data.containsKey('newAddress') !=
+        other._$data.containsKey('newAddress')) {
+      return false;
+    }
+    if (l$newAddress != lOther$newAddress) {
       return false;
     }
     final l$deleteParents = deleteParents;
@@ -750,6 +799,11 @@ class Variables_Mutation_updateFamily {
     if (l$updateFamily != lOther$updateFamily) {
       return false;
     }
+    final l$updateAddress = updateAddress;
+    final lOther$updateAddress = other.updateAddress;
+    if (l$updateAddress != lOther$updateAddress) {
+      return false;
+    }
     final l$deleteRelatedFamilies = deleteRelatedFamilies;
     final lOther$deleteRelatedFamilies = other.deleteRelatedFamilies;
     if (l$deleteRelatedFamilies != lOther$deleteRelatedFamilies) {
@@ -767,19 +821,25 @@ class Variables_Mutation_updateFamily {
   int get hashCode {
     final l$familyId = familyId;
     final l$newFamily = newFamily;
+    final l$addressId = addressId;
+    final l$newAddress = newAddress;
     final l$deleteParents = deleteParents;
     final l$deleteChildren = deleteChildren;
     final l$addRelatedFamilies = addRelatedFamilies;
     final l$updateFamily = updateFamily;
+    final l$updateAddress = updateAddress;
     final l$deleteRelatedFamilies = deleteRelatedFamilies;
     final l$insertRelatedFamilies = insertRelatedFamilies;
     return Object.hashAll([
       l$familyId,
       l$newFamily,
+      l$addressId,
+      _$data.containsKey('newAddress') ? l$newAddress : const {},
       Object.hashAll(l$deleteParents.map((v) => v)),
       Object.hashAll(l$deleteChildren.map((v) => v)),
       Object.hashAll(l$addRelatedFamilies.map((v) => v)),
       l$updateFamily,
+      l$updateAddress,
       l$deleteRelatedFamilies,
       l$insertRelatedFamilies,
     ]);
@@ -798,10 +858,13 @@ abstract class CopyWith_Variables_Mutation_updateFamily<TRes> {
   TRes call({
     UuidValue? familyId,
     Input_FamiliesSetInput? newFamily,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
     List<UuidValue>? deleteParents,
     List<UuidValue>? deleteChildren,
     List<Input_FamiliesFamiliesInsertInput>? addRelatedFamilies,
     bool? updateFamily,
+    bool? updateAddress,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
   });
@@ -823,10 +886,13 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
   TRes call({
     Object? familyId = _undefined,
     Object? newFamily = _undefined,
+    Object? addressId = _undefined,
+    Object? newAddress = _undefined,
     Object? deleteParents = _undefined,
     Object? deleteChildren = _undefined,
     Object? addRelatedFamilies = _undefined,
     Object? updateFamily = _undefined,
+    Object? updateAddress = _undefined,
     Object? deleteRelatedFamilies = _undefined,
     Object? insertRelatedFamilies = _undefined,
   }) =>
@@ -836,6 +902,10 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
           'familyId': (familyId as UuidValue),
         if (newFamily != _undefined && newFamily != null)
           'newFamily': (newFamily as Input_FamiliesSetInput),
+        if (addressId != _undefined && addressId != null)
+          'addressId': (addressId as UuidValue),
+        if (newAddress != _undefined)
+          'newAddress': (newAddress as Input_AddressesSetInput?),
         if (deleteParents != _undefined && deleteParents != null)
           'deleteParents': (deleteParents as List<UuidValue>),
         if (deleteChildren != _undefined && deleteChildren != null)
@@ -845,6 +915,8 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
               (addRelatedFamilies as List<Input_FamiliesFamiliesInsertInput>),
         if (updateFamily != _undefined && updateFamily != null)
           'updateFamily': (updateFamily as bool),
+        if (updateAddress != _undefined && updateAddress != null)
+          'updateAddress': (updateAddress as bool),
         if (deleteRelatedFamilies != _undefined &&
             deleteRelatedFamilies != null)
           'deleteRelatedFamilies': (deleteRelatedFamilies as bool),
@@ -863,10 +935,13 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
   call({
     UuidValue? familyId,
     Input_FamiliesSetInput? newFamily,
+    UuidValue? addressId,
+    Input_AddressesSetInput? newAddress,
     List<UuidValue>? deleteParents,
     List<UuidValue>? deleteChildren,
     List<Input_FamiliesFamiliesInsertInput>? addRelatedFamilies,
     bool? updateFamily,
+    bool? updateAddress,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
   }) =>
@@ -876,6 +951,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
 class Mutation_updateFamily {
   Mutation_updateFamily({
     this.updateFamiliesByPk,
+    this.updateAddressesByPk,
     this.deleteFamiliesFamilies,
     this.insertFamiliesFamilies,
     this.$__typename = 'mutation_root',
@@ -883,6 +959,7 @@ class Mutation_updateFamily {
 
   factory Mutation_updateFamily.fromJson(Map<String, dynamic> json) {
     final l$updateFamiliesByPk = json['updateFamiliesByPk'];
+    final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$deleteFamiliesFamilies = json['deleteFamiliesFamilies'];
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
     final l$$__typename = json['__typename'];
@@ -891,6 +968,10 @@ class Mutation_updateFamily {
           ? null
           : Fragment_Family.fromJson(
               (l$updateFamiliesByPk as Map<String, dynamic>)),
+      updateAddressesByPk: l$updateAddressesByPk == null
+          ? null
+          : Fragment_Address.fromJson(
+              (l$updateAddressesByPk as Map<String, dynamic>)),
       deleteFamiliesFamilies: l$deleteFamiliesFamilies == null
           ? null
           : Mutation_updateFamily_deleteFamiliesFamilies.fromJson(
@@ -905,6 +986,8 @@ class Mutation_updateFamily {
 
   final Fragment_Family? updateFamiliesByPk;
 
+  final Fragment_Address? updateAddressesByPk;
+
   final Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies;
 
   final Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies;
@@ -915,6 +998,8 @@ class Mutation_updateFamily {
     final _resultData = <String, dynamic>{};
     final l$updateFamiliesByPk = updateFamiliesByPk;
     _resultData['updateFamiliesByPk'] = l$updateFamiliesByPk?.toJson();
+    final l$updateAddressesByPk = updateAddressesByPk;
+    _resultData['updateAddressesByPk'] = l$updateAddressesByPk?.toJson();
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     _resultData['deleteFamiliesFamilies'] = l$deleteFamiliesFamilies?.toJson();
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
@@ -927,11 +1012,13 @@ class Mutation_updateFamily {
   @override
   int get hashCode {
     final l$updateFamiliesByPk = updateFamiliesByPk;
+    final l$updateAddressesByPk = updateAddressesByPk;
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateFamiliesByPk,
+      l$updateAddressesByPk,
       l$deleteFamiliesFamilies,
       l$insertFamiliesFamilies,
       l$$__typename,
@@ -949,6 +1036,11 @@ class Mutation_updateFamily {
     final l$updateFamiliesByPk = updateFamiliesByPk;
     final lOther$updateFamiliesByPk = other.updateFamiliesByPk;
     if (l$updateFamiliesByPk != lOther$updateFamiliesByPk) {
+      return false;
+    }
+    final l$updateAddressesByPk = updateAddressesByPk;
+    final lOther$updateAddressesByPk = other.updateAddressesByPk;
+    if (l$updateAddressesByPk != lOther$updateAddressesByPk) {
       return false;
     }
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
@@ -989,11 +1081,13 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
 
   TRes call({
     Fragment_Family? updateFamiliesByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     String? $__typename,
   });
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
@@ -1015,6 +1109,7 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
 
   TRes call({
     Object? updateFamiliesByPk = _undefined,
+    Object? updateAddressesByPk = _undefined,
     Object? deleteFamiliesFamilies = _undefined,
     Object? insertFamiliesFamilies = _undefined,
     Object? $__typename = _undefined,
@@ -1023,6 +1118,9 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
         updateFamiliesByPk: updateFamiliesByPk == _undefined
             ? _instance.updateFamiliesByPk
             : (updateFamiliesByPk as Fragment_Family?),
+        updateAddressesByPk: updateAddressesByPk == _undefined
+            ? _instance.updateAddressesByPk
+            : (updateAddressesByPk as Fragment_Address?),
         deleteFamiliesFamilies: deleteFamiliesFamilies == _undefined
             ? _instance.deleteFamiliesFamilies
             : (deleteFamiliesFamilies
@@ -1042,6 +1140,14 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
         ? CopyWith_Fragment_Family.stub(_then(_instance))
         : CopyWith_Fragment_Family(
             local$updateFamiliesByPk, (e) => call(updateFamiliesByPk: e));
+  }
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
+    final local$updateAddressesByPk = _instance.updateAddressesByPk;
+    return local$updateAddressesByPk == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(
+            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
   }
 
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
@@ -1075,6 +1181,7 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
 
   call({
     Fragment_Family? updateFamiliesByPk,
+    Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     String? $__typename,
@@ -1083,6 +1190,9 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
 
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
+
+  CopyWith_Fragment_Address<TRes> get updateAddressesByPk =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
       get deleteFamiliesFamilies =>
@@ -1101,7 +1211,7 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'familyId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1117,10 +1227,28 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'addressId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'uuid'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'newAddress')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'AddressesSetInput'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'deleteParents')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: true,
@@ -1132,7 +1260,7 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         variable: VariableNode(name: NameNode(value: 'deleteChildren')),
         type: ListTypeNode(
           type: NamedTypeNode(
-            name: NameNode(value: 'Uuid'),
+            name: NameNode(value: 'uuid'),
             isNonNull: true,
           ),
           isNonNull: true,
@@ -1154,6 +1282,15 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
       ),
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'updateFamily')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'updateAddress')),
         type: NamedTypeNode(
           name: NameNode(value: 'Boolean'),
           isNonNull: true,
@@ -1214,6 +1351,49 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         selectionSet: SelectionSetNode(selections: [
           FragmentSpreadNode(
             name: NameNode(value: 'Family'),
+            directives: [],
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'updateAddressesByPk'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'pkColumns'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'addressId')),
+              )
+            ]),
+          ),
+          ArgumentNode(
+            name: NameNode(value: '_set'),
+            value: VariableNode(name: NameNode(value: 'newAddress')),
+          ),
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(name: NameNode(value: 'updateAddress')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Address'),
             directives: [],
           ),
           FieldNode(
@@ -1362,6 +1542,11 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
   ),
   fragmentDefinitionFamily,
   fragmentDefinitionFamilyNoPhoto,
+  fragmentDefinitionAddress,
+  fragmentDefinitionArea,
+  fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
 ]);
 
 class Mutation_updateFamily_deleteFamiliesFamilies {

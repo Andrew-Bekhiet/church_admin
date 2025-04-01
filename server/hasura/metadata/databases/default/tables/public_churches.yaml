@@ -36,7 +36,7 @@ update_permissions:
       columns:
         - name
       filter: {}
-      check: null
+      check: {}
 delete_permissions:
   - role: user
     permission:

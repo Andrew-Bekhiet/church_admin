@@ -391,6 +391,7 @@ void main() {
           bloc.add(const ReloadUser());
           await Future.delayed(Duration.zero);
         },
+        wait: const Duration(seconds: 1),
         expect: () => [
           isA<AuthAuthenticated>()
               .having((s) => s.authUser.idToken, 'idToken', 'idToken')
@@ -459,7 +460,7 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  late final controller = StreamController<AuthUser?>.broadcast(sync: true);
 
   final mock = MockFirebaseAuthRepository();
 
@@ -502,6 +503,7 @@ Future<Override> _setUpMockDatabaseService() async {
   when(
     mockUsersDAO.streamSingleById(
       id: initialAuthUser.claims['x-hasura-user-id'],
+      fullData: true,
     ),
   ).thenAnswer((_) => Stream.value(initialUserData));
 

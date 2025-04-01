@@ -243,7 +243,7 @@ const documentNodeQuerygetStudyYearName = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'order')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Smallint'),
+          name: NameNode(value: 'smallint'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

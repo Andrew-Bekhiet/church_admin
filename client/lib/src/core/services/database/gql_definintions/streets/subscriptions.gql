@@ -9,11 +9,13 @@ subscription watchAllStreets(
   }
 }
 
-subscription watchStreet($id: Uuid!) {
+subscription watchStreet($id: uuid!) {
   streetsByPk(id: $id) {
     ...Street
-    areas(orderBy: { name: ASC }) {
-      ...Area
+    areas(orderBy: { area: { name: ASC } }) {
+      area {
+        ...Area
+      }
     }
     line
     lastEdit {

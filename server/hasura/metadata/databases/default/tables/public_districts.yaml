@@ -1,0 +1,31 @@
+table:
+  name: districts
+  schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - name
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - id
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+      filter: {}
+      check: {}
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter: {}
+    comment: ""

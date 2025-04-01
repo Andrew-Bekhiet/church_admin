@@ -8,7 +8,7 @@ subscription watchAllGroups(
   }
 }
 
-subscription watchGroup($id: Uuid!) {
+subscription watchGroup($id: uuid!) {
   groupsByPk(id: $id) {
     ...Group
     service {

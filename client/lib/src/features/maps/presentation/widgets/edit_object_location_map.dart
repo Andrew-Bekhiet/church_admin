@@ -31,9 +31,11 @@ class EditObjectLocationMap<T extends ViewableWithID> extends StatefulWidget {
 }
 
 class _EditObjectLocationMap<T extends ViewableWithID>
-    extends State<EditObjectLocationMap<T>> with TickerProviderStateMixin {
-  late final BehaviorSubject<T> resultObject =
-      BehaviorSubject.seeded(widget.initialObject);
+    extends State<EditObjectLocationMap<T>>
+    with TickerProviderStateMixin {
+  late final BehaviorSubject<T> resultObject = BehaviorSubject.seeded(
+    widget.initialObject,
+  );
 
   late final _mapOptionsStream = BehaviorSubject.seeded(widget.geomapOptions);
   final _sheetScrollController = ScrollController();
@@ -70,9 +72,10 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ),
         child: DataGeomap(
-          initialPerson: widget.initialObject is Person
-              ? widget.initialObject as Person
-              : null,
+          initialPerson:
+              widget.initialObject is Person
+                  ? widget.initialObject as Person
+                  : null,
           onUserLocationChanged: _userLocationSubject.add,
           geomapOptionsStream: _mapOptionsStream,
           addLayers: [
@@ -99,20 +102,21 @@ class _EditObjectLocationMap<T extends ViewableWithID>
               },
             ),
           ],
-          createMapOptions: (center) => MapOptions(
-            onTap: (pos, point) {
-              resultObject.value = widget.copyWithNewLocation(
-                resultObject.value,
-                Point(point.latitude, point.longitude),
-              );
-            },
-            maxZoom: 18,
-            initialZoom: 14,
-            interactionOptions: const InteractionOptions(
-              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-            ),
-            initialCenter: center,
-          ),
+          createMapOptions:
+              (center) => MapOptions(
+                onTap: (pos, point) {
+                  resultObject.value = widget.copyWithNewLocation(
+                    resultObject.value,
+                    Point(point.latitude, point.longitude),
+                  );
+                },
+                maxZoom: 18,
+                initialZoom: 14,
+                interactionOptions: const InteractionOptions(
+                  flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+                ),
+                initialCenter: center,
+              ),
         ),
       ),
       floatingActionButton: Column(
@@ -124,8 +128,10 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
               if (location == null) return;
 
-              resultObject.value =
-                  widget.copyWithNewLocation(resultObject.value, location);
+              resultObject.value = widget.copyWithNewLocation(
+                resultObject.value,
+                location,
+              );
             },
             child: const Icon(Symbols.link),
           ),
@@ -136,6 +142,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
               builder: (context, locationSnapshot) {
                 if (locationSnapshot.hasData) {
                   return FloatingActionButton.small(
+                    heroTag: null,
                     onPressed: () {
                       resultObject.value = widget.copyWithNewLocation(
                         resultObject.value,
@@ -164,22 +171,23 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
     final result = await showDialog<String?>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('تحديد الموقع من لينك Google Maps'),
-        content: TextField(
-          autofocus: true,
-          autofillHints: const [AutofillHints.url],
-          textInputAction: TextInputAction.done,
-          controller: controller,
-          onSubmitted: Navigator.of(context).pop,
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(controller.text),
-            child: const Text('تحديد الموقع'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('تحديد الموقع من لينك Google Maps'),
+            content: TextField(
+              autofocus: true,
+              autofillHints: const [AutofillHints.url],
+              textInputAction: TextInputAction.done,
+              controller: controller,
+              onSubmitted: Navigator.of(context).pop,
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () => Navigator.of(context).pop(controller.text),
+                child: const Text('تحديد الموقع'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
 
     if (result == null) return null;
@@ -195,10 +203,12 @@ class _EditObjectLocationMap<T extends ViewableWithID>
       ),
     );
 
-    final locationResult = Uri.tryParse(result) != null
-        ? await LocationParsingService.I
-            .maybeParseLocationUri(Uri.parse(result))
-        : null;
+    final locationResult =
+        Uri.tryParse(result) != null
+            ? await LocationParsingService.I.maybeParseLocationUri(
+              Uri.parse(result),
+            )
+            : null;
 
     scaffoldMessenger.hideCurrentSnackBar();
 
@@ -207,9 +217,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
         const SnackBar(
           content: Row(
             children: [
-              Expanded(
-                child: Text('لم يتم العثور على الموقع'),
-              ),
+              Expanded(child: Text('لم يتم العثور على الموقع')),
               Icon(Symbols.error, color: Colors.red),
             ],
           ),
@@ -220,9 +228,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
         const SnackBar(
           content: Row(
             children: [
-              Expanded(
-                child: Text('تم العثور على الموقع'),
-              ),
+              Expanded(child: Text('تم العثور على الموقع')),
               Icon(Symbols.check, color: Colors.green),
             ],
           ),

@@ -1,6 +1,653 @@
+import '../../areas/__generated__/fragments.gql.dart';
+import '../../streets/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
+
+class Fragment_Address {
+  Fragment_Address({
+    required this.id,
+    required this.countryIsoCode,
+    required this.area,
+    this.district,
+    required this.street,
+    this.substreetName,
+    this.geolocation,
+    this.houseNumber,
+    this.storeyNumber,
+    this.apartmentNumber,
+    this.specialLandmark,
+    this.$__typename = 'Addresses',
+  });
+
+  factory Fragment_Address.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$countryIsoCode = json['countryIsoCode'];
+    final l$area = json['area'];
+    final l$district = json['district'];
+    final l$street = json['street'];
+    final l$substreetName = json['substreetName'];
+    final l$geolocation = json['geolocation'];
+    final l$houseNumber = json['houseNumber'];
+    final l$storeyNumber = json['storeyNumber'];
+    final l$apartmentNumber = json['apartmentNumber'];
+    final l$specialLandmark = json['specialLandmark'];
+    final l$$__typename = json['__typename'];
+    return Fragment_Address(
+      id: stringToUuid(l$id),
+      countryIsoCode: (l$countryIsoCode as String),
+      area: Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
+      district: l$district == null
+          ? null
+          : Fragment_Address_district.fromJson(
+              (l$district as Map<String, dynamic>)),
+      street: Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
+      substreetName: (l$substreetName as String?),
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+      houseNumber: (l$houseNumber as int?),
+      storeyNumber: (l$storeyNumber as int?),
+      apartmentNumber: (l$apartmentNumber as int?),
+      specialLandmark: (l$specialLandmark as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final String countryIsoCode;
+
+  final Fragment_Area area;
+
+  final Fragment_Address_district? district;
+
+  final Fragment_Street street;
+
+  final String? substreetName;
+
+  final Map<String, dynamic>? geolocation;
+
+  final int? houseNumber;
+
+  final int? storeyNumber;
+
+  final int? apartmentNumber;
+
+  final String? specialLandmark;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$countryIsoCode = countryIsoCode;
+    _resultData['countryIsoCode'] = l$countryIsoCode;
+    final l$area = area;
+    _resultData['area'] = l$area.toJson();
+    final l$district = district;
+    _resultData['district'] = l$district?.toJson();
+    final l$street = street;
+    _resultData['street'] = l$street.toJson();
+    final l$substreetName = substreetName;
+    _resultData['substreetName'] = l$substreetName;
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$houseNumber = houseNumber;
+    _resultData['houseNumber'] = l$houseNumber;
+    final l$storeyNumber = storeyNumber;
+    _resultData['storeyNumber'] = l$storeyNumber;
+    final l$apartmentNumber = apartmentNumber;
+    _resultData['apartmentNumber'] = l$apartmentNumber;
+    final l$specialLandmark = specialLandmark;
+    _resultData['specialLandmark'] = l$specialLandmark;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$countryIsoCode = countryIsoCode;
+    final l$area = area;
+    final l$district = district;
+    final l$street = street;
+    final l$substreetName = substreetName;
+    final l$geolocation = geolocation;
+    final l$houseNumber = houseNumber;
+    final l$storeyNumber = storeyNumber;
+    final l$apartmentNumber = apartmentNumber;
+    final l$specialLandmark = specialLandmark;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$countryIsoCode,
+      l$area,
+      l$district,
+      l$street,
+      l$substreetName,
+      l$geolocation,
+      l$houseNumber,
+      l$storeyNumber,
+      l$apartmentNumber,
+      l$specialLandmark,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_Address || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$countryIsoCode = countryIsoCode;
+    final lOther$countryIsoCode = other.countryIsoCode;
+    if (l$countryIsoCode != lOther$countryIsoCode) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$district = district;
+    final lOther$district = other.district;
+    if (l$district != lOther$district) {
+      return false;
+    }
+    final l$street = street;
+    final lOther$street = other.street;
+    if (l$street != lOther$street) {
+      return false;
+    }
+    final l$substreetName = substreetName;
+    final lOther$substreetName = other.substreetName;
+    if (l$substreetName != lOther$substreetName) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$houseNumber = houseNumber;
+    final lOther$houseNumber = other.houseNumber;
+    if (l$houseNumber != lOther$houseNumber) {
+      return false;
+    }
+    final l$storeyNumber = storeyNumber;
+    final lOther$storeyNumber = other.storeyNumber;
+    if (l$storeyNumber != lOther$storeyNumber) {
+      return false;
+    }
+    final l$apartmentNumber = apartmentNumber;
+    final lOther$apartmentNumber = other.apartmentNumber;
+    if (l$apartmentNumber != lOther$apartmentNumber) {
+      return false;
+    }
+    final l$specialLandmark = specialLandmark;
+    final lOther$specialLandmark = other.specialLandmark;
+    if (l$specialLandmark != lOther$specialLandmark) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_Address on Fragment_Address {
+  CopyWith_Fragment_Address<Fragment_Address> get copyWith =>
+      CopyWith_Fragment_Address(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Fragment_Address<TRes> {
+  factory CopyWith_Fragment_Address(
+    Fragment_Address instance,
+    TRes Function(Fragment_Address) then,
+  ) = _CopyWithImpl_Fragment_Address;
+
+  factory CopyWith_Fragment_Address.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_Address;
+
+  TRes call({
+    UuidValue? id,
+    String? countryIsoCode,
+    Fragment_Area? area,
+    Fragment_Address_district? district,
+    Fragment_Street? street,
+    String? substreetName,
+    Map<String, dynamic>? geolocation,
+    int? houseNumber,
+    int? storeyNumber,
+    int? apartmentNumber,
+    String? specialLandmark,
+    String? $__typename,
+  });
+  CopyWith_Fragment_Area<TRes> get area;
+  CopyWith_Fragment_Address_district<TRes> get district;
+  CopyWith_Fragment_Street<TRes> get street;
+}
+
+class _CopyWithImpl_Fragment_Address<TRes>
+    implements CopyWith_Fragment_Address<TRes> {
+  _CopyWithImpl_Fragment_Address(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_Address _instance;
+
+  final TRes Function(Fragment_Address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? countryIsoCode = _undefined,
+    Object? area = _undefined,
+    Object? district = _undefined,
+    Object? street = _undefined,
+    Object? substreetName = _undefined,
+    Object? geolocation = _undefined,
+    Object? houseNumber = _undefined,
+    Object? storeyNumber = _undefined,
+    Object? apartmentNumber = _undefined,
+    Object? specialLandmark = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_Address(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        countryIsoCode: countryIsoCode == _undefined || countryIsoCode == null
+            ? _instance.countryIsoCode
+            : (countryIsoCode as String),
+        area: area == _undefined || area == null
+            ? _instance.area
+            : (area as Fragment_Area),
+        district: district == _undefined
+            ? _instance.district
+            : (district as Fragment_Address_district?),
+        street: street == _undefined || street == null
+            ? _instance.street
+            : (street as Fragment_Street),
+        substreetName: substreetName == _undefined
+            ? _instance.substreetName
+            : (substreetName as String?),
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+        houseNumber: houseNumber == _undefined
+            ? _instance.houseNumber
+            : (houseNumber as int?),
+        storeyNumber: storeyNumber == _undefined
+            ? _instance.storeyNumber
+            : (storeyNumber as int?),
+        apartmentNumber: apartmentNumber == _undefined
+            ? _instance.apartmentNumber
+            : (apartmentNumber as int?),
+        specialLandmark: specialLandmark == _undefined
+            ? _instance.specialLandmark
+            : (specialLandmark as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_Area<TRes> get area {
+    final local$area = _instance.area;
+    return CopyWith_Fragment_Area(local$area, (e) => call(area: e));
+  }
+
+  CopyWith_Fragment_Address_district<TRes> get district {
+    final local$district = _instance.district;
+    return local$district == null
+        ? CopyWith_Fragment_Address_district.stub(_then(_instance))
+        : CopyWith_Fragment_Address_district(
+            local$district, (e) => call(district: e));
+  }
+
+  CopyWith_Fragment_Street<TRes> get street {
+    final local$street = _instance.street;
+    return CopyWith_Fragment_Street(local$street, (e) => call(street: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_Address<TRes>
+    implements CopyWith_Fragment_Address<TRes> {
+  _CopyWithStubImpl_Fragment_Address(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? countryIsoCode,
+    Fragment_Area? area,
+    Fragment_Address_district? district,
+    Fragment_Street? street,
+    String? substreetName,
+    Map<String, dynamic>? geolocation,
+    int? houseNumber,
+    int? storeyNumber,
+    int? apartmentNumber,
+    String? specialLandmark,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
+
+  CopyWith_Fragment_Address_district<TRes> get district =>
+      CopyWith_Fragment_Address_district.stub(_res);
+
+  CopyWith_Fragment_Street<TRes> get street =>
+      CopyWith_Fragment_Street.stub(_res);
+}
+
+const fragmentDefinitionAddress = FragmentDefinitionNode(
+  name: NameNode(value: 'Address'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'Addresses'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'countryIsoCode'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'area'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'Area'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'district'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'id'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'street'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FragmentSpreadNode(
+          name: NameNode(value: 'Street'),
+          directives: [],
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: 'substreetName'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'geolocation'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'houseNumber'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'storeyNumber'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'apartmentNumber'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'specialLandmark'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentAddress = DocumentNode(definitions: [
+  fragmentDefinitionAddress,
+  fragmentDefinitionArea,
+  fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
+]);
+
+class Fragment_Address_district {
+  Fragment_Address_district({
+    required this.id,
+    required this.name,
+    this.$__typename = 'Districts',
+  });
+
+  factory Fragment_Address_district.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Fragment_Address_district(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_Address_district ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_Address_district
+    on Fragment_Address_district {
+  CopyWith_Fragment_Address_district<Fragment_Address_district> get copyWith =>
+      CopyWith_Fragment_Address_district(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Fragment_Address_district<TRes> {
+  factory CopyWith_Fragment_Address_district(
+    Fragment_Address_district instance,
+    TRes Function(Fragment_Address_district) then,
+  ) = _CopyWithImpl_Fragment_Address_district;
+
+  factory CopyWith_Fragment_Address_district.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_Address_district;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Fragment_Address_district<TRes>
+    implements CopyWith_Fragment_Address_district<TRes> {
+  _CopyWithImpl_Fragment_Address_district(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_Address_district _instance;
+
+  final TRes Function(Fragment_Address_district) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment_Address_district(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Fragment_Address_district<TRes>
+    implements CopyWith_Fragment_Address_district<TRes> {
+  _CopyWithStubImpl_Fragment_Address_district(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
 
 class Fragment_EditHistory {
   Fragment_EditHistory({

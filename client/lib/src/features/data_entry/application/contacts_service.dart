@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
 export 'package:flutter_contacts/flutter_contacts.dart'
-    show Address, Contact, Name, Phone;
+    show Contact, Name, Phone;
 
 class ContactsService {
   static ContactsService get I =>

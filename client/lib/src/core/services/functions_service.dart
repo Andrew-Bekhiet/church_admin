@@ -33,14 +33,12 @@ class FunctionsService {
     String? contentType,
   }) async {
     final hash = Object.hash(table, id, contentType);
-    _pendingDownloadUrls[hash] ??= httpsCallable('getDownloadUrl').call({
-      'table': table,
-      'id': id,
-      'contentType': contentType,
-    }).then((value) {
-      _pendingDownloadUrls.remove(hash);
-      return value.data;
-    });
+    _pendingDownloadUrls[hash] ??= httpsCallable('getDownloadUrl')
+        .call({'table': table, 'id': id, 'contentType': contentType})
+        .then((value) {
+          _pendingDownloadUrls.remove(hash);
+          return value.data;
+        });
 
     try {
       return await _pendingDownloadUrls[hash]!;
@@ -55,22 +53,16 @@ class FunctionsService {
     String id, {
     String? contentType,
   }) async {
-    return (await httpsCallable('getUploadUrl').call({
-      'table': table,
-      'id': id,
-      'contentType': contentType,
-    }))
-        .data;
+    return (await httpsCallable(
+      'getUploadUrl',
+    ).call({'table': table, 'id': id, 'contentType': contentType})).data;
   }
 
   Future<void> deletePhoto(String table, String id) async {
-    await httpsCallable('deletePhoto').call({
-      'table': table,
-      'id': id,
-    });
+    await httpsCallable('deletePhoto').call({'table': table, 'id': id});
   }
 
-  Future<String?> getAddressFromLocation(Point location) async {
+  Future<Address?> getAddressFromLocation(Point location) async {
     final response = await _dio.getUri(
       Uri(
         scheme: 'https',
@@ -81,10 +73,17 @@ class FunctionsService {
           'lon': '${location.longitude}',
           'accept': 'language=ar-EG',
           'format': 'jsonv2',
+          'addressdetails': '1',
         },
       ),
+      options: Options(headers: {'User-Agent': 'church_admin'}),
     );
-    return response.data['display_name'];
+
+    if (response.statusCode != 200 || response.data == null) {
+      return null;
+    }
+
+    return Address.fromNominatimResponse(response.data);
   }
 
   Future<Response> uploadPhoto({
@@ -99,9 +98,7 @@ class FunctionsService {
       data: fileStream,
       options: Options(
         contentType: contentType,
-        headers: {
-          if (fileLength != null) 'content-length': fileLength,
-        },
+        headers: {if (fileLength != null) 'content-length': fileLength},
       ),
       onSendProgress: onSendProgress,
     );
@@ -110,23 +107,24 @@ class FunctionsService {
   Future<bool> checkHasuraHealth() async {
     final res = await _dio
         .getUri(
-          Uri.parse(SecretsService.I.hasuraServer)
-              .replace(pathSegments: ['healthz']),
+          Uri.parse(
+            SecretsService.I.hasuraServer,
+          ).replace(pathSegments: ['healthz']),
         )
         .timeout(const Duration(seconds: 15));
     return res.data == 'OK';
   }
 
   Future<void> registerUserWithCode(String? registerCode) async {
-    await httpsCallable('registerUserWithCode').call({
-      'registerCode': registerCode,
-    });
+    await httpsCallable(
+      'registerUserWithCode',
+    ).call({'registerCode': registerCode});
   }
 
   Future<String> getAppDownloadLink(String platform) async {
-    final response = await httpsCallable('getAppDownloadLink').call({
-      'platform': platform,
-    });
+    final response = await httpsCallable(
+      'getAppDownloadLink',
+    ).call({'platform': platform});
 
     return response.data;
   }

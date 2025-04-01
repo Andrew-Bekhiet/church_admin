@@ -9,25 +9,26 @@ subscription watchAllPersons(
 }
 
 subscription watchPerson(
-  $id: Uuid!
+  $id: uuid!
   $classesLimit: Int
   $groupsLimit: Int
   $servicesLimit: Int
 ) {
   personsByPk(id: $id) {
     ...Person
-    address
-    birthdate
-    areas(orderBy: { name: ASC }) {
-      ...Area
+    address {
+      ...Address
     }
-    classes(limit: $classesLimit, orderBy: { name: ASC }) {
-      ...Class
+    birthdate
+    classes(limit: $classesLimit, orderBy: { class: { name: ASC } }) {
+      class {
+        ...Class
 
-      attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
-        aggregate {
-          max {
-            time
+        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
+          aggregate {
+            max {
+              time
+            }
           }
         }
       }
@@ -52,7 +53,6 @@ subscription watchPerson(
       }
     }
     gender
-    geolocation
     groups(limit: $groupsLimit, orderBy: { group: { name: ASC } }) {
       group {
         ...Group
@@ -126,9 +126,6 @@ subscription watchPerson(
       id
       color
       name
-    }
-    streets {
-      ...Street
     }
     studyYear {
       name

@@ -17,35 +17,18 @@ final _$StoreFields = <String, FieldMetadata>{
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),
+  'address': FieldMetadata<Address>(
+    name: 'address',
+    label: 'العنوان',
+  ),
   'family': FieldMetadata<Family>(
     name: 'family',
     label: 'العائلة',
-  ),
-  'address': FieldMetadata<String>(
-    name: 'address',
-    label: 'العنوان',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'geolocation': FieldMetadata<Point>(
-    name: 'geolocation',
-    label: 'الموقع',
-    operators: Operator.spatial,
   ),
   'color': FieldMetadata<Color>(
     name: 'color',
     label: 'اللون',
     operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'areas': FieldMetadata<Area>(
-    name: 'areas',
-    label: 'المناطق',
-    isOrderable: false,
-  ),
-  'streets': FieldMetadata<Street>(
-    name: 'streets',
-    label: 'الشوارع',
-    isOrderable: false,
   ),
   'lastEdit': FieldMetadata<LastRecordedByInfo>(
     name: 'lastEdit',
@@ -65,19 +48,14 @@ final _$StoreFields = <String, FieldMetadata>{
 _$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
       id: json['id'] as String,
       name: json['name'] as String,
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
       family: json['family'] == null
           ? null
           : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-      address: json['address'] as String?,
       familyId: json['adminFamily'] as String?,
-      geolocation: pointFromJson(json['geolocation']),
       color: colorFromInt((json['color'] as num?)?.toInt()),
-      areas: (json['areas'] as List<dynamic>?)
-          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      streets: (json['streets'] as List<dynamic>?)
-          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
       lastEdit: json['lastEdit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -92,13 +70,10 @@ Map<String, dynamic> _$$StoreImplToJson(_$StoreImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'address': instance.address?.toJson(),
       'family': instance.family?.toJson(),
-      'address': instance.address,
       'adminFamily': instance.familyId,
-      'geolocation': pointToJson(instance.geolocation),
       'color': colorToInt(instance.color),
-      'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'lastEdit': instance.lastEdit?.toJson(),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,

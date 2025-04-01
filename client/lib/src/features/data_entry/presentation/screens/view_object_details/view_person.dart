@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as contacts;
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,11 +14,7 @@ class ViewPerson extends StatefulWidget {
   final Person? person;
   final String personId;
 
-  const ViewPerson({
-    required this.personId,
-    this.person,
-    super.key,
-  });
+  const ViewPerson({required this.personId, this.person, super.key});
 
   @override
   State<ViewPerson> createState() => _ViewPersonState();
@@ -54,314 +51,322 @@ class _ViewPersonState extends State<ViewPerson> {
         final labelSmall = Theme.of(context).textTheme.labelSmall!;
 
         return SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              PhoneNumberProperty(
-                'رقم الهاتف',
-                person.mainPhone ?? '',
+          delegate: SliverChildListDelegate([
+            PhoneNumberProperty(
+              'رقم الهاتف',
+              person.mainPhone ?? '',
+              (n) => _phoneCall(context, n),
+              (n) => _contactAdd(context, n, person),
+            ),
+            ...person.otherPhones.entries.map(
+              (e) => PhoneNumberProperty(
+                e.key,
+                e.value,
                 (n) => _phoneCall(context, n),
                 (n) => _contactAdd(context, n, person),
               ),
-              ...person.otherPhones.entries.map(
-                (e) => PhoneNumberProperty(
-                  e.key,
-                  e.value,
-                  (n) => _phoneCall(context, n),
-                  (n) => _contactAdd(context, n, person),
-                ),
-              ),
-              CopiablePropertyWidget(
-                'العنوان والموقع',
-                person.address,
-                additionalOptions: [
-                  if (person.geolocation != null)
-                    IconButton(
-                      icon: const Icon(Symbols.location_pin),
-                      onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ViewGeodataMap(
-                            initialPerson: person,
-                            initialGeomapOptions: GeomapOptions(),
+            ),
+            CopiablePropertyWidget(
+              'العنوان والموقع',
+              person.address?.toString(),
+              additionalOptions: [
+                if (person.geolocation != null)
+                  IconButton(
+                    icon: const Icon(Symbols.location_pin),
+                    onPressed:
+                        () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder:
+                                (context) => ViewGeodataMap(
+                                  initialPerson: person,
+                                  initialGeomapOptions: GeomapOptions(),
+                                ),
                           ),
                         ),
-                      ),
-                      tooltip: 'إظهار على الخريطة',
-                    ),
-                ],
-              ),
-              ListTile(
-                title: const Text('السن'),
-                subtitle: person.birthdate != null
-                    ? Row(
+                    tooltip: 'إظهار على الخريطة',
+                  ),
+              ],
+            ),
+            ListTile(
+              title: const Text('السن'),
+              subtitle:
+                  person.birthdate != null
+                      ? Row(
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              person.birthdate!
-                                  .toDurationString(appendSince: false),
+                              person.birthdate!.toDurationString(
+                                appendSince: false,
+                              ),
                             ),
                           ),
                           Text(
-                            DateFormat('yyyy/M/d').format(
-                              person.birthdate!,
-                            ),
+                            DateFormat('yyyy/M/d').format(person.birthdate!),
                             style: labelSmall,
                           ),
                         ],
                       )
-                    : null,
+                      : null,
+            ),
+            const Divider(thickness: 1),
+            ListTile(
+              title: const Text('الخدمات التي يوجد بها'),
+              subtitle: _ShowMore<Service>(
+                person: person,
+                getField: (p) => p?.services,
+                loadAll: () => _servicesLimit.add(null),
               ),
-              const Divider(thickness: 1),
+            ),
+            ListTile(
+              title: const Text('الفصول التي يوجد بها'),
+              subtitle: _ShowMore<Class>(
+                person: person,
+                getField: (p) => p?.classes,
+                loadAll: () => _classesLimit.add(null),
+              ),
+            ),
+            ListTile(
+              title: const Text('المجموعات التي يشارك بها'),
+              subtitle: _ShowMore<Group>(
+                person: person,
+                getField: (p) => p?.groups,
+                loadAll: () => _groupsLimit.add(null),
+              ),
+            ),
+            const Divider(),
+            if (person.isStudent) ...[
               ListTile(
-                title: const Text('الخدمات التي يوجد بها'),
-                subtitle: _ShowMore<Service>(
-                  person: person,
-                  getField: (p) => p?.services,
-                  loadAll: () => _servicesLimit.add(null),
-                ),
+                title: const Text('السنة الدراسية'),
+                subtitle: Text(person.studyYear?.name ?? ''),
               ),
-              ListTile(
-                title: const Text('الفصول التي يوجد بها'),
-                subtitle: _ShowMore<Class>(
-                  person: person,
-                  getField: (p) => p?.classes,
-                  loadAll: () => _classesLimit.add(null),
-                ),
-              ),
-              ListTile(
-                title: const Text('المجموعات التي يشارك بها'),
-                subtitle: _ShowMore<Group>(
-                  person: person,
-                  getField: (p) => p?.groups,
-                  loadAll: () => _groupsLimit.add(null),
-                ),
-              ),
-              const Divider(),
-              if (person.isStudent) ...[
+              if ((person.studyYearId ?? person.studyYear?.order) != null &&
+                  (person.studyYearId ?? person.studyYear?.order)! > 12)
                 ListTile(
-                  title: const Text('السنة الدراسية'),
-                  subtitle: Text(person.studyYear?.name ?? ''),
-                ),
-                if ((person.studyYearId ?? person.studyYear?.order) != null &&
-                    (person.studyYearId ?? person.studyYear?.order)! > 12)
-                  ListTile(
-                    title: const Text('الكلية'),
-                    subtitle: Text(person.college?.name ?? ''),
-                  )
-                else
-                  ListTile(
-                    title: const Text('المدرسة'),
-                    subtitle: Text(person.school?.name ?? ''),
-                  ),
-              ] else ...[
+                  title: const Text('الكلية'),
+                  subtitle: Text(person.college?.name ?? ''),
+                )
+              else
                 ListTile(
-                  title: const Text('المؤهل'),
-                  subtitle: Text(person.qualification?.name ?? ''),
+                  title: const Text('المدرسة'),
+                  subtitle: Text(person.school?.name ?? ''),
                 ),
-                ListTile(
-                  title: const Text('الوظيفة'),
-                  subtitle: Text(person.job?.name ?? ''),
-                ),
-                ListTile(
-                  title: const Text('تفاصيل الوظيفة'),
-                  subtitle: Text(person.jobDescription ?? ''),
-                ),
-              ],
-              const Divider(thickness: 1),
+            ] else ...[
               ListTile(
-                title: const Text('النوع'),
-                subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
+                title: const Text('المؤهل'),
+                subtitle: Text(person.qualification?.name ?? ''),
               ),
               ListTile(
-                title: const Text('الحالة الاجتماعية'),
-                subtitle: Text(person.personType?.name ?? ''),
-              ),
-              const Divider(thickness: 1),
-              ListTile(
-                title: const Text('الكنيسة'),
-                subtitle: Text(person.church?.name ?? ''),
+                title: const Text('الوظيفة'),
+                subtitle: Text(person.job?.name ?? ''),
               ),
               ListTile(
-                title: const Text('أب الاعتراف'),
-                subtitle: Text(person.father?.name ?? ''),
+                title: const Text('تفاصيل الوظيفة'),
+                subtitle: Text(person.jobDescription ?? ''),
               ),
-              ListTile(
-                title: const Text('خادم؟'),
-                subtitle: Text(person.isServant ? 'نعم' : 'لا'),
-                trailing: person.isServant && person.user?.email != null
-                    ? IconButton(
-                        onPressed: () => ViewUserRoute(
-                          uid: person.user!.uid,
-                          $extra: person.user,
-                        ).push(context),
+            ],
+            const Divider(thickness: 1),
+            ListTile(
+              title: const Text('النوع'),
+              subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
+            ),
+            ListTile(
+              title: const Text('الحالة الاجتماعية'),
+              subtitle: Text(person.personType?.name ?? ''),
+            ),
+            const Divider(thickness: 1),
+            ListTile(
+              title: const Text('الكنيسة'),
+              subtitle: Text(person.church?.name ?? ''),
+            ),
+            ListTile(
+              title: const Text('أب الاعتراف'),
+              subtitle: Text(person.father?.name ?? ''),
+            ),
+            ListTile(
+              title: const Text('خادم؟'),
+              subtitle: Text(person.isServant ? 'نعم' : 'لا'),
+              trailing:
+                  person.isServant && person.user?.email != null
+                      ? IconButton(
+                        onPressed:
+                            () => ViewUserRoute(
+                              uid: person.user!.uid,
+                              $extra: person.user,
+                            ).push(context),
                         icon: const Icon(Symbols.manage_accounts),
                         tooltip: 'عرض بيانات الخادم',
                       )
-                    : null,
-              ),
-              if (person.gender)
-                ListTile(
-                  title: const Text('شماس؟'),
-                  subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
-                ),
-              if (person.gender && person.isShammas)
-                ListTile(
-                  title: const Text('رتبة الشموسية'),
-                  subtitle: Text(person.shammasLevel?.name ?? ''),
-                ),
+                      : null,
+            ),
+            if (person.gender)
               ListTile(
-                title: const Text('الحالة الروحية'),
-                subtitle: Text(person.state?.name ?? ''),
-                trailing: person.state?.color == null
-                    ? null
-                    : ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                title: const Text('شماس؟'),
+                subtitle: Text(person.isShammas ? 'نعم' : 'لا'),
+              ),
+            if (person.gender && person.isShammas)
+              ListTile(
+                title: const Text('رتبة الشموسية'),
+                subtitle: Text(person.shammasLevel?.name ?? ''),
+              ),
+            ListTile(
+              title: const Text('الحالة الروحية'),
+              subtitle: Text(person.state?.name ?? ''),
+              trailing:
+                  person.state?.color == null
+                      ? null
+                      : ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                         child: Container(
                           width: 50,
                           height: 50,
                           color: person.state!.color,
                         ),
                       ),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('الهوايات'),
-                subtitle: Wrap(
-                  spacing: 3,
-                  children: [
-                    for (final hobby in person.hobbies ?? <Hobby>[])
-                      Chip(
-                        side: BorderSide(
-                          color: hobby.color?.findInvert() ?? labelSmall.color!,
-                        ),
-                        label: Text(
-                          hobby.name,
-                          style: labelSmall.copyWith(
-                            color: hobby.color?.findInvert(),
-                          ),
-                        ),
-                        color: WidgetStateProperty.all(hobby.color),
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('الهوايات'),
+              subtitle: Wrap(
+                spacing: 3,
+                children: [
+                  for (final hobby in person.hobbies ?? <Hobby>[])
+                    Chip(
+                      side: BorderSide(
+                        color: hobby.color?.findInvert() ?? labelSmall.color!,
                       ),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: const Text('الشارات'),
-                subtitle: Wrap(
-                  spacing: 3,
-                  children: [
-                    for (final tag in person.tags ?? <Tag>[])
-                      Chip(
-                        side: BorderSide(
-                          color: tag.color?.findInvert() ?? labelSmall.color!,
+                      label: Text(
+                        hobby.name,
+                        style: labelSmall.copyWith(
+                          color: hobby.color?.findInvert(),
                         ),
-                        label: Text(
-                          tag.name,
-                          style: labelSmall.copyWith(
-                            color: tag.color?.findInvert(),
-                          ),
-                        ),
-                        color: WidgetStateProperty.all(tag.color),
                       ),
-                  ],
-                ),
-              ),
-              CopiablePropertyWidget(
-                'ملاحظات',
-                person.notes,
-                showErrorIfEmpty: false,
-              ),
-              const Divider(thickness: 1),
-              HistoryProperty(
-                name: 'أخر تناول',
-                value: person.lastKodas?.time,
-                showTime: false,
-                getHistoryStream: () => DatabaseService.I.history
-                    .paginatePersonKodasHistory(personId: person.id),
-                onRecordNow: () =>
-                    DatabaseService.I.history.updatePersonLastKodas(
-                  personId: widget.personId,
-                  lastKodas: DateTime.now(),
-                ),
-              ),
-              HistoryProperty(
-                name: 'أخر اعتراف',
-                value: person.lastConfession?.time,
-                showTime: false,
-                getHistoryStream: () =>
-                    DatabaseService.I.history.paginatePersonConfessionHistory(
-                  personId: person.id,
-                ),
-                onRecordNow: () =>
-                    DatabaseService.I.history.updatePersonLastConfession(
-                  personId: widget.personId,
-                  lastConfession: DateTime.now(),
-                ),
-              ),
-              const Divider(thickness: 1),
-              HistoryProperty(
-                name: 'أخر افتقاد',
-                value: person.lastVisit?.time,
-                getHistoryStream: () => DatabaseService.I.history
-                    .paginatePersonVisitHistory(personId: person.id),
-                onRecordNow: () =>
-                    DatabaseService.I.history.updatePersonLastVisit(
-                  personId: widget.personId,
-                  lastVisit: DateTime.now(),
-                ),
-              ),
-              HistoryProperty(
-                name: 'أخر مكالمة',
-                value: person.lastCall?.time,
-                getHistoryStream: () => DatabaseService.I.history
-                    .paginatePersonCallHistory(personId: person.id),
-                onRecordNow: () =>
-                    DatabaseService.I.history.updatePersonLastCall(
-                  personId: widget.personId,
-                  lastCall: DateTime.now(),
-                ),
-              ),
-              HistoryProperty(
-                name: 'أخر تحديث للبيانات',
-                value: person.lastEdit?.time,
-                getHistoryStream: () => DatabaseService.I.history
-                    .paginateEditHistory<Person>(id: person.id),
-              ),
-              ListTile(
-                title: FilledButton.icon(
-                  icon: const Icon(Symbols.query_stats),
-                  label: const Text('احصائيات'),
-                  onPressed: () => _analysis(context, person),
-                ),
-              ),
-              const Divider(thickness: 1),
-              ListTile(
-                title: const Text('المناطق التي يوجد بها'),
-                subtitle: _ShowMore<Area>(
-                  person: person,
-                  getField: (p) => p?.areas,
-                ),
-              ),
-              ListTile(
-                title: const Text('الشوارع التي يوجد بها'),
-                subtitle: Wrap(
-                  children: [
-                    for (final s in person.streets ?? <Street>[])
-                      ViewableObjectCard(s),
-                  ],
-                ),
-              ),
-              if (person.family != null)
-                ListTile(
-                  title: const Text('العائلة'),
-                  subtitle: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: ViewableObjectCard(
-                      person.family!,
+                      color: WidgetStateProperty.all(hobby.color),
                     ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: const Text('الشارات'),
+              subtitle: Wrap(
+                spacing: 3,
+                children: [
+                  for (final tag in person.tags ?? <Tag>[])
+                    Chip(
+                      side: BorderSide(
+                        color: tag.color?.findInvert() ?? labelSmall.color!,
+                      ),
+                      label: Text(
+                        tag.name,
+                        style: labelSmall.copyWith(
+                          color: tag.color?.findInvert(),
+                        ),
+                      ),
+                      color: WidgetStateProperty.all(tag.color),
+                    ),
+                ],
+              ),
+            ),
+            CopiablePropertyWidget(
+              'ملاحظات',
+              person.notes,
+              showErrorIfEmpty: false,
+            ),
+            const Divider(thickness: 1),
+            HistoryProperty(
+              name: 'أخر تناول',
+              value: person.lastKodas?.time,
+              showTime: false,
+              getHistoryStream:
+                  () => DatabaseService.I.history.paginatePersonKodasHistory(
+                    personId: person.id,
                   ),
+              onRecordNow:
+                  () => DatabaseService.I.history.updatePersonLastKodas(
+                    personId: widget.personId,
+                    lastKodas: DateTime.now(),
+                  ),
+            ),
+            HistoryProperty(
+              name: 'أخر اعتراف',
+              value: person.lastConfession?.time,
+              showTime: false,
+              getHistoryStream:
+                  () => DatabaseService.I.history
+                      .paginatePersonConfessionHistory(personId: person.id),
+              onRecordNow:
+                  () => DatabaseService.I.history.updatePersonLastConfession(
+                    personId: widget.personId,
+                    lastConfession: DateTime.now(),
+                  ),
+            ),
+            const Divider(thickness: 1),
+            HistoryProperty(
+              name: 'أخر افتقاد',
+              value: person.lastVisit?.time,
+              getHistoryStream:
+                  () => DatabaseService.I.history.paginatePersonVisitHistory(
+                    personId: person.id,
+                  ),
+              onRecordNow:
+                  () => DatabaseService.I.history.updatePersonLastVisit(
+                    personId: widget.personId,
+                    lastVisit: DateTime.now(),
+                  ),
+            ),
+            HistoryProperty(
+              name: 'أخر مكالمة',
+              value: person.lastCall?.time,
+              getHistoryStream:
+                  () => DatabaseService.I.history.paginatePersonCallHistory(
+                    personId: person.id,
+                  ),
+              onRecordNow:
+                  () => DatabaseService.I.history.updatePersonLastCall(
+                    personId: widget.personId,
+                    lastCall: DateTime.now(),
+                  ),
+            ),
+            HistoryProperty(
+              name: 'أخر تحديث للبيانات',
+              value: person.lastEdit?.time,
+              getHistoryStream:
+                  () => DatabaseService.I.history.paginateEditHistory<Person>(
+                    id: person.id,
+                  ),
+            ),
+            ListTile(
+              title: FilledButton.icon(
+                icon: const Icon(Symbols.query_stats),
+                label: const Text('احصائيات'),
+                onPressed: () => _analysis(context, person),
+              ),
+            ),
+            const Divider(thickness: 1),
+            ListTile(
+              title: const Text('المنطقة'),
+              subtitle:
+                  person.address?.area != null
+                      ? ViewableObjectCard(person.address!.area!)
+                      : null,
+            ),
+            ListTile(
+              title: const Text('الشارع'),
+              subtitle:
+                  person.address?.street != null
+                      ? ViewableObjectCard(person.address!.street!)
+                      : null,
+            ),
+            if (person.family != null)
+              ListTile(
+                title: const Text('العائلة'),
+                subtitle: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: ViewableObjectCard(person.family!),
                 ),
-              /* if (person.store != null)
+              ),
+            /* if (person.store != null)
                       ListTile(
                         title: const Text('داخل متجر'),
                         subtitle: ViewableObjectWidget<Store>(
@@ -370,42 +375,42 @@ class _ViewPersonState extends State<ViewPerson> {
                           forceShowSecondLine: false,
                         ),
                       ), */
-              const SizedBox(height: 50),
-            ],
-          ),
+            const SizedBox(height: 50),
+          ]),
         );
       },
-      editButtonBuilder: (context, person) => IconButton(
-        tooltip: 'تعديل',
-        onPressed: () => EditPersonRoute(
-          $extra: EditPersonExtra(
-            person: person,
+      editButtonBuilder:
+          (context, person) => IconButton(
+            tooltip: 'تعديل',
+            onPressed:
+                () => EditPersonRoute(
+                  $extra: EditPersonExtra(person: person),
+                ).push(context),
+            icon: const Icon(Symbols.edit),
           ),
-        ).push(context),
-        icon: const Icon(Symbols.edit),
-      ),
-      notFoundBuilder: (context) => Center(
-        child: Text(
-          'لم يتم العثور على المخدوم',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-      ),
+      notFoundBuilder:
+          (context) => Center(
+            child: Text(
+              'لم يتم العثور على المخدوم',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
     );
   }
 
   void _analysis(BuildContext context, Person person) {
     PersonAnalysisRoute(
       $extra: PersonAnalysisExtra(
-        editOptionsBuilder: (
-          context,
-          options,
-          void Function(PersonAnalysisOptions) onComplete,
-        ) =>
-            _SelectAttendanceOptions(
-          person: person,
-          onComplete: onComplete,
-          options: options,
-        ),
+        editOptionsBuilder:
+            (
+              context,
+              options,
+              void Function(PersonAnalysisOptions) onComplete,
+            ) => _SelectAttendanceOptions(
+              person: person,
+              onComplete: onComplete,
+              options: options,
+            ),
         person: person,
       ),
     ).push(context);
@@ -414,22 +419,23 @@ class _ViewPersonState extends State<ViewPerson> {
   Future<void> _phoneCall(BuildContext context, String? number) async {
     final doMakeCallResult = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('هل تريد اجراء مكالمة الأن'),
-        actions: [
-          FilledButton.icon(
-            icon: const Icon(Symbols.call),
-            label: const Text('اجراء مكالمة الأن'),
-            onPressed: () => Navigator.of(context).pop(true),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('هل تريد اجراء مكالمة الأن'),
+            actions: [
+              FilledButton.icon(
+                icon: const Icon(Symbols.call),
+                label: const Text('اجراء مكالمة الأن'),
+                onPressed: () => Navigator.of(context).pop(true),
+              ),
+              FilledButton.tonalIcon(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                icon: const Icon(Symbols.dialpad),
+                label: const Text('نسخ في لوحة الاتصال فقط'),
+                onPressed: () => Navigator.of(context).pop(false),
+              ),
+            ],
           ),
-          FilledButton.tonalIcon(
-            style: Theme.of(context).filledTonalButtonStyleWorkaround,
-            icon: const Icon(Symbols.dialpad),
-            label: const Text('نسخ في لوحة الاتصال فقط'),
-            onPressed: () => Navigator.of(context).pop(false),
-          ),
-        ],
-      ),
     );
 
     if (doMakeCallResult == null) return;
@@ -443,19 +449,20 @@ class _ViewPersonState extends State<ViewPerson> {
 
     final recordLastCall = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
-        actions: [
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('نعم'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('هل تريد تسجيل تاريخ هذه المكالمة؟'),
+            actions: [
+              FilledButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('نعم'),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('لا'),
+              ),
+            ],
           ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('لا'),
-          ),
-        ],
-      ),
     );
 
     if (recordLastCall != true) return;
@@ -465,11 +472,7 @@ class _ViewPersonState extends State<ViewPerson> {
       lastCall: DateTime.now(),
     );
 
-    scaffoldMessenger.showSnackBar(
-      const SnackBar(
-        content: Text('تم بنجاح'),
-      ),
-    );
+    scaffoldMessenger.showSnackBar(const SnackBar(content: Text('تم بنجاح')));
   }
 
   Future<void> _contactAdd(
@@ -485,41 +488,45 @@ class _ViewPersonState extends State<ViewPerson> {
 
     final dialogResult = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('ادخل اسم جهة الاتصال:'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormField(controller: nameController),
-            Container(height: 10),
-            Text(phone),
-          ],
-        ),
-        actions: [
-          OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('حفظ جهة الاتصال'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('ادخل اسم جهة الاتصال:'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(controller: nameController),
+                Container(height: 10),
+                Text(phone),
+              ],
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('حفظ جهة الاتصال'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
 
     if (dialogResult != true) return;
 
-    final imageFile = person.hasImage
-        ? await ImageUrlCacheService.I.getImageFile(person.imageInfo)
-        : null;
+    final imageFile =
+        person.hasImage
+            ? await ImageUrlCacheService.I.getImageFile(person.imageInfo)
+            : null;
 
     await ContactsService.I.insertContact(
       Contact(
         addresses: [
-          if (person.address != null) Address(person.address!),
+          if (person.address != null)
+            contacts.Address(person.address!.toString()),
         ],
         name: Name(first: nameController.text),
-        photo: imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
-            ? await imageFile.readAsBytes()
-            : null,
+        photo:
+            imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
+                ? await imageFile.readAsBytes()
+                : null,
         phones: [Phone(phone)],
       ),
     );
@@ -554,9 +561,9 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   final int visibleItemsLimit;
 
   DateFormat get dateFormat => DateFormat(
-        'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
-        'ar-EG',
-      );
+    'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
+    'ar-EG',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -568,24 +575,19 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
           if (listField.length >= visibleItemsLimit + 1 &&
               o == listField[visibleItemsLimit])
             ExpansionTile(
-              onExpansionChanged: loadAll != null
-                  ? (expanded) => expanded ? loadAll!() : null
-                  : null,
+              onExpansionChanged:
+                  loadAll != null
+                      ? (expanded) => expanded ? loadAll!() : null
+                      : null,
               title: const Text('اظهار المزيد'),
               children: [
-                ViewableObjectCard(
-                  o,
-                ),
+                ViewableObjectCard(o),
                 for (final o in listField.skip(visibleItemsLimit + 1))
-                  ViewableObjectCard(
-                    o,
-                  ),
+                  ViewableObjectCard(o),
               ],
             )
           else
-            ViewableObjectCard(
-              o,
-            ),
+            ViewableObjectCard(o),
       ],
     );
   }
@@ -612,10 +614,10 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
     widget.options == null
         ? {}
         : {
-            ...widget.options!.services,
-            ...widget.options!.classes,
-            ...widget.options!.groups,
-          },
+          ...widget.options!.services,
+          ...widget.options!.classes,
+          ...widget.options!.groups,
+        },
   );
 
   late bool confessionAnalysis = widget.options?.confessionAnalysis ?? true;
@@ -626,7 +628,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       widget.options?.visitHistoryAnalysis ?? false;
   late bool editHistoryAnalysis = widget.options?.editHistoryAnalysis ?? false;
 
-  late DateTimeRange dateRange = widget.options?.dateRange ??
+  late DateTimeRange dateRange =
+      widget.options?.dateRange ??
       DateTimeRange(
         start: DateTime.now().subtract(const Duration(days: 30)),
         end: DateTime.now(),
@@ -637,9 +640,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('تحليل الحضور في'),
-      ),
+      appBar: AppBar(title: const Text('تحليل الحضور في')),
       body: FutureBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
         initialData: <ViewableWithIDAndImage>[
           ...widget.person.classes ?? [],
@@ -647,28 +648,23 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         ].groupListsBy(
           (o) =>
               (o is Class ? o.service : (o as Group).service) ??
-              Service(
-                id: 'id',
-                name: 'جار التحميل',
-              ),
+              Service(id: 'id', name: 'جار التحميل'),
         ),
         future: DatabaseService.I.persons
             .personServicesClassesGroups(personId: widget.person.id)
-            .then(
-          (p) {
-            final groupedObjects = <ViewableWithIDAndImage>[
-              ...p?.classes ?? [],
-              ...p?.groups ?? [],
-            ].groupListsBy(
-              (o) => o is Class ? o.service! : (o as Group).service!,
-            );
+            .then((p) {
+              final groupedObjects = <ViewableWithIDAndImage>[
+                ...p?.classes ?? [],
+                ...p?.groups ?? [],
+              ].groupListsBy(
+                (o) => o is Class ? o.service! : (o as Group).service!,
+              );
 
-            return <Service, List<ViewableWithIDAndImage>>{
-              for (final s in p?.services ?? []) s: [],
-              ...groupedObjects,
-            };
-          },
-        ),
+              return <Service, List<ViewableWithIDAndImage>>{
+                for (final s in p?.services ?? []) s: [],
+                ...groupedObjects,
+              };
+            }),
         builder: (context, snapshot) {
           return Padding(
             padding: const EdgeInsets.all(8),
@@ -694,21 +690,25 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                               entry.key,
                               wrapInCard: false,
                               forceShowSecondLine: false,
-                              onTap: (service) => _toggle(
-                                service,
-                                !selected.value.contains(service),
-                              ),
+                              onTap:
+                                  (service) => _toggle(
+                                    service,
+                                    !selected.value.contains(service),
+                                  ),
                               trailing: StreamBuilder<bool>(
                                 initialData: false,
-                                stream: selected
-                                    .map((set) => set.contains(entry.key)),
-                                builder: (context, entryChecked) => Checkbox(
-                                  onChanged: (checked) => _toggle(
-                                    entry.key,
-                                    checked ?? false,
-                                  ),
-                                  value: entryChecked.requireData,
+                                stream: selected.map(
+                                  (set) => set.contains(entry.key),
                                 ),
+                                builder:
+                                    (context, entryChecked) => Checkbox(
+                                      onChanged:
+                                          (checked) => _toggle(
+                                            entry.key,
+                                            checked ?? false,
+                                          ),
+                                      value: entryChecked.requireData,
+                                    ),
                               ),
                             ),
                             Padding(
@@ -721,23 +721,25 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                       descendent,
                                       wrapInCard: false,
                                       forceShowSecondLine: false,
-                                      onTap: (object) => _toggle(
-                                        object,
-                                        !selected.value.contains(object),
-                                      ),
+                                      onTap:
+                                          (object) => _toggle(
+                                            object,
+                                            !selected.value.contains(object),
+                                          ),
                                       trailing: StreamBuilder<bool>(
                                         initialData: false,
                                         stream: selected.map(
                                           (set) => set.contains(descendent),
                                         ),
-                                        builder: (context, entryChecked) =>
-                                            Checkbox(
-                                          onChanged: (checked) => _toggle(
-                                            descendent,
-                                            checked ?? false,
-                                          ),
-                                          value: entryChecked.requireData,
-                                        ),
+                                        builder:
+                                            (context, entryChecked) => Checkbox(
+                                              onChanged:
+                                                  (checked) => _toggle(
+                                                    descendent,
+                                                    checked ?? false,
+                                                  ),
+                                              value: entryChecked.requireData,
+                                            ),
                                       ),
                                     ),
                                 ],
@@ -748,33 +750,34 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           CheckboxListTile(
                             value: confessionAnalysis,
                             title: const Text('الاعتراف'),
-                            onChanged: (v) =>
-                                setState(() => confessionAnalysis = v!),
+                            onChanged:
+                                (v) => setState(() => confessionAnalysis = v!),
                           ),
                           CheckboxListTile(
                             value: kodasAnalysis,
                             title: const Text('حضور القداس'),
-                            onChanged: (v) =>
-                                setState(() => kodasAnalysis = v!),
+                            onChanged:
+                                (v) => setState(() => kodasAnalysis = v!),
                           ),
                           const Divider(thickness: 1),
                           CheckboxListTile(
                             value: callHistoryAnalysis,
                             title: const Text('خدمة المكالمات'),
-                            onChanged: (v) =>
-                                setState(() => callHistoryAnalysis = v!),
+                            onChanged:
+                                (v) => setState(() => callHistoryAnalysis = v!),
                           ),
                           CheckboxListTile(
                             value: visitHistoryAnalysis,
                             title: const Text('الافتقاد'),
-                            onChanged: (v) =>
-                                setState(() => visitHistoryAnalysis = v!),
+                            onChanged:
+                                (v) =>
+                                    setState(() => visitHistoryAnalysis = v!),
                           ),
                           CheckboxListTile(
                             value: editHistoryAnalysis,
                             title: const Text('تحديث البيانات'),
-                            onChanged: (v) =>
-                                setState(() => editHistoryAnalysis = v!),
+                            onChanged:
+                                (v) => setState(() => editHistoryAnalysis = v!),
                           ),
                         ],
                       ),
@@ -818,11 +821,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
     if (isSelected) {
       selected.add({...selected.value, object});
     } else {
-      selected.add(
-        selected.value.difference(
-          <ViewableWithID>{object},
-        ),
-      );
+      selected.add(selected.value.difference(<ViewableWithID>{object}));
     }
   }
 

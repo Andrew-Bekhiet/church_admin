@@ -14,8 +14,9 @@ class PersonsDAO
 
   @override
   late final StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>
-      baseStreamAllConfig =
-      const StreamAllConfig(document: documentNodeSubscriptionwatchAllPersons);
+      baseStreamAllConfig = const StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllPersons,
+  );
   @override
   final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(
@@ -32,6 +33,7 @@ class PersonsDAO
       UpdateObjectConfig(
     document: documentNodeMutationupdatePerson,
     varsConstructor: _updatePersonVarsConstructor,
+    parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
   );
   @override
   late final CreateObjectConfig<Person> baseCreateObjectConfig =
@@ -54,7 +56,9 @@ class PersonsDAO
       ).toJson();
 
   Json _createPersonVarsConstructor({required Person newObject}) =>
-      PersonInsertHelper(newPerson: newObject).variables.toJson();
+      Variables_Mutation_insertPerson(
+        newPerson: newObject.toInsertInput(),
+      ).toJson();
 
   Json _updatePersonVarsConstructor({
     required Person newObject,
@@ -88,15 +92,13 @@ class PersonsDAO
     );
   }
 
-  Future<Person?> personServicesClassesGroups({
-    required String personId,
-  }) {
+  Future<Person?> personServicesClassesGroups({required String personId}) {
     final queryOptions = QueryOptions(
       document: documentNodeQuerypersonServicesClassesGroups,
       operationName: 'personServicesClassesGroups',
-      variables:
-          Variables_Query_personServicesClassesGroups(id: personId.toUuid())
-              .toJson(),
+      variables: Variables_Query_personServicesClassesGroups(
+        id: personId.toUuid(),
+      ).toJson(),
       parserFn: db.parser.singleOrNullParser(Person.fromJson),
     );
 
@@ -139,40 +141,28 @@ class PersonsDAO
         personsConditions: [
           if (personId != null)
             Input_PersonsBoolExp(
-              id: Input_UuidComparisonExp(
-                $_eq: personId.toUuid(),
-              ),
+              id: Input_UuidComparisonExp($_eq: personId.toUuid()),
             ),
           if (areasIds.isNotEmpty ||
               streetsIds.isNotEmpty ||
               familiesIds.isNotEmpty)
             Input_PersonsBoolExp(
-              $_or: [
-                if (areasIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    areas: Input_AreasBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: areasIds,
-                      ),
+              address: Input_AddressesBoolExp(
+                $_or: [
+                  if (areasIds.isNotEmpty)
+                    Input_AddressesBoolExp(
+                      areaId: Input_UuidComparisonExp($_in: areasIds),
                     ),
-                  ),
-                if (streetsIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    streets: Input_StreetsBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: streetsIds,
-                      ),
+                  if (streetsIds.isNotEmpty)
+                    Input_AddressesBoolExp(
+                      streetId: Input_UuidComparisonExp($_in: streetsIds),
                     ),
-                  ),
-                if (familiesIds.isNotEmpty)
-                  Input_PersonsBoolExp(
-                    family: Input_FamiliesBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: familiesIds,
-                      ),
+                  if (familiesIds.isNotEmpty)
+                    Input_AddressesBoolExp(
+                      familyId: Input_UuidComparisonExp($_in: familiesIds),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           if (servicesIds.isNotEmpty ||
               classesIds.isNotEmpty ||
@@ -182,31 +172,26 @@ class PersonsDAO
                 if (servicesIds.isNotEmpty)
                   Input_PersonsBoolExp(
                     services: Input_PersonsServicesBoolExp(
-                      serviceId: Input_UuidComparisonExp(
-                        $_in: servicesIds,
-                      ),
+                      serviceId: Input_UuidComparisonExp($_in: servicesIds),
                     ),
                   ),
                 if (classesIds.isNotEmpty)
                   Input_PersonsBoolExp(
-                    classes: Input_ClassesBoolExp(
-                      id: Input_UuidComparisonExp(
-                        $_in: classesIds,
-                      ),
+                    classes: Input_ClassesPersonsBoolExp(
+                      classId: Input_UuidComparisonExp($_in: classesIds),
                     ),
                   ),
                 if (groupsIds.isNotEmpty)
                   Input_PersonsBoolExp(
                     groups: Input_PersonsGroupsBoolExp(
-                      groupId: Input_UuidComparisonExp(
-                        $_in: groupsIds,
-                      ),
+                      groupId: Input_UuidComparisonExp($_in: groupsIds),
                     ),
                   ),
               ],
             ),
         ],
       ).toJson(),
+      queryRequestTimeout: const Duration(seconds: 30),
       parserFn: PersonsGeolocationsResponse.fromJson,
     );
 

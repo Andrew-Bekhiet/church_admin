@@ -28,6 +28,7 @@ mixin _$Street {
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
   List<Area>? get areas => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
@@ -53,6 +54,7 @@ abstract class $StreetCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
+      @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
       List<Area>? areas,
       LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit});
@@ -169,6 +171,7 @@ abstract class _$$StreetImplCopyWith<$Res> implements $StreetCopyWith<$Res> {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
+      @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
       List<Area>? areas,
       LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit});
@@ -253,6 +256,7 @@ class _$StreetImpl extends _Street {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.blurhash,
+      @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
       final List<Area>? areas,
       this.lastVisit,
       this.lastEdit})
@@ -278,6 +282,7 @@ class _$StreetImpl extends _Street {
   final String? blurhash;
   final List<Area>? _areas;
   @override
+  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
   List<Area>? get areas {
     final value = _areas;
     if (value == null) return null;
@@ -354,6 +359,7 @@ abstract class _Street extends Street {
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final String? blurhash,
+      @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
       final List<Area>? areas,
       final LastRecordedByInfo? lastVisit,
       final LastRecordedByInfo? lastEdit}) = _$StreetImpl;
@@ -376,6 +382,7 @@ abstract class _Street extends Street {
   @override
   String? get blurhash;
   @override
+  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
   List<Area>? get areas;
   @override
   LastRecordedByInfo? get lastVisit;

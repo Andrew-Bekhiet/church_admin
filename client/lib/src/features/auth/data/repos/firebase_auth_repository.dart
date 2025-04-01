@@ -94,6 +94,8 @@ class FirebaseAuthRepository implements AuthRepository {
 
       final multiFactorSession = _createMFASessionFromError(e, email, password);
 
+      _pendingSessions[multiFactorSession.id] = e.resolver.session;
+
       throw MultiFactorRequiredException(multiFactorSession, e, stackTrace);
     } on firebase_auth.FirebaseAuthException catch (e, stackTrace) {
       throw IncorrectCredentialsException(e, stackTrace);
