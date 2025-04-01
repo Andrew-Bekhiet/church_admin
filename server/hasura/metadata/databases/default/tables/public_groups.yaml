@@ -66,8 +66,19 @@ insert_permissions:
                   _eq: X-Hasura-User-Id
               - allow_edit:
                   _eq: true
-              - entity_type:
-                  _eq: group
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: service
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       columns:
         - color
         - name

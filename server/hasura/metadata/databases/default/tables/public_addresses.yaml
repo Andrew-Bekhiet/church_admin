@@ -20,30 +20,7 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      check:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - allow_edit:
-                  _eq: true
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: family
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - family_id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+      check: {}
       columns:
         - apartment_number
         - area_id
