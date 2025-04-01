@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.45.2
+FROM hasura/graphql-engine:v2.46.0
 
 # Install PostgreSQL client 17
 RUN apt-get update && apt-get install -y curl gnupg lsb-release
