@@ -1,5 +1,7 @@
 DROP VIEW IF EXISTS auth.users_permissions_by_entity_id;
 
+ALTER TABLE history.attendance_days_constraints ALTER COLUMN service_study_year TYPE int4 USING service_study_year::int4;
+
 CREATE
 OR REPLACE VIEW auth.users_permissions_by_entity_id AS
 SELECT
