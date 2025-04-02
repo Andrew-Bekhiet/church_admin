@@ -5,7 +5,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query checkApproved($uid: Uuid!) {
+            query checkApproved($uid: uuid!) {
               authUsersData(where: { uid: { _eq: $uid } }, limit: 1) {
                 permissions{
                   permission
@@ -63,7 +63,7 @@ export async function getPersonIdFromUser(
   try {
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query getPersonIdFromUser($hasuraUID: Uuid = "") {
+            query getPersonIdFromUser($hasuraUID: uuid = "") {
               authUsersData(where: {uid: {_eq: $hasuraUID}}) {
                 person {
                   id
@@ -103,7 +103,7 @@ export async function checkUserAccess(
 
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query checkPermissions($id: Uuid!) {
+            query checkPermissions($id: uuid!) {
                 ${table == "users" ? "authUsersData" : table}(where: {${
         table == "users" ? "uid" : "id"
       }: {_eq: $id}}, limit: 1) {
@@ -206,7 +206,7 @@ export async function updatePhotoTime(
     }ByPk`;
     const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation updatePhotoTime($id: Uuid!, $photoUpdatedAt: Timestamptz) {
+            mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
               ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
@@ -250,7 +250,7 @@ export async function updatePhotoBlurHash(
     }ByPk`;
     const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation updatePhotoBlurHash($id: Uuid!, $blurhash: String) {
+            mutation updatePhotoBlurHash($id: uuid!, $blurhash: String) {
               ${op_name}(pkColumns: {id: $id}, _set: {blurhash: $blurhash}) {
                 ${table == "users" ? "u" : ""}id
               }
