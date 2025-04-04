@@ -96,35 +96,51 @@ export async function checkUserAccess(
   try {
     if (permission == "write" && table == "users") return false;
 
-    const field =
-      "isUserAllowedTo" +
-      permission.at(0)!.toUpperCase() +
-      permission.substring(1);
-
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query checkPermissions($id: uuid!) {
-                ${table == "users" ? "authUsersData" : table}(where: {${
-        table == "users" ? "uid" : "id"
-      }: {_eq: $id}}, limit: 1) {
-                    ${field}
+            query checkPermissions($uid: uuid!, $id: uuid!, $table: name, $anyEntityType: String) {
+              authUsersPermissionsByEntityId(
+                where: {
+                  _and: [
+                    { uid: { _eq: $uid } }
+                    {
+                      _or: [
+                        {
+                          _and: [
+                            { table: { _eq: $table } }
+                            { entityId: { _eq: $id } }
+                          ]
+                        }
+                        {
+                          _and: [
+                            { entityType: { _eq: $anyEntityType } }
+                            { entityId: { _isNull: true } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
+              ) {
+                allowEdit
+              }
             }
           `,
-      variables: { id },
-      operationName: "checkPermissions",
-      headers: {
-        "content-type": "application/json",
-        "x-hasura-user-id": hasura_uid,
-        "x-hasura-role": "admin",
-        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+      variables: {
+        id,
+        uid: hasura_uid,
+        table,
+        anyEntityType: table == "users" ? "any-user" : "any",
       },
+      operationName: "checkPermissions",
     });
 
+    const exists: Array<{ allowEdit: boolean }> =
+      hasura_response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
+
     return (
-      hasura_response.data?.["data"]?.[
-        table == "users" ? "authUsersData" : table
-      ]?.[0]?.[field] === true
+      (permission == "read" && exists.length > 0) ||
+      (permission == "write" && !!exists?.[0]?.allowEdit)
     );
   } catch (e) {
     console.error(e);
