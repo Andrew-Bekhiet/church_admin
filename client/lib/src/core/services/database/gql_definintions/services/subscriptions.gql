@@ -27,6 +27,14 @@ subscription watchAllServices(
     }
   }
 }
+subscription watchServicesCount($where: [ServicesBoolExp!] = {}) {
+  servicesAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchService($id: uuid!) {
   servicesByPk(id: $id) {
     ...ServiceWithStudyYears

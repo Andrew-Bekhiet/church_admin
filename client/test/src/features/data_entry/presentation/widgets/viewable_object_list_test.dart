@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,6 @@ void main() {
         objectsPaginatableStream:
             _createMockPaginatableStream(isLoading, objectsStream),
       );
-      addTearDown(controller.dispose);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -104,6 +105,7 @@ void main() {
       );
 
       flushVisibilityDetectors();
+      unawaited(controller.dispose());
     },
   );
 
@@ -126,7 +128,6 @@ void main() {
         ),
         selectionController: selectionController,
       );
-      addTearDown(controller.dispose);
 
       await tester.pumpWidgetBuilder(
         ViewableObjectList(objectsController: controller),
@@ -173,6 +174,7 @@ void main() {
       expect(find.byType(Checkbox), findsNothing);
 
       flushVisibilityDetectors();
+      unawaited(controller.dispose());
     },
   );
 
@@ -184,10 +186,8 @@ void main() {
         Person(id: 'id2', name: 'name2'),
         Person(id: 'id3', name: 'name3'),
       ]);
-      addTearDown(objectsStream.close);
 
       final filterStream = BehaviorSubject.seeded('');
-      addTearDown(filterStream.close);
 
       final controller = ViewableObjectListController(
         objectsPaginatableStream: _createMockPaginatableStream(
@@ -197,7 +197,6 @@ void main() {
         filterStream: filterStream,
         selectionController: SelectionController<Person>(),
       );
-      addTearDown(controller.dispose);
 
       await tester.pumpWidgetBuilder(
         ViewableObjectList(objectsController: controller),
@@ -240,7 +239,9 @@ void main() {
         findsNWidgets(3),
       );
 
+      await filterStream.close();
       flushVisibilityDetectors();
+      unawaited(controller.dispose());
     },
   );
 
@@ -263,12 +264,11 @@ void main() {
         ]),
         limit: limit,
       );
-      when(paginatableStream.canPaginateForward).thenReturn(true);
+      when(paginatableStream.hasMore).thenReturn(true);
 
       final controller = ViewableObjectListController(
         objectsPaginatableStream: paginatableStream,
       );
-      addTearDown(controller.dispose);
 
       await tester.pumpWidgetBuilder(
         ViewableObjectList(objectsController: controller),
@@ -287,9 +287,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      verify(paginatableStream.loadNextPage()).called(1);
+      verify(paginatableStream.listenToNextPage()).called(1);
 
       flushVisibilityDetectors();
+      unawaited(controller.dispose());
     },
   );
 }
@@ -321,13 +322,25 @@ MockPaginatableStreamBase<Person> _createMockPaginatableStream(
   int limit = 3,
 }) {
   final paginatableStream = MockPaginatableStreamBase<Person>();
-  when(paginatableStream.limit).thenReturn(limit);
+  when(paginatableStream.pageSize).thenReturn(limit);
   when(paginatableStream.isLoading).thenAnswer((_) => isLoadingStream.value);
   when(paginatableStream.onLoadingChanged).thenAnswer((_) => isLoadingStream);
-  when(paginatableStream.stream).thenAnswer((_) => objectsStream.stream);
-  when(paginatableStream.currentValueOrNull)
-      .thenAnswer((_) => objectsStream.valueOrNull);
-  when(paginatableStream.currentValue).thenAnswer((_) => objectsStream.value);
+  when(
+    paginatableStream.listen(
+      captureAny,
+      onDone: captureAnyNamed('onDone'),
+      onError: captureAnyNamed('onError'),
+      cancelOnError: captureAnyNamed('cancelOnError'),
+    ),
+  ).thenAnswer(
+    (i) => objectsStream.stream.listen(
+      i.positionalArguments.first,
+      onDone: i.namedArguments[#onDone],
+      onError: i.namedArguments[#onError],
+      cancelOnError: i.namedArguments[#cancelOnError],
+    ),
+  );
+  when(paginatableStream.currentItems).thenAnswer((_) => objectsStream.value);
 
   return paginatableStream;
 }

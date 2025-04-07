@@ -8,8 +8,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
   final DateTimeRange range;
   final HistoryAggregateData analysisData;
   final HistoryAggregateData totalAnalysisData;
-  final DelegatingPaginatableStream<LastRecordedByInfo> Function()
-      getHistoryStream;
+  final PaginatableStreamBase<LastRecordedByInfo> Function() getHistoryStream;
 
   final String name;
   final Color? color;

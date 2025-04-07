@@ -8,6 +8,14 @@ subscription watchAllPersons(
   }
 }
 
+subscription watchPersonsCount($where: [PersonsBoolExp!] = {}) {
+  personsAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchPerson(
   $id: uuid!
   $classesLimit: Int

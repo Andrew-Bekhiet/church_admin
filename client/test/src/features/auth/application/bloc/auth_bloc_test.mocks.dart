@@ -256,9 +256,20 @@ class _FakeStreamAllConfig_21<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamSingleByIdConfig_22<T> extends _i1.SmartFake
+class _FakeStreamCountConfig_22<T, TBoolExp> extends _i1.SmartFake
+    implements _i2.StreamCountConfig<T, TBoolExp> {
+  _FakeStreamCountConfig_22(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamSingleByIdConfig_23<T> extends _i1.SmartFake
     implements _i2.StreamSingleByIdConfig<T> {
-  _FakeStreamSingleByIdConfig_22(
+  _FakeStreamSingleByIdConfig_23(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -267,9 +278,9 @@ class _FakeStreamSingleByIdConfig_22<T> extends _i1.SmartFake
         );
 }
 
-class _FakeDatabaseService_23 extends _i1.SmartFake
+class _FakeDatabaseService_24 extends _i1.SmartFake
     implements _i2.DatabaseService {
-  _FakeDatabaseService_23(
+  _FakeDatabaseService_24(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -278,8 +289,8 @@ class _FakeDatabaseService_23 extends _i1.SmartFake
         );
 }
 
-class _FakeUser_24 extends _i1.SmartFake implements _i2.User {
-  _FakeUser_24(
+class _FakeUser_25 extends _i1.SmartFake implements _i2.User {
+  _FakeUser_25(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -288,10 +299,10 @@ class _FakeUser_24 extends _i1.SmartFake implements _i2.User {
         );
 }
 
-class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
+class _FakeStreamableDAOProxy_26<T extends _i2.ViewableWithID, TBoolExp,
         TOrderByExp> extends _i1.SmartFake
     implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
-  _FakeStreamableDAOProxy_25(
+  _FakeStreamableDAOProxy_26(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -300,9 +311,9 @@ class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
         );
 }
 
-class _FakeGQLPaginatableStream_26<T> extends _i1.SmartFake
-    implements _i2.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_26(
+class _FakePaginatableStreamBase_27<T> extends _i1.SmartFake
+    implements _i2.PaginatableStreamBase<T> {
+  _FakePaginatableStreamBase_27(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1227,14 +1238,31 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
               _i2.Input_AuthUsersDataOrderBy>);
 
   @override
+  _i2.StreamCountConfig<_i2.User,
+      _i2.Input_AuthUsersDataBoolExp> get baseStreamCountConfig => (super
+          .noSuchMethod(
+        Invocation.getter(#baseStreamCountConfig),
+        returnValue:
+            _FakeStreamCountConfig_22<_i2.User, _i2.Input_AuthUsersDataBoolExp>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+        returnValueForMissingStub:
+            _FakeStreamCountConfig_22<_i2.User, _i2.Input_AuthUsersDataBoolExp>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+      ) as _i2.StreamCountConfig<_i2.User, _i2.Input_AuthUsersDataBoolExp>);
+
+  @override
   _i2.StreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeStreamSingleByIdConfig_22<_i2.User>(
+        returnValue: _FakeStreamSingleByIdConfig_23<_i2.User>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-        returnValueForMissingStub: _FakeStreamSingleByIdConfig_22<_i2.User>(
+        returnValueForMissingStub: _FakeStreamSingleByIdConfig_23<_i2.User>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
@@ -1243,11 +1271,11 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_23(
+        returnValue: _FakeDatabaseService_24(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_23(
+        returnValueForMissingStub: _FakeDatabaseService_24(
           this,
           Invocation.getter(#db),
         ),
@@ -1256,11 +1284,11 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
   _i2.User Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _FakeUser_24(
+        returnValue: (Map<String, dynamic> json) => _FakeUser_25(
           this,
           Invocation.getter(#fromJson),
         ),
-        returnValueForMissingStub: (Map<String, dynamic> json) => _FakeUser_24(
+        returnValueForMissingStub: (Map<String, dynamic> json) => _FakeUser_25(
           this,
           Invocation.getter(#fromJson),
         ),
@@ -1284,12 +1312,12 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
           _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>
       get streamingProxy => (super.noSuchMethod(
             Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_25<_i2.User,
+            returnValue: _FakeStreamableDAOProxy_26<_i2.User,
                 _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
               this,
               Invocation.getter(#streamingProxy),
             ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.User,
+            returnValueForMissingStub: _FakeStreamableDAOProxy_26<_i2.User,
                 _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
               this,
               Invocation.getter(#streamingProxy),
@@ -1344,7 +1372,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       ) as _i5.Future<_i2.User?>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.User> streamAll({
+  _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i5.Stream<String?>? searchQuery,
     List<_i2.Input_AuthUsersDataBoolExp>? where,
     List<_i2.Input_AuthUsersDataOrderBy>? orderBy,
@@ -1359,7 +1387,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
             #orderBy: orderBy,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_26<_i2.User>(
+        returnValue: _FakePaginatableStreamBase_27<_i2.User>(
           this,
           Invocation.method(
             #streamAll,
@@ -1371,7 +1399,7 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_26<_i2.User>(
+        returnValueForMissingStub: _FakePaginatableStreamBase_27<_i2.User>(
           this,
           Invocation.method(
             #streamAll,
@@ -1383,5 +1411,5 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
             },
           ),
         ),
-      ) as _i2.GQLPaginatableStream<_i2.User>);
+      ) as _i2.PaginatableStreamBase<_i2.User>);
 }

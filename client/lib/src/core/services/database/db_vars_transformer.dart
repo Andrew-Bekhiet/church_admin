@@ -5,29 +5,22 @@ class DBVarsTransformer {
   const DBVarsTransformer();
 
   Json transformVariablesForPagination<T extends ViewableWithID>(
-    GQLPaginatableStreamEvent<T> event, {
+    PaginatableStreamRequest<T> request, {
     List<Json> where = const [],
     List<Json> orderBy = const [
       {'name': 'ASC'},
     ],
   }) {
-    final search = event.search;
-    final lastSearch = event.lastSearch;
-
-    final paginatableStreamInstance = event.instance;
-    final cursor = lastSearch == search
-        ? paginatableStreamInstance.getCursorForOffset(event.offset - 1)
-        : null;
+    final PaginatableStreamRequest(:search, :cursor, :pageSize) = request;
 
     return {
       'where': [
         ...where,
         if (search != null && search.isNotEmpty) _nameSearch(search),
-        if (lastSearch == search && cursor != null)
-          _whereConditionsForPagination(orderBy, cursor),
+        if (cursor != null) _whereConditionsForPagination(orderBy, cursor),
       ],
       'orderBy': orderBy,
-      'limit': paginatableStreamInstance.limit + 1,
+      'limit': pageSize + 1,
     };
   }
 
@@ -82,7 +75,7 @@ class DBVarsTransformer {
           : (object as ToJson).toJson().followKeysPath(orderByClause);
 
   String _getOperatorByDirection(Json orderByClause) =>
-      orderByClause.getLeaf() == 'ASC' ? '_gt' : '_lt';
+      orderByClause.getLeaf() == 'ASC' ? '_gte' : '_lte';
 }
 
 extension _FollowKeysPath<T> on Map<T, dynamic> {

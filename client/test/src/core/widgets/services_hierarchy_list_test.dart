@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,7 +37,6 @@ void main() {
       final viewableObjectListController = ViewableObjectListController(
         objectsPaginatableStream: mock,
       );
-      addTearDown(viewableObjectListController.dispose);
 
       final deviceBuilder = DeviceBuilder(
         wrap: materialAppWrapper(
@@ -126,6 +127,8 @@ void main() {
       // Dispose the main widget:
       await tester.pumpWidget(Container());
       flushVisibilityDetectors();
+
+      unawaited(viewableObjectListController.dispose());
     },
   );
 
@@ -137,7 +140,6 @@ void main() {
       final viewableObjectListController = ViewableObjectListController(
         objectsPaginatableStream: mock,
       );
-      addTearDown(viewableObjectListController.dispose);
 
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
@@ -181,6 +183,7 @@ void main() {
       // Dispose the main widget:
       await tester.pumpWidget(Container());
       flushVisibilityDetectors();
+      unawaited(viewableObjectListController.dispose());
     },
   );
 
@@ -192,7 +195,6 @@ void main() {
       final viewableObjectListController = ViewableObjectListController(
         objectsPaginatableStream: mock,
       );
-      addTearDown(viewableObjectListController.dispose);
 
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
@@ -287,6 +289,7 @@ void main() {
       // Dispose the main widget:
       await tester.pumpWidget(Container());
       flushVisibilityDetectors();
+      unawaited(viewableObjectListController.dispose());
     },
   );
 }
@@ -294,10 +297,17 @@ void main() {
 MockPaginatableStreamBase _createPaginatableStreamMock() {
   final mock = MockPaginatableStreamBase();
 
-  when(mock.canPaginateForward).thenReturn(false);
-  when(mock.limit).thenReturn(2);
-  when(mock.stream).thenAnswer(
-    (_) => BehaviorSubject.seeded(
+  when(mock.hasMore).thenReturn(false);
+  when(mock.pageSize).thenReturn(2);
+  when(
+    mock.listen(
+      captureAny,
+      onDone: captureAnyNamed('onDone'),
+      onError: captureAnyNamed('onError'),
+      cancelOnError: captureAnyNamed('cancelOnError'),
+    ),
+  ).thenAnswer(
+    (i) => BehaviorSubject.seeded(
       [
         Service(
           id: 'id',
@@ -335,6 +345,11 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
           ],
         ),
       ],
+    ).listen(
+      i.positionalArguments.first,
+      onDone: i.namedArguments[#onDone],
+      onError: i.namedArguments[#onError],
+      cancelOnError: i.namedArguments[#cancelOnError],
     ),
   );
   when(mock.onLoadingChanged)

@@ -9,7 +9,7 @@ import 'package:riverpod/riverpod.dart';
 import 'admin_users_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<PaginatableStream<LastRecordedByInfo>>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])

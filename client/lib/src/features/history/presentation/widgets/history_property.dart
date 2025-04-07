@@ -16,7 +16,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final String name;
   final bool showTime;
   final DateTime? value;
-  final DelegatingPaginatableStream<T> Function() getHistoryStream;
+  final PaginatableStreamBase<T> Function() getHistoryStream;
   final void Function()? onRecordNow;
 
   DateFormat get dateFormat => DateFormat(

@@ -18,6 +18,11 @@ class PersonsDAO
     document: documentNodeSubscriptionwatchAllPersons,
   );
   @override
+  late final StreamCountConfig<Person, Input_PersonsBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchPersonsCount,
+  );
+  @override
   final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(
     document: documentNodeSubscriptionwatchPerson,
@@ -198,15 +203,15 @@ class PersonsDAO
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonClassAttendance({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonClassAttendance({
     required String personId,
     required String classId,
     bool asAdmin = false,
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
+      vars: (request) => Variables_Subscription_personAttendance(
+        limit: request.pageSize,
         where: [
           Input_HistoryAttendanceHistoryBoolExp(
             personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
@@ -220,13 +225,10 @@ class PersonsDAO
             asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
           if (where != null) ...where,
-          if (offset > 0)
+          if (request.cursor != null)
             Input_HistoryAttendanceHistoryBoolExp(
               time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+                $_lt: request.cursor!.time,
               ),
             ),
         ],
@@ -234,15 +236,15 @@ class PersonsDAO
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonGroupAttendance({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonGroupAttendance({
     required String personId,
     required String groupId,
     bool asAdmin = false,
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
+      vars: (request) => Variables_Subscription_personAttendance(
+        limit: request.pageSize,
         where: [
           Input_HistoryAttendanceHistoryBoolExp(
             personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
@@ -254,13 +256,10 @@ class PersonsDAO
             asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
           if (where != null) ...where,
-          if (offset > 0)
+          if (request.cursor != null)
             Input_HistoryAttendanceHistoryBoolExp(
               time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+                $_lt: request.cursor!.time,
               ),
             ),
         ],
@@ -268,15 +267,15 @@ class PersonsDAO
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonServiceAttendance({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonServiceAttendance({
     required String personId,
     required String serviceId,
     bool asAdmin = false,
     List<Input_HistoryAttendanceHistoryBoolExp>? where,
   }) {
     return paginatePersonAttendance(
-      vars: (offset, instance) => Variables_Subscription_personAttendance(
-        limit: instance.limit + 1,
+      vars: (request) => Variables_Subscription_personAttendance(
+        limit: request.pageSize,
         where: [
           Input_HistoryAttendanceHistoryBoolExp(
             personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
@@ -288,13 +287,10 @@ class PersonsDAO
             asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
           ),
           if (where != null) ...where,
-          if (offset > 0)
+          if (request.cursor != null)
             Input_HistoryAttendanceHistoryBoolExp(
               time: Input_TimestampComparisonExp(
-                $_lt: instance
-                    .currentValue[
-                        (offset - 1) * instance.limit + instance.limit - 1]
-                    .time,
+                $_lt: request.cursor!.time,
               ),
             ),
         ],
@@ -302,22 +298,24 @@ class PersonsDAO
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonAttendance({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonAttendance({
     required Variables_Subscription_personAttendance Function(
-      int,
-      GQLPaginatableStream<LastRecordedByInfo>,
+      PaginatableStreamRequest<LastRecordedByInfo>,
     ) vars,
     int? limit,
   }) {
-    return GQLPaginatableStream<LastRecordedByInfo>(
-      limit: limit ?? 100,
-      subscriptionStreamCallback: (event) {
+    return PaginatableStream<LastRecordedByInfo>(
+      pageSize: limit ?? 100,
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonAttendance,
             operationName: 'personAttendance',
-            variables: vars(event.offset, event.instance).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            variables: vars(request).toJson(),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },

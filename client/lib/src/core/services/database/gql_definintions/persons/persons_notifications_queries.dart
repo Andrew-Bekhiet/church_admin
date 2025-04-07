@@ -23,7 +23,12 @@ class PersonsNotificationsQueries {
           limit: limit,
           orderBy: orderBy,
         ).toJson(),
-        parserFn: db.parser.singleListParser(Person.fromJson),
+        parserFn: (json) => db.parser
+            .singleListParser(
+              Person.fromJson,
+              pageSize: limit ?? 100,
+            )(json)
+            .data,
       ),
     );
   }

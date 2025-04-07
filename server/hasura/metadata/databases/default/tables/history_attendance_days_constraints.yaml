@@ -147,7 +147,6 @@ select_permissions:
                                       _ceq:
                                         - $
                                         - service_study_year
-
       allow_aggregations: true
 delete_permissions:
   - role: user

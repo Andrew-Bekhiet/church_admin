@@ -10,21 +10,18 @@ class HistoryDAO {
 
   HistoryDAO({required this.db});
 
-  GQLPaginatableStream<LastRecordedByInfo>
+  PaginatableStreamBase<LastRecordedByInfo>
       paginateEditHistory<T extends Viewable>({
     required String id,
   }) {
-    return GQLPaginatableStream(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptioneditHistory,
             operationName: 'editHistory',
             variables: Variables_Subscription_editHistory(
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
                 Input_HistoryEditHistoryBoolExp(
                   table: Input_NameComparisonExp(
@@ -36,40 +33,36 @@ class HistoryDAO {
                     $_eq: id.toUuid(),
                   ),
                 ),
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryEditHistoryBoolExp(
                     time: Input_TimestamptzComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo>
+  PaginatableStreamBase<LastRecordedByInfo>
       paginateVisitHistory<T extends Viewable>({
     required String id,
   }) {
-    return GQLPaginatableStream(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionvisitHistory,
             operationName: 'visitHistory',
             variables: Variables_Subscription_visitHistory(
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
                 Input_HistoryVisitHistoryBoolExp(
                   table: Input_NameComparisonExp(
@@ -81,159 +74,142 @@ class HistoryDAO {
                     $_eq: id.toUuid(),
                   ),
                 ),
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryVisitHistoryBoolExp(
                     time: Input_TimestamptzComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonCallHistory({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonCallHistory({
     required String personId,
   }) {
-    return GQLPaginatableStream<LastRecordedByInfo>(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonCallHistory,
             operationName: 'personCallHistory',
             variables: Variables_Subscription_personCallHistory(
               personId: personId.toUuid(),
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryCallHistoryBoolExp(
                     time: Input_TimestamptzComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonConfessionHistory({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonConfessionHistory({
     required String personId,
   }) {
-    return GQLPaginatableStream<LastRecordedByInfo>(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonConfessionHistory,
             operationName: 'personConfessionHistory',
             variables: Variables_Subscription_personConfessionHistory(
               personId: personId.toUuid(),
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryConfessionHistoryBoolExp(
                     dayId: Input_DateComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonKodasHistory({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonKodasHistory({
     required String personId,
   }) {
-    return GQLPaginatableStream<LastRecordedByInfo>(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonKodasHistory,
             operationName: 'personKodasHistory',
             variables: Variables_Subscription_personKodasHistory(
               personId: personId.toUuid(),
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryKodasHistoryBoolExp(
                     dayId: Input_DateComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },
     );
   }
 
-  GQLPaginatableStream<LastRecordedByInfo> paginatePersonVisitHistory({
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonVisitHistory({
     required String personId,
   }) {
-    return GQLPaginatableStream<LastRecordedByInfo>(
-      subscriptionStreamCallback: (event) {
-        final instance = event.instance;
-        final offset = event.offset;
-
+    return PaginatableStream(
+      factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonVisitHistory,
             operationName: 'personVisitHistory',
             variables: Variables_Subscription_personVisitHistory(
               personId: personId.toUuid(),
-              limit: instance.limit + 1,
+              limit: request.pageSize,
               where: [
-                if (offset > 0)
+                if (request.cursor != null)
                   Input_HistoryVisitHistoryBoolExp(
                     time: Input_TimestamptzComparisonExp(
-                      $_lt: instance
-                          .currentValue[(offset - 1) * instance.limit +
-                              instance.limit -
-                              1]
-                          .time,
+                      $_lt: request.cursor!.time,
                     ),
                   ),
               ],
             ).toJson(),
-            parserFn: db.parser.singleListParser(LastRecordedByInfo.fromJson),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
           ),
         );
       },

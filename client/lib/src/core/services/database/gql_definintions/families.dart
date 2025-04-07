@@ -11,37 +11,43 @@ class FamiliesDAO
 
   @override
   final StreamAllConfig<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy>
-  baseStreamAllConfig = const StreamAllConfig(
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFamilies,
+  );
+
+  @override
+  late final StreamCountConfig<Family, Input_FamiliesBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchFamiliesCount,
   );
 
   @override
   late final StreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchFamily,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+    document: documentNodeSubscriptionwatchFamily,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
 
   @override
   late final DeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteFamily,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+    document: documentNodeMutationdeleteFamily,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
 
   @override
   late final UpdateObjectConfig<Family> baseUpdateObjectConfig =
       UpdateObjectConfig(
-        document: documentNodeMutationupdateFamily,
-        varsConstructor: _updateFamilyVarsConstructor,
-      );
+    document: documentNodeMutationupdateFamily,
+    varsConstructor: _updateFamilyVarsConstructor,
+  );
 
   @override
   late final CreateObjectConfig<Family> baseCreateObjectConfig =
       CreateObjectConfig(
-        document: documentNodeMutationinsertFamily,
-        varsConstructor: _createFamilyVarsConstructor,
-      );
+    document: documentNodeMutationinsertFamily,
+    varsConstructor: _createFamilyVarsConstructor,
+  );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchFamily(id: id).toJson();
@@ -84,17 +90,16 @@ class FamiliesDAO
     final queryOptions = QueryOptions(
       document: documentNodeQuerygetFamilyRelatedFamilies,
       operationName: 'getFamilyRelatedFamilies',
-      variables:
-          Variables_Query_getFamilyRelatedFamilies(
-            familyId: familyId.toUuid(),
-          ).toJson(),
+      variables: Variables_Query_getFamilyRelatedFamilies(
+        familyId: familyId.toUuid(),
+      ).toJson(),
       parserFn: db.parser.singleOrNullParser(Family.fromJson),
     );
 
     return graphQLClient.queryAndReturnParsed(queryOptions);
   }
 
-  GQLPaginatableStream<Family> streamAllWithAddresses({
+  PaginatableStreamBase<Family> streamAllWithAddresses({
     Stream<String?>? searchQuery,
     List<Input_FamiliesBoolExp>? where,
     List<Input_FamiliesOrderBy>? orderBy,
@@ -104,43 +109,46 @@ class FamiliesDAO
       operationName: 'watchAllFamiliesWithAddresses',
     );
 
-    return GQLPaginatableStream(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback:
-          (event) => graphQLClient.subscribeAndReturnParsed(
-            streamAllConfig.operationOptions ??
-                SubscriptionOptions(
-                  document: streamAllConfig.document,
-                  operationName: streamAllConfig.effectiveOperationName,
-                  variables:
-                      streamAllConfig.variables ??
-                      streamAllConfig.transformVars?.call(
-                        event: event,
-                        where: where,
-                        orderBy: orderBy,
-                      ) ??
-                      db.varsTransformer.transformVariablesForPagination<
-                        Family
-                      >(
-                        event,
-                        where:
-                            where
-                                ?.map((o) => (o as dynamic).toJson() as Json)
-                                .toList() ??
-                            [],
-                        orderBy:
-                            orderBy
-                                ?.map((o) => (o as dynamic).toJson() as Json)
-                                .toList() ??
-                            [
-                              {'name': 'ASC'},
-                            ],
-                      ),
-                  parserFn:
-                      streamAllConfig.parserFn ??
-                      db.parser.singleListParser(fromJson),
-                ),
-          ),
+    Stream<PaginatableStreamResponse<Family>> streamFactory(
+      PaginatableStreamRequest<Family> request,
+    ) =>
+        graphQLClient.subscribeAndReturnParsed(
+          streamAllConfig.operationOptions ??
+              SubscriptionOptions(
+                document: streamAllConfig.document,
+                operationName: streamAllConfig.effectiveOperationName,
+                variables: streamAllConfig.variables ??
+                    streamAllConfig.transformVars?.call(
+                      request: request,
+                      where: where,
+                      orderBy: orderBy,
+                    ) ??
+                    db.varsTransformer.transformVariablesForPagination<Family>(
+                      request,
+                      where: where
+                              ?.map((o) => (o as dynamic).toJson() as Json)
+                              .toList() ??
+                          [],
+                      orderBy: orderBy
+                              ?.map((o) => (o as dynamic).toJson() as Json)
+                              .toList() ??
+                          [
+                            {'name': 'ASC'},
+                          ],
+                    ),
+                parserFn: streamAllConfig.parserFn ??
+                    db.parser
+                        .singleListParser(fromJson, pageSize: request.pageSize),
+              ),
+        );
+
+    if (searchQuery == null) {
+      return PaginatableStream<Family>(factory: streamFactory);
+    }
+
+    return PaginatableStream<Family>.withSearch(
+      searchStream: searchQuery,
+      factory: streamFactory,
     );
   }
 }

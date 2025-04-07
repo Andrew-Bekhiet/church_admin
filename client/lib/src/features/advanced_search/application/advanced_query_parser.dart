@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 class AdvancedQueryParser {
   const AdvancedQueryParser();
 
-  GQLPaginatableStream<ViewableWithID> createPaginatableStream(
+  PaginatableStreamBase<ViewableWithID> createPaginatableStream(
     AdvancedQuery query, [
     BehaviorSubject<String?>? searchStream,
   ]) {
@@ -75,9 +75,9 @@ class AdvancedQueryParser {
   }) {
     return config.copyWith(
       document: document,
-      varsConstructor: ({required event, where, orderBy}) => {
+      varsConstructor: ({required request, where, orderBy}) => {
         ...DatabaseService.I.varsTransformer.transformVariablesForPagination(
-          event,
+          request,
           where: [
             {logicalOperator.value: jsonConditions},
           ],

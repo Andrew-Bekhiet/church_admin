@@ -37,50 +37,45 @@ class _ViewClassState extends State<ViewClass> {
       objectStream: stream,
       childrenTypes: const [Person],
       tabsContentBuilders: {
-        Person:
-            (context) => ViewableObjectList(
+        Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
               objectsController: _personsController,
             ),
       },
-      notFoundBuilder:
-          (context) => Center(
-            child: Text(
-              'لم يتم العثور على الفصل',
-              style: Theme.of(context).textTheme.titleLarge,
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على الفصل',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      editButtonBuilder: (context, $class) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () => EditClassRoute(
+          $extra: EditClassExtra($class: $class),
+        ).push(context),
+        icon: const Icon(Symbols.edit),
+      ),
+      detailsBuilder: (context, $class) => SliverList(
+        delegate: SliverChildListDelegate([
+          HistoryProperty(
+            name: 'أخر تحديث للبيانات',
+            value: $class.lastEdit?.time,
+            getHistoryStream: () =>
+                DatabaseService.I.history.paginateEditHistory<Class>(
+              id: $class.id,
             ),
           ),
-      editButtonBuilder:
-          (context, $class) => IconButton(
-            tooltip: 'تعديل',
-            onPressed:
-                () => EditClassRoute(
-                  $extra: EditClassExtra($class: $class),
-                ).push(context),
-            icon: const Icon(Symbols.edit),
+          ListTile(
+            title: FilledButton.icon(
+              style: Theme.of(context).largeFilledButtonStyle,
+              icon: const Icon(Symbols.query_stats),
+              label: const Text('الاحصائيات'),
+              // TODO: add service analysis
+              onPressed: () {},
+            ),
           ),
-      detailsBuilder:
-          (context, $class) => SliverList(
-            delegate: SliverChildListDelegate([
-              HistoryProperty(
-                name: 'أخر تحديث للبيانات',
-                value: $class.lastEdit?.time,
-                getHistoryStream:
-                    () => DatabaseService.I.history.paginateEditHistory<Class>(
-                      id: $class.id,
-                    ),
-              ),
-              ListTile(
-                title: FilledButton.icon(
-                  style: Theme.of(context).largeFilledButtonStyle,
-                  icon: const Icon(Symbols.query_stats),
-                  label: const Text('الاحصائيات'),
-                  // TODO: add service analysis
-                  onPressed: () {},
-                ),
-              ),
-            ]),
-          ),
+        ]),
+      ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
@@ -89,19 +84,29 @@ class _ViewClassState extends State<ViewClass> {
           ),
         ],
       ),
-      floatingActionButtonBuilder:
-          (context, tabController, class$) => FloatingActionButton(
-            onPressed: () {
-              EditPersonRoute(
-                $extra: EditPersonExtra(
-                  service: class$.service,
-                  studyYear: class$.studyYear,
-                  gender: class$.serviceGender,
-                ),
-              ).push(context);
-            },
-            child: const Icon(Symbols.person_add),
-          ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: _personsController.totalCountStream.map((c) => '$c مخدوم'),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
+      ),
+      floatingActionButtonBuilder: (context, tabController, class$) =>
+          FloatingActionButton(
+        onPressed: () {
+          EditPersonRoute(
+            $extra: EditPersonExtra(
+              service: class$.service,
+              studyYear: class$.studyYear,
+              gender: class$.serviceGender,
+            ),
+          ).push(context);
+        },
+        child: const Icon(Symbols.person_add),
+      ),
     );
   }
 

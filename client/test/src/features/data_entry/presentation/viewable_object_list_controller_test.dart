@@ -8,7 +8,6 @@ void main() {
     'ViewableObjectListController => filterStream',
     () async {
       final filterStream = BehaviorSubject.seeded('');
-      addTearDown(filterStream.close);
 
       final basicViewables = [
         BasicViewable(id: '1', name: 'Alice'),
@@ -43,6 +42,8 @@ void main() {
         ..add('a')
         ..add('al')
         ..add('b');
+
+      await filterStream.close();
     },
   );
 }
@@ -52,12 +53,11 @@ ViewableObjectListController<BasicViewable> _createTestUnit(
   List<BasicViewable> objects,
 ) {
   return ViewableObjectListController<BasicViewable>(
-    objectsPaginatableStream: DelegatingPaginatableStream(
-      streamDelegate: (_, __) => Stream.value(
-        DelegatingStreamResult<BasicViewable>(
-          result: objects,
-          canPaginateBackward: false,
-          canPaginateForward: false,
+    objectsPaginatableStream: PaginatableStream(
+      factory: (_) => Stream.value(
+        PaginatableStreamResponse(
+          data: objects,
+          cursor: objects.last,
         ),
       ),
     ),

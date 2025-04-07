@@ -29,37 +29,39 @@ void main() {
 
   tearDown(resetGlobalProviderContainer);
 
-  testWidgets('Church Admin App => First Screen', (tester) async {
-    await tester.pumpWidget(const ChurchAdminApp());
-    await tester.pump();
+  testWidgets(
+    'Church Admin App => First Screen',
+    (tester) async {
+      await tester.pumpWidget(const ChurchAdminApp());
+      await tester.pump();
 
-    if (firstScreenVariant.currentValue ==
-        FirstScreenVariantEnum.values.first) {
-      verify(LoggingService.I.navigatorObserver);
-    }
+      if (firstScreenVariant.currentValue ==
+          FirstScreenVariantEnum.values.first) {
+        verify(LoggingService.I.navigatorObserver);
+      }
 
-    final goRouter =
-        tester
-            .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
-            .goRouter;
+      final goRouter = tester
+          .firstWidget<InheritedGoRouter>(find.byType(InheritedGoRouter))
+          .goRouter;
 
-    final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
+      final lastMatch = goRouter.routerDelegate.currentConfiguration.last;
 
-    final RouteMatchList matchList =
-        lastMatch is ImperativeRouteMatch
-            ? lastMatch.matches
-            : goRouter.routerDelegate.currentConfiguration;
+      final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+          ? lastMatch.matches
+          : goRouter.routerDelegate.currentConfiguration;
 
-    expect(matchList.uri.toString(), firstScreenVariant.expectedLocation());
+      expect(matchList.uri.toString(), firstScreenVariant.expectedLocation());
 
-    if (firstScreenVariant.currentValue ==
-        FirstScreenVariantEnum.authenticate) {
-      expect(
-        find.byType(AuthenticateScreen, skipOffstage: false),
-        findsOneWidget,
-      );
-    }
-  }, variant: firstScreenVariant);
+      if (firstScreenVariant.currentValue ==
+          FirstScreenVariantEnum.authenticate) {
+        expect(
+          find.byType(AuthenticateScreen, skipOffstage: false),
+          findsOneWidget,
+        );
+      }
+    },
+    variant: firstScreenVariant,
+  );
 
   testWidgets('Church Admin App => Observes ThemingService', (tester) async {
     await tester.pumpWidget(const ChurchAdminApp());
@@ -175,7 +177,7 @@ MockUsersDAO _setUpUsersDAO() {
 MockServicesDAO _setUpServiceDAO() {
   final servicesDAO = MockServicesDAO();
   when(servicesDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
+    (_) => PaginatableStream(factory: (_) async* {}),
   );
 
   return servicesDAO;
@@ -184,7 +186,7 @@ MockServicesDAO _setUpServiceDAO() {
 MockPersonsDAO _setUpPersonsDAO() {
   final personsDAO = MockPersonsDAO();
   when(personsDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
+    (_) => PaginatableStream(factory: (_) async* {}),
   );
 
   return personsDAO;
@@ -193,7 +195,7 @@ MockPersonsDAO _setUpPersonsDAO() {
 MockAreasDAO _setUpAreasDAO() {
   final areasDAO = MockAreasDAO();
   when(areasDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => GQLPaginatableStream(subscriptionStreamCallback: (_) async* {}),
+    (_) => PaginatableStream(factory: (_) async* {}),
   );
 
   return areasDAO;
@@ -267,68 +269,64 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     final mock = MockAuthBloc();
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
 
-    final user =
-        value != FirstScreenVariantEnum.login
-            ? AuthUser(
-              uid: 'uid',
-              email: 'email',
-              emailVerified: value != FirstScreenVariantEnum.emailVerification,
-              isMultiFactorEnabled: value != FirstScreenVariantEnum.multiFactor,
-              idToken: 'idToken',
-              claims: {},
-            )
-            : null;
+    final user = value != FirstScreenVariantEnum.login
+        ? AuthUser(
+            uid: 'uid',
+            email: 'email',
+            emailVerified: value != FirstScreenVariantEnum.emailVerification,
+            isMultiFactorEnabled: value != FirstScreenVariantEnum.multiFactor,
+            idToken: 'idToken',
+            claims: {},
+          )
+        : null;
 
-    final userData =
-        value != FirstScreenVariantEnum.login
-            ? User(
-              uid: 'uid',
+    final userData = value != FirstScreenVariantEnum.login
+        ? User(
+            uid: 'uid',
+            name: 'name',
+            permissions: PermissionsSet.fromSet({
+              if (value != FirstScreenVariantEnum.unapprovedUser)
+                UserPermission.approved,
+            }),
+            person: Person(
+              id: 'id',
               name: 'name',
-              permissions: PermissionsSet.fromSet({
-                if (value != FirstScreenVariantEnum.unapprovedUser)
-                  UserPermission.approved,
-              }),
-              person: Person(
-                id: 'id',
-                name: 'name',
-                lastKodas:
-                    value == FirstScreenVariantEnum.updateUserSpiritData
-                        ? null
-                        : LastRecordedByInfo(
+              lastKodas: value == FirstScreenVariantEnum.updateUserSpiritData
+                  ? null
+                  : LastRecordedByInfo(
+                      time: DateTime.now(),
+                      recordedBy: 'uid',
+                    ),
+              lastConfession:
+                  value == FirstScreenVariantEnum.updateUserSpiritData
+                      ? null
+                      : LastRecordedByInfo(
                           time: DateTime.now(),
                           recordedBy: 'uid',
                         ),
-                lastConfession:
-                    value == FirstScreenVariantEnum.updateUserSpiritData
-                        ? null
-                        : LastRecordedByInfo(
-                          time: DateTime.now(),
-                          recordedBy: 'uid',
-                        ),
-              ),
-            )
-            : null;
+            ),
+          )
+        : null;
 
     when(mock.currentUser).thenReturn(user);
     when(mock.currentUserData).thenReturn(userData);
 
     when(mock.state).thenAnswer(
-      (_) =>
-          user != null
-              ? AuthAuthenticated(authUser: user, userData: userData)
-              : value == FirstScreenVariantEnum.multiFactor
+      (_) => user != null
+          ? AuthAuthenticated(authUser: user, userData: userData)
+          : value == FirstScreenVariantEnum.multiFactor
               ? AuthMultiFactorChallengeInProgress(
-                challenge: MultiFactorChallenge(
-                  verificationId: 'verificationId',
-                  createdAt: DateTime.now(),
-                ),
-                session: const MultiFactorSession(
-                  id: 'id',
-                  email: 'email',
-                  password: 'password',
-                  enrolledFactors: [],
-                ),
-              )
+                  challenge: MultiFactorChallenge(
+                    verificationId: 'verificationId',
+                    createdAt: DateTime.now(),
+                  ),
+                  session: const MultiFactorSession(
+                    id: 'id',
+                    email: 'email',
+                    password: 'password',
+                    enrolledFactors: [],
+                  ),
+                )
               : const AuthUnauthenticated(),
     );
 

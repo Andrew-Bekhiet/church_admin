@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:clock/clock.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gql/ast.dart';
 import 'package:rxdart/rxdart.dart';
@@ -73,6 +74,20 @@ extension DateTimeX on DateTime {
       millisecond,
       microsecond,
     );
+  }
+}
+
+extension MaxFrequencyOrNull<T> on List<T> {
+  /// Returns the most frequent element in the list or null if the list is empty.
+  T? get maxFrequencyOrNull {
+    if (isEmpty) return null;
+
+    final frequencyMap = <T, int>{};
+    for (final element in this) {
+      frequencyMap[element] = (frequencyMap[element] ?? 0) + 1;
+    }
+
+    return frequencyMap.entries.reduce((a, b) => a.value > b.value ? a : b).key;
   }
 }
 
@@ -184,5 +199,22 @@ extension ColorValue on Color {
         _floatToInt8(r) << 16 |
         _floatToInt8(g) << 8 |
         _floatToInt8(b) << 0;
+  }
+}
+
+extension ValueListenableAsStream<T> on ValueListenable<T> {
+  Stream<T> asStream() {
+    late final StreamController<T> controller;
+
+    void listener() {
+      controller.add(value);
+    }
+
+    controller = StreamController<T>(
+      onListen: () => addListener(listener),
+      onCancel: () => removeListener(listener),
+    );
+
+    return controller.stream.startWith(value);
   }
 }

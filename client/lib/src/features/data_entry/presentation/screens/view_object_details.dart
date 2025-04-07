@@ -37,6 +37,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
+  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
@@ -47,6 +48,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.notFoundBuilder,
     required this.editButtonBuilder,
     required this.detailsBuilder,
+    this.bottomNavBarBuilder,
     this.childrenTypes = const [],
     this.sliverPersistentHeaderDelegate,
     this.tabsContentBuilders = const {},
@@ -160,8 +162,18 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 ),
               );
 
-        final newTheme =
+        ThemeData newTheme =
             ThemingService.getDefault(seedOverride: objectData.color);
+
+        if (widget.floatingActionButtonBuilder != null &&
+            widget.bottomNavBarBuilder != null) {
+          newTheme = newTheme.copyWith(
+            floatingActionButtonTheme:
+                newTheme.floatingActionButtonTheme.copyWith(
+              elevation: 0,
+            ),
+          );
+        }
 
         return Theme(
           data: newTheme,
@@ -172,6 +184,19 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 onNotification: _onScrollEnd,
                 child: body,
               ),
+              bottomNavigationBar: widget.bottomNavBarBuilder != null
+                  ? Builder(
+                      builder: (context) => BottomAppBar(
+                        child: widget.bottomNavBarBuilder!(
+                          context,
+                          DefaultTabController.of(context),
+                        ),
+                      ),
+                    )
+                  : null,
+              floatingActionButtonLocation: widget.bottomNavBarBuilder != null
+                  ? FloatingActionButtonLocation.endContained
+                  : null,
               floatingActionButton:
                   widget.floatingActionButtonBuilder != null && canEditObject
                       ? Builder(

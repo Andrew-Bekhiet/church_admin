@@ -124,6 +124,7 @@ select_permissions:
                         - $
                         - id
       limit: 200
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:

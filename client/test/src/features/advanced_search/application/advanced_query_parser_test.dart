@@ -11,8 +11,8 @@ import 'advanced_query_parser_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<PersonsDAO>(),
   MockSpec<StreamableDAOProxy>(),
-  MockSpec<GQLPaginatableStream>(),
-  MockSpec<GQLPaginatableStreamEvent>(),
+  MockSpec<PaginatableStream>(),
+  MockSpec<PaginatableStreamRequest>(),
   MockSpec<DBVarsTransformer>(),
 ])
 void main() {
@@ -265,7 +265,7 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
       .firstSelectionNode;
 
   final capturedVars = capturedConfig.variables ??
-      capturedConfig.transformVars!(event: MockGQLPaginatableStreamEvent());
+      capturedConfig.transformVars!(request: MockPaginatableStreamRequest());
 
   expect(capturedVars, expectedVarsJson);
 
@@ -334,7 +334,7 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
       searchQuery: anyNamed('searchQuery'),
       streamAllConfig: anyNamed('streamAllConfig'),
     ),
-  ).thenAnswer((_) => MockGQLPaginatableStream());
+  ).thenAnswer((_) => MockPaginatableStream());
 
   when(mockPersonsDAO.streamingProxy).thenReturn(mockStreamableDAOProxy);
 

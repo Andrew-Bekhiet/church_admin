@@ -72,6 +72,7 @@ select_permissions:
         - photo_updated_at
       filter: {}
       limit: 200
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:

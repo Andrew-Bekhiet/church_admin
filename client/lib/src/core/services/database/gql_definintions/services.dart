@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
-
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
@@ -13,6 +12,11 @@ class ServicesDAO
           Input_ServicesOrderBy> baseStreamAllConfig =
       const StreamAllConfig(document: documentNodeSubscriptionwatchAllServices);
 
+  @override
+  late final StreamCountConfig<Service, Input_ServicesBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchServicesCount,
+  );
   @override
   late final StreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
@@ -39,13 +43,13 @@ class ServicesDAO
   );
 
   Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Service> event,
+    required PaginatableStreamRequest<Service> request,
     List<Input_ServicesBoolExp>? where,
     List<Input_GroupsBoolExp> groupsWhere = const [],
     List<Input_ClassesBoolExp> classesWhere = const [],
     List<Input_ServicesOrderBy>? orderBy,
   }) {
-    final search = event.search;
+    final search = request.search;
 
     final bool nameSearch = search != null && search.isNotEmpty;
     final nameSearchExp = Input_StringComparisonExp($_ilike: '%$search%');
@@ -66,7 +70,7 @@ class ServicesDAO
           ),
       ].map((e) => e.toJson()).toList(),
       ...db.varsTransformer.transformVariablesForPagination(
-        event,
+        request,
         where: nameSearch
             ? [
                 ...where?.map((o) => o.toJson()) ?? [],
@@ -141,7 +145,7 @@ class ServicesDAO
       Variables_Mutation_deleteService(serviceId: id).toJson();
 
   @override
-  GQLPaginatableStream<Service> streamAll({
+  PaginatableStreamBase<Service> streamAll({
     Stream<String?>? searchQuery,
     List<Input_ServicesBoolExp>? where,
     List<Input_GroupsBoolExp>? groupsWhere,
@@ -153,15 +157,16 @@ class ServicesDAO
       where: where,
       orderBy: orderBy,
       streamAllConfig: baseStreamAllConfig.copyWith(
-        varsConstructor: ({required event, where, orderBy}) =>
+        varsConstructor: ({required request, where, orderBy}) =>
             _streamAllVarsConstructor(
-          event: event,
+          request: request,
           where: where ?? [],
           groupsWhere: groupsWhere ?? [],
           classesWhere: classesWhere ?? [],
           orderBy: orderBy,
         ),
       ),
+      streamCountConfig: baseStreamCountConfig,
     );
   }
 }

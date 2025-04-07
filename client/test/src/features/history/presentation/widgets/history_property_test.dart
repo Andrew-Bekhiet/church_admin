@@ -15,7 +15,7 @@ import '../../../../utils.dart';
 import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<PaginatableStream<LastRecordedByInfo>>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
@@ -36,7 +36,7 @@ void main() {
         final historyProperty = HistoryProperty(
           name: 'name',
           value: value,
-          getHistoryStream: MockDelegatingPaginatableStream.new,
+          getHistoryStream: MockPaginatableStream.new,
           onRecordNow: () {},
         );
 
@@ -103,7 +103,7 @@ void main() {
       final historyProperty = HistoryProperty(
         name: 'name',
         value: clock.now(),
-        getHistoryStream: MockDelegatingPaginatableStream.new,
+        getHistoryStream: MockPaginatableStream.new,
         onRecordNow: () => called = true,
       );
 
@@ -145,14 +145,26 @@ void main() {
           getHistoryStream: () {
             called = true;
 
-            final mock = MockDelegatingPaginatableStream();
+            final mock = MockPaginatableStream();
 
-            when(mock.stream).thenAnswer(
-              (_) => BehaviorSubject.seeded([lastRecordedByInfo]),
+            when(
+              mock.listen(
+                captureAny,
+                onDone: captureAnyNamed('onDone'),
+                onError: captureAnyNamed('onError'),
+                cancelOnError: captureAnyNamed('cancelOnError'),
+              ),
+            ).thenAnswer(
+              (i) => BehaviorSubject.seeded([lastRecordedByInfo]).listen(
+                i.positionalArguments.first,
+                onDone: i.namedArguments[#onDone],
+                onError: i.namedArguments[#onError],
+                cancelOnError: i.namedArguments[#cancelOnError],
+              ),
             );
 
-            when(mock.canPaginateForward).thenReturn(false);
-            when(mock.limit).thenReturn(1);
+            when(mock.hasMore).thenReturn(false);
+            when(mock.pageSize).thenReturn(1);
             when(mock.onLoadingChanged)
                 .thenAnswer((_) => BehaviorSubject.seeded(false));
             return mock;
@@ -202,6 +214,8 @@ void main() {
           ),
           findsOneWidget,
         );
+
+        tester.firstState<NavigatorState>(find.byType(Navigator)).pop();
 
         flushVisibilityDetectors();
       });

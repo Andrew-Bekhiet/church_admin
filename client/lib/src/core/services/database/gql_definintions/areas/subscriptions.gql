@@ -9,6 +9,14 @@ subscription watchAllAreas(
   }
 }
 
+subscription watchAreasCount($where: [AreasBoolExp!] = {}) {
+  areasAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchArea($id: uuid!) {
   areasByPk(id: $id) {
     ...Area

@@ -239,7 +239,7 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
   }
 
   Future<List<T>?> _select<T extends ViewableWithID>({
-    required DelegatingPaginatableStream<T> stream,
+    required PaginatableStreamBase<T> stream,
     required List<T> selected,
     required String title,
   }) async {
@@ -261,9 +261,8 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             actions: [
               IconButton(
                 icon: const Icon(Symbols.select_all),
-                onPressed: () => controller.selectionController.selectAll(
-                  controller.objectsPaginatableStream.currentValue,
-                ),
+                onPressed: () => controller.selectionController
+                    .selectAll(controller.currentFilteredObjectsOrNull ?? []),
                 tooltip: 'تحديد الكل',
               ),
               IconButton(

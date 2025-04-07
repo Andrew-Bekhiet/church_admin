@@ -12,6 +12,13 @@ class AreasDAO
       baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllAreas,
   );
+
+  @override
+  late final StreamCountConfig<Area, Input_AreasBoolExp> baseStreamCountConfig =
+      const StreamCountConfig(
+    document: documentNodeSubscriptionwatchAreasCount,
+  );
+
   @override
   late final StreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(

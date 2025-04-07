@@ -5,6 +5,14 @@ subscription watchUser($uid: uuid!, $fullData: Boolean = false) {
   }
 }
 
+subscription watchAuthUsersDataCount($where: [AuthUsersDataBoolExp!] = {}) {
+  authUsersDataAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchAllUsers(
   $where: [AuthUsersDataBoolExp!] = {}
   $orderBy: [AuthUsersDataOrderBy!] = { name: ASC }

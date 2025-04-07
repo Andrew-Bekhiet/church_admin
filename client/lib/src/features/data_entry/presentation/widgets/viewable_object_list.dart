@@ -1,11 +1,8 @@
 // ViewableObjectList is a widget that displays a list of ViewableObjects from a PaginatableStream
 import 'dart:async';
-import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 enum ViewableObjectListType {
@@ -27,13 +24,11 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     this.scrollController,
-    this.offsetFromIndex = defaultOffsetFromIndex,
     this.itemsExpandable = false,
     this.addSeparator = true,
     super.key,
   });
 
-  final OffsetFromIndexFunction offsetFromIndex;
   final ScrollController? scrollController;
   final ViewableObjectListController<T> objectsController;
   final ItemBuilder<T>? itemBuilder;
@@ -53,12 +48,6 @@ class _ViewableObjectListState<T extends Viewable>
   ViewableObjectListController<T> get objectsController =>
       widget.objectsController;
 
-  PaginatableStreamBase<T> get objectsPaginatableStream =>
-      widget.objectsController.objectsPaginatableStream;
-
-  final BehaviorSubject<int> _pageLoaderThrottler = BehaviorSubject();
-  late final StreamSubscription<int> _pageLoaderThrottlerListener;
-
   @override
   void initState() {
     super.initState();
@@ -68,22 +57,6 @@ class _ViewableObjectListState<T extends Viewable>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scrollController.addListener(_scrollListener);
     });
-
-    _pageLoaderThrottlerListener = _pageLoaderThrottler
-        .bufferTime(const Duration(seconds: 1, milliseconds: 450))
-        .map(
-          (b) => b
-              .sublist(b.length - min(b.length, 51), b.length)
-              .groupListsBy((element) => element)
-              .maxOrNull,
-        )
-        .whereType<int>()
-        .where(
-          (o) =>
-              objectsPaginatableStream.currentOffset != o &&
-              !objectsPaginatableStream.isLoading,
-        )
-        .listen(objectsPaginatableStream.loadPage);
   }
 
   @override
@@ -103,7 +76,7 @@ class _ViewableObjectListState<T extends Viewable>
 
         final items = snapshot.requireData;
 
-        if (items.isEmpty && !objectsPaginatableStream.isLoading) {
+        if (items.isEmpty && !objectsController.isLoading) {
           return const Center(child: Text('لا يوجد بيانات'));
         } else if (items.isEmpty) {
           return const Center(child: CircularProgressIndicator());
@@ -113,7 +86,7 @@ class _ViewableObjectListState<T extends Viewable>
         Widget itemBuilder(BuildContext context, int i) {
           if (i >= items.length) {
             return StreamBuilder(
-              stream: objectsPaginatableStream.onLoadingChanged,
+              stream: objectsController.onLoadingChanged,
               builder: (context, state) => state.hasData && state.requireData
                   ? const Center(child: CircularProgressIndicator())
                   : const SizedBox(height: 120),
@@ -173,16 +146,11 @@ class _ViewableObjectListState<T extends Viewable>
 
     if (!position.atEdge && !position.outOfRange) return;
 
-    final paginatableStream = objectsPaginatableStream;
-
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         if (position.pixels >= position.maxScrollExtent &&
-            paginatableStream.canPaginateForward) {
-          await objectsPaginatableStream.loadNextPage();
-        } else if (position.pixels <= position.minScrollExtent &&
-            paginatableStream.canPaginateBackward) {
-          await objectsPaginatableStream.loadPreviousPage();
+            objectsController.hasMore) {
+          await objectsController.listenToNextPage();
         }
       },
     );
@@ -190,9 +158,7 @@ class _ViewableObjectListState<T extends Viewable>
 
   void Function(VisibilityInfo) _onVisibilityChanged(int i) => (info) {
         if (info.visibleFraction >= 0.8) {
-          _pageLoaderThrottler.add(
-            widget.offsetFromIndex(objectsPaginatableStream.limit, i),
-          );
+          objectsController.itemVisibleAt(i);
         }
       };
 
@@ -203,9 +169,6 @@ class _ViewableObjectListState<T extends Viewable>
     if (widget.scrollController == null) scrollController.dispose();
 
     super.dispose();
-
-    await _pageLoaderThrottlerListener.cancel();
-    await _pageLoaderThrottler.close();
   }
 }
 
