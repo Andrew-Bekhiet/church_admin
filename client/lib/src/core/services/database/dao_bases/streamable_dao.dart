@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart/transformers.dart';
+import 'package:rxdart/rxdart.dart';
 
 mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
     on DAOBase<T> {
@@ -61,24 +61,27 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
     List<TBoolExp>? where,
     List<TOrderByExp>? orderBy,
   }) {
-    final countStream = streamCountConfig != null
-        ? graphQLClient.subscribeAndReturnParsed(
-            streamCountConfig.operationOptions ??
-                SubscriptionOptions(
-                  document: streamCountConfig.document,
-                  operationName: streamCountConfig.effectiveOperationName,
-                  variables: {
-                    'where': where
-                            ?.map(
-                              (o) => (o as dynamic).toJson() as Json,
-                            )
-                            .toList() ??
-                        [],
-                  },
-                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
-                ),
-          )
-        : Stream.value(null);
+    final Stream<int?> countStream = streamCountConfig != null
+        ? graphQLClient
+            .subscribeAndReturnParsed(
+              streamCountConfig.operationOptions ??
+                  SubscriptionOptions(
+                    document: streamCountConfig.document,
+                    operationName: streamCountConfig.effectiveOperationName,
+                    variables: {
+                      'where': where
+                              ?.map(
+                                (o) => (o as dynamic).toJson() as Json,
+                              )
+                              .toList() ??
+                          [],
+                    },
+                    parserFn:
+                        streamCountConfig.parserFn ?? db.parser.countParser,
+                  ),
+            )
+            .shareValue()
+        : Stream.value(null).shareValue();
 
     Stream<PaginatableStreamResponse<T>> streamFactory(
       PaginatableStreamRequest<T> request,
