@@ -20,13 +20,13 @@ class AdvancedQueryParser {
 
     final streamableDAO = query.queryableType.dao!;
 
-    final config = streamableDAO.baseStreamAllConfig;
+    final streamAllConfig = streamableDAO.baseStreamAllConfig;
 
     final docWithSelectedOrderBy =
-        _selectOrderByFields(config.document, jsonOrderBy);
+        _selectOrderByFields(streamAllConfig.document, jsonOrderBy);
 
-    final newConfig = _overrideConfigVars(
-      config: config,
+    final newStreamAllConfig = _overrideStreamAllVars(
+      config: streamAllConfig,
       document: docWithSelectedOrderBy,
       logicalOperator: query.logicalOperator,
       jsonConditions: jsonConditions,
@@ -34,9 +34,18 @@ class AdvancedQueryParser {
       limit: query.limit,
     );
 
+    final newStreamCountConfig = streamableDAO.baseStreamCountConfig != null
+        ? _overrideStreamCountVars(
+            config: streamableDAO.baseStreamCountConfig!,
+            jsonConditions: jsonConditions,
+            logicalOperator: query.logicalOperator,
+          )
+        : null;
+
     return streamableDAO.streamingProxy.streamAll(
       searchQuery: searchStream,
-      streamAllConfig: newConfig,
+      streamAllConfig: newStreamAllConfig,
+      streamCountConfig: newStreamCountConfig,
     );
   }
 
@@ -65,7 +74,7 @@ class AdvancedQueryParser {
   }
 
   StreamAllConfig<T, dynamic, dynamic>
-      _overrideConfigVars<T extends ViewableWithID>({
+      _overrideStreamAllVars<T extends ViewableWithID>({
     required LogicalOperator logicalOperator,
     required StreamAllConfig<T, dynamic, dynamic> config,
     required DocumentNode document,
@@ -84,6 +93,21 @@ class AdvancedQueryParser {
           orderBy: jsonOrderBy,
         ),
         if (limit != null) 'limit': limit,
+      },
+    );
+  }
+
+  StreamCountConfig<T, dynamic>?
+      _overrideStreamCountVars<T extends ViewableWithID>({
+    required StreamCountConfig<T, dynamic> config,
+    required List<Json> jsonConditions,
+    required LogicalOperator logicalOperator,
+  }) {
+    return config.copyWith(
+      variables: {
+        'where': [
+          {logicalOperator.value: jsonConditions},
+        ],
       },
     );
   }

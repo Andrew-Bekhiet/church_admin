@@ -173,6 +173,22 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
             body: ViewableObjectList(
               objectsController: viewableObjectListController,
             ),
+            bottomNavigationBar: StreamBuilder<int?>(
+              stream: viewableObjectListController.totalCountStream,
+              builder: (context, snapshot) {
+                final totalCount = snapshot.data;
+
+                if (totalCount == null) return const SizedBox.shrink();
+
+                return BottomAppBar(
+                  child: Text(
+                    '$totalCount من ${controller.query.queryableType.label}',
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

@@ -68,14 +68,15 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
                   SubscriptionOptions(
                     document: streamCountConfig.document,
                     operationName: streamCountConfig.effectiveOperationName,
-                    variables: {
-                      'where': where
-                              ?.map(
-                                (o) => (o as dynamic).toJson() as Json,
-                              )
-                              .toList() ??
-                          [],
-                    },
+                    variables: streamCountConfig.variables ??
+                        {
+                          'where': where
+                                  ?.map(
+                                    (o) => (o as dynamic).toJson() as Json,
+                                  )
+                                  .toList() ??
+                              [],
+                        },
                     parserFn:
                         streamCountConfig.parserFn ?? db.parser.countParser,
                   ),
