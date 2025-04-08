@@ -22,7 +22,7 @@ class StudyYearsDAO extends DAOBase<StudyYear>
       throw UnimplementedError();
 
   @override
-  GQLPaginatableStream<StudyYear> streamAll({
+  PaginatableStreamBase<StudyYear> streamAll({
     Stream<String?>? searchQuery,
     List<Input_StudyYearsBoolExp>? where,
     List<Input_StudyYearsOrderBy>? orderBy,

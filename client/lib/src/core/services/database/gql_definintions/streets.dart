@@ -15,6 +15,12 @@ class StreetsDAO
   );
 
   @override
+  late final StreamCountConfig<Street, Input_StreetsBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchStreetsCount,
+  );
+
+  @override
   late final StreamSingleByIdConfig<Street> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
     document: documentNodeSubscriptionwatchStreet,

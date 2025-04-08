@@ -103,7 +103,9 @@
           "-r",
           "'.gql.dart$'",
           "-r",
-          "'.freezed.dart$'"
+          "'.freezed.dart$'",
+          "-r",
+          "'__generated__'"
         ],
         "problemMatcher": []
       }

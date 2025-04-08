@@ -14,6 +14,11 @@ class GroupsDAO
     transformVars: _streamAllVarsConstructor,
   );
   @override
+  late final StreamCountConfig<Group, Input_GroupsBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchGroupsCount,
+  );
+  @override
   late final StreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
     document: documentNodeSubscriptionwatchGroup,
@@ -39,12 +44,12 @@ class GroupsDAO
   );
 
   Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Group> event,
+    required PaginatableStreamRequest<Group> request,
     List<Input_GroupsBoolExp>? where,
     List<Input_GroupsOrderBy>? orderBy,
   }) {
     return db.varsTransformer.transformVariablesForPagination(
-      event,
+      request,
       where: where?.map((o) => o.toJson()).toList() ?? [],
       orderBy: ((orderBy?.isEmpty ?? true)
               ? [

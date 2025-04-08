@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
@@ -8,27 +10,33 @@ class GQLParser {
     return data.cast<String, Object?>();
   }
 
-  Iterable<T> Function(Json d) singleListParser<T>(
-    T Function(Json) mapper, [
-    String? key,
-  ]) {
-    return (d) {
-      final value =
-          key != null
-              ? d[key] as List?
-              : d.values.whereType<List?>().singleOrNull;
-      if (value == null) return [];
+  int? countParser(Json d) =>
+      d.values.singleOrNull?['aggregate']?['count'] as int?;
 
-      return value.map((o) => mapper(castMapToJson(o)));
+  PaginatableStreamResponse<T> Function(Json d) singleListParser<T>(
+    T Function(Json) mapper, {
+    required int pageSize,
+    String? dataKey,
+  }) {
+    return (d) {
+      final value = dataKey != null
+          ? d[dataKey] as List?
+          : d.values.whereType<List?>().singleOrNull;
+
+      final items = value?.map((o) => mapper(castMapToJson(o))).toList() ?? [];
+
+      return PaginatableStreamResponse<T>(
+        data: items.sublist(0, min(items.length, pageSize)),
+        cursor: items.elementAtOrNull(pageSize),
+      );
     };
   }
 
   ParserFn<T?> singleOrNullParser<T>(ParserFn<T?> fromJson, [String? key]) {
     return (data) {
-      final value =
-          key != null
-              ? data[key] as Map?
-              : data.values.whereType<Map?>().singleOrNull;
+      final value = key != null
+          ? data[key] as Map?
+          : data.values.whereType<Map?>().singleOrNull;
       if (value == null) return null;
 
       return fromJson(value.cast<String, Object?>());

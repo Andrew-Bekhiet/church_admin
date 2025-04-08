@@ -3,3 +3,4 @@ ignore:
   - "**.freezed.dart"
   - "**.graphql.dart"
   - "**.gql.dart"
+  - "**/__generated__/**"

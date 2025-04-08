@@ -64,3 +64,4 @@ select_permissions:
                           _ceq:
                             - $
                             - uid
+      allow_aggregations: true

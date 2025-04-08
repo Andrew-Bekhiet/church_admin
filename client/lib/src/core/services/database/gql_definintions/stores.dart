@@ -9,38 +9,44 @@ class StoresDAO
 
   @override
   late final StreamAllConfig<Store, Input_StoresBoolExp, Input_StoresOrderBy>
-  baseStreamAllConfig = const StreamAllConfig(
+      baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,
+  );
+
+  @override
+  late final StreamCountConfig<Store, Input_StoresBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchStoresCount,
   );
 
   @override
   late final StreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-        document: documentNodeSubscriptionwatchStore,
-        varsConstructor: _streamSingleByIdVarsConstructor,
-      );
+    document: documentNodeSubscriptionwatchStore,
+    varsConstructor: _streamSingleByIdVarsConstructor,
+  );
 
   @override
   late final DeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-        document: documentNodeMutationdeleteStore,
-        varsConstructor: _deleteSingleByIdVarsConstructor,
-      );
+    document: documentNodeMutationdeleteStore,
+    varsConstructor: _deleteSingleByIdVarsConstructor,
+  );
 
   @override
   late final UpdateObjectConfig<Store> baseUpdateObjectConfig =
       UpdateObjectConfig(
-        document: documentNodeMutationupdateStore,
-        varsConstructor: _updateStoreVarsConstructor,
-        parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
-      );
+    document: documentNodeMutationupdateStore,
+    varsConstructor: _updateStoreVarsConstructor,
+    parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
+  );
 
   @override
   late final CreateObjectConfig<Store> baseCreateObjectConfig =
       CreateObjectConfig(
-        document: documentNodeMutationinsertStore,
-        varsConstructor: _createStoreVarsConstructor,
-      );
+    document: documentNodeMutationinsertStore,
+    varsConstructor: _createStoreVarsConstructor,
+  );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStore(id: id).toJson();

@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
+import 'package:rxdart/transformers.dart';
 
 mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
     on DAOBase<T> {
@@ -10,16 +11,19 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
 
   StreamAllConfig<T, TBoolExp, TOrderByExp> get baseStreamAllConfig;
 
+  StreamCountConfig<T, TBoolExp>? get baseStreamCountConfig => null;
+
   @protected
   StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
 
-  GQLPaginatableStream<T> streamAll({
+  PaginatableStreamBase<T> streamAll({
     Stream<String?>? searchQuery,
     List<TBoolExp>? where,
     List<TOrderByExp>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
+      streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
       where: where,
       orderBy: orderBy,
@@ -50,47 +54,88 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
       _secondLineFieldNameOverride ??
       UserSettingsService.I.getSecondLineFor<T>();
 
-  GQLPaginatableStream<T> streamAll({
+  PaginatableStreamBase<T> streamAll({
     required StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    StreamCountConfig<T, TBoolExp>? streamCountConfig,
     Stream<String?>? searchQuery,
     List<TBoolExp>? where,
     List<TOrderByExp>? orderBy,
   }) {
-    return GQLPaginatableStream<T>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) =>
-          graphQLClient.subscribeAndReturnParsed(
-        streamAllConfig.operationOptions ??
-            SubscriptionOptions(
-              document: _getDocumentWithSecondLine(streamAllConfig),
-              operationName: streamAllConfig.effectiveOperationName,
-              variables: _getEffectiveStreamAllVars(
-                streamAllConfig,
-                event,
-                where,
-                orderBy,
-              ),
-              parserFn: streamAllConfig.parserFn ??
-                  db.parser.singleListParser(fromJson),
+    final countStream = streamCountConfig != null
+        ? graphQLClient.subscribeAndReturnParsed(
+            streamCountConfig.operationOptions ??
+                SubscriptionOptions(
+                  document: streamCountConfig.document,
+                  operationName: streamCountConfig.effectiveOperationName,
+                  variables: {
+                    'where': where
+                            ?.map(
+                              (o) => (o as dynamic).toJson() as Json,
+                            )
+                            .toList() ??
+                        [],
+                  },
+                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
+                ),
+          )
+        : Stream.value(null);
+
+    Stream<PaginatableStreamResponse<T>> streamFactory(
+      PaginatableStreamRequest<T> request,
+    ) {
+      return graphQLClient
+          .subscribeAndReturnParsed(
+            streamAllConfig.operationOptions ??
+                SubscriptionOptions(
+                  document: _getDocumentWithSecondLine(streamAllConfig),
+                  operationName: streamAllConfig.effectiveOperationName,
+                  variables: _getEffectiveStreamAllVars(
+                    streamAllConfig,
+                    request,
+                    where,
+                    orderBy,
+                  ),
+                  parserFn: streamAllConfig.parserFn ??
+                      db.parser.singleListParser(
+                        fromJson,
+                        pageSize: request.pageSize,
+                      ),
+                ),
+          )
+          .withLatestFrom(
+            countStream,
+            (data, count) => PaginatableStreamResponse<T>(
+              data: data.data,
+              cursor: data.cursor,
+              totalCount: count ?? data.totalCount,
             ),
-      ),
+          );
+    }
+
+    if (searchQuery == null) {
+      return PaginatableStream<T>(factory: streamFactory);
+    }
+
+    return PaginatableStream<T>.withSearch(
+      searchStream: searchQuery,
+      factory: streamFactory,
     );
   }
 
   Json _getEffectiveStreamAllVars(
     StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
-    GQLPaginatableStreamEvent<T> event,
+    PaginatableStreamRequest<T> request,
     List<TBoolExp>? where,
     List<TOrderByExp>? orderBy,
   ) {
     return streamAllConfig.variables ??
         streamAllConfig.transformVars?.call(
-          event: event,
+          request: request,
           where: where,
           orderBy: orderBy,
         ) ??
         db.varsTransformer.transformVariablesForPagination<T>(
-          event,
+          request,
           where:
               where?.map((o) => (o as dynamic).toJson() as Json).toList() ?? [],
           orderBy:

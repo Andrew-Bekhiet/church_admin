@@ -5,13 +5,13 @@ import 'package:meta/meta.dart';
 
 @immutable
 class StreamAllConfig<T, TBoolExp, TOrderByExp>
-    extends DAOMethodTemplate<Iterable<T>> {
+    extends DAOMethodTemplate<PaginatableStreamResponse<T>> {
   final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? transformVars;
-  final SubscriptionOptions<Iterable<T>>? operationOptions;
+  final SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions;
 
   @override
-  Iterable<T> Function(Json)? get parserFn =>
-      super.parserFn as Iterable<T> Function(Json)?;
+  PaginatableStreamResponse<T> Function(Json)? get parserFn =>
+      super.parserFn as PaginatableStreamResponse<T> Function(Json)?;
 
   const StreamAllConfig({
     required super.document,
@@ -19,7 +19,7 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
     this.operationOptions,
     super.operationName,
     super.variables,
-    Iterable<T> Function(Json)? super.parserFn,
+    PaginatableStreamResponse<T> Function(Json)? super.parserFn,
   });
 
   StreamAllConfig<T, TBoolExp, TOrderByExp> copyWith({
@@ -27,8 +27,8 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
     String? operationName,
     Json? variables,
     StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? varsConstructor,
-    SubscriptionOptions<Iterable<T>>? operationOptions,
-    Iterable<T> Function(Json)? parserFn,
+    SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions,
+    PaginatableStreamResponse<T> Function(Json)? parserFn,
   }) {
     return StreamAllConfig<T, TBoolExp, TOrderByExp>(
       document: document ?? this.document,
@@ -41,9 +41,9 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
   }
 }
 
-typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> =
-    Json Function({
-      required GQLPaginatableStreamEvent<T> event,
-      List<TBoolExp>? where,
-      List<TOrderByExp>? orderBy,
-    });
+typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> = Json
+    Function({
+  required PaginatableStreamRequest<T> request,
+  List<TBoolExp>? where,
+  List<TOrderByExp>? orderBy,
+});

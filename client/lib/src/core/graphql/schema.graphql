@@ -338,6 +338,28 @@ type Areas {
   ): [AreasStreets!]!
 }
 
+type AreasAggregate {
+  aggregate: AreasAggregateFields
+  nodes: [Areas!]!
+}
+
+type AreasAggregateFields {
+  avg: AreasAvgFields
+  count(columns: [AreasSelectColumn!], distinct: Boolean): Int!
+  max: AreasMaxFields
+  min: AreasMinFields
+  stddev: AreasStddevFields
+  stddevPop: AreasStddevPopFields
+  stddevSamp: AreasStddevSampFields
+  sum: AreasSumFields
+  varPop: AreasVarPopFields
+  varSamp: AreasVarSampFields
+  variance: AreasVarianceFields
+}
+type AreasAvgFields {
+  color: Float
+}
+
 input AreasBoolExp {
   _and: [AreasBoolExp!]
   _not: AreasBoolExp
@@ -371,6 +393,20 @@ input AreasInsertInput {
   color: bigint
   name: String
   streets: AreasStreetsArrRelInsertInput
+}
+type AreasMaxFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+}
+type AreasMinFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
 }
 
 type AreasMutationResponse {
@@ -418,6 +454,15 @@ input AreasSetInput {
   bounds: geography
   color: bigint
   name: String
+}
+type AreasStddevFields {
+  color: Float
+}
+type AreasStddevPopFields {
+  color: Float
+}
+type AreasStddevSampFields {
+  color: Float
 }
 
 input AreasStreamCursorInput {
@@ -516,6 +561,9 @@ input AreasStreetsStreamCursorValueInput {
 enum AreasStreetsUpdateColumn {
   _PLACEHOLDER
 }
+type AreasSumFields {
+  color: bigint
+}
 
 enum AreasUpdateColumn {
   bounds
@@ -527,6 +575,15 @@ input AreasUpdates {
   _inc: AreasIncInput
   _set: AreasSetInput
   where: AreasBoolExp!
+}
+type AreasVarPopFields {
+  color: Float
+}
+type AreasVarSampFields {
+  color: Float
+}
+type AreasVarianceFields {
+  color: Float
 }
 type AuthUsersAdminOn {
   adminOnArea: uuid
@@ -542,6 +599,13 @@ type AuthUsersAdminOn {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): [Classes!]!
+  classesAggregate(
+    distinctOn: [ClassesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ClassesOrderBy!]
+    where: ClassesBoolExp
+  ): ClassesAggregate!
   group: Groups
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
@@ -550,7 +614,7 @@ type AuthUsersAdminOn {
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceGender: Boolean
-  serviceStudyYear: smallint
+  serviceStudyYear: Int
   serviceStudyYearData: StudyYears
   uid: uuid!
   user: AuthUsersData!
@@ -590,6 +654,7 @@ input AuthUsersAdminOnBoolExp {
   areaAdminOnUsers: BooleanComparisonExp
   areaAllowEdit: BooleanComparisonExp
   classes: ClassesBoolExp
+  classesAggregate: ClassesAggregateBoolExp
   group: GroupsBoolExp
   groupAdminOnUsers: BooleanComparisonExp
   groupAllowEdit: BooleanComparisonExp
@@ -598,7 +663,7 @@ input AuthUsersAdminOnBoolExp {
   serviceAdminOnUsers: BooleanComparisonExp
   serviceAllowEdit: BooleanComparisonExp
   serviceGender: BooleanComparisonExp
-  serviceStudyYear: SmallintComparisonExp
+  serviceStudyYear: IntComparisonExp
   serviceStudyYearData: StudyYearsBoolExp
   uid: UuidComparisonExp
   user: AuthUsersDataBoolExp
@@ -626,7 +691,7 @@ input AuthUsersAdminOnInsertInput {
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceGender: Boolean
-  serviceStudyYear: smallint
+  serviceStudyYear: Int
   serviceStudyYearData: StudyYearsObjRelInsertInput
   uid: uuid
 }
@@ -725,7 +790,7 @@ input AuthUsersAdminOnStreamCursorValueInput {
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceGender: Boolean
-  serviceStudyYear: smallint
+  serviceStudyYear: Int
   uid: uuid
 }
 
@@ -772,6 +837,17 @@ type AuthUsersData {
   uid: uuid!
 }
 
+type AuthUsersDataAggregate {
+  aggregate: AuthUsersDataAggregateFields
+  nodes: [AuthUsersData!]!
+}
+
+type AuthUsersDataAggregateFields {
+  count(columns: [AuthUsersDataSelectColumn!], distinct: Boolean): Int!
+  max: AuthUsersDataMaxFields
+  min: AuthUsersDataMinFields
+}
+
 input AuthUsersDataBoolExp {
   _and: [AuthUsersDataBoolExp!]
   _not: AuthUsersDataBoolExp
@@ -785,6 +861,20 @@ input AuthUsersDataBoolExp {
   person: PersonsBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
   uid: UuidComparisonExp
+}
+type AuthUsersDataMaxFields {
+  blurhash: String
+  email: String
+  name: String
+  photoUpdatedAt: timestamptz
+  uid: uuid
+}
+type AuthUsersDataMinFields {
+  blurhash: String
+  email: String
+  name: String
+  photoUpdatedAt: timestamptz
+  uid: uuid
 }
 input AuthUsersDataOrderBy {
   adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
@@ -933,6 +1023,13 @@ type Churches {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input ChurchesBoolExp {
@@ -943,6 +1040,7 @@ input ChurchesBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum ChurchesConstraint {
@@ -1078,6 +1176,31 @@ type Classes {
   studyYear: StudyYears!
 }
 
+type ClassesAggregate {
+  aggregate: ClassesAggregateFields
+  nodes: [Classes!]!
+}
+
+input ClassesAggregateBoolExp {
+  bool_and: classesAggregateBoolExpBool_and
+  bool_or: classesAggregateBoolExpBool_or
+  count: classesAggregateBoolExpCount
+}
+
+type ClassesAggregateFields {
+  avg: ClassesAvgFields
+  count(columns: [ClassesSelectColumn!], distinct: Boolean): Int!
+  max: ClassesMaxFields
+  min: ClassesMinFields
+  stddev: ClassesStddevFields
+  stddevPop: ClassesStddevPopFields
+  stddevSamp: ClassesStddevSampFields
+  sum: ClassesSumFields
+  varPop: ClassesVarPopFields
+  varSamp: ClassesVarSampFields
+  variance: ClassesVarianceFields
+}
+
 input ClassesAggregateOrderBy {
   avg: ClassesAvgOrderBy
   count: OrderBy
@@ -1095,6 +1218,10 @@ input ClassesAggregateOrderBy {
 input ClassesArrRelInsertInput {
   data: [ClassesInsertInput!]!
   onConflict: ClassesOnConflict
+}
+type ClassesAvgFields {
+  color: Float
+  serviceStudyYear: Float
 }
 
 input ClassesAvgOrderBy {
@@ -1148,6 +1275,15 @@ input ClassesInsertInput {
   serviceStudyYear: Int
   studyYear: StudyYearsObjRelInsertInput
 }
+type ClassesMaxFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
+  serviceStudyYear: Int
+}
 
 input ClassesMaxOrderBy {
   blurhash: OrderBy
@@ -1157,6 +1293,15 @@ input ClassesMaxOrderBy {
   photoUpdatedAt: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
+}
+type ClassesMinFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
+  serviceStudyYear: Int
 }
 
 input ClassesMinOrderBy {
@@ -1270,6 +1415,14 @@ enum ClassesSelectColumn {
   serviceStudyYear
 }
 
+enum ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns {
+  serviceGender
+}
+
+enum ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
+  serviceGender
+}
+
 input ClassesSetInput {
   blurhash: String
   color: bigint
@@ -1279,15 +1432,27 @@ input ClassesSetInput {
   serviceId: uuid
   serviceStudyYear: Int
 }
+type ClassesStddevFields {
+  color: Float
+  serviceStudyYear: Float
+}
 
 input ClassesStddevOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+type ClassesStddevPopFields {
+  color: Float
+  serviceStudyYear: Float
+}
 
 input ClassesStddevPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+}
+type ClassesStddevSampFields {
+  color: Float
+  serviceStudyYear: Float
 }
 
 input ClassesStddevSampOrderBy {
@@ -1307,6 +1472,10 @@ input ClassesStreamCursorValueInput {
   photoUpdatedAt: timestamptz
   serviceGender: Boolean
   serviceId: uuid
+  serviceStudyYear: Int
+}
+type ClassesSumFields {
+  color: bigint
   serviceStudyYear: Int
 }
 
@@ -1330,15 +1499,27 @@ input ClassesUpdates {
   _set: ClassesSetInput
   where: ClassesBoolExp!
 }
+type ClassesVarPopFields {
+  color: Float
+  serviceStudyYear: Float
+}
 
 input ClassesVarPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+type ClassesVarSampFields {
+  color: Float
+  serviceStudyYear: Float
+}
 
 input ClassesVarSampOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
+}
+type ClassesVarianceFields {
+  color: Float
+  serviceStudyYear: Float
 }
 
 input ClassesVarianceOrderBy {
@@ -1356,6 +1537,13 @@ type Colleges {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
   university: Universities
   universityId: uuid
 }
@@ -1378,6 +1566,7 @@ input CollegesBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
   university: UniversitiesBoolExp
   universityId: UuidComparisonExp
 }
@@ -1606,6 +1795,13 @@ type Families {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
   photoUpdatedAt: timestamptz
   stores(
     distinctOn: [StoresSelectColumn!]
@@ -1614,6 +1810,35 @@ type Families {
     orderBy: [StoresOrderBy!]
     where: StoresBoolExp
   ): [Stores!]!
+  storesAggregate(
+    distinctOn: [StoresSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [StoresOrderBy!]
+    where: StoresBoolExp
+  ): StoresAggregate!
+}
+
+type FamiliesAggregate {
+  aggregate: FamiliesAggregateFields
+  nodes: [Families!]!
+}
+
+type FamiliesAggregateFields {
+  avg: FamiliesAvgFields
+  count(columns: [FamiliesSelectColumn!], distinct: Boolean): Int!
+  max: FamiliesMaxFields
+  min: FamiliesMinFields
+  stddev: FamiliesStddevFields
+  stddevPop: FamiliesStddevPopFields
+  stddevSamp: FamiliesStddevSampFields
+  sum: FamiliesSumFields
+  varPop: FamiliesVarPopFields
+  varSamp: FamiliesVarSampFields
+  variance: FamiliesVarianceFields
+}
+type FamiliesAvgFields {
+  color: Float
 }
 
 input FamiliesBoolExp {
@@ -1634,8 +1859,10 @@ input FamiliesBoolExp {
   notes: StringComparisonExp
   parents: FamiliesFamiliesBoolExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
   stores: StoresBoolExp
+  storesAggregate: StoresAggregateBoolExp
 }
 
 enum FamiliesConstraint {
@@ -1743,6 +1970,24 @@ input FamiliesInsertInput {
   persons: PersonsArrRelInsertInput
   stores: StoresArrRelInsertInput
 }
+type FamiliesMaxFields {
+  addressText: String
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  notes: String
+  photoUpdatedAt: timestamptz
+}
+type FamiliesMinFields {
+  addressText: String
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  notes: String
+  photoUpdatedAt: timestamptz
+}
 
 type FamiliesMutationResponse {
   affectedRows: Int!
@@ -1798,6 +2043,15 @@ input FamiliesSetInput {
   name: String
   notes: String
 }
+type FamiliesStddevFields {
+  color: Float
+}
+type FamiliesStddevPopFields {
+  color: Float
+}
+type FamiliesStddevSampFields {
+  color: Float
+}
 
 input FamiliesStreamCursorInput {
   initialValue: FamiliesStreamCursorValueInput!
@@ -1813,6 +2067,9 @@ input FamiliesStreamCursorValueInput {
   notes: String
   photoUpdatedAt: timestamptz
 }
+type FamiliesSumFields {
+  color: bigint
+}
 
 enum FamiliesUpdateColumn {
   addressText
@@ -1827,6 +2084,15 @@ input FamiliesUpdates {
   _set: FamiliesSetInput
   where: FamiliesBoolExp!
 }
+type FamiliesVarPopFields {
+  color: Float
+}
+type FamiliesVarSampFields {
+  color: Float
+}
+type FamiliesVarianceFields {
+  color: Float
+}
 
 type Fathers {
   church: Churches
@@ -1840,6 +2106,13 @@ type Fathers {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input FathersAggregateOrderBy {
@@ -1862,6 +2135,7 @@ input FathersBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum FathersConstraint {
@@ -2056,6 +2330,29 @@ type Groups {
   validity: daterange
 }
 
+type GroupsAggregate {
+  aggregate: GroupsAggregateFields
+  nodes: [Groups!]!
+}
+
+input GroupsAggregateBoolExp {
+  count: groupsAggregateBoolExpCount
+}
+
+type GroupsAggregateFields {
+  avg: GroupsAvgFields
+  count(columns: [GroupsSelectColumn!], distinct: Boolean): Int!
+  max: GroupsMaxFields
+  min: GroupsMinFields
+  stddev: GroupsStddevFields
+  stddevPop: GroupsStddevPopFields
+  stddevSamp: GroupsStddevSampFields
+  sum: GroupsSumFields
+  varPop: GroupsVarPopFields
+  varSamp: GroupsVarSampFields
+  variance: GroupsVarianceFields
+}
+
 input GroupsAggregateOrderBy {
   avg: GroupsAvgOrderBy
   count: OrderBy
@@ -2073,6 +2370,9 @@ input GroupsAggregateOrderBy {
 input GroupsArrRelInsertInput {
   data: [GroupsInsertInput!]!
   onConflict: GroupsOnConflict
+}
+type GroupsAvgFields {
+  color: Float
 }
 
 input GroupsAvgOrderBy {
@@ -2121,6 +2421,14 @@ input GroupsInsertInput {
   serviceId: uuid
   validity: daterange
 }
+type GroupsMaxFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
+}
 
 input GroupsMaxOrderBy {
   blurhash: OrderBy
@@ -2129,6 +2437,14 @@ input GroupsMaxOrderBy {
   name: OrderBy
   photoUpdatedAt: OrderBy
   serviceId: OrderBy
+}
+type GroupsMinFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+  serviceId: uuid
 }
 
 input GroupsMinOrderBy {
@@ -2191,13 +2507,22 @@ input GroupsSetInput {
   serviceId: uuid
   validity: daterange
 }
+type GroupsStddevFields {
+  color: Float
+}
 
 input GroupsStddevOrderBy {
   color: OrderBy
 }
+type GroupsStddevPopFields {
+  color: Float
+}
 
 input GroupsStddevPopOrderBy {
   color: OrderBy
+}
+type GroupsStddevSampFields {
+  color: Float
 }
 
 input GroupsStddevSampOrderBy {
@@ -2217,6 +2542,9 @@ input GroupsStreamCursorValueInput {
   serviceId: uuid
   validity: daterange
 }
+type GroupsSumFields {
+  color: bigint
+}
 
 input GroupsSumOrderBy {
   color: OrderBy
@@ -2234,13 +2562,22 @@ input GroupsUpdates {
   _set: GroupsSetInput
   where: GroupsBoolExp!
 }
+type GroupsVarPopFields {
+  color: Float
+}
 
 input GroupsVarPopOrderBy {
   color: OrderBy
 }
+type GroupsVarSampFields {
+  color: Float
+}
 
 input GroupsVarSampOrderBy {
   color: OrderBy
+}
+type GroupsVarianceFields {
+  color: Float
 }
 
 input GroupsVarianceOrderBy {
@@ -3784,6 +4121,13 @@ type Jobs {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input JobsBoolExp {
@@ -3793,6 +4137,7 @@ input JobsBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum JobsConstraint {
@@ -3909,6 +4254,13 @@ type PersonStates {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input PersonStatesBoolExp {
@@ -3919,6 +4271,7 @@ input PersonStatesBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum PersonStatesConstraint {
@@ -4005,6 +4358,13 @@ type PersonTypes {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input PersonTypesBoolExp {
@@ -4015,6 +4375,7 @@ input PersonTypesBoolExp {
   name: StringComparisonExp
   order: IntComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum PersonTypesConstraint {
@@ -4262,6 +4623,31 @@ type Persons {
   ): HistoryVisitHistoryAggregate!
 }
 
+type PersonsAggregate {
+  aggregate: PersonsAggregateFields
+  nodes: [Persons!]!
+}
+
+input PersonsAggregateBoolExp {
+  bool_and: personsAggregateBoolExpBool_and
+  bool_or: personsAggregateBoolExpBool_or
+  count: personsAggregateBoolExpCount
+}
+
+type PersonsAggregateFields {
+  avg: PersonsAvgFields
+  count(columns: [PersonsSelectColumn!], distinct: Boolean): Int!
+  max: PersonsMaxFields
+  min: PersonsMinFields
+  stddev: PersonsStddevFields
+  stddevPop: PersonsStddevPopFields
+  stddevSamp: PersonsStddevSampFields
+  sum: PersonsSumFields
+  varPop: PersonsVarPopFields
+  varSamp: PersonsVarSampFields
+  variance: PersonsVarianceFields
+}
+
 input PersonsAggregateOrderBy {
   avg: PersonsAvgOrderBy
   count: OrderBy
@@ -4282,6 +4668,10 @@ input PersonsAppendInput {
 input PersonsArrRelInsertInput {
   data: [PersonsInsertInput!]!
   onConflict: PersonsOnConflict
+}
+type PersonsAvgFields {
+  color: Float
+  studyYearId: Float
 }
 
 input PersonsAvgOrderBy {
@@ -4603,6 +4993,32 @@ input PersonsInsertInput {
   tags: PersonsTagsArrRelInsertInput
   visitHistory: HistoryVisitHistoryArrRelInsertInput
 }
+type PersonsMaxFields {
+  addressText: String
+  birthdate: date
+  birthday: String
+  blurhash: String
+  churchId: uuid
+  collegeId: uuid
+  color: bigint
+  familyId: uuid
+  fatherId: uuid
+  id: uuid
+  jobDescription: String
+  jobId: uuid
+  mainPhone: String
+  name: String
+  notes: String
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
+  shammasLevelId: uuid
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
+  uid: uuid
+}
 
 input PersonsMaxOrderBy {
   addressText: OrderBy
@@ -4628,6 +5044,32 @@ input PersonsMaxOrderBy {
   storeId: OrderBy
   studyYearId: OrderBy
   uid: OrderBy
+}
+type PersonsMinFields {
+  addressText: String
+  birthdate: date
+  birthday: String
+  blurhash: String
+  churchId: uuid
+  collegeId: uuid
+  color: bigint
+  familyId: uuid
+  fatherId: uuid
+  id: uuid
+  jobDescription: String
+  jobId: uuid
+  mainPhone: String
+  name: String
+  notes: String
+  personTypeId: uuid
+  photoUpdatedAt: timestamptz
+  qualificationId: uuid
+  schoolId: uuid
+  shammasLevelId: uuid
+  stateId: uuid
+  storeId: uuid
+  studyYearId: smallint
+  uid: uuid
 }
 
 input PersonsMinOrderBy {
@@ -4771,6 +5213,20 @@ enum PersonsSelectColumn {
   uid
 }
 
+enum PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
+  gender
+  isServant
+  isShammas
+  isStudent
+}
+
+enum PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
+  gender
+  isServant
+  isShammas
+  isStudent
+}
+
 type PersonsServices {
   person: Persons!
   personId: uuid!
@@ -4894,15 +5350,27 @@ input PersonsSetInput {
   storeId: uuid
   studyYearId: smallint
 }
+type PersonsStddevFields {
+  color: Float
+  studyYearId: Float
+}
 
 input PersonsStddevOrderBy {
   color: OrderBy
   studyYearId: OrderBy
 }
+type PersonsStddevPopFields {
+  color: Float
+  studyYearId: Float
+}
 
 input PersonsStddevPopOrderBy {
   color: OrderBy
   studyYearId: OrderBy
+}
+type PersonsStddevSampFields {
+  color: Float
+  studyYearId: Float
 }
 
 input PersonsStddevSampOrderBy {
@@ -4944,6 +5412,10 @@ input PersonsStreamCursorValueInput {
   storeId: uuid
   studyYearId: smallint
   uid: uuid
+}
+type PersonsSumFields {
+  color: bigint
+  studyYearId: smallint
 }
 
 input PersonsSumOrderBy {
@@ -5077,15 +5549,27 @@ input PersonsUpdates {
   _set: PersonsSetInput
   where: PersonsBoolExp!
 }
+type PersonsVarPopFields {
+  color: Float
+  studyYearId: Float
+}
 
 input PersonsVarPopOrderBy {
   color: OrderBy
   studyYearId: OrderBy
 }
+type PersonsVarSampFields {
+  color: Float
+  studyYearId: Float
+}
 
 input PersonsVarSampOrderBy {
   color: OrderBy
   studyYearId: OrderBy
+}
+type PersonsVarianceFields {
+  color: Float
+  studyYearId: Float
 }
 
 input PersonsVarianceOrderBy {
@@ -5103,6 +5587,13 @@ type Qualifications {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input QualificationsBoolExp {
@@ -5112,6 +5603,7 @@ input QualificationsBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum QualificationsConstraint {
@@ -5185,6 +5677,13 @@ type Schools {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input SchoolsBoolExp {
@@ -5194,6 +5693,7 @@ input SchoolsBoolExp {
   id: UuidComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum SchoolsConstraint {
@@ -5301,6 +5801,13 @@ type Services {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): [Classes!]!
+  classesAggregate(
+    distinctOn: [ClassesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ClassesOrderBy!]
+    where: ClassesBoolExp
+  ): ClassesAggregate!
   color: bigint
   editHistory(
     distinctOn: [HistoryEditHistorySelectColumn!]
@@ -5323,6 +5830,13 @@ type Services {
     orderBy: [GroupsOrderBy!]
     where: GroupsBoolExp
   ): [Groups!]!
+  groupsAggregate(
+    distinctOn: [GroupsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [GroupsOrderBy!]
+    where: GroupsBoolExp
+  ): GroupsAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
   name: String!
@@ -5342,6 +5856,30 @@ type Services {
   studyYearToId: smallint
 }
 
+type ServicesAggregate {
+  aggregate: ServicesAggregateFields
+  nodes: [Services!]!
+}
+
+type ServicesAggregateFields {
+  avg: ServicesAvgFields
+  count(columns: [ServicesSelectColumn!], distinct: Boolean): Int!
+  max: ServicesMaxFields
+  min: ServicesMinFields
+  stddev: ServicesStddevFields
+  stddevPop: ServicesStddevPopFields
+  stddevSamp: ServicesStddevSampFields
+  sum: ServicesSumFields
+  varPop: ServicesVarPopFields
+  varSamp: ServicesVarSampFields
+  variance: ServicesVarianceFields
+}
+type ServicesAvgFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
+
 input ServicesBoolExp {
   _and: [ServicesBoolExp!]
   _not: ServicesBoolExp
@@ -5353,10 +5891,12 @@ input ServicesBoolExp {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   blurhash: StringComparisonExp
   classes: ClassesBoolExp
+  classesAggregate: ClassesAggregateBoolExp
   color: BigintComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   groups: GroupsBoolExp
+  groupsAggregate: GroupsAggregateBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
   name: StringComparisonExp
@@ -5395,6 +5935,26 @@ input ServicesInsertInput {
   studyYearFrom: StudyYearsObjRelInsertInput
   studyYearFromId: smallint
   studyYearTo: StudyYearsObjRelInsertInput
+  studyYearToId: smallint
+}
+type ServicesMaxFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  nextServiceId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearFromId: smallint
+  studyYearToId: smallint
+}
+type ServicesMinFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  nextServiceId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearFromId: smallint
   studyYearToId: smallint
 }
 
@@ -5456,6 +6016,21 @@ input ServicesSetInput {
   studyYearFromId: smallint
   studyYearToId: smallint
 }
+type ServicesStddevFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
+type ServicesStddevPopFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
+type ServicesStddevSampFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
 
 input ServicesStreamCursorInput {
   initialValue: ServicesStreamCursorValueInput!
@@ -5468,6 +6043,11 @@ input ServicesStreamCursorValueInput {
   name: String
   nextServiceId: uuid
   photoUpdatedAt: timestamptz
+  studyYearFromId: smallint
+  studyYearToId: smallint
+}
+type ServicesSumFields {
+  color: bigint
   studyYearFromId: smallint
   studyYearToId: smallint
 }
@@ -5484,6 +6064,21 @@ input ServicesUpdates {
   _inc: ServicesIncInput
   _set: ServicesSetInput
   where: ServicesBoolExp!
+}
+type ServicesVarPopFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
+type ServicesVarSampFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
+}
+type ServicesVarianceFields {
+  color: Float
+  studyYearFromId: Float
+  studyYearToId: Float
 }
 
 type ShammasLevels {
@@ -5574,6 +6169,29 @@ type Stores {
   photoUpdatedAt: timestamptz
 }
 
+type StoresAggregate {
+  aggregate: StoresAggregateFields
+  nodes: [Stores!]!
+}
+
+input StoresAggregateBoolExp {
+  count: storesAggregateBoolExpCount
+}
+
+type StoresAggregateFields {
+  avg: StoresAvgFields
+  count(columns: [StoresSelectColumn!], distinct: Boolean): Int!
+  max: StoresMaxFields
+  min: StoresMinFields
+  stddev: StoresStddevFields
+  stddevPop: StoresStddevPopFields
+  stddevSamp: StoresStddevSampFields
+  sum: StoresSumFields
+  varPop: StoresVarPopFields
+  varSamp: StoresVarSampFields
+  variance: StoresVarianceFields
+}
+
 input StoresAggregateOrderBy {
   avg: StoresAvgOrderBy
   count: OrderBy
@@ -5591,6 +6209,9 @@ input StoresAggregateOrderBy {
 input StoresArrRelInsertInput {
   data: [StoresInsertInput!]!
   onConflict: StoresOnConflict
+}
+type StoresAvgFields {
+  color: Float
 }
 
 input StoresAvgOrderBy {
@@ -5633,6 +6254,15 @@ input StoresInsertInput {
   geolocation: geography
   name: String
 }
+type StoresMaxFields {
+  addressText: String
+  adminFamily: uuid
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+}
 
 input StoresMaxOrderBy {
   addressText: OrderBy
@@ -5642,6 +6272,15 @@ input StoresMaxOrderBy {
   id: OrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy
+}
+type StoresMinFields {
+  addressText: String
+  adminFamily: uuid
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
 }
 
 input StoresMinOrderBy {
@@ -5705,13 +6344,22 @@ input StoresSetInput {
   geolocation: geography
   name: String
 }
+type StoresStddevFields {
+  color: Float
+}
 
 input StoresStddevOrderBy {
   color: OrderBy
 }
+type StoresStddevPopFields {
+  color: Float
+}
 
 input StoresStddevPopOrderBy {
   color: OrderBy
+}
+type StoresStddevSampFields {
+  color: Float
 }
 
 input StoresStddevSampOrderBy {
@@ -5732,6 +6380,9 @@ input StoresStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
 }
+type StoresSumFields {
+  color: bigint
+}
 
 input StoresSumOrderBy {
   color: OrderBy
@@ -5750,13 +6401,22 @@ input StoresUpdates {
   _set: StoresSetInput
   where: StoresBoolExp!
 }
+type StoresVarPopFields {
+  color: Float
+}
 
 input StoresVarPopOrderBy {
   color: OrderBy
 }
+type StoresVarSampFields {
+  color: Float
+}
 
 input StoresVarSampOrderBy {
   color: OrderBy
+}
+type StoresVarianceFields {
+  color: Float
 }
 
 input StoresVarianceOrderBy {
@@ -5801,6 +6461,28 @@ type Streets {
   photoUpdatedAt: timestamptz
 }
 
+type StreetsAggregate {
+  aggregate: StreetsAggregateFields
+  nodes: [Streets!]!
+}
+
+type StreetsAggregateFields {
+  avg: StreetsAvgFields
+  count(columns: [StreetsSelectColumn!], distinct: Boolean): Int!
+  max: StreetsMaxFields
+  min: StreetsMinFields
+  stddev: StreetsStddevFields
+  stddevPop: StreetsStddevPopFields
+  stddevSamp: StreetsStddevSampFields
+  sum: StreetsSumFields
+  varPop: StreetsVarPopFields
+  varSamp: StreetsVarSampFields
+  variance: StreetsVarianceFields
+}
+type StreetsAvgFields {
+  color: Float
+}
+
 input StreetsBoolExp {
   _and: [StreetsBoolExp!]
   _not: StreetsBoolExp
@@ -5832,6 +6514,20 @@ input StreetsInsertInput {
   color: bigint
   line: geography
   name: String
+}
+type StreetsMaxFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
+}
+type StreetsMinFields {
+  blurhash: String
+  color: bigint
+  id: uuid
+  name: String
+  photoUpdatedAt: timestamptz
 }
 
 type StreetsMutationResponse {
@@ -5879,6 +6575,15 @@ input StreetsSetInput {
   line: geography
   name: String
 }
+type StreetsStddevFields {
+  color: Float
+}
+type StreetsStddevPopFields {
+  color: Float
+}
+type StreetsStddevSampFields {
+  color: Float
+}
 
 input StreetsStreamCursorInput {
   initialValue: StreetsStreamCursorValueInput!
@@ -5892,6 +6597,9 @@ input StreetsStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
 }
+type StreetsSumFields {
+  color: bigint
+}
 
 enum StreetsUpdateColumn {
   color
@@ -5903,6 +6611,15 @@ input StreetsUpdates {
   _inc: StreetsIncInput
   _set: StreetsSetInput
   where: StreetsBoolExp!
+}
+type StreetsVarPopFields {
+  color: Float
+}
+type StreetsVarSampFields {
+  color: Float
+}
+type StreetsVarianceFields {
+  color: Float
 }
 
 input StringComparisonExp {
@@ -5949,6 +6666,13 @@ type StudyYears {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): [Classes!]!
+  classesAggregate(
+    distinctOn: [ClassesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ClassesOrderBy!]
+    where: ClassesBoolExp
+  ): ClassesAggregate!
   name: String!
   order: smallint!
   persons(
@@ -5958,6 +6682,13 @@ type StudyYears {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
 }
 
 input StudyYearsBoolExp {
@@ -5967,9 +6698,11 @@ input StudyYearsBoolExp {
   attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
   attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
   classes: ClassesBoolExp
+  classesAggregate: ClassesAggregateBoolExp
   name: StringComparisonExp
   order: SmallintComparisonExp
   persons: PersonsBoolExp
+  personsAggregate: PersonsAggregateBoolExp
 }
 
 enum StudyYearsConstraint {
@@ -6254,6 +6987,27 @@ input UuidComparisonExp {
 
 scalar bigint
 
+input classesAggregateBoolExpBool_and {
+  arguments: ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns!
+  distinct: Boolean
+  filter: ClassesBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input classesAggregateBoolExpBool_or {
+  arguments: ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns!
+  distinct: Boolean
+  filter: ClassesBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input classesAggregateBoolExpCount {
+  arguments: [ClassesSelectColumn!]
+  distinct: Boolean
+  filter: ClassesBoolExp
+  predicate: IntComparisonExp!
+}
+
 scalar date
 
 scalar daterange
@@ -6261,6 +7015,13 @@ scalar daterange
 scalar geography
 
 scalar geometry
+
+input groupsAggregateBoolExpCount {
+  arguments: [GroupsSelectColumn!]
+  distinct: Boolean
+  filter: GroupsBoolExp
+  predicate: IntComparisonExp!
+}
 
 input historyAttendanceDaysConstraintsAggregateBoolExpBool_and {
   arguments: HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns!
@@ -7098,6 +7859,27 @@ type mutation_root {
 
 scalar name
 
+input personsAggregateBoolExpBool_and {
+  arguments: PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns!
+  distinct: Boolean
+  filter: PersonsBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input personsAggregateBoolExpBool_or {
+  arguments: PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns!
+  distinct: Boolean
+  filter: PersonsBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input personsAggregateBoolExpCount {
+  arguments: [PersonsSelectColumn!]
+  distinct: Boolean
+  filter: PersonsBoolExp
+  predicate: IntComparisonExp!
+}
+
 type query_root {
   addresses(
     distinctOn: [AddressesSelectColumn!]
@@ -7114,6 +7896,13 @@ type query_root {
     orderBy: [AreasOrderBy!]
     where: AreasBoolExp
   ): [Areas!]!
+  areasAggregate(
+    distinctOn: [AreasSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AreasOrderBy!]
+    where: AreasBoolExp
+  ): AreasAggregate!
   areasByPk(id: uuid!): Areas
   areasStreets(
     distinctOn: [AreasStreetsSelectColumn!]
@@ -7138,6 +7927,13 @@ type query_root {
     orderBy: [AuthUsersDataOrderBy!]
     where: AuthUsersDataBoolExp
   ): [AuthUsersData!]!
+  authUsersDataAggregate(
+    distinctOn: [AuthUsersDataSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AuthUsersDataOrderBy!]
+    where: AuthUsersDataBoolExp
+  ): AuthUsersDataAggregate!
   authUsersDataByPk(uid: uuid!): AuthUsersData
   authUsersPermissions(
     distinctOn: [AuthUsersPermissionsSelectColumn!]
@@ -7162,6 +7958,13 @@ type query_root {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): [Classes!]!
+  classesAggregate(
+    distinctOn: [ClassesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ClassesOrderBy!]
+    where: ClassesBoolExp
+  ): ClassesAggregate!
   classesByPk(id: uuid!): Classes
   classesPersons(
     distinctOn: [ClassesPersonsSelectColumn!]
@@ -7193,6 +7996,13 @@ type query_root {
     orderBy: [FamiliesOrderBy!]
     where: FamiliesBoolExp
   ): [Families!]!
+  familiesAggregate(
+    distinctOn: [FamiliesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [FamiliesOrderBy!]
+    where: FamiliesBoolExp
+  ): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
   familiesFamilies(
     distinctOn: [FamiliesFamiliesSelectColumn!]
@@ -7216,6 +8026,13 @@ type query_root {
     orderBy: [GroupsOrderBy!]
     where: GroupsBoolExp
   ): [Groups!]!
+  groupsAggregate(
+    distinctOn: [GroupsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [GroupsOrderBy!]
+    where: GroupsBoolExp
+  ): GroupsAggregate!
   groupsByPk(id: uuid!): Groups
   historyAttendanceDays(
     distinctOn: [HistoryAttendanceDaysSelectColumn!]
@@ -7368,6 +8185,13 @@ type query_root {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
   personsByPk(id: uuid!): Persons
   personsGroups(
     distinctOn: [PersonsGroupsSelectColumn!]
@@ -7420,6 +8244,13 @@ type query_root {
     orderBy: [ServicesOrderBy!]
     where: ServicesBoolExp
   ): [Services!]!
+  servicesAggregate(
+    distinctOn: [ServicesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ServicesOrderBy!]
+    where: ServicesBoolExp
+  ): ServicesAggregate!
   servicesByPk(id: uuid!): Services
   shammasLevels(
     distinctOn: [ShammasLevelsSelectColumn!]
@@ -7436,6 +8267,13 @@ type query_root {
     orderBy: [StoresOrderBy!]
     where: StoresBoolExp
   ): [Stores!]!
+  storesAggregate(
+    distinctOn: [StoresSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [StoresOrderBy!]
+    where: StoresBoolExp
+  ): StoresAggregate!
   storesByPk(id: uuid!): Stores
   streets(
     distinctOn: [StreetsSelectColumn!]
@@ -7444,6 +8282,13 @@ type query_root {
     orderBy: [StreetsOrderBy!]
     where: StreetsBoolExp
   ): [Streets!]!
+  streetsAggregate(
+    distinctOn: [StreetsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [StreetsOrderBy!]
+    where: StreetsBoolExp
+  ): StreetsAggregate!
   streetsByPk(id: uuid!): Streets
   studyYears(
     distinctOn: [StudyYearsSelectColumn!]
@@ -7484,6 +8329,13 @@ input st_d_within_input {
   from: geometry!
 }
 
+input storesAggregateBoolExpCount {
+  arguments: [StoresSelectColumn!]
+  distinct: Boolean
+  filter: StoresBoolExp
+  predicate: IntComparisonExp!
+}
+
 type subscription_root {
   addresses(
     distinctOn: [AddressesSelectColumn!]
@@ -7505,6 +8357,13 @@ type subscription_root {
     orderBy: [AreasOrderBy!]
     where: AreasBoolExp
   ): [Areas!]!
+  areasAggregate(
+    distinctOn: [AreasSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AreasOrderBy!]
+    where: AreasBoolExp
+  ): AreasAggregate!
   areasByPk(id: uuid!): Areas
   areasStream(
     batchSize: Int!
@@ -7544,6 +8403,13 @@ type subscription_root {
     orderBy: [AuthUsersDataOrderBy!]
     where: AuthUsersDataBoolExp
   ): [AuthUsersData!]!
+  authUsersDataAggregate(
+    distinctOn: [AuthUsersDataSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AuthUsersDataOrderBy!]
+    where: AuthUsersDataBoolExp
+  ): AuthUsersDataAggregate!
   authUsersDataByPk(uid: uuid!): AuthUsersData
   authUsersDataStream(
     batchSize: Int!
@@ -7583,6 +8449,13 @@ type subscription_root {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): [Classes!]!
+  classesAggregate(
+    distinctOn: [ClassesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ClassesOrderBy!]
+    where: ClassesBoolExp
+  ): ClassesAggregate!
   classesByPk(id: uuid!): Classes
   classesPersons(
     distinctOn: [ClassesPersonsSelectColumn!]
@@ -7634,6 +8507,13 @@ type subscription_root {
     orderBy: [FamiliesOrderBy!]
     where: FamiliesBoolExp
   ): [Families!]!
+  familiesAggregate(
+    distinctOn: [FamiliesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [FamiliesOrderBy!]
+    where: FamiliesBoolExp
+  ): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
   familiesFamilies(
     distinctOn: [FamiliesFamiliesSelectColumn!]
@@ -7672,6 +8552,13 @@ type subscription_root {
     orderBy: [GroupsOrderBy!]
     where: GroupsBoolExp
   ): [Groups!]!
+  groupsAggregate(
+    distinctOn: [GroupsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [GroupsOrderBy!]
+    where: GroupsBoolExp
+  ): GroupsAggregate!
   groupsByPk(id: uuid!): Groups
   groupsStream(
     batchSize: Int!
@@ -7889,6 +8776,13 @@ type subscription_root {
     orderBy: [PersonsOrderBy!]
     where: PersonsBoolExp
   ): [Persons!]!
+  personsAggregate(
+    distinctOn: [PersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [PersonsOrderBy!]
+    where: PersonsBoolExp
+  ): PersonsAggregate!
   personsByPk(id: uuid!): Persons
   personsGroups(
     distinctOn: [PersonsGroupsSelectColumn!]
@@ -7976,6 +8870,13 @@ type subscription_root {
     orderBy: [ServicesOrderBy!]
     where: ServicesBoolExp
   ): [Services!]!
+  servicesAggregate(
+    distinctOn: [ServicesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [ServicesOrderBy!]
+    where: ServicesBoolExp
+  ): ServicesAggregate!
   servicesByPk(id: uuid!): Services
   servicesStream(
     batchSize: Int!
@@ -8002,6 +8903,13 @@ type subscription_root {
     orderBy: [StoresOrderBy!]
     where: StoresBoolExp
   ): [Stores!]!
+  storesAggregate(
+    distinctOn: [StoresSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [StoresOrderBy!]
+    where: StoresBoolExp
+  ): StoresAggregate!
   storesByPk(id: uuid!): Stores
   storesStream(
     batchSize: Int!
@@ -8015,6 +8923,13 @@ type subscription_root {
     orderBy: [StreetsOrderBy!]
     where: StreetsBoolExp
   ): [Streets!]!
+  streetsAggregate(
+    distinctOn: [StreetsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [StreetsOrderBy!]
+    where: StreetsBoolExp
+  ): StreetsAggregate!
   streetsByPk(id: uuid!): Streets
   streetsStream(
     batchSize: Int!

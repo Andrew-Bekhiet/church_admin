@@ -112,6 +112,16 @@ class _ViewGroupState extends State<ViewGroup> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: _personsController.totalCountStream.map((c) => '$c مخدوم'),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
+      ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
         onPressed: () {

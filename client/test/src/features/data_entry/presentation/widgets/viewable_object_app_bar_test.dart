@@ -11,7 +11,7 @@ import 'package:riverpod/riverpod.dart';
 import 'viewable_object_app_bar_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<PaginatableStream<LastRecordedByInfo>>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])

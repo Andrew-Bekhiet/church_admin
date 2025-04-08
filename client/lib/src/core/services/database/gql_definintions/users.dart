@@ -16,16 +16,21 @@ class UsersDAO extends DAOBase<User>
     transformVars: _streamAllVarsConstructor,
   );
   @override
+  late final StreamCountConfig<User, Input_AuthUsersDataBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchAuthUsersDataCount,
+  );
+  @override
   late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
 
   Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<User> event,
+    required PaginatableStreamRequest<User> request,
     List<Input_AuthUsersDataBoolExp>? where,
     List<Input_AuthUsersDataOrderBy>? orderBy,
   }) {
     return db.varsTransformer.transformVariablesForPagination(
-      event,
+      request,
       where: where?.map((o) => o.toJson()).toList() ?? [],
       orderBy: [
         ...?orderBy,

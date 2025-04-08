@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewService extends StatefulWidget {
   final Service? service;
@@ -17,35 +18,42 @@ class ViewService extends StatefulWidget {
 }
 
 class _ViewServiceState extends State<ViewService> {
-  late final _classesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.classes.streamAll(
-      where: [
-        Input_ClassesBoolExp(
-          serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
-        ),
-      ],
-    ),
-  );
-
-  late final _groupsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.groups.streamAll(
-      where: [
-        Input_GroupsBoolExp(
-          serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
-        ),
-      ],
-    ),
-  );
-
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
-        Input_PersonsBoolExp(
-          services: Input_PersonsServicesBoolExp(
+  late final _classesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.classes.streamAll(
+        where: [
+          Input_ClassesBoolExp(
             serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
           ),
-        ),
-      ],
+        ],
+      ),
+    ),
+  );
+
+  late final _groupsController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.groups.streamAll(
+        where: [
+          Input_GroupsBoolExp(
+            serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+          ),
+        ],
+      ),
+    ),
+  );
+
+  late final _personsController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+        where: [
+          Input_PersonsBoolExp(
+            services: Input_PersonsServicesBoolExp(
+              serviceId:
+                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 
@@ -107,15 +115,15 @@ class _ViewServiceState extends State<ViewService> {
                   ViewableObjectCard<Class>(class_, config: config),
               type: ViewableObjectListType.grid3,
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_classesController),
+              objectsController: _classesController,
             ),
         Group: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_groupsController),
+              objectsController: _groupsController,
             ),
         Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_personsController),
+              objectsController: _personsController,
             ),
       },
       notFoundBuilder: (context) => Center(
@@ -130,6 +138,36 @@ class _ViewServiceState extends State<ViewService> {
           $extra: service,
         ).push(context),
         icon: const Icon(Symbols.edit),
+      ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: tabController.animation!.asStream().switchMap(
+          (index) {
+            final currentIndex = index.round();
+
+            return switch (currentIndex) {
+              0 => _classesController,
+              1 => _groupsController,
+              2 => _personsController,
+              _ => throw UnimplementedError(),
+            }
+                .totalCountStream
+                .map(
+                  (c) => switch (currentIndex) {
+                    0 => '$c فصل',
+                    1 => '$c مجموعة',
+                    2 => '$c مخدوم',
+                    _ => throw UnimplementedError(),
+                  },
+                );
+          },
+        ),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
           SwitchingFloatingActionButton(
@@ -162,6 +200,12 @@ class _ViewServiceState extends State<ViewService> {
         },
       ),
     );
+  }
+
+  int getNewIndex(double offset, int currentIndex) {
+    return offset.isNegative
+        ? (currentIndex + offset).floor()
+        : (currentIndex + offset).ceil();
   }
 
   ViewableObjectListController<T>

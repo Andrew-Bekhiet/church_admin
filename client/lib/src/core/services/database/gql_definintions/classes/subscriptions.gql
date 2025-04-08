@@ -8,6 +8,14 @@ subscription watchAllClasses(
   }
 }
 
+subscription watchClassesCount($where: [ClassesBoolExp!] = {}) {
+  classesAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchClass($id: uuid!) {
   classesByPk(id: $id) {
     ...Class

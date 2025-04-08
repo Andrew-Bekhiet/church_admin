@@ -660,6 +660,605 @@ class _CopyWithStubImpl_Subscription_watchAllStreets_streets<TRes>
       _res;
 }
 
+class Variables_Subscription_watchStreetsCount {
+  factory Variables_Subscription_watchStreetsCount(
+          {List<Input_StreetsBoolExp>? where}) =>
+      Variables_Subscription_watchStreetsCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchStreetsCount._(this._$data);
+
+  factory Variables_Subscription_watchStreetsCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map(
+              (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchStreetsCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_StreetsBoolExp>? get where =>
+      (_$data['where'] as List<Input_StreetsBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchStreetsCount<
+          Variables_Subscription_watchStreetsCount>
+      get copyWith => CopyWith_Variables_Subscription_watchStreetsCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchStreetsCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchStreetsCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchStreetsCount(
+    Variables_Subscription_watchStreetsCount instance,
+    TRes Function(Variables_Subscription_watchStreetsCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchStreetsCount;
+
+  factory CopyWith_Variables_Subscription_watchStreetsCount.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchStreetsCount;
+
+  TRes call({List<Input_StreetsBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchStreetsCount<TRes>
+    implements CopyWith_Variables_Subscription_watchStreetsCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchStreetsCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchStreetsCount _instance;
+
+  final TRes Function(Variables_Subscription_watchStreetsCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchStreetsCount._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input_StreetsBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchStreetsCount<TRes>
+    implements CopyWith_Variables_Subscription_watchStreetsCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchStreetsCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_StreetsBoolExp>? where}) => _res;
+}
+
+class Subscription_watchStreetsCount {
+  Subscription_watchStreetsCount({required this.streetsAggregate});
+
+  factory Subscription_watchStreetsCount.fromJson(Map<String, dynamic> json) {
+    final l$streetsAggregate = json['streetsAggregate'];
+    return Subscription_watchStreetsCount(
+        streetsAggregate:
+            Subscription_watchStreetsCount_streetsAggregate.fromJson(
+                (l$streetsAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchStreetsCount_streetsAggregate streetsAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$streetsAggregate = streetsAggregate;
+    _resultData['streetsAggregate'] = l$streetsAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$streetsAggregate = streetsAggregate;
+    return Object.hashAll([l$streetsAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStreetsCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$streetsAggregate = streetsAggregate;
+    final lOther$streetsAggregate = other.streetsAggregate;
+    if (l$streetsAggregate != lOther$streetsAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStreetsCount
+    on Subscription_watchStreetsCount {
+  CopyWith_Subscription_watchStreetsCount<Subscription_watchStreetsCount>
+      get copyWith => CopyWith_Subscription_watchStreetsCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStreetsCount<TRes> {
+  factory CopyWith_Subscription_watchStreetsCount(
+    Subscription_watchStreetsCount instance,
+    TRes Function(Subscription_watchStreetsCount) then,
+  ) = _CopyWithImpl_Subscription_watchStreetsCount;
+
+  factory CopyWith_Subscription_watchStreetsCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreetsCount;
+
+  TRes call(
+      {Subscription_watchStreetsCount_streetsAggregate? streetsAggregate});
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
+      get streetsAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchStreetsCount<TRes>
+    implements CopyWith_Subscription_watchStreetsCount<TRes> {
+  _CopyWithImpl_Subscription_watchStreetsCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStreetsCount _instance;
+
+  final TRes Function(Subscription_watchStreetsCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? streetsAggregate = _undefined}) =>
+      _then(Subscription_watchStreetsCount(
+          streetsAggregate:
+              streetsAggregate == _undefined || streetsAggregate == null
+                  ? _instance.streetsAggregate
+                  : (streetsAggregate
+                      as Subscription_watchStreetsCount_streetsAggregate)));
+
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
+      get streetsAggregate {
+    final local$streetsAggregate = _instance.streetsAggregate;
+    return CopyWith_Subscription_watchStreetsCount_streetsAggregate(
+        local$streetsAggregate, (e) => call(streetsAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchStreetsCount<TRes>
+    implements CopyWith_Subscription_watchStreetsCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchStreetsCount(this._res);
+
+  TRes _res;
+
+  call({Subscription_watchStreetsCount_streetsAggregate? streetsAggregate}) =>
+      _res;
+
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
+      get streetsAggregate =>
+          CopyWith_Subscription_watchStreetsCount_streetsAggregate.stub(_res);
+}
+
+const documentNodeSubscriptionwatchStreetsCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchStreetsCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'StreetsBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'streetsAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchStreetsCount_streetsAggregate {
+  Subscription_watchStreetsCount_streetsAggregate({
+    this.aggregate,
+    this.$__typename = 'StreetsAggregate',
+  });
+
+  factory Subscription_watchStreetsCount_streetsAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStreetsCount_streetsAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchStreetsCount_streetsAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchStreetsCount_streetsAggregate_aggregate? aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStreetsCount_streetsAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStreetsCount_streetsAggregate
+    on Subscription_watchStreetsCount_streetsAggregate {
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate<
+          Subscription_watchStreetsCount_streetsAggregate>
+      get copyWith => CopyWith_Subscription_watchStreetsCount_streetsAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes> {
+  factory CopyWith_Subscription_watchStreetsCount_streetsAggregate(
+    Subscription_watchStreetsCount_streetsAggregate instance,
+    TRes Function(Subscription_watchStreetsCount_streetsAggregate) then,
+  ) = _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate;
+
+  factory CopyWith_Subscription_watchStreetsCount_streetsAggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate;
+
+  TRes call({
+    Subscription_watchStreetsCount_streetsAggregate_aggregate? aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
+      get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate<TRes>
+    implements CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes> {
+  _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStreetsCount_streetsAggregate _instance;
+
+  final TRes Function(Subscription_watchStreetsCount_streetsAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchStreetsCount_streetsAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchStreetsCount_streetsAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
+      get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate<TRes>
+    implements CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchStreetsCount_streetsAggregate_aggregate? aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate
+              .stub(_res);
+}
+
+class Subscription_watchStreetsCount_streetsAggregate_aggregate {
+  Subscription_watchStreetsCount_streetsAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'StreetsAggregateFields',
+  });
+
+  factory Subscription_watchStreetsCount_streetsAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStreetsCount_streetsAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStreetsCount_streetsAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStreetsCount_streetsAggregate_aggregate
+    on Subscription_watchStreetsCount_streetsAggregate_aggregate {
+  CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+          Subscription_watchStreetsCount_streetsAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+    Subscription_watchStreetsCount_streetsAggregate_aggregate instance,
+    TRes Function(Subscription_watchStreetsCount_streetsAggregate_aggregate)
+        then,
+  ) = _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+            TRes> {
+  _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStreetsCount_streetsAggregate_aggregate _instance;
+
+  final TRes Function(Subscription_watchStreetsCount_streetsAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchStreetsCount_streetsAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables_Subscription_watchStreet {
   factory Variables_Subscription_watchStreet({required UuidValue id}) =>
       Variables_Subscription_watchStreet._({

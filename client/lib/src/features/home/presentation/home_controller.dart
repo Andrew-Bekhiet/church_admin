@@ -100,7 +100,7 @@ class HomeController {
 
   ViewableObjectListController<T>
       _putControllerIfAbsentUsing<T extends Viewable>(
-    GQLPaginatableStream<T> Function() paginatableStreamFactory,
+    PaginatableStreamBase<T> Function() paginatableStreamFactory,
   ) {
     return _initializedControllers.putIfAbsent(
       T,

@@ -653,6 +653,593 @@ class _CopyWithStubImpl_Subscription_watchAllAreas_areas<TRes>
       _res;
 }
 
+class Variables_Subscription_watchAreasCount {
+  factory Variables_Subscription_watchAreasCount(
+          {List<Input_AreasBoolExp>? where}) =>
+      Variables_Subscription_watchAreasCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchAreasCount._(this._$data);
+
+  factory Variables_Subscription_watchAreasCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map((e) => Input_AreasBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchAreasCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_AreasBoolExp>? get where =>
+      (_$data['where'] as List<Input_AreasBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchAreasCount<
+          Variables_Subscription_watchAreasCount>
+      get copyWith => CopyWith_Variables_Subscription_watchAreasCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchAreasCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchAreasCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchAreasCount(
+    Variables_Subscription_watchAreasCount instance,
+    TRes Function(Variables_Subscription_watchAreasCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAreasCount;
+
+  factory CopyWith_Variables_Subscription_watchAreasCount.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAreasCount;
+
+  TRes call({List<Input_AreasBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchAreasCount<TRes>
+    implements CopyWith_Variables_Subscription_watchAreasCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAreasCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchAreasCount _instance;
+
+  final TRes Function(Variables_Subscription_watchAreasCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchAreasCount._({
+        ..._instance._$data,
+        if (where != _undefined) 'where': (where as List<Input_AreasBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchAreasCount<TRes>
+    implements CopyWith_Variables_Subscription_watchAreasCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAreasCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_AreasBoolExp>? where}) => _res;
+}
+
+class Subscription_watchAreasCount {
+  Subscription_watchAreasCount({required this.areasAggregate});
+
+  factory Subscription_watchAreasCount.fromJson(Map<String, dynamic> json) {
+    final l$areasAggregate = json['areasAggregate'];
+    return Subscription_watchAreasCount(
+        areasAggregate: Subscription_watchAreasCount_areasAggregate.fromJson(
+            (l$areasAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchAreasCount_areasAggregate areasAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$areasAggregate = areasAggregate;
+    _resultData['areasAggregate'] = l$areasAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$areasAggregate = areasAggregate;
+    return Object.hashAll([l$areasAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAreasCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$areasAggregate = areasAggregate;
+    final lOther$areasAggregate = other.areasAggregate;
+    if (l$areasAggregate != lOther$areasAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAreasCount
+    on Subscription_watchAreasCount {
+  CopyWith_Subscription_watchAreasCount<Subscription_watchAreasCount>
+      get copyWith => CopyWith_Subscription_watchAreasCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAreasCount<TRes> {
+  factory CopyWith_Subscription_watchAreasCount(
+    Subscription_watchAreasCount instance,
+    TRes Function(Subscription_watchAreasCount) then,
+  ) = _CopyWithImpl_Subscription_watchAreasCount;
+
+  factory CopyWith_Subscription_watchAreasCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAreasCount;
+
+  TRes call({Subscription_watchAreasCount_areasAggregate? areasAggregate});
+  CopyWith_Subscription_watchAreasCount_areasAggregate<TRes> get areasAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchAreasCount<TRes>
+    implements CopyWith_Subscription_watchAreasCount<TRes> {
+  _CopyWithImpl_Subscription_watchAreasCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAreasCount _instance;
+
+  final TRes Function(Subscription_watchAreasCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? areasAggregate = _undefined}) =>
+      _then(Subscription_watchAreasCount(
+          areasAggregate: areasAggregate == _undefined || areasAggregate == null
+              ? _instance.areasAggregate
+              : (areasAggregate
+                  as Subscription_watchAreasCount_areasAggregate)));
+
+  CopyWith_Subscription_watchAreasCount_areasAggregate<TRes>
+      get areasAggregate {
+    final local$areasAggregate = _instance.areasAggregate;
+    return CopyWith_Subscription_watchAreasCount_areasAggregate(
+        local$areasAggregate, (e) => call(areasAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAreasCount<TRes>
+    implements CopyWith_Subscription_watchAreasCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchAreasCount(this._res);
+
+  TRes _res;
+
+  call({Subscription_watchAreasCount_areasAggregate? areasAggregate}) => _res;
+
+  CopyWith_Subscription_watchAreasCount_areasAggregate<TRes>
+      get areasAggregate =>
+          CopyWith_Subscription_watchAreasCount_areasAggregate.stub(_res);
+}
+
+const documentNodeSubscriptionwatchAreasCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchAreasCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'AreasBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'areasAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchAreasCount_areasAggregate {
+  Subscription_watchAreasCount_areasAggregate({
+    this.aggregate,
+    this.$__typename = 'AreasAggregate',
+  });
+
+  factory Subscription_watchAreasCount_areasAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAreasCount_areasAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchAreasCount_areasAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchAreasCount_areasAggregate_aggregate? aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAreasCount_areasAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAreasCount_areasAggregate
+    on Subscription_watchAreasCount_areasAggregate {
+  CopyWith_Subscription_watchAreasCount_areasAggregate<
+          Subscription_watchAreasCount_areasAggregate>
+      get copyWith => CopyWith_Subscription_watchAreasCount_areasAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAreasCount_areasAggregate<TRes> {
+  factory CopyWith_Subscription_watchAreasCount_areasAggregate(
+    Subscription_watchAreasCount_areasAggregate instance,
+    TRes Function(Subscription_watchAreasCount_areasAggregate) then,
+  ) = _CopyWithImpl_Subscription_watchAreasCount_areasAggregate;
+
+  factory CopyWith_Subscription_watchAreasCount_areasAggregate.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate;
+
+  TRes call({
+    Subscription_watchAreasCount_areasAggregate_aggregate? aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<TRes>
+      get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchAreasCount_areasAggregate<TRes>
+    implements CopyWith_Subscription_watchAreasCount_areasAggregate<TRes> {
+  _CopyWithImpl_Subscription_watchAreasCount_areasAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAreasCount_areasAggregate _instance;
+
+  final TRes Function(Subscription_watchAreasCount_areasAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchAreasCount_areasAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchAreasCount_areasAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<TRes>
+      get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate<TRes>
+    implements CopyWith_Subscription_watchAreasCount_areasAggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchAreasCount_areasAggregate_aggregate? aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate.stub(
+              _res);
+}
+
+class Subscription_watchAreasCount_areasAggregate_aggregate {
+  Subscription_watchAreasCount_areasAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'AreasAggregateFields',
+  });
+
+  factory Subscription_watchAreasCount_areasAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAreasCount_areasAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAreasCount_areasAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAreasCount_areasAggregate_aggregate
+    on Subscription_watchAreasCount_areasAggregate_aggregate {
+  CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<
+          Subscription_watchAreasCount_areasAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate(
+    Subscription_watchAreasCount_areasAggregate_aggregate instance,
+    TRes Function(Subscription_watchAreasCount_areasAggregate_aggregate) then,
+  ) = _CopyWithImpl_Subscription_watchAreasCount_areasAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchAreasCount_areasAggregate_aggregate<TRes>
+    implements
+        CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<TRes> {
+  _CopyWithImpl_Subscription_watchAreasCount_areasAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAreasCount_areasAggregate_aggregate _instance;
+
+  final TRes Function(Subscription_watchAreasCount_areasAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchAreasCount_areasAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchAreasCount_areasAggregate_aggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchAreasCount_areasAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables_Subscription_watchArea {
   factory Variables_Subscription_watchArea({required UuidValue id}) =>
       Variables_Subscription_watchArea._({

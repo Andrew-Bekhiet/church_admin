@@ -8,6 +8,14 @@ subscription watchAllStores(
   }
 }
 
+subscription watchStoresCount($where: [StoresBoolExp!] = {}) {
+  storesAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchStore($id: uuid!) {
   storesByPk(id: $id) {
     ...Store

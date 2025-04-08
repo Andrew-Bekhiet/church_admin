@@ -8,6 +8,14 @@ subscription watchAllFamilies(
   }
 }
 
+subscription watchFamiliesCount($where: [FamiliesBoolExp!] = {}) {
+  familiesAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 subscription watchAllFamiliesWithAddresses(
   $limit: Int = 200
   $orderBy: [FamiliesOrderBy!] = { name: ASC }

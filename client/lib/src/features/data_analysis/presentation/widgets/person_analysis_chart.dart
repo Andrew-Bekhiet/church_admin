@@ -10,8 +10,7 @@ import 'package:tinycolor2/tinycolor2.dart';
 class PersonAnalysisChart extends StatefulWidget {
   final DateTimeRange range;
   final HistoryAggregateData analysisData;
-  final DelegatingPaginatableStream<LastRecordedByInfo> Function()
-      getHistoryStream;
+  final PaginatableStreamBase<LastRecordedByInfo> Function() getHistoryStream;
 
   final String title;
   final String lastTimeName;
