@@ -174,7 +174,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
             key: ValueKey(_address.district),
             enabled: widget.enabled,
             listController: (s) =>
-                _listControllerFor(DatabaseService.I.districts, s),
+                _listControllerFor(DatabaseService.I.metadata.districts, s),
             initialValue: _address.district,
             dialogFieldLabel: 'الحي',
             builder: (context, state) {
@@ -418,7 +418,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
         : null;
 
     final district = address.district != null
-        ? await DatabaseService.I.districts
+        ? await DatabaseService.I.metadata.districts
             .streamAll(searchQuery: Stream.value(address.district!.name))
             .first
         : null;

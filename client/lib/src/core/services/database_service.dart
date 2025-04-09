@@ -1,7 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts.dart';
-
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
 export 'database/db_gql_client.dart';
@@ -29,7 +27,6 @@ class DatabaseService {
 
   late final areas = AreasDAO(db: this);
   late final streets = StreetsDAO(db: this);
-  late final districts = DistrictsDAO(db: this);
   late final families = FamiliesDAO(db: this);
   late final stores = StoresDAO(db: this);
 
@@ -48,7 +45,6 @@ class DatabaseService {
   late final Map<Type, DAOBase> daosByType = {
     Area: areas,
     Street: streets,
-    District: districts,
     Family: families,
     Store: stores,
     Service: services,
@@ -58,6 +54,7 @@ class DatabaseService {
     Person: persons,
     Church: metadata.churches,
     College: metadata.colleges,
+    District: metadata.districts,
     Father: metadata.fathers,
     Hobby: metadata.hobbies,
     Job: metadata.jobs,

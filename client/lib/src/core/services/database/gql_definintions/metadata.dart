@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/churches.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/colleges.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/metadata/districts.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/fathers.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/hobbies.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/jobs.dart';
@@ -21,6 +22,7 @@ class MetadataDAO {
 
   late final churches = ChurchesDAO(db: db);
   late final colleges = CollegesDAO(db: db);
+  late final districts = DistrictsDAO(db: db);
   late final fathers = FathersDAO(db: db);
   late final jobs = JobsDAO(db: db);
   late final personStates = PersonStatesDAO(db: db);
