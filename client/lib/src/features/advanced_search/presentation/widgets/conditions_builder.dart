@@ -415,7 +415,9 @@ class _SelectValueWidget<T extends Object> extends StatelessWidget {
           ),
         ]),
       );
-    } else if (dummyInstance is ViewableWithID) {
+    } else if (dummyInstance is ViewableWithID ||
+        dummyInstance is Address ||
+        dummyInstance is AggregateData) {
       if (queryableType == null) {
         throw Exception('No $queryableType for $dummyInstance');
       }

@@ -1,8 +1,10 @@
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 abstract final class AdvancedQueriesMetadata {
   static final Map<Type, QueryableType> queryableTypes = {
+    Address: Address.queryableType,
     Area: Area.queryableType,
     Street: Street.queryableType,
     Family: Family.queryableType,
@@ -14,6 +16,7 @@ abstract final class AdvancedQueriesMetadata {
     Person: Person.queryableType,
     Church: Church.queryableType,
     College: College.queryableType,
+    District: District.queryableType,
     Father: Father.queryableType,
     Hobby: Hobby.queryableType,
     Job: Job.queryableType,
@@ -57,6 +60,9 @@ abstract final class AdvancedQueriesMetadata {
     StudyYear: StudyYear(name: '', order: 0),
     Tag: Tag(id: '', name: ''),
     Color: Colors.transparent,
+    Address: Address(),
+    District: District(id: '', name: ''),
+    Point: const Point(0, 0),
     Polygon: const Polygon([]),
     DateTimeRange: DateTimeRange(start: DateTime.now(), end: DateTime.now()),
     AdminOnData: const AdminOnData(permissionId: ''),
