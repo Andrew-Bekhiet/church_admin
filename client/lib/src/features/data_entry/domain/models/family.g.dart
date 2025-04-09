@@ -35,7 +35,7 @@ final _$FamilyFields = <String, FieldMetadata>{
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'children': FieldMetadata<Family>(
     name: 'children',

@@ -7,31 +7,21 @@ part of 'address.dart';
 // **************************************************************************
 
 final _$AddressFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Address>(
-    name: 'id',
-    label: '=',
-  ),
-  'countryIsoCode': FieldMetadata<String>(
-    name: 'countryIsoCode',
-    label: 'countryIsoCode',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
   'district': FieldMetadata<District>(
     name: 'district',
-    label: 'district',
+    label: 'الحي',
   ),
   'area': FieldMetadata<Area>(
     name: 'area',
-    label: 'area',
+    label: 'المنطقة',
   ),
   'street': FieldMetadata<Street>(
     name: 'street',
-    label: 'street',
+    label: 'الشارع',
   ),
   'substreetName': FieldMetadata<String>(
     name: 'substreetName',
-    label: 'substreetName',
+    label: 'الشارع الفرعي',
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),
@@ -42,22 +32,22 @@ final _$AddressFields = <String, FieldMetadata>{
   ),
   'storeyNumber': FieldMetadata<int>(
     name: 'storeyNumber',
-    label: 'storeyNumber',
+    label: 'رقم الدور',
     operators: Operator.comparitive,
   ),
   'houseNumber': FieldMetadata<int>(
     name: 'houseNumber',
-    label: 'houseNumber',
+    label: 'رقم العمارة',
     operators: Operator.comparitive,
   ),
   'apartmentNumber': FieldMetadata<int>(
     name: 'apartmentNumber',
-    label: 'apartmentNumber',
+    label: 'رقم الشقة',
     operators: Operator.comparitive,
   ),
   'specialLandmark': FieldMetadata<String>(
     name: 'specialLandmark',
-    label: 'specialLandmark',
+    label: 'علامة مميزة',
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),

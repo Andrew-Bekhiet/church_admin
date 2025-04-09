@@ -30,7 +30,7 @@ final _$PersonFields = <String, FieldMetadata>{
   'birthdate': FieldMetadata<DateTime>(
     name: 'birthdate',
     label: 'تاريخ الميلاد',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'birthday': FieldMetadata<String>(
     name: 'birthday',
@@ -126,7 +126,7 @@ final _$PersonFields = <String, FieldMetadata>{
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'lastConfession': FieldMetadata<LastRecordedByInfo>(
     name: 'lastConfession',
