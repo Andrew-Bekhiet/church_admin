@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 class ConditionsBuilder<T extends Object> extends StatelessWidget {
   final QueryableType<T> queryableType;
 
+  final bool hideAdvancedOperators;
   final bool canAddManyConditions;
   final List<Condition> conditions;
   final void Function(List<Condition>) onChanged;
@@ -15,6 +16,7 @@ class ConditionsBuilder<T extends Object> extends StatelessWidget {
     required this.queryableType,
     required this.conditions,
     required this.onChanged,
+    this.hideAdvancedOperators = true,
     this.canAddManyConditions = true,
     super.key,
   });
@@ -36,6 +38,7 @@ class ConditionsBuilder<T extends Object> extends StatelessWidget {
             return ConditionBuilder(
               queryableType: queryableType,
               condition: condition,
+              hideAdvancedOperators: hideAdvancedOperators,
               operators: queryableType
                   .fieldsMetadata[condition.field]!.operators
                   .toList(),
@@ -159,9 +162,11 @@ class ConditionBuilder<T extends Object> extends StatelessWidget {
   final void Function() onConditionRemoved;
   final void Function(List<Condition>, bool) onValueChanged;
 
+  final bool hideAdvancedOperators;
   final List<Operator> operators;
 
   const ConditionBuilder({
+    required this.hideAdvancedOperators,
     required this.condition,
     required this.queryableType,
     required this.onFieldChanged,
@@ -223,6 +228,12 @@ class ConditionBuilder<T extends Object> extends StatelessWidget {
                     isExpanded: true,
                     value: condition.operator,
                     items: operators
+                        .where(
+                          (o) =>
+                              !hideAdvancedOperators ||
+                              condition.operator == o ||
+                              !Operator.advanced.contains(o),
+                        )
                         .map(
                           (e) => DropdownMenuItem(
                             alignment: Alignment.center,
@@ -255,6 +266,7 @@ class ConditionBuilder<T extends Object> extends StatelessWidget {
             child: _SelectValueWidget(
               queryableType: AdvancedQueriesMetadata
                   .queryableTypes[conditionFieldMetadata.type],
+              hideAdvancedOperators: hideAdvancedOperators,
               condition: condition,
               onChanged: (value) {
                 final isNested = conditionFieldMetadata.isNestabale;
@@ -272,11 +284,13 @@ class ConditionBuilder<T extends Object> extends StatelessWidget {
 
 class _SelectValueWidget<T extends Object> extends StatelessWidget {
   final QueryableType<T>? queryableType;
+  final bool hideAdvancedOperators;
   final T dummyInstance;
   final Condition condition;
   final void Function(List<Condition>) onChanged;
 
   const _SelectValueWidget({
+    required this.hideAdvancedOperators,
     required this.queryableType,
     required this.condition,
     required this.onChanged,
@@ -330,10 +344,8 @@ class _SelectValueWidget<T extends Object> extends StatelessWidget {
         decoration: InputDecoration(
           labelText: 'قيمة البحث',
           helperText: {
-            Operator.like,
             Operator.ilike,
             Operator.nilike,
-            Operator.nlike,
           }.contains(condition.operator)
               ? 'يمكنك استخدام الرموز التالية:\n'
                   '% لاستبدال أي عدد من الأحرف\n'
@@ -425,6 +437,7 @@ class _SelectValueWidget<T extends Object> extends StatelessWidget {
       return ConditionsBuilder(
         canAddManyConditions: condition.field != LogicalOperator.not.value,
         queryableType: queryableType!,
+        hideAdvancedOperators: hideAdvancedOperators,
         conditions: condition.value is List<Condition> ? condition.value : [],
         onChanged: onChanged,
       );

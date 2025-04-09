@@ -18,6 +18,12 @@ enum Operator {
   nin('_nin', 'لا يساوي أي من'),
   stIntersects('_stIntersects', 'يتقاطع مع');
 
+  static const Set<Operator> advanced = {
+    Operator.nilike,
+    Operator.regex,
+    Operator.nregex,
+  };
+
   static const Set<Operator> textual = {
     Operator.like,
     Operator.ilike,
