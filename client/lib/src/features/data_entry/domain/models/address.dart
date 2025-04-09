@@ -7,7 +7,7 @@ part 'address.freezed.dart';
 part 'address.g.dart';
 
 @freezed
-@TypeMetadata()
+@TypeMetadata(ignoreFields: ['id', 'countryIsoCode'])
 class Address with _$Address {
   static Map<String, FieldMetadata> get fieldsMetadata => _$AddressFields;
 
@@ -47,8 +47,7 @@ class Address with _$Address {
       addressData['house_number'] as String? ?? '',
     );
     final String? streetName = addressData['road'] as String?;
-    final String? districtName =
-        addressData['neighbourhood'] as String? ??
+    final String? districtName = addressData['neighbourhood'] as String? ??
         addressData['allotments'] as String? ??
         addressData['quarter'] as String? ??
         addressData['suburb'] as String? ??
@@ -60,14 +59,12 @@ class Address with _$Address {
     return Address(
       geolocation: lat != null && lon != null ? Point(lat, lon) : null,
       houseNumber: houseNumber,
-      street:
-          streetName != null
-              ? Street(id: Namespace.nil.value, name: streetName.trim())
-              : null,
-      district:
-          districtName != null
-              ? District(id: Namespace.nil.value, name: districtName.trim())
-              : null,
+      street: streetName != null
+          ? Street(id: Namespace.nil.value, name: streetName.trim())
+          : null,
+      district: districtName != null
+          ? District(id: Namespace.nil.value, name: districtName.trim())
+          : null,
       countryIsoCode: countryCode ?? 'EG',
     );
   }
