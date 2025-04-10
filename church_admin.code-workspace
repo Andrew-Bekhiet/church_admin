@@ -44,7 +44,7 @@
         "request": "launch",
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
-        "args": ["build"],
+        "args": ["build", "--delete-conflicting-outputs"],
         "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
@@ -147,7 +147,12 @@
       "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/FunctionsYAML.schema.json": "**/functions.yaml",
       "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/QueryCollectionsYAML.schema.json": "**/query_collections.yaml",
       "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/RemoteSchemasYAML.schema.json": "**/remote_schemas.yaml",
-      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/TablesYAML.schema.json": "**/tables.yaml"
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/TablesYAML.schema.json": "**/tables.yaml",
+      "https://json.schemastore.org/dart-build": [
+        "build.yaml",
+        "*.build.yaml",
+        "build.*.yaml"
+      ]
     },
     "autoHide.autoHideSideBar": false,
     "autoHide.autoHidePanel": true,
