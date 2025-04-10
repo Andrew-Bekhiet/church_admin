@@ -253,6 +253,7 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
     mockedStreamingProxy.streamAll(
       searchQuery: captureAnyNamed('searchQuery'),
       streamAllConfig: captureAnyNamed('streamAllConfig'),
+      streamCountConfig: captureAnyNamed('streamCountConfig'),
     ),
   )..called(1);
 
@@ -324,6 +325,8 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
   final realPersonsDAO = PersonsDAO(db: mock);
 
   final mockPersonsDAO = MockPersonsDAO();
+  when(mockPersonsDAO.baseStreamCountConfig)
+      .thenReturn(realPersonsDAO.baseStreamCountConfig);
   when(mockPersonsDAO.baseStreamAllConfig)
       .thenReturn(realPersonsDAO.baseStreamAllConfig);
 
@@ -333,6 +336,7 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
     mockStreamableDAOProxy.streamAll(
       searchQuery: anyNamed('searchQuery'),
       streamAllConfig: anyNamed('streamAllConfig'),
+      streamCountConfig: anyNamed('streamCountConfig'),
     ),
   ).thenAnswer((_) => MockPaginatableStream());
 
