@@ -1,10 +1,13 @@
 name: church_admin_generator
-description:
+description: ""
 version: 1.0.0
 publish_to: "none"
 
 environment:
   sdk: ^3.1.0
+
+dependency_overrides:
+  js: ^0.7.1
 
 dependencies:
   analyzer: ^6.2.0
