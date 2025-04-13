@@ -109,8 +109,7 @@ class ThemingService with WidgetsBindingObserver {
     late final effectiveUserSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark =
-        isDarkOverride ??
+    bool isDark = isDarkOverride ??
         effectiveUserSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
@@ -141,17 +140,16 @@ class ThemingService with WidgetsBindingObserver {
     final flexThemeDataFactory =
         isDark ? FlexThemeData.dark : FlexThemeData.light;
 
-    final flexSchemeColor =
-        effectiveSeedOverride != null
-            ? FlexSchemeColor.from(
-              primary: effectiveSeedOverride,
-              tertiary: effectiveSeedOverride.desaturate(90),
-            )
-            : FlexSchemeColor.from(
-              primary: AppColors.primary,
-              secondary: AppColors.secondary,
-              tertiary: AppColors.tertiary,
-            );
+    final flexSchemeColor = effectiveSeedOverride != null
+        ? FlexSchemeColor.from(
+            primary: effectiveSeedOverride,
+            tertiary: effectiveSeedOverride.desaturate(90),
+          )
+        : FlexSchemeColor.from(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
+            tertiary: AppColors.tertiary,
+          );
 
     final rawThemeData = flexThemeDataFactory(
       colors: isLight ? flexSchemeColor : flexSchemeColor.toDark(),
@@ -238,6 +236,21 @@ class ThemingService with WidgetsBindingObserver {
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: themeData.elevatedButtonTheme.style!.copyWith(
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: themeData.outlinedButtonTheme.style!.copyWith(
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: themeData.textButtonTheme.style!.copyWith(
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+        ),
+      ),
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: scaffoldBackgroundColor,
         elevation: 0,
@@ -260,10 +273,9 @@ class ThemingService with WidgetsBindingObserver {
       ),
       chipTheme: themeData.chipTheme.copyWith(
         color: WidgetStateProperty.resolveWith(
-          (states) =>
-              states.contains(WidgetState.selected)
-                  ? themeData.colorScheme.primary
-                  : themeData.scaffoldBackgroundColor,
+          (states) => states.contains(WidgetState.selected)
+              ? themeData.colorScheme.primary
+              : themeData.scaffoldBackgroundColor,
         ),
         labelStyle: themeData.textTheme.titleMedium,
         secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
@@ -285,8 +297,8 @@ class ThemingService with WidgetsBindingObserver {
   ThemingService.withInitialThemeata({
     required UserSettingsService userSettingsService,
     required ThemeData initialTheme,
-  }) : _userSettingsService = userSettingsService,
-       _themeData = BehaviorSubject.seeded(initialTheme) {
+  })  : _userSettingsService = userSettingsService,
+        _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -321,11 +333,12 @@ extension ChurchAdminTheming on ThemeData {
   ButtonStyle? get filledTonalButtonStyleWorkaround =>
       brightness == Brightness.light
           ? filledButtonTheme.style?.copyWith(
-            backgroundColor: WidgetStateProperty.all(colorScheme.primaryFixed),
-          )
+              backgroundColor:
+                  WidgetStateProperty.all(colorScheme.primaryFixed),
+            )
           : filledButtonTheme.style;
 
   ButtonStyle get largeFilledButtonStyle => filledButtonTheme.style!.copyWith(
-    textStyle: WidgetStateProperty.all(textTheme.titleLarge),
-  );
+        textStyle: WidgetStateProperty.all(textTheme.titleLarge),
+      );
 }
