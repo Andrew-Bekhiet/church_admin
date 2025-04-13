@@ -14,6 +14,7 @@ class FeatureFlagsRepository {
   static const String forceUpdateMessageKey = 'forceUpdateMessage';
   static const String isUnderMaintenanceKey = 'isUnderMaintenance';
   static const String maintenanceMessageKey = 'maintenanceMessage';
+  static const String disabledRoutesKey = 'disabledRoutes';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -63,6 +64,16 @@ class FeatureFlagsRepository {
     return rawValue;
   }
 
+  Set<String> get disabledRoutes {
+    final rawValue = _remoteConfig.getString(disabledRoutesKey);
+
+    if (rawValue.isEmpty) {
+      return {};
+    }
+
+    return rawValue.split(',').toSet();
+  }
+
   Stream<void> get onConfigChanged => _remoteConfig.onConfigUpdated
       .asyncMap((_) => _remoteConfig.fetchAndActivate());
 
@@ -76,6 +87,7 @@ class FeatureFlagsRepository {
           'https://github.com/Andrew-Bekhiet/church_admin/releases',
       mustForceUpdateKey: false,
       isUnderMaintenanceKey: false,
+      disabledRoutesKey: '',
     });
   }
 }

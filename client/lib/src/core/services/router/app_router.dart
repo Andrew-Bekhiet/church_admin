@@ -18,6 +18,11 @@ final GoRouter $appRouter = GoRouter(
       return const UnderMaintenanceRoute().location;
     }
 
+    if (state.fullPath != null &&
+        featureFlags.disabledRoutes.contains(state.fullPath)) {
+      return const OutdatedFeatureRoute().location;
+    }
+
     return null;
   },
   routes: [
@@ -32,6 +37,7 @@ final GoRouter $appRouter = GoRouter(
     $authenticateRoute,
     $forceUpdateRoute,
     $underMaintenanceRoute,
+    $outdatedFeatureRoute,
   ],
   errorBuilder: (context, state) {
     if (kReleaseMode) {
