@@ -120,7 +120,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   }
 
   PaginatableStream.simple({
-    required PaginatableStreamFactory<T, void> factory,
+    required PaginatableStreamFactory<T, P?> factory,
     this.pageSize = 100,
   }) {
     _subjectSubscription = _pageIndex

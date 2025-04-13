@@ -24,17 +24,9 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
-      parametersStream: Rx.combineLatest3(
-        searchQuery ?? Stream.value(null),
-        where ?? Stream.value(null),
-        orderBy ?? Stream.value(null),
-        (search, where, orderBy) =>
-            StreamableDAOParameters<T, TBoolExp, TOrderByExp>(
-          search: search,
-          where: where,
-          orderBy: orderBy,
-        ),
-      ),
+      searchQuery: searchQuery,
+      where: where,
+      orderBy: orderBy,
     );
   }
 
@@ -65,23 +57,24 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
   PaginatableStreamBase<T> streamAll({
     required StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
     StreamCountConfig<T, TBoolExp>? streamCountConfig,
-    Stream<StreamableDAOParameters<T, TBoolExp, TOrderByExp>>? parametersStream,
+    Stream<String?>? searchQuery,
+    Stream<List<TBoolExp>>? where,
+    Stream<List<TOrderByExp>>? orderBy,
   }) {
-    final shareableParametersStream = parametersStream?.shareValue();
+    final shareableParametersStream = Rx.combineLatest3(
+      searchQuery ?? Stream.value(null),
+      where ?? Stream.value(null),
+      orderBy ?? Stream.value(null),
+      (search, where, orderBy) =>
+          StreamableDAOParameters<T, TBoolExp, TOrderByExp>(
+        search: search,
+        where: where,
+        orderBy: orderBy,
+      ),
+    ).shareValue();
 
     final Stream<int?> countStream =
         _getCountStream(streamCountConfig, shareableParametersStream);
-
-    if (shareableParametersStream == null) {
-      return PaginatableStream.simple(
-        factory: (request) => _streamAllFactory(
-          streamAllConfig,
-          countStream,
-          request as PaginatableStreamRequest<T,
-              StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>,
-        ),
-      );
-    }
 
     return PaginatableStream(
       parametersStream: shareableParametersStream,

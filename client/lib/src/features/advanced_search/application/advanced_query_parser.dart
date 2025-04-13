@@ -43,8 +43,7 @@ class AdvancedQueryParser {
         : null;
 
     return streamableDAO.streamingProxy.streamAll(
-      parametersStream: searchStream
-          ?.map((search) => StreamableDAOParameters(search: search)),
+      searchQuery: searchStream,
       streamAllConfig: newStreamAllConfig,
       streamCountConfig: newStreamCountConfig,
     );
