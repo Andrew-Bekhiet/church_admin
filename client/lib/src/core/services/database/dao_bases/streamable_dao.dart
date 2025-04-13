@@ -26,9 +26,10 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
       streamCountConfig: baseStreamCountConfig,
       parametersStream: Rx.combineLatest3(
         searchQuery ?? Stream.value(null),
-        where ?? Stream.value(<TBoolExp>[]),
-        orderBy ?? Stream.value(<TOrderByExp>[]),
-        (search, where, orderBy) => StreamableDAOParameters(
+        where ?? Stream.value(null),
+        orderBy ?? Stream.value(null),
+        (search, where, orderBy) =>
+            StreamableDAOParameters<T, TBoolExp, TOrderByExp>(
           search: search,
           where: where,
           orderBy: orderBy,
@@ -66,10 +67,12 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
     StreamCountConfig<T, TBoolExp>? streamCountConfig,
     Stream<StreamableDAOParameters<T, TBoolExp, TOrderByExp>>? parametersStream,
   }) {
-    final Stream<int?> countStream =
-        _getCountStream(streamCountConfig, parametersStream);
+    final shareableParametersStream = parametersStream?.shareValue();
 
-    if (parametersStream == null) {
+    final Stream<int?> countStream =
+        _getCountStream(streamCountConfig, shareableParametersStream);
+
+    if (shareableParametersStream == null) {
       return PaginatableStream.simple(
         factory: (request) => _streamAllFactory(
           streamAllConfig,
@@ -81,7 +84,7 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
     }
 
     return PaginatableStream(
-      parametersStream: parametersStream,
+      parametersStream: shareableParametersStream,
       factory: (request) =>
           _streamAllFactory(streamAllConfig, countStream, request),
     );
