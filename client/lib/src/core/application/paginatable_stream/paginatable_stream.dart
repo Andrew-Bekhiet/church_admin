@@ -37,7 +37,7 @@ abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
   Future<void> dispose();
 }
 
-/// A concrete implementation of [PaginatableStreamBase<T>] that handles pagination logic.
+/// A concrete implementation of [PaginatableStreamBase<T, P>] that handles pagination logic.
 ///
 /// This class manages a realtime list of items that are loaded in pages, using a factory function
 /// to fetch each page independently. It maintains the current state of pagination and provides methods
@@ -58,7 +58,7 @@ abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
 /// // Listen the next page
 /// await paginatedStream.listenToNextPage();
 /// ```
-class PaginatableStream<T> extends PaginatableStreamBase<T> {
+class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   @override
   final int pageSize;
 
@@ -70,65 +70,34 @@ class PaginatableStream<T> extends PaginatableStreamBase<T> {
   final BehaviorSubject<bool> _onLoadingChanged = BehaviorSubject.seeded(true);
 
   PaginatableStream({
-    required PaginatableStreamFactory<T> factory,
+    required Stream<P> parametersStream,
+    required PaginatableStreamFactory<T, P> factory,
     this.pageSize = 100,
   }) {
-    _subjectSubscription = _pageIndex
-        .doOnData((_) => _onLoadingChanged.add(true))
-        .switchMap(
-          (pageIndex) => factory(
-            PaginatableStreamRequest(
-              cursor: currentItems.elementAtOrNull(pageIndex * pageSize) ??
-                  currentCursor,
-              pageIndex: pageIndex,
-              pageSize: pageSize,
-            ),
-          ).map(
-            (response) => (
-              pageIndex: pageIndex,
-              response: response,
-              searchedChanged: false
-            ),
-          ),
-        )
-        .map(_mapPageResult)
-        .doOnData((_) => _onLoadingChanged.add(false))
-        .listen(
-          _subject.add,
-          onError: _subject.addError,
-          onDone: _subject.close,
-        );
-  }
-
-  PaginatableStream.withSearch({
-    required PaginatableStreamFactory<T> factory,
-    required Stream<String?> searchStream,
-    this.pageSize = 100,
-  }) {
-    _subjectSubscription = searchStream
-        .scan<({String? search, bool changed})?>(
-          (previousSearch, search, _) {
-            if ((previousSearch ?? '') != (search ?? '')) {
+    _subjectSubscription = parametersStream
+        .scan<({P value, bool changed})?>(
+          (previousValue, value, _) {
+            if ((previousValue ?? '') != (value ?? '')) {
               listenToPage(0);
-              return (search: search, changed: true);
+              return (value: value, changed: true);
             }
 
-            return (search: search, changed: false);
+            return (value: value, changed: false);
           },
           null,
         )
         .doOnData((_) => _onLoadingChanged.add(true))
         .switchMap(
-          (search) => _pageIndex
+          (p) => _pageIndex
               .doOnData((_) => _onLoadingChanged.add(true))
               .switchMap(
                 (pageIndex) => factory(
                   PaginatableStreamRequest(
-                    cursor: search?.changed ?? false
+                    cursor: p?.changed ?? false
                         ? null
                         : currentItems.elementAtOrNull(pageIndex * pageSize) ??
                             currentCursor,
-                    search: search?.search,
+                    param: p?.value,
                     pageIndex: pageIndex,
                     pageSize: pageSize,
                   ),
@@ -136,7 +105,7 @@ class PaginatableStream<T> extends PaginatableStreamBase<T> {
                   (response) => (
                     pageIndex: pageIndex,
                     response: response,
-                    searchedChanged: search?.changed ?? false
+                    paramChanged: p?.changed ?? false
                   ),
                 ),
               ),
@@ -150,17 +119,56 @@ class PaginatableStream<T> extends PaginatableStreamBase<T> {
         );
   }
 
+  PaginatableStream.simple({
+    required PaginatableStreamFactory<T, void> factory,
+    this.pageSize = 100,
+  }) {
+    _subjectSubscription = _pageIndex
+        .doOnData((_) => _onLoadingChanged.add(true))
+        .switchMap(
+          (pageIndex) => factory(
+            PaginatableStreamRequest(
+              cursor: currentItems.elementAtOrNull(pageIndex * pageSize) ??
+                  currentCursor,
+              pageIndex: pageIndex,
+              pageSize: pageSize,
+            ),
+          ).map(
+            (response) =>
+                (pageIndex: pageIndex, response: response, paramChanged: false),
+          ),
+        )
+        .map(_mapPageResult)
+        .doOnData((_) => _onLoadingChanged.add(false))
+        .listen(
+          _subject.add,
+          onError: _subject.addError,
+          onDone: _subject.close,
+        );
+  }
+
+  static PaginatableStream<T, String?> withSearch<T>({
+    required PaginatableStreamFactory<T, String?> factory,
+    required Stream<String?> searchStream,
+    int pageSize = 100,
+  }) =>
+      PaginatableStream(
+        factory: factory,
+        parametersStream: searchStream,
+        pageSize: pageSize,
+      );
+
   PaginatableStreamData<T> _mapPageResult(
     ({
       int pageIndex,
       PaginatableStreamResponse<T> response,
-      bool searchedChanged
+      bool paramChanged
     }) newPageResult,
   ) {
     final currentPageIndex = newPageResult.pageIndex;
     final newItems = newPageResult.response.data;
 
-    if (newPageResult.searchedChanged) {
+    if (newPageResult.paramChanged) {
       return PaginatableStreamData<T>(
         items: newItems,
         cursor: newPageResult.response.cursor,
@@ -255,7 +263,7 @@ class PaginatableStream<T> extends PaginatableStreamBase<T> {
   }
 }
 
-typedef PaginatableStreamFactory<T> = Stream<PaginatableStreamResponse<T>>
+typedef PaginatableStreamFactory<T, P> = Stream<PaginatableStreamResponse<T>>
     Function(
-  PaginatableStreamRequest<T>,
+  PaginatableStreamRequest<T, P>,
 );

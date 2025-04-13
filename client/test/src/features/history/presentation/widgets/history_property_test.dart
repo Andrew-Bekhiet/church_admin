@@ -15,7 +15,7 @@ import '../../../../utils.dart';
 import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<PaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<PaginatableStreamBase>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
@@ -33,10 +33,12 @@ void main() {
       await withClock(Clock.fixed(DateTime(2050)), () async {
         final value = clock.now().subtract(const Duration(days: 5));
 
-        final historyProperty = HistoryProperty(
+        final historyProperty = HistoryProperty<LastRecordedByInfo>(
           name: 'name',
           value: value,
-          getHistoryStream: MockPaginatableStream.new,
+          getHistoryListController: () => ViewableObjectListController(
+            objectsPaginatableStream: MockPaginatableStreamBase(),
+          ),
           onRecordNow: () {},
         );
 
@@ -100,10 +102,12 @@ void main() {
     (tester) async {
       var called = false;
 
-      final historyProperty = HistoryProperty(
+      final historyProperty = HistoryProperty<LastRecordedByInfo>(
         name: 'name',
         value: clock.now(),
-        getHistoryStream: MockPaginatableStream.new,
+        getHistoryListController: () => ViewableObjectListController(
+          objectsPaginatableStream: MockPaginatableStreamBase(),
+        ),
         onRecordNow: () => called = true,
       );
 
@@ -139,13 +143,13 @@ void main() {
           ),
         );
 
-        final historyProperty = HistoryProperty(
+        final historyProperty = HistoryProperty<LastRecordedByInfo>(
           name: 'name',
           value: clock.now(),
-          getHistoryStream: () {
+          getHistoryListController: () {
             called = true;
 
-            final mock = MockPaginatableStream();
+            final mock = MockPaginatableStreamBase<LastRecordedByInfo>();
 
             when(
               mock.listen(
@@ -167,7 +171,8 @@ void main() {
             when(mock.pageSize).thenReturn(1);
             when(mock.onLoadingChanged)
                 .thenAnswer((_) => BehaviorSubject.seeded(false));
-            return mock;
+
+            return ViewableObjectListController(objectsPaginatableStream: mock);
           },
           onRecordNow: () {},
         );

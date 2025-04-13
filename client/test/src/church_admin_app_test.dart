@@ -177,7 +177,7 @@ MockUsersDAO _setUpUsersDAO() {
 MockServicesDAO _setUpServiceDAO() {
   final servicesDAO = MockServicesDAO();
   when(servicesDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => PaginatableStream(factory: (_) async* {}),
+    (_) => PaginatableStream.simple(factory: (_) async* {}),
   );
 
   return servicesDAO;
@@ -186,7 +186,7 @@ MockServicesDAO _setUpServiceDAO() {
 MockPersonsDAO _setUpPersonsDAO() {
   final personsDAO = MockPersonsDAO();
   when(personsDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => PaginatableStream(factory: (_) async* {}),
+    (_) => PaginatableStream.simple(factory: (_) async* {}),
   );
 
   return personsDAO;
@@ -195,7 +195,7 @@ MockPersonsDAO _setUpPersonsDAO() {
 MockAreasDAO _setUpAreasDAO() {
   final areasDAO = MockAreasDAO();
   when(areasDAO.streamAll(searchQuery: anyNamed('searchQuery'))).thenAnswer(
-    (_) => PaginatableStream(factory: (_) async* {}),
+    (_) => PaginatableStream.simple(factory: (_) async* {}),
   );
 
   return areasDAO;

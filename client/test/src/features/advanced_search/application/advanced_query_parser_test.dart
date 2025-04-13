@@ -11,7 +11,7 @@ import 'advanced_query_parser_test.mocks.dart';
   MockSpec<DatabaseService>(),
   MockSpec<PersonsDAO>(),
   MockSpec<StreamableDAOProxy>(),
-  MockSpec<PaginatableStream>(),
+  MockSpec<PaginatableStreamBase>(),
   MockSpec<PaginatableStreamRequest>(),
   MockSpec<DBVarsTransformer>(),
 ])
@@ -251,13 +251,13 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
 
   final verificationResult = verify(
     mockedStreamingProxy.streamAll(
-      searchQuery: captureAnyNamed('searchQuery'),
+      parametersStream: anyNamed('parametersStream'),
       streamAllConfig: captureAnyNamed('streamAllConfig'),
-      streamCountConfig: captureAnyNamed('streamCountConfig'),
+      streamCountConfig: anyNamed('streamCountConfig'),
     ),
   )..called(1);
 
-  final capturedConfig = verificationResult.captured[1]
+  final capturedConfig = verificationResult.captured[0]
       as StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>;
 
   final firstSelectionNode = capturedConfig.document.definitions
@@ -266,7 +266,7 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
       .firstSelectionNode;
 
   final capturedVars = capturedConfig.variables ??
-      capturedConfig.transformVars!(request: MockPaginatableStreamRequest());
+      capturedConfig.transformRequest!(MockPaginatableStreamRequest());
 
   expect(capturedVars, expectedVarsJson);
 
@@ -305,15 +305,15 @@ DBVarsTransformer _createMockDBVarsTransformer() {
   final mock = MockDBVarsTransformer();
 
   when(
-    mock.transformVariablesForPagination(
+    mock.transformrequestForPagination(
       any,
-      where: anyNamed('where'),
-      orderBy: anyNamed('orderBy'),
+      overrideWhere: captureAnyNamed('overrideWhere'),
+      overrideOrderBy: captureAnyNamed('overrideOrderBy'),
     ),
   ).thenAnswer(
     (i) => {
-      'where': i.namedArguments[#where] as List<Json>,
-      'orderBy': i.namedArguments[#orderBy] as List<Json>,
+      'where': i.namedArguments[#overrideWhere] as List<Json>,
+      'orderBy': i.namedArguments[#overrideOrderBy] as List<Json>,
       'limit': 10,
     },
   );
@@ -334,11 +334,11 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
       Input_PersonsBoolExp, Input_PersonsOrderBy>();
   when(
     mockStreamableDAOProxy.streamAll(
-      searchQuery: anyNamed('searchQuery'),
+      parametersStream: anyNamed('parametersStream'),
       streamAllConfig: anyNamed('streamAllConfig'),
       streamCountConfig: anyNamed('streamCountConfig'),
     ),
-  ).thenAnswer((_) => MockPaginatableStream());
+  ).thenAnswer((_) => MockPaginatableStreamBase());
 
   when(mockPersonsDAO.streamingProxy).thenReturn(mockStreamableDAOProxy);
 

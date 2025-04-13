@@ -15,13 +15,13 @@ class ViewClass extends StatefulWidget {
 class _ViewClassState extends State<ViewClass> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
+      where: Stream.value([
         Input_PersonsBoolExp(
           classes: Input_ClassesPersonsBoolExp(
             classId: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
           ),
         ),
-      ],
+      ]),
     ),
   );
 
@@ -60,9 +60,11 @@ class _ViewClassState extends State<ViewClass> {
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: $class.lastEdit?.time,
-            getHistoryStream: () =>
-                DatabaseService.I.history.paginateEditHistory<Class>(
-              id: $class.id,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Class>(
+                id: $class.id,
+              ),
             ),
           ),
           ListTile(

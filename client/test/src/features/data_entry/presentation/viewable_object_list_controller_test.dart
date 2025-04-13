@@ -53,7 +53,7 @@ ViewableObjectListController<BasicViewable> _createTestUnit(
   List<BasicViewable> objects,
 ) {
   return ViewableObjectListController<BasicViewable>(
-    objectsPaginatableStream: PaginatableStream(
+    objectsPaginatableStream: PaginatableStream.simple(
       factory: (_) => Stream.value(
         PaginatableStreamResponse(
           data: objects,

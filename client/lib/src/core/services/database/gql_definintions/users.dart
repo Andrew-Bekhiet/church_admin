@@ -13,7 +13,7 @@ class UsersDAO extends DAOBase<User>
   late final StreamAllConfig<User, Input_AuthUsersDataBoolExp,
       Input_AuthUsersDataOrderBy> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
-    transformVars: _streamAllVarsConstructor,
+    transformRequest: _streamAllVarsConstructor,
   );
   @override
   late final StreamCountConfig<User, Input_AuthUsersDataBoolExp>
@@ -24,15 +24,18 @@ class UsersDAO extends DAOBase<User>
   late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
 
-  Json _streamAllVarsConstructor({
-    required PaginatableStreamRequest<User> request,
-    List<Input_AuthUsersDataBoolExp>? where,
-    List<Input_AuthUsersDataOrderBy>? orderBy,
-  }) {
-    return db.varsTransformer.transformVariablesForPagination(
+  Json _streamAllVarsConstructor(
+    PaginatableStreamRequest<
+            User,
+            StreamableDAOParameters<User, Input_AuthUsersDataBoolExp,
+                Input_AuthUsersDataOrderBy>?>
+        request,
+  ) {
+    final orderBy = request.param?.orderBy;
+
+    return db.varsTransformer.transformrequestForPagination(
       request,
-      where: where?.map((o) => o.toJson()).toList() ?? [],
-      orderBy: [
+      overrideOrderBy: [
         ...?orderBy,
         Input_AuthUsersDataOrderBy(
           permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(

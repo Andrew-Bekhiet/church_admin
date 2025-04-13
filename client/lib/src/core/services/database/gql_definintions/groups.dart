@@ -11,7 +11,7 @@ class GroupsDAO
   late final StreamAllConfig<Group, Input_GroupsBoolExp, Input_GroupsOrderBy>
       baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllGroups,
-    transformVars: _streamAllVarsConstructor,
+    transformRequest: _streamAllVarsConstructor,
   );
   @override
   late final StreamCountConfig<Group, Input_GroupsBoolExp>
@@ -43,26 +43,27 @@ class GroupsDAO
     varsConstructor: _createGroupVarsConstructor,
   );
 
-  Json _streamAllVarsConstructor({
-    required PaginatableStreamRequest<Group> request,
-    List<Input_GroupsBoolExp>? where,
-    List<Input_GroupsOrderBy>? orderBy,
-  }) {
-    return db.varsTransformer.transformVariablesForPagination(
+  Json _streamAllVarsConstructor(
+    PaginatableStreamRequest<
+            Group,
+            StreamableDAOParameters<Group, Input_GroupsBoolExp,
+                Input_GroupsOrderBy>?>
+        request,
+  ) {
+    final orderBy = request.param?.orderBy;
+
+    return db.varsTransformer.transformrequestForPagination(
       request,
-      where: where?.map((o) => o.toJson()).toList() ?? [],
-      orderBy: ((orderBy?.isEmpty ?? true)
-              ? [
-                  Input_GroupsOrderBy(
-                    validity: Enum_OrderBy.ASC,
-                  ),
-                  Input_GroupsOrderBy(
-                    name: Enum_OrderBy.ASC,
-                  ),
-                ]
-              : orderBy!)
-          .map((o) => o.toJson())
-          .toList(),
+      overrideOrderBy: (orderBy?.isEmpty ?? true)
+          ? [
+              Input_GroupsOrderBy(
+                validity: Enum_OrderBy.ASC,
+              ),
+              Input_GroupsOrderBy(
+                name: Enum_OrderBy.ASC,
+              ),
+            ].map((o) => o.toJson()).toList()
+          : null,
     );
   }
 

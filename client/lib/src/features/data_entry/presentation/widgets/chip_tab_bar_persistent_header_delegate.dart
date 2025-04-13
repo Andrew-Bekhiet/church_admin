@@ -5,16 +5,21 @@ class ChipTabBarPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
   ChipTabBarPersistentHeaderDelegate({
     required this.tabs,
+    this.filtersWidget,
     ViewableObjectService? viewableObjectService,
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   final List<({String label, IconData icon})> tabs;
+  final Widget? filtersWidget;
   final ViewableObjectService viewableObjectService;
 
+  bool get _hasFilters => filtersWidget != null;
+
   @override
-  double get minExtent => kToolbarHeight - 6;
+  double get minExtent => (kToolbarHeight - 6) * (_hasFilters ? 2 : 1);
+
   @override
-  double get maxExtent => kToolbarHeight * 1.2;
+  double get maxExtent => kToolbarHeight * 1.2 * (_hasFilters ? 2 : 1);
 
   @override
   Widget build(
@@ -31,7 +36,13 @@ class ChipTabBarPersistentHeaderDelegate
       color: theme.scaffoldBackgroundColor,
       child: Align(
         alignment: AlignmentDirectional.centerStart,
-        child: ChipTabBar(tabs: tabs),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ChipTabBar(tabs: tabs),
+            if (_hasFilters) filtersWidget!,
+          ],
+        ),
       ),
     );
   }

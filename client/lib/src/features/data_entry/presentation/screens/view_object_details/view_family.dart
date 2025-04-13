@@ -17,11 +17,13 @@ class _ViewFamilyState extends State<ViewFamily> {
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-        where: [
-          Input_PersonsBoolExp(
-            familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-          ),
-        ],
+        where: Stream.value(
+          [
+            Input_PersonsBoolExp(
+              familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -29,15 +31,17 @@ class _ViewFamilyState extends State<ViewFamily> {
   late final _childrenFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
-        where: [
-          Input_FamiliesBoolExp(
-            parents: Input_FamiliesFamiliesBoolExp(
-              parentFamilyId: Input_UuidComparisonExp(
-                $_eq: widget.familyId.toUuid(),
+        where: Stream.value(
+          [
+            Input_FamiliesBoolExp(
+              parents: Input_FamiliesFamiliesBoolExp(
+                parentFamilyId: Input_UuidComparisonExp(
+                  $_eq: widget.familyId.toUuid(),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -45,15 +49,17 @@ class _ViewFamilyState extends State<ViewFamily> {
   late final _parentFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
-        where: [
-          Input_FamiliesBoolExp(
-            children: Input_FamiliesFamiliesBoolExp(
-              childFamilyId: Input_UuidComparisonExp(
-                $_eq: widget.familyId.toUuid(),
+        where: Stream.value(
+          [
+            Input_FamiliesBoolExp(
+              children: Input_FamiliesFamiliesBoolExp(
+                childFamilyId: Input_UuidComparisonExp(
+                  $_eq: widget.familyId.toUuid(),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -61,12 +67,14 @@ class _ViewFamilyState extends State<ViewFamily> {
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-        where: [
-          Input_StoresBoolExp(
-            adminFamily:
-                Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-          ),
-        ],
+        where: Stream.value(
+          [
+            Input_StoresBoolExp(
+              adminFamily:
+                  Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -174,9 +182,11 @@ class _ViewFamilyState extends State<ViewFamily> {
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: family.lastEdit?.time,
-            getHistoryStream: () =>
-                DatabaseService.I.history.paginateEditHistory<Family>(
-              id: family.id,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Family>(
+                id: family.id,
+              ),
             ),
           ),
         ]),
@@ -260,7 +270,8 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   ViewableObjectListController<T>
       _ensureWillDispose<T extends ViewableWithIDAndImage>(
-          ViewableObjectListController<T> controller) {
+    ViewableObjectListController<T> controller,
+  ) {
     _controllersToDispose.add(controller);
     return controller;
   }

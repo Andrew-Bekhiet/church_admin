@@ -1017,7 +1017,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   @override
   _i2.PaginatableStreamBase<_i2.LastRecordedByInfo> paginatePersonAttendance({
     required _i5.Variables_Subscription_personAttendance Function(
-            _i2.PaginatableStreamRequest<_i2.LastRecordedByInfo>)?
+            _i2.PaginatableStreamRequest<_i2.LastRecordedByInfo, void>)?
         vars,
     int? limit,
   }) =>
@@ -1096,8 +1096,8 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   @override
   _i2.PaginatableStreamBase<_i2.Person> streamAll({
     _i4.Stream<String?>? searchQuery,
-    List<_i2.Input_PersonsBoolExp>? where,
-    List<_i2.Input_PersonsOrderBy>? orderBy,
+    _i4.Stream<List<_i2.Input_PersonsBoolExp>>? where,
+    _i4.Stream<List<_i2.Input_PersonsOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1242,9 +1242,8 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
   _i2.PaginatableStreamBase<T> streamAll({
     required _i2.StreamAllConfig<T, TBoolExp, TOrderByExp>? streamAllConfig,
     _i2.StreamCountConfig<T, TBoolExp>? streamCountConfig,
-    _i4.Stream<String?>? searchQuery,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    _i4.Stream<_i2.StreamableDAOParameters<T, TBoolExp, TOrderByExp>>?
+        parametersStream,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1253,9 +1252,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
           {
             #streamAllConfig: streamAllConfig,
             #streamCountConfig: streamCountConfig,
-            #searchQuery: searchQuery,
-            #where: where,
-            #orderBy: orderBy,
+            #parametersStream: parametersStream,
           },
         ),
         returnValue: _FakePaginatableStreamBase_29<T>(
@@ -1266,9 +1263,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
             {
               #streamAllConfig: streamAllConfig,
               #streamCountConfig: streamCountConfig,
-              #searchQuery: searchQuery,
-              #where: where,
-              #orderBy: orderBy,
+              #parametersStream: parametersStream,
             },
           ),
         ),
@@ -1280,9 +1275,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
             {
               #streamAllConfig: streamAllConfig,
               #streamCountConfig: streamCountConfig,
-              #searchQuery: searchQuery,
-              #where: where,
-              #orderBy: orderBy,
+              #parametersStream: parametersStream,
             },
           ),
         ),
@@ -1307,11 +1300,11 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
       ) as _i4.Stream<T?>);
 }
 
-/// A class which mocks [PaginatableStream].
+/// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPaginatableStream<T> extends _i1.Mock
-    implements _i2.PaginatableStream<T> {
+class MockPaginatableStreamBase<T> extends _i1.Mock
+    implements _i2.PaginatableStreamBase<T> {
   @override
   int get pageSize => (super.noSuchMethod(
         Invocation.getter(#pageSize),
@@ -1414,6 +1407,26 @@ class MockPaginatableStream<T> extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
+  _i4.Future<void> listenToNextPage() => (super.noSuchMethod(
+        Invocation.method(
+          #listenToNextPage,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
   _i4.Stream<List<T>> asBroadcastStream({
     void Function(_i4.StreamSubscription<List<T>>)? onListen,
     void Function(_i4.StreamSubscription<List<T>>)? onCancel,
@@ -1473,26 +1486,6 @@ class MockPaginatableStream<T> extends _i1.Mock
           ),
         ),
       ) as _i4.StreamSubscription<List<T>>);
-
-  @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<void> listenToNextPage() => (super.noSuchMethod(
-        Invocation.method(
-          #listenToNextPage,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
 
   @override
   _i4.Stream<List<T>> where(bool Function(List<T>)? test) =>
@@ -1933,8 +1926,8 @@ class MockPaginatableStream<T> extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockPaginatableStreamRequest<T> extends _i1.Mock
-    implements _i2.PaginatableStreamRequest<T> {
+class MockPaginatableStreamRequest<T, P> extends _i1.Mock
+    implements _i2.PaginatableStreamRequest<T, P> {
   @override
   int get pageIndex => (super.noSuchMethod(
         Invocation.getter(#pageIndex),
@@ -1963,20 +1956,20 @@ class MockPaginatableStreamRequest<T> extends _i1.Mock
 class MockDBVarsTransformer extends _i1.Mock implements _i2.DBVarsTransformer {
   @override
   Map<String, dynamic>
-      transformVariablesForPagination<T extends _i2.ViewableWithID>(
-    _i2.PaginatableStreamRequest<T>? request, {
-    List<Map<String, dynamic>>? where = const [],
-    List<Map<String, dynamic>>? orderBy = const [
-      {'name': 'ASC'}
-    ],
+      transformrequestForPagination<T extends _i2.ViewableWithID>(
+    _i2.PaginatableStreamRequest<T,
+            _i2.StreamableDAOParameters<T, dynamic, dynamic>?>?
+        request, {
+    List<Map<String, dynamic>>? overrideWhere,
+    List<Map<String, dynamic>>? overrideOrderBy,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
-              #transformVariablesForPagination,
+              #transformrequestForPagination,
               [request],
               {
-                #where: where,
-                #orderBy: orderBy,
+                #overrideWhere: overrideWhere,
+                #overrideOrderBy: overrideOrderBy,
               },
             ),
             returnValue: <String, dynamic>{},

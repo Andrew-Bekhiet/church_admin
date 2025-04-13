@@ -17,13 +17,13 @@ class _ViewAreaState extends State<ViewArea> {
   late final _streetsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.streets.streamAll(
-        where: [
+        where: Stream.value([
           Input_StreetsBoolExp(
             areas: Input_AreasStreetsBoolExp(
               areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
             ),
           ),
-        ],
+        ]),
       ),
     ),
   );
@@ -31,13 +31,13 @@ class _ViewAreaState extends State<ViewArea> {
   late final _familiesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
-        where: [
+        where: Stream.value([
           Input_FamiliesBoolExp(
             address: Input_AddressesBoolExp(
               areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
             ),
           ),
-        ],
+        ]),
       ),
     ),
   );
@@ -45,13 +45,13 @@ class _ViewAreaState extends State<ViewArea> {
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-        where: [
+        where: Stream.value([
           Input_StoresBoolExp(
             address: Input_AddressesBoolExp(
               areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
             ),
           ),
-        ],
+        ]),
       ),
     ),
   );
@@ -59,13 +59,13 @@ class _ViewAreaState extends State<ViewArea> {
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-        where: [
+        where: Stream.value([
           Input_PersonsBoolExp(
             address: Input_AddressesBoolExp(
               areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
             ),
           ),
-        ],
+        ]),
       ),
     ),
   );
@@ -148,17 +148,21 @@ class _ViewAreaState extends State<ViewArea> {
           HistoryProperty(
             name: 'أخر افتقاد',
             value: area.lastVisit?.time,
-            getHistoryStream: () =>
-                DatabaseService.I.history.paginateVisitHistory<Area>(
-              id: area.id,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateVisitHistory<Area>(
+                id: area.id,
+              ),
             ),
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: area.lastEdit?.time,
-            getHistoryStream: () =>
-                DatabaseService.I.history.paginateEditHistory<Area>(
-              id: area.id,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Area>(
+                id: area.id,
+              ),
             ),
           ),
           ListTile(

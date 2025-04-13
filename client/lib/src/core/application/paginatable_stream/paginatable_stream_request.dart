@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class PaginatableStreamRequest<T> with EquatableMixin {
+class PaginatableStreamRequest<T, P> with EquatableMixin {
   final T? cursor;
-  final String? search;
+  final P? param;
   final int pageIndex;
   final int pageSize;
 
@@ -12,9 +12,9 @@ class PaginatableStreamRequest<T> with EquatableMixin {
     required this.pageIndex,
     required this.pageSize,
     this.cursor,
-    this.search,
+    this.param,
   });
 
   @override
-  List<Object?> get props => [cursor, search, pageIndex, pageSize];
+  List<Object?> get props => [cursor, param, pageIndex, pageSize];
 }

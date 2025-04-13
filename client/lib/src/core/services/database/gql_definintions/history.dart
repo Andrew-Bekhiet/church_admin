@@ -14,7 +14,7 @@ class HistoryDAO {
       paginateEditHistory<T extends Viewable>({
     required String id,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -55,7 +55,7 @@ class HistoryDAO {
       paginateVisitHistory<T extends Viewable>({
     required String id,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -95,7 +95,7 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonCallHistory({
     required String personId,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -126,7 +126,7 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonConfessionHistory({
     required String personId,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -157,7 +157,7 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonKodasHistory({
     required String personId,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(
@@ -188,7 +188,7 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonVisitHistory({
     required String personId,
   }) {
-    return PaginatableStream(
+    return PaginatableStream.simple(
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(
           SubscriptionOptions(

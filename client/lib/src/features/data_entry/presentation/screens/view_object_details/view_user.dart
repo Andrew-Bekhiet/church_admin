@@ -63,8 +63,10 @@ class _ViewUserState extends State<ViewUser> {
             HistoryProperty(
               name: 'أخر تحديث لبيانات الخادم',
               value: user.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<User>(id: user.id),
+              getHistoryListController: () => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginateEditHistory<User>(id: user.id),
+              ),
             ),
             const SizedBox(height: 50),
           ],

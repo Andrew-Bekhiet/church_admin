@@ -21,11 +21,14 @@ class _ViewServiceState extends State<ViewService> {
   late final _classesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.classes.streamAll(
-        where: [
-          Input_ClassesBoolExp(
-            serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
-          ),
-        ],
+        where: Stream.value(
+          [
+            Input_ClassesBoolExp(
+              serviceId:
+                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -33,11 +36,14 @@ class _ViewServiceState extends State<ViewService> {
   late final _groupsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.groups.streamAll(
-        where: [
-          Input_GroupsBoolExp(
-            serviceId: Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
-          ),
-        ],
+        where: Stream.value(
+          [
+            Input_GroupsBoolExp(
+              serviceId:
+                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -45,14 +51,16 @@ class _ViewServiceState extends State<ViewService> {
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-        where: [
-          Input_PersonsBoolExp(
-            services: Input_PersonsServicesBoolExp(
-              serviceId:
-                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+        where: Stream.value(
+          [
+            Input_PersonsBoolExp(
+              services: Input_PersonsServicesBoolExp(
+                serviceId:
+                    Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -78,8 +86,10 @@ class _ViewServiceState extends State<ViewService> {
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: service.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Service>(id: service.id),
+              getHistoryListController: () => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginateEditHistory<Service>(id: service.id),
+              ),
             ),
             ListTile(
               title: FilledButton.icon(

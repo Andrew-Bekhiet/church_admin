@@ -300,11 +300,11 @@ class PersonsDAO
 
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonAttendance({
     required Variables_Subscription_personAttendance Function(
-      PaginatableStreamRequest<LastRecordedByInfo>,
+      PaginatableStreamRequest<LastRecordedByInfo, void>,
     ) vars,
     int? limit,
   }) {
-    return PaginatableStream<LastRecordedByInfo>(
+    return PaginatableStream.simple(
       pageSize: limit ?? 100,
       factory: (request) {
         return graphQLClient.subscribeAndReturnParsed(

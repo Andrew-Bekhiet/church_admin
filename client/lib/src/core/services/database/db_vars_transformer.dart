@@ -4,14 +4,23 @@ import 'package:collection/collection.dart';
 class DBVarsTransformer {
   const DBVarsTransformer();
 
-  Json transformVariablesForPagination<T extends ViewableWithID>(
-    PaginatableStreamRequest<T> request, {
-    List<Json> where = const [],
-    List<Json> orderBy = const [
-      {'name': 'ASC'},
-    ],
+  Json transformrequestForPagination<T extends ViewableWithID>(
+    PaginatableStreamRequest<T, StreamableDAOParameters<T, dynamic, dynamic>?>
+        request, {
+    List<Json>? overrideWhere,
+    List<Json>? overrideOrderBy,
   }) {
-    final PaginatableStreamRequest(:search, :cursor, :pageSize) = request;
+    final PaginatableStreamRequest(:param, :cursor, :pageSize) = request;
+
+    final search = param?.search;
+    final where = param?.where.map((o) => o.toJson() as Json).toList() ??
+        overrideWhere ??
+        [];
+    final orderBy = param?.orderBy.map((o) => o.toJson() as Json).toList() ??
+        overrideOrderBy ??
+        [
+          {'name': 'ASC'},
+        ];
 
     return {
       'where': [

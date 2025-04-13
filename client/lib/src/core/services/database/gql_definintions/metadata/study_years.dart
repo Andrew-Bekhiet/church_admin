@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:rxdart/rxdart.dart';
 
 class StudyYearsDAO extends DAOBase<StudyYear>
     with
@@ -24,14 +25,25 @@ class StudyYearsDAO extends DAOBase<StudyYear>
   @override
   PaginatableStreamBase<StudyYear> streamAll({
     Stream<String?>? searchQuery,
-    List<Input_StudyYearsBoolExp>? where,
-    List<Input_StudyYearsOrderBy>? orderBy,
+    Stream<List<Input_StudyYearsBoolExp>>? where,
+    Stream<List<Input_StudyYearsOrderBy>>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
-      searchQuery: searchQuery,
-      where: where,
-      orderBy: orderBy ?? [Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC)],
+      streamCountConfig: baseStreamCountConfig,
+      parametersStream: Rx.combineLatest3(
+        searchQuery ?? Stream.value(null),
+        where ?? Stream.value(<Input_StudyYearsBoolExp>[]),
+        orderBy ??
+            Stream.value([
+              Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC),
+            ]),
+        (search, where, orderBy) => StreamableDAOParameters(
+          search: search,
+          where: where,
+          orderBy: orderBy,
+        ),
+      ),
     );
   }
 

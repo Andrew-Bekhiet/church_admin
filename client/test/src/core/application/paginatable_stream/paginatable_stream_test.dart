@@ -7,7 +7,7 @@ import 'package:rxdart/rxdart.dart';
 
 void main() {
   late List<String> testData;
-  late PaginatableStream<String> paginatableStream;
+  late PaginatableStreamBase<String> paginatableStream;
   late BehaviorSubject<String?> searchController;
 
   setUp(() {
@@ -24,7 +24,7 @@ void main() {
 
   group('PaginatableStream basic functionality', () {
     test('should load first page with correct page size', () async {
-      paginatableStream = PaginatableStream<String>(
+      paginatableStream = PaginatableStream.simple(
         pageSize: 10,
         factory: (request) {
           final start = request.pageIndex * request.pageSize;
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('should load next page when requested', () async {
-      paginatableStream = PaginatableStream<String>(
+      paginatableStream = PaginatableStream.simple(
         pageSize: 10,
         factory: (request) {
           final start = request.pageIndex * request.pageSize;
@@ -90,7 +90,7 @@ void main() {
     });
 
     test('should track loading state correctly', () async {
-      paginatableStream = PaginatableStream<String>(
+      paginatableStream = PaginatableStream.simple(
         pageSize: 10,
         factory: (request) {
           return Stream.value(
@@ -121,7 +121,7 @@ void main() {
 
   group('PaginatableStream navigation between pages', () {
     test('should return to previously loaded page', () async {
-      paginatableStream = PaginatableStream<String>(
+      paginatableStream = PaginatableStream.simple(
         pageSize: 10,
         factory: (request) {
           final start = request.pageIndex * request.pageSize;
@@ -175,7 +175,7 @@ void main() {
     });
 
     test("Doesn't load pages if already loading other pages", () async {
-      paginatableStream = PaginatableStream<String>(
+      paginatableStream = PaginatableStream.simple(
         pageSize: 10,
         factory: (request) {
           final start = request.pageIndex * request.pageSize;
@@ -223,7 +223,7 @@ void main() {
         pageSize: 10,
         searchStream: searchController.stream,
         factory: (request) {
-          final searchTerm = request.search;
+          final searchTerm = request.param;
           final filteredData = searchTerm != null && searchTerm.isNotEmpty
               ? testData.where((item) => item.contains(searchTerm)).toList()
               : testData;

@@ -4,6 +4,7 @@ import 'package:church_admin/src/core/services/database/gql_definintions/familie
 import 'package:church_admin/src/core/services/database/gql_definintions/families/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/families/helpers.dart';
 import 'package:graphql/client.dart';
+import 'package:rxdart/rxdart.dart';
 
 class FamiliesDAO
     extends FullCRUDDAO<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy> {
@@ -101,54 +102,51 @@ class FamiliesDAO
 
   PaginatableStreamBase<Family> streamAllWithAddresses({
     Stream<String?>? searchQuery,
-    List<Input_FamiliesBoolExp>? where,
-    List<Input_FamiliesOrderBy>? orderBy,
+    Stream<List<Input_FamiliesBoolExp>>? where,
+    Stream<List<Input_FamiliesOrderBy>>? orderBy,
   }) {
     final streamAllConfig = baseStreamAllConfig.copyWith(
       document: documentNodeSubscriptionwatchAllFamiliesWithAddresses,
       operationName: 'watchAllFamiliesWithAddresses',
     );
 
-    Stream<PaginatableStreamResponse<Family>> streamFactory(
-      PaginatableStreamRequest<Family> request,
-    ) =>
-        graphQLClient.subscribeAndReturnParsed(
-          streamAllConfig.operationOptions ??
-              SubscriptionOptions(
-                document: streamAllConfig.document,
-                operationName: streamAllConfig.effectiveOperationName,
-                variables: streamAllConfig.variables ??
-                    streamAllConfig.transformVars?.call(
-                      request: request,
-                      where: where,
-                      orderBy: orderBy,
-                    ) ??
-                    db.varsTransformer.transformVariablesForPagination<Family>(
-                      request,
-                      where: where
-                              ?.map((o) => (o as dynamic).toJson() as Json)
-                              .toList() ??
-                          [],
-                      orderBy: orderBy
-                              ?.map((o) => (o as dynamic).toJson() as Json)
-                              .toList() ??
-                          [
-                            {'name': 'ASC'},
-                          ],
-                    ),
-                parserFn: streamAllConfig.parserFn ??
-                    db.parser
-                        .singleListParser(fromJson, pageSize: request.pageSize),
-              ),
-        );
-
-    if (searchQuery == null) {
-      return PaginatableStream<Family>(factory: streamFactory);
-    }
-
-    return PaginatableStream<Family>.withSearch(
-      searchStream: searchQuery,
-      factory: streamFactory,
+    return PaginatableStream(
+      parametersStream: Rx.combineLatest3(
+        searchQuery ?? Stream.value(null),
+        where ?? Stream.value(<Input_FamiliesBoolExp>[]),
+        orderBy ?? Stream.value(<Input_FamiliesOrderBy>[]),
+        (search, where, orderBy) => StreamableDAOParameters<Family,
+            Input_FamiliesBoolExp, Input_FamiliesOrderBy>(
+          search: search,
+          where: where,
+          orderBy: orderBy,
+        ),
+      ),
+      factory: (request) => _streamAllFactory(streamAllConfig, request),
     );
   }
+
+  Stream<PaginatableStreamResponse<Family>> _streamAllFactory(
+    StreamAllConfig<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy>
+        streamAllConfig,
+    PaginatableStreamRequest<
+            Family,
+            StreamableDAOParameters<Family, Input_FamiliesBoolExp,
+                Input_FamiliesOrderBy>?>
+        request,
+  ) =>
+      graphQLClient.subscribeAndReturnParsed(
+        streamAllConfig.operationOptions ??
+            SubscriptionOptions(
+              document: streamAllConfig.document,
+              operationName: streamAllConfig.effectiveOperationName,
+              variables: streamAllConfig.variables ??
+                  streamAllConfig.transformRequest?.call(request) ??
+                  db.varsTransformer
+                      .transformrequestForPagination<Family>(request),
+              parserFn: streamAllConfig.parserFn ??
+                  db.parser
+                      .singleListParser(fromJson, pageSize: request.pageSize),
+            ),
+      );
 }

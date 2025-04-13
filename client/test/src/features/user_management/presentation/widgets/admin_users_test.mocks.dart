@@ -126,11 +126,11 @@ class _FakeFile_8 extends _i1.SmartFake implements _i7.File {
         );
 }
 
-/// A class which mocks [PaginatableStream].
+/// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPaginatableStream extends _i1.Mock
-    implements _i8.PaginatableStream<_i8.LastRecordedByInfo> {
+class MockPaginatableStreamBase extends _i1.Mock
+    implements _i8.PaginatableStreamBase<_i8.LastRecordedByInfo> {
   @override
   int get pageSize => (super.noSuchMethod(
         Invocation.getter(#pageSize),
@@ -242,6 +242,26 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<void>);
 
   @override
+  _i2.Future<void> listenToNextPage() => (super.noSuchMethod(
+        Invocation.method(
+          #listenToNextPage,
+          [],
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
+
+  @override
+  _i2.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
+
+  @override
   _i2.Stream<List<_i8.LastRecordedByInfo>> asBroadcastStream({
     void Function(_i2.StreamSubscription<List<_i8.LastRecordedByInfo>>)?
         onListen,
@@ -305,26 +325,6 @@ class MockPaginatableStream extends _i1.Mock
           ),
         ),
       ) as _i2.StreamSubscription<List<_i8.LastRecordedByInfo>>);
-
-  @override
-  _i2.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
-
-  @override
-  _i2.Future<void> listenToNextPage() => (super.noSuchMethod(
-        Invocation.method(
-          #listenToNextPage,
-          [],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
 
   @override
   _i2.Stream<List<_i8.LastRecordedByInfo>> where(

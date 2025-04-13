@@ -10,7 +10,8 @@ import 'package:tinycolor2/tinycolor2.dart';
 class PersonAnalysisChart extends StatefulWidget {
   final DateTimeRange range;
   final HistoryAggregateData analysisData;
-  final PaginatableStreamBase<LastRecordedByInfo> Function() getHistoryStream;
+  final ViewableObjectListController<LastRecordedByInfo> Function()
+      getHistoryListController;
 
   final String title;
   final String lastTimeName;
@@ -22,7 +23,7 @@ class PersonAnalysisChart extends StatefulWidget {
     required this.lastTimeName,
     required this.range,
     required this.analysisData,
-    required this.getHistoryStream,
+    required this.getHistoryListController,
     this.color,
     this.showTime = true,
     super.key,
@@ -233,7 +234,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
         HistoryProperty(
           name: widget.lastTimeName,
           value: widget.analysisData.aggregate.max?.time,
-          getHistoryStream: widget.getHistoryStream,
+          getHistoryListController: widget.getHistoryListController,
           showTime: widget.showTime,
         ),
       ],

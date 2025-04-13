@@ -43,7 +43,8 @@ class AdvancedQueryParser {
         : null;
 
     return streamableDAO.streamingProxy.streamAll(
-      searchQuery: searchStream,
+      parametersStream: searchStream
+          ?.map((search) => StreamableDAOParameters(search: search)),
       streamAllConfig: newStreamAllConfig,
       streamCountConfig: newStreamCountConfig,
     );
@@ -84,13 +85,13 @@ class AdvancedQueryParser {
   }) {
     return config.copyWith(
       document: document,
-      varsConstructor: ({required request, where, orderBy}) => {
-        ...DatabaseService.I.varsTransformer.transformVariablesForPagination(
+      varsConstructor: (request) => {
+        ...DatabaseService.I.varsTransformer.transformrequestForPagination(
           request,
-          where: [
+          overrideWhere: [
             {logicalOperator.value: jsonConditions},
           ],
-          orderBy: jsonOrderBy,
+          overrideOrderBy: jsonOrderBy,
         ),
         if (limit != null) 'limit': limit,
       },

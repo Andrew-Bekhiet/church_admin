@@ -45,7 +45,10 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     Stream<String?> searchStream, {
     List<TBool> where = const [],
   }) {
-    final stream = dao.streamAll(searchQuery: searchStream, where: where);
+    final stream = dao.streamAll(
+      searchQuery: searchStream,
+      where: Stream.value(where),
+    );
 
     return ViewableObjectListController<T>(objectsPaginatableStream: stream);
   }

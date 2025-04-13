@@ -6,7 +6,8 @@ import 'package:meta/meta.dart';
 @immutable
 class StreamAllConfig<T, TBoolExp, TOrderByExp>
     extends DAOMethodTemplate<PaginatableStreamResponse<T>> {
-  final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? transformVars;
+  final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>?
+      transformRequest;
   final SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions;
 
   @override
@@ -15,7 +16,7 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
 
   const StreamAllConfig({
     required super.document,
-    this.transformVars,
+    this.transformRequest,
     this.operationOptions,
     super.operationName,
     super.variables,
@@ -34,7 +35,7 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
-      transformVars: varsConstructor ?? this.transformVars,
+      transformRequest: varsConstructor ?? this.transformRequest,
       operationOptions: operationOptions ?? this.operationOptions,
       parserFn: parserFn ?? this.parserFn,
     );
@@ -42,8 +43,8 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
 }
 
 typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> = Json
-    Function({
-  required PaginatableStreamRequest<T> request,
-  List<TBoolExp>? where,
-  List<TOrderByExp>? orderBy,
-});
+    Function(
+  PaginatableStreamRequest<T,
+          StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
+      request,
+);

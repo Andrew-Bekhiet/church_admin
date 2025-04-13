@@ -28,8 +28,8 @@ import 'package:mockito/src/dummies.dart' as _i9;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeStreamSubscription_0<T> extends _i1.SmartFake
-    implements _i2.StreamSubscription<T> {
+class _FakeStreamSubscription_0<T1> extends _i1.SmartFake
+    implements _i2.StreamSubscription<T1> {
   _FakeStreamSubscription_0(
     Object parent,
     Invocation parentInvocation,
@@ -39,7 +39,7 @@ class _FakeStreamSubscription_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeFuture_1<T> extends _i1.SmartFake implements _i2.Future<T> {
+class _FakeFuture_1<T1> extends _i1.SmartFake implements _i2.Future<T1> {
   _FakeFuture_1(
     Object parent,
     Invocation parentInvocation,
@@ -126,11 +126,11 @@ class _FakeFile_8 extends _i1.SmartFake implements _i7.File {
         );
 }
 
-/// A class which mocks [PaginatableStream].
+/// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPaginatableStream extends _i1.Mock
-    implements _i8.PaginatableStream<_i8.LastRecordedByInfo> {
+class MockPaginatableStreamBase<T> extends _i1.Mock
+    implements _i8.PaginatableStreamBase<T> {
   @override
   int get pageSize => (super.noSuchMethod(
         Invocation.getter(#pageSize),
@@ -153,11 +153,11 @@ class MockPaginatableStream extends _i1.Mock
       ) as int);
 
   @override
-  List<_i8.LastRecordedByInfo> get currentItems => (super.noSuchMethod(
+  List<T> get currentItems => (super.noSuchMethod(
         Invocation.getter(#currentItems),
-        returnValue: <_i8.LastRecordedByInfo>[],
-        returnValueForMissingStub: <_i8.LastRecordedByInfo>[],
-      ) as List<_i8.LastRecordedByInfo>);
+        returnValue: <T>[],
+        returnValueForMissingStub: <T>[],
+      ) as List<T>);
 
   @override
   bool get isLoading => (super.noSuchMethod(
@@ -202,115 +202,31 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<bool>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> get first => (super.noSuchMethod(
+  _i2.Future<List<T>> get first => (super.noSuchMethod(
         Invocation.getter(#first),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> get last => (super.noSuchMethod(
+  _i2.Future<List<T>> get last => (super.noSuchMethod(
         Invocation.getter(#last),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> get single => (super.noSuchMethod(
+  _i2.Future<List<T>> get single => (super.noSuchMethod(
         Invocation.getter(#single),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
   _i2.Future<void> listenToPage(int? pageIndex) => (super.noSuchMethod(
         Invocation.method(
           #listenToPage,
           [pageIndex],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
-
-  @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> asBroadcastStream({
-    void Function(_i2.StreamSubscription<List<_i8.LastRecordedByInfo>>)?
-        onListen,
-    void Function(_i2.StreamSubscription<List<_i8.LastRecordedByInfo>>)?
-        onCancel,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #asBroadcastStream,
-          [],
-          {
-            #onListen: onListen,
-            #onCancel: onCancel,
-          },
-        ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
-
-  @override
-  _i2.StreamSubscription<List<_i8.LastRecordedByInfo>> listen(
-    void Function(List<_i8.LastRecordedByInfo>)? onData, {
-    Function? onError,
-    void Function()? onDone,
-    bool? cancelOnError,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #listen,
-          [onData],
-          {
-            #onError: onError,
-            #onDone: onDone,
-            #cancelOnError: cancelOnError,
-          },
-        ),
-        returnValue: _FakeStreamSubscription_0<List<_i8.LastRecordedByInfo>>(
-          this,
-          Invocation.method(
-            #listen,
-            [onData],
-            {
-              #onError: onError,
-              #onDone: onDone,
-              #cancelOnError: cancelOnError,
-            },
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakeStreamSubscription_0<List<_i8.LastRecordedByInfo>>(
-          this,
-          Invocation.method(
-            #listen,
-            [onData],
-            {
-              #onError: onError,
-              #onDone: onDone,
-              #cancelOnError: cancelOnError,
-            },
-          ),
-        ),
-      ) as _i2.StreamSubscription<List<_i8.LastRecordedByInfo>>);
-
-  @override
-  _i2.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
         ),
         returnValue: _i2.Future<void>.value(),
         returnValueForMissingStub: _i2.Future<void>.value(),
@@ -327,21 +243,89 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<void>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> where(
-          bool Function(List<_i8.LastRecordedByInfo>)? test) =>
+  _i2.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
+
+  @override
+  _i2.Stream<List<T>> asBroadcastStream({
+    void Function(_i2.StreamSubscription<List<T>>)? onListen,
+    void Function(_i2.StreamSubscription<List<T>>)? onCancel,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asBroadcastStream,
+          [],
+          {
+            #onListen: onListen,
+            #onCancel: onCancel,
+          },
+        ),
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
+
+  @override
+  _i2.StreamSubscription<List<T>> listen(
+    void Function(List<T>)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #listen,
+          [onData],
+          {
+            #onError: onError,
+            #onDone: onDone,
+            #cancelOnError: cancelOnError,
+          },
+        ),
+        returnValue: _FakeStreamSubscription_0<List<T>>(
+          this,
+          Invocation.method(
+            #listen,
+            [onData],
+            {
+              #onError: onError,
+              #onDone: onDone,
+              #cancelOnError: cancelOnError,
+            },
+          ),
+        ),
+        returnValueForMissingStub: _FakeStreamSubscription_0<List<T>>(
+          this,
+          Invocation.method(
+            #listen,
+            [onData],
+            {
+              #onError: onError,
+              #onDone: onDone,
+              #cancelOnError: cancelOnError,
+            },
+          ),
+        ),
+      ) as _i2.StreamSubscription<List<T>>);
+
+  @override
+  _i2.Stream<List<T>> where(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #where,
           [test],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<S> map<S>(S Function(List<_i8.LastRecordedByInfo>)? convert) =>
-      (super.noSuchMethod(
+  _i2.Stream<S> map<S>(S Function(List<T>)? convert) => (super.noSuchMethod(
         Invocation.method(
           #map,
           [convert],
@@ -351,8 +335,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<S>);
 
   @override
-  _i2.Stream<E> asyncMap<E>(
-          _i2.FutureOr<E> Function(List<_i8.LastRecordedByInfo>)? convert) =>
+  _i2.Stream<E> asyncMap<E>(_i2.FutureOr<E> Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncMap,
@@ -363,8 +346,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<E>);
 
   @override
-  _i2.Stream<E> asyncExpand<E>(
-          _i2.Stream<E>? Function(List<_i8.LastRecordedByInfo>)? convert) =>
+  _i2.Stream<E> asyncExpand<E>(_i2.Stream<E>? Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncExpand,
@@ -375,7 +357,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<E>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> handleError(
+  _i2.Stream<List<T>> handleError(
     Function? onError, {
     bool Function(dynamic)? test,
   }) =>
@@ -385,14 +367,12 @@ class MockPaginatableStream extends _i1.Mock
           [onError],
           {#test: test},
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<S> expand<S>(
-          Iterable<S> Function(List<_i8.LastRecordedByInfo>)? convert) =>
+  _i2.Stream<S> expand<S>(Iterable<S> Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #expand,
@@ -403,8 +383,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<S>);
 
   @override
-  _i2.Future<dynamic> pipe(
-          _i2.StreamConsumer<List<_i8.LastRecordedByInfo>>? streamConsumer) =>
+  _i2.Future<dynamic> pipe(_i2.StreamConsumer<List<T>>? streamConsumer) =>
       (super.noSuchMethod(
         Invocation.method(
           #pipe,
@@ -416,8 +395,7 @@ class MockPaginatableStream extends _i1.Mock
 
   @override
   _i2.Stream<S> transform<S>(
-          _i2.StreamTransformer<List<_i8.LastRecordedByInfo>, S>?
-              streamTransformer) =>
+          _i2.StreamTransformer<List<T>, S>? streamTransformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transform,
@@ -428,29 +406,26 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<S>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> reduce(
-          List<_i8.LastRecordedByInfo> Function(
-            List<_i8.LastRecordedByInfo>,
-            List<_i8.LastRecordedByInfo>,
+  _i2.Future<List<T>> reduce(
+          List<T> Function(
+            List<T>,
+            List<T>,
           )? combine) =>
       (super.noSuchMethod(
         Invocation.method(
           #reduce,
           [combine],
         ),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
   _i2.Future<S> fold<S>(
     S? initialValue,
     S Function(
       S,
-      List<_i8.LastRecordedByInfo>,
+      List<T>,
     )? combine,
   ) =>
       (super.noSuchMethod(
@@ -543,8 +518,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<bool>);
 
   @override
-  _i2.Future<void> forEach(
-          void Function(List<_i8.LastRecordedByInfo>)? action) =>
+  _i2.Future<void> forEach(void Function(List<T>)? action) =>
       (super.noSuchMethod(
         Invocation.method(
           #forEach,
@@ -555,8 +529,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<void>);
 
   @override
-  _i2.Future<bool> every(bool Function(List<_i8.LastRecordedByInfo>)? test) =>
-      (super.noSuchMethod(
+  _i2.Future<bool> every(bool Function(List<T>)? test) => (super.noSuchMethod(
         Invocation.method(
           #every,
           [test],
@@ -566,8 +539,7 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<bool>);
 
   @override
-  _i2.Future<bool> any(bool Function(List<_i8.LastRecordedByInfo>)? test) =>
-      (super.noSuchMethod(
+  _i2.Future<bool> any(bool Function(List<T>)? test) => (super.noSuchMethod(
         Invocation.method(
           #any,
           [test],
@@ -587,31 +559,24 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Stream<R>);
 
   @override
-  _i2.Future<List<List<_i8.LastRecordedByInfo>>> toList() =>
-      (super.noSuchMethod(
+  _i2.Future<List<List<T>>> toList() => (super.noSuchMethod(
         Invocation.method(
           #toList,
           [],
         ),
-        returnValue: _i2.Future<List<List<_i8.LastRecordedByInfo>>>.value(
-            <List<_i8.LastRecordedByInfo>>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<List<_i8.LastRecordedByInfo>>>.value(
-                <List<_i8.LastRecordedByInfo>>[]),
-      ) as _i2.Future<List<List<_i8.LastRecordedByInfo>>>);
+        returnValue: _i2.Future<List<List<T>>>.value(<List<T>>[]),
+        returnValueForMissingStub: _i2.Future<List<List<T>>>.value(<List<T>>[]),
+      ) as _i2.Future<List<List<T>>>);
 
   @override
-  _i2.Future<Set<List<_i8.LastRecordedByInfo>>> toSet() => (super.noSuchMethod(
+  _i2.Future<Set<List<T>>> toSet() => (super.noSuchMethod(
         Invocation.method(
           #toSet,
           [],
         ),
-        returnValue: _i2.Future<Set<List<_i8.LastRecordedByInfo>>>.value(
-            <List<_i8.LastRecordedByInfo>>{}),
-        returnValueForMissingStub:
-            _i2.Future<Set<List<_i8.LastRecordedByInfo>>>.value(
-                <List<_i8.LastRecordedByInfo>>{}),
-      ) as _i2.Future<Set<List<_i8.LastRecordedByInfo>>>);
+        returnValue: _i2.Future<Set<List<T>>>.value(<List<T>>{}),
+        returnValueForMissingStub: _i2.Future<Set<List<T>>>.value(<List<T>>{}),
+      ) as _i2.Future<Set<List<T>>>);
 
   @override
   _i2.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
@@ -656,75 +621,66 @@ class MockPaginatableStream extends _i1.Mock
       ) as _i2.Future<E>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> take(int? count) =>
-      (super.noSuchMethod(
+  _i2.Stream<List<T>> take(int? count) => (super.noSuchMethod(
         Invocation.method(
           #take,
           [count],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> takeWhile(
-          bool Function(List<_i8.LastRecordedByInfo>)? test) =>
+  _i2.Stream<List<T>> takeWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #takeWhile,
           [test],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> skip(int? count) =>
-      (super.noSuchMethod(
+  _i2.Stream<List<T>> skip(int? count) => (super.noSuchMethod(
         Invocation.method(
           #skip,
           [count],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> skipWhile(
-          bool Function(List<_i8.LastRecordedByInfo>)? test) =>
+  _i2.Stream<List<T>> skipWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #skipWhile,
           [test],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> distinct(
+  _i2.Stream<List<T>> distinct(
           [bool Function(
-            List<_i8.LastRecordedByInfo>,
-            List<_i8.LastRecordedByInfo>,
+            List<T>,
+            List<T>,
           )? equals]) =>
       (super.noSuchMethod(
         Invocation.method(
           #distinct,
           [equals],
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> firstWhere(
-    bool Function(List<_i8.LastRecordedByInfo>)? test, {
-    List<_i8.LastRecordedByInfo> Function()? orElse,
+  _i2.Future<List<T>> firstWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -732,17 +688,14 @@ class MockPaginatableStream extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> lastWhere(
-    bool Function(List<_i8.LastRecordedByInfo>)? test, {
-    List<_i8.LastRecordedByInfo> Function()? orElse,
+  _i2.Future<List<T>> lastWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -750,17 +703,14 @@ class MockPaginatableStream extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> singleWhere(
-    bool Function(List<_i8.LastRecordedByInfo>)? test, {
-    List<_i8.LastRecordedByInfo> Function()? orElse,
+  _i2.Future<List<T>> singleWhere(
+    bool Function(List<T>)? test, {
+    List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -768,31 +718,24 @@ class MockPaginatableStream extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<_i8.LastRecordedByInfo>> elementAt(int? index) =>
-      (super.noSuchMethod(
+  _i2.Future<List<T>> elementAt(int? index) => (super.noSuchMethod(
         Invocation.method(
           #elementAt,
           [index],
         ),
-        returnValue: _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-            <_i8.LastRecordedByInfo>[]),
-        returnValueForMissingStub:
-            _i2.Future<List<_i8.LastRecordedByInfo>>.value(
-                <_i8.LastRecordedByInfo>[]),
-      ) as _i2.Future<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+      ) as _i2.Future<List<T>>);
 
   @override
-  _i2.Stream<List<_i8.LastRecordedByInfo>> timeout(
+  _i2.Stream<List<T>> timeout(
     Duration? timeLimit, {
-    void Function(_i2.EventSink<List<_i8.LastRecordedByInfo>>)? onTimeout,
+    void Function(_i2.EventSink<List<T>>)? onTimeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -800,10 +743,9 @@ class MockPaginatableStream extends _i1.Mock
           [timeLimit],
           {#onTimeout: onTimeout},
         ),
-        returnValue: _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-        returnValueForMissingStub:
-            _i2.Stream<List<_i8.LastRecordedByInfo>>.empty(),
-      ) as _i2.Stream<List<_i8.LastRecordedByInfo>>);
+        returnValue: _i2.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+      ) as _i2.Stream<List<T>>);
 }
 
 /// A class which mocks [ViewableObjectService].

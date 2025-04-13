@@ -51,91 +51,85 @@ class _EditObjectDataState<T extends ViewableWithID>
       data: newTheme,
       child: Scaffold(
         body: Builder(
-          builder:
-              (context) => Form(
-                key: _controller.formKey,
-                canPop: false,
-                onPopInvokedWithResult: (didPop, result) async {
-                  if (didPop) return;
+          builder: (context) => Form(
+            key: _controller.formKey,
+            canPop: false,
+            onPopInvokedWithResult: (didPop, result) async {
+              if (didPop) return;
 
-                  final navigator = Navigator.of(context);
-                  if (await _controller.confirmExit(context))
-                    navigator.pop(result);
-                },
-                child: CustomScrollView(
-                  slivers: [
-                    if (newObjectData is ViewableWithIDAndImage)
-                      SliverAppBar(
-                        stretch: true,
-                        pinned: true,
-                        expandedHeight: MediaQuery.sizeOf(context).width,
-                        actions: [
-                          if (widget.canDeletePhoto(_controller))
-                            IconButton(
-                              onPressed: () => _controller.delete(context),
-                              icon: const Icon(Symbols.delete),
-                              tooltip: 'حذف',
-                            ),
-                        ],
-                        flexibleSpace: PhotoField(
-                          circleCrop:
-                              newObjectData is Person || newObjectData is User,
-                          object: newObjectData as ViewableWithIDAndImage,
-                          initialValue: _controller.photoFieldState,
-                          canDelete: _controller.isUpdate,
-                          backgroundColor: newObjectData.color,
-                          onSaved:
-                              (v) =>
-                                  v?.hasChanged ?? false
-                                      ? _controller.photoFieldState = v!
-                                      : null,
+              final navigator = Navigator.of(context);
+              if (await _controller.confirmExit(context)) navigator.pop(result);
+            },
+            child: CustomScrollView(
+              slivers: [
+                if (newObjectData is ViewableWithIDAndImage)
+                  SliverAppBar(
+                    stretch: true,
+                    pinned: true,
+                    expandedHeight: MediaQuery.sizeOf(context).width,
+                    actions: [
+                      if (widget.canDeletePhoto(_controller))
+                        IconButton(
+                          onPressed: () => _controller.delete(context),
+                          icon: const Icon(Symbols.delete),
+                          tooltip: 'حذف',
                         ),
-                      ),
-                    SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: FocusScope(
-                        debugLabel: 'EditObjectDataFocusScope',
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Builder(
-                            builder:
-                                (context) =>
-                                    widget.builder(context, _controller),
-                          ),
-                        ),
+                    ],
+                    flexibleSpace: PhotoField(
+                      circleCrop:
+                          newObjectData is Person || newObjectData is User,
+                      object: newObjectData as ViewableWithIDAndImage,
+                      initialValue: _controller.photoFieldState,
+                      canDelete: _controller.isUpdate,
+                      backgroundColor: newObjectData.color,
+                      onSaved: (v) => v?.hasChanged ?? false
+                          ? _controller.photoFieldState = v!
+                          : null,
+                    ),
+                  ),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: FocusScope(
+                    debugLabel: 'EditObjectDataFocusScope',
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Builder(
+                        builder: (context) =>
+                            widget.builder(context, _controller),
                       ),
                     ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 16,
-                        ),
-                        child: SaveAndCancelButtonRow(
-                          onSave: () => _controller.save(context),
-                          onCancel: () async {
-                            final bool value = await _controller.confirmExit(
-                              context,
-                            );
-                            if (value && context.mounted) {
-                              Navigator.of(context).pop();
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                    const SliverToBoxAdapter(child: SizedBox(height: 80)),
-                  ],
+                  ),
                 ),
-              ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 16,
+                    ),
+                    child: SaveAndCancelButtonRow(
+                      onSave: () => _controller.save(context),
+                      onCancel: () async {
+                        final bool value = await _controller.confirmExit(
+                          context,
+                        );
+                        if (value && context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 80)),
+              ],
+            ),
+          ),
         ),
-        floatingActionButton:
-            kDebugMode
-                ? FloatingActionButton(
-                  onPressed: () => _controller.save(context),
-                  child: const Icon(Icons.save),
-                )
-                : null,
+        floatingActionButton: kDebugMode
+            ? FloatingActionButton(
+                onPressed: () => _controller.save(context),
+                child: const Icon(Icons.save),
+              )
+            : null,
       ),
     );
   }

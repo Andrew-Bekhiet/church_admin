@@ -96,6 +96,7 @@ typedef Serializer<T> = dynamic Function(Type, T?);
 @visibleForTesting
 final Map<String, Serializer> serializersByField = {
   'id': _idSerializer,
+  'areas': _areasStreetsSerializer,
   'parents': _familiesParentsSerializer,
   'children': _familiesChildrenSerializer,
   'groups': _personsGroupsSerializer,
@@ -114,6 +115,23 @@ dynamic _permissionsSerializer<T>(
   if (type == User && value is UserPermission) {
     return {
       'permission': {'_eq': value.name},
+    };
+  }
+}
+
+dynamic _areasStreetsSerializer<T>(
+  Type type,
+  T? value,
+) {
+  if (type == Street && value is List<Condition>) {
+    return {
+      ..._maybeAddAnd(
+        value
+            .map(
+              (e) => {'area': e.toSearchJson()},
+            )
+            .toList(),
+      ),
     };
   }
 }

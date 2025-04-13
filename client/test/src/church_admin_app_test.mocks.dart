@@ -1101,8 +1101,8 @@ class MockUsersDAO extends _i1.Mock implements _i4.UsersDAO {
   @override
   _i4.PaginatableStreamBase<_i4.User> streamAll({
     _i7.Stream<String?>? searchQuery,
-    List<_i4.Input_AuthUsersDataBoolExp>? where,
-    List<_i4.Input_AuthUsersDataOrderBy>? orderBy,
+    _i7.Stream<List<_i4.Input_AuthUsersDataBoolExp>>? where,
+    _i7.Stream<List<_i4.Input_AuthUsersDataOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1572,7 +1572,7 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
   @override
   _i4.PaginatableStreamBase<_i4.LastRecordedByInfo> paginatePersonAttendance({
     required _i10.Variables_Subscription_personAttendance Function(
-            _i4.PaginatableStreamRequest<_i4.LastRecordedByInfo>)?
+            _i4.PaginatableStreamRequest<_i4.LastRecordedByInfo, void>)?
         vars,
     int? limit,
   }) =>
@@ -1651,8 +1651,8 @@ class MockPersonsDAO extends _i1.Mock implements _i4.PersonsDAO {
   @override
   _i4.PaginatableStreamBase<_i4.Person> streamAll({
     _i7.Stream<String?>? searchQuery,
-    List<_i4.Input_PersonsBoolExp>? where,
-    List<_i4.Input_PersonsOrderBy>? orderBy,
+    _i7.Stream<List<_i4.Input_PersonsBoolExp>>? where,
+    _i7.Stream<List<_i4.Input_PersonsOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1940,8 +1940,8 @@ class MockAreasDAO extends _i1.Mock implements _i4.AreasDAO {
   @override
   _i4.PaginatableStreamBase<_i4.Area> streamAll({
     _i7.Stream<String?>? searchQuery,
-    List<_i4.Input_AreasBoolExp>? where,
-    List<_i4.Input_AreasOrderBy>? orderBy,
+    _i7.Stream<List<_i4.Input_AreasBoolExp>>? where,
+    _i7.Stream<List<_i4.Input_AreasOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2247,10 +2247,8 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
   @override
   _i4.PaginatableStreamBase<_i4.Service> streamAll({
     _i7.Stream<String?>? searchQuery,
-    List<_i4.Input_ServicesBoolExp>? where,
-    List<_i4.Input_GroupsBoolExp>? groupsWhere,
-    List<_i4.Input_ClassesBoolExp>? classesWhere,
-    List<_i4.Input_ServicesOrderBy>? orderBy,
+    _i7.Stream<List<_i4.Input_ServicesBoolExp>>? where,
+    _i7.Stream<List<_i4.Input_ServicesOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2259,8 +2257,6 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
           {
             #searchQuery: searchQuery,
             #where: where,
-            #groupsWhere: groupsWhere,
-            #classesWhere: classesWhere,
             #orderBy: orderBy,
           },
         ),
@@ -2272,8 +2268,6 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
             {
               #searchQuery: searchQuery,
               #where: where,
-              #groupsWhere: groupsWhere,
-              #classesWhere: classesWhere,
               #orderBy: orderBy,
             },
           ),
@@ -2286,8 +2280,6 @@ class MockServicesDAO extends _i1.Mock implements _i4.ServicesDAO {
             {
               #searchQuery: searchQuery,
               #where: where,
-              #groupsWhere: groupsWhere,
-              #classesWhere: classesWhere,
               #orderBy: orderBy,
             },
           ),

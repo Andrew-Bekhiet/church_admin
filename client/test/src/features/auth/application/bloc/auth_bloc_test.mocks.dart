@@ -1349,8 +1349,8 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i4.Stream<String?>? searchQuery,
-    List<_i2.Input_AuthUsersDataBoolExp>? where,
-    List<_i2.Input_AuthUsersDataOrderBy>? orderBy,
+    _i4.Stream<List<_i2.Input_AuthUsersDataBoolExp>>? where,
+    _i4.Stream<List<_i2.Input_AuthUsersDataOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

@@ -985,11 +985,11 @@ class MockAdvancedQueryParser extends _i1.Mock
       ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
 }
 
-/// A class which mocks [PaginatableStream].
+/// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPaginatableStream<T> extends _i1.Mock
-    implements _i2.PaginatableStream<T> {
+class MockPaginatableStreamBase<T> extends _i1.Mock
+    implements _i2.PaginatableStreamBase<T> {
   @override
   int get pageSize => (super.noSuchMethod(
         Invocation.getter(#pageSize),
@@ -1092,6 +1092,26 @@ class MockPaginatableStream<T> extends _i1.Mock
       ) as _i3.Future<void>);
 
   @override
+  _i3.Future<void> listenToNextPage() => (super.noSuchMethod(
+        Invocation.method(
+          #listenToNextPage,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
   _i3.Stream<List<T>> asBroadcastStream({
     void Function(_i3.StreamSubscription<List<T>>)? onListen,
     void Function(_i3.StreamSubscription<List<T>>)? onCancel,
@@ -1151,26 +1171,6 @@ class MockPaginatableStream<T> extends _i1.Mock
           ),
         ),
       ) as _i3.StreamSubscription<List<T>>);
-
-  @override
-  _i3.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
-
-  @override
-  _i3.Future<void> listenToNextPage() => (super.noSuchMethod(
-        Invocation.method(
-          #listenToNextPage,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
 
   @override
   _i3.Stream<List<T>> where(bool Function(List<T>)? test) =>

@@ -49,134 +49,145 @@ void main() {
 
   const size = Size(100, 1365 * 3);
 
-  testWidgets('Authenticate Screen => Key elements', (tester) async {
-    await tester.binding.setSurfaceSize(size);
+  testWidgets(
+    'Authenticate Screen => Key elements',
+    (tester) async {
+      await tester.binding.setSurfaceSize(size);
 
-    await tester.pumpWidgetBuilder(
-      SizedBox.fromSize(
-        size: size,
-        child: Builder(
-          builder: (context) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(size: size),
-              child: const AuthenticateScreen(),
-            );
-          },
+      await tester.pumpWidgetBuilder(
+        SizedBox.fromSize(
+          size: size,
+          child: Builder(
+            builder: (context) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(size: size),
+                child: const AuthenticateScreen(),
+              );
+            },
+          ),
         ),
-      ),
-      wrapper: materialAppWrapper(),
-    );
-    await tester.pumpAndSettle();
-
-    expect(
-      find.byElementPredicate((e) {
-        final Widget widget = e.widget;
-        if (widget is Image) {
-          return widget.image == const AssetImage('assets/holyweek.jpeg') ||
-              widget.image == const AssetImage('assets/risen.jpg') ||
-              widget.image == const AssetImage('assets/logo.png');
-        }
-        return false;
-      }, skipOffstage: false),
-      findsOneWidget,
-    );
-
-    spotKey(
-      AuthenticateScreenKeys.passwordFieldKey,
-    ).spot<PasswordFormField>().existsOnce();
-
-    spotKey(AuthenticateScreenKeys.submitButtonKey).existsOnce();
-
-    spotKey(AuthenticateScreenKeys.biometricsButtonKey)
-        .spotFinder(find.bySubtype<FilledButton>())
-        .existsExactlyNTimes(
-          authVariant.currentValue == AuthenticationVariantEnum.password
-              ? 0
-              : 1,
-        );
-  }, variant: authVariant);
-
-  testWidgets('Authenticate Screen => Authentication', (tester) async {
-    final authCompleter = Completer<bool>();
-    final widgetKey = GlobalKey();
-
-    when(
-      LocalAuthService.I.authenticate(),
-    ).thenAnswer((_) async => authCompleter.future);
-
-    await tester.pumpWidgetBuilder(
-      SizedBox.fromSize(
-        size: size,
-        child: Builder(
-          builder: (context) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(size: size),
-              child: AuthenticateScreen(key: widgetKey),
-            );
-          },
-        ),
-      ),
-      wrapper: materialAppWrapper(),
-    );
-    await tester.pumpAndSettle();
-
-    verify(LocalAuthService.I.canCheckBiometrics());
-
-    if (authVariant.currentValue == AuthenticationVariantEnum.password) {
-      await act.enterText(
-        spotKey(AuthenticateScreenKeys.passwordFieldKey),
-        'wrong password',
+        wrapper: materialAppWrapper(),
       );
-      await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
-
       await tester.pumpAndSettle();
 
-      spot<AlertDialog>().spotText('كلمة سر خاطئة!').existsOnce();
-
-      Navigator.of(widgetKey.currentContext!).pop();
-      await tester.pumpAndSettle();
-
-      await act.enterText(
-        spotKey(AuthenticateScreenKeys.passwordFieldKey),
-        testPassword,
-      );
-      await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
-
-      await tester.pumpAndSettle();
-
-      verifyInOrder([
-        LocalAuthService.I.verifyPassword(
-          email: _fakeUser.email,
-          password: testPassword,
-          storedPasswordHash: testPasswordHash,
+      expect(
+        find.byElementPredicate(
+          (e) {
+            final Widget widget = e.widget;
+            if (widget is Image) {
+              return widget.image == const AssetImage('assets/holyweek.jpeg') ||
+                  widget.image == const AssetImage('assets/risen.jpg') ||
+                  widget.image == const AssetImage('assets/logo.png');
+            }
+            return false;
+          },
+          skipOffstage: false,
         ),
-        LocalAuthService.I.resetAuthState(),
-      ]);
-      verifyNever(LocalAuthService.I.authenticate());
-    } else {
-      verify(LocalAuthService.I.authenticate());
+        findsOneWidget,
+      );
 
-      authCompleter.complete(false);
+      spotKey(
+        AuthenticateScreenKeys.passwordFieldKey,
+      ).spot<PasswordFormField>().existsOnce();
 
-      await tester.pumpAndSettle();
+      spotKey(AuthenticateScreenKeys.submitButtonKey).existsOnce();
 
-      verifyNever(LocalAuthService.I.resetAuthState());
+      spotKey(AuthenticateScreenKeys.biometricsButtonKey)
+          .spotFinder(find.bySubtype<FilledButton>())
+          .existsExactlyNTimes(
+            authVariant.currentValue == AuthenticationVariantEnum.password
+                ? 0
+                : 1,
+          );
+    },
+    variant: authVariant,
+  );
 
-      final authCompleter2 = Completer<bool>();
+  testWidgets(
+    'Authenticate Screen => Authentication',
+    (tester) async {
+      final authCompleter = Completer<bool>();
+      final widgetKey = GlobalKey();
 
       when(
         LocalAuthService.I.authenticate(),
-      ).thenAnswer((_) async => authCompleter2.future);
+      ).thenAnswer((_) async => authCompleter.future);
 
-      await act.tap(spotKey(AuthenticateScreenKeys.biometricsButtonKey));
-
-      authCompleter2.complete(true);
-
+      await tester.pumpWidgetBuilder(
+        SizedBox.fromSize(
+          size: size,
+          child: Builder(
+            builder: (context) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(size: size),
+                child: AuthenticateScreen(key: widgetKey),
+              );
+            },
+          ),
+        ),
+        wrapper: materialAppWrapper(),
+      );
       await tester.pumpAndSettle();
 
-      verify(LocalAuthService.I.resetAuthState());
-    }
-  }, variant: authVariant);
+      verify(LocalAuthService.I.canCheckBiometrics());
+
+      if (authVariant.currentValue == AuthenticationVariantEnum.password) {
+        await act.enterText(
+          spotKey(AuthenticateScreenKeys.passwordFieldKey),
+          'wrong password',
+        );
+        await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+
+        await tester.pumpAndSettle();
+
+        spot<AlertDialog>().spotText('كلمة سر خاطئة!').existsOnce();
+
+        Navigator.of(widgetKey.currentContext!).pop();
+        await tester.pumpAndSettle();
+
+        await act.enterText(
+          spotKey(AuthenticateScreenKeys.passwordFieldKey),
+          testPassword,
+        );
+        await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+
+        await tester.pumpAndSettle();
+
+        verifyInOrder([
+          LocalAuthService.I.verifyPassword(
+            email: _fakeUser.email,
+            password: testPassword,
+            storedPasswordHash: testPasswordHash,
+          ),
+          LocalAuthService.I.resetAuthState(),
+        ]);
+        verifyNever(LocalAuthService.I.authenticate());
+      } else {
+        verify(LocalAuthService.I.authenticate());
+
+        authCompleter.complete(false);
+
+        await tester.pumpAndSettle();
+
+        verifyNever(LocalAuthService.I.resetAuthState());
+
+        final authCompleter2 = Completer<bool>();
+
+        when(
+          LocalAuthService.I.authenticate(),
+        ).thenAnswer((_) async => authCompleter2.future);
+
+        await act.tap(spotKey(AuthenticateScreenKeys.biometricsButtonKey));
+
+        authCompleter2.complete(true);
+
+        await tester.pumpAndSettle();
+
+        verify(LocalAuthService.I.resetAuthState());
+      }
+    },
+    variant: authVariant,
+  );
 
   group('Authenticate Screen => Route =>', () {
     test('No Signed In User', () async {

@@ -17,13 +17,16 @@ class _ViewStreetState extends State<ViewStreet> {
   late final _familiesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
-        where: [
-          Input_FamiliesBoolExp(
-            address: Input_AddressesBoolExp(
-              streetId: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+        where: Stream.value(
+          [
+            Input_FamiliesBoolExp(
+              address: Input_AddressesBoolExp(
+                streetId:
+                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -31,13 +34,16 @@ class _ViewStreetState extends State<ViewStreet> {
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-        where: [
-          Input_StoresBoolExp(
-            address: Input_AddressesBoolExp(
-              streetId: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+        where: Stream.value(
+          [
+            Input_StoresBoolExp(
+              address: Input_AddressesBoolExp(
+                streetId:
+                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -45,13 +51,16 @@ class _ViewStreetState extends State<ViewStreet> {
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-        where: [
-          Input_PersonsBoolExp(
-            address: Input_AddressesBoolExp(
-              streetId: Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+        where: Stream.value(
+          [
+            Input_PersonsBoolExp(
+              address: Input_AddressesBoolExp(
+                streetId:
+                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -143,15 +152,19 @@ class _ViewStreetState extends State<ViewStreet> {
           HistoryProperty(
             name: 'أخر افتقاد',
             value: street.lastVisit?.time,
-            getHistoryStream: () => DatabaseService.I.history
-                .paginateVisitHistory<Street>(id: street.id),
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateVisitHistory<Street>(id: street.id),
+            ),
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: street.lastEdit?.time,
-            getHistoryStream: () =>
-                DatabaseService.I.history.paginateEditHistory<Street>(
-              id: street.id,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Street>(
+                id: street.id,
+              ),
             ),
           ),
         ]),

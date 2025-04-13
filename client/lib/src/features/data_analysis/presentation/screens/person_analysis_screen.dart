@@ -139,12 +139,16 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: s.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 s.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => DatabaseService.I.persons
-                                .paginatePersonServiceAttendance(
-                              personId:
-                                  widget.user?.person?.id ?? widget.person!.id,
-                              asAdmin: widget.user != null,
-                              serviceId: s.id,
+                            getHistoryListController: () =>
+                                ViewableObjectListController(
+                              objectsPaginatableStream: DatabaseService
+                                  .I.persons
+                                  .paginatePersonServiceAttendance(
+                                personId: widget.user?.person?.id ??
+                                    widget.person!.id,
+                                asAdmin: widget.user != null,
+                                serviceId: s.id,
+                              ),
                             ),
                             color: s.color ?? userColor,
                           ),
@@ -169,12 +173,16 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: c.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 c.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => DatabaseService.I.persons
-                                .paginatePersonClassAttendance(
-                              personId:
-                                  widget.user?.person?.id ?? widget.person!.id,
-                              asAdmin: widget.user != null,
-                              classId: c.id,
+                            getHistoryListController: () =>
+                                ViewableObjectListController(
+                              objectsPaginatableStream: DatabaseService
+                                  .I.persons
+                                  .paginatePersonClassAttendance(
+                                personId: widget.user?.person?.id ??
+                                    widget.person!.id,
+                                asAdmin: widget.user != null,
+                                classId: c.id,
+                              ),
                             ),
                             color: c.color ?? userColor,
                           ),
@@ -197,12 +205,16 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             analysisData: g.attendanceHistoryAggregate!,
                             totalAnalysisData:
                                 g.attendanceDaysConstraintsAggregate!,
-                            getHistoryStream: () => DatabaseService.I.persons
-                                .paginatePersonGroupAttendance(
-                              personId:
-                                  widget.user?.person?.id ?? widget.person!.id,
-                              asAdmin: widget.user != null,
-                              groupId: g.id,
+                            getHistoryListController: () =>
+                                ViewableObjectListController(
+                              objectsPaginatableStream: DatabaseService
+                                  .I.persons
+                                  .paginatePersonGroupAttendance(
+                                personId: widget.user?.person?.id ??
+                                    widget.person!.id,
+                                asAdmin: widget.user != null,
+                                groupId: g.id,
+                              ),
                             ),
                             color: g.color ?? userColor,
                           ),
@@ -219,9 +231,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.kodasHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.history
-                                  .paginatePersonConfessionHistory(
-                                personId: widget.person!.id,
+                              getHistoryListController: () =>
+                                  ViewableObjectListController(
+                                objectsPaginatableStream: DatabaseService
+                                    .I.history
+                                    .paginatePersonConfessionHistory(
+                                  personId: widget.person!.id,
+                                ),
                               ),
                               title: 'الاعتراف',
                               range: dateRange,
@@ -239,9 +255,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.confessionHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.history
-                                  .paginatePersonKodasHistory(
-                                personId: widget.person!.id,
+                              getHistoryListController: () =>
+                                  ViewableObjectListController(
+                                objectsPaginatableStream: DatabaseService
+                                    .I.history
+                                    .paginatePersonKodasHistory(
+                                  personId: widget.person!.id,
+                                ),
                               ),
                               title: 'حضور القداس',
                               range: dateRange,
@@ -259,9 +279,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.callHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.history
-                                  .paginatePersonCallHistory(
-                                personId: widget.person!.id,
+                              getHistoryListController: () =>
+                                  ViewableObjectListController(
+                                objectsPaginatableStream: DatabaseService
+                                    .I.history
+                                    .paginatePersonCallHistory(
+                                  personId: widget.person!.id,
+                                ),
                               ),
                               title: 'خدمة المكالمات',
                               range: dateRange,
@@ -279,9 +303,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.visitHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.history
-                                  .paginatePersonVisitHistory(
-                                personId: widget.person!.id,
+                              getHistoryListController: () =>
+                                  ViewableObjectListController(
+                                objectsPaginatableStream: DatabaseService
+                                    .I.history
+                                    .paginatePersonVisitHistory(
+                                  personId: widget.person!.id,
+                                ),
                               ),
                               title: 'الافتقاد',
                               range: dateRange,
@@ -299,9 +327,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             keepAlive: true,
                             child: PersonAnalysisChart(
                               analysisData: person!.editHistoryAggregate!,
-                              getHistoryStream: () => DatabaseService.I.history
-                                  .paginateEditHistory<Person>(
-                                id: widget.person!.id,
+                              getHistoryListController: () =>
+                                  ViewableObjectListController(
+                                objectsPaginatableStream: DatabaseService
+                                    .I.history
+                                    .paginateEditHistory<Person>(
+                                  id: widget.person!.id,
+                                ),
                               ),
                               title: 'تحديث البيانات',
                               range: dateRange,

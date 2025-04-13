@@ -23,90 +23,83 @@ class _ViewStoreState extends State<ViewStore> {
       objectId: widget.storeId,
       object: widget.store,
       objectStream: stream,
-      notFoundBuilder:
-          (context) => Center(
-            child: Text(
-              'لم يتم العثور على المتجر',
-              style: Theme.of(context).textTheme.titleLarge,
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على المتجر',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+      editButtonBuilder: (context, store) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () => EditStoreRoute(
+          $extra: EditStoreExtra(store: store),
+        ).push(context),
+        icon: const Icon(Symbols.edit),
+      ),
+      detailsBuilder: (context, store) => SliverList(
+        delegate: SliverChildListDelegate([
+          CopiablePropertyWidget(
+            'العنوان والموقع',
+            store.address?.toString(),
+            additionalOptions: [
+              if (store.geolocation != null)
+                IconButton(
+                  icon: const Icon(Symbols.map),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions: GeomapOptions(
+                          selectedStores: {store},
+                        ),
+                      ),
+                    ),
+                  ),
+                  tooltip: 'إظهار على الخريطة',
+                ),
+            ],
+          ),
+          ListTile(
+            title: const Text('المنطقة'),
+            subtitle: store.address?.area != null
+                ? ViewableObjectCard(store.address!.area!)
+                : null,
+          ),
+          ListTile(
+            title: const Text('الشارع'),
+            subtitle: store.address?.street != null
+                ? ViewableObjectCard(store.address!.street!)
+                : null,
+          ),
+          ListTile(
+            title: const Text('العائلة المسؤولة'),
+            subtitle: store.family != null
+                ? Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: ViewableObjectCard(store.family!),
+                  )
+                : const Text('لا يوجد'),
+          ),
+          ListTile(
+            title: FilledButton.icon(
+              icon: const Icon(Symbols.query_stats),
+              label: const Text('احصائيات'),
+              // TODO: add store analysis
+              onPressed: () {},
             ),
           ),
-      editButtonBuilder:
-          (context, store) => IconButton(
-            tooltip: 'تعديل',
-            onPressed:
-                () => EditStoreRoute(
-                  $extra: EditStoreExtra(store: store),
-                ).push(context),
-            icon: const Icon(Symbols.edit),
+          HistoryProperty(
+            name: 'أخر تحديث للبيانات',
+            value: store.lastEdit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Store>(
+                id: store.id,
+              ),
+            ),
           ),
-      detailsBuilder:
-          (context, store) => SliverList(
-            delegate: SliverChildListDelegate([
-              CopiablePropertyWidget(
-                'العنوان والموقع',
-                store.address?.toString(),
-                additionalOptions: [
-                  if (store.geolocation != null)
-                    IconButton(
-                      icon: const Icon(Symbols.map),
-                      onPressed:
-                          () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => ViewGeodataMap(
-                                    initialGeomapOptions: GeomapOptions(
-                                      selectedStores: {store},
-                                    ),
-                                  ),
-                            ),
-                          ),
-                      tooltip: 'إظهار على الخريطة',
-                    ),
-                ],
-              ),
-              ListTile(
-                title: const Text('المنطقة'),
-                subtitle:
-                    store.address?.area != null
-                        ? ViewableObjectCard(store.address!.area!)
-                        : null,
-              ),
-              ListTile(
-                title: const Text('الشارع'),
-                subtitle:
-                    store.address?.street != null
-                        ? ViewableObjectCard(store.address!.street!)
-                        : null,
-              ),
-              ListTile(
-                title: const Text('العائلة المسؤولة'),
-                subtitle:
-                    store.family != null
-                        ? Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: ViewableObjectCard(store.family!),
-                        )
-                        : const Text('لا يوجد'),
-              ),
-              ListTile(
-                title: FilledButton.icon(
-                  icon: const Icon(Symbols.query_stats),
-                  label: const Text('احصائيات'),
-                  // TODO: add store analysis
-                  onPressed: () {},
-                ),
-              ),
-              HistoryProperty(
-                name: 'أخر تحديث للبيانات',
-                value: store.lastEdit?.time,
-                getHistoryStream:
-                    () => DatabaseService.I.history.paginateEditHistory<Store>(
-                      id: store.id,
-                    ),
-              ),
-              const SizedBox(height: 40),
-            ]),
-          ),
+          const SizedBox(height: 40),
+        ]),
+      ),
     );
   }
 }
