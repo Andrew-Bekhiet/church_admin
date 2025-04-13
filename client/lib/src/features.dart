@@ -11,4 +11,5 @@ export 'features/maps.dart';
 export 'features/notifications.dart';
 export 'features/settings.dart';
 export 'features/update_user_data.dart';
+export 'features/updates.dart';
 export 'features/user_management.dart';

@@ -18,6 +18,7 @@ class InitializationService {
         DeviceInfoInit(),
         HiveInit(),
         FirebaseInit(),
+        FeatureFlagsInit(),
         FMTCInit(),
         IntlLocaleMessagesInit(),
         AndroidAlarmManagerPluginInit(),
