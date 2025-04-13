@@ -12,6 +12,8 @@ class FeatureFlagsRepository {
   static const String releaseNotesURLKey = 'releaseNotesURL';
   static const String mustForceUpdateKey = 'mustForceUpdate';
   static const String forceUpdateMessageKey = 'forceUpdateMessage';
+  static const String isUnderMaintenanceKey = 'isUnderMaintenance';
+  static const String maintenanceMessageKey = 'maintenanceMessage';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -49,6 +51,18 @@ class FeatureFlagsRepository {
     return rawValue;
   }
 
+  bool get isUnderMaintenance => _remoteConfig.getBool(isUnderMaintenanceKey);
+
+  String? get maintenanceMessage {
+    final rawValue = _remoteConfig.getString(maintenanceMessageKey);
+
+    if (rawValue.isEmpty) {
+      return null;
+    }
+
+    return rawValue;
+  }
+
   Stream<void> get onConfigChanged => _remoteConfig.onConfigUpdated
       .asyncMap((_) => _remoteConfig.fetchAndActivate());
 
@@ -61,6 +75,7 @@ class FeatureFlagsRepository {
       releaseNotesURLKey:
           'https://github.com/Andrew-Bekhiet/church_admin/releases',
       mustForceUpdateKey: false,
+      isUnderMaintenanceKey: false,
     });
   }
 }

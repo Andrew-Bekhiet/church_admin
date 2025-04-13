@@ -8,8 +8,14 @@ final GoRouter $appRouter = GoRouter(
   extraCodec: ChurchAdminRouterExtraCodec(),
   refreshListenable: GoRouterRefreshStream.I,
   redirect: (context, state) {
-    if (FeatureFlagsRepository.I.mustForceUpdate) {
+    final featureFlags = FeatureFlagsRepository.I;
+
+    if (featureFlags.mustForceUpdate) {
       return const ForceUpdateRoute().location;
+    }
+
+    if (featureFlags.isUnderMaintenance) {
+      return const UnderMaintenanceRoute().location;
     }
 
     return null;
@@ -25,6 +31,7 @@ final GoRouter $appRouter = GoRouter(
     $updateUserSpiritDataRoute,
     $authenticateRoute,
     $forceUpdateRoute,
+    $underMaintenanceRoute,
   ],
   errorBuilder: (context, state) {
     if (kReleaseMode) {
