@@ -118,6 +118,8 @@ class ThemingService with WidgetsBindingObserver {
 
     Color? effectiveSeedOverride = seedOverride;
 
+    bool isUsingGreatFeastTheme = false;
+
     final riseDay = getRiseDay();
     if (greatFeastTheme &&
         DateTime.now().isAfter(
@@ -126,6 +128,7 @@ class ThemingService with WidgetsBindingObserver {
         DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
       effectiveSeedOverride = Colors.black;
       isDark = true;
+      isUsingGreatFeastTheme = true;
     } else if (greatFeastTheme &&
         DateTime.now().isBefore(
           riseDay.add(const Duration(days: 50, seconds: 20)),
@@ -133,6 +136,7 @@ class ThemingService with WidgetsBindingObserver {
         DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
       effectiveSeedOverride = Colors.white;
       isDark = false;
+      isUsingGreatFeastTheme = true;
     }
 
     final bool isLight = !isDark;
@@ -174,7 +178,9 @@ class ThemingService with WidgetsBindingObserver {
             isLight ? SchemeColor.primary : null,
         fabUseShape: true,
         fabAlwaysCircular: true,
-        fabForegroundSchemeColor: SchemeColor.onPrimary,
+        fabForegroundSchemeColor: isUsingGreatFeastTheme
+            ? SchemeColor.onPrimaryContainer
+            : SchemeColor.onPrimary,
         chipSchemeColor: SchemeColor.transparent,
         chipSelectedSchemeColor: SchemeColor.primary,
         chipSecondarySelectedSchemeColor: SchemeColor.primary,
@@ -238,17 +244,20 @@ class ThemingService with WidgetsBindingObserver {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: themeData.elevatedButtonTheme.style!.copyWith(
-          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: themeData.outlinedButtonTheme.style!.copyWith(
-          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: themeData.textButtonTheme.style!.copyWith(
-          textStyle: WidgetStateProperty.all(themeData.textTheme.titleSmall),
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       appBarTheme: themeData.appBarTheme.copyWith(
@@ -260,10 +269,12 @@ class ThemingService with WidgetsBindingObserver {
         color: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
       ),
-      inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
-        suffixIconColor: colorScheme.primaryContainer,
-        prefixIconColor: colorScheme.primaryContainer,
-      ),
+      inputDecorationTheme: isUsingGreatFeastTheme
+          ? null
+          : themeData.inputDecorationTheme.copyWith(
+              suffixIconColor: colorScheme.primaryContainer,
+              prefixIconColor: colorScheme.primaryContainer,
+            ),
       dividerTheme: themeData.dividerTheme.copyWith(
         thickness: 1,
         space: 0,
