@@ -32,7 +32,7 @@ class HomeModeSelector extends StatelessWidget {
         return ListView(
           children: [
             Image.asset(
-              'assets/images/High way to God 1.png',
+              _getHomeImage(),
               height: size.height * 0.24,
               fit: BoxFit.fill,
             ),
@@ -128,6 +128,23 @@ class HomeModeSelector extends StatelessWidget {
         );
       },
     );
+  }
+
+  String _getHomeImage() {
+    final riseDay = getRiseDay();
+    if (DateTime.now().isAfter(
+          riseDay.subtract(const Duration(days: 7, seconds: 20)),
+        ) &&
+        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
+      return 'assets/holyweek.jpeg';
+    } else if (DateTime.now().isBefore(
+          riseDay.add(const Duration(days: 50, seconds: 20)),
+        ) &&
+        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
+      return 'assets/risen.jpg';
+    }
+
+    return 'assets/images/High way to God 1.png';
   }
 
   void showMessageDialog(
