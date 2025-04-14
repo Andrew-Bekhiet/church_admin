@@ -180,7 +180,7 @@ class __$$AdvancedQueryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AdvancedQueryImpl implements _AdvancedQuery {
+class _$AdvancedQueryImpl extends _AdvancedQuery {
   const _$AdvancedQueryImpl(
       {required this.name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
@@ -192,7 +192,8 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
       final List<OrderBy> orderBy = const [],
       this.limit})
       : _conditions = conditions,
-        _orderBy = orderBy;
+        _orderBy = orderBy,
+        super._();
 
   factory _$AdvancedQueryImpl.fromJson(Map<String, dynamic> json) =>
       _$$AdvancedQueryImplFromJson(json);
@@ -274,7 +275,7 @@ class _$AdvancedQueryImpl implements _AdvancedQuery {
   }
 }
 
-abstract class _AdvancedQuery implements AdvancedQuery {
+abstract class _AdvancedQuery extends AdvancedQuery {
   const factory _AdvancedQuery(
       {required final String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
@@ -285,6 +286,7 @@ abstract class _AdvancedQuery implements AdvancedQuery {
       @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
       final List<OrderBy> orderBy,
       final int? limit}) = _$AdvancedQueryImpl;
+  const _AdvancedQuery._() : super._();
 
   factory _AdvancedQuery.fromJson(Map<String, dynamic> json) =
       _$AdvancedQueryImpl.fromJson;
