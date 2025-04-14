@@ -15,6 +15,6 @@ export const registerFCMToken = https.onCall({}, async (request) => {
   const hasuraUID = (await getHasuraUID(currentUser.uid))!;
 
   await database()
-    .ref(`Users/${hasuraUID}/fcmTokens/${token}`)
-    .set(new Date().getTime());
+    .ref(`Users/${hasuraUID}/fcmTokens/${new Date().getTime()}`)
+    .set(token);
 });
