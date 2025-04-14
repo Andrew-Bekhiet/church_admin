@@ -45,6 +45,7 @@ class ForceUpdateScreen extends StatelessWidget {
             ),
             if (releaseNotesUrl != null)
               FilledButton.tonal(
+                style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 onPressed: () => _launcherService.launchUrl(releaseNotesUrl),
                 child: const Text('ما الجديد؟'),
               ),

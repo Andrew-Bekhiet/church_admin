@@ -47,6 +47,7 @@ class UpdateAvailableWidget extends StatelessWidget {
                     ),
                     if (releaseNotesUrl != null)
                       FilledButton.tonal(
+                        style: themeData.filledTonalButtonStyleWorkaround,
                         onPressed: () =>
                             launcherService.launchUrl(releaseNotesUrl),
                         child: const Text('ما الجديد؟'),
