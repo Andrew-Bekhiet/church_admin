@@ -37,6 +37,13 @@ class HomeController {
 
   List<Type> get currentTypes => _typesForMode(currentMode);
 
+  bool get showSnowflakeAnimation {
+    final now = DateTime.now();
+
+    return now.isAfter(DateTime(now.year, 12, 25)) ||
+        now.isBefore(DateTime(now.year, 1, 19));
+  }
+
   List<Type> _typesForMode(HomeMode currentMode) {
     return switch (currentMode) {
       HomeMode.sundaySchool => [HomeMode, Service, Person],
