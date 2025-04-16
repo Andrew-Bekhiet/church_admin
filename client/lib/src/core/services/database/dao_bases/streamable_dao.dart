@@ -78,21 +78,21 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
 
     return PaginatableStream(
       parametersStream: shareableParametersStream,
-      factory: (request) =>
-          _streamAllFactory(streamAllConfig, countStream, request),
+      factory: (request) => _streamAllFactory(
+        streamAllConfig,
+        countStream,
+        request,
+      ),
     );
   }
 
-  ValueStream<int?> _getCountStream(
+  Stream<int?> _getCountStream(
     StreamCountConfig? streamCountConfig,
-    Stream<StreamableDAOParameters>? parametersStream,
+    Stream<StreamableDAOParameters> parametersStream,
   ) {
     if (streamCountConfig == null) return Stream.value(null).shareValue();
 
-    return (parametersStream ?? Stream<StreamableDAOParameters?>.value(null))
-        .map((p) => p?.where)
-        .distinct()
-        .switchMap(
+    return parametersStream.map((p) => p.where).distinct().switchMap(
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??
                 SubscriptionOptions(
@@ -110,8 +110,7 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
                   parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
                 ),
           ),
-        )
-        .shareValue();
+        );
   }
 
   Stream<PaginatableStreamResponse<T>> _streamAllFactory(
@@ -121,28 +120,27 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
             StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
         request,
   ) {
-    return graphQLClient
-        .subscribeAndReturnParsed(
-          streamAllConfig.operationOptions ??
-              SubscriptionOptions(
-                document: _getDocumentWithSecondLine(streamAllConfig),
-                operationName: streamAllConfig.effectiveOperationName,
-                variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-                parserFn: streamAllConfig.parserFn ??
-                    db.parser.singleListParser(
-                      fromJson,
-                      pageSize: request.pageSize,
-                    ),
-              ),
-        )
-        .withLatestFrom(
-          countStream,
-          (data, count) => PaginatableStreamResponse<T>(
-            data: data.data,
-            cursor: data.cursor,
-            totalCount: count ?? data.totalCount,
-          ),
-        );
+    return Rx.combineLatest2(
+      graphQLClient.subscribeAndReturnParsed(
+        streamAllConfig.operationOptions ??
+            SubscriptionOptions(
+              document: _getDocumentWithSecondLine(streamAllConfig),
+              operationName: streamAllConfig.effectiveOperationName,
+              variables: _getEffectiveStreamAllVars(streamAllConfig, request),
+              parserFn: streamAllConfig.parserFn ??
+                  db.parser.singleListParser(
+                    fromJson,
+                    pageSize: request.pageSize,
+                  ),
+            ),
+      ),
+      countStream,
+      (data, count) => PaginatableStreamResponse<T>(
+        data: data.data,
+        cursor: data.cursor,
+        totalCount: count ?? data.totalCount,
+      ),
+    );
   }
 
   Json _getEffectiveStreamAllVars(
