@@ -121,8 +121,7 @@ class ThemingService with WidgetsBindingObserver {
     bool isUsingGreatFeastTheme = false;
 
     if (greatFeastTheme) {
-      final litrugySeason = LiturgySeason.current();
-      switch (litrugySeason) {
+      switch (LiturgySeason.current) {
         case LiturgySeason.holyWeek:
           effectiveSeedOverride = Colors.black;
           isDark = true;

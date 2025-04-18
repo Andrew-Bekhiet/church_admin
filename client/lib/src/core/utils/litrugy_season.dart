@@ -1,11 +1,19 @@
 import 'package:clock/clock.dart';
 
 enum LiturgySeason {
+  christmas,
   holyWeek,
   pentecost;
 
-  static LiturgySeason? current() {
+  static LiturgySeason? get current {
     final now = clock.now();
+
+    final epiphany = DateTime(now.year, 1, 19);
+    final christmasSeasonStart = DateTime(now.year, 12, 25);
+
+    if (now.isBetween(christmasSeasonStart, epiphany)) {
+      return LiturgySeason.christmas;
+    }
 
     final resurrectionDay = getRessurectionDate(now.year);
     final palmSundayEnd = resurrectionDay

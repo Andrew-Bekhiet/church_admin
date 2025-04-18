@@ -95,8 +95,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   }
 
   String _getAssetImage() {
-    final litrugySeason = LiturgySeason.current();
-    switch (litrugySeason) {
+    switch (LiturgySeason.current) {
       case LiturgySeason.holyWeek:
         return 'assets/holyweek.jpeg';
 

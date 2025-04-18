@@ -131,8 +131,7 @@ class HomeModeSelector extends StatelessWidget {
   }
 
   String _getHomeImage() {
-    final litrugySeason = LiturgySeason.current();
-    switch (litrugySeason) {
+    switch (LiturgySeason.current) {
       case LiturgySeason.holyWeek:
         return 'assets/holyweek.jpeg';
 
