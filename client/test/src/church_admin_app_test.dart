@@ -4,10 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/not_replay_value_stream.dart';
 
 import 'church_admin_app_test.mocks.dart';
+import 'fakes/fake_feature_flags_repo.dart';
 
 @GenerateNiceMocks([
   MockSpec<LoggingService>(),
@@ -21,6 +23,7 @@ import 'church_admin_app_test.mocks.dart';
   MockSpec<ConnectivityService>(),
   MockSpec<NotificationsService>(),
   MockSpec<HomeDailyDataBloc>(),
+  MockSpec<PackageInfo>(),
 ])
 void main() {
   final firstScreenVariant = FirstScreenVariant();
@@ -127,6 +130,8 @@ List<Override> _setUp() {
     _setUpConnectivityService(),
     _setUpNotificationsService(),
     _setUpHomeDailyDataBloc(),
+    packageInfoPluginProvider.overrideWithValue(MockPackageInfo()),
+    featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
   ];
 
   initGlobalProviderContainer(overrides);

@@ -37,6 +37,9 @@ class HomeController {
 
   List<Type> get currentTypes => _typesForMode(currentMode);
 
+  bool get showSnowflakeAnimation =>
+      LiturgySeason.current == LiturgySeason.christmas;
+
   List<Type> _typesForMode(HomeMode currentMode) {
     return switch (currentMode) {
       HomeMode.sundaySchool => [HomeMode, Service, Person],

@@ -1,14 +1,12 @@
-import 'package:church_admin/church_admin.dart';
-
 class StreamableDAOParameters<T, TBoolExp, TOrderByExp> {
   final String? search;
-  final List<TBoolExp> where;
-  final List<TOrderByExp> orderBy;
+  final List<TBoolExp>? where;
+  final List<TOrderByExp>? orderBy;
 
   const StreamableDAOParameters({
     this.search,
-    this.where = const [],
-    this.orderBy = const [],
+    this.where,
+    this.orderBy,
   });
 
   StreamableDAOParameters<T, TBoolExp, TOrderByExp> copyWith({
@@ -21,13 +19,5 @@ class StreamableDAOParameters<T, TBoolExp, TOrderByExp> {
       where: where ?? this.where,
       orderBy: orderBy ?? this.orderBy,
     );
-  }
-
-  Json toJson() {
-    return {
-      'search': search,
-      'where': where.map((e) => (e as dynamic).toJson()).toList(),
-      'orderBy': orderBy.map((e) => (e as dynamic).toJson()).toList(),
-    };
   }
 }

@@ -1,5 +1,10 @@
 {
-  "include": [
-    ".eslintrc.js"
-  ]
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": ["eslint.config.mjs"],
+  "files": ["src/index.ts"]
 }

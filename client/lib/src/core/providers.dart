@@ -6,6 +6,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -59,8 +60,8 @@ final encryptionServiceProvider = Provider<EncryptionService>(
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
-    );
+  (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+);
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) => DBGraphQLClient(
@@ -76,8 +77,9 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
             .watch(authStorageProvider)
             .getAuthDataFromCache()
             .asStream()
-            .concatWith([ref.watch(authRepositoryProvider).userChanges])
-            .map((u) => u?.idToken),
+            .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
+          (u) => u?.idToken,
+        ),
         url: ref.watch(secretsServiceProvider).hasuraServer,
       ),
     ),
@@ -140,6 +142,15 @@ final firebaseFunctionsProvider = Provider(
   (_) => FirebaseFunctions.instanceFor(region: 'europe-west6'),
 );
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
+final firebaseRemoteConfigProvider =
+    Provider((_) => FirebaseRemoteConfig.instance);
+
+final featureFlagsRepoProvider = Provider<FeatureFlagsRepository>(
+  (ref) => FeatureFlagsRepository(
+    packageInfo: ref.read(packageInfoPluginProvider),
+    remoteConfig: ref.read(firebaseRemoteConfigProvider),
+  ),
+);
 
 final dioProvider = Provider((_) => Dio());
 
@@ -149,19 +160,17 @@ final functionsServiceProvider = Provider<FunctionsService>(
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => FlutterSecureStorage(
-    aOptions:
-        ref.watch(currentPlatformServiceProvider).isAndroid
-            ? AndroidOptions(
-              sharedPreferencesName: 'secure_storage',
-              encryptedSharedPreferences:
-                  ref
-                      .read(deviceInfoServiceProvider)
-                      .androidDeviceInfo!
-                      .version
-                      .sdkInt >=
-                  23,
-            )
-            : AndroidOptions.defaultOptions,
+    aOptions: ref.watch(currentPlatformServiceProvider).isAndroid
+        ? AndroidOptions(
+            sharedPreferencesName: 'secure_storage',
+            encryptedSharedPreferences: ref
+                    .read(deviceInfoServiceProvider)
+                    .androidDeviceInfo!
+                    .version
+                    .sdkInt >=
+                23,
+          )
+        : AndroidOptions.defaultOptions,
     webOptions: const WebOptions(
       dbName: 'secure_storage',
       publicKey: 'secure_storage_pub_key',
@@ -171,8 +180,8 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
 
 final localNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>(
-      (ref) => FlutterLocalNotificationsPlugin(),
-    );
+  (ref) => FlutterLocalNotificationsPlugin(),
+);
 
 final notificationsServiceProvider = Provider<NotificationsService>((ref) {
   final notificationsService = NotificationsService(
@@ -229,12 +238,15 @@ final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
 });
 
 final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
+  final authBloc = ref.watch(authBlocProvider);
+
   final goRouterRefreshStream = GoRouterRefreshStream(
-    Rx.combineLatest2(
-      ref.watch(authBlocProvider).stream,
+    Rx.combineLatest3(
+      authBloc.stream.startWith(authBloc.state),
       ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
+      ref.watch(featureFlagsRepoProvider).onConfigChanged.startWith(null),
       //Just notify when any stream emits
-      (_, __) => Object(),
+      (_, __, ___) => Object(),
     ),
   );
 
@@ -244,13 +256,12 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
 });
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
-  (ref) =>
-      kIsWeb
-          ? throw Exception('Web version does not support viewing data')
-          : ViewableObjectService(
-            router: $appRouter,
-            userSettingsService: ref.watch(userSettingsServiceProvider),
-          ),
+  (ref) => kIsWeb
+      ? throw Exception('Web version does not support viewing data')
+      : ViewableObjectService(
+          router: $appRouter,
+          userSettingsService: ref.watch(userSettingsServiceProvider),
+        ),
 );
 
 final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {

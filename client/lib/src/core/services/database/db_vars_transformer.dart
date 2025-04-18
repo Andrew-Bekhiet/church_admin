@@ -13,10 +13,10 @@ class DBVarsTransformer {
     final PaginatableStreamRequest(:param, :cursor, :pageSize) = request;
 
     final search = param?.search;
-    final where = param?.where.map((o) => o.toJson() as Json).toList() ??
+    final where = param?.where?.map((o) => o.toJson() as Json).toList() ??
         overrideWhere ??
         [];
-    final orderBy = param?.orderBy.map((o) => o.toJson() as Json).toList() ??
+    final orderBy = param?.orderBy?.map((o) => o.toJson() as Json).toList() ??
         overrideOrderBy ??
         [
           {'name': 'ASC'},

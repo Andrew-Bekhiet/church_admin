@@ -32,10 +32,11 @@ class HomeModeSelector extends StatelessWidget {
         return ListView(
           children: [
             Image.asset(
-              'assets/images/High way to God 1.png',
+              _getHomeImage(),
               height: size.height * 0.24,
               fit: BoxFit.fill,
             ),
+            const UpdateAvailableWidget(),
             Container(
               padding: const EdgeInsets.only(
                 left: 7,
@@ -54,47 +55,44 @@ class HomeModeSelector extends StatelessWidget {
               ),
               child: switch (state) {
                 HomeDailyDataLoading() => const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                    child: CircularProgressIndicator(),
+                  ),
                 HomeDailyDataLoaded(:final data) => Column(
-                  spacing: 6,
-                  children: [
-                    HomeModeSection(
-                      key: HomeModeSelectorKeys.verseButtonKey,
-                      onTap:
-                          () => showMessageDialog(
-                            context,
-                            initialData: data,
-                            type: HomeDailyDataType.verse,
-                          ),
-                      title: 'الآيه',
-                      text: data.verse,
-                    ),
-                    HomeModeSection(
-                      key: HomeModeSelectorKeys.sneksarButtonKey,
-                      onTap:
-                          () => showMessageDialog(
-                            context,
-                            initialData: data,
-                            type: HomeDailyDataType.sneksar,
-                            canGetNew: false,
-                          ),
-                      title: 'السنكسار',
-                      text: data.sneksar,
-                    ),
-                    HomeModeSection(
-                      key: HomeModeSelectorKeys.sayingButtonKey,
-                      onTap:
-                          () => showMessageDialog(
-                            context,
-                            initialData: data,
-                            type: HomeDailyDataType.saying,
-                          ),
-                      title: 'أقوال أباء',
-                      text: data.saying,
-                    ),
-                  ],
-                ),
+                    spacing: 6,
+                    children: [
+                      HomeModeSection(
+                        key: HomeModeSelectorKeys.verseButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: data,
+                          type: HomeDailyDataType.verse,
+                        ),
+                        title: 'الآيه',
+                        text: data.verse,
+                      ),
+                      HomeModeSection(
+                        key: HomeModeSelectorKeys.sneksarButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: data,
+                          type: HomeDailyDataType.sneksar,
+                          canGetNew: false,
+                        ),
+                        title: 'السنكسار',
+                        text: data.sneksar,
+                      ),
+                      HomeModeSection(
+                        key: HomeModeSelectorKeys.sayingButtonKey,
+                        onTap: () => showMessageDialog(
+                          context,
+                          initialData: data,
+                          type: HomeDailyDataType.saying,
+                        ),
+                        title: 'أقوال أباء',
+                        text: data.saying,
+                      ),
+                    ],
+                  ),
               },
             ),
             Padding(
@@ -106,21 +104,17 @@ class HomeModeSelector extends StatelessWidget {
                   children: [
                     HomeModeCard(
                       key: HomeModeSelectorKeys.churchDataButtonKey,
-                      onTap:
-                          () =>
-                              homeController
-                                ..onModeChanged(HomeMode.churchData)
-                                ..onTabIndexChanged(1),
+                      onTap: () => homeController
+                        ..onModeChanged(HomeMode.churchData)
+                        ..onTabIndexChanged(1),
                       assetName: 'assets/images/church_data.png',
                       title: 'أسرة أبونا بيشوى كامل',
                     ),
                     HomeModeCard(
                       key: HomeModeSelectorKeys.sundaySchoolButtonKey,
-                      onTap:
-                          () =>
-                              homeController
-                                ..onModeChanged(HomeMode.sundaySchool)
-                                ..onTabIndexChanged(1),
+                      onTap: () => homeController
+                        ..onModeChanged(HomeMode.sundaySchool)
+                        ..onTabIndexChanged(1),
                       assetName:
                           'assets/images/sunday_school_services_image.png',
                       title: 'خدمات مدارس الأحد',
@@ -136,6 +130,19 @@ class HomeModeSelector extends StatelessWidget {
     );
   }
 
+  String _getHomeImage() {
+    switch (LiturgySeason.current) {
+      case LiturgySeason.holyWeek:
+        return 'assets/holyweek.jpeg';
+
+      case LiturgySeason.pentecost:
+        return 'assets/risen.jpg';
+
+      case _:
+        return 'assets/images/High way to God 1.png';
+    }
+  }
+
   void showMessageDialog(
     BuildContext context, {
     required HomeDailyData initialData,
@@ -148,42 +155,40 @@ class HomeModeSelector extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder:
-          (context) => BlocBuilder<HomeDailyDataBloc, HomeDailyDataState>(
-            bloc: dailyDataBloc,
-            builder: (context, state) {
-              final message = switch (state) {
-                HomeDailyDataLoading() => initialMessage,
-                HomeDailyDataLoaded(:final data) => data.select(type),
-              };
+      builder: (context) => BlocBuilder<HomeDailyDataBloc, HomeDailyDataState>(
+        bloc: dailyDataBloc,
+        builder: (context, state) {
+          final message = switch (state) {
+            HomeDailyDataLoading() => initialMessage,
+            HomeDailyDataLoaded(:final data) => data.select(type),
+          };
 
-              return AlertDialog(
-                scrollable: true,
-                title: Text(title),
-                content: Text(message, textAlign: TextAlign.center),
-                contentTextStyle: Theme.of(context).textTheme.titleLarge,
-                actionsAlignment: MainAxisAlignment.center,
-                actions: [
-                  FilledButton(
-                    key: HomeModeSelectorKeys.shareButtonKey,
-                    onPressed: () => ShareService.I.shareText(message),
-                    child: Text('مشاركة $title'),
-                  ),
-                  if (canGetNew)
-                    FilledButton(
-                      key: HomeModeSelectorKeys.newItemButtonKey,
-                      onPressed:
-                          () => dailyDataBloc.add(HomeDailyDataGetNew(type)),
-                      child: Text('$label أخرى'),
-                    ),
-                  FilledButton(
-                    onPressed: Navigator.of(context).pop,
-                    child: const Text('إلغاء'),
-                  ),
-                ],
-              );
-            },
-          ),
+          return AlertDialog(
+            scrollable: true,
+            title: Text(title),
+            content: Text(message, textAlign: TextAlign.center),
+            contentTextStyle: Theme.of(context).textTheme.titleLarge,
+            actionsAlignment: MainAxisAlignment.center,
+            actions: [
+              FilledButton(
+                key: HomeModeSelectorKeys.shareButtonKey,
+                onPressed: () => ShareService.I.shareText(message),
+                child: Text('مشاركة $title'),
+              ),
+              if (canGetNew)
+                FilledButton(
+                  key: HomeModeSelectorKeys.newItemButtonKey,
+                  onPressed: () => dailyDataBloc.add(HomeDailyDataGetNew(type)),
+                  child: Text('$label أخرى'),
+                ),
+              FilledButton(
+                onPressed: Navigator.of(context).pop,
+                child: const Text('إلغاء'),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

@@ -10,5 +10,7 @@ export 'features/local_auth.dart';
 export 'features/maps.dart';
 export 'features/notifications.dart';
 export 'features/settings.dart';
+export 'features/under_maintenance.dart';
 export 'features/update_user_data.dart';
+export 'features/updates.dart';
 export 'features/user_management.dart';

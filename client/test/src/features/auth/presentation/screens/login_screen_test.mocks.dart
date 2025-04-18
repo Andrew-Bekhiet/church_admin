@@ -18,6 +18,7 @@ import 'package:hive/src/box/default_key_comparator.dart' as _i10;
 import 'package:hive_flutter/hive_flutter.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
+import 'package:package_info_plus/package_info_plus.dart' as _i15;
 import 'package:rxdart/rxdart.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -1986,4 +1987,81 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+}
+
+/// A class which mocks [PackageInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPackageInfo extends _i1.Mock implements _i15.PackageInfo {
+  @override
+  String get appName => (super.noSuchMethod(
+        Invocation.getter(#appName),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#appName),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#appName),
+        ),
+      ) as String);
+
+  @override
+  String get packageName => (super.noSuchMethod(
+        Invocation.getter(#packageName),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#packageName),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#packageName),
+        ),
+      ) as String);
+
+  @override
+  String get version => (super.noSuchMethod(
+        Invocation.getter(#version),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#version),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#version),
+        ),
+      ) as String);
+
+  @override
+  String get buildNumber => (super.noSuchMethod(
+        Invocation.getter(#buildNumber),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#buildNumber),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#buildNumber),
+        ),
+      ) as String);
+
+  @override
+  String get buildSignature => (super.noSuchMethod(
+        Invocation.getter(#buildSignature),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#buildSignature),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#buildSignature),
+        ),
+      ) as String);
+
+  @override
+  Map<String, dynamic> get data => (super.noSuchMethod(
+        Invocation.getter(#data),
+        returnValue: <String, dynamic>{},
+        returnValueForMissingStub: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }

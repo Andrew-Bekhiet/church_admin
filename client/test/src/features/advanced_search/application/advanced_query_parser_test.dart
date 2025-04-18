@@ -251,7 +251,9 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
 
   final verificationResult = verify(
     mockedStreamingProxy.streamAll(
-      parametersStream: anyNamed('parametersStream'),
+      orderBy: anyNamed('orderBy'),
+      where: anyNamed('where'),
+      searchQuery: anyNamed('searchQuery'),
       streamAllConfig: captureAnyNamed('streamAllConfig'),
       streamCountConfig: anyNamed('streamCountConfig'),
     ),
@@ -334,7 +336,9 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
       Input_PersonsBoolExp, Input_PersonsOrderBy>();
   when(
     mockStreamableDAOProxy.streamAll(
-      parametersStream: anyNamed('parametersStream'),
+      orderBy: anyNamed('orderBy'),
+      where: anyNamed('where'),
+      searchQuery: anyNamed('searchQuery'),
       streamAllConfig: anyNamed('streamAllConfig'),
       streamCountConfig: anyNamed('streamCountConfig'),
     ),
