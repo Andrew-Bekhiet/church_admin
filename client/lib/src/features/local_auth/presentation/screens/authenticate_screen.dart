@@ -59,9 +59,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
                 onFieldSubmitted: _submit,
                 controller: _passwordText,
                 decoration: const InputDecoration(labelText: 'كلمة السر'),
-                validator:
-                    (p) =>
-                        p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,
+                validator: (p) =>
+                    p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,
                 textInputAction: TextInputAction.done,
               ),
               FilledButton(
@@ -96,19 +95,17 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   }
 
   String _getAssetImage() {
-    final riseDay = getRiseDay();
-    if (DateTime.now().isAfter(
-          riseDay.subtract(const Duration(days: 7, seconds: 20)),
-        ) &&
-        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/holyweek.jpeg';
-    } else if (DateTime.now().isBefore(
-          riseDay.add(const Duration(days: 50, seconds: 20)),
-        ) &&
-        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/risen.jpg';
+    final litrugySeason = LiturgySeason.current();
+    switch (litrugySeason) {
+      case LiturgySeason.holyWeek:
+        return 'assets/holyweek.jpeg';
+
+      case LiturgySeason.pentecost:
+        return 'assets/risen.jpg';
+
+      case _:
+        return 'assets/logo.png';
     }
-    return 'assets/logo.png';
   }
 
   Future<void> _authenticate() async {
@@ -127,9 +124,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       unawaited(
         showDialog(
           context: context,
-          builder:
-              (context) =>
-                  const AlertDialog(title: Text('برجاء ادخال كلمة السر!')),
+          builder: (context) =>
+              const AlertDialog(title: Text('برجاء ادخال كلمة السر!')),
         ),
       );
       return;
@@ -150,8 +146,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       if (mounted) {
         await showDialog(
           context: context,
-          builder:
-              (context) => const AlertDialog(title: Text('كلمة سر خاطئة!')),
+          builder: (context) =>
+              const AlertDialog(title: Text('كلمة سر خاطئة!')),
         );
       }
     }

@@ -131,20 +131,17 @@ class HomeModeSelector extends StatelessWidget {
   }
 
   String _getHomeImage() {
-    final riseDay = getRiseDay();
-    if (DateTime.now().isAfter(
-          riseDay.subtract(const Duration(days: 7, seconds: 20)),
-        ) &&
-        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/holyweek.jpeg';
-    } else if (DateTime.now().isBefore(
-          riseDay.add(const Duration(days: 50, seconds: 20)),
-        ) &&
-        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      return 'assets/risen.jpg';
-    }
+    final litrugySeason = LiturgySeason.current();
+    switch (litrugySeason) {
+      case LiturgySeason.holyWeek:
+        return 'assets/holyweek.jpeg';
 
-    return 'assets/images/High way to God 1.png';
+      case LiturgySeason.pentecost:
+        return 'assets/risen.jpg';
+
+      case _:
+        return 'assets/images/High way to God 1.png';
+    }
   }
 
   void showMessageDialog(

@@ -120,23 +120,21 @@ class ThemingService with WidgetsBindingObserver {
 
     bool isUsingGreatFeastTheme = false;
 
-    final riseDay = getRiseDay();
-    if (greatFeastTheme &&
-        DateTime.now().isAfter(
-          riseDay.subtract(const Duration(days: 7, seconds: 20)),
-        ) &&
-        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      effectiveSeedOverride = Colors.black;
-      isDark = true;
-      isUsingGreatFeastTheme = true;
-    } else if (greatFeastTheme &&
-        DateTime.now().isBefore(
-          riseDay.add(const Duration(days: 50, seconds: 20)),
-        ) &&
-        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      effectiveSeedOverride = Colors.white;
-      isDark = false;
-      isUsingGreatFeastTheme = true;
+    if (greatFeastTheme) {
+      final litrugySeason = LiturgySeason.current();
+      switch (litrugySeason) {
+        case LiturgySeason.holyWeek:
+          effectiveSeedOverride = Colors.black;
+          isDark = true;
+          isUsingGreatFeastTheme = true;
+
+        case LiturgySeason.pentecost:
+          effectiveSeedOverride = Colors.white;
+          isDark = false;
+          isUsingGreatFeastTheme = true;
+
+        case _:
+      }
     }
 
     final bool isLight = !isDark;

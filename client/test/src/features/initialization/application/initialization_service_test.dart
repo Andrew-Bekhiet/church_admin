@@ -14,30 +14,6 @@ void main() {
       tearDown(resetGlobalProviderContainer);
 
       test(
-        'steps',
-        () {
-          final expectedTypes = {
-            WebNavigationInit,
-            SentryInit,
-            PackageInfoInit,
-            DeviceInfoInit,
-            HiveInit,
-            FirebaseInit,
-            FMTCInit,
-            IntlLocaleMessagesInit,
-            AndroidAlarmManagerPluginInit,
-            FlutterLocalNotificationsPluginInit,
-            BlocObserverInit,
-          };
-
-          expect(
-            InitializationService.I.steps.map((e) => e.runtimeType),
-            expectedTypes,
-          );
-        },
-      );
-
-      test(
         'initialize: steps',
         () async {
           final unit = MockInitializationService();

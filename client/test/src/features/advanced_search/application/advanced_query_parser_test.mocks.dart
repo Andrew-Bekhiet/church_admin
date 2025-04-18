@@ -1242,8 +1242,9 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
   _i2.PaginatableStreamBase<T> streamAll({
     required _i2.StreamAllConfig<T, TBoolExp, TOrderByExp>? streamAllConfig,
     _i2.StreamCountConfig<T, TBoolExp>? streamCountConfig,
-    _i4.Stream<_i2.StreamableDAOParameters<T, TBoolExp, TOrderByExp>>?
-        parametersStream,
+    _i4.Stream<String?>? searchQuery,
+    _i4.Stream<List<TBoolExp>>? where,
+    _i4.Stream<List<TOrderByExp>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1252,7 +1253,9 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
           {
             #streamAllConfig: streamAllConfig,
             #streamCountConfig: streamCountConfig,
-            #parametersStream: parametersStream,
+            #searchQuery: searchQuery,
+            #where: where,
+            #orderBy: orderBy,
           },
         ),
         returnValue: _FakePaginatableStreamBase_29<T>(
@@ -1263,7 +1266,9 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
             {
               #streamAllConfig: streamAllConfig,
               #streamCountConfig: streamCountConfig,
-              #parametersStream: parametersStream,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
             },
           ),
         ),
@@ -1275,7 +1280,9 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
             {
               #streamAllConfig: streamAllConfig,
               #streamCountConfig: streamCountConfig,
-              #parametersStream: parametersStream,
+              #searchQuery: searchQuery,
+              #where: where,
+              #orderBy: orderBy,
             },
           ),
         ),
