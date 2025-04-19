@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
 
@@ -74,8 +75,10 @@ class FeatureFlagsRepository {
     return rawValue.split(',').toSet();
   }
 
-  Stream<void> get onConfigChanged => _remoteConfig.onConfigUpdated
-      .asyncMap((_) => _remoteConfig.fetchAndActivate());
+  Stream<void> get onConfigChanged => kIsWeb
+      ? Stream.value(null)
+      : _remoteConfig.onConfigUpdated
+          .asyncMap((_) => _remoteConfig.fetchAndActivate());
 
   Future<void> initialize() async {
     await _remoteConfig.fetchAndActivate();
