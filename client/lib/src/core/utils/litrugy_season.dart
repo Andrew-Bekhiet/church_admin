@@ -26,7 +26,7 @@ enum LiturgySeason {
     if (now.isBetween(palmSundayEnd, holyWeekeEnd)) {
       return LiturgySeason.holyWeek;
     } else if (now.isBetween(
-      resurrectionDay,
+      holyWeekeEnd,
       pentecostEnd,
     )) {
       return LiturgySeason.pentecost;
