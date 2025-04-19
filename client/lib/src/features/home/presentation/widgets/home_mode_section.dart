@@ -28,7 +28,7 @@ class HomeModeSection extends StatelessWidget {
               child: Text(
                 title,
                 style: themeData.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
+                  color: themeData.colorScheme.onPrimary,
                 ),
               ),
             ),

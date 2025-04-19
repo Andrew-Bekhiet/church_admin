@@ -241,7 +241,9 @@ class ThemingService with WidgetsBindingObserver {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: themeData.elevatedButtonTheme.style!.copyWith(
-          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          foregroundColor:
+              WidgetStateProperty.all(colorScheme.onSecondaryContainer),
+          iconColor: WidgetStateProperty.all(colorScheme.onSecondaryContainer),
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
