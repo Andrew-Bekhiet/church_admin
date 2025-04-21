@@ -193,7 +193,7 @@ void main() {
           _setUpAuthStorage(),
           _setUpGoRouterRefreshStream(),
           _setUpLoggingService(),
-          packageInfoPluginProvider.overrideWithValue(MockPackageInfo()),
+          packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
           featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
         ];
 

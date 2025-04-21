@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Family;
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -58,8 +59,10 @@ class DataGeomapState extends State<DataGeomap> {
 
   GeomapOptions get _currentMapOptions => widget.geomapOptionsStream.value;
 
-  String get packageName =>
-      globalProviderContainer.read(packageInfoPluginProvider).packageName;
+  String get packageName => globalProviderContainer
+      .read(packageInfoPluginProvider)
+      .requireValue
+      .packageName;
 
   late final _userLocationStream =
       const LocationMarkerDataStreamFactory().fromGeolocatorPositionStream();

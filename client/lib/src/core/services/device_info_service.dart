@@ -1,9 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DeviceInfoService {
   static DeviceInfoService get I =>
-      globalProviderContainer.read(deviceInfoServiceProvider);
+      globalProviderContainer.read(deviceInfoServiceProvider).requireValue;
 
   final AndroidDeviceInfo? androidDeviceInfo;
   final IosDeviceInfo? iosDeviceInfo;

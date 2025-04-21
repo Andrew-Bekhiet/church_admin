@@ -130,7 +130,7 @@ List<Override> _setUp() {
     _setUpConnectivityService(),
     _setUpNotificationsService(),
     _setUpHomeDailyDataBloc(),
-    packageInfoPluginProvider.overrideWithValue(MockPackageInfo()),
+    packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
     featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
   ];
 

@@ -44,7 +44,7 @@ void main() {
     initGlobalProviderContainer([
       homeDailyDataBlocProvider.overrideWithValue(dailyDataBloc),
       shareServiceProvider.overrideWithValue(shareService),
-      packageInfoPluginProvider.overrideWithValue(MockPackageInfo()),
+      packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
     ]);
   });
