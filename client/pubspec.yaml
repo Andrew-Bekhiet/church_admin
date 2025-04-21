@@ -163,18 +163,18 @@ flutter:
     - assets/images/
 
 flutter_launcher_icons:
-  image_path_android: "graphics/app_icon.png"
-  image_path_ios: "graphics/app_icon.png"
+  image_path_android: "graphics/logo.png"
+  image_path_ios: "graphics/logo.png"
   android: true
   ios: true
-  adaptive_icon_background: "graphics/app_icon_background.png"
-  adaptive_icon_foreground: "graphics/app_icon_foreground.png"
+  adaptive_icon_background: "#E2CABF"
+  adaptive_icon_foreground: "graphics/logo.png"
   min_sdk_android: 21
   remove_alpha_ios: true
   background_color_ios: "#E2CABF"
   web:
     generate: true
-    image_path: "graphics/app_icon.png"
+    image_path: "graphics/logo.png"
     background_color: "#E2CABF"
     theme_color: "#E2CABF"
 
