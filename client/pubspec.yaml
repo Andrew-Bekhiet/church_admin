@@ -181,7 +181,9 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#E2CABF"
   image: graphics/logo.png
+  image_web: graphics/logo-original.png
   branding: graphics/branding.png
+  branding_web: graphics/branding-original.png
   branding_bottom_padding: 24
 
   android_gravity: center
