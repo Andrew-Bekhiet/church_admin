@@ -6,6 +6,7 @@ abstract final class HomeModeSelectorKeys {
   static const Key churchDataButtonKey = Key('church_data_button');
   static const Key sundaySchoolButtonKey = Key('sunday_school_button');
 
+  static const Key birthdaysButtonKey = Key('birthdays_button');
   static const Key verseButtonKey = Key('verse_button');
   static const Key sneksarButtonKey = Key('sneksar_button');
   static const Key sayingButtonKey = Key('saying_button');
@@ -60,6 +61,21 @@ class HomeModeSelector extends StatelessWidget {
                 HomeDailyDataLoaded(:final data) => Column(
                     spacing: 6,
                     children: [
+                      if (data.birthdays.isNotEmpty)
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 400),
+                          alignment: Alignment.topCenter,
+                          curve: Easing.standard,
+                          child: HomeModeSection(
+                            key: HomeModeSelectorKeys.birthdaysButtonKey,
+                            onTap: () =>
+                                AdvancedSearchRoute($extra: data.birthdaysQuery)
+                                    .push(context),
+                            title: 'أعياد الميلاد اليوم',
+                            text: data.birthdays.join('، '),
+                            textMaxLines: 2,
+                          ),
+                        ),
                       HomeModeSection(
                         key: HomeModeSelectorKeys.verseButtonKey,
                         onTap: () => showMessageDialog(

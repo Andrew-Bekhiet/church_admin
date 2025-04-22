@@ -5,12 +5,14 @@ class HomeModeSection extends StatelessWidget {
     required this.onTap,
     required this.title,
     required this.text,
+    this.textMaxLines,
     super.key,
   });
 
   final void Function() onTap;
   final String title;
   final String text;
+  final int? textMaxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,8 @@ class HomeModeSection extends StatelessWidget {
           ),
           Text(
             text,
+            maxLines: textMaxLines,
+            overflow: textMaxLines != null ? TextOverflow.ellipsis : null,
             textAlign: TextAlign.center,
             style: themeData.textTheme.titleLarge,
           ),
