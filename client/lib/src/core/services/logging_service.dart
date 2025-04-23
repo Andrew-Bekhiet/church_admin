@@ -14,13 +14,13 @@ class LoggingService extends BlocObserver {
 
   final NavigatorObserver navigatorObserver = SentryNavigatorObserver();
 
-  LoggingService() {
+  LoggingService({required String sentryDSN}) {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = _errorWidgetBuilder;
 
     SentryFlutter.init(
       (options) => options
-        ..dsn = SecretsService.I.sentryDSN
+        ..dsn = sentryDSN
         ..environment = kReleaseMode ? 'release' : 'debug'
         ..enableAutoPerformanceTracing = true
         ..enableTimeToFullDisplayTracing = true

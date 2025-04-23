@@ -59,8 +59,8 @@ final encryptionServiceProvider = Provider<EncryptionService>(
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
-    );
+  (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+);
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) => DBGraphQLClient(
@@ -76,8 +76,9 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
             .watch(authStorageProvider)
             .getAuthDataFromCache()
             .asStream()
-            .concatWith([ref.watch(authRepositoryProvider).userChanges])
-            .map((u) => u?.idToken),
+            .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
+          (u) => u?.idToken,
+        ),
         url: ref.watch(secretsServiceProvider).hasuraServer,
       ),
     ),
@@ -126,7 +127,8 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
 });
 
 final loggingServiceProvider = Provider<LoggingService>(
-  (ref) => LoggingService(),
+  (ref) =>
+      LoggingService(sentryDSN: ref.watch(secretsServiceProvider).sentryDSN),
 );
 
 final userSettingsServiceProvider = Provider<UserSettingsService>(
@@ -149,19 +151,17 @@ final functionsServiceProvider = Provider<FunctionsService>(
 
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => FlutterSecureStorage(
-    aOptions:
-        ref.watch(currentPlatformServiceProvider).isAndroid
-            ? AndroidOptions(
-              sharedPreferencesName: 'secure_storage',
-              encryptedSharedPreferences:
-                  ref
-                      .read(deviceInfoServiceProvider)
-                      .androidDeviceInfo!
-                      .version
-                      .sdkInt >=
-                  23,
-            )
-            : AndroidOptions.defaultOptions,
+    aOptions: ref.watch(currentPlatformServiceProvider).isAndroid
+        ? AndroidOptions(
+            sharedPreferencesName: 'secure_storage',
+            encryptedSharedPreferences: ref
+                    .read(deviceInfoServiceProvider)
+                    .androidDeviceInfo!
+                    .version
+                    .sdkInt >=
+                23,
+          )
+        : AndroidOptions.defaultOptions,
     webOptions: const WebOptions(
       dbName: 'secure_storage',
       publicKey: 'secure_storage_pub_key',
@@ -171,8 +171,8 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
 
 final localNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>(
-      (ref) => FlutterLocalNotificationsPlugin(),
-    );
+  (ref) => FlutterLocalNotificationsPlugin(),
+);
 
 final notificationsServiceProvider = Provider<NotificationsService>((ref) {
   final notificationsService = NotificationsService(
@@ -244,13 +244,12 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
 });
 
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
-  (ref) =>
-      kIsWeb
-          ? throw Exception('Web version does not support viewing data')
-          : ViewableObjectService(
-            router: $appRouter,
-            userSettingsService: ref.watch(userSettingsServiceProvider),
-          ),
+  (ref) => kIsWeb
+      ? throw Exception('Web version does not support viewing data')
+      : ViewableObjectService(
+          router: $appRouter,
+          userSettingsService: ref.watch(userSettingsServiceProvider),
+        ),
 );
 
 final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
