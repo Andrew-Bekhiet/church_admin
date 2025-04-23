@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'auth_user.freezed.dart';
 part 'auth_user.g.dart';
 
-@freezed
+@Freezed(toStringOverride: true)
 class AuthUser with _$AuthUser {
   const factory AuthUser({
     required String uid,
@@ -16,4 +16,9 @@ class AuthUser with _$AuthUser {
 
   factory AuthUser.fromJson(Map<String, dynamic> json) =>
       _$AuthUserFromJson(json);
+
+  @override
+  String toString() {
+    return 'AuthUser(uid: $uid, email: $email, emailVerified: $emailVerified, claims: $claims, isMultiFactorEnabled: $isMultiFactorEnabled)';
+  }
 }
