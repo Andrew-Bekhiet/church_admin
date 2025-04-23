@@ -13,10 +13,12 @@ class ConnectivityService {
     required Connectivity connectivityPlugin,
     required Dio dio,
     SecretsService? secretsService,
+    LoggingService? loggingService,
     String? urlToPing,
   })  : assert((secretsService == null) != (urlToPing == null)),
         _connectivityPlugin = connectivityPlugin,
         _dio = dio,
+        _loggingService = loggingService ?? LoggingService.I,
         urlToPing = urlToPing ??
             Uri.parse(secretsService!.hasuraServer)
                 .replace(pathSegments: ['healthz']).toString() {
@@ -29,6 +31,7 @@ class ConnectivityService {
 
   final Connectivity _connectivityPlugin;
   final Dio _dio;
+  final LoggingService _loggingService;
 
   late final StreamSubscription<bool> _connectivityStreamSubscription;
   final BehaviorSubject<bool> _connectivityStreamSubject = BehaviorSubject();
@@ -38,9 +41,21 @@ class ConnectivityService {
         .asBroadcastStream()
         .asyncMap(
           (state) async =>
-              state.isNotEmpty && state.singleOrNull != ConnectivityResult.none && await _canPingUrl(),
+              state.isNotEmpty &&
+              state.singleOrNull != ConnectivityResult.none &&
+              await _canPingUrl(),
         )
         .startWithFuture(Future.sync(isConnected))
+        .doOnData(
+          (isConnected) => _loggingService.info(
+            LogRecord(
+              moduleName: '$ConnectivityService',
+              eventName: 'connectivityChanged',
+              message: 'Connectivity changed to $isConnected',
+              data: {'isConnected': isConnected},
+            ),
+          ),
+        )
         .listen(
           _connectivityStreamSubject.add,
           onDone: _connectivityStreamSubject.close,
@@ -50,7 +65,8 @@ class ConnectivityService {
 
   Future<bool> isConnected() async {
     final state = await _connectivityPlugin.checkConnectivity();
-    final isConnected = state.isNotEmpty && state.singleOrNull != ConnectivityResult.none;
+    final isConnected =
+        state.isNotEmpty && state.singleOrNull != ConnectivityResult.none;
 
     if (!isConnected) return false;
 
