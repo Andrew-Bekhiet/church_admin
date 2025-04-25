@@ -36,7 +36,7 @@ class LoggingService extends BlocObserver {
   }
 
   Widget _errorWidgetBuilder(FlutterErrorDetails error) {
-    if (kReleaseMode) _onFlutterError(error);
+    _onFlutterError(error);
 
     return Material(
       type: MaterialType.card,
@@ -54,6 +54,7 @@ class LoggingService extends BlocObserver {
         ..dsn = sentryDSN
         ..environment = kReleaseMode ? 'release' : 'debug'
         ..enableAutoPerformanceTracing = true
+        ..sendDefaultPii = true
         ..enableTimeToFullDisplayTracing = true
         ..anrEnabled = true
         ..debug = false
@@ -135,7 +136,7 @@ class LoggingService extends BlocObserver {
           name: userData?.name,
           data: {
             'emailVerified': authUser.emailVerified,
-            'claims': authUser.claims,
+            'claims': authUser.filteredClaims,
             'isMultiFactorEnabled': authUser.isMultiFactorEnabled,
             'permissions': userData?.permissions.toList(),
             'adminOn': userData?.adminOn?.map((a) => a.toJson()).toList(),
