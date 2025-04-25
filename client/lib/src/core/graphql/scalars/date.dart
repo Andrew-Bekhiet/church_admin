@@ -1,4 +1,10 @@
-DateTime dateFromString(dynamic data) {
+DateTime dateFromString(dynamic rawData) {
+  String data = rawData;
+
+  if (!data.contains('T')) {
+    data = '${data}T00:00:00Z';
+  }
+
   final parsed = DateTime.parse(data);
 
   return parsed.isUtc
