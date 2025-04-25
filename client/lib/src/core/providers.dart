@@ -416,5 +416,6 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
   (ref) => HomeDailyDataBloc(
     homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+    advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
   ),
 );

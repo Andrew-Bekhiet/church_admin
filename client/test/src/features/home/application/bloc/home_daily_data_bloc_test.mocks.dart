@@ -6,6 +6,7 @@
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
+import 'package:rxdart/rxdart.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,6 +21,17 @@ import 'package:mockito/src/dummies.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+
+class _FakePaginatableStreamBase_0<T> extends _i1.SmartFake
+    implements _i2.PaginatableStreamBase<T> {
+  _FakePaginatableStreamBase_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
 
 /// A class which mocks [HomeDailyDataRepository].
 ///
@@ -97,4 +109,46 @@ class MockHomeDailyDataRepository extends _i1.Mock
           ),
         ),
       ) as String);
+}
+
+/// A class which mocks [AdvancedQueryParser].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAdvancedQueryParser extends _i1.Mock
+    implements _i2.AdvancedQueryParser {
+  @override
+  _i2.PaginatableStreamBase<_i2.ViewableWithID> createPaginatableStream(
+    _i2.AdvancedQuery? query, [
+    _i4.BehaviorSubject<String?>? searchStream,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createPaginatableStream,
+          [
+            query,
+            searchStream,
+          ],
+        ),
+        returnValue: _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+          this,
+          Invocation.method(
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
+          ),
+        ),
+        returnValueForMissingStub:
+            _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+          this,
+          Invocation.method(
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
+          ),
+        ),
+      ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
 }

@@ -7,10 +7,13 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
       globalProviderContainer.read(homeDailyDataBlocProvider);
 
   final HomeDailyDataRepository _homeDailyDataRepository;
+  final AdvancedQueryParser _advancedQueryParser;
 
   HomeDailyDataBloc({
     required HomeDailyDataRepository homeDailyDataRepository,
+    required AdvancedQueryParser advancedQueryParser,
   })  : _homeDailyDataRepository = homeDailyDataRepository,
+        _advancedQueryParser = advancedQueryParser,
         super(const HomeDailyDataLoading()) {
     on<LoadHomeDailyData>(
       _onLoadHomeDailyData,
@@ -66,7 +69,7 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
       ],
     );
 
-    final persons = await DatabaseService.I.advancedQueryParser
+    final persons = await _advancedQueryParser
         .createPaginatableStream(birthdaysQuery)
         .first;
 
