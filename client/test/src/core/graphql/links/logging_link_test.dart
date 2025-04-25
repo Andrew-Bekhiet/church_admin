@@ -25,11 +25,18 @@ void main() {
       when(mockRequest.operation).thenReturn(
         const Operation(
           operationName: 'testOperation',
-          document: DocumentNode(),
+          document: DocumentNode(
+            definitions: [
+              OperationDefinitionNode(
+                type: OperationType.query,
+                name: NameNode(value: 'testOperation'),
+                selectionSet: SelectionSetNode(),
+              ),
+            ],
+          ),
         ),
       );
       when(mockRequest.variables).thenReturn({'a': 'b'});
-      when(mockRequest.type).thenReturn(OperationType.query);
 
       final stream = unit.request(
         mockRequest,
@@ -42,7 +49,7 @@ void main() {
 
       await expectLater(stream, emits(mockResponse));
 
-      final verificationResult = verify(loggingService.log(any, captureAny))
+      final verificationResult = verify(loggingService.fine(captureAny))
         ..called(1);
       expect(
         verificationResult.captured.first,
