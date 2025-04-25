@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+export 'logging/dio_logging_interceptor.dart';
 export 'logging/models.dart';
 
 class LoggingService extends BlocObserver {
@@ -13,6 +15,8 @@ class LoggingService extends BlocObserver {
       globalProviderContainer.read(loggingServiceProvider);
 
   final NavigatorObserver navigatorObserver = SentryNavigatorObserver();
+
+  late final Interceptor dioInterceptor = DioLoggingInterceptor(this);
 
   LoggingService({required String sentryDSN}) {
     FlutterError.onError = _onFlutterError;

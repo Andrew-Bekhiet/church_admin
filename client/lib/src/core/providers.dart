@@ -143,7 +143,17 @@ final firebaseFunctionsProvider = Provider(
 );
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
 
-final dioProvider = Provider((_) => Dio());
+final dioProvider = Provider(
+  (ref) {
+    final dio = Dio();
+    ref.onDispose(dio.close);
+
+    final loggingService = ref.read(loggingServiceProvider);
+    dio.interceptors.add(loggingService.dioInterceptor);
+
+    return dio;
+  },
+);
 
 final functionsServiceProvider = Provider<FunctionsService>(
   (ref) => FunctionsService(dio: ref.watch(dioProvider)),
