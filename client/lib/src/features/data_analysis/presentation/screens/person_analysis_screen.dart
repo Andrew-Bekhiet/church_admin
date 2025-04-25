@@ -81,272 +81,238 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
         title:
             Text('تحليل الحضور ل${widget.user?.name ?? widget.person!.name}'),
       ),
-      body: ListView(
-        children: [
-          FutureBuilder<ViewableWithID?>(
-            initialData: widget.person,
-            future: widget.user != null
-                ? DatabaseService.I.users.analyzeUserAttendance(
-                    userId: widget.user!.id,
-                    personId: widget.user!.person?.id ?? widget.person!.id,
-                    dateFrom: dateRange.start,
-                    dateTo: dateRange.end,
-                    groupsIds: groupsIds,
-                    classesIds: classesIds,
-                    servicesIds: servicesIds,
-                  )
-                : DatabaseService.I.persons.getPersonAnalysis(
-                    personId: widget.person!.id,
-                    options: options!,
-                  ),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return ErrorWidget.builder(
-                  FlutterErrorDetails(exception: snapshot.error!),
-                );
-              }
-
-              if (snapshot.data == null) {
-                return const Center(child: CircularProgressIndicator());
-              }
-
-              final user = snapshot.requireData! is User
-                  ? snapshot.requireData! as User
-                  : null;
-              final person = snapshot.requireData! is Person
-                  ? snapshot.requireData! as Person
-                  : null;
-              final userColor = user?.color ?? person?.color;
-
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (final s
-                      in user?.servicesHistory?.map((e) => e.service!) ??
-                          person?.services ??
-                          <Service>[])
-                    if (s.attendanceHistoryAggregate == null ||
-                        s.attendanceDaysConstraintsAggregate == null)
-                      const Center(child: CircularProgressIndicator())
-                    else
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: KeepAlive(
-                          keepAlive: true,
-                          child: PersonAttendanceIndicator(
-                            name: s.name,
-                            range: dateRange,
-                            analysisData: s.attendanceHistoryAggregate!,
-                            totalAnalysisData:
-                                s.attendanceDaysConstraintsAggregate!,
-                            getHistoryListController: () =>
-                                ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I.persons
-                                  .paginatePersonServiceAttendance(
-                                personId: widget.user?.person?.id ??
-                                    widget.person!.id,
-                                asAdmin: widget.user != null,
-                                serviceId: s.id,
-                              ),
-                            ),
-                            color: s.color ?? userColor,
-                          ),
-                        ),
-                      ),
-                  for (final c in user?.classesHistory
-                          ?.map((e) => e.classes)
-                          .expand((e) => e) ??
-                      person?.classes ??
-                      <Class>[])
-                    if (c.attendanceHistoryAggregate == null ||
-                        c.attendanceDaysConstraintsAggregate == null)
-                      const Center(child: CircularProgressIndicator())
-                    else
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: KeepAlive(
-                          keepAlive: true,
-                          child: PersonAttendanceIndicator(
-                            name: c.name,
-                            range: dateRange,
-                            analysisData: c.attendanceHistoryAggregate!,
-                            totalAnalysisData:
-                                c.attendanceDaysConstraintsAggregate!,
-                            getHistoryListController: () =>
-                                ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I.persons
-                                  .paginatePersonClassAttendance(
-                                personId: widget.user?.person?.id ??
-                                    widget.person!.id,
-                                asAdmin: widget.user != null,
-                                classId: c.id,
-                              ),
-                            ),
-                            color: c.color ?? userColor,
-                          ),
-                        ),
-                      ),
-                  for (final g in user?.groupsHistory?.map((e) => e.group!) ??
-                      person?.groups ??
-                      <Group>[])
-                    if (g.attendanceHistoryAggregate == null ||
-                        g.attendanceDaysConstraintsAggregate == null)
-                      const Center(child: CircularProgressIndicator())
-                    else
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: KeepAlive(
-                          keepAlive: true,
-                          child: PersonAttendanceIndicator(
-                            name: g.name,
-                            range: dateRange,
-                            analysisData: g.attendanceHistoryAggregate!,
-                            totalAnalysisData:
-                                g.attendanceDaysConstraintsAggregate!,
-                            getHistoryListController: () =>
-                                ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I.persons
-                                  .paginatePersonGroupAttendance(
-                                personId: widget.user?.person?.id ??
-                                    widget.person!.id,
-                                asAdmin: widget.user != null,
-                                groupId: g.id,
-                              ),
-                            ),
-                            color: g.color ?? userColor,
-                          ),
-                        ),
-                      ),
-                  if (widget.person != null) ...[
-                    if (options!.kodasAnalysis)
-                      if (person?.kodasHistoryAggregate == null)
-                        const Center(child: CircularProgressIndicator())
-                      else
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: KeepAlive(
-                            keepAlive: true,
-                            child: PersonAnalysisChart(
-                              analysisData: person!.kodasHistoryAggregate!,
-                              getHistoryListController: () =>
-                                  ViewableObjectListController(
-                                objectsPaginatableStream: DatabaseService
-                                    .I.history
-                                    .paginatePersonConfessionHistory(
-                                  personId: widget.person!.id,
-                                ),
-                              ),
-                              title: 'الاعتراف',
-                              range: dateRange,
-                              lastTimeName: 'أخر اعتراف',
-                            ),
-                          ),
-                        ),
-                    if (options!.confessionAnalysis)
-                      if (person?.confessionHistoryAggregate == null)
-                        const Center(child: CircularProgressIndicator())
-                      else
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: KeepAlive(
-                            keepAlive: true,
-                            child: PersonAnalysisChart(
-                              analysisData: person!.confessionHistoryAggregate!,
-                              getHistoryListController: () =>
-                                  ViewableObjectListController(
-                                objectsPaginatableStream: DatabaseService
-                                    .I.history
-                                    .paginatePersonKodasHistory(
-                                  personId: widget.person!.id,
-                                ),
-                              ),
-                              title: 'حضور القداس',
-                              range: dateRange,
-                              lastTimeName: 'أخر حضور قداس',
-                            ),
-                          ),
-                        ),
-                    if (options!.callHistoryAnalysis)
-                      if (person?.callHistoryAggregate == null)
-                        const Center(child: CircularProgressIndicator())
-                      else
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: KeepAlive(
-                            keepAlive: true,
-                            child: PersonAnalysisChart(
-                              analysisData: person!.callHistoryAggregate!,
-                              getHistoryListController: () =>
-                                  ViewableObjectListController(
-                                objectsPaginatableStream: DatabaseService
-                                    .I.history
-                                    .paginatePersonCallHistory(
-                                  personId: widget.person!.id,
-                                ),
-                              ),
-                              title: 'خدمة المكالمات',
-                              range: dateRange,
-                              lastTimeName: 'أخر مكالمة',
-                            ),
-                          ),
-                        ),
-                    if (options!.visitHistoryAnalysis)
-                      if (person?.visitHistoryAggregate == null)
-                        const Center(child: CircularProgressIndicator())
-                      else
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: KeepAlive(
-                            keepAlive: true,
-                            child: PersonAnalysisChart(
-                              analysisData: person!.visitHistoryAggregate!,
-                              getHistoryListController: () =>
-                                  ViewableObjectListController(
-                                objectsPaginatableStream: DatabaseService
-                                    .I.history
-                                    .paginatePersonVisitHistory(
-                                  personId: widget.person!.id,
-                                ),
-                              ),
-                              title: 'الافتقاد',
-                              range: dateRange,
-                              lastTimeName: 'أخر افتقاد',
-                            ),
-                          ),
-                        ),
-                    if (options!.editHistoryAnalysis)
-                      if (person?.editHistoryAggregate == null)
-                        const Center(child: CircularProgressIndicator())
-                      else
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: KeepAlive(
-                            keepAlive: true,
-                            child: PersonAnalysisChart(
-                              analysisData: person!.editHistoryAggregate!,
-                              getHistoryListController: () =>
-                                  ViewableObjectListController(
-                                objectsPaginatableStream: DatabaseService
-                                    .I.history
-                                    .paginateEditHistory<Person>(
-                                  id: widget.person!.id,
-                                ),
-                              ),
-                              title: 'تحديث البيانات',
-                              range: dateRange,
-                              lastTimeName: 'أخر تحديث للبيانات',
-                            ),
-                          ),
-                        ),
-                  ],
-                ],
+      body: SingleChildScrollView(
+        child: FutureBuilder<ViewableWithID?>(
+          initialData: widget.person,
+          future: widget.user != null
+              ? DatabaseService.I.users.analyzeUserAttendance(
+                  userId: widget.user!.id,
+                  personId: widget.user!.person?.id ?? widget.person!.id,
+                  dateFrom: dateRange.start,
+                  dateTo: dateRange.end,
+                  groupsIds: groupsIds,
+                  classesIds: classesIds,
+                  servicesIds: servicesIds,
+                )
+              : DatabaseService.I.persons.getPersonAnalysis(
+                  personId: widget.person!.id,
+                  options: options!,
+                ),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return ErrorWidget.builder(
+                FlutterErrorDetails(exception: snapshot.error!),
               );
-            },
-          ),
-        ],
+            }
+
+            if (snapshot.data == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            final user = snapshot.requireData! is User
+                ? snapshot.requireData! as User
+                : null;
+            final person = snapshot.requireData! is Person
+                ? snapshot.requireData! as Person
+                : null;
+            final userColor = user?.color ?? person?.color;
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (final s in user?.servicesHistory?.map((e) => e.service!) ??
+                    person?.services ??
+                    <Service>[])
+                  if (s.attendanceHistoryAggregate == null ||
+                      s.attendanceDaysConstraintsAggregate == null)
+                    const Center(child: CircularProgressIndicator())
+                  else
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: PersonAttendanceIndicator(
+                        name: s.name,
+                        range: dateRange,
+                        analysisData: s.attendanceHistoryAggregate!,
+                        totalAnalysisData:
+                            s.attendanceDaysConstraintsAggregate!,
+                        getHistoryListController: () =>
+                            ViewableObjectListController(
+                          objectsPaginatableStream: DatabaseService.I.persons
+                              .paginatePersonServiceAttendance(
+                            personId:
+                                widget.user?.person?.id ?? widget.person!.id,
+                            asAdmin: widget.user != null,
+                            serviceId: s.id,
+                          ),
+                        ),
+                        color: s.color ?? userColor,
+                      ),
+                    ),
+                for (final c in user?.classesHistory
+                        ?.map((e) => e.classes)
+                        .expand((e) => e) ??
+                    person?.classes ??
+                    <Class>[])
+                  if (c.attendanceHistoryAggregate == null ||
+                      c.attendanceDaysConstraintsAggregate == null)
+                    const Center(child: CircularProgressIndicator())
+                  else
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: PersonAttendanceIndicator(
+                        name: c.name,
+                        range: dateRange,
+                        analysisData: c.attendanceHistoryAggregate!,
+                        totalAnalysisData:
+                            c.attendanceDaysConstraintsAggregate!,
+                        getHistoryListController: () =>
+                            ViewableObjectListController(
+                          objectsPaginatableStream: DatabaseService.I.persons
+                              .paginatePersonClassAttendance(
+                            personId:
+                                widget.user?.person?.id ?? widget.person!.id,
+                            asAdmin: widget.user != null,
+                            classId: c.id,
+                          ),
+                        ),
+                        color: c.color ?? userColor,
+                      ),
+                    ),
+                for (final g in user?.groupsHistory?.map((e) => e.group!) ??
+                    person?.groups ??
+                    <Group>[])
+                  if (g.attendanceHistoryAggregate == null ||
+                      g.attendanceDaysConstraintsAggregate == null)
+                    const Center(child: CircularProgressIndicator())
+                  else
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: PersonAttendanceIndicator(
+                        name: g.name,
+                        range: dateRange,
+                        analysisData: g.attendanceHistoryAggregate!,
+                        totalAnalysisData:
+                            g.attendanceDaysConstraintsAggregate!,
+                        getHistoryListController: () =>
+                            ViewableObjectListController(
+                          objectsPaginatableStream: DatabaseService.I.persons
+                              .paginatePersonGroupAttendance(
+                            personId:
+                                widget.user?.person?.id ?? widget.person!.id,
+                            asAdmin: widget.user != null,
+                            groupId: g.id,
+                          ),
+                        ),
+                        color: g.color ?? userColor,
+                      ),
+                    ),
+                if (widget.person != null) ...[
+                  if (options!.kodasAnalysis)
+                    if (person?.kodasHistoryAggregate == null)
+                      const Center(child: CircularProgressIndicator())
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: PersonAnalysisChart(
+                          analysisData: person!.kodasHistoryAggregate!,
+                          getHistoryListController: () =>
+                              ViewableObjectListController(
+                            objectsPaginatableStream: DatabaseService.I.history
+                                .paginatePersonConfessionHistory(
+                              personId: widget.person!.id,
+                            ),
+                          ),
+                          title: 'الاعتراف',
+                          range: dateRange,
+                          lastTimeName: 'أخر اعتراف',
+                        ),
+                      ),
+                  if (options!.confessionAnalysis)
+                    if (person?.confessionHistoryAggregate == null)
+                      const Center(child: CircularProgressIndicator())
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: PersonAnalysisChart(
+                          analysisData: person!.confessionHistoryAggregate!,
+                          getHistoryListController: () =>
+                              ViewableObjectListController(
+                            objectsPaginatableStream: DatabaseService.I.history
+                                .paginatePersonKodasHistory(
+                              personId: widget.person!.id,
+                            ),
+                          ),
+                          title: 'حضور القداس',
+                          range: dateRange,
+                          lastTimeName: 'أخر حضور قداس',
+                        ),
+                      ),
+                  if (options!.callHistoryAnalysis)
+                    if (person?.callHistoryAggregate == null)
+                      const Center(child: CircularProgressIndicator())
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: PersonAnalysisChart(
+                          analysisData: person!.callHistoryAggregate!,
+                          getHistoryListController: () =>
+                              ViewableObjectListController(
+                            objectsPaginatableStream: DatabaseService.I.history
+                                .paginatePersonCallHistory(
+                              personId: widget.person!.id,
+                            ),
+                          ),
+                          title: 'خدمة المكالمات',
+                          range: dateRange,
+                          lastTimeName: 'أخر مكالمة',
+                        ),
+                      ),
+                  if (options!.visitHistoryAnalysis)
+                    if (person?.visitHistoryAggregate == null)
+                      const Center(child: CircularProgressIndicator())
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: PersonAnalysisChart(
+                          analysisData: person!.visitHistoryAggregate!,
+                          getHistoryListController: () =>
+                              ViewableObjectListController(
+                            objectsPaginatableStream: DatabaseService.I.history
+                                .paginatePersonVisitHistory(
+                              personId: widget.person!.id,
+                            ),
+                          ),
+                          title: 'الافتقاد',
+                          range: dateRange,
+                          lastTimeName: 'أخر افتقاد',
+                        ),
+                      ),
+                  if (options!.editHistoryAnalysis)
+                    if (person?.editHistoryAggregate == null)
+                      const Center(child: CircularProgressIndicator())
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: PersonAnalysisChart(
+                          analysisData: person!.editHistoryAggregate!,
+                          getHistoryListController: () =>
+                              ViewableObjectListController(
+                            objectsPaginatableStream: DatabaseService.I.history
+                                .paginateEditHistory<Person>(
+                              id: widget.person!.id,
+                            ),
+                          ),
+                          title: 'تحديث البيانات',
+                          range: dateRange,
+                          lastTimeName: 'أخر تحديث للبيانات',
+                        ),
+                      ),
+                ],
+              ],
+            );
+          },
+        ),
       ),
     );
   }
