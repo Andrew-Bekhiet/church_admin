@@ -11,7 +11,12 @@ class ClassesDAO
   late final StreamAllConfig<Class, Input_ClassesBoolExp, Input_ClassesOrderBy>
       baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllClasses,
-    transformVars: _streamAllVarsConstructor,
+    transformRequest: _streamAllVarsConstructor,
+  );
+  @override
+  late final StreamCountConfig<Class, Input_ClassesBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchClassesCount,
   );
   @override
   late final StreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
@@ -38,25 +43,26 @@ class ClassesDAO
     varsConstructor: _createClassVarsConstructor,
   );
 
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Class> event,
-    List<Input_ClassesBoolExp>? where,
-    List<Input_ClassesOrderBy>? orderBy,
-  }) {
-    return db.varsTransformer.transformVariablesForPagination(
-      event,
-      where: where?.map((o) => o.toJson()).toList() ?? [],
-      orderBy: ((orderBy?.isEmpty ?? true)
-              ? [
-                  Input_ClassesOrderBy(serviceStudyYear: Enum_OrderBy.ASC),
-                  Input_ClassesOrderBy(
-                    serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
-                  ),
-                  Input_ClassesOrderBy(name: Enum_OrderBy.ASC),
-                ]
-              : orderBy!)
-          .map((o) => o.toJson())
-          .toList(),
+  Json _streamAllVarsConstructor(
+    PaginatableStreamRequest<
+            Class,
+            StreamableDAOParameters<Class, Input_ClassesBoolExp,
+                Input_ClassesOrderBy>?>
+        request,
+  ) {
+    final orderBy = request.param?.orderBy;
+
+    return db.varsTransformer.transformrequestForPagination(
+      request,
+      overrideOrderBy: (orderBy?.isEmpty ?? true)
+          ? [
+              Input_ClassesOrderBy(serviceStudyYear: Enum_OrderBy.ASC),
+              Input_ClassesOrderBy(
+                serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
+              ),
+              Input_ClassesOrderBy(name: Enum_OrderBy.ASC),
+            ].map((o) => o.toJson()).toList()
+          : null,
     );
   }
 

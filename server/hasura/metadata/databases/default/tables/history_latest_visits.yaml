@@ -11,13 +11,6 @@ object_relationships:
         remote_table:
           name: users_data
           schema: auth
-computed_fields:
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_latest_visit
-        schema: history
-      session_argument: hasura_session
 select_permissions:
   - role: user
     permission:
@@ -28,8 +21,29 @@ select_permissions:
         - time
         - visit_id
       filter:
-        isUserAllowedToRead:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+                  - _and:
+                      - table:
+                          _ceq:
+                            - $
+                            - table
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - record_id
       allow_aggregations: true
       query_root_fields: []
       subscription_root_fields: []

@@ -2,88 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:collection/collection.dart';
-
-class PersonInsertHelper {
-  static final _mutationNonExistentVars = {
-    'id',
-    'church',
-    'college',
-    'family',
-    'father',
-    'job',
-    'personType',
-    'qualification',
-    'school',
-    'shammasLevel',
-    'studyYear',
-    'state',
-  };
-
-  final Person newPerson;
-
-  final Map<String, dynamic> _personDelta;
-
-  PersonInsertHelper({
-    required this.newPerson,
-    Person? oldPerson,
-  }) : _personDelta = computeObjectDelta(
-          newPerson.toJson(),
-          (oldPerson ?? Person(id: '', name: '')).toJson(),
-          ignoreFields: _mutationNonExistentVars,
-        );
-
-  List<Input_PersonsServicesInsertInput> get _newServices =>
-      (newPerson.services ?? [])
-          .map(
-            (e) => Input_PersonsServicesInsertInput(
-              serviceId: e.id.toUuid(),
-            ),
-          )
-          .toList();
-
-  List<Input_PersonsGroupsInsertInput> get _newGroups =>
-      (newPerson.groups ?? [])
-          .map(
-            (e) => Input_PersonsGroupsInsertInput(
-              groupId: e.id.toUuid(),
-            ),
-          )
-          .toList();
-
-  List<Input_PersonsHobbiesInsertInput> get _newHobbies =>
-      (newPerson.hobbies ?? [])
-          .map(
-            (e) => Input_PersonsHobbiesInsertInput(
-              hobbyId: e.id.toUuid(),
-            ),
-          )
-          .toList();
-
-  List<Input_PersonsTagsInsertInput> get _newTags => (newPerson.tags ?? [])
-      .map(
-        (e) => Input_PersonsTagsInsertInput(
-          tagId: e.id.toUuid(),
-        ),
-      )
-      .toList();
-
-  Variables_Mutation_insertPerson get variables =>
-      Variables_Mutation_insertPerson(
-        newPerson: Input_PersonsInsertInput.fromJson(
-          {
-            ..._personDelta,
-            'services':
-                Input_PersonsServicesArrRelInsertInput(data: _newServices)
-                    .toJson(),
-            'groups':
-                Input_PersonsGroupsArrRelInsertInput(data: _newGroups).toJson(),
-            'hobbies': Input_PersonsHobbiesArrRelInsertInput(data: _newHobbies)
-                .toJson(),
-            'tags': Input_PersonsTagsArrRelInsertInput(data: _newTags).toJson(),
-          },
-        ),
-      );
-}
+import 'package:uuid/enums.dart';
 
 class PersonUpdateHelper {
   final Person newPerson;
@@ -96,11 +15,11 @@ class PersonUpdateHelper {
   late final IterableDifferenceResult<ID> _hobbiesDiff;
   late final IterableDifferenceResult<ID> _tagsDiff;
 
-  PersonUpdateHelper({
-    required this.newPerson,
-    required this.oldPerson,
-  }) : _personDelta =
-            computeObjectDelta(newPerson.toJson(), oldPerson.toJson()) {
+  PersonUpdateHelper({required this.newPerson, required this.oldPerson})
+      : _personDelta = computeObjectDelta(
+          newPerson.toJson(),
+          oldPerson.toJson(),
+        ) {
     _servicesDiff = _getDifferenceUsing((p) => p.services);
     _groupsDiff = _getDifferenceUsing((p) => p.groups);
     _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);
@@ -119,7 +38,11 @@ class PersonUpdateHelper {
   bool get _updatePersonsByPk => _personDelta.keys
       .where(
         (k) =>
-            k != 'services' && k != 'groups' && k != 'hobbies' && k != 'tags',
+            k != 'address' &&
+            k != 'services' &&
+            k != 'groups' &&
+            k != 'hobbies' &&
+            k != 'tags',
       )
       .isNotEmpty;
 
@@ -183,10 +106,19 @@ class PersonUpdateHelper {
       )
       .toList();
 
+  bool get _updateAddressByPk =>
+      _personDelta.containsKey('address') &&
+      !_personDelta.containsKey('familyId');
+
   Variables_Mutation_updatePerson get variables =>
       Variables_Mutation_updatePerson(
         personId: newPerson.id.toUuid(),
-        newPerson: Input_PersonsSetInput.fromJson(_personDelta),
+        newPerson: newPerson.toUpdateInput(oldPerson),
+        addressId: oldPerson.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
+        newAddress: newPerson.address?.toUpdateInput(
+          oldPerson.address ?? Address(),
+        ),
+        updateAddressByPk: _updateAddressByPk,
         deleteServices: _deleteServices,
         newServices: _newServices,
         deleteGroups: _deleteGroups,

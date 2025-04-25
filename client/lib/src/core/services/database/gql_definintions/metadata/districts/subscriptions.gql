@@ -1,0 +1,10 @@
+subscription watchAllDistricts(
+  $where: [DistrictsBoolExp!] = {}
+  $orderBy: [DistrictsOrderBy!] = { name: ASC }
+  $limit: Int = 25
+) {
+  districts(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
+    id
+    name
+  }
+}

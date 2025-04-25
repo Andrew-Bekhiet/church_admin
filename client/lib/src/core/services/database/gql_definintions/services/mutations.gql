@@ -1,4 +1,4 @@
-mutation deleteService($serviceId: Uuid!) {
+mutation deleteService($serviceId: uuid!) {
   deleteServicesByPk(id: $serviceId) {
     ...Service
   }
@@ -10,7 +10,7 @@ mutation insertService($newService: ServicesInsertInput!) {
   }
 }
 
-mutation updateService($serviceId: Uuid!, $newService: ServicesSetInput!) {
+mutation updateService($serviceId: uuid!, $newService: ServicesSetInput!) {
   updateServicesByPk(pkColumns: { id: $serviceId }, _set: $newService) {
     ...Service
   }

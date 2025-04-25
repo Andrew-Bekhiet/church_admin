@@ -28,10 +28,10 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
     add(const LoadHomeDailyData());
   }
 
-  void _onLoadHomeDailyData(
+  Future<void> _onLoadHomeDailyData(
     LoadHomeDailyData event,
     Emitter<HomeDailyDataState> emit,
-  ) {
+  ) async {
     final verse = _homeDailyDataRepository.getVerse();
     final sneksar = _homeDailyDataRepository.getTodaysSneksar();
     final saying = _homeDailyDataRepository.getSaying();
@@ -42,6 +42,44 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
           verse: verse,
           sneksar: sneksar,
           saying: saying,
+        ),
+      ),
+    );
+
+    final now = DateTime.now();
+
+    final birthdaysQuery = AdvancedQuery(
+      name: 'أعياد الميلاد',
+      queryableType: Person.queryableType,
+      conditions: [
+        Condition(
+          queryableType: Person.queryableType,
+          field: 'birthday',
+          operator: Operator.eq,
+          value:
+              '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
+        ),
+      ],
+      orderBy: [
+        OrderBy(fieldName: 'birthdate'),
+        OrderBy(fieldName: 'name'),
+      ],
+    );
+
+    final persons = await DatabaseService.I.advancedQueryParser
+        .createPaginatableStream(birthdaysQuery)
+        .first;
+
+    final currentState = state as HomeDailyDataLoaded;
+
+    emit(
+      HomeDailyDataLoaded(
+        data: HomeDailyData(
+          verse: currentState.data.verse,
+          sneksar: currentState.data.sneksar,
+          saying: currentState.data.saying,
+          birthdays: persons.map((e) => e.name).toList(),
+          birthdaysQuery: birthdaysQuery,
         ),
       ),
     );

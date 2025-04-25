@@ -37,6 +37,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
+  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
@@ -47,6 +48,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.notFoundBuilder,
     required this.editButtonBuilder,
     required this.detailsBuilder,
+    this.bottomNavBarBuilder,
     this.childrenTypes = const [],
     this.sliverPersistentHeaderDelegate,
     this.tabsContentBuilders = const {},
@@ -106,6 +108,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
+        final canEditObject =
+            AuthBloc.I.currentUserData!.canEditObject(objectData);
+
         final slivers = [
           SliverAppBar(
             stretch: true,
@@ -117,7 +122,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   padding: EdgeInsets.all(8),
                   child: Center(child: CircularProgressIndicator()),
                 )
-              else if (AuthBloc.I.currentUserData!.canEditObject(objectData))
+              else if (canEditObject)
                 widget.editButtonBuilder(context, objectData),
             ],
             flexibleSpace: ViewableObjectAppBar(
@@ -157,8 +162,18 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 ),
               );
 
-        final newTheme =
+        ThemeData newTheme =
             ThemingService.getDefault(seedOverride: objectData.color);
+
+        if (widget.floatingActionButtonBuilder != null &&
+            widget.bottomNavBarBuilder != null) {
+          newTheme = newTheme.copyWith(
+            floatingActionButtonTheme:
+                newTheme.floatingActionButtonTheme.copyWith(
+              elevation: 0,
+            ),
+          );
+        }
 
         return Theme(
           data: newTheme,
@@ -169,17 +184,31 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 onNotification: _onScrollEnd,
                 child: body,
               ),
-              floatingActionButton: widget.floatingActionButtonBuilder != null
+              bottomNavigationBar: widget.bottomNavBarBuilder != null
                   ? Builder(
-                      builder: (context) {
-                        return widget.floatingActionButtonBuilder!(
+                      builder: (context) => BottomAppBar(
+                        child: widget.bottomNavBarBuilder!(
                           context,
                           DefaultTabController.of(context),
-                          objectData,
-                        );
-                      },
+                        ),
+                      ),
                     )
                   : null,
+              floatingActionButtonLocation: widget.bottomNavBarBuilder != null
+                  ? FloatingActionButtonLocation.endContained
+                  : null,
+              floatingActionButton:
+                  widget.floatingActionButtonBuilder != null && canEditObject
+                      ? Builder(
+                          builder: (context) {
+                            return widget.floatingActionButtonBuilder!(
+                              context,
+                              DefaultTabController.of(context),
+                              objectData,
+                            );
+                          },
+                        )
+                      : null,
             ),
           ),
         );

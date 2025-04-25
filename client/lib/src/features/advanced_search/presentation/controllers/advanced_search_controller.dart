@@ -21,6 +21,11 @@ class AdvancedSearchController {
     ),
   );
 
+  final BehaviorSubject<bool> _hideAdvancedOperators =
+      BehaviorSubject.seeded(true);
+
+  Stream<bool> get hideAdvancedOperatorsStream => _hideAdvancedOperators.stream;
+
   Stream<AdvancedQuery> get queryStream => _query.stream;
 
   Stream<QueryableType> get selectedTypeStream =>
@@ -37,6 +42,8 @@ class AdvancedSearchController {
   Stream<List<OrderBy>> get orderByStream =>
       _query.map((q) => q.orderBy).distinct();
 
+  bool get hideAdvancedOperators => _hideAdvancedOperators.value;
+
   AdvancedQuery get query => _query.value;
 
   QueryableType get selectedQueryableType => _query.value.queryableType;
@@ -48,6 +55,9 @@ class AdvancedSearchController {
   int? get limit => _query.value.limit;
 
   List<OrderBy> get orderBy => _query.value.orderBy;
+
+  void toggleHideAdvancedOperators() =>
+      _hideAdvancedOperators.add(!_hideAdvancedOperators.value);
 
   void changeQuery(AdvancedQuery value) => _query.add(value);
 

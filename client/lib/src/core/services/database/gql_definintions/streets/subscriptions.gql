@@ -9,11 +9,21 @@ subscription watchAllStreets(
   }
 }
 
-subscription watchStreet($id: Uuid!) {
+subscription watchStreetsCount($where: [StreetsBoolExp!] = {}) {
+  streetsAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
+subscription watchStreet($id: uuid!) {
   streetsByPk(id: $id) {
     ...Street
-    areas(orderBy: { name: ASC }) {
-      ...Area
+    areas(orderBy: { area: { name: ASC } }) {
+      area {
+        ...Area
+      }
     }
     line
     lastEdit {

@@ -5,7 +5,7 @@ part 'advanced_query.freezed.dart';
 part 'advanced_query.g.dart';
 
 @freezed
-class AdvancedQuery with _$AdvancedQuery implements ToJson {
+class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
   const factory AdvancedQuery({
     required String name,
     @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
@@ -19,9 +19,13 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson {
     List<OrderBy> orderBy,
     int? limit,
   }) = _AdvancedQuery;
+  const AdvancedQuery._();
 
   factory AdvancedQuery.fromJson(Map<String, Object?> json) =>
       _$AdvancedQueryFromJson(json);
+
+  @override
+  String get typeName => 'AdvancedQuery';
 }
 
 List<Json> conditionsToJson(List<Condition> data) =>

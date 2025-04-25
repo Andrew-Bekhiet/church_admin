@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
-
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
@@ -10,9 +9,16 @@ class ServicesDAO
 
   @override
   late final StreamAllConfig<Service, Input_ServicesBoolExp,
-          Input_ServicesOrderBy> baseStreamAllConfig =
-      const StreamAllConfig(document: documentNodeSubscriptionwatchAllServices);
+      Input_ServicesOrderBy> baseStreamAllConfig = StreamAllConfig(
+    document: documentNodeSubscriptionwatchAllServices,
+    transformRequest: _streamAllVarsConstructor,
+  );
 
+  @override
+  late final StreamCountConfig<Service, Input_ServicesBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchServicesCount,
+  );
   @override
   late final StreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
@@ -38,36 +44,36 @@ class ServicesDAO
     varsConstructor: _createServiceVarsConstructor,
   );
 
-  Json _streamAllVarsConstructor({
-    required GQLPaginatableStreamEvent<Service> event,
-    List<Input_ServicesBoolExp>? where,
-    List<Input_GroupsBoolExp> groupsWhere = const [],
-    List<Input_ClassesBoolExp> classesWhere = const [],
-    List<Input_ServicesOrderBy>? orderBy,
-  }) {
-    final search = event.search;
+  Json _streamAllVarsConstructor(
+    PaginatableStreamRequest<
+            Service,
+            StreamableDAOParameters<Service, Input_ServicesBoolExp,
+                Input_ServicesOrderBy>?>
+        request,
+  ) {
+    final search = request.param?.search;
+    final orderBy = request.param?.orderBy;
+    final where = request.param?.where;
 
     final bool nameSearch = search != null && search.isNotEmpty;
     final nameSearchExp = Input_StringComparisonExp($_ilike: '%$search%');
 
     return {
       'classesWhere': [
-        ...classesWhere,
         if (nameSearch)
           Input_ClassesBoolExp(
             name: nameSearchExp,
           ),
       ].map((e) => e.toJson()).toList(),
       'groupsWhere': [
-        ...groupsWhere,
         if (nameSearch)
           Input_GroupsBoolExp(
             name: nameSearchExp,
           ),
       ].map((e) => e.toJson()).toList(),
-      ...db.varsTransformer.transformVariablesForPagination(
-        event,
-        where: nameSearch
+      ...db.varsTransformer.transformrequestForPagination(
+        request,
+        overrideWhere: nameSearch
             ? [
                 ...where?.map((o) => o.toJson()) ?? [],
                 Input_ServicesBoolExp(
@@ -89,7 +95,7 @@ class ServicesDAO
                 ).toJson(),
               ]
             : [],
-        orderBy: orderBy?.map((o) => o.toJson()).toList() ??
+        overrideOrderBy: orderBy?.map((o) => o.toJson()).toList() ??
             [
               {'studyYearFromId': 'ASC'},
               {'studyYearToId': 'ASC'},
@@ -139,29 +145,4 @@ class ServicesDAO
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteService(serviceId: id).toJson();
-
-  @override
-  GQLPaginatableStream<Service> streamAll({
-    Stream<String?>? searchQuery,
-    List<Input_ServicesBoolExp>? where,
-    List<Input_GroupsBoolExp>? groupsWhere,
-    List<Input_ClassesBoolExp>? classesWhere,
-    List<Input_ServicesOrderBy>? orderBy,
-  }) {
-    return streamingProxy.streamAll(
-      searchQuery: searchQuery,
-      where: where,
-      orderBy: orderBy,
-      streamAllConfig: baseStreamAllConfig.copyWith(
-        varsConstructor: ({required event, where, orderBy}) =>
-            _streamAllVarsConstructor(
-          event: event,
-          where: where ?? [],
-          groupsWhere: groupsWhere ?? [],
-          classesWhere: classesWhere ?? [],
-          orderBy: orderBy,
-        ),
-      ),
-    );
-  }
 }

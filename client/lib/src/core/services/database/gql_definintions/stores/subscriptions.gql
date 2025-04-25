@@ -8,20 +8,23 @@ subscription watchAllStores(
   }
 }
 
-subscription watchStore($id: Uuid!) {
+subscription watchStoresCount($where: [StoresBoolExp!] = {}) {
+  storesAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
+subscription watchStore($id: uuid!) {
   storesByPk(id: $id) {
     ...Store
-    areas(orderBy: { name: ASC }) {
-      ...Area
-    }
-    streets(orderBy: { name: ASC }) {
-      ...Street
+    address {
+      ...Address
     }
     lastEdit {
       ...LatestEditHistory
     }
-    address
-    geolocation
     family {
       ...Family
     }

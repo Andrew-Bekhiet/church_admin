@@ -20,13 +20,15 @@ class ViewGroup extends StatefulWidget {
 class _ViewGroupState extends State<ViewGroup> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
-        Input_PersonsBoolExp(
-          groups: Input_PersonsGroupsBoolExp(
-            groupId: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
+      where: Stream.value(
+        [
+          Input_PersonsBoolExp(
+            groups: Input_PersonsGroupsBoolExp(
+              groupId: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 
@@ -87,8 +89,10 @@ class _ViewGroupState extends State<ViewGroup> {
             HistoryProperty(
               name: 'أخر تحديث للبيانات',
               value: group.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Group>(id: group.id),
+              getHistoryListController: () => ViewableObjectListController(
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginateEditHistory<Group>(id: group.id),
+              ),
             ),
             ListTile(
               title: const Text('الخدام المسؤولين'),
@@ -111,6 +115,16 @@ class _ViewGroupState extends State<ViewGroup> {
           $extra: EditGroupExtra(group: group),
         ).push(context),
         icon: const Icon(Symbols.edit),
+      ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: _personsController.totalCountStream.map((c) => '$c مخدوم'),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(

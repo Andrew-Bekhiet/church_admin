@@ -1,0 +1,190 @@
+import 'package:church_admin/annotations.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
+
+part 'address.freezed.dart';
+part 'address.g.dart';
+
+@freezed
+@TypeMetadata(ignoreFields: ['id', 'countryIsoCode'])
+class Address with _$Address {
+  static Map<String, FieldMetadata> get fieldsMetadata => _$AddressFields;
+
+  static final QueryableType<Address> queryableType = QueryableType<Address>(
+    name: 'Address',
+    label: 'العنوان',
+    fieldsMetadata: fieldsMetadata,
+    fromJson: Address.fromJson,
+  );
+  factory Address({
+    String? id,
+    @Default('EG') String countryIsoCode,
+    District? district,
+    Area? area,
+    Street? street,
+    String? substreetName,
+    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    int? storeyNumber,
+    int? houseNumber,
+    int? apartmentNumber,
+    String? specialLandmark,
+    Family? family,
+    Store? store,
+  }) = _Address;
+  Address._() : super();
+
+  factory Address.fromJson(Map<String, Object?> json) =>
+      _$AddressFromJson(json);
+
+  factory Address.fromNominatimResponse(Map<String, Object?> data) {
+    final addressData = data['address']! as Map<String, Object?>;
+
+    final double? lat = double.tryParse(data['lat'] as String? ?? '');
+    final double? lon = double.tryParse(data['lon'] as String? ?? '');
+
+    final int? houseNumber = int.tryParse(
+      addressData['house_number'] as String? ?? '',
+    );
+    final String? streetName = addressData['road'] as String?;
+    final String? districtName = addressData['neighbourhood'] as String? ??
+        addressData['allotments'] as String? ??
+        addressData['quarter'] as String? ??
+        addressData['suburb'] as String? ??
+        addressData['district'] as String? ??
+        addressData['city_district'] as String?;
+    final String? countryCode =
+        addressData['country_code']?.toString().toUpperCase();
+
+    return Address(
+      geolocation: lat != null && lon != null ? Point(lat, lon) : null,
+      houseNumber: houseNumber,
+      street: streetName != null
+          ? Street(id: Namespace.nil.value, name: streetName.trim())
+          : null,
+      district: districtName != null
+          ? District(id: Namespace.nil.value, name: districtName.trim())
+          : null,
+      countryIsoCode: countryCode ?? 'EG',
+    );
+  }
+
+  @override
+  String toString() {
+    //شقة {0} عمارة {1} ش {2} متفرع من {3} حي {4} {5}
+    final StringBuffer buffer = StringBuffer();
+
+    if (apartmentNumber != null) {
+      buffer.write('شقة $apartmentNumber ');
+    }
+
+    if (storeyNumber != null) {
+      buffer.write('الدور $storeyNumber ');
+    }
+
+    if (houseNumber != null) {
+      buffer.write('عمارة $houseNumber ');
+    }
+
+    if (street != null) {
+      buffer.write(
+        'ش ${street!.name.replaceAll(RegExp('شارع|الشارع'), '').trim()} ',
+      );
+    }
+
+    if (substreetName != null) {
+      buffer.write(
+        'متفرع من ${substreetName!.replaceAll(RegExp('شارع|الشارع'), '').trim()} ',
+      );
+    }
+
+    if (district != null) {
+      buffer.write(
+        'حي ${district!.name.replaceAll(RegExp('حي|الحي'), '').replaceAll(RegExp('حى|الحى'), '').trim()} ',
+      );
+    }
+
+    if (specialLandmark != null) {
+      buffer.write('$specialLandmark ');
+    }
+
+    if (area != null) {
+      buffer.write(
+        'منطقة ${area!.name.replaceAll(RegExp('منطقة|المنطقة'), '').trim()} ',
+      );
+    }
+
+    return buffer.toString().trim();
+  }
+
+  Input_AddressesInsertInput toInsertInput() {
+    return Input_AddressesInsertInput(
+      countryIsoCode: countryIsoCode,
+      districtId: district?.id.toUuid(),
+      areaId: area?.id.toUuid(),
+      streetId: street?.id.toUuid(),
+      substreetName: substreetName,
+      geolocation: geolocation?.toPostGISJson(),
+      storeyNumber: storeyNumber,
+      houseNumber: houseNumber,
+      apartmentNumber: apartmentNumber,
+      specialLandmark: specialLandmark,
+      familyId: family?.id.toUuid(),
+      storeId: store?.id.toUuid(),
+    );
+  }
+
+  Input_AddressesSetInput toUpdateInput(Address old) {
+    Input_AddressesSetInput result = Input_AddressesSetInput();
+
+    if (old.countryIsoCode != countryIsoCode) {
+      result = result.copyWith(countryIsoCode: countryIsoCode);
+    }
+
+    if (old.district?.id != district?.id) {
+      result = result.copyWith(districtId: district?.id.toUuid());
+    }
+
+    if (old.area?.id != area?.id) {
+      result = result.copyWith(areaId: area?.id.toUuid());
+    }
+
+    if (old.street?.id != street?.id) {
+      result = result.copyWith(streetId: street?.id.toUuid());
+    }
+
+    if (old.substreetName != substreetName) {
+      result = result.copyWith(substreetName: substreetName);
+    }
+
+    if (old.geolocation != geolocation) {
+      result = result.copyWith(geolocation: geolocation?.toPostGISJson());
+    }
+
+    if (old.storeyNumber != storeyNumber) {
+      result = result.copyWith(storeyNumber: storeyNumber);
+    }
+
+    if (old.houseNumber != houseNumber) {
+      result = result.copyWith(houseNumber: houseNumber);
+    }
+
+    if (old.apartmentNumber != apartmentNumber) {
+      result = result.copyWith(apartmentNumber: apartmentNumber);
+    }
+
+    if (old.specialLandmark != specialLandmark) {
+      result = result.copyWith(specialLandmark: specialLandmark);
+    }
+
+    if (old.family?.id != family?.id) {
+      result = result.copyWith(familyId: family?.id.toUuid());
+    }
+
+    if (old.store?.id != store?.id) {
+      result = result.copyWith(storeId: store?.id.toUuid());
+    }
+
+    return result;
+  }
+}

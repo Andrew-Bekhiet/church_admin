@@ -1,4 +1,4 @@
-mutation deleteStore($storeId: Uuid!) {
+mutation deleteStore($storeId: uuid!) {
   deleteStoresByPk(id: $storeId) {
     ...Store
   }
@@ -10,8 +10,21 @@ mutation insertStore($newStore: StoresInsertInput!) {
   }
 }
 
-mutation updateStore($storeId: Uuid!, $newStore: StoresSetInput!) {
-  updateStoresByPk(pkColumns: { id: $storeId }, _set: $newStore) {
+mutation updateStore(
+  $storeId: uuid!
+  $newStore: StoresSetInput!
+  $addressId: uuid!
+  $newAddress: AddressesSetInput
+  $updateAddress: Boolean!
+  $updateStore: Boolean!
+) {
+  updateStoresByPk(pkColumns: { id: $storeId }, _set: $newStore)
+    @include(if: $updateStore) {
     ...Store
+  }
+
+  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
+    @include(if: $updateAddress) {
+    ...Address
   }
 }

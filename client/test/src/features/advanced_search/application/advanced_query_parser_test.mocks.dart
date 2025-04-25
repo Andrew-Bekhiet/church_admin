@@ -3,16 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:church_admin/church_admin.dart' as _i2;
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
-    as _i6;
+    as _i5;
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
-import 'package:rxdart/rxdart.dart' as _i4;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -213,9 +212,20 @@ class _FakeStreamAllConfig_17<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamSingleByIdConfig_18<T> extends _i1.SmartFake
+class _FakeStreamCountConfig_18<T, TBoolExp> extends _i1.SmartFake
+    implements _i2.StreamCountConfig<T, TBoolExp> {
+  _FakeStreamCountConfig_18(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamSingleByIdConfig_19<T> extends _i1.SmartFake
     implements _i2.StreamSingleByIdConfig<T> {
-  _FakeStreamSingleByIdConfig_18(
+  _FakeStreamSingleByIdConfig_19(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -224,9 +234,9 @@ class _FakeStreamSingleByIdConfig_18<T> extends _i1.SmartFake
         );
 }
 
-class _FakeDeleteSingleByIdConfig_19<T> extends _i1.SmartFake
+class _FakeDeleteSingleByIdConfig_20<T> extends _i1.SmartFake
     implements _i2.DeleteSingleByIdConfig<T> {
-  _FakeDeleteSingleByIdConfig_19(
+  _FakeDeleteSingleByIdConfig_20(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -235,9 +245,9 @@ class _FakeDeleteSingleByIdConfig_19<T> extends _i1.SmartFake
         );
 }
 
-class _FakeUpdateObjectConfig_20<T> extends _i1.SmartFake
+class _FakeUpdateObjectConfig_21<T> extends _i1.SmartFake
     implements _i2.UpdateObjectConfig<T> {
-  _FakeUpdateObjectConfig_20(
+  _FakeUpdateObjectConfig_21(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -246,9 +256,9 @@ class _FakeUpdateObjectConfig_20<T> extends _i1.SmartFake
         );
 }
 
-class _FakeCreateObjectConfig_21<T> extends _i1.SmartFake
+class _FakeCreateObjectConfig_22<T> extends _i1.SmartFake
     implements _i2.CreateObjectConfig<T> {
-  _FakeCreateObjectConfig_21(
+  _FakeCreateObjectConfig_22(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -257,9 +267,9 @@ class _FakeCreateObjectConfig_21<T> extends _i1.SmartFake
         );
 }
 
-class _FakeDatabaseService_22 extends _i1.SmartFake
+class _FakeDatabaseService_23 extends _i1.SmartFake
     implements _i2.DatabaseService {
-  _FakeDatabaseService_22(
+  _FakeDatabaseService_23(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -268,8 +278,8 @@ class _FakeDatabaseService_22 extends _i1.SmartFake
         );
 }
 
-class _FakePerson_23 extends _i1.SmartFake implements _i2.Person {
-  _FakePerson_23(
+class _FakePerson_24 extends _i1.SmartFake implements _i2.Person {
+  _FakePerson_24(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -278,10 +288,10 @@ class _FakePerson_23 extends _i1.SmartFake implements _i2.Person {
         );
 }
 
-class _FakeStreamableDAOProxy_24<T extends _i2.ViewableWithID, TBoolExp,
+class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
         TOrderByExp> extends _i1.SmartFake
     implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
-  _FakeStreamableDAOProxy_24(
+  _FakeStreamableDAOProxy_25(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -290,9 +300,9 @@ class _FakeStreamableDAOProxy_24<T extends _i2.ViewableWithID, TBoolExp,
         );
 }
 
-class _FakeCreatableDAOProxy_25<T extends _i2.ViewableWithID>
+class _FakeCreatableDAOProxy_26<T extends _i2.ViewableWithID>
     extends _i1.SmartFake implements _i2.CreatableDAOProxy<T> {
-  _FakeCreatableDAOProxy_25(
+  _FakeCreatableDAOProxy_26(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -301,9 +311,9 @@ class _FakeCreatableDAOProxy_25<T extends _i2.ViewableWithID>
         );
 }
 
-class _FakeUpdatableDAOProxy_26<T extends _i2.ViewableWithID>
+class _FakeUpdatableDAOProxy_27<T extends _i2.ViewableWithID>
     extends _i1.SmartFake implements _i2.UpdatableDAOProxy<T> {
-  _FakeUpdatableDAOProxy_26(
+  _FakeUpdatableDAOProxy_27(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -312,9 +322,9 @@ class _FakeUpdatableDAOProxy_26<T extends _i2.ViewableWithID>
         );
 }
 
-class _FakeDeletableDAOProxy_27<T extends _i2.ViewableWithID>
+class _FakeDeletableDAOProxy_28<T extends _i2.ViewableWithID>
     extends _i1.SmartFake implements _i2.DeletableDAOProxy<T> {
-  _FakeDeletableDAOProxy_27(
+  _FakeDeletableDAOProxy_28(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -323,20 +333,9 @@ class _FakeDeletableDAOProxy_27<T extends _i2.ViewableWithID>
         );
 }
 
-class _FakeGQLPaginatableStream_28<T> extends _i1.SmartFake
-    implements _i2.GQLPaginatableStream<T> {
-  _FakeGQLPaginatableStream_28(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeValueStream_29<T1> extends _i1.SmartFake
-    implements _i4.ValueStream<T1> {
-  _FakeValueStream_29(
+class _FakePaginatableStreamBase_29<T> extends _i1.SmartFake
+    implements _i2.PaginatableStreamBase<T> {
+  _FakePaginatableStreamBase_29(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -346,7 +345,7 @@ class _FakeValueStream_29<T1> extends _i1.SmartFake
 }
 
 class _FakeStreamSubscription_30<T1> extends _i1.SmartFake
-    implements _i5.StreamSubscription<T1> {
+    implements _i4.StreamSubscription<T1> {
   _FakeStreamSubscription_30(
     Object parent,
     Invocation parentInvocation,
@@ -356,7 +355,7 @@ class _FakeStreamSubscription_30<T1> extends _i1.SmartFake
         );
 }
 
-class _FakeFuture_31<T1> extends _i1.SmartFake implements _i5.Future<T1> {
+class _FakeFuture_31<T1> extends _i1.SmartFake implements _i4.Future<T1> {
   _FakeFuture_31(
     Object parent,
     Invocation parentInvocation,
@@ -624,14 +623,30 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
               _i2.Input_PersonsOrderBy>);
 
   @override
+  _i2.StreamCountConfig<_i2.Person, _i2.Input_PersonsBoolExp>
+      get baseStreamCountConfig => (super.noSuchMethod(
+            Invocation.getter(#baseStreamCountConfig),
+            returnValue:
+                _FakeStreamCountConfig_18<_i2.Person, _i2.Input_PersonsBoolExp>(
+              this,
+              Invocation.getter(#baseStreamCountConfig),
+            ),
+            returnValueForMissingStub:
+                _FakeStreamCountConfig_18<_i2.Person, _i2.Input_PersonsBoolExp>(
+              this,
+              Invocation.getter(#baseStreamCountConfig),
+            ),
+          ) as _i2.StreamCountConfig<_i2.Person, _i2.Input_PersonsBoolExp>);
+
+  @override
   _i2.StreamSingleByIdConfig<_i2.Person> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeStreamSingleByIdConfig_18<_i2.Person>(
+        returnValue: _FakeStreamSingleByIdConfig_19<_i2.Person>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
-        returnValueForMissingStub: _FakeStreamSingleByIdConfig_18<_i2.Person>(
+        returnValueForMissingStub: _FakeStreamSingleByIdConfig_19<_i2.Person>(
           this,
           Invocation.getter(#baseStreamSingleByIdConfig),
         ),
@@ -641,11 +656,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.DeleteSingleByIdConfig<_i2.Person> get baseDeleteSingleByIdConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseDeleteSingleByIdConfig),
-        returnValue: _FakeDeleteSingleByIdConfig_19<_i2.Person>(
+        returnValue: _FakeDeleteSingleByIdConfig_20<_i2.Person>(
           this,
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
-        returnValueForMissingStub: _FakeDeleteSingleByIdConfig_19<_i2.Person>(
+        returnValueForMissingStub: _FakeDeleteSingleByIdConfig_20<_i2.Person>(
           this,
           Invocation.getter(#baseDeleteSingleByIdConfig),
         ),
@@ -655,11 +670,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.UpdateObjectConfig<_i2.Person> get baseUpdateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseUpdateObjectConfig),
-        returnValue: _FakeUpdateObjectConfig_20<_i2.Person>(
+        returnValue: _FakeUpdateObjectConfig_21<_i2.Person>(
           this,
           Invocation.getter(#baseUpdateObjectConfig),
         ),
-        returnValueForMissingStub: _FakeUpdateObjectConfig_20<_i2.Person>(
+        returnValueForMissingStub: _FakeUpdateObjectConfig_21<_i2.Person>(
           this,
           Invocation.getter(#baseUpdateObjectConfig),
         ),
@@ -669,11 +684,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.CreateObjectConfig<_i2.Person> get baseCreateObjectConfig =>
       (super.noSuchMethod(
         Invocation.getter(#baseCreateObjectConfig),
-        returnValue: _FakeCreateObjectConfig_21<_i2.Person>(
+        returnValue: _FakeCreateObjectConfig_22<_i2.Person>(
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
-        returnValueForMissingStub: _FakeCreateObjectConfig_21<_i2.Person>(
+        returnValueForMissingStub: _FakeCreateObjectConfig_22<_i2.Person>(
           this,
           Invocation.getter(#baseCreateObjectConfig),
         ),
@@ -682,11 +697,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_22(
+        returnValue: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_22(
+        returnValueForMissingStub: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
@@ -695,12 +710,12 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   @override
   _i2.Person Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _FakePerson_23(
+        returnValue: (Map<String, dynamic> json) => _FakePerson_24(
           this,
           Invocation.getter(#fromJson),
         ),
         returnValueForMissingStub: (Map<String, dynamic> json) =>
-            _FakePerson_23(
+            _FakePerson_24(
           this,
           Invocation.getter(#fromJson),
         ),
@@ -724,12 +739,12 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
           _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>
       get streamingProxy => (super.noSuchMethod(
             Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_24<_i2.Person,
+            returnValue: _FakeStreamableDAOProxy_25<_i2.Person,
                 _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
               this,
               Invocation.getter(#streamingProxy),
             ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i2.Person,
+            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.Person,
                 _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
               this,
               Invocation.getter(#streamingProxy),
@@ -741,11 +756,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.CreatableDAOProxy<_i2.Person> get createObjectProxy =>
       (super.noSuchMethod(
         Invocation.getter(#createObjectProxy),
-        returnValue: _FakeCreatableDAOProxy_25<_i2.Person>(
+        returnValue: _FakeCreatableDAOProxy_26<_i2.Person>(
           this,
           Invocation.getter(#createObjectProxy),
         ),
-        returnValueForMissingStub: _FakeCreatableDAOProxy_25<_i2.Person>(
+        returnValueForMissingStub: _FakeCreatableDAOProxy_26<_i2.Person>(
           this,
           Invocation.getter(#createObjectProxy),
         ),
@@ -755,11 +770,11 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.UpdatableDAOProxy<_i2.Person> get updateObjectProxy =>
       (super.noSuchMethod(
         Invocation.getter(#updateObjectProxy),
-        returnValue: _FakeUpdatableDAOProxy_26<_i2.Person>(
+        returnValue: _FakeUpdatableDAOProxy_27<_i2.Person>(
           this,
           Invocation.getter(#updateObjectProxy),
         ),
-        returnValueForMissingStub: _FakeUpdatableDAOProxy_26<_i2.Person>(
+        returnValueForMissingStub: _FakeUpdatableDAOProxy_27<_i2.Person>(
           this,
           Invocation.getter(#updateObjectProxy),
         ),
@@ -769,18 +784,18 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   _i2.DeletableDAOProxy<_i2.Person> get deleteSingleByIdProxy =>
       (super.noSuchMethod(
         Invocation.getter(#deleteSingleByIdProxy),
-        returnValue: _FakeDeletableDAOProxy_27<_i2.Person>(
+        returnValue: _FakeDeletableDAOProxy_28<_i2.Person>(
           this,
           Invocation.getter(#deleteSingleByIdProxy),
         ),
-        returnValueForMissingStub: _FakeDeletableDAOProxy_27<_i2.Person>(
+        returnValueForMissingStub: _FakeDeletableDAOProxy_28<_i2.Person>(
           this,
           Invocation.getter(#deleteSingleByIdProxy),
         ),
       ) as _i2.DeletableDAOProxy<_i2.Person>);
 
   @override
-  _i5.Stream<_i2.Person?> streamSingleById({
+  _i4.Stream<_i2.Person?> streamSingleById({
     required String? id,
     int? servicesLimit = 6,
     int? classesLimit = 6,
@@ -797,12 +812,12 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #groupsLimit: groupsLimit,
           },
         ),
-        returnValue: _i5.Stream<_i2.Person?>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i2.Person?>.empty(),
-      ) as _i5.Stream<_i2.Person?>);
+        returnValue: _i4.Stream<_i2.Person?>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i2.Person?>.empty(),
+      ) as _i4.Stream<_i2.Person?>);
 
   @override
-  _i5.Future<_i2.Person?> personServicesClassesGroups(
+  _i4.Future<_i2.Person?> personServicesClassesGroups(
           {required String? personId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -810,12 +825,12 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
           [],
           {#personId: personId},
         ),
-        returnValue: _i5.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i5.Future<_i2.Person?>.value(),
-      ) as _i5.Future<_i2.Person?>);
+        returnValue: _i4.Future<_i2.Person?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+      ) as _i4.Future<_i2.Person?>);
 
   @override
-  _i5.Future<_i2.PersonsGeolocationsResponse?> personsGeolocations({
+  _i4.Future<_i2.PersonsGeolocationsResponse?> personsGeolocations({
     String? personId,
     List<_i2.UuidValue>? areasIds = const [],
     List<_i2.UuidValue>? streetsIds = const [],
@@ -850,13 +865,13 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #getPersons: getPersons,
           },
         ),
-        returnValue: _i5.Future<_i2.PersonsGeolocationsResponse?>.value(),
+        returnValue: _i4.Future<_i2.PersonsGeolocationsResponse?>.value(),
         returnValueForMissingStub:
-            _i5.Future<_i2.PersonsGeolocationsResponse?>.value(),
-      ) as _i5.Future<_i2.PersonsGeolocationsResponse?>);
+            _i4.Future<_i2.PersonsGeolocationsResponse?>.value(),
+      ) as _i4.Future<_i2.PersonsGeolocationsResponse?>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
+  _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>
       paginatePersonClassAttendance({
     required String? personId,
     required String? classId,
@@ -874,7 +889,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 #where: where,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+            returnValue: _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonClassAttendance,
@@ -888,7 +903,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+                _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonClassAttendance,
@@ -901,10 +916,10 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 },
               ),
             ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
+          ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
+  _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>
       paginatePersonGroupAttendance({
     required String? personId,
     required String? groupId,
@@ -922,7 +937,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 #where: where,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+            returnValue: _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonGroupAttendance,
@@ -936,7 +951,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+                _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonGroupAttendance,
@@ -949,10 +964,10 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 },
               ),
             ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
+          ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>
+  _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>
       paginatePersonServiceAttendance({
     required String? personId,
     required String? serviceId,
@@ -970,7 +985,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 #where: where,
               },
             ),
-            returnValue: _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+            returnValue: _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonServiceAttendance,
@@ -984,7 +999,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
               ),
             ),
             returnValueForMissingStub:
-                _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+                _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
               this,
               Invocation.method(
                 #paginatePersonServiceAttendance,
@@ -997,14 +1012,13 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
                 },
               ),
             ),
-          ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
+          ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.LastRecordedByInfo> paginatePersonAttendance({
-    required _i6.Variables_Subscription_personAttendance Function(
-      int,
-      _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>,
-    )? vars,
+  _i2.PaginatableStreamBase<_i2.LastRecordedByInfo> paginatePersonAttendance({
+    required _i5.Variables_Subscription_personAttendance Function(
+            _i2.PaginatableStreamRequest<_i2.LastRecordedByInfo, void>)?
+        vars,
     int? limit,
   }) =>
       (super.noSuchMethod(
@@ -1016,7 +1030,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #limit: limit,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+        returnValue: _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
           this,
           Invocation.method(
             #paginatePersonAttendance,
@@ -1028,7 +1042,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
           ),
         ),
         returnValueForMissingStub:
-            _FakeGQLPaginatableStream_28<_i2.LastRecordedByInfo>(
+            _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
           this,
           Invocation.method(
             #paginatePersonAttendance,
@@ -1039,10 +1053,10 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             },
           ),
         ),
-      ) as _i2.GQLPaginatableStream<_i2.LastRecordedByInfo>);
+      ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
 
   @override
-  _i5.Future<_i2.Person?> getPersonAnalysis({
+  _i4.Future<_i2.Person?> getPersonAnalysis({
     required String? personId,
     required _i2.PersonAnalysisOptions? options,
   }) =>
@@ -1055,12 +1069,12 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #options: options,
           },
         ),
-        returnValue: _i5.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i5.Future<_i2.Person?>.value(),
-      ) as _i5.Future<_i2.Person?>);
+        returnValue: _i4.Future<_i2.Person?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+      ) as _i4.Future<_i2.Person?>);
 
   @override
-  _i5.Future<_i2.Person?> updatePersonSpiritData({
+  _i4.Future<_i2.Person?> updatePersonSpiritData({
     required String? personId,
     required DateTime? lastConfession,
     required DateTime? lastKodas,
@@ -1075,15 +1089,15 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #lastKodas: lastKodas,
           },
         ),
-        returnValue: _i5.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i5.Future<_i2.Person?>.value(),
-      ) as _i5.Future<_i2.Person?>);
+        returnValue: _i4.Future<_i2.Person?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+      ) as _i4.Future<_i2.Person?>);
 
   @override
-  _i2.GQLPaginatableStream<_i2.Person> streamAll({
-    _i5.Stream<String?>? searchQuery,
-    List<_i2.Input_PersonsBoolExp>? where,
-    List<_i2.Input_PersonsOrderBy>? orderBy,
+  _i2.PaginatableStreamBase<_i2.Person> streamAll({
+    _i4.Stream<String?>? searchQuery,
+    _i4.Stream<List<_i2.Input_PersonsBoolExp>>? where,
+    _i4.Stream<List<_i2.Input_PersonsOrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1095,7 +1109,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #orderBy: orderBy,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_28<_i2.Person>(
+        returnValue: _FakePaginatableStreamBase_29<_i2.Person>(
           this,
           Invocation.method(
             #streamAll,
@@ -1107,7 +1121,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_28<_i2.Person>(
+        returnValueForMissingStub: _FakePaginatableStreamBase_29<_i2.Person>(
           this,
           Invocation.method(
             #streamAll,
@@ -1119,17 +1133,17 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             },
           ),
         ),
-      ) as _i2.GQLPaginatableStream<_i2.Person>);
+      ) as _i2.PaginatableStreamBase<_i2.Person>);
 
   @override
-  _i5.Future<_i2.Person> createObject({required _i2.Person? newObject}) =>
+  _i4.Future<_i2.Person> createObject({required _i2.Person? newObject}) =>
       (super.noSuchMethod(
         Invocation.method(
           #createObject,
           [],
           {#newObject: newObject},
         ),
-        returnValue: _i5.Future<_i2.Person>.value(_FakePerson_23(
+        returnValue: _i4.Future<_i2.Person>.value(_FakePerson_24(
           this,
           Invocation.method(
             #createObject,
@@ -1137,7 +1151,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             {#newObject: newObject},
           ),
         )),
-        returnValueForMissingStub: _i5.Future<_i2.Person>.value(_FakePerson_23(
+        returnValueForMissingStub: _i4.Future<_i2.Person>.value(_FakePerson_24(
           this,
           Invocation.method(
             #createObject,
@@ -1145,10 +1159,10 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             {#newObject: newObject},
           ),
         )),
-      ) as _i5.Future<_i2.Person>);
+      ) as _i4.Future<_i2.Person>);
 
   @override
-  _i5.Future<_i2.Person?> updateObject({
+  _i4.Future<_i2.Person?> updateObject({
     required _i2.Person? newObject,
     required _i2.Person? oldObject,
   }) =>
@@ -1161,21 +1175,21 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
             #oldObject: oldObject,
           },
         ),
-        returnValue: _i5.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i5.Future<_i2.Person?>.value(),
-      ) as _i5.Future<_i2.Person?>);
+        returnValue: _i4.Future<_i2.Person?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+      ) as _i4.Future<_i2.Person?>);
 
   @override
-  _i5.Future<_i2.Person?> deleteById({required String? id}) =>
+  _i4.Future<_i2.Person?> deleteById({required String? id}) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteById,
           [],
           {#id: id},
         ),
-        returnValue: _i5.Future<_i2.Person?>.value(),
-        returnValueForMissingStub: _i5.Future<_i2.Person?>.value(),
-      ) as _i5.Future<_i2.Person?>);
+        returnValue: _i4.Future<_i2.Person?>.value(),
+        returnValueForMissingStub: _i4.Future<_i2.Person?>.value(),
+      ) as _i4.Future<_i2.Person?>);
 }
 
 /// A class which mocks [StreamableDAOProxy].
@@ -1187,11 +1201,11 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_22(
+        returnValue: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
-        returnValueForMissingStub: _FakeDatabaseService_22(
+        returnValueForMissingStub: _FakeDatabaseService_23(
           this,
           Invocation.getter(#db),
         ),
@@ -1200,12 +1214,12 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
   @override
   T Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _i7.dummyValue<T>(
+        returnValue: (Map<String, dynamic> json) => _i6.dummyValue<T>(
           this,
           Invocation.getter(#fromJson),
         ),
         returnValueForMissingStub: (Map<String, dynamic> json) =>
-            _i7.dummyValue<T>(
+            _i6.dummyValue<T>(
           this,
           Invocation.getter(#fromJson),
         ),
@@ -1225,11 +1239,12 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
       ) as _i2.DBGraphQLClient);
 
   @override
-  _i2.GQLPaginatableStream<T> streamAll({
+  _i2.PaginatableStreamBase<T> streamAll({
     required _i2.StreamAllConfig<T, TBoolExp, TOrderByExp>? streamAllConfig,
-    _i5.Stream<String?>? searchQuery,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    _i2.StreamCountConfig<T, TBoolExp>? streamCountConfig,
+    _i4.Stream<String?>? searchQuery,
+    _i4.Stream<List<TBoolExp>>? where,
+    _i4.Stream<List<TOrderByExp>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1237,41 +1252,44 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
           [],
           {
             #streamAllConfig: streamAllConfig,
+            #streamCountConfig: streamCountConfig,
             #searchQuery: searchQuery,
             #where: where,
             #orderBy: orderBy,
           },
         ),
-        returnValue: _FakeGQLPaginatableStream_28<T>(
+        returnValue: _FakePaginatableStreamBase_29<T>(
           this,
           Invocation.method(
             #streamAll,
             [],
             {
               #streamAllConfig: streamAllConfig,
+              #streamCountConfig: streamCountConfig,
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
             },
           ),
         ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_28<T>(
+        returnValueForMissingStub: _FakePaginatableStreamBase_29<T>(
           this,
           Invocation.method(
             #streamAll,
             [],
             {
               #streamAllConfig: streamAllConfig,
+              #streamCountConfig: streamCountConfig,
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
             },
           ),
         ),
-      ) as _i2.GQLPaginatableStream<T>);
+      ) as _i2.PaginatableStreamBase<T>);
 
   @override
-  _i5.Stream<T?> streamSingleById({
+  _i4.Stream<T?> streamSingleById({
     required String? id,
     required _i2.StreamSingleByIdConfig<T>? streamSingleByIdConfig,
   }) =>
@@ -1284,64 +1302,43 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
             #streamSingleByIdConfig: streamSingleByIdConfig,
           },
         ),
-        returnValue: _i5.Stream<T?>.empty(),
-        returnValueForMissingStub: _i5.Stream<T?>.empty(),
-      ) as _i5.Stream<T?>);
+        returnValue: _i4.Stream<T?>.empty(),
+        returnValueForMissingStub: _i4.Stream<T?>.empty(),
+      ) as _i4.Stream<T?>);
 }
 
-/// A class which mocks [GQLPaginatableStream].
+/// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGQLPaginatableStream<T> extends _i1.Mock
-    implements _i2.GQLPaginatableStream<T> {
+class MockPaginatableStreamBase<T> extends _i1.Mock
+    implements _i2.PaginatableStreamBase<T> {
   @override
-  _i5.Stream<Iterable<T>> Function(
-      _i2
-          .GQLPaginatableStreamEvent<T>) get subscriptionStreamCallback =>
-      (super.noSuchMethod(
-        Invocation.getter(#subscriptionStreamCallback),
-        returnValue: (_i2.GQLPaginatableStreamEvent<T> __p0) =>
-            _i5.Stream<Iterable<T>>.empty(),
-        returnValueForMissingStub: (_i2.GQLPaginatableStreamEvent<T> __p0) =>
-            _i5.Stream<Iterable<T>>.empty(),
-      ) as _i5.Stream<Iterable<T>> Function(_i2.GQLPaginatableStreamEvent<T>));
+  int get pageSize => (super.noSuchMethod(
+        Invocation.getter(#pageSize),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 
   @override
-  set lastSearch(String? _lastSearch) => super.noSuchMethod(
-        Invocation.setter(
-          #lastSearch,
-          _lastSearch,
-        ),
-        returnValueForMissingStub: null,
-      );
+  bool get hasMore => (super.noSuchMethod(
+        Invocation.getter(#hasMore),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 
   @override
-  _i2.OnQuery<T> get streamDelegate => (super.noSuchMethod(
-        Invocation.getter(#streamDelegate),
-        returnValue: (
-          _i2.DelegatingPaginatableStream<T> instance,
-          _i5.Stream<int> offset,
-        ) =>
-            _i5.Stream<_i2.DelegatingStreamResult<T>>.empty(),
-        returnValueForMissingStub: (
-          _i2.DelegatingPaginatableStream<T> instance,
-          _i5.Stream<int> offset,
-        ) =>
-            _i5.Stream<_i2.DelegatingStreamResult<T>>.empty(),
-      ) as _i2.OnQuery<T>);
+  int get currentPageIndex => (super.noSuchMethod(
+        Invocation.getter(#currentPageIndex),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 
   @override
-  _i4.ValueStream<bool> get onLoadingChanged => (super.noSuchMethod(
-        Invocation.getter(#onLoadingChanged),
-        returnValue: _FakeValueStream_29<bool>(
-          this,
-          Invocation.getter(#onLoadingChanged),
-        ),
-        returnValueForMissingStub: _FakeValueStream_29<bool>(
-          this,
-          Invocation.getter(#onLoadingChanged),
-        ),
-      ) as _i4.ValueStream<bool>);
+  List<T> get currentItems => (super.noSuchMethod(
+        Invocation.getter(#currentItems),
+        returnValue: <T>[],
+        returnValueForMissingStub: <T>[],
+      ) as List<T>);
 
   @override
   bool get isLoading => (super.noSuchMethod(
@@ -1351,52 +1348,18 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
       ) as bool);
 
   @override
-  bool get canPaginateBackward => (super.noSuchMethod(
-        Invocation.getter(#canPaginateBackward),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  _i4.Stream<bool> get onLoadingChanged => (super.noSuchMethod(
+        Invocation.getter(#onLoadingChanged),
+        returnValue: _i4.Stream<bool>.empty(),
+        returnValueForMissingStub: _i4.Stream<bool>.empty(),
+      ) as _i4.Stream<bool>);
 
   @override
-  bool get canPaginateForward => (super.noSuchMethod(
-        Invocation.getter(#canPaginateForward),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  int get currentOffset => (super.noSuchMethod(
-        Invocation.getter(#currentOffset),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
-
-  @override
-  _i4.ValueStream<List<T>> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _FakeValueStream_29<List<T>>(
-          this,
-          Invocation.getter(#stream),
-        ),
-        returnValueForMissingStub: _FakeValueStream_29<List<T>>(
-          this,
-          Invocation.getter(#stream),
-        ),
-      ) as _i4.ValueStream<List<T>>);
-
-  @override
-  List<T> get currentValue => (super.noSuchMethod(
-        Invocation.getter(#currentValue),
-        returnValue: <T>[],
-        returnValueForMissingStub: <T>[],
-      ) as List<T>);
-
-  @override
-  int get limit => (super.noSuchMethod(
-        Invocation.getter(#limit),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+  _i4.Stream<int?> get totalCountStream => (super.noSuchMethod(
+        Invocation.getter(#totalCountStream),
+        returnValue: _i4.Stream<int?>.empty(),
+        returnValueForMissingStub: _i4.Stream<int?>.empty(),
+      ) as _i4.Stream<int?>);
 
   @override
   bool get isBroadcast => (super.noSuchMethod(
@@ -1406,91 +1369,90 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
       ) as bool);
 
   @override
-  _i5.Future<int> get length => (super.noSuchMethod(
+  _i4.Future<int> get length => (super.noSuchMethod(
         Invocation.getter(#length),
-        returnValue: _i5.Future<int>.value(0),
-        returnValueForMissingStub: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: _i4.Future<int>.value(0),
+        returnValueForMissingStub: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 
   @override
-  _i5.Future<bool> get isEmpty => (super.noSuchMethod(
+  _i4.Future<bool> get isEmpty => (super.noSuchMethod(
         Invocation.getter(#isEmpty),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i5.Future<List<T>> get first => (super.noSuchMethod(
+  _i4.Future<List<T>> get first => (super.noSuchMethod(
         Invocation.getter(#first),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<List<T>> get last => (super.noSuchMethod(
+  _i4.Future<List<T>> get last => (super.noSuchMethod(
         Invocation.getter(#last),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<List<T>> get single => (super.noSuchMethod(
+  _i4.Future<List<T>> get single => (super.noSuchMethod(
         Invocation.getter(#single),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<void> loadPage(int? offset) => (super.noSuchMethod(
+  _i4.Future<void> listenToPage(int? pageIndex) => (super.noSuchMethod(
         Invocation.method(
-          #loadPage,
-          [offset],
+          #listenToPage,
+          [pageIndex],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.Future<void> loadNextPage() => (super.noSuchMethod(
+  _i4.Future<void> listenToNextPage() => (super.noSuchMethod(
         Invocation.method(
-          #loadNextPage,
+          #listenToNextPage,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.Future<void> loadPreviousPage() => (super.noSuchMethod(
-        Invocation.method(
-          #loadPreviousPage,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-
-  @override
-  T? getCursorForOffset(int? offset) => (super.noSuchMethod(
-        Invocation.method(
-          #getCursorForOffset,
-          [offset],
-        ),
-        returnValueForMissingStub: null,
-      ) as T?);
-
-  @override
-  _i5.Future<void> dispose() => (super.noSuchMethod(
+  _i4.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
           #dispose,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.StreamSubscription<List<T>> listen(
+  _i4.Stream<List<T>> asBroadcastStream({
+    void Function(_i4.StreamSubscription<List<T>>)? onListen,
+    void Function(_i4.StreamSubscription<List<T>>)? onCancel,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asBroadcastStream,
+          [],
+          {
+            #onListen: onListen,
+            #onCancel: onCancel,
+          },
+        ),
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
+
+  @override
+  _i4.StreamSubscription<List<T>> listen(
     void Function(List<T>)? onData, {
     Function? onError,
     void Function()? onDone,
@@ -1530,71 +1492,53 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
             },
           ),
         ),
-      ) as _i5.StreamSubscription<List<T>>);
+      ) as _i4.StreamSubscription<List<T>>);
 
   @override
-  _i5.Stream<List<T>> asBroadcastStream({
-    void Function(_i5.StreamSubscription<List<T>>)? onListen,
-    void Function(_i5.StreamSubscription<List<T>>)? onCancel,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #asBroadcastStream,
-          [],
-          {
-            #onListen: onListen,
-            #onCancel: onCancel,
-          },
-        ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
-
-  @override
-  _i5.Stream<List<T>> where(bool Function(List<T>)? test) =>
+  _i4.Stream<List<T>> where(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #where,
           [test],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<S> map<S>(S Function(List<T>)? convert) => (super.noSuchMethod(
+  _i4.Stream<S> map<S>(S Function(List<T>)? convert) => (super.noSuchMethod(
         Invocation.method(
           #map,
           [convert],
         ),
-        returnValue: _i5.Stream<S>.empty(),
-        returnValueForMissingStub: _i5.Stream<S>.empty(),
-      ) as _i5.Stream<S>);
+        returnValue: _i4.Stream<S>.empty(),
+        returnValueForMissingStub: _i4.Stream<S>.empty(),
+      ) as _i4.Stream<S>);
 
   @override
-  _i5.Stream<E> asyncMap<E>(_i5.FutureOr<E> Function(List<T>)? convert) =>
+  _i4.Stream<E> asyncMap<E>(_i4.FutureOr<E> Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncMap,
           [convert],
         ),
-        returnValue: _i5.Stream<E>.empty(),
-        returnValueForMissingStub: _i5.Stream<E>.empty(),
-      ) as _i5.Stream<E>);
+        returnValue: _i4.Stream<E>.empty(),
+        returnValueForMissingStub: _i4.Stream<E>.empty(),
+      ) as _i4.Stream<E>);
 
   @override
-  _i5.Stream<E> asyncExpand<E>(_i5.Stream<E>? Function(List<T>)? convert) =>
+  _i4.Stream<E> asyncExpand<E>(_i4.Stream<E>? Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncExpand,
           [convert],
         ),
-        returnValue: _i5.Stream<E>.empty(),
-        returnValueForMissingStub: _i5.Stream<E>.empty(),
-      ) as _i5.Stream<E>);
+        returnValue: _i4.Stream<E>.empty(),
+        returnValueForMissingStub: _i4.Stream<E>.empty(),
+      ) as _i4.Stream<E>);
 
   @override
-  _i5.Stream<List<T>> handleError(
+  _i4.Stream<List<T>> handleError(
     Function? onError, {
     bool Function(dynamic)? test,
   }) =>
@@ -1604,46 +1548,46 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           [onError],
           {#test: test},
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<S> expand<S>(Iterable<S> Function(List<T>)? convert) =>
+  _i4.Stream<S> expand<S>(Iterable<S> Function(List<T>)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #expand,
           [convert],
         ),
-        returnValue: _i5.Stream<S>.empty(),
-        returnValueForMissingStub: _i5.Stream<S>.empty(),
-      ) as _i5.Stream<S>);
+        returnValue: _i4.Stream<S>.empty(),
+        returnValueForMissingStub: _i4.Stream<S>.empty(),
+      ) as _i4.Stream<S>);
 
   @override
-  _i5.Future<dynamic> pipe(_i5.StreamConsumer<List<T>>? streamConsumer) =>
+  _i4.Future<dynamic> pipe(_i4.StreamConsumer<List<T>>? streamConsumer) =>
       (super.noSuchMethod(
         Invocation.method(
           #pipe,
           [streamConsumer],
         ),
-        returnValue: _i5.Future<dynamic>.value(),
-        returnValueForMissingStub: _i5.Future<dynamic>.value(),
-      ) as _i5.Future<dynamic>);
+        returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 
   @override
-  _i5.Stream<S> transform<S>(
-          _i5.StreamTransformer<List<T>, S>? streamTransformer) =>
+  _i4.Stream<S> transform<S>(
+          _i4.StreamTransformer<List<T>, S>? streamTransformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transform,
           [streamTransformer],
         ),
-        returnValue: _i5.Stream<S>.empty(),
-        returnValueForMissingStub: _i5.Stream<S>.empty(),
-      ) as _i5.Stream<S>);
+        returnValue: _i4.Stream<S>.empty(),
+        returnValueForMissingStub: _i4.Stream<S>.empty(),
+      ) as _i4.Stream<S>);
 
   @override
-  _i5.Future<List<T>> reduce(
+  _i4.Future<List<T>> reduce(
           List<T> Function(
             List<T>,
             List<T>,
@@ -1653,12 +1597,12 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           #reduce,
           [combine],
         ),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<S> fold<S>(
+  _i4.Future<S> fold<S>(
     S? initialValue,
     S Function(
       S,
@@ -1673,8 +1617,8 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
             combine,
           ],
         ),
-        returnValue: _i7.ifNotNull(
-              _i7.dummyValueOrNull<S>(
+        returnValue: _i6.ifNotNull(
+              _i6.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -1684,7 +1628,7 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                   ],
                 ),
               ),
-              (S v) => _i5.Future<S>.value(v),
+              (S v) => _i4.Future<S>.value(v),
             ) ??
             _FakeFuture_31<S>(
               this,
@@ -1696,8 +1640,8 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                 ],
               ),
             ),
-        returnValueForMissingStub: _i7.ifNotNull(
-              _i7.dummyValueOrNull<S>(
+        returnValueForMissingStub: _i6.ifNotNull(
+              _i6.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -1707,7 +1651,7 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                   ],
                 ),
               ),
-              (S v) => _i5.Future<S>.value(v),
+              (S v) => _i4.Future<S>.value(v),
             ) ??
             _FakeFuture_31<S>(
               this,
@@ -1719,15 +1663,15 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                 ],
               ),
             ),
-      ) as _i5.Future<S>);
+      ) as _i4.Future<S>);
 
   @override
-  _i5.Future<String> join([String? separator = '']) => (super.noSuchMethod(
+  _i4.Future<String> join([String? separator = '']) => (super.noSuchMethod(
         Invocation.method(
           #join,
           [separator],
         ),
-        returnValue: _i5.Future<String>.value(_i7.dummyValue<String>(
+        returnValue: _i4.Future<String>.value(_i6.dummyValue<String>(
           this,
           Invocation.method(
             #join,
@@ -1735,101 +1679,101 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<String>.value(_i7.dummyValue<String>(
+            _i4.Future<String>.value(_i6.dummyValue<String>(
           this,
           Invocation.method(
             #join,
             [separator],
           ),
         )),
-      ) as _i5.Future<String>);
+      ) as _i4.Future<String>);
 
   @override
-  _i5.Future<bool> contains(Object? needle) => (super.noSuchMethod(
+  _i4.Future<bool> contains(Object? needle) => (super.noSuchMethod(
         Invocation.method(
           #contains,
           [needle],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i5.Future<void> forEach(void Function(List<T>)? action) =>
+  _i4.Future<void> forEach(void Function(List<T>)? action) =>
       (super.noSuchMethod(
         Invocation.method(
           #forEach,
           [action],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i5.Future<bool> every(bool Function(List<T>)? test) => (super.noSuchMethod(
+  _i4.Future<bool> every(bool Function(List<T>)? test) => (super.noSuchMethod(
         Invocation.method(
           #every,
           [test],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i5.Future<bool> any(bool Function(List<T>)? test) => (super.noSuchMethod(
+  _i4.Future<bool> any(bool Function(List<T>)? test) => (super.noSuchMethod(
         Invocation.method(
           #any,
           [test],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i5.Stream<R> cast<R>() => (super.noSuchMethod(
+  _i4.Stream<R> cast<R>() => (super.noSuchMethod(
         Invocation.method(
           #cast,
           [],
         ),
-        returnValue: _i5.Stream<R>.empty(),
-        returnValueForMissingStub: _i5.Stream<R>.empty(),
-      ) as _i5.Stream<R>);
+        returnValue: _i4.Stream<R>.empty(),
+        returnValueForMissingStub: _i4.Stream<R>.empty(),
+      ) as _i4.Stream<R>);
 
   @override
-  _i5.Future<List<List<T>>> toList() => (super.noSuchMethod(
+  _i4.Future<List<List<T>>> toList() => (super.noSuchMethod(
         Invocation.method(
           #toList,
           [],
         ),
-        returnValue: _i5.Future<List<List<T>>>.value(<List<T>>[]),
-        returnValueForMissingStub: _i5.Future<List<List<T>>>.value(<List<T>>[]),
-      ) as _i5.Future<List<List<T>>>);
+        returnValue: _i4.Future<List<List<T>>>.value(<List<T>>[]),
+        returnValueForMissingStub: _i4.Future<List<List<T>>>.value(<List<T>>[]),
+      ) as _i4.Future<List<List<T>>>);
 
   @override
-  _i5.Future<Set<List<T>>> toSet() => (super.noSuchMethod(
+  _i4.Future<Set<List<T>>> toSet() => (super.noSuchMethod(
         Invocation.method(
           #toSet,
           [],
         ),
-        returnValue: _i5.Future<Set<List<T>>>.value(<List<T>>{}),
-        returnValueForMissingStub: _i5.Future<Set<List<T>>>.value(<List<T>>{}),
-      ) as _i5.Future<Set<List<T>>>);
+        returnValue: _i4.Future<Set<List<T>>>.value(<List<T>>{}),
+        returnValueForMissingStub: _i4.Future<Set<List<T>>>.value(<List<T>>{}),
+      ) as _i4.Future<Set<List<T>>>);
 
   @override
-  _i5.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
+  _i4.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
         Invocation.method(
           #drain,
           [futureValue],
         ),
-        returnValue: _i7.ifNotNull(
-              _i7.dummyValueOrNull<E>(
+        returnValue: _i6.ifNotNull(
+              _i6.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,
                   [futureValue],
                 ),
               ),
-              (E v) => _i5.Future<E>.value(v),
+              (E v) => _i4.Future<E>.value(v),
             ) ??
             _FakeFuture_31<E>(
               this,
@@ -1838,15 +1782,15 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                 [futureValue],
               ),
             ),
-        returnValueForMissingStub: _i7.ifNotNull(
-              _i7.dummyValueOrNull<E>(
+        returnValueForMissingStub: _i6.ifNotNull(
+              _i6.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,
                   [futureValue],
                 ),
               ),
-              (E v) => _i5.Future<E>.value(v),
+              (E v) => _i4.Future<E>.value(v),
             ) ??
             _FakeFuture_31<E>(
               this,
@@ -1855,52 +1799,52 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
                 [futureValue],
               ),
             ),
-      ) as _i5.Future<E>);
+      ) as _i4.Future<E>);
 
   @override
-  _i5.Stream<List<T>> take(int? count) => (super.noSuchMethod(
+  _i4.Stream<List<T>> take(int? count) => (super.noSuchMethod(
         Invocation.method(
           #take,
           [count],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<List<T>> takeWhile(bool Function(List<T>)? test) =>
+  _i4.Stream<List<T>> takeWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #takeWhile,
           [test],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<List<T>> skip(int? count) => (super.noSuchMethod(
+  _i4.Stream<List<T>> skip(int? count) => (super.noSuchMethod(
         Invocation.method(
           #skip,
           [count],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<List<T>> skipWhile(bool Function(List<T>)? test) =>
+  _i4.Stream<List<T>> skipWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #skipWhile,
           [test],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Stream<List<T>> distinct(
+  _i4.Stream<List<T>> distinct(
           [bool Function(
             List<T>,
             List<T>,
@@ -1910,12 +1854,12 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           #distinct,
           [equals],
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 
   @override
-  _i5.Future<List<T>> firstWhere(
+  _i4.Future<List<T>> firstWhere(
     bool Function(List<T>)? test, {
     List<T> Function()? orElse,
   }) =>
@@ -1925,12 +1869,12 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<List<T>> lastWhere(
+  _i4.Future<List<T>> lastWhere(
     bool Function(List<T>)? test, {
     List<T> Function()? orElse,
   }) =>
@@ -1940,12 +1884,12 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<List<T>> singleWhere(
+  _i4.Future<List<T>> singleWhere(
     bool Function(List<T>)? test, {
     List<T> Function()? orElse,
   }) =>
@@ -1955,24 +1899,24 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Future<List<T>> elementAt(int? index) => (super.noSuchMethod(
+  _i4.Future<List<T>> elementAt(int? index) => (super.noSuchMethod(
         Invocation.method(
           #elementAt,
           [index],
         ),
-        returnValue: _i5.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i5.Future<List<T>>.value(<T>[]),
-      ) as _i5.Future<List<T>>);
+        returnValue: _i4.Future<List<T>>.value(<T>[]),
+        returnValueForMissingStub: _i4.Future<List<T>>.value(<T>[]),
+      ) as _i4.Future<List<T>>);
 
   @override
-  _i5.Stream<List<T>> timeout(
+  _i4.Stream<List<T>> timeout(
     Duration? timeLimit, {
-    void Function(_i5.EventSink<List<T>>)? onTimeout,
+    void Function(_i4.EventSink<List<T>>)? onTimeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1980,35 +1924,37 @@ class MockGQLPaginatableStream<T> extends _i1.Mock
           [timeLimit],
           {#onTimeout: onTimeout},
         ),
-        returnValue: _i5.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i5.Stream<List<T>>.empty(),
-      ) as _i5.Stream<List<T>>);
+        returnValue: _i4.Stream<List<T>>.empty(),
+        returnValueForMissingStub: _i4.Stream<List<T>>.empty(),
+      ) as _i4.Stream<List<T>>);
 }
 
-/// A class which mocks [GQLPaginatableStreamEvent].
+/// A class which mocks [PaginatableStreamRequest].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGQLPaginatableStreamEvent<T> extends _i1.Mock
-    implements _i2.GQLPaginatableStreamEvent<T> {
+// ignore: must_be_immutable
+class MockPaginatableStreamRequest<T, P> extends _i1.Mock
+    implements _i2.PaginatableStreamRequest<T, P> {
   @override
-  int get offset => (super.noSuchMethod(
-        Invocation.getter(#offset),
+  int get pageIndex => (super.noSuchMethod(
+        Invocation.getter(#pageIndex),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
 
   @override
-  _i2.GQLPaginatableStream<T> get instance => (super.noSuchMethod(
-        Invocation.getter(#instance),
-        returnValue: _FakeGQLPaginatableStream_28<T>(
-          this,
-          Invocation.getter(#instance),
-        ),
-        returnValueForMissingStub: _FakeGQLPaginatableStream_28<T>(
-          this,
-          Invocation.getter(#instance),
-        ),
-      ) as _i2.GQLPaginatableStream<T>);
+  int get pageSize => (super.noSuchMethod(
+        Invocation.getter(#pageSize),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+        returnValueForMissingStub: <Object?>[],
+      ) as List<Object?>);
 }
 
 /// A class which mocks [DBVarsTransformer].
@@ -2017,20 +1963,20 @@ class MockGQLPaginatableStreamEvent<T> extends _i1.Mock
 class MockDBVarsTransformer extends _i1.Mock implements _i2.DBVarsTransformer {
   @override
   Map<String, dynamic>
-      transformVariablesForPagination<T extends _i2.ViewableWithID>(
-    _i2.GQLPaginatableStreamEvent<T>? event, {
-    List<Map<String, dynamic>>? where = const [],
-    List<Map<String, dynamic>>? orderBy = const [
-      {'name': 'ASC'}
-    ],
+      transformrequestForPagination<T extends _i2.ViewableWithID>(
+    _i2.PaginatableStreamRequest<T,
+            _i2.StreamableDAOParameters<T, dynamic, dynamic>?>?
+        request, {
+    List<Map<String, dynamic>>? overrideWhere,
+    List<Map<String, dynamic>>? overrideOrderBy,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
-              #transformVariablesForPagination,
-              [event],
+              #transformrequestForPagination,
+              [request],
               {
-                #where: where,
-                #orderBy: orderBy,
+                #overrideWhere: overrideWhere,
+                #overrideOrderBy: overrideOrderBy,
               },
             ),
             returnValue: <String, dynamic>{},

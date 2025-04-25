@@ -1,5 +1,5 @@
 name: church_admin_generator
-description:
+description: ""
 version: 1.0.0
 publish_to: "none"
 
@@ -7,16 +7,7 @@ environment:
   sdk: ^3.1.0
 
 dependency_overrides:
-  cryptography_flutter_plus:
-    git:
-      url: https://github.com/CodeDoctorDE/dart-cryptography
-      ref: cf0c1917b586fb7ac95648356798f1dd5cf65541
-      path: cryptography_flutter
-  cryptography_plus:
-    git:
-      url: https://github.com/CodeDoctorDE/dart-cryptography
-      ref: cf0c1917b586fb7ac95648356798f1dd5cf65541
-      path: cryptography
+  js: ^0.7.1
 
 dependencies:
   analyzer: ^6.2.0

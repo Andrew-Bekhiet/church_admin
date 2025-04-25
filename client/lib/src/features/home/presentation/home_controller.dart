@@ -37,6 +37,9 @@ class HomeController {
 
   List<Type> get currentTypes => _typesForMode(currentMode);
 
+  bool get showSnowflakeAnimation =>
+      LiturgySeason.current == LiturgySeason.christmas;
+
   List<Type> _typesForMode(HomeMode currentMode) {
     return switch (currentMode) {
       HomeMode.sundaySchool => [HomeMode, Service, Person],
@@ -100,7 +103,7 @@ class HomeController {
 
   ViewableObjectListController<T>
       _putControllerIfAbsentUsing<T extends Viewable>(
-    GQLPaginatableStream<T> Function() paginatableStreamFactory,
+    PaginatableStreamBase<T> Function() paginatableStreamFactory,
   ) {
     return _initializedControllers.putIfAbsent(
       T,

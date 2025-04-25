@@ -18,7 +18,7 @@ import 'notifications_service_callbacks_test.mocks.dart';
   MockSpec<NotificationsService>(),
   MockSpec<DatabaseService>(),
   MockSpec<AdvancedQueryParser>(),
-  MockSpec<GQLPaginatableStream>(),
+  MockSpec<PaginatableStreamBase>(),
 ])
 void main() {
   group(
@@ -294,7 +294,7 @@ final expectedPersons = [
 ];
 
 Override _setUpMockDatabaseService() {
-  final expectedStream = MockGQLPaginatableStream<Person>();
+  final expectedStream = MockPaginatableStreamBase<Person>();
 
   when(
     expectedStream.first,

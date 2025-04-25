@@ -1,5 +1,5 @@
-import '../../gql/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
+import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
@@ -308,7 +308,7 @@ const documentNodeMutationinsertPersonLastConfession =
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -317,7 +317,7 @@ const documentNodeMutationinsertPersonLastConfession =
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastConfession')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -356,7 +356,7 @@ const documentNodeMutationinsertPersonLastConfession =
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
+                            name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -374,7 +374,8 @@ const documentNodeMutationinsertPersonLastConfession =
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'confessionHistoryDayIdPersonIdKey')),
+                    name: NameNode(
+                        value: 'confession_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -869,7 +870,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -878,7 +879,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastKodas')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Date'),
+          name: NameNode(value: 'date'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -916,7 +917,7 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
                       ObjectFieldNode(
                         name: NameNode(value: 'constraint'),
                         value: EnumValueNode(
-                            name: NameNode(value: 'attendanceDaysPkey')),
+                            name: NameNode(value: 'attendance_days_pkey')),
                       ),
                       ObjectFieldNode(
                         name: NameNode(value: 'updateColumns'),
@@ -934,7 +935,8 @@ const documentNodeMutationinsertPersonLastKodas = DocumentNode(definitions: [
               ObjectFieldNode(
                 name: NameNode(value: 'constraint'),
                 value: EnumValueNode(
-                    name: NameNode(value: 'kodasHistoryDayIdPersonIdKey')),
+                    name:
+                        NameNode(value: 'kodas_history_day_id_person_id_key')),
               )
             ]),
           ),
@@ -1422,7 +1424,7 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1431,7 +1433,7 @@ const documentNodeMutationinsertPersonLastCall = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastCall')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1942,7 +1944,7 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'personId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1951,7 +1953,7 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'lastVisit')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Timestamptz'),
+          name: NameNode(value: 'timestamptz'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1987,9 +1989,31 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'LatestVisitHistory'),
+          FieldNode(
+            name: NameNode(value: 'time'),
+            alias: null,
+            arguments: [],
             directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'user'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'User'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -2009,24 +2033,43 @@ const documentNodeMutationinsertPersonLastVisit = DocumentNode(definitions: [
       ),
     ]),
   ),
-  fragmentDefinitionLatestVisitHistory,
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
 ]);
 
 class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
-  Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
-      {this.$__typename = 'HistoryVisitHistory'});
+  Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne({
+    required this.time,
+    this.user,
+    this.$__typename = 'HistoryVisitHistory',
+  });
 
   factory Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne.fromJson(
       Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
-        $__typename: (l$$__typename as String));
+      time: tstzFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
   }
+
+  final DateTime time;
+
+  final Fragment_User? user;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2034,8 +2077,14 @@ class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
 
   @override
   int get hashCode {
+    final l$time = time;
+    final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$$__typename]);
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -2045,6 +2094,16 @@ class Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne {
     }
     if (other is! Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2079,7 +2138,12 @@ abstract class CopyWith_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
           TRes res) =
       _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne;
 
-  TRes call({String? $__typename});
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
@@ -2099,11 +2163,27 @@ class _CopyWithImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? $__typename = _undefined}) =>
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
       _then(Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne(
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String)));
+        time: time == _undefined || time == null
+            ? _instance.time
+            : (time as DateTime),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistoryOne<
@@ -2116,5 +2196,12 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
 
   TRes _res;
 
-  call({String? $__typename}) => _res;
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

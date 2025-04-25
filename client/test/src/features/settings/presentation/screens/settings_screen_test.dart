@@ -175,8 +175,8 @@ void main() {
 
               await tester.pumpAndSettle();
 
-              expect(find.byType(AlertDialog), findsOneWidget);
-              expect(find.byType(SettingsScreen), findsOneWidget);
+              expect(find.byType(AlertDialog), findsNothing);
+              expect(find.byType(SettingsScreen), findsNothing);
               expect(find.text('تم حفظ التغييرات'), findsNothing);
             },
           );

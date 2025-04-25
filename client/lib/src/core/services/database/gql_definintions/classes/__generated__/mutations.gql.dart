@@ -247,7 +247,7 @@ const documentNodeMutationdeleteClass = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'classId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -863,7 +863,7 @@ const documentNodeMutationupdateClass = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'classId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

@@ -422,6 +422,599 @@ const documentNodeSubscriptionwatchAllStores = DocumentNode(definitions: [
   fragmentDefinitionStoreNoPhoto,
 ]);
 
+class Variables_Subscription_watchStoresCount {
+  factory Variables_Subscription_watchStoresCount(
+          {List<Input_StoresBoolExp>? where}) =>
+      Variables_Subscription_watchStoresCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchStoresCount._(this._$data);
+
+  factory Variables_Subscription_watchStoresCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map(
+              (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchStoresCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_StoresBoolExp>? get where =>
+      (_$data['where'] as List<Input_StoresBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchStoresCount<
+          Variables_Subscription_watchStoresCount>
+      get copyWith => CopyWith_Variables_Subscription_watchStoresCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchStoresCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchStoresCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchStoresCount(
+    Variables_Subscription_watchStoresCount instance,
+    TRes Function(Variables_Subscription_watchStoresCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchStoresCount;
+
+  factory CopyWith_Variables_Subscription_watchStoresCount.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchStoresCount;
+
+  TRes call({List<Input_StoresBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchStoresCount<TRes>
+    implements CopyWith_Variables_Subscription_watchStoresCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchStoresCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchStoresCount _instance;
+
+  final TRes Function(Variables_Subscription_watchStoresCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchStoresCount._({
+        ..._instance._$data,
+        if (where != _undefined) 'where': (where as List<Input_StoresBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchStoresCount<TRes>
+    implements CopyWith_Variables_Subscription_watchStoresCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchStoresCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_StoresBoolExp>? where}) => _res;
+}
+
+class Subscription_watchStoresCount {
+  Subscription_watchStoresCount({required this.storesAggregate});
+
+  factory Subscription_watchStoresCount.fromJson(Map<String, dynamic> json) {
+    final l$storesAggregate = json['storesAggregate'];
+    return Subscription_watchStoresCount(
+        storesAggregate: Subscription_watchStoresCount_storesAggregate.fromJson(
+            (l$storesAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchStoresCount_storesAggregate storesAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$storesAggregate = storesAggregate;
+    _resultData['storesAggregate'] = l$storesAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$storesAggregate = storesAggregate;
+    return Object.hashAll([l$storesAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStoresCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$storesAggregate = storesAggregate;
+    final lOther$storesAggregate = other.storesAggregate;
+    if (l$storesAggregate != lOther$storesAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStoresCount
+    on Subscription_watchStoresCount {
+  CopyWith_Subscription_watchStoresCount<Subscription_watchStoresCount>
+      get copyWith => CopyWith_Subscription_watchStoresCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStoresCount<TRes> {
+  factory CopyWith_Subscription_watchStoresCount(
+    Subscription_watchStoresCount instance,
+    TRes Function(Subscription_watchStoresCount) then,
+  ) = _CopyWithImpl_Subscription_watchStoresCount;
+
+  factory CopyWith_Subscription_watchStoresCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchStoresCount;
+
+  TRes call({Subscription_watchStoresCount_storesAggregate? storesAggregate});
+  CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
+      get storesAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchStoresCount<TRes>
+    implements CopyWith_Subscription_watchStoresCount<TRes> {
+  _CopyWithImpl_Subscription_watchStoresCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStoresCount _instance;
+
+  final TRes Function(Subscription_watchStoresCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? storesAggregate = _undefined}) =>
+      _then(Subscription_watchStoresCount(
+          storesAggregate:
+              storesAggregate == _undefined || storesAggregate == null
+                  ? _instance.storesAggregate
+                  : (storesAggregate
+                      as Subscription_watchStoresCount_storesAggregate)));
+
+  CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
+      get storesAggregate {
+    final local$storesAggregate = _instance.storesAggregate;
+    return CopyWith_Subscription_watchStoresCount_storesAggregate(
+        local$storesAggregate, (e) => call(storesAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchStoresCount<TRes>
+    implements CopyWith_Subscription_watchStoresCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchStoresCount(this._res);
+
+  TRes _res;
+
+  call({Subscription_watchStoresCount_storesAggregate? storesAggregate}) =>
+      _res;
+
+  CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
+      get storesAggregate =>
+          CopyWith_Subscription_watchStoresCount_storesAggregate.stub(_res);
+}
+
+const documentNodeSubscriptionwatchStoresCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchStoresCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'StoresBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'storesAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchStoresCount_storesAggregate {
+  Subscription_watchStoresCount_storesAggregate({
+    this.aggregate,
+    this.$__typename = 'StoresAggregate',
+  });
+
+  factory Subscription_watchStoresCount_storesAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStoresCount_storesAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchStoresCount_storesAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchStoresCount_storesAggregate_aggregate? aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStoresCount_storesAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStoresCount_storesAggregate
+    on Subscription_watchStoresCount_storesAggregate {
+  CopyWith_Subscription_watchStoresCount_storesAggregate<
+          Subscription_watchStoresCount_storesAggregate>
+      get copyWith => CopyWith_Subscription_watchStoresCount_storesAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStoresCount_storesAggregate<TRes> {
+  factory CopyWith_Subscription_watchStoresCount_storesAggregate(
+    Subscription_watchStoresCount_storesAggregate instance,
+    TRes Function(Subscription_watchStoresCount_storesAggregate) then,
+  ) = _CopyWithImpl_Subscription_watchStoresCount_storesAggregate;
+
+  factory CopyWith_Subscription_watchStoresCount_storesAggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate;
+
+  TRes call({
+    Subscription_watchStoresCount_storesAggregate_aggregate? aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
+      get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate<TRes>
+    implements CopyWith_Subscription_watchStoresCount_storesAggregate<TRes> {
+  _CopyWithImpl_Subscription_watchStoresCount_storesAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStoresCount_storesAggregate _instance;
+
+  final TRes Function(Subscription_watchStoresCount_storesAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchStoresCount_storesAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchStoresCount_storesAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
+      get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate<TRes>
+    implements CopyWith_Subscription_watchStoresCount_storesAggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchStoresCount_storesAggregate_aggregate? aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
+              _res);
+}
+
+class Subscription_watchStoresCount_storesAggregate_aggregate {
+  Subscription_watchStoresCount_storesAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'StoresAggregateFields',
+  });
+
+  factory Subscription_watchStoresCount_storesAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchStoresCount_storesAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchStoresCount_storesAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchStoresCount_storesAggregate_aggregate
+    on Subscription_watchStoresCount_storesAggregate_aggregate {
+  CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<
+          Subscription_watchStoresCount_storesAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
+    Subscription_watchStoresCount_storesAggregate_aggregate instance,
+    TRes Function(Subscription_watchStoresCount_storesAggregate_aggregate) then,
+  ) = _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes> {
+  _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchStoresCount_storesAggregate_aggregate _instance;
+
+  final TRes Function(Subscription_watchStoresCount_storesAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchStoresCount_storesAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables_Subscription_watchStore {
   factory Variables_Subscription_watchStore({required UuidValue id}) =>
       Variables_Subscription_watchStore._({
@@ -632,7 +1225,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -657,52 +1250,13 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
-            name: NameNode(value: 'areas'),
+            name: NameNode(value: 'address'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
-                  )
-                ]),
-              )
-            ],
+            arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'Area'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'streets'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
-                  )
-                ]),
-              )
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Street'),
+                name: NameNode(value: 'Address'),
                 directives: [],
               ),
               FieldNode(
@@ -732,20 +1286,6 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
                 selectionSet: null,
               ),
             ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'address'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'geolocation'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
           ),
           FieldNode(
             name: NameNode(value: 'family'),
@@ -779,6 +1319,7 @@ const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
   ),
   fragmentDefinitionStore,
   fragmentDefinitionStoreNoPhoto,
+  fragmentDefinitionAddress,
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
   fragmentDefinitionStreet,
@@ -799,11 +1340,8 @@ class Subscription_watchStore_storesByPk
     this.$__typename = 'Stores',
     this.photoUpdatedAt,
     this.blurhash,
-    this.areas,
-    this.streets,
-    this.lastEdit,
     this.address,
-    this.geolocation,
+    this.lastEdit,
     this.family,
   });
 
@@ -815,11 +1353,8 @@ class Subscription_watchStore_storesByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
-    final l$areas = json['areas'];
-    final l$streets = json['streets'];
-    final l$lastEdit = json['lastEdit'];
     final l$address = json['address'];
-    final l$geolocation = json['geolocation'];
+    final l$lastEdit = json['lastEdit'];
     final l$family = json['family'];
     return Subscription_watchStore_storesByPk(
       id: stringToUuid(l$id),
@@ -829,18 +1364,13 @@ class Subscription_watchStore_storesByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      streets: (l$streets as List<dynamic>?)
-          ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
-          .toList(),
+      address: l$address == null
+          ? null
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>)),
-      address: (l$address as String?),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
       family: l$family == null
           ? null
           : Fragment_Family.fromJson((l$family as Map<String, dynamic>)),
@@ -859,15 +1389,9 @@ class Subscription_watchStore_storesByPk
 
   final String? blurhash;
 
-  final List<Fragment_Area>? areas;
-
-  final List<Fragment_Street>? streets;
+  final Fragment_Address? address;
 
   final Fragment_LatestEditHistory? lastEdit;
-
-  final String? address;
-
-  final Map<String, dynamic>? geolocation;
 
   final Fragment_Family? family;
 
@@ -886,16 +1410,10 @@ class Subscription_watchStore_storesByPk
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
-    final l$areas = areas;
-    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
-    final l$streets = streets;
-    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
-    final l$address = address;
-    _resultData['address'] = l$address;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
     final l$family = family;
     _resultData['family'] = l$family?.toJson();
     return _resultData;
@@ -909,11 +1427,8 @@ class Subscription_watchStore_storesByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
-    final l$areas = areas;
-    final l$streets = streets;
-    final l$lastEdit = lastEdit;
     final l$address = address;
-    final l$geolocation = geolocation;
+    final l$lastEdit = lastEdit;
     final l$family = family;
     return Object.hashAll([
       l$id,
@@ -922,11 +1437,8 @@ class Subscription_watchStore_storesByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
-      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
-      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
-      l$lastEdit,
       l$address,
-      l$geolocation,
+      l$lastEdit,
       l$family,
     ]);
   }
@@ -970,51 +1482,14 @@ class Subscription_watchStore_storesByPk
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
-    final l$areas = areas;
-    final lOther$areas = other.areas;
-    if (l$areas != null && lOther$areas != null) {
-      if (l$areas.length != lOther$areas.length) {
-        return false;
-      }
-      for (int i = 0; i < l$areas.length; i++) {
-        final l$areas$entry = l$areas[i];
-        final lOther$areas$entry = lOther$areas[i];
-        if (l$areas$entry != lOther$areas$entry) {
-          return false;
-        }
-      }
-    } else if (l$areas != lOther$areas) {
-      return false;
-    }
-    final l$streets = streets;
-    final lOther$streets = other.streets;
-    if (l$streets != null && lOther$streets != null) {
-      if (l$streets.length != lOther$streets.length) {
-        return false;
-      }
-      for (int i = 0; i < l$streets.length; i++) {
-        final l$streets$entry = l$streets[i];
-        final lOther$streets$entry = lOther$streets[i];
-        if (l$streets$entry != lOther$streets$entry) {
-          return false;
-        }
-      }
-    } else if (l$streets != lOther$streets) {
-      return false;
-    }
-    final l$lastEdit = lastEdit;
-    final lOther$lastEdit = other.lastEdit;
-    if (l$lastEdit != lOther$lastEdit) {
-      return false;
-    }
     final l$address = address;
     final lOther$address = other.address;
     if (l$address != lOther$address) {
       return false;
     }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
     final l$family = family;
@@ -1052,21 +1527,11 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    Fragment_Address? address,
     Fragment_LatestEditHistory? lastEdit,
-    String? address,
-    Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   });
-  TRes areas(
-      Iterable<Fragment_Area>? Function(
-              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-          _fn);
-  TRes streets(
-      Iterable<Fragment_Street>? Function(
-              Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-          _fn);
+  CopyWith_Fragment_Address<TRes> get address;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   CopyWith_Fragment_Family<TRes> get family;
 }
@@ -1091,11 +1556,8 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-    Object? areas = _undefined,
-    Object? streets = _undefined,
-    Object? lastEdit = _undefined,
     Object? address = _undefined,
-    Object? geolocation = _undefined,
+    Object? lastEdit = _undefined,
     Object? family = _undefined,
   }) =>
       _then(Subscription_watchStore_storesByPk(
@@ -1112,44 +1574,23 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        areas: areas == _undefined
-            ? _instance.areas
-            : (areas as List<Fragment_Area>?),
-        streets: streets == _undefined
-            ? _instance.streets
-            : (streets as List<Fragment_Street>?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Fragment_Address?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
             : (lastEdit as Fragment_LatestEditHistory?),
-        address:
-            address == _undefined ? _instance.address : (address as String?),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
         family: family == _undefined
             ? _instance.family
             : (family as Fragment_Family?),
       ));
 
-  TRes areas(
-          Iterable<Fragment_Area>? Function(
-                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-              _fn) =>
-      call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
-                e,
-                (i) => i,
-              )))?.toList());
-
-  TRes streets(
-          Iterable<Fragment_Street>? Function(
-                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-              _fn) =>
-      call(
-          streets: _fn(_instance.streets?.map((e) => CopyWith_Fragment_Street(
-                e,
-                (i) => i,
-              )))?.toList());
+  CopyWith_Fragment_Address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
@@ -1180,18 +1621,14 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    List<Fragment_Area>? areas,
-    List<Fragment_Street>? streets,
+    Fragment_Address? address,
     Fragment_LatestEditHistory? lastEdit,
-    String? address,
-    Map<String, dynamic>? geolocation,
     Fragment_Family? family,
   }) =>
       _res;
 
-  areas(_fn) => _res;
-
-  streets(_fn) => _res;
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);

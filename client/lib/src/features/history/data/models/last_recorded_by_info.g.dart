@@ -10,7 +10,7 @@ final _$LastRecordedByInfoFields = <String, FieldMetadata>{
   'time': FieldMetadata<DateTime>(
     name: 'time',
     label: 'الوقت',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'user': FieldMetadata<User>(
     name: 'user',

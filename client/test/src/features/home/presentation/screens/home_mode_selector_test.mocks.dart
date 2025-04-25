@@ -10,6 +10,7 @@ import 'package:flutter/material.dart' as _i2;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
+import 'package:package_info_plus/package_info_plus.dart' as _i8;
 import 'package:rxdart/rxdart.dart' as _i4;
 
 // ignore_for_file: type=lint
@@ -287,6 +288,13 @@ class MockHomeController extends _i1.Mock implements _i3.HomeController {
       ) as List<Type>);
 
   @override
+  bool get showSnowflakeAnimation => (super.noSuchMethod(
+        Invocation.getter(#showSnowflakeAnimation),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
   _i3.ViewableObjectListController<_i3.Area> get areasController =>
       (super.noSuchMethod(
         Invocation.getter(#areasController),
@@ -426,4 +434,81 @@ class MockShareService extends _i1.Mock implements _i3.ShareService {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+}
+
+/// A class which mocks [PackageInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPackageInfo extends _i1.Mock implements _i8.PackageInfo {
+  @override
+  String get appName => (super.noSuchMethod(
+        Invocation.getter(#appName),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#appName),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#appName),
+        ),
+      ) as String);
+
+  @override
+  String get packageName => (super.noSuchMethod(
+        Invocation.getter(#packageName),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#packageName),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#packageName),
+        ),
+      ) as String);
+
+  @override
+  String get version => (super.noSuchMethod(
+        Invocation.getter(#version),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#version),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#version),
+        ),
+      ) as String);
+
+  @override
+  String get buildNumber => (super.noSuchMethod(
+        Invocation.getter(#buildNumber),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#buildNumber),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#buildNumber),
+        ),
+      ) as String);
+
+  @override
+  String get buildSignature => (super.noSuchMethod(
+        Invocation.getter(#buildSignature),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#buildSignature),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.getter(#buildSignature),
+        ),
+      ) as String);
+
+  @override
+  Map<String, dynamic> get data => (super.noSuchMethod(
+        Invocation.getter(#data),
+        returnValue: <String, dynamic>{},
+        returnValueForMissingStub: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }

@@ -8,10 +8,12 @@ import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 import 'package:spot/spot.dart';
 
+import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
 import 'login_screen_test.mocks.dart';
 
@@ -26,6 +28,7 @@ import 'login_screen_test.mocks.dart';
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
   MockSpec<LoggingService>(),
+  MockSpec<PackageInfo>(),
 ])
 void main() {
   loadAppFonts();
@@ -190,6 +193,8 @@ void main() {
           _setUpAuthStorage(),
           _setUpGoRouterRefreshStream(),
           _setUpLoggingService(),
+          packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
+          featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
         ];
 
         initGlobalProviderContainer(overrides);

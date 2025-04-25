@@ -328,15 +328,14 @@ class NotificationsService extends BlocObserver {
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
 
-    if (currentState is AuthInitial) {
-      return;
-    }
-
-    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
-      if (await requestNotificationsPermission()) {
+    if (currentState is! AuthAuthenticated &&
+        nextState is AuthAuthenticated &&
+        await requestNotificationsPermission()) {
+      if (currentState is! AuthInitial) {
         await scheduleDefaultNotifications();
-        await registerFCMTokenAndListenForChanges();
       }
+
+      await registerFCMTokenAndListenForChanges();
     }
   }
 

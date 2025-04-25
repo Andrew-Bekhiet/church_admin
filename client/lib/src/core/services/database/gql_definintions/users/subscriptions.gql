@@ -1,7 +1,15 @@
-subscription watchUser($uid: Uuid!, $fullData: Boolean = false) {
+subscription watchUser($uid: uuid!, $fullData: Boolean = false) {
   authUsersDataByPk(uid: $uid) {
     ...UserOverview @skip(if: $fullData)
     ...UserDetails @include(if: $fullData)
+  }
+}
+
+subscription watchAuthUsersDataCount($where: [AuthUsersDataBoolExp!] = {}) {
+  authUsersDataAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
   }
 }
 

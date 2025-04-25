@@ -30,7 +30,7 @@ final _$StreetFields = <String, FieldMetadata>{
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'areas': FieldMetadata<Area>(
     name: 'areas',
@@ -60,9 +60,7 @@ _$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
       blurhash: json['blurhash'] as String?,
-      areas: (json['areas'] as List<dynamic>?)
-          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
+      areas: streetsAreasFromJson(json['areas'] as List?),
       lastVisit: json['lastVisit'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -81,7 +79,7 @@ Map<String, dynamic> _$$StreetImplToJson(_$StreetImpl instance) =>
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
       'blurhash': instance.blurhash,
-      'areas': instance.areas?.map((e) => e.toJson()).toList(),
+      'areas': streetsAreasToJson(instance.areas),
       'lastVisit': instance.lastVisit?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
     };

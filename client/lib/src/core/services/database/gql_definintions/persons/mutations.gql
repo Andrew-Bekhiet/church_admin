@@ -1,24 +1,27 @@
-mutation deletePerson($personId: Uuid!) {
+mutation deletePerson($personId: uuid!) {
   deletePersonsByPk(id: $personId) {
     ...Person
   }
 }
 
 mutation updatePerson(
-  $personId: Uuid!
+  $personId: uuid!
   $newPerson: PersonsSetInput!
+  $addressId: uuid!
+  $newAddress: AddressesSetInput
+  $updateAddressByPk: Boolean! = false
   $newGroups: [PersonsGroupsInsertInput!]! = []
-  $deleteGroups: [Uuid!]
+  $deleteGroups: [uuid!]
   $newServices: [PersonsServicesInsertInput!]! = []
-  $deleteServices: [Uuid!]
+  $deleteServices: [uuid!]
   $newHobbies: [PersonsHobbiesInsertInput!]! = []
-  $deleteHobbies: [Uuid!]
+  $deleteHobbies: [uuid!]
   $newTags: [PersonsTagsInsertInput!]! = []
-  $deleteTags: [Uuid!]
-  $lastConfession: Date
-  $lastKodas: Date
-  $lastCall: Timestamptz
-  $lastVisit: Timestamptz
+  $deleteTags: [uuid!]
+  $lastConfession: date
+  $lastKodas: date
+  $lastCall: timestamptz
+  $lastVisit: timestamptz
   $updatePersonsByPk: Boolean! = true
   $insertPersonsServices: Boolean! = true
   $insertPersonsGroups: Boolean! = true
@@ -36,6 +39,11 @@ mutation updatePerson(
   updatePersonsByPk(pkColumns: { id: $personId }, _set: $newPerson)
     @include(if: $updatePersonsByPk) {
     ...Person
+  }
+
+  updateAddressesByPk(pkColumns: { id: $addressId }, _set: $newAddress)
+    @include(if: $updateAddressByPk) {
+    ...Address
   }
 
   insertPersonsServices(objects: $newServices)
@@ -79,10 +87,10 @@ mutation updatePerson(
       personId: $personId
       day: {
         data: { day: $lastConfession }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: confessionHistoryDayIdPersonIdKey }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) @include(if: $insertHistoryConfessionHistoryOne) {
     person {
       id
@@ -95,10 +103,10 @@ mutation updatePerson(
       personId: $personId
       day: {
         data: { day: $lastKodas }
-        onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
       }
     }
-    onConflict: { constraint: kodasHistoryDayIdPersonIdKey }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) @include(if: $insertHistoryKodasHistoryOne) {
     person {
       id
@@ -128,25 +136,25 @@ mutation insertPerson($newPerson: PersonsInsertInput!) {
 }
 
 mutation updatePersonSpiritData(
-  $personId: Uuid!
-  $lastConfession: Date!
-  $lastKodas: Date!
+  $personId: uuid!
+  $lastConfession: date!
+  $lastKodas: date!
 ) {
   _c: insertHistoryAttendanceDaysOne(
     object: { day: $lastConfession }
-    onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+    onConflict: { constraint: attendance_days_pkey, updateColumns: day }
   ) {
     day
   }
   _k: insertHistoryAttendanceDaysOne(
     object: { day: $lastKodas }
-    onConflict: { constraint: attendanceDaysPkey, updateColumns: day }
+    onConflict: { constraint: attendance_days_pkey, updateColumns: day }
   ) {
     day
   }
   insertHistoryConfessionHistoryOne(
     object: { personId: $personId, dayId: $lastConfession }
-    onConflict: { constraint: confessionHistoryDayIdPersonIdKey }
+    onConflict: { constraint: confession_history_day_id_person_id_key }
   ) {
     person {
       ...Person
@@ -156,7 +164,7 @@ mutation updatePersonSpiritData(
   }
   insertHistoryKodasHistoryOne(
     object: { personId: $personId, dayId: $lastKodas }
-    onConflict: { constraint: kodasHistoryDayIdPersonIdKey }
+    onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) {
     person {
       ...Person

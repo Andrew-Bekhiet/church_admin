@@ -1,3 +1,23 @@
+fragment Address on Addresses {
+  id
+  countryIsoCode
+  area {
+    ...Area
+  }
+  district {
+    id
+    name
+  }
+  street {
+    ...Street
+  }
+  substreetName
+  geolocation
+  houseNumber
+  storeyNumber
+  apartmentNumber
+  specialLandmark
+}
 fragment EditHistory on HistoryEditHistory {
   time
   user {

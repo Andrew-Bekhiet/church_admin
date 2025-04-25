@@ -1,65 +1,81 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewFamily extends StatefulWidget {
   final Family? family;
   final String familyId;
 
-  const ViewFamily({
-    required this.familyId,
-    this.family,
-    super.key,
-  });
+  const ViewFamily({required this.familyId, this.family, super.key});
 
   @override
   State<ViewFamily> createState() => _ViewFamilyState();
 }
 
 class _ViewFamilyState extends State<ViewFamily> {
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
-        Input_PersonsBoolExp(
-          familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+  late final _personsController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+        where: Stream.value(
+          [
+            Input_PersonsBoolExp(
+              familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 
-  late final _childrenFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.streamAll(
-      where: [
-        Input_FamiliesBoolExp(
-          parents: Input_FamiliesFamiliesBoolExp(
-            parentFamilyId:
-                Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-          ),
+  late final _childrenFamiliesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.families.streamAll(
+        where: Stream.value(
+          [
+            Input_FamiliesBoolExp(
+              parents: Input_FamiliesFamiliesBoolExp(
+                parentFamilyId: Input_UuidComparisonExp(
+                  $_eq: widget.familyId.toUuid(),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 
-  late final _parentFamiliesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.streamAll(
-      where: [
-        Input_FamiliesBoolExp(
-          children: Input_FamiliesFamiliesBoolExp(
-            childFamilyId:
-                Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
-          ),
+  late final _parentFamiliesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.families.streamAll(
+        where: Stream.value(
+          [
+            Input_FamiliesBoolExp(
+              children: Input_FamiliesFamiliesBoolExp(
+                childFamilyId: Input_UuidComparisonExp(
+                  $_eq: widget.familyId.toUuid(),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-      where: [
-        Input_StoresBoolExp(
-          adminFamily: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+  late final _storesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.stores.streamAll(
+        where: Stream.value(
+          [
+            Input_StoresBoolExp(
+              adminFamily:
+                  Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 
@@ -67,8 +83,9 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   late final viewableObjectService = ViewableObjectService.I;
 
-  late final stream =
-      DatabaseService.I.families.streamSingleById(id: widget.familyId);
+  late final stream = DatabaseService.I.families.streamSingleById(
+    id: widget.familyId,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -80,20 +97,19 @@ class _ViewFamilyState extends State<ViewFamily> {
       tabsContentBuilders: {
         Person: (context) => ViewableObjectList<Person>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_personsController),
+              objectsController: _personsController,
             ),
         _ChildrenFamily: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController:
-                  _ensureWillDispose(_childrenFamiliesController),
+              objectsController: _childrenFamiliesController,
             ),
         _ParentFamily: (context) => ViewableObjectList<Family>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_parentFamiliesController),
+              objectsController: _parentFamiliesController,
             ),
         Store: (context) => ViewableObjectList<Store>(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_storesController),
+              objectsController: _storesController,
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
@@ -117,67 +133,63 @@ class _ViewFamilyState extends State<ViewFamily> {
         ],
       ),
       detailsBuilder: (context, family) => SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            CopiablePropertyWidget(
-              'العنوان والموقع',
-              family.address,
-              additionalOptions: [
-                if (family.geolocation != null)
-                  IconButton(
-                    icon: const Icon(Symbols.map),
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ViewGeodataMap(
-                          initialGeomapOptions: GeomapOptions(
-                            selectedFamilies: {family},
-                          ),
+        delegate: SliverChildListDelegate([
+          CopiablePropertyWidget(
+            'العنوان والموقع',
+            family.address?.toString(),
+            additionalOptions: [
+              if (family.geolocation != null)
+                IconButton(
+                  icon: const Icon(Symbols.map),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ViewGeodataMap(
+                        initialGeomapOptions: GeomapOptions(
+                          selectedFamilies: {family},
                         ),
                       ),
                     ),
-                    tooltip: 'إظهار على الخريطة',
                   ),
-              ],
+                  tooltip: 'إظهار على الخريطة',
+                ),
+            ],
+          ),
+          ListTile(
+            title: const Text('المنطقة'),
+            subtitle: family.address?.area != null
+                ? ViewableObjectCard(family.address!.area!)
+                : null,
+          ),
+          ListTile(
+            title: const Text('الشارع'),
+            subtitle: family.address?.street != null
+                ? ViewableObjectCard(family.address!.street!)
+                : null,
+          ),
+          CopiablePropertyWidget(
+            'ملاحظات',
+            family.notes,
+            showErrorIfEmpty: false,
+          ),
+          ListTile(
+            title: FilledButton.icon(
+              icon: const Icon(Symbols.query_stats),
+              label: const Text('احصائيات'),
+              // TODO: add family analysis
+              onPressed: () {},
             ),
-            ListTile(
-              title: const Text('المناطق التي تظهر بها'),
-              subtitle: Wrap(
-                children: [
-                  for (final a in family.areas ?? <Area>[])
-                    ViewableObjectCard(a),
-                ],
+          ),
+          HistoryProperty(
+            name: 'أخر تحديث للبيانات',
+            value: family.lastEdit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Family>(
+                id: family.id,
               ),
             ),
-            ListTile(
-              title: const Text('الشوارع التي تظهر بها'),
-              subtitle: Wrap(
-                children: [
-                  for (final s in family.streets ?? <Street>[])
-                    ViewableObjectCard(s),
-                ],
-              ),
-            ),
-            CopiablePropertyWidget(
-              'ملاحظات',
-              family.notes,
-              showErrorIfEmpty: false,
-            ),
-            ListTile(
-              title: FilledButton.icon(
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('احصائيات'),
-                // TODO: add family analysis
-                onPressed: () {},
-              ),
-            ),
-            HistoryProperty(
-              name: 'أخر تحديث للبيانات',
-              value: family.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Family>(id: family.id),
-            ),
-          ],
-        ),
+          ),
+        ]),
       ),
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -188,11 +200,41 @@ class _ViewFamilyState extends State<ViewFamily> {
       editButtonBuilder: (context, family) => IconButton(
         tooltip: 'تعديل',
         onPressed: () => EditFamilyRoute(
-          $extra: EditFamilyExtra(
-            family: family,
-          ),
+          $extra: EditFamilyExtra(family: family),
         ).push(context),
         icon: const Icon(Symbols.edit),
+      ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: tabController.animation!.asStream().switchMap(
+          (index) {
+            final currentIndex = index.round();
+
+            return switch (currentIndex) {
+              0 => _personsController,
+              1 => _childrenFamiliesController,
+              2 => _parentFamiliesController,
+              3 => _storesController,
+              _ => throw UnimplementedError(),
+            }
+                .totalCountStream
+                .map(
+                  (c) => switch (currentIndex) {
+                    0 => '$c مخدوم',
+                    1 => '$c أبناء',
+                    2 => '$c أباء',
+                    3 => '$c متجر',
+                    _ => throw UnimplementedError(),
+                  },
+                );
+          },
+        ),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
           SwitchingFloatingActionButton(
@@ -206,27 +248,19 @@ class _ViewFamilyState extends State<ViewFamily> {
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditPersonRoute(
-              $extra: EditPersonExtra(
-                family: family,
-              ),
+              $extra: EditPersonExtra(family: family),
             ).push(context);
           } else if (newIndex == 1) {
             EditFamilyRoute(
-              $extra: EditFamilyExtra(
-                parents: {family},
-              ),
+              $extra: EditFamilyExtra(parents: {family}),
             ).push(context);
           } else if (newIndex == 2) {
             EditFamilyRoute(
-              $extra: EditFamilyExtra(
-                children: {family},
-              ),
+              $extra: EditFamilyExtra(children: {family}),
             ).push(context);
           } else if (newIndex == 3) {
             EditStoreRoute(
-              $extra: EditStoreExtra(
-                family: family,
-              ),
+              $extra: EditStoreExtra(family: family),
             ).push(context);
           }
         },

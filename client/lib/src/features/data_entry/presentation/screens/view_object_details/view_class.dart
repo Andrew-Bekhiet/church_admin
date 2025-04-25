@@ -6,11 +6,7 @@ class ViewClass extends StatefulWidget {
   final Class? $class;
   final String classId;
 
-  const ViewClass({
-    required this.classId,
-    this.$class,
-    super.key,
-  });
+  const ViewClass({required this.classId, this.$class, super.key});
 
   @override
   State<ViewClass> createState() => _ViewClassState();
@@ -19,18 +15,19 @@ class ViewClass extends StatefulWidget {
 class _ViewClassState extends State<ViewClass> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
+      where: Stream.value([
         Input_PersonsBoolExp(
-          classes: Input_ClassesBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
+          classes: Input_ClassesPersonsBoolExp(
+            classId: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
           ),
         ),
-      ],
+      ]),
     ),
   );
 
-  late final stream =
-      DatabaseService.I.classes.streamSingleById(id: widget.classId);
+  late final stream = DatabaseService.I.classes.streamSingleById(
+    id: widget.classId,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -59,33 +56,45 @@ class _ViewClassState extends State<ViewClass> {
         icon: const Icon(Symbols.edit),
       ),
       detailsBuilder: (context, $class) => SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            HistoryProperty(
-              name: 'أخر تحديث للبيانات',
-              value: $class.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Class>(id: $class.id),
-            ),
-            ListTile(
-              title: FilledButton.icon(
-                style: Theme.of(context).largeFilledButtonStyle,
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('الاحصائيات'),
-                // TODO: add service analysis
-                onPressed: () {},
+        delegate: SliverChildListDelegate([
+          HistoryProperty(
+            name: 'أخر تحديث للبيانات',
+            value: $class.lastEdit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Class>(
+                id: $class.id,
               ),
             ),
-          ],
-        ),
+          ),
+          ListTile(
+            title: FilledButton.icon(
+              style: Theme.of(context).largeFilledButtonStyle,
+              icon: const Icon(Symbols.query_stats),
+              label: const Text('الاحصائيات'),
+              // TODO: add service analysis
+              onPressed: () {},
+            ),
+          ),
+        ]),
       ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
             icon: ViewableObjectService.I.getDefaultIconFor<Person>(),
-            label: 'المخدومين'
+            label: 'المخدومين',
           ),
         ],
+      ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: _personsController.totalCountStream.map((c) => '$c مخدوم'),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(

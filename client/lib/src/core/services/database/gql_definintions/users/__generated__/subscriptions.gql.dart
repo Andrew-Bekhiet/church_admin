@@ -261,7 +261,7 @@ const documentNodeSubscriptionwatchUser = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'uid')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -1776,6 +1776,635 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn_service
   call({
     String? name,
     int? order,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables_Subscription_watchAuthUsersDataCount {
+  factory Variables_Subscription_watchAuthUsersDataCount(
+          {List<Input_AuthUsersDataBoolExp>? where}) =>
+      Variables_Subscription_watchAuthUsersDataCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchAuthUsersDataCount._(this._$data);
+
+  factory Variables_Subscription_watchAuthUsersDataCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map((e) =>
+              Input_AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchAuthUsersDataCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_AuthUsersDataBoolExp>? get where =>
+      (_$data['where'] as List<Input_AuthUsersDataBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchAuthUsersDataCount<
+          Variables_Subscription_watchAuthUsersDataCount>
+      get copyWith => CopyWith_Variables_Subscription_watchAuthUsersDataCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchAuthUsersDataCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchAuthUsersDataCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchAuthUsersDataCount(
+    Variables_Subscription_watchAuthUsersDataCount instance,
+    TRes Function(Variables_Subscription_watchAuthUsersDataCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchAuthUsersDataCount;
+
+  factory CopyWith_Variables_Subscription_watchAuthUsersDataCount.stub(
+          TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchAuthUsersDataCount;
+
+  TRes call({List<Input_AuthUsersDataBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchAuthUsersDataCount<TRes>
+    implements CopyWith_Variables_Subscription_watchAuthUsersDataCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchAuthUsersDataCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchAuthUsersDataCount _instance;
+
+  final TRes Function(Variables_Subscription_watchAuthUsersDataCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchAuthUsersDataCount._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input_AuthUsersDataBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchAuthUsersDataCount<TRes>
+    implements CopyWith_Variables_Subscription_watchAuthUsersDataCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchAuthUsersDataCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_AuthUsersDataBoolExp>? where}) => _res;
+}
+
+class Subscription_watchAuthUsersDataCount {
+  Subscription_watchAuthUsersDataCount({required this.authUsersDataAggregate});
+
+  factory Subscription_watchAuthUsersDataCount.fromJson(
+      Map<String, dynamic> json) {
+    final l$authUsersDataAggregate = json['authUsersDataAggregate'];
+    return Subscription_watchAuthUsersDataCount(
+        authUsersDataAggregate:
+            Subscription_watchAuthUsersDataCount_authUsersDataAggregate
+                .fromJson((l$authUsersDataAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchAuthUsersDataCount_authUsersDataAggregate
+      authUsersDataAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$authUsersDataAggregate = authUsersDataAggregate;
+    _resultData['authUsersDataAggregate'] = l$authUsersDataAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$authUsersDataAggregate = authUsersDataAggregate;
+    return Object.hashAll([l$authUsersDataAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAuthUsersDataCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$authUsersDataAggregate = authUsersDataAggregate;
+    final lOther$authUsersDataAggregate = other.authUsersDataAggregate;
+    if (l$authUsersDataAggregate != lOther$authUsersDataAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAuthUsersDataCount
+    on Subscription_watchAuthUsersDataCount {
+  CopyWith_Subscription_watchAuthUsersDataCount<
+          Subscription_watchAuthUsersDataCount>
+      get copyWith => CopyWith_Subscription_watchAuthUsersDataCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAuthUsersDataCount<TRes> {
+  factory CopyWith_Subscription_watchAuthUsersDataCount(
+    Subscription_watchAuthUsersDataCount instance,
+    TRes Function(Subscription_watchAuthUsersDataCount) then,
+  ) = _CopyWithImpl_Subscription_watchAuthUsersDataCount;
+
+  factory CopyWith_Subscription_watchAuthUsersDataCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAuthUsersDataCount;
+
+  TRes call(
+      {Subscription_watchAuthUsersDataCount_authUsersDataAggregate?
+          authUsersDataAggregate});
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<TRes>
+      get authUsersDataAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchAuthUsersDataCount<TRes>
+    implements CopyWith_Subscription_watchAuthUsersDataCount<TRes> {
+  _CopyWithImpl_Subscription_watchAuthUsersDataCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAuthUsersDataCount _instance;
+
+  final TRes Function(Subscription_watchAuthUsersDataCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? authUsersDataAggregate = _undefined}) =>
+      _then(Subscription_watchAuthUsersDataCount(
+          authUsersDataAggregate: authUsersDataAggregate == _undefined ||
+                  authUsersDataAggregate == null
+              ? _instance.authUsersDataAggregate
+              : (authUsersDataAggregate
+                  as Subscription_watchAuthUsersDataCount_authUsersDataAggregate)));
+
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<TRes>
+      get authUsersDataAggregate {
+    final local$authUsersDataAggregate = _instance.authUsersDataAggregate;
+    return CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+        local$authUsersDataAggregate, (e) => call(authUsersDataAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAuthUsersDataCount<TRes>
+    implements CopyWith_Subscription_watchAuthUsersDataCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchAuthUsersDataCount(this._res);
+
+  TRes _res;
+
+  call(
+          {Subscription_watchAuthUsersDataCount_authUsersDataAggregate?
+              authUsersDataAggregate}) =>
+      _res;
+
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<TRes>
+      get authUsersDataAggregate =>
+          CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate
+              .stub(_res);
+}
+
+const documentNodeSubscriptionwatchAuthUsersDataCount =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchAuthUsersDataCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'AuthUsersDataBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'authUsersDataAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchAuthUsersDataCount_authUsersDataAggregate {
+  Subscription_watchAuthUsersDataCount_authUsersDataAggregate({
+    this.aggregate,
+    this.$__typename = 'AuthUsersDataAggregate',
+  });
+
+  factory Subscription_watchAuthUsersDataCount_authUsersDataAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+              .fromJson((l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate?
+      aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAuthUsersDataCount_authUsersDataAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAuthUsersDataCount_authUsersDataAggregate
+    on Subscription_watchAuthUsersDataCount_authUsersDataAggregate {
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+          Subscription_watchAuthUsersDataCount_authUsersDataAggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+    Subscription_watchAuthUsersDataCount_authUsersDataAggregate instance,
+    TRes Function(Subscription_watchAuthUsersDataCount_authUsersDataAggregate)
+        then,
+  ) = _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate;
+
+  factory CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate;
+
+  TRes call({
+    Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate?
+        aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+      TRes> get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+            TRes> {
+  _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAuthUsersDataCount_authUsersDataAggregate _instance;
+
+  final TRes Function(
+      Subscription_watchAuthUsersDataCount_authUsersDataAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+      TRes> get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate?
+        aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+          TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+              .stub(_res);
+}
+
+class Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate {
+  Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'AuthUsersDataAggregateFields',
+  });
+
+  factory Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other
+            is! Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+    on Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate {
+  CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+          Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+    Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+        instance,
+    TRes Function(
+            Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate)
+        then,
+  ) = _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+            TRes> {
+  _CopyWithImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate
+      _instance;
+
+  final TRes Function(
+          Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(
+          Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchAuthUsersDataCount_authUsersDataAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
     String? $__typename,
   }) =>
       _res;

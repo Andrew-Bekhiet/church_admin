@@ -1,4 +1,4 @@
-query getStudyYearName($order: Smallint!) {
+query getStudyYearName($order: smallint!) {
   studyYearsByPk(order: $order) {
     order
     name

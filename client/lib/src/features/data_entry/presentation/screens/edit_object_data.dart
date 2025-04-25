@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -42,8 +43,9 @@ class _EditObjectDataState<T extends ViewableWithID>
 
   @override
   Widget build(BuildContext context) {
-    final newTheme =
-        ThemingService.getDefault(seedOverride: newObjectData.color);
+    final newTheme = ThemingService.getDefault(
+      seedOverride: newObjectData.color,
+    );
 
     return Theme(
       data: newTheme,
@@ -90,9 +92,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                   child: FocusScope(
                     debugLabel: 'EditObjectDataFocusScope',
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Builder(
                         builder: (context) =>
                             widget.builder(context, _controller),
@@ -109,8 +109,9 @@ class _EditObjectDataState<T extends ViewableWithID>
                     child: SaveAndCancelButtonRow(
                       onSave: () => _controller.save(context),
                       onCancel: () async {
-                        final bool value =
-                            await _controller.confirmExit(context);
+                        final bool value = await _controller.confirmExit(
+                          context,
+                        );
                         if (value && context.mounted) {
                           Navigator.of(context).pop();
                         }
@@ -118,13 +119,17 @@ class _EditObjectDataState<T extends ViewableWithID>
                     ),
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 80),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 80)),
               ],
             ),
           ),
         ),
+        floatingActionButton: kDebugMode
+            ? FloatingActionButton(
+                onPressed: () => _controller.save(context),
+                child: const Icon(Icons.save),
+              )
+            : null,
       ),
     );
   }

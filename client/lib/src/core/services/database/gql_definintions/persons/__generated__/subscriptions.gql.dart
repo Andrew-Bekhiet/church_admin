@@ -427,6 +427,605 @@ const documentNodeSubscriptionwatchAllPersons = DocumentNode(definitions: [
   fragmentDefinitionPersonNoPhoto,
 ]);
 
+class Variables_Subscription_watchPersonsCount {
+  factory Variables_Subscription_watchPersonsCount(
+          {List<Input_PersonsBoolExp>? where}) =>
+      Variables_Subscription_watchPersonsCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchPersonsCount._(this._$data);
+
+  factory Variables_Subscription_watchPersonsCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map(
+              (e) => Input_PersonsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchPersonsCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_PersonsBoolExp>? get where =>
+      (_$data['where'] as List<Input_PersonsBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchPersonsCount<
+          Variables_Subscription_watchPersonsCount>
+      get copyWith => CopyWith_Variables_Subscription_watchPersonsCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchPersonsCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchPersonsCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchPersonsCount(
+    Variables_Subscription_watchPersonsCount instance,
+    TRes Function(Variables_Subscription_watchPersonsCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchPersonsCount;
+
+  factory CopyWith_Variables_Subscription_watchPersonsCount.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchPersonsCount;
+
+  TRes call({List<Input_PersonsBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchPersonsCount<TRes>
+    implements CopyWith_Variables_Subscription_watchPersonsCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchPersonsCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchPersonsCount _instance;
+
+  final TRes Function(Variables_Subscription_watchPersonsCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchPersonsCount._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input_PersonsBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchPersonsCount<TRes>
+    implements CopyWith_Variables_Subscription_watchPersonsCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchPersonsCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_PersonsBoolExp>? where}) => _res;
+}
+
+class Subscription_watchPersonsCount {
+  Subscription_watchPersonsCount({required this.personsAggregate});
+
+  factory Subscription_watchPersonsCount.fromJson(Map<String, dynamic> json) {
+    final l$personsAggregate = json['personsAggregate'];
+    return Subscription_watchPersonsCount(
+        personsAggregate:
+            Subscription_watchPersonsCount_personsAggregate.fromJson(
+                (l$personsAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchPersonsCount_personsAggregate personsAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$personsAggregate = personsAggregate;
+    _resultData['personsAggregate'] = l$personsAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([l$personsAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchPersonsCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPersonsCount
+    on Subscription_watchPersonsCount {
+  CopyWith_Subscription_watchPersonsCount<Subscription_watchPersonsCount>
+      get copyWith => CopyWith_Subscription_watchPersonsCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPersonsCount<TRes> {
+  factory CopyWith_Subscription_watchPersonsCount(
+    Subscription_watchPersonsCount instance,
+    TRes Function(Subscription_watchPersonsCount) then,
+  ) = _CopyWithImpl_Subscription_watchPersonsCount;
+
+  factory CopyWith_Subscription_watchPersonsCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPersonsCount;
+
+  TRes call(
+      {Subscription_watchPersonsCount_personsAggregate? personsAggregate});
+  CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes>
+      get personsAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchPersonsCount<TRes>
+    implements CopyWith_Subscription_watchPersonsCount<TRes> {
+  _CopyWithImpl_Subscription_watchPersonsCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPersonsCount _instance;
+
+  final TRes Function(Subscription_watchPersonsCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? personsAggregate = _undefined}) =>
+      _then(Subscription_watchPersonsCount(
+          personsAggregate:
+              personsAggregate == _undefined || personsAggregate == null
+                  ? _instance.personsAggregate
+                  : (personsAggregate
+                      as Subscription_watchPersonsCount_personsAggregate)));
+
+  CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes>
+      get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return CopyWith_Subscription_watchPersonsCount_personsAggregate(
+        local$personsAggregate, (e) => call(personsAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchPersonsCount<TRes>
+    implements CopyWith_Subscription_watchPersonsCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchPersonsCount(this._res);
+
+  TRes _res;
+
+  call({Subscription_watchPersonsCount_personsAggregate? personsAggregate}) =>
+      _res;
+
+  CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes>
+      get personsAggregate =>
+          CopyWith_Subscription_watchPersonsCount_personsAggregate.stub(_res);
+}
+
+const documentNodeSubscriptionwatchPersonsCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchPersonsCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonsBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'personsAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchPersonsCount_personsAggregate {
+  Subscription_watchPersonsCount_personsAggregate({
+    this.aggregate,
+    this.$__typename = 'PersonsAggregate',
+  });
+
+  factory Subscription_watchPersonsCount_personsAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPersonsCount_personsAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchPersonsCount_personsAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchPersonsCount_personsAggregate_aggregate? aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchPersonsCount_personsAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPersonsCount_personsAggregate
+    on Subscription_watchPersonsCount_personsAggregate {
+  CopyWith_Subscription_watchPersonsCount_personsAggregate<
+          Subscription_watchPersonsCount_personsAggregate>
+      get copyWith => CopyWith_Subscription_watchPersonsCount_personsAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes> {
+  factory CopyWith_Subscription_watchPersonsCount_personsAggregate(
+    Subscription_watchPersonsCount_personsAggregate instance,
+    TRes Function(Subscription_watchPersonsCount_personsAggregate) then,
+  ) = _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate;
+
+  factory CopyWith_Subscription_watchPersonsCount_personsAggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate;
+
+  TRes call({
+    Subscription_watchPersonsCount_personsAggregate_aggregate? aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<TRes>
+      get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate<TRes>
+    implements CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes> {
+  _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPersonsCount_personsAggregate _instance;
+
+  final TRes Function(Subscription_watchPersonsCount_personsAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPersonsCount_personsAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchPersonsCount_personsAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<TRes>
+      get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate<TRes>
+    implements CopyWith_Subscription_watchPersonsCount_personsAggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchPersonsCount_personsAggregate_aggregate? aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate
+              .stub(_res);
+}
+
+class Subscription_watchPersonsCount_personsAggregate_aggregate {
+  Subscription_watchPersonsCount_personsAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'PersonsAggregateFields',
+  });
+
+  factory Subscription_watchPersonsCount_personsAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPersonsCount_personsAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchPersonsCount_personsAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPersonsCount_personsAggregate_aggregate
+    on Subscription_watchPersonsCount_personsAggregate_aggregate {
+  CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<
+          Subscription_watchPersonsCount_personsAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate(
+    Subscription_watchPersonsCount_personsAggregate_aggregate instance,
+    TRes Function(Subscription_watchPersonsCount_personsAggregate_aggregate)
+        then,
+  ) = _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<
+            TRes> {
+  _CopyWithImpl_Subscription_watchPersonsCount_personsAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPersonsCount_personsAggregate_aggregate _instance;
+
+  final TRes Function(Subscription_watchPersonsCount_personsAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPersonsCount_personsAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchPersonsCount_personsAggregate_aggregate<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchPersonsCount_personsAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables_Subscription_watchPerson {
   factory Variables_Subscription_watchPerson({
     required UuidValue id,
@@ -734,7 +1333,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
@@ -790,33 +1389,9 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'birthdate'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'areas'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
-                  )
-                ]),
-              )
-            ],
-            directives: [],
             selectionSet: SelectionSetNode(selections: [
               FragmentSpreadNode(
-                name: NameNode(value: 'Area'),
+                name: NameNode(value: 'Address'),
                 directives: [],
               ),
               FieldNode(
@@ -827,6 +1402,13 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
                 selectionSet: null,
               ),
             ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'birthdate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
           ),
           FieldNode(
             name: NameNode(value: 'classes'),
@@ -840,57 +1422,78 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
                 name: NameNode(value: 'orderBy'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    name: NameNode(value: 'class'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      )
+                    ]),
                   )
                 ]),
               ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Class'),
-                directives: [],
-              ),
               FieldNode(
-                name: NameNode(value: 'attendanceHistoryAggregate'),
+                name: NameNode(value: 'class'),
                 alias: null,
-                arguments: [
-                  ArgumentNode(
-                    name: NameNode(value: 'where'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'personId'),
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Class'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceHistoryAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
                         value: ObjectValueNode(fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: '_eq'),
-                            value: VariableNode(name: NameNode(value: 'id')),
+                            name: NameNode(value: 'personId'),
+                            value: ObjectValueNode(fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_eq'),
+                                value:
+                                    VariableNode(name: NameNode(value: 'id')),
+                              )
+                            ]),
                           )
                         ]),
                       )
-                    ]),
-                  )
-                ],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'aggregate'),
-                    alias: null,
-                    arguments: [],
+                    ],
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
-                        name: NameNode(value: 'max'),
+                        name: NameNode(value: 'aggregate'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: SelectionSetNode(selections: [
                           FieldNode(
-                            name: NameNode(value: 'time'),
+                            name: NameNode(value: 'max'),
                             alias: null,
                             arguments: [],
                             directives: [],
-                            selectionSet: null,
+                            selectionSet: SelectionSetNode(selections: [
+                              FieldNode(
+                                name: NameNode(value: 'time'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ]),
                           ),
                           FieldNode(
                             name: NameNode(value: '__typename'),
@@ -1065,13 +1668,6 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
           ),
           FieldNode(
             name: NameNode(value: 'gender'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'geolocation'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1652,25 +2248,6 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
-            name: NameNode(value: 'streets'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Street'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
             name: NameNode(value: 'studyYear'),
             alias: null,
             arguments: [],
@@ -1887,8 +2464,11 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   ),
   fragmentDefinitionPerson,
   fragmentDefinitionPersonNoPhoto,
+  fragmentDefinitionAddress,
   fragmentDefinitionArea,
   fragmentDefinitionAreaNoPhoto,
+  fragmentDefinitionStreet,
+  fragmentDefinitionStreetNoPhoto,
   fragmentDefinitionClass,
   fragmentDefinitionClassNoPhoto,
   fragmentDefinitionFamily,
@@ -1904,8 +2484,6 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
   fragmentDefinitionLatestVisitHistory,
   fragmentDefinitionServiceWithStudyYears,
   fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
 ]);
 
 class Subscription_watchPerson_personsByPk
@@ -1919,14 +2497,12 @@ class Subscription_watchPerson_personsByPk
     this.blurhash,
     this.address,
     this.birthdate,
-    this.areas,
-    this.classes,
+    required this.classes,
     this.church,
     this.college,
     this.family,
     this.father,
     required this.gender,
-    this.geolocation,
     required this.groups,
     required this.isServant,
     required this.isShammas,
@@ -1947,7 +2523,6 @@ class Subscription_watchPerson_personsByPk
     required this.services,
     this.shammasLevel,
     this.state,
-    this.streets,
     this.studyYear,
     required this.hobbies,
     required this.tags,
@@ -1965,14 +2540,12 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = json['blurhash'];
     final l$address = json['address'];
     final l$birthdate = json['birthdate'];
-    final l$areas = json['areas'];
     final l$classes = json['classes'];
     final l$church = json['church'];
     final l$college = json['college'];
     final l$family = json['family'];
     final l$father = json['father'];
     final l$gender = json['gender'];
-    final l$geolocation = json['geolocation'];
     final l$groups = json['groups'];
     final l$isServant = json['isServant'];
     final l$isShammas = json['isShammas'];
@@ -1993,7 +2566,6 @@ class Subscription_watchPerson_personsByPk
     final l$services = json['services'];
     final l$shammasLevel = json['shammasLevel'];
     final l$state = json['state'];
-    final l$streets = json['streets'];
     final l$studyYear = json['studyYear'];
     final l$hobbies = json['hobbies'];
     final l$tags = json['tags'];
@@ -2007,13 +2579,12 @@ class Subscription_watchPerson_personsByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      address: (l$address as String?),
+      address: l$address == null
+          ? null
+          : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       birthdate: l$birthdate == null ? null : dateFromString(l$birthdate),
-      areas: (l$areas as List<dynamic>?)
-          ?.map((e) => Fragment_Area.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      classes: (l$classes as List<dynamic>?)
-          ?.map((e) => Subscription_watchPerson_personsByPk_classes.fromJson(
+      classes: (l$classes as List<dynamic>)
+          .map((e) => Subscription_watchPerson_personsByPk_classes.fromJson(
               (e as Map<String, dynamic>)))
           .toList(),
       church: l$church == null
@@ -2032,7 +2603,6 @@ class Subscription_watchPerson_personsByPk
           : Subscription_watchPerson_personsByPk_father.fromJson(
               (l$father as Map<String, dynamic>)),
       gender: (l$gender as bool),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
       groups: (l$groups as List<dynamic>)
           .map((e) => Subscription_watchPerson_personsByPk_groups.fromJson(
               (e as Map<String, dynamic>)))
@@ -2092,9 +2662,6 @@ class Subscription_watchPerson_personsByPk
           ? null
           : Subscription_watchPerson_personsByPk_state.fromJson(
               (l$state as Map<String, dynamic>)),
-      streets: (l$streets as List<dynamic>?)
-          ?.map((e) => Fragment_Street.fromJson((e as Map<String, dynamic>)))
-          .toList(),
       studyYear: l$studyYear == null
           ? null
           : Subscription_watchPerson_personsByPk_studyYear.fromJson(
@@ -2127,13 +2694,11 @@ class Subscription_watchPerson_personsByPk
 
   final String? blurhash;
 
-  final String? address;
+  final Fragment_Address? address;
 
   final DateTime? birthdate;
 
-  final List<Fragment_Area>? areas;
-
-  final List<Subscription_watchPerson_personsByPk_classes>? classes;
+  final List<Subscription_watchPerson_personsByPk_classes> classes;
 
   final Subscription_watchPerson_personsByPk_church? church;
 
@@ -2144,8 +2709,6 @@ class Subscription_watchPerson_personsByPk
   final Subscription_watchPerson_personsByPk_father? father;
 
   final bool gender;
-
-  final Map<String, dynamic>? geolocation;
 
   final List<Subscription_watchPerson_personsByPk_groups> groups;
 
@@ -2187,8 +2750,6 @@ class Subscription_watchPerson_personsByPk
 
   final Subscription_watchPerson_personsByPk_state? state;
 
-  final List<Fragment_Street>? streets;
-
   final Subscription_watchPerson_personsByPk_studyYear? studyYear;
 
   final List<Subscription_watchPerson_personsByPk_hobbies> hobbies;
@@ -2215,14 +2776,12 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$address = address;
-    _resultData['address'] = l$address;
+    _resultData['address'] = l$address?.toJson();
     final l$birthdate = birthdate;
     _resultData['birthdate'] =
         l$birthdate == null ? null : dateToString(l$birthdate);
-    final l$areas = areas;
-    _resultData['areas'] = l$areas?.map((e) => e.toJson()).toList();
     final l$classes = classes;
-    _resultData['classes'] = l$classes?.map((e) => e.toJson()).toList();
+    _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$church = church;
     _resultData['church'] = l$church?.toJson();
     final l$college = college;
@@ -2233,8 +2792,6 @@ class Subscription_watchPerson_personsByPk
     _resultData['father'] = l$father?.toJson();
     final l$gender = gender;
     _resultData['gender'] = l$gender;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
     final l$groups = groups;
     _resultData['groups'] = l$groups.map((e) => e.toJson()).toList();
     final l$isServant = isServant;
@@ -2275,8 +2832,6 @@ class Subscription_watchPerson_personsByPk
     _resultData['shammasLevel'] = l$shammasLevel?.toJson();
     final l$state = state;
     _resultData['state'] = l$state?.toJson();
-    final l$streets = streets;
-    _resultData['streets'] = l$streets?.map((e) => e.toJson()).toList();
     final l$studyYear = studyYear;
     _resultData['studyYear'] = l$studyYear?.toJson();
     final l$hobbies = hobbies;
@@ -2300,14 +2855,12 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = blurhash;
     final l$address = address;
     final l$birthdate = birthdate;
-    final l$areas = areas;
     final l$classes = classes;
     final l$church = church;
     final l$college = college;
     final l$family = family;
     final l$father = father;
     final l$gender = gender;
-    final l$geolocation = geolocation;
     final l$groups = groups;
     final l$isServant = isServant;
     final l$isShammas = isShammas;
@@ -2328,7 +2881,6 @@ class Subscription_watchPerson_personsByPk
     final l$services = services;
     final l$shammasLevel = shammasLevel;
     final l$state = state;
-    final l$streets = streets;
     final l$studyYear = studyYear;
     final l$hobbies = hobbies;
     final l$tags = tags;
@@ -2343,14 +2895,12 @@ class Subscription_watchPerson_personsByPk
       l$blurhash,
       l$address,
       l$birthdate,
-      l$areas == null ? null : Object.hashAll(l$areas.map((v) => v)),
-      l$classes == null ? null : Object.hashAll(l$classes.map((v) => v)),
+      Object.hashAll(l$classes.map((v) => v)),
       l$church,
       l$college,
       l$family,
       l$father,
       l$gender,
-      l$geolocation,
       Object.hashAll(l$groups.map((v) => v)),
       l$isServant,
       l$isShammas,
@@ -2371,7 +2921,6 @@ class Subscription_watchPerson_personsByPk
       Object.hashAll(l$services.map((v) => v)),
       l$shammasLevel,
       l$state,
-      l$streets == null ? null : Object.hashAll(l$streets.map((v) => v)),
       l$studyYear,
       Object.hashAll(l$hobbies.map((v) => v)),
       Object.hashAll(l$tags.map((v) => v)),
@@ -2429,37 +2978,17 @@ class Subscription_watchPerson_personsByPk
     if (l$birthdate != lOther$birthdate) {
       return false;
     }
-    final l$areas = areas;
-    final lOther$areas = other.areas;
-    if (l$areas != null && lOther$areas != null) {
-      if (l$areas.length != lOther$areas.length) {
-        return false;
-      }
-      for (int i = 0; i < l$areas.length; i++) {
-        final l$areas$entry = l$areas[i];
-        final lOther$areas$entry = lOther$areas[i];
-        if (l$areas$entry != lOther$areas$entry) {
-          return false;
-        }
-      }
-    } else if (l$areas != lOther$areas) {
-      return false;
-    }
     final l$classes = classes;
     final lOther$classes = other.classes;
-    if (l$classes != null && lOther$classes != null) {
-      if (l$classes.length != lOther$classes.length) {
+    if (l$classes.length != lOther$classes.length) {
+      return false;
+    }
+    for (int i = 0; i < l$classes.length; i++) {
+      final l$classes$entry = l$classes[i];
+      final lOther$classes$entry = lOther$classes[i];
+      if (l$classes$entry != lOther$classes$entry) {
         return false;
       }
-      for (int i = 0; i < l$classes.length; i++) {
-        final l$classes$entry = l$classes[i];
-        final lOther$classes$entry = lOther$classes[i];
-        if (l$classes$entry != lOther$classes$entry) {
-          return false;
-        }
-      }
-    } else if (l$classes != lOther$classes) {
-      return false;
     }
     final l$church = church;
     final lOther$church = other.church;
@@ -2484,11 +3013,6 @@ class Subscription_watchPerson_personsByPk
     final l$gender = gender;
     final lOther$gender = other.gender;
     if (l$gender != lOther$gender) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
       return false;
     }
     final l$groups = groups;
@@ -2605,22 +3129,6 @@ class Subscription_watchPerson_personsByPk
     if (l$state != lOther$state) {
       return false;
     }
-    final l$streets = streets;
-    final lOther$streets = other.streets;
-    if (l$streets != null && lOther$streets != null) {
-      if (l$streets.length != lOther$streets.length) {
-        return false;
-      }
-      for (int i = 0; i < l$streets.length; i++) {
-        final l$streets$entry = l$streets[i];
-        final lOther$streets$entry = lOther$streets[i];
-        if (l$streets$entry != lOther$streets$entry) {
-          return false;
-        }
-      }
-    } else if (l$streets != lOther$streets) {
-      return false;
-    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (l$studyYear != lOther$studyYear) {
@@ -2690,16 +3198,14 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    String? address,
+    Fragment_Address? address,
     DateTime? birthdate,
-    List<Fragment_Area>? areas,
     List<Subscription_watchPerson_personsByPk_classes>? classes,
     Subscription_watchPerson_personsByPk_church? church,
     Subscription_watchPerson_personsByPk_college? college,
     Fragment_Family? family,
     Subscription_watchPerson_personsByPk_father? father,
     bool? gender,
-    Map<String, dynamic>? geolocation,
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
@@ -2720,22 +3226,18 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     List<Subscription_watchPerson_personsByPk_services>? services,
     Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
     Subscription_watchPerson_personsByPk_state? state,
-    List<Fragment_Street>? streets,
     Subscription_watchPerson_personsByPk_studyYear? studyYear,
     List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
     List<Subscription_watchPerson_personsByPk_tags>? tags,
     UuidValue? uid,
     Subscription_watchPerson_personsByPk_user? user,
   });
-  TRes areas(
-      Iterable<Fragment_Area>? Function(
-              Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-          _fn);
+  CopyWith_Fragment_Address<TRes> get address;
   TRes classes(
-      Iterable<Subscription_watchPerson_personsByPk_classes>? Function(
+      Iterable<Subscription_watchPerson_personsByPk_classes> Function(
               Iterable<
                   CopyWith_Subscription_watchPerson_personsByPk_classes<
-                      Subscription_watchPerson_personsByPk_classes>>?)
+                      Subscription_watchPerson_personsByPk_classes>>)
           _fn);
   CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church;
   CopyWith_Subscription_watchPerson_personsByPk_college<TRes> get college;
@@ -2766,10 +3268,6 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
   CopyWith_Subscription_watchPerson_personsByPk_shammasLevel<TRes>
       get shammasLevel;
   CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state;
-  TRes streets(
-      Iterable<Fragment_Street>? Function(
-              Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-          _fn);
   CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear;
   TRes hobbies(
       Iterable<Subscription_watchPerson_personsByPk_hobbies> Function(
@@ -2808,14 +3306,12 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? blurhash = _undefined,
     Object? address = _undefined,
     Object? birthdate = _undefined,
-    Object? areas = _undefined,
     Object? classes = _undefined,
     Object? church = _undefined,
     Object? college = _undefined,
     Object? family = _undefined,
     Object? father = _undefined,
     Object? gender = _undefined,
-    Object? geolocation = _undefined,
     Object? groups = _undefined,
     Object? isServant = _undefined,
     Object? isShammas = _undefined,
@@ -2836,7 +3332,6 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? services = _undefined,
     Object? shammasLevel = _undefined,
     Object? state = _undefined,
-    Object? streets = _undefined,
     Object? studyYear = _undefined,
     Object? hobbies = _undefined,
     Object? tags = _undefined,
@@ -2857,17 +3352,15 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        address:
-            address == _undefined ? _instance.address : (address as String?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Fragment_Address?),
         birthdate: birthdate == _undefined
             ? _instance.birthdate
             : (birthdate as DateTime?),
-        areas: areas == _undefined
-            ? _instance.areas
-            : (areas as List<Fragment_Area>?),
-        classes: classes == _undefined
+        classes: classes == _undefined || classes == null
             ? _instance.classes
-            : (classes as List<Subscription_watchPerson_personsByPk_classes>?),
+            : (classes as List<Subscription_watchPerson_personsByPk_classes>),
         church: church == _undefined
             ? _instance.church
             : (church as Subscription_watchPerson_personsByPk_church?),
@@ -2883,9 +3376,6 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         gender: gender == _undefined || gender == null
             ? _instance.gender
             : (gender as bool),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
         groups: groups == _undefined || groups == null
             ? _instance.groups
             : (groups as List<Subscription_watchPerson_personsByPk_groups>),
@@ -2946,9 +3436,6 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         state: state == _undefined
             ? _instance.state
             : (state as Subscription_watchPerson_personsByPk_state?),
-        streets: streets == _undefined
-            ? _instance.streets
-            : (streets as List<Fragment_Street>?),
         studyYear: studyYear == _undefined
             ? _instance.studyYear
             : (studyYear as Subscription_watchPerson_personsByPk_studyYear?),
@@ -2964,28 +3451,25 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             : (user as Subscription_watchPerson_personsByPk_user?),
       ));
 
-  TRes areas(
-          Iterable<Fragment_Area>? Function(
-                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>?)
-              _fn) =>
-      call(
-          areas: _fn(_instance.areas?.map((e) => CopyWith_Fragment_Area(
-                e,
-                (i) => i,
-              )))?.toList());
+  CopyWith_Fragment_Address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Fragment_Address.stub(_then(_instance))
+        : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
 
   TRes classes(
-          Iterable<Subscription_watchPerson_personsByPk_classes>? Function(
+          Iterable<Subscription_watchPerson_personsByPk_classes> Function(
                   Iterable<
                       CopyWith_Subscription_watchPerson_personsByPk_classes<
-                          Subscription_watchPerson_personsByPk_classes>>?)
+                          Subscription_watchPerson_personsByPk_classes>>)
               _fn) =>
       call(
-          classes: _fn(_instance.classes?.map(
-              (e) => CopyWith_Subscription_watchPerson_personsByPk_classes(
+          classes: _fn(_instance.classes
+              .map((e) => CopyWith_Subscription_watchPerson_personsByPk_classes(
                     e,
                     (i) => i,
-                  )))?.toList());
+                  ))).toList());
 
   CopyWith_Subscription_watchPerson_personsByPk_church<TRes> get church {
     final local$church = _instance.church;
@@ -3144,16 +3628,6 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             local$state, (e) => call(state: e));
   }
 
-  TRes streets(
-          Iterable<Fragment_Street>? Function(
-                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>?)
-              _fn) =>
-      call(
-          streets: _fn(_instance.streets?.map((e) => CopyWith_Fragment_Street(
-                e,
-                (i) => i,
-              )))?.toList());
-
   CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
@@ -3212,16 +3686,14 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    String? address,
+    Fragment_Address? address,
     DateTime? birthdate,
-    List<Fragment_Area>? areas,
     List<Subscription_watchPerson_personsByPk_classes>? classes,
     Subscription_watchPerson_personsByPk_church? church,
     Subscription_watchPerson_personsByPk_college? college,
     Fragment_Family? family,
     Subscription_watchPerson_personsByPk_father? father,
     bool? gender,
-    Map<String, dynamic>? geolocation,
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
@@ -3242,7 +3714,6 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     List<Subscription_watchPerson_personsByPk_services>? services,
     Subscription_watchPerson_personsByPk_shammasLevel? shammasLevel,
     Subscription_watchPerson_personsByPk_state? state,
-    List<Fragment_Street>? streets,
     Subscription_watchPerson_personsByPk_studyYear? studyYear,
     List<Subscription_watchPerson_personsByPk_hobbies>? hobbies,
     List<Subscription_watchPerson_personsByPk_tags>? tags,
@@ -3251,7 +3722,8 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
   }) =>
       _res;
 
-  areas(_fn) => _res;
+  CopyWith_Fragment_Address<TRes> get address =>
+      CopyWith_Fragment_Address.stub(_res);
 
   classes(_fn) => _res;
 
@@ -3308,8 +3780,6 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
   CopyWith_Subscription_watchPerson_personsByPk_state<TRes> get state =>
       CopyWith_Subscription_watchPerson_personsByPk_state.stub(_res);
 
-  streets(_fn) => _res;
-
   CopyWith_Subscription_watchPerson_personsByPk_studyYear<TRes> get studyYear =>
       CopyWith_Subscription_watchPerson_personsByPk_studyYear.stub(_res);
 
@@ -3321,9 +3791,154 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
       CopyWith_Subscription_watchPerson_personsByPk_user.stub(_res);
 }
 
-class Subscription_watchPerson_personsByPk_classes
-    implements Fragment_Class, Fragment_ClassNoPhoto {
+class Subscription_watchPerson_personsByPk_classes {
   Subscription_watchPerson_personsByPk_classes({
+    this.$class,
+    this.$__typename = 'ClassesPersons',
+  });
+
+  factory Subscription_watchPerson_personsByPk_classes.fromJson(
+      Map<String, dynamic> json) {
+    final l$$class = json['class'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_classes(
+      $class: l$$class == null
+          ? null
+          : Subscription_watchPerson_personsByPk_classes_class.fromJson(
+              (l$$class as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchPerson_personsByPk_classes_class? $class;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$class = $class;
+    _resultData['class'] = l$$class?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$class = $class;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$$class,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchPerson_personsByPk_classes ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$class = $class;
+    final lOther$$class = other.$class;
+    if (l$$class != lOther$$class) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes
+    on Subscription_watchPerson_personsByPk_classes {
+  CopyWith_Subscription_watchPerson_personsByPk_classes<
+          Subscription_watchPerson_personsByPk_classes>
+      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_classes(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes(
+    Subscription_watchPerson_personsByPk_classes instance,
+    TRes Function(Subscription_watchPerson_personsByPk_classes) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes;
+
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes;
+
+  TRes call({
+    Subscription_watchPerson_personsByPk_classes_class? $class,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class<TRes> get $class;
+}
+
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPerson_personsByPk_classes _instance;
+
+  final TRes Function(Subscription_watchPerson_personsByPk_classes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $class = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPerson_personsByPk_classes(
+        $class: $class == _undefined
+            ? _instance.$class
+            : ($class as Subscription_watchPerson_personsByPk_classes_class?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class<TRes> get $class {
+    final local$$class = _instance.$class;
+    return local$$class == null
+        ? CopyWith_Subscription_watchPerson_personsByPk_classes_class.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchPerson_personsByPk_classes_class(
+            local$$class, (e) => call($class: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes<TRes>
+    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchPerson_personsByPk_classes_class? $class,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class<TRes>
+      get $class =>
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class.stub(
+              _res);
+}
+
+class Subscription_watchPerson_personsByPk_classes_class
+    implements Fragment_Class, Fragment_ClassNoPhoto {
+  Subscription_watchPerson_personsByPk_classes_class({
     required this.id,
     required this.name,
     this.color,
@@ -3333,7 +3948,7 @@ class Subscription_watchPerson_personsByPk_classes
     required this.attendanceHistoryAggregate,
   });
 
-  factory Subscription_watchPerson_personsByPk_classes.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_class.fromJson(
       Map<String, dynamic> json) {
     final l$id = json['id'];
     final l$name = json['name'];
@@ -3342,7 +3957,7 @@ class Subscription_watchPerson_personsByPk_classes
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
-    return Subscription_watchPerson_personsByPk_classes(
+    return Subscription_watchPerson_personsByPk_classes_class(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
@@ -3351,7 +3966,7 @@ class Subscription_watchPerson_personsByPk_classes
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
               .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
     );
   }
@@ -3368,7 +3983,7 @@ class Subscription_watchPerson_personsByPk_classes
 
   final String? blurhash;
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
       attendanceHistoryAggregate;
 
   Map<String, dynamic> toJson() {
@@ -3417,7 +4032,7 @@ class Subscription_watchPerson_personsByPk_classes
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Subscription_watchPerson_personsByPk_classes ||
+    if (other is! Subscription_watchPerson_personsByPk_classes_class ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3460,24 +4075,27 @@ class Subscription_watchPerson_personsByPk_classes
   }
 }
 
-extension UtilityExtension_Subscription_watchPerson_personsByPk_classes
-    on Subscription_watchPerson_personsByPk_classes {
-  CopyWith_Subscription_watchPerson_personsByPk_classes<
-          Subscription_watchPerson_personsByPk_classes>
-      get copyWith => CopyWith_Subscription_watchPerson_personsByPk_classes(
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_class
+    on Subscription_watchPerson_personsByPk_classes_class {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class<
+          Subscription_watchPerson_personsByPk_classes_class>
+      get copyWith =>
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes(
-    Subscription_watchPerson_personsByPk_classes instance,
-    TRes Function(Subscription_watchPerson_personsByPk_classes) then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes;
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_class<
+    TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class(
+    Subscription_watchPerson_personsByPk_classes_class instance,
+    TRes Function(Subscription_watchPerson_personsByPk_classes_class) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class;
 
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes.stub(TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes;
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class;
 
   TRes call({
     UuidValue? id,
@@ -3486,23 +4104,24 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   });
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate;
 }
 
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes(
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class<TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchPerson_personsByPk_classes _instance;
+  final Subscription_watchPerson_personsByPk_classes_class _instance;
 
-  final TRes Function(Subscription_watchPerson_personsByPk_classes) _then;
+  final TRes Function(Subscription_watchPerson_personsByPk_classes_class) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3515,7 +4134,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
     Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
   }) =>
-      _then(Subscription_watchPerson_personsByPk_classes(
+      _then(Subscription_watchPerson_personsByPk_classes_class(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
         name: name == _undefined || name == null
             ? _instance.name
@@ -3533,22 +4152,24 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes<TRes>
                 attendanceHistoryAggregate == null
             ? _instance.attendanceHistoryAggregate
             : (attendanceHistoryAggregate
-                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate),
+                as Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate),
       ));
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
       TRes> get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
-    return CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+    return CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
         local$attendanceHistoryAggregate,
         (e) => call(attendanceHistoryAggregate: e));
   }
 }
 
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes<TRes>
-    implements CopyWith_Subscription_watchPerson_personsByPk_classes<TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes(this._res);
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class<TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class(
+      this._res);
 
   TRes _res;
 
@@ -3559,38 +4180,38 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate?
         attendanceHistoryAggregate,
   }) =>
       _res;
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
           TRes>
       get attendanceHistoryAggregate =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
               .stub(_res);
 }
 
-class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
-  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate({
+class Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate {
+  Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate({
     this.aggregate,
     this.$__typename = 'HistoryAttendanceHistoryAggregate',
   });
 
-  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate.fromJson(
       Map<String, dynamic> json) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+    return Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+          : Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
               .fromJson((l$aggregate as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
       aggregate;
 
   final String $__typename;
@@ -3620,7 +4241,7 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
       return true;
     }
     if (other
-            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate ||
+            is! Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3638,55 +4259,55 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
   }
 }
 
-extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
-    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate {
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
+    on Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate>
       get copyWith =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
     TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
         instance,
     TRes Function(
-            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate)
+            Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate)
         then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate;
 
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate;
 
   TRes call({
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   });
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate;
 }
 
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate
       _instance;
 
   final TRes Function(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate)
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3696,71 +4317,71 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
         aggregate: aggregate == _undefined
             ? _instance.aggregate
             : (aggregate
-                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?),
+                as Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
       TRes> get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+        ? CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
             .stub(_then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+        : CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
             local$aggregate, (e) => call(aggregate: e));
   }
 }
 
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate<
             TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate?
         aggregate,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
           TRes>
       get aggregate =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
               .stub(_res);
 }
 
-class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate {
-  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate({
+class Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate {
+  Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate({
     this.max,
     this.$__typename = 'HistoryAttendanceHistoryAggregateFields',
   });
 
-  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate.fromJson(
       Map<String, dynamic> json) {
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+    return Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
       max: l$max == null
           ? null
-          : Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+          : Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
               .fromJson((l$max as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
       max;
 
   final String $__typename;
@@ -3790,7 +4411,7 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
       return true;
     }
     if (other
-            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate ||
+            is! Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3808,55 +4429,55 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
   }
 }
 
-extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
-    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate {
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
+    on Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate>
       get copyWith =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
     TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
         instance,
     TRes Function(
-            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate)
+            Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate)
         then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate;
 
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate.stub(
           TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate;
 
   TRes call({
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   });
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
       TRes> get max;
 }
 
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate
       _instance;
 
   final TRes Function(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate)
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3866,62 +4487,62 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
         max: max == _undefined
             ? _instance.max
             : (max
-                as Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?),
+                as Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
       TRes> get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+        ? CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
             .stub(_then(_instance))
-        : CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+        : CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
             local$max, (e) => call(max: e));
   }
 }
 
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate<
             TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate(
       this._res);
 
   TRes _res;
 
   call({
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max?
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max?
         max,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
           TRes>
       get max =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
               .stub(_res);
 }
 
-class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
-  Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max({
+class Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max {
+  Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max({
     this.time,
     this.$__typename = 'HistoryAttendanceHistoryMaxFields',
   });
 
-  factory Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
+  factory Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max.fromJson(
       Map<String, dynamic> json) {
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+    return Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
       time: l$time == null ? null : tstzFromString(l$time),
       $__typename: (l$$__typename as String),
     );
@@ -3956,7 +4577,7 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
       return true;
     }
     if (other
-            is! Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max ||
+            is! Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3974,30 +4595,30 @@ class Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_ag
   }
 }
 
-extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
-    on Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max {
-  CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max>
+extension UtilityExtension_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
+    on Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max {
+  CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max>
       get copyWith =>
-          CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+          CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
     TRes> {
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
-    Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
+    Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
         instance,
     TRes Function(
-            Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
+            Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max)
         then,
-  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max;
 
-  factory CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max.stub(
+  factory CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max.stub(
           TRes res) =
-      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max;
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max;
 
   TRes call({
     DateTime? time,
@@ -4005,21 +4626,21 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceH
   });
 }
 
-class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max
+  final Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max
       _instance;
 
   final TRes Function(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max)
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max)
       _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -4029,7 +4650,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHisto
     Object? $__typename = _undefined,
   }) =>
       _then(
-          Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+          Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
         time: time == _undefined ? _instance.time : (time as DateTime?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -4037,12 +4658,12 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_attendanceHisto
       ));
 }
 
-class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
         TRes>
     implements
-        CopyWith_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max<
+        CopyWith_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max<
             TRes> {
-  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_attendanceHistoryAggregate_aggregate_max(
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class_attendanceHistoryAggregate_aggregate_max(
       this._res);
 
   TRes _res;

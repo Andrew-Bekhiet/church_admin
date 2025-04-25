@@ -1,0 +1,3 @@
+table:
+  name: users_permissions_by_entity_id
+  schema: auth

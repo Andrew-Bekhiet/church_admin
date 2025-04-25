@@ -1,41 +1,54 @@
 enum Operator {
-  eq('_eq', '='),
-  gt('_gt', '>'),
-  gte('_gte', '>='),
   lt('_lt', '<'),
   lte('_lte', '<='),
+  dateLt('_lt', 'قبل'),
+  dateLte('_lte', 'قبل أو يساوي'),
+  eq('_eq', 'يساوي'),
+  dateEq('_eq', 'في نفس الوقت'),
   neq('_neq', 'لا يساوي'),
-  like('_like', 'يشبه'),
-  ilike('_ilike', 'يشبه (case insensitive)'),
-  nlike('_nlike', 'لا يشبه'),
-  nilike('_nilike', 'لا يشبه (case insensitive)'),
+  dateNeq('_eq', 'ليس في نفس الوقت'),
+  gt('_gt', '>'),
+  gte('_gte', '>='),
+  dateGt('_gt', 'بعد'),
+  dateGte('_gte', 'بعد أو يساوي'),
+  ilike('_ilike', 'يشبه'),
+  nilike('_nilike', 'لا يشبه'),
   regex('_regex', 'regex'),
   nregex('_nregex', '!regex'),
-  iregex('_iregex', 'iregex'),
-  niregex('_niregex', '!iregex'),
   isNull('_isNull', 'فارغ'),
   $in('_in', 'يساوي أي من'),
   nin('_nin', 'لا يساوي أي من'),
   stIntersects('_stIntersects', 'يتقاطع مع');
 
-  static const Set<Operator> textual = {
-    Operator.like,
-    Operator.ilike,
-    Operator.nlike,
+  static const Set<Operator> advanced = {
     Operator.nilike,
     Operator.regex,
     Operator.nregex,
-    Operator.iregex,
-    Operator.niregex,
+  };
+
+  static const Set<Operator> textual = {
+    Operator.ilike,
+    Operator.nilike,
+    Operator.regex,
+    Operator.nregex,
   };
 
   static const Set<Operator> comparitive = {
     Operator.eq,
-    Operator.gt,
-    Operator.gte,
+    Operator.neq,
     Operator.lt,
     Operator.lte,
-    Operator.neq,
+    Operator.gt,
+    Operator.gte,
+  };
+
+  static const Set<Operator> dateComparitive = {
+    Operator.dateLt,
+    Operator.dateLte,
+    Operator.dateEq,
+    Operator.dateNeq,
+    Operator.dateGt,
+    Operator.dateGte,
   };
 
   static const Set<Operator> arrays = {

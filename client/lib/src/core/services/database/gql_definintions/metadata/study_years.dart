@@ -22,16 +22,20 @@ class StudyYearsDAO extends DAOBase<StudyYear>
       throw UnimplementedError();
 
   @override
-  GQLPaginatableStream<StudyYear> streamAll({
+  PaginatableStreamBase<StudyYear> streamAll({
     Stream<String?>? searchQuery,
-    List<Input_StudyYearsBoolExp>? where,
-    List<Input_StudyYearsOrderBy>? orderBy,
+    Stream<List<Input_StudyYearsBoolExp>>? where,
+    Stream<List<Input_StudyYearsOrderBy>>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
+      streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
       where: where,
-      orderBy: orderBy ?? [Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC)],
+      orderBy: orderBy ??
+          Stream.value([
+            Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC),
+          ]),
     );
   }
 

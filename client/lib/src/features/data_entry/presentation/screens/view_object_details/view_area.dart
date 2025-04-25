@@ -1,74 +1,80 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewArea extends StatefulWidget {
   final Area? area;
   final String areaId;
 
-  const ViewArea({
-    required this.areaId,
-    this.area,
-    super.key,
-  });
+  const ViewArea({required this.areaId, this.area, super.key});
 
   @override
   State<ViewArea> createState() => _ViewAreaState();
 }
 
 class _ViewAreaState extends State<ViewArea> {
-  late final _streetsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.streets.streamAll(
-      where: [
-        Input_StreetsBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+  late final _streetsController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.streets.streamAll(
+        where: Stream.value([
+          Input_StreetsBoolExp(
+            areas: Input_AreasStreetsBoolExp(
+              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+            ),
           ),
-        ),
-      ],
+        ]),
+      ),
     ),
   );
 
-  late final _familiesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.families.streamAll(
-      where: [
-        Input_FamiliesBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+  late final _familiesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.families.streamAll(
+        where: Stream.value([
+          Input_FamiliesBoolExp(
+            address: Input_AddressesBoolExp(
+              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+            ),
           ),
-        ),
-      ],
+        ]),
+      ),
     ),
   );
 
-  late final _storesController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-      where: [
-        Input_StoresBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+  late final _storesController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.stores.streamAll(
+        where: Stream.value([
+          Input_StoresBoolExp(
+            address: Input_AddressesBoolExp(
+              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+            ),
           ),
-        ),
-      ],
+        ]),
+      ),
     ),
   );
 
-  late final _personsController = ViewableObjectListController(
-    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
-      where: [
-        Input_PersonsBoolExp(
-          areas: Input_AreasBoolExp(
-            id: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+  late final _personsController = _ensureWillDispose(
+    ViewableObjectListController(
+      objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+        where: Stream.value([
+          Input_PersonsBoolExp(
+            address: Input_AddressesBoolExp(
+              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
+            ),
           ),
-        ),
-      ],
+        ]),
+      ),
     ),
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
-  late final Stream<Area?> stream =
-      DatabaseService.I.areas.streamSingleById(id: widget.areaId);
+  late final Stream<Area?> stream = DatabaseService.I.areas.streamSingleById(
+    id: widget.areaId,
+  );
 
   late final viewableObjectService = ViewableObjectService.I;
 
@@ -82,83 +88,90 @@ class _ViewAreaState extends State<ViewArea> {
       tabsContentBuilders: {
         Street: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_streetsController),
+              objectsController: _streetsController,
             ),
         Family: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_familiesController),
+              objectsController: _familiesController,
             ),
         Person: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_personsController),
+              objectsController: _personsController,
             ),
         Store: (context) => ViewableObjectList(
               scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _ensureWillDispose(_storesController),
+              objectsController: _storesController,
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Street>(),
-            label: 'الشوارع'
+            label: 'الشوارع',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Family>(),
-            label: 'العائلات'
+            label: 'العائلات',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Person>(),
-            label: 'المخدومين'
+            label: 'المخدومين',
           ),
           (
             icon: viewableObjectService.getDefaultIconFor<Store>(),
-            label: 'المتاجر'
+            label: 'المتاجر',
           ),
         ],
       ),
       detailsBuilder: (context, area) => SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            if (area.bounds != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: FilledButton.icon(
-                  label: const Text('الموقع على الخريطة'),
-                  icon: const Icon(Symbols.map),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ViewGeodataMap(
-                        initialGeomapOptions:
-                            GeomapOptions(selectedAreas: {area}),
+        delegate: SliverChildListDelegate([
+          if (area.bounds != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              child: FilledButton.icon(
+                label: const Text('الموقع على الخريطة'),
+                icon: const Icon(Symbols.map),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ViewGeodataMap(
+                      initialGeomapOptions: GeomapOptions(
+                        selectedAreas: {area},
                       ),
                     ),
                   ),
                 ),
               ),
-            HistoryProperty(
-              name: 'أخر افتقاد',
-              value: area.lastVisit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateVisitHistory<Area>(id: area.id),
             ),
-            HistoryProperty(
-              name: 'أخر تحديث للبيانات',
-              value: area.lastEdit?.time,
-              getHistoryStream: () => DatabaseService.I.history
-                  .paginateEditHistory<Area>(id: area.id),
+          HistoryProperty(
+            name: 'أخر افتقاد',
+            value: area.lastVisit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateVisitHistory<Area>(
+                id: area.id,
+              ),
             ),
-            ListTile(
-              title: const Text('الخدام المسؤولين'),
-              subtitle: area.adminUsers?.isNotEmpty ?? false
-                  ? AdminUsers(users: area.adminUsers!)
-                  : const Text('لا يوجد خدام محددين للمنطقة'),
+          ),
+          HistoryProperty(
+            name: 'أخر تحديث للبيانات',
+            value: area.lastEdit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateEditHistory<Area>(
+                id: area.id,
+              ),
             ),
-          ],
-        ),
+          ),
+          ListTile(
+            title: const Text('الخدام المسؤولين'),
+            subtitle: area.adminUsers?.isNotEmpty ?? false
+                ? AdminUsers(users: area.adminUsers!)
+                : const Text('لا يوجد خدام محددين للمنطقة'),
+          ),
+        ]),
       ),
       editButtonBuilder: (context, area) => IconButton(
         tooltip: 'تعديل',
@@ -170,6 +183,38 @@ class _ViewAreaState extends State<ViewArea> {
           'لم يتم العثور على المنطقة',
           style: Theme.of(context).textTheme.titleLarge,
         ),
+      ),
+      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
+        stream: tabController.animation!.asStream().switchMap(
+          (index) {
+            final currentIndex = index.round();
+
+            return switch (currentIndex) {
+              0 => _streetsController,
+              1 => _familiesController,
+              2 => _personsController,
+              3 => _storesController,
+              _ => throw UnimplementedError(),
+            }
+                .totalCountStream
+                .map(
+                  (c) => switch (currentIndex) {
+                    0 => '$c شارع',
+                    1 => '$c عائلة',
+                    2 => '$c مخدوم',
+                    3 => '$c متجر',
+                    _ => throw UnimplementedError(),
+                  },
+                );
+          },
+        ),
+        builder: (context, snapshot) {
+          return Text(
+            snapshot.data ?? '',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          );
+        },
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
           SwitchingFloatingActionButton(

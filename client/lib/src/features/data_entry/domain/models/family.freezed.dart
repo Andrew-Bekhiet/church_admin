@@ -22,16 +22,12 @@ Family _$FamilyFromJson(Map<String, dynamic> json) {
 mixin _$Family {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation => throw _privateConstructorUsedError;
+  Address? get address => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color => throw _privateConstructorUsedError;
   DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
   String? get blurhash => throw _privateConstructorUsedError;
-  List<Area>? get areas => throw _privateConstructorUsedError;
-  List<Street>? get streets => throw _privateConstructorUsedError;
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
   List<Family>? get children => throw _privateConstructorUsedError;
   @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
@@ -55,20 +51,18 @@ abstract class $FamilyCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      Address? address,
       String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
-      List<Area>? areas,
-      List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
       List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
+  $AddressCopyWith<$Res>? get address;
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
 
@@ -90,13 +84,10 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
     Object? id = null,
     Object? name = null,
     Object? address = freezed,
-    Object? geolocation = freezed,
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? children = freezed,
     Object? parents = freezed,
     Object? lastEdit = freezed,
@@ -113,11 +104,7 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
+              as Address?,
       notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -134,14 +121,6 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
           ? _value.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
-      areas: freezed == areas
-          ? _value.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value.streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       children: freezed == children
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
@@ -155,6 +134,20 @@ class _$FamilyCopyWithImpl<$Res, $Val extends Family>
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
     ) as $Val);
+  }
+
+  /// Create a copy of Family
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_value.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.address!, (value) {
+      return _then(_value.copyWith(address: value) as $Val);
+    });
   }
 
   /// Create a copy of Family
@@ -182,20 +175,19 @@ abstract class _$$FamilyImplCopyWith<$Res> implements $FamilyCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      Address? address,
       String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
       DateTime? photoUpdatedAt,
       String? blurhash,
-      List<Area>? areas,
-      List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
       List<Family>? parents,
       LastRecordedByInfo? lastEdit});
 
+  @override
+  $AddressCopyWith<$Res>? get address;
   @override
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
 }
@@ -216,13 +208,10 @@ class __$$FamilyImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? address = freezed,
-    Object? geolocation = freezed,
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? children = freezed,
     Object? parents = freezed,
     Object? lastEdit = freezed,
@@ -239,11 +228,7 @@ class __$$FamilyImplCopyWithImpl<$Res>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
+              as Address?,
       notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -260,14 +245,6 @@ class __$$FamilyImplCopyWithImpl<$Res>
           ? _value.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
-      areas: freezed == areas
-          ? _value._areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value._streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       children: freezed == children
           ? _value._children
           : children // ignore: cast_nullable_to_non_nullable
@@ -291,21 +268,16 @@ class _$FamilyImpl extends _Family {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       this.notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
       this.photoUpdatedAt,
       this.blurhash,
-      final List<Area>? areas,
-      final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       final List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
       final List<Family>? parents,
       this.lastEdit})
-      : _areas = areas,
-        _streets = streets,
-        _children = children,
+      : _children = children,
         _parents = parents,
         super._();
 
@@ -317,10 +289,7 @@ class _$FamilyImpl extends _Family {
   @override
   final String name;
   @override
-  final String? address;
-  @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  final Point? geolocation;
+  final Address? address;
   @override
   final String? notes;
   @override
@@ -330,26 +299,6 @@ class _$FamilyImpl extends _Family {
   final DateTime? photoUpdatedAt;
   @override
   final String? blurhash;
-  final List<Area>? _areas;
-  @override
-  List<Area>? get areas {
-    final value = _areas;
-    if (value == null) return null;
-    if (_areas is EqualUnmodifiableListView) return _areas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Street>? _streets;
-  @override
-  List<Street>? get streets {
-    final value = _streets;
-    if (value == null) return null;
-    if (_streets is EqualUnmodifiableListView) return _streets;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   final List<Family>? _children;
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
@@ -377,7 +326,7 @@ class _$FamilyImpl extends _Family {
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, geolocation: $geolocation, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, streets: $streets, children: $children, parents: $parents, lastEdit: $lastEdit)';
+    return 'Family(id: $id, name: $name, address: $address, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit)';
   }
 
   @override
@@ -388,16 +337,12 @@ class _$FamilyImpl extends _Family {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.geolocation, geolocation) ||
-                other.geolocation == geolocation) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             (identical(other.blurhash, blurhash) ||
                 other.blurhash == blurhash) &&
-            const DeepCollectionEquality().equals(other._areas, _areas) &&
-            const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._children, _children) &&
             const DeepCollectionEquality().equals(other._parents, _parents) &&
             (identical(other.lastEdit, lastEdit) ||
@@ -411,13 +356,10 @@ class _$FamilyImpl extends _Family {
       id,
       name,
       address,
-      geolocation,
       notes,
       color,
       photoUpdatedAt,
       blurhash,
-      const DeepCollectionEquality().hash(_areas),
-      const DeepCollectionEquality().hash(_streets),
       const DeepCollectionEquality().hash(_children),
       const DeepCollectionEquality().hash(_parents),
       lastEdit);
@@ -442,15 +384,11 @@ abstract class _Family extends Family {
   factory _Family(
       {required final String id,
       required final String name,
-      final String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-      final Point? geolocation,
+      final Address? address,
       final String? notes,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
       final DateTime? photoUpdatedAt,
       final String? blurhash,
-      final List<Area>? areas,
-      final List<Street>? streets,
       @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
       final List<Family>? children,
       @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
@@ -465,10 +403,7 @@ abstract class _Family extends Family {
   @override
   String get name;
   @override
-  String? get address;
-  @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation;
+  Address? get address;
   @override
   String? get notes;
   @override
@@ -478,10 +413,6 @@ abstract class _Family extends Family {
   DateTime? get photoUpdatedAt;
   @override
   String? get blurhash;
-  @override
-  List<Area>? get areas;
-  @override
-  List<Street>? get streets;
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
   List<Family>? get children;

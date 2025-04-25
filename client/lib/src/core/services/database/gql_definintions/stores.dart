@@ -1,8 +1,7 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
-
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
+import 'package:uuid/enums.dart';
 
 class StoresDAO
     extends FullCRUDDAO<Store, Input_StoresBoolExp, Input_StoresOrderBy> {
@@ -12,6 +11,12 @@ class StoresDAO
   late final StreamAllConfig<Store, Input_StoresBoolExp, Input_StoresOrderBy>
       baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,
+  );
+
+  @override
+  late final StreamCountConfig<Store, Input_StoresBoolExp>
+      baseStreamCountConfig = const StreamCountConfig(
+    document: documentNodeSubscriptionwatchStoresCount,
   );
 
   @override
@@ -33,6 +38,7 @@ class StoresDAO
       UpdateObjectConfig(
     document: documentNodeMutationupdateStore,
     varsConstructor: _updateStoreVarsConstructor,
+    parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
   );
 
   @override
@@ -47,19 +53,23 @@ class StoresDAO
 
   Json _createStoreVarsConstructor({required Store newObject}) =>
       Variables_Mutation_insertStore(
-        newStore: Input_StoresInsertInput.fromJson(newObject.toJson()),
+        newStore: newObject.toInsertInput(),
       ).toJson();
 
   Json _updateStoreVarsConstructor({
     required Store newObject,
     required Store oldObject,
-  }) =>
-      Variables_Mutation_updateStore(
-        storeId: newObject.id.toUuid(),
-        newStore: Input_StoresSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-        ),
-      ).toJson();
+  }) {
+    final updateInput = newObject.toUpdateInput(oldObject);
+    return Variables_Mutation_updateStore(
+      storeId: newObject.id.toUuid(),
+      newStore: updateInput,
+      addressId: newObject.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
+      newAddress: newObject.address?.toUpdateInput(oldObject.address!),
+      updateAddress: newObject.address != oldObject.address,
+      updateStore: updateInput.toJson().values.nonNulls.isNotEmpty,
+    ).toJson();
+  }
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteStore(storeId: id).toJson();

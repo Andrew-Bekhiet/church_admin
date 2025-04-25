@@ -8,11 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FlutterNativeSplash.preserve(
+    widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
+  );
 
   await InitializationService.I.initialize();
 
@@ -25,5 +23,5 @@ Future<void> main() async {
     ),
   );
 
-  Future.delayed(const Duration(seconds: 2), FlutterNativeSplash.remove);
+  FlutterNativeSplash.remove();
 }

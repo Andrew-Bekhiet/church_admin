@@ -15,7 +15,7 @@ import '../../../../utils.dart';
 import 'history_property_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<DelegatingPaginatableStream<LastRecordedByInfo>>(),
+  MockSpec<PaginatableStreamBase>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
@@ -33,10 +33,12 @@ void main() {
       await withClock(Clock.fixed(DateTime(2050)), () async {
         final value = clock.now().subtract(const Duration(days: 5));
 
-        final historyProperty = HistoryProperty(
+        final historyProperty = HistoryProperty<LastRecordedByInfo>(
           name: 'name',
           value: value,
-          getHistoryStream: MockDelegatingPaginatableStream.new,
+          getHistoryListController: () => ViewableObjectListController(
+            objectsPaginatableStream: MockPaginatableStreamBase(),
+          ),
           onRecordNow: () {},
         );
 
@@ -100,10 +102,12 @@ void main() {
     (tester) async {
       var called = false;
 
-      final historyProperty = HistoryProperty(
+      final historyProperty = HistoryProperty<LastRecordedByInfo>(
         name: 'name',
         value: clock.now(),
-        getHistoryStream: MockDelegatingPaginatableStream.new,
+        getHistoryListController: () => ViewableObjectListController(
+          objectsPaginatableStream: MockPaginatableStreamBase(),
+        ),
         onRecordNow: () => called = true,
       );
 
@@ -139,23 +143,36 @@ void main() {
           ),
         );
 
-        final historyProperty = HistoryProperty(
+        final historyProperty = HistoryProperty<LastRecordedByInfo>(
           name: 'name',
           value: clock.now(),
-          getHistoryStream: () {
+          getHistoryListController: () {
             called = true;
 
-            final mock = MockDelegatingPaginatableStream();
+            final mock = MockPaginatableStreamBase<LastRecordedByInfo>();
 
-            when(mock.stream).thenAnswer(
-              (_) => BehaviorSubject.seeded([lastRecordedByInfo]),
+            when(
+              mock.listen(
+                captureAny,
+                onDone: captureAnyNamed('onDone'),
+                onError: captureAnyNamed('onError'),
+                cancelOnError: captureAnyNamed('cancelOnError'),
+              ),
+            ).thenAnswer(
+              (i) => BehaviorSubject.seeded([lastRecordedByInfo]).listen(
+                i.positionalArguments.first,
+                onDone: i.namedArguments[#onDone],
+                onError: i.namedArguments[#onError],
+                cancelOnError: i.namedArguments[#cancelOnError],
+              ),
             );
 
-            when(mock.canPaginateForward).thenReturn(false);
-            when(mock.limit).thenReturn(1);
+            when(mock.hasMore).thenReturn(false);
+            when(mock.pageSize).thenReturn(1);
             when(mock.onLoadingChanged)
                 .thenAnswer((_) => BehaviorSubject.seeded(false));
-            return mock;
+
+            return ViewableObjectListController(objectsPaginatableStream: mock);
           },
           onRecordNow: () {},
         );
@@ -202,6 +219,8 @@ void main() {
           ),
           findsOneWidget,
         );
+
+        tester.firstState<NavigatorState>(find.byType(Navigator)).pop();
 
         flushVisibilityDetectors();
       });

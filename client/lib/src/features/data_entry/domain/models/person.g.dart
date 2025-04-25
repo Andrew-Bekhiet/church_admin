@@ -17,16 +17,9 @@ final _$PersonFields = <String, FieldMetadata>{
     operators:
         Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
   ),
-  'address': FieldMetadata<String>(
+  'address': FieldMetadata<Address>(
     name: 'address',
     label: 'العنوان',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'geolocation': FieldMetadata<Point>(
-    name: 'geolocation',
-    label: 'الموقع',
-    operators: Operator.spatial,
   ),
   'mainPhone': FieldMetadata<String>(
     name: 'mainPhone',
@@ -37,7 +30,7 @@ final _$PersonFields = <String, FieldMetadata>{
   'birthdate': FieldMetadata<DateTime>(
     name: 'birthdate',
     label: 'تاريخ الميلاد',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'birthday': FieldMetadata<String>(
     name: 'birthday',
@@ -133,7 +126,7 @@ final _$PersonFields = <String, FieldMetadata>{
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'lastConfession': FieldMetadata<LastRecordedByInfo>(
     name: 'lastConfession',
@@ -168,16 +161,6 @@ final _$PersonFields = <String, FieldMetadata>{
   'services': FieldMetadata<Service>(
     name: 'services',
     label: 'الخدمات',
-    isOrderable: false,
-  ),
-  'areas': FieldMetadata<Area>(
-    name: 'areas',
-    label: 'المناطق',
-    isOrderable: false,
-  ),
-  'streets': FieldMetadata<Street>(
-    name: 'streets',
-    label: 'الشوارع',
     isOrderable: false,
   ),
   'tags': FieldMetadata<Tag>(
@@ -248,8 +231,9 @@ final _$PersonFields = <String, FieldMetadata>{
 _$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      address: json['address'] as String?,
-      geolocation: pointFromJson(json['geolocation']),
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
       mainPhone: json['mainPhone'] as String?,
       otherPhones: (json['otherPhones'] as Map?)?.map(
             (k, e) => MapEntry(k as String, e),
@@ -343,17 +327,9 @@ _$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
           ? null
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
-      classes: (json['classes'] as List<dynamic>?)
-          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
+      classes: personsClassesFromJson(json['classes'] as List?),
       groups: personsGroupsFromJson(json['groups'] as List?),
       services: personsServicesFromJson(json['services'] as List?),
-      areas: (json['areas'] as List<dynamic>?)
-          ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      streets: (json['streets'] as List<dynamic>?)
-          ?.map((e) => Street.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
       tags: personsTagsFromJson(json['tags'] as List?),
       hobbies: personsHobbiesFromJson(json['hobbies'] as List?),
       user: json['user'] == null
@@ -405,8 +381,7 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'address': instance.address,
-      'geolocation': pointToJson(instance.geolocation),
+      'address': instance.address?.toJson(),
       'mainPhone': instance.mainPhone,
       'otherPhones': instance.otherPhones,
       'birthdate': instance.birthdate?.toIso8601String(),
@@ -449,11 +424,9 @@ Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
       'lastCall': instance.lastCall?.toJson(),
       'lastVisit': instance.lastVisit?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
-      'classes': instance.classes?.map((e) => e.toJson()).toList(),
+      'classes': personsClassesToJson(instance.classes),
       'groups': personsGroupsToJson(instance.groups),
       'services': personsServicesToJson(instance.services),
-      'areas': instance.areas?.map((e) => e.toJson()).toList(),
-      'streets': instance.streets?.map((e) => e.toJson()).toList(),
       'tags': personsTagsToJson(instance.tags),
       'hobbies': personsHobbiesToJson(instance.hobbies),
       'user': instance.user?.toJson(),

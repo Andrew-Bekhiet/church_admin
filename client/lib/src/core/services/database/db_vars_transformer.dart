@@ -4,30 +4,32 @@ import 'package:collection/collection.dart';
 class DBVarsTransformer {
   const DBVarsTransformer();
 
-  Json transformVariablesForPagination<T extends ViewableWithID>(
-    GQLPaginatableStreamEvent<T> event, {
-    List<Json> where = const [],
-    List<Json> orderBy = const [
-      {'name': 'ASC'},
-    ],
+  Json transformrequestForPagination<T extends ViewableWithID>(
+    PaginatableStreamRequest<T, StreamableDAOParameters<T, dynamic, dynamic>?>
+        request, {
+    List<Json>? overrideWhere,
+    List<Json>? overrideOrderBy,
   }) {
-    final search = event.search;
-    final lastSearch = event.lastSearch;
+    final PaginatableStreamRequest(:param, :cursor, :pageSize) = request;
 
-    final paginatableStreamInstance = event.instance;
-    final cursor = lastSearch == search
-        ? paginatableStreamInstance.getCursorForOffset(event.offset - 1)
-        : null;
+    final search = param?.search;
+    final where = param?.where?.map((o) => o.toJson() as Json).toList() ??
+        overrideWhere ??
+        [];
+    final orderBy = param?.orderBy?.map((o) => o.toJson() as Json).toList() ??
+        overrideOrderBy ??
+        [
+          {'name': 'ASC'},
+        ];
 
     return {
       'where': [
         ...where,
         if (search != null && search.isNotEmpty) _nameSearch(search),
-        if (lastSearch == search && cursor != null)
-          _whereConditionsForPagination(orderBy, cursor),
+        if (cursor != null) _whereConditionsForPagination(orderBy, cursor),
       ],
       'orderBy': orderBy,
-      'limit': paginatableStreamInstance.limit + 1,
+      'limit': pageSize + 1,
     };
   }
 
@@ -82,7 +84,7 @@ class DBVarsTransformer {
           : (object as ToJson).toJson().followKeysPath(orderByClause);
 
   String _getOperatorByDirection(Json orderByClause) =>
-      orderByClause.getLeaf() == 'ASC' ? '_gt' : '_lt';
+      orderByClause.getLeaf() == 'ASC' ? '_gte' : '_lte';
 }
 
 extension _FollowKeysPath<T> on Map<T, dynamic> {

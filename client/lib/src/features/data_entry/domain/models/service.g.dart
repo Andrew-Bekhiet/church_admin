@@ -37,7 +37,7 @@ final _$ServiceFields = <String, FieldMetadata>{
   'photoUpdatedAt': FieldMetadata<DateTime>(
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.comparitive.union({Operator.isNull}),
+    operators: Operator.dateComparitive.union({Operator.isNull}),
   ),
   'classes': FieldMetadata<Class>(
     name: 'classes',

@@ -44,7 +44,7 @@
         "request": "launch",
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
-        "args": ["build"],
+        "args": ["build", "--delete-conflicting-outputs"],
         "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
@@ -103,7 +103,9 @@
           "-r",
           "'.gql.dart$'",
           "-r",
-          "'.freezed.dart$'"
+          "'.freezed.dart$'",
+          "-r",
+          "'__generated__'"
         ],
         "problemMatcher": []
       }
@@ -132,6 +134,26 @@
       "elixirLS.projectDir": "./backend-beta"
     },
     "peacock.color": "009688",
+    "json.schemas": [
+      {
+        "fileMatch": ["**/metadata.json"],
+        "url": "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/MetadataExport.schema.json"
+      }
+    ],
+    "yaml.schemas": {
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/ActionsYAML.schema.json": "**/actions.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/AllowListYAML.schema.json": "**/allow_list.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/CronTriggerYAML.schema.json": "**/cron_triggers.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/FunctionsYAML.schema.json": "**/functions.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/QueryCollectionsYAML.schema.json": "**/query_collections.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/RemoteSchemasYAML.schema.json": "**/remote_schemas.yaml",
+      "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/TablesYAML.schema.json": "**/tables.yaml",
+      "https://json.schemastore.org/dart-build": [
+        "build.yaml",
+        "*.build.yaml",
+        "build.*.yaml"
+      ]
+    },
     "autoHide.autoHideSideBar": false,
     "autoHide.autoHidePanel": true,
     "autoHide.autoHideAuxiliaryBar": false

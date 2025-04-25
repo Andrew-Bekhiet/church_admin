@@ -1,4 +1,4 @@
-mutation deleteClass($classId: Uuid!) {
+mutation deleteClass($classId: uuid!) {
   deleteClassesByPk(id: $classId) {
     ...Class
   }
@@ -10,7 +10,7 @@ mutation insertClass($newClass: ClassesInsertInput!) {
   }
 }
 
-mutation updateClass($classId: Uuid!, $newClass: ClassesSetInput!) {
+mutation updateClass($classId: uuid!, $newClass: ClassesSetInput!) {
   updateClassesByPk(pkColumns: { id: $classId }, _set: $newClass) {
     ...Class
   }

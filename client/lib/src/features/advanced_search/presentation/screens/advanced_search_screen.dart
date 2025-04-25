@@ -41,7 +41,21 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('البحث المتقدم')),
+      appBar: AppBar(
+        title: const Text('البحث المتقدم'),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                onTap: controller.toggleHideAdvancedOperators,
+                child: Text(
+                  '${controller.hideAdvancedOperators ? 'إظهار' : 'إخفاء'} العمليات المتقدمة',
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: SingleChildScrollView(
@@ -73,17 +87,34 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 ],
               ),
               const Divider(),
-              StreamBuilder<AdvancedQuery>(
-                stream: controller.queryStream,
-                builder: (context, snapshot) => ConditionsBuilder(
-                  canAddManyConditions: (snapshot.data?.logicalOperator ??
-                          controller.logicalOperator) !=
-                      LogicalOperator.not,
-                  queryableType: selectedQueryableType,
-                  conditions:
-                      snapshot.data?.conditions ?? controller.conditions,
-                  onChanged: controller.changeConditions,
+              StreamBuilder<
+                  ({
+                    AdvancedQuery query,
+                    bool hideAdvancedOperators,
+                  })>(
+                initialData: (
+                  query: controller.query,
+                  hideAdvancedOperators: controller.hideAdvancedOperators,
                 ),
+                stream: Rx.combineLatest2(
+                  controller.queryStream,
+                  controller.hideAdvancedOperatorsStream,
+                  (q, h) => (query: q, hideAdvancedOperators: h),
+                ),
+                builder: (context, snapshot) {
+                  final (:hideAdvancedOperators, :query) = snapshot.requireData;
+
+                  final canAddManyConditions =
+                      query.logicalOperator != LogicalOperator.not;
+
+                  return ConditionsBuilder(
+                    canAddManyConditions: canAddManyConditions,
+                    hideAdvancedOperators: hideAdvancedOperators,
+                    queryableType: selectedQueryableType,
+                    conditions: query.conditions,
+                    onChanged: controller.changeConditions,
+                  );
+                },
               ),
               const Divider(),
               StreamBuilder<QueryableType>(
@@ -172,6 +203,22 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
             ),
             body: ViewableObjectList(
               objectsController: viewableObjectListController,
+            ),
+            bottomNavigationBar: StreamBuilder<int?>(
+              stream: viewableObjectListController.totalCountStream,
+              builder: (context, snapshot) {
+                final totalCount = snapshot.data;
+
+                if (totalCount == null) return const SizedBox.shrink();
+
+                return BottomAppBar(
+                  child: Text(
+                    '$totalCount من ${controller.query.queryableType.label}',
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              },
             ),
           );
         },

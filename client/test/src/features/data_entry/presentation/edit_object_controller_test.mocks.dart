@@ -69,6 +69,16 @@ class _FakeNavigatorObserver_3 extends _i1.SmartFake
         );
 }
 
+class _FakeInterceptor_4 extends _i1.SmartFake implements _i3.Interceptor {
+  _FakeInterceptor_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FunctionsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -227,15 +237,15 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<String?> getAddressFromLocation(_i5.Point? location) =>
+  _i6.Future<_i5.Address?> getAddressFromLocation(_i5.Point? location) =>
       (super.noSuchMethod(
         Invocation.method(
           #getAddressFromLocation,
           [location],
         ),
-        returnValue: _i6.Future<String?>.value(),
-        returnValueForMissingStub: _i6.Future<String?>.value(),
-      ) as _i6.Future<String?>);
+        returnValue: _i6.Future<_i5.Address?>.value(),
+        returnValueForMissingStub: _i6.Future<_i5.Address?>.value(),
+      ) as _i6.Future<_i5.Address?>);
 
   @override
   _i6.Future<_i3.Response<dynamic>> uploadPhoto({
@@ -354,6 +364,19 @@ class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
           Invocation.getter(#navigatorObserver),
         ),
       ) as _i4.NavigatorObserver);
+
+  @override
+  _i3.Interceptor get dioInterceptor => (super.noSuchMethod(
+        Invocation.getter(#dioInterceptor),
+        returnValue: _FakeInterceptor_4(
+          this,
+          Invocation.getter(#dioInterceptor),
+        ),
+        returnValueForMissingStub: _FakeInterceptor_4(
+          this,
+          Invocation.getter(#dioInterceptor),
+        ),
+      ) as _i3.Interceptor);
 
   @override
   void onError(

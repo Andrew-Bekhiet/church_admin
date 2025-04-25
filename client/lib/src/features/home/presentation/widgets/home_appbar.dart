@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
@@ -18,7 +19,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ViewableObjectListType?>(
+    final appbar = StreamBuilder<ViewableObjectListType?>(
       stream: homeController.tabTypeSubject.switchMap(
         (t) => t == Service
             ? homeController.servicesListTypeSubject.stream
@@ -74,6 +75,12 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         );
       },
     );
+
+    if (homeController.showSnowflakeAnimation) {
+      return SnowflakeAnimation(child: appbar);
+    }
+
+    return appbar;
   }
 
   void onSearch(BuildContext context) {

@@ -172,9 +172,11 @@ class ChurchAdminGenerator extends GeneratorForAnnotation<TypeMetadata> {
         type.isDartCoreInt ||
         type.isDartCoreDouble ||
         type.isDartCoreBool ||
-        typeName == 'DateTime' ||
         typeName == 'Color') {
       operators.add('Operator.comparitive');
+    }
+    if (typeName == 'DateTime') {
+      operators.add('Operator.dateComparitive');
     }
 
     if (type.isDartCoreString) {
@@ -249,6 +251,15 @@ final Map<String, String> _fieldsLabels = {
   'state': 'الحالة الروحية',
   'hobbies': 'الهوايات',
   'tags': 'الشارات',
+  'district': 'الحي',
+  'districts': 'الأحياء السكنية',
+  'substreetName': 'الشارع الفرعي',
+  'storeyNumber': 'رقم الدور',
+  'apartmentNumber': 'رقم الشقة',
+  'houseNumber': 'رقم العمارة',
+  'specialLandmark': 'علامة مميزة',
+  'area': 'المنطقة',
+  'street': 'الشارع',
   'family': 'العائلة',
   'store': 'المتجر',
   'services': 'الخدمات',

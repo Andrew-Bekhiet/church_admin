@@ -7,7 +7,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 class UserSettingsService extends BlocObserver {
   static UserSettingsService get I =>
       globalProviderContainer.read(userSettingsServiceProvider);
-
   final Box box;
 
   UserSettingsService({required this.box}) : assert(box.isOpen);
@@ -23,14 +22,10 @@ class UserSettingsService extends BlocObserver {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
-  String? getSecondLineFor<T>([Type? type]) => box.get(
-        '${_getTypeName(type ?? T)}SecondLine',
-      );
+  String? getSecondLineFor<T>([Type? type]) =>
+      box.get('${_getTypeName(type ?? T)}SecondLine');
   Future<void> setSecondLineFor<T>({required String? value, Type? type}) =>
-      box.put(
-        '${_getTypeName(type ?? T)}SecondLine',
-        value,
-      );
+      box.put('${_getTypeName(type ?? T)}SecondLine', value);
 
   String _getTypeName(Type t) =>
       AdvancedQueriesMetadata.queryableTypes[t]?.name ??
@@ -41,7 +36,7 @@ class UserSettingsService extends BlocObserver {
       setGreatFeastTheme(true),
       setSecondLineFor(type: Area, value: null),
       setSecondLineFor(type: Street, value: null),
-      setSecondLineFor(type: Family, value: 'address'),
+      setSecondLineFor(type: Family, value: null),
       setSecondLineFor(type: Person, value: 'birthdate'),
       setSecondLineFor(type: User, value: 'permissions'),
     ]);

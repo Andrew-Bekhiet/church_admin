@@ -2,6 +2,7 @@ import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'person.freezed.dart';
 part 'person.g.dart';
@@ -23,8 +24,7 @@ class Person extends ViewableWithIDAndImage
   factory Person({
     required String id,
     required String name,
-    String? address,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+    Address? address,
     String? mainPhone,
     @Default({}) Json otherPhones,
     DateTime? birthdate,
@@ -67,13 +67,12 @@ class Person extends ViewableWithIDAndImage
     LastRecordedByInfo? lastCall,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
+    @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
     List<Class>? classes,
     @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
     List<Group>? groups,
     @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
     List<Service>? services,
-    List<Area>? areas,
-    List<Street>? streets,
     @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
     List<Tag>? tags,
     @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -93,6 +92,8 @@ class Person extends ViewableWithIDAndImage
   Person._() : super();
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
+
+  Point? get geolocation => address?.geolocation;
 
   @override
   LastRecordedByInfo? get lastConfession =>
@@ -132,14 +133,190 @@ class Person extends ViewableWithIDAndImage
 
     return lastKodas != null &&
         lastConfession != null &&
-        !lastKodas!.time.isBefore(
-          thirtyDaysAgo,
-        ) &&
-        !lastConfession!.time.isBefore(
-          thirtyDaysAgo,
-        );
+        !lastKodas!.time.isBefore(thirtyDaysAgo) &&
+        !lastConfession!.time.isBefore(thirtyDaysAgo);
+  }
+
+  Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
+        name: name,
+        mainPhone: mainPhone,
+        otherPhones: otherPhones,
+        birthdate: birthdate,
+        gender: gender,
+        isShammas: isShammas,
+        shammasLevelId: shammasLevel?.id.toUuid(),
+        schoolId: school?.id.toUuid(),
+        collegeId: college?.id.toUuid(),
+        churchId: church?.id.toUuid(),
+        fatherId: father?.id.toUuid(),
+        isStudent: isStudent,
+        jobId: job?.id.toUuid(),
+        jobDescription: jobDescription,
+        qualificationId: qualification?.id.toUuid(),
+        personTypeId: personType?.id.toUuid(),
+        stateId: state?.id.toUuid(),
+        isServant: isServant,
+        notes: notes,
+        family: family == null && address != null
+            ? Input_FamiliesObjRelInsertInput(
+                data: Family(
+                  id: family?.id ?? Namespace.nil.value,
+                  name: name.split(' ').sublist(1).join(' '),
+                  address: address!.copyWith(family: null),
+                ).toInsertInput(),
+              )
+            : null,
+        familyId: family?.id.toUuid(),
+        storeId: store?.id.toUuid(),
+        studyYearId: studyYear?.order,
+        groups: groups != null
+            ? Input_PersonsGroupsArrRelInsertInput(
+                data: groups!
+                    .map(
+                      (g) => Input_PersonsGroupsInsertInput(
+                        groupId: g.id.toUuid(),
+                      ),
+                    )
+                    .toList(),
+              )
+            : null,
+        services: services != null
+            ? Input_PersonsServicesArrRelInsertInput(
+                data: services!
+                    .map(
+                      (s) => Input_PersonsServicesInsertInput(
+                        serviceId: s.id.toUuid(),
+                      ),
+                    )
+                    .toList(),
+              )
+            : null,
+        tags: tags != null
+            ? Input_PersonsTagsArrRelInsertInput(
+                data: tags!
+                    .map(
+                      (t) => Input_PersonsTagsInsertInput(tagId: t.id.toUuid()),
+                    )
+                    .toList(),
+              )
+            : null,
+        hobbies: hobbies != null
+            ? Input_PersonsHobbiesArrRelInsertInput(
+                data: hobbies!
+                    .map(
+                      (h) => Input_PersonsHobbiesInsertInput(
+                        hobbyId: h.id.toUuid(),
+                      ),
+                    )
+                    .toList(),
+              )
+            : null,
+        color: colorToInt(color),
+      );
+
+  Input_PersonsSetInput toUpdateInput(Person oldPerson) {
+    Input_PersonsSetInput result = Input_PersonsSetInput();
+
+    if (name != oldPerson.name) {
+      result = result.copyWith(name: name);
+    }
+
+    if (mainPhone != oldPerson.mainPhone) {
+      result = result.copyWith(mainPhone: mainPhone);
+    }
+
+    if (otherPhones != oldPerson.otherPhones) {
+      result = result.copyWith(otherPhones: otherPhones);
+    }
+
+    if (birthdate != oldPerson.birthdate) {
+      result = result.copyWith(birthdate: birthdate);
+    }
+
+    if (gender != oldPerson.gender) {
+      result = result.copyWith(gender: gender);
+    }
+
+    if (isShammas != oldPerson.isShammas) {
+      result = result.copyWith(isShammas: isShammas);
+    }
+
+    if (isStudent != oldPerson.isStudent) {
+      result = result.copyWith(isStudent: isStudent);
+    }
+
+    if (jobDescription != oldPerson.jobDescription) {
+      result = result.copyWith(jobDescription: jobDescription);
+    }
+
+    if (isServant != oldPerson.isServant) {
+      result = result.copyWith(isServant: isServant);
+    }
+
+    if (notes != oldPerson.notes) {
+      result = result.copyWith(notes: notes);
+    }
+
+    if (color != oldPerson.color) {
+      result = result.copyWith(color: colorToInt(color));
+    }
+
+    if (studyYear?.order != oldPerson.studyYear?.order) {
+      result = result.copyWith(studyYearId: studyYear?.order);
+    }
+
+    if (shammasLevel?.id != oldPerson.shammasLevel?.id) {
+      result = result.copyWith(shammasLevelId: shammasLevel?.id.toUuid());
+    }
+
+    if (school?.id != oldPerson.school?.id) {
+      result = result.copyWith(schoolId: school?.id.toUuid());
+    }
+
+    if (college?.id != oldPerson.college?.id) {
+      result = result.copyWith(collegeId: college?.id.toUuid());
+    }
+
+    if (church?.id != oldPerson.church?.id) {
+      result = result.copyWith(churchId: church?.id.toUuid());
+    }
+
+    if (father?.id != oldPerson.father?.id) {
+      result = result.copyWith(fatherId: father?.id.toUuid());
+    }
+
+    if (job?.id != oldPerson.job?.id) {
+      result = result.copyWith(jobId: job?.id.toUuid());
+    }
+
+    if (qualification?.id != oldPerson.qualification?.id) {
+      result = result.copyWith(qualificationId: qualification?.id.toUuid());
+    }
+
+    if (personType?.id != oldPerson.personType?.id) {
+      result = result.copyWith(personTypeId: personType?.id.toUuid());
+    }
+
+    if (state?.id != oldPerson.state?.id) {
+      result = result.copyWith(stateId: state?.id.toUuid());
+    }
+
+    if (family?.id != oldPerson.family?.id) {
+      result = result.copyWith(familyId: family?.id.toUuid());
+    }
+
+    if (store?.id != oldPerson.store?.id) {
+      result = result.copyWith(storeId: store?.id.toUuid());
+    }
+
+    return result;
   }
 }
+
+List<Class>? personsClassesFromJson(List? data) =>
+    data?.map((e) => Class.fromJson(e['class'])).toList();
+List<Json>? personsClassesToJson(List<Class>? classes) =>
+    classes?.map((e) => {'class': e.toJson()}).toList();
 
 List<Group>? personsGroupsFromJson(List? data) =>
     data?.map((e) => Group.fromJson(e['group'])).toList();

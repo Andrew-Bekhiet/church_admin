@@ -34,7 +34,7 @@ class HomeModeCard extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: themeData.textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
+                      color: themeData.colorScheme.onPrimary,
                     ),
                   ),
                 ),

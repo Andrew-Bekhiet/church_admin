@@ -5,7 +5,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query checkApproved($uid: Uuid!) {
+            query checkApproved($uid: uuid!) {
               authUsersData(where: { uid: { _eq: $uid } }, limit: 1) {
                 permissions{
                   permission
@@ -63,7 +63,7 @@ export async function getPersonIdFromUser(
   try {
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query getPersonIdFromUser($hasuraUID: Uuid = "") {
+            query getPersonIdFromUser($hasuraUID: uuid = "") {
               authUsersData(where: {uid: {_eq: $hasuraUID}}) {
                 person {
                   id
@@ -96,35 +96,51 @@ export async function checkUserAccess(
   try {
     if (permission == "write" && table == "users") return false;
 
-    const field =
-      "isUserAllowedTo" +
-      permission.at(0)!.toUpperCase() +
-      permission.substring(1);
-
     const hasura_response = await makeGraphqlRequest({
       query: `
-            query checkPermissions($id: Uuid!) {
-                ${table == "users" ? "authUsersData" : table}(where: {${
-        table == "users" ? "uid" : "id"
-      }: {_eq: $id}}, limit: 1) {
-                    ${field}
+            query checkPermissions($uid: uuid!, $id: uuid!, $table: name, $anyEntityType: String) {
+              authUsersPermissionsByEntityId(
+                where: {
+                  _and: [
+                    { uid: { _eq: $uid } }
+                    {
+                      _or: [
+                        {
+                          _and: [
+                            { table: { _eq: $table } }
+                            { entityId: { _eq: $id } }
+                          ]
+                        }
+                        {
+                          _and: [
+                            { entityType: { _eq: $anyEntityType } }
+                            { entityId: { _isNull: true } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
+              ) {
+                allowEdit
+              }
             }
           `,
-      variables: { id },
-      operationName: "checkPermissions",
-      headers: {
-        "content-type": "application/json",
-        "x-hasura-user-id": hasura_uid,
-        "x-hasura-role": "admin",
-        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+      variables: {
+        id,
+        uid: hasura_uid,
+        table,
+        anyEntityType: table == "users" ? "any-user" : "any",
       },
+      operationName: "checkPermissions",
     });
 
+    const exists: Array<{ allowEdit: boolean }> =
+      hasura_response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
+
     return (
-      hasura_response.data?.["data"]?.[
-        table == "users" ? "authUsersData" : table
-      ]?.[0]?.[field] === true
+      (permission == "read" && exists.length > 0) ||
+      (permission == "write" && !!exists?.[0]?.allowEdit)
     );
   } catch (e) {
     console.error(e);
@@ -206,7 +222,7 @@ export async function updatePhotoTime(
     }ByPk`;
     const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation updatePhotoTime($id: Uuid!, $photoUpdatedAt: Timestamptz) {
+            mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
               ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
@@ -250,7 +266,7 @@ export async function updatePhotoBlurHash(
     }ByPk`;
     const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation updatePhotoBlurHash($id: Uuid!, $blurhash: String) {
+            mutation updatePhotoBlurHash($id: uuid!, $blurhash: String) {
               ${op_name}(pkColumns: {id: $id}, _set: {blurhash: $blurhash}) {
                 ${table == "users" ? "u" : ""}id
               }

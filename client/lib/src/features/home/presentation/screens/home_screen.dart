@@ -53,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       (_) {
         if (LocalAuthService.I.shouldAuthenticate && !_authEntry.mounted) {
           overlay.insert(_authEntry);
-        } else if (!LocalAuthService.I.shouldAuthenticate) {
+        } else if (!LocalAuthService.I.shouldAuthenticate &&
+            _authEntry.mounted) {
           _authEntry.remove();
         }
       },

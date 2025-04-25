@@ -7,6 +7,24 @@ final GoRouter $appRouter = GoRouter(
   observers: [LoggingService.I.navigatorObserver],
   extraCodec: ChurchAdminRouterExtraCodec(),
   refreshListenable: GoRouterRefreshStream.I,
+  redirect: (context, state) {
+    final featureFlags = FeatureFlagsRepository.I;
+
+    if (featureFlags.mustForceUpdate) {
+      return const ForceUpdateRoute().location;
+    }
+
+    if (featureFlags.isUnderMaintenance) {
+      return const UnderMaintenanceRoute().location;
+    }
+
+    if (state.fullPath != null &&
+        featureFlags.disabledRoutes.contains(state.fullPath)) {
+      return const OutdatedFeatureRoute().location;
+    }
+
+    return null;
+  },
   routes: [
     if (kIsWeb) $homeScreenWebRoute else $homeScreenRoute,
     $forgotPasswordRoute,
@@ -17,6 +35,9 @@ final GoRouter $appRouter = GoRouter(
     $unapprovedUserRoute,
     $updateUserSpiritDataRoute,
     $authenticateRoute,
+    $forceUpdateRoute,
+    $underMaintenanceRoute,
+    $outdatedFeatureRoute,
   ],
   errorBuilder: (context, state) {
     if (kReleaseMode) {

@@ -1,11 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -40,12 +42,31 @@ void initGlobalProviderContainer(List<Override> overrides) {
   globalProviderContainer = ProviderContainer(overrides: overrides);
 }
 
-late final PackageInfo packageInfoPluginInstance;
+final deviceInfoServiceProvider = FutureProvider<DeviceInfoService>(
+  (ref) async {
+    final currentPlatformService = ref.read(currentPlatformServiceProvider);
+    final deviceInfoPlugin = DeviceInfoPlugin();
 
-late final DeviceInfoService deviceInfoServiceInstance;
-
-final deviceInfoServiceProvider = Provider<DeviceInfoService>(
-  (ref) => deviceInfoServiceInstance,
+    return DeviceInfoService(
+      androidDeviceInfo: currentPlatformService.isAndroid
+          ? await deviceInfoPlugin.androidInfo
+          : null,
+      iosDeviceInfo:
+          currentPlatformService.isIOS ? await deviceInfoPlugin.iosInfo : null,
+      webBrowserInfo: currentPlatformService.isWeb
+          ? await deviceInfoPlugin.webBrowserInfo
+          : null,
+      linuxDeviceInfo: currentPlatformService.isLinux
+          ? await deviceInfoPlugin.linuxInfo
+          : null,
+      macOSDeviceInfo: currentPlatformService.isMacOS
+          ? await deviceInfoPlugin.macOsInfo
+          : null,
+      windowsDeviceInfo: currentPlatformService.isWindows
+          ? await deviceInfoPlugin.windowsInfo
+          : null,
+    );
+  },
 );
 
 final hiveProvider = Provider<HiveInterface>((ref) {
@@ -142,6 +163,15 @@ final firebaseFunctionsProvider = Provider(
   (_) => FirebaseFunctions.instanceFor(region: 'europe-west6'),
 );
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
+final firebaseRemoteConfigProvider =
+    Provider((_) => FirebaseRemoteConfig.instance);
+
+final featureFlagsRepoProvider = Provider<FeatureFlagsRepository>(
+  (ref) => FeatureFlagsRepository(
+    packageInfo: ref.read(packageInfoPluginProvider).requireValue,
+    remoteConfig: ref.read(firebaseRemoteConfigProvider),
+  ),
+);
 
 final dioProvider = Provider(
   (ref) {
@@ -166,6 +196,7 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
             sharedPreferencesName: 'secure_storage',
             encryptedSharedPreferences: ref
                     .read(deviceInfoServiceProvider)
+                    .requireValue
                     .androidDeviceInfo!
                     .version
                     .sdkInt >=
@@ -239,12 +270,15 @@ final userPersistenceServiceProvider = Provider<UserPersistenceService>((ref) {
 });
 
 final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
+  final authBloc = ref.watch(authBlocProvider);
+
   final goRouterRefreshStream = GoRouterRefreshStream(
-    Rx.combineLatest2(
-      ref.watch(authBlocProvider).stream,
+    Rx.combineLatest3(
+      authBloc.stream.startWith(authBloc.state),
       ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
+      ref.watch(featureFlagsRepoProvider).onConfigChanged.startWith(null),
       //Just notify when any stream emits
-      (_, __) => Object(),
+      (_, __, ___) => Object(),
     ),
   );
 
@@ -291,14 +325,14 @@ final locationParsingServiceProvider = Provider<LocationParsingService>(
   (ref) => const LocationParsingService(),
 );
 
-final packageInfoPluginProvider = Provider<PackageInfo>(
-  (ref) => packageInfoPluginInstance,
+final packageInfoPluginProvider = FutureProvider<PackageInfo>(
+  (ref) => PackageInfo.fromPlatform(),
 );
 
 final aboutAppServiceProvider = Provider<AboutAppService>(
   (ref) => AboutAppService(
     urlLauncher: ref.watch(launcherServiceProvider).launchUrl,
-    version: ref.watch(packageInfoPluginProvider).version,
+    version: ref.watch(packageInfoPluginProvider).requireValue.version,
     appIcon: Image.asset('assets/logo.png', width: 50, height: 50),
     privacyPolicyUrl: Uri(),
     termsOfServiceUrl: Uri(),

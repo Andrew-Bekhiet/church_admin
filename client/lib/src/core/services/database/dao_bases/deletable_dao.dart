@@ -4,15 +4,15 @@ import 'package:meta/meta.dart';
 
 mixin DeletableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  late final DeletableDAOProxy<T> deleteSingleByIdProxy =
-      DeletableDAOProxy<T>(db: db, fromJson: fromJson);
+  late final DeletableDAOProxy<T> deleteSingleByIdProxy = DeletableDAOProxy<T>(
+    db: db,
+    fromJson: fromJson,
+  );
 
   @protected
   DeleteSingleByIdConfig<T> get baseDeleteSingleByIdConfig;
 
-  Future<T?> deleteById({
-    required String id,
-  }) {
+  Future<T?> deleteById({required String id}) {
     return deleteSingleByIdProxy.deleteById(
       id: id,
       deleteSingleByIdConfig: baseDeleteSingleByIdConfig,
@@ -27,15 +27,17 @@ class DeletableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
     required String id,
     required DeleteSingleByIdConfig<T> deleteSingleByIdConfig,
   }) {
-    return graphQLClient.mutateAndReturnParsed(
+    return graphQLClient.mutateAndReturnParsedNullable(
       deleteSingleByIdConfig.operationOptions ??
           MutationOptions(
             document: deleteSingleByIdConfig.document,
             operationName: deleteSingleByIdConfig.effectiveOperationName,
-            variables: deleteSingleByIdConfig.variables ??
+            variables:
+                deleteSingleByIdConfig.variables ??
                 deleteSingleByIdConfig.varsConstructor?.call(id: id.toUuid()) ??
                 {},
-            parserFn: deleteSingleByIdConfig.parserFn ??
+            parserFn:
+                deleteSingleByIdConfig.parserFn ??
                 db.parser.singleOrNullParser(fromJson),
           ),
     );

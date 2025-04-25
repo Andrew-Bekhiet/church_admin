@@ -8,7 +8,15 @@ subscription watchAllGroups(
   }
 }
 
-subscription watchGroup($id: Uuid!) {
+subscription watchGroupsCount($where: [GroupsBoolExp!] = {}) {
+  groupsAggregate(where: { _and: $where }) {
+    aggregate {
+      count
+    }
+  }
+}
+
+subscription watchGroup($id: uuid!) {
   groupsByPk(id: $id) {
     ...Group
     service {

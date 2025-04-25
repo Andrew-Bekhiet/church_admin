@@ -15,19 +15,25 @@ query personsGeolocations(
   $getFamilies: Boolean! = true
   $getStores: Boolean! = true
   $getPersons: Boolean! = true
-  $areasIds: [Uuid!]
-  $streetsIds: [Uuid!]
-  $familiesIds: [Uuid!]
-  $storesIds: [Uuid!]
+  $areasIds: [uuid!]
+  $streetsIds: [uuid!]
+  $familiesIds: [uuid!]
+  $storesIds: [uuid!]
   $personsConditions: [PersonsBoolExp!] = {}
 ) {
   areas(
     where: {
       _or: [
         { id: { _in: $areasIds } }
-        { streets: { id: { _in: $streetsIds } } }
-        { families: { id: { _in: $familiesIds } } }
-        { persons: { _and: $personsConditions } }
+        { streets: { streetId: { _in: $streetsIds } } }
+        {
+          addresses: {
+            _or: [
+              { familyId: { _in: $familiesIds } }
+              { family: { persons: { _and: $personsConditions } } }
+            ]
+          }
+        }
       ]
       bounds: { _isNull: false }
     }
@@ -40,9 +46,15 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $streetsIds } }
-        { areas: { id: { _in: $areasIds } } }
-        { families: { id: { _in: $familiesIds } } }
-        { persons: { _and: $personsConditions } }
+        { areas: { areaId: { _in: $areasIds } } }
+        {
+          addresses: {
+            _or: [
+              { familyId: { _in: $familiesIds } }
+              { family: { persons: { _and: $personsConditions } } }
+            ]
+          }
+        }
       ]
       line: { _isNull: false }
     }
@@ -55,8 +67,14 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $familiesIds } }
-        { areas: { id: { _in: $areasIds } } }
-        { streets: { id: { _in: $streetsIds } } }
+        {
+          address: {
+            _or: [
+              { areaId: { _in: $areasIds } }
+              { streetId: { _in: $streetsIds } }
+            ]
+          }
+        }
         { persons: { _and: $personsConditions } }
         { parents: { parentFamilyId: { _in: $familiesIds } } }
         { children: { childFamilyId: { _in: $familiesIds } } }
@@ -72,8 +90,14 @@ query personsGeolocations(
     where: {
       _or: [
         { id: { _in: $storesIds } }
-        { streets: { id: { _in: $streetsIds } } }
-        { areas: { id: { _in: $areasIds } } }
+        {
+          address: {
+            _or: [
+              { areaId: { _in: $areasIds } }
+              { streetId: { _in: $streetsIds } }
+            ]
+          }
+        }
         { adminFamily: { _in: $familiesIds } }
       ]
       geolocation: { _isNull: false }
@@ -92,14 +116,14 @@ query personsGeolocations(
 }
 
 query personHistoryAnalysis(
-  $dateFrom: Date!
-  $dateTo: Date!
-  $timeFrom: Timestamptz!
-  $timeTo: Timestamptz!
-  $personId: Uuid!
-  $groupsIds: [Uuid!] = []
-  $classesIds: [Uuid!] = []
-  $servicesIds: [Uuid!] = []
+  $dateFrom: date!
+  $dateTo: date!
+  $timeFrom: timestamptz!
+  $timeTo: timestamptz!
+  $personId: uuid!
+  $groupsIds: [uuid!] = []
+  $classesIds: [uuid!] = []
+  $servicesIds: [uuid!] = []
   $callHistory: Boolean! = false
   $visitHistory: Boolean! = false
   $editHistory: Boolean! = false
@@ -202,33 +226,35 @@ query personHistoryAnalysis(
         }
       }
     }
-    classes(where: { id: { _in: $classesIds } }) {
-      ...ClassNoPhoto
-      attendanceHistoryAggregate(
-        where: {
-          dayId: { _gte: $dateFrom, _lte: $dateTo }
-          personId: { _eq: $personId }
-          asAdmin: { _eq: false }
-        }
-      ) {
-        aggregate {
-          count
-          max {
+    classes(where: { classId: { _in: $classesIds } }) {
+      class {
+        ...ClassNoPhoto
+        attendanceHistoryAggregate(
+          where: {
+            dayId: { _gte: $dateFrom, _lte: $dateTo }
+            personId: { _eq: $personId }
+            asAdmin: { _eq: false }
+          }
+        ) {
+          aggregate {
+            count
+            max {
+              dayId
+            }
+          }
+          nodes {
             dayId
           }
         }
-        nodes {
-          dayId
-        }
-      }
-      attendanceDaysConstraintsAggregate(
-        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          dayId
+        attendanceDaysConstraintsAggregate(
+          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
+        ) {
+          aggregate {
+            count
+          }
+          nodes {
+            dayId
+          }
         }
       }
     }
@@ -267,7 +293,7 @@ query personHistoryAnalysis(
   }
 }
 
-query personServicesClassesGroups($id: Uuid!) {
+query personServicesClassesGroups($id: uuid!) {
   personsByPk(id: $id) {
     id
     name
@@ -276,10 +302,12 @@ query personServicesClassesGroups($id: Uuid!) {
         ...ServiceWithStudyYears
       }
     }
-    classes(orderBy: { name: ASC }) {
-      ...Class
-      service {
-        ...ServiceWithStudyYears
+    classes(orderBy: { class: { name: ASC } }) {
+      class {
+        ...Class
+        service {
+          ...ServiceWithStudyYears
+        }
       }
     }
     groups(orderBy: { group: { name: ASC } }) {

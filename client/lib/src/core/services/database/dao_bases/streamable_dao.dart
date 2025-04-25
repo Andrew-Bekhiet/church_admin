@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
+import 'package:rxdart/rxdart.dart';
 
 mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
     on DAOBase<T> {
@@ -10,16 +11,19 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
 
   StreamAllConfig<T, TBoolExp, TOrderByExp> get baseStreamAllConfig;
 
+  StreamCountConfig<T, TBoolExp>? get baseStreamCountConfig => null;
+
   @protected
   StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
 
-  GQLPaginatableStream<T> streamAll({
+  PaginatableStreamBase<T> streamAll({
     Stream<String?>? searchQuery,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    Stream<List<TBoolExp>>? where,
+    Stream<List<TOrderByExp>>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
+      streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
       where: where,
       orderBy: orderBy,
@@ -50,55 +54,104 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
       _secondLineFieldNameOverride ??
       UserSettingsService.I.getSecondLineFor<T>();
 
-  GQLPaginatableStream<T> streamAll({
+  PaginatableStreamBase<T> streamAll({
     required StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    StreamCountConfig<T, TBoolExp>? streamCountConfig,
     Stream<String?>? searchQuery,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    Stream<List<TBoolExp>>? where,
+    Stream<List<TOrderByExp>>? orderBy,
   }) {
-    return GQLPaginatableStream<T>(
-      searchQuery: searchQuery,
-      subscriptionStreamCallback: (event) =>
-          graphQLClient.subscribeAndReturnParsed(
+    final shareableParametersStream = Rx.combineLatest3(
+      searchQuery ?? Stream.value(null),
+      where ?? Stream.value(null),
+      orderBy ?? Stream.value(null),
+      (search, where, orderBy) =>
+          StreamableDAOParameters<T, TBoolExp, TOrderByExp>(
+        search: search,
+        where: where,
+        orderBy: orderBy,
+      ),
+    ).shareValue();
+
+    final Stream<int?> countStream =
+        _getCountStream(streamCountConfig, shareableParametersStream);
+
+    return PaginatableStream(
+      parametersStream: shareableParametersStream,
+      factory: (request) => _streamAllFactory(
+        streamAllConfig,
+        countStream,
+        request,
+      ),
+    );
+  }
+
+  Stream<int?> _getCountStream(
+    StreamCountConfig? streamCountConfig,
+    Stream<StreamableDAOParameters> parametersStream,
+  ) {
+    if (streamCountConfig == null) return Stream.value(null).shareValue();
+
+    return parametersStream.map((p) => p.where).distinct().switchMap(
+          (where) => graphQLClient.subscribeAndReturnParsed(
+            streamCountConfig.operationOptions ??
+                SubscriptionOptions(
+                  document: streamCountConfig.document,
+                  operationName: streamCountConfig.effectiveOperationName,
+                  variables: streamCountConfig.variables ??
+                      {
+                        'where': where
+                                ?.map(
+                                  (o) => (o as dynamic).toJson() as Json,
+                                )
+                                .toList() ??
+                            [],
+                      },
+                  parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
+                ),
+          ),
+        );
+  }
+
+  Stream<PaginatableStreamResponse<T>> _streamAllFactory(
+    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    Stream<int?> countStream,
+    PaginatableStreamRequest<T,
+            StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
+        request,
+  ) {
+    return Rx.combineLatest2(
+      graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
               document: _getDocumentWithSecondLine(streamAllConfig),
               operationName: streamAllConfig.effectiveOperationName,
-              variables: _getEffectiveStreamAllVars(
-                streamAllConfig,
-                event,
-                where,
-                orderBy,
-              ),
+              variables: _getEffectiveStreamAllVars(streamAllConfig, request),
               parserFn: streamAllConfig.parserFn ??
-                  db.parser.singleListParser(fromJson),
+                  db.parser.singleListParser(
+                    fromJson,
+                    pageSize: request.pageSize,
+                  ),
             ),
+      ),
+      countStream,
+      (data, count) => PaginatableStreamResponse<T>(
+        data: data.data,
+        cursor: data.cursor,
+        totalCount: count ?? data.totalCount,
       ),
     );
   }
 
   Json _getEffectiveStreamAllVars(
     StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
-    GQLPaginatableStreamEvent<T> event,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    PaginatableStreamRequest<T,
+            StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
+        request,
   ) {
     return streamAllConfig.variables ??
-        streamAllConfig.transformVars?.call(
-          event: event,
-          where: where,
-          orderBy: orderBy,
-        ) ??
-        db.varsTransformer.transformVariablesForPagination<T>(
-          event,
-          where:
-              where?.map((o) => (o as dynamic).toJson() as Json).toList() ?? [],
-          orderBy:
-              orderBy?.map((o) => (o as dynamic).toJson() as Json).toList() ??
-                  [
-                    {'name': 'ASC'},
-                  ],
-        );
+        streamAllConfig.transformRequest?.call(request) ??
+        db.varsTransformer.transformrequestForPagination<T>(request);
   }
 
   dynamic _getDocumentWithSecondLine(

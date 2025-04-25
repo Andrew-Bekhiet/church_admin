@@ -22,9 +22,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
 mixin _$Person {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation => throw _privateConstructorUsedError;
+  Address? get address => throw _privateConstructorUsedError;
   String? get mainPhone => throw _privateConstructorUsedError;
   Map<String, dynamic> get otherPhones => throw _privateConstructorUsedError;
   DateTime? get birthdate => throw _privateConstructorUsedError;
@@ -68,13 +66,12 @@ mixin _$Person {
   LastRecordedByInfo? get lastCall => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
   LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   List<Class>? get classes => throw _privateConstructorUsedError;
   @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
   List<Group>? get groups => throw _privateConstructorUsedError;
   @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
   List<Service>? get services => throw _privateConstructorUsedError;
-  List<Area>? get areas => throw _privateConstructorUsedError;
-  List<Street>? get streets => throw _privateConstructorUsedError;
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   List<Tag>? get tags => throw _privateConstructorUsedError;
   @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -118,8 +115,7 @@ abstract class $PersonCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      Address? address,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -162,13 +158,12 @@ abstract class $PersonCopyWith<$Res> {
       LastRecordedByInfo? lastCall,
       LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
       List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
       List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
       List<Service>? services,
-      List<Area>? areas,
-      List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
       List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -185,6 +180,7 @@ abstract class $PersonCopyWith<$Res> {
       HistoryAggregateData? visitHistoryAggregate,
       HistoryAggregateData? editHistoryAggregate});
 
+  $AddressCopyWith<$Res>? get address;
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
   $SchoolCopyWith<$Res>? get school;
   $CollegeCopyWith<$Res>? get college;
@@ -228,7 +224,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? id = null,
     Object? name = null,
     Object? address = freezed,
-    Object? geolocation = freezed,
     Object? mainPhone = freezed,
     Object? otherPhones = null,
     Object? birthdate = freezed,
@@ -274,8 +269,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? classes = freezed,
     Object? groups = freezed,
     Object? services = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? tags = freezed,
     Object? hobbies = freezed,
     Object? user = freezed,
@@ -302,11 +295,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
+              as Address?,
       mainPhone: freezed == mainPhone
           ? _value.mainPhone
           : mainPhone // ignore: cast_nullable_to_non_nullable
@@ -487,14 +476,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<Service>?,
-      areas: freezed == areas
-          ? _value.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value.streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -548,6 +529,20 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
     ) as $Val);
+  }
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res>? get address {
+    if (_value.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.address!, (value) {
+      return _then(_value.copyWith(address: value) as $Val);
+    });
   }
 
   /// Create a copy of Person
@@ -888,8 +883,7 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
+      Address? address,
       String? mainPhone,
       Map<String, dynamic> otherPhones,
       DateTime? birthdate,
@@ -932,13 +926,12 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       LastRecordedByInfo? lastCall,
       LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
       List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
       List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
       List<Service>? services,
-      List<Area>? areas,
-      List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
       List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -955,6 +948,8 @@ abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
       HistoryAggregateData? visitHistoryAggregate,
       HistoryAggregateData? editHistoryAggregate});
 
+  @override
+  $AddressCopyWith<$Res>? get address;
   @override
   $ShammasLevelCopyWith<$Res>? get shammasLevel;
   @override
@@ -1019,7 +1014,6 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? address = freezed,
-    Object? geolocation = freezed,
     Object? mainPhone = freezed,
     Object? otherPhones = null,
     Object? birthdate = freezed,
@@ -1065,8 +1059,6 @@ class __$$PersonImplCopyWithImpl<$Res>
     Object? classes = freezed,
     Object? groups = freezed,
     Object? services = freezed,
-    Object? areas = freezed,
-    Object? streets = freezed,
     Object? tags = freezed,
     Object? hobbies = freezed,
     Object? user = freezed,
@@ -1093,11 +1085,7 @@ class __$$PersonImplCopyWithImpl<$Res>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      geolocation: freezed == geolocation
-          ? _value.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
+              as Address?,
       mainPhone: freezed == mainPhone
           ? _value.mainPhone
           : mainPhone // ignore: cast_nullable_to_non_nullable
@@ -1278,14 +1266,6 @@ class __$$PersonImplCopyWithImpl<$Res>
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
               as List<Service>?,
-      areas: freezed == areas
-          ? _value._areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      streets: freezed == streets
-          ? _value._streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as List<Street>?,
       tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -1349,7 +1329,6 @@ class _$PersonImpl extends _Person {
       {required this.id,
       required this.name,
       this.address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson) this.geolocation,
       this.mainPhone,
       final Map<String, dynamic> otherPhones = const {},
       this.birthdate,
@@ -1392,13 +1371,12 @@ class _$PersonImpl extends _Person {
       this.lastCall,
       this.lastVisit,
       this.lastEdit,
+      @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
       final List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
       final List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
       final List<Service>? services,
-      final List<Area>? areas,
-      final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
       final List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -1418,8 +1396,6 @@ class _$PersonImpl extends _Person {
         _classes = classes,
         _groups = groups,
         _services = services,
-        _areas = areas,
-        _streets = streets,
         _tags = tags,
         _hobbies = hobbies,
         _kodasHistory = kodasHistory,
@@ -1437,10 +1413,7 @@ class _$PersonImpl extends _Person {
   @override
   final String name;
   @override
-  final String? address;
-  @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  final Point? geolocation;
+  final Address? address;
   @override
   final String? mainPhone;
   final Map<String, dynamic> _otherPhones;
@@ -1539,6 +1512,7 @@ class _$PersonImpl extends _Person {
   final LastRecordedByInfo? lastEdit;
   final List<Class>? _classes;
   @override
+  @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   List<Class>? get classes {
     final value = _classes;
     if (value == null) return null;
@@ -1565,26 +1539,6 @@ class _$PersonImpl extends _Person {
     final value = _services;
     if (value == null) return null;
     if (_services is EqualUnmodifiableListView) return _services;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Area>? _areas;
-  @override
-  List<Area>? get areas {
-    final value = _areas;
-    if (value == null) return null;
-    if (_areas is EqualUnmodifiableListView) return _areas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Street>? _streets;
-  @override
-  List<Street>? get streets {
-    final value = _streets;
-    if (value == null) return null;
-    if (_streets is EqualUnmodifiableListView) return _streets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1677,7 +1631,7 @@ class _$PersonImpl extends _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, address: $address, geolocation: $geolocation, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, areas: $areas, streets: $streets, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, isStudent: $isStudent, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 
   @override
@@ -1688,8 +1642,6 @@ class _$PersonImpl extends _Person {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.geolocation, geolocation) ||
-                other.geolocation == geolocation) &&
             (identical(other.mainPhone, mainPhone) ||
                 other.mainPhone == mainPhone) &&
             const DeepCollectionEquality()
@@ -1763,8 +1715,6 @@ class _$PersonImpl extends _Person {
             const DeepCollectionEquality().equals(other._classes, _classes) &&
             const DeepCollectionEquality().equals(other._groups, _groups) &&
             const DeepCollectionEquality().equals(other._services, _services) &&
-            const DeepCollectionEquality().equals(other._areas, _areas) &&
-            const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality().equals(other._hobbies, _hobbies) &&
             (identical(other.user, user) || other.user == user) &&
@@ -1799,7 +1749,6 @@ class _$PersonImpl extends _Person {
         id,
         name,
         address,
-        geolocation,
         mainPhone,
         const DeepCollectionEquality().hash(_otherPhones),
         birthdate,
@@ -1845,8 +1794,6 @@ class _$PersonImpl extends _Person {
         const DeepCollectionEquality().hash(_classes),
         const DeepCollectionEquality().hash(_groups),
         const DeepCollectionEquality().hash(_services),
-        const DeepCollectionEquality().hash(_areas),
-        const DeepCollectionEquality().hash(_streets),
         const DeepCollectionEquality().hash(_tags),
         const DeepCollectionEquality().hash(_hobbies),
         user,
@@ -1882,9 +1829,7 @@ abstract class _Person extends Person {
   factory _Person(
       {required final String id,
       required final String name,
-      final String? address,
-      @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-      final Point? geolocation,
+      final Address? address,
       final String? mainPhone,
       final Map<String, dynamic> otherPhones,
       final DateTime? birthdate,
@@ -1927,13 +1872,12 @@ abstract class _Person extends Person {
       final LastRecordedByInfo? lastCall,
       final LastRecordedByInfo? lastVisit,
       final LastRecordedByInfo? lastEdit,
+      @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
       final List<Class>? classes,
       @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
       final List<Group>? groups,
       @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
       final List<Service>? services,
-      final List<Area>? areas,
-      final List<Street>? streets,
       @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
       final List<Tag>? tags,
       @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
@@ -1958,10 +1902,7 @@ abstract class _Person extends Person {
   @override
   String get name;
   @override
-  String? get address;
-  @override
-  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
-  Point? get geolocation;
+  Address? get address;
   @override
   String? get mainPhone;
   @override
@@ -2048,6 +1989,7 @@ abstract class _Person extends Person {
   @override
   LastRecordedByInfo? get lastEdit;
   @override
+  @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
   List<Class>? get classes;
   @override
   @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
@@ -2055,10 +1997,6 @@ abstract class _Person extends Person {
   @override
   @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
   List<Service>? get services;
-  @override
-  List<Area>? get areas;
-  @override
-  List<Street>? get streets;
   @override
   @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
   List<Tag>? get tags;

@@ -2,6 +2,15 @@ table:
   name: persons
   schema: public
 object_relationships:
+  - name: address
+    using:
+      manual_configuration:
+        column_mapping:
+          family_id: family_id
+        insertion_order: null
+        remote_table:
+          name: addresses
+          schema: public
   - name: church
     using:
       foreign_key_constraint_on: church_id
@@ -98,6 +107,15 @@ array_relationships:
         table:
           name: call_history
           schema: history
+  - name: classes
+    using:
+      manual_configuration:
+        column_mapping:
+          id: person_id
+        insertion_order: null
+        remote_table:
+          name: classes_persons
+          schema: public
   - name: confessionHistory
     using:
       foreign_key_constraint_on:
@@ -165,54 +183,17 @@ array_relationships:
           name: visit_history
           schema: history
 computed_fields:
-  - name: areas
-    definition:
-      function:
-        name: person_areas
-        schema: public
-      session_argument: hasura_session
   - name: birthday
     definition:
       function:
         name: get_person_birthday
         schema: public
-  - name: classes
-    definition:
-      function:
-        name: get_person_classes
-        schema: public
-      session_argument: hasura_session
-    comment: ""
-  - name: isUserAllowedToRead
-    definition:
-      function:
-        name: user_allowed_to_read_person
-        schema: public
-      session_argument: hasura_session
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_person
-        schema: public
-      session_argument: hasura_session
-  - name: streets
-    definition:
-      function:
-        name: person_streets
-        schema: public
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
-      check:
-        _and:
-          - _and:
-              - uid:
-                  _eq: null
-          - isUserAllowedToWrite:
-              _eq: true
+      check: {}
       columns:
-        - address
+        - address_text
         - birthdate
         - church_id
         - college_id
@@ -241,7 +222,7 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - birthdate
         - church_id
         - college_id
@@ -273,13 +254,34 @@ select_permissions:
       computed_fields:
         - birthday
       filter:
-        isUserAllowedToRead:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+      limit: 200
+      allow_aggregations: true
 update_permissions:
   - role: user
     permission:
       columns:
-        - address
+        - address_text
         - birthdate
         - church_id
         - college_id
@@ -305,18 +307,64 @@ update_permissions:
         - store_id
         - study_year_id
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
 delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
-          - _and:
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
               - uid:
-                  _eq: null
-          - isUserAllowedToWrite:
-              _eq: true
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: writeAllData

@@ -422,6 +422,605 @@ const documentNodeSubscriptionwatchAllClasses = DocumentNode(definitions: [
   fragmentDefinitionClassNoPhoto,
 ]);
 
+class Variables_Subscription_watchClassesCount {
+  factory Variables_Subscription_watchClassesCount(
+          {List<Input_ClassesBoolExp>? where}) =>
+      Variables_Subscription_watchClassesCount._({
+        if (where != null) r'where': where,
+      });
+
+  Variables_Subscription_watchClassesCount._(this._$data);
+
+  factory Variables_Subscription_watchClassesCount.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map(
+              (e) => Input_ClassesBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    return Variables_Subscription_watchClassesCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_ClassesBoolExp>? get where =>
+      (_$data['where'] as List<Input_ClassesBoolExp>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchClassesCount<
+          Variables_Subscription_watchClassesCount>
+      get copyWith => CopyWith_Variables_Subscription_watchClassesCount(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchClassesCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+              ? null
+              : Object.hashAll(l$where.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchClassesCount<TRes> {
+  factory CopyWith_Variables_Subscription_watchClassesCount(
+    Variables_Subscription_watchClassesCount instance,
+    TRes Function(Variables_Subscription_watchClassesCount) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchClassesCount;
+
+  factory CopyWith_Variables_Subscription_watchClassesCount.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchClassesCount;
+
+  TRes call({List<Input_ClassesBoolExp>? where});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchClassesCount<TRes>
+    implements CopyWith_Variables_Subscription_watchClassesCount<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchClassesCount(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchClassesCount _instance;
+
+  final TRes Function(Variables_Subscription_watchClassesCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? where = _undefined}) =>
+      _then(Variables_Subscription_watchClassesCount._({
+        ..._instance._$data,
+        if (where != _undefined)
+          'where': (where as List<Input_ClassesBoolExp>?),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchClassesCount<TRes>
+    implements CopyWith_Variables_Subscription_watchClassesCount<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchClassesCount(this._res);
+
+  TRes _res;
+
+  call({List<Input_ClassesBoolExp>? where}) => _res;
+}
+
+class Subscription_watchClassesCount {
+  Subscription_watchClassesCount({required this.classesAggregate});
+
+  factory Subscription_watchClassesCount.fromJson(Map<String, dynamic> json) {
+    final l$classesAggregate = json['classesAggregate'];
+    return Subscription_watchClassesCount(
+        classesAggregate:
+            Subscription_watchClassesCount_classesAggregate.fromJson(
+                (l$classesAggregate as Map<String, dynamic>)));
+  }
+
+  final Subscription_watchClassesCount_classesAggregate classesAggregate;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$classesAggregate = classesAggregate;
+    _resultData['classesAggregate'] = l$classesAggregate.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$classesAggregate = classesAggregate;
+    return Object.hashAll([l$classesAggregate]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchClassesCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$classesAggregate = classesAggregate;
+    final lOther$classesAggregate = other.classesAggregate;
+    if (l$classesAggregate != lOther$classesAggregate) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchClassesCount
+    on Subscription_watchClassesCount {
+  CopyWith_Subscription_watchClassesCount<Subscription_watchClassesCount>
+      get copyWith => CopyWith_Subscription_watchClassesCount(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchClassesCount<TRes> {
+  factory CopyWith_Subscription_watchClassesCount(
+    Subscription_watchClassesCount instance,
+    TRes Function(Subscription_watchClassesCount) then,
+  ) = _CopyWithImpl_Subscription_watchClassesCount;
+
+  factory CopyWith_Subscription_watchClassesCount.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchClassesCount;
+
+  TRes call(
+      {Subscription_watchClassesCount_classesAggregate? classesAggregate});
+  CopyWith_Subscription_watchClassesCount_classesAggregate<TRes>
+      get classesAggregate;
+}
+
+class _CopyWithImpl_Subscription_watchClassesCount<TRes>
+    implements CopyWith_Subscription_watchClassesCount<TRes> {
+  _CopyWithImpl_Subscription_watchClassesCount(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchClassesCount _instance;
+
+  final TRes Function(Subscription_watchClassesCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? classesAggregate = _undefined}) =>
+      _then(Subscription_watchClassesCount(
+          classesAggregate:
+              classesAggregate == _undefined || classesAggregate == null
+                  ? _instance.classesAggregate
+                  : (classesAggregate
+                      as Subscription_watchClassesCount_classesAggregate)));
+
+  CopyWith_Subscription_watchClassesCount_classesAggregate<TRes>
+      get classesAggregate {
+    final local$classesAggregate = _instance.classesAggregate;
+    return CopyWith_Subscription_watchClassesCount_classesAggregate(
+        local$classesAggregate, (e) => call(classesAggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchClassesCount<TRes>
+    implements CopyWith_Subscription_watchClassesCount<TRes> {
+  _CopyWithStubImpl_Subscription_watchClassesCount(this._res);
+
+  TRes _res;
+
+  call({Subscription_watchClassesCount_classesAggregate? classesAggregate}) =>
+      _res;
+
+  CopyWith_Subscription_watchClassesCount_classesAggregate<TRes>
+      get classesAggregate =>
+          CopyWith_Subscription_watchClassesCount_classesAggregate.stub(_res);
+}
+
+const documentNodeSubscriptionwatchClassesCount = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'watchClassesCount'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'where')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'ClassesBoolExp'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'classesAggregate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: '_and'),
+                value: VariableNode(name: NameNode(value: 'where')),
+              )
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'aggregate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'count'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  ),
+]);
+
+class Subscription_watchClassesCount_classesAggregate {
+  Subscription_watchClassesCount_classesAggregate({
+    this.aggregate,
+    this.$__typename = 'ClassesAggregate',
+  });
+
+  factory Subscription_watchClassesCount_classesAggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregate = json['aggregate'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchClassesCount_classesAggregate(
+      aggregate: l$aggregate == null
+          ? null
+          : Subscription_watchClassesCount_classesAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Subscription_watchClassesCount_classesAggregate_aggregate? aggregate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregate = aggregate;
+    _resultData['aggregate'] = l$aggregate?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregate = aggregate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchClassesCount_classesAggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregate = aggregate;
+    final lOther$aggregate = other.aggregate;
+    if (l$aggregate != lOther$aggregate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchClassesCount_classesAggregate
+    on Subscription_watchClassesCount_classesAggregate {
+  CopyWith_Subscription_watchClassesCount_classesAggregate<
+          Subscription_watchClassesCount_classesAggregate>
+      get copyWith => CopyWith_Subscription_watchClassesCount_classesAggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchClassesCount_classesAggregate<TRes> {
+  factory CopyWith_Subscription_watchClassesCount_classesAggregate(
+    Subscription_watchClassesCount_classesAggregate instance,
+    TRes Function(Subscription_watchClassesCount_classesAggregate) then,
+  ) = _CopyWithImpl_Subscription_watchClassesCount_classesAggregate;
+
+  factory CopyWith_Subscription_watchClassesCount_classesAggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate;
+
+  TRes call({
+    Subscription_watchClassesCount_classesAggregate_aggregate? aggregate,
+    String? $__typename,
+  });
+  CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<TRes>
+      get aggregate;
+}
+
+class _CopyWithImpl_Subscription_watchClassesCount_classesAggregate<TRes>
+    implements CopyWith_Subscription_watchClassesCount_classesAggregate<TRes> {
+  _CopyWithImpl_Subscription_watchClassesCount_classesAggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchClassesCount_classesAggregate _instance;
+
+  final TRes Function(Subscription_watchClassesCount_classesAggregate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchClassesCount_classesAggregate(
+        aggregate: aggregate == _undefined
+            ? _instance.aggregate
+            : (aggregate
+                as Subscription_watchClassesCount_classesAggregate_aggregate?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<TRes>
+      get aggregate {
+    final local$aggregate = _instance.aggregate;
+    return local$aggregate == null
+        ? CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate(
+            local$aggregate, (e) => call(aggregate: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate<TRes>
+    implements CopyWith_Subscription_watchClassesCount_classesAggregate<TRes> {
+  _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate(this._res);
+
+  TRes _res;
+
+  call({
+    Subscription_watchClassesCount_classesAggregate_aggregate? aggregate,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<TRes>
+      get aggregate =>
+          CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate
+              .stub(_res);
+}
+
+class Subscription_watchClassesCount_classesAggregate_aggregate {
+  Subscription_watchClassesCount_classesAggregate_aggregate({
+    required this.count,
+    this.$__typename = 'ClassesAggregateFields',
+  });
+
+  factory Subscription_watchClassesCount_classesAggregate_aggregate.fromJson(
+      Map<String, dynamic> json) {
+    final l$count = json['count'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchClassesCount_classesAggregate_aggregate(
+      count: (l$count as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int count;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$count = count;
+    _resultData['count'] = l$count;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$count,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchClassesCount_classesAggregate_aggregate ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchClassesCount_classesAggregate_aggregate
+    on Subscription_watchClassesCount_classesAggregate_aggregate {
+  CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<
+          Subscription_watchClassesCount_classesAggregate_aggregate>
+      get copyWith =>
+          CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<
+    TRes> {
+  factory CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate(
+    Subscription_watchClassesCount_classesAggregate_aggregate instance,
+    TRes Function(Subscription_watchClassesCount_classesAggregate_aggregate)
+        then,
+  ) = _CopyWithImpl_Subscription_watchClassesCount_classesAggregate_aggregate;
+
+  factory CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate_aggregate;
+
+  TRes call({
+    int? count,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchClassesCount_classesAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<
+            TRes> {
+  _CopyWithImpl_Subscription_watchClassesCount_classesAggregate_aggregate(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchClassesCount_classesAggregate_aggregate _instance;
+
+  final TRes Function(Subscription_watchClassesCount_classesAggregate_aggregate)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchClassesCount_classesAggregate_aggregate(
+        count: count == _undefined || count == null
+            ? _instance.count
+            : (count as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate_aggregate<
+        TRes>
+    implements
+        CopyWith_Subscription_watchClassesCount_classesAggregate_aggregate<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchClassesCount_classesAggregate_aggregate(
+      this._res);
+
+  TRes _res;
+
+  call({
+    int? count,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
 class Variables_Subscription_watchClass {
   factory Variables_Subscription_watchClass({required UuidValue id}) =>
       Variables_Subscription_watchClass._({
@@ -633,7 +1232,7 @@ const documentNodeSubscriptionwatchClass = DocumentNode(definitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Uuid'),
+          name: NameNode(value: 'uuid'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),

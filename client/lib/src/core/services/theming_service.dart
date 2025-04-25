@@ -109,8 +109,7 @@ class ThemingService with WidgetsBindingObserver {
     late final effectiveUserSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark =
-        isDarkOverride ??
+    bool isDark = isDarkOverride ??
         effectiveUserSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
@@ -119,21 +118,22 @@ class ThemingService with WidgetsBindingObserver {
 
     Color? effectiveSeedOverride = seedOverride;
 
-    final riseDay = getRiseDay();
-    if (greatFeastTheme &&
-        DateTime.now().isAfter(
-          riseDay.subtract(const Duration(days: 7, seconds: 20)),
-        ) &&
-        DateTime.now().isBefore(riseDay.subtract(const Duration(days: 1)))) {
-      effectiveSeedOverride = Colors.black;
-      isDark = true;
-    } else if (greatFeastTheme &&
-        DateTime.now().isBefore(
-          riseDay.add(const Duration(days: 50, seconds: 20)),
-        ) &&
-        DateTime.now().isAfter(riseDay.subtract(const Duration(days: 1)))) {
-      effectiveSeedOverride = Colors.white;
-      isDark = false;
+    bool isUsingGreatFeastTheme = false;
+
+    if (greatFeastTheme) {
+      switch (LiturgySeason.current) {
+        case LiturgySeason.holyWeek:
+          effectiveSeedOverride = Colors.black;
+          isDark = true;
+          isUsingGreatFeastTheme = true;
+
+        case LiturgySeason.pentecost:
+          effectiveSeedOverride = Colors.white;
+          isDark = false;
+          isUsingGreatFeastTheme = true;
+
+        case _:
+      }
     }
 
     final bool isLight = !isDark;
@@ -141,17 +141,16 @@ class ThemingService with WidgetsBindingObserver {
     final flexThemeDataFactory =
         isDark ? FlexThemeData.dark : FlexThemeData.light;
 
-    final flexSchemeColor =
-        effectiveSeedOverride != null
-            ? FlexSchemeColor.from(
-              primary: effectiveSeedOverride,
-              tertiary: effectiveSeedOverride.desaturate(90),
-            )
-            : FlexSchemeColor.from(
-              primary: AppColors.primary,
-              secondary: AppColors.secondary,
-              tertiary: AppColors.tertiary,
-            );
+    final flexSchemeColor = effectiveSeedOverride != null
+        ? FlexSchemeColor.from(
+            primary: effectiveSeedOverride,
+            tertiary: effectiveSeedOverride.desaturate(90),
+          )
+        : FlexSchemeColor.from(
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
+            tertiary: AppColors.tertiary,
+          );
 
     final rawThemeData = flexThemeDataFactory(
       colors: isLight ? flexSchemeColor : flexSchemeColor.toDark(),
@@ -176,7 +175,9 @@ class ThemingService with WidgetsBindingObserver {
             isLight ? SchemeColor.primary : null,
         fabUseShape: true,
         fabAlwaysCircular: true,
-        fabForegroundSchemeColor: SchemeColor.onPrimary,
+        fabForegroundSchemeColor: isUsingGreatFeastTheme
+            ? SchemeColor.onPrimaryContainer
+            : SchemeColor.onPrimary,
         chipSchemeColor: SchemeColor.transparent,
         chipSelectedSchemeColor: SchemeColor.primary,
         chipSecondarySelectedSchemeColor: SchemeColor.primary,
@@ -238,6 +239,26 @@ class ThemingService with WidgetsBindingObserver {
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: themeData.elevatedButtonTheme.style!.copyWith(
+          foregroundColor:
+              WidgetStateProperty.all(colorScheme.onSecondaryContainer),
+          iconColor: WidgetStateProperty.all(colorScheme.onSecondaryContainer),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: themeData.outlinedButtonTheme.style!.copyWith(
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: themeData.textButtonTheme.style!.copyWith(
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
+        ),
+      ),
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: scaffoldBackgroundColor,
         elevation: 0,
@@ -247,10 +268,12 @@ class ThemingService with WidgetsBindingObserver {
         color: colorScheme.primaryContainer,
         clipBehavior: Clip.antiAlias,
       ),
-      inputDecorationTheme: themeData.inputDecorationTheme.copyWith(
-        suffixIconColor: colorScheme.primaryContainer,
-        prefixIconColor: colorScheme.primaryContainer,
-      ),
+      inputDecorationTheme: isUsingGreatFeastTheme
+          ? null
+          : themeData.inputDecorationTheme.copyWith(
+              suffixIconColor: colorScheme.primaryContainer,
+              prefixIconColor: colorScheme.primaryContainer,
+            ),
       dividerTheme: themeData.dividerTheme.copyWith(
         thickness: 1,
         space: 0,
@@ -260,10 +283,9 @@ class ThemingService with WidgetsBindingObserver {
       ),
       chipTheme: themeData.chipTheme.copyWith(
         color: WidgetStateProperty.resolveWith(
-          (states) =>
-              states.contains(WidgetState.selected)
-                  ? themeData.colorScheme.primary
-                  : themeData.scaffoldBackgroundColor,
+          (states) => states.contains(WidgetState.selected)
+              ? themeData.colorScheme.primary
+              : themeData.scaffoldBackgroundColor,
         ),
         labelStyle: themeData.textTheme.titleMedium,
         secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
@@ -285,8 +307,8 @@ class ThemingService with WidgetsBindingObserver {
   ThemingService.withInitialThemeata({
     required UserSettingsService userSettingsService,
     required ThemeData initialTheme,
-  }) : _userSettingsService = userSettingsService,
-       _themeData = BehaviorSubject.seeded(initialTheme) {
+  })  : _userSettingsService = userSettingsService,
+        _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -321,11 +343,12 @@ extension ChurchAdminTheming on ThemeData {
   ButtonStyle? get filledTonalButtonStyleWorkaround =>
       brightness == Brightness.light
           ? filledButtonTheme.style?.copyWith(
-            backgroundColor: WidgetStateProperty.all(colorScheme.primaryFixed),
-          )
+              backgroundColor:
+                  WidgetStateProperty.all(colorScheme.primaryFixed),
+            )
           : filledButtonTheme.style;
 
   ButtonStyle get largeFilledButtonStyle => filledButtonTheme.style!.copyWith(
-    textStyle: WidgetStateProperty.all(textTheme.titleLarge),
-  );
+        textStyle: WidgetStateProperty.all(textTheme.titleLarge),
+      );
 }

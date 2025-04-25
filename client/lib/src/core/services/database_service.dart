@@ -54,6 +54,7 @@ class DatabaseService {
     Person: persons,
     Church: metadata.churches,
     College: metadata.colleges,
+    District: metadata.districts,
     Father: metadata.fathers,
     Hobby: metadata.hobbies,
     Job: metadata.jobs,

@@ -22,6 +22,7 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     return dummyInstance is ViewableWithID &&
             dummyInstance is! UserPermission &&
             name != 'id' ||
+        dummyInstance is Address ||
         dummyInstance is HistoryAggregateData ||
         dummyInstance is AggregateData;
   }

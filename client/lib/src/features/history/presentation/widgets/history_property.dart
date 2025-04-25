@@ -6,7 +6,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   const HistoryProperty({
     required this.name,
-    required this.getHistoryStream,
+    required this.getHistoryListController,
     this.onRecordNow,
     this.showTime = true,
     this.value,
@@ -16,7 +16,7 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final String name;
   final bool showTime;
   final DateTime? value;
-  final DelegatingPaginatableStream<T> Function() getHistoryStream;
+  final ViewableObjectListController<T> Function() getHistoryListController;
   final void Function()? onRecordNow;
 
   DateFormat get dateFormat => DateFormat(
@@ -61,9 +61,8 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   }
 
   void Function() _onHistoryTap(BuildContext context) => () async {
-        final viewableObjectListController = ViewableObjectListController(
-          objectsPaginatableStream: getHistoryStream(),
-        );
+        final viewableObjectListController = getHistoryListController();
+
         await showDialog(
           context: context,
           builder: (context) {

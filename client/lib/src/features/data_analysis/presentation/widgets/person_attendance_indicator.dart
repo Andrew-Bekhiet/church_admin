@@ -8,8 +8,8 @@ class PersonAttendanceIndicator extends StatelessWidget {
   final DateTimeRange range;
   final HistoryAggregateData analysisData;
   final HistoryAggregateData totalAnalysisData;
-  final DelegatingPaginatableStream<LastRecordedByInfo> Function()
-      getHistoryStream;
+  final ViewableObjectListController<LastRecordedByInfo> Function()
+      getHistoryListController;
 
   final String name;
   final Color? color;
@@ -20,7 +20,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
     required this.range,
     required this.analysisData,
     required this.totalAnalysisData,
-    required this.getHistoryStream,
+    required this.getHistoryListController,
     this.color,
     this.showTime = true,
     super.key,
@@ -198,7 +198,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
         HistoryProperty(
           name: 'أخر حضور $name',
           value: analysisData.aggregate.max?.time,
-          getHistoryStream: getHistoryStream,
+          getHistoryListController: getHistoryListController,
           showTime: showTime,
         ),
       ],
