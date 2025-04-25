@@ -22,6 +22,33 @@ class LoggingService extends BlocObserver {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = _errorWidgetBuilder;
 
+    _initSentry(sentryDSN);
+  }
+
+  Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
+    await error(
+      LogRecord(
+        message: flutterError.exceptionAsString(),
+        error: flutterError.exception,
+        stackTrace: flutterError.stack,
+      ),
+    );
+  }
+
+  Widget _errorWidgetBuilder(FlutterErrorDetails error) {
+    if (kReleaseMode) _onFlutterError(error);
+
+    return Material(
+      type: MaterialType.card,
+      child: Center(
+        child: Text(
+          'حدث خطأ:\n${error.summary}',
+        ),
+      ),
+    );
+  }
+
+  void _initSentry(String sentryDSN) {
     SentryFlutter.init(
       (options) => options
         ..dsn = sentryDSN
@@ -99,54 +126,54 @@ class LoggingService extends BlocObserver {
     final nextState = transition.nextState.unwrapped;
     final currentState = transition.currentState.unwrapped;
 
-    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
-      Sentry.configureScope(
-        (scope) => scope.setUser(
-          SentryUser(
-            id: nextState.authUser.uid,
-            email: nextState.authUser.email,
-            name: nextState.userData?.name,
-            data: {
-              'emailVerified': nextState.authUser.emailVerified,
-              'claims': nextState.authUser.claims,
-              'isMultiFactorEnabled': nextState.authUser.isMultiFactorEnabled,
-              'permissions': nextState.userData?.permissions.toList(),
-              'adminOn':
-                  nextState.userData?.adminOn?.map((a) => a.toJson()).toList(),
-            },
-          ),
+    final sentryUser = switch ((currentState, nextState)) {
+      (_, AuthAuthenticated(:final authUser, :final userData))
+          when currentState is! AuthAuthenticated =>
+        SentryUser(
+          id: authUser.uid,
+          email: authUser.email,
+          name: userData?.name,
+          data: {
+            'emailVerified': authUser.emailVerified,
+            'claims': authUser.claims,
+            'isMultiFactorEnabled': authUser.isMultiFactorEnabled,
+            'permissions': userData?.permissions.toList(),
+            'adminOn': userData?.adminOn?.map((a) => a.toJson()).toList(),
+          },
         ),
-      );
-    } else if (currentState is AuthAuthenticated &&
-        nextState is! AuthAuthenticated) {
-      Sentry.configureScope((scope) => scope.setUser(null));
+      (AuthAuthenticated(), _) when nextState is! AuthAuthenticated => null,
+      _ => false,
+    };
+
+    if (sentryUser is SentryUser?) {
+      Sentry.configureScope((scope) => scope.setUser(sentryUser));
     }
   }
 
-  Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
-    await error(
-      LogRecord(
-        message: flutterError.exceptionAsString(),
-        error: flutterError.exception,
-        stackTrace: flutterError.stack,
-      ),
-    );
-  }
-
-  Widget _errorWidgetBuilder(FlutterErrorDetails error) {
-    if (kReleaseMode) _onFlutterError(error);
-
-    return Material(
-      type: MaterialType.card,
-      child: Center(
-        child: Text(
-          'حدث خطأ:\n${error.summary}',
-        ),
-      ),
-    );
-  }
-
   Future<void> log(LoggingLevel level, LogRecord record) async {
+    final message = _getRecordMessage(record);
+
+    if (message.isNotEmpty) {
+      await Sentry.addBreadcrumb(
+        Breadcrumb(
+          level: level.sentryLevel,
+          message: message,
+          data: record.data,
+        ),
+      );
+    }
+
+    if (level >= LoggingLevel.exception) {
+      await Sentry.captureException(
+        record.error,
+        stackTrace: record.stackTrace,
+        hint: Hint.withMap({'data': record.data}),
+        withScope: (scope) => _configureScopeWithRecord(scope, record),
+      );
+    }
+  }
+
+  String _getRecordMessage(LogRecord record) {
     final msgBuilder = StringBuffer();
 
     if (record.moduleName != null) {
@@ -161,29 +188,10 @@ class LoggingService extends BlocObserver {
       msgBuilder.write(record.message);
     }
 
-    final msg = msgBuilder.toString();
-
-    if (msg.isNotEmpty) {
-      await Sentry.addBreadcrumb(
-        Breadcrumb(
-          level: level.sentryLevel,
-          message: msg,
-          data: record.data,
-        ),
-      );
-    }
-
-    if (level >= LoggingLevel.exception) {
-      await Sentry.captureException(
-        record.error,
-        stackTrace: record.stackTrace,
-        hint: Hint.withMap({'data': record.data}),
-        withScope: (scope) => _configureSentryScope(scope, record),
-      );
-    }
+    return msgBuilder.toString();
   }
 
-  Future<void> _configureSentryScope(Scope scope, LogRecord record) async {
+  Future<void> _configureScopeWithRecord(Scope scope, LogRecord record) async {
     await Future.wait(
       {
         ...?record.data,
