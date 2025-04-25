@@ -31,4 +31,7 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
 
   @override
   Uri? get releaseNotesUrl => null;
+
+  @override
+  Json toJson() => {};
 }

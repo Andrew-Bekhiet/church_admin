@@ -169,7 +169,10 @@ class LoggingService extends BlocObserver {
         record.error,
         stackTrace: record.stackTrace,
         hint: Hint.withMap({'data': record.data}),
-        withScope: (scope) => _configureScopeWithRecord(scope, record),
+        withScope: (scope) async {
+          await _configureScopeWithRecord(scope, record);
+          await _configureScopeWithFeatureFlags(scope);
+        },
       );
     }
   }
@@ -200,6 +203,10 @@ class LoggingService extends BlocObserver {
         'eventName': record.eventName,
       }.entries.map((e) => scope.setContexts(e.key, e.value)).toList(),
     );
+  }
+
+  Future<void> _configureScopeWithFeatureFlags(Scope scope) async {
+    await scope.setContexts('Feature Flags', FeatureFlagsRepository.I.toJson());
   }
 
   Future<void> fine(LogRecord record) async {
