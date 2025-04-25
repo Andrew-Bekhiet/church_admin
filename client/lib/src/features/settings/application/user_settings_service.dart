@@ -61,4 +61,6 @@ class UserSettingsService extends BlocObserver {
       setupDefaults();
     }
   }
+
+  Json toJson() => box.toMap().cast<String, dynamic>();
 }

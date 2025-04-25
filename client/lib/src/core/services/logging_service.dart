@@ -19,7 +19,7 @@ class LoggingService extends BlocObserver {
   final NavigatorObserver navigatorObserver = SentryNavigatorObserver();
 
   late final Interceptor dioInterceptor = DioLoggingInterceptor(this);
-  
+
   late final Link loggingLink = LoggingLink(this);
 
   LoggingService({required String sentryDSN}) {
@@ -176,6 +176,7 @@ class LoggingService extends BlocObserver {
         withScope: (scope) async {
           await _configureScopeWithRecord(scope, record);
           await _configureScopeWithFeatureFlags(scope);
+          await _configureScopeWithUserSettings(scope);
         },
       );
     }
@@ -211,6 +212,10 @@ class LoggingService extends BlocObserver {
 
   Future<void> _configureScopeWithFeatureFlags(Scope scope) async {
     await scope.setContexts('Feature Flags', FeatureFlagsRepository.I.toJson());
+  }
+
+  Future<void> _configureScopeWithUserSettings(Scope scope) async {
+    await scope.setContexts('UserSettings', UserSettingsService.I.toJson());
   }
 
   Future<void> fine(LogRecord record) async {
