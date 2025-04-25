@@ -1,24 +1,35 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import './logging_link_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Request>(), MockSpec<Response>()])
+@GenerateNiceMocks(
+  [MockSpec<Request>(), MockSpec<Response>(), MockSpec<LoggingService>()],
+)
 void main() {
   test(
     'Logging Link',
     () async {
-      Object? loggedObject;
+      final loggingService = MockLoggingService();
 
-      void logFn(Object? object) => loggedObject = object;
-
-      final unit = LoggingLink(log: logFn);
+      final unit = LoggingLink(loggingService);
       addTearDown(unit.dispose);
 
       final mockResponse = MockResponse();
       final mockRequest = MockRequest();
+
+      when(mockRequest.operation).thenReturn(
+        const Operation(
+          operationName: 'testOperation',
+          document: DocumentNode(),
+        ),
+      );
+      when(mockRequest.variables).thenReturn({'a': 'b'});
+      when(mockRequest.type).thenReturn(OperationType.query);
 
       final stream = unit.request(
         mockRequest,
@@ -30,7 +41,31 @@ void main() {
       );
 
       await expectLater(stream, emits(mockResponse));
-      expect(loggedObject, mockRequest);
+
+      final verificationResult = verify(loggingService.log(any, captureAny))
+        ..called(1);
+      expect(
+        verificationResult.captured.first,
+        isA<LogRecord>()
+            .having(
+              (r) => r.data,
+              'data.type',
+              containsPair('type', 'query'),
+            )
+            .having(
+              (r) => r.data,
+              'data.operationName',
+              containsPair(
+                'operationName',
+                mockRequest.operation.operationName,
+              ),
+            )
+            .having(
+              (r) => r.data,
+              'data.variables',
+              containsPair('variables', mockRequest.variables),
+            ),
+      );
     },
   );
 }
