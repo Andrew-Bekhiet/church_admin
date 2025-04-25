@@ -171,7 +171,7 @@ class __$$AuthUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AuthUserImpl implements _AuthUser {
+class _$AuthUserImpl extends _AuthUser {
   const _$AuthUserImpl(
       {required this.uid,
       required this.email,
@@ -179,7 +179,8 @@ class _$AuthUserImpl implements _AuthUser {
       required this.idToken,
       @JsonKey(defaultValue: {}) required final Map<String, dynamic> claims,
       this.isMultiFactorEnabled = false})
-      : _claims = claims;
+      : _claims = claims,
+        super._();
 
   factory _$AuthUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthUserImplFromJson(json);
@@ -204,11 +205,6 @@ class _$AuthUserImpl implements _AuthUser {
   @override
   @JsonKey()
   final bool isMultiFactorEnabled;
-
-  @override
-  String toString() {
-    return 'AuthUser(uid: $uid, email: $email, emailVerified: $emailVerified, idToken: $idToken, claims: $claims, isMultiFactorEnabled: $isMultiFactorEnabled)';
-  }
 
   @override
   bool operator ==(Object other) {
@@ -252,7 +248,7 @@ class _$AuthUserImpl implements _AuthUser {
   }
 }
 
-abstract class _AuthUser implements AuthUser {
+abstract class _AuthUser extends AuthUser {
   const factory _AuthUser(
       {required final String uid,
       required final String email,
@@ -260,6 +256,7 @@ abstract class _AuthUser implements AuthUser {
       required final String idToken,
       @JsonKey(defaultValue: {}) required final Map<String, dynamic> claims,
       final bool isMultiFactorEnabled}) = _$AuthUserImpl;
+  const _AuthUser._() : super._();
 
   factory _AuthUser.fromJson(Map<String, dynamic> json) =
       _$AuthUserImpl.fromJson;

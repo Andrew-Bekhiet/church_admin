@@ -168,9 +168,13 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
       if (mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           context,
-          error,
-          stackTrace: stackTrace,
-          data: _userData.toJson(),
+          LogRecord(
+            moduleName: '$UpdateUserSpiritData',
+            eventName: 'updateUserSpiritData',
+            error: error,
+            stackTrace: stackTrace,
+            data: _userData.toJson(),
+          ),
         );
       }
     } finally {

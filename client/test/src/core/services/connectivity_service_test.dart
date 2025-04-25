@@ -14,6 +14,7 @@ import 'connectivity_service_test.mocks.dart';
   MockSpec<Dio>(),
   MockSpec<Response>(),
   MockSpec<SecretsService>(),
+  MockSpec<LoggingService>(),
 ])
 void main() {
   setUp(_setUp);
@@ -28,7 +29,7 @@ void main() {
             .checkConnectivity(),
       ).thenAnswer((_) async => [ConnectivityResult.wifi]);
 
-      final unit = ConnectivityService.I;
+      final unit = _getConnectivityService();
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isTrue));
@@ -60,7 +61,7 @@ void main() {
             .checkConnectivity(),
       ).thenAnswer((_) async => [ConnectivityResult.none]);
 
-      final unit = ConnectivityService.I;
+      final unit = _getConnectivityService();
       addTearDown(unit.dispose);
 
       await expectLater(unit.isConnected(), completion(isFalse));
@@ -99,7 +100,7 @@ void main() {
         ConnectivityResult.mobile: true,
       };
 
-      final unit = ConnectivityService.I;
+      final unit = _getConnectivityService();
       addTearDown(unit.dispose);
 
       expect(
@@ -119,6 +120,18 @@ void main() {
       }
     },
   );
+}
+
+ConnectivityService _getConnectivityService() {
+  final unit = ConnectivityService(
+    dio: globalProviderContainer.read(dioProvider),
+    connectivityPlugin:
+        globalProviderContainer.read(connectivityPluginProvider),
+    loggingService: MockLoggingService(),
+    secretsService: globalProviderContainer.read(secretsServiceProvider),
+  );
+
+  return unit;
 }
 
 Future<void> _setUp() async {

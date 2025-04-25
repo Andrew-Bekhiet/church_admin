@@ -290,8 +290,11 @@ class _LoginScreenState extends State<LoginScreen> {
         if (mounted) {
           await LoggingService.I.showErrorDialogAndReport(
             context,
-            e,
-            stackTrace: stackTrace,
+            LogRecord(
+              error: e,
+              stackTrace: stackTrace,
+              data: {'email': _emailController.text},
+            ),
           );
         }
       }

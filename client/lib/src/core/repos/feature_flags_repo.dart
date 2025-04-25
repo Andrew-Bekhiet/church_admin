@@ -93,4 +93,8 @@ class FeatureFlagsRepository {
       disabledRoutesKey: '',
     });
   }
+
+  Json toJson() => _remoteConfig
+      .getAll()
+      .map((key, value) => MapEntry(key, value.asString()));
 }

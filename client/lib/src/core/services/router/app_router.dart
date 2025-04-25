@@ -41,17 +41,20 @@ final GoRouter $appRouter = GoRouter(
   ],
   errorBuilder: (context, state) {
     if (kReleaseMode) {
-      LoggingService.I.reportError(
-        state.error,
-        hints: {'location': state.uri.toString()},
+      LoggingService.I.error(
+        LogRecord(
+          error: state.error,
+          data: {
+            'location': state.uri.toString(),
+            'extra': state.extra.toString(),
+          },
+        ),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: () => context.go('/'),
-        ),
+        leading: BackButton(onPressed: () => context.go('/')),
         title: Text(
           'حدث خطأ',
           style: TextStyle(
@@ -60,9 +63,7 @@ final GoRouter $appRouter = GoRouter(
         ),
         backgroundColor: Theme.of(context).colorScheme.errorContainer,
       ),
-      body: ErrorWidget.builder(
-        FlutterErrorDetails(exception: state.error!),
-      ),
+      body: ErrorWidget.builder(FlutterErrorDetails(exception: state.error!)),
     );
   },
 );

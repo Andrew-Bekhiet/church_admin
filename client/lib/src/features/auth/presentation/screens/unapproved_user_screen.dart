@@ -108,9 +108,11 @@ class _UnapprovedUserScreenState extends State<UnapprovedUserScreen> {
       if (navigator.mounted) {
         await LoggingService.I.showErrorDialogAndReport(
           navigator.context,
-          e,
-          stackTrace: stackTrace,
-          data: {'registerCode': registerCode},
+          LogRecord(
+            error: e,
+            stackTrace: stackTrace,
+            data: {'registerCode': registerCode},
+          ),
         );
       }
     }

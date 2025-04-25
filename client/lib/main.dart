@@ -19,9 +19,7 @@ Future<void> main() async {
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
-      child: const SentryWidget(
-        child: ChurchAdminApp(),
-      ),
+      child: SentryWidget(child: const ChurchAdminApp()),
     ),
   );
 

@@ -84,29 +84,33 @@ final Provider<DatabaseService> databaseServiceProvider =
 );
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
-  (ref) => DBGraphQLClient(
-    defaultPolicies: DefaultPolicies(
-      query: Policies(fetch: FetchPolicy.cacheAndNetwork),
-      watchQuery: Policies(fetch: FetchPolicy.cacheAndNetwork),
-      subscribe: Policies(fetch: FetchPolicy.cacheAndNetwork),
-    ),
-    link: Link.concat(
-      const LoggingLink(),
-      AddAuthLink(
-        idTokenStream: ref
-            .watch(authStorageProvider)
-            .getAuthDataFromCache()
-            .asStream()
-            .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
-          (u) => u?.idToken,
-        ),
-        url: ref.watch(secretsServiceProvider).hasuraServer,
+  (ref) {
+    final loggingService = ref.read(loggingServiceProvider);
+
+    return DBGraphQLClient(
+      defaultPolicies: DefaultPolicies(
+        query: Policies(fetch: FetchPolicy.cacheAndNetwork),
+        watchQuery: Policies(fetch: FetchPolicy.cacheAndNetwork),
+        subscribe: Policies(fetch: FetchPolicy.cacheAndNetwork),
       ),
-    ),
-    cache: GraphQLCache(store: ref.watch(graphQLCacheStore)),
-    connectivityStream:
-        ref.watch(connectivityServiceProvider).connectivityStream,
-  ),
+      link: Link.concat(
+        loggingService.loggingLink,
+        AddAuthLink(
+          idTokenStream: ref
+              .watch(authStorageProvider)
+              .getAuthDataFromCache()
+              .asStream()
+              .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
+            (u) => u?.idToken,
+          ),
+          url: ref.watch(secretsServiceProvider).hasuraServer,
+        ),
+      ),
+      cache: GraphQLCache(store: ref.watch(graphQLCacheStore)),
+      connectivityStream:
+          ref.watch(connectivityServiceProvider).connectivityStream,
+    );
+  },
 );
 
 final graphQLCacheStore = Provider<HiveStore>(
@@ -148,7 +152,8 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
 });
 
 final loggingServiceProvider = Provider<LoggingService>(
-  (ref) => LoggingService(),
+  (ref) =>
+      LoggingService(sentryDSN: ref.watch(secretsServiceProvider).sentryDSN),
 );
 
 final userSettingsServiceProvider = Provider<UserSettingsService>(
@@ -172,7 +177,17 @@ final featureFlagsRepoProvider = Provider<FeatureFlagsRepository>(
   ),
 );
 
-final dioProvider = Provider((_) => Dio());
+final dioProvider = Provider(
+  (ref) {
+    final dio = Dio();
+    ref.onDispose(dio.close);
+
+    final loggingService = ref.read(loggingServiceProvider);
+    dio.interceptors.add(loggingService.dioInterceptor);
+
+    return dio;
+  },
+);
 
 final functionsServiceProvider = Provider<FunctionsService>(
   (ref) => FunctionsService(dio: ref.watch(dioProvider)),
@@ -401,5 +416,6 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
   (ref) => HomeDailyDataBloc(
     homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+    advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
   ),
 );
