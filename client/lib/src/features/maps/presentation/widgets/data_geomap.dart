@@ -67,7 +67,7 @@ class DataGeomapState extends State<DataGeomap> {
   late final _userLocationStream =
       const LocationMarkerDataStreamFactory().fromGeolocatorPositionStream();
   late final _userLocationHeadingStream =
-      const LocationMarkerDataStreamFactory().fromCompassHeadingStream();
+      const LocationMarkerDataStreamFactory().fromRotationSensorHeadingStream();
 
   @override
   Widget build(BuildContext context) {
