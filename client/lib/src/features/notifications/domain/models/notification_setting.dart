@@ -1,25 +1,16 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'notification_setting.freezed.dart';
 part 'notification_setting.g.dart';
 
-@immutable
-@HiveType(typeId: 2)
-class NotificationSetting extends Equatable {
-  @HiveField(0)
-  final int hours;
-  @HiveField(1)
-  final int minutes;
-  @HiveField(2)
-  final int intervalInDays;
+@freezed
+abstract class NotificationSetting with _$NotificationSetting {
+  const factory NotificationSetting({
+    required int hours,
+    required int minutes,
+    required int intervalInDays,
+  }) = _NotificationSetting;
 
-  const NotificationSetting(this.hours, this.minutes, this.intervalInDays);
-
-  @override
-  List<Object?> get props => [
-        hours,
-        minutes,
-        intervalInDays,
-      ];
+  factory NotificationSetting.fromJson(Map<String, dynamic> json) =>
+      _$NotificationSettingFromJson(json);
 }

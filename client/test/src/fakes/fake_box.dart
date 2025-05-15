@@ -1,19 +1,50 @@
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mockito/mockito.dart';
+import 'package:church_admin/church_admin.dart';
 
-class FakeBox<T> extends Fake implements Box<T> {
-  final Map<String, dynamic> _box = {};
+class FakeSyncKVStore<T> implements SyncKVStore<T> {
+  FakeSyncKVStore();
 
-  FakeBox();
-
-  @override
-  bool get isOpen => true;
+  final Map<String, T> _map = {};
 
   @override
-  T? get(dynamic key, {T? defaultValue}) => _box[key] ?? defaultValue;
+  Future<void> clear() async {
+    _map.clear();
+  }
 
   @override
-  Future<void> put(dynamic key, T? value) async {
-    _box[key] = value;
+  Future<void> close() async {}
+
+  @override
+  Future<void> delete(String key) async {
+    _map.remove(key);
+  }
+
+  @override
+  T? get(String key) {
+    return _map[key];
+  }
+
+  @override
+  Future<void> put(String key, T? value) async {
+    if (value == null) {
+      _map.remove(key);
+    } else {
+      _map[key] = value;
+    }
+  }
+
+  @override
+  Future<void> putAll(Map<String, T?> values) async {
+    for (final entry in values.entries) {
+      if (entry.value == null) {
+        _map.remove(entry.key);
+      } else {
+        _map[entry.key] = entry.value as T;
+      }
+    }
+  }
+
+  @override
+  Map<String, T> toMap() {
+    return _map;
   }
 }

@@ -5,14 +5,14 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:cryptography_flutter_plus/cryptography_flutter_plus.dart';
-import 'package:cryptography_plus/cryptography_plus.dart';
+import 'package:cryptography_plus/cryptography_plus.dart' hide SecureRandom;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:pointycastle/export.dart';
+import 'package:sembast/sembast.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-abstract class EncryptionService {
+class EncryptionService {
   static EncryptionService get I =>
       globalProviderContainer.read(encryptionServiceProvider);
 
@@ -141,5 +141,32 @@ abstract class EncryptionService {
     return Uint8List.fromList(computedInfo);
   }
 
-  Future<HiveCipher> getHiveCipher({String? boxName});
+  Future<SembastCodec> getSembastCodec(String dbName) async {
+    final keyName = '$dbName.key';
+
+    final secureStorage = globalProviderContainer.read(secureStorageProvider);
+
+    if (!await secureStorage.containsKey(key: keyName)) {
+      await secureStorage.write(
+        key: keyName,
+        value: base64Url.encode(
+          SecureRandom().nextBytes(32),
+        ),
+      );
+    }
+
+    return SembastCodec(
+      codec: ChurchAdminSembastCodec(
+        key: Uint8List.fromList(
+          base64Url
+                  .decode(
+                    (await secureStorage.read(key: keyName))!,
+                  )
+                  .sublist(0, 16) +
+              (await additionalDeviceInfo()).sublist(0, 16),
+        ),
+      ),
+      signature: keyName,
+    );
+  }
 }

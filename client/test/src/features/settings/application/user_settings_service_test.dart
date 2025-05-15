@@ -9,7 +9,7 @@ void main() {
   test(
     'UserSettingsService => darkTheme',
     () async {
-      final unit = UserSettingsService(box: FakeBox());
+      final unit = UserSettingsService(box: FakeSyncKVStore());
 
       expect(unit.darkTheme, isNull);
 
@@ -26,7 +26,7 @@ void main() {
   test(
     'UserSettingsService => registeredFCMToken',
     () async {
-      final unit = UserSettingsService(box: FakeBox());
+      final unit = UserSettingsService(box: FakeSyncKVStore());
 
       expect(unit.registeredFCMToken, isNull);
 
@@ -40,7 +40,7 @@ void main() {
   test(
     'UserSettingsService => greatFeastTheme',
     () async {
-      final unit = UserSettingsService(box: FakeBox());
+      final unit = UserSettingsService(box: FakeSyncKVStore());
 
       expect(unit.greatFeastTheme, isTrue);
 
@@ -54,7 +54,7 @@ void main() {
   test(
     'UserSettingsService => getSecondLineFor',
     () async {
-      final unit = UserSettingsService(box: FakeBox());
+      final unit = UserSettingsService(box: FakeSyncKVStore());
 
       expect(unit.getSecondLineFor(PhoneNumberService), isNull);
 

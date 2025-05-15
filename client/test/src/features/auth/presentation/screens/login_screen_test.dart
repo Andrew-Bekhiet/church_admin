@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -23,7 +23,6 @@ import 'login_screen_test.mocks.dart';
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
   MockSpec<UserSettingsService>(),
-  MockSpec<HiveInterface>(),
   MockSpec<NotificationsService>(),
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),

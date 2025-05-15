@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -9,7 +8,9 @@ import 'package:mockito/mockito.dart';
 import '../../../utils.dart';
 import 'home_daily_data_repository_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Box<Map>>()])
+@GenerateNiceMocks([
+  MockSpec<SyncKVStore<Map>>(),
+])
 void main() {
   const testVersesData = ['verse 1', 'verse 2'];
   const testSayingData = ['saying 1', 'saying 2'];
@@ -33,7 +34,7 @@ void main() {
 
   group('getVerse, getSaying', () {
     test('returns cached verse when available', () {
-      final mockBox = MockBox();
+      final mockBox = MockSyncKVStore();
       when(mockBox.get(dateKey)).thenReturn({'verse': 0, 'saying': 1});
 
       final unit = HomeDailyDataRepository(
@@ -51,10 +52,12 @@ void main() {
     });
 
     test('generates new verse when forced', () {
-      final mockBox = MockBox();
+      final mockBox = MockSyncKVStore();
 
       when(mockBox.get(dateKey)).thenReturn({'verse': 0, 'saying': 1});
-      when(mockBox.put(any, any)).thenAnswer((_) async {});
+      when(mockBox.put(any, any)).thenAnswer((_) async {
+        return;
+      });
 
       final unit = HomeDailyDataRepository(
         currentIndexes: mockBox,
@@ -77,18 +80,16 @@ void main() {
 
       HomeDailyDataRepository createUnit(DateTime now) =>
           HomeDailyDataRepository(
-            currentIndexes: MockBox(),
+            currentIndexes: MockSyncKVStore(),
             versesData: testVersesData,
             sayingData: testSayingData,
             sneksarData: testSneksarData,
             clock: Clock.fixed(now),
           );
 
-      for (
-        var (date, i) = (DateTime(2022, 9, 11), 0);
-        i < 366;
-        date = date.add(const Duration(days: 1)), i++
-      ) {
+      for (var (date, i) = (DateTime(2022, 9, 11), 0);
+          i < 366;
+          date = date.add(const Duration(days: 1)), i++) {
         final sneksar = createUnit(date).getTodaysSneksar();
 
         expect(sneksar, contains(kRawSneksarData[i].trim()));
@@ -98,7 +99,7 @@ void main() {
 
   group('_maybeGenerateIndexes', () {
     test('generates new data when cache miss', () {
-      final mockBox = MockBox();
+      final mockBox = MockSyncKVStore();
 
       dynamic savedValue;
 

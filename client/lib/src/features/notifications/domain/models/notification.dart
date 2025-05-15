@@ -1,26 +1,22 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'notification.freezed.dart';
 part 'notification.g.dart';
 
 @immutable
 @freezed
-@HiveType(typeId: 0)
-class Notification with _$Notification {
+abstract class Notification with _$Notification {
   const factory Notification({
-    @HiveField(0) required String id,
-    @HiveField(1) required String title,
-    @HiveField(2) required String body,
-    @HiveField(3) required DateTime sentTime,
-    @HiveField(4) required String senderUID,
-    @HiveField(5) String? imageURL,
-    @HiveField(6, defaultValue: NotificationType.remote)
-    @Default(NotificationType.remote)
-    NotificationType type,
-    @HiveField(7) Json? additionalData,
+    required String id,
+    required String title,
+    required String body,
+    required DateTime sentTime,
+    required String senderUID,
+    String? imageURL,
+    @Default(NotificationType.remote) NotificationType type,
+    Json? additionalData,
   }) = _Notification;
 
   factory Notification.fromJson(Map<String, Object?> json) =>
@@ -61,12 +57,4 @@ class Notification with _$Notification {
   }
 }
 
-@HiveType(typeId: 1)
-enum NotificationType {
-  @HiveField(0)
-  local,
-  @HiveField(1, defaultValue: true)
-  remote,
-  @HiveField(2)
-  manualPushRemote
-}
+enum NotificationType { local, remote, manualPushRemote }

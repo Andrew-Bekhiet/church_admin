@@ -64,7 +64,6 @@ jobs:
         working-directory: client
         run: |
           cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
-          cp --force lib/src/core/services/encryption/encryption_service_ci_impl.dart lib/src/core/services/encryption/encryption_service_impl.dart
           cp --force lib/src/core/services/secrets/secrets_service_ci_impl.dart lib/src/core/services/secrets/secrets_service_impl.dart
 
       - name: Install dependencies
@@ -185,11 +184,9 @@ jobs:
         working-directory: client
         env:
           FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
           SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
         run: |
           echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
-          echo $ENCRYPTION_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/encryption/encryption_service_impl.dart
           echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
 
       - name: Decode and save android secrets
@@ -336,11 +333,9 @@ jobs:
         working-directory: client
         env:
           FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          ENCRYPTION_SERVICE_DART: ${{ secrets.ENCRYPTION_SERVICE_DART }}
           SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
         run: |
           echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
-          echo $ENCRYPTION_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/encryption/encryption_service_impl.dart
           echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
 
       - name: Install dependencies

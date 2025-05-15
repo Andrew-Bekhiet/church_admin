@@ -2,14 +2,13 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class UserSettingsService extends BlocObserver {
   static UserSettingsService get I =>
       globalProviderContainer.read(userSettingsServiceProvider);
-  final Box box;
+  final SyncKVStore box;
 
-  UserSettingsService({required this.box}) : assert(box.isOpen);
+  UserSettingsService({required this.box});
 
   bool? get darkTheme => box.get('darkTheme');
   Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
@@ -18,7 +17,7 @@ class UserSettingsService extends BlocObserver {
   Future<void> setRegisteredFCMToken(String? value) =>
       box.put('registeredFCMToken', value);
 
-  bool get greatFeastTheme => box.get('greatFeastTheme', defaultValue: true)!;
+  bool get greatFeastTheme => box.get('greatFeastTheme') ?? true;
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 

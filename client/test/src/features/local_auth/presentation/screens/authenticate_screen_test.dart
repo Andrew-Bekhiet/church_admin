@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:sembast/sembast.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_device_info.dart';
@@ -415,11 +415,6 @@ void _setUpDeviceInfo() {
 
 class FakeEncryptionService extends EncryptionService {
   @override
-  Future<HiveCipher> getHiveCipher({String? boxName}) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<String> hashPassword({
     required String password,
     required Uint8List keyBytes,
@@ -442,5 +437,10 @@ class FakeEncryptionService extends EncryptionService {
     required String? storedPasswordHash,
   }) async {
     return passwordToVerify == testPassword;
+  }
+
+  @override
+  Future<SembastCodec> getSembastCodec(String dbName) {
+    throw UnimplementedError();
   }
 }

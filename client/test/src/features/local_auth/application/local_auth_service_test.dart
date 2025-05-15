@@ -11,9 +11,10 @@ import 'package:riverpod/riverpod.dart';
 
 import 'local_auth_service_test.mocks.dart';
 
-@GenerateMocks(
-  [NotificationsService, AuthBloc],
-  customMocks: [
+@GenerateNiceMocks(
+  [
+    MockSpec<NotificationsService>(),
+    MockSpec<AuthBloc>(),
     MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
   ],
 )
