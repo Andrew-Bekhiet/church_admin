@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,43 +10,78 @@ part of 'street.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Street _$StreetFromJson(Map<String, dynamic> json) {
-  return _Street.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Street {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
-  Line? get line => throw _privateConstructorUsedError;
+  Line? get line;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-  DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  String? get blurhash => throw _privateConstructorUsedError;
+  Color? get color;
+  DateTime? get photoUpdatedAt;
+  String? get blurhash;
   @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-  List<Area>? get areas => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
-
-  /// Serializes this Street to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<Area>? get areas;
+  LastRecordedByInfo? get lastVisit;
+  LastRecordedByInfo? get lastEdit;
 
   /// Create a copy of Street
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $StreetCopyWith<Street> get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $StreetCopyWith<Street> get copyWith =>
+      _$StreetCopyWithImpl<Street>(this as Street, _$identity);
+
+  /// Serializes this Street to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Street &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.line, line) || other.line == line) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
+            const DeepCollectionEquality().equals(other.areas, areas) &&
+            (identical(other.lastVisit, lastVisit) ||
+                other.lastVisit == lastVisit) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      line,
+      color,
+      photoUpdatedAt,
+      blurhash,
+      const DeepCollectionEquality().hash(areas),
+      lastVisit,
+      lastEdit);
+
+  @override
+  String toString() {
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit)';
+  }
 }
 
 /// @nodoc
-abstract class $StreetCopyWith<$Res> {
-  factory $StreetCopyWith(Street value, $Res Function(Street) then) =
-      _$StreetCopyWithImpl<$Res, Street>;
+abstract mixin class $StreetCopyWith<$Res> {
+  factory $StreetCopyWith(Street value, $Res Function(Street) _then) =
+      _$StreetCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -64,14 +100,11 @@ abstract class $StreetCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StreetCopyWithImpl<$Res, $Val extends Street>
-    implements $StreetCopyWith<$Res> {
-  _$StreetCopyWithImpl(this._value, this._then);
+class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
+  _$StreetCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Street _self;
+  final $Res Function(Street) _then;
 
   /// Create a copy of Street
   /// with the given fields replaced by the non-null parameter values.
@@ -88,44 +121,44 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
     Object? lastVisit = freezed,
     Object? lastEdit = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       line: freezed == line
-          ? _value.line
+          ? _self.line
           : line // ignore: cast_nullable_to_non_nullable
               as Line?,
       color: freezed == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
       photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
+          ? _self.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blurhash: freezed == blurhash
-          ? _value.blurhash
+          ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
       areas: freezed == areas
-          ? _value.areas
+          ? _self.areas
           : areas // ignore: cast_nullable_to_non_nullable
               as List<Area>?,
       lastVisit: freezed == lastVisit
-          ? _value.lastVisit
+          ? _self.lastVisit
           : lastVisit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
-          ? _value.lastEdit
+          ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of Street
@@ -133,12 +166,12 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
-    if (_value.lastVisit == null) {
+    if (_self.lastVisit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastVisit!, (value) {
-      return _then(_value.copyWith(lastVisit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
     });
   }
 
@@ -147,109 +180,20 @@ class _$StreetCopyWithImpl<$Res, $Val extends Street>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
-    if (_value.lastEdit == null) {
+    if (_self.lastEdit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$StreetImplCopyWith<$Res> implements $StreetCopyWith<$Res> {
-  factory _$$StreetImplCopyWith(
-          _$StreetImpl value, $Res Function(_$StreetImpl) then) =
-      __$$StreetImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-      List<Area>? areas,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit});
-
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-}
-
-/// @nodoc
-class __$$StreetImplCopyWithImpl<$Res>
-    extends _$StreetCopyWithImpl<$Res, _$StreetImpl>
-    implements _$$StreetImplCopyWith<$Res> {
-  __$$StreetImplCopyWithImpl(
-      _$StreetImpl _value, $Res Function(_$StreetImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Street
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? line = freezed,
-    Object? color = freezed,
-    Object? photoUpdatedAt = freezed,
-    Object? blurhash = freezed,
-    Object? areas = freezed,
-    Object? lastVisit = freezed,
-    Object? lastEdit = freezed,
-  }) {
-    return _then(_$StreetImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      line: freezed == line
-          ? _value.line
-          : line // ignore: cast_nullable_to_non_nullable
-              as Line?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _value.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      areas: freezed == areas
-          ? _value._areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      lastVisit: freezed == lastVisit
-          ? _value.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastEdit: freezed == lastEdit
-          ? _value.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$StreetImpl extends _Street {
-  _$StreetImpl(
+class _Street extends Street {
+  _Street(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: lineFromJson, toJson: lineToJson) this.line,
@@ -262,9 +206,7 @@ class _$StreetImpl extends _Street {
       this.lastEdit})
       : _areas = areas,
         super._();
-
-  factory _$StreetImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StreetImplFromJson(json);
+  factory _Street.fromJson(Map<String, dynamic> json) => _$StreetFromJson(json);
 
   @override
   final String id;
@@ -296,16 +238,26 @@ class _$StreetImpl extends _Street {
   @override
   final LastRecordedByInfo? lastEdit;
 
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$StreetCopyWith<_Street> get copyWith =>
+      __$StreetCopyWithImpl<_Street>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$StreetToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StreetImpl &&
+            other is _Street &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.line, line) || other.line == line) &&
@@ -335,64 +287,125 @@ class _$StreetImpl extends _Street {
       lastVisit,
       lastEdit);
 
-  /// Create a copy of Street
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
-      __$$StreetImplCopyWithImpl<_$StreetImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StreetImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit)';
   }
 }
 
-abstract class _Street extends Street {
-  factory _Street(
-      {required final String id,
-      required final String name,
-      @JsonKey(fromJson: lineFromJson, toJson: lineToJson) final Line? line,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt,
-      final String? blurhash,
+/// @nodoc
+abstract mixin class _$StreetCopyWith<$Res> implements $StreetCopyWith<$Res> {
+  factory _$StreetCopyWith(_Street value, $Res Function(_Street) _then) =
+      __$StreetCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      DateTime? photoUpdatedAt,
+      String? blurhash,
       @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-      final List<Area>? areas,
-      final LastRecordedByInfo? lastVisit,
-      final LastRecordedByInfo? lastEdit}) = _$StreetImpl;
-  _Street._() : super._();
-
-  factory _Street.fromJson(Map<String, dynamic> json) = _$StreetImpl.fromJson;
+      List<Area>? areas,
+      LastRecordedByInfo? lastVisit,
+      LastRecordedByInfo? lastEdit});
 
   @override
-  String get id;
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   @override
-  String get name;
-  @override
-  @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
-  Line? get line;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
-  @override
-  DateTime? get photoUpdatedAt;
-  @override
-  String? get blurhash;
-  @override
-  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-  List<Area>? get areas;
-  @override
-  LastRecordedByInfo? get lastVisit;
-  @override
-  LastRecordedByInfo? get lastEdit;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+}
+
+/// @nodoc
+class __$StreetCopyWithImpl<$Res> implements _$StreetCopyWith<$Res> {
+  __$StreetCopyWithImpl(this._self, this._then);
+
+  final _Street _self;
+  final $Res Function(_Street) _then;
 
   /// Create a copy of Street
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StreetImplCopyWith<_$StreetImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? line = freezed,
+    Object? color = freezed,
+    Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
+    Object? areas = freezed,
+    Object? lastVisit = freezed,
+    Object? lastEdit = freezed,
+  }) {
+    return _then(_Street(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      line: freezed == line
+          ? _self.line
+          : line // ignore: cast_nullable_to_non_nullable
+              as Line?,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+      photoUpdatedAt: freezed == photoUpdatedAt
+          ? _self.photoUpdatedAt
+          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blurhash: freezed == blurhash
+          ? _self.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      areas: freezed == areas
+          ? _self._areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as List<Area>?,
+      lastVisit: freezed == lastVisit
+          ? _self.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      lastEdit: freezed == lastEdit
+          ? _self.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+    ));
+  }
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Street
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
 }
+
+// dart format on

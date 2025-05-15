@@ -28,13 +28,13 @@ final _$ShammasLevelFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ShammasLevelImpl _$$ShammasLevelImplFromJson(Map json) => _$ShammasLevelImpl(
+_ShammasLevel _$ShammasLevelFromJson(Map json) => _ShammasLevel(
       order: (json['order'] as num).toInt(),
       name: json['name'] as String,
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$ShammasLevelImplToJson(_$ShammasLevelImpl instance) =>
+Map<String, dynamic> _$ShammasLevelToJson(_ShammasLevel instance) =>
     <String, dynamic>{
       'order': instance.order,
       'name': instance.name,

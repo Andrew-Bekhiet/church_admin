@@ -23,14 +23,13 @@ final _$CollegeFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CollegeImpl _$$CollegeImplFromJson(Map json) => _$CollegeImpl(
+_College _$CollegeFromJson(Map json) => _College(
       id: json['id'] as String,
       name: json['name'] as String,
       universityId: json['universityId'] as String?,
     );
 
-Map<String, dynamic> _$$CollegeImplToJson(_$CollegeImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CollegeToJson(_College instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'universityId': instance.universityId,

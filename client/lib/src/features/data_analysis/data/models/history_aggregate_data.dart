@@ -7,7 +7,7 @@ part 'history_aggregate_data.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['nodes'])
-class HistoryAggregateData with _$HistoryAggregateData {
+abstract class HistoryAggregateData with _$HistoryAggregateData {
   static Map<String, FieldMetadata> get fieldsMetadata =>
       _$HistoryAggregateDataFields;
 

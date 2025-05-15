@@ -65,7 +65,7 @@ final _$AddressFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AddressImpl _$$AddressImplFromJson(Map json) => _$AddressImpl(
+_Address _$AddressFromJson(Map json) => _Address(
       id: json['id'] as String?,
       countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
       district: json['district'] == null
@@ -92,8 +92,7 @@ _$AddressImpl _$$AddressImplFromJson(Map json) => _$AddressImpl(
           : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
     );
 
-Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AddressToJson(_Address instance) => <String, dynamic>{
       'id': instance.id,
       'countryIsoCode': instance.countryIsoCode,
       'district': instance.district?.toJson(),

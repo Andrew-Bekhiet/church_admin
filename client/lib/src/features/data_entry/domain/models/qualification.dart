@@ -7,7 +7,7 @@ part 'qualification.g.dart';
 
 @freezed
 @TypeMetadata()
-class Qualification extends ViewableWithID
+abstract class Qualification extends ViewableWithID
     with _$Qualification
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$QualificationFields;

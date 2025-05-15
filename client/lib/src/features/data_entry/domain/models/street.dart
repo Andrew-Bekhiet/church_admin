@@ -8,7 +8,7 @@ part 'street.g.dart';
 
 @freezed
 @TypeMetadata()
-class Street extends ViewableWithIDAndImage
+abstract class Street extends ViewableWithIDAndImage
     with _$Street
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$StreetFields;

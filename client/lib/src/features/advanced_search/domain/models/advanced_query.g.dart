@@ -6,8 +6,7 @@ part of 'advanced_query.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AdvancedQueryImpl _$$AdvancedQueryImplFromJson(Map json) =>
-    _$AdvancedQueryImpl(
+_AdvancedQuery _$AdvancedQueryFromJson(Map json) => _AdvancedQuery(
       name: json['name'] as String,
       queryableType: queryableTypeFromJson(json['queryableType'] as String),
       conditions: json['conditions'] == null
@@ -22,7 +21,7 @@ _$AdvancedQueryImpl _$$AdvancedQueryImplFromJson(Map json) =>
       limit: (json['limit'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$AdvancedQueryImplToJson(_$AdvancedQueryImpl instance) =>
+Map<String, dynamic> _$AdvancedQueryToJson(_AdvancedQuery instance) =>
     <String, dynamic>{
       'name': instance.name,
       'queryableType': queryableTypeToJson(instance.queryableType),

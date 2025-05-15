@@ -9,7 +9,7 @@ part 'person_state.g.dart';
 
 @freezed
 @TypeMetadata()
-class PersonState extends ViewableWithID
+abstract class PersonState extends ViewableWithID
     with _$PersonState
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$PersonStateFields;

@@ -8,7 +8,7 @@ part 'store.g.dart';
 
 @freezed
 @TypeMetadata()
-class Store extends ViewableWithIDAndImage
+abstract class Store extends ViewableWithIDAndImage
     with _$Store
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$StoreFields;
@@ -45,18 +45,17 @@ class Store extends ViewableWithIDAndImage
   String get typeName => Store.queryableType.name;
 
   Input_StoresInsertInput toInsertInput() => Input_StoresInsertInput(
-    name: name,
-    address:
-        address != null
+        name: name,
+        address: address != null
             ? Input_AddressesObjRelInsertInput(data: address!.toInsertInput())
             : null,
-    adminFamily: familyId?.toUuid(),
-    color: colorToInt(color),
-  );
+        adminFamily: familyId?.toUuid(),
+        color: colorToInt(color),
+      );
 
   Input_StoresSetInput toUpdateInput(Store oldStore) => Input_StoresSetInput(
-    name: name != oldStore.name ? name : null,
-    adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
-    color: color != oldStore.color ? colorToInt(color) : null,
-  );
+        name: name != oldStore.name ? name : null,
+        adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
+        color: color != oldStore.color ? colorToInt(color) : null,
+      );
 }

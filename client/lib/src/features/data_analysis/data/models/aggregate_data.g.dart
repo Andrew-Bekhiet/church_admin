@@ -26,8 +26,7 @@ final _$AggregateDataFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AggregateDataImpl _$$AggregateDataImplFromJson(Map json) =>
-    _$AggregateDataImpl(
+_AggregateData _$AggregateDataFromJson(Map json) => _AggregateData(
       count: (json['count'] as num?)?.toInt(),
       max: _readLastRecordedByInfo(json, 'max') == null
           ? null
@@ -39,7 +38,7 @@ _$AggregateDataImpl _$$AggregateDataImplFromJson(Map json) =>
               _readLastRecordedByInfo(json, 'min') as Map)),
     );
 
-Map<String, dynamic> _$$AggregateDataImplToJson(_$AggregateDataImpl instance) =>
+Map<String, dynamic> _$AggregateDataToJson(_AggregateData instance) =>
     <String, dynamic>{
       'count': instance.count,
       'max': instance.max?.toJson(),

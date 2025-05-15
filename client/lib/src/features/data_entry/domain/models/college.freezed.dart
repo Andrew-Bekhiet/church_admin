@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,144 +10,30 @@ part of 'college.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-College _$CollegeFromJson(Map<String, dynamic> json) {
-  return _College.fromJson(json);
-}
 
 /// @nodoc
 mixin _$College {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get universityId => throw _privateConstructorUsedError;
-
-  /// Serializes this College to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String? get universityId;
 
   /// Create a copy of College
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CollegeCopyWith<College> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CollegeCopyWith<$Res> {
-  factory $CollegeCopyWith(College value, $Res Function(College) then) =
-      _$CollegeCopyWithImpl<$Res, College>;
-  @useResult
-  $Res call({String id, String name, String? universityId});
-}
-
-/// @nodoc
-class _$CollegeCopyWithImpl<$Res, $Val extends College>
-    implements $CollegeCopyWith<$Res> {
-  _$CollegeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? universityId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      universityId: freezed == universityId
-          ? _value.universityId
-          : universityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
+  $CollegeCopyWith<College> get copyWith =>
+      _$CollegeCopyWithImpl<College>(this as College, _$identity);
 
-/// @nodoc
-abstract class _$$CollegeImplCopyWith<$Res> implements $CollegeCopyWith<$Res> {
-  factory _$$CollegeImplCopyWith(
-          _$CollegeImpl value, $Res Function(_$CollegeImpl) then) =
-      __$$CollegeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String id, String name, String? universityId});
-}
-
-/// @nodoc
-class __$$CollegeImplCopyWithImpl<$Res>
-    extends _$CollegeCopyWithImpl<$Res, _$CollegeImpl>
-    implements _$$CollegeImplCopyWith<$Res> {
-  __$$CollegeImplCopyWithImpl(
-      _$CollegeImpl _value, $Res Function(_$CollegeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? universityId = freezed,
-  }) {
-    return _then(_$CollegeImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      universityId: freezed == universityId
-          ? _value.universityId
-          : universityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CollegeImpl extends _College {
-  _$CollegeImpl({required this.id, required this.name, this.universityId})
-      : super._();
-
-  factory _$CollegeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CollegeImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String? universityId;
-
-  @override
-  String toString() {
-    return 'College(id: $id, name: $name, universityId: $universityId)';
-  }
+  /// Serializes this College to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CollegeImpl &&
+            other is College &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.universityId, universityId) ||
@@ -157,42 +44,144 @@ class _$CollegeImpl extends _College {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, universityId);
 
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
-      __$$CollegeImplCopyWithImpl<_$CollegeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CollegeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'College(id: $id, name: $name, universityId: $universityId)';
   }
 }
 
-abstract class _College extends College {
-  factory _College(
-      {required final String id,
-      required final String name,
-      final String? universityId}) = _$CollegeImpl;
-  _College._() : super._();
+/// @nodoc
+abstract mixin class $CollegeCopyWith<$Res> {
+  factory $CollegeCopyWith(College value, $Res Function(College) _then) =
+      _$CollegeCopyWithImpl;
+  @useResult
+  $Res call({String id, String name, String? universityId});
+}
 
-  factory _College.fromJson(Map<String, dynamic> json) = _$CollegeImpl.fromJson;
+/// @nodoc
+class _$CollegeCopyWithImpl<$Res> implements $CollegeCopyWith<$Res> {
+  _$CollegeCopyWithImpl(this._self, this._then);
+
+  final College _self;
+  final $Res Function(College) _then;
+
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? universityId = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      universityId: freezed == universityId
+          ? _self.universityId
+          : universityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _College extends College {
+  _College({required this.id, required this.name, this.universityId})
+      : super._();
+  factory _College.fromJson(Map<String, dynamic> json) =>
+      _$CollegeFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
-  String? get universityId;
+  final String? universityId;
 
   /// Create a copy of College
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CollegeImplCopyWith<_$CollegeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$CollegeCopyWith<_College> get copyWith =>
+      __$CollegeCopyWithImpl<_College>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CollegeToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _College &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.universityId, universityId) ||
+                other.universityId == universityId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, universityId);
+
+  @override
+  String toString() {
+    return 'College(id: $id, name: $name, universityId: $universityId)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$CollegeCopyWith<$Res> implements $CollegeCopyWith<$Res> {
+  factory _$CollegeCopyWith(_College value, $Res Function(_College) _then) =
+      __$CollegeCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, String name, String? universityId});
+}
+
+/// @nodoc
+class __$CollegeCopyWithImpl<$Res> implements _$CollegeCopyWith<$Res> {
+  __$CollegeCopyWithImpl(this._self, this._then);
+
+  final _College _self;
+  final $Res Function(_College) _then;
+
+  /// Create a copy of College
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? universityId = freezed,
+  }) {
+    return _then(_College(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      universityId: freezed == universityId
+          ? _self.universityId
+          : universityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

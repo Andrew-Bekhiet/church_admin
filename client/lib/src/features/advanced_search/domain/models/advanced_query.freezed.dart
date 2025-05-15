@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,118 +10,75 @@ part of 'advanced_query.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AdvancedQuery _$AdvancedQueryFromJson(Map<String, dynamic> json) {
-  return _AdvancedQuery.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AdvancedQuery {
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  QueryableType<Object> get queryableType => throw _privateConstructorUsedError;
+  QueryableType get queryableType;
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-  List<Condition> get conditions => throw _privateConstructorUsedError;
-  LogicalOperator get logicalOperator => throw _privateConstructorUsedError;
+  List<Condition> get conditions;
+  LogicalOperator get logicalOperator;
   @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-  List<OrderBy> get orderBy => throw _privateConstructorUsedError;
-  int? get limit => throw _privateConstructorUsedError;
-
-  /// Serializes this AdvancedQuery to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<OrderBy> get orderBy;
+  int? get limit;
 
   /// Create a copy of AdvancedQuery
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AdvancedQueryCopyWith<AdvancedQuery> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AdvancedQueryCopyWith<$Res> {
-  factory $AdvancedQueryCopyWith(
-          AdvancedQuery value, $Res Function(AdvancedQuery) then) =
-      _$AdvancedQueryCopyWithImpl<$Res, AdvancedQuery>;
-  @useResult
-  $Res call(
-      {String name,
-      @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType<Object> queryableType,
-      @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-      List<Condition> conditions,
-      LogicalOperator logicalOperator,
-      @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-      List<OrderBy> orderBy,
-      int? limit});
-}
-
-/// @nodoc
-class _$AdvancedQueryCopyWithImpl<$Res, $Val extends AdvancedQuery>
-    implements $AdvancedQueryCopyWith<$Res> {
-  _$AdvancedQueryCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AdvancedQuery
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AdvancedQueryCopyWith<AdvancedQuery> get copyWith =>
+      _$AdvancedQueryCopyWithImpl<AdvancedQuery>(
+          this as AdvancedQuery, _$identity);
+
+  /// Serializes this AdvancedQuery to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? queryableType = null,
-    Object? conditions = null,
-    Object? logicalOperator = null,
-    Object? orderBy = null,
-    Object? limit = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      queryableType: null == queryableType
-          ? _value.queryableType
-          : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType<Object>,
-      conditions: null == conditions
-          ? _value.conditions
-          : conditions // ignore: cast_nullable_to_non_nullable
-              as List<Condition>,
-      logicalOperator: null == logicalOperator
-          ? _value.logicalOperator
-          : logicalOperator // ignore: cast_nullable_to_non_nullable
-              as LogicalOperator,
-      orderBy: null == orderBy
-          ? _value.orderBy
-          : orderBy // ignore: cast_nullable_to_non_nullable
-              as List<OrderBy>,
-      limit: freezed == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AdvancedQuery &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.queryableType, queryableType) ||
+                other.queryableType == queryableType) &&
+            const DeepCollectionEquality()
+                .equals(other.conditions, conditions) &&
+            (identical(other.logicalOperator, logicalOperator) ||
+                other.logicalOperator == logicalOperator) &&
+            const DeepCollectionEquality().equals(other.orderBy, orderBy) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      queryableType,
+      const DeepCollectionEquality().hash(conditions),
+      logicalOperator,
+      const DeepCollectionEquality().hash(orderBy),
+      limit);
+
+  @override
+  String toString() {
+    return 'AdvancedQuery(name: $name, queryableType: $queryableType, conditions: $conditions, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
   }
 }
 
 /// @nodoc
-abstract class _$$AdvancedQueryImplCopyWith<$Res>
-    implements $AdvancedQueryCopyWith<$Res> {
-  factory _$$AdvancedQueryImplCopyWith(
-          _$AdvancedQueryImpl value, $Res Function(_$AdvancedQueryImpl) then) =
-      __$$AdvancedQueryImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AdvancedQueryCopyWith<$Res> {
+  factory $AdvancedQueryCopyWith(
+          AdvancedQuery value, $Res Function(AdvancedQuery) _then) =
+      _$AdvancedQueryCopyWithImpl;
   @useResult
   $Res call(
       {String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType<Object> queryableType,
+      QueryableType queryableType,
       @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
       List<Condition> conditions,
       LogicalOperator logicalOperator,
@@ -130,12 +88,12 @@ abstract class _$$AdvancedQueryImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AdvancedQueryImplCopyWithImpl<$Res>
-    extends _$AdvancedQueryCopyWithImpl<$Res, _$AdvancedQueryImpl>
-    implements _$$AdvancedQueryImplCopyWith<$Res> {
-  __$$AdvancedQueryImplCopyWithImpl(
-      _$AdvancedQueryImpl _value, $Res Function(_$AdvancedQueryImpl) _then)
-      : super(_value, _then);
+class _$AdvancedQueryCopyWithImpl<$Res>
+    implements $AdvancedQueryCopyWith<$Res> {
+  _$AdvancedQueryCopyWithImpl(this._self, this._then);
+
+  final AdvancedQuery _self;
+  final $Res Function(AdvancedQuery) _then;
 
   /// Create a copy of AdvancedQuery
   /// with the given fields replaced by the non-null parameter values.
@@ -149,29 +107,29 @@ class __$$AdvancedQueryImplCopyWithImpl<$Res>
     Object? orderBy = null,
     Object? limit = freezed,
   }) {
-    return _then(_$AdvancedQueryImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       queryableType: null == queryableType
-          ? _value.queryableType
+          ? _self.queryableType
           : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType<Object>,
+              as QueryableType,
       conditions: null == conditions
-          ? _value._conditions
+          ? _self.conditions
           : conditions // ignore: cast_nullable_to_non_nullable
               as List<Condition>,
       logicalOperator: null == logicalOperator
-          ? _value.logicalOperator
+          ? _self.logicalOperator
           : logicalOperator // ignore: cast_nullable_to_non_nullable
               as LogicalOperator,
       orderBy: null == orderBy
-          ? _value._orderBy
+          ? _self.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as List<OrderBy>,
       limit: freezed == limit
-          ? _value.limit
+          ? _self.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
@@ -180,8 +138,8 @@ class __$$AdvancedQueryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AdvancedQueryImpl extends _AdvancedQuery {
-  const _$AdvancedQueryImpl(
+class _AdvancedQuery extends AdvancedQuery {
+  const _AdvancedQuery(
       {required this.name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
       required this.queryableType,
@@ -194,15 +152,14 @@ class _$AdvancedQueryImpl extends _AdvancedQuery {
       : _conditions = conditions,
         _orderBy = orderBy,
         super._();
-
-  factory _$AdvancedQueryImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AdvancedQueryImplFromJson(json);
+  factory _AdvancedQuery.fromJson(Map<String, dynamic> json) =>
+      _$AdvancedQueryFromJson(json);
 
   @override
   final String name;
   @override
   @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  final QueryableType<Object> queryableType;
+  final QueryableType queryableType;
   final List<Condition> _conditions;
   @override
   @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
@@ -227,16 +184,26 @@ class _$AdvancedQueryImpl extends _AdvancedQuery {
   @override
   final int? limit;
 
+  /// Create a copy of AdvancedQuery
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AdvancedQuery(name: $name, queryableType: $queryableType, conditions: $conditions, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AdvancedQueryCopyWith<_AdvancedQuery> get copyWith =>
+      __$AdvancedQueryCopyWithImpl<_AdvancedQuery>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AdvancedQueryToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AdvancedQueryImpl &&
+            other is _AdvancedQuery &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.queryableType, queryableType) ||
                 other.queryableType == queryableType) &&
@@ -259,58 +226,79 @@ class _$AdvancedQueryImpl extends _AdvancedQuery {
       const DeepCollectionEquality().hash(_orderBy),
       limit);
 
-  /// Create a copy of AdvancedQuery
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AdvancedQueryImplCopyWith<_$AdvancedQueryImpl> get copyWith =>
-      __$$AdvancedQueryImplCopyWithImpl<_$AdvancedQueryImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AdvancedQueryImplToJson(
-      this,
-    );
+  String toString() {
+    return 'AdvancedQuery(name: $name, queryableType: $queryableType, conditions: $conditions, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
   }
 }
 
-abstract class _AdvancedQuery extends AdvancedQuery {
-  const factory _AdvancedQuery(
-      {required final String name,
+/// @nodoc
+abstract mixin class _$AdvancedQueryCopyWith<$Res>
+    implements $AdvancedQueryCopyWith<$Res> {
+  factory _$AdvancedQueryCopyWith(
+          _AdvancedQuery value, $Res Function(_AdvancedQuery) _then) =
+      __$AdvancedQueryCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String name,
       @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      required final QueryableType<Object> queryableType,
+      QueryableType queryableType,
       @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-      final List<Condition> conditions,
-      final LogicalOperator logicalOperator,
+      List<Condition> conditions,
+      LogicalOperator logicalOperator,
       @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-      final List<OrderBy> orderBy,
-      final int? limit}) = _$AdvancedQueryImpl;
-  const _AdvancedQuery._() : super._();
+      List<OrderBy> orderBy,
+      int? limit});
+}
 
-  factory _AdvancedQuery.fromJson(Map<String, dynamic> json) =
-      _$AdvancedQueryImpl.fromJson;
+/// @nodoc
+class __$AdvancedQueryCopyWithImpl<$Res>
+    implements _$AdvancedQueryCopyWith<$Res> {
+  __$AdvancedQueryCopyWithImpl(this._self, this._then);
 
-  @override
-  String get name;
-  @override
-  @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  QueryableType<Object> get queryableType;
-  @override
-  @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-  List<Condition> get conditions;
-  @override
-  LogicalOperator get logicalOperator;
-  @override
-  @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-  List<OrderBy> get orderBy;
-  @override
-  int? get limit;
+  final _AdvancedQuery _self;
+  final $Res Function(_AdvancedQuery) _then;
 
   /// Create a copy of AdvancedQuery
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AdvancedQueryImplCopyWith<_$AdvancedQueryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? queryableType = null,
+    Object? conditions = null,
+    Object? logicalOperator = null,
+    Object? orderBy = null,
+    Object? limit = freezed,
+  }) {
+    return _then(_AdvancedQuery(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      queryableType: null == queryableType
+          ? _self.queryableType
+          : queryableType // ignore: cast_nullable_to_non_nullable
+              as QueryableType,
+      conditions: null == conditions
+          ? _self._conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<Condition>,
+      logicalOperator: null == logicalOperator
+          ? _self.logicalOperator
+          : logicalOperator // ignore: cast_nullable_to_non_nullable
+              as LogicalOperator,
+      orderBy: null == orderBy
+          ? _self._orderBy
+          : orderBy // ignore: cast_nullable_to_non_nullable
+              as List<OrderBy>,
+      limit: freezed == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
+
+// dart format on

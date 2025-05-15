@@ -23,12 +23,12 @@ final _$JobFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$JobImpl _$$JobImplFromJson(Map json) => _$JobImpl(
+_Job _$JobFromJson(Map json) => _Job(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$JobImplToJson(_$JobImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$JobToJson(_Job instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

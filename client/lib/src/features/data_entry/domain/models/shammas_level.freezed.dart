@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,148 +10,31 @@ part of 'shammas_level.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ShammasLevel _$ShammasLevelFromJson(Map<String, dynamic> json) {
-  return _ShammasLevel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ShammasLevel {
-  int get order => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
-
-  /// Serializes this ShammasLevel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get order;
+  String get name;
+  String get id;
 
   /// Create a copy of ShammasLevel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ShammasLevelCopyWith<ShammasLevel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$ShammasLevelCopyWithImpl<ShammasLevel>(
+          this as ShammasLevel, _$identity);
 
-/// @nodoc
-abstract class $ShammasLevelCopyWith<$Res> {
-  factory $ShammasLevelCopyWith(
-          ShammasLevel value, $Res Function(ShammasLevel) then) =
-      _$ShammasLevelCopyWithImpl<$Res, ShammasLevel>;
-  @useResult
-  $Res call({int order, String name, String id});
-}
-
-/// @nodoc
-class _$ShammasLevelCopyWithImpl<$Res, $Val extends ShammasLevel>
-    implements $ShammasLevelCopyWith<$Res> {
-  _$ShammasLevelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ShammasLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? order = null,
-    Object? name = null,
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ShammasLevelImplCopyWith<$Res>
-    implements $ShammasLevelCopyWith<$Res> {
-  factory _$$ShammasLevelImplCopyWith(
-          _$ShammasLevelImpl value, $Res Function(_$ShammasLevelImpl) then) =
-      __$$ShammasLevelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int order, String name, String id});
-}
-
-/// @nodoc
-class __$$ShammasLevelImplCopyWithImpl<$Res>
-    extends _$ShammasLevelCopyWithImpl<$Res, _$ShammasLevelImpl>
-    implements _$$ShammasLevelImplCopyWith<$Res> {
-  __$$ShammasLevelImplCopyWithImpl(
-      _$ShammasLevelImpl _value, $Res Function(_$ShammasLevelImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ShammasLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? order = null,
-    Object? name = null,
-    Object? id = null,
-  }) {
-    return _then(_$ShammasLevelImpl(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ShammasLevelImpl extends _ShammasLevel {
-  _$ShammasLevelImpl(
-      {required this.order, required this.name, required this.id})
-      : super._();
-
-  factory _$ShammasLevelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ShammasLevelImplFromJson(json);
-
-  @override
-  final int order;
-  @override
-  final String name;
-  @override
-  final String id;
-
-  @override
-  String toString() {
-    return 'ShammasLevel(order: $order, name: $name, id: $id)';
-  }
+  /// Serializes this ShammasLevel to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ShammasLevelImpl &&
+            other is ShammasLevel &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id));
@@ -160,43 +44,147 @@ class _$ShammasLevelImpl extends _ShammasLevel {
   @override
   int get hashCode => Object.hash(runtimeType, order, name, id);
 
-  /// Create a copy of ShammasLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
-      __$$ShammasLevelImplCopyWithImpl<_$ShammasLevelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ShammasLevelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ShammasLevel(order: $order, name: $name, id: $id)';
   }
 }
 
-abstract class _ShammasLevel extends ShammasLevel {
-  factory _ShammasLevel(
-      {required final int order,
-      required final String name,
-      required final String id}) = _$ShammasLevelImpl;
-  _ShammasLevel._() : super._();
+/// @nodoc
+abstract mixin class $ShammasLevelCopyWith<$Res> {
+  factory $ShammasLevelCopyWith(
+          ShammasLevel value, $Res Function(ShammasLevel) _then) =
+      _$ShammasLevelCopyWithImpl;
+  @useResult
+  $Res call({int order, String name, String id});
+}
 
-  factory _ShammasLevel.fromJson(Map<String, dynamic> json) =
-      _$ShammasLevelImpl.fromJson;
+/// @nodoc
+class _$ShammasLevelCopyWithImpl<$Res> implements $ShammasLevelCopyWith<$Res> {
+  _$ShammasLevelCopyWithImpl(this._self, this._then);
+
+  final ShammasLevel _self;
+  final $Res Function(ShammasLevel) _then;
+
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? order = null,
+    Object? name = null,
+    Object? id = null,
+  }) {
+    return _then(_self.copyWith(
+      order: null == order
+          ? _self.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _ShammasLevel extends ShammasLevel {
+  _ShammasLevel({required this.order, required this.name, required this.id})
+      : super._();
+  factory _ShammasLevel.fromJson(Map<String, dynamic> json) =>
+      _$ShammasLevelFromJson(json);
 
   @override
-  int get order;
+  final int order;
   @override
-  String get name;
+  final String name;
   @override
-  String get id;
+  final String id;
 
   /// Create a copy of ShammasLevel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ShammasLevelImplCopyWith<_$ShammasLevelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$ShammasLevelCopyWith<_ShammasLevel> get copyWith =>
+      __$ShammasLevelCopyWithImpl<_ShammasLevel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ShammasLevelToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ShammasLevel &&
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, order, name, id);
+
+  @override
+  String toString() {
+    return 'ShammasLevel(order: $order, name: $name, id: $id)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$ShammasLevelCopyWith<$Res>
+    implements $ShammasLevelCopyWith<$Res> {
+  factory _$ShammasLevelCopyWith(
+          _ShammasLevel value, $Res Function(_ShammasLevel) _then) =
+      __$ShammasLevelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int order, String name, String id});
+}
+
+/// @nodoc
+class __$ShammasLevelCopyWithImpl<$Res>
+    implements _$ShammasLevelCopyWith<$Res> {
+  __$ShammasLevelCopyWithImpl(this._self, this._then);
+
+  final _ShammasLevel _self;
+  final $Res Function(_ShammasLevel) _then;
+
+  /// Create a copy of ShammasLevel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? order = null,
+    Object? name = null,
+    Object? id = null,
+  }) {
+    return _then(_ShammasLevel(
+      order: null == order
+          ? _self.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

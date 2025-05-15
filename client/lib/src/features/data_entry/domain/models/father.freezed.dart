@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,144 +10,30 @@ part of 'father.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Father _$FatherFromJson(Map<String, dynamic> json) {
-  return _Father.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Father {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get churchId => throw _privateConstructorUsedError;
-
-  /// Serializes this Father to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String? get churchId;
 
   /// Create a copy of Father
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FatherCopyWith<Father> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FatherCopyWith<$Res> {
-  factory $FatherCopyWith(Father value, $Res Function(Father) then) =
-      _$FatherCopyWithImpl<$Res, Father>;
-  @useResult
-  $Res call({String id, String name, String? churchId});
-}
-
-/// @nodoc
-class _$FatherCopyWithImpl<$Res, $Val extends Father>
-    implements $FatherCopyWith<$Res> {
-  _$FatherCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? churchId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      churchId: freezed == churchId
-          ? _value.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
+  $FatherCopyWith<Father> get copyWith =>
+      _$FatherCopyWithImpl<Father>(this as Father, _$identity);
 
-/// @nodoc
-abstract class _$$FatherImplCopyWith<$Res> implements $FatherCopyWith<$Res> {
-  factory _$$FatherImplCopyWith(
-          _$FatherImpl value, $Res Function(_$FatherImpl) then) =
-      __$$FatherImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String id, String name, String? churchId});
-}
-
-/// @nodoc
-class __$$FatherImplCopyWithImpl<$Res>
-    extends _$FatherCopyWithImpl<$Res, _$FatherImpl>
-    implements _$$FatherImplCopyWith<$Res> {
-  __$$FatherImplCopyWithImpl(
-      _$FatherImpl _value, $Res Function(_$FatherImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? churchId = freezed,
-  }) {
-    return _then(_$FatherImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      churchId: freezed == churchId
-          ? _value.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FatherImpl extends _Father {
-  _$FatherImpl({required this.id, required this.name, this.churchId})
-      : super._();
-
-  factory _$FatherImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FatherImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String? churchId;
-
-  @override
-  String toString() {
-    return 'Father(id: $id, name: $name, churchId: $churchId)';
-  }
+  /// Serializes this Father to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FatherImpl &&
+            other is Father &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.churchId, churchId) ||
@@ -157,42 +44,142 @@ class _$FatherImpl extends _Father {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, churchId);
 
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
-      __$$FatherImplCopyWithImpl<_$FatherImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FatherImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Father(id: $id, name: $name, churchId: $churchId)';
   }
 }
 
-abstract class _Father extends Father {
-  factory _Father(
-      {required final String id,
-      required final String name,
-      final String? churchId}) = _$FatherImpl;
-  _Father._() : super._();
+/// @nodoc
+abstract mixin class $FatherCopyWith<$Res> {
+  factory $FatherCopyWith(Father value, $Res Function(Father) _then) =
+      _$FatherCopyWithImpl;
+  @useResult
+  $Res call({String id, String name, String? churchId});
+}
 
-  factory _Father.fromJson(Map<String, dynamic> json) = _$FatherImpl.fromJson;
+/// @nodoc
+class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
+  _$FatherCopyWithImpl(this._self, this._then);
+
+  final Father _self;
+  final $Res Function(Father) _then;
+
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? churchId = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      churchId: freezed == churchId
+          ? _self.churchId
+          : churchId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Father extends Father {
+  _Father({required this.id, required this.name, this.churchId}) : super._();
+  factory _Father.fromJson(Map<String, dynamic> json) => _$FatherFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
-  String? get churchId;
+  final String? churchId;
 
   /// Create a copy of Father
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FatherImplCopyWith<_$FatherImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FatherCopyWith<_Father> get copyWith =>
+      __$FatherCopyWithImpl<_Father>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FatherToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Father &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.churchId, churchId) ||
+                other.churchId == churchId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, churchId);
+
+  @override
+  String toString() {
+    return 'Father(id: $id, name: $name, churchId: $churchId)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$FatherCopyWith<$Res> implements $FatherCopyWith<$Res> {
+  factory _$FatherCopyWith(_Father value, $Res Function(_Father) _then) =
+      __$FatherCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, String name, String? churchId});
+}
+
+/// @nodoc
+class __$FatherCopyWithImpl<$Res> implements _$FatherCopyWith<$Res> {
+  __$FatherCopyWithImpl(this._self, this._then);
+
+  final _Father _self;
+  final $Res Function(_Father) _then;
+
+  /// Create a copy of Father
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? churchId = freezed,
+  }) {
+    return _then(_Father(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      churchId: freezed == churchId
+          ? _self.churchId
+          : churchId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

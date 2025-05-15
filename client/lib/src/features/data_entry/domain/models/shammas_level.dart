@@ -7,7 +7,7 @@ part 'shammas_level.g.dart';
 
 @freezed
 @TypeMetadata()
-class ShammasLevel extends ViewableWithID
+abstract class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ShammasLevelFields;

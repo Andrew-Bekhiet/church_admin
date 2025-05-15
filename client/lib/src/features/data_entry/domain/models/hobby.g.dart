@@ -28,14 +28,13 @@ final _$HobbyFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HobbyImpl _$$HobbyImplFromJson(Map json) => _$HobbyImpl(
+_Hobby _$HobbyFromJson(Map json) => _Hobby(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$HobbyImplToJson(_$HobbyImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$HobbyToJson(_Hobby instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,130 +10,29 @@ part of 'church.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Church _$ChurchFromJson(Map<String, dynamic> json) {
-  return _Church.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Church {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-
-  /// Serializes this Church to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
 
   /// Create a copy of Church
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChurchCopyWith<Church> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ChurchCopyWith<$Res> {
-  factory $ChurchCopyWith(Church value, $Res Function(Church) then) =
-      _$ChurchCopyWithImpl<$Res, Church>;
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class _$ChurchCopyWithImpl<$Res, $Val extends Church>
-    implements $ChurchCopyWith<$Res> {
-  _$ChurchCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Church
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
+  $ChurchCopyWith<Church> get copyWith =>
+      _$ChurchCopyWithImpl<Church>(this as Church, _$identity);
 
-/// @nodoc
-abstract class _$$ChurchImplCopyWith<$Res> implements $ChurchCopyWith<$Res> {
-  factory _$$ChurchImplCopyWith(
-          _$ChurchImpl value, $Res Function(_$ChurchImpl) then) =
-      __$$ChurchImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class __$$ChurchImplCopyWithImpl<$Res>
-    extends _$ChurchCopyWithImpl<$Res, _$ChurchImpl>
-    implements _$$ChurchImplCopyWith<$Res> {
-  __$$ChurchImplCopyWithImpl(
-      _$ChurchImpl _value, $Res Function(_$ChurchImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Church
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_$ChurchImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ChurchImpl extends _Church {
-  _$ChurchImpl({required this.id, required this.name}) : super._();
-
-  factory _$ChurchImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChurchImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-
-  @override
-  String toString() {
-    return 'Church(id: $id, name: $name)';
-  }
+  /// Serializes this Church to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChurchImpl &&
+            other is Church &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -141,38 +41,128 @@ class _$ChurchImpl extends _Church {
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  /// Create a copy of Church
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
-      __$$ChurchImplCopyWithImpl<_$ChurchImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChurchImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Church(id: $id, name: $name)';
   }
 }
 
-abstract class _Church extends Church {
-  factory _Church({required final String id, required final String name}) =
-      _$ChurchImpl;
-  _Church._() : super._();
+/// @nodoc
+abstract mixin class $ChurchCopyWith<$Res> {
+  factory $ChurchCopyWith(Church value, $Res Function(Church) _then) =
+      _$ChurchCopyWithImpl;
+  @useResult
+  $Res call({String id, String name});
+}
 
-  factory _Church.fromJson(Map<String, dynamic> json) = _$ChurchImpl.fromJson;
+/// @nodoc
+class _$ChurchCopyWithImpl<$Res> implements $ChurchCopyWith<$Res> {
+  _$ChurchCopyWithImpl(this._self, this._then);
+
+  final Church _self;
+  final $Res Function(Church) _then;
+
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Church extends Church {
+  _Church({required this.id, required this.name}) : super._();
+  factory _Church.fromJson(Map<String, dynamic> json) => _$ChurchFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
 
   /// Create a copy of Church
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChurchImplCopyWith<_$ChurchImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$ChurchCopyWith<_Church> get copyWith =>
+      __$ChurchCopyWithImpl<_Church>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ChurchToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Church &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @override
+  String toString() {
+    return 'Church(id: $id, name: $name)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$ChurchCopyWith<$Res> implements $ChurchCopyWith<$Res> {
+  factory _$ChurchCopyWith(_Church value, $Res Function(_Church) _then) =
+      __$ChurchCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, String name});
+}
+
+/// @nodoc
+class __$ChurchCopyWithImpl<$Res> implements _$ChurchCopyWith<$Res> {
+  __$ChurchCopyWithImpl(this._self, this._then);
+
+  final _Church _self;
+  final $Res Function(_Church) _then;
+
+  /// Create a copy of Church
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_Church(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

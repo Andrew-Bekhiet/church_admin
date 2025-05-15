@@ -28,12 +28,12 @@ final _$StudyYearFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StudyYearImpl _$$StudyYearImplFromJson(Map json) => _$StudyYearImpl(
+_StudyYear _$StudyYearFromJson(Map json) => _StudyYear(
       order: (json['order'] as num).toInt(),
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$StudyYearImplToJson(_$StudyYearImpl instance) =>
+Map<String, dynamic> _$StudyYearToJson(_StudyYear instance) =>
     <String, dynamic>{
       'order': instance.order,
       'name': instance.name,

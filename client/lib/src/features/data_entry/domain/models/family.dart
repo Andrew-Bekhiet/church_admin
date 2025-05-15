@@ -8,7 +8,7 @@ part 'family.g.dart';
 
 @freezed
 @TypeMetadata()
-class Family extends ViewableWithIDAndImage
+abstract class Family extends ViewableWithIDAndImage
     with _$Family
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$FamilyFields;
@@ -48,16 +48,15 @@ class Family extends ViewableWithIDAndImage
   String get typeName => Family.queryableType.name;
 
   Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
-    name: name,
-    address:
-        address != null
+        name: name,
+        address: address != null
             ? Input_AddressesObjRelInsertInput(
-              data: address!.copyWith(family: null).toInsertInput(),
-            )
+                data: address!.copyWith(family: null).toInsertInput(),
+              )
             : null,
-    notes: notes,
-    color: colorToInt(color),
-  );
+        notes: notes,
+        color: colorToInt(color),
+      );
 
   Input_FamiliesSetInput toUpdateInput(Family oldFamily) =>
       Input_FamiliesSetInput(

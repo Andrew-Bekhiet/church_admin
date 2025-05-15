@@ -23,13 +23,12 @@ final _$QualificationFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$QualificationImpl _$$QualificationImplFromJson(Map json) =>
-    _$QualificationImpl(
+_Qualification _$QualificationFromJson(Map json) => _Qualification(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$QualificationImplToJson(_$QualificationImpl instance) =>
+Map<String, dynamic> _$QualificationToJson(_Qualification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

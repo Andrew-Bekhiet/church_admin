@@ -23,13 +23,12 @@ final _$ChurchFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ChurchImpl _$$ChurchImplFromJson(Map json) => _$ChurchImpl(
+_Church _$ChurchFromJson(Map json) => _Church(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$ChurchImplToJson(_$ChurchImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ChurchToJson(_Church instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

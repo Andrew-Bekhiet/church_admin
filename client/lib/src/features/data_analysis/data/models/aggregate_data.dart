@@ -7,7 +7,7 @@ part 'aggregate_data.g.dart';
 
 @freezed
 @TypeMetadata()
-class AggregateData with _$AggregateData {
+abstract class AggregateData with _$AggregateData {
   static Map<String, FieldMetadata> get fieldsMetadata => _$AggregateDataFields;
 
   static final QueryableType<AggregateData> queryableType =

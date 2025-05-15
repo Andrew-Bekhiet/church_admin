@@ -5,7 +5,7 @@ part 'order_by.freezed.dart';
 part 'order_by.g.dart';
 
 @freezed
-class OrderBy with _$OrderBy {
+abstract class OrderBy with _$OrderBy {
   @Assert('value is OrderBy || value is Enum_OrderBy')
   factory OrderBy({
     required String fieldName,

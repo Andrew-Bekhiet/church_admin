@@ -8,7 +8,7 @@ part 'service.g.dart';
 
 @freezed
 @TypeMetadata()
-class Service extends ViewableWithIDAndImage
+abstract class Service extends ViewableWithIDAndImage
     with _$Service
     implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ServiceFields;
