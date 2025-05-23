@@ -663,7 +663,8 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting = NotificationSetting(4, 5, 2);
+              const notificationSetting =
+                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
               await unit.scheduleBirthDayNotification(notificationSetting);
 
               verify(
@@ -696,7 +697,8 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting = NotificationSetting(4, 5, 2);
+              const notificationSetting =
+                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
               await unit.scheduleMeetingNotification(notificationSetting);
 
               verify(
@@ -729,7 +731,8 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting = NotificationSetting(4, 5, 2);
+              const notificationSetting =
+                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
               await unit.scheduleKodasNotification(notificationSetting);
 
               verify(
@@ -761,7 +764,8 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting = NotificationSetting(4, 5, 2);
+              const notificationSetting =
+                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
               await unit.scheduleConfessionNotification(notificationSetting);
 
               verify(

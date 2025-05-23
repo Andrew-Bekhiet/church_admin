@@ -171,50 +171,50 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<void> scheduleBirthDayNotification([
-    NotificationSetting notificationSetting =
-        const NotificationSetting(11, 0, 1),
+    NotificationSetting? notificationSetting,
   ]) {
     return _scheduleNotification(
       code: 'BirthDay'.hashCode,
       callback: NotificationsServiceCallbacks.showBirthDayNotification,
       settingsCallback: _settings.setBirthDayTime,
-      notificationSetting: notificationSetting,
+      notificationSetting: notificationSetting ??
+          const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 1),
     );
   }
 
   Future<void> scheduleMeetingNotification([
-    NotificationSetting notificationSetting =
-        const NotificationSetting(11, 0, 7),
+    NotificationSetting? notificationSetting,
   ]) {
     return _scheduleNotification(
       code: 'Meeting'.hashCode,
       callback: NotificationsServiceCallbacks.showMeetingNotification,
       settingsCallback: _settings.setMeetingTime,
-      notificationSetting: notificationSetting,
+      notificationSetting: notificationSetting ??
+          const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
 
   Future<void> scheduleKodasNotification([
-    NotificationSetting notificationSetting =
-        const NotificationSetting(11, 0, 7),
+    NotificationSetting? notificationSetting,
   ]) {
     return _scheduleNotification(
       code: 'Kodas'.hashCode,
       callback: NotificationsServiceCallbacks.showKodasNotification,
       settingsCallback: _settings.setKodasTime,
-      notificationSetting: notificationSetting,
+      notificationSetting: notificationSetting ??
+          const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
 
   Future<void> scheduleConfessionNotification([
-    NotificationSetting notificationSetting =
-        const NotificationSetting(11, 0, 7),
+    NotificationSetting? notificationSetting,
   ]) {
     return _scheduleNotification(
       code: 'Confession'.hashCode,
       callback: NotificationsServiceCallbacks.showConfessionNotification,
       settingsCallback: _settings.setConfessionTime,
-      notificationSetting: notificationSetting,
+      notificationSetting: notificationSetting ??
+          const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
 
@@ -222,8 +222,7 @@ class NotificationsService extends BlocObserver {
     required int code,
     required VoidCallback callback,
     required Future<void> Function(NotificationSetting) settingsCallback,
-    NotificationSetting notificationSetting =
-        const NotificationSetting(11, 0, 7),
+    required NotificationSetting notificationSetting,
   }) async {
     if (!CurrentPlatformService.I.isAndroid) return;
 

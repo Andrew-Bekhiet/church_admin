@@ -1,27 +1,27 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import './notifications_settings_storage_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Box>()])
+@GenerateNiceMocks([
+  MockSpec<SyncKVStore>(),
+])
 void main() {
   group('NotificationsSettingsStorage', () {
-    late MockBox<NotificationSetting> mockBox;
+    late MockSyncKVStore<NotificationSetting> mockBox;
     late NotificationsSettingsStorage storage;
 
     setUp(() {
-      mockBox = MockBox<NotificationSetting>();
-
-      when(mockBox.isOpen).thenReturn(true);
+      mockBox = MockSyncKVStore<NotificationSetting>();
 
       storage = NotificationsSettingsStorage(mockBox);
     });
 
     test('birthDayTimeSetting', () async {
-      const setting = NotificationSetting(12, 0, 7);
+      const setting =
+          NotificationSetting(hours: 12, minutes: 0, intervalInDays: 7);
 
       when(mockBox.get(NotificationsSettingsStorage.birthDayTimeKey))
           .thenReturn(setting);
@@ -32,7 +32,8 @@ void main() {
     });
 
     test('kodasTimeSetting', () async {
-      const setting = NotificationSetting(13, 0, 7);
+      const setting =
+          NotificationSetting(hours: 13, minutes: 0, intervalInDays: 7);
 
       when(mockBox.get(NotificationsSettingsStorage.kodasTimeKey))
           .thenReturn(setting);
@@ -44,7 +45,8 @@ void main() {
     });
 
     test('meetingTimeSetting', () async {
-      const setting = NotificationSetting(14, 0, 7);
+      const setting =
+          NotificationSetting(hours: 14, minutes: 0, intervalInDays: 7);
 
       when(mockBox.get(NotificationsSettingsStorage.meetingTimeKey))
           .thenReturn(setting);
@@ -56,7 +58,8 @@ void main() {
     });
 
     test('confessionTimeSetting', () async {
-      const setting = NotificationSetting(15, 0, 7);
+      const setting =
+          NotificationSetting(hours: 15, minutes: 0, intervalInDays: 7);
 
       when(mockBox.get(NotificationsSettingsStorage.confessionTimeKey))
           .thenReturn(setting);

@@ -228,7 +228,7 @@ final _$PersonFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
+_Person _$PersonFromJson(Map json) => _Person(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] == null
@@ -377,8 +377,7 @@ _$PersonImpl _$$PersonImplFromJson(Map json) => _$PersonImpl(
               Map<String, dynamic>.from(json['editHistoryAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),

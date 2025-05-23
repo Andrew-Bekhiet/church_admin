@@ -7,7 +7,7 @@ part 'study_year.g.dart';
 
 @freezed
 @TypeMetadata(addFields: {'id': String})
-class StudyYear extends ViewableWithID
+abstract class StudyYear extends ViewableWithID
     with _$StudyYear
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$StudyYearFields;

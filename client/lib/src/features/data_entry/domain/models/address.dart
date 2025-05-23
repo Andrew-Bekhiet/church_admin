@@ -8,7 +8,7 @@ part 'address.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['id', 'countryIsoCode'])
-class Address with _$Address {
+abstract class Address with _$Address {
   static Map<String, FieldMetadata> get fieldsMetadata => _$AddressFields;
 
   static final QueryableType<Address> queryableType = QueryableType<Address>(

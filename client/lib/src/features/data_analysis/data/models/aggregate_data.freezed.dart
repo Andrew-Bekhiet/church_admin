@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,38 +10,53 @@ part of 'aggregate_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AggregateData _$AggregateDataFromJson(Map<String, dynamic> json) {
-  return _AggregateData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AggregateData {
-  int? get count => throw _privateConstructorUsedError;
+  int? get count;
   @JsonKey(readValue: _readLastRecordedByInfo)
-  LastRecordedByInfo? get max => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get max;
   @JsonKey(readValue: _readLastRecordedByInfo)
-  LastRecordedByInfo? get min => throw _privateConstructorUsedError;
-
-  /// Serializes this AggregateData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  LastRecordedByInfo? get min;
 
   /// Create a copy of AggregateData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AggregateDataCopyWith<AggregateData> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$AggregateDataCopyWithImpl<AggregateData>(
+          this as AggregateData, _$identity);
+
+  /// Serializes this AggregateData to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AggregateData &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.max, max) || other.max == max) &&
+            (identical(other.min, min) || other.min == min));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, count, max, min);
+
+  @override
+  String toString() {
+    return 'AggregateData(count: $count, max: $max, min: $min)';
+  }
 }
 
 /// @nodoc
-abstract class $AggregateDataCopyWith<$Res> {
+abstract mixin class $AggregateDataCopyWith<$Res> {
   factory $AggregateDataCopyWith(
-          AggregateData value, $Res Function(AggregateData) then) =
-      _$AggregateDataCopyWithImpl<$Res, AggregateData>;
+          AggregateData value, $Res Function(AggregateData) _then) =
+      _$AggregateDataCopyWithImpl;
   @useResult
   $Res call(
       {int? count,
@@ -52,14 +68,12 @@ abstract class $AggregateDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
+class _$AggregateDataCopyWithImpl<$Res>
     implements $AggregateDataCopyWith<$Res> {
-  _$AggregateDataCopyWithImpl(this._value, this._then);
+  _$AggregateDataCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AggregateData _self;
+  final $Res Function(AggregateData) _then;
 
   /// Create a copy of AggregateData
   /// with the given fields replaced by the non-null parameter values.
@@ -70,20 +84,20 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
     Object? max = freezed,
     Object? min = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       count: freezed == count
-          ? _value.count
+          ? _self.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
       max: freezed == max
-          ? _value.max
+          ? _self.max
           : max // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       min: freezed == min
-          ? _value.min
+          ? _self.min
           : min // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of AggregateData
@@ -91,12 +105,12 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get max {
-    if (_value.max == null) {
+    if (_self.max == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.max!, (value) {
-      return _then(_value.copyWith(max: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.max!, (value) {
+      return _then(_self.copyWith(max: value));
     });
   }
 
@@ -105,79 +119,25 @@ class _$AggregateDataCopyWithImpl<$Res, $Val extends AggregateData>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get min {
-    if (_value.min == null) {
+    if (_self.min == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.min!, (value) {
-      return _then(_value.copyWith(min: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.min!, (value) {
+      return _then(_self.copyWith(min: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$AggregateDataImplCopyWith<$Res>
-    implements $AggregateDataCopyWith<$Res> {
-  factory _$$AggregateDataImplCopyWith(
-          _$AggregateDataImpl value, $Res Function(_$AggregateDataImpl) then) =
-      __$$AggregateDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? count,
-      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? max,
-      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? min});
-
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get max;
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get min;
-}
-
-/// @nodoc
-class __$$AggregateDataImplCopyWithImpl<$Res>
-    extends _$AggregateDataCopyWithImpl<$Res, _$AggregateDataImpl>
-    implements _$$AggregateDataImplCopyWith<$Res> {
-  __$$AggregateDataImplCopyWithImpl(
-      _$AggregateDataImpl _value, $Res Function(_$AggregateDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? count = freezed,
-    Object? max = freezed,
-    Object? min = freezed,
-  }) {
-    return _then(_$AggregateDataImpl(
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      max: freezed == max
-          ? _value.max
-          : max // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      min: freezed == min
-          ? _value.min
-          : min // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$AggregateDataImpl implements _AggregateData {
-  const _$AggregateDataImpl(
+class _AggregateData implements AggregateData {
+  const _AggregateData(
       {this.count,
       @JsonKey(readValue: _readLastRecordedByInfo) this.max,
       @JsonKey(readValue: _readLastRecordedByInfo) this.min});
-
-  factory _$AggregateDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AggregateDataImplFromJson(json);
+  factory _AggregateData.fromJson(Map<String, dynamic> json) =>
+      _$AggregateDataFromJson(json);
 
   @override
   final int? count;
@@ -188,16 +148,26 @@ class _$AggregateDataImpl implements _AggregateData {
   @JsonKey(readValue: _readLastRecordedByInfo)
   final LastRecordedByInfo? min;
 
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AggregateData(count: $count, max: $max, min: $min)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AggregateDataCopyWith<_AggregateData> get copyWith =>
+      __$AggregateDataCopyWithImpl<_AggregateData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AggregateDataToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AggregateDataImpl &&
+            other is _AggregateData &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.max, max) || other.max == max) &&
             (identical(other.min, min) || other.min == min));
@@ -207,46 +177,91 @@ class _$AggregateDataImpl implements _AggregateData {
   @override
   int get hashCode => Object.hash(runtimeType, count, max, min);
 
-  /// Create a copy of AggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
-      __$$AggregateDataImplCopyWithImpl<_$AggregateDataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AggregateDataImplToJson(
-      this,
-    );
+  String toString() {
+    return 'AggregateData(count: $count, max: $max, min: $min)';
   }
 }
 
-abstract class _AggregateData implements AggregateData {
-  const factory _AggregateData(
-      {final int? count,
-      @JsonKey(readValue: _readLastRecordedByInfo)
-      final LastRecordedByInfo? max,
-      @JsonKey(readValue: _readLastRecordedByInfo)
-      final LastRecordedByInfo? min}) = _$AggregateDataImpl;
+/// @nodoc
+abstract mixin class _$AggregateDataCopyWith<$Res>
+    implements $AggregateDataCopyWith<$Res> {
+  factory _$AggregateDataCopyWith(
+          _AggregateData value, $Res Function(_AggregateData) _then) =
+      __$AggregateDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int? count,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? max,
+      @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? min});
 
-  factory _AggregateData.fromJson(Map<String, dynamic> json) =
-      _$AggregateDataImpl.fromJson;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get max;
+  @override
+  $LastRecordedByInfoCopyWith<$Res>? get min;
+}
 
-  @override
-  int? get count;
-  @override
-  @JsonKey(readValue: _readLastRecordedByInfo)
-  LastRecordedByInfo? get max;
-  @override
-  @JsonKey(readValue: _readLastRecordedByInfo)
-  LastRecordedByInfo? get min;
+/// @nodoc
+class __$AggregateDataCopyWithImpl<$Res>
+    implements _$AggregateDataCopyWith<$Res> {
+  __$AggregateDataCopyWithImpl(this._self, this._then);
+
+  final _AggregateData _self;
+  final $Res Function(_AggregateData) _then;
 
   /// Create a copy of AggregateData
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AggregateDataImplCopyWith<_$AggregateDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? count = freezed,
+    Object? max = freezed,
+    Object? min = freezed,
+  }) {
+    return _then(_AggregateData(
+      count: freezed == count
+          ? _self.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int?,
+      max: freezed == max
+          ? _self.max
+          : max // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      min: freezed == min
+          ? _self.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+    ));
+  }
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get max {
+    if (_self.max == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.max!, (value) {
+      return _then(_self.copyWith(max: value));
+    });
+  }
+
+  /// Create a copy of AggregateData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get min {
+    if (_self.min == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.min!, (value) {
+      return _then(_self.copyWith(min: value));
+    });
+  }
 }
+
+// dart format on

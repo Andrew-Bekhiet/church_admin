@@ -45,7 +45,7 @@ final _$StoreFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
+_Store _$StoreFromJson(Map json) => _Store(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] == null
@@ -66,8 +66,7 @@ _$StoreImpl _$$StoreImplFromJson(Map json) => _$StoreImpl(
       blurhash: json['blurhash'] as String?,
     );
 
-Map<String, dynamic> _$$StoreImplToJson(_$StoreImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StoreToJson(_Store instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),

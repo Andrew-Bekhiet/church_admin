@@ -6,7 +6,7 @@ part of 'auth_user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AuthUserImpl _$$AuthUserImplFromJson(Map json) => _$AuthUserImpl(
+_AuthUser _$AuthUserFromJson(Map json) => _AuthUser(
       uid: json['uid'] as String,
       email: json['email'] as String,
       emailVerified: json['emailVerified'] as bool,
@@ -18,8 +18,7 @@ _$AuthUserImpl _$$AuthUserImplFromJson(Map json) => _$AuthUserImpl(
       isMultiFactorEnabled: json['isMultiFactorEnabled'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$AuthUserImplToJson(_$AuthUserImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AuthUserToJson(_AuthUser instance) => <String, dynamic>{
       'uid': instance.uid,
       'email': instance.email,
       'emailVerified': instance.emailVerified,

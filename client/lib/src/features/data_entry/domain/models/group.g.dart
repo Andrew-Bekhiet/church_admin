@@ -54,7 +54,7 @@ final _$GroupFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GroupImpl _$$GroupImplFromJson(Map json) => _$GroupImpl(
+_Group _$GroupFromJson(Map json) => _Group(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt((json['color'] as num?)?.toInt()),
@@ -83,8 +83,7 @@ _$GroupImpl _$$GroupImplFromJson(Map json) => _$GroupImpl(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$GroupToJson(_Group instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

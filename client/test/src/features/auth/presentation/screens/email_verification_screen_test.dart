@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart' hide Family;
@@ -19,7 +19,6 @@ import 'email_verification_screen_test.mocks.dart';
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
   MockSpec<UserSettingsService>(),
-  MockSpec<HiveInterface>(),
   MockSpec<NotificationsService>(),
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),

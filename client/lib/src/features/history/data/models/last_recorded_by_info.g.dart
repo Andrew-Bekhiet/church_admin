@@ -22,8 +22,8 @@ final _$LastRecordedByInfoFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LastRecordedByInfoImpl _$$LastRecordedByInfoImplFromJson(Map json) =>
-    _$LastRecordedByInfoImpl(
+_LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) =>
+    _LastRecordedByInfo(
       time: DateTime.parse(json['time'] as String),
       recordedBy: readRecordedBy(json, 'recordedBy') as String?,
       user: json['user'] == null
@@ -31,8 +31,7 @@ _$LastRecordedByInfoImpl _$$LastRecordedByInfoImplFromJson(Map json) =>
           : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
     );
 
-Map<String, dynamic> _$$LastRecordedByInfoImplToJson(
-        _$LastRecordedByInfoImpl instance) =>
+Map<String, dynamic> _$LastRecordedByInfoToJson(_LastRecordedByInfo instance) =>
     <String, dynamic>{
       'time': instance.time.toIso8601String(),
       'recordedBy': instance.recordedBy,

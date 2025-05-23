@@ -28,13 +28,13 @@ final _$TagFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TagImpl _$$TagImplFromJson(Map json) => _$TagImpl(
+_Tag _$TagFromJson(Map json) => _Tag(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$TagToJson(_Tag instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

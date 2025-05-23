@@ -62,7 +62,7 @@ final _$UserFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
+_User _$UserFromJson(Map json) => _User(
       uid: json['uid'] as String,
       name: json['name'] as String,
       email: json['email'] as String?,
@@ -99,8 +99,7 @@ _$UserImpl _$$UserImplFromJson(Map json) => _$UserImpl(
           .toList(),
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
       'uid': instance.uid,
       'name': instance.name,
       'email': instance.email,

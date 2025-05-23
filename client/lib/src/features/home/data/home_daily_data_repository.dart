@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:collection/collection.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 const kCopticMonthsNames = [
@@ -27,7 +26,7 @@ class HomeDailyDataRepository {
       globalProviderContainer.read(homeDailyDataRepositoryProvider);
 
   final Clock _clock;
-  final Box<Map> _currentIndexes;
+  final SyncKVStore<Map> _currentIndexes;
 
   /// Coptic calendar data, indexed by month, then day
   final List<List<String>> _sneksarData;
@@ -37,7 +36,7 @@ class HomeDailyDataRepository {
   const HomeDailyDataRepository({
     required List<List<String>> sneksarData,
     required List<String> sayingData,
-    required Box<Map> currentIndexes,
+    required SyncKVStore<Map> currentIndexes,
     required List<String> versesData,
     Clock? clock,
   })  : _sneksarData = sneksarData,

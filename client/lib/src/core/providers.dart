@@ -14,7 +14,6 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
@@ -69,13 +68,8 @@ final deviceInfoServiceProvider = FutureProvider<DeviceInfoService>(
   },
 );
 
-final hiveProvider = Provider<HiveInterface>((ref) {
-  ref.onDispose(Hive.close);
-  return Hive;
-});
-
 final encryptionServiceProvider = Provider<EncryptionService>(
-  (ref) => EncryptionServiceImpl(),
+  (ref) => EncryptionService(),
 );
 
 final Provider<DatabaseService> databaseServiceProvider =
@@ -113,9 +107,13 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
   },
 );
 
-final graphQLCacheStore = Provider<HiveStore>(
-  (ref) => HiveStore(ref.watch(hiveProvider).box('GQLCache')),
-);
+final graphQLCacheStore = Provider<GqlKvStore>((ref) {
+  final store = GqlKvStore(SyncKVStore.fromLoaded<Json>('GQLCache'));
+
+  ref.onDispose(store.close);
+
+  return store;
+});
 
 final connectivityPluginProvider = Provider<Connectivity>(
   (ref) => Connectivity(),
@@ -157,7 +155,9 @@ final loggingServiceProvider = Provider<LoggingService>(
 );
 
 final userSettingsServiceProvider = Provider<UserSettingsService>(
-  (ref) => UserSettingsService(box: ref.watch(hiveProvider).box('Settings')),
+  (ref) => UserSettingsService(
+    box: SyncKVStore.fromLoaded('Settings'),
+  ),
 );
 
 final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
@@ -237,12 +237,18 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
 });
 
 final notificationsStorageProvider = Provider<NotificationsStorage>(
-  (ref) => NotificationsStorageImpl(ref.watch(hiveProvider), 'Notifications'),
+  (ref) => NotificationsStorageImpl(
+    ref.read(sembastProvider(KvDatabase.shared)).requireValue.serializableKv(
+          'Notifications',
+          fromJson: Notification.fromJson,
+          toJson: (n) => n.toJson(),
+        ),
+  ),
 );
 
 final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
   (ref) => NotificationsSettingsStorage(
-    ref.watch(hiveProvider).box<NotificationSetting>('NotificationsSettings'),
+    SyncKVStore.fromLoaded<NotificationSetting>('NotificationsSettings'),
   ),
 );
 
@@ -317,7 +323,7 @@ final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
 final imageUrlCacheServiceProvider = Provider<ImageUrlCacheService>(
   (ref) => ImageUrlCacheService(
     cacheManager: ref.watch(baseCacheManagerProvider),
-    box: ref.watch(hiveProvider).box<String>('ImageUrlsCache'),
+    box: SyncKVStore.fromLoaded<String>('ImageUrlsCache'),
   ),
 );
 
@@ -393,7 +399,7 @@ final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
 
 final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
   (ref) => HomeDailyDataRepository(
-    currentIndexes: ref.watch(hiveProvider).box<Map>('HomeDailyDataIndexes'),
+    currentIndexes: SyncKVStore.fromLoaded<Map>('HomeDailyDataIndexes'),
     versesData: kVersesData,
     // Chunks the sneksar data into a list of list of 30 strings or less
     // each corresponding to a day in the coptic calendar month

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,155 +10,31 @@ part of 'hobby.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Hobby _$HobbyFromJson(Map<String, dynamic> json) {
-  return _Hobby.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Hobby {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-
-  /// Serializes this Hobby to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Color? get color;
 
   /// Create a copy of Hobby
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $HobbyCopyWith<Hobby> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $HobbyCopyWith<$Res> {
-  factory $HobbyCopyWith(Hobby value, $Res Function(Hobby) then) =
-      _$HobbyCopyWithImpl<$Res, Hobby>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
-}
-
-/// @nodoc
-class _$HobbyCopyWithImpl<$Res, $Val extends Hobby>
-    implements $HobbyCopyWith<$Res> {
-  _$HobbyCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Hobby
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ) as $Val);
-  }
-}
+  $HobbyCopyWith<Hobby> get copyWith =>
+      _$HobbyCopyWithImpl<Hobby>(this as Hobby, _$identity);
 
-/// @nodoc
-abstract class _$$HobbyImplCopyWith<$Res> implements $HobbyCopyWith<$Res> {
-  factory _$$HobbyImplCopyWith(
-          _$HobbyImpl value, $Res Function(_$HobbyImpl) then) =
-      __$$HobbyImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
-}
-
-/// @nodoc
-class __$$HobbyImplCopyWithImpl<$Res>
-    extends _$HobbyCopyWithImpl<$Res, _$HobbyImpl>
-    implements _$$HobbyImplCopyWith<$Res> {
-  __$$HobbyImplCopyWithImpl(
-      _$HobbyImpl _value, $Res Function(_$HobbyImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Hobby
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(_$HobbyImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$HobbyImpl extends _Hobby {
-  _$HobbyImpl(
-      {required this.id,
-      required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
-      : super._();
-
-  factory _$HobbyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$HobbyImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  final Color? color;
-
-  @override
-  String toString() {
-    return 'Hobby(id: $id, name: $name, color: $color)';
-  }
+  /// Serializes this Hobby to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HobbyImpl &&
+            other is Hobby &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color));
@@ -167,44 +44,152 @@ class _$HobbyImpl extends _Hobby {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, color);
 
-  /// Create a copy of Hobby
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
-      __$$HobbyImplCopyWithImpl<_$HobbyImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$HobbyImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Hobby(id: $id, name: $name, color: $color)';
   }
 }
 
-abstract class _Hobby extends Hobby {
-  factory _Hobby(
-      {required final String id,
-      required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-      final Color? color}) = _$HobbyImpl;
-  _Hobby._() : super._();
+/// @nodoc
+abstract mixin class $HobbyCopyWith<$Res> {
+  factory $HobbyCopyWith(Hobby value, $Res Function(Hobby) _then) =
+      _$HobbyCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
+}
 
-  factory _Hobby.fromJson(Map<String, dynamic> json) = _$HobbyImpl.fromJson;
+/// @nodoc
+class _$HobbyCopyWithImpl<$Res> implements $HobbyCopyWith<$Res> {
+  _$HobbyCopyWithImpl(this._self, this._then);
+
+  final Hobby _self;
+  final $Res Function(Hobby) _then;
+
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? color = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Hobby extends Hobby {
+  _Hobby(
+      {required this.id,
+      required this.name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
+      : super._();
+  factory _Hobby.fromJson(Map<String, dynamic> json) => _$HobbyFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
+  final Color? color;
 
   /// Create a copy of Hobby
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HobbyImplCopyWith<_$HobbyImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$HobbyCopyWith<_Hobby> get copyWith =>
+      __$HobbyCopyWithImpl<_Hobby>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$HobbyToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Hobby &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.color, color) || other.color == color));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, color);
+
+  @override
+  String toString() {
+    return 'Hobby(id: $id, name: $name, color: $color)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$HobbyCopyWith<$Res> implements $HobbyCopyWith<$Res> {
+  factory _$HobbyCopyWith(_Hobby value, $Res Function(_Hobby) _then) =
+      __$HobbyCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
+}
+
+/// @nodoc
+class __$HobbyCopyWithImpl<$Res> implements _$HobbyCopyWith<$Res> {
+  __$HobbyCopyWithImpl(this._self, this._then);
+
+  final _Hobby _self;
+  final $Res Function(_Hobby) _then;
+
+  /// Create a copy of Hobby
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? color = freezed,
+  }) {
+    return _then(_Hobby(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+    ));
+  }
+}
+
+// dart format on

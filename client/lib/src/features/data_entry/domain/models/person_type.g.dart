@@ -28,13 +28,13 @@ final _$PersonTypeFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PersonTypeImpl _$$PersonTypeImplFromJson(Map json) => _$PersonTypeImpl(
+_PersonType _$PersonTypeFromJson(Map json) => _PersonType(
       id: json['id'] as String,
       name: json['name'] as String,
       color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$$PersonTypeImplToJson(_$PersonTypeImpl instance) =>
+Map<String, dynamic> _$PersonTypeToJson(_PersonType instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

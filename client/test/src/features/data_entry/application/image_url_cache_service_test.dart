@@ -21,7 +21,7 @@ void main() {
     'Image Url Cache Service: isUrlExpired',
     () async {
       final unit = ImageUrlCacheService(
-        box: FakeBox(),
+        box: FakeSyncKVStore(),
         cacheManager: MockBaseCacheManager(),
       );
 
@@ -59,7 +59,7 @@ void main() {
           getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
 
       final unit = ImageUrlCacheService(
-        box: FakeBox(),
+        box: FakeSyncKVStore(),
         cacheManager: baseCacheManager,
       );
 
@@ -71,7 +71,7 @@ void main() {
   test(
     'Image Url Cache Service: getNonExpiredCachedImageUrl',
     () async {
-      final fakeBox = FakeBox<String>();
+      final fakeBox = FakeSyncKVStore<String>();
       final unit = ImageUrlCacheService(
         box: fakeBox,
         cacheManager: MockBaseCacheManager(),
@@ -127,7 +127,7 @@ void main() {
         getMockedFunctionsSrvc('id', testNotExpiredUrl.toString()),
       );
 
-      final box = FakeBox<String>();
+      final box = FakeSyncKVStore<String>();
       final unit = ImageUrlCacheService(
         box: box,
         cacheManager: baseCacheManager,
@@ -169,7 +169,7 @@ void main() {
         getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
 
     final unit = ImageUrlCacheService(
-      box: FakeBox(),
+      box: FakeSyncKVStore(),
       cacheManager: baseCacheManager,
     );
 

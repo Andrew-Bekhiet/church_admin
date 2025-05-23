@@ -8,7 +8,7 @@ part 'class.g.dart';
 
 @freezed
 @TypeMetadata(labelsOverrides: {'serviceStudyYear': 'ترتيب السنة الدراسية'})
-class Class extends ViewableWithIDAndImage
+abstract class Class extends ViewableWithIDAndImage
     with _$Class
     implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ClassFields;

@@ -7,7 +7,9 @@ part 'church.g.dart';
 
 @freezed
 @TypeMetadata()
-class Church extends ViewableWithID with _$Church implements SerializableExtra {
+abstract class Church extends ViewableWithID
+    with _$Church
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$ChurchFields;
 
   static final QueryableType<Church> queryableType = QueryableType<Church>(

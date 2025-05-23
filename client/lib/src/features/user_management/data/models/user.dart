@@ -15,7 +15,7 @@ part 'user.g.dart';
     'authId',
   ],
 )
-class User extends ViewableWithIDAndImage
+abstract class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$UserFields;

@@ -72,7 +72,7 @@ final _$ServiceFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ServiceImpl _$$ServiceImplFromJson(Map json) => _$ServiceImpl(
+_Service _$ServiceFromJson(Map json) => _Service(
       id: json['id'] as String,
       name: json['name'] as String,
       studyYearFrom: json['studyYearFrom'] == null
@@ -117,8 +117,7 @@ _$ServiceImpl _$$ServiceImplFromJson(Map json) => _$ServiceImpl(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$$ServiceImplToJson(_$ServiceImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ServiceToJson(_Service instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'studyYearFrom': instance.studyYearFrom?.toJson(),

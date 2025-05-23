@@ -57,7 +57,7 @@ final _$FamilyFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
+_Family _$FamilyFromJson(Map json) => _Family(
       id: json['id'] as String,
       name: json['name'] as String,
       address: json['address'] == null
@@ -77,8 +77,7 @@ _$FamilyImpl _$$FamilyImplFromJson(Map json) => _$FamilyImpl(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$$FamilyImplToJson(_$FamilyImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FamilyToJson(_Family instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),

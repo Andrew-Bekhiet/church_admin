@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'geomap_options.freezed.dart';
 
 @freezed
-class GeomapOptions with _$GeomapOptions {
+abstract class GeomapOptions with _$GeomapOptions {
   @Assert('layers.isNotEmpty', 'there must be at least one layer')
   factory GeomapOptions({
     @Default({

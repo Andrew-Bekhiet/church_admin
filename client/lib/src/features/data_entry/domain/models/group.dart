@@ -8,7 +8,7 @@ part 'group.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['validity', 'blurhash'])
-class Group extends ViewableWithIDAndImage
+abstract class Group extends ViewableWithIDAndImage
     with _$Group
     implements SerializableExtra, AttendanceAnalyzable {
   static Map<String, FieldMetadata> get fieldsMetadata => _$GroupFields;

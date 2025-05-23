@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:universal_io/io.dart';
 
 class ImageUrlCacheService {
@@ -13,9 +12,9 @@ class ImageUrlCacheService {
   ImageUrlCacheService({
     required this.box,
     required this.cacheManager,
-  }) : assert(box.isOpen);
+  });
 
-  final Box<String> box;
+  final SyncKVStore<String> box;
   final BaseCacheManager cacheManager;
 
   Future<File> getImageFile(ObjectImageInfo imageInfo) async {

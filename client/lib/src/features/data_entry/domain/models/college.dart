@@ -7,7 +7,7 @@ part 'college.g.dart';
 
 @freezed
 @TypeMetadata()
-class College extends ViewableWithID
+abstract class College extends ViewableWithID
     with _$College
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$CollegeFields;

@@ -23,14 +23,13 @@ final _$FatherFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FatherImpl _$$FatherImplFromJson(Map json) => _$FatherImpl(
+_Father _$FatherFromJson(Map json) => _Father(
       id: json['id'] as String,
       name: json['name'] as String,
       churchId: json['churchId'] as String?,
     );
 
-Map<String, dynamic> _$$FatherImplToJson(_$FatherImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FatherToJson(_Father instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'churchId': instance.churchId,

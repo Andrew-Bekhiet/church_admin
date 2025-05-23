@@ -51,7 +51,7 @@ final _$AreaFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AreaImpl _$$AreaImplFromJson(Map json) => _$AreaImpl(
+_Area _$AreaFromJson(Map json) => _Area(
       id: json['id'] as String,
       name: json['name'] as String,
       bounds: polygonFromJson(json['bounds']),
@@ -71,8 +71,7 @@ _$AreaImpl _$$AreaImplFromJson(Map json) => _$AreaImpl(
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
     );
 
-Map<String, dynamic> _$$AreaImplToJson(_$AreaImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AreaToJson(_Area instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'bounds': polygonToJson(instance.bounds),

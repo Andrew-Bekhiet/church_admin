@@ -8,7 +8,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
 class FirebaseInit implements Initializer {
-  const FirebaseInit();
+  final String? kEmulatorsHost;
+
+  const FirebaseInit({this.kEmulatorsHost});
 
   @override
   Future<void> initialize() async {
@@ -18,7 +20,9 @@ class FirebaseInit implements Initializer {
 
     _initFirebaseFirebaseCloudMessaging();
 
-    if (kDebugMode) await _initializeFirebaseEmulators();
+    if (kDebugMode && kEmulatorsHost != null) {
+      await _initializeFirebaseEmulators(kEmulatorsHost!);
+    }
   }
 
   Future<void> _initFirebaseApp() async {
@@ -45,17 +49,10 @@ class FirebaseInit implements Initializer {
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
   }
 
-  Future<void> _initializeFirebaseEmulators() async {
-    final devBox =
-        await globalProviderContainer.read(hiveProvider).openBox('Dev');
-
-    final kEmulatorsHost = devBox.get('kEmulatorsHost');
-
-    if (kEmulatorsHost != null) {
-      FirebaseFunctions.instanceFor(region: 'europe-west6')
-          .useFunctionsEmulator(kEmulatorsHost, 5001);
-      FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
-    }
+  Future<void> _initializeFirebaseEmulators(String kEmulatorsHost) async {
+    FirebaseFunctions.instanceFor(region: 'europe-west6')
+        .useFunctionsEmulator(kEmulatorsHost, 5001);
+    FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
   }
 
   void _initFirebaseFirebaseCloudMessaging() {

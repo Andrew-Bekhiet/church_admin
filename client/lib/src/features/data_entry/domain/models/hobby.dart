@@ -9,7 +9,9 @@ part 'hobby.g.dart';
 
 @freezed
 @TypeMetadata()
-class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
+abstract class Hobby extends ViewableWithID
+    with _$Hobby
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$HobbyFields;
 
   static final QueryableType<Hobby> queryableType = QueryableType<Hobby>(

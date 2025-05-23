@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,151 +10,31 @@ part of 'tag.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Tag _$TagFromJson(Map<String, dynamic> json) {
-  return _Tag.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Tag {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-
-  /// Serializes this Tag to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Color? get color;
 
   /// Create a copy of Tag
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TagCopyWith<Tag> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TagCopyWith<$Res> {
-  factory $TagCopyWith(Tag value, $Res Function(Tag) then) =
-      _$TagCopyWithImpl<$Res, Tag>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
-}
-
-/// @nodoc
-class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
-  _$TagCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Tag
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ) as $Val);
-  }
-}
+  $TagCopyWith<Tag> get copyWith =>
+      _$TagCopyWithImpl<Tag>(this as Tag, _$identity);
 
-/// @nodoc
-abstract class _$$TagImplCopyWith<$Res> implements $TagCopyWith<$Res> {
-  factory _$$TagImplCopyWith(_$TagImpl value, $Res Function(_$TagImpl) then) =
-      __$$TagImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
-}
-
-/// @nodoc
-class __$$TagImplCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$TagImpl>
-    implements _$$TagImplCopyWith<$Res> {
-  __$$TagImplCopyWithImpl(_$TagImpl _value, $Res Function(_$TagImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Tag
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(_$TagImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TagImpl extends _Tag {
-  _$TagImpl(
-      {required this.id,
-      required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
-      : super._();
-
-  factory _$TagImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TagImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  final Color? color;
-
-  @override
-  String toString() {
-    return 'Tag(id: $id, name: $name, color: $color)';
-  }
+  /// Serializes this Tag to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TagImpl &&
+            other is Tag &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color));
@@ -163,44 +44,151 @@ class _$TagImpl extends _Tag {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, color);
 
-  /// Create a copy of Tag
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
-      __$$TagImplCopyWithImpl<_$TagImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TagImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Tag(id: $id, name: $name, color: $color)';
   }
 }
 
-abstract class _Tag extends Tag {
-  factory _Tag(
-      {required final String id,
-      required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-      final Color? color}) = _$TagImpl;
-  _Tag._() : super._();
+/// @nodoc
+abstract mixin class $TagCopyWith<$Res> {
+  factory $TagCopyWith(Tag value, $Res Function(Tag) _then) = _$TagCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
+}
 
-  factory _Tag.fromJson(Map<String, dynamic> json) = _$TagImpl.fromJson;
+/// @nodoc
+class _$TagCopyWithImpl<$Res> implements $TagCopyWith<$Res> {
+  _$TagCopyWithImpl(this._self, this._then);
+
+  final Tag _self;
+  final $Res Function(Tag) _then;
+
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? color = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Tag extends Tag {
+  _Tag(
+      {required this.id,
+      required this.name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
+      : super._();
+  factory _Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
+  final Color? color;
 
   /// Create a copy of Tag
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$TagCopyWith<_Tag> get copyWith =>
+      __$TagCopyWithImpl<_Tag>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TagToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Tag &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.color, color) || other.color == color));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, color);
+
+  @override
+  String toString() {
+    return 'Tag(id: $id, name: $name, color: $color)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$TagCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$TagCopyWith(_Tag value, $Res Function(_Tag) _then) =
+      __$TagCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
+}
+
+/// @nodoc
+class __$TagCopyWithImpl<$Res> implements _$TagCopyWith<$Res> {
+  __$TagCopyWithImpl(this._self, this._then);
+
+  final _Tag _self;
+  final $Res Function(_Tag) _then;
+
+  /// Create a copy of Tag
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? color = freezed,
+  }) {
+    return _then(_Tag(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+    ));
+  }
+}
+
+// dart format on

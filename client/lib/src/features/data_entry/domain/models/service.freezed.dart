@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,52 +10,113 @@ part of 'service.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Service _$ServiceFromJson(Map<String, dynamic> json) {
-  return _Service.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Service {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  StudyYear? get studyYearFrom => throw _privateConstructorUsedError;
-  StudyYear? get studyYearTo => throw _privateConstructorUsedError;
-  int? get studyYearFromId => throw _privateConstructorUsedError;
-  int? get studyYearToId => throw _privateConstructorUsedError;
-  Service? get nextService => throw _privateConstructorUsedError;
-  String? get nextServiceId => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  StudyYear? get studyYearFrom;
+  StudyYear? get studyYearTo;
+  int? get studyYearFromId;
+  int? get studyYearToId;
+  Service? get nextService;
+  String? get nextServiceId;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-  DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  String? get blurhash => throw _privateConstructorUsedError;
-  List<Class>? get classes => throw _privateConstructorUsedError;
-  List<Group>? get groups => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  Color? get color;
+  DateTime? get photoUpdatedAt;
+  String? get blurhash;
+  List<Class>? get classes;
+  List<Group>? get groups;
+  LastRecordedByInfo? get lastEdit;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers => throw _privateConstructorUsedError;
-  HistoryAggregateData? get attendanceHistoryAggregate =>
-      throw _privateConstructorUsedError;
-  HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this Service to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<User>? get adminUsers;
+  HistoryAggregateData? get attendanceHistoryAggregate;
+  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
 
   /// Create a copy of Service
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ServiceCopyWith<Service> get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<Service> get copyWith =>
+      _$ServiceCopyWithImpl<Service>(this as Service, _$identity);
+
+  /// Serializes this Service to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Service &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.studyYearFrom, studyYearFrom) ||
+                other.studyYearFrom == studyYearFrom) &&
+            (identical(other.studyYearTo, studyYearTo) ||
+                other.studyYearTo == studyYearTo) &&
+            (identical(other.studyYearFromId, studyYearFromId) ||
+                other.studyYearFromId == studyYearFromId) &&
+            (identical(other.studyYearToId, studyYearToId) ||
+                other.studyYearToId == studyYearToId) &&
+            (identical(other.nextService, nextService) ||
+                other.nextService == nextService) &&
+            (identical(other.nextServiceId, nextServiceId) ||
+                other.nextServiceId == nextServiceId) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
+            const DeepCollectionEquality().equals(other.classes, classes) &&
+            const DeepCollectionEquality().equals(other.groups, groups) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other.adminUsers, adminUsers) &&
+            (identical(other.attendanceHistoryAggregate,
+                    attendanceHistoryAggregate) ||
+                other.attendanceHistoryAggregate ==
+                    attendanceHistoryAggregate) &&
+            (identical(other.attendanceDaysConstraintsAggregate,
+                    attendanceDaysConstraintsAggregate) ||
+                other.attendanceDaysConstraintsAggregate ==
+                    attendanceDaysConstraintsAggregate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      studyYearFrom,
+      studyYearTo,
+      studyYearFromId,
+      studyYearToId,
+      nextService,
+      nextServiceId,
+      color,
+      photoUpdatedAt,
+      blurhash,
+      const DeepCollectionEquality().hash(classes),
+      const DeepCollectionEquality().hash(groups),
+      lastEdit,
+      const DeepCollectionEquality().hash(adminUsers),
+      attendanceHistoryAggregate,
+      attendanceDaysConstraintsAggregate);
+
+  @override
+  String toString() {
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+  }
 }
 
 /// @nodoc
-abstract class $ServiceCopyWith<$Res> {
-  factory $ServiceCopyWith(Service value, $Res Function(Service) then) =
-      _$ServiceCopyWithImpl<$Res, Service>;
+abstract mixin class $ServiceCopyWith<$Res> {
+  factory $ServiceCopyWith(Service value, $Res Function(Service) _then) =
+      _$ServiceCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -85,14 +147,11 @@ abstract class $ServiceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ServiceCopyWithImpl<$Res, $Val extends Service>
-    implements $ServiceCopyWith<$Res> {
-  _$ServiceCopyWithImpl(this._value, this._then);
+class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
+  _$ServiceCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Service _self;
+  final $Res Function(Service) _then;
 
   /// Create a copy of Service
   /// with the given fields replaced by the non-null parameter values.
@@ -117,77 +176,77 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       studyYearFrom: freezed == studyYearFrom
-          ? _value.studyYearFrom
+          ? _self.studyYearFrom
           : studyYearFrom // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
       studyYearTo: freezed == studyYearTo
-          ? _value.studyYearTo
+          ? _self.studyYearTo
           : studyYearTo // ignore: cast_nullable_to_non_nullable
               as StudyYear?,
       studyYearFromId: freezed == studyYearFromId
-          ? _value.studyYearFromId
+          ? _self.studyYearFromId
           : studyYearFromId // ignore: cast_nullable_to_non_nullable
               as int?,
       studyYearToId: freezed == studyYearToId
-          ? _value.studyYearToId
+          ? _self.studyYearToId
           : studyYearToId // ignore: cast_nullable_to_non_nullable
               as int?,
       nextService: freezed == nextService
-          ? _value.nextService
+          ? _self.nextService
           : nextService // ignore: cast_nullable_to_non_nullable
               as Service?,
       nextServiceId: freezed == nextServiceId
-          ? _value.nextServiceId
+          ? _self.nextServiceId
           : nextServiceId // ignore: cast_nullable_to_non_nullable
               as String?,
       color: freezed == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
       photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
+          ? _self.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blurhash: freezed == blurhash
-          ? _value.blurhash
+          ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
       classes: freezed == classes
-          ? _value.classes
+          ? _self.classes
           : classes // ignore: cast_nullable_to_non_nullable
               as List<Class>?,
       groups: freezed == groups
-          ? _value.groups
+          ? _self.groups
           : groups // ignore: cast_nullable_to_non_nullable
               as List<Group>?,
       lastEdit: freezed == lastEdit
-          ? _value.lastEdit
+          ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       adminUsers: freezed == adminUsers
-          ? _value.adminUsers
+          ? _self.adminUsers
           : adminUsers // ignore: cast_nullable_to_non_nullable
               as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _value.attendanceHistoryAggregate
+          ? _self.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
       attendanceDaysConstraintsAggregate: freezed ==
               attendanceDaysConstraintsAggregate
-          ? _value.attendanceDaysConstraintsAggregate
+          ? _self.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of Service
@@ -195,12 +254,12 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYearFrom {
-    if (_value.studyYearFrom == null) {
+    if (_self.studyYearFrom == null) {
       return null;
     }
 
-    return $StudyYearCopyWith<$Res>(_value.studyYearFrom!, (value) {
-      return _then(_value.copyWith(studyYearFrom: value) as $Val);
+    return $StudyYearCopyWith<$Res>(_self.studyYearFrom!, (value) {
+      return _then(_self.copyWith(studyYearFrom: value));
     });
   }
 
@@ -209,12 +268,12 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $StudyYearCopyWith<$Res>? get studyYearTo {
-    if (_value.studyYearTo == null) {
+    if (_self.studyYearTo == null) {
       return null;
     }
 
-    return $StudyYearCopyWith<$Res>(_value.studyYearTo!, (value) {
-      return _then(_value.copyWith(studyYearTo: value) as $Val);
+    return $StudyYearCopyWith<$Res>(_self.studyYearTo!, (value) {
+      return _then(_self.copyWith(studyYearTo: value));
     });
   }
 
@@ -223,12 +282,12 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get nextService {
-    if (_value.nextService == null) {
+    if (_self.nextService == null) {
       return null;
     }
 
-    return $ServiceCopyWith<$Res>(_value.nextService!, (value) {
-      return _then(_value.copyWith(nextService: value) as $Val);
+    return $ServiceCopyWith<$Res>(_self.nextService!, (value) {
+      return _then(_self.copyWith(nextService: value));
     });
   }
 
@@ -237,12 +296,12 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
-    if (_value.lastEdit == null) {
+    if (_self.lastEdit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
     });
   }
 
@@ -251,13 +310,13 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
-    if (_value.attendanceHistoryAggregate == null) {
+    if (_self.attendanceHistoryAggregate == null) {
       return null;
     }
 
     return $HistoryAggregateDataCopyWith<$Res>(
-        _value.attendanceHistoryAggregate!, (value) {
-      return _then(_value.copyWith(attendanceHistoryAggregate: value) as $Val);
+        _self.attendanceHistoryAggregate!, (value) {
+      return _then(_self.copyWith(attendanceHistoryAggregate: value));
     });
   }
 
@@ -266,168 +325,21 @@ class _$ServiceCopyWithImpl<$Res, $Val extends Service>
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
-    if (_value.attendanceDaysConstraintsAggregate == null) {
+    if (_self.attendanceDaysConstraintsAggregate == null) {
       return null;
     }
 
     return $HistoryAggregateDataCopyWith<$Res>(
-        _value.attendanceDaysConstraintsAggregate!, (value) {
-      return _then(
-          _value.copyWith(attendanceDaysConstraintsAggregate: value) as $Val);
+        _self.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_self.copyWith(attendanceDaysConstraintsAggregate: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ServiceImplCopyWith<$Res> implements $ServiceCopyWith<$Res> {
-  factory _$$ServiceImplCopyWith(
-          _$ServiceImpl value, $Res Function(_$ServiceImpl) then) =
-      __$$ServiceImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      StudyYear? studyYearFrom,
-      StudyYear? studyYearTo,
-      int? studyYearFromId,
-      int? studyYearToId,
-      Service? nextService,
-      String? nextServiceId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<Class>? classes,
-      List<Group>? groups,
-      LastRecordedByInfo? lastEdit,
-      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      List<User>? adminUsers,
-      HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? attendanceDaysConstraintsAggregate});
-
-  @override
-  $StudyYearCopyWith<$Res>? get studyYearFrom;
-  @override
-  $StudyYearCopyWith<$Res>? get studyYearTo;
-  @override
-  $ServiceCopyWith<$Res>? get nextService;
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-  @override
-  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
-  @override
-  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
-}
-
-/// @nodoc
-class __$$ServiceImplCopyWithImpl<$Res>
-    extends _$ServiceCopyWithImpl<$Res, _$ServiceImpl>
-    implements _$$ServiceImplCopyWith<$Res> {
-  __$$ServiceImplCopyWithImpl(
-      _$ServiceImpl _value, $Res Function(_$ServiceImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Service
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? studyYearFrom = freezed,
-    Object? studyYearTo = freezed,
-    Object? studyYearFromId = freezed,
-    Object? studyYearToId = freezed,
-    Object? nextService = freezed,
-    Object? nextServiceId = freezed,
-    Object? color = freezed,
-    Object? photoUpdatedAt = freezed,
-    Object? blurhash = freezed,
-    Object? classes = freezed,
-    Object? groups = freezed,
-    Object? lastEdit = freezed,
-    Object? adminUsers = freezed,
-    Object? attendanceHistoryAggregate = freezed,
-    Object? attendanceDaysConstraintsAggregate = freezed,
-  }) {
-    return _then(_$ServiceImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      studyYearFrom: freezed == studyYearFrom
-          ? _value.studyYearFrom
-          : studyYearFrom // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      studyYearTo: freezed == studyYearTo
-          ? _value.studyYearTo
-          : studyYearTo // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      studyYearFromId: freezed == studyYearFromId
-          ? _value.studyYearFromId
-          : studyYearFromId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      studyYearToId: freezed == studyYearToId
-          ? _value.studyYearToId
-          : studyYearToId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      nextService: freezed == nextService
-          ? _value.nextService
-          : nextService // ignore: cast_nullable_to_non_nullable
-              as Service?,
-      nextServiceId: freezed == nextServiceId
-          ? _value.nextServiceId
-          : nextServiceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _value.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      classes: freezed == classes
-          ? _value._classes
-          : classes // ignore: cast_nullable_to_non_nullable
-              as List<Class>?,
-      groups: freezed == groups
-          ? _value._groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>?,
-      lastEdit: freezed == lastEdit
-          ? _value.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _value._adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _value.attendanceHistoryAggregate
-          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      attendanceDaysConstraintsAggregate: freezed ==
-              attendanceDaysConstraintsAggregate
-          ? _value.attendanceDaysConstraintsAggregate
-          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$ServiceImpl extends _Service {
-  _$ServiceImpl(
+class _Service extends Service {
+  _Service(
       {required this.id,
       required this.name,
       this.studyYearFrom,
@@ -450,9 +362,8 @@ class _$ServiceImpl extends _Service {
         _groups = groups,
         _adminUsers = adminUsers,
         super._();
-
-  factory _$ServiceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ServiceImplFromJson(json);
+  factory _Service.fromJson(Map<String, dynamic> json) =>
+      _$ServiceFromJson(json);
 
   @override
   final String id;
@@ -515,16 +426,26 @@ class _$ServiceImpl extends _Service {
   @override
   final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ServiceCopyWith<_Service> get copyWith =>
+      __$ServiceCopyWithImpl<_Service>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ServiceToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ServiceImpl &&
+            other is _Service &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.studyYearFrom, studyYearFrom) ||
@@ -582,88 +503,240 @@ class _$ServiceImpl extends _Service {
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
-  /// Create a copy of Service
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ServiceImplCopyWith<_$ServiceImpl> get copyWith =>
-      __$$ServiceImplCopyWithImpl<_$ServiceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ServiceImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 }
 
-abstract class _Service extends Service {
-  factory _Service(
-      {required final String id,
-      required final String name,
-      final StudyYear? studyYearFrom,
-      final StudyYear? studyYearTo,
-      final int? studyYearFromId,
-      final int? studyYearToId,
-      final Service? nextService,
-      final String? nextServiceId,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt,
-      final String? blurhash,
-      final List<Class>? classes,
-      final List<Group>? groups,
-      final LastRecordedByInfo? lastEdit,
+/// @nodoc
+abstract mixin class _$ServiceCopyWith<$Res> implements $ServiceCopyWith<$Res> {
+  factory _$ServiceCopyWith(_Service value, $Res Function(_Service) _then) =
+      __$ServiceCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      StudyYear? studyYearFrom,
+      StudyYear? studyYearTo,
+      int? studyYearFromId,
+      int? studyYearToId,
+      Service? nextService,
+      String? nextServiceId,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      DateTime? photoUpdatedAt,
+      String? blurhash,
+      List<Class>? classes,
+      List<Group>? groups,
+      LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      final List<User>? adminUsers,
-      final HistoryAggregateData? attendanceHistoryAggregate,
-      final HistoryAggregateData?
-          attendanceDaysConstraintsAggregate}) = _$ServiceImpl;
-  _Service._() : super._();
-
-  factory _Service.fromJson(Map<String, dynamic> json) = _$ServiceImpl.fromJson;
+      List<User>? adminUsers,
+      HistoryAggregateData? attendanceHistoryAggregate,
+      HistoryAggregateData? attendanceDaysConstraintsAggregate});
 
   @override
-  String get id;
+  $StudyYearCopyWith<$Res>? get studyYearFrom;
   @override
-  String get name;
+  $StudyYearCopyWith<$Res>? get studyYearTo;
   @override
-  StudyYear? get studyYearFrom;
+  $ServiceCopyWith<$Res>? get nextService;
   @override
-  StudyYear? get studyYearTo;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
-  int? get studyYearFromId;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
   @override
-  int? get studyYearToId;
-  @override
-  Service? get nextService;
-  @override
-  String? get nextServiceId;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
-  @override
-  DateTime? get photoUpdatedAt;
-  @override
-  String? get blurhash;
-  @override
-  List<Class>? get classes;
-  @override
-  List<Group>? get groups;
-  @override
-  LastRecordedByInfo? get lastEdit;
-  @override
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers;
-  @override
-  HistoryAggregateData? get attendanceHistoryAggregate;
-  @override
-  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
+}
+
+/// @nodoc
+class __$ServiceCopyWithImpl<$Res> implements _$ServiceCopyWith<$Res> {
+  __$ServiceCopyWithImpl(this._self, this._then);
+
+  final _Service _self;
+  final $Res Function(_Service) _then;
 
   /// Create a copy of Service
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ServiceImplCopyWith<_$ServiceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? studyYearFrom = freezed,
+    Object? studyYearTo = freezed,
+    Object? studyYearFromId = freezed,
+    Object? studyYearToId = freezed,
+    Object? nextService = freezed,
+    Object? nextServiceId = freezed,
+    Object? color = freezed,
+    Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
+    Object? classes = freezed,
+    Object? groups = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
+  }) {
+    return _then(_Service(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      studyYearFrom: freezed == studyYearFrom
+          ? _self.studyYearFrom
+          : studyYearFrom // ignore: cast_nullable_to_non_nullable
+              as StudyYear?,
+      studyYearTo: freezed == studyYearTo
+          ? _self.studyYearTo
+          : studyYearTo // ignore: cast_nullable_to_non_nullable
+              as StudyYear?,
+      studyYearFromId: freezed == studyYearFromId
+          ? _self.studyYearFromId
+          : studyYearFromId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      studyYearToId: freezed == studyYearToId
+          ? _self.studyYearToId
+          : studyYearToId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      nextService: freezed == nextService
+          ? _self.nextService
+          : nextService // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      nextServiceId: freezed == nextServiceId
+          ? _self.nextServiceId
+          : nextServiceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+      photoUpdatedAt: freezed == photoUpdatedAt
+          ? _self.photoUpdatedAt
+          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blurhash: freezed == blurhash
+          ? _self.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      classes: freezed == classes
+          ? _self._classes
+          : classes // ignore: cast_nullable_to_non_nullable
+              as List<Class>?,
+      groups: freezed == groups
+          ? _self._groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<Group>?,
+      lastEdit: freezed == lastEdit
+          ? _self.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _self._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
+      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
+          ? _self.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as HistoryAggregateData?,
+      attendanceDaysConstraintsAggregate: freezed ==
+              attendanceDaysConstraintsAggregate
+          ? _self.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as HistoryAggregateData?,
+    ));
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYearFrom {
+    if (_self.studyYearFrom == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYearFrom!, (value) {
+      return _then(_self.copyWith(studyYearFrom: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $StudyYearCopyWith<$Res>? get studyYearTo {
+    if (_self.studyYearTo == null) {
+      return null;
+    }
+
+    return $StudyYearCopyWith<$Res>(_self.studyYearTo!, (value) {
+      return _then(_self.copyWith(studyYearTo: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get nextService {
+    if (_self.nextService == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.nextService!, (value) {
+      return _then(_self.copyWith(nextService: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
+    if (_self.attendanceHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+        _self.attendanceHistoryAggregate!, (value) {
+      return _then(_self.copyWith(attendanceHistoryAggregate: value));
+    });
+  }
+
+  /// Create a copy of Service
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
+    if (_self.attendanceDaysConstraintsAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+        _self.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_self.copyWith(attendanceDaysConstraintsAggregate: value));
+    });
+  }
 }
+
+// dart format on

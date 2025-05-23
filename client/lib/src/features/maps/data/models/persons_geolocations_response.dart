@@ -5,7 +5,7 @@ part 'persons_geolocations_response.freezed.dart';
 part 'persons_geolocations_response.g.dart';
 
 @freezed
-class PersonsGeolocationsResponse
+abstract class PersonsGeolocationsResponse
     with _$PersonsGeolocationsResponse
     implements ToJson {
   factory PersonsGeolocationsResponse({

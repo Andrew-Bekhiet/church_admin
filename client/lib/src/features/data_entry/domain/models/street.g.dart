@@ -51,7 +51,7 @@ final _$StreetFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
+_Street _$StreetFromJson(Map json) => _Street(
       id: json['id'] as String,
       name: json['name'] as String,
       line: lineFromJson(json['line']),
@@ -71,8 +71,7 @@ _$StreetImpl _$$StreetImplFromJson(Map json) => _$StreetImpl(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$$StreetImplToJson(_$StreetImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$StreetToJson(_Street instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'line': lineToJson(instance.line),

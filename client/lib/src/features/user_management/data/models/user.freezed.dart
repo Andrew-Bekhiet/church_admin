@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,45 +10,91 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
 
 /// @nodoc
 mixin _$User {
-  String get uid => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  String? get blurhash => throw _privateConstructorUsedError;
-  List<AdminOnData>? get adminOn => throw _privateConstructorUsedError;
+  String get uid;
+  String get name;
+  String? get email;
+  DateTime? get photoUpdatedAt;
+  String? get blurhash;
+  List<AdminOnData>? get adminOn;
   @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  PermissionsSet get permissions => throw _privateConstructorUsedError;
-  String? get authId => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
-  Person? get person => throw _privateConstructorUsedError;
-  List<AdminOnData>? get servicesHistory => throw _privateConstructorUsedError;
-  List<AdminOnData>? get classesHistory => throw _privateConstructorUsedError;
-  List<AdminOnData>? get groupsHistory => throw _privateConstructorUsedError;
-
-  /// Serializes this User to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  PermissionsSet get permissions;
+  String? get authId;
+  LastRecordedByInfo? get lastEdit;
+  Person? get person;
+  List<AdminOnData>? get servicesHistory;
+  List<AdminOnData>? get classesHistory;
+  List<AdminOnData>? get groupsHistory;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<User> get copyWith =>
+      _$UserCopyWithImpl<User>(this as User, _$identity);
+
+  /// Serializes this User to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is User &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
+            const DeepCollectionEquality().equals(other.adminOn, adminOn) &&
+            const DeepCollectionEquality()
+                .equals(other.permissions, permissions) &&
+            (identical(other.authId, authId) || other.authId == authId) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            (identical(other.person, person) || other.person == person) &&
+            const DeepCollectionEquality()
+                .equals(other.servicesHistory, servicesHistory) &&
+            const DeepCollectionEquality()
+                .equals(other.classesHistory, classesHistory) &&
+            const DeepCollectionEquality()
+                .equals(other.groupsHistory, groupsHistory));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      uid,
+      name,
+      email,
+      photoUpdatedAt,
+      blurhash,
+      const DeepCollectionEquality().hash(adminOn),
+      const DeepCollectionEquality().hash(permissions),
+      authId,
+      lastEdit,
+      person,
+      const DeepCollectionEquality().hash(servicesHistory),
+      const DeepCollectionEquality().hash(classesHistory),
+      const DeepCollectionEquality().hash(groupsHistory));
+
+  @override
+  String toString() {
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
+  }
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract mixin class $UserCopyWith<$Res> {
+  factory $UserCopyWith(User value, $Res Function(User) _then) =
+      _$UserCopyWithImpl;
   @useResult
   $Res call(
       {String uid,
@@ -70,14 +117,11 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final User _self;
+  final $Res Function(User) _then;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -98,60 +142,60 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? classesHistory = freezed,
     Object? groupsHistory = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       email: freezed == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
       photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
+          ? _self.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blurhash: freezed == blurhash
-          ? _value.blurhash
+          ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
       adminOn: freezed == adminOn
-          ? _value.adminOn
+          ? _self.adminOn
           : adminOn // ignore: cast_nullable_to_non_nullable
               as List<AdminOnData>?,
       permissions: null == permissions
-          ? _value.permissions
+          ? _self.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
               as PermissionsSet,
       authId: freezed == authId
-          ? _value.authId
+          ? _self.authId
           : authId // ignore: cast_nullable_to_non_nullable
               as String?,
       lastEdit: freezed == lastEdit
-          ? _value.lastEdit
+          ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       person: freezed == person
-          ? _value.person
+          ? _self.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person?,
       servicesHistory: freezed == servicesHistory
-          ? _value.servicesHistory
+          ? _self.servicesHistory
           : servicesHistory // ignore: cast_nullable_to_non_nullable
               as List<AdminOnData>?,
       classesHistory: freezed == classesHistory
-          ? _value.classesHistory
+          ? _self.classesHistory
           : classesHistory // ignore: cast_nullable_to_non_nullable
               as List<AdminOnData>?,
       groupsHistory: freezed == groupsHistory
-          ? _value.groupsHistory
+          ? _self.groupsHistory
           : groupsHistory // ignore: cast_nullable_to_non_nullable
               as List<AdminOnData>?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of User
@@ -159,12 +203,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
-    if (_value.lastEdit == null) {
+    if (_self.lastEdit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
     });
   }
 
@@ -173,132 +217,20 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   @pragma('vm:prefer-inline')
   $PersonCopyWith<$Res>? get person {
-    if (_value.person == null) {
+    if (_self.person == null) {
       return null;
     }
 
-    return $PersonCopyWith<$Res>(_value.person!, (value) {
-      return _then(_value.copyWith(person: value) as $Val);
+    return $PersonCopyWith<$Res>(_self.person!, (value) {
+      return _then(_self.copyWith(person: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String uid,
-      String name,
-      String? email,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<AdminOnData>? adminOn,
-      @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-      PermissionsSet permissions,
-      String? authId,
-      LastRecordedByInfo? lastEdit,
-      Person? person,
-      List<AdminOnData>? servicesHistory,
-      List<AdminOnData>? classesHistory,
-      List<AdminOnData>? groupsHistory});
-
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-  @override
-  $PersonCopyWith<$Res>? get person;
-}
-
-/// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? uid = null,
-    Object? name = null,
-    Object? email = freezed,
-    Object? photoUpdatedAt = freezed,
-    Object? blurhash = freezed,
-    Object? adminOn = freezed,
-    Object? permissions = null,
-    Object? authId = freezed,
-    Object? lastEdit = freezed,
-    Object? person = freezed,
-    Object? servicesHistory = freezed,
-    Object? classesHistory = freezed,
-    Object? groupsHistory = freezed,
-  }) {
-    return _then(_$UserImpl(
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _value.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      adminOn: freezed == adminOn
-          ? _value._adminOn
-          : adminOn // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      permissions: null == permissions
-          ? _value.permissions
-          : permissions // ignore: cast_nullable_to_non_nullable
-              as PermissionsSet,
-      authId: freezed == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastEdit: freezed == lastEdit
-          ? _value.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      person: freezed == person
-          ? _value.person
-          : person // ignore: cast_nullable_to_non_nullable
-              as Person?,
-      servicesHistory: freezed == servicesHistory
-          ? _value._servicesHistory
-          : servicesHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      classesHistory: freezed == classesHistory
-          ? _value._classesHistory
-          : classesHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      groupsHistory: freezed == groupsHistory
-          ? _value._groupsHistory
-          : groupsHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$UserImpl extends _User {
-  _$UserImpl(
+class _User extends User {
+  _User(
       {required this.uid,
       required this.name,
       this.email,
@@ -318,9 +250,7 @@ class _$UserImpl extends _User {
         _classesHistory = classesHistory,
         _groupsHistory = groupsHistory,
         super._();
-
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
+  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
   final String uid;
@@ -381,16 +311,26 @@ class _$UserImpl extends _User {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserCopyWith<_User> get copyWith =>
+      __$UserCopyWithImpl<_User>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
+            other is _User &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
@@ -431,74 +371,149 @@ class _$UserImpl extends _User {
       const DeepCollectionEquality().hash(_classesHistory),
       const DeepCollectionEquality().hash(_groupsHistory));
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
+  String toString() {
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
   }
 }
 
-abstract class _User extends User {
-  factory _User(
-      {required final String uid,
-      required final String name,
-      final String? email,
-      final DateTime? photoUpdatedAt,
-      final String? blurhash,
-      final List<AdminOnData>? adminOn,
+/// @nodoc
+abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) =
+      __$UserCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String uid,
+      String name,
+      String? email,
+      DateTime? photoUpdatedAt,
+      String? blurhash,
+      List<AdminOnData>? adminOn,
       @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-      final PermissionsSet permissions,
-      final String? authId,
-      final LastRecordedByInfo? lastEdit,
-      final Person? person,
-      final List<AdminOnData>? servicesHistory,
-      final List<AdminOnData>? classesHistory,
-      final List<AdminOnData>? groupsHistory}) = _$UserImpl;
-  _User._() : super._();
-
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
+      PermissionsSet permissions,
+      String? authId,
+      LastRecordedByInfo? lastEdit,
+      Person? person,
+      List<AdminOnData>? servicesHistory,
+      List<AdminOnData>? classesHistory,
+      List<AdminOnData>? groupsHistory});
 
   @override
-  String get uid;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
-  String get name;
-  @override
-  String? get email;
-  @override
-  DateTime? get photoUpdatedAt;
-  @override
-  String? get blurhash;
-  @override
-  List<AdminOnData>? get adminOn;
-  @override
-  @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
-  PermissionsSet get permissions;
-  @override
-  String? get authId;
-  @override
-  LastRecordedByInfo? get lastEdit;
-  @override
-  Person? get person;
-  @override
-  List<AdminOnData>? get servicesHistory;
-  @override
-  List<AdminOnData>? get classesHistory;
-  @override
-  List<AdminOnData>? get groupsHistory;
+  $PersonCopyWith<$Res>? get person;
+}
+
+/// @nodoc
+class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
+
+  final _User _self;
+  final $Res Function(_User) _then;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? uid = null,
+    Object? name = null,
+    Object? email = freezed,
+    Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
+    Object? adminOn = freezed,
+    Object? permissions = null,
+    Object? authId = freezed,
+    Object? lastEdit = freezed,
+    Object? person = freezed,
+    Object? servicesHistory = freezed,
+    Object? classesHistory = freezed,
+    Object? groupsHistory = freezed,
+  }) {
+    return _then(_User(
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photoUpdatedAt: freezed == photoUpdatedAt
+          ? _self.photoUpdatedAt
+          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blurhash: freezed == blurhash
+          ? _self.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adminOn: freezed == adminOn
+          ? _self._adminOn
+          : adminOn // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      permissions: null == permissions
+          ? _self.permissions
+          : permissions // ignore: cast_nullable_to_non_nullable
+              as PermissionsSet,
+      authId: freezed == authId
+          ? _self.authId
+          : authId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastEdit: freezed == lastEdit
+          ? _self.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      person: freezed == person
+          ? _self.person
+          : person // ignore: cast_nullable_to_non_nullable
+              as Person?,
+      servicesHistory: freezed == servicesHistory
+          ? _self._servicesHistory
+          : servicesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      classesHistory: freezed == classesHistory
+          ? _self._classesHistory
+          : classesHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+      groupsHistory: freezed == groupsHistory
+          ? _self._groupsHistory
+          : groupsHistory // ignore: cast_nullable_to_non_nullable
+              as List<AdminOnData>?,
+    ));
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get person {
+    if (_self.person == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_self.person!, (value) {
+      return _then(_self.copyWith(person: value));
+    });
+  }
 }
+
+// dart format on

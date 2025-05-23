@@ -7,7 +7,7 @@ part 'last_recorded_by_info.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['recordedBy'])
-class LastRecordedByInfo extends ViewableWithID
+abstract class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata =>

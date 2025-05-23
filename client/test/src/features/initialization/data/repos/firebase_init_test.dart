@@ -5,17 +5,15 @@ import 'package:firebase_auth_platform_interface/firebase_auth_platform_interfac
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:firebase_messaging_platform_interface/firebase_messaging_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:sembast/sembast.dart' as sembast;
 
 import 'firebase_init_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<HiveInterface>(),
-  MockSpec<Box>(),
+  MockSpec<sembast.DatabaseClient>(),
   MockSpec<FirebasePlatform>(as: #FirebasePlatform_),
   MockSpec<FirebaseAuthPlatform>(as: #FirebaseAuthPlatform_),
   MockSpec<FirebaseAppPlatform>(as: #MockFirebaseAppPlatform_),
@@ -55,8 +53,6 @@ void _setUp() {
   _setUpMockFirebaseAppCheck();
   _setUpMockFirebaseAuth();
   _setUpMockFirebaseMessaging();
-
-  initGlobalProviderContainer([_setUpMockHive()]);
 }
 
 void _setUpMockFirebaseCore() {
@@ -81,7 +77,9 @@ void _setUpMockFirebaseAppCheck() {
       androidProvider: anyNamed('androidProvider'),
       appleProvider: anyNamed('appleProvider'),
     ),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
 
   when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
   when(mock.setInitialValues()).thenReturn(mock);
@@ -94,7 +92,9 @@ void _setUpMockFirebaseAuth() {
   when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
   when(mock.setInitialValues()).thenReturn(mock);
   when(mock.setSettings(forceRecaptchaFlow: anyNamed('forceRecaptchaFlow')))
-      .thenAnswer((_) async {});
+      .thenAnswer((_) async {
+    return;
+  });
 
   FirebaseAuthPlatform.instance = mock;
 }
@@ -103,26 +103,14 @@ void _setUpMockFirebaseMessaging() {
   final mock = MockFirebaseMessagingPlatform();
   when(
     mock.registerBackgroundMessageHandler(any),
-  ).thenAnswer((_) async {});
+  ).thenAnswer((_) async {
+    return;
+  });
 
   when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
   when(mock.setInitialValues()).thenReturn(mock);
 
   FirebaseMessagingPlatform.instance = mock;
-}
-
-Override _setUpMockHive() {
-  final mockHiveInterface = MockHiveInterface();
-
-  when(
-    mockHiveInterface.openBox<Map?>(
-      any,
-      encryptionCipher: anyNamed('encryptionCipher'),
-    ),
-  ).thenAnswer((_) async => MockBox<Map?>());
-
-  final overrideWithValue = hiveProvider.overrideWithValue(mockHiveInterface);
-  return overrideWithValue;
 }
 
 class MockFirebasePlatform extends FirebasePlatform_

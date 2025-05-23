@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,114 +10,73 @@ part of 'geomap_options.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GeomapOptions {
-  Set<GeoMapLayer> get layers => throw _privateConstructorUsedError;
-  Set<Area> get selectedAreas => throw _privateConstructorUsedError;
-  Set<Street> get selectedStreets => throw _privateConstructorUsedError;
-  Set<Family> get selectedFamilies => throw _privateConstructorUsedError;
-  Set<Store> get selectedStores => throw _privateConstructorUsedError;
-  Set<Service> get selectedServices => throw _privateConstructorUsedError;
-  Set<Class> get selectedClasses => throw _privateConstructorUsedError;
-  Set<Group> get selectedGroups => throw _privateConstructorUsedError;
+  Set<GeoMapLayer> get layers;
+  Set<Area> get selectedAreas;
+  Set<Street> get selectedStreets;
+  Set<Family> get selectedFamilies;
+  Set<Store> get selectedStores;
+  Set<Service> get selectedServices;
+  Set<Class> get selectedClasses;
+  Set<Group> get selectedGroups;
 
   /// Create a copy of GeomapOptions
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GeomapOptionsCopyWith<GeomapOptions> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GeomapOptionsCopyWith<$Res> {
-  factory $GeomapOptionsCopyWith(
-          GeomapOptions value, $Res Function(GeomapOptions) then) =
-      _$GeomapOptionsCopyWithImpl<$Res, GeomapOptions>;
-  @useResult
-  $Res call(
-      {Set<GeoMapLayer> layers,
-      Set<Area> selectedAreas,
-      Set<Street> selectedStreets,
-      Set<Family> selectedFamilies,
-      Set<Store> selectedStores,
-      Set<Service> selectedServices,
-      Set<Class> selectedClasses,
-      Set<Group> selectedGroups});
-}
-
-/// @nodoc
-class _$GeomapOptionsCopyWithImpl<$Res, $Val extends GeomapOptions>
-    implements $GeomapOptionsCopyWith<$Res> {
-  _$GeomapOptionsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GeomapOptions
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GeomapOptionsCopyWith<GeomapOptions> get copyWith =>
+      _$GeomapOptionsCopyWithImpl<GeomapOptions>(
+          this as GeomapOptions, _$identity);
+
   @override
-  $Res call({
-    Object? layers = null,
-    Object? selectedAreas = null,
-    Object? selectedStreets = null,
-    Object? selectedFamilies = null,
-    Object? selectedStores = null,
-    Object? selectedServices = null,
-    Object? selectedClasses = null,
-    Object? selectedGroups = null,
-  }) {
-    return _then(_value.copyWith(
-      layers: null == layers
-          ? _value.layers
-          : layers // ignore: cast_nullable_to_non_nullable
-              as Set<GeoMapLayer>,
-      selectedAreas: null == selectedAreas
-          ? _value.selectedAreas
-          : selectedAreas // ignore: cast_nullable_to_non_nullable
-              as Set<Area>,
-      selectedStreets: null == selectedStreets
-          ? _value.selectedStreets
-          : selectedStreets // ignore: cast_nullable_to_non_nullable
-              as Set<Street>,
-      selectedFamilies: null == selectedFamilies
-          ? _value.selectedFamilies
-          : selectedFamilies // ignore: cast_nullable_to_non_nullable
-              as Set<Family>,
-      selectedStores: null == selectedStores
-          ? _value.selectedStores
-          : selectedStores // ignore: cast_nullable_to_non_nullable
-              as Set<Store>,
-      selectedServices: null == selectedServices
-          ? _value.selectedServices
-          : selectedServices // ignore: cast_nullable_to_non_nullable
-              as Set<Service>,
-      selectedClasses: null == selectedClasses
-          ? _value.selectedClasses
-          : selectedClasses // ignore: cast_nullable_to_non_nullable
-              as Set<Class>,
-      selectedGroups: null == selectedGroups
-          ? _value.selectedGroups
-          : selectedGroups // ignore: cast_nullable_to_non_nullable
-              as Set<Group>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GeomapOptions &&
+            const DeepCollectionEquality().equals(other.layers, layers) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedAreas, selectedAreas) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedStreets, selectedStreets) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedFamilies, selectedFamilies) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedStores, selectedStores) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedServices, selectedServices) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedClasses, selectedClasses) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedGroups, selectedGroups));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(layers),
+      const DeepCollectionEquality().hash(selectedAreas),
+      const DeepCollectionEquality().hash(selectedStreets),
+      const DeepCollectionEquality().hash(selectedFamilies),
+      const DeepCollectionEquality().hash(selectedStores),
+      const DeepCollectionEquality().hash(selectedServices),
+      const DeepCollectionEquality().hash(selectedClasses),
+      const DeepCollectionEquality().hash(selectedGroups));
+
+  @override
+  String toString() {
+    return 'GeomapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
   }
 }
 
 /// @nodoc
-abstract class _$$GeoMapOptionsImplCopyWith<$Res>
-    implements $GeomapOptionsCopyWith<$Res> {
-  factory _$$GeoMapOptionsImplCopyWith(
-          _$GeoMapOptionsImpl value, $Res Function(_$GeoMapOptionsImpl) then) =
-      __$$GeoMapOptionsImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GeomapOptionsCopyWith<$Res> {
+  factory $GeomapOptionsCopyWith(
+          GeomapOptions value, $Res Function(GeomapOptions) _then) =
+      _$GeomapOptionsCopyWithImpl;
   @useResult
   $Res call(
       {Set<GeoMapLayer> layers,
@@ -130,12 +90,12 @@ abstract class _$$GeoMapOptionsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GeoMapOptionsImplCopyWithImpl<$Res>
-    extends _$GeomapOptionsCopyWithImpl<$Res, _$GeoMapOptionsImpl>
-    implements _$$GeoMapOptionsImplCopyWith<$Res> {
-  __$$GeoMapOptionsImplCopyWithImpl(
-      _$GeoMapOptionsImpl _value, $Res Function(_$GeoMapOptionsImpl) _then)
-      : super(_value, _then);
+class _$GeomapOptionsCopyWithImpl<$Res>
+    implements $GeomapOptionsCopyWith<$Res> {
+  _$GeomapOptionsCopyWithImpl(this._self, this._then);
+
+  final GeomapOptions _self;
+  final $Res Function(GeomapOptions) _then;
 
   /// Create a copy of GeomapOptions
   /// with the given fields replaced by the non-null parameter values.
@@ -151,37 +111,37 @@ class __$$GeoMapOptionsImplCopyWithImpl<$Res>
     Object? selectedClasses = null,
     Object? selectedGroups = null,
   }) {
-    return _then(_$GeoMapOptionsImpl(
+    return _then(_self.copyWith(
       layers: null == layers
-          ? _value._layers
+          ? _self.layers
           : layers // ignore: cast_nullable_to_non_nullable
               as Set<GeoMapLayer>,
       selectedAreas: null == selectedAreas
-          ? _value._selectedAreas
+          ? _self.selectedAreas
           : selectedAreas // ignore: cast_nullable_to_non_nullable
               as Set<Area>,
       selectedStreets: null == selectedStreets
-          ? _value._selectedStreets
+          ? _self.selectedStreets
           : selectedStreets // ignore: cast_nullable_to_non_nullable
               as Set<Street>,
       selectedFamilies: null == selectedFamilies
-          ? _value._selectedFamilies
+          ? _self.selectedFamilies
           : selectedFamilies // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
       selectedStores: null == selectedStores
-          ? _value._selectedStores
+          ? _self.selectedStores
           : selectedStores // ignore: cast_nullable_to_non_nullable
               as Set<Store>,
       selectedServices: null == selectedServices
-          ? _value._selectedServices
+          ? _self.selectedServices
           : selectedServices // ignore: cast_nullable_to_non_nullable
               as Set<Service>,
       selectedClasses: null == selectedClasses
-          ? _value._selectedClasses
+          ? _self.selectedClasses
           : selectedClasses // ignore: cast_nullable_to_non_nullable
               as Set<Class>,
       selectedGroups: null == selectedGroups
-          ? _value._selectedGroups
+          ? _self.selectedGroups
           : selectedGroups // ignore: cast_nullable_to_non_nullable
               as Set<Group>,
     ));
@@ -190,8 +150,8 @@ class __$$GeoMapOptionsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GeoMapOptionsImpl implements _GeoMapOptions {
-  _$GeoMapOptionsImpl(
+class _GeoMapOptions implements GeomapOptions {
+  _GeoMapOptions(
       {final Set<GeoMapLayer> layers = const {
         GeoMapLayer.areas,
         GeoMapLayer.streets,
@@ -287,16 +247,19 @@ class _$GeoMapOptionsImpl implements _GeoMapOptions {
     return EqualUnmodifiableSetView(_selectedGroups);
   }
 
+  /// Create a copy of GeomapOptions
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GeomapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GeoMapOptionsCopyWith<_GeoMapOptions> get copyWith =>
+      __$GeoMapOptionsCopyWithImpl<_GeoMapOptions>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GeoMapOptionsImpl &&
+            other is _GeoMapOptions &&
             const DeepCollectionEquality().equals(other._layers, _layers) &&
             const DeepCollectionEquality()
                 .equals(other._selectedAreas, _selectedAreas) &&
@@ -326,47 +289,88 @@ class _$GeoMapOptionsImpl implements _GeoMapOptions {
       const DeepCollectionEquality().hash(_selectedClasses),
       const DeepCollectionEquality().hash(_selectedGroups));
 
+  @override
+  String toString() {
+    return 'GeomapOptions(layers: $layers, selectedAreas: $selectedAreas, selectedStreets: $selectedStreets, selectedFamilies: $selectedFamilies, selectedStores: $selectedStores, selectedServices: $selectedServices, selectedClasses: $selectedClasses, selectedGroups: $selectedGroups)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$GeoMapOptionsCopyWith<$Res>
+    implements $GeomapOptionsCopyWith<$Res> {
+  factory _$GeoMapOptionsCopyWith(
+          _GeoMapOptions value, $Res Function(_GeoMapOptions) _then) =
+      __$GeoMapOptionsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Set<GeoMapLayer> layers,
+      Set<Area> selectedAreas,
+      Set<Street> selectedStreets,
+      Set<Family> selectedFamilies,
+      Set<Store> selectedStores,
+      Set<Service> selectedServices,
+      Set<Class> selectedClasses,
+      Set<Group> selectedGroups});
+}
+
+/// @nodoc
+class __$GeoMapOptionsCopyWithImpl<$Res>
+    implements _$GeoMapOptionsCopyWith<$Res> {
+  __$GeoMapOptionsCopyWithImpl(this._self, this._then);
+
+  final _GeoMapOptions _self;
+  final $Res Function(_GeoMapOptions) _then;
+
   /// Create a copy of GeomapOptions
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
-      __$$GeoMapOptionsImplCopyWithImpl<_$GeoMapOptionsImpl>(this, _$identity);
+  $Res call({
+    Object? layers = null,
+    Object? selectedAreas = null,
+    Object? selectedStreets = null,
+    Object? selectedFamilies = null,
+    Object? selectedStores = null,
+    Object? selectedServices = null,
+    Object? selectedClasses = null,
+    Object? selectedGroups = null,
+  }) {
+    return _then(_GeoMapOptions(
+      layers: null == layers
+          ? _self._layers
+          : layers // ignore: cast_nullable_to_non_nullable
+              as Set<GeoMapLayer>,
+      selectedAreas: null == selectedAreas
+          ? _self._selectedAreas
+          : selectedAreas // ignore: cast_nullable_to_non_nullable
+              as Set<Area>,
+      selectedStreets: null == selectedStreets
+          ? _self._selectedStreets
+          : selectedStreets // ignore: cast_nullable_to_non_nullable
+              as Set<Street>,
+      selectedFamilies: null == selectedFamilies
+          ? _self._selectedFamilies
+          : selectedFamilies // ignore: cast_nullable_to_non_nullable
+              as Set<Family>,
+      selectedStores: null == selectedStores
+          ? _self._selectedStores
+          : selectedStores // ignore: cast_nullable_to_non_nullable
+              as Set<Store>,
+      selectedServices: null == selectedServices
+          ? _self._selectedServices
+          : selectedServices // ignore: cast_nullable_to_non_nullable
+              as Set<Service>,
+      selectedClasses: null == selectedClasses
+          ? _self._selectedClasses
+          : selectedClasses // ignore: cast_nullable_to_non_nullable
+              as Set<Class>,
+      selectedGroups: null == selectedGroups
+          ? _self._selectedGroups
+          : selectedGroups // ignore: cast_nullable_to_non_nullable
+              as Set<Group>,
+    ));
+  }
 }
 
-abstract class _GeoMapOptions implements GeomapOptions {
-  factory _GeoMapOptions(
-      {final Set<GeoMapLayer> layers,
-      final Set<Area> selectedAreas,
-      final Set<Street> selectedStreets,
-      final Set<Family> selectedFamilies,
-      final Set<Store> selectedStores,
-      final Set<Service> selectedServices,
-      final Set<Class> selectedClasses,
-      final Set<Group> selectedGroups}) = _$GeoMapOptionsImpl;
-
-  @override
-  Set<GeoMapLayer> get layers;
-  @override
-  Set<Area> get selectedAreas;
-  @override
-  Set<Street> get selectedStreets;
-  @override
-  Set<Family> get selectedFamilies;
-  @override
-  Set<Store> get selectedStores;
-  @override
-  Set<Service> get selectedServices;
-  @override
-  Set<Class> get selectedClasses;
-  @override
-  Set<Group> get selectedGroups;
-
-  /// Create a copy of GeomapOptions
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GeoMapOptionsImplCopyWith<_$GeoMapOptionsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

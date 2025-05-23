@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,105 +10,63 @@ part of 'persons_geolocations_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PersonsGeolocationsResponse _$PersonsGeolocationsResponseFromJson(
-    Map<String, dynamic> json) {
-  return _PersonsGeolocationsResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PersonsGeolocationsResponse {
-  Set<Area> get areas => throw _privateConstructorUsedError;
-  Set<Street> get streets => throw _privateConstructorUsedError;
-  Set<Family> get families => throw _privateConstructorUsedError;
-  Set<Store> get stores => throw _privateConstructorUsedError;
-  Set<Person> get persons => throw _privateConstructorUsedError;
-
-  /// Serializes this PersonsGeolocationsResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Set<Area> get areas;
+  Set<Street> get streets;
+  Set<Family> get families;
+  Set<Store> get stores;
+  Set<Person> get persons;
 
   /// Create a copy of PersonsGeolocationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PersonsGeolocationsResponseCopyWith<PersonsGeolocationsResponse>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PersonsGeolocationsResponseCopyWith<$Res> {
-  factory $PersonsGeolocationsResponseCopyWith(
-          PersonsGeolocationsResponse value,
-          $Res Function(PersonsGeolocationsResponse) then) =
-      _$PersonsGeolocationsResponseCopyWithImpl<$Res,
-          PersonsGeolocationsResponse>;
-  @useResult
-  $Res call(
-      {Set<Area> areas,
-      Set<Street> streets,
-      Set<Family> families,
-      Set<Store> stores,
-      Set<Person> persons});
-}
-
-/// @nodoc
-class _$PersonsGeolocationsResponseCopyWithImpl<$Res,
-        $Val extends PersonsGeolocationsResponse>
-    implements $PersonsGeolocationsResponseCopyWith<$Res> {
-  _$PersonsGeolocationsResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PersonsGeolocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PersonsGeolocationsResponseCopyWith<PersonsGeolocationsResponse>
+      get copyWith => _$PersonsGeolocationsResponseCopyWithImpl<
+              PersonsGeolocationsResponse>(
+          this as PersonsGeolocationsResponse, _$identity);
+
+  /// Serializes this PersonsGeolocationsResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? areas = null,
-    Object? streets = null,
-    Object? families = null,
-    Object? stores = null,
-    Object? persons = null,
-  }) {
-    return _then(_value.copyWith(
-      areas: null == areas
-          ? _value.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as Set<Area>,
-      streets: null == streets
-          ? _value.streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as Set<Street>,
-      families: null == families
-          ? _value.families
-          : families // ignore: cast_nullable_to_non_nullable
-              as Set<Family>,
-      stores: null == stores
-          ? _value.stores
-          : stores // ignore: cast_nullable_to_non_nullable
-              as Set<Store>,
-      persons: null == persons
-          ? _value.persons
-          : persons // ignore: cast_nullable_to_non_nullable
-              as Set<Person>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PersonsGeolocationsResponse &&
+            const DeepCollectionEquality().equals(other.areas, areas) &&
+            const DeepCollectionEquality().equals(other.streets, streets) &&
+            const DeepCollectionEquality().equals(other.families, families) &&
+            const DeepCollectionEquality().equals(other.stores, stores) &&
+            const DeepCollectionEquality().equals(other.persons, persons));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(areas),
+      const DeepCollectionEquality().hash(streets),
+      const DeepCollectionEquality().hash(families),
+      const DeepCollectionEquality().hash(stores),
+      const DeepCollectionEquality().hash(persons));
+
+  @override
+  String toString() {
+    return 'PersonsGeolocationsResponse(areas: $areas, streets: $streets, families: $families, stores: $stores, persons: $persons)';
   }
 }
 
 /// @nodoc
-abstract class _$$PersonsGeolocationsResponseImplCopyWith<$Res>
-    implements $PersonsGeolocationsResponseCopyWith<$Res> {
-  factory _$$PersonsGeolocationsResponseImplCopyWith(
-          _$PersonsGeolocationsResponseImpl value,
-          $Res Function(_$PersonsGeolocationsResponseImpl) then) =
-      __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PersonsGeolocationsResponseCopyWith<$Res> {
+  factory $PersonsGeolocationsResponseCopyWith(
+          PersonsGeolocationsResponse value,
+          $Res Function(PersonsGeolocationsResponse) _then) =
+      _$PersonsGeolocationsResponseCopyWithImpl;
   @useResult
   $Res call(
       {Set<Area> areas,
@@ -118,14 +77,12 @@ abstract class _$$PersonsGeolocationsResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>
-    extends _$PersonsGeolocationsResponseCopyWithImpl<$Res,
-        _$PersonsGeolocationsResponseImpl>
-    implements _$$PersonsGeolocationsResponseImplCopyWith<$Res> {
-  __$$PersonsGeolocationsResponseImplCopyWithImpl(
-      _$PersonsGeolocationsResponseImpl _value,
-      $Res Function(_$PersonsGeolocationsResponseImpl) _then)
-      : super(_value, _then);
+class _$PersonsGeolocationsResponseCopyWithImpl<$Res>
+    implements $PersonsGeolocationsResponseCopyWith<$Res> {
+  _$PersonsGeolocationsResponseCopyWithImpl(this._self, this._then);
+
+  final PersonsGeolocationsResponse _self;
+  final $Res Function(PersonsGeolocationsResponse) _then;
 
   /// Create a copy of PersonsGeolocationsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -138,25 +95,25 @@ class __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>
     Object? stores = null,
     Object? persons = null,
   }) {
-    return _then(_$PersonsGeolocationsResponseImpl(
+    return _then(_self.copyWith(
       areas: null == areas
-          ? _value._areas
+          ? _self.areas
           : areas // ignore: cast_nullable_to_non_nullable
               as Set<Area>,
       streets: null == streets
-          ? _value._streets
+          ? _self.streets
           : streets // ignore: cast_nullable_to_non_nullable
               as Set<Street>,
       families: null == families
-          ? _value._families
+          ? _self.families
           : families // ignore: cast_nullable_to_non_nullable
               as Set<Family>,
       stores: null == stores
-          ? _value._stores
+          ? _self.stores
           : stores // ignore: cast_nullable_to_non_nullable
               as Set<Store>,
       persons: null == persons
-          ? _value._persons
+          ? _self.persons
           : persons // ignore: cast_nullable_to_non_nullable
               as Set<Person>,
     ));
@@ -165,9 +122,8 @@ class __$$PersonsGeolocationsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PersonsGeolocationsResponseImpl
-    implements _PersonsGeolocationsResponse {
-  _$PersonsGeolocationsResponseImpl(
+class _PersonsGeolocationsResponse implements PersonsGeolocationsResponse {
+  _PersonsGeolocationsResponse(
       {final Set<Area> areas = const {},
       final Set<Street> streets = const {},
       final Set<Family> families = const {},
@@ -178,10 +134,8 @@ class _$PersonsGeolocationsResponseImpl
         _families = families,
         _stores = stores,
         _persons = persons;
-
-  factory _$PersonsGeolocationsResponseImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$PersonsGeolocationsResponseImplFromJson(json);
+  factory _PersonsGeolocationsResponse.fromJson(Map<String, dynamic> json) =>
+      _$PersonsGeolocationsResponseFromJson(json);
 
   final Set<Area> _areas;
   @override
@@ -228,16 +182,27 @@ class _$PersonsGeolocationsResponseImpl
     return EqualUnmodifiableSetView(_persons);
   }
 
+  /// Create a copy of PersonsGeolocationsResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PersonsGeolocationsResponse(areas: $areas, streets: $streets, families: $families, stores: $stores, persons: $persons)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PersonsGeolocationsResponseCopyWith<_PersonsGeolocationsResponse>
+      get copyWith => __$PersonsGeolocationsResponseCopyWithImpl<
+          _PersonsGeolocationsResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PersonsGeolocationsResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PersonsGeolocationsResponseImpl &&
+            other is _PersonsGeolocationsResponse &&
             const DeepCollectionEquality().equals(other._areas, _areas) &&
             const DeepCollectionEquality().equals(other._streets, _streets) &&
             const DeepCollectionEquality().equals(other._families, _families) &&
@@ -255,50 +220,71 @@ class _$PersonsGeolocationsResponseImpl
       const DeepCollectionEquality().hash(_stores),
       const DeepCollectionEquality().hash(_persons));
 
-  /// Create a copy of PersonsGeolocationsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
-      get copyWith => __$$PersonsGeolocationsResponseImplCopyWithImpl<
-          _$PersonsGeolocationsResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PersonsGeolocationsResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PersonsGeolocationsResponse(areas: $areas, streets: $streets, families: $families, stores: $stores, persons: $persons)';
   }
 }
 
-abstract class _PersonsGeolocationsResponse
-    implements PersonsGeolocationsResponse {
-  factory _PersonsGeolocationsResponse(
-      {final Set<Area> areas,
-      final Set<Street> streets,
-      final Set<Family> families,
-      final Set<Store> stores,
-      final Set<Person> persons}) = _$PersonsGeolocationsResponseImpl;
+/// @nodoc
+abstract mixin class _$PersonsGeolocationsResponseCopyWith<$Res>
+    implements $PersonsGeolocationsResponseCopyWith<$Res> {
+  factory _$PersonsGeolocationsResponseCopyWith(
+          _PersonsGeolocationsResponse value,
+          $Res Function(_PersonsGeolocationsResponse) _then) =
+      __$PersonsGeolocationsResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Set<Area> areas,
+      Set<Street> streets,
+      Set<Family> families,
+      Set<Store> stores,
+      Set<Person> persons});
+}
 
-  factory _PersonsGeolocationsResponse.fromJson(Map<String, dynamic> json) =
-      _$PersonsGeolocationsResponseImpl.fromJson;
+/// @nodoc
+class __$PersonsGeolocationsResponseCopyWithImpl<$Res>
+    implements _$PersonsGeolocationsResponseCopyWith<$Res> {
+  __$PersonsGeolocationsResponseCopyWithImpl(this._self, this._then);
 
-  @override
-  Set<Area> get areas;
-  @override
-  Set<Street> get streets;
-  @override
-  Set<Family> get families;
-  @override
-  Set<Store> get stores;
-  @override
-  Set<Person> get persons;
+  final _PersonsGeolocationsResponse _self;
+  final $Res Function(_PersonsGeolocationsResponse) _then;
 
   /// Create a copy of PersonsGeolocationsResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PersonsGeolocationsResponseImplCopyWith<_$PersonsGeolocationsResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? areas = null,
+    Object? streets = null,
+    Object? families = null,
+    Object? stores = null,
+    Object? persons = null,
+  }) {
+    return _then(_PersonsGeolocationsResponse(
+      areas: null == areas
+          ? _self._areas
+          : areas // ignore: cast_nullable_to_non_nullable
+              as Set<Area>,
+      streets: null == streets
+          ? _self._streets
+          : streets // ignore: cast_nullable_to_non_nullable
+              as Set<Street>,
+      families: null == families
+          ? _self._families
+          : families // ignore: cast_nullable_to_non_nullable
+              as Set<Family>,
+      stores: null == stores
+          ? _self._stores
+          : stores // ignore: cast_nullable_to_non_nullable
+              as Set<Store>,
+      persons: null == persons
+          ? _self._persons
+          : persons // ignore: cast_nullable_to_non_nullable
+              as Set<Person>,
+    ));
+  }
 }
+
+// dart format on

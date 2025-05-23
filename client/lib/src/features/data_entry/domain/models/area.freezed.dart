@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,43 +10,79 @@ part of 'area.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Area _$AreaFromJson(Map<String, dynamic> json) {
-  return _Area.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Area {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-  Polygon? get bounds => throw _privateConstructorUsedError;
+  Polygon? get bounds;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-  DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  String? get blurhash => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastVisit => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  Color? get color;
+  DateTime? get photoUpdatedAt;
+  String? get blurhash;
+  LastRecordedByInfo? get lastVisit;
+  LastRecordedByInfo? get lastEdit;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers => throw _privateConstructorUsedError;
-
-  /// Serializes this Area to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<User>? get adminUsers;
 
   /// Create a copy of Area
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AreaCopyWith<Area> get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $AreaCopyWith<Area> get copyWith =>
+      _$AreaCopyWithImpl<Area>(this as Area, _$identity);
+
+  /// Serializes this Area to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Area &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.bounds, bounds) || other.bounds == bounds) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
+            (identical(other.lastVisit, lastVisit) ||
+                other.lastVisit == lastVisit) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other.adminUsers, adminUsers));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      bounds,
+      color,
+      photoUpdatedAt,
+      blurhash,
+      lastVisit,
+      lastEdit,
+      const DeepCollectionEquality().hash(adminUsers));
+
+  @override
+  String toString() {
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers)';
+  }
 }
 
 /// @nodoc
-abstract class $AreaCopyWith<$Res> {
-  factory $AreaCopyWith(Area value, $Res Function(Area) then) =
-      _$AreaCopyWithImpl<$Res, Area>;
+abstract mixin class $AreaCopyWith<$Res> {
+  factory $AreaCopyWith(Area value, $Res Function(Area) _then) =
+      _$AreaCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -65,14 +102,11 @@ abstract class $AreaCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AreaCopyWithImpl<$Res, $Val extends Area>
-    implements $AreaCopyWith<$Res> {
-  _$AreaCopyWithImpl(this._value, this._then);
+class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
+  _$AreaCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Area _self;
+  final $Res Function(Area) _then;
 
   /// Create a copy of Area
   /// with the given fields replaced by the non-null parameter values.
@@ -89,44 +123,44 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       bounds: freezed == bounds
-          ? _value.bounds
+          ? _self.bounds
           : bounds // ignore: cast_nullable_to_non_nullable
               as Polygon?,
       color: freezed == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
       photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
+          ? _self.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blurhash: freezed == blurhash
-          ? _value.blurhash
+          ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
       lastVisit: freezed == lastVisit
-          ? _value.lastVisit
+          ? _self.lastVisit
           : lastVisit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       lastEdit: freezed == lastEdit
-          ? _value.lastEdit
+          ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       adminUsers: freezed == adminUsers
-          ? _value.adminUsers
+          ? _self.adminUsers
           : adminUsers // ignore: cast_nullable_to_non_nullable
               as List<User>?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of Area
@@ -134,12 +168,12 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
-    if (_value.lastVisit == null) {
+    if (_self.lastVisit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastVisit!, (value) {
-      return _then(_value.copyWith(lastVisit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
     });
   }
 
@@ -148,109 +182,20 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
-    if (_value.lastEdit == null) {
+    if (_self.lastEdit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$AreaImplCopyWith<$Res> implements $AreaCopyWith<$Res> {
-  factory _$$AreaImplCopyWith(
-          _$AreaImpl value, $Res Function(_$AreaImpl) then) =
-      __$$AreaImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-      Polygon? bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit,
-      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      List<User>? adminUsers});
-
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-}
-
-/// @nodoc
-class __$$AreaImplCopyWithImpl<$Res>
-    extends _$AreaCopyWithImpl<$Res, _$AreaImpl>
-    implements _$$AreaImplCopyWith<$Res> {
-  __$$AreaImplCopyWithImpl(_$AreaImpl _value, $Res Function(_$AreaImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Area
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? bounds = freezed,
-    Object? color = freezed,
-    Object? photoUpdatedAt = freezed,
-    Object? blurhash = freezed,
-    Object? lastVisit = freezed,
-    Object? lastEdit = freezed,
-    Object? adminUsers = freezed,
-  }) {
-    return _then(_$AreaImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      bounds: freezed == bounds
-          ? _value.bounds
-          : bounds // ignore: cast_nullable_to_non_nullable
-              as Polygon?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _value.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastVisit: freezed == lastVisit
-          ? _value.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastEdit: freezed == lastEdit
-          ? _value.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _value._adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$AreaImpl extends _Area {
-  _$AreaImpl(
+class _Area extends Area {
+  _Area(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson) this.bounds,
@@ -263,9 +208,7 @@ class _$AreaImpl extends _Area {
       final List<User>? adminUsers})
       : _adminUsers = adminUsers,
         super._();
-
-  factory _$AreaImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AreaImplFromJson(json);
+  factory _Area.fromJson(Map<String, dynamic> json) => _$AreaFromJson(json);
 
   @override
   final String id;
@@ -296,16 +239,26 @@ class _$AreaImpl extends _Area {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AreaCopyWith<_Area> get copyWith =>
+      __$AreaCopyWithImpl<_Area>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AreaToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AreaImpl &&
+            other is _Area &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.bounds, bounds) || other.bounds == bounds) &&
@@ -336,65 +289,126 @@ class _$AreaImpl extends _Area {
       lastEdit,
       const DeepCollectionEquality().hash(_adminUsers));
 
-  /// Create a copy of Area
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
-      __$$AreaImplCopyWithImpl<_$AreaImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AreaImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers)';
   }
 }
 
-abstract class _Area extends Area {
-  factory _Area(
-      {required final String id,
-      required final String name,
+/// @nodoc
+abstract mixin class _$AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
+  factory _$AreaCopyWith(_Area value, $Res Function(_Area) _then) =
+      __$AreaCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
       @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-      final Polygon? bounds,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt,
-      final String? blurhash,
-      final LastRecordedByInfo? lastVisit,
-      final LastRecordedByInfo? lastEdit,
+      Polygon? bounds,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      DateTime? photoUpdatedAt,
+      String? blurhash,
+      LastRecordedByInfo? lastVisit,
+      LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      final List<User>? adminUsers}) = _$AreaImpl;
-  _Area._() : super._();
-
-  factory _Area.fromJson(Map<String, dynamic> json) = _$AreaImpl.fromJson;
+      List<User>? adminUsers});
 
   @override
-  String get id;
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit;
   @override
-  String get name;
-  @override
-  @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
-  Polygon? get bounds;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
-  @override
-  DateTime? get photoUpdatedAt;
-  @override
-  String? get blurhash;
-  @override
-  LastRecordedByInfo? get lastVisit;
-  @override
-  LastRecordedByInfo? get lastEdit;
-  @override
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
+}
+
+/// @nodoc
+class __$AreaCopyWithImpl<$Res> implements _$AreaCopyWith<$Res> {
+  __$AreaCopyWithImpl(this._self, this._then);
+
+  final _Area _self;
+  final $Res Function(_Area) _then;
 
   /// Create a copy of Area
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? bounds = freezed,
+    Object? color = freezed,
+    Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
+    Object? lastVisit = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
+  }) {
+    return _then(_Area(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      bounds: freezed == bounds
+          ? _self.bounds
+          : bounds // ignore: cast_nullable_to_non_nullable
+              as Polygon?,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+      photoUpdatedAt: freezed == photoUpdatedAt
+          ? _self.photoUpdatedAt
+          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blurhash: freezed == blurhash
+          ? _self.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastVisit: freezed == lastVisit
+          ? _self.lastVisit
+          : lastVisit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      lastEdit: freezed == lastEdit
+          ? _self.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _self._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
+    ));
+  }
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastVisit {
+    if (_self.lastVisit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastVisit!, (value) {
+      return _then(_self.copyWith(lastVisit: value));
+    });
+  }
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
 }
+
+// dart format on

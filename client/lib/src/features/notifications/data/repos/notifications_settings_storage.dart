@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 
 class NotificationsSettingsStorage {
@@ -16,11 +15,15 @@ class NotificationsSettingsStorage {
   static const String confessionTimeKey = 'ConfessionTime';
 
   static const NotificationSetting _defaultNotificationSetting =
-      NotificationSetting(11, 0, 7);
+      NotificationSetting(
+    hours: 11,
+    minutes: 0,
+    intervalInDays: 7,
+  );
 
-  final Box<NotificationSetting> _box;
+  final SyncKVStore<NotificationSetting> _box;
 
-  NotificationsSettingsStorage(this._box) : assert(_box.isOpen);
+  NotificationsSettingsStorage(this._box);
 
   NotificationSetting get birthDayTimeSetting =>
       _box.get(birthDayTimeKey) ?? _defaultNotificationSetting;

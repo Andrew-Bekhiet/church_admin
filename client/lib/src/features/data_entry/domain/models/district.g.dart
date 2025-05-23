@@ -23,13 +23,12 @@ final _$DistrictFields = <String, FieldMetadata>{
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DistrictImpl _$$DistrictImplFromJson(Map json) => _$DistrictImpl(
+_District _$DistrictFromJson(Map json) => _District(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$DistrictImplToJson(_$DistrictImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DistrictToJson(_District instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

@@ -8,7 +8,7 @@ part 'area.g.dart';
 
 @freezed
 @TypeMetadata()
-class Area extends ViewableWithIDAndImage
+abstract class Area extends ViewableWithIDAndImage
     with _$Area
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$AreaFields;

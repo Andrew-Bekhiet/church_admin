@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,48 +10,95 @@ part of 'group.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Group _$GroupFromJson(Map<String, dynamic> json) {
-  return _Group.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Group {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color => throw _privateConstructorUsedError;
-  DateTime? get photoUpdatedAt => throw _privateConstructorUsedError;
-  String? get blurhash => throw _privateConstructorUsedError;
-  String? get serviceId => throw _privateConstructorUsedError;
-  Service? get service => throw _privateConstructorUsedError;
+  Color? get color;
+  DateTime? get photoUpdatedAt;
+  String? get blurhash;
+  String? get serviceId;
+  Service? get service;
   @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-  DateTimeRange? get validity => throw _privateConstructorUsedError;
-  LastRecordedByInfo? get lastEdit => throw _privateConstructorUsedError;
+  DateTimeRange? get validity;
+  LastRecordedByInfo? get lastEdit;
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers => throw _privateConstructorUsedError;
-  HistoryAggregateData? get attendanceHistoryAggregate =>
-      throw _privateConstructorUsedError;
-  HistoryAggregateData? get attendanceDaysConstraintsAggregate =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this Group to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<User>? get adminUsers;
+  HistoryAggregateData? get attendanceHistoryAggregate;
+  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
 
   /// Create a copy of Group
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GroupCopyWith<Group> get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $GroupCopyWith<Group> get copyWith =>
+      _$GroupCopyWithImpl<Group>(this as Group, _$identity);
+
+  /// Serializes this Group to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Group &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.photoUpdatedAt, photoUpdatedAt) ||
+                other.photoUpdatedAt == photoUpdatedAt) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId) &&
+            (identical(other.service, service) || other.service == service) &&
+            (identical(other.validity, validity) ||
+                other.validity == validity) &&
+            (identical(other.lastEdit, lastEdit) ||
+                other.lastEdit == lastEdit) &&
+            const DeepCollectionEquality()
+                .equals(other.adminUsers, adminUsers) &&
+            (identical(other.attendanceHistoryAggregate,
+                    attendanceHistoryAggregate) ||
+                other.attendanceHistoryAggregate ==
+                    attendanceHistoryAggregate) &&
+            (identical(other.attendanceDaysConstraintsAggregate,
+                    attendanceDaysConstraintsAggregate) ||
+                other.attendanceDaysConstraintsAggregate ==
+                    attendanceDaysConstraintsAggregate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      color,
+      photoUpdatedAt,
+      blurhash,
+      serviceId,
+      service,
+      validity,
+      lastEdit,
+      const DeepCollectionEquality().hash(adminUsers),
+      attendanceHistoryAggregate,
+      attendanceDaysConstraintsAggregate);
+
+  @override
+  String toString() {
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+  }
 }
 
 /// @nodoc
-abstract class $GroupCopyWith<$Res> {
-  factory $GroupCopyWith(Group value, $Res Function(Group) then) =
-      _$GroupCopyWithImpl<$Res, Group>;
+abstract mixin class $GroupCopyWith<$Res> {
+  factory $GroupCopyWith(Group value, $Res Function(Group) _then) =
+      _$GroupCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -75,14 +123,11 @@ abstract class $GroupCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GroupCopyWithImpl<$Res, $Val extends Group>
-    implements $GroupCopyWith<$Res> {
-  _$GroupCopyWithImpl(this._value, this._then);
+class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
+  _$GroupCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Group _self;
+  final $Res Function(Group) _then;
 
   /// Create a copy of Group
   /// with the given fields replaced by the non-null parameter values.
@@ -102,57 +147,57 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       color: freezed == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color?,
       photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
+          ? _self.photoUpdatedAt
           : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blurhash: freezed == blurhash
-          ? _value.blurhash
+          ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
       serviceId: freezed == serviceId
-          ? _value.serviceId
+          ? _self.serviceId
           : serviceId // ignore: cast_nullable_to_non_nullable
               as String?,
       service: freezed == service
-          ? _value.service
+          ? _self.service
           : service // ignore: cast_nullable_to_non_nullable
               as Service?,
       validity: freezed == validity
-          ? _value.validity
+          ? _self.validity
           : validity // ignore: cast_nullable_to_non_nullable
               as DateTimeRange?,
       lastEdit: freezed == lastEdit
-          ? _value.lastEdit
+          ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
       adminUsers: freezed == adminUsers
-          ? _value.adminUsers
+          ? _self.adminUsers
           : adminUsers // ignore: cast_nullable_to_non_nullable
               as List<User>?,
       attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _value.attendanceHistoryAggregate
+          ? _self.attendanceHistoryAggregate
           : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
       attendanceDaysConstraintsAggregate: freezed ==
               attendanceDaysConstraintsAggregate
-          ? _value.attendanceDaysConstraintsAggregate
+          ? _self.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of Group
@@ -160,12 +205,12 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   @override
   @pragma('vm:prefer-inline')
   $ServiceCopyWith<$Res>? get service {
-    if (_value.service == null) {
+    if (_self.service == null) {
       return null;
     }
 
-    return $ServiceCopyWith<$Res>(_value.service!, (value) {
-      return _then(_value.copyWith(service: value) as $Val);
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
     });
   }
 
@@ -174,12 +219,12 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   @override
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
-    if (_value.lastEdit == null) {
+    if (_self.lastEdit == null) {
       return null;
     }
 
-    return $LastRecordedByInfoCopyWith<$Res>(_value.lastEdit!, (value) {
-      return _then(_value.copyWith(lastEdit: value) as $Val);
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
     });
   }
 
@@ -188,13 +233,13 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
-    if (_value.attendanceHistoryAggregate == null) {
+    if (_self.attendanceHistoryAggregate == null) {
       return null;
     }
 
     return $HistoryAggregateDataCopyWith<$Res>(
-        _value.attendanceHistoryAggregate!, (value) {
-      return _then(_value.copyWith(attendanceHistoryAggregate: value) as $Val);
+        _self.attendanceHistoryAggregate!, (value) {
+      return _then(_self.copyWith(attendanceHistoryAggregate: value));
     });
   }
 
@@ -203,135 +248,21 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   @override
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
-    if (_value.attendanceDaysConstraintsAggregate == null) {
+    if (_self.attendanceDaysConstraintsAggregate == null) {
       return null;
     }
 
     return $HistoryAggregateDataCopyWith<$Res>(
-        _value.attendanceDaysConstraintsAggregate!, (value) {
-      return _then(
-          _value.copyWith(attendanceDaysConstraintsAggregate: value) as $Val);
+        _self.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_self.copyWith(attendanceDaysConstraintsAggregate: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
-  factory _$$GroupImplCopyWith(
-          _$GroupImpl value, $Res Function(_$GroupImpl) then) =
-      __$$GroupImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      String? serviceId,
-      Service? service,
-      @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-      DateTimeRange? validity,
-      LastRecordedByInfo? lastEdit,
-      @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      List<User>? adminUsers,
-      HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? attendanceDaysConstraintsAggregate});
-
-  @override
-  $ServiceCopyWith<$Res>? get service;
-  @override
-  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
-  @override
-  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
-  @override
-  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
-}
-
-/// @nodoc
-class __$$GroupImplCopyWithImpl<$Res>
-    extends _$GroupCopyWithImpl<$Res, _$GroupImpl>
-    implements _$$GroupImplCopyWith<$Res> {
-  __$$GroupImplCopyWithImpl(
-      _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Group
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-    Object? photoUpdatedAt = freezed,
-    Object? blurhash = freezed,
-    Object? serviceId = freezed,
-    Object? service = freezed,
-    Object? validity = freezed,
-    Object? lastEdit = freezed,
-    Object? adminUsers = freezed,
-    Object? attendanceHistoryAggregate = freezed,
-    Object? attendanceDaysConstraintsAggregate = freezed,
-  }) {
-    return _then(_$GroupImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _value.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _value.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      serviceId: freezed == serviceId
-          ? _value.serviceId
-          : serviceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      service: freezed == service
-          ? _value.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as Service?,
-      validity: freezed == validity
-          ? _value.validity
-          : validity // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange?,
-      lastEdit: freezed == lastEdit
-          ? _value.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _value._adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _value.attendanceHistoryAggregate
-          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      attendanceDaysConstraintsAggregate: freezed ==
-              attendanceDaysConstraintsAggregate
-          ? _value.attendanceDaysConstraintsAggregate
-          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$GroupImpl extends _Group {
-  _$GroupImpl(
+class _Group extends Group {
+  _Group(
       {required this.id,
       required this.name,
       @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color,
@@ -348,9 +279,7 @@ class _$GroupImpl extends _Group {
       this.attendanceDaysConstraintsAggregate})
       : _adminUsers = adminUsers,
         super._();
-
-  factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GroupImplFromJson(json);
+  factory _Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 
   @override
   final String id;
@@ -388,16 +317,26 @@ class _$GroupImpl extends _Group {
   @override
   final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GroupCopyWith<_Group> get copyWith =>
+      __$GroupCopyWithImpl<_Group>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GroupToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroupImpl &&
+            other is _Group &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.color, color) || other.color == color) &&
@@ -441,75 +380,179 @@ class _$GroupImpl extends _Group {
       attendanceHistoryAggregate,
       attendanceDaysConstraintsAggregate);
 
-  /// Create a copy of Group
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
-      __$$GroupImplCopyWithImpl<_$GroupImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GroupImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
   }
 }
 
-abstract class _Group extends Group {
-  factory _Group(
-      {required final String id,
-      required final String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) final Color? color,
-      final DateTime? photoUpdatedAt,
-      final String? blurhash,
-      final String? serviceId,
-      final Service? service,
+/// @nodoc
+abstract mixin class _$GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
+  factory _$GroupCopyWith(_Group value, $Res Function(_Group) _then) =
+      __$GroupCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
+      DateTime? photoUpdatedAt,
+      String? blurhash,
+      String? serviceId,
+      Service? service,
       @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-      final DateTimeRange? validity,
-      final LastRecordedByInfo? lastEdit,
+      DateTimeRange? validity,
+      LastRecordedByInfo? lastEdit,
       @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-      final List<User>? adminUsers,
-      final HistoryAggregateData? attendanceHistoryAggregate,
-      final HistoryAggregateData?
-          attendanceDaysConstraintsAggregate}) = _$GroupImpl;
-  _Group._() : super._();
-
-  factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
+      List<User>? adminUsers,
+      HistoryAggregateData? attendanceHistoryAggregate,
+      HistoryAggregateData? attendanceDaysConstraintsAggregate});
 
   @override
-  String get id;
+  $ServiceCopyWith<$Res>? get service;
   @override
-  String get name;
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit;
   @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  Color? get color;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate;
   @override
-  DateTime? get photoUpdatedAt;
-  @override
-  String? get blurhash;
-  @override
-  String? get serviceId;
-  @override
-  Service? get service;
-  @override
-  @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-  DateTimeRange? get validity;
-  @override
-  LastRecordedByInfo? get lastEdit;
-  @override
-  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-  List<User>? get adminUsers;
-  @override
-  HistoryAggregateData? get attendanceHistoryAggregate;
-  @override
-  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate;
+}
+
+/// @nodoc
+class __$GroupCopyWithImpl<$Res> implements _$GroupCopyWith<$Res> {
+  __$GroupCopyWithImpl(this._self, this._then);
+
+  final _Group _self;
+  final $Res Function(_Group) _then;
 
   /// Create a copy of Group
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? color = freezed,
+    Object? photoUpdatedAt = freezed,
+    Object? blurhash = freezed,
+    Object? serviceId = freezed,
+    Object? service = freezed,
+    Object? validity = freezed,
+    Object? lastEdit = freezed,
+    Object? adminUsers = freezed,
+    Object? attendanceHistoryAggregate = freezed,
+    Object? attendanceDaysConstraintsAggregate = freezed,
+  }) {
+    return _then(_Group(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      color: freezed == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
+      photoUpdatedAt: freezed == photoUpdatedAt
+          ? _self.photoUpdatedAt
+          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blurhash: freezed == blurhash
+          ? _self.blurhash
+          : blurhash // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serviceId: freezed == serviceId
+          ? _self.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      service: freezed == service
+          ? _self.service
+          : service // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      validity: freezed == validity
+          ? _self.validity
+          : validity // ignore: cast_nullable_to_non_nullable
+              as DateTimeRange?,
+      lastEdit: freezed == lastEdit
+          ? _self.lastEdit
+          : lastEdit // ignore: cast_nullable_to_non_nullable
+              as LastRecordedByInfo?,
+      adminUsers: freezed == adminUsers
+          ? _self._adminUsers
+          : adminUsers // ignore: cast_nullable_to_non_nullable
+              as List<User>?,
+      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
+          ? _self.attendanceHistoryAggregate
+          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+              as HistoryAggregateData?,
+      attendanceDaysConstraintsAggregate: freezed ==
+              attendanceDaysConstraintsAggregate
+          ? _self.attendanceDaysConstraintsAggregate
+          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+              as HistoryAggregateData?,
+    ));
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get service {
+    if (_self.service == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_self.service!, (value) {
+      return _then(_self.copyWith(service: value));
+    });
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LastRecordedByInfoCopyWith<$Res>? get lastEdit {
+    if (_self.lastEdit == null) {
+      return null;
+    }
+
+    return $LastRecordedByInfoCopyWith<$Res>(_self.lastEdit!, (value) {
+      return _then(_self.copyWith(lastEdit: value));
+    });
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceHistoryAggregate {
+    if (_self.attendanceHistoryAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+        _self.attendanceHistoryAggregate!, (value) {
+      return _then(_self.copyWith(attendanceHistoryAggregate: value));
+    });
+  }
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryAggregateDataCopyWith<$Res>? get attendanceDaysConstraintsAggregate {
+    if (_self.attendanceDaysConstraintsAggregate == null) {
+      return null;
+    }
+
+    return $HistoryAggregateDataCopyWith<$Res>(
+        _self.attendanceDaysConstraintsAggregate!, (value) {
+      return _then(_self.copyWith(attendanceDaysConstraintsAggregate: value));
+    });
+  }
 }
+
+// dart format on

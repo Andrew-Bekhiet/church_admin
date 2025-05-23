@@ -5,7 +5,7 @@ part 'admin_on_data.freezed.dart';
 part 'admin_on_data.g.dart';
 
 @freezed
-class AdminOnData with _$AdminOnData implements ToJson {
+abstract class AdminOnData with _$AdminOnData implements ToJson {
   const factory AdminOnData({
     required String permissionId,
     Area? area,

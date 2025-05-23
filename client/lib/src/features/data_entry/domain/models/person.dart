@@ -9,7 +9,7 @@ part 'person.g.dart';
 
 @freezed
 @TypeMetadata(ignoreFields: ['blurhash', 'otherPhones'])
-class Person extends ViewableWithIDAndImage
+abstract class Person extends ViewableWithIDAndImage
     with _$Person
     implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$PersonFields;
@@ -97,29 +97,20 @@ class Person extends ViewableWithIDAndImage
 
   @override
   LastRecordedByInfo? get lastConfession =>
-      super.lastConfession ??
       confessionHistoryAggregate?.aggregate.max ??
       confessionHistory?.singleOrNull;
   @override
   LastRecordedByInfo? get lastKodas =>
-      super.lastKodas ??
-      kodasHistoryAggregate?.aggregate.max ??
-      kodasHistory?.singleOrNull;
+      kodasHistoryAggregate?.aggregate.max ?? kodasHistory?.singleOrNull;
   @override
   LastRecordedByInfo? get lastCall =>
-      super.lastCall ??
-      callHistoryAggregate?.aggregate.max ??
-      callHistory?.singleOrNull;
+      callHistoryAggregate?.aggregate.max ?? callHistory?.singleOrNull;
   @override
   LastRecordedByInfo? get lastVisit =>
-      super.lastVisit ??
-      visitHistoryAggregate?.aggregate.max ??
-      visitHistory?.singleOrNull;
+      visitHistoryAggregate?.aggregate.max ?? visitHistory?.singleOrNull;
   @override
   LastRecordedByInfo? get lastEdit =>
-      super.lastEdit ??
-      editHistoryAggregate?.aggregate.max ??
-      editHistory?.singleOrNull;
+      editHistoryAggregate?.aggregate.max ?? editHistory?.singleOrNull;
 
   @override
   ObjectImageInfo get imageInfo =>

@@ -9,7 +9,9 @@ part 'tag.g.dart';
 
 @freezed
 @TypeMetadata()
-class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
+abstract class Tag extends ViewableWithID
+    with _$Tag
+    implements SerializableExtra {
   static Map<String, FieldMetadata> get fieldsMetadata => _$TagFields;
 
   static final QueryableType<Tag> queryableType = QueryableType<Tag>(

@@ -5,7 +5,9 @@ part 'advanced_query.freezed.dart';
 part 'advanced_query.g.dart';
 
 @freezed
-class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
+abstract class AdvancedQuery
+    with _$AdvancedQuery
+    implements ToJson, SerializableExtra {
   const factory AdvancedQuery({
     required String name,
     @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
