@@ -78,14 +78,26 @@ class EncryptionService {
         keyBytes: keyBytes,
       );
 
-      return storedPasswordHash == passwordHashToVerify;
+      return _constantTimeEquals(storedPasswordHash, passwordHashToVerify);
     }
 
     return false;
   }
 
+  bool _constantTimeEquals(String a, String b) {
+    if (a.length != b.length) return false;
+
+    int result = 0;
+    for (int i = 0; i < a.length; i++) {
+      result |= a.codeUnitAt(i) ^ b.codeUnitAt(i);
+    }
+    return result == 0;
+  }
+
   @protected
-  Future<Uint8List> additionalDeviceInfo() async {
+  Future<Uint8List> additionalDeviceInfo({
+    bool usePotentialyVolatitleInfo = false,
+  }) async {
     final deviceInfoPlugin = DeviceInfoPlugin();
     final computedInfo = <int>[];
 
@@ -93,8 +105,11 @@ class EncryptionService {
       final webBrowserInfo = await deviceInfoPlugin.webBrowserInfo;
 
       return utf8.encode(
-        '${webBrowserInfo.hardwareConcurrency}-${webBrowserInfo.vendor}'
-            .padRight(16, '#'),
+        (usePotentialyVolatitleInfo
+                ? '${webBrowserInfo.appVersion}-${webBrowserInfo.browserName}-'
+                : '') +
+            '${webBrowserInfo.hardwareConcurrency}-${webBrowserInfo.vendor}'
+                .padRight(32, '#'),
       );
     }
 
@@ -103,9 +118,12 @@ class EncryptionService {
 
       computedInfo.addAll(
         utf8.encode(
-          (androidDeviceInfo.fingerprint) +
-              (androidDeviceInfo.board) +
-              (androidDeviceInfo.device),
+          // Ignored fore readability
+          // ignore: prefer_interpolation_to_compose_strings
+          '${androidDeviceInfo.fingerprint}${androidDeviceInfo.board}${androidDeviceInfo.device}' +
+              (usePotentialyVolatitleInfo
+                  ? '${androidDeviceInfo.model}${androidDeviceInfo.brand}${androidDeviceInfo.bootloader}'
+                  : ''),
         ),
       );
     } else if (UniversalPlatform.isIOS) {
@@ -133,9 +151,10 @@ class EncryptionService {
         ),
       );
     } else if (UniversalPlatform.isWindows) {
-      final macDeviceInfo = await deviceInfoPlugin.windowsInfo;
+      final windowsDeviceInfo = await deviceInfoPlugin.windowsInfo;
 
-      computedInfo.addAll(utf8.encode(macDeviceInfo.numberOfCores.toString()));
+      computedInfo
+          .addAll(utf8.encode(windowsDeviceInfo.numberOfCores.toString()));
     }
 
     return Uint8List.fromList(computedInfo);
@@ -146,24 +165,26 @@ class EncryptionService {
 
     final secureStorage = globalProviderContainer.read(secureStorageProvider);
 
-    if (!await secureStorage.containsKey(key: keyName)) {
-      await secureStorage.write(
-        key: keyName,
-        value: base64Url.encode(
-          SecureRandom().nextBytes(32),
-        ),
+    final String key;
+
+    if (await secureStorage.containsKey(key: keyName)) {
+      key = (await secureStorage.read(key: keyName))!;
+    } else {
+      final deviceInfo =
+          await additionalDeviceInfo(usePotentialyVolatitleInfo: true);
+
+      key = base64Url.encode(
+        (FortunaRandom()..seed(KeyParameter(deviceInfo.sublist(0, 32))))
+            .nextBytes(32),
       );
+
+      await secureStorage.write(key: keyName, value: key);
     }
 
     return SembastCodec(
       codec: ChurchAdminSembastCodec(
         key: Uint8List.fromList(
-          base64Url
-                  .decode(
-                    (await secureStorage.read(key: keyName))!,
-                  )
-                  .sublist(0, 16) +
-              (await additionalDeviceInfo()).sublist(0, 16),
+          base64Url.decode(key).sublist(0, 32),
         ),
       ),
       signature: keyName,
