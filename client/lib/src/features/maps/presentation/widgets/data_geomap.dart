@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Family;
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -116,12 +115,13 @@ class DataGeomapState extends State<DataGeomap> {
           ),
           children: [
             TileLayer(
-              tileProvider: const FMTCStore('default').getTileProvider(),
+              tileProvider:
+                  globalProviderContainer.read(flutterMapTileCacheProvider),
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName:
-                  '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}: ${CurrentPlatformService.I.effectiveValue.name}',
+                  '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}'
+                  ': ${CurrentPlatformService.I.effectiveValue.name}',
               maxZoom: 19,
-              retinaMode: MediaQuery.devicePixelRatioOf(context) > 1,
             ),
             if (_currentMapOptions.layers.contains(GeoMapLayer.areas))
               _AreasLayer(areas: areas),
@@ -184,6 +184,7 @@ class DataGeomapState extends State<DataGeomap> {
           },
           maxZoom: 18,
           initialZoom: 14,
+          crs: const Epsg4326(),
           interactionOptions: const InteractionOptions(
             flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
           ),

@@ -66,7 +66,7 @@ class AdminUsers extends StatelessWidget {
               secondaryAnimation,
               DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).dialogBackgroundColor,
+                  color: DialogTheme.of(context).backgroundColor,
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,

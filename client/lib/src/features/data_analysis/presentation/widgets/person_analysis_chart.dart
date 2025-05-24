@@ -107,7 +107,7 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                   handleBuiltInTouches: false,
                   touchTooltipData: LineTouchTooltipData(
                     tooltipMargin: 10,
-                    tooltipRoundedRadius: 20,
+                    tooltipBorderRadius: BorderRadius.circular(20),
                     tooltipBorder: BorderSide(
                       color: colorScheme.outline,
                     ),

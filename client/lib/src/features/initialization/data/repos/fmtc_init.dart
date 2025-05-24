@@ -11,11 +11,6 @@ class FMTCInit implements Initializer {
 
     await FMTCObjectBoxBackend().initialise();
 
-    FMTCTileProvider.allStores(
-      allStoresStrategy: BrowseStoreStrategy.readUpdateCreate,
-      cachedValidDuration: const Duration(days: 30),
-    );
-
     await const FMTCStore('default').manage.create();
   }
 }

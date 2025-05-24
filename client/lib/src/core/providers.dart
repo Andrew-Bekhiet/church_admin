@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -423,5 +424,12 @@ final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
   (ref) => HomeDailyDataBloc(
     homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
     advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
+  ),
+);
+
+final flutterMapTileCacheProvider = Provider<FMTCTileProvider>(
+  (ref) => FMTCTileProvider(
+    stores: const {'default': BrowseStoreStrategy.readUpdateCreate},
+    cachedValidDuration: const Duration(days: 30),
   ),
 );
