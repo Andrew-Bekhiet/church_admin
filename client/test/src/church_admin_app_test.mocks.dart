@@ -3051,29 +3051,29 @@ class MockNotificationsService extends _i1.Mock
       );
 }
 
-/// A class which mocks [HomeDailyDataBloc].
+/// A class which mocks [HomeBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
+class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
   @override
-  _i5.HomeDailyDataState get state => (super.noSuchMethod(
+  _i5.HomeState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i10.dummyValue<_i5.HomeDailyDataState>(
+        returnValue: _i10.dummyValue<_i5.HomeState>(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _i10.dummyValue<_i5.HomeDailyDataState>(
+        returnValueForMissingStub: _i10.dummyValue<_i5.HomeState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i5.HomeDailyDataState);
+      ) as _i5.HomeState);
 
   @override
-  _i9.Stream<_i5.HomeDailyDataState> get stream => (super.noSuchMethod(
+  _i9.Stream<_i5.HomeState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i9.Stream<_i5.HomeDailyDataState>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i5.HomeDailyDataState>.empty(),
-      ) as _i9.Stream<_i5.HomeDailyDataState>);
+        returnValue: _i9.Stream<_i5.HomeState>.empty(),
+        returnValueForMissingStub: _i9.Stream<_i5.HomeState>.empty(),
+      ) as _i9.Stream<_i5.HomeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -3083,7 +3083,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       ) as bool);
 
   @override
-  void add(_i5.HomeDailyDataEvent? event) => super.noSuchMethod(
+  void add(_i5.HomeEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -3092,7 +3092,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       );
 
   @override
-  void onEvent(_i5.HomeDailyDataEvent? event) => super.noSuchMethod(
+  void onEvent(_i5.HomeEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -3101,7 +3101,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       );
 
   @override
-  void emit(_i5.HomeDailyDataState? state) => super.noSuchMethod(
+  void emit(_i5.HomeState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -3110,8 +3110,8 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       );
 
   @override
-  void on<E extends _i5.HomeDailyDataEvent>(
-    _i8.EventHandler<E, _i5.HomeDailyDataState>? handler, {
+  void on<E extends _i5.HomeEvent>(
+    _i8.EventHandler<E, _i5.HomeState>? handler, {
     _i8.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
@@ -3124,9 +3124,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       );
 
   @override
-  void onTransition(
-          _i8.Transition<_i5.HomeDailyDataEvent, _i5.HomeDailyDataState>?
-              transition) =>
+  void onTransition(_i8.Transition<_i5.HomeEvent, _i5.HomeState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -3146,8 +3144,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i5.HomeDailyDataBloc {
       ) as _i9.Future<void>);
 
   @override
-  void onChange(_i8.Change<_i5.HomeDailyDataState>? change) =>
-      super.noSuchMethod(
+  void onChange(_i8.Change<_i5.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],

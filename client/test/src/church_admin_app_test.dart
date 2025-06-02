@@ -22,7 +22,7 @@ import 'fakes/fake_feature_flags_repo.dart';
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<NotificationsService>(),
-  MockSpec<HomeDailyDataBloc>(),
+  MockSpec<HomeBloc>(),
   MockSpec<PackageInfo>(),
 ])
 void main() {
@@ -229,14 +229,14 @@ Override _setUpLoggingService() {
 }
 
 Override _setUpHomeDailyDataBloc() {
-  provideDummy<HomeDailyDataState>(
+  provideDummy<HomeState>(
     const HomeDailyDataLoaded(
       data: HomeDailyData(saying: '', verse: '', sneksar: ''),
     ),
   );
   final mockHomeDailyDataBloc = MockHomeDailyDataBloc();
 
-  return homeDailyDataBlocProvider.overrideWithValue(mockHomeDailyDataBloc);
+  return homeBlocProvider.overrideWithValue(mockHomeDailyDataBloc);
 }
 
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {

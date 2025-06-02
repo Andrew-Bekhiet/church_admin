@@ -420,8 +420,8 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
   ),
 );
 
-final homeDailyDataBlocProvider = Provider<HomeDailyDataBloc>(
-  (ref) => HomeDailyDataBloc(
+final homeBlocProvider = Provider<HomeBloc>(
+  (ref) => HomeBloc(
     homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
     advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
   ),

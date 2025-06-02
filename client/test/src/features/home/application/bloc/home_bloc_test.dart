@@ -5,7 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../utils.dart';
-import 'home_daily_data_bloc_test.mocks.dart';
+import 'home_bloc_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<HomeDailyDataRepository>(),
@@ -33,9 +33,9 @@ void main() {
         when(repository.getSaying()).thenReturn('test saying');
       });
 
-      blocTest<HomeDailyDataBloc, HomeDailyDataState>(
+      blocTest<HomeBloc, HomeState>(
         'emits [HomeDailyDataLoaded] with initial data',
-        build: () => HomeDailyDataBloc(
+        build: () => HomeBloc(
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
         ),
@@ -70,9 +70,9 @@ void main() {
         when(repository.getSaying()).thenReturn('test saying');
       });
 
-      blocTest<HomeDailyDataBloc, HomeDailyDataState>(
+      blocTest<HomeBloc, HomeState>(
         'updates data when requesting new data',
-        build: () => HomeDailyDataBloc(
+        build: () => HomeBloc(
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
         ),

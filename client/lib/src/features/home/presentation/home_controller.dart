@@ -11,7 +11,7 @@ class HomeController {
     onModeChanged(HomeMode.sundaySchool);
   }
 
-  final HomeDailyDataBloc dailyDataBloc = HomeDailyDataBloc.I;
+  final HomeBloc dailyDataBloc = HomeBloc.I;
 
   final BehaviorSubject<ViewableObjectListType> servicesListTypeSubject =
       BehaviorSubject.seeded(ViewableObjectListType.grid);
@@ -82,28 +82,32 @@ class HomeController {
   }
 
   ViewableObjectListController<Area> get areasController =>
-      _putControllerIfAbsentUsing<Area>(DatabaseService.I.areas.streamAll);
+      _putControllerIfAbsentUsing(DatabaseService.I.areas.streamAll);
 
   ViewableObjectListController<Service> get servicesController =>
-      _putControllerIfAbsentUsing<Service>(
+      _putControllerIfAbsentUsing(
         DatabaseService.I.services.streamAll,
       );
 
   ViewableObjectListController<Street> get streetsController =>
-      _putControllerIfAbsentUsing<Street>(DatabaseService.I.streets.streamAll);
+      _putControllerIfAbsentUsing(DatabaseService.I.streets.streamAll);
 
   ViewableObjectListController<Family> get familiesController =>
-      _putControllerIfAbsentUsing<Family>(DatabaseService.I.families.streamAll);
+      _putControllerIfAbsentUsing(DatabaseService.I.families.streamAll);
 
   ViewableObjectListController<Store> get storesController =>
-      _putControllerIfAbsentUsing<Store>(DatabaseService.I.stores.streamAll);
+      _putControllerIfAbsentUsing(DatabaseService.I.stores.streamAll);
 
   ViewableObjectListController<Person> get personsController =>
-      _putControllerIfAbsentUsing<Person>(DatabaseService.I.persons.streamAll);
+      _putControllerIfAbsentUsing(DatabaseService.I.persons.streamAll);
 
   ViewableObjectListController<T>
-      _putControllerIfAbsentUsing<T extends Viewable>(
-    PaginatableStreamBase<T> Function() paginatableStreamFactory,
+      _putControllerIfAbsentUsing<T extends Viewable, TWhere, TOrderBy>(
+    PaginatableStreamBase<T> Function({
+      Stream<String?>? searchQuery,
+      Stream<List<TWhere>>? where,
+      Stream<List<TOrderBy>>? orderBy,
+    }) paginatableStreamFactory,
   ) {
     return _initializedControllers.putIfAbsent(
       T,

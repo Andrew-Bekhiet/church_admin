@@ -18,7 +18,7 @@ abstract final class HomeModeSelectorKeys {
 class HomeModeSelector extends StatelessWidget {
   final HomeController homeController;
 
-  HomeDailyDataBloc get dailyDataBloc => homeController.dailyDataBloc;
+  HomeBloc get dailyDataBloc => homeController.dailyDataBloc;
 
   const HomeModeSelector({required this.homeController, super.key});
 
@@ -27,7 +27,7 @@ class HomeModeSelector extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
 
-    return BlocBuilder<HomeDailyDataBloc, HomeDailyDataState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       bloc: homeController.dailyDataBloc,
       builder: (context, state) {
         return ListView(
@@ -171,7 +171,7 @@ class HomeModeSelector extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder: (context) => BlocBuilder<HomeDailyDataBloc, HomeDailyDataState>(
+      builder: (context) => BlocBuilder<HomeBloc, HomeState>(
         bloc: dailyDataBloc,
         builder: (context, state) {
           final message = switch (state) {

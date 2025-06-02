@@ -2,14 +2,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
-  static HomeDailyDataBloc get I =>
-      globalProviderContainer.read(homeDailyDataBlocProvider);
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  static HomeBloc get I => globalProviderContainer.read(homeBlocProvider);
 
   final HomeDailyDataRepository _homeDailyDataRepository;
   final AdvancedQueryParser _advancedQueryParser;
 
-  HomeDailyDataBloc({
+  HomeBloc({
     required HomeDailyDataRepository homeDailyDataRepository,
     required AdvancedQueryParser advancedQueryParser,
   })  : _homeDailyDataRepository = homeDailyDataRepository,
@@ -33,7 +32,7 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
 
   Future<void> _onLoadHomeDailyData(
     LoadHomeDailyData event,
-    Emitter<HomeDailyDataState> emit,
+    Emitter<HomeState> emit,
   ) async {
     final verse = _homeDailyDataRepository.getVerse();
     final sneksar = _homeDailyDataRepository.getTodaysSneksar();
@@ -90,7 +89,7 @@ class HomeDailyDataBloc extends Bloc<HomeDailyDataEvent, HomeDailyDataState> {
 
   void _onHomeDailyDataGetNew(
     HomeDailyDataGetNew event,
-    Emitter<HomeDailyDataState> emit,
+    Emitter<HomeState> emit,
   ) {
     final newText = switch (event.type) {
       HomeDailyDataType.verse =>

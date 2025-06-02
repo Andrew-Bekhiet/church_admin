@@ -13,7 +13,7 @@ import '../../../../utils.dart';
 import 'home_mode_selector_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<HomeDailyDataBloc>(),
+  MockSpec<HomeBloc>(),
   MockSpec<HomeController>(),
   MockSpec<ShareService>(),
   MockSpec<PackageInfo>(),
@@ -34,7 +34,7 @@ void main() {
     homeController = MockHomeController();
     shareService = MockShareService();
 
-    provideDummy<HomeDailyDataState>(const HomeDailyDataLoaded(data: mockData));
+    provideDummy<HomeState>(const HomeDailyDataLoaded(data: mockData));
 
     when(homeController.dailyDataBloc).thenReturn(dailyDataBloc);
     when(
@@ -42,7 +42,7 @@ void main() {
     ).thenReturn(const HomeDailyDataLoaded(data: mockData));
 
     initGlobalProviderContainer([
-      homeDailyDataBlocProvider.overrideWithValue(dailyDataBloc),
+      homeBlocProvider.overrideWithValue(dailyDataBloc),
       shareServiceProvider.overrideWithValue(shareService),
       packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),

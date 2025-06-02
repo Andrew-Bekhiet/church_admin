@@ -38,9 +38,8 @@ class _FakeTickerProvider_0 extends _i1.SmartFake
         );
 }
 
-class _FakeHomeDailyDataBloc_1 extends _i1.SmartFake
-    implements _i3.HomeDailyDataBloc {
-  _FakeHomeDailyDataBloc_1(
+class _FakeHomeBloc_1 extends _i1.SmartFake implements _i3.HomeBloc {
+  _FakeHomeBloc_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -71,29 +70,29 @@ class _FakeViewableObjectListController_3<T extends _i3.Viewable>
         );
 }
 
-/// A class which mocks [HomeDailyDataBloc].
+/// A class which mocks [HomeBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
+class MockHomeBloc extends _i1.Mock implements _i3.HomeBloc {
   @override
-  _i3.HomeDailyDataState get state => (super.noSuchMethod(
+  _i3.HomeState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i5.dummyValue<_i3.HomeDailyDataState>(
+        returnValue: _i5.dummyValue<_i3.HomeState>(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _i5.dummyValue<_i3.HomeDailyDataState>(
+        returnValueForMissingStub: _i5.dummyValue<_i3.HomeState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i3.HomeDailyDataState);
+      ) as _i3.HomeState);
 
   @override
-  _i6.Stream<_i3.HomeDailyDataState> get stream => (super.noSuchMethod(
+  _i6.Stream<_i3.HomeState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i6.Stream<_i3.HomeDailyDataState>.empty(),
-        returnValueForMissingStub: _i6.Stream<_i3.HomeDailyDataState>.empty(),
-      ) as _i6.Stream<_i3.HomeDailyDataState>);
+        returnValue: _i6.Stream<_i3.HomeState>.empty(),
+        returnValueForMissingStub: _i6.Stream<_i3.HomeState>.empty(),
+      ) as _i6.Stream<_i3.HomeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -103,7 +102,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       ) as bool);
 
   @override
-  void add(_i3.HomeDailyDataEvent? event) => super.noSuchMethod(
+  void add(_i3.HomeEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -112,7 +111,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       );
 
   @override
-  void onEvent(_i3.HomeDailyDataEvent? event) => super.noSuchMethod(
+  void onEvent(_i3.HomeEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -121,7 +120,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       );
 
   @override
-  void emit(_i3.HomeDailyDataState? state) => super.noSuchMethod(
+  void emit(_i3.HomeState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -130,8 +129,8 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       );
 
   @override
-  void on<E extends _i3.HomeDailyDataEvent>(
-    _i7.EventHandler<E, _i3.HomeDailyDataState>? handler, {
+  void on<E extends _i3.HomeEvent>(
+    _i7.EventHandler<E, _i3.HomeState>? handler, {
     _i7.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
@@ -144,9 +143,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       );
 
   @override
-  void onTransition(
-          _i7.Transition<_i3.HomeDailyDataEvent, _i3.HomeDailyDataState>?
-              transition) =>
+  void onTransition(_i7.Transition<_i3.HomeEvent, _i3.HomeState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -166,8 +163,7 @@ class MockHomeDailyDataBloc extends _i1.Mock implements _i3.HomeDailyDataBloc {
       ) as _i6.Future<void>);
 
   @override
-  void onChange(_i7.Change<_i3.HomeDailyDataState>? change) =>
-      super.noSuchMethod(
+  void onChange(_i7.Change<_i3.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -226,17 +222,17 @@ class MockHomeController extends _i1.Mock implements _i3.HomeController {
       ) as _i2.TickerProvider);
 
   @override
-  _i3.HomeDailyDataBloc get dailyDataBloc => (super.noSuchMethod(
+  _i3.HomeBloc get dailyDataBloc => (super.noSuchMethod(
         Invocation.getter(#dailyDataBloc),
-        returnValue: _FakeHomeDailyDataBloc_1(
+        returnValue: _FakeHomeBloc_1(
           this,
           Invocation.getter(#dailyDataBloc),
         ),
-        returnValueForMissingStub: _FakeHomeDailyDataBloc_1(
+        returnValueForMissingStub: _FakeHomeBloc_1(
           this,
           Invocation.getter(#dailyDataBloc),
         ),
-      ) as _i3.HomeDailyDataBloc);
+      ) as _i3.HomeBloc);
 
   @override
   _i4.BehaviorSubject<_i3.ViewableObjectListType> get servicesListTypeSubject =>
