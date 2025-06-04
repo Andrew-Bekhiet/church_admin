@@ -75,52 +75,54 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final animationValue = 1 -
-              ((constraints.biggest.height - kToolbarHeight) /
-                  (widget.appBarMaxHeight - kToolbarHeight));
+    return RepaintBoundary(
+      child: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final animationValue = 1 -
+                ((constraints.biggest.height - kToolbarHeight) /
+                    (widget.appBarMaxHeight - kToolbarHeight));
 
-          final BorderRadius? borderRadiusValue = _borderRadiusTween
-              .transform(widget.circleCrop ? animationValue : 0);
+            final BorderRadius? borderRadiusValue = _borderRadiusTween
+                .transform(widget.circleCrop ? animationValue : 0);
 
-          final Alignment textAlignValue =
-              _textAlignTween.transform(animationValue);
+            final Alignment textAlignValue =
+                _textAlignTween.transform(animationValue);
 
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              _AppBarPhoto(
-                foregroundColor: _foregroundColorTween.lerp(animationValue),
-                viewable: widget.viewable,
-                height: 4 * constraints.biggest.height / 5,
-                photoAlign: _photoAlignTween.lerp(animationValue),
-                borderRadius: borderRadiusValue,
-                circleCrop: widget.circleCrop,
-                blurhashSize: widget.appBarMaxHeight + kToolbarHeight,
-                onTap: widget.onTap,
-                overrideImage: widget.overrideImage,
-              ),
-              Align(
-                alignment: textAlignValue,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: animationValue > 0.9
-                        ? constraints.biggest.width - kToolbarHeight * 3 - 16
-                        : double.infinity,
-                  ),
-                  child: Text(
-                    widget.viewable.name,
-                    overflow: TextOverflow.clip,
-                    textAlign: TextAlign.center,
-                    style: _textStyleTween.transform(animationValue),
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                _AppBarPhoto(
+                  foregroundColor: _foregroundColorTween.lerp(animationValue),
+                  viewable: widget.viewable,
+                  height: 4 * constraints.biggest.height / 5,
+                  photoAlign: _photoAlignTween.lerp(animationValue),
+                  borderRadius: borderRadiusValue,
+                  circleCrop: widget.circleCrop,
+                  blurhashSize: widget.appBarMaxHeight + kToolbarHeight,
+                  onTap: widget.onTap,
+                  overrideImage: widget.overrideImage,
+                ),
+                Align(
+                  alignment: textAlignValue,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: animationValue > 0.9
+                          ? constraints.biggest.width - kToolbarHeight * 3 - 16
+                          : double.infinity,
+                    ),
+                    child: Text(
+                      widget.viewable.name,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
+                      style: _textStyleTween.transform(animationValue),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

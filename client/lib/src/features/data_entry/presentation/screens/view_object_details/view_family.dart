@@ -237,14 +237,14 @@ class _ViewFamilyState extends State<ViewFamily> {
         },
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
-          SwitchingFloatingActionButton(
+          SwitchingFloatingActionButton.fromTabController(
         tabController: tabController,
-        icons: const {
-          0: Icon(Symbols.person_add),
-          1: Icon(Symbols.group_add),
-          2: Icon(Symbols.group_add),
-          3: Icon(Symbols.add_business),
-        },
+        icons: const [
+          Icon(Symbols.person_add),
+          Icon(Symbols.group_add),
+          Icon(Symbols.group_add),
+          Icon(Symbols.add_business),
+        ],
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditPersonRoute(

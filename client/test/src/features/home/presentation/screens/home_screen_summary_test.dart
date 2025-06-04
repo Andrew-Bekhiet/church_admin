@@ -10,17 +10,15 @@ import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
-import 'home_mode_selector_test.mocks.dart';
+import 'home_screen_summary_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<HomeBloc>(),
-  MockSpec<HomeController>(),
   MockSpec<ShareService>(),
   MockSpec<PackageInfo>(),
 ])
 void main() {
-  late MockHomeDailyDataBloc dailyDataBloc;
-  late MockHomeController homeController;
+  late MockHomeBloc homeBloc;
   late MockShareService shareService;
 
   const mockData = HomeDailyData(
@@ -30,19 +28,29 @@ void main() {
   );
 
   setUp(() {
-    dailyDataBloc = MockHomeDailyDataBloc();
-    homeController = MockHomeController();
+    homeBloc = MockHomeBloc();
     shareService = MockShareService();
 
-    provideDummy<HomeState>(const HomeDailyDataLoaded(data: mockData));
+    provideDummy<HomeState>(
+      HomeState(
+        pageController: PageController(),
+        pages: const [],
+        dailyData: mockData,
+      ),
+    );
 
-    when(homeController.dailyDataBloc).thenReturn(dailyDataBloc);
     when(
-      dailyDataBloc.state,
-    ).thenReturn(const HomeDailyDataLoaded(data: mockData));
+      homeBloc.state,
+    ).thenReturn(
+      HomeState(
+        dailyData: mockData,
+        pageController: PageController(),
+        pages: const [],
+      ),
+    );
 
     initGlobalProviderContainer([
-      homeBlocProvider.overrideWithValue(dailyDataBloc),
+      homeBlocProvider.overrideWithValue(homeBloc),
       shareServiceProvider.overrideWithValue(shareService),
       packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
       featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
@@ -61,7 +69,7 @@ void main() {
             ..overrideDevicesForAllScenarios(devices: [Device.phone])
             ..addScenario(
               widget: Scaffold(
-                body: HomeModeSelector(homeController: homeController),
+                body: HomeScreenSummary(homeBloc: homeBloc),
               ),
               name: 'Loaded State',
             );
@@ -82,56 +90,55 @@ void main() {
 
     testWidgets('requests new data on dialog button tap', (tester) async {
       await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeModeSelector(homeController: homeController)),
+        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
         wrapper: materialAppWithThemeAndLocale(),
       );
 
-      await act.tap(spotKey(HomeModeSelectorKeys.verseButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
       await tester.pumpAndSettle();
 
-      await act.tap(spotKey(HomeModeSelectorKeys.newItemButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.newItemButtonKey));
 
       verify(
-        dailyDataBloc.add(const HomeDailyDataGetNew(HomeDailyDataType.verse)),
+        homeBloc.add(const HomeDailyDataGetNew(HomeDailyDataType.verse)),
       ).called(1);
     });
 
     testWidgets('shares text when share button is tapped', (tester) async {
       await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeModeSelector(homeController: homeController)),
+        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
         wrapper: materialAppWithThemeAndLocale(),
       );
 
-      await act.tap(spotKey(HomeModeSelectorKeys.verseButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.verseButtonKey));
       await tester.pumpAndSettle();
 
-      await act.tap(spotKey(HomeModeSelectorKeys.shareButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.shareButtonKey));
 
       verify(shareService.shareText(mockData.verse)).called(1);
     });
 
     testWidgets('switches to church data mode', (tester) async {
       await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeModeSelector(homeController: homeController)),
+        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
         wrapper: materialAppWithThemeAndLocale(),
       );
 
-      await act.tap(spotKey(HomeModeSelectorKeys.churchDataButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.churchDataButtonKey));
 
-      verify(homeController.onModeChanged(HomeMode.churchData)).called(1);
-      verify(homeController.onTabIndexChanged(1)).called(1);
+      verify(homeBloc.add(const HomeChangeMode(HomeMode.churchData))).called(1);
     });
 
     testWidgets('switches to sunday school mode', (tester) async {
       await tester.pumpWidgetBuilder(
-        Scaffold(body: HomeModeSelector(homeController: homeController)),
+        Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
         wrapper: materialAppWithThemeAndLocale(),
       );
 
-      await act.tap(spotKey(HomeModeSelectorKeys.sundaySchoolButtonKey));
+      await act.tap(spotKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));
 
-      verify(homeController.onModeChanged(HomeMode.sundaySchool)).called(1);
-      verify(homeController.onTabIndexChanged(1)).called(1);
+      verify(homeBloc.add(const HomeChangeMode(HomeMode.sundaySchool)))
+          .called(1);
     });
   });
 }

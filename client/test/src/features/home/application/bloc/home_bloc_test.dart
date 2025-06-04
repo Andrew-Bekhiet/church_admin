@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,17 +11,28 @@ import 'home_bloc_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<HomeDailyDataRepository>(),
   MockSpec<AdvancedQueryParser>(),
+  MockSpec<DatabaseService>(),
 ])
 void main() {
   late MockHomeDailyDataRepository repository;
   late MockAdvancedQueryParser mockAdvancedQueryParser;
+  late MockDatabaseService mockDatabaseService;
 
   setUp(() {
     repository = MockHomeDailyDataRepository();
     mockAdvancedQueryParser = MockAdvancedQueryParser();
+    mockDatabaseService = MockDatabaseService();
 
     when(mockAdvancedQueryParser.createPaginatableStream(any))
         .thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
+
+    when(mockDatabaseService.daosByType).thenReturn({
+      Family: mockDatabaseService.families,
+      Store: mockDatabaseService.stores,
+      Person: mockDatabaseService.persons,
+      Class: mockDatabaseService.classes,
+      Group: mockDatabaseService.groups,
+    });
   });
 
   tearDown(defaultTearDown);
@@ -38,11 +50,14 @@ void main() {
         build: () => HomeBloc(
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
+          databaseService: mockDatabaseService,
         ),
         wait: Duration.zero,
         expect: () => [
-          const HomeDailyDataLoaded(
-            data: HomeDailyData(
+          isA<HomeState>().having(
+            (s) => s.dailyData,
+            'dailyData',
+            const HomeDailyData(
               verse: 'test verse',
               sneksar: 'test sneksar',
               saying: 'test saying',
@@ -75,27 +90,35 @@ void main() {
         build: () => HomeBloc(
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
+          databaseService: mockDatabaseService,
         ),
-        seed: () => const HomeDailyDataLoaded(
-          data: HomeDailyData(
+        seed: () => HomeState(
+          dailyData: const HomeDailyData(
             verse: 'test verse',
             sneksar: 'test sneksar',
             saying: 'test saying',
           ),
+          pageController: PageController(),
+          pages: const [],
         ),
         act: (bloc) => bloc
           ..add(const HomeDailyDataGetNew(HomeDailyDataType.verse))
           ..add(const HomeDailyDataGetNew(HomeDailyDataType.saying)),
+        skip: 1,
         expect: () => [
-          const HomeDailyDataLoaded(
-            data: HomeDailyData(
+          isA<HomeState>().having(
+            (s) => s.dailyData,
+            'dailyData',
+            const HomeDailyData(
               verse: 'new test verse',
               sneksar: 'test sneksar',
               saying: 'test saying',
             ),
           ),
-          const HomeDailyDataLoaded(
-            data: HomeDailyData(
+          isA<HomeState>().having(
+            (s) => s.dailyData,
+            'dailyData',
+            const HomeDailyData(
               verse: 'new test verse',
               sneksar: 'test sneksar',
               saying: 'new test saying',

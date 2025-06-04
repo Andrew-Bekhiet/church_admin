@@ -3,23 +3,36 @@ import 'package:flutter/material.dart';
 
 class SwitchingFloatingActionButton extends StatelessWidget {
   const SwitchingFloatingActionButton({
-    required this.tabController,
+    required this.animation,
+    required this.getIndex,
+    required this.getOffset,
     required this.icons,
     required this.onTap,
     super.key,
-  }) : assert(tabController.length == icons.length);
+  });
 
-  final TabController tabController;
-  final Map<int, Widget?> icons;
+  SwitchingFloatingActionButton.fromTabController({
+    required TabController tabController,
+    required this.icons,
+    required this.onTap,
+    super.key,
+  })  : animation = tabController.animation!,
+        getIndex = (() => tabController.index),
+        getOffset = (() => tabController.offset);
+
+  final Listenable animation;
+  final List<Widget?> icons;
   final void Function(int) onTap;
+  final int Function() getIndex;
+  final double Function() getOffset;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: tabController.animation!,
+      animation: animation,
       builder: (context, child) {
-        final double offset = tabController.offset;
-        final int currentIndex = tabController.index;
+        final double offset = getOffset();
+        final int currentIndex = getIndex();
 
         final int newIndex = getNewIndex(offset, currentIndex);
 

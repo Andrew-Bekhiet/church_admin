@@ -43,7 +43,8 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
 
 class _ViewableObjectListState<T extends Viewable>
     extends State<ViewableObjectList<T>> {
-  late ScrollController scrollController;
+  ScrollController? _ownScrollController;
+  ScrollController? _scrollController;
 
   ViewableObjectListController<T> get objectsController =>
       widget.objectsController;
@@ -52,10 +53,30 @@ class _ViewableObjectListState<T extends Viewable>
   void initState() {
     super.initState();
 
-    scrollController = widget.scrollController ?? ScrollController();
+    _listenToScrollController();
+  }
+
+  @override
+  void didUpdateWidget(covariant ViewableObjectList<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.scrollController == widget.scrollController) return;
+
+    _scrollController?.removeListener(_scrollListener);
+    _ownScrollController?.dispose();
+    _ownScrollController = null;
+
+    _listenToScrollController();
+  }
+
+  void _listenToScrollController() {
+    _scrollController =
+        widget.scrollController ?? (_ownScrollController = ScrollController());
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollController.addListener(_scrollListener);
+      if (!mounted) return;
+
+      _scrollController?.addListener(_scrollListener);
     });
   }
 
@@ -117,7 +138,7 @@ class _ViewableObjectListState<T extends Viewable>
               mainAxisSpacing: 4,
             ),
             padding: const EdgeInsets.all(2),
-            controller: scrollController,
+            controller: _scrollController,
             itemBuilder: itemBuilder,
             cacheExtent: 250,
             itemCount: items.length + (items.length % 2) + 2,
@@ -126,7 +147,7 @@ class _ViewableObjectListState<T extends Viewable>
         } else {
           return ListView.builder(
             padding: const EdgeInsets.all(2),
-            controller: scrollController,
+            controller: _scrollController,
             itemBuilder: itemBuilder,
             cacheExtent: 250,
             itemCount: items.length + 1,
@@ -142,7 +163,7 @@ class _ViewableObjectListState<T extends Viewable>
   }
 
   void _scrollListener() {
-    final position = scrollController.position;
+    final position = _scrollController!.position;
 
     if (!position.atEdge && !position.outOfRange) return;
 
@@ -164,9 +185,9 @@ class _ViewableObjectListState<T extends Viewable>
 
   @override
   Future<void> dispose() async {
-    scrollController.removeListener(_scrollListener);
+    _scrollController?.removeListener(_scrollListener);
 
-    if (widget.scrollController == null) scrollController.dispose();
+    _ownScrollController?.dispose();
 
     super.dispose();
   }

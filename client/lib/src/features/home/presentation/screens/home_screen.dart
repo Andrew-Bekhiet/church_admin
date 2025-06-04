@@ -10,8 +10,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late final HomeController _controller = HomeController(this);
+class _HomeScreenState extends State<HomeScreen> {
+  late final homeBloc = HomeBloc.I;
 
   final _authEntry = OverlayEntry(
     builder: (context) => const AuthenticateScreen(),
@@ -33,12 +33,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: HomeDrawer(homeController: _controller),
-      appBar: HomeAppBar(homeController: _controller),
-      body: HomeBody(homeController: _controller),
-      floatingActionButton:
-          HomeFloatingActionButton(homeController: _controller),
-      bottomNavigationBar: HomeBottomNavBar(homeController: _controller),
+      drawer: HomeDrawer(homeBloc: homeBloc),
+      appBar: HomeAppBar(homeBloc: homeBloc),
+      body: HomeBody(homeBloc: homeBloc),
+      floatingActionButton: HomeFloatingActionButton(homeBloc: homeBloc),
+      bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
       extendBody: true,
     );
   }
@@ -79,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void dispose() {
     _appLifecycleListener.dispose();
 
-    _controller.dispose();
+    homeBloc.close();
     _localAuthListener.cancel();
 
     super.dispose();

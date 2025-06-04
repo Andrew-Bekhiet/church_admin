@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 typedef ServiceTrailingBuilder = Widget Function(
   BuildContext,
@@ -46,19 +45,17 @@ class ServicesHierarchyList extends StatefulWidget {
 
   final ClassBuilder? classBuilder;
 
-  final ViewableObjectListController<Service>? listController;
-  final Stream<String?>? search;
-  final Stream<ViewableObjectListType>? type;
+  final ViewableObjectListController<Service> listController;
+  final ViewableObjectListType? type;
 
   const ServicesHierarchyList({
+    required this.listController,
     this.showClasses = true,
     this.showGroups = true,
     this.serviceTrailingBuilder,
     this.studyYearBuilder,
     this.classBuilder,
     this.groupBuilder,
-    this.listController,
-    this.search,
     this.type,
     super.key,
   }) : assert(showClasses || showGroups);
@@ -69,38 +66,21 @@ class ServicesHierarchyList extends StatefulWidget {
 
 class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     with TickerProviderStateMixin {
-  late final search = widget.search ?? BehaviorSubject<String?>.seeded(null);
-  late final type = widget.type ??
-      BehaviorSubject<ViewableObjectListType>.seeded(
-        ViewableObjectListType.list,
-      );
-
-  late final listController = widget.listController ??
-      ViewableObjectListController<Service>(
-        objectsPaginatableStream:
-            DatabaseService.I.services.streamAll(searchQuery: search),
-      );
-
   final _animationControllers = <Object, AnimationController>{};
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ViewableObjectListType>(
-      stream: type,
-      builder: (context, typeSnapshot) {
-        final typeValue = typeSnapshot.data ?? ViewableObjectListType.list;
+    final listType = widget.type ?? ViewableObjectListType.list;
 
-        return ViewableObjectList(
-          type: typeValue,
-          addSeparator: false,
-          itemsExpandable: true,
-          objectsController: listController,
-          itemBuilder: typeValue == ViewableObjectListType.grid ||
-                  typeValue == ViewableObjectListType.grid3
-              ? _buildServiceCard
-              : _buildHierarchyServiceTile,
-        );
-      },
+    return ViewableObjectList(
+      type: listType,
+      addSeparator: false,
+      itemsExpandable: true,
+      objectsController: widget.listController,
+      itemBuilder: listType == ViewableObjectListType.grid ||
+              listType == ViewableObjectListType.grid3
+          ? _buildServiceCard
+          : _buildHierarchyServiceTile,
     );
   }
 
@@ -216,13 +196,6 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     }
 
     super.dispose();
-
-    if (search is BehaviorSubject) {
-      await (search as BehaviorSubject).close();
-    }
-    if (widget.listController == null) {
-      await listController.dispose();
-    }
   }
 }
 

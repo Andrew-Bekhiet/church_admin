@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-abstract final class HomeModeSelectorKeys {
+abstract final class HomeScreenSummaryKeys {
   static const Key churchDataButtonKey = Key('church_data_button');
   static const Key sundaySchoolButtonKey = Key('sunday_school_button');
 
@@ -15,21 +15,20 @@ abstract final class HomeModeSelectorKeys {
   static const Key shareButtonKey = Key('share_button');
 }
 
-class HomeModeSelector extends StatelessWidget {
-  final HomeController homeController;
+class HomeScreenSummary extends StatelessWidget {
+  final HomeBloc homeBloc;
 
-  HomeBloc get dailyDataBloc => homeController.dailyDataBloc;
-
-  const HomeModeSelector({required this.homeController, super.key});
+  const HomeScreenSummary({required this.homeBloc, super.key});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
 
-    return BlocBuilder<HomeBloc, HomeState>(
-      bloc: homeController.dailyDataBloc,
-      builder: (context, state) {
+    return BlocSelector<HomeBloc, HomeState, HomeDailyData?>(
+      bloc: homeBloc,
+      selector: (state) => state.dailyData,
+      builder: (context, dailyData) {
         return ListView(
           children: [
             Image.asset(
@@ -54,58 +53,58 @@ class HomeModeSelector extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-              child: switch (state) {
-                HomeDailyDataLoading() => const Center(
+              child: switch (dailyData) {
+                null => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                HomeDailyDataLoaded(:final data) => Column(
+                final HomeDailyData dailyData => Column(
                     spacing: 6,
                     children: [
-                      if (data.birthdays.isNotEmpty)
+                      if (dailyData.birthdays.isNotEmpty)
                         AnimatedSize(
                           duration: const Duration(milliseconds: 400),
                           alignment: Alignment.topCenter,
                           curve: Easing.standard,
                           child: HomeModeSection(
-                            key: HomeModeSelectorKeys.birthdaysButtonKey,
-                            onTap: () =>
-                                AdvancedSearchRoute($extra: data.birthdaysQuery)
-                                    .push(context),
+                            key: HomeScreenSummaryKeys.birthdaysButtonKey,
+                            onTap: () => AdvancedSearchRoute(
+                              $extra: dailyData.birthdaysQuery,
+                            ).push(context),
                             title: 'أعياد الميلاد اليوم',
-                            text: data.birthdays.join('، '),
+                            text: dailyData.birthdays.join('، '),
                             textMaxLines: 2,
                           ),
                         ),
                       HomeModeSection(
-                        key: HomeModeSelectorKeys.verseButtonKey,
+                        key: HomeScreenSummaryKeys.verseButtonKey,
                         onTap: () => showMessageDialog(
                           context,
-                          initialData: data,
+                          initialData: dailyData,
                           type: HomeDailyDataType.verse,
                         ),
                         title: 'الآيه',
-                        text: data.verse,
+                        text: dailyData.verse,
                       ),
                       HomeModeSection(
-                        key: HomeModeSelectorKeys.sneksarButtonKey,
+                        key: HomeScreenSummaryKeys.sneksarButtonKey,
                         onTap: () => showMessageDialog(
                           context,
-                          initialData: data,
+                          initialData: dailyData,
                           type: HomeDailyDataType.sneksar,
                           canGetNew: false,
                         ),
                         title: 'السنكسار',
-                        text: data.sneksar,
+                        text: dailyData.sneksar,
                       ),
                       HomeModeSection(
-                        key: HomeModeSelectorKeys.sayingButtonKey,
+                        key: HomeScreenSummaryKeys.sayingButtonKey,
                         onTap: () => showMessageDialog(
                           context,
-                          initialData: data,
+                          initialData: dailyData,
                           type: HomeDailyDataType.saying,
                         ),
                         title: 'أقوال أباء',
-                        text: data.saying,
+                        text: dailyData.saying,
                       ),
                     ],
                   ),
@@ -119,18 +118,16 @@ class HomeModeSelector extends StatelessWidget {
                   spacing: 16,
                   children: [
                     HomeModeCard(
-                      key: HomeModeSelectorKeys.churchDataButtonKey,
-                      onTap: () => homeController
-                        ..onModeChanged(HomeMode.churchData)
-                        ..onTabIndexChanged(1),
+                      key: HomeScreenSummaryKeys.churchDataButtonKey,
+                      onTap: () => homeBloc
+                          .add(const HomeChangeMode(HomeMode.churchData)),
                       assetName: 'assets/images/church_data.png',
                       title: 'أسرة أبونا بيشوى كامل',
                     ),
                     HomeModeCard(
-                      key: HomeModeSelectorKeys.sundaySchoolButtonKey,
-                      onTap: () => homeController
-                        ..onModeChanged(HomeMode.sundaySchool)
-                        ..onTabIndexChanged(1),
+                      key: HomeScreenSummaryKeys.sundaySchoolButtonKey,
+                      onTap: () => homeBloc
+                          .add(const HomeChangeMode(HomeMode.sundaySchool)),
                       assetName:
                           'assets/images/sunday_school_services_image.png',
                       title: 'خدمات مدارس الأحد',
@@ -172,11 +169,11 @@ class HomeModeSelector extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => BlocBuilder<HomeBloc, HomeState>(
-        bloc: dailyDataBloc,
+        bloc: homeBloc,
         builder: (context, state) {
           final message = switch (state) {
-            HomeDailyDataLoading() => initialMessage,
-            HomeDailyDataLoaded(:final data) => data.select(type),
+            HomeState(dailyData: null) => initialMessage,
+            HomeState(:final HomeDailyData dailyData) => dailyData.select(type),
           };
 
           return AlertDialog(
@@ -187,14 +184,14 @@ class HomeModeSelector extends StatelessWidget {
             actionsAlignment: MainAxisAlignment.center,
             actions: [
               FilledButton(
-                key: HomeModeSelectorKeys.shareButtonKey,
+                key: HomeScreenSummaryKeys.shareButtonKey,
                 onPressed: () => ShareService.I.shareText(message),
                 child: Text('مشاركة $title'),
               ),
               if (canGetNew)
                 FilledButton(
-                  key: HomeModeSelectorKeys.newItemButtonKey,
-                  onPressed: () => dailyDataBloc.add(HomeDailyDataGetNew(type)),
+                  key: HomeScreenSummaryKeys.newItemButtonKey,
+                  onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
                   child: Text('$label أخرى'),
                 ),
               FilledButton(

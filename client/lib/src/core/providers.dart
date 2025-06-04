@@ -387,7 +387,13 @@ final shareServiceProvider = Provider<ShareService>(
 );
 
 final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => FirebaseAuthRepository(auth: ref.watch(firebaseAuthProvider)),
+  (ref) {
+    final firebaseAuthRepository =
+        FirebaseAuthRepository(auth: ref.watch(firebaseAuthProvider));
+    ref.onDispose(firebaseAuthRepository.dispose);
+
+    return firebaseAuthRepository;
+  },
 );
 
 final authStorageProvider = Provider<AuthStorage>(
@@ -421,15 +427,27 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 );
 
 final homeBlocProvider = Provider<HomeBloc>(
-  (ref) => HomeBloc(
-    homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
-    advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
-  ),
+  (ref) {
+    final homeBloc = HomeBloc(
+      databaseService: ref.watch(databaseServiceProvider),
+      homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+      advancedQueryParser:
+          ref.watch(databaseServiceProvider).advancedQueryParser,
+    );
+    ref.onDispose(homeBloc.close);
+
+    return homeBloc;
+  },
 );
 
 final flutterMapTileCacheProvider = Provider<FMTCTileProvider>(
-  (ref) => FMTCTileProvider(
-    stores: const {'default': BrowseStoreStrategy.readUpdateCreate},
-    cachedValidDuration: const Duration(days: 30),
-  ),
+  (ref) {
+    final fmtcTileProvider = FMTCTileProvider(
+      stores: const {'default': BrowseStoreStrategy.readUpdateCreate},
+      cachedValidDuration: const Duration(days: 30),
+    );
+    ref.onDispose(fmtcTileProvider.dispose);
+
+    return fmtcTileProvider;
+  },
 );

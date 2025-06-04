@@ -33,6 +33,169 @@ class _FakePaginatableStreamBase_0<T> extends _i1.SmartFake
         );
 }
 
+class _FakeDBGraphQLClient_1 extends _i1.SmartFake
+    implements _i2.DBGraphQLClient {
+  _FakeDBGraphQLClient_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGQLParser_2 extends _i1.SmartFake implements _i2.GQLParser {
+  _FakeGQLParser_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDBVarsTransformer_3 extends _i1.SmartFake
+    implements _i2.DBVarsTransformer {
+  _FakeDBVarsTransformer_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeAdvancedQueryParser_4 extends _i1.SmartFake
+    implements _i2.AdvancedQueryParser {
+  _FakeAdvancedQueryParser_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeHomeDAO_5 extends _i1.SmartFake implements _i2.HomeDAO {
+  _FakeHomeDAO_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeAreasDAO_6 extends _i1.SmartFake implements _i2.AreasDAO {
+  _FakeAreasDAO_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreetsDAO_7 extends _i1.SmartFake implements _i2.StreetsDAO {
+  _FakeStreetsDAO_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeFamiliesDAO_8 extends _i1.SmartFake implements _i2.FamiliesDAO {
+  _FakeFamiliesDAO_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStoresDAO_9 extends _i1.SmartFake implements _i2.StoresDAO {
+  _FakeStoresDAO_9(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePersonsDAO_10 extends _i1.SmartFake implements _i2.PersonsDAO {
+  _FakePersonsDAO_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeServicesDAO_11 extends _i1.SmartFake implements _i2.ServicesDAO {
+  _FakeServicesDAO_11(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeClassesDAO_12 extends _i1.SmartFake implements _i2.ClassesDAO {
+  _FakeClassesDAO_12(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeGroupsDAO_13 extends _i1.SmartFake implements _i2.GroupsDAO {
+  _FakeGroupsDAO_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUsersDAO_14 extends _i1.SmartFake implements _i2.UsersDAO {
+  _FakeUsersDAO_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [HomeDailyDataRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -151,4 +314,225 @@ class MockAdvancedQueryParser extends _i1.Mock
           ),
         ),
       ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
+}
+
+/// A class which mocks [DatabaseService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
+  @override
+  _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
+        Invocation.getter(#graphQLClient),
+        returnValue: _FakeDBGraphQLClient_1(
+          this,
+          Invocation.getter(#graphQLClient),
+        ),
+        returnValueForMissingStub: _FakeDBGraphQLClient_1(
+          this,
+          Invocation.getter(#graphQLClient),
+        ),
+      ) as _i2.DBGraphQLClient);
+
+  @override
+  _i2.GQLParser get parser => (super.noSuchMethod(
+        Invocation.getter(#parser),
+        returnValue: _FakeGQLParser_2(
+          this,
+          Invocation.getter(#parser),
+        ),
+        returnValueForMissingStub: _FakeGQLParser_2(
+          this,
+          Invocation.getter(#parser),
+        ),
+      ) as _i2.GQLParser);
+
+  @override
+  _i2.DBVarsTransformer get varsTransformer => (super.noSuchMethod(
+        Invocation.getter(#varsTransformer),
+        returnValue: _FakeDBVarsTransformer_3(
+          this,
+          Invocation.getter(#varsTransformer),
+        ),
+        returnValueForMissingStub: _FakeDBVarsTransformer_3(
+          this,
+          Invocation.getter(#varsTransformer),
+        ),
+      ) as _i2.DBVarsTransformer);
+
+  @override
+  _i2.AdvancedQueryParser get advancedQueryParser => (super.noSuchMethod(
+        Invocation.getter(#advancedQueryParser),
+        returnValue: _FakeAdvancedQueryParser_4(
+          this,
+          Invocation.getter(#advancedQueryParser),
+        ),
+        returnValueForMissingStub: _FakeAdvancedQueryParser_4(
+          this,
+          Invocation.getter(#advancedQueryParser),
+        ),
+      ) as _i2.AdvancedQueryParser);
+
+  @override
+  _i2.HomeDAO get home => (super.noSuchMethod(
+        Invocation.getter(#home),
+        returnValue: _FakeHomeDAO_5(
+          this,
+          Invocation.getter(#home),
+        ),
+        returnValueForMissingStub: _FakeHomeDAO_5(
+          this,
+          Invocation.getter(#home),
+        ),
+      ) as _i2.HomeDAO);
+
+  @override
+  _i2.AreasDAO get areas => (super.noSuchMethod(
+        Invocation.getter(#areas),
+        returnValue: _FakeAreasDAO_6(
+          this,
+          Invocation.getter(#areas),
+        ),
+        returnValueForMissingStub: _FakeAreasDAO_6(
+          this,
+          Invocation.getter(#areas),
+        ),
+      ) as _i2.AreasDAO);
+
+  @override
+  _i2.StreetsDAO get streets => (super.noSuchMethod(
+        Invocation.getter(#streets),
+        returnValue: _FakeStreetsDAO_7(
+          this,
+          Invocation.getter(#streets),
+        ),
+        returnValueForMissingStub: _FakeStreetsDAO_7(
+          this,
+          Invocation.getter(#streets),
+        ),
+      ) as _i2.StreetsDAO);
+
+  @override
+  _i2.FamiliesDAO get families => (super.noSuchMethod(
+        Invocation.getter(#families),
+        returnValue: _FakeFamiliesDAO_8(
+          this,
+          Invocation.getter(#families),
+        ),
+        returnValueForMissingStub: _FakeFamiliesDAO_8(
+          this,
+          Invocation.getter(#families),
+        ),
+      ) as _i2.FamiliesDAO);
+
+  @override
+  _i2.StoresDAO get stores => (super.noSuchMethod(
+        Invocation.getter(#stores),
+        returnValue: _FakeStoresDAO_9(
+          this,
+          Invocation.getter(#stores),
+        ),
+        returnValueForMissingStub: _FakeStoresDAO_9(
+          this,
+          Invocation.getter(#stores),
+        ),
+      ) as _i2.StoresDAO);
+
+  @override
+  _i2.PersonsDAO get persons => (super.noSuchMethod(
+        Invocation.getter(#persons),
+        returnValue: _FakePersonsDAO_10(
+          this,
+          Invocation.getter(#persons),
+        ),
+        returnValueForMissingStub: _FakePersonsDAO_10(
+          this,
+          Invocation.getter(#persons),
+        ),
+      ) as _i2.PersonsDAO);
+
+  @override
+  _i2.ServicesDAO get services => (super.noSuchMethod(
+        Invocation.getter(#services),
+        returnValue: _FakeServicesDAO_11(
+          this,
+          Invocation.getter(#services),
+        ),
+        returnValueForMissingStub: _FakeServicesDAO_11(
+          this,
+          Invocation.getter(#services),
+        ),
+      ) as _i2.ServicesDAO);
+
+  @override
+  _i2.ClassesDAO get classes => (super.noSuchMethod(
+        Invocation.getter(#classes),
+        returnValue: _FakeClassesDAO_12(
+          this,
+          Invocation.getter(#classes),
+        ),
+        returnValueForMissingStub: _FakeClassesDAO_12(
+          this,
+          Invocation.getter(#classes),
+        ),
+      ) as _i2.ClassesDAO);
+
+  @override
+  _i2.GroupsDAO get groups => (super.noSuchMethod(
+        Invocation.getter(#groups),
+        returnValue: _FakeGroupsDAO_13(
+          this,
+          Invocation.getter(#groups),
+        ),
+        returnValueForMissingStub: _FakeGroupsDAO_13(
+          this,
+          Invocation.getter(#groups),
+        ),
+      ) as _i2.GroupsDAO);
+
+  @override
+  _i2.UsersDAO get users => (super.noSuchMethod(
+        Invocation.getter(#users),
+        returnValue: _FakeUsersDAO_14(
+          this,
+          Invocation.getter(#users),
+        ),
+        returnValueForMissingStub: _FakeUsersDAO_14(
+          this,
+          Invocation.getter(#users),
+        ),
+      ) as _i2.UsersDAO);
+
+  @override
+  _i2.MetadataDAO get metadata => (super.noSuchMethod(
+        Invocation.getter(#metadata),
+        returnValue: _FakeMetadataDAO_15(
+          this,
+          Invocation.getter(#metadata),
+        ),
+        returnValueForMissingStub: _FakeMetadataDAO_15(
+          this,
+          Invocation.getter(#metadata),
+        ),
+      ) as _i2.MetadataDAO);
+
+  @override
+  _i2.HistoryDAO get history => (super.noSuchMethod(
+        Invocation.getter(#history),
+        returnValue: _FakeHistoryDAO_16(
+          this,
+          Invocation.getter(#history),
+        ),
+        returnValueForMissingStub: _FakeHistoryDAO_16(
+          this,
+          Invocation.getter(#history),
+        ),
+      ) as _i2.HistoryDAO);
+
+  @override
+  Map<Type, _i2.DAOBase<_i2.ViewableWithID>> get daosByType =>
+      (super.noSuchMethod(
+        Invocation.getter(#daosByType),
+        returnValue: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
+        returnValueForMissingStub: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
+      ) as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
 }

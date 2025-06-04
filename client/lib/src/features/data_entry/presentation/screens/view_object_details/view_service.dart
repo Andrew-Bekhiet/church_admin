@@ -180,13 +180,13 @@ class _ViewServiceState extends State<ViewService> {
         },
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
-          SwitchingFloatingActionButton(
+          SwitchingFloatingActionButton.fromTabController(
         tabController: tabController,
-        icons: const {
-          0: Icon(Symbols.group_add),
-          1: Icon(Symbols.group_add),
-          2: Icon(Symbols.person_add),
-        },
+        icons: const [
+          Icon(Symbols.group_add),
+          Icon(Symbols.group_add),
+          Icon(Symbols.person_add),
+        ],
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditClassRoute(

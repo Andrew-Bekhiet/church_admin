@@ -129,7 +129,7 @@ List<Override> _setUp() {
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
     _setUpNotificationsService(),
-    _setUpHomeDailyDataBloc(),
+    _setUpHomeBloc(),
     packageInfoPluginProvider.overrideWith((_) => MockPackageInfo()),
     featureFlagsRepoProvider.overrideWithValue(FakeFeatureFlagsRepo()),
   ];
@@ -228,15 +228,17 @@ Override _setUpLoggingService() {
   return loggingServiceProvider.overrideWithValue(mockLoggingService);
 }
 
-Override _setUpHomeDailyDataBloc() {
+Override _setUpHomeBloc() {
   provideDummy<HomeState>(
-    const HomeDailyDataLoaded(
-      data: HomeDailyData(saying: '', verse: '', sneksar: ''),
+    HomeState(
+      pageController: PageController(),
+      dailyData: const HomeDailyData(saying: '', verse: '', sneksar: ''),
+      pages: const [HomePageConfig(label: '', pageIcon: Icons.home)],
     ),
   );
-  final mockHomeDailyDataBloc = MockHomeDailyDataBloc();
+  final mockHomeBloc = MockHomeBloc();
 
-  return homeBlocProvider.overrideWithValue(mockHomeDailyDataBloc);
+  return homeBlocProvider.overrideWithValue(mockHomeBloc);
 }
 
 class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {

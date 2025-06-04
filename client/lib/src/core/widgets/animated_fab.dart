@@ -32,12 +32,14 @@ class AnimatedFloatingActionButton extends StatelessWidget {
       child: oldFAB,
     );
 
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        bgAnimatiedWidget,
-        fgAnimatiedWidget,
-      ],
+    return RepaintBoundary(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          bgAnimatiedWidget,
+          fgAnimatiedWidget,
+        ],
+      ),
     );
   }
 }

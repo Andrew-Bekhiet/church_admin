@@ -211,13 +211,13 @@ class _ViewStreetState extends State<ViewStreet> {
         },
       ),
       floatingActionButtonBuilder: (context, tabController, street) =>
-          SwitchingFloatingActionButton(
+          SwitchingFloatingActionButton.fromTabController(
         tabController: tabController,
-        icons: const {
-          0: Icon(Symbols.group_add),
-          1: Icon(Symbols.person_add),
-          2: Icon(Symbols.add_business),
-        },
+        icons: const [
+          Icon(Symbols.group_add),
+          Icon(Symbols.person_add),
+          Icon(Symbols.add_business),
+        ],
         onTap: (newIndex) {
           if (newIndex == 0) {
             EditFamilyRoute(

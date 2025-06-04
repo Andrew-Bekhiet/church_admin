@@ -1,55 +1,32 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeFloatingActionButton extends StatelessWidget {
-  final HomeController homeController;
+  final HomeBloc homeBloc;
 
-  const HomeFloatingActionButton({
-    required this.homeController,
-    super.key,
-  });
+  const HomeFloatingActionButton({required this.homeBloc, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<HomeMode>(
-      initialData: homeController.currentMode,
-      stream: homeController.modeStream,
-      builder: (context, modeSnapshot) {
-        final isSundaySchool = modeSnapshot.data == HomeMode.sundaySchool;
+    return BlocBuilder<HomeBloc, HomeState>(
+      bloc: homeBloc,
+      builder: (context, homeState) {
+        final pages = homeState.pages;
 
         return SwitchingFloatingActionButton(
-          tabController: homeController.tabController!,
-          icons: [
-            null,
-            if (isSundaySchool)
-              const Icon(Symbols.add)
-            else ...[
-              const Icon(Symbols.add_location),
-              const Icon(Symbols.add_road),
-              const Icon(Symbols.group_add),
-              const Icon(Symbols.add_business),
-            ],
-            const Icon(Symbols.person_add),
-          ].asMap(),
+          animation: homeState.pageController,
+          getIndex: () => homeState.currentPage.floor(),
+          getOffset: () =>
+              homeState.currentPage - homeState.currentPage.truncateToDouble(),
+          icons: pages.map((tab) => tab.fabIcon).toList(),
           onTap: (i) {
-            if (i == 0) return;
+            final location = pages[i].fabOnTapLocation;
 
-            context.push(
-              [
-                '',
-                if (isSundaySchool)
-                  const EditServiceRoute().location
-                else ...[
-                  const EditAreaRoute().location,
-                  const EditStreetRoute().location,
-                  const EditFamilyRoute().location,
-                  const EditStoreRoute().location,
-                ],
-                const EditPersonRoute().location,
-              ][i],
-            );
+            if (location == null) return;
+
+            context.push(location);
           },
         );
       },

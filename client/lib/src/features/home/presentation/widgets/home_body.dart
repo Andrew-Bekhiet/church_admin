@@ -1,35 +1,38 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({
-    required this.homeController,
-    super.key,
-  });
+  const HomeBody({required this.homeBloc, super.key});
 
-  final HomeController homeController;
+  final HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<HomeMode>(
-      initialData: homeController.currentMode,
-      stream: homeController.modeStream,
-      builder: (context, modeSnapshot) {
-        final tabController = homeController.tabController;
+    return BlocBuilder<HomeBloc, HomeState>(
+      bloc: homeBloc,
+      buildWhen: (previous, current) =>
+          previous.pageController != current.pageController ||
+          !const DeepCollectionEquality().equals(previous.pages, current.pages),
+      builder: (context, homeState) {
+        final pages = homeState.pages;
 
-        return TabBarView(
-          controller: tabController,
-          children: [
-            HomeModeSelector(homeController: homeController),
-            if (modeSnapshot.data == HomeMode.sundaySchool)
-              LazyTabPage(
-                tabController: tabController,
-                index: 1,
-                builder: (context) => ServicesHierarchyList(
-                  key: const PageStorageKey('_HomeBody => ServicesTab'),
-                  type: homeController.servicesListTypeSubject,
-                  listController: homeController.servicesController,
+        return PageView.builder(
+          controller: homeState.pageController,
+          itemCount: pages.length,
+          allowImplicitScrolling: true,
+          padEnds: false,
+          itemBuilder: (context, i) {
+            final page = pages[i];
+
+            return switch (page) {
+              _ when i == 0 => HomeScreenSummary(homeBloc: homeBloc),
+              HomePageConfig<Service> _ => ServicesHierarchyList(
+                  key: PageStorageKey('Home => ${page.type} Page'),
+                  type: page.listType,
+                  listController: page.objectsController!(),
                   serviceTrailingBuilder: (
                     context,
                     s, {
@@ -43,53 +46,15 @@ class HomeBody extends StatelessWidget {
                     icon: const Icon(Symbols.info),
                   ),
                 ),
-              )
-            else ...[
-              LazyTabPage(
-                tabController: tabController,
-                index: 1,
-                builder: (context) => ViewableObjectList<Area>(
-                  key: const PageStorageKey('_HomeBody => AreasTab'),
-                  objectsController: homeController.areasController,
+              HomePageConfig<Viewable> _ => ViewableObjectList(
+                  key: PageStorageKey('Home => ${page.type} Page'),
+                  objectsController: page.objectsController!(),
                   viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
                     forceShowSecondLine: false,
                   ),
                 ),
-              ),
-              LazyTabPage(
-                tabController: tabController,
-                index: 2,
-                builder: (context) => ViewableObjectList<Street>(
-                  key: const PageStorageKey('_HomeBody => StreetsTab'),
-                  objectsController: homeController.streetsController,
-                ),
-              ),
-              LazyTabPage(
-                tabController: tabController,
-                index: 3,
-                builder: (context) => ViewableObjectList<Family>(
-                  key: const PageStorageKey('_HomeBody => FamiliesTab'),
-                  objectsController: homeController.familiesController,
-                ),
-              ),
-              LazyTabPage(
-                tabController: tabController,
-                index: 4,
-                builder: (context) => ViewableObjectList<Store>(
-                  key: const PageStorageKey('_HomeBody => StoresTab'),
-                  objectsController: homeController.storesController,
-                ),
-              ),
-            ],
-            LazyTabPage(
-              tabController: tabController,
-              index: modeSnapshot.data == HomeMode.sundaySchool ? 2 : 5,
-              builder: (context) => ViewableObjectList<Person>(
-                key: const PageStorageKey('_HomeBody => PersonsTab'),
-                objectsController: homeController.personsController,
-              ),
-            ),
-          ],
+            };
+          },
         );
       },
     );

@@ -7,9 +7,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeDrawer extends StatelessWidget {
-  final HomeController homeController;
+  final HomeBloc homeBloc;
 
-  const HomeDrawer({required this.homeController, super.key});
+  const HomeDrawer({required this.homeBloc, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,19 @@ class HomeDrawer extends StatelessWidget {
       builder: (context, state) {
         final destinations = [
           HomeDrawerDestination(
-            label: StreamBuilder<HomeMode>(
-              stream: homeController.modeStream,
+            label: BlocSelector<HomeBloc, HomeState, HomeMode>(
+              bloc: homeBloc,
+              selector: (state) => state.mode,
               builder: (context, modeSnapshot) {
                 return Text(
-                  modeSnapshot.data == HomeMode.sundaySchool
+                  modeSnapshot == HomeMode.sundaySchool
                       ? 'تبديل إلى الافتقاد'
                       : 'تبديل إلى مدارس الأحد',
                 );
               },
             ),
             icon: const Icon(Symbols.home),
-            onTap: homeController.switchHomeMode,
+            onTap: () => homeBloc.add(const HomeSwitchMode()),
           ),
           if (state is AuthAuthenticated &&
               (state.userData?.canManageSomeUsers ?? false))
@@ -59,23 +60,22 @@ class HomeDrawer extends StatelessWidget {
             HomeDrawerDestination(
               icon: const Icon(Symbols.developer_mode),
               label: const Text('gql cache'),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        final gqlClient = graphQLClientProvider.read(
-                          globalProviderContainer,
-                        );
-                        return GraphqlCacheInspector(
-                          title: 'GraphQL Cache',
-                          data:
-                              (gqlClient.cache.store as HiveStore).box.toMap(),
-                          getCacheData:
-                              (gqlClient.cache.store as HiveStore).box.toMap,
-                        );
-                      },
-                    ),
-                  ),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    final gqlClient = graphQLClientProvider.read(
+                      globalProviderContainer,
+                    );
+
+                    return GraphqlCacheInspector(
+                      title: 'GraphQL Cache',
+                      data: (gqlClient.cache.store as HiveStore).box.toMap(),
+                      getCacheData:
+                          (gqlClient.cache.store as HiveStore).box.toMap,
+                    );
+                  },
+                ),
+              ),
             ),
         ];
 
@@ -95,15 +95,14 @@ class HomeDrawer extends StatelessWidget {
 
                     destinations[i].onTap();
                   },
-                  children:
-                      destinations
-                          .map(
-                            (e) => NavigationDrawerDestination(
-                              icon: e.icon,
-                              label: e.label,
-                            ),
-                          )
-                          .toList(),
+                  children: destinations
+                      .map(
+                        (e) => NavigationDrawerDestination(
+                          icon: e.icon,
+                          label: e.label,
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
               ListTile(

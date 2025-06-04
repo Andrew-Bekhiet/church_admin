@@ -8,12 +8,32 @@ sealed class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-final class LoadHomeDailyData extends HomeEvent {
-  const LoadHomeDailyData();
+final class LoadHomeSummaryAndTabs extends HomeEvent {
+  const LoadHomeSummaryAndTabs();
 }
 
 final class HomeDailyDataGetNew extends HomeEvent {
   final HomeDailyDataType type;
 
   const HomeDailyDataGetNew(this.type);
+}
+
+final class HomeChangeMode extends HomeEvent {
+  final HomeMode mode;
+
+  const HomeChangeMode(this.mode);
+}
+
+final class HomeSwitchMode extends HomeEvent {
+  const HomeSwitchMode();
+}
+
+final class HomeSwitchPageListType extends HomeEvent {
+  final int pageIndex;
+  final ViewableObjectListType listType;
+
+  const HomeSwitchPageListType(this.pageIndex, this.listType);
+
+  @override
+  List<Object?> get props => [pageIndex, listType];
 }

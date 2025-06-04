@@ -3083,6 +3083,16 @@ class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
       ) as bool);
 
   @override
+  _i9.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
   void add(_i5.HomeEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
@@ -3132,16 +3142,6 @@ class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
         ),
         returnValueForMissingStub: null,
       );
-
-  @override
-  _i9.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
 
   @override
   void onChange(_i8.Change<_i5.HomeState>? change) => super.noSuchMethod(
