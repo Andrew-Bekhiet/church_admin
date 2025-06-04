@@ -46,12 +46,16 @@ class HomeBody extends StatelessWidget {
                     icon: const Icon(Symbols.info),
                   ),
                 ),
-              HomePageConfig<Viewable> _ => ViewableObjectList(
+              HomePageConfig<Area> _ => ViewableObjectList(
                   key: PageStorageKey('Home => ${page.type} Page'),
                   objectsController: page.objectsController!(),
                   viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
                     forceShowSecondLine: false,
                   ),
+                ),
+              HomePageConfig<Viewable> _ => ViewableObjectList(
+                  key: PageStorageKey('Home => ${page.type} Page'),
+                  objectsController: page.objectsController!(),
                 ),
             };
           },
