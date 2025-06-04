@@ -90,25 +90,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         .switchMap(
           (p) => _pageIndex
               .doOnData((_) => _onLoadingChanged.add(true))
-              .switchMap(
-                (pageIndex) => factory(
-                  PaginatableStreamRequest(
-                    cursor: p?.changed ?? false
-                        ? null
-                        : currentItems.elementAtOrNull(pageIndex * pageSize) ??
-                            currentCursor,
-                    param: p?.value,
-                    pageIndex: pageIndex,
-                    pageSize: pageSize,
-                  ),
-                ).map(
-                  (response) => (
-                    pageIndex: pageIndex,
-                    response: response,
-                    paramChanged: p?.changed ?? false
-                  ),
-                ),
-              ),
+              .switchMap((pageIndex) => _loadPage(factory, pageIndex, p)),
         )
         .map(_mapPageResult)
         .doOnData((_) => _onLoadingChanged.add(false))
@@ -126,17 +108,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     _subjectSubscription = _pageIndex
         .doOnData((_) => _onLoadingChanged.add(true))
         .switchMap(
-          (pageIndex) => factory(
-            PaginatableStreamRequest(
-              cursor: currentItems.elementAtOrNull(pageIndex * pageSize) ??
-                  currentCursor,
-              pageIndex: pageIndex,
-              pageSize: pageSize,
-            ),
-          ).map(
-            (response) =>
-                (pageIndex: pageIndex, response: response, paramChanged: false),
-          ),
+          (pageIndex) => _loadPage(factory, pageIndex, null),
         )
         .map(_mapPageResult)
         .doOnData((_) => _onLoadingChanged.add(false))
@@ -157,6 +129,35 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         parametersStream: searchStream,
         pageSize: pageSize,
       );
+
+  Stream<
+      ({
+        int pageIndex,
+        bool paramChanged,
+        PaginatableStreamResponse<T> response
+      })> _loadPage(
+    PaginatableStreamFactory<T, P> factory,
+    int currentPageIndex,
+    ({P? value, bool changed})? parameter,
+  ) {
+    return factory(
+      PaginatableStreamRequest(
+        cursor: parameter?.changed ?? false
+            ? null
+            : currentItems.elementAtOrNull(currentPageIndex * pageSize) ??
+                currentCursor,
+        param: parameter?.value,
+        pageIndex: currentPageIndex,
+        pageSize: pageSize,
+      ),
+    ).map(
+      (response) => (
+        pageIndex: currentPageIndex,
+        response: response,
+        paramChanged: parameter?.changed ?? false
+      ),
+    );
+  }
 
   PaginatableStreamData<T> _mapPageResult(
     ({
