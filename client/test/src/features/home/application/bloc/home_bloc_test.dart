@@ -12,6 +12,7 @@ import 'home_bloc_test.mocks.dart';
   MockSpec<HomeDailyDataRepository>(),
   MockSpec<AdvancedQueryParser>(),
   MockSpec<DatabaseService>(),
+  MockSpec<PageController>(),
 ])
 void main() {
   late MockHomeDailyDataRepository repository;
@@ -37,8 +38,8 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  group('HomeDailyDataBloc', () {
-    group('LoadHomeDailyData', () {
+  group('HomeBloc', () {
+    group('$LoadHomeSummaryAndTabs', () {
       setUp(() {
         when(repository.getVerse()).thenReturn('test verse');
         when(repository.getTodaysSneksar()).thenReturn('test sneksar');
@@ -46,22 +47,38 @@ void main() {
       });
 
       blocTest<HomeBloc, HomeState>(
-        'emits [HomeDailyDataLoaded] with initial data',
+        'emits [HomeState] with initial data',
         build: () => HomeBloc(
+          pageController: MockPageController(),
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
           databaseService: mockDatabaseService,
         ),
         wait: Duration.zero,
         expect: () => [
-          isA<HomeState>().having(
-            (s) => s.dailyData,
-            'dailyData',
-            const HomeDailyData(
-              verse: 'test verse',
-              sneksar: 'test sneksar',
-              saying: 'test saying',
-            ),
+          isA<HomeState>()
+              .having(
+                (s) => s.dailyData,
+                'dailyData',
+                const HomeDailyData(
+                  verse: 'test verse',
+                  sneksar: 'test sneksar',
+                  saying: 'test saying',
+                ),
+              )
+              .having(
+                (s) => s.mode,
+                'mode',
+                HomeMode.sundaySchool,
+              )
+              .having(
+            (s) => s.pages.map((e) => e.type),
+            'pages types',
+            [anything, Service, Person],
+          ).having(
+            (s) => s.pages.map((e) => e.objectsController),
+            'every page has objectsController',
+            [anything, isNotNull, isNotNull],
           ),
         ],
         verify: (_) {
@@ -72,7 +89,7 @@ void main() {
       );
     });
 
-    group('HomeDailyDataGetNew', () {
+    group('$HomeDailyDataGetNew', () {
       setUp(() {
         when(
           repository.getVerse(forceRefresh: true),
@@ -88,6 +105,7 @@ void main() {
       blocTest<HomeBloc, HomeState>(
         'updates data when requesting new data',
         build: () => HomeBloc(
+          pageController: MockPageController(),
           homeDailyDataRepository: repository,
           advancedQueryParser: mockAdvancedQueryParser,
           databaseService: mockDatabaseService,
@@ -131,5 +149,191 @@ void main() {
         },
       );
     });
+
+    group(
+      '$HomeChangeMode and $HomeSwitchMode',
+      () {
+        blocTest(
+          'Changes mode and emits new pages',
+          build: () => HomeBloc(
+            pageController: MockPageController(),
+            homeDailyDataRepository: repository,
+            advancedQueryParser: mockAdvancedQueryParser,
+            databaseService: mockDatabaseService,
+          ),
+          act: (bloc) => bloc
+            ..add(const HomeChangeMode(HomeMode.churchData))
+            ..add(const HomeChangeMode(HomeMode.sundaySchool))
+            ..add(const HomeSwitchMode())
+            ..add(const HomeSwitchMode()),
+          skip: 1,
+          expect: () => [
+            isA<HomeState>()
+                .having(
+              (s) => s.mode,
+              'mode',
+              HomeMode.churchData,
+            )
+                .having(
+              (s) => s.pages.map((e) => e.type),
+              'pages types',
+              [
+                anything,
+                Area,
+                Street,
+                Family,
+                Store,
+                Person,
+              ],
+            ).having(
+              (s) => s.pages.map((e) => e.objectsController),
+              'every page has objectsController',
+              [
+                anything,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+              ],
+            ),
+            isA<HomeState>()
+                .having(
+              (s) => s.mode,
+              'mode',
+              HomeMode.sundaySchool,
+            )
+                .having(
+              (s) => s.pages.map((e) => e.type),
+              'pages types',
+              [
+                anything,
+                Service,
+                Person,
+              ],
+            ).having(
+              (s) => s.pages.map((e) => e.objectsController),
+              'every page has objectsController',
+              [
+                anything,
+                isNotNull,
+                isNotNull,
+              ],
+            ),
+            isA<HomeState>()
+                .having(
+              (s) => s.mode,
+              'mode',
+              HomeMode.churchData,
+            )
+                .having(
+              (s) => s.pages.map((e) => e.type),
+              'pages types',
+              [
+                anything,
+                Area,
+                Street,
+                Family,
+                Store,
+                Person,
+              ],
+            ).having(
+              (s) => s.pages.map((e) => e.objectsController),
+              'every page has objectsController',
+              [
+                anything,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+                isNotNull,
+              ],
+            ),
+            isA<HomeState>()
+                .having(
+              (s) => s.mode,
+              'mode',
+              HomeMode.sundaySchool,
+            )
+                .having(
+              (s) => s.pages.map((e) => e.type),
+              'pages types',
+              [
+                anything,
+                Service,
+                Person,
+              ],
+            ).having(
+              (s) => s.pages.map((e) => e.objectsController),
+              'every page has objectsController',
+              [
+                anything,
+                isNotNull,
+                isNotNull,
+              ],
+            ),
+          ],
+        );
+      },
+    );
+    group(
+      '$HomeSwitchPageListType',
+      () {
+        blocTest(
+          'Switches page list type and preserves it across modes',
+          build: () => HomeBloc(
+            pageController: MockPageController(),
+            homeDailyDataRepository: repository,
+            advancedQueryParser: mockAdvancedQueryParser,
+            databaseService: mockDatabaseService,
+          ),
+          act: (bloc) async {
+            bloc
+              ..add(
+                const HomeSwitchPageListType(1, ViewableObjectListType.list),
+              )
+              ..add(const HomeSwitchMode());
+            await Future.delayed(Duration.zero);
+
+            bloc.add(const HomeSwitchMode());
+            await Future.delayed(Duration.zero);
+
+            bloc
+              ..add(
+                const HomeSwitchPageListType(1, ViewableObjectListType.grid3),
+              )
+              ..add(const HomeSwitchMode());
+            await Future.delayed(Duration.zero);
+
+            bloc.add(const HomeSwitchMode());
+          },
+          skip: 1,
+          expect: () => [
+            isA<HomeState>().having(
+              (s) => s.pages[1].listType,
+              'first page list type',
+              ViewableObjectListType.list,
+            ),
+            isA<HomeState>(),
+            isA<HomeState>().having(
+              (s) => s.pages[1].listType,
+              'first page list type',
+              ViewableObjectListType.list,
+            ),
+            isA<HomeState>().having(
+              (s) => s.pages[1].listType,
+              'first page list type',
+              ViewableObjectListType.grid3,
+            ),
+            isA<HomeState>(),
+            isA<HomeState>().having(
+              (s) => s.pages[1].listType,
+              'first page list type',
+              ViewableObjectListType.grid3,
+            ),
+          ],
+        );
+      },
+    );
   });
 }

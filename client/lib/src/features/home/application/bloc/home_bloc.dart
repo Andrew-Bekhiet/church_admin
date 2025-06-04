@@ -114,19 +114,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required HomeDailyDataRepository homeDailyDataRepository,
     required AdvancedQueryParser advancedQueryParser,
     required DatabaseService databaseService,
-  })  : _databaseService = databaseService,
+    required PageController pageController,
+  })  : _pageController = pageController,
+        _databaseService = databaseService,
         _homeDailyDataRepository = homeDailyDataRepository,
         _advancedQueryParser = advancedQueryParser,
         super(
           HomeState(
-            pageController: PageController(),
+            pageController: pageController,
             pages: const [_HomePagesConfig.summaryPage],
             showSnowflakeAnimation:
                 LiturgySeason.current == LiturgySeason.christmas,
           ),
         ) {
-    _pageController = state.pageController;
-
     on<LoadHomeSummaryAndTabs>(
       _onLoadHomeSummaryAndTabs,
       transformer: (events, mapper) => events
@@ -263,7 +263,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     final newPages = _pagesConfigState[mode]!;
-    final currentPage = state.pages[state.pageController.page!.round()];
+    final currentPage = state.pages[state.currentPage.round()];
 
     final commonPageIndex = newPages.indexWhere(
       (p) => p.type == currentPage.type,

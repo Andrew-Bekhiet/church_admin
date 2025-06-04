@@ -429,6 +429,7 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeBlocProvider = Provider<HomeBloc>(
   (ref) {
     final homeBloc = HomeBloc(
+      pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
       advancedQueryParser:

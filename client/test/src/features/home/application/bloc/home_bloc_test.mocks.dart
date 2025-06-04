@@ -3,10 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i7;
+import 'dart:ui' as _i11;
+
 import 'package:church_admin/church_admin.dart' as _i2;
+import 'package:flutter/src/widgets/basic.dart' as _i8;
+import 'package:flutter/src/widgets/page_view.dart' as _i6;
+import 'package:flutter/src/widgets/scroll_context.dart' as _i10;
+import 'package:flutter/src/widgets/scroll_physics.dart' as _i9;
+import 'package:flutter/src/widgets/scroll_position.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i3;
-import 'package:rxdart/rxdart.dart' as _i4;
+import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:rxdart/rxdart.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -196,6 +204,17 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
         );
 }
 
+class _FakeScrollPosition_17 extends _i1.SmartFake
+    implements _i3.ScrollPosition {
+  _FakeScrollPosition_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [HomeDailyDataRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -208,7 +227,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
           [],
           {#forceRefresh: forceRefresh},
         ),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getVerse,
@@ -216,7 +235,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
             {#forceRefresh: forceRefresh},
           ),
         ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
+        returnValueForMissingStub: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getVerse,
@@ -233,7 +252,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
           [],
           {#forceRefresh: forceRefresh},
         ),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getSaying,
@@ -241,7 +260,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
             {#forceRefresh: forceRefresh},
           ),
         ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
+        returnValueForMissingStub: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getSaying,
@@ -257,14 +276,14 @@ class MockHomeDailyDataRepository extends _i1.Mock
           #getTodaysSneksar,
           [],
         ),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getTodaysSneksar,
             [],
           ),
         ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
+        returnValueForMissingStub: _i4.dummyValue<String>(
           this,
           Invocation.method(
             #getTodaysSneksar,
@@ -282,7 +301,7 @@ class MockAdvancedQueryParser extends _i1.Mock
   @override
   _i2.PaginatableStreamBase<_i2.ViewableWithID> createPaginatableStream(
     _i2.AdvancedQuery? query, [
-    _i4.BehaviorSubject<String?>? searchStream,
+    _i5.BehaviorSubject<String?>? searchStream,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -535,4 +554,279 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
         returnValue: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
         returnValueForMissingStub: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
       ) as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
+}
+
+/// A class which mocks [PageController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPageController extends _i1.Mock implements _i6.PageController {
+  @override
+  int get initialPage => (super.noSuchMethod(
+        Invocation.getter(#initialPage),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  bool get keepPage => (super.noSuchMethod(
+        Invocation.getter(#keepPage),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  double get viewportFraction => (super.noSuchMethod(
+        Invocation.getter(#viewportFraction),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  bool get keepScrollOffset => (super.noSuchMethod(
+        Invocation.getter(#keepScrollOffset),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  double get initialScrollOffset => (super.noSuchMethod(
+        Invocation.getter(#initialScrollOffset),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  Iterable<_i3.ScrollPosition> get positions => (super.noSuchMethod(
+        Invocation.getter(#positions),
+        returnValue: <_i3.ScrollPosition>[],
+        returnValueForMissingStub: <_i3.ScrollPosition>[],
+      ) as Iterable<_i3.ScrollPosition>);
+
+  @override
+  bool get hasClients => (super.noSuchMethod(
+        Invocation.getter(#hasClients),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i3.ScrollPosition get position => (super.noSuchMethod(
+        Invocation.getter(#position),
+        returnValue: _FakeScrollPosition_17(
+          this,
+          Invocation.getter(#position),
+        ),
+        returnValueForMissingStub: _FakeScrollPosition_17(
+          this,
+          Invocation.getter(#position),
+        ),
+      ) as _i3.ScrollPosition);
+
+  @override
+  double get offset => (super.noSuchMethod(
+        Invocation.getter(#offset),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i7.Future<void> animateToPage(
+    int? page, {
+    required Duration? duration,
+    required _i8.Curve? curve,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #animateToPage,
+          [page],
+          {
+            #duration: duration,
+            #curve: curve,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  void jumpToPage(int? page) => super.noSuchMethod(
+        Invocation.method(
+          #jumpToPage,
+          [page],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i7.Future<void> nextPage({
+    required Duration? duration,
+    required _i8.Curve? curve,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #nextPage,
+          [],
+          {
+            #duration: duration,
+            #curve: curve,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> previousPage({
+    required Duration? duration,
+    required _i8.Curve? curve,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #previousPage,
+          [],
+          {
+            #duration: duration,
+            #curve: curve,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i3.ScrollPosition createScrollPosition(
+    _i9.ScrollPhysics? physics,
+    _i10.ScrollContext? context,
+    _i3.ScrollPosition? oldPosition,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createScrollPosition,
+          [
+            physics,
+            context,
+            oldPosition,
+          ],
+        ),
+        returnValue: _FakeScrollPosition_17(
+          this,
+          Invocation.method(
+            #createScrollPosition,
+            [
+              physics,
+              context,
+              oldPosition,
+            ],
+          ),
+        ),
+        returnValueForMissingStub: _FakeScrollPosition_17(
+          this,
+          Invocation.method(
+            #createScrollPosition,
+            [
+              physics,
+              context,
+              oldPosition,
+            ],
+          ),
+        ),
+      ) as _i3.ScrollPosition);
+
+  @override
+  void attach(_i3.ScrollPosition? position) => super.noSuchMethod(
+        Invocation.method(
+          #attach,
+          [position],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i7.Future<void> animateTo(
+    double? offset, {
+    required Duration? duration,
+    required _i8.Curve? curve,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #animateTo,
+          [offset],
+          {
+            #duration: duration,
+            #curve: curve,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  void jumpTo(double? value) => super.noSuchMethod(
+        Invocation.method(
+          #jumpTo,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void detach(_i3.ScrollPosition? position) => super.noSuchMethod(
+        Invocation.method(
+          #detach,
+          [position],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void debugFillDescription(List<String>? description) => super.noSuchMethod(
+        Invocation.method(
+          #debugFillDescription,
+          [description],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
