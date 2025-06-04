@@ -108,7 +108,10 @@ class _ViewableObjectListState<T extends Viewable>
           if (i >= items.length) {
             return StreamBuilder(
               stream: objectsController.onLoadingChanged,
-              builder: (context, state) => state.hasData && state.requireData
+              builder: (context, state) => state.hasData &&
+                      state.requireData &&
+                      (widget.type != ViewableObjectListType.list ||
+                          i == items.length)
                   ? const Center(child: CircularProgressIndicator())
                   : const SizedBox(height: 120),
             );
@@ -150,7 +153,7 @@ class _ViewableObjectListState<T extends Viewable>
             controller: _scrollController,
             itemBuilder: itemBuilder,
             cacheExtent: 250,
-            itemCount: items.length + 1,
+            itemCount: items.length + 2,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             prototypeItem: !widget.itemsExpandable
                 // ignore: avoid-returning-widgets
