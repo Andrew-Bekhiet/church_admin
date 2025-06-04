@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream.dart';
+import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream_request.dart';
 import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rxdart/rxdart.dart';
@@ -24,7 +26,7 @@ void main() {
 
   group('PaginatableStream basic functionality', () {
     test('should load first page with correct page size', () async {
-      paginatableStream = PaginatableStream.simple(
+      paginatableStream = PaginatableStream<String, String?>.simple(
         pageSize: 10,
         factory: (request) {
           final start = request.pageIndex * request.pageSize;
@@ -55,23 +57,10 @@ void main() {
     });
 
     test('should load next page when requested', () async {
-      paginatableStream = PaginatableStream.simple(
+      paginatableStream = PaginatableStream<String, String?>.simple(
         pageSize: 10,
         factory: (request) {
-          final start = request.pageIndex * request.pageSize;
-          final end = start + request.pageSize;
-          final slicedData = testData.sublist(
-            start,
-            end > testData.length ? testData.length : end,
-          );
-
-          return Stream.value(
-            PaginatableStreamResponse(
-              data: slicedData,
-              cursor: testData.elementAtOrNull(end),
-              totalCount: testData.length,
-            ),
-          );
+          return Stream.value(_paginateData(request, testData));
         },
       );
 
@@ -90,18 +79,10 @@ void main() {
     });
 
     test('should track loading state correctly', () async {
-      paginatableStream = PaginatableStream.simple(
+      paginatableStream = PaginatableStream<String, String?>.simple(
         pageSize: 10,
         factory: (request) {
-          return Stream.value(
-            PaginatableStreamResponse(
-              data: testData.sublist(
-                request.pageIndex * request.pageSize,
-                (request.pageIndex + 1) * request.pageSize,
-              ),
-              totalCount: testData.length,
-            ),
-          ).delay(const Duration(milliseconds: 100));
+          return Stream.value(_paginateData(request, testData, hasNext: false));
         },
       );
 
@@ -121,23 +102,10 @@ void main() {
 
   group('PaginatableStream navigation between pages', () {
     test('should return to previously loaded page', () async {
-      paginatableStream = PaginatableStream.simple(
+      paginatableStream = PaginatableStream<String, String?>.simple(
         pageSize: 10,
         factory: (request) {
-          final start = request.pageIndex * request.pageSize;
-          final end = start + request.pageSize;
-          final slicedData = testData.sublist(
-            start,
-            end > testData.length ? testData.length : end,
-          );
-
-          return Stream.value(
-            PaginatableStreamResponse(
-              data: slicedData,
-              cursor: testData.elementAtOrNull(end),
-              totalCount: testData.length,
-            ),
-          );
+          return Stream.value(_paginateData(request, testData));
         },
       );
 
@@ -147,6 +115,8 @@ void main() {
           equals(testData.sublist(0, 10)),
           equals(testData.sublist(0, 20)),
           equals(testData.sublist(0, 30)),
+          equals(testData.sublist(0, 40)),
+          equals(testData.sublist(0, 40)),
           equals(testData.sublist(0, 40)),
           equals(testData.sublist(0, 40)),
           equals(testData.sublist(0, 50)),
@@ -165,6 +135,8 @@ void main() {
       await paginatableStream.listenToPage(3);
 
       await paginatableStream.listenToPage(1);
+      await paginatableStream.listenToPage(2);
+      await paginatableStream.listenToPage(3);
 
       await paginatableStream.listenToPage(4);
       await paginatableStream.listenToPage(5);
@@ -175,23 +147,10 @@ void main() {
     });
 
     test("Doesn't load pages if already loading other pages", () async {
-      paginatableStream = PaginatableStream.simple(
+      paginatableStream = PaginatableStream<String, String?>.simple(
         pageSize: 10,
         factory: (request) {
-          final start = request.pageIndex * request.pageSize;
-          final end = start + request.pageSize;
-          final slicedData = testData.sublist(
-            start,
-            end > testData.length ? testData.length : end,
-          );
-
-          return Stream.value(
-            PaginatableStreamResponse(
-              data: slicedData,
-              cursor: testData.elementAtOrNull(end),
-              totalCount: testData.length,
-            ),
-          );
+          return Stream.value(_paginateData(request, testData));
         },
       );
 
@@ -228,19 +187,8 @@ void main() {
               ? testData.where((item) => item.contains(searchTerm)).toList()
               : testData;
 
-          final start = request.pageIndex * request.pageSize;
-          final end = start + request.pageSize;
-          final slicedData = filteredData.sublist(
-            start,
-            end > filteredData.length ? filteredData.length : end,
-          );
-
           return Stream.value(
-            PaginatableStreamResponse(
-              data: slicedData,
-              cursor: testData.elementAtOrNull(end),
-              totalCount: filteredData.length,
-            ),
+            _paginateData(request, filteredData),
           );
         },
       );
@@ -272,4 +220,27 @@ void main() {
       expect(paginatableStream.currentPageIndex, equals(0));
     });
   });
+}
+
+PaginatableStreamResponse<String> _paginateData(
+  PaginatableStreamRequest<String, String?> request,
+  List<String> testData, {
+  bool hasNext = true,
+}) {
+  int countTaken = 0;
+  final slicedData = testData.where((item) {
+    if (countTaken > 0 && countTaken <= request.pageSize ||
+        countTaken == 0 && (request.cursor == null || item == request.cursor)) {
+      countTaken++;
+      return true;
+    }
+
+    return false;
+  }).toList();
+
+  return PaginatableStreamResponse(
+    data: slicedData.sublist(0, min(slicedData.length, request.pageSize)),
+    cursor: hasNext ? slicedData.lastOrNull : null,
+    totalCount: testData.length,
+  );
 }

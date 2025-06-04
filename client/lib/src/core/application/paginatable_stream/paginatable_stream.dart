@@ -76,8 +76,8 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   }) {
     _subjectSubscription = parametersStream
         .scan<({P value, bool changed})?>(
-          (previousValue, value, _) {
-            if ((previousValue ?? '') != (value ?? '')) {
+          (previousValue, value, i) {
+            if (i != 0 && previousValue?.value != value) {
               listenToPage(0);
               return (value: value, changed: true);
             }
