@@ -23,6 +23,7 @@ linter:
     omit_local_variable_types: false
     public_member_api_docs: false
     sort_constructors_first: false
+    specify_nonobvious_property_types: false
     lines_longer_than_80_chars: false
     prefer_asserts_with_message: false
     # Enabled

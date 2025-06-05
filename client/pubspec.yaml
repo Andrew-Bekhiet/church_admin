@@ -134,7 +134,7 @@ dev_dependencies:
   rxdart_ext: ^0.3.0
   spot: ^0.17.0
   url_launcher_platform_interface: ^2.1.2
-  very_good_analysis: ^7.0.0
+  very_good_analysis: ^8.0.0
 
 flutter:
   uses-material-design: true

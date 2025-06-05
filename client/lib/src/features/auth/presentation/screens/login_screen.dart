@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       AutovalidateMode.onUserInteraction,
                                   textInputAction: TextInputAction.done,
                                   controller: _passwordController,
-                                  onFieldSubmitted: _submit,
+                                  onFieldSubmitted: (_) => _submit,
                                   validator: (password) {
                                     if (password?.isEmpty ?? true) {
                                       return 'كلمة المرور لا يمكن أن تكون فارغة';
@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               autoFillHints: const [AutofillHints.newPassword],
                               controller: _passwordConfirmationController,
                               textInputAction: TextInputAction.done,
-                              onFieldSubmitted: _submit,
+                              onFieldSubmitted: (_) => _submit,
                               validator: (password) {
                                 if (password != _passwordController.text) {
                                   return 'كلمتا المرور غير متطابقتين';
@@ -270,7 +270,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _submit([_]) async {
+  Future<void> _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
       try {
         authBloc.add(

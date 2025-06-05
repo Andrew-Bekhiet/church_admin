@@ -476,7 +476,8 @@ class _SelectValueWidget<T extends Object> extends StatelessWidget {
     return null;
   }
 
-  ViewableObjectListController<ViewableWithID> _listControllerForType(s) =>
+  ViewableObjectListController<ViewableWithID> _listControllerForType(
+          Stream<String?> s) =>
       ViewableObjectListController(
         objectsPaginatableStream: queryableType!.dao!.streamAll(searchQuery: s),
       );

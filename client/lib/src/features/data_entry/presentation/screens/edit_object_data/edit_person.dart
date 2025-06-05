@@ -1134,7 +1134,7 @@ class _EditPersonState extends State<EditPerson> {
     return result?.geolocation;
   }
 
-  String? _personGeneralCheckValidator([_]) {
+  String? _personGeneralCheckValidator([dynamic _]) {
     return newPerson.address == null &&
             (newPerson.family == null || newPerson.familyId == null) &&
             (newPerson.services?.isEmpty ?? true) &&
@@ -1144,7 +1144,7 @@ class _EditPersonState extends State<EditPerson> {
         : null;
   }
 
-  String? _validatePhoneField(v) =>
+  String? _validatePhoneField(String? v) =>
       v != null && !PhoneNumberService.I.validate(v)
           ? 'برجاء ادخال رقم هاتف صالح'
           : null;
