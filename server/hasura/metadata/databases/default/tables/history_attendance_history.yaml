@@ -22,15 +22,15 @@ object_relationships:
   - name: person
     using:
       foreign_key_constraint_on: person_id
+  - name: recordedByUser
+    using:
+      foreign_key_constraint_on: recorded_by
   - name: service
     using:
       foreign_key_constraint_on: service_id
   - name: studyYear
     using:
       foreign_key_constraint_on: service_study_year
-  - name: user
-    using:
-      foreign_key_constraint_on: recorded_by
 insert_permissions:
   - role: user
     permission:
