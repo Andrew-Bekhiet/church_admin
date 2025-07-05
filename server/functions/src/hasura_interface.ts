@@ -169,10 +169,10 @@ export async function upsertUser(user: {
                   name: $name,
                   person: {
                     data: { name: $name, isServant: true, isStudent: false },
-                    onConflict: { constraint: personsUidKey, updateColumns: [isServant, isStudent] },
+                    onConflict: { constraint: persons_uid_key, updateColumns: [isServant, isStudent] },
                   }
                 }
-                onConflict: {constraint: usersDataEmailKey, updateColumns: [authId]}
+                onConflict: {constraint: users_data_email_key, updateColumns: [authId]}
               ) {
                 returning {
                   uid
