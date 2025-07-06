@@ -27,6 +27,9 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get mustForceUpdate => false;
 
   @override
+  bool get useSentryLogs => true;
+
+  @override
   Stream<void> get onConfigChanged => const Stream.empty();
 
   @override
