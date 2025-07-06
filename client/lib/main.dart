@@ -13,6 +13,13 @@ Future<void> main() async {
   );
 
   await InitializationService.I.initialize();
+  runApp(
+    UncontrolledProviderScope(
+      container: globalProviderContainer,
+      child: SentryWidget(child: const ChurchAdminSplashScreen()),
+    ),
+  );
+  FlutterNativeSplash.remove();
 
   await AuthBloc.I.loaded;
 
@@ -22,6 +29,4 @@ Future<void> main() async {
       child: SentryWidget(child: const ChurchAdminApp()),
     ),
   );
-
-  FlutterNativeSplash.remove();
 }

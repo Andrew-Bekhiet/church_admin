@@ -155,6 +155,7 @@ flutter:
         - asset: assets/fonts/Inter-VariableFont.ttf
   assets:
     - assets/logo.png
+    - assets/branding.png
     - assets/google_logo.png
     - assets/risen.jpg
     - assets/holyweek.jpeg
