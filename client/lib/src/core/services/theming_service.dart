@@ -241,21 +241,26 @@ class ThemingService with WidgetsBindingObserver {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: themeData.elevatedButtonTheme.style!.copyWith(
-          foregroundColor:
-              WidgetStateProperty.all(colorScheme.onSecondaryContainer),
+          foregroundColor: isUsingGreatFeastTheme
+              ? WidgetStateProperty.all(colorScheme.onSecondaryContainer)
+              : null,
           iconColor: WidgetStateProperty.all(colorScheme.onSecondaryContainer),
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: themeData.outlinedButtonTheme.style!.copyWith(
-          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          foregroundColor: isUsingGreatFeastTheme
+              ? WidgetStateProperty.all(colorScheme.onPrimary)
+              : null,
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: themeData.textButtonTheme.style!.copyWith(
-          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          foregroundColor: isUsingGreatFeastTheme && isLight
+              ? WidgetStateProperty.all(colorScheme.onPrimary)
+              : null,
           textStyle: WidgetStateProperty.all(themeData.textTheme.titleMedium),
         ),
       ),
