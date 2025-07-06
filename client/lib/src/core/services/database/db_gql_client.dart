@@ -24,10 +24,16 @@ class DBGraphQLClient extends GraphQLClient {
   FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
 
   Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
-    if (result.hasException) {
-      throw result.exception!;
+    switch (result.exception) {
+      case null ||
+            OperationException(
+              linkException: UnexpectedResponseStructureException()
+            ):
+        return result;
+
+      case final exception:
+        throw exception;
     }
-    return result;
   }
 
   @override
