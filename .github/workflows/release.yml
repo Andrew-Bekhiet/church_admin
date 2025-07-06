@@ -332,10 +332,10 @@ jobs:
           entryPoint: ./server/
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
           channelId: live
- 
+
   update-app-version:
     runs-on: ubuntu-latest
-    needs: [release-mobile, release-web]
+    needs: release-mobile
     if: github.actor == github.repository_owner && (github.event_name == 'workflow_dispatch' || github.event_name != 'pull_request' && (contains(github.event.head_commit.message, '[ci release]') || contains(github.event.head_commit.message, '[ci release web]') || contains(github.event.head_commit.message, '[ci release apk]') || contains(github.event.head_commit.message, '[ci release ios]')))
     steps:
       - uses: actions/checkout@v4

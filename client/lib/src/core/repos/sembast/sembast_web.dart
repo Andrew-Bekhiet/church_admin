@@ -1,3 +1,3 @@
 import 'package:sembast_web/sembast_web.dart';
 
-DatabaseFactory getDatabaseFactory(bool useSqflite) => databaseFactoryWeb;
+DatabaseFactory getDatabaseFactory(Object? _) => databaseFactoryWeb;
