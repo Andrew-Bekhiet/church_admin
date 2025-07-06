@@ -123,11 +123,10 @@ void main() {
 
           await tester.pumpAndSettle();
 
-          await act.dragUntilVisible(
-            dragStart: spot<Scrollable>().first(),
-            dragTarget:
-                spotKey(MultiFactorLoginScreenKeys.verificationCodeFieldKey),
-            moveStep: const Offset(0, -100),
+          await tester.dragUntilVisible(
+            find.byKey(MultiFactorLoginScreenKeys.verificationCodeFieldKey),
+            find.byType(SingleChildScrollView),
+            const Offset(0, -100),
           );
 
           final otp = _generateRandomOtp();

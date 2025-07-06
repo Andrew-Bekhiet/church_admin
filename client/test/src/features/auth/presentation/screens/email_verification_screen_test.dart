@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
-
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart' hide Family;
@@ -99,10 +98,10 @@ void main() {
           wrapper: materialAppWrapper(),
         );
 
-        await act.dragUntilVisible(
-          dragTarget: spotKey(EmailVerificationScreenKeys.resendEmailButtonKey),
-          dragStart: spot<Scrollable>().first(),
-          moveStep: const Offset(0, -150),
+        await tester.dragUntilVisible(
+          find.byKey(EmailVerificationScreenKeys.resendEmailButtonKey),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -150),
         );
 
         await act.tap(

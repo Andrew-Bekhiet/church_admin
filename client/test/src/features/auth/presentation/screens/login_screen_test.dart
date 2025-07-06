@@ -114,10 +114,10 @@ void main() {
 
         spotKey(LoginScreenKeys.loginSignupButtonKey).existsOnce();
 
-        await act.dragUntilVisible(
-          dragTarget: spotKey(LoginScreenKeys.loginSignupButtonKey),
-          dragStart: spot<Scrollable>().first(),
-          moveStep: const Offset(0, -150),
+        await tester.dragUntilVisible(
+          find.byKey(LoginScreenKeys.loginSignupButtonKey),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -150),
         );
         await act.tap(spotKey(LoginScreenKeys.loginSignupButtonKey));
 
@@ -148,11 +148,12 @@ void main() {
           wrapper: materialAppWrapper(),
         );
 
-        await act.dragUntilVisible(
-          dragTarget: spotKey(LoginScreenKeys.switchLoginSignupButtonKey),
-          dragStart: spot<Scrollable>().first(),
-          moveStep: const Offset(0, -150),
+        await tester.dragUntilVisible(
+          find.byKey(LoginScreenKeys.switchLoginSignupButtonKey),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -150),
         );
+
         await act.tap(
           spotKey(LoginScreenKeys.switchLoginSignupButtonKey),
         );
@@ -203,12 +204,11 @@ void main() {
           ),
         );
 
-        await act.dragUntilVisible(
-          dragTarget: spotKey(LoginScreenKeys.forgotPasswordButtonKey),
-          dragStart: spot<Scrollable>().first(),
-          moveStep: const Offset(0, -150),
+        await tester.dragUntilVisible(
+          find.byKey(LoginScreenKeys.forgotPasswordButtonKey),
+          find.byType(SingleChildScrollView),
+          const Offset(0, -150),
         );
-
         await act.tap(
           spotKey(LoginScreenKeys.forgotPasswordButtonKey),
         );
