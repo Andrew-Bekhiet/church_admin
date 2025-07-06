@@ -2,7 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsRoute extends GoRouteData {
+part 'settings_route.g.dart';
+
+@TypedGoRoute<SettingsRoute>(path: '/settings')
+class SettingsRoute extends GoRouteData with _$SettingsRoute {
   const SettingsRoute();
 
   @override

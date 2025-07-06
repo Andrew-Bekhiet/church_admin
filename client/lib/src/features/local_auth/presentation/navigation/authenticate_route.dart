@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'authenticate_route.g.dart';
 
 @TypedGoRoute<AuthenticateRoute>(path: '/authenticate')
-class AuthenticateRoute extends GoRouteData {
+class AuthenticateRoute extends GoRouteData with _$AuthenticateRoute {
   const AuthenticateRoute({this.next = '/'});
 
   final String next;

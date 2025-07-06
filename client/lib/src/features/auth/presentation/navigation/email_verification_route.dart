@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'email_verification_route.g.dart';
 
 @TypedGoRoute<EmailVerificationRoute>(path: '/email_verification')
-class EmailVerificationRoute extends GoRouteData {
+class EmailVerificationRoute extends GoRouteData with _$EmailVerificationRoute {
   const EmailVerificationRoute();
 
   @override

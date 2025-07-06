@@ -756,6 +756,16 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
       ) as _i11.Future<void>);
 
   @override
+  _i11.Future<void> cancelAllPendingNotifications() => (super.noSuchMethod(
+        Invocation.method(
+          #cancelAllPendingNotifications,
+          [],
+        ),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
+
+  @override
   _i11.Future<void> zonedSchedule(
     int? id,
     String? title,

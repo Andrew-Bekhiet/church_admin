@@ -12,10 +12,10 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $updateUserSpiritDataRoute => GoRouteData.$route(
       path: '/update_user_spirit_data',
-      factory: $UpdateUserSpiritDataRouteExtension._fromState,
+      factory: _$UpdateUserSpiritDataRoute._fromState,
     );
 
-extension $UpdateUserSpiritDataRouteExtension on UpdateUserSpiritDataRoute {
+mixin _$UpdateUserSpiritDataRoute on GoRouteData {
   static UpdateUserSpiritDataRoute _fromState(GoRouterState state) =>
       UpdateUserSpiritDataRoute(
         forced: _$convertMapValue(
@@ -24,23 +24,30 @@ extension $UpdateUserSpiritDataRouteExtension on UpdateUserSpiritDataRoute {
         $extra: state.extra as Person?,
       );
 
+  UpdateUserSpiritDataRoute get _self => this as UpdateUserSpiritDataRoute;
+
+  @override
   String get location => GoRouteData.$location(
         '/update_user_spirit_data',
         queryParams: {
-          if (forced != false) 'forced': forced.toString(),
+          if (_self.forced != false) 'forced': _self.forced.toString(),
         },
       );
 
-  void go(BuildContext context) => context.go(location, extra: $extra);
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
+  @override
   Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: $extra);
+      context.push<T>(location, extra: _self.$extra);
 
+  @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: $extra);
+      context.pushReplacement(location, extra: _self.$extra);
 
+  @override
   void replace(BuildContext context) =>
-      context.replace(location, extra: $extra);
+      context.replace(location, extra: _self.$extra);
 }
 
 T? _$convertMapValue<T>(

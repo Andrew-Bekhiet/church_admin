@@ -1,6 +1,11 @@
 targets:
   $default:
     builders:
+      freezed:
+        enabled: true
+        options:
+          map: false
+          when: false
       json_serializable:
         options:
           any_map: true

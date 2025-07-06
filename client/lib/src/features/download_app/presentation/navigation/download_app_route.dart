@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'download_app_route.g.dart';
 
 @TypedGoRoute<DownloadAppRoute>(path: '/download')
-class DownloadAppRoute extends GoRouteData {
+class DownloadAppRoute extends GoRouteData with _$DownloadAppRoute {
   const DownloadAppRoute();
 
   @override

@@ -12,23 +12,28 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $outdatedFeatureRoute => GoRouteData.$route(
       path: '/outdated_feature',
-      factory: $OutdatedFeatureRouteExtension._fromState,
+      factory: _$OutdatedFeatureRoute._fromState,
     );
 
-extension $OutdatedFeatureRouteExtension on OutdatedFeatureRoute {
+mixin _$OutdatedFeatureRoute on GoRouteData {
   static OutdatedFeatureRoute _fromState(GoRouterState state) =>
       const OutdatedFeatureRoute();
 
+  @override
   String get location => GoRouteData.$location(
         '/outdated_feature',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

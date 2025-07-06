@@ -12,23 +12,28 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $forgotPasswordRoute => GoRouteData.$route(
       path: '/forgot_password',
-      factory: $ForgotPasswordRouteExtension._fromState,
+      factory: _$ForgotPasswordRoute._fromState,
     );
 
-extension $ForgotPasswordRouteExtension on ForgotPasswordRoute {
+mixin _$ForgotPasswordRoute on GoRouteData {
   static ForgotPasswordRoute _fromState(GoRouterState state) =>
       const ForgotPasswordRoute();
 
+  @override
   String get location => GoRouteData.$location(
         '/forgot_password',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

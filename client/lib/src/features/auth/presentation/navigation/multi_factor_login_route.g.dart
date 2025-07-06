@@ -12,23 +12,28 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $multiFactorLoginRoute => GoRouteData.$route(
       path: '/multifactor',
-      factory: $MultiFactorLoginRouteExtension._fromState,
+      factory: _$MultiFactorLoginRoute._fromState,
     );
 
-extension $MultiFactorLoginRouteExtension on MultiFactorLoginRoute {
+mixin _$MultiFactorLoginRoute on GoRouteData {
   static MultiFactorLoginRoute _fromState(GoRouterState state) =>
       const MultiFactorLoginRoute();
 
+  @override
   String get location => GoRouteData.$location(
         '/multifactor',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

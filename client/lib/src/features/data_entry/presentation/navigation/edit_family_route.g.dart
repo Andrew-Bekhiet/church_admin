@@ -3,6 +3,47 @@
 part of 'edit_family_route.dart';
 
 // **************************************************************************
+// GoRouterGenerator
+// **************************************************************************
+
+List<RouteBase> get $appRoutes => [
+      $editFamilyRoute,
+    ];
+
+RouteBase get $editFamilyRoute => GoRouteData.$route(
+      path: '/edit_family',
+      factory: _$EditFamilyRoute._fromState,
+    );
+
+mixin _$EditFamilyRoute on GoRouteData {
+  static EditFamilyRoute _fromState(GoRouterState state) => EditFamilyRoute(
+        $extra: state.extra as EditFamilyExtra?,
+      );
+
+  EditFamilyRoute get _self => this as EditFamilyRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+        '/edit_family',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

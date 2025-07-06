@@ -12,23 +12,28 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $authLoadingRoute => GoRouteData.$route(
       path: '/auth_loading',
-      factory: $AuthLoadingRouteExtension._fromState,
+      factory: _$AuthLoadingRoute._fromState,
     );
 
-extension $AuthLoadingRouteExtension on AuthLoadingRoute {
+mixin _$AuthLoadingRoute on GoRouteData {
   static AuthLoadingRoute _fromState(GoRouterState state) =>
       const AuthLoadingRoute();
 
+  @override
   String get location => GoRouteData.$location(
         '/auth_loading',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

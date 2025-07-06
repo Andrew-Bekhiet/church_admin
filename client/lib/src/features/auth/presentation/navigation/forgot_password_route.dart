@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'forgot_password_route.g.dart';
 
 @TypedGoRoute<ForgotPasswordRoute>(path: '/forgot_password')
-class ForgotPasswordRoute extends GoRouteData {
+class ForgotPasswordRoute extends GoRouteData with _$ForgotPasswordRoute {
   const ForgotPasswordRoute();
 
   @override

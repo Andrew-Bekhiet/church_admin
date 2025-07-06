@@ -12,27 +12,34 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $authenticateRoute => GoRouteData.$route(
       path: '/authenticate',
-      factory: $AuthenticateRouteExtension._fromState,
+      factory: _$AuthenticateRoute._fromState,
     );
 
-extension $AuthenticateRouteExtension on AuthenticateRoute {
+mixin _$AuthenticateRoute on GoRouteData {
   static AuthenticateRoute _fromState(GoRouterState state) => AuthenticateRoute(
         next: state.uri.queryParameters['next'] ?? '/',
       );
 
+  AuthenticateRoute get _self => this as AuthenticateRoute;
+
+  @override
   String get location => GoRouteData.$location(
         '/authenticate',
         queryParams: {
-          if (next != '/') 'next': next,
+          if (_self.next != '/') 'next': _self.next,
         },
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

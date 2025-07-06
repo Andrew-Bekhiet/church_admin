@@ -2,7 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class EditAreaRoute extends GoRouteData {
+part 'edit_area_route.g.dart';
+
+@TypedGoRoute<EditAreaRoute>(path: '/edit_area')
+class EditAreaRoute extends GoRouteData with _$EditAreaRoute {
   const EditAreaRoute({this.$extra});
 
   final Area? $extra;

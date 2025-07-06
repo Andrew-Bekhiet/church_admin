@@ -56,7 +56,8 @@ class PersonAnalysisExtra extends SerializableExtra {
   }
 }
 
-class PersonAnalysisRoute extends GoRouteData {
+@TypedGoRoute<PersonAnalysisRoute>(path: '/person_analysis')
+class PersonAnalysisRoute extends GoRouteData with _$PersonAnalysisRoute {
   const PersonAnalysisRoute({required this.$extra});
 
   final PersonAnalysisExtra $extra;

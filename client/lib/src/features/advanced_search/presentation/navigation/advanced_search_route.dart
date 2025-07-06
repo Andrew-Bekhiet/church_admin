@@ -2,7 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AdvancedSearchRoute extends GoRouteData {
+part 'advanced_search_route.g.dart';
+
+@TypedGoRoute<AdvancedSearchRoute>(path: '/advanced_search')
+class AdvancedSearchRoute extends GoRouteData with _$AdvancedSearchRoute {
   const AdvancedSearchRoute({this.$extra});
 
   final AdvancedQuery? $extra;

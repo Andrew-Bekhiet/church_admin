@@ -937,6 +937,16 @@ class FirebaseAuthPlatform_ extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> initializeRecaptchaConfig() => (super.noSuchMethod(
+        Invocation.method(
+          #initializeRecaptchaConfig,
+          [],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [FirebaseAppPlatform].

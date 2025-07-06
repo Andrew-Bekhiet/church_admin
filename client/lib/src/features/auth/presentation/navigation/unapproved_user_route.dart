@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'unapproved_user_route.g.dart';
 
 @TypedGoRoute<UnapprovedUserRoute>(path: '/unapproved_user')
-class UnapprovedUserRoute extends GoRouteData {
+class UnapprovedUserRoute extends GoRouteData with _$UnapprovedUserRoute {
   const UnapprovedUserRoute();
 
   @override
@@ -19,8 +19,8 @@ class UnapprovedUserRoute extends GoRouteData {
 
     switch (authState) {
       case AuthAuthenticated(
-        userData: User(permissions: PermissionsSet(approved: true)),
-      ):
+          userData: User(permissions: PermissionsSet(approved: true)),
+        ):
         return const HomeScreenWebRoute().location;
 
       case AuthUnauthenticated():

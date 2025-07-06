@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'multi_factor_login_route.g.dart';
 
 @TypedGoRoute<MultiFactorLoginRoute>(path: '/multifactor')
-class MultiFactorLoginRoute extends GoRouteData {
+class MultiFactorLoginRoute extends GoRouteData with _$MultiFactorLoginRoute {
   const MultiFactorLoginRoute();
 
   @override
@@ -20,8 +20,8 @@ class MultiFactorLoginRoute extends GoRouteData {
 
     switch (authState) {
       case AuthAuthenticated(
-        authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false),
-      ):
+          authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false),
+        ):
       case AuthMultiFactorChallengeInProgress():
         return null;
 

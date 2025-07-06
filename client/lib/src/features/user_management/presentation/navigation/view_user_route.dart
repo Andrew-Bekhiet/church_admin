@@ -2,7 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ViewUserRoute extends GoRouteData {
+part 'view_user_route.g.dart';
+
+@TypedGoRoute<ViewUserRoute>(path: '/view_user')
+class ViewUserRoute extends GoRouteData with _$ViewUserRoute {
   const ViewUserRoute({required this.uid, this.$extra});
 
   final String uid;

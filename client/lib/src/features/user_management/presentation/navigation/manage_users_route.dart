@@ -2,7 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ManageUsersRoute extends GoRouteData {
+part 'manage_users_route.g.dart';
+
+@TypedGoRoute<ManageUsersRoute>(path: '/manage_users')
+class ManageUsersRoute extends GoRouteData with _$ManageUsersRoute {
   const ManageUsersRoute();
 
   @override

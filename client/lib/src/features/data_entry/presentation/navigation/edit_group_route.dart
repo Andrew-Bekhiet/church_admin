@@ -21,7 +21,8 @@ class EditGroupExtra extends SerializableExtra {
   Json toJson() => _$EditGroupExtraToJson(this);
 }
 
-class EditGroupRoute extends GoRouteData {
+@TypedGoRoute<EditGroupRoute>(path: '/edit_group')
+class EditGroupRoute extends GoRouteData with _$EditGroupRoute {
   const EditGroupRoute({this.$extra});
 
   final EditGroupExtra? $extra;

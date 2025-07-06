@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 part 'update_user_spirit_data.g.dart';
 
 @TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/update_user_spirit_data')
-class UpdateUserSpiritDataRoute extends GoRouteData {
+class UpdateUserSpiritDataRoute extends GoRouteData
+    with _$UpdateUserSpiritDataRoute {
   const UpdateUserSpiritDataRoute({this.forced = false, this.$extra});
 
   final bool forced;
