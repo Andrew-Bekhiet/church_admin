@@ -62,7 +62,7 @@ extension RemoveQuotes on String {
 }
 
 List<Json> permissionsSetToJson(PermissionsSet data) =>
-    data.map((e) => {'permission': e.name}).toList();
+    data.map((e) => {'permission': e.id}).toList();
 PermissionsSet permissionsSetFromJson(dynamic data) => PermissionsSet.parse(
       (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
     );
