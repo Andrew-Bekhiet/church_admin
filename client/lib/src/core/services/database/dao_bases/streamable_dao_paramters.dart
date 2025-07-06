@@ -1,7 +1,9 @@
-class StreamableDAOParameters<T, TBoolExp, TOrderByExp> {
+import 'package:church_admin/church_admin.dart';
+
+class StreamableDAOParameters<T> {
   final String? search;
-  final List<TBoolExp>? where;
-  final List<TOrderByExp>? orderBy;
+  final List<Filter>? where;
+  final List<OrderBy>? orderBy;
 
   const StreamableDAOParameters({
     this.search,
@@ -9,10 +11,10 @@ class StreamableDAOParameters<T, TBoolExp, TOrderByExp> {
     this.orderBy,
   });
 
-  StreamableDAOParameters<T, TBoolExp, TOrderByExp> copyWith({
+  StreamableDAOParameters<T> copyWith({
     String? search,
-    List<TBoolExp>? where,
-    List<TOrderByExp>? orderBy,
+    List<Filter>? where,
+    List<OrderBy>? orderBy,
   }) {
     return StreamableDAOParameters(
       search: search ?? this.search,

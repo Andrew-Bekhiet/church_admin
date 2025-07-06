@@ -3,51 +3,126 @@
 part of 'store.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$StoreFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Store>(
+class _StoreFields {
+  _StoreFields();
+
+  final FieldMetadata<Store> id = FieldMetadata<Store>(
+    parentType: Store,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Store,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'address': FieldMetadata<Address>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Address> address = FieldMetadata<Address>(
+    parentType: Store,
     name: 'address',
     label: 'العنوان',
-  ),
-  'family': FieldMetadata<Family>(
+    isCodeOnly: false,
+  );
+
+  final FieldMetadata<Family> family = FieldMetadata<Family>(
+    parentType: Store,
     name: 'family',
     label: 'العائلة',
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Store,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Store,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Store,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    parentType: Store,
+    name: 'geolocation',
+    label: 'الموقع',
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    address,
+    family,
+    color,
+    lastEdit,
+    photoUpdatedAt,
+    geolocation
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'address': address,
+    'family': family,
+    'color': color,
+    'lastEdit': lastEdit,
+    'photoUpdatedAt': photoUpdatedAt,
+    'geolocation': geolocation
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Store _$StoreFromJson(Map json) => _Store(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Store _$StoreFromJson(Map json) => Store(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       address: json['address'] == null
           ? null
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -66,7 +141,7 @@ _Store _$StoreFromJson(Map json) => _Store(
       blurhash: json['blurhash'] as String?,
     );
 
-Map<String, dynamic> _$StoreToJson(_Store instance) => <String, dynamic>{
+Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),

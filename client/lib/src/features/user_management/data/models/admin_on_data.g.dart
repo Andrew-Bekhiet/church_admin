@@ -3,10 +3,205 @@
 part of 'admin_on_data.dart';
 
 // **************************************************************************
+// QueryableFieldsGenerator
+// **************************************************************************
+
+class AdminOnDataFields {
+  static final AdminOnDataFields _instance = AdminOnDataFields._();
+  factory AdminOnDataFields() => _instance;
+  AdminOnDataFields._();
+
+  final FieldMetadata<Area> area = FieldMetadata<Area>(
+    parentType: AdminOnData,
+    name: 'area',
+    label: 'المنطقة',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> areaAllowEdit = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'areaAllowEdit',
+    label: 'يمكنه تعديل المنطقة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> areaAdminOnUsers = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'areaAdminOnUsers',
+    label: 'مسؤول عن خدام المنطقة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Service> service = FieldMetadata<Service>(
+    parentType: AdminOnData,
+    name: 'service',
+    label: 'الخدمة',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<StudyYear> serviceStudyYearData =
+      FieldMetadata<StudyYear>(
+    parentType: AdminOnData,
+    name: 'serviceStudyYearData',
+    label: 'السنة الدراسية',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'serviceGender',
+    label: 'نوع المخدومين المسؤول عنهم',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> serviceAllowEdit = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'serviceAllowEdit',
+    label: 'يمكنه تعديل الخدمة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> serviceAdminOnUsers = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'serviceAdminOnUsers',
+    label: 'مسؤول عن خدام الخدمة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Class> classes = FieldMetadata<Class>(
+    parentType: AdminOnData,
+    name: 'classes',
+    label: 'الفصول',
+    isCodeOnly: false,
+    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<Group> group = FieldMetadata<Group>(
+    parentType: AdminOnData,
+    name: 'group',
+    label: 'المجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> groupAllowEdit = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'groupAllowEdit',
+    label: 'يمكنه تعديل المجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> groupAdminOnUsers = FieldMetadata<bool>(
+    parentType: AdminOnData,
+    name: 'groupAdminOnUsers',
+    label: 'مسؤول عن خدام المجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<User> user = FieldMetadata<User>(
+    parentType: AdminOnData,
+    name: 'user',
+    label: 'بيانات الخادم',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    area,
+    areaAllowEdit,
+    areaAdminOnUsers,
+    service,
+    serviceStudyYearData,
+    serviceGender,
+    serviceAllowEdit,
+    serviceAdminOnUsers,
+    classes,
+    group,
+    groupAllowEdit,
+    groupAdminOnUsers,
+    user
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'area': area,
+    'areaAllowEdit': areaAllowEdit,
+    'areaAdminOnUsers': areaAdminOnUsers,
+    'service': service,
+    'serviceStudyYearData': serviceStudyYearData,
+    'serviceGender': serviceGender,
+    'serviceAllowEdit': serviceAllowEdit,
+    'serviceAdminOnUsers': serviceAdminOnUsers,
+    'classes': classes,
+    'group': group,
+    'groupAllowEdit': groupAllowEdit,
+    'groupAdminOnUsers': groupAdminOnUsers,
+    'user': user
+  };
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AdminOnData _$AdminOnDataFromJson(Map json) => _AdminOnData(
+AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       permissionId: json['permissionId'] as String,
       area: json['area'] == null
           ? null
@@ -32,9 +227,12 @@ _AdminOnData _$AdminOnDataFromJson(Map json) => _AdminOnData(
           : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
       groupAllowEdit: json['groupAllowEdit'] as bool?,
       groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
     );
 
-Map<String, dynamic> _$AdminOnDataToJson(_AdminOnData instance) =>
+Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
     <String, dynamic>{
       'permissionId': instance.permissionId,
       'area': instance.area?.toJson(),
@@ -49,4 +247,5 @@ Map<String, dynamic> _$AdminOnDataToJson(_AdminOnData instance) =>
       'group': instance.group?.toJson(),
       'groupAllowEdit': instance.groupAllowEdit,
       'groupAdminOnUsers': instance.groupAdminOnUsers,
+      'user': instance.user?.toJson(),
     };

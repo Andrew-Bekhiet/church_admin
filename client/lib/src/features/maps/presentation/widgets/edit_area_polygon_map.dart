@@ -1,7 +1,6 @@
-import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:church_admin/church_admin.dart' as ca show Polygon;
+import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
-
 
 class EditAreaPolygonMap extends StatelessWidget {
   final Area initialArea;
@@ -21,7 +20,7 @@ class EditAreaPolygonMap extends StatelessWidget {
       overrideResponseObjects: (response, resultAreaStream) {
         return resultAreaStream.map(
           (resultAreaValue) =>
-              (response ?? PersonsGeolocationsResponse()).copyWith(
+              (response ?? const PersonsGeolocationsResponse()).copyWith(
             areas: {
               ...response?.areas.where((s) => s.id != resultAreaValue.id) ?? {},
               resultAreaValue,

@@ -5,34 +5,57 @@ part 'order_by.freezed.dart';
 part 'order_by.g.dart';
 
 @freezed
-abstract class OrderBy with _$OrderBy {
-  @Assert('value is OrderBy || value is Enum_OrderBy')
-  factory OrderBy({
-    required String fieldName,
+@JsonSerializable()
+class OrderBy with _$OrderBy {
+  @override
+  @JsonKey(
+    fromJson: fieldMetadataFromJson,
+    toJson: fieldMetadataToJson,
+  )
+  final FieldMetadata field;
 
-    /// [value] is either OrderBy or Enum_OrderBy
-    @Default(Enum_OrderBy.ASC)
-    @JsonKey(
-      fromJson: orderByValueFromJson,
-      toJson: orderByValueToJson,
-    )
-    Object value,
-  }) = _OrderBy;
-  OrderBy._() : super();
+  /// [value] is either OrderBy or Enum_OrderBy
+  @override
+  @JsonKey(
+    fromJson: orderByValueFromJson,
+    toJson: orderByValueToJson,
+  )
+  final OrderByValue value;
+
+  OrderBy({
+    required this.field,
+    this.value = OrderByValue.asc,
+  }) : assert(field.isOrderable, 'Field ${field.name} is not orderable.');
 
   factory OrderBy.fromJson(Map<String, Object?> json) =>
       _$OrderByFromJson(json);
 
-  Json toSearchJson() => {
-        fieldName: value is OrderBy
-            ? (value as OrderBy).toSearchJson()
-            : (value as Enum_OrderBy).name,
-      };
+  Map<String, dynamic> toJson() => _$OrderByToJson(this);
+
+  Json toSearchJson() {
+    return field.serializeOrderBy(switch (field) {
+      FieldMetadata<ShammasLevel>() || FieldMetadata<StudyYear>() => {
+          'order': value.serializedName
+        },
+      FieldMetadata<ID>() => {'name': value.serializedName},
+      _ => value.serializedName,
+    });
+  }
 }
 
-Object orderByValueFromJson(Object? data) => data is String
-    ? Enum_OrderBy.values.byName(data)
-    : OrderBy.fromJson(Json.from(data! as Map));
+OrderByValue orderByValueFromJson(Object? data) =>
+    data is String ? OrderByValue.values.byName(data) : OrderByValue.asc;
 
-Object orderByValueToJson(Object value) =>
-    value is Enum_OrderBy ? value.name : (value as OrderBy).toJson();
+Object orderByValueToJson(OrderByValue value) => value.serializedName;
+
+FieldMetadata fieldMetadataFromJson(Object? data) =>
+    FieldMetadata.fromJson(Json.from(data! as Map));
+
+Json fieldMetadataToJson(FieldMetadata field) => field.toJson();
+
+enum OrderByValue {
+  asc,
+  desc;
+
+  String get serializedName => name.toUpperCase();
+}

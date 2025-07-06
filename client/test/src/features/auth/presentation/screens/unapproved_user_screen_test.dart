@@ -135,19 +135,18 @@ void main() {
             'Redirects to home if user is approved',
             () async {
               when(AuthBloc.I.state).thenReturn(
-                AuthAuthenticated(
-                  authUser: const AuthUser(
+                const AuthAuthenticated(
+                  authUser: AuthUser(
                     uid: '123',
                     email: 'test@test.com',
                     emailVerified: true,
                     idToken: 'token',
-                    claims: {},
                   ),
                   userData: User(
                     uid: '123',
                     name: 'test',
                     permissions:
-                        const PermissionsSet.fromSet({UserPermission.approved}),
+                        PermissionsSet.fromSet({UserPermission.approved}),
                   ),
                 ),
               );
@@ -164,13 +163,12 @@ void main() {
 
           test('Stays on screen if user is not approved', () async {
             when(AuthBloc.I.state).thenReturn(
-              AuthAuthenticated(
-                authUser: const AuthUser(
+              const AuthAuthenticated(
+                authUser: AuthUser(
                   uid: '123',
                   email: 'test@test.com',
                   emailVerified: true,
                   idToken: 'token',
-                  claims: {},
                 ),
                 userData: User(
                   uid: '123',
@@ -214,7 +212,6 @@ Override _setUpAuthBloc() {
       email: 'test@test.com',
       emailVerified: true,
       idToken: 'token',
-      claims: {},
     ),
   );
 

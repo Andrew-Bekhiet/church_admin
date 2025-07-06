@@ -10,7 +10,7 @@ class NotificationsSettingsStorage {
   @visibleForTesting
   static const String kodasTimeKey = 'KodasTime';
   @visibleForTesting
-  static const String meetingTimeKey = 'MeetingTime';
+  static const String attendanceTimeKey = 'AttendanceTime';
   @visibleForTesting
   static const String confessionTimeKey = 'ConfessionTime';
 
@@ -31,8 +31,8 @@ class NotificationsSettingsStorage {
   NotificationSetting get kodasTimeSetting =>
       _box.get(kodasTimeKey) ?? _defaultNotificationSetting;
 
-  NotificationSetting get meetingTimeSetting =>
-      _box.get(meetingTimeKey) ?? _defaultNotificationSetting;
+  NotificationSetting get attendanceTimeSetting =>
+      _box.get(attendanceTimeKey) ?? _defaultNotificationSetting;
 
   NotificationSetting get confessionTimeSetting =>
       _box.get(confessionTimeKey) ?? _defaultNotificationSetting;
@@ -45,8 +45,8 @@ class NotificationsSettingsStorage {
     await _box.put(kodasTimeKey, setting);
   }
 
-  Future<void> setMeetingTime(NotificationSetting setting) async {
-    await _box.put(meetingTimeKey, setting);
+  Future<void> setAttendanceTime(NotificationSetting setting) async {
+    await _box.put(attendanceTimeKey, setting);
   }
 
   Future<void> setConfessionTime(NotificationSetting setting) async {

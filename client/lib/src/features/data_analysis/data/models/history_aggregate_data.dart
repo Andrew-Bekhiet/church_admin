@@ -6,24 +6,21 @@ part 'history_aggregate_data.freezed.dart';
 part 'history_aggregate_data.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['nodes'])
-abstract class HistoryAggregateData with _$HistoryAggregateData {
-  static Map<String, FieldMetadata> get fieldsMetadata =>
-      _$HistoryAggregateDataFields;
+@JsonSerializable()
+@Queryable(classLabel: 'HistoryAggregateData', ignoreFields: ['nodes'])
+class HistoryAggregateData with _$HistoryAggregateData {
+  @override
+  final AggregateData aggregate;
+  @override
+  final List<LastRecordedByInfo> nodes;
 
-  static final QueryableType<HistoryAggregateData> queryableType =
-      QueryableType<HistoryAggregateData>(
-    name: 'HistoryAggregateData',
-    label: 'HistoryAggregateData',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: HistoryAggregateData.fromJson,
-  );
-
-  const factory HistoryAggregateData({
-    required AggregateData aggregate,
-    @Default([]) List<LastRecordedByInfo> nodes,
-  }) = _HistoryAggregateData;
+  const HistoryAggregateData({
+    required this.aggregate,
+    this.nodes = const [],
+  });
 
   factory HistoryAggregateData.fromJson(Json json) =>
       _$HistoryAggregateDataFromJson(json);
+
+  Json toJson() => _$HistoryAggregateDataToJson(this);
 }

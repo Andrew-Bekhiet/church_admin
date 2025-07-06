@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
-
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -279,7 +278,6 @@ Override _setUpAuthBloc({bool isSignedIn = true}) {
       email: 'email',
       emailVerified: true,
       idToken: 'token',
-      claims: {},
     );
     when(authBloc.userStream).thenAnswer(
       (_) => BehaviorSubject.seeded(
@@ -309,7 +307,6 @@ Override _setUpAuthBloc({bool isSignedIn = true}) {
           email: 'email',
           emailVerified: true,
           idToken: 'token',
-          claims: {},
         ),
       ),
     );

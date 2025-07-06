@@ -19,7 +19,6 @@ mixin _$AuthUser {
   String get email;
   bool get emailVerified;
   String get idToken;
-  @JsonKey(defaultValue: {})
   Map<String, dynamic> get claims;
   bool get isMultiFactorEnabled;
 
@@ -29,9 +28,6 @@ mixin _$AuthUser {
   @pragma('vm:prefer-inline')
   $AuthUserCopyWith<AuthUser> get copyWith =>
       _$AuthUserCopyWithImpl<AuthUser>(this as AuthUser, _$identity);
-
-  /// Serializes this AuthUser to a JSON map.
-  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
@@ -70,7 +66,7 @@ abstract mixin class $AuthUserCopyWith<$Res> {
       String email,
       bool emailVerified,
       String idToken,
-      @JsonKey(defaultValue: {}) Map<String, dynamic> claims,
+      Map<String, dynamic> claims,
       bool isMultiFactorEnabled});
 }
 
@@ -93,7 +89,7 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
     Object? claims = null,
     Object? isMultiFactorEnabled = null,
   }) {
-    return _then(_self.copyWith(
+    return _then(AuthUser(
       uid: null == uid
           ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -112,148 +108,6 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
               as String,
       claims: null == claims
           ? _self.claims
-          : claims // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      isMultiFactorEnabled: null == isMultiFactorEnabled
-          ? _self.isMultiFactorEnabled
-          : isMultiFactorEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _AuthUser extends AuthUser {
-  const _AuthUser(
-      {required this.uid,
-      required this.email,
-      required this.emailVerified,
-      required this.idToken,
-      @JsonKey(defaultValue: {}) required final Map<String, dynamic> claims,
-      this.isMultiFactorEnabled = false})
-      : _claims = claims,
-        super._();
-  factory _AuthUser.fromJson(Map<String, dynamic> json) =>
-      _$AuthUserFromJson(json);
-
-  @override
-  final String uid;
-  @override
-  final String email;
-  @override
-  final bool emailVerified;
-  @override
-  final String idToken;
-  final Map<String, dynamic> _claims;
-  @override
-  @JsonKey(defaultValue: {})
-  Map<String, dynamic> get claims {
-    if (_claims is EqualUnmodifiableMapView) return _claims;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_claims);
-  }
-
-  @override
-  @JsonKey()
-  final bool isMultiFactorEnabled;
-
-  /// Create a copy of AuthUser
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$AuthUserCopyWith<_AuthUser> get copyWith =>
-      __$AuthUserCopyWithImpl<_AuthUser>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$AuthUserToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _AuthUser &&
-            (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.emailVerified, emailVerified) ||
-                other.emailVerified == emailVerified) &&
-            (identical(other.idToken, idToken) || other.idToken == idToken) &&
-            const DeepCollectionEquality().equals(other._claims, _claims) &&
-            (identical(other.isMultiFactorEnabled, isMultiFactorEnabled) ||
-                other.isMultiFactorEnabled == isMultiFactorEnabled));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      uid,
-      email,
-      emailVerified,
-      idToken,
-      const DeepCollectionEquality().hash(_claims),
-      isMultiFactorEnabled);
-}
-
-/// @nodoc
-abstract mixin class _$AuthUserCopyWith<$Res>
-    implements $AuthUserCopyWith<$Res> {
-  factory _$AuthUserCopyWith(_AuthUser value, $Res Function(_AuthUser) _then) =
-      __$AuthUserCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String uid,
-      String email,
-      bool emailVerified,
-      String idToken,
-      @JsonKey(defaultValue: {}) Map<String, dynamic> claims,
-      bool isMultiFactorEnabled});
-}
-
-/// @nodoc
-class __$AuthUserCopyWithImpl<$Res> implements _$AuthUserCopyWith<$Res> {
-  __$AuthUserCopyWithImpl(this._self, this._then);
-
-  final _AuthUser _self;
-  final $Res Function(_AuthUser) _then;
-
-  /// Create a copy of AuthUser
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? uid = null,
-    Object? email = null,
-    Object? emailVerified = null,
-    Object? idToken = null,
-    Object? claims = null,
-    Object? isMultiFactorEnabled = null,
-  }) {
-    return _then(_AuthUser(
-      uid: null == uid
-          ? _self.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _self.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      emailVerified: null == emailVerified
-          ? _self.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      idToken: null == idToken
-          ? _self.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      claims: null == claims
-          ? _self._claims
           : claims // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       isMultiFactorEnabled: null == isMultiFactorEnabled

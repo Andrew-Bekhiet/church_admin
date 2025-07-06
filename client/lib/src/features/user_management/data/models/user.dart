@@ -7,56 +7,85 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-@TypeMetadata(
-  labelsOverrides: {'uid': '='},
+@JsonSerializable()
+@Queryable(
+  classLabel: 'الخدام',
   ignoreFields: [
-    'email',
-    'blurhash',
     'authId',
+    'id',
+    'blurhash',
+    'canManageSomeUsers',
   ],
+  regexIgnoreFields: [r'.+History$'],
+  allowExtension: true,
 )
-abstract class User extends ViewableWithIDAndImage
+class User extends ViewableWithIDAndImage
     with _$User
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$UserFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String uid;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  final String? email;
+  @override
+  final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
+  @override
+  final List<AdminOnData>? adminOn;
+  @override
+  @JsonKey(
+    fromJson: permissionsSetFromJson,
+    toJson: permissionsSetToJson,
+  )
+  @QueryableField(
+    manyToManyRelSelectField: 'permission',
+    manyToManyRelType: UsersPermissionsRel,
+  )
+  final PermissionsSet permissions;
+  @override
+  final String? authId;
+  @override
+  final LastRecordedByInfo? lastEdit;
+  @override
+  final Person? person;
+  @override
+  final List<AdminOnData>? servicesHistory;
+  @override
+  final List<AdminOnData>? classesHistory;
+  @override
+  final List<AdminOnData>? groupsHistory;
 
-  static final QueryableType<User> queryableType = QueryableType<User>(
-    name: 'User',
-    label: 'الخدام',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: User.fromJson,
-  );
-
-  factory User({
-    required String uid,
-    required String name,
-    String? email,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    List<AdminOnData>? adminOn,
-    @JsonKey(
-      fromJson: permissionsSetFromJson,
-      toJson: permissionsSetToJson,
-    )
-    @Default(PermissionsSet.empty())
-    PermissionsSet permissions,
-    String? authId,
-    LastRecordedByInfo? lastEdit,
-    Person? person,
-    List<AdminOnData>? servicesHistory,
-    List<AdminOnData>? classesHistory,
-    List<AdminOnData>? groupsHistory,
-  }) = _User;
-  User._() : super();
+  const User({
+    required this.uid,
+    required this.name,
+    this.email,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.adminOn,
+    this.permissions = const PermissionsSet.empty(),
+    this.authId,
+    this.lastEdit,
+    this.person,
+    this.servicesHistory,
+    this.classesHistory,
+    this.groupsHistory,
+  });
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
-  String get typeName => User.queryableType.name;
+  String get typeName => AdvancedQueriesMetadata().user.name;
 
   @override
   String get id => uid;
@@ -185,4 +214,49 @@ abstract class User extends ViewableWithIDAndImage
                 (p.groupAdminOnUsers ?? false),
           ) ??
           false);
+}
+
+class UserFields extends _UserFields {
+  UserFields();
+
+  @override
+  FieldMetadata<String> get uid => const FieldMetadata<String>(
+        parentType: User,
+        name: 'uid',
+        label: 'معرف المستخدم',
+        operators: {...StringOperator.values},
+        isCodeOnly: true,
+      );
+
+  @override
+  FieldMetadata<String> get email => const FieldMetadata<String>(
+        parentType: User,
+        name: 'email',
+        label: 'البريد الإلكتروني',
+        operators: {...StringOperator.values},
+        isCodeOnly: true,
+      );
+
+  FieldMetadata<AggregateData> get permissionsAggregate => const FieldMetadata(
+        parentType: User,
+        name: 'permissionsAggregate',
+        label: 'permissionsAggregate',
+        isCodeOnly: true,
+        isOrderable: false,
+        operators: {...MultiSelectOperator.values},
+      );
+
+  @override
+  List<FieldMetadata<Object>> get allFields => [
+        ...super.allFields,
+        permissionsAggregate,
+      ];
+
+  @override
+  Map<String, FieldMetadata<Object>> get allFieldsByName {
+    return {
+      ...super.allFieldsByName,
+      permissionsAggregate.name: permissionsAggregate,
+    };
+  }
 }

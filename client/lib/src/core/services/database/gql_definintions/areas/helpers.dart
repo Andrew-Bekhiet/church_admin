@@ -16,7 +16,7 @@ class AreaInsertHelper {
     Area? oldArea,
   }) : _areaDelta = computeObjectDelta(
           newArea.toJson(),
-          (oldArea ?? Area(id: '', name: '')).toJson(),
+          (oldArea ?? const Area(id: '', name: '')).toJson(),
           ignoreFields: _mutationNonExistentVars,
         );
 

@@ -136,7 +136,7 @@ void main() {
         final lastRecordedByInfo = LastRecordedByInfo(
           time: clock.now(),
           recordedBy: 'id',
-          user: User(
+          user: const User(
             uid: 'id',
             name: 'user',
             email: 'email',

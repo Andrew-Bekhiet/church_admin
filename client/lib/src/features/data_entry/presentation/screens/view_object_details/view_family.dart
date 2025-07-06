@@ -19,8 +19,10 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
         where: Stream.value(
           [
-            Input_PersonsBoolExp(
-              familyId: Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            Filter(
+              PersonFields().family.redirectTo(FamilyFields().id),
+              PrimitiveOperator.eq,
+              widget.familyId,
             ),
           ],
         ),
@@ -33,12 +35,12 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
         where: Stream.value(
           [
-            Input_FamiliesBoolExp(
-              parents: Input_FamiliesFamiliesBoolExp(
-                parentFamilyId: Input_UuidComparisonExp(
-                  $_eq: widget.familyId.toUuid(),
-                ),
-              ),
+            Filter(
+              FamilyFields()
+                  .parentsRel
+                  .redirectTo(FamiliesFamiliesFields().parentFamilyId),
+              PrimitiveOperator.eq,
+              widget.familyId,
             ),
           ],
         ),
@@ -51,12 +53,12 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
         where: Stream.value(
           [
-            Input_FamiliesBoolExp(
-              children: Input_FamiliesFamiliesBoolExp(
-                childFamilyId: Input_UuidComparisonExp(
-                  $_eq: widget.familyId.toUuid(),
-                ),
-              ),
+            Filter(
+              FamilyFields()
+                  .childrenRel
+                  .redirectTo(FamiliesFamiliesFields().childFamilyId),
+              PrimitiveOperator.eq,
+              widget.familyId,
             ),
           ],
         ),
@@ -69,9 +71,10 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
         where: Stream.value(
           [
-            Input_StoresBoolExp(
-              adminFamily:
-                  Input_UuidComparisonExp($_eq: widget.familyId.toUuid()),
+            Filter(
+              StoreFields().family.redirectTo(FamilyFields().id),
+              PrimitiveOperator.eq,
+              widget.familyId,
             ),
           ],
         ),

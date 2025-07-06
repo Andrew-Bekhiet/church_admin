@@ -3,40 +3,59 @@
 part of 'shammas_level.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$ShammasLevelFields = <String, FieldMetadata>{
-  'order': FieldMetadata<int>(
+class ShammasLevelFields {
+  static final ShammasLevelFields _instance = ShammasLevelFields._();
+  factory ShammasLevelFields() => _instance;
+  ShammasLevelFields._();
+
+  final FieldMetadata<int> order = FieldMetadata<int>(
+    parentType: ShammasLevel,
     name: 'order',
     label: 'الترتيب',
-    operators: Operator.comparitive,
-  ),
-  'name': FieldMetadata<String>(
-    name: 'name',
-    label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'id': FieldMetadata<ShammasLevel>(
+    isCodeOnly: false,
+    operators: {...PrimitiveOperator.values},
+  );
+
+  final FieldMetadata<ShammasLevel> id = FieldMetadata<ShammasLevel>(
+    parentType: ShammasLevel,
     name: 'id',
     label: '=',
-  ),
-};
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: ShammasLevel,
+    name: 'name',
+    label: 'الاسم',
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [order, id, name];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'order': order,
+    'id': id,
+    'name': name
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ShammasLevel _$ShammasLevelFromJson(Map json) => _ShammasLevel(
-      order: (json['order'] as num).toInt(),
-      name: json['name'] as String,
-      id: json['id'] as String,
+ShammasLevel _$ShammasLevelFromJson(Map json) => ShammasLevel(
+      order: (json['order'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? '',
+      id: json['id'] as String? ?? '',
     );
 
-Map<String, dynamic> _$ShammasLevelToJson(_ShammasLevel instance) =>
+Map<String, dynamic> _$ShammasLevelToJson(ShammasLevel instance) =>
     <String, dynamic>{
       'order': instance.order,
-      'name': instance.name,
       'id': instance.id,
+      'name': instance.name,
     };

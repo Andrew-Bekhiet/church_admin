@@ -324,7 +324,7 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
               studyYear: StudyYear(order: 1, name: 'First Primary'),
             ),
           ],
-          groups: [
+          groups: const [
             Group(id: 'id', name: 'Group 1'),
             Group(id: 'id', name: 'Group 2'),
           ],
@@ -339,7 +339,7 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
               studyYear: StudyYear(order: 1, name: 'First Primary'),
             ),
           ],
-          groups: [
+          groups: const [
             Group(id: 'id', name: 'Group 1'),
             Group(id: 'id', name: 'Group 2'),
           ],

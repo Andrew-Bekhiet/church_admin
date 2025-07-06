@@ -3,60 +3,138 @@
 part of 'group.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$GroupFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Group>(
+class _GroupFields {
+  _GroupFields();
+
+  final FieldMetadata<Group> id = FieldMetadata<Group>(
+    parentType: Group,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Group,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Group,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Group,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'service': FieldMetadata<Service>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Service> service = FieldMetadata<Service>(
+    parentType: Group,
     name: 'service',
     label: 'الخدمة',
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Group,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'adminUsers': FieldMetadata<User>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    parentType: Group,
     name: 'adminUsers',
-    label: 'الخدام المسؤلين',
+    label: 'adminUsers',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+  );
+
+  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
+    AdminOnDataFields().user,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Group,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
-  ),
-  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Group,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',
-  ),
-};
+    isCodeOnly: true,
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    color,
+    photoUpdatedAt,
+    service,
+    lastEdit,
+    adminUsers,
+    attendanceHistoryAggregate,
+    attendanceDaysConstraintsAggregate
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'service': service,
+    'lastEdit': lastEdit,
+    'adminUsers': adminUsers,
+    'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Group _$GroupFromJson(Map json) => _Group(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Group _$GroupFromJson(Map json) => Group(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
@@ -83,7 +161,7 @@ _Group _$GroupFromJson(Map json) => _Group(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$GroupToJson(_Group instance) => <String, dynamic>{
+Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

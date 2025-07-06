@@ -3,18 +3,16 @@ import 'package:church_admin/src/core/services/database/gql_definintions/areas/_
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/helpers.dart';
 
-class AreasDAO
-    extends FullCRUDDAO<Area, Input_AreasBoolExp, Input_AreasOrderBy> {
+class AreasDAO extends FullCRUDDAO<Area> {
   AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
 
   @override
-  late final StreamAllConfig<Area, Input_AreasBoolExp, Input_AreasOrderBy>
-      baseStreamAllConfig = const StreamAllConfig(
+  late final StreamAllConfig<Area> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllAreas,
   );
 
   @override
-  late final StreamCountConfig<Area, Input_AreasBoolExp> baseStreamCountConfig =
+  late final StreamCountConfig<Area> baseStreamCountConfig =
       const StreamCountConfig(
     document: documentNodeSubscriptionwatchAreasCount,
   );

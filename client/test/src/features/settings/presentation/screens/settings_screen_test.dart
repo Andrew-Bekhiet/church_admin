@@ -210,7 +210,9 @@ void main() {
               await tester.tap(
                 find
                     .text(
-                      Area.queryableType.fieldsMetadata.values
+                      AdvancedQueriesMetadata()
+                          .area
+                          .fieldsMetadata
                           .elementAt(2)
                           .label,
                     )
@@ -256,7 +258,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final FieldMetadata<Object> property =
-              Area.queryableType.fieldsMetadata.values.elementAt(2);
+              AdvancedQueriesMetadata().area.fieldsMetadata.elementAt(2);
 
           await tester.tap(find.text(property.label).first);
           await tester.pumpAndSettle();

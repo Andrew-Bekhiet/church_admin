@@ -3,57 +3,135 @@
 part of 'street.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$StreetFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Street>(
+class StreetFields {
+  static final StreetFields _instance = StreetFields._();
+  factory StreetFields() => _instance;
+  StreetFields._();
+
+  final FieldMetadata<Street> id = FieldMetadata<Street>(
+    parentType: Street,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Street,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'line': FieldMetadata<Line>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Line> line = FieldMetadata<Line>(
+    parentType: Street,
     name: 'line',
     label: 'الموقع',
-    operators: Operator.spatial,
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Street,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Street,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'areas': FieldMetadata<Area>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AreasStreets> areasRel = FieldMetadata<AreasStreets>(
+    parentType: Street,
     name: 'areas',
-    label: 'المناطق',
+    label: 'areas',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+  );
+
+  late final FieldMetadata<Area> areas = areasRel.redirectTo(
+    AreasStreetsFields().area,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastVisit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Street,
     name: 'lastVisit',
     label: 'أخر افتقاد',
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Street,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    line,
+    color,
+    photoUpdatedAt,
+    areas,
+    lastVisit,
+    lastEdit
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'line': line,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'areas': areas,
+    'lastVisit': lastVisit,
+    'lastEdit': lastEdit
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Street _$StreetFromJson(Map json) => _Street(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Street _$StreetFromJson(Map json) => Street(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       line: lineFromJson(json['line']),
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -71,7 +149,7 @@ _Street _$StreetFromJson(Map json) => _Street(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$StreetToJson(_Street instance) => <String, dynamic>{
+Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'line': lineToJson(instance.line),

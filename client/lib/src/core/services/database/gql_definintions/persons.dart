@@ -6,20 +6,19 @@ import 'package:church_admin/src/core/services/database/gql_definintions/persons
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
 
-class PersonsDAO
-    extends FullCRUDDAO<Person, Input_PersonsBoolExp, Input_PersonsOrderBy> {
+class PersonsDAO extends FullCRUDDAO<Person> {
   PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
 
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
   @override
-  late final StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>
-      baseStreamAllConfig = const StreamAllConfig(
+  late final StreamAllConfig<Person> baseStreamAllConfig =
+      const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllPersons,
   );
   @override
-  late final StreamCountConfig<Person, Input_PersonsBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Person> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchPersonsCount,
   );
   @override
@@ -207,32 +206,19 @@ class PersonsDAO
     required String personId,
     required String classId,
     bool asAdmin = false,
-    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Filter>? where,
   }) {
-    return paginatePersonAttendance(
-      vars: (request) => Variables_Subscription_personAttendance(
-        limit: request.pageSize,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            $class: Input_ClassesBoolExp(
-              id: Input_UuidComparisonExp($_eq: classId.toUuid()),
-            ),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (request.cursor != null)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: request.cursor!.time,
-              ),
-            ),
-        ],
-      ),
+    return _paginatePersonAttendance(
+      asAdmin: asAdmin,
+      personId: personId,
+      where: [
+        Filter(
+          AttendanceRecordFields().class$.redirectTo(ClassFields().id),
+          PrimitiveOperator.eq,
+          classId,
+        ),
+        if (where != null) ...where,
+      ],
     );
   }
 
@@ -240,30 +226,19 @@ class PersonsDAO
     required String personId,
     required String groupId,
     bool asAdmin = false,
-    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Filter>? where,
   }) {
-    return paginatePersonAttendance(
-      vars: (request) => Variables_Subscription_personAttendance(
-        limit: request.pageSize,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            groupId: Input_UuidComparisonExp($_eq: groupId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (request.cursor != null)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: request.cursor!.time,
-              ),
-            ),
-        ],
-      ),
+    return _paginatePersonAttendance(
+      asAdmin: asAdmin,
+      personId: personId,
+      where: [
+        Filter(
+          AttendanceRecordFields().group.redirectTo(GroupFields().id),
+          PrimitiveOperator.eq,
+          groupId,
+        ),
+        if (where != null) ...where,
+      ],
     );
   }
 
@@ -271,37 +246,26 @@ class PersonsDAO
     required String personId,
     required String serviceId,
     bool asAdmin = false,
-    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Filter>? where,
   }) {
-    return paginatePersonAttendance(
-      vars: (request) => Variables_Subscription_personAttendance(
-        limit: request.pageSize,
-        where: [
-          Input_HistoryAttendanceHistoryBoolExp(
-            personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            serviceId: Input_UuidComparisonExp($_eq: serviceId.toUuid()),
-          ),
-          Input_HistoryAttendanceHistoryBoolExp(
-            asAdmin: Input_BooleanComparisonExp($_eq: asAdmin),
-          ),
-          if (where != null) ...where,
-          if (request.cursor != null)
-            Input_HistoryAttendanceHistoryBoolExp(
-              time: Input_TimestampComparisonExp(
-                $_lt: request.cursor!.time,
-              ),
-            ),
-        ],
-      ),
+    return _paginatePersonAttendance(
+      asAdmin: asAdmin,
+      personId: personId,
+      where: [
+        Filter(
+          AttendanceRecordFields().service.redirectTo(ServiceFields().id),
+          PrimitiveOperator.eq,
+          serviceId,
+        ),
+        if (where != null) ...where,
+      ],
     );
   }
 
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonAttendance({
-    required Variables_Subscription_personAttendance Function(
-      PaginatableStreamRequest<LastRecordedByInfo, void>,
-    ) vars,
+  PaginatableStreamBase<LastRecordedByInfo> _paginatePersonAttendance({
+    required String personId,
+    required bool asAdmin,
+    required List<Filter>? where,
     int? limit,
   }) {
     return PaginatableStream.simple(
@@ -311,7 +275,29 @@ class PersonsDAO
           SubscriptionOptions(
             document: documentNodeSubscriptionpersonAttendance,
             operationName: 'personAttendance',
-            variables: vars(request).toJson(),
+            variables: AdvancedQuery(
+              queryableType: AdvancedQueriesMetadata().attendanceRecord,
+              limit: request.pageSize,
+              filters: [
+                Filter(
+                  AttendanceRecordFields().person.redirectTo(PersonFields().id),
+                  PrimitiveOperator.eq,
+                  personId,
+                ),
+                Filter(
+                  AttendanceRecordFields().asAdmin,
+                  PrimitiveOperator.eq,
+                  asAdmin,
+                ),
+                if (where != null) ...where,
+                if (request.cursor != null)
+                  Filter(
+                    AttendanceRecordFields().time,
+                    PrimitiveOperator.lt,
+                    request.cursor!.time,
+                  ),
+              ],
+            ).toJson(),
             parserFn: db.parser.singleListParser(
               LastRecordedByInfo.fromJson,
               pageSize: request.pageSize,

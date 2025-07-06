@@ -5,17 +5,32 @@ part 'persons_geolocations_response.freezed.dart';
 part 'persons_geolocations_response.g.dart';
 
 @freezed
-abstract class PersonsGeolocationsResponse
+@JsonSerializable()
+class PersonsGeolocationsResponse
     with _$PersonsGeolocationsResponse
     implements ToJson {
-  factory PersonsGeolocationsResponse({
-    @Default({}) Set<Area> areas,
-    @Default({}) Set<Street> streets,
-    @Default({}) Set<Family> families,
-    @Default({}) Set<Store> stores,
-    @Default({}) Set<Person> persons,
-  }) = _PersonsGeolocationsResponse;
+  @override
+  final Set<Area> areas;
+  @override
+  final Set<Street> streets;
+  @override
+  final Set<Family> families;
+  @override
+  final Set<Store> stores;
+  @override
+  final Set<Person> persons;
+
+  const PersonsGeolocationsResponse({
+    this.areas = const {},
+    this.streets = const {},
+    this.families = const {},
+    this.stores = const {},
+    this.persons = const {},
+  });
 
   factory PersonsGeolocationsResponse.fromJson(Map<String, Object?> json) =>
       _$PersonsGeolocationsResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PersonsGeolocationsResponseToJson(this);
 }

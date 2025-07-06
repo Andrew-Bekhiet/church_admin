@@ -3,19 +3,17 @@ import 'package:church_admin/src/core/services/database/gql_definintions/stores/
 import 'package:church_admin/src/core/services/database/gql_definintions/stores/__generated__/subscriptions.gql.dart';
 import 'package:uuid/enums.dart';
 
-class StoresDAO
-    extends FullCRUDDAO<Store, Input_StoresBoolExp, Input_StoresOrderBy> {
+class StoresDAO extends FullCRUDDAO<Store> {
   StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
 
   @override
-  late final StreamAllConfig<Store, Input_StoresBoolExp, Input_StoresOrderBy>
-      baseStreamAllConfig = const StreamAllConfig(
+  late final StreamAllConfig<Store> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,
   );
 
   @override
-  late final StreamCountConfig<Store, Input_StoresBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Store> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchStoresCount,
   );
 

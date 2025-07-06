@@ -27,7 +27,7 @@ void main() {
       setUp(_setUp);
       tearDown(resetGlobalProviderContainer);
 
-      final area = Area(id: 'id', name: 'name', color: Colors.purple);
+      const area = Area(id: 'id', name: 'name', color: Colors.purple);
 
       group(
         'Structure',
@@ -311,10 +311,10 @@ Override _mockAuthBloc() {
   final mock = MockAuthBloc();
 
   when(mock.currentUserData).thenReturn(
-    User(
+    const User(
       uid: 'id',
       name: 'name',
-      permissions: const PermissionsSet.fromSet({UserPermission.writeAllData}),
+      permissions: PermissionsSet.fromSet({UserPermission.writeAllData}),
     ),
   );
 

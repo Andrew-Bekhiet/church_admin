@@ -26,9 +26,6 @@ mixin _$College {
   $CollegeCopyWith<College> get copyWith =>
       _$CollegeCopyWithImpl<College>(this as College, _$identity);
 
-  /// Serializes this College to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -74,100 +71,7 @@ class _$CollegeCopyWithImpl<$Res> implements $CollegeCopyWith<$Res> {
     Object? name = null,
     Object? universityId = freezed,
   }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      universityId: freezed == universityId
-          ? _self.universityId
-          : universityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _College extends College {
-  _College({required this.id, required this.name, this.universityId})
-      : super._();
-  factory _College.fromJson(Map<String, dynamic> json) =>
-      _$CollegeFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String? universityId;
-
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$CollegeCopyWith<_College> get copyWith =>
-      __$CollegeCopyWithImpl<_College>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$CollegeToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _College &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.universityId, universityId) ||
-                other.universityId == universityId));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, universityId);
-
-  @override
-  String toString() {
-    return 'College(id: $id, name: $name, universityId: $universityId)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$CollegeCopyWith<$Res> implements $CollegeCopyWith<$Res> {
-  factory _$CollegeCopyWith(_College value, $Res Function(_College) _then) =
-      __$CollegeCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String id, String name, String? universityId});
-}
-
-/// @nodoc
-class __$CollegeCopyWithImpl<$Res> implements _$CollegeCopyWith<$Res> {
-  __$CollegeCopyWithImpl(this._self, this._then);
-
-  final _College _self;
-  final $Res Function(_College) _then;
-
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? universityId = freezed,
-  }) {
-    return _then(_College(
+    return _then(College(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable

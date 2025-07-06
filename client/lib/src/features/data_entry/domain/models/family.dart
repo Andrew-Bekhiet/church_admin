@@ -7,36 +7,58 @@ part 'family.freezed.dart';
 part 'family.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Family extends ViewableWithIDAndImage
+@JsonSerializable()
+@Queryable(classLabel: 'العائلات', allowExtension: true)
+class Family extends ViewableWithIDAndImage
     with _$Family
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$FamilyFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  final Address? address;
+  @override
+  final String? notes;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
+  @override
+  final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
+  @override
+  @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
+  @QueryableField(
+      manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'child')
+  final List<Family>? children;
+  @override
+  @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
+  @QueryableField(
+      manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'parent')
+  final List<Family>? parents;
+  @override
+  final LastRecordedByInfo? lastEdit;
 
-  static final QueryableType<Family> queryableType = QueryableType<Family>(
-    name: 'Family',
-    label: 'العائلات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Family.fromJson,
-  );
-
-  factory Family({
-    required String id,
-    required String name,
-    Address? address,
-    String? notes,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
-    List<Family>? children,
-    @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
-    List<Family>? parents,
-    LastRecordedByInfo? lastEdit,
-  }) = _Family;
-  Family._() : super();
+  const Family({
+    required this.id,
+    required this.name,
+    this.address,
+    this.notes,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.children,
+    this.parents,
+    this.lastEdit,
+  });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
+
+  @override
+  Json toJson() => _$FamilyToJson(this);
 
   Point? get geolocation => address?.geolocation;
 
@@ -45,7 +67,7 @@ abstract class Family extends ViewableWithIDAndImage
       FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
-  String get typeName => Family.queryableType.name;
+  String get typeName => AdvancedQueriesMetadata().family.name;
 
   Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
         name: name,
@@ -64,6 +86,50 @@ abstract class Family extends ViewableWithIDAndImage
         notes: notes != oldFamily.notes ? notes : null,
         color: color != oldFamily.color ? colorToInt(color) : null,
       );
+}
+
+class FamilyFields extends _FamilyFields {
+  FamilyFields();
+
+  @override
+  FieldMetadata<Point> get geolocation =>
+      address.redirectTo(AddressFields().geolocation, isExpandable: false);
+
+  FieldMetadata<Area> get area =>
+      address.redirectTo(AddressFields().area, isExpandable: false);
+
+  FieldMetadata<Street> get street =>
+      address.redirectTo(AddressFields().street, isExpandable: false);
+
+  FieldMetadata<District> get district =>
+      address.redirectTo(AddressFields().district, isExpandable: false);
+
+  @override
+  FieldMetadata<Family> get children =>
+      childrenRel.redirectTo(FamiliesFamiliesFields().child,
+          label: childrenRel.label, isExpandable: false);
+  @override
+  FieldMetadata<Family> get parents =>
+      parentsRel.redirectTo(FamiliesFamiliesFields().parent,
+          label: parentsRel.label, isExpandable: false);
+
+  @override
+  List<FieldMetadata<Object>> get allFields => [
+        ...super.allFields,
+        area,
+        street,
+        district,
+      ];
+
+  @override
+  Map<String, FieldMetadata<Object>> get allFieldsByName {
+    return {
+      ...super.allFieldsByName,
+      area.name: area,
+      street.name: street,
+      district.name: district,
+    };
+  }
 }
 
 List<Family>? familyChildrenFromJson(List? data) =>

@@ -3,20 +3,18 @@ import 'package:church_admin/src/core/services/database/gql_definintions/helpers
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
-class ServicesDAO
-    extends FullCRUDDAO<Service, Input_ServicesBoolExp, Input_ServicesOrderBy> {
+class ServicesDAO extends FullCRUDDAO<Service> {
   ServicesDAO({required super.db}) : super(fromJson: Service.fromJson);
 
   @override
-  late final StreamAllConfig<Service, Input_ServicesBoolExp,
-      Input_ServicesOrderBy> baseStreamAllConfig = StreamAllConfig(
+  late final StreamAllConfig<Service> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllServices,
     transformRequest: _streamAllVarsConstructor,
   );
 
   @override
-  late final StreamCountConfig<Service, Input_ServicesBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Service> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchServicesCount,
   );
   @override
@@ -45,10 +43,7 @@ class ServicesDAO
   );
 
   Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<
-            Service,
-            StreamableDAOParameters<Service, Input_ServicesBoolExp,
-                Input_ServicesOrderBy>?>
+    PaginatableStreamRequest<Service, StreamableDAOParameters<Service>?>
         request,
   ) {
     final search = request.param?.search;
@@ -112,7 +107,7 @@ class ServicesDAO
         newService: Input_ServicesInsertInput.fromJson(
           computeObjectDelta(
             newObject.toJson(),
-            Service(id: '', name: '').toJson(),
+            const Service(id: '', name: '').toJson(),
             ignoreFields: {
               'id',
               'studyYearFrom',

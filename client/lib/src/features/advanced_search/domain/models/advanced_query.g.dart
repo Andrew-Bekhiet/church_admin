@@ -6,12 +6,12 @@ part of 'advanced_query.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AdvancedQuery _$AdvancedQueryFromJson(Map json) => _AdvancedQuery(
-      name: json['name'] as String,
+AdvancedQuery _$AdvancedQueryFromJson(Map json) => AdvancedQuery(
       queryableType: queryableTypeFromJson(json['queryableType'] as String),
-      conditions: json['conditions'] == null
+      name: json['name'] as String?,
+      filters: json['filters'] == null
           ? const []
-          : conditionsFromJson(json['conditions'] as List),
+          : conditionsFromJson(json['filters'] as List),
       logicalOperator: $enumDecodeNullable(
               _$LogicalOperatorEnumMap, json['logicalOperator']) ??
           LogicalOperator.and,
@@ -21,18 +21,18 @@ _AdvancedQuery _$AdvancedQueryFromJson(Map json) => _AdvancedQuery(
       limit: (json['limit'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$AdvancedQueryToJson(_AdvancedQuery instance) =>
+Map<String, dynamic> _$AdvancedQueryToJson(AdvancedQuery instance) =>
     <String, dynamic>{
       'name': instance.name,
       'queryableType': queryableTypeToJson(instance.queryableType),
-      'conditions': conditionsToJson(instance.conditions),
+      'filters': conditionsToJson(instance.filters),
       'logicalOperator': _$LogicalOperatorEnumMap[instance.logicalOperator]!,
       'orderBy': orderBysToJson(instance.orderBy),
       'limit': instance.limit,
     };
 
 const _$LogicalOperatorEnumMap = {
-  LogicalOperator.and: 'and',
   LogicalOperator.or: 'or',
+  LogicalOperator.and: 'and',
   LogicalOperator.not: 'not',
 };

@@ -8,28 +8,30 @@ part 'hobby.freezed.dart';
 part 'hobby.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Hobby extends ViewableWithID
-    with _$Hobby
-    implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$HobbyFields;
+@JsonSerializable()
+@Queryable(classLabel: 'الهوايات')
+class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
 
-  static final QueryableType<Hobby> queryableType = QueryableType<Hobby>(
-    name: 'Hobby',
-    label: 'الهوايات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Hobby.fromJson,
-  );
-
-  factory Hobby({
-    required String id,
-    required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-  }) = _Hobby;
-  Hobby._();
+  const Hobby({
+    required this.id,
+    required this.name,
+    this.color,
+  });
 
   factory Hobby.fromJson(Map<String, Object?> json) => _$HobbyFromJson(json);
 
   @override
-  String get typeName => Hobby.queryableType.name;
+  Json toJson() => _$HobbyToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().hobby.name;
 }

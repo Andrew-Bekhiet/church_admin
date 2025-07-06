@@ -4,22 +4,21 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
-    on DAOBase<T> {
-  late final StreamableDAOProxy<T, TBoolExp, TOrderByExp> streamingProxy =
-      StreamableDAOProxy<T, TBoolExp, TOrderByExp>(db: db, fromJson: fromJson);
+mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
+  late final StreamableDAOProxy<T> streamingProxy =
+      StreamableDAOProxy<T>(db: db, fromJson: fromJson);
 
-  StreamAllConfig<T, TBoolExp, TOrderByExp> get baseStreamAllConfig;
+  StreamAllConfig<T> get baseStreamAllConfig;
 
-  StreamCountConfig<T, TBoolExp>? get baseStreamCountConfig => null;
+  StreamCountConfig<T>? get baseStreamCountConfig => null;
 
   @protected
   StreamSingleByIdConfig<T> get baseStreamSingleByIdConfig;
 
   PaginatableStreamBase<T> streamAll({
     Stream<String?>? searchQuery,
-    Stream<List<TBoolExp>>? where,
-    Stream<List<TOrderByExp>>? orderBy,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
@@ -40,8 +39,7 @@ mixin StreamableDAO<T extends ViewableWithID, TBoolExp, TOrderByExp>
   }
 }
 
-class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
-    extends DAOBase<T> {
+class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
   StreamableDAOProxy({
     required super.db,
     required super.fromJson,
@@ -55,18 +53,17 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
       UserSettingsService.I.getSecondLineFor<T>();
 
   PaginatableStreamBase<T> streamAll({
-    required StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
-    StreamCountConfig<T, TBoolExp>? streamCountConfig,
+    required StreamAllConfig<T> streamAllConfig,
+    StreamCountConfig<T>? streamCountConfig,
     Stream<String?>? searchQuery,
-    Stream<List<TBoolExp>>? where,
-    Stream<List<TOrderByExp>>? orderBy,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
   }) {
     final shareableParametersStream = Rx.combineLatest3(
       searchQuery ?? Stream.value(null),
       where ?? Stream.value(null),
       orderBy ?? Stream.value(null),
-      (search, where, orderBy) =>
-          StreamableDAOParameters<T, TBoolExp, TOrderByExp>(
+      (search, where, orderBy) => StreamableDAOParameters<T>(
         search: search,
         where: where,
         orderBy: orderBy,
@@ -100,12 +97,8 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
                   operationName: streamCountConfig.effectiveOperationName,
                   variables: streamCountConfig.variables ??
                       {
-                        'where': where
-                                ?.map(
-                                  (o) => (o as dynamic).toJson() as Json,
-                                )
-                                .toList() ??
-                            [],
+                        'where':
+                            where?.map((o) => o.queryToJson()).toList() ?? [],
                       },
                   parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
                 ),
@@ -114,11 +107,9 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
   }
 
   Stream<PaginatableStreamResponse<T>> _streamAllFactory(
-    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    StreamAllConfig<T> streamAllConfig,
     Stream<int?> countStream,
-    PaginatableStreamRequest<T,
-            StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
-        request,
+    PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
   ) {
     return Rx.combineLatest2(
       graphQLClient.subscribeAndReturnParsed(
@@ -144,10 +135,8 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
   }
 
   Json _getEffectiveStreamAllVars(
-    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
-    PaginatableStreamRequest<T,
-            StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
-        request,
+    StreamAllConfig<T> streamAllConfig,
+    PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
   ) {
     return streamAllConfig.variables ??
         streamAllConfig.transformRequest?.call(request) ??
@@ -155,7 +144,7 @@ class StreamableDAOProxy<T extends ViewableWithID, TBoolExp, TOrderByExp>
   }
 
   dynamic _getDocumentWithSecondLine(
-    StreamAllConfig<T, TBoolExp, TOrderByExp> streamAllConfig,
+    StreamAllConfig<T> streamAllConfig,
   ) {
     final configDocument = streamAllConfig.document;
 

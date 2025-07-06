@@ -7,35 +7,57 @@ part 'address.freezed.dart';
 part 'address.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['id', 'countryIsoCode'])
-abstract class Address with _$Address {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$AddressFields;
+@JsonSerializable()
+@Queryable(classLabel: 'العنوان', ignoreFields: ['id', 'countryIsoCode'])
+class Address with _$Address {
+  @override
+  final String? id;
+  @override
+  final String countryIsoCode;
+  @override
+  final District? district;
+  @override
+  final Area? area;
+  @override
+  final Street? street;
+  @override
+  final String? substreetName;
+  @override
+  @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
+  final Point? geolocation;
+  @override
+  final int? storeyNumber;
+  @override
+  final int? houseNumber;
+  @override
+  final int? apartmentNumber;
+  @override
+  final String? specialLandmark;
+  @override
+  final Family? family;
+  @override
+  final Store? store;
 
-  static final QueryableType<Address> queryableType = QueryableType<Address>(
-    name: 'Address',
-    label: 'العنوان',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Address.fromJson,
-  );
-  factory Address({
-    String? id,
-    @Default('EG') String countryIsoCode,
-    District? district,
-    Area? area,
-    Street? street,
-    String? substreetName,
-    @JsonKey(fromJson: pointFromJson, toJson: pointToJson) Point? geolocation,
-    int? storeyNumber,
-    int? houseNumber,
-    int? apartmentNumber,
-    String? specialLandmark,
-    Family? family,
-    Store? store,
-  }) = _Address;
-  Address._() : super();
+  const Address({
+    this.id,
+    this.countryIsoCode = 'EG',
+    this.district,
+    this.area,
+    this.street,
+    this.substreetName,
+    this.geolocation,
+    this.storeyNumber,
+    this.houseNumber,
+    this.apartmentNumber,
+    this.specialLandmark,
+    this.family,
+    this.store,
+  });
 
   factory Address.fromJson(Map<String, Object?> json) =>
       _$AddressFromJson(json);
+
+  Json toJson() => _$AddressToJson(this);
 
   factory Address.fromNominatimResponse(Map<String, Object?> data) {
     final addressData = data['address']! as Map<String, Object?>;

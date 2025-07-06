@@ -27,9 +27,6 @@ mixin _$NotificationSetting {
       _$NotificationSettingCopyWithImpl<NotificationSetting>(
           this as NotificationSetting, _$identity);
 
-  /// Serializes this NotificationSetting to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -77,106 +74,7 @@ class _$NotificationSettingCopyWithImpl<$Res>
     Object? minutes = null,
     Object? intervalInDays = null,
   }) {
-    return _then(_self.copyWith(
-      hours: null == hours
-          ? _self.hours
-          : hours // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _self.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      intervalInDays: null == intervalInDays
-          ? _self.intervalInDays
-          : intervalInDays // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _NotificationSetting implements NotificationSetting {
-  const _NotificationSetting(
-      {required this.hours,
-      required this.minutes,
-      required this.intervalInDays});
-  factory _NotificationSetting.fromJson(Map<String, dynamic> json) =>
-      _$NotificationSettingFromJson(json);
-
-  @override
-  final int hours;
-  @override
-  final int minutes;
-  @override
-  final int intervalInDays;
-
-  /// Create a copy of NotificationSetting
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$NotificationSettingCopyWith<_NotificationSetting> get copyWith =>
-      __$NotificationSettingCopyWithImpl<_NotificationSetting>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$NotificationSettingToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _NotificationSetting &&
-            (identical(other.hours, hours) || other.hours == hours) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
-            (identical(other.intervalInDays, intervalInDays) ||
-                other.intervalInDays == intervalInDays));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, hours, minutes, intervalInDays);
-
-  @override
-  String toString() {
-    return 'NotificationSetting(hours: $hours, minutes: $minutes, intervalInDays: $intervalInDays)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$NotificationSettingCopyWith<$Res>
-    implements $NotificationSettingCopyWith<$Res> {
-  factory _$NotificationSettingCopyWith(_NotificationSetting value,
-          $Res Function(_NotificationSetting) _then) =
-      __$NotificationSettingCopyWithImpl;
-  @override
-  @useResult
-  $Res call({int hours, int minutes, int intervalInDays});
-}
-
-/// @nodoc
-class __$NotificationSettingCopyWithImpl<$Res>
-    implements _$NotificationSettingCopyWith<$Res> {
-  __$NotificationSettingCopyWithImpl(this._self, this._then);
-
-  final _NotificationSetting _self;
-  final $Res Function(_NotificationSetting) _then;
-
-  /// Create a copy of NotificationSetting
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? hours = null,
-    Object? minutes = null,
-    Object? intervalInDays = null,
-  }) {
-    return _then(_NotificationSetting(
+    return _then(NotificationSetting(
       hours: null == hours
           ? _self.hours
           : hours // ignore: cast_nullable_to_non_nullable

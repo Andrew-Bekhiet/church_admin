@@ -7,48 +7,90 @@ part 'service.freezed.dart';
 part 'service.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Service extends ViewableWithIDAndImage
+@JsonSerializable()
+@Queryable(classLabel: 'الخدمات', allowExtension: true)
+class Service extends ViewableWithIDAndImage
     with _$Service
     implements SerializableExtra, AttendanceAnalyzable {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$ServiceFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  final StudyYear? studyYearFrom;
+  @override
+  final StudyYear? studyYearTo;
+  @override
+  final int? studyYearFromId;
+  @override
+  final int? studyYearToId;
+  @override
+  final Service? nextService;
+  @override
+  final String? nextServiceId;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
+  @override
+  final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
+  @override
+  final List<Class>? classes;
+  @override
+  final List<Group>? groups;
+  @override
+  final LastRecordedByInfo? lastEdit;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  @QueryableField(manyToManyRelType: AdminOnData)
+  final List<User>? adminUsers;
+  @override
+  final HistoryAggregateData? attendanceHistoryAggregate;
+  @override
+  final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
-  static final QueryableType<Service> queryableType = QueryableType<Service>(
-    name: 'Service',
-    label: 'الخدمات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Service.fromJson,
-  );
-
-  factory Service({
-    required String id,
-    required String name,
-    StudyYear? studyYearFrom,
-    StudyYear? studyYearTo,
-    int? studyYearFromId,
-    int? studyYearToId,
-    Service? nextService,
-    String? nextServiceId,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    List<Class>? classes,
-    List<Group>? groups,
-    LastRecordedByInfo? lastEdit,
-    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-    List<User>? adminUsers,
-    HistoryAggregateData? attendanceHistoryAggregate,
-    HistoryAggregateData? attendanceDaysConstraintsAggregate,
-  }) = _Service;
-  Service._() : super();
+  const Service({
+    required this.id,
+    required this.name,
+    this.studyYearFrom,
+    this.studyYearTo,
+    this.studyYearFromId,
+    this.studyYearToId,
+    this.nextService,
+    this.nextServiceId,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.classes,
+    this.groups,
+    this.lastEdit,
+    this.adminUsers,
+    this.attendanceHistoryAggregate,
+    this.attendanceDaysConstraintsAggregate,
+  });
 
   factory Service.fromJson(Map<String, Object?> json) =>
       _$ServiceFromJson(json);
+
+  @override
+  Json toJson() => _$ServiceToJson(this);
 
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
-  String get typeName => Service.queryableType.name;
+  String get typeName => AdvancedQueriesMetadata().service.name;
+}
+
+class ServiceFields extends _ServiceFields {
+  ServiceFields();
+
+  @override
+  FieldMetadata<User> get adminUsers =>
+      adminUsersRel.redirectTo(AdminOnDataFields().user,
+          label: adminUsersRel.label, isExpandable: false);
 }

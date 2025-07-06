@@ -85,15 +85,16 @@ void main() {
           );
 
           test(
-            'showMeetingNotification',
+            'showAttendanceNotification',
             () async {
               await _testNotificationMethod(
                 channelName: 'إشعارات حضور الاجتماع',
                 channelDescription: 'إشعارات حضور الاجتماع',
                 title: 'إنذار حضور الاجتماع',
-                channelId: 'Meeting',
-                callback: NotificationsServiceCallbacks.showMeetingNotification,
-                type: LocalNotificationType.meeting,
+                channelId: 'Attendance',
+                callback:
+                    NotificationsServiceCallbacks.showAttendanceNotification,
+                type: LocalNotificationType.attendance,
               );
             },
           );
@@ -256,7 +257,6 @@ Override _setUpMockAuthBloc() {
         email: 'email',
         emailVerified: true,
         idToken: 'idToken',
-        claims: {},
       ),
     ),
   );

@@ -6,27 +6,26 @@ part 'job.freezed.dart';
 part 'job.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Job extends ViewableWithID
-    with _$Job
-    implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$JobFields;
+@JsonSerializable()
+@Queryable(classLabel: 'الوظائف')
+class Job extends ViewableWithID with _$Job implements SerializableExtra {
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
 
-  static final QueryableType<Job> queryableType = QueryableType<Job>(
-    name: 'Job',
-    label: 'الوظائف',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Job.fromJson,
-  );
-
-  factory Job({
-    required String id,
-    required String name,
-  }) = _Job;
-  Job._();
+  const Job({
+    required this.id,
+    required this.name,
+  });
 
   factory Job.fromJson(Map<String, Object?> json) => _$JobFromJson(json);
 
   @override
-  String get typeName => Job.queryableType.name;
+  Json toJson() => _$JobToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().job.name;
 }

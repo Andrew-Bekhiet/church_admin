@@ -3,74 +3,166 @@
 part of 'class.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$ClassFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Class>(
+class _ClassFields {
+  _ClassFields();
+
+  final FieldMetadata<Class> id = FieldMetadata<Class>(
+    parentType: Class,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Class,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Class,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Class,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'service': FieldMetadata<Service>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Service> service = FieldMetadata<Service>(
+    parentType: Class,
     name: 'service',
     label: 'الخدمة',
-  ),
-  'studyYear': FieldMetadata<StudyYear>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
+    parentType: Class,
     name: 'studyYear',
     label: 'السنة الدراسية',
-  ),
-  'serviceStudyYear': FieldMetadata<int>(
-    name: 'serviceStudyYear',
-    label: 'ترتيب السنة الدراسية',
-    operators: Operator.comparitive,
-  ),
-  'serviceGender': FieldMetadata<bool>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+    parentType: Class,
     name: 'serviceGender',
-    label: 'النوع',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    label: 'نوع المخدومين المسؤول عنهم',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Class,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'adminUsers': FieldMetadata<User>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    parentType: Class,
     name: 'adminUsers',
-    label: 'الخدام المسؤلين',
+    label: 'adminUsers',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+  );
+
+  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
+    AdminOnDataFields().user,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Class,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
-  ),
-  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Class,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',
-  ),
-};
+    isCodeOnly: true,
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    color,
+    photoUpdatedAt,
+    service,
+    studyYear,
+    serviceGender,
+    lastEdit,
+    adminUsers,
+    attendanceHistoryAggregate,
+    attendanceDaysConstraintsAggregate
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'service': service,
+    'studyYear': studyYear,
+    'serviceGender': serviceGender,
+    'lastEdit': lastEdit,
+    'adminUsers': adminUsers,
+    'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Class _$ClassFromJson(Map json) => _Class(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Class _$ClassFromJson(Map json) => Class(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
@@ -102,7 +194,7 @@ _Class _$ClassFromJson(Map json) => _Class(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$ClassToJson(_Class instance) => <String, dynamic>{
+Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

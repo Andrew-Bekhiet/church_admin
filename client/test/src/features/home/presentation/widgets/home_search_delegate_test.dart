@@ -40,7 +40,7 @@ void main() {
       final mockHomeDAO = MockHomeDAO();
 
       when(mockHomeDAO.searchAll(any)).thenAnswer(
-        (_) async => HomeSearchResults(
+        (_) async => const HomeSearchResults(
           areas: [
             Area(id: '1', name: 'Test Area 1'),
             Area(id: '2', name: 'Test Area 2'),

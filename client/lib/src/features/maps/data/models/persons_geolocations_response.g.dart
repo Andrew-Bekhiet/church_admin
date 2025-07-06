@@ -6,8 +6,8 @@ part of 'persons_geolocations_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_PersonsGeolocationsResponse _$PersonsGeolocationsResponseFromJson(Map json) =>
-    _PersonsGeolocationsResponse(
+PersonsGeolocationsResponse _$PersonsGeolocationsResponseFromJson(Map json) =>
+    PersonsGeolocationsResponse(
       areas: (json['areas'] as List<dynamic>?)
               ?.map((e) => Area.fromJson(Map<String, Object?>.from(e as Map)))
               .toSet() ??
@@ -31,7 +31,7 @@ _PersonsGeolocationsResponse _$PersonsGeolocationsResponseFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$PersonsGeolocationsResponseToJson(
-        _PersonsGeolocationsResponse instance) =>
+        PersonsGeolocationsResponse instance) =>
     <String, dynamic>{
       'areas': instance.areas.map((e) => e.toJson()).toList(),
       'streets': instance.streets.map((e) => e.toJson()).toList(),

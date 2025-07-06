@@ -3,63 +3,158 @@
 part of 'family.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$FamilyFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Family>(
+class _FamilyFields {
+  _FamilyFields();
+
+  final FieldMetadata<Family> id = FieldMetadata<Family>(
+    parentType: Family,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Family,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'address': FieldMetadata<Address>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Address> address = FieldMetadata<Address>(
+    parentType: Family,
     name: 'address',
     label: 'العنوان',
-  ),
-  'notes': FieldMetadata<String>(
+    isCodeOnly: false,
+  );
+
+  final FieldMetadata<String> notes = FieldMetadata<String>(
+    parentType: Family,
     name: 'notes',
     label: 'ملاحظات',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Family,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Family,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'children': FieldMetadata<Family>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<FamiliesFamilies> childrenRel =
+      FieldMetadata<FamiliesFamilies>(
+    parentType: Family,
     name: 'children',
-    label: 'العائلات الأبناء',
+    label: 'children',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'parents': FieldMetadata<Family>(
+  );
+
+  late final FieldMetadata<Family> children = childrenRel.redirectTo(
+    FamiliesFamiliesFields().child,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<FamiliesFamilies> parentsRel =
+      FieldMetadata<FamiliesFamilies>(
+    parentType: Family,
     name: 'parents',
-    label: 'العائلات الأباء',
+    label: 'parents',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+  );
+
+  late final FieldMetadata<Family> parents = parentsRel.redirectTo(
+    FamiliesFamiliesFields().parent,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Family,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    parentType: Family,
+    name: 'geolocation',
+    label: 'الموقع',
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    address,
+    notes,
+    color,
+    photoUpdatedAt,
+    children,
+    parents,
+    lastEdit,
+    geolocation
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'address': address,
+    'notes': notes,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'children': children,
+    'parents': parents,
+    'lastEdit': lastEdit,
+    'geolocation': geolocation
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Family _$FamilyFromJson(Map json) => _Family(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Family _$FamilyFromJson(Map json) => Family(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       address: json['address'] == null
           ? null
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -77,7 +172,7 @@ _Family _$FamilyFromJson(Map json) => _Family(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
     );
 
-Map<String, dynamic> _$FamilyToJson(_Family instance) => <String, dynamic>{
+Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),

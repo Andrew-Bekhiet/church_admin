@@ -1,0 +1,77 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'families_families.dart';
+
+// **************************************************************************
+// QueryableFieldsGenerator
+// **************************************************************************
+
+class FamiliesFamiliesFields {
+  static final FamiliesFamiliesFields _instance = FamiliesFamiliesFields._();
+  factory FamiliesFamiliesFields() => _instance;
+  FamiliesFamiliesFields._();
+
+  final FieldMetadata<Family> parent = FieldMetadata<Family>(
+    parentType: FamiliesFamilies,
+    name: 'parent',
+    label: 'parent',
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<Family> child = FieldMetadata<Family>(
+    parentType: FamiliesFamilies,
+    name: 'child',
+    label: 'child',
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> parentFamilyId = FieldMetadata<String>(
+    parentType: FamiliesFamilies,
+    name: 'parentFamilyId',
+    label: 'parentFamilyId',
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<String> childFamilyId = FieldMetadata<String>(
+    parentType: FamiliesFamilies,
+    name: 'childFamilyId',
+    label: 'childFamilyId',
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    parent,
+    child,
+    parentFamilyId,
+    childFamilyId
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'parent': parent,
+    'child': child,
+    'parentFamilyId': parentFamilyId,
+    'childFamilyId': childFamilyId
+  };
+}
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+FamiliesFamilies _$FamiliesFamiliesFromJson(Map json) => FamiliesFamilies(
+      parent: Family.fromJson(Map<String, Object?>.from(json['parent'] as Map)),
+      child: Family.fromJson(Map<String, Object?>.from(json['child'] as Map)),
+      parentFamilyId: json['parentFamilyId'] as String,
+      childFamilyId: json['childFamilyId'] as String,
+    );
+
+Map<String, dynamic> _$FamiliesFamiliesToJson(FamiliesFamilies instance) =>
+    <String, dynamic>{
+      'parent': instance.parent.toJson(),
+      'child': instance.child.toJson(),
+      'parentFamilyId': instance.parentFamilyId,
+      'childFamilyId': instance.childFamilyId,
+    };

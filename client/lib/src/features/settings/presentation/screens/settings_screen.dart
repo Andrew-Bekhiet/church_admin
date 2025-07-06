@@ -13,14 +13,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   static final List<QueryableType> _secondLineTypes = [
-    Area.queryableType,
-    Street.queryableType,
-    Family.queryableType,
-    Store.queryableType,
-    Service.queryableType,
-    Class.queryableType,
-    Group.queryableType,
-    Person.queryableType,
+    AdvancedQueriesMetadata().area,
+    AdvancedQueriesMetadata().street,
+    AdvancedQueriesMetadata().family,
+    AdvancedQueriesMetadata().store,
+    AdvancedQueriesMetadata().service,
+    AdvancedQueriesMetadata().$class,
+    AdvancedQueriesMetadata().group,
+    AdvancedQueriesMetadata().person,
   ];
 
   final _formKey = GlobalKey<FormState>();
@@ -102,9 +102,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           items: [
                             const DropdownMenuItem(child: Text('')),
-                            ...qtype.fieldsMetadata.values
+                            ...qtype.fieldsMetadata
                                 .where(
                                   (element) =>
+                                      !element.isCodeOnly &&
                                       element.name != 'id' &&
                                       element.name != 'name' &&
                                       element.name != 'color',

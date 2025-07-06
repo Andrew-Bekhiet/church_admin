@@ -4,20 +4,36 @@ part 'auth_user.freezed.dart';
 part 'auth_user.g.dart';
 
 @Freezed(toStringOverride: false)
-abstract class AuthUser with _$AuthUser {
-  const factory AuthUser({
-    required String uid,
-    required String email,
-    required bool emailVerified,
-    required String idToken,
-    @JsonKey(defaultValue: {}) required Map<String, dynamic> claims,
-    @Default(false) bool isMultiFactorEnabled,
-  }) = _AuthUser;
-  const AuthUser._();
+@JsonSerializable()
+class AuthUser with _$AuthUser {
+  @override
+  final String uid;
+  @override
+  final String email;
+  @override
+  final bool emailVerified;
+  @override
+  final String idToken;
+  @override
+  final Map<String, dynamic> claims;
+  @override
+  final bool isMultiFactorEnabled;
+
+  const AuthUser({
+    required this.uid,
+    required this.email,
+    required this.emailVerified,
+    required this.idToken,
+    this.claims = const {},
+    this.isMultiFactorEnabled = false,
+  });
 
   factory AuthUser.fromJson(Map<String, dynamic> json) =>
       _$AuthUserFromJson(json);
 
+  Map<String, dynamic> toJson() => _$AuthUserToJson(this);
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Map<String, dynamic> get filteredClaims => _filterClaims(claims);
 
   Map<String, dynamic> _filterClaims(Map<String, dynamic> claims) {

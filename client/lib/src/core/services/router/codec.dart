@@ -10,7 +10,8 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'EditClassExtra': EditClassExtra.fromJson,
   'EditGroupExtra': EditGroupExtra.fromJson,
   'AdvancedQuery': AdvancedQuery.fromJson,
-  ...AdvancedQueriesMetadata.queryableTypes
+  ...AdvancedQueriesMetadata()
+      .allQueryablesByType
       .map((k, v) => MapEntry(v.name, v.fromJson)),
 };
 

@@ -638,7 +638,7 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
         ].groupListsBy(
           (o) =>
               (o is Class ? o.service : (o as Group).service) ??
-              Service(id: 'id', name: 'جار التحميل'),
+              const Service(id: 'id', name: 'جار التحميل'),
         ),
         future: DatabaseService.I.persons
             .personServicesClassesGroups(personId: widget.person.id)

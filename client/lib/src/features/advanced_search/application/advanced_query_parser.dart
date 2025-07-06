@@ -1,16 +1,14 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
-import 'package:rxdart/rxdart.dart';
 
 class AdvancedQueryParser {
   const AdvancedQueryParser();
 
   PaginatableStreamBase<ViewableWithID> createPaginatableStream(
     AdvancedQuery query, [
-    BehaviorSubject<String?>? searchStream,
+    Stream<String?>? searchStream,
   ]) {
-    final List<Json> jsonConditions =
-        query.conditions.map((e) => e.toSearchJson()).toList();
+    final Json jsonFilter = query.serializeFilter();
 
     final List<Json> jsonOrderBy = query.orderBy.isEmpty
         ? [
@@ -28,8 +26,7 @@ class AdvancedQueryParser {
     final newStreamAllConfig = _overrideStreamAllVars(
       config: streamAllConfig,
       document: docWithSelectedOrderBy,
-      logicalOperator: query.logicalOperator,
-      jsonConditions: jsonConditions,
+      jsonConditions: jsonFilter,
       jsonOrderBy: jsonOrderBy,
       limit: query.limit,
     );
@@ -37,8 +34,7 @@ class AdvancedQueryParser {
     final newStreamCountConfig = streamableDAO.baseStreamCountConfig != null
         ? _overrideStreamCountVars(
             config: streamableDAO.baseStreamCountConfig!,
-            jsonConditions: jsonConditions,
-            logicalOperator: query.logicalOperator,
+            jsonConditions: jsonFilter,
           )
         : null;
 
@@ -73,12 +69,10 @@ class AdvancedQueryParser {
     });
   }
 
-  StreamAllConfig<T, dynamic, dynamic>
-      _overrideStreamAllVars<T extends ViewableWithID>({
-    required LogicalOperator logicalOperator,
-    required StreamAllConfig<T, dynamic, dynamic> config,
+  StreamAllConfig<T> _overrideStreamAllVars<T extends ViewableWithID>({
+    required StreamAllConfig<T> config,
     required DocumentNode document,
-    required List<Json> jsonConditions,
+    required Json jsonConditions,
     required List<Json> jsonOrderBy,
     int? limit,
   }) {
@@ -87,9 +81,7 @@ class AdvancedQueryParser {
       varsConstructor: (request) => {
         ...DatabaseService.I.varsTransformer.transformrequestForPagination(
           request,
-          overrideWhere: [
-            {logicalOperator.value: jsonConditions},
-          ],
+          overrideWhere: [jsonConditions],
           overrideOrderBy: jsonOrderBy,
         ),
         if (limit != null) 'limit': limit,
@@ -97,17 +89,13 @@ class AdvancedQueryParser {
     );
   }
 
-  StreamCountConfig<T, dynamic>?
-      _overrideStreamCountVars<T extends ViewableWithID>({
-    required StreamCountConfig<T, dynamic> config,
-    required List<Json> jsonConditions,
-    required LogicalOperator logicalOperator,
+  StreamCountConfig<T>? _overrideStreamCountVars<T extends ViewableWithID>({
+    required StreamCountConfig<T> config,
+    required Json jsonConditions,
   }) {
     return config.copyWith(
       variables: {
-        'where': [
-          {logicalOperator.value: jsonConditions},
-        ],
+        'where': [jsonConditions],
       },
     );
   }

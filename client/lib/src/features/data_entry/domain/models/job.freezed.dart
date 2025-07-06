@@ -25,9 +25,6 @@ mixin _$Job {
   $JobCopyWith<Job> get copyWith =>
       _$JobCopyWithImpl<Job>(this as Job, _$identity);
 
-  /// Serializes this Job to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -69,89 +66,7 @@ class _$JobCopyWithImpl<$Res> implements $JobCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _Job extends Job {
-  _Job({required this.id, required this.name}) : super._();
-  factory _Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-
-  /// Create a copy of Job
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$JobCopyWith<_Job> get copyWith =>
-      __$JobCopyWithImpl<_Job>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$JobToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Job &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name);
-
-  @override
-  String toString() {
-    return 'Job(id: $id, name: $name)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$JobCopyWith<$Res> implements $JobCopyWith<$Res> {
-  factory _$JobCopyWith(_Job value, $Res Function(_Job) _then) =
-      __$JobCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class __$JobCopyWithImpl<$Res> implements _$JobCopyWith<$Res> {
-  __$JobCopyWithImpl(this._self, this._then);
-
-  final _Job _self;
-  final $Res Function(_Job) _then;
-
-  /// Create a copy of Job
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_Job(
+    return _then(Job(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable

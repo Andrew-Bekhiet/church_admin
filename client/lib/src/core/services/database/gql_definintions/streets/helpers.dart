@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
 class StreetInsertHelper {
@@ -16,7 +15,7 @@ class StreetInsertHelper {
     Street? oldStreet,
   }) : _streetDelta = computeObjectDelta(
           newStreet.toJson(),
-          (oldStreet ?? Street(id: '', name: '')).toJson(),
+          (oldStreet ?? const Street(id: '', name: '')).toJson(),
           ignoreFields: _mutationNonExistentVars,
         );
 

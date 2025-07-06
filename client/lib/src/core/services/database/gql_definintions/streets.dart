@@ -4,19 +4,18 @@ import 'package:church_admin/src/core/services/database/gql_definintions/streets
 export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';
 
-class StreetsDAO
-    extends FullCRUDDAO<Street, Input_StreetsBoolExp, Input_StreetsOrderBy> {
+class StreetsDAO extends FullCRUDDAO<Street> {
   StreetsDAO({required super.db}) : super(fromJson: Street.fromJson);
 
   @override
-  late final StreamAllConfig<Street, Input_StreetsBoolExp, Input_StreetsOrderBy>
-      baseStreamAllConfig = const StreamAllConfig(
+  late final StreamAllConfig<Street> baseStreamAllConfig =
+      const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStreets,
   );
 
   @override
-  late final StreamCountConfig<Street, Input_StreetsBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Street> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchStreetsCount,
   );
 

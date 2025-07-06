@@ -18,10 +18,10 @@ class _ViewAreaState extends State<ViewArea> {
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.streets.streamAll(
         where: Stream.value([
-          Input_StreetsBoolExp(
-            areas: Input_AreasStreetsBoolExp(
-              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
-            ),
+          Filter(
+            StreetFields().areas.redirectTo(AreaFields().id),
+            PrimitiveOperator.eq,
+            widget.areaId,
           ),
         ]),
       ),
@@ -32,10 +32,10 @@ class _ViewAreaState extends State<ViewArea> {
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
         where: Stream.value([
-          Input_FamiliesBoolExp(
-            address: Input_AddressesBoolExp(
-              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
-            ),
+          Filter(
+            FamilyFields().area.redirectTo(AreaFields().id),
+            PrimitiveOperator.eq,
+            widget.areaId,
           ),
         ]),
       ),
@@ -46,10 +46,10 @@ class _ViewAreaState extends State<ViewArea> {
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
         where: Stream.value([
-          Input_StoresBoolExp(
-            address: Input_AddressesBoolExp(
-              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
-            ),
+          Filter(
+            StoreFields().area.redirectTo(AreaFields().id),
+            PrimitiveOperator.eq,
+            widget.areaId,
           ),
         ]),
       ),
@@ -60,10 +60,10 @@ class _ViewAreaState extends State<ViewArea> {
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
         where: Stream.value([
-          Input_PersonsBoolExp(
-            address: Input_AddressesBoolExp(
-              areaId: Input_UuidComparisonExp($_eq: widget.areaId.toUuid()),
-            ),
+          Filter(
+            PersonFields().area.redirectTo(AreaFields().id),
+            PrimitiveOperator.eq,
+            widget.areaId,
           ),
         ]),
       ),

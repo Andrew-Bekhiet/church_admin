@@ -233,8 +233,8 @@ class _FakeValueStream_19<T> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamAllConfig_20<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamAllConfig<T, TBoolExp, TOrderByExp> {
+class _FakeStreamAllConfig_20<T> extends _i1.SmartFake
+    implements _i2.StreamAllConfig<T> {
   _FakeStreamAllConfig_20(
     Object parent,
     Invocation parentInvocation,
@@ -244,8 +244,8 @@ class _FakeStreamAllConfig_20<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamCountConfig_21<T, TBoolExp> extends _i1.SmartFake
-    implements _i2.StreamCountConfig<T, TBoolExp> {
+class _FakeStreamCountConfig_21<T> extends _i1.SmartFake
+    implements _i2.StreamCountConfig<T> {
   _FakeStreamCountConfig_21(
     Object parent,
     Invocation parentInvocation,
@@ -287,9 +287,8 @@ class _FakeUser_24 extends _i1.SmartFake implements _i2.User {
         );
 }
 
-class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
-        TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
+class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID>
+    extends _i1.SmartFake implements _i2.StreamableDAOProxy<T> {
   _FakeStreamableDAOProxy_25(
     Object parent,
     Invocation parentInvocation,
@@ -1195,39 +1194,31 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
-  _i2.StreamAllConfig<_i2.User, _i2.Input_AuthUsersDataBoolExp,
-          _i2.Input_AuthUsersDataOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_20<_i2.User,
-                _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_20<_i2.User,
-                _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i2.StreamAllConfig<_i2.User, _i2.Input_AuthUsersDataBoolExp,
-              _i2.Input_AuthUsersDataOrderBy>);
+  _i2.StreamAllConfig<_i2.User> get baseStreamAllConfig => (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_20<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_20<_i2.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i2.StreamAllConfig<_i2.User>);
 
   @override
-  _i2.StreamCountConfig<_i2.User,
-      _i2.Input_AuthUsersDataBoolExp> get baseStreamCountConfig => (super
-          .noSuchMethod(
+  _i2.StreamCountConfig<_i2.User> get baseStreamCountConfig =>
+      (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
-        returnValue:
-            _FakeStreamCountConfig_21<_i2.User, _i2.Input_AuthUsersDataBoolExp>(
+        returnValue: _FakeStreamCountConfig_21<_i2.User>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-        returnValueForMissingStub:
-            _FakeStreamCountConfig_21<_i2.User, _i2.Input_AuthUsersDataBoolExp>(
+        returnValueForMissingStub: _FakeStreamCountConfig_21<_i2.User>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i2.StreamCountConfig<_i2.User, _i2.Input_AuthUsersDataBoolExp>);
+      ) as _i2.StreamCountConfig<_i2.User>);
 
   @override
   _i2.StreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
@@ -1283,22 +1274,17 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       ) as _i2.DBGraphQLClient);
 
   @override
-  _i2.StreamableDAOProxy<_i2.User,
-          _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_25<_i2.User,
-                _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.User,
-                _i2.Input_AuthUsersDataBoolExp, _i2.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i2.StreamableDAOProxy<_i2.User, _i2.Input_AuthUsersDataBoolExp,
-              _i2.Input_AuthUsersDataOrderBy>);
+  _i2.StreamableDAOProxy<_i2.User> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_25<_i2.User>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.User>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i2.StreamableDAOProxy<_i2.User>);
 
   @override
   _i4.Stream<_i2.User?> streamSingleById({
@@ -1349,8 +1335,8 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i4.Stream<String?>? searchQuery,
-    _i4.Stream<List<_i2.Input_AuthUsersDataBoolExp>>? where,
-    _i4.Stream<List<_i2.Input_AuthUsersDataOrderBy>>? orderBy,
+    _i4.Stream<List<_i2.Filter<Object>>>? where,
+    _i4.Stream<List<_i2.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

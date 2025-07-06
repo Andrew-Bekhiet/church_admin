@@ -5,26 +5,15 @@ import 'package:rxdart/rxdart.dart';
 class AdvancedSearchController {
   final BehaviorSubject<AdvancedQuery> _query = BehaviorSubject.seeded(
     AdvancedQuery(
-      name: '',
-      queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-      conditions: [
-        Condition(
-          queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-          field: 'name',
-          operator: Operator.ilike,
-          value: '%%',
-        ),
+      queryableType: AdvancedQueriesMetadata().person,
+      filters: [
+        Filter(PersonFields().name, StringOperator.contains, ''),
       ],
       orderBy: [
-        OrderBy(fieldName: 'name'),
+        OrderBy(field: PersonFields().name),
       ],
     ),
   );
-
-  final BehaviorSubject<bool> _hideAdvancedOperators =
-      BehaviorSubject.seeded(true);
-
-  Stream<bool> get hideAdvancedOperatorsStream => _hideAdvancedOperators.stream;
 
   Stream<AdvancedQuery> get queryStream => _query.stream;
 
@@ -34,15 +23,13 @@ class AdvancedSearchController {
   Stream<LogicalOperator> get logicalOperatorStream =>
       _query.map((q) => q.logicalOperator).distinct();
 
-  Stream<List<Condition>> get conditionsStream =>
-      _query.map((q) => q.conditions).distinct();
+  Stream<List<Filter>> get filtersStream =>
+      _query.map((q) => q.filters).distinct();
 
   Stream<int?> get limitStream => _query.map((q) => q.limit).distinct();
 
   Stream<List<OrderBy>> get orderByStream =>
       _query.map((q) => q.orderBy).distinct();
-
-  bool get hideAdvancedOperators => _hideAdvancedOperators.value;
 
   AdvancedQuery get query => _query.value;
 
@@ -50,76 +37,75 @@ class AdvancedSearchController {
 
   LogicalOperator get logicalOperator => _query.value.logicalOperator;
 
-  List<Condition> get conditions => _query.value.conditions;
+  List<Filter> get filters => _query.value.filters;
 
   int? get limit => _query.value.limit;
 
   List<OrderBy> get orderBy => _query.value.orderBy;
 
-  void toggleHideAdvancedOperators() =>
-      _hideAdvancedOperators.add(!_hideAdvancedOperators.value);
-
   void changeQuery(AdvancedQuery value) => _query.add(value);
 
   void changeSelectedQueryableType(QueryableType queryableType) {
-    final defaultField =
-        queryableType.fieldsMetadata.keys.firstWhere((p) => p != 'id');
+    final defaultField = queryableType.fieldsMetadata.firstWhere(
+      (p) => !p.name.endsWith('id') && p.operators.isNotEmpty,
+      orElse: () => queryableType.fieldsMetadata.first,
+    );
 
     _query.add(
       AdvancedQuery(
         name: query.name,
         queryableType: queryableType,
-        conditions: [
-          Condition(
-            queryableType: queryableType,
-            field: defaultField,
-            operator: Operator.eq,
+        filters: [
+          Filter(
+            defaultField,
+            defaultField.operators.first,
+            '',
           ),
         ],
         orderBy: [
-          OrderBy(fieldName: defaultField),
+          OrderBy(field: defaultField),
         ],
       ),
     );
   }
 
-  void changeConditions(List<Condition> newConditions) {
-    for (final condition in newConditions) {
-      _checkConditionType(condition);
+  void changeFilters(List<Filter> newFilters) {
+    for (final filter in newFilters) {
+      _checkFilterType(filter);
     }
 
-    _query.add(query.copyWith(conditions: newConditions));
+    _query.add(query.copyWith(filters: newFilters));
   }
 
-  void addCondition(Condition newCondition) {
-    _checkConditionType(newCondition);
+  void addFilter(Filter newFilter) {
+    _checkFilterType(newFilter);
 
-    changeConditions([...conditions, newCondition]);
+    changeFilters([...filters, newFilter]);
   }
 
-  void replaceCondition(int index, Condition newCondition) {
-    _checkConditionType(newCondition);
+  void replaceFilter(int index, Filter newFilter) {
+    _checkFilterType(newFilter);
 
-    changeConditions(
-      conditions
+    changeFilters(
+      filters
           .mapIndexed(
-            (i, e) => i == index ? newCondition : e,
+            (i, e) => i == index ? newFilter : e,
           )
           .toList(),
     );
   }
 
-  void _checkConditionType(Condition condition) {
-    if (condition.queryableType != selectedQueryableType) {
+  void _checkFilterType(Filter filter) {
+    if (filter.field.parentQueryableType != selectedQueryableType) {
       throw ArgumentError(
-        'Expected all conditions to be of type ${selectedQueryableType.type}, '
-        'but got ${condition.queryableType.type}',
+        'Expected all filters to be of type ${selectedQueryableType.type}, '
+        'but got ${filter.field.parentQueryableType.type}',
       );
     }
   }
 
-  void removeConditionAt(int index) {
-    changeConditions(conditions.whereIndexed((i, e) => i != index).toList());
+  void removeFilterAt(int index) {
+    changeFilters(filters.whereIndexed((i, e) => i != index).toList());
   }
 
   void changeLimit(int? limit) => _query.add(query.copyWith(limit: limit));

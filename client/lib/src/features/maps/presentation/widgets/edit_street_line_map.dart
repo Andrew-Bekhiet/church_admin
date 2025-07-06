@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 
-
 class EditStreetLineMap extends StatelessWidget {
   final Street initialStreet;
   final GeomapOptions geomapOptions;
@@ -20,7 +19,7 @@ class EditStreetLineMap extends StatelessWidget {
       overrideResponseObjects: (response, resultStreetStream) {
         return resultStreetStream.map(
           (resultStreetValue) =>
-              (response ?? PersonsGeolocationsResponse()).copyWith(
+              (response ?? const PersonsGeolocationsResponse()).copyWith(
             streets: {
               ...response?.streets.where((s) => s.id != resultStreetValue.id) ??
                   {},

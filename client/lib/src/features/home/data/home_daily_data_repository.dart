@@ -33,17 +33,55 @@ class HomeDailyDataRepository {
   final List<String> _versesData;
   final List<String> _sayingData;
 
+  final AdvancedQueryParser _advancedQueryParser;
+
   const HomeDailyDataRepository({
     required List<List<String>> sneksarData,
     required List<String> sayingData,
     required SyncKVStore<Map> currentIndexes,
     required List<String> versesData,
+    required AdvancedQueryParser advancedQueryParser,
     Clock? clock,
   })  : _sneksarData = sneksarData,
         _versesData = versesData,
         _sayingData = sayingData,
         _currentIndexes = currentIndexes,
-        _clock = clock ?? const Clock();
+        _clock = clock ?? const Clock(),
+        _advancedQueryParser = advancedQueryParser;
+
+  Future<List<String>> getTodaysBirthdaysData() async {
+    final birthdaysQuery = getTodaysBirthdaysQuery();
+
+    if (birthdaysQuery == null) {
+      return [];
+    }
+
+    final persons = await _advancedQueryParser
+        .createPaginatableStream(birthdaysQuery)
+        .first;
+
+    return persons.map((p) => p.name).toList();
+  }
+
+  AdvancedQuery? getTodaysBirthdaysQuery() {
+    final now = DateTime.now();
+
+    return AdvancedQuery(
+      name: 'أعياد الميلاد',
+      queryableType: AdvancedQueriesMetadata().person,
+      filters: [
+        Filter(
+          PersonFields().birthday,
+          BirthdayOperator.equals,
+          '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
+        ),
+      ],
+      orderBy: [
+        OrderBy(field: PersonFields().birthdate),
+        OrderBy(field: PersonFields().name),
+      ],
+    );
+  }
 
   String getVerse({bool forceRefresh = false}) {
     return _versesData[

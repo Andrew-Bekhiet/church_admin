@@ -105,7 +105,9 @@ class HomeSearchDelegate extends SearchDelegate {
                         vertical: 10,
                       ),
                       child: Text(
-                        AdvancedQueriesMetadata.queryableTypes[type]!.label,
+                        AdvancedQueriesMetadata()
+                            .allQueryablesByType[type]!
+                            .label,
                         style: Theme.of(context).textTheme.headlineSmall,
                         textAlign: TextAlign.start,
                       ),

@@ -18,6 +18,7 @@ export 'models/person.dart';
 export 'models/person_state.dart';
 export 'models/person_type.dart';
 export 'models/qualification.dart';
+export 'models/relationships.dart';
 export 'models/school.dart';
 export 'models/service.dart';
 export 'models/shammas_level.dart';

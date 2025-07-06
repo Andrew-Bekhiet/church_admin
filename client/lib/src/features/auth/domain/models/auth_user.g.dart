@@ -6,7 +6,7 @@ part of 'auth_user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AuthUser _$AuthUserFromJson(Map json) => _AuthUser(
+AuthUser _$AuthUserFromJson(Map json) => AuthUser(
       uid: json['uid'] as String,
       email: json['email'] as String,
       emailVerified: json['emailVerified'] as bool,
@@ -14,11 +14,11 @@ _AuthUser _$AuthUserFromJson(Map json) => _AuthUser(
       claims: (json['claims'] as Map?)?.map(
             (k, e) => MapEntry(k as String, e),
           ) ??
-          {},
+          const {},
       isMultiFactorEnabled: json['isMultiFactorEnabled'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$AuthUserToJson(_AuthUser instance) => <String, dynamic>{
+Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
       'uid': instance.uid,
       'email': instance.email,
       'emailVerified': instance.emailVerified,

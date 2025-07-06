@@ -6,32 +6,52 @@ part 'study_year.freezed.dart';
 part 'study_year.g.dart';
 
 @freezed
-@TypeMetadata(addFields: {'id': String})
-abstract class StudyYear extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'السنوات الدراسية', allowExtension: true)
+class StudyYear extends ViewableWithID
     with _$StudyYear
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$StudyYearFields;
-
-  static final QueryableType<StudyYear> queryableType =
-      QueryableType<StudyYear>(
-    name: 'StudyYear',
-    label: 'السنوات الدراسية',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: StudyYear.fromJson,
-  );
-
-  factory StudyYear({
-    required int order,
-    required String name,
-  }) = _StudyYear;
-  StudyYear._() : super();
+  @override
+  @JsonKey(defaultValue: 0)
+  final int order;
 
   @override
-  String get id => order.toString();
+  @JsonKey(defaultValue: '')
+  final String name;
+
+  StudyYear({required this.order, required this.name});
 
   factory StudyYear.fromJson(Map<String, Object?> json) =>
       _$StudyYearFromJson(json);
 
   @override
-  String get typeName => StudyYear.queryableType.name;
+  String get id => order.toString();
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().studyYear.name;
+
+  @override
+  Json toJson() => _$StudyYearToJson(this);
+}
+
+class StudyYearFields extends _StudyYearFields {
+  StudyYearFields();
+
+  @override
+  FieldMetadata<StudyYear> get id => const FieldMetadata<StudyYear>(
+        parentType: StudyYear,
+        name: 'id',
+        label: '=',
+      );
+
+  @override
+  List<FieldMetadata<Object>> get allFields => [id, ...super.allFields];
+
+  @override
+  Map<String, FieldMetadata<Object>> get allFieldsByName {
+    return {
+      id.name: id,
+      ...super.allFieldsByName,
+    };
+  }
 }

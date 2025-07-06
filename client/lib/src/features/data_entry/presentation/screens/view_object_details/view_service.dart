@@ -23,9 +23,10 @@ class _ViewServiceState extends State<ViewService> {
       objectsPaginatableStream: DatabaseService.I.classes.streamAll(
         where: Stream.value(
           [
-            Input_ClassesBoolExp(
-              serviceId:
-                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+            Filter(
+              ClassFields().service.redirectTo(ServiceFields().id),
+              PrimitiveOperator.eq,
+              widget.serviceId,
             ),
           ],
         ),
@@ -38,9 +39,10 @@ class _ViewServiceState extends State<ViewService> {
       objectsPaginatableStream: DatabaseService.I.groups.streamAll(
         where: Stream.value(
           [
-            Input_GroupsBoolExp(
-              serviceId:
-                  Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
+            Filter(
+              GroupFields().service.redirectTo(ServiceFields().id),
+              PrimitiveOperator.eq,
+              widget.serviceId,
             ),
           ],
         ),
@@ -53,11 +55,12 @@ class _ViewServiceState extends State<ViewService> {
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
         where: Stream.value(
           [
-            Input_PersonsBoolExp(
-              services: Input_PersonsServicesBoolExp(
-                serviceId:
-                    Input_UuidComparisonExp($_eq: widget.serviceId.toUuid()),
-              ),
+            Filter(
+              PersonFields()
+                  .servicesRel
+                  .redirectTo(PersonsServicesFields().serviceId),
+              PrimitiveOperator.eq,
+              widget.serviceId,
             ),
           ],
         ),

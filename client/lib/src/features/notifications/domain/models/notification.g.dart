@@ -6,7 +6,7 @@ part of 'notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Notification _$NotificationFromJson(Map json) => _Notification(
+Notification _$NotificationFromJson(Map json) => Notification(
       id: json['id'] as String,
       title: json['title'] as String,
       body: json['body'] as String,
@@ -20,7 +20,7 @@ _Notification _$NotificationFromJson(Map json) => _Notification(
       ),
     );
 
-Map<String, dynamic> _$NotificationToJson(_Notification instance) =>
+Map<String, dynamic> _$NotificationToJson(Notification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

@@ -406,6 +406,7 @@ final currentPlatformServiceProvider = Provider<CurrentPlatformService>(
 
 final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
   (ref) => HomeDailyDataRepository(
+    advancedQueryParser: ref.watch(databaseServiceProvider).advancedQueryParser,
     currentIndexes: SyncKVStore.fromLoaded<Map>('HomeDailyDataIndexes'),
     versesData: kVersesData,
     // Chunks the sneksar data into a list of list of 30 strings or less
@@ -432,8 +433,6 @@ final homeBlocProvider = Provider<HomeBloc>(
       pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
-      advancedQueryParser:
-          ref.watch(databaseServiceProvider).advancedQueryParser,
     );
     ref.onDispose(homeBloc.close);
 

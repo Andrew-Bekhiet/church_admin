@@ -6,29 +6,29 @@ part 'qualification.freezed.dart';
 part 'qualification.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Qualification extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'المؤهلات')
+class Qualification extends ViewableWithID
     with _$Qualification
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$QualificationFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
 
-  static final QueryableType<Qualification> queryableType =
-      QueryableType<Qualification>(
-    name: 'Qualification',
-    label: 'المؤهلات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Qualification.fromJson,
-  );
-
-  factory Qualification({
-    required String id,
-    required String name,
-  }) = _Qualification;
-  Qualification._();
+  const Qualification({
+    required this.id,
+    required this.name,
+  });
 
   factory Qualification.fromJson(Map<String, Object?> json) =>
       _$QualificationFromJson(json);
 
   @override
-  String get typeName => Qualification.queryableType.name;
+  Json toJson() => _$QualificationToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().qualification.name;
 }

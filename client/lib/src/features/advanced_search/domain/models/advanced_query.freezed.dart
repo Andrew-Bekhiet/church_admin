@@ -15,13 +15,10 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AdvancedQuery {
-  String get name;
-  @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
+  String? get name;
   QueryableType get queryableType;
-  @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-  List<Condition> get conditions;
+  List<Filter> get filters;
   LogicalOperator get logicalOperator;
-  @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
   List<OrderBy> get orderBy;
   int? get limit;
 
@@ -33,9 +30,6 @@ mixin _$AdvancedQuery {
       _$AdvancedQueryCopyWithImpl<AdvancedQuery>(
           this as AdvancedQuery, _$identity);
 
-  /// Serializes this AdvancedQuery to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -44,8 +38,7 @@ mixin _$AdvancedQuery {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.queryableType, queryableType) ||
                 other.queryableType == queryableType) &&
-            const DeepCollectionEquality()
-                .equals(other.conditions, conditions) &&
+            const DeepCollectionEquality().equals(other.filters, filters) &&
             (identical(other.logicalOperator, logicalOperator) ||
                 other.logicalOperator == logicalOperator) &&
             const DeepCollectionEquality().equals(other.orderBy, orderBy) &&
@@ -58,14 +51,14 @@ mixin _$AdvancedQuery {
       runtimeType,
       name,
       queryableType,
-      const DeepCollectionEquality().hash(conditions),
+      const DeepCollectionEquality().hash(filters),
       logicalOperator,
       const DeepCollectionEquality().hash(orderBy),
       limit);
 
   @override
   String toString() {
-    return 'AdvancedQuery(name: $name, queryableType: $queryableType, conditions: $conditions, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
+    return 'AdvancedQuery(name: $name, queryableType: $queryableType, filters: $filters, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
   }
 }
 
@@ -76,13 +69,12 @@ abstract mixin class $AdvancedQueryCopyWith<$Res> {
       _$AdvancedQueryCopyWithImpl;
   @useResult
   $Res call(
-      {String name,
-      @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType queryableType,
-      @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-      List<Condition> conditions,
-      LogicalOperator logicalOperator,
-      @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
+      {QueryableType<Object> queryableType,
+      String? name,
+      List<Filter<Object>> filters,
+      LogicalOperator<FieldMetadata<Object>, Operator<dynamic>, Object,
+              Filter<Object>>
+          logicalOperator,
       List<OrderBy> orderBy,
       int? limit});
 }
@@ -100,197 +92,33 @@ class _$AdvancedQueryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? queryableType = null,
-    Object? conditions = null,
+    Object? name = freezed,
+    Object? filters = null,
     Object? logicalOperator = null,
     Object? orderBy = null,
     Object? limit = freezed,
   }) {
-    return _then(_self.copyWith(
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(AdvancedQuery(
       queryableType: null == queryableType
           ? _self.queryableType
           : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType,
-      conditions: null == conditions
-          ? _self.conditions
-          : conditions // ignore: cast_nullable_to_non_nullable
-              as List<Condition>,
+              as QueryableType<Object>,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filters: null == filters
+          ? _self.filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<Filter<Object>>,
       logicalOperator: null == logicalOperator
           ? _self.logicalOperator
           : logicalOperator // ignore: cast_nullable_to_non_nullable
-              as LogicalOperator,
+              as LogicalOperator<FieldMetadata<Object>, Operator<dynamic>,
+                  Object, Filter<Object>>,
       orderBy: null == orderBy
           ? _self.orderBy
-          : orderBy // ignore: cast_nullable_to_non_nullable
-              as List<OrderBy>,
-      limit: freezed == limit
-          ? _self.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _AdvancedQuery extends AdvancedQuery {
-  const _AdvancedQuery(
-      {required this.name,
-      @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      required this.queryableType,
-      @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-      final List<Condition> conditions = const [],
-      this.logicalOperator = LogicalOperator.and,
-      @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-      final List<OrderBy> orderBy = const [],
-      this.limit})
-      : _conditions = conditions,
-        _orderBy = orderBy,
-        super._();
-  factory _AdvancedQuery.fromJson(Map<String, dynamic> json) =>
-      _$AdvancedQueryFromJson(json);
-
-  @override
-  final String name;
-  @override
-  @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-  final QueryableType queryableType;
-  final List<Condition> _conditions;
-  @override
-  @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-  List<Condition> get conditions {
-    if (_conditions is EqualUnmodifiableListView) return _conditions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_conditions);
-  }
-
-  @override
-  @JsonKey()
-  final LogicalOperator logicalOperator;
-  final List<OrderBy> _orderBy;
-  @override
-  @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-  List<OrderBy> get orderBy {
-    if (_orderBy is EqualUnmodifiableListView) return _orderBy;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orderBy);
-  }
-
-  @override
-  final int? limit;
-
-  /// Create a copy of AdvancedQuery
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$AdvancedQueryCopyWith<_AdvancedQuery> get copyWith =>
-      __$AdvancedQueryCopyWithImpl<_AdvancedQuery>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$AdvancedQueryToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _AdvancedQuery &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.queryableType, queryableType) ||
-                other.queryableType == queryableType) &&
-            const DeepCollectionEquality()
-                .equals(other._conditions, _conditions) &&
-            (identical(other.logicalOperator, logicalOperator) ||
-                other.logicalOperator == logicalOperator) &&
-            const DeepCollectionEquality().equals(other._orderBy, _orderBy) &&
-            (identical(other.limit, limit) || other.limit == limit));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      queryableType,
-      const DeepCollectionEquality().hash(_conditions),
-      logicalOperator,
-      const DeepCollectionEquality().hash(_orderBy),
-      limit);
-
-  @override
-  String toString() {
-    return 'AdvancedQuery(name: $name, queryableType: $queryableType, conditions: $conditions, logicalOperator: $logicalOperator, orderBy: $orderBy, limit: $limit)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$AdvancedQueryCopyWith<$Res>
-    implements $AdvancedQueryCopyWith<$Res> {
-  factory _$AdvancedQueryCopyWith(
-          _AdvancedQuery value, $Res Function(_AdvancedQuery) _then) =
-      __$AdvancedQueryCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String name,
-      @JsonKey(fromJson: queryableTypeFromJson, toJson: queryableTypeToJson)
-      QueryableType queryableType,
-      @JsonKey(fromJson: conditionsFromJson, toJson: conditionsToJson)
-      List<Condition> conditions,
-      LogicalOperator logicalOperator,
-      @JsonKey(fromJson: orderBysFromJson, toJson: orderBysToJson)
-      List<OrderBy> orderBy,
-      int? limit});
-}
-
-/// @nodoc
-class __$AdvancedQueryCopyWithImpl<$Res>
-    implements _$AdvancedQueryCopyWith<$Res> {
-  __$AdvancedQueryCopyWithImpl(this._self, this._then);
-
-  final _AdvancedQuery _self;
-  final $Res Function(_AdvancedQuery) _then;
-
-  /// Create a copy of AdvancedQuery
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? name = null,
-    Object? queryableType = null,
-    Object? conditions = null,
-    Object? logicalOperator = null,
-    Object? orderBy = null,
-    Object? limit = freezed,
-  }) {
-    return _then(_AdvancedQuery(
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      queryableType: null == queryableType
-          ? _self.queryableType
-          : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType,
-      conditions: null == conditions
-          ? _self._conditions
-          : conditions // ignore: cast_nullable_to_non_nullable
-              as List<Condition>,
-      logicalOperator: null == logicalOperator
-          ? _self.logicalOperator
-          : logicalOperator // ignore: cast_nullable_to_non_nullable
-              as LogicalOperator,
-      orderBy: null == orderBy
-          ? _self._orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as List<OrderBy>,
       limit: freezed == limit

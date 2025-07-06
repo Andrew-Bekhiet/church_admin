@@ -12,27 +12,21 @@ void main() {
           addTearDown(unit.dispose);
 
           final expectedQuery = AdvancedQuery(
-            name: '',
-            queryableType: Person.queryableType,
-            conditions: [
-              Condition(
-                queryableType: Person.queryableType,
-                field: 'name',
-                operator: Operator.ilike,
-                value: '%%',
-              ),
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: [
+              Filter(PersonFields().name, StringOperator.contains, ''),
             ],
             orderBy: [
-              OrderBy(fieldName: 'name'),
+              OrderBy(field: PersonFields().name),
             ],
           );
 
           expect(unit.query, expectedQuery);
 
-          expect(unit.conditions, expectedQuery.conditions);
+          expect(unit.filters, expectedQuery.filters);
           expect(
             unit.selectedQueryableType,
-            expectedQuery.conditions.first.queryableType,
+            expectedQuery.queryableType,
           );
           expect(unit.limit, expectedQuery.limit);
           expect(unit.logicalOperator, expectedQuery.logicalOperator);
@@ -43,32 +37,30 @@ void main() {
       test(
         'Streams',
         () {
-          final newConditions = [
-            Condition(
-              queryableType: Person.queryableType,
-              field: 'mainPhone',
-              operator: Operator.eq,
-              value: '01234567890',
+          final newFilters = [
+            Filter(
+              PersonFields().mainPhone,
+              StringOperator.eq,
+              '01234567890',
             ),
-            Condition(
-              queryableType: Person.queryableType,
-              field: 'address',
-              operator: Operator.ilike,
-              value: 'address',
+            Filter(
+              PersonFields().address,
+              StringOperator.contains,
+              'address',
             ),
           ];
 
           final newOrderBy = [
-            OrderBy(fieldName: 'mainPhone'),
-            OrderBy(fieldName: 'address'),
+            OrderBy(field: PersonFields().mainPhone),
+            OrderBy(field: PersonFields().address),
           ];
           const newLimit = 10;
-          final newType = Area.queryableType;
+          final newType = AdvancedQueriesMetadata().area;
 
           final newQuery = AdvancedQuery(
             name: 'new query',
-            queryableType: Person.queryableType,
-            conditions: newConditions,
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: newFilters,
             orderBy: newOrderBy,
             limit: newLimit,
             logicalOperator: LogicalOperator.or,
@@ -78,8 +70,8 @@ void main() {
           addTearDown(unit.dispose);
 
           expect(
-            unit.conditionsStream,
-            emitsInOrder([unit.conditions, newConditions]),
+            unit.filtersStream,
+            emitsInOrder([unit.filters, newFilters]),
           );
           expect(unit.orderByStream, emitsInOrder([unit.orderBy, newOrderBy]));
           expect(unit.limitStream, emitsInOrder([unit.limit, newLimit]));
@@ -92,28 +84,28 @@ void main() {
             unit.queryStream,
             emitsInOrder([
               unit.query,
-              unit.query.copyWith(conditions: newConditions),
+              unit.query.copyWith(filters: newFilters),
               unit.query.copyWith(
-                conditions: newConditions,
+                filters: newFilters,
                 orderBy: newOrderBy,
               ),
               unit.query.copyWith(
-                conditions: newConditions,
+                filters: newFilters,
                 orderBy: newOrderBy,
                 limit: newLimit,
               ),
               AdvancedQuery(
                 name: unit.query.name,
                 queryableType: newType,
-                conditions: [
-                  Condition(
-                    queryableType: newType,
-                    field: 'name',
-                    operator: Operator.eq,
+                filters: [
+                  Filter(
+                    AreaFields().name,
+                    StringOperator.contains,
+                    '',
                   ),
                 ],
                 orderBy: [
-                  OrderBy(fieldName: 'name'),
+                  OrderBy(field: AreaFields().name),
                 ],
               ),
               newQuery,
@@ -129,7 +121,7 @@ void main() {
           );
 
           unit
-            ..changeConditions(newConditions)
+            ..changeFilters(newFilters)
             ..changeOrderBy(newOrderBy)
             ..changeLimit(newLimit)
             ..changeSelectedQueryableType(newType)
@@ -138,20 +130,18 @@ void main() {
       );
 
       test(
-        'Conditions methods',
+        'Filters methods',
         () {
-          final newConditions = [
-            Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-              field: 'mainPhone',
-              operator: Operator.eq,
-              value: '01234567890',
+          final newFilters = [
+            Filter(
+              PersonFields().mainPhone,
+              StringOperator.eq,
+              '01234567890',
             ),
-            Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-              field: 'address',
-              operator: Operator.ilike,
-              value: 'address',
+            Filter(
+              PersonFields().address,
+              StringOperator.contains,
+              'address',
             ),
           ];
 
@@ -159,47 +149,39 @@ void main() {
           addTearDown(unit.dispose);
 
           expect(
-            unit.conditionsStream,
+            unit.filtersStream,
             emitsInOrder([
-              unit.conditions,
-              newConditions,
-              [...newConditions, newConditions.last],
-              [newConditions.last, newConditions.last],
-              newConditions,
+              unit.filters,
+              newFilters,
+              [...newFilters, newFilters.last],
+              [newFilters.last, newFilters.last],
+              newFilters,
             ]),
           );
 
           unit
-            ..changeConditions(newConditions)
-            ..addCondition(newConditions.last)
-            ..removeConditionAt(0)
-            ..replaceCondition(0, newConditions.first);
+            ..changeFilters(newFilters)
+            ..addFilter(newFilters.last)
+            ..removeFilterAt(0)
+            ..replaceFilter(0, newFilters.first);
 
-          expect(unit.conditions, newConditions);
+          expect(unit.filters, newFilters);
         },
       );
 
       test(
-        'Conditions type checks',
+        'Filters type checks',
         () {
-          final newConditions = [
-            Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-              field: 'mainPhone',
-              operator: Operator.eq,
-              value: '01234567890',
+          final invalidFilters = [
+            Filter(
+              AreaFields().name,
+              StringOperator.eq,
+              'test',
             ),
-            Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-              field: 'address',
-              operator: Operator.ilike,
-              value: 'address',
-            ),
-            Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-              field: 'address',
-              operator: Operator.ilike,
-              value: 'address',
+            Filter(
+              PersonFields().address,
+              StringOperator.contains,
+              'address',
             ),
           ];
 
@@ -207,15 +189,15 @@ void main() {
           addTearDown(unit.dispose);
 
           expect(
-            () => unit.changeConditions(newConditions),
+            () => unit.changeFilters(invalidFilters),
             throwsArgumentError,
           );
           expect(
-            () => unit.addCondition(newConditions.last),
+            () => unit.addFilter(invalidFilters.first),
             throwsArgumentError,
           );
           expect(
-            () => unit.replaceCondition(0, newConditions.first),
+            () => unit.replaceFilter(0, invalidFilters.first),
             throwsArgumentError,
           );
         },
@@ -226,14 +208,11 @@ void main() {
         () {
           final newOrderBy = [
             OrderBy(
-              fieldName: 'mainPhone',
-              value: Enum_OrderBy.DESC,
+              field: PersonFields().mainPhone,
+              value: OrderByValue.desc,
             ),
             OrderBy(
-              fieldName: 'address',
-              // Ignored to make sure value is ASC
-              // ignore: avoid_redundant_argument_values
-              value: Enum_OrderBy.ASC,
+              field: PersonFields().address,
             ),
           ];
 

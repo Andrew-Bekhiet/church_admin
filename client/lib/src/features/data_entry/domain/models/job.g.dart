@@ -3,32 +3,47 @@
 part of 'job.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$JobFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Job>(
+class JobFields {
+  static final JobFields _instance = JobFields._();
+  factory JobFields() => _instance;
+  JobFields._();
+
+  final FieldMetadata<Job> id = FieldMetadata<Job>(
+    parentType: Job,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Job,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-};
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Job _$JobFromJson(Map json) => _Job(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Job _$JobFromJson(Map json) => Job(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
     );
 
-Map<String, dynamic> _$JobToJson(_Job instance) => <String, dynamic>{
+Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

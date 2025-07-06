@@ -8,143 +8,81 @@ void main() {
       test(
         'String',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-            field: 'name',
-            operator: Operator.eq,
-            value: 'kkmkmk',
+          final Filter<Object> unit = Filter(
+            AreaFields().name,
+            StringOperator.eq,
+            'kkmkmk',
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
 
       test(
         'int',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[StudyYear]!,
-            field: 'order',
-            operator: Operator.eq,
-            value: 4,
+          final Filter<Object> unit = Filter(
+            StudyYearFields().order,
+            PrimitiveOperator.eq,
+            4,
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
 
       test(
         'id field',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-            field: 'id',
-            operator: Operator.eq,
-            value: Area(id: 'asdasdsad', name: 'area name'),
+          final Filter<Object> unit = Filter(
+            AreaFields().id,
+            MultiSelectOperator.anyOf,
+            [const Area(id: 'asdasdsad', name: 'area name')],
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
 
       test(
-        'isNull: true',
+        'isNull',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-            field: 'photoUpdatedAt',
-            operator: Operator.isNull,
-            value: true,
+          final Filter<Object> unit = Filter(
+            AreaFields().photoUpdatedAt,
+            PrimitiveOperator.isNull,
+            null,
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
 
       test(
-        'isNull: false',
+        'isNotNull',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-            field: 'photoUpdatedAt',
-            operator: Operator.isNull,
-            value: false,
+          final Filter<Object> unit = Filter(
+            AreaFields().photoUpdatedAt,
+            PrimitiveOperator.isNotNull,
+            null,
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
 
       test(
         'Nested conditions',
         () {
-          final unit = Condition(
-            queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-            field: 'persons',
-            operator: null,
-            value: [
-              Condition(
-                queryableType: AdvancedQueriesMetadata.queryableTypes[Person]!,
-                field: 'services',
-                operator: null,
-                value: [
-                  Condition(
-                    queryableType:
-                        AdvancedQueriesMetadata.queryableTypes[Service]!,
-                    field: 'studyYearFrom',
-                    operator: Operator.eq,
-                    value: 1,
-                  ),
-                  Condition(
-                    queryableType:
-                        AdvancedQueriesMetadata.queryableTypes[Service]!,
-                    field: 'studyYearTo',
-                    operator: Operator.eq,
-                    value: 6,
-                  ),
-                ],
-              ),
-            ],
+          final Filter<Object> unit = Filter(
+            PersonFields()
+                .address
+                .redirectTo<Object>(AddressFields().street)
+                .redirectTo<Object>(StreetFields().name),
+            StringOperator.contains,
+            'name',
           );
 
-          expect(unit, Condition.fromJson(unit.toJson()));
-        },
-      );
-
-      test(
-        'Special cases serializers',
-        () {
-          for (final serializer in serializersByField.entries) {
-            if (serializer.key == 'id' || serializer.key == 'permissions') {
-              //skip these because they can't be nested
-              continue;
-            }
-
-            final unit = Condition(
-              queryableType: AdvancedQueriesMetadata.queryableTypes[Area]!,
-              field: 'persons',
-              operator: null,
-              value: [
-                Condition(
-                  queryableType:
-                      AdvancedQueriesMetadata.queryableTypes[Person]!,
-                  field: serializer.key,
-                  operator: null,
-                  value: [
-                    Condition(
-                      queryableType:
-                          AdvancedQueriesMetadata.queryableTypes[Person]!,
-                      field: 'id',
-                      operator: Operator.eq,
-                      value: 'qweqq23',
-                    ),
-                  ],
-                ),
-              ],
-            );
-
-            expect(unit, Condition.fromJson(unit.toJson()));
-          }
+          expect(unit, Filter.fromJson(unit.toJson()));
         },
       );
     },

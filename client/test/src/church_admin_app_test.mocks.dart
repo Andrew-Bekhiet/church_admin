@@ -4,23 +4,21 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
-import 'dart:ui' as _i12;
+import 'dart:ui' as _i11;
 
 import 'package:church_admin/church_admin.dart' as _i5;
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
-    as _i11;
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i6;
 import 'package:dio/dio.dart' as _i3;
 import 'package:flutter/material.dart' as _i2;
-import 'package:flutter/services.dart' as _i13;
+import 'package:flutter/services.dart' as _i12;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i8;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    as _i14;
+    as _i13;
 import 'package:graphql/client.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i10;
-import 'package:package_info_plus/package_info_plus.dart' as _i15;
+import 'package:package_info_plus/package_info_plus.dart' as _i14;
 import 'package:rxdart/rxdart.dart' as _i7;
 
 // ignore_for_file: type=lint
@@ -231,8 +229,8 @@ class _FakeHistoryDAO_18 extends _i1.SmartFake implements _i5.HistoryDAO {
         );
 }
 
-class _FakeStreamAllConfig_19<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
-    implements _i5.StreamAllConfig<T, TBoolExp, TOrderByExp> {
+class _FakeStreamAllConfig_19<T> extends _i1.SmartFake
+    implements _i5.StreamAllConfig<T> {
   _FakeStreamAllConfig_19(
     Object parent,
     Invocation parentInvocation,
@@ -242,8 +240,8 @@ class _FakeStreamAllConfig_19<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamCountConfig_20<T, TBoolExp> extends _i1.SmartFake
-    implements _i5.StreamCountConfig<T, TBoolExp> {
+class _FakeStreamCountConfig_20<T> extends _i1.SmartFake
+    implements _i5.StreamCountConfig<T> {
   _FakeStreamCountConfig_20(
     Object parent,
     Invocation parentInvocation,
@@ -285,9 +283,8 @@ class _FakeUser_23 extends _i1.SmartFake implements _i5.User {
         );
 }
 
-class _FakeStreamableDAOProxy_24<T extends _i5.ViewableWithID, TBoolExp,
-        TOrderByExp> extends _i1.SmartFake
-    implements _i5.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
+class _FakeStreamableDAOProxy_24<T extends _i5.ViewableWithID>
+    extends _i1.SmartFake implements _i5.StreamableDAOProxy<T> {
   _FakeStreamableDAOProxy_24(
     Object parent,
     Invocation parentInvocation,
@@ -1060,39 +1057,31 @@ class MockDatabaseService extends _i1.Mock implements _i5.DatabaseService {
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i5.UsersDAO {
   @override
-  _i5.StreamAllConfig<_i5.User, _i5.Input_AuthUsersDataBoolExp,
-          _i5.Input_AuthUsersDataOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_19<_i5.User,
-                _i5.Input_AuthUsersDataBoolExp, _i5.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.User,
-                _i5.Input_AuthUsersDataBoolExp, _i5.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i5.StreamAllConfig<_i5.User, _i5.Input_AuthUsersDataBoolExp,
-              _i5.Input_AuthUsersDataOrderBy>);
+  _i5.StreamAllConfig<_i5.User> get baseStreamAllConfig => (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_19<_i5.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.User>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i5.StreamAllConfig<_i5.User>);
 
   @override
-  _i5.StreamCountConfig<_i5.User,
-      _i5.Input_AuthUsersDataBoolExp> get baseStreamCountConfig => (super
-          .noSuchMethod(
+  _i5.StreamCountConfig<_i5.User> get baseStreamCountConfig =>
+      (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
-        returnValue:
-            _FakeStreamCountConfig_20<_i5.User, _i5.Input_AuthUsersDataBoolExp>(
+        returnValue: _FakeStreamCountConfig_20<_i5.User>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-        returnValueForMissingStub:
-            _FakeStreamCountConfig_20<_i5.User, _i5.Input_AuthUsersDataBoolExp>(
+        returnValueForMissingStub: _FakeStreamCountConfig_20<_i5.User>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i5.StreamCountConfig<_i5.User, _i5.Input_AuthUsersDataBoolExp>);
+      ) as _i5.StreamCountConfig<_i5.User>);
 
   @override
   _i5.StreamSingleByIdConfig<_i5.User> get baseStreamSingleByIdConfig =>
@@ -1148,22 +1137,17 @@ class MockUsersDAO extends _i1.Mock implements _i5.UsersDAO {
       ) as _i5.DBGraphQLClient);
 
   @override
-  _i5.StreamableDAOProxy<_i5.User,
-          _i5.Input_AuthUsersDataBoolExp, _i5.Input_AuthUsersDataOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_24<_i5.User,
-                _i5.Input_AuthUsersDataBoolExp, _i5.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.User,
-                _i5.Input_AuthUsersDataBoolExp, _i5.Input_AuthUsersDataOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i5.StreamableDAOProxy<_i5.User, _i5.Input_AuthUsersDataBoolExp,
-              _i5.Input_AuthUsersDataOrderBy>);
+  _i5.StreamableDAOProxy<_i5.User> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_24<_i5.User>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.User>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i5.StreamableDAOProxy<_i5.User>);
 
   @override
   _i9.Stream<_i5.User?> streamSingleById({
@@ -1214,8 +1198,8 @@ class MockUsersDAO extends _i1.Mock implements _i5.UsersDAO {
   @override
   _i5.PaginatableStreamBase<_i5.User> streamAll({
     _i9.Stream<String?>? searchQuery,
-    _i9.Stream<List<_i5.Input_AuthUsersDataBoolExp>>? where,
-    _i9.Stream<List<_i5.Input_AuthUsersDataOrderBy>>? orderBy,
+    _i9.Stream<List<_i5.Filter<Object>>>? where,
+    _i9.Stream<List<_i5.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1273,38 +1257,32 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
       ) as _i6.PersonsNotificationsQueries);
 
   @override
-  _i5.StreamAllConfig<_i5.Person,
-          _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_19<_i5.Person,
-                _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Person,
-                _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i5.StreamAllConfig<_i5.Person, _i5.Input_PersonsBoolExp,
-              _i5.Input_PersonsOrderBy>);
+  _i5.StreamAllConfig<_i5.Person> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_19<_i5.Person>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Person>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i5.StreamAllConfig<_i5.Person>);
 
   @override
-  _i5.StreamCountConfig<_i5.Person, _i5.Input_PersonsBoolExp>
-      get baseStreamCountConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamCountConfig),
-            returnValue:
-                _FakeStreamCountConfig_20<_i5.Person, _i5.Input_PersonsBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-            returnValueForMissingStub:
-                _FakeStreamCountConfig_20<_i5.Person, _i5.Input_PersonsBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-          ) as _i5.StreamCountConfig<_i5.Person, _i5.Input_PersonsBoolExp>);
+  _i5.StreamCountConfig<_i5.Person> get baseStreamCountConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamCountConfig),
+        returnValue: _FakeStreamCountConfig_20<_i5.Person>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamCountConfig_20<_i5.Person>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+      ) as _i5.StreamCountConfig<_i5.Person>);
 
   @override
   _i5.StreamSingleByIdConfig<_i5.Person> get baseStreamSingleByIdConfig =>
@@ -1403,22 +1381,17 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
       ) as _i5.DBGraphQLClient);
 
   @override
-  _i5.StreamableDAOProxy<_i5.Person,
-          _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_24<_i5.Person,
-                _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Person,
-                _i5.Input_PersonsBoolExp, _i5.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i5.StreamableDAOProxy<_i5.Person, _i5.Input_PersonsBoolExp,
-              _i5.Input_PersonsOrderBy>);
+  _i5.StreamableDAOProxy<_i5.Person> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_24<_i5.Person>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Person>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i5.StreamableDAOProxy<_i5.Person>);
 
   @override
   _i5.CreatableDAOProxy<_i5.Person> get createObjectProxy =>
@@ -1544,7 +1517,7 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
     required String? personId,
     required String? classId,
     bool? asAdmin = false,
-    List<_i5.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i5.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -1592,7 +1565,7 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
     required String? personId,
     required String? groupId,
     bool? asAdmin = false,
-    List<_i5.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i5.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -1640,7 +1613,7 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
     required String? personId,
     required String? serviceId,
     bool? asAdmin = false,
-    List<_i5.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i5.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -1683,47 +1656,6 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
           ) as _i5.PaginatableStreamBase<_i5.LastRecordedByInfo>);
 
   @override
-  _i5.PaginatableStreamBase<_i5.LastRecordedByInfo> paginatePersonAttendance({
-    required _i11.Variables_Subscription_personAttendance Function(
-            _i5.PaginatableStreamRequest<_i5.LastRecordedByInfo, void>)?
-        vars,
-    int? limit,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonAttendance,
-          [],
-          {
-            #vars: vars,
-            #limit: limit,
-          },
-        ),
-        returnValue: _FakePaginatableStreamBase_25<_i5.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakePaginatableStreamBase_25<_i5.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-      ) as _i5.PaginatableStreamBase<_i5.LastRecordedByInfo>);
-
-  @override
   _i9.Future<_i5.Person?> getPersonAnalysis({
     required String? personId,
     required _i5.PersonAnalysisOptions? options,
@@ -1764,8 +1696,8 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
   @override
   _i5.PaginatableStreamBase<_i5.Person> streamAll({
     _i9.Stream<String?>? searchQuery,
-    _i9.Stream<List<_i5.Input_PersonsBoolExp>>? where,
-    _i9.Stream<List<_i5.Input_PersonsOrderBy>>? orderBy,
+    _i9.Stream<List<_i5.Filter<Object>>>? where,
+    _i9.Stream<List<_i5.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1865,37 +1797,31 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
 /// See the documentation for Mockito's code generation for more information.
 class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
   @override
-  _i5.StreamAllConfig<_i5.Area, _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_19<_i5.Area,
-                _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Area,
-                _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i5.StreamAllConfig<_i5.Area, _i5.Input_AreasBoolExp,
-              _i5.Input_AreasOrderBy>);
+  _i5.StreamAllConfig<_i5.Area> get baseStreamAllConfig => (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_19<_i5.Area>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Area>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i5.StreamAllConfig<_i5.Area>);
 
   @override
-  _i5.StreamCountConfig<_i5.Area, _i5.Input_AreasBoolExp>
-      get baseStreamCountConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamCountConfig),
-            returnValue:
-                _FakeStreamCountConfig_20<_i5.Area, _i5.Input_AreasBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-            returnValueForMissingStub:
-                _FakeStreamCountConfig_20<_i5.Area, _i5.Input_AreasBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-          ) as _i5.StreamCountConfig<_i5.Area, _i5.Input_AreasBoolExp>);
+  _i5.StreamCountConfig<_i5.Area> get baseStreamCountConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamCountConfig),
+        returnValue: _FakeStreamCountConfig_20<_i5.Area>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamCountConfig_20<_i5.Area>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+      ) as _i5.StreamCountConfig<_i5.Area>);
 
   @override
   _i5.StreamSingleByIdConfig<_i5.Area> get baseStreamSingleByIdConfig =>
@@ -1993,22 +1919,17 @@ class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
       ) as _i5.DBGraphQLClient);
 
   @override
-  _i5.StreamableDAOProxy<_i5.Area,
-          _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_24<_i5.Area,
-                _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Area,
-                _i5.Input_AreasBoolExp, _i5.Input_AreasOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i5.StreamableDAOProxy<_i5.Area, _i5.Input_AreasBoolExp,
-              _i5.Input_AreasOrderBy>);
+  _i5.StreamableDAOProxy<_i5.Area> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_24<_i5.Area>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Area>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i5.StreamableDAOProxy<_i5.Area>);
 
   @override
   _i5.CreatableDAOProxy<_i5.Area> get createObjectProxy => (super.noSuchMethod(
@@ -2053,8 +1974,8 @@ class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
   @override
   _i5.PaginatableStreamBase<_i5.Area> streamAll({
     _i9.Stream<String?>? searchQuery,
-    _i9.Stream<List<_i5.Input_AreasBoolExp>>? where,
-    _i9.Stream<List<_i5.Input_AreasOrderBy>>? orderBy,
+    _i9.Stream<List<_i5.Filter<Object>>>? where,
+    _i9.Stream<List<_i5.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2166,39 +2087,32 @@ class MockAreasDAO extends _i1.Mock implements _i5.AreasDAO {
 /// See the documentation for Mockito's code generation for more information.
 class MockServicesDAO extends _i1.Mock implements _i5.ServicesDAO {
   @override
-  _i5.StreamAllConfig<_i5.Service,
-          _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_19<_i5.Service,
-                _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Service,
-                _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i5.StreamAllConfig<_i5.Service, _i5.Input_ServicesBoolExp,
-              _i5.Input_ServicesOrderBy>);
+  _i5.StreamAllConfig<_i5.Service> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_19<_i5.Service>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_19<_i5.Service>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i5.StreamAllConfig<_i5.Service>);
 
   @override
-  _i5.StreamCountConfig<_i5.Service,
-      _i5.Input_ServicesBoolExp> get baseStreamCountConfig => (super
-          .noSuchMethod(
+  _i5.StreamCountConfig<_i5.Service> get baseStreamCountConfig =>
+      (super.noSuchMethod(
         Invocation.getter(#baseStreamCountConfig),
-        returnValue:
-            _FakeStreamCountConfig_20<_i5.Service, _i5.Input_ServicesBoolExp>(
+        returnValue: _FakeStreamCountConfig_20<_i5.Service>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-        returnValueForMissingStub:
-            _FakeStreamCountConfig_20<_i5.Service, _i5.Input_ServicesBoolExp>(
+        returnValueForMissingStub: _FakeStreamCountConfig_20<_i5.Service>(
           this,
           Invocation.getter(#baseStreamCountConfig),
         ),
-      ) as _i5.StreamCountConfig<_i5.Service, _i5.Input_ServicesBoolExp>);
+      ) as _i5.StreamCountConfig<_i5.Service>);
 
   @override
   _i5.StreamSingleByIdConfig<_i5.Service> get baseStreamSingleByIdConfig =>
@@ -2298,22 +2212,17 @@ class MockServicesDAO extends _i1.Mock implements _i5.ServicesDAO {
       ) as _i5.DBGraphQLClient);
 
   @override
-  _i5.StreamableDAOProxy<_i5.Service,
-          _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_24<_i5.Service,
-                _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Service,
-                _i5.Input_ServicesBoolExp, _i5.Input_ServicesOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i5.StreamableDAOProxy<_i5.Service, _i5.Input_ServicesBoolExp,
-              _i5.Input_ServicesOrderBy>);
+  _i5.StreamableDAOProxy<_i5.Service> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_24<_i5.Service>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_24<_i5.Service>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i5.StreamableDAOProxy<_i5.Service>);
 
   @override
   _i5.CreatableDAOProxy<_i5.Service> get createObjectProxy =>
@@ -2360,8 +2269,8 @@ class MockServicesDAO extends _i1.Mock implements _i5.ServicesDAO {
   @override
   _i5.PaginatableStreamBase<_i5.Service> streamAll({
     _i9.Stream<String?>? searchQuery,
-    _i9.Stream<List<_i5.Input_ServicesBoolExp>>? where,
-    _i9.Stream<List<_i5.Input_ServicesOrderBy>>? orderBy,
+    _i9.Stream<List<_i5.Filter<Object>>>? where,
+    _i9.Stream<List<_i5.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2521,7 +2430,7 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       ) as bool);
 
   @override
-  void didChangeAppLifecycleState(_i12.AppLifecycleState? state) =>
+  void didChangeAppLifecycleState(_i11.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(
           #didChangeAppLifecycleState,
@@ -2610,7 +2519,7 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       ) as _i9.Future<bool>);
 
   @override
-  bool handleStartBackGesture(_i13.PredictiveBackEvent? backEvent) =>
+  bool handleStartBackGesture(_i12.PredictiveBackEvent? backEvent) =>
       (super.noSuchMethod(
         Invocation.method(
           #handleStartBackGesture,
@@ -2621,7 +2530,7 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       ) as bool);
 
   @override
-  void handleUpdateBackGestureProgress(_i13.PredictiveBackEvent? backEvent) =>
+  void handleUpdateBackGestureProgress(_i12.PredictiveBackEvent? backEvent) =>
       super.noSuchMethod(
         Invocation.method(
           #handleUpdateBackGestureProgress,
@@ -2698,7 +2607,7 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       );
 
   @override
-  void didChangeLocales(List<_i12.Locale>? locales) => super.noSuchMethod(
+  void didChangeLocales(List<_i11.Locale>? locales) => super.noSuchMethod(
         Invocation.method(
           #didChangeLocales,
           [locales],
@@ -2707,7 +2616,7 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       );
 
   @override
-  void didChangeViewFocus(_i12.ViewFocusEvent? event) => super.noSuchMethod(
+  void didChangeViewFocus(_i11.ViewFocusEvent? event) => super.noSuchMethod(
         Invocation.method(
           #didChangeViewFocus,
           [event],
@@ -2716,16 +2625,16 @@ class MockLocalAuthService extends _i1.Mock implements _i5.LocalAuthService {
       );
 
   @override
-  _i9.Future<_i12.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
+  _i9.Future<_i11.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
         Invocation.method(
           #didRequestAppExit,
           [],
         ),
         returnValue:
-            _i9.Future<_i12.AppExitResponse>.value(_i12.AppExitResponse.exit),
+            _i9.Future<_i11.AppExitResponse>.value(_i11.AppExitResponse.exit),
         returnValueForMissingStub:
-            _i9.Future<_i12.AppExitResponse>.value(_i12.AppExitResponse.exit),
-      ) as _i9.Future<_i12.AppExitResponse>);
+            _i9.Future<_i11.AppExitResponse>.value(_i11.AppExitResponse.exit),
+      ) as _i9.Future<_i11.AppExitResponse>);
 
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
@@ -2869,11 +2778,11 @@ class MockNotificationsService extends _i1.Mock
       ) as _i9.Future<void>);
 
   @override
-  _i9.Future<void> scheduleMeetingNotification(
+  _i9.Future<void> scheduleAttendanceNotification(
           [_i5.NotificationSetting? notificationSetting]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #scheduleMeetingNotification,
+          #scheduleAttendanceNotification,
           [notificationSetting],
         ),
         returnValue: _i9.Future<void>.value(),
@@ -2918,7 +2827,7 @@ class MockNotificationsService extends _i1.Mock
   _i9.Future<void> notify(
     _i5.Notification? notification, {
     int? id,
-    _i14.NotificationDetails? notificationDetails,
+    _i13.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3188,7 +3097,7 @@ class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
 /// A class which mocks [PackageInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPackageInfo extends _i1.Mock implements _i15.PackageInfo {
+class MockPackageInfo extends _i1.Mock implements _i14.PackageInfo {
   @override
   String get appName => (super.noSuchMethod(
         Invocation.getter(#appName),

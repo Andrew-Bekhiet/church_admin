@@ -7,41 +7,59 @@ part 'street.freezed.dart';
 part 'street.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Street extends ViewableWithIDAndImage
+@JsonSerializable()
+@Queryable(classLabel: 'الشوارع')
+class Street extends ViewableWithIDAndImage
     with _$Street
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$StreetFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
+  final Line? line;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
+  @override
+  final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
+  @override
+  @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
+  @QueryableField(manyToManyRelType: AreasStreets)
+  final List<Area>? areas;
+  @override
+  final LastRecordedByInfo? lastVisit;
+  @override
+  final LastRecordedByInfo? lastEdit;
 
-  static final QueryableType<Street> queryableType = QueryableType<Street>(
-    name: 'Street',
-    label: 'الشوارع',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Street.fromJson,
-  );
-
-  factory Street({
-    required String id,
-    required String name,
-    @JsonKey(fromJson: lineFromJson, toJson: lineToJson) Line? line,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
-    List<Area>? areas,
-    LastRecordedByInfo? lastVisit,
-    LastRecordedByInfo? lastEdit,
-  }) = _Street;
-  Street._() : super();
+  const Street({
+    required this.id,
+    required this.name,
+    this.line,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.areas,
+    this.lastVisit,
+    this.lastEdit,
+  });
 
   factory Street.fromJson(Map<String, Object?> json) => _$StreetFromJson(json);
+
+  @override
+  Json toJson() => _$StreetToJson(this);
 
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
-  String get typeName => Street.queryableType.name;
+  String get typeName => AdvancedQueriesMetadata().street.name;
 }
 
 List<Area>? streetsAreasFromJson(List? data) =>

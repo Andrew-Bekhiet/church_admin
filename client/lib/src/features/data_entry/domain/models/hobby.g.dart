@@ -3,38 +3,61 @@
 part of 'hobby.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$HobbyFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Hobby>(
+class HobbyFields {
+  static final HobbyFields _instance = HobbyFields._();
+  factory HobbyFields() => _instance;
+  HobbyFields._();
+
+  final FieldMetadata<Hobby> id = FieldMetadata<Hobby>(
+    parentType: Hobby,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Hobby,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Hobby,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name, color];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'color': color
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Hobby _$HobbyFromJson(Map json) => _Hobby(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Hobby _$HobbyFromJson(Map json) => Hobby(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       color: colorFromInt((json['color'] as num?)?.toInt()),
     );
 
-Map<String, dynamic> _$HobbyToJson(_Hobby instance) => <String, dynamic>{
+Map<String, dynamic> _$HobbyToJson(Hobby instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'color': colorToInt(instance.color),

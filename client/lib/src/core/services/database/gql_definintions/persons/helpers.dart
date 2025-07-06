@@ -116,7 +116,7 @@ class PersonUpdateHelper {
         newPerson: newPerson.toUpdateInput(oldPerson),
         addressId: oldPerson.address?.id?.toUuid() ?? Namespace.nil.uuidValue,
         newAddress: newPerson.address?.toUpdateInput(
-          oldPerson.address ?? Address(),
+          oldPerson.address ?? const Address(),
         ),
         updateAddressByPk: _updateAddressByPk,
         deleteServices: _deleteServices,

@@ -1582,15 +1582,15 @@ class MockNotificationsSettingsStorage extends _i1.Mock
       ) as _i4.NotificationSetting);
 
   @override
-  _i4.NotificationSetting get meetingTimeSetting => (super.noSuchMethod(
-        Invocation.getter(#meetingTimeSetting),
+  _i4.NotificationSetting get attendanceTimeSetting => (super.noSuchMethod(
+        Invocation.getter(#attendanceTimeSetting),
         returnValue: _FakeNotificationSetting_6(
           this,
-          Invocation.getter(#meetingTimeSetting),
+          Invocation.getter(#attendanceTimeSetting),
         ),
         returnValueForMissingStub: _FakeNotificationSetting_6(
           this,
-          Invocation.getter(#meetingTimeSetting),
+          Invocation.getter(#attendanceTimeSetting),
         ),
       ) as _i4.NotificationSetting);
 
@@ -1630,10 +1630,10 @@ class MockNotificationsSettingsStorage extends _i1.Mock
       ) as _i11.Future<void>);
 
   @override
-  _i11.Future<void> setMeetingTime(_i4.NotificationSetting? setting) =>
+  _i11.Future<void> setAttendanceTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
         Invocation.method(
-          #setMeetingTime,
+          #setAttendanceTime,
           [setting],
         ),
         returnValue: _i11.Future<void>.value(),
@@ -1724,11 +1724,11 @@ class MockNotificationsService extends _i1.Mock
       ) as _i11.Future<void>);
 
   @override
-  _i11.Future<void> scheduleMeetingNotification(
+  _i11.Future<void> scheduleAttendanceNotification(
           [_i4.NotificationSetting? notificationSetting]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #scheduleMeetingNotification,
+          #scheduleAttendanceNotification,
           [notificationSetting],
         ),
         returnValue: _i11.Future<void>.value(),

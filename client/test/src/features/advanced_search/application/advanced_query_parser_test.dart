@@ -26,32 +26,24 @@ void main() {
         'createPaginatableStream: nested conditions, orderBy',
         () async {
           final query = AdvancedQuery(
-            name: '',
-            queryableType: Person.queryableType,
-            conditions: [
-              Condition(
-                queryableType: Person.queryableType,
-                field: 'lastEdit',
-                operator: null,
-                value: [
-                  Condition(
-                    queryableType: LastRecordedByInfo.queryableType,
-                    field: 'time',
-                    operator: Operator.gt,
-                    value: DateTime.now().subtract(const Duration(days: 7)),
-                  ),
-                ],
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: [
+              Filter(
+                PersonFields()
+                    .lastEdit
+                    .redirectTo(LastRecordedByInfoFields().time),
+                DateTimeOperator.isAfter,
+                DateTime.now().subtract(const Duration(days: 7)),
               ),
             ],
             orderBy: [
               OrderBy(
-                fieldName: 'lastEdit',
-                value: OrderBy(
-                  fieldName: 'time',
-                  value: Enum_OrderBy.DESC,
-                ),
+                field: PersonFields()
+                    .lastEdit
+                    .redirectTo(LastRecordedByInfoFields().time),
+                value: OrderByValue.desc,
               ),
-              OrderBy(fieldName: 'name'),
+              OrderBy(field: PersonFields().name),
             ],
           );
 
@@ -62,9 +54,8 @@ void main() {
                   {
                     'lastEdit': {
                       'time': {
-                        '_gt': timeToString(
-                          query.conditions.first.value.first.value,
-                        ),
+                        '_gt': (query.filters.first.value! as DateTime)
+                            .toIso8601String(),
                       },
                     },
                   },
@@ -88,14 +79,12 @@ void main() {
         'createPaginatableStream: default orderBy',
         () async {
           final query = AdvancedQuery(
-            name: '',
-            queryableType: Person.queryableType,
-            conditions: [
-              Condition(
-                queryableType: Person.queryableType,
-                field: 'name',
-                operator: Operator.eq,
-                value: 'nameadasdad',
+            queryableType: AdvancedQueriesMetadata().person,
+            filters: [
+              Filter(
+                PersonFields().name,
+                StringOperator.eq,
+                'nameadasdad',
               ),
             ],
           );
@@ -125,68 +114,44 @@ void main() {
       test(
         'createPaginatableStream: nested conditions, logicalOperatos, limit',
         () async {
+          final dateValue = DateTime.now().subtract(const Duration(days: 7));
           final query = AdvancedQuery(
-            name: '',
-            queryableType: Person.queryableType,
+            queryableType: AdvancedQueriesMetadata().person,
             logicalOperator: LogicalOperator.or,
-            conditions: [
-              Condition(
-                queryableType: Person.queryableType,
-                field: '_and',
-                operator: null,
-                value: [
-                  Condition(
-                    queryableType: Person.queryableType,
-                    field: 'lastVisit',
-                    operator: null,
-                    value: [
-                      Condition(
-                        queryableType: LastRecordedByInfo.queryableType,
-                        field: 'time',
-                        operator: Operator.gt,
-                        value: DateTime.now().subtract(const Duration(days: 7)),
-                      ),
-                    ],
+            filters: [
+              Filter(
+                const DotField(),
+                LogicalOperator.and,
+                [
+                  Filter(
+                    PersonFields()
+                        .lastVisit
+                        .redirectTo(LastRecordedByInfoFields().time),
+                    DateTimeOperator.isAfter,
+                    dateValue,
                   ),
-                  Condition(
-                    queryableType: Person.queryableType,
-                    field: 'user',
-                    operator: Operator.eq,
-                    // uuid value
-                    value: 'aqefwaef',
+                  Filter(
+                    PersonFields().user,
+                    StringOperator.eq,
+                    'aqefwaef',
                   ),
                 ],
               ),
-              Condition(
-                queryableType: Person.queryableType,
-                field: 'areas',
-                operator: null,
-                value: [
-                  Condition(
-                    queryableType: Area.queryableType,
-                    field: 'persons',
-                    operator: null,
-                    value: [
-                      Condition(
-                        queryableType: LastRecordedByInfo.queryableType,
-                        field: 'name',
-                        operator: Operator.ilike,
-                        value: '%name%',
-                      ),
-                    ],
-                  ),
-                ],
+              Filter(
+                PersonFields().area.redirectTo(
+                    AreaFields().streets.redirectTo(StreetFields().name)),
+                StringOperator.contains,
+                'name',
               ),
             ],
             orderBy: [
               OrderBy(
-                fieldName: 'lastEdit',
-                value: OrderBy(
-                  fieldName: 'time',
-                  value: Enum_OrderBy.DESC,
-                ),
+                field: PersonFields()
+                    .lastEdit
+                    .redirectTo(LastRecordedByInfoFields().time),
+                value: OrderByValue.desc,
               ),
-              OrderBy(fieldName: 'name'),
+              OrderBy(field: PersonFields().name),
             ],
             limit: 12,
           );
@@ -200,10 +165,7 @@ void main() {
                       {
                         'lastVisit': {
                           'time': {
-                            '_gt': timeToString(
-                              query.conditions.first.value.first.value.first
-                                  .value,
-                            ),
+                            '_gt': dateValue.toIso8601String(),
                           },
                         },
                       },
@@ -213,9 +175,13 @@ void main() {
                     ],
                   },
                   {
-                    'areas': {
-                      'persons': {
-                        'name': {'_ilike': '%name%'},
+                    'address': {
+                      'area': {
+                        'streets': {
+                          'street': {
+                            'name': {'_ilike': '%name%'},
+                          },
+                        }
                       },
                     },
                   }
@@ -243,11 +209,9 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
   await unit.createPaginatableStream(query).dispose();
 
   final mockedStreamingProxy = (globalProviderContainer
-              .read(databaseServiceProvider)
-              .daosByType[Person]! as MockPersonsDAO)
-          .streamingProxy
-      as MockStreamableDAOProxy<Person, Input_PersonsBoolExp,
-          Input_PersonsOrderBy>;
+          .read(databaseServiceProvider)
+          .daosByType[Person]! as MockPersonsDAO)
+      .streamingProxy as MockStreamableDAOProxy<Person>;
 
   final verificationResult = verify(
     mockedStreamingProxy.streamAll(
@@ -259,8 +223,8 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
     ),
   )..called(1);
 
-  final capturedConfig = verificationResult.captured[0]
-      as StreamAllConfig<Person, Input_PersonsBoolExp, Input_PersonsOrderBy>;
+  final capturedConfig =
+      verificationResult.captured[0] as StreamAllConfig<Person>;
 
   final firstSelectionNode = capturedConfig.document.definitions
       .whereType<OperationDefinitionNode>()
@@ -332,8 +296,7 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
   when(mockPersonsDAO.baseStreamAllConfig)
       .thenReturn(realPersonsDAO.baseStreamAllConfig);
 
-  final mockStreamableDAOProxy = MockStreamableDAOProxy<Person,
-      Input_PersonsBoolExp, Input_PersonsOrderBy>();
+  final mockStreamableDAOProxy = MockStreamableDAOProxy<Person>();
   when(
     mockStreamableDAOProxy.streamAll(
       orderBy: anyNamed('orderBy'),

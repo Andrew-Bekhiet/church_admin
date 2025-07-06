@@ -1,7 +1,6 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:equatable/equatable.dart';
+part of 'spatial.dart';
 
-class Point with EquatableMixin {
+class Point with EquatableMixin implements Spatial {
   final double latitude;
   final double longitude;
 

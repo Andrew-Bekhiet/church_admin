@@ -6,12 +6,10 @@
 import 'dart:async' as _i4;
 
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart'
-    as _i5;
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -201,8 +199,8 @@ class _FakePersonsNotificationsQueries_16 extends _i1.SmartFake
         );
 }
 
-class _FakeStreamAllConfig_17<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamAllConfig<T, TBoolExp, TOrderByExp> {
+class _FakeStreamAllConfig_17<T> extends _i1.SmartFake
+    implements _i2.StreamAllConfig<T> {
   _FakeStreamAllConfig_17(
     Object parent,
     Invocation parentInvocation,
@@ -212,8 +210,8 @@ class _FakeStreamAllConfig_17<T, TBoolExp, TOrderByExp> extends _i1.SmartFake
         );
 }
 
-class _FakeStreamCountConfig_18<T, TBoolExp> extends _i1.SmartFake
-    implements _i2.StreamCountConfig<T, TBoolExp> {
+class _FakeStreamCountConfig_18<T> extends _i1.SmartFake
+    implements _i2.StreamCountConfig<T> {
   _FakeStreamCountConfig_18(
     Object parent,
     Invocation parentInvocation,
@@ -288,9 +286,8 @@ class _FakePerson_24 extends _i1.SmartFake implements _i2.Person {
         );
 }
 
-class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID, TBoolExp,
-        TOrderByExp> extends _i1.SmartFake
-    implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
+class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID>
+    extends _i1.SmartFake implements _i2.StreamableDAOProxy<T> {
   _FakeStreamableDAOProxy_25(
     Object parent,
     Invocation parentInvocation,
@@ -605,38 +602,32 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
       ) as _i3.PersonsNotificationsQueries);
 
   @override
-  _i2.StreamAllConfig<_i2.Person,
-          _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>
-      get baseStreamAllConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamAllConfig),
-            returnValue: _FakeStreamAllConfig_17<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-            returnValueForMissingStub: _FakeStreamAllConfig_17<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#baseStreamAllConfig),
-            ),
-          ) as _i2.StreamAllConfig<_i2.Person, _i2.Input_PersonsBoolExp,
-              _i2.Input_PersonsOrderBy>);
+  _i2.StreamAllConfig<_i2.Person> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamAllConfig),
+        returnValue: _FakeStreamAllConfig_17<_i2.Person>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamAllConfig_17<_i2.Person>(
+          this,
+          Invocation.getter(#baseStreamAllConfig),
+        ),
+      ) as _i2.StreamAllConfig<_i2.Person>);
 
   @override
-  _i2.StreamCountConfig<_i2.Person, _i2.Input_PersonsBoolExp>
-      get baseStreamCountConfig => (super.noSuchMethod(
-            Invocation.getter(#baseStreamCountConfig),
-            returnValue:
-                _FakeStreamCountConfig_18<_i2.Person, _i2.Input_PersonsBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-            returnValueForMissingStub:
-                _FakeStreamCountConfig_18<_i2.Person, _i2.Input_PersonsBoolExp>(
-              this,
-              Invocation.getter(#baseStreamCountConfig),
-            ),
-          ) as _i2.StreamCountConfig<_i2.Person, _i2.Input_PersonsBoolExp>);
+  _i2.StreamCountConfig<_i2.Person> get baseStreamCountConfig =>
+      (super.noSuchMethod(
+        Invocation.getter(#baseStreamCountConfig),
+        returnValue: _FakeStreamCountConfig_18<_i2.Person>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+        returnValueForMissingStub: _FakeStreamCountConfig_18<_i2.Person>(
+          this,
+          Invocation.getter(#baseStreamCountConfig),
+        ),
+      ) as _i2.StreamCountConfig<_i2.Person>);
 
   @override
   _i2.StreamSingleByIdConfig<_i2.Person> get baseStreamSingleByIdConfig =>
@@ -735,22 +726,17 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
       ) as _i2.DBGraphQLClient);
 
   @override
-  _i2.StreamableDAOProxy<_i2.Person,
-          _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>
-      get streamingProxy => (super.noSuchMethod(
-            Invocation.getter(#streamingProxy),
-            returnValue: _FakeStreamableDAOProxy_25<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.Person,
-                _i2.Input_PersonsBoolExp, _i2.Input_PersonsOrderBy>(
-              this,
-              Invocation.getter(#streamingProxy),
-            ),
-          ) as _i2.StreamableDAOProxy<_i2.Person, _i2.Input_PersonsBoolExp,
-              _i2.Input_PersonsOrderBy>);
+  _i2.StreamableDAOProxy<_i2.Person> get streamingProxy => (super.noSuchMethod(
+        Invocation.getter(#streamingProxy),
+        returnValue: _FakeStreamableDAOProxy_25<_i2.Person>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+        returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.Person>(
+          this,
+          Invocation.getter(#streamingProxy),
+        ),
+      ) as _i2.StreamableDAOProxy<_i2.Person>);
 
   @override
   _i2.CreatableDAOProxy<_i2.Person> get createObjectProxy =>
@@ -876,7 +862,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
     required String? personId,
     required String? classId,
     bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i2.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -924,7 +910,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
     required String? personId,
     required String? groupId,
     bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i2.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -972,7 +958,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
     required String? personId,
     required String? serviceId,
     bool? asAdmin = false,
-    List<_i2.Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<_i2.Filter<Object>>? where,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -1015,47 +1001,6 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
           ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
 
   @override
-  _i2.PaginatableStreamBase<_i2.LastRecordedByInfo> paginatePersonAttendance({
-    required _i5.Variables_Subscription_personAttendance Function(
-            _i2.PaginatableStreamRequest<_i2.LastRecordedByInfo, void>)?
-        vars,
-    int? limit,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #paginatePersonAttendance,
-          [],
-          {
-            #vars: vars,
-            #limit: limit,
-          },
-        ),
-        returnValue: _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakePaginatableStreamBase_29<_i2.LastRecordedByInfo>(
-          this,
-          Invocation.method(
-            #paginatePersonAttendance,
-            [],
-            {
-              #vars: vars,
-              #limit: limit,
-            },
-          ),
-        ),
-      ) as _i2.PaginatableStreamBase<_i2.LastRecordedByInfo>);
-
-  @override
   _i4.Future<_i2.Person?> getPersonAnalysis({
     required String? personId,
     required _i2.PersonAnalysisOptions? options,
@@ -1096,8 +1041,8 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
   @override
   _i2.PaginatableStreamBase<_i2.Person> streamAll({
     _i4.Stream<String?>? searchQuery,
-    _i4.Stream<List<_i2.Input_PersonsBoolExp>>? where,
-    _i4.Stream<List<_i2.Input_PersonsOrderBy>>? orderBy,
+    _i4.Stream<List<_i2.Filter<Object>>>? where,
+    _i4.Stream<List<_i2.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1195,9 +1140,8 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
 /// A class which mocks [StreamableDAOProxy].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
-        TOrderByExp> extends _i1.Mock
-    implements _i2.StreamableDAOProxy<T, TBoolExp, TOrderByExp> {
+class MockStreamableDAOProxy<T extends _i2.ViewableWithID> extends _i1.Mock
+    implements _i2.StreamableDAOProxy<T> {
   @override
   _i2.DatabaseService get db => (super.noSuchMethod(
         Invocation.getter(#db),
@@ -1214,12 +1158,12 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
   @override
   T Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
         Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _i6.dummyValue<T>(
+        returnValue: (Map<String, dynamic> json) => _i5.dummyValue<T>(
           this,
           Invocation.getter(#fromJson),
         ),
         returnValueForMissingStub: (Map<String, dynamic> json) =>
-            _i6.dummyValue<T>(
+            _i5.dummyValue<T>(
           this,
           Invocation.getter(#fromJson),
         ),
@@ -1240,11 +1184,11 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID, TBoolExp,
 
   @override
   _i2.PaginatableStreamBase<T> streamAll({
-    required _i2.StreamAllConfig<T, TBoolExp, TOrderByExp>? streamAllConfig,
-    _i2.StreamCountConfig<T, TBoolExp>? streamCountConfig,
+    required _i2.StreamAllConfig<T>? streamAllConfig,
+    _i2.StreamCountConfig<T>? streamCountConfig,
     _i4.Stream<String?>? searchQuery,
-    _i4.Stream<List<TBoolExp>>? where,
-    _i4.Stream<List<TOrderByExp>>? orderBy,
+    _i4.Stream<List<_i2.Filter<Object>>>? where,
+    _i4.Stream<List<_i2.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1617,8 +1561,8 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
             combine,
           ],
         ),
-        returnValue: _i6.ifNotNull(
-              _i6.dummyValueOrNull<S>(
+        returnValue: _i5.ifNotNull(
+              _i5.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -1640,8 +1584,8 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                 ],
               ),
             ),
-        returnValueForMissingStub: _i6.ifNotNull(
-              _i6.dummyValueOrNull<S>(
+        returnValueForMissingStub: _i5.ifNotNull(
+              _i5.dummyValueOrNull<S>(
                 this,
                 Invocation.method(
                   #fold,
@@ -1671,7 +1615,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
           #join,
           [separator],
         ),
-        returnValue: _i4.Future<String>.value(_i6.dummyValue<String>(
+        returnValue: _i4.Future<String>.value(_i5.dummyValue<String>(
           this,
           Invocation.method(
             #join,
@@ -1679,7 +1623,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<String>.value(_i6.dummyValue<String>(
+            _i4.Future<String>.value(_i5.dummyValue<String>(
           this,
           Invocation.method(
             #join,
@@ -1765,8 +1709,8 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
           #drain,
           [futureValue],
         ),
-        returnValue: _i6.ifNotNull(
-              _i6.dummyValueOrNull<E>(
+        returnValue: _i5.ifNotNull(
+              _i5.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,
@@ -1782,8 +1726,8 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                 [futureValue],
               ),
             ),
-        returnValueForMissingStub: _i6.ifNotNull(
-              _i6.dummyValueOrNull<E>(
+        returnValueForMissingStub: _i5.ifNotNull(
+              _i5.dummyValueOrNull<E>(
                 this,
                 Invocation.method(
                   #drain,
@@ -1964,9 +1908,7 @@ class MockDBVarsTransformer extends _i1.Mock implements _i2.DBVarsTransformer {
   @override
   Map<String, dynamic>
       transformrequestForPagination<T extends _i2.ViewableWithID>(
-    _i2.PaginatableStreamRequest<T,
-            _i2.StreamableDAOParameters<T, dynamic, dynamic>?>?
-        request, {
+    _i2.PaginatableStreamRequest<T, _i2.StreamableDAOParameters<T>?>? request, {
     List<Map<String, dynamic>>? overrideWhere,
     List<Map<String, dynamic>>? overrideOrderBy,
   }) =>

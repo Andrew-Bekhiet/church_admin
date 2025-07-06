@@ -37,3 +37,12 @@ final class HomeSwitchPageListType extends HomeEvent {
   @override
   List<Object?> get props => [pageIndex, listType];
 }
+
+final class HomePageChange extends HomeEvent {
+  final double page;
+
+  const HomePageChange(this.page);
+
+  @override
+  List<Object?> get props => [page];
+}

@@ -1,7 +1,6 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:equatable/equatable.dart';
+part of 'spatial.dart';
 
-class Line with EquatableMixin {
+class Line with EquatableMixin implements Spatial {
   final List<Point> coordinates;
 
   const Line(this.coordinates);

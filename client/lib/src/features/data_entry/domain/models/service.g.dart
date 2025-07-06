@@ -3,78 +3,188 @@
 part of 'service.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$ServiceFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Service>(
+class _ServiceFields {
+  _ServiceFields();
+
+  final FieldMetadata<Service> id = FieldMetadata<Service>(
+    parentType: Service,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Service,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'studyYearFrom': FieldMetadata<StudyYear>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<StudyYear> studyYearFrom = FieldMetadata<StudyYear>(
+    parentType: Service,
     name: 'studyYearFrom',
     label: 'السنة الدراسية: من',
-  ),
-  'studyYearTo': FieldMetadata<StudyYear>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<StudyYear> studyYearTo = FieldMetadata<StudyYear>(
+    parentType: Service,
     name: 'studyYearTo',
     label: 'السنة الدراسية: إلى',
-  ),
-  'nextService': FieldMetadata<Service>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Service> nextService = FieldMetadata<Service>(
+    parentType: Service,
     name: 'nextService',
     label: 'الخدمة التالية',
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Service,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Service,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'classes': FieldMetadata<Class>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Class> classes = FieldMetadata<Class>(
+    parentType: Service,
     name: 'classes',
     label: 'الفصول',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'groups': FieldMetadata<Group>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<Group> groups = FieldMetadata<Group>(
+    parentType: Service,
     name: 'groups',
     label: 'المجموعات',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Service,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'adminUsers': FieldMetadata<User>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    parentType: Service,
     name: 'adminUsers',
-    label: 'الخدام المسؤلين',
+    label: 'adminUsers',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'attendanceHistoryAggregate': FieldMetadata<AggregateData>(
+  );
+
+  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
+    AdminOnDataFields().user,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Service,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
-  ),
-  'attendanceDaysConstraintsAggregate': FieldMetadata<AggregateData>(
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Service,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',
-  ),
-};
+    isCodeOnly: true,
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    studyYearFrom,
+    studyYearTo,
+    nextService,
+    color,
+    photoUpdatedAt,
+    classes,
+    groups,
+    lastEdit,
+    adminUsers,
+    attendanceHistoryAggregate,
+    attendanceDaysConstraintsAggregate
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'studyYearFrom': studyYearFrom,
+    'studyYearTo': studyYearTo,
+    'nextService': nextService,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'classes': classes,
+    'groups': groups,
+    'lastEdit': lastEdit,
+    'adminUsers': adminUsers,
+    'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Service _$ServiceFromJson(Map json) => _Service(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Service _$ServiceFromJson(Map json) => Service(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       studyYearFrom: json['studyYearFrom'] == null
           ? null
           : StudyYear.fromJson(
@@ -117,7 +227,7 @@ _Service _$ServiceFromJson(Map json) => _Service(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$ServiceToJson(_Service instance) => <String, dynamic>{
+Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'studyYearFrom': instance.studyYearFrom?.toJson(),

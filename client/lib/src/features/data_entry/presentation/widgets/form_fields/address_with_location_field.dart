@@ -27,7 +27,7 @@ class AddressWithLocationField extends StatefulWidget {
 }
 
 class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
-  late Address _address = widget.initialAddress ?? Address();
+  late Address _address = widget.initialAddress ?? const Address();
   Address? _suggestedAddress;
 
   void _setAddress(Address address, [bool setState = true]) {
@@ -39,11 +39,10 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     }
   }
 
-  ViewableObjectListController<T>
-      _listControllerFor<T extends ViewableWithID, TBool, TOrderBy>(
-    StreamableDAO<T, TBool, TOrderBy> dao,
+  ViewableObjectListController<T> _listControllerFor<T extends ViewableWithID>(
+    StreamableDAO<T> dao,
     Stream<String?> searchStream, {
-    List<TBool> where = const [],
+    List<Filter> where = const [],
   }) {
     final stream = dao.streamAll(
       searchQuery: searchStream,
@@ -58,7 +57,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.initialAddress != widget.initialAddress) {
-      _address = widget.initialAddress ?? Address();
+      _address = widget.initialAddress ?? const Address();
       _suggestedAddress = null;
     }
   }
@@ -198,15 +197,15 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               s,
               where: _address.area != null
                   ? [
-                      Input_StreetsBoolExp(
-                        areas: Input_AreasStreetsBoolExp(
-                          areaId: Input_UuidComparisonExp(
-                            $_eq: _address.area!.id.toUuid(),
-                          ),
-                        ),
+                      Filter(
+                        StreetFields()
+                            .areasRel
+                            .redirectTo(AreasStreetsFields().areaId),
+                        PrimitiveOperator.eq,
+                        _address.area!.id,
                       ),
                     ]
-                  : <Input_StreetsBoolExp>[],
+                  : <Filter>[],
             ),
             initialValue: _address.street,
             dialogFieldLabel: 'الشارع الرئيسي',
@@ -373,15 +372,15 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               s,
               where: _address.street != null
                   ? [
-                      Input_AreasBoolExp(
-                        streets: Input_AreasStreetsBoolExp(
-                          streetId: Input_UuidComparisonExp(
-                            $_eq: _address.street!.id.toUuid(),
-                          ),
-                        ),
+                      Filter(
+                        AreaFields()
+                            .streets
+                            .redirectTo(AreasStreetsFields().streetId),
+                        PrimitiveOperator.eq,
+                        _address.street!.id,
                       ),
                     ]
-                  : <Input_AreasBoolExp>[],
+                  : [],
             ),
             initialValue: _address.area,
             dialogFieldLabel: 'المنطقة',

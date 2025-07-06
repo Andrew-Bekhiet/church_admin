@@ -27,7 +27,7 @@ class UserSettingsService extends BlocObserver {
       box.put('${_getTypeName(type ?? T)}SecondLine', value);
 
   String _getTypeName(Type t) =>
-      AdvancedQueriesMetadata.queryableTypes[t]?.name ??
+      AdvancedQueriesMetadata().allQueryablesByType[t]?.name ??
       (t.toString().replaceAll(RegExp(r'_|\$|(Impl)'), ''));
 
   Future<void> setupDefaults() async {

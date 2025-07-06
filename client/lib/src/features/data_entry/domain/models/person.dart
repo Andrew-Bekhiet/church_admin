@@ -8,116 +8,317 @@ part 'person.freezed.dart';
 part 'person.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['blurhash', 'otherPhones'])
-abstract class Person extends ViewableWithIDAndImage
+@JsonSerializable()
+@Queryable(
+  classLabel: 'الأشخاص',
+  ignoreFields: ['blurhash', 'otherPhones'],
+  allowExtension: true,
+)
+class Person extends ViewableWithIDAndImage
     with _$Person
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$PersonFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
 
-  static final QueryableType<Person> queryableType = QueryableType<Person>(
-    name: 'Person',
-    label: 'الأشخاص',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Person.fromJson,
-  );
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
 
-  factory Person({
-    required String id,
-    required String name,
-    Address? address,
-    String? mainPhone,
-    @Default({}) Json otherPhones,
-    DateTime? birthdate,
-    String? birthday,
-    @Default(true) bool gender,
-    @Default(false) bool isShammas,
-    String? shammasLevelId,
-    ShammasLevel? shammasLevel,
-    School? school,
-    String? schoolId,
-    College? college,
-    String? collegeId,
-    Church? church,
-    String? churchId,
-    Father? father,
-    String? fatherId,
-    @Default(false) bool isStudent,
-    Job? job,
-    String? jobId,
-    String? jobDescription,
-    Qualification? qualification,
-    String? qualificationId,
-    PersonType? personType,
-    String? personTypeId,
-    PersonState? state,
-    String? stateId,
-    @Default(false) bool isServant,
-    String? notes,
-    Family? family,
-    String? familyId,
-    Store? store,
-    String? storeId,
-    StudyYear? studyYear,
-    int? studyYearId,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    LastRecordedByInfo? lastConfession,
-    LastRecordedByInfo? lastKodas,
-    LastRecordedByInfo? lastCall,
-    LastRecordedByInfo? lastVisit,
-    LastRecordedByInfo? lastEdit,
-    @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
-    List<Class>? classes,
-    @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
-    List<Group>? groups,
-    @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
-    List<Service>? services,
-    @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
-    List<Tag>? tags,
-    @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
-    List<Hobby>? hobbies,
-    User? user,
-    List<LastRecordedByInfo>? kodasHistory,
-    List<LastRecordedByInfo>? confessionHistory,
-    List<LastRecordedByInfo>? callHistory,
-    List<LastRecordedByInfo>? visitHistory,
-    List<LastRecordedByInfo>? editHistory,
-    HistoryAggregateData? kodasHistoryAggregate,
-    HistoryAggregateData? confessionHistoryAggregate,
-    HistoryAggregateData? callHistoryAggregate,
-    HistoryAggregateData? visitHistoryAggregate,
-    HistoryAggregateData? editHistoryAggregate,
-  }) = _Person;
-  Person._() : super();
-
-  factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
+  @override
+  final Address? address;
 
   Point? get geolocation => address?.geolocation;
 
   @override
-  LastRecordedByInfo? get lastConfession =>
-      confessionHistoryAggregate?.aggregate.max ??
-      confessionHistory?.singleOrNull;
+  final String? mainPhone;
+
   @override
-  LastRecordedByInfo? get lastKodas =>
-      kodasHistoryAggregate?.aggregate.max ?? kodasHistory?.singleOrNull;
+  final Json otherPhones;
+
   @override
-  LastRecordedByInfo? get lastCall =>
-      callHistoryAggregate?.aggregate.max ?? callHistory?.singleOrNull;
+  final DateTime? birthdate;
+
   @override
-  LastRecordedByInfo? get lastVisit =>
-      visitHistoryAggregate?.aggregate.max ?? visitHistory?.singleOrNull;
+  final String? birthday;
+
   @override
-  LastRecordedByInfo? get lastEdit =>
-      editHistoryAggregate?.aggregate.max ?? editHistory?.singleOrNull;
+  final bool gender;
+
+  @override
+  final bool isShammas;
+
+  @override
+  final String? shammasLevelId;
+
+  @override
+  final ShammasLevel? shammasLevel;
+
+  @override
+  final School? school;
+
+  @override
+  final String? schoolId;
+
+  @override
+  final College? college;
+
+  @override
+  final String? collegeId;
+
+  @override
+  final Church? church;
+
+  @override
+  final String? churchId;
+
+  @override
+  final Father? father;
+
+  @override
+  final String? fatherId;
+
+  @override
+  final bool isStudent;
+
+  @override
+  final Job? job;
+
+  @override
+  final String? jobId;
+
+  @override
+  final String? jobDescription;
+
+  @override
+  final Qualification? qualification;
+
+  @override
+  final String? qualificationId;
+
+  @override
+  final PersonType? personType;
+
+  @override
+  final String? personTypeId;
+
+  @override
+  final PersonState? state;
+
+  @override
+  final String? stateId;
+
+  @override
+  final bool isServant;
+
+  @override
+  final String? notes;
+
+  @override
+  final Family? family;
+
+  @override
+  final String? familyId;
+
+  @override
+  final Store? store;
+
+  @override
+  final String? storeId;
+
+  @override
+  final StudyYear? studyYear;
+
+  @override
+  final int? studyYearId;
+
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
+
+  @override
+  final DateTime? photoUpdatedAt;
+
+  @override
+  final String? blurhash;
+
+  @override
+  final LastRecordedByInfo? lastConfession;
+
+  @override
+  final LastRecordedByInfo? lastKodas;
+
+  @override
+  final LastRecordedByInfo? lastAttendance;
+
+  @override
+  final LastRecordedByInfo? lastCall;
+
+  @override
+  final LastRecordedByInfo? lastVisit;
+
+  @override
+  final LastRecordedByInfo? lastEdit;
+
+  @override
+  @JsonKey(fromJson: personsClassesFromJson, toJson: personsClassesToJson)
+  @QueryableField(manyToManyRelType: ClassesPersons)
+  final List<Class>? classes;
+
+  @override
+  @JsonKey(fromJson: personsGroupsFromJson, toJson: personsGroupsToJson)
+  @QueryableField(manyToManyRelType: PersonsGroups)
+  final List<Group>? groups;
+
+  @override
+  @JsonKey(fromJson: personsServicesFromJson, toJson: personsServicesToJson)
+  @QueryableField(manyToManyRelType: PersonsServices)
+  final List<Service>? services;
+
+  @override
+  @JsonKey(fromJson: personsTagsFromJson, toJson: personsTagsToJson)
+  @QueryableField(manyToManyRelType: PersonsTags)
+  final List<Tag>? tags;
+
+  @override
+  @JsonKey(fromJson: personsHobbiesFromJson, toJson: personsHobbiesToJson)
+  @QueryableField(manyToManyRelType: PersonsHobbies)
+  final List<Hobby>? hobbies;
+
+  @override
+  final User? user;
+
+  @override
+  final List<LastRecordedByInfo>? kodasHistory;
+
+  @override
+  final List<LastRecordedByInfo>? attendanceHistory;
+
+  @override
+  final List<LastRecordedByInfo>? confessionHistory;
+
+  @override
+  final List<LastRecordedByInfo>? callHistory;
+
+  @override
+  final List<LastRecordedByInfo>? visitHistory;
+
+  @override
+  final List<LastRecordedByInfo>? editHistory;
+
+  @override
+  final HistoryAggregateData? kodasHistoryAggregate;
+
+  @override
+  final HistoryAggregateData? attendanceHistoryAggregate;
+
+  @override
+  final HistoryAggregateData? confessionHistoryAggregate;
+
+  @override
+  final HistoryAggregateData? callHistoryAggregate;
+
+  @override
+  final HistoryAggregateData? visitHistoryAggregate;
+
+  @override
+  final HistoryAggregateData? editHistoryAggregate;
+
+  Person({
+    required this.id,
+    required this.name,
+    this.address,
+    this.mainPhone,
+    this.otherPhones = const {},
+    this.birthdate,
+    this.birthday,
+    this.gender = true,
+    this.isShammas = false,
+    this.shammasLevelId,
+    this.shammasLevel,
+    this.school,
+    this.schoolId,
+    this.college,
+    this.collegeId,
+    this.church,
+    this.churchId,
+    this.father,
+    this.fatherId,
+    this.isStudent = false,
+    this.job,
+    this.jobId,
+    this.jobDescription,
+    this.qualification,
+    this.qualificationId,
+    this.personType,
+    this.personTypeId,
+    this.state,
+    this.stateId,
+    this.isServant = false,
+    this.notes,
+    this.family,
+    this.familyId,
+    this.store,
+    this.storeId,
+    this.studyYear,
+    this.studyYearId,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    LastRecordedByInfo? lastConfession,
+    LastRecordedByInfo? lastKodas,
+    LastRecordedByInfo? lastAttendance,
+    LastRecordedByInfo? lastCall,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastEdit,
+    this.classes,
+    this.groups,
+    this.services,
+    this.tags,
+    this.hobbies,
+    this.user,
+    this.kodasHistory,
+    this.attendanceHistory,
+    this.confessionHistory,
+    this.callHistory,
+    this.visitHistory,
+    this.editHistory,
+    this.kodasHistoryAggregate,
+    this.attendanceHistoryAggregate,
+    this.confessionHistoryAggregate,
+    this.callHistoryAggregate,
+    this.visitHistoryAggregate,
+    this.editHistoryAggregate,
+  })  : lastConfession = lastConfession ??
+            confessionHistoryAggregate?.aggregate.max ??
+            confessionHistory?.singleOrNull,
+        lastKodas = lastKodas ??
+            kodasHistoryAggregate?.aggregate.max ??
+            kodasHistory?.singleOrNull,
+        lastAttendance = lastAttendance ??
+            attendanceHistoryAggregate?.aggregate.max ??
+            attendanceHistory?.singleOrNull,
+        lastCall = lastCall ??
+            callHistoryAggregate?.aggregate.max ??
+            callHistory?.singleOrNull,
+        lastVisit = lastVisit ??
+            visitHistoryAggregate?.aggregate.max ??
+            visitHistory?.singleOrNull,
+        lastEdit = lastEdit ??
+            editHistoryAggregate?.aggregate.max ??
+            editHistory?.singleOrNull;
+
+  factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().person.name;
+
+  @override
+  Json toJson() => _$PersonToJson(this);
 
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => Person.queryableType.name;
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
@@ -301,6 +502,79 @@ abstract class Person extends ViewableWithIDAndImage
     }
 
     return result;
+  }
+}
+
+class PersonFields extends _PersonFields {
+  PersonFields();
+
+  FieldMetadata<Area> get area => address.redirectTo(
+        AddressFields().area,
+        isExpandable: false,
+      );
+
+  FieldMetadata<Street> get street =>
+      address.redirectTo(AddressFields().street, isExpandable: false);
+
+  FieldMetadata<District> get district =>
+      address.redirectTo(AddressFields().district, isExpandable: false);
+
+  @override
+  List<FieldMetadata<Object>> get allFields => {
+        id,
+        name,
+        address,
+        area,
+        street,
+        district,
+        geolocation,
+        mainPhone,
+        birthdate,
+        birthday,
+        gender,
+        isServant,
+        church,
+        father,
+        isShammas,
+        shammasLevel,
+        isStudent,
+        studyYear,
+        school,
+        college,
+        qualification,
+        job,
+        jobDescription,
+        personType,
+        state,
+        hobbies,
+        notes,
+        tags,
+        family,
+        store,
+        classes,
+        groups,
+        services,
+        user,
+        confessionHistory,
+        lastConfession,
+        kodasHistory,
+        lastKodas,
+        attendanceHistory,
+        lastAttendance,
+        callHistory,
+        lastCall,
+        visitHistory,
+        lastVisit,
+        editHistory,
+        lastEdit,
+        ...super.allFields,
+      }.toList();
+
+  @override
+  Map<String, FieldMetadata<Object>> get allFieldsByName {
+    return {
+      for (final field in allFields) field.name: field,
+    };
   }
 }
 

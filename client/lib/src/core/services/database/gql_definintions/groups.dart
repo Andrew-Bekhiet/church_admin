@@ -3,19 +3,17 @@ import 'package:church_admin/src/core/services/database/gql_definintions/groups/
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
-class GroupsDAO
-    extends FullCRUDDAO<Group, Input_GroupsBoolExp, Input_GroupsOrderBy> {
+class GroupsDAO extends FullCRUDDAO<Group> {
   GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
 
   @override
-  late final StreamAllConfig<Group, Input_GroupsBoolExp, Input_GroupsOrderBy>
-      baseStreamAllConfig = StreamAllConfig(
+  late final StreamAllConfig<Group> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllGroups,
     transformRequest: _streamAllVarsConstructor,
   );
   @override
-  late final StreamCountConfig<Group, Input_GroupsBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Group> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchGroupsCount,
   );
   @override
@@ -44,11 +42,7 @@ class GroupsDAO
   );
 
   Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<
-            Group,
-            StreamableDAOParameters<Group, Input_GroupsBoolExp,
-                Input_GroupsOrderBy>?>
-        request,
+    PaginatableStreamRequest<Group, StreamableDAOParameters<Group>?> request,
   ) {
     final orderBy = request.param?.orderBy;
 

@@ -7,43 +7,78 @@ part 'group.freezed.dart';
 part 'group.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['validity', 'blurhash'])
-abstract class Group extends ViewableWithIDAndImage
+@JsonSerializable()
+@Queryable(
+    classLabel: 'المجموعات',
+    ignoreFields: ['validity', 'blurhash'],
+    allowExtension: true)
+class Group extends ViewableWithIDAndImage
     with _$Group
     implements SerializableExtra, AttendanceAnalyzable {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$GroupFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
+  @override
+  final DateTime? photoUpdatedAt;
+  @override
+  final String? blurhash;
+  @override
+  final String? serviceId;
+  @override
+  final Service? service;
+  @override
+  @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
+  final DateTimeRange? validity;
+  @override
+  final LastRecordedByInfo? lastEdit;
+  @override
+  @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
+  @QueryableField(manyToManyRelType: AdminOnData)
+  final List<User>? adminUsers;
+  @override
+  final HistoryAggregateData? attendanceHistoryAggregate;
+  @override
+  final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
-  static final QueryableType<Group> queryableType = QueryableType<Group>(
-    name: 'Group',
-    label: 'المجموعات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Group.fromJson,
-  );
-
-  factory Group({
-    required String id,
-    required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-    DateTime? photoUpdatedAt,
-    String? blurhash,
-    String? serviceId,
-    Service? service,
-    @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
-    DateTimeRange? validity,
-    LastRecordedByInfo? lastEdit,
-    @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
-    List<User>? adminUsers,
-    HistoryAggregateData? attendanceHistoryAggregate,
-    HistoryAggregateData? attendanceDaysConstraintsAggregate,
-  }) = _Group;
-  Group._() : super();
+  const Group({
+    required this.id,
+    required this.name,
+    this.color,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.serviceId,
+    this.service,
+    this.validity,
+    this.lastEdit,
+    this.adminUsers,
+    this.attendanceHistoryAggregate,
+    this.attendanceDaysConstraintsAggregate,
+  });
 
   factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);
+
+  @override
+  Json toJson() => _$GroupToJson(this);
 
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('groups', id, lastUpdatedTime: photoUpdatedAt);
 
   @override
-  String get typeName => Group.queryableType.name;
+  String get typeName => AdvancedQueriesMetadata().group.name;
+}
+
+class GroupFields extends _GroupFields {
+  GroupFields();
+
+  @override
+  FieldMetadata<User> get adminUsers =>
+      adminUsersRel.redirectTo(AdminOnDataFields().user,
+          label: adminUsersRel.label, isExpandable: false);
 }

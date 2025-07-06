@@ -3,57 +3,133 @@
 part of 'area.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$AreaFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Area>(
+class _AreaFields {
+  _AreaFields();
+
+  final FieldMetadata<Area> id = FieldMetadata<Area>(
+    parentType: Area,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Area,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'bounds': FieldMetadata<Polygon>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Polygon> bounds = FieldMetadata<Polygon>(
+    parentType: Area,
     name: 'bounds',
     label: 'الموقع',
-    operators: Operator.spatial,
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Area,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Area,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastVisit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Area,
     name: 'lastVisit',
     label: 'أخر افتقاد',
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Area,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'adminUsers': FieldMetadata<User>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    parentType: Area,
     name: 'adminUsers',
-    label: 'الخدام المسؤلين',
+    label: 'adminUsers',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-};
+  );
+
+  late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
+    AdminOnDataFields().user,
+    isExpandable: false,
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    bounds,
+    color,
+    photoUpdatedAt,
+    lastVisit,
+    lastEdit,
+    adminUsers
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'bounds': bounds,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'lastVisit': lastVisit,
+    'lastEdit': lastEdit,
+    'adminUsers': adminUsers
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Area _$AreaFromJson(Map json) => _Area(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Area _$AreaFromJson(Map json) => Area(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       bounds: polygonFromJson(json['bounds']),
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -71,7 +147,7 @@ _Area _$AreaFromJson(Map json) => _Area(
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
     );
 
-Map<String, dynamic> _$AreaToJson(_Area instance) => <String, dynamic>{
+Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'bounds': polygonToJson(instance.bounds),

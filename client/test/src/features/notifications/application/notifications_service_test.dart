@@ -687,7 +687,7 @@ void main() {
           );
 
           test(
-            'scheduleMeetingNotification',
+            'scheduleAttendanceNotification',
             () async {
               MethodCall? capturedCall;
               _setUpAlarmManagerPlatformChannel((call) async {
@@ -699,11 +699,11 @@ void main() {
 
               const notificationSetting =
                   NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
-              await unit.scheduleMeetingNotification(notificationSetting);
+              await unit.scheduleAttendanceNotification(notificationSetting);
 
               verify(
                 NotificationsSettingsStorage.I
-                    .setMeetingTime(notificationSetting),
+                    .setAttendanceTime(notificationSetting),
               );
 
               expect(capturedCall, isNotNull);
@@ -712,9 +712,9 @@ void main() {
                 capturedCall!.arguments,
                 _callArgumentsMatchFor(
                   notificationSetting: notificationSetting,
-                  name: 'Meeting',
+                  name: 'Attendance',
                   callback:
-                      NotificationsServiceCallbacks.showMeetingNotification,
+                      NotificationsServiceCallbacks.showAttendanceNotification,
                 ),
               );
             },

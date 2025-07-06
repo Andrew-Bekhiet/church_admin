@@ -8,30 +8,33 @@ part 'person_type.freezed.dart';
 part 'person_type.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class PersonType extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'الحالات الاجتماعية')
+class PersonType extends ViewableWithID
     with _$PersonType
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$PersonTypeFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
 
-  static final QueryableType<PersonType> queryableType =
-      QueryableType<PersonType>(
-    name: 'PersonType',
-    label: 'الحالات الاجتماعية',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: PersonType.fromJson,
-  );
-
-  factory PersonType({
-    required String id,
-    required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-  }) = _PersonType;
-  PersonType._() : super();
+  const PersonType({
+    required this.id,
+    required this.name,
+    this.color,
+  });
 
   factory PersonType.fromJson(Map<String, Object?> json) =>
       _$PersonTypeFromJson(json);
 
   @override
-  String get typeName => PersonType.queryableType.name;
+  Json toJson() => _$PersonTypeToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().personType.name;
 }

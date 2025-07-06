@@ -137,45 +137,39 @@ class NotificationsServiceCallbacks {
 
   static AdvancedQuery _createAdvQueryWith({
     required String name,
-    required String field,
+    required FieldMetadata field,
+    required FieldMetadata aggField,
     required DateTime value,
   }) {
     return AdvancedQuery(
       name: name,
-      queryableType: Person.queryableType,
-      conditions: [
-        Condition(
-          queryableType: Person.queryableType,
-          field: field,
-          operator: null,
-          value: [
-            Condition(
-              queryableType: LastRecordedByInfo.queryableType,
-              field: 'time',
-              operator: Operator.isNull,
-              value: false,
+      queryableType: AdvancedQueriesMetadata().person,
+      filters: [
+        Filter(
+          field,
+          LogicalOperator.and,
+          [
+            Filter(
+              LastRecordedByInfoFields().time,
+              PrimitiveOperator.isNull,
+              false,
             ),
-            Condition(
-              queryableType: LastRecordedByInfo.queryableType,
-              field: 'time',
-              operator: Operator.lt,
-              value: value,
+            Filter(
+              LastRecordedByInfoFields().time,
+              DateTimeOperator.isBefore,
+              value,
             ),
           ],
         ),
       ],
       orderBy: [
         OrderBy(
-          fieldName: '${field}Aggregate',
-          value: OrderBy(
-            fieldName: 'max',
-            value: OrderBy(
-              fieldName: 'time',
-              value: Enum_OrderBy.DESC,
-            ),
-          ),
+          field: aggField.redirectTo(AggregateDataFields()
+              .max
+              .redirectTo(LastRecordedByInfoFields().time)),
+          value: OrderByValue.desc,
         ),
-        OrderBy(fieldName: 'name'),
+        OrderBy(field: LastRecordedByInfoFields().time),
       ],
     );
   }
@@ -186,7 +180,8 @@ class NotificationsServiceCallbacks {
 
     final query = _createAdvQueryWith(
       name: 'إشعارات القداس',
-      field: 'kodasHistory',
+      field: PersonFields().kodasHistory,
+      aggField: PersonFields().kodasHistoryAggregate,
       value: date,
     );
 
@@ -201,19 +196,20 @@ class NotificationsServiceCallbacks {
   }
 
   @pragma('vm:entry-point')
-  static Future<void> showMeetingNotification() {
+  static Future<void> showAttendanceNotification() {
     final query = _createAdvQueryWith(
       name: 'إنذار حضور الاجتماع',
-      field: 'meetingHistory',
+      field: PersonFields().attendanceHistory,
+      aggField: PersonFields().attendanceHistoryAggregate,
       value: DateTime.now().subtract(const Duration(days: 7)),
     );
 
     return showNotification(
-      channelId: 'Meeting',
+      channelId: 'Attendance',
       channelName: 'إشعارات حضور الاجتماع',
       channelDescription: 'إشعارات حضور الاجتماع',
       title: 'إنذار حضور الاجتماع',
-      type: LocalNotificationType.meeting,
+      type: LocalNotificationType.attendance,
       query: query,
     );
   }
@@ -224,7 +220,8 @@ class NotificationsServiceCallbacks {
 
     final query = _createAdvQueryWith(
       name: 'إنذار الافتقاد',
-      field: 'visitHistory',
+      field: PersonFields().visitHistory,
+      aggField: PersonFields().visitHistoryAggregate,
       value: date,
     );
 
@@ -242,7 +239,8 @@ class NotificationsServiceCallbacks {
   static Future<void> showConfessionNotification() {
     final query = _createAdvQueryWith(
       name: 'إنذار الاعتراف',
-      field: 'confessionHistory',
+      field: PersonFields().confessionHistory,
+      aggField: PersonFields().confessionHistoryAggregate,
       value: DateTime.now().subtract(const Duration(days: 7)),
     );
 
@@ -262,19 +260,17 @@ class NotificationsServiceCallbacks {
 
     final query = AdvancedQuery(
       name: 'أعياد الميلاد',
-      queryableType: Person.queryableType,
-      conditions: [
-        Condition(
-          queryableType: Person.queryableType,
-          field: 'birthday',
-          operator: Operator.eq,
-          value:
-              '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
+      queryableType: AdvancedQueriesMetadata().person,
+      filters: [
+        Filter(
+          PersonFields().birthday,
+          BirthdayOperator.equals,
+          '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
         ),
       ],
       orderBy: [
-        OrderBy(fieldName: 'birthdate'),
-        OrderBy(fieldName: 'name'),
+        OrderBy(field: PersonFields().birthdate),
+        OrderBy(field: PersonFields().name),
       ],
     );
 
@@ -293,7 +289,7 @@ class NotificationsServiceCallbacks {
 enum LocalNotificationType {
   birthday,
   kodas,
-  meeting,
+  attendance,
   confession,
   visit,
 }

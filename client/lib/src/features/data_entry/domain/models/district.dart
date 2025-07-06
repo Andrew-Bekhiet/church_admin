@@ -6,25 +6,29 @@ part 'district.freezed.dart';
 part 'district.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class District extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'الأحياء السكنية')
+class District extends ViewableWithID
     with _$District
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$DistrictFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
 
-  static final QueryableType<District> queryableType = QueryableType<District>(
-    name: 'District',
-    label: 'الحي',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: District.fromJson,
-  );
-
-  factory District({required String id, required String name}) = _District;
-  District._();
+  const District({
+    required this.id,
+    required this.name,
+  });
 
   factory District.fromJson(Map<String, Object?> json) =>
       _$DistrictFromJson(json);
 
   @override
-  String get typeName => District.queryableType.name;
+  Json toJson() => _$DistrictToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().district.name;
 }

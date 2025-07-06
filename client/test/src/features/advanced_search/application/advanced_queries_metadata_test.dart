@@ -8,33 +8,14 @@ void main() {
       test(
         'queryableTypes',
         () {
-          expect(AdvancedQueriesMetadata.queryableTypes, isNotEmpty);
+          expect(AdvancedQueriesMetadata().allQueryables, isNotEmpty);
 
           for (final MapEntry(:key, :value)
-              in AdvancedQueriesMetadata.queryableTypes.entries) {
+              in AdvancedQueriesMetadata().allQueryablesByType.entries) {
             expect(value.type, key);
           }
         },
       );
-
-      test(
-        'dummyInstanceForType',
-        () {
-          expect(AdvancedQueriesMetadata.dummyInstanceForType, isNotEmpty);
-
-          for (final MapEntry(:key, :value)
-              in AdvancedQueriesMetadata.dummyInstanceForType.entries) {
-            expect(
-              AdvancedQueriesMetadata.queryableTypes[value.runtimeType]?.name ??
-                  value.runtimeType
-                      .toString()
-                      .replaceAll(RegExp(r'_|\$|(Impl)'), ''),
-              key.toString(),
-            );
-          }
-        },
-      );
-      
     },
   );
 }

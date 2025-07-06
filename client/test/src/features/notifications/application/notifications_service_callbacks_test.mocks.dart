@@ -11,7 +11,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
-import 'package:rxdart/rxdart.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -520,11 +519,11 @@ class MockNotificationsService extends _i1.Mock
       ) as _i3.Future<void>);
 
   @override
-  _i3.Future<void> scheduleMeetingNotification(
+  _i3.Future<void> scheduleAttendanceNotification(
           [_i2.NotificationSetting? notificationSetting]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #scheduleMeetingNotification,
+          #scheduleAttendanceNotification,
           [notificationSetting],
         ),
         returnValue: _i3.Future<void>.value(),
@@ -931,7 +930,7 @@ class MockAdvancedQueryParser extends _i1.Mock
   @override
   _i2.PaginatableStreamBase<_i2.ViewableWithID> createPaginatableStream(
     _i2.AdvancedQuery? query, [
-    _i7.BehaviorSubject<String?>? searchStream,
+    _i3.Stream<String?>? searchStream,
   ]) =>
       (super.noSuchMethod(
         Invocation.method(

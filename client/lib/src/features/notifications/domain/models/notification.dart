@@ -7,20 +7,40 @@ part 'notification.g.dart';
 
 @immutable
 @freezed
-abstract class Notification with _$Notification {
-  const factory Notification({
-    required String id,
-    required String title,
-    required String body,
-    required DateTime sentTime,
-    required String senderUID,
-    String? imageURL,
-    @Default(NotificationType.remote) NotificationType type,
-    Json? additionalData,
-  }) = _Notification;
+@JsonSerializable()
+class Notification with _$Notification {
+  @override
+  final String id;
+  @override
+  final String title;
+  @override
+  final String body;
+  @override
+  final DateTime sentTime;
+  @override
+  final String senderUID;
+  @override
+  final String? imageURL;
+  @override
+  final NotificationType type;
+  @override
+  final Json? additionalData;
+
+  const Notification({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.sentTime,
+    required this.senderUID,
+    this.imageURL,
+    this.type = NotificationType.remote,
+    this.additionalData,
+  });
 
   factory Notification.fromJson(Map<String, Object?> json) =>
       _$NotificationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationToJson(this);
 
   factory Notification.fromRemoteMessage(RemoteMessage message) => Notification(
         id: message.messageId ??

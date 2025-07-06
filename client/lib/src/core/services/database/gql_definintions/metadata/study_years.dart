@@ -3,19 +3,15 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class StudyYearsDAO extends DAOBase<StudyYear>
-    with
-        StreamableDAO<StudyYear, Input_StudyYearsBoolExp,
-            Input_StudyYearsOrderBy> {
+class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
   StudyYearsDAO({
     required super.db,
   }) : super(fromJson: StudyYear.fromJson);
 
   @override
-  StreamAllConfig<StudyYear, Input_StudyYearsBoolExp, Input_StudyYearsOrderBy>
-      get baseStreamAllConfig => const StreamAllConfig(
-            document: documentNodeSubscriptionwatchAllStudyYears,
-          );
+  StreamAllConfig<StudyYear> get baseStreamAllConfig => const StreamAllConfig(
+        document: documentNodeSubscriptionwatchAllStudyYears,
+      );
 
   @override
   StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
@@ -24,18 +20,16 @@ class StudyYearsDAO extends DAOBase<StudyYear>
   @override
   PaginatableStreamBase<StudyYear> streamAll({
     Stream<String?>? searchQuery,
-    Stream<List<Input_StudyYearsBoolExp>>? where,
-    Stream<List<Input_StudyYearsOrderBy>>? orderBy,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
       where: where,
-      orderBy: orderBy ??
-          Stream.value([
-            Input_StudyYearsOrderBy(order: Enum_OrderBy.ASC),
-          ]),
+      orderBy:
+          orderBy ?? Stream.value([OrderBy(field: StudyYearFields().order)]),
     );
   }
 

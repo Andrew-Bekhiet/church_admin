@@ -41,21 +41,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('البحث المتقدم'),
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                onTap: controller.toggleHideAdvancedOperators,
-                child: Text(
-                  '${controller.hideAdvancedOperators ? 'إظهار' : 'إخفاء'} العمليات المتقدمة',
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('البحث المتقدم')),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: SingleChildScrollView(
@@ -71,7 +57,8 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       isExpanded: true,
                       value: selectedQueryableType,
-                      items: AdvancedQueriesMetadata.queryableTypes.values
+                      items: AdvancedQueriesMetadata()
+                          .allQueryables
                           .where((t) => t.dao != null)
                           .map(
                             (t) => DropdownMenuItem(
@@ -87,44 +74,54 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 ],
               ),
               const Divider(),
-              StreamBuilder<
-                  ({
-                    AdvancedQuery query,
-                    bool hideAdvancedOperators,
-                  })>(
-                initialData: (
-                  query: controller.query,
-                  hideAdvancedOperators: controller.hideAdvancedOperators,
-                ),
-                stream: Rx.combineLatest2(
-                  controller.queryStream,
-                  controller.hideAdvancedOperatorsStream,
-                  (q, h) => (query: q, hideAdvancedOperators: h),
-                ),
+              StreamBuilder<AdvancedQuery>(
+                initialData: controller.query,
+                stream: controller.queryStream,
                 builder: (context, snapshot) {
-                  final (:hideAdvancedOperators, :query) = snapshot.requireData;
+                  final query = snapshot.requireData;
 
                   final canAddManyConditions =
                       query.logicalOperator != LogicalOperator.not;
 
-                  return ConditionsBuilder(
-                    canAddManyConditions: canAddManyConditions,
-                    hideAdvancedOperators: hideAdvancedOperators,
+                  return FiltersBuilder(
+                    canAddManyFilters: canAddManyConditions,
                     queryableType: selectedQueryableType,
-                    conditions: query.conditions,
-                    onChanged: controller.changeConditions,
+                    filters: query.filters.toList(),
+                    onChanged: controller.changeFilters,
                   );
                 },
               ),
               const Divider(),
-              StreamBuilder<QueryableType>(
-                stream: controller.selectedTypeStream,
-                builder: (context, snapshot) => _OrderByWidget(
-                  selectedQueryableType: snapshot.data ?? selectedQueryableType,
-                  orderByStream: controller.orderByStream,
-                  replaceOrderBy: controller.replaceOrderBy,
-                  removeOrderBy: controller.removeOrderByAt,
+              StreamBuilder<(QueryableType, List<OrderBy>)>(
+                stream: Rx.combineLatest2(
+                  controller.selectedTypeStream,
+                  controller.orderByStream,
+                  (type, orderBy) => (type, orderBy),
                 ),
+                initialData: (
+                  controller.selectedQueryableType,
+                  controller.orderBy
+                ),
+                builder: (context, orderByData) {
+                  final (selectedQueryableType, orderByStatments) =
+                      orderByData.data!;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: orderByStatments
+                        .mapIndexed(
+                          (i, orderBy) => _OrderByWidget(
+                            selectedQueryableType: selectedQueryableType,
+                            orderBy: orderBy,
+                            onChanged: (newValue) =>
+                                controller.replaceOrderBy(i, newValue),
+                            onRemoved: () => controller.removeOrderByAt(i),
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
               ),
               ElevatedButton.icon(
                 onPressed: _onAddOrderByStatement,
@@ -155,8 +152,8 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
   void _onAddOrderByStatement() => controller.addOrderBy(
         OrderBy(
-          fieldName: selectedQueryableType.fieldsMetadata.keys
-              .firstWhere((p) => p != 'id'),
+          field: selectedQueryableType.fieldsMetadata
+              .firstWhere((p) => !p.name.endsWith('id') && p.isOrderable),
         ),
       );
 
@@ -233,163 +230,153 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 class _OrderByWidget extends StatelessWidget {
   const _OrderByWidget({
     required this.selectedQueryableType,
-    required this.orderByStream,
-    required this.replaceOrderBy,
-    required this.removeOrderBy,
+    required this.orderBy,
+    required this.onChanged,
+    required this.onRemoved,
   });
 
   final QueryableType selectedQueryableType;
-  final Stream<List<OrderBy>> orderByStream;
-  final void Function(int, OrderBy) replaceOrderBy;
-  final void Function(int) removeOrderBy;
-
-  Map<String, FieldMetadata<Object>> get fieldsMetadata =>
-      selectedQueryableType.fieldsMetadata;
+  final OrderBy orderBy;
+  final void Function(OrderBy) onChanged;
+  final void Function() onRemoved;
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    return StreamBuilder<List<OrderBy>>(
-      stream: orderByStream,
-      builder: (context, orderByData) {
-        final orderByStatments = orderByData.data ?? [];
+    final filterableFields = selectedQueryableType.fieldsMetadata
+        .where((p) => p.isOrderable && !p.isCodeOnly)
+        .toList();
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: orderByStatments
-              .mapIndexed(
-                (i, orderBy) => Padding(
-                  key: ValueKey(orderBy),
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DropdownButtonFormField<String>(
-                              decoration: const InputDecoration(
-                                labelText: 'ترتيب حسب',
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                              isExpanded: true,
-                              value: orderBy.fieldName,
-                              items: fieldsMetadata.values
-                                  .where((p) => p.isOrderable)
-                                  .map(
-                                    (p) => DropdownMenuItem(
-                                      alignment: Alignment.center,
-                                      value: p.name,
-                                      child: Text(p.label),
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                final fieldMetadata = fieldsMetadata[value!]!;
+    final FieldMetadata field = orderBy.field;
+    final FieldMetadata parentField;
+    final FieldMetadata? childField;
 
-                                replaceOrderBy(
-                                  i,
-                                  orderBy.copyWith(
-                                    fieldName: value,
-                                    value: fieldMetadata.isNestabale
-                                        ? _createNewNestedOrderBy(fieldMetadata)
-                                        : orderBy.value,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          if (orderBy.value is Enum_OrderBy)
-                            Expanded(
-                              child: DropdownButtonFormField<Enum_OrderBy>(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                                isExpanded: true,
-                                value: orderBy.value as Enum_OrderBy,
-                                alignment: Alignment.center,
-                                items: const [
-                                  DropdownMenuItem(
-                                    alignment: Alignment.center,
-                                    value: Enum_OrderBy.ASC,
-                                    child: Text('تصاعدي'),
-                                  ),
-                                  DropdownMenuItem(
-                                    alignment: Alignment.center,
-                                    value: Enum_OrderBy.DESC,
-                                    child: Text('تنازلي'),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  replaceOrderBy(
-                                    i,
-                                    orderBy.copyWith(value: value!),
-                                  );
-                                },
-                              ),
-                            ),
-                          IconButton(
-                            onPressed: () => removeOrderBy(i),
-                            icon: const Icon(Symbols.clear),
-                          ),
-                        ],
-                      ),
-                      if (orderBy.value is OrderBy)
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              right: BorderSide(
-                                color: themeData.inputDecorationTheme.border
-                                        ?.borderSide.color ??
-                                    themeData.colorScheme.primary,
-                                width: 1.2,
-                              ),
-                            ),
-                          ),
-                          child: _OrderByWidget(
-                            selectedQueryableType:
-                                fieldsMetadata[orderBy.fieldName]!
-                                    .queryableType!,
-                            orderByStream: orderByStream
-                                .map((o) => o[i].value as OrderBy)
-                                .distinct()
-                                .map((e) => [e]),
-                            replaceOrderBy: (_, newOrderBy) => replaceOrderBy(
-                              i,
-                              orderBy.copyWith(value: newOrderBy),
-                            ),
-                            removeOrderBy: (_) => removeOrderBy(i),
-                          ),
+    if (field is RedirectingFieldMetadata &&
+        field.isExpandable &&
+        filterableFields.contains(field.parentField)) {
+      parentField = field.parentField;
+      childField = field.targetField;
+    } else {
+      parentField = field;
+      childField = null;
+    }
+
+    return Padding(
+      key: ValueKey(orderBy),
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: DropdownButtonFormField<FieldMetadata>(
+                  decoration: const InputDecoration(
+                    labelText: 'ترتيب حسب',
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  isExpanded: true,
+                  value: parentField,
+                  items: filterableFields
+                      .map(
+                        (p) => DropdownMenuItem(
+                          alignment: Alignment.center,
+                          value: p,
+                          child: Text(p.label),
                         ),
+                      )
+                      .toList(),
+                  onChanged: (field) {
+                    final FieldMetadata newField;
+                    if (field!.operators.isEmpty ||
+                        !(field.fieldQueryableType?.isSelectableAsReference ??
+                            true)) {
+                      newField = field.redirectTo(
+                        field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                            (f) =>
+                                !f.isCodeOnly &&
+                                f.isOrderable &&
+                                (f.operators.isNotEmpty ||
+                                    (f.fieldQueryableType
+                                            ?.isSelectableAsReference ??
+                                        false))),
+                      );
+                    } else {
+                      newField = field;
+                    }
+
+                    onChanged(
+                      orderBy.copyWith(
+                        field: newField,
+                        value: orderBy.value,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              if (childField == null)
+                Expanded(
+                  child: DropdownButtonFormField<OrderByValue>(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    isExpanded: true,
+                    value: orderBy.value,
+                    alignment: Alignment.center,
+                    items: const [
+                      DropdownMenuItem(
+                        alignment: Alignment.center,
+                        value: OrderByValue.asc,
+                        child: Text('تصاعدي'),
+                      ),
+                      DropdownMenuItem(
+                        alignment: Alignment.center,
+                        value: OrderByValue.desc,
+                        child: Text('تنازلي'),
+                      ),
                     ],
+                    onChanged: (value) =>
+                        onChanged(orderBy.copyWith(value: value!)),
                   ),
                 ),
-              )
-              .toList(),
-        );
-      },
-    );
-  }
-
-  OrderBy _createNewNestedOrderBy(FieldMetadata outerFieldMetadata) {
-    final nestedFieldMetadata =
-        outerFieldMetadata.queryableType?.fieldsMetadata.values.firstWhere(
-      (p) => p.name != 'id',
-      orElse: () => const FieldMetadata(name: 'id', label: '='),
-    );
-
-    return OrderBy(
-      fieldName: nestedFieldMetadata?.name ?? 'id',
-      value: nestedFieldMetadata?.isNestabale ?? false
-          ? _createNewNestedOrderBy(nestedFieldMetadata!)
-          : Enum_OrderBy.ASC,
+              IconButton(
+                onPressed: onRemoved,
+                icon: const Icon(Symbols.clear),
+              ),
+            ],
+          ),
+          if (childField != null)
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(
+                    color: themeData
+                            .inputDecorationTheme.border?.borderSide.color ??
+                        themeData.colorScheme.primary,
+                    width: 1.2,
+                  ),
+                ),
+              ),
+              child: _OrderByWidget(
+                selectedQueryableType: parentField.fieldQueryableType!,
+                orderBy: OrderBy(field: childField, value: orderBy.value),
+                onChanged: (newOrderBy) => onChanged(
+                  orderBy.copyWith(
+                    field: field.redirectTo(newOrderBy.field),
+                    value: newOrderBy.value,
+                  ),
+                ),
+                onRemoved: onRemoved,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

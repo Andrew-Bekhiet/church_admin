@@ -204,15 +204,14 @@ Override _setUpAuthBloc() {
       email: 'email',
       emailVerified: true,
       idToken: 'idToken',
-      claims: {},
     ),
   );
   when(mock.currentUserData).thenReturn(
-    User(
+    const User(
       uid: 'uid',
       email: 'email',
       name: 'name',
-      permissions: const PermissionsSet.fromSet({UserPermission.writeAllData}),
+      permissions: PermissionsSet.fromSet({UserPermission.writeAllData}),
     ),
   );
 

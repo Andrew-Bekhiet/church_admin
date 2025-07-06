@@ -3,32 +3,47 @@
 part of 'school.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$SchoolFields = <String, FieldMetadata>{
-  'id': FieldMetadata<School>(
+class SchoolFields {
+  static final SchoolFields _instance = SchoolFields._();
+  factory SchoolFields() => _instance;
+  SchoolFields._();
+
+  final FieldMetadata<School> id = FieldMetadata<School>(
+    parentType: School,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: School,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-};
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_School _$SchoolFromJson(Map json) => _School(
-      id: json['id'] as String,
-      name: json['name'] as String,
+School _$SchoolFromJson(Map json) => School(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
     );
 
-Map<String, dynamic> _$SchoolToJson(_School instance) => <String, dynamic>{
+Map<String, dynamic> _$SchoolToJson(School instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };

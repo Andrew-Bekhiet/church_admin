@@ -286,7 +286,6 @@ void main() {
                     email: 'email',
                     emailVerified: true,
                     idToken: '',
-                    claims: {},
                     isMultiFactorEnabled: true,
                   ),
                 ),
@@ -310,7 +309,6 @@ void main() {
                     email: 'email',
                     emailVerified: false,
                     idToken: '',
-                    claims: {},
                   ),
                 ),
               );
@@ -333,7 +331,6 @@ void main() {
                     email: 'email',
                     emailVerified: true,
                     idToken: '',
-                    claims: {},
                   ),
                 ),
               );
@@ -405,7 +402,6 @@ Override _setUpAuthBloc() {
       email: 'test@test.com',
       emailVerified: true,
       idToken: 'token',
-      claims: {},
     ),
   );
 
@@ -429,7 +425,6 @@ Override _setUpAuthBloc() {
           email: 'test@test.com',
           emailVerified: true,
           idToken: 'token',
-          claims: {},
         ),
       );
       streamController.add(state);

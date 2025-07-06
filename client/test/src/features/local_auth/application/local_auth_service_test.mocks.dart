@@ -100,11 +100,11 @@ class MockNotificationsService extends _i1.Mock
       ) as _i3.Future<void>);
 
   @override
-  _i3.Future<void> scheduleMeetingNotification(
+  _i3.Future<void> scheduleAttendanceNotification(
           [_i2.NotificationSetting? notificationSetting]) =>
       (super.noSuchMethod(
         Invocation.method(
-          #scheduleMeetingNotification,
+          #scheduleAttendanceNotification,
           [notificationSetting],
         ),
         returnValue: _i3.Future<void>.value(),

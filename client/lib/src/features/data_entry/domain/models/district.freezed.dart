@@ -25,9 +25,6 @@ mixin _$District {
   $DistrictCopyWith<District> get copyWith =>
       _$DistrictCopyWithImpl<District>(this as District, _$identity);
 
-  /// Serializes this District to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -70,91 +67,7 @@ class _$DistrictCopyWithImpl<$Res> implements $DistrictCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _District extends District {
-  _District({required this.id, required this.name}) : super._();
-  factory _District.fromJson(Map<String, dynamic> json) =>
-      _$DistrictFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-
-  /// Create a copy of District
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$DistrictCopyWith<_District> get copyWith =>
-      __$DistrictCopyWithImpl<_District>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$DistrictToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _District &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name);
-
-  @override
-  String toString() {
-    return 'District(id: $id, name: $name)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$DistrictCopyWith<$Res>
-    implements $DistrictCopyWith<$Res> {
-  factory _$DistrictCopyWith(_District value, $Res Function(_District) _then) =
-      __$DistrictCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class __$DistrictCopyWithImpl<$Res> implements _$DistrictCopyWith<$Res> {
-  __$DistrictCopyWithImpl(this._self, this._then);
-
-  final _District _self;
-  final $Res Function(_District) _then;
-
-  /// Create a copy of District
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_District(
+    return _then(District(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable

@@ -26,9 +26,6 @@ mixin _$Father {
   $FatherCopyWith<Father> get copyWith =>
       _$FatherCopyWithImpl<Father>(this as Father, _$identity);
 
-  /// Serializes this Father to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -74,98 +71,7 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
     Object? name = null,
     Object? churchId = freezed,
   }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      churchId: freezed == churchId
-          ? _self.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _Father extends Father {
-  _Father({required this.id, required this.name, this.churchId}) : super._();
-  factory _Father.fromJson(Map<String, dynamic> json) => _$FatherFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String? churchId;
-
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$FatherCopyWith<_Father> get copyWith =>
-      __$FatherCopyWithImpl<_Father>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$FatherToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Father &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.churchId, churchId) ||
-                other.churchId == churchId));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, churchId);
-
-  @override
-  String toString() {
-    return 'Father(id: $id, name: $name, churchId: $churchId)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$FatherCopyWith<$Res> implements $FatherCopyWith<$Res> {
-  factory _$FatherCopyWith(_Father value, $Res Function(_Father) _then) =
-      __$FatherCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String id, String name, String? churchId});
-}
-
-/// @nodoc
-class __$FatherCopyWithImpl<$Res> implements _$FatherCopyWith<$Res> {
-  __$FatherCopyWithImpl(this._self, this._then);
-
-  final _Father _self;
-  final $Res Function(_Father) _then;
-
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? churchId = freezed,
-  }) {
-    return _then(_Father(
+    return _then(Father(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable

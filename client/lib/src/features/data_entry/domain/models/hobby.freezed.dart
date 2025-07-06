@@ -17,7 +17,6 @@ T _$identity<T>(T value) => value;
 mixin _$Hobby {
   String get id;
   String get name;
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   Color? get color;
 
   /// Create a copy of Hobby
@@ -26,9 +25,6 @@ mixin _$Hobby {
   @pragma('vm:prefer-inline')
   $HobbyCopyWith<Hobby> get copyWith =>
       _$HobbyCopyWithImpl<Hobby>(this as Hobby, _$identity);
-
-  /// Serializes this Hobby to a JSON map.
-  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
@@ -55,10 +51,7 @@ abstract mixin class $HobbyCopyWith<$Res> {
   factory $HobbyCopyWith(Hobby value, $Res Function(Hobby) _then) =
       _$HobbyCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
+  $Res call({String id, String name, Color? color});
 }
 
 /// @nodoc
@@ -77,105 +70,7 @@ class _$HobbyCopyWithImpl<$Res> implements $HobbyCopyWith<$Res> {
     Object? name = null,
     Object? color = freezed,
   }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _Hobby extends Hobby {
-  _Hobby(
-      {required this.id,
-      required this.name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) this.color})
-      : super._();
-  factory _Hobby.fromJson(Map<String, dynamic> json) => _$HobbyFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
-  final Color? color;
-
-  /// Create a copy of Hobby
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$HobbyCopyWith<_Hobby> get copyWith =>
-      __$HobbyCopyWithImpl<_Hobby>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$HobbyToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Hobby &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.color, color) || other.color == color));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, color);
-
-  @override
-  String toString() {
-    return 'Hobby(id: $id, name: $name, color: $color)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$HobbyCopyWith<$Res> implements $HobbyCopyWith<$Res> {
-  factory _$HobbyCopyWith(_Hobby value, $Res Function(_Hobby) _then) =
-      __$HobbyCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color});
-}
-
-/// @nodoc
-class __$HobbyCopyWithImpl<$Res> implements _$HobbyCopyWith<$Res> {
-  __$HobbyCopyWithImpl(this._self, this._then);
-
-  final _Hobby _self;
-  final $Res Function(_Hobby) _then;
-
-  /// Create a copy of Hobby
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(_Hobby(
+    return _then(Hobby(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable

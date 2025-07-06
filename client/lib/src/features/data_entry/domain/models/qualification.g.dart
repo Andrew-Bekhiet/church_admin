@@ -3,32 +3,47 @@
 part of 'qualification.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$QualificationFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Qualification>(
+class QualificationFields {
+  static final QualificationFields _instance = QualificationFields._();
+  factory QualificationFields() => _instance;
+  QualificationFields._();
+
+  final FieldMetadata<Qualification> id = FieldMetadata<Qualification>(
+    parentType: Qualification,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Qualification,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-};
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Qualification _$QualificationFromJson(Map json) => _Qualification(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Qualification _$QualificationFromJson(Map json) => Qualification(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
     );
 
-Map<String, dynamic> _$QualificationToJson(_Qualification instance) =>
+Map<String, dynamic> _$QualificationToJson(Qualification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

@@ -3,69 +3,179 @@
 part of 'address.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$AddressFields = <String, FieldMetadata>{
-  'district': FieldMetadata<District>(
+class AddressFields {
+  static final AddressFields _instance = AddressFields._();
+  factory AddressFields() => _instance;
+  AddressFields._();
+
+  final FieldMetadata<District> district = FieldMetadata<District>(
+    parentType: Address,
     name: 'district',
     label: 'الحي',
-  ),
-  'area': FieldMetadata<Area>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Area> area = FieldMetadata<Area>(
+    parentType: Address,
     name: 'area',
     label: 'المنطقة',
-  ),
-  'street': FieldMetadata<Street>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Street> street = FieldMetadata<Street>(
+    parentType: Address,
     name: 'street',
     label: 'الشارع',
-  ),
-  'substreetName': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<String> substreetName = FieldMetadata<String>(
+    parentType: Address,
     name: 'substreetName',
     label: 'الشارع الفرعي',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'geolocation': FieldMetadata<Point>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    parentType: Address,
     name: 'geolocation',
     label: 'الموقع',
-    operators: Operator.spatial,
-  ),
-  'storeyNumber': FieldMetadata<int>(
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<int> storeyNumber = FieldMetadata<int>(
+    parentType: Address,
     name: 'storeyNumber',
     label: 'رقم الدور',
-    operators: Operator.comparitive,
-  ),
-  'houseNumber': FieldMetadata<int>(
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<int> houseNumber = FieldMetadata<int>(
+    parentType: Address,
     name: 'houseNumber',
     label: 'رقم العمارة',
-    operators: Operator.comparitive,
-  ),
-  'apartmentNumber': FieldMetadata<int>(
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<int> apartmentNumber = FieldMetadata<int>(
+    parentType: Address,
     name: 'apartmentNumber',
     label: 'رقم الشقة',
-    operators: Operator.comparitive,
-  ),
-  'specialLandmark': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<String> specialLandmark = FieldMetadata<String>(
+    parentType: Address,
     name: 'specialLandmark',
     label: 'علامة مميزة',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'family': FieldMetadata<Family>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Family> family = FieldMetadata<Family>(
+    parentType: Address,
     name: 'family',
     label: 'العائلة',
-  ),
-  'store': FieldMetadata<Store>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Store> store = FieldMetadata<Store>(
+    parentType: Address,
     name: 'store',
     label: 'المتجر',
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    district,
+    area,
+    street,
+    substreetName,
+    geolocation,
+    storeyNumber,
+    houseNumber,
+    apartmentNumber,
+    specialLandmark,
+    family,
+    store
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'district': district,
+    'area': area,
+    'street': street,
+    'substreetName': substreetName,
+    'geolocation': geolocation,
+    'storeyNumber': storeyNumber,
+    'houseNumber': houseNumber,
+    'apartmentNumber': apartmentNumber,
+    'specialLandmark': specialLandmark,
+    'family': family,
+    'store': store
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Address _$AddressFromJson(Map json) => _Address(
+Address _$AddressFromJson(Map json) => Address(
       id: json['id'] as String?,
       countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
       district: json['district'] == null
@@ -92,7 +202,7 @@ _Address _$AddressFromJson(Map json) => _Address(
           : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
     );
 
-Map<String, dynamic> _$AddressToJson(_Address instance) => <String, dynamic>{
+Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'id': instance.id,
       'countryIsoCode': instance.countryIsoCode,
       'district': instance.district?.toJson(),

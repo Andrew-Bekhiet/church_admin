@@ -3,22 +3,34 @@
 part of 'history_aggregate_data.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$HistoryAggregateDataFields = <String, FieldMetadata>{
-  'aggregate': FieldMetadata<AggregateData>(
+class HistoryAggregateDataFields {
+  static final HistoryAggregateDataFields _instance =
+      HistoryAggregateDataFields._();
+  factory HistoryAggregateDataFields() => _instance;
+  HistoryAggregateDataFields._();
+
+  final FieldMetadata<AggregateData> aggregate = FieldMetadata<AggregateData>(
+    parentType: HistoryAggregateData,
     name: 'aggregate',
     label: 'aggregate',
-  ),
-};
+    isCodeOnly: false,
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [aggregate];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'aggregate': aggregate
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_HistoryAggregateData _$HistoryAggregateDataFromJson(Map json) =>
-    _HistoryAggregateData(
+HistoryAggregateData _$HistoryAggregateDataFromJson(Map json) =>
+    HistoryAggregateData(
       aggregate: AggregateData.fromJson(
           Map<String, Object?>.from(json['aggregate'] as Map)),
       nodes: (json['nodes'] as List<dynamic>?)
@@ -29,7 +41,7 @@ _HistoryAggregateData _$HistoryAggregateDataFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$HistoryAggregateDataToJson(
-        _HistoryAggregateData instance) =>
+        HistoryAggregateData instance) =>
     <String, dynamic>{
       'aggregate': instance.aggregate.toJson(),
       'nodes': instance.nodes.map((e) => e.toJson()).toList(),

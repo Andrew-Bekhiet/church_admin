@@ -22,6 +22,59 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakePaginatableStreamBase_0<T> extends _i1.SmartFake
+    implements _i2.PaginatableStreamBase<T> {
+  _FakePaginatableStreamBase_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [AdvancedQueryParser].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAdvancedQueryParser extends _i1.Mock
+    implements _i2.AdvancedQueryParser {
+  @override
+  _i2.PaginatableStreamBase<_i2.ViewableWithID> createPaginatableStream(
+    _i2.AdvancedQuery? query, [
+    _i3.Stream<String?>? searchStream,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createPaginatableStream,
+          [
+            query,
+            searchStream,
+          ],
+        ),
+        returnValue: _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+          this,
+          Invocation.method(
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
+          ),
+        ),
+        returnValueForMissingStub:
+            _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+          this,
+          Invocation.method(
+            #createPaginatableStream,
+            [
+              query,
+              searchStream,
+            ],
+          ),
+        ),
+      ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
+}
+
 /// A class which mocks [SyncKVStore].
 ///
 /// See the documentation for Mockito's code generation for more information.

@@ -27,11 +27,10 @@ const AuthUser _fakeUser = AuthUser(
   email: email,
   emailVerified: true,
   idToken: 'idToken',
-  claims: {},
   isMultiFactorEnabled: true,
 );
 
-final User _fakeUserData = User(uid: 'uid', email: email, name: 'name');
+const User _fakeUserData = User(uid: 'uid', email: email, name: 'name');
 
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),

@@ -3,234 +3,691 @@
 part of 'person.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$PersonFields = <String, FieldMetadata>{
-  'id': FieldMetadata<Person>(
+class _PersonFields {
+  _PersonFields();
+
+  final FieldMetadata<Person> id = FieldMetadata<Person>(
+    parentType: Person,
     name: 'id',
     label: '=',
-  ),
-  'name': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: Person,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'address': FieldMetadata<Address>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<Address> address = FieldMetadata<Address>(
+    parentType: Person,
     name: 'address',
     label: 'العنوان',
-  ),
-  'mainPhone': FieldMetadata<String>(
+    isCodeOnly: false,
+  );
+
+  final FieldMetadata<String> mainPhone = FieldMetadata<String>(
+    parentType: Person,
     name: 'mainPhone',
     label: 'رقم الهاتف',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'birthdate': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> birthdate = FieldMetadata<DateTime>(
+    parentType: Person,
     name: 'birthdate',
     label: 'تاريخ الميلاد',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'birthday': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<String> birthday = FieldMetadata<String>(
+    parentType: Person,
     name: 'birthday',
     label: 'يوم وشهر الميلاد',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'gender': FieldMetadata<bool>(
+    isCodeOnly: false,
+    operators: {
+      ...BirthdayOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> gender = FieldMetadata<bool>(
+    parentType: Person,
     name: 'gender',
     label: 'النوع',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'isShammas': FieldMetadata<bool>(
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<bool> isShammas = FieldMetadata<bool>(
+    parentType: Person,
     name: 'isShammas',
     label: 'شماس؟',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'shammasLevel': FieldMetadata<ShammasLevel>(
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<ShammasLevel> shammasLevel = FieldMetadata<ShammasLevel>(
+    parentType: Person,
     name: 'shammasLevel',
     label: 'رتبة الشموسية',
-  ),
-  'school': FieldMetadata<School>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<School> school = FieldMetadata<School>(
+    parentType: Person,
     name: 'school',
     label: 'المدرسة',
-  ),
-  'college': FieldMetadata<College>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<College> college = FieldMetadata<College>(
+    parentType: Person,
     name: 'college',
     label: 'الكلية',
-  ),
-  'church': FieldMetadata<Church>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Church> church = FieldMetadata<Church>(
+    parentType: Person,
     name: 'church',
     label: 'الكنيسة',
-  ),
-  'father': FieldMetadata<Father>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Father> father = FieldMetadata<Father>(
+    parentType: Person,
     name: 'father',
     label: 'اب الاعتراف',
-  ),
-  'isStudent': FieldMetadata<bool>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> isStudent = FieldMetadata<bool>(
+    parentType: Person,
     name: 'isStudent',
     label: 'طالب؟',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'job': FieldMetadata<Job>(
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<Job> job = FieldMetadata<Job>(
+    parentType: Person,
     name: 'job',
     label: 'الوظيفة',
-  ),
-  'jobDescription': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<String> jobDescription = FieldMetadata<String>(
+    parentType: Person,
     name: 'jobDescription',
     label: 'تفاصيل الوظيفة',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'qualification': FieldMetadata<Qualification>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Qualification> qualification =
+      FieldMetadata<Qualification>(
+    parentType: Person,
     name: 'qualification',
     label: 'المؤهل',
-  ),
-  'personType': FieldMetadata<PersonType>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<PersonType> personType = FieldMetadata<PersonType>(
+    parentType: Person,
     name: 'personType',
     label: 'الحالة الاجتماعية',
-  ),
-  'state': FieldMetadata<PersonState>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<PersonState> state = FieldMetadata<PersonState>(
+    parentType: Person,
     name: 'state',
     label: 'الحالة الروحية',
-  ),
-  'isServant': FieldMetadata<bool>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<bool> isServant = FieldMetadata<bool>(
+    parentType: Person,
     name: 'isServant',
     label: 'خادم؟',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'notes': FieldMetadata<String>(
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<String> notes = FieldMetadata<String>(
+    parentType: Person,
     name: 'notes',
     label: 'ملاحظات',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'family': FieldMetadata<Family>(
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Family> family = FieldMetadata<Family>(
+    parentType: Person,
     name: 'family',
     label: 'العائلة',
-  ),
-  'store': FieldMetadata<Store>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Store> store = FieldMetadata<Store>(
+    parentType: Person,
     name: 'store',
     label: 'المتجر',
-  ),
-  'studyYear': FieldMetadata<StudyYear>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
+    parentType: Person,
     name: 'studyYear',
     label: 'السنة الدراسية',
-  ),
-  'color': FieldMetadata<Color>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Color> color = FieldMetadata<Color>(
+    parentType: Person,
     name: 'color',
     label: 'اللون',
-    operators: Operator.comparitive.union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {
+      ...ColorOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: Person,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'lastConfession': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastConfession =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'lastConfession',
     label: 'أخر اعتراف',
-  ),
-  'lastKodas': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastKodas =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'lastKodas',
     label: 'أخر تناول',
-  ),
-  'lastCall': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastAttendance =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
+    name: 'lastAttendance',
+    label: 'أخر حضور',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastCall =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'lastCall',
     label: 'أخر مكالمات',
-  ),
-  'lastVisit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastVisit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'lastVisit',
     label: 'أخر افتقاد',
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'classes': FieldMetadata<Class>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<ClassesPersons> classesRel =
+      FieldMetadata<ClassesPersons>(
+    parentType: Person,
     name: 'classes',
-    label: 'الفصول',
+    label: 'classes',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'groups': FieldMetadata<Group>(
+  );
+
+  late final FieldMetadata<Class> classes = classesRel.redirectTo(
+    ClassesPersonsFields().class$,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<PersonsGroups> groupsRel = FieldMetadata<PersonsGroups>(
+    parentType: Person,
     name: 'groups',
-    label: 'المجموعات',
+    label: 'groups',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'services': FieldMetadata<Service>(
+  );
+
+  late final FieldMetadata<Group> groups = groupsRel.redirectTo(
+    PersonsGroupsFields().group,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<PersonsServices> servicesRel =
+      FieldMetadata<PersonsServices>(
+    parentType: Person,
     name: 'services',
-    label: 'الخدمات',
+    label: 'services',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'tags': FieldMetadata<Tag>(
+  );
+
+  late final FieldMetadata<Service> services = servicesRel.redirectTo(
+    PersonsServicesFields().service,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<PersonsTags> tagsRel = FieldMetadata<PersonsTags>(
+    parentType: Person,
     name: 'tags',
-    label: 'الشارات',
+    label: 'tags',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'hobbies': FieldMetadata<Hobby>(
+  );
+
+  late final FieldMetadata<Tag> tags = tagsRel.redirectTo(
+    PersonsTagsFields().tag,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<PersonsHobbies> hobbiesRel =
+      FieldMetadata<PersonsHobbies>(
+    parentType: Person,
     name: 'hobbies',
-    label: 'الهوايات',
+    label: 'hobbies',
+    isCodeOnly: true,
     isOrderable: false,
-  ),
-  'user': FieldMetadata<User>(
+  );
+
+  late final FieldMetadata<Hobby> hobbies = hobbiesRel.redirectTo(
+    PersonsHobbiesFields().hobby,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<User> user = FieldMetadata<User>(
+    parentType: Person,
     name: 'user',
     label: 'بيانات الخادم',
-  ),
-  'kodasHistory': FieldMetadata<LastRecordedByInfo>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> kodasHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'kodasHistory',
     label: 'سجل التناول',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'confessionHistory': FieldMetadata<LastRecordedByInfo>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> attendanceHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
+    name: 'attendanceHistory',
+    label: 'سجل الحضور',
+    isCodeOnly: false,
+    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> confessionHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'confessionHistory',
     label: 'سجل الاعتراف',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'callHistory': FieldMetadata<LastRecordedByInfo>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> callHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'callHistory',
     label: 'سجل المكالمات',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'visitHistory': FieldMetadata<LastRecordedByInfo>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> visitHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'visitHistory',
     label: 'سجل الافتقاد',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'editHistory': FieldMetadata<LastRecordedByInfo>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<LastRecordedByInfo> editHistory =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Person,
     name: 'editHistory',
     label: 'سجل تحديث البيانات',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'kodasHistoryAggregate': FieldMetadata<AggregateData>(
+    operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<AggregateData> kodasHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
     name: 'kodasHistoryAggregate',
-    label: 'إحصائيات سجل التناول',
-  ),
-  'confessionHistoryAggregate': FieldMetadata<AggregateData>(
+    label: 'kodasHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
+    name: 'attendanceHistoryAggregate',
+    label: 'attendanceHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> confessionHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
     name: 'confessionHistoryAggregate',
-    label: 'إحصائيات سجل الاعتراف',
-  ),
-  'callHistoryAggregate': FieldMetadata<AggregateData>(
+    label: 'confessionHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> callHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
     name: 'callHistoryAggregate',
-    label: 'إحصائيات سجل المكالمات',
-  ),
-  'visitHistoryAggregate': FieldMetadata<AggregateData>(
+    label: 'callHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> visitHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
     name: 'visitHistoryAggregate',
-    label: 'إحصائيات سجل الافتقاد',
-  ),
-  'editHistoryAggregate': FieldMetadata<AggregateData>(
+    label: 'visitHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<AggregateData> editHistoryAggregate =
+      FieldMetadata<AggregateData>(
+    parentType: Person,
     name: 'editHistoryAggregate',
-    label: 'إحصائيات سجل تحديث البيانات',
-  ),
-};
+    label: 'editHistoryAggregate',
+    isCodeOnly: true,
+  );
+
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    parentType: Person,
+    name: 'geolocation',
+    label: 'الموقع',
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    address,
+    mainPhone,
+    birthdate,
+    birthday,
+    gender,
+    isShammas,
+    shammasLevel,
+    school,
+    college,
+    church,
+    father,
+    isStudent,
+    job,
+    jobDescription,
+    qualification,
+    personType,
+    state,
+    isServant,
+    notes,
+    family,
+    store,
+    studyYear,
+    color,
+    photoUpdatedAt,
+    lastConfession,
+    lastKodas,
+    lastAttendance,
+    lastCall,
+    lastVisit,
+    lastEdit,
+    classes,
+    groups,
+    services,
+    tags,
+    hobbies,
+    user,
+    kodasHistory,
+    attendanceHistory,
+    confessionHistory,
+    callHistory,
+    visitHistory,
+    editHistory,
+    kodasHistoryAggregate,
+    attendanceHistoryAggregate,
+    confessionHistoryAggregate,
+    callHistoryAggregate,
+    visitHistoryAggregate,
+    editHistoryAggregate,
+    geolocation
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'id': id,
+    'name': name,
+    'address': address,
+    'mainPhone': mainPhone,
+    'birthdate': birthdate,
+    'birthday': birthday,
+    'gender': gender,
+    'isShammas': isShammas,
+    'shammasLevel': shammasLevel,
+    'school': school,
+    'college': college,
+    'church': church,
+    'father': father,
+    'isStudent': isStudent,
+    'job': job,
+    'jobDescription': jobDescription,
+    'qualification': qualification,
+    'personType': personType,
+    'state': state,
+    'isServant': isServant,
+    'notes': notes,
+    'family': family,
+    'store': store,
+    'studyYear': studyYear,
+    'color': color,
+    'photoUpdatedAt': photoUpdatedAt,
+    'lastConfession': lastConfession,
+    'lastKodas': lastKodas,
+    'lastAttendance': lastAttendance,
+    'lastCall': lastCall,
+    'lastVisit': lastVisit,
+    'lastEdit': lastEdit,
+    'classes': classes,
+    'groups': groups,
+    'services': services,
+    'tags': tags,
+    'hobbies': hobbies,
+    'user': user,
+    'kodasHistory': kodasHistory,
+    'attendanceHistory': attendanceHistory,
+    'confessionHistory': confessionHistory,
+    'callHistory': callHistory,
+    'visitHistory': visitHistory,
+    'editHistory': editHistory,
+    'kodasHistoryAggregate': kodasHistoryAggregate,
+    'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    'confessionHistoryAggregate': confessionHistoryAggregate,
+    'callHistoryAggregate': callHistoryAggregate,
+    'visitHistoryAggregate': visitHistoryAggregate,
+    'editHistoryAggregate': editHistoryAggregate,
+    'geolocation': geolocation
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Person _$PersonFromJson(Map json) => _Person(
-      id: json['id'] as String,
-      name: json['name'] as String,
+Person _$PersonFromJson(Map json) => Person(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       address: json['address'] == null
           ? null
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -315,6 +772,10 @@ _Person _$PersonFromJson(Map json) => _Person(
           ? null
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastKodas'] as Map)),
+      lastAttendance: json['lastAttendance'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastAttendance'] as Map)),
       lastCall: json['lastCall'] == null
           ? null
           : LastRecordedByInfo.fromJson(
@@ -339,6 +800,10 @@ _Person _$PersonFromJson(Map json) => _Person(
           ?.map((e) =>
               LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
+      attendanceHistory: (json['attendanceHistory'] as List<dynamic>?)
+          ?.map((e) =>
+              LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList(),
       confessionHistory: (json['confessionHistory'] as List<dynamic>?)
           ?.map((e) =>
               LastRecordedByInfo.fromJson(Map<String, Object?>.from(e as Map)))
@@ -359,6 +824,10 @@ _Person _$PersonFromJson(Map json) => _Person(
           ? null
           : HistoryAggregateData.fromJson(
               Map<String, dynamic>.from(json['kodasHistoryAggregate'] as Map)),
+      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+          ? null
+          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
+              json['attendanceHistoryAggregate'] as Map)),
       confessionHistoryAggregate: json['confessionHistoryAggregate'] == null
           ? null
           : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
@@ -377,7 +846,7 @@ _Person _$PersonFromJson(Map json) => _Person(
               Map<String, dynamic>.from(json['editHistoryAggregate'] as Map)),
     );
 
-Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
+Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),
@@ -420,6 +889,7 @@ Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
       'blurhash': instance.blurhash,
       'lastConfession': instance.lastConfession?.toJson(),
       'lastKodas': instance.lastKodas?.toJson(),
+      'lastAttendance': instance.lastAttendance?.toJson(),
       'lastCall': instance.lastCall?.toJson(),
       'lastVisit': instance.lastVisit?.toJson(),
       'lastEdit': instance.lastEdit?.toJson(),
@@ -430,12 +900,16 @@ Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
       'hobbies': personsHobbiesToJson(instance.hobbies),
       'user': instance.user?.toJson(),
       'kodasHistory': instance.kodasHistory?.map((e) => e.toJson()).toList(),
+      'attendanceHistory':
+          instance.attendanceHistory?.map((e) => e.toJson()).toList(),
       'confessionHistory':
           instance.confessionHistory?.map((e) => e.toJson()).toList(),
       'callHistory': instance.callHistory?.map((e) => e.toJson()).toList(),
       'visitHistory': instance.visitHistory?.map((e) => e.toJson()).toList(),
       'editHistory': instance.editHistory?.map((e) => e.toJson()).toList(),
       'kodasHistoryAggregate': instance.kodasHistoryAggregate?.toJson(),
+      'attendanceHistoryAggregate':
+          instance.attendanceHistoryAggregate?.toJson(),
       'confessionHistoryAggregate':
           instance.confessionHistoryAggregate?.toJson(),
       'callHistoryAggregate': instance.callHistoryAggregate?.toJson(),

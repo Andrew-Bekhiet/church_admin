@@ -9,9 +9,12 @@ import '../../../utils.dart';
 import 'home_daily_data_repository_test.mocks.dart';
 
 @GenerateNiceMocks([
+  MockSpec<AdvancedQueryParser>(),
   MockSpec<SyncKVStore<Map>>(),
 ])
 void main() {
+  late MockAdvancedQueryParser mockAdvancedQueryParser;
+
   const testVersesData = ['verse 1', 'verse 2'];
   const testSayingData = ['saying 1', 'saying 2'];
   final List<List<String>> testSneksarData = kRawSneksarData.fold(
@@ -30,6 +33,12 @@ void main() {
   final date = DateTime(2024, 1, 15);
   final dateKey = date.toIso8601String().split('T').first;
 
+  setUp(() {
+    mockAdvancedQueryParser = MockAdvancedQueryParser();
+    when(mockAdvancedQueryParser.createPaginatableStream(any))
+        .thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
+  });
+
   tearDown(defaultTearDown);
 
   group('getVerse, getSaying', () {
@@ -38,6 +47,7 @@ void main() {
       when(mockBox.get(dateKey)).thenReturn({'verse': 0, 'saying': 1});
 
       final unit = HomeDailyDataRepository(
+        advancedQueryParser: mockAdvancedQueryParser,
         currentIndexes: mockBox,
         versesData: testVersesData,
         sayingData: testSayingData,
@@ -60,6 +70,7 @@ void main() {
       });
 
       final unit = HomeDailyDataRepository(
+        advancedQueryParser: mockAdvancedQueryParser,
         currentIndexes: mockBox,
         versesData: testVersesData,
         sayingData: testSayingData,
@@ -80,6 +91,7 @@ void main() {
 
       HomeDailyDataRepository createUnit(DateTime now) =>
           HomeDailyDataRepository(
+            advancedQueryParser: mockAdvancedQueryParser,
             currentIndexes: MockSyncKVStore(),
             versesData: testVersesData,
             sayingData: testSayingData,
@@ -109,6 +121,7 @@ void main() {
       ).thenAnswer((i) async => savedValue = i.positionalArguments[1]);
 
       final unit = HomeDailyDataRepository(
+        advancedQueryParser: mockAdvancedQueryParser,
         currentIndexes: mockBox,
         versesData: testVersesData,
         sayingData: testSayingData,

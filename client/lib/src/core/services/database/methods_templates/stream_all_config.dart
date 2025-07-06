@@ -4,10 +4,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class StreamAllConfig<T, TBoolExp, TOrderByExp>
+class StreamAllConfig<T>
     extends DAOMethodTemplate<PaginatableStreamResponse<T>> {
-  final StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>?
-      transformRequest;
+  final StreamAllConfigVarsConstructor<T>? transformRequest;
   final SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions;
 
   @override
@@ -23,15 +22,15 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
     PaginatableStreamResponse<T> Function(Json)? super.parserFn,
   });
 
-  StreamAllConfig<T, TBoolExp, TOrderByExp> copyWith({
+  StreamAllConfig<T> copyWith({
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp>? varsConstructor,
+    StreamAllConfigVarsConstructor<T>? varsConstructor,
     SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions,
     PaginatableStreamResponse<T> Function(Json)? parserFn,
   }) {
-    return StreamAllConfig<T, TBoolExp, TOrderByExp>(
+    return StreamAllConfig<T>(
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
@@ -42,9 +41,6 @@ class StreamAllConfig<T, TBoolExp, TOrderByExp>
   }
 }
 
-typedef StreamAllConfigVarsConstructor<T, TBoolExp, TOrderByExp> = Json
-    Function(
-  PaginatableStreamRequest<T,
-          StreamableDAOParameters<T, TBoolExp, TOrderByExp>?>
-      request,
+typedef StreamAllConfigVarsConstructor<T> = Json Function(
+  PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request,
 );

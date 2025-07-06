@@ -6,28 +6,29 @@ part 'father.freezed.dart';
 part 'father.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Father extends ViewableWithID
-    with _$Father
-    implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$FatherFields;
+@JsonSerializable()
+@Queryable(classLabel: 'أباء الاعتراف')
+class Father extends ViewableWithID with _$Father implements SerializableExtra {
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  final String? churchId;
 
-  static final QueryableType<Father> queryableType = QueryableType<Father>(
-    name: 'Father',
-    label: 'أباء الاعتراف',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Father.fromJson,
-  );
-
-  factory Father({
-    required String id,
-    required String name,
-    String? churchId,
-  }) = _Father;
-  Father._();
+  const Father({
+    required this.id,
+    required this.name,
+    this.churchId,
+  });
 
   factory Father.fromJson(Map<String, Object?> json) => _$FatherFromJson(json);
 
   @override
-  String get typeName => Father.queryableType.name;
+  Json toJson() => _$FatherToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().father.name;
 }

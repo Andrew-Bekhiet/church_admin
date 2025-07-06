@@ -182,13 +182,13 @@ class NotificationsService extends BlocObserver {
     );
   }
 
-  Future<void> scheduleMeetingNotification([
+  Future<void> scheduleAttendanceNotification([
     NotificationSetting? notificationSetting,
   ]) {
     return _scheduleNotification(
-      code: 'Meeting'.hashCode,
-      callback: NotificationsServiceCallbacks.showMeetingNotification,
-      settingsCallback: _settings.setMeetingTime,
+      code: 'Attendance'.hashCode,
+      callback: NotificationsServiceCallbacks.showAttendanceNotification,
+      settingsCallback: _settings.setAttendanceTime,
       notificationSetting: notificationSetting ??
           const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
@@ -253,7 +253,7 @@ class NotificationsService extends BlocObserver {
   Future<void> scheduleDefaultNotifications() async {
     await scheduleBirthDayNotification();
     await scheduleKodasNotification();
-    await scheduleMeetingNotification();
+    await scheduleAttendanceNotification();
     await scheduleConfessionNotification();
   }
 

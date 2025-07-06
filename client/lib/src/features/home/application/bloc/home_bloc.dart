@@ -66,12 +66,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   final HomeDailyDataRepository _homeDailyDataRepository;
   final DatabaseService _databaseService;
-  final AdvancedQueryParser _advancedQueryParser;
 
   VoidCallback? _pageControllerListener;
 
   late final PageController _pageController;
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
+  final Map<Type,
+          ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})>
+      _paginatableStreamsParams = {};
 
   late final Map<HomeMode, List<HomePageConfig>> _pagesConfigState = {
     HomeMode.sundaySchool: [
@@ -112,13 +114,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc({
     required HomeDailyDataRepository homeDailyDataRepository,
-    required AdvancedQueryParser advancedQueryParser,
     required DatabaseService databaseService,
     required PageController pageController,
   })  : _pageController = pageController,
         _databaseService = databaseService,
         _homeDailyDataRepository = homeDailyDataRepository,
-        _advancedQueryParser = advancedQueryParser,
         super(
           HomeState(
             pageController: pageController,
@@ -138,6 +138,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           )
           .switchMap(mapper),
     );
+    on<HomePageChange>(_onHomePageChange);
     on<HomeDailyDataGetNew>(_onHomeDailyDataGetNew);
     on<HomeChangeMode>(_onHomeChangeMode);
     on<HomeSwitchMode>(_onHomeSwitchMode);
@@ -148,14 +149,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomePageConfig<T> _ensureControllerWillDispose<T extends Viewable>(
     HomePageConfig<T> config,
-    PaginatableStreamBase<T> Function() paginatableStreamFactory,
+    PaginatableStreamBase<T> Function({
+      Stream<String?>? searchQuery,
+      Stream<List<Filter>>? where,
+      Stream<List<OrderBy>>? orderBy,
+    }) paginatableStreamFactory,
   ) {
     return config.copyWith(
       objectsController: () => _controllersToDispose.putIfAbsent(
         T,
-        () => ViewableObjectListController<T>(
-          objectsPaginatableStream: paginatableStreamFactory(),
-        ),
+        () {
+          return ViewableObjectListController<T>(
+            objectsPaginatableStream: paginatableStreamFactory(
+              where: _paginatableStreamsParams[T]?.where,
+              orderBy: _paginatableStreamsParams[T]?.orderBy,
+            ),
+          );
+        },
       ) as ViewableObjectListController<T>,
     );
   }
@@ -170,7 +180,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (_pageController.page != null &&
             _pageController.page != state.currentPage) {
-          emit(state.copyWith(currentPage: _pageController.page));
+          add(HomePageChange(_pageController.page!));
         }
       },
     );
@@ -193,35 +203,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
 
     await _loadBirthdays(emit);
-
-    // Await until last event to keep the [_pageControllerListener] alive
-    await stream.last;
   }
 
   Future<void> _loadBirthdays(Emitter<HomeState> emit) async {
-    final now = DateTime.now();
-
-    final birthdaysQuery = AdvancedQuery(
-      name: 'أعياد الميلاد',
-      queryableType: Person.queryableType,
-      conditions: [
-        Condition(
-          queryableType: Person.queryableType,
-          field: 'birthday',
-          operator: Operator.eq,
-          value:
-              '${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}',
-        ),
-      ],
-      orderBy: [
-        OrderBy(fieldName: 'birthdate'),
-        OrderBy(fieldName: 'name'),
-      ],
-    );
-
-    final persons = await _advancedQueryParser
-        .createPaginatableStream(birthdaysQuery)
-        .first;
+    final birthdays = await _homeDailyDataRepository.getTodaysBirthdaysData();
 
     final currentData = state.dailyData!;
 
@@ -231,11 +216,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           verse: currentData.verse,
           sneksar: currentData.sneksar,
           saying: currentData.saying,
-          birthdays: persons.map((e) => e.name).toList(),
-          birthdaysQuery: birthdaysQuery,
+          birthdays: birthdays,
+          birthdaysQuery: _homeDailyDataRepository.getTodaysBirthdaysQuery(),
         ),
       ),
     );
+  }
+
+  void _onHomePageChange(
+    HomePageChange event,
+    Emitter<HomeState> emit,
+  ) {
+    final newPage = event.page.clamp(0.0, state.pages.length - 1.0);
+
+    if (newPage == state.currentPage) return;
+
+    emit(state.copyWith(currentPage: newPage));
   }
 
   void _onHomeDailyDataGetNew(

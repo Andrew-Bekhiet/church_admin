@@ -26,9 +26,6 @@ mixin _$HistoryAggregateData {
       _$HistoryAggregateDataCopyWithImpl<HistoryAggregateData>(
           this as HistoryAggregateData, _$identity);
 
-  /// Serializes this HistoryAggregateData to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -57,8 +54,6 @@ abstract mixin class $HistoryAggregateDataCopyWith<$Res> {
       _$HistoryAggregateDataCopyWithImpl;
   @useResult
   $Res call({AggregateData aggregate, List<LastRecordedByInfo> nodes});
-
-  $AggregateDataCopyWith<$Res> get aggregate;
 }
 
 /// @nodoc
@@ -77,7 +72,7 @@ class _$HistoryAggregateDataCopyWithImpl<$Res>
     Object? aggregate = null,
     Object? nodes = null,
   }) {
-    return _then(_self.copyWith(
+    return _then(HistoryAggregateData(
       aggregate: null == aggregate
           ? _self.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
@@ -87,127 +82,6 @@ class _$HistoryAggregateDataCopyWithImpl<$Res>
           : nodes // ignore: cast_nullable_to_non_nullable
               as List<LastRecordedByInfo>,
     ));
-  }
-
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AggregateDataCopyWith<$Res> get aggregate {
-    return $AggregateDataCopyWith<$Res>(_self.aggregate, (value) {
-      return _then(_self.copyWith(aggregate: value));
-    });
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _HistoryAggregateData implements HistoryAggregateData {
-  const _HistoryAggregateData(
-      {required this.aggregate,
-      final List<LastRecordedByInfo> nodes = const []})
-      : _nodes = nodes;
-  factory _HistoryAggregateData.fromJson(Map<String, dynamic> json) =>
-      _$HistoryAggregateDataFromJson(json);
-
-  @override
-  final AggregateData aggregate;
-  final List<LastRecordedByInfo> _nodes;
-  @override
-  @JsonKey()
-  List<LastRecordedByInfo> get nodes {
-    if (_nodes is EqualUnmodifiableListView) return _nodes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_nodes);
-  }
-
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$HistoryAggregateDataCopyWith<_HistoryAggregateData> get copyWith =>
-      __$HistoryAggregateDataCopyWithImpl<_HistoryAggregateData>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$HistoryAggregateDataToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _HistoryAggregateData &&
-            (identical(other.aggregate, aggregate) ||
-                other.aggregate == aggregate) &&
-            const DeepCollectionEquality().equals(other._nodes, _nodes));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, aggregate, const DeepCollectionEquality().hash(_nodes));
-
-  @override
-  String toString() {
-    return 'HistoryAggregateData(aggregate: $aggregate, nodes: $nodes)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$HistoryAggregateDataCopyWith<$Res>
-    implements $HistoryAggregateDataCopyWith<$Res> {
-  factory _$HistoryAggregateDataCopyWith(_HistoryAggregateData value,
-          $Res Function(_HistoryAggregateData) _then) =
-      __$HistoryAggregateDataCopyWithImpl;
-  @override
-  @useResult
-  $Res call({AggregateData aggregate, List<LastRecordedByInfo> nodes});
-
-  @override
-  $AggregateDataCopyWith<$Res> get aggregate;
-}
-
-/// @nodoc
-class __$HistoryAggregateDataCopyWithImpl<$Res>
-    implements _$HistoryAggregateDataCopyWith<$Res> {
-  __$HistoryAggregateDataCopyWithImpl(this._self, this._then);
-
-  final _HistoryAggregateData _self;
-  final $Res Function(_HistoryAggregateData) _then;
-
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? aggregate = null,
-    Object? nodes = null,
-  }) {
-    return _then(_HistoryAggregateData(
-      aggregate: null == aggregate
-          ? _self.aggregate
-          : aggregate // ignore: cast_nullable_to_non_nullable
-              as AggregateData,
-      nodes: null == nodes
-          ? _self._nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>,
-    ));
-  }
-
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AggregateDataCopyWith<$Res> get aggregate {
-    return $AggregateDataCopyWith<$Res>(_self.aggregate, (value) {
-      return _then(_self.copyWith(aggregate: value));
-    });
   }
 }
 

@@ -19,11 +19,10 @@ class _ViewStreetState extends State<ViewStreet> {
       objectsPaginatableStream: DatabaseService.I.families.streamAll(
         where: Stream.value(
           [
-            Input_FamiliesBoolExp(
-              address: Input_AddressesBoolExp(
-                streetId:
-                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
-              ),
+            Filter(
+              FamilyFields().street.redirectTo(StreetFields().id),
+              PrimitiveOperator.eq,
+              widget.streetId,
             ),
           ],
         ),
@@ -36,11 +35,10 @@ class _ViewStreetState extends State<ViewStreet> {
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
         where: Stream.value(
           [
-            Input_StoresBoolExp(
-              address: Input_AddressesBoolExp(
-                streetId:
-                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
-              ),
+            Filter(
+              StoreFields().street.redirectTo(StreetFields().id),
+              PrimitiveOperator.eq,
+              widget.streetId,
             ),
           ],
         ),
@@ -53,11 +51,10 @@ class _ViewStreetState extends State<ViewStreet> {
       objectsPaginatableStream: DatabaseService.I.persons.streamAll(
         where: Stream.value(
           [
-            Input_PersonsBoolExp(
-              address: Input_AddressesBoolExp(
-                streetId:
-                    Input_UuidComparisonExp($_eq: widget.streetId.toUuid()),
-              ),
+            Filter(
+              PersonFields().street.redirectTo(StreetFields().id),
+              PrimitiveOperator.eq,
+              widget.streetId,
             ),
           ],
         ),

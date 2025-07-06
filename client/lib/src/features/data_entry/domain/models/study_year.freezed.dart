@@ -25,9 +25,6 @@ mixin _$StudyYear {
   $StudyYearCopyWith<StudyYear> get copyWith =>
       _$StudyYearCopyWithImpl<StudyYear>(this as StudyYear, _$identity);
 
-  /// Serializes this StudyYear to a JSON map.
-  Map<String, dynamic> toJson();
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -70,92 +67,7 @@ class _$StudyYearCopyWithImpl<$Res> implements $StudyYearCopyWith<$Res> {
     Object? order = null,
     Object? name = null,
   }) {
-    return _then(_self.copyWith(
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _StudyYear extends StudyYear {
-  _StudyYear({required this.order, required this.name}) : super._();
-  factory _StudyYear.fromJson(Map<String, dynamic> json) =>
-      _$StudyYearFromJson(json);
-
-  @override
-  final int order;
-  @override
-  final String name;
-
-  /// Create a copy of StudyYear
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$StudyYearCopyWith<_StudyYear> get copyWith =>
-      __$StudyYearCopyWithImpl<_StudyYear>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$StudyYearToJson(
-      this,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _StudyYear &&
-            (identical(other.order, order) || other.order == order) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, order, name);
-
-  @override
-  String toString() {
-    return 'StudyYear(order: $order, name: $name)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$StudyYearCopyWith<$Res>
-    implements $StudyYearCopyWith<$Res> {
-  factory _$StudyYearCopyWith(
-          _StudyYear value, $Res Function(_StudyYear) _then) =
-      __$StudyYearCopyWithImpl;
-  @override
-  @useResult
-  $Res call({int order, String name});
-}
-
-/// @nodoc
-class __$StudyYearCopyWithImpl<$Res> implements _$StudyYearCopyWith<$Res> {
-  __$StudyYearCopyWithImpl(this._self, this._then);
-
-  final _StudyYear _self;
-  final $Res Function(_StudyYear) _then;
-
-  /// Create a copy of StudyYear
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? order = null,
-    Object? name = null,
-  }) {
-    return _then(_StudyYear(
+    return _then(StudyYear(
       order: null == order
           ? _self.order
           : order // ignore: cast_nullable_to_non_nullable

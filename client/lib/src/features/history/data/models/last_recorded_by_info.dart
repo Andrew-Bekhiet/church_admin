@@ -6,39 +6,40 @@ part 'last_recorded_by_info.freezed.dart';
 part 'last_recorded_by_info.g.dart';
 
 @freezed
-@TypeMetadata(ignoreFields: ['recordedBy'])
-abstract class LastRecordedByInfo extends ViewableWithID
+@JsonSerializable()
+@Queryable(
+    classLabel: 'بيانات آخر تسجيل', ignoreFields: ['id', 'name', 'recordedBy'])
+class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata =>
-      _$LastRecordedByInfoFields;
+  @override
+  final DateTime time;
+  @override
+  @JsonKey(readValue: readRecordedBy)
+  final String? recordedBy;
+  @override
+  final User? user;
 
-  static final QueryableType<LastRecordedByInfo> queryableType =
-      QueryableType<LastRecordedByInfo>(
-    name: 'LastRecordedByInfo',
-    label: 'بيانات آخر تسجيل',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: LastRecordedByInfo.fromJson,
-  );
-
-  factory LastRecordedByInfo({
-    required DateTime time,
-    @JsonKey(readValue: readRecordedBy) String? recordedBy,
-    User? user,
-  }) = _LastRecordedByInfo;
-  LastRecordedByInfo._() : super();
+  LastRecordedByInfo({
+    required this.time,
+    this.recordedBy,
+    this.user,
+  });
 
   factory LastRecordedByInfo.fromJson(Map<String, Object?> json) =>
       _$LastRecordedByInfoFromJson(json);
 
   @override
-  String get name => time.toString();
+  Map<String, dynamic> toJson() => _$LastRecordedByInfoToJson(this);
 
   @override
   String get id => time.toIso8601String();
 
   @override
-  String get typeName => LastRecordedByInfo.queryableType.name;
+  String get name => time.toString();
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().lastRecordedByInfo.name;
 }
 
 String? readRecordedBy(Map json, String _) =>

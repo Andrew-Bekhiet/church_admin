@@ -5,18 +5,17 @@ class DBVarsTransformer {
   const DBVarsTransformer();
 
   Json transformrequestForPagination<T extends ViewableWithID>(
-    PaginatableStreamRequest<T, StreamableDAOParameters<T, dynamic, dynamic>?>
-        request, {
+    PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request, {
     List<Json>? overrideWhere,
     List<Json>? overrideOrderBy,
   }) {
     final PaginatableStreamRequest(:param, :cursor, :pageSize) = request;
 
     final search = param?.search;
-    final where = param?.where?.map((o) => o.toJson() as Json).toList() ??
+    final where = param?.where?.map((o) => o.queryToJson()).toList() ??
         overrideWhere ??
         [];
-    final orderBy = param?.orderBy?.map((o) => o.toJson() as Json).toList() ??
+    final orderBy = param?.orderBy?.map((o) => o.toSearchJson()).toList() ??
         overrideOrderBy ??
         [
           {'name': 'ASC'},
@@ -94,10 +93,11 @@ extension _FollowKeysPath<T> on Map<T, dynamic> {
     }
 
     if (path.isEmpty) return this;
-    if (path.length == 1) return this[path.keys.single];
 
-    return (this[path.keys.single] as Map<T, dynamic>)
-        .followKeysPath(path.values.single);
+    final value = this[path.keys.single];
+    return value is Map<T, dynamic>
+        ? value.followKeysPath(path.values.single)
+        : value;
   }
 }
 

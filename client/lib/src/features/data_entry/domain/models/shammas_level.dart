@@ -6,30 +6,35 @@ part 'shammas_level.freezed.dart';
 part 'shammas_level.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class ShammasLevel extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'رتب الشموسية')
+class ShammasLevel extends ViewableWithID
     with _$ShammasLevel
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$ShammasLevelFields;
+  @override
+  @JsonKey(defaultValue: 0)
+  final int order;
 
-  static final QueryableType<ShammasLevel> queryableType =
-      QueryableType<ShammasLevel>(
-    name: 'ShammasLevel',
-    label: 'رتب الشموسية',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: ShammasLevel.fromJson,
-  );
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
 
-  factory ShammasLevel({
-    required int order,
-    required String name,
-    required String id,
-  }) = _ShammasLevel;
-  ShammasLevel._() : super();
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+
+  const ShammasLevel({
+    required this.order,
+    required this.name,
+    required this.id,
+  });
 
   factory ShammasLevel.fromJson(Map<String, Object?> json) =>
       _$ShammasLevelFromJson(json);
 
   @override
-  String get typeName => ShammasLevel.queryableType.name;
+  Json toJson() => _$ShammasLevelToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().shammasLevel.name;
 }

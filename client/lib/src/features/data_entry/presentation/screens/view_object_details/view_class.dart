@@ -16,10 +16,10 @@ class _ViewClassState extends State<ViewClass> {
   late final _personsController = ViewableObjectListController(
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
       where: Stream.value([
-        Input_PersonsBoolExp(
-          classes: Input_ClassesPersonsBoolExp(
-            classId: Input_UuidComparisonExp($_eq: widget.classId.toUuid()),
-          ),
+        Filter(
+          PersonFields().classesRel.redirectTo(ClassesPersonsFields().classId),
+          PrimitiveOperator.eq,
+          widget.classId,
         ),
       ]),
     ),

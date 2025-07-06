@@ -325,7 +325,6 @@ Override _setUpAuthBloc() {
         email: 'email',
         emailVerified: true,
         idToken: 'idToken',
-        claims: {},
       ),
     ),
   );
@@ -338,7 +337,6 @@ Override _setUpAuthBloc() {
       email: 'email',
       emailVerified: true,
       idToken: 'idToken',
-      claims: {},
     ),
   );
 

@@ -3,18 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i11;
+import 'dart:async' as _i4;
+import 'dart:ui' as _i10;
 
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:flutter/src/widgets/basic.dart' as _i8;
+import 'package:flutter/src/widgets/basic.dart' as _i7;
 import 'package:flutter/src/widgets/page_view.dart' as _i6;
-import 'package:flutter/src/widgets/scroll_context.dart' as _i10;
-import 'package:flutter/src/widgets/scroll_physics.dart' as _i9;
+import 'package:flutter/src/widgets/scroll_context.dart' as _i9;
+import 'package:flutter/src/widgets/scroll_physics.dart' as _i8;
 import 'package:flutter/src/widgets/scroll_position.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
-import 'package:rxdart/rxdart.dart' as _i5;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,20 +29,9 @@ import 'package:rxdart/rxdart.dart' as _i5;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakePaginatableStreamBase_0<T> extends _i1.SmartFake
-    implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDBGraphQLClient_1 extends _i1.SmartFake
+class _FakeDBGraphQLClient_0 extends _i1.SmartFake
     implements _i2.DBGraphQLClient {
-  _FakeDBGraphQLClient_1(
+  _FakeDBGraphQLClient_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +40,8 @@ class _FakeDBGraphQLClient_1 extends _i1.SmartFake
         );
 }
 
-class _FakeGQLParser_2 extends _i1.SmartFake implements _i2.GQLParser {
-  _FakeGQLParser_2(
+class _FakeGQLParser_1 extends _i1.SmartFake implements _i2.GQLParser {
+  _FakeGQLParser_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,9 +50,9 @@ class _FakeGQLParser_2 extends _i1.SmartFake implements _i2.GQLParser {
         );
 }
 
-class _FakeDBVarsTransformer_3 extends _i1.SmartFake
+class _FakeDBVarsTransformer_2 extends _i1.SmartFake
     implements _i2.DBVarsTransformer {
-  _FakeDBVarsTransformer_3(
+  _FakeDBVarsTransformer_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -73,9 +61,9 @@ class _FakeDBVarsTransformer_3 extends _i1.SmartFake
         );
 }
 
-class _FakeAdvancedQueryParser_4 extends _i1.SmartFake
+class _FakeAdvancedQueryParser_3 extends _i1.SmartFake
     implements _i2.AdvancedQueryParser {
-  _FakeAdvancedQueryParser_4(
+  _FakeAdvancedQueryParser_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,8 +72,8 @@ class _FakeAdvancedQueryParser_4 extends _i1.SmartFake
         );
 }
 
-class _FakeHomeDAO_5 extends _i1.SmartFake implements _i2.HomeDAO {
-  _FakeHomeDAO_5(
+class _FakeHomeDAO_4 extends _i1.SmartFake implements _i2.HomeDAO {
+  _FakeHomeDAO_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -94,8 +82,8 @@ class _FakeHomeDAO_5 extends _i1.SmartFake implements _i2.HomeDAO {
         );
 }
 
-class _FakeAreasDAO_6 extends _i1.SmartFake implements _i2.AreasDAO {
-  _FakeAreasDAO_6(
+class _FakeAreasDAO_5 extends _i1.SmartFake implements _i2.AreasDAO {
+  _FakeAreasDAO_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -104,8 +92,8 @@ class _FakeAreasDAO_6 extends _i1.SmartFake implements _i2.AreasDAO {
         );
 }
 
-class _FakeStreetsDAO_7 extends _i1.SmartFake implements _i2.StreetsDAO {
-  _FakeStreetsDAO_7(
+class _FakeStreetsDAO_6 extends _i1.SmartFake implements _i2.StreetsDAO {
+  _FakeStreetsDAO_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -114,8 +102,8 @@ class _FakeStreetsDAO_7 extends _i1.SmartFake implements _i2.StreetsDAO {
         );
 }
 
-class _FakeFamiliesDAO_8 extends _i1.SmartFake implements _i2.FamiliesDAO {
-  _FakeFamiliesDAO_8(
+class _FakeFamiliesDAO_7 extends _i1.SmartFake implements _i2.FamiliesDAO {
+  _FakeFamiliesDAO_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -124,8 +112,8 @@ class _FakeFamiliesDAO_8 extends _i1.SmartFake implements _i2.FamiliesDAO {
         );
 }
 
-class _FakeStoresDAO_9 extends _i1.SmartFake implements _i2.StoresDAO {
-  _FakeStoresDAO_9(
+class _FakeStoresDAO_8 extends _i1.SmartFake implements _i2.StoresDAO {
+  _FakeStoresDAO_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -134,8 +122,8 @@ class _FakeStoresDAO_9 extends _i1.SmartFake implements _i2.StoresDAO {
         );
 }
 
-class _FakePersonsDAO_10 extends _i1.SmartFake implements _i2.PersonsDAO {
-  _FakePersonsDAO_10(
+class _FakePersonsDAO_9 extends _i1.SmartFake implements _i2.PersonsDAO {
+  _FakePersonsDAO_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -144,8 +132,8 @@ class _FakePersonsDAO_10 extends _i1.SmartFake implements _i2.PersonsDAO {
         );
 }
 
-class _FakeServicesDAO_11 extends _i1.SmartFake implements _i2.ServicesDAO {
-  _FakeServicesDAO_11(
+class _FakeServicesDAO_10 extends _i1.SmartFake implements _i2.ServicesDAO {
+  _FakeServicesDAO_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -154,8 +142,8 @@ class _FakeServicesDAO_11 extends _i1.SmartFake implements _i2.ServicesDAO {
         );
 }
 
-class _FakeClassesDAO_12 extends _i1.SmartFake implements _i2.ClassesDAO {
-  _FakeClassesDAO_12(
+class _FakeClassesDAO_11 extends _i1.SmartFake implements _i2.ClassesDAO {
+  _FakeClassesDAO_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -164,8 +152,8 @@ class _FakeClassesDAO_12 extends _i1.SmartFake implements _i2.ClassesDAO {
         );
 }
 
-class _FakeGroupsDAO_13 extends _i1.SmartFake implements _i2.GroupsDAO {
-  _FakeGroupsDAO_13(
+class _FakeGroupsDAO_12 extends _i1.SmartFake implements _i2.GroupsDAO {
+  _FakeGroupsDAO_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -174,8 +162,8 @@ class _FakeGroupsDAO_13 extends _i1.SmartFake implements _i2.GroupsDAO {
         );
 }
 
-class _FakeUsersDAO_14 extends _i1.SmartFake implements _i2.UsersDAO {
-  _FakeUsersDAO_14(
+class _FakeUsersDAO_13 extends _i1.SmartFake implements _i2.UsersDAO {
+  _FakeUsersDAO_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -184,8 +172,8 @@ class _FakeUsersDAO_14 extends _i1.SmartFake implements _i2.UsersDAO {
         );
 }
 
-class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_15(
+class _FakeMetadataDAO_14 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -194,8 +182,8 @@ class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
         );
 }
 
-class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_16(
+class _FakeHistoryDAO_15 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -204,9 +192,9 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
         );
 }
 
-class _FakeScrollPosition_17 extends _i1.SmartFake
+class _FakeScrollPosition_16 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_17(
+  _FakeScrollPosition_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -221,13 +209,23 @@ class _FakeScrollPosition_17 extends _i1.SmartFake
 class MockHomeDailyDataRepository extends _i1.Mock
     implements _i2.HomeDailyDataRepository {
   @override
+  _i4.Future<List<String>> getTodaysBirthdaysData() => (super.noSuchMethod(
+        Invocation.method(
+          #getTodaysBirthdaysData,
+          [],
+        ),
+        returnValue: _i4.Future<List<String>>.value(<String>[]),
+        returnValueForMissingStub: _i4.Future<List<String>>.value(<String>[]),
+      ) as _i4.Future<List<String>>);
+
+  @override
   String getVerse({bool? forceRefresh = false}) => (super.noSuchMethod(
         Invocation.method(
           #getVerse,
           [],
           {#forceRefresh: forceRefresh},
         ),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getVerse,
@@ -235,7 +233,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
             {#forceRefresh: forceRefresh},
           ),
         ),
-        returnValueForMissingStub: _i4.dummyValue<String>(
+        returnValueForMissingStub: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getVerse,
@@ -252,7 +250,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
           [],
           {#forceRefresh: forceRefresh},
         ),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getSaying,
@@ -260,7 +258,7 @@ class MockHomeDailyDataRepository extends _i1.Mock
             {#forceRefresh: forceRefresh},
           ),
         ),
-        returnValueForMissingStub: _i4.dummyValue<String>(
+        returnValueForMissingStub: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getSaying,
@@ -276,14 +274,14 @@ class MockHomeDailyDataRepository extends _i1.Mock
           #getTodaysSneksar,
           [],
         ),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getTodaysSneksar,
             [],
           ),
         ),
-        returnValueForMissingStub: _i4.dummyValue<String>(
+        returnValueForMissingStub: _i5.dummyValue<String>(
           this,
           Invocation.method(
             #getTodaysSneksar,
@@ -293,48 +291,6 @@ class MockHomeDailyDataRepository extends _i1.Mock
       ) as String);
 }
 
-/// A class which mocks [AdvancedQueryParser].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAdvancedQueryParser extends _i1.Mock
-    implements _i2.AdvancedQueryParser {
-  @override
-  _i2.PaginatableStreamBase<_i2.ViewableWithID> createPaginatableStream(
-    _i2.AdvancedQuery? query, [
-    _i5.BehaviorSubject<String?>? searchStream,
-  ]) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #createPaginatableStream,
-          [
-            query,
-            searchStream,
-          ],
-        ),
-        returnValue: _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
-          this,
-          Invocation.method(
-            #createPaginatableStream,
-            [
-              query,
-              searchStream,
-            ],
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
-          this,
-          Invocation.method(
-            #createPaginatableStream,
-            [
-              query,
-              searchStream,
-            ],
-          ),
-        ),
-      ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
-}
-
 /// A class which mocks [DatabaseService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -342,11 +298,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
         Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_1(
+        returnValue: _FakeDBGraphQLClient_0(
           this,
           Invocation.getter(#graphQLClient),
         ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_1(
+        returnValueForMissingStub: _FakeDBGraphQLClient_0(
           this,
           Invocation.getter(#graphQLClient),
         ),
@@ -355,11 +311,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.GQLParser get parser => (super.noSuchMethod(
         Invocation.getter(#parser),
-        returnValue: _FakeGQLParser_2(
+        returnValue: _FakeGQLParser_1(
           this,
           Invocation.getter(#parser),
         ),
-        returnValueForMissingStub: _FakeGQLParser_2(
+        returnValueForMissingStub: _FakeGQLParser_1(
           this,
           Invocation.getter(#parser),
         ),
@@ -368,11 +324,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.DBVarsTransformer get varsTransformer => (super.noSuchMethod(
         Invocation.getter(#varsTransformer),
-        returnValue: _FakeDBVarsTransformer_3(
+        returnValue: _FakeDBVarsTransformer_2(
           this,
           Invocation.getter(#varsTransformer),
         ),
-        returnValueForMissingStub: _FakeDBVarsTransformer_3(
+        returnValueForMissingStub: _FakeDBVarsTransformer_2(
           this,
           Invocation.getter(#varsTransformer),
         ),
@@ -381,11 +337,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.AdvancedQueryParser get advancedQueryParser => (super.noSuchMethod(
         Invocation.getter(#advancedQueryParser),
-        returnValue: _FakeAdvancedQueryParser_4(
+        returnValue: _FakeAdvancedQueryParser_3(
           this,
           Invocation.getter(#advancedQueryParser),
         ),
-        returnValueForMissingStub: _FakeAdvancedQueryParser_4(
+        returnValueForMissingStub: _FakeAdvancedQueryParser_3(
           this,
           Invocation.getter(#advancedQueryParser),
         ),
@@ -394,11 +350,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.HomeDAO get home => (super.noSuchMethod(
         Invocation.getter(#home),
-        returnValue: _FakeHomeDAO_5(
+        returnValue: _FakeHomeDAO_4(
           this,
           Invocation.getter(#home),
         ),
-        returnValueForMissingStub: _FakeHomeDAO_5(
+        returnValueForMissingStub: _FakeHomeDAO_4(
           this,
           Invocation.getter(#home),
         ),
@@ -407,11 +363,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.AreasDAO get areas => (super.noSuchMethod(
         Invocation.getter(#areas),
-        returnValue: _FakeAreasDAO_6(
+        returnValue: _FakeAreasDAO_5(
           this,
           Invocation.getter(#areas),
         ),
-        returnValueForMissingStub: _FakeAreasDAO_6(
+        returnValueForMissingStub: _FakeAreasDAO_5(
           this,
           Invocation.getter(#areas),
         ),
@@ -420,11 +376,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.StreetsDAO get streets => (super.noSuchMethod(
         Invocation.getter(#streets),
-        returnValue: _FakeStreetsDAO_7(
+        returnValue: _FakeStreetsDAO_6(
           this,
           Invocation.getter(#streets),
         ),
-        returnValueForMissingStub: _FakeStreetsDAO_7(
+        returnValueForMissingStub: _FakeStreetsDAO_6(
           this,
           Invocation.getter(#streets),
         ),
@@ -433,11 +389,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.FamiliesDAO get families => (super.noSuchMethod(
         Invocation.getter(#families),
-        returnValue: _FakeFamiliesDAO_8(
+        returnValue: _FakeFamiliesDAO_7(
           this,
           Invocation.getter(#families),
         ),
-        returnValueForMissingStub: _FakeFamiliesDAO_8(
+        returnValueForMissingStub: _FakeFamiliesDAO_7(
           this,
           Invocation.getter(#families),
         ),
@@ -446,11 +402,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.StoresDAO get stores => (super.noSuchMethod(
         Invocation.getter(#stores),
-        returnValue: _FakeStoresDAO_9(
+        returnValue: _FakeStoresDAO_8(
           this,
           Invocation.getter(#stores),
         ),
-        returnValueForMissingStub: _FakeStoresDAO_9(
+        returnValueForMissingStub: _FakeStoresDAO_8(
           this,
           Invocation.getter(#stores),
         ),
@@ -459,11 +415,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.PersonsDAO get persons => (super.noSuchMethod(
         Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_10(
+        returnValue: _FakePersonsDAO_9(
           this,
           Invocation.getter(#persons),
         ),
-        returnValueForMissingStub: _FakePersonsDAO_10(
+        returnValueForMissingStub: _FakePersonsDAO_9(
           this,
           Invocation.getter(#persons),
         ),
@@ -472,11 +428,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.ServicesDAO get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_11(
+        returnValue: _FakeServicesDAO_10(
           this,
           Invocation.getter(#services),
         ),
-        returnValueForMissingStub: _FakeServicesDAO_11(
+        returnValueForMissingStub: _FakeServicesDAO_10(
           this,
           Invocation.getter(#services),
         ),
@@ -485,11 +441,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.ClassesDAO get classes => (super.noSuchMethod(
         Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_12(
+        returnValue: _FakeClassesDAO_11(
           this,
           Invocation.getter(#classes),
         ),
-        returnValueForMissingStub: _FakeClassesDAO_12(
+        returnValueForMissingStub: _FakeClassesDAO_11(
           this,
           Invocation.getter(#classes),
         ),
@@ -498,11 +454,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.GroupsDAO get groups => (super.noSuchMethod(
         Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_13(
+        returnValue: _FakeGroupsDAO_12(
           this,
           Invocation.getter(#groups),
         ),
-        returnValueForMissingStub: _FakeGroupsDAO_13(
+        returnValueForMissingStub: _FakeGroupsDAO_12(
           this,
           Invocation.getter(#groups),
         ),
@@ -511,11 +467,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.UsersDAO get users => (super.noSuchMethod(
         Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_14(
+        returnValue: _FakeUsersDAO_13(
           this,
           Invocation.getter(#users),
         ),
-        returnValueForMissingStub: _FakeUsersDAO_14(
+        returnValueForMissingStub: _FakeUsersDAO_13(
           this,
           Invocation.getter(#users),
         ),
@@ -524,11 +480,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.MetadataDAO get metadata => (super.noSuchMethod(
         Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_15(
+        returnValue: _FakeMetadataDAO_14(
           this,
           Invocation.getter(#metadata),
         ),
-        returnValueForMissingStub: _FakeMetadataDAO_15(
+        returnValueForMissingStub: _FakeMetadataDAO_14(
           this,
           Invocation.getter(#metadata),
         ),
@@ -537,11 +493,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
   _i2.HistoryDAO get history => (super.noSuchMethod(
         Invocation.getter(#history),
-        returnValue: _FakeHistoryDAO_16(
+        returnValue: _FakeHistoryDAO_15(
           this,
           Invocation.getter(#history),
         ),
-        returnValueForMissingStub: _FakeHistoryDAO_16(
+        returnValueForMissingStub: _FakeHistoryDAO_15(
           this,
           Invocation.getter(#history),
         ),
@@ -612,11 +568,11 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   @override
   _i3.ScrollPosition get position => (super.noSuchMethod(
         Invocation.getter(#position),
-        returnValue: _FakeScrollPosition_17(
+        returnValue: _FakeScrollPosition_16(
           this,
           Invocation.getter(#position),
         ),
-        returnValueForMissingStub: _FakeScrollPosition_17(
+        returnValueForMissingStub: _FakeScrollPosition_16(
           this,
           Invocation.getter(#position),
         ),
@@ -637,10 +593,10 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
       ) as bool);
 
   @override
-  _i7.Future<void> animateToPage(
+  _i4.Future<void> animateToPage(
     int? page, {
     required Duration? duration,
-    required _i8.Curve? curve,
+    required _i7.Curve? curve,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -651,9 +607,9 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             #curve: curve,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   void jumpToPage(int? page) => super.noSuchMethod(
@@ -665,9 +621,9 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
       );
 
   @override
-  _i7.Future<void> nextPage({
+  _i4.Future<void> nextPage({
     required Duration? duration,
-    required _i8.Curve? curve,
+    required _i7.Curve? curve,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -678,14 +634,14 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             #curve: curve,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i7.Future<void> previousPage({
+  _i4.Future<void> previousPage({
     required Duration? duration,
-    required _i8.Curve? curve,
+    required _i7.Curve? curve,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -696,14 +652,14 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             #curve: curve,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   _i3.ScrollPosition createScrollPosition(
-    _i9.ScrollPhysics? physics,
-    _i10.ScrollContext? context,
+    _i8.ScrollPhysics? physics,
+    _i9.ScrollContext? context,
     _i3.ScrollPosition? oldPosition,
   ) =>
       (super.noSuchMethod(
@@ -715,7 +671,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             oldPosition,
           ],
         ),
-        returnValue: _FakeScrollPosition_17(
+        returnValue: _FakeScrollPosition_16(
           this,
           Invocation.method(
             #createScrollPosition,
@@ -726,7 +682,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             ],
           ),
         ),
-        returnValueForMissingStub: _FakeScrollPosition_17(
+        returnValueForMissingStub: _FakeScrollPosition_16(
           this,
           Invocation.method(
             #createScrollPosition,
@@ -749,10 +705,10 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
       );
 
   @override
-  _i7.Future<void> animateTo(
+  _i4.Future<void> animateTo(
     double? offset, {
     required Duration? duration,
-    required _i8.Curve? curve,
+    required _i7.Curve? curve,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -763,9 +719,9 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
             #curve: curve,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   void jumpTo(double? value) => super.noSuchMethod(
@@ -804,7 +760,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
       );
 
   @override
-  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -813,7 +769,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
       );
 
   @override
-  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

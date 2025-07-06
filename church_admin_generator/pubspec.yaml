@@ -7,16 +7,6 @@ environment:
   sdk: ^3.1.0
 
 dependency_overrides:
-  hive:
-    git:
-      url: https://github.com/MarioMederos/hive/
-      ref: 299decc6295258c0c1583d04ff99c6ff1283ec8a
-      path: hive
-  hive_flutter:
-    git:
-      url: https://github.com/MarioMederos/hive/
-      ref: 299decc6295258c0c1583d04ff99c6ff1283ec8a
-      path: hive_flutter
   js: ^0.7.1
 
 dependencies:
@@ -24,10 +14,12 @@ dependencies:
   build: ^2.4.1
   church_admin:
     path: ../client
+  code_builder: ^4.10.1
+  dart_style: ^3.1.0
   glob: ^2.1.2
   gql: ^1.0.1-alpha+1691943394579
   source_gen: ^2.0.0
 
 dev_dependencies:
-  lints: ^3.0.0
+  lints: ^6.0.0
   test: ^1.21.0

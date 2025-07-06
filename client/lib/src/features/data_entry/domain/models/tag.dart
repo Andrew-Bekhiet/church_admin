@@ -8,28 +8,30 @@ part 'tag.freezed.dart';
 part 'tag.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class Tag extends ViewableWithID
-    with _$Tag
-    implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$TagFields;
+@JsonSerializable()
+@Queryable(classLabel: 'الشارات')
+class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
+  final Color? color;
 
-  static final QueryableType<Tag> queryableType = QueryableType<Tag>(
-    name: 'Tag',
-    label: 'الشارات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: Tag.fromJson,
-  );
-
-  factory Tag({
-    required String id,
-    required String name,
-    @JsonKey(fromJson: colorFromInt, toJson: colorToInt) Color? color,
-  }) = _Tag;
-  Tag._();
+  const Tag({
+    required this.id,
+    required this.name,
+    this.color,
+  });
 
   factory Tag.fromJson(Map<String, Object?> json) => _$TagFromJson(json);
 
   @override
-  String get typeName => Tag.queryableType.name;
+  Json toJson() => _$TagToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().tag.name;
 }

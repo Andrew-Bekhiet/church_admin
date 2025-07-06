@@ -1,7 +1,6 @@
-import 'package:church_admin/church_admin.dart';
-import 'package:equatable/equatable.dart';
+part of 'spatial.dart';
 
-class Polygon with EquatableMixin {
+class Polygon with EquatableMixin implements Spatial {
   final List<Point> coordinates;
 
   const Polygon(this.coordinates);

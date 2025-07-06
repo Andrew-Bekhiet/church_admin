@@ -12,7 +12,6 @@ class PersonsNotificationsQueries {
   Future<Iterable<Person>> _getPersonsNames({
     List<Input_PersonsBoolExp>? where,
     int? limit,
-    List<Input_PersonsOrderBy>? orderBy,
   }) {
     return graphQLClient.queryAndReturnParsed(
       QueryOptions(
@@ -21,7 +20,6 @@ class PersonsNotificationsQueries {
         variables: Variables_Query_personsNames(
           where: where,
           limit: limit,
-          orderBy: orderBy,
         ).toJson(),
         parserFn: (json) => db.parser
             .singleListParser(
@@ -84,7 +82,7 @@ class PersonsNotificationsQueries {
     );
   }
 
-  Future<Iterable<Person>> getPersonsMeetingWarning({
+  Future<Iterable<Person>> getPersonsAttendanceWarning({
     required DateTime date,
   }) {
     return _getPersonsNames(

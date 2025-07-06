@@ -44,16 +44,17 @@ void main() {
           .called(1);
     });
 
-    test('meetingTimeSetting', () async {
+    test('attendanceTimeSetting', () async {
       const setting =
           NotificationSetting(hours: 14, minutes: 0, intervalInDays: 7);
 
-      when(mockBox.get(NotificationsSettingsStorage.meetingTimeKey))
+      when(mockBox.get(NotificationsSettingsStorage.attendanceTimeKey))
           .thenReturn(setting);
-      expect(storage.meetingTimeSetting, setting);
+      expect(storage.attendanceTimeSetting, setting);
 
-      await storage.setMeetingTime(setting);
-      verify(mockBox.put(NotificationsSettingsStorage.meetingTimeKey, setting))
+      await storage.setAttendanceTime(setting);
+      verify(mockBox.put(
+              NotificationsSettingsStorage.attendanceTimeKey, setting))
           .called(1);
     });
 

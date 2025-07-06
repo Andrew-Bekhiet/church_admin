@@ -6,26 +6,27 @@ part 'aggregate_data.freezed.dart';
 part 'aggregate_data.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class AggregateData with _$AggregateData {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$AggregateDataFields;
+@JsonSerializable()
+@Queryable(classLabel: 'الإحصائيات')
+class AggregateData with _$AggregateData {
+  @override
+  final int? count;
+  @override
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  final LastRecordedByInfo? max;
+  @override
+  @JsonKey(readValue: _readLastRecordedByInfo)
+  final LastRecordedByInfo? min;
 
-  static final QueryableType<AggregateData> queryableType =
-      QueryableType<AggregateData>(
-    name: 'AggregateData',
-    label: 'الإحصائيات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: AggregateData.fromJson,
-  );
-
-  const factory AggregateData({
-    int? count,
-    @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? max,
-    @JsonKey(readValue: _readLastRecordedByInfo) LastRecordedByInfo? min,
-  }) = _AggregateData;
-
+  const AggregateData({
+    this.count,
+    this.max,
+    this.min,
+  });
   factory AggregateData.fromJson(Map<String, Object?> json) =>
       _$AggregateDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AggregateDataToJson(this);
 }
 
 Map? _readLastRecordedByInfo(Map json, String field) =>

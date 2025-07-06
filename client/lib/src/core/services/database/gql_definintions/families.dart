@@ -6,19 +6,17 @@ import 'package:church_admin/src/core/services/database/gql_definintions/familie
 import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
-class FamiliesDAO
-    extends FullCRUDDAO<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy> {
+class FamiliesDAO extends FullCRUDDAO<Family> {
   FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
 
   @override
-  final StreamAllConfig<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy>
-      baseStreamAllConfig = const StreamAllConfig(
+  final StreamAllConfig<Family> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFamilies,
   );
 
   @override
-  late final StreamCountConfig<Family, Input_FamiliesBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<Family> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchFamiliesCount,
   );
 
@@ -102,8 +100,8 @@ class FamiliesDAO
 
   PaginatableStreamBase<Family> streamAllWithAddresses({
     Stream<String?>? searchQuery,
-    Stream<List<Input_FamiliesBoolExp>>? where,
-    Stream<List<Input_FamiliesOrderBy>>? orderBy,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
   }) {
     final streamAllConfig = baseStreamAllConfig.copyWith(
       document: documentNodeSubscriptionwatchAllFamiliesWithAddresses,
@@ -113,10 +111,9 @@ class FamiliesDAO
     return PaginatableStream(
       parametersStream: Rx.combineLatest3(
         searchQuery ?? Stream.value(null),
-        where ?? Stream.value(<Input_FamiliesBoolExp>[]),
-        orderBy ?? Stream.value(<Input_FamiliesOrderBy>[]),
-        (search, where, orderBy) => StreamableDAOParameters<Family,
-            Input_FamiliesBoolExp, Input_FamiliesOrderBy>(
+        where ?? Stream.value(<Filter>[]),
+        orderBy ?? Stream.value(<OrderBy>[]),
+        (search, where, orderBy) => StreamableDAOParameters<Family>(
           search: search,
           where: where,
           orderBy: orderBy,
@@ -127,13 +124,8 @@ class FamiliesDAO
   }
 
   Stream<PaginatableStreamResponse<Family>> _streamAllFactory(
-    StreamAllConfig<Family, Input_FamiliesBoolExp, Input_FamiliesOrderBy>
-        streamAllConfig,
-    PaginatableStreamRequest<
-            Family,
-            StreamableDAOParameters<Family, Input_FamiliesBoolExp,
-                Input_FamiliesOrderBy>?>
-        request,
+    StreamAllConfig<Family> streamAllConfig,
+    PaginatableStreamRequest<Family, StreamableDAOParameters<Family>?> request,
   ) =>
       graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??

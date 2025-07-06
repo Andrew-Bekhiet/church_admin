@@ -6,14 +6,14 @@ part of 'order_by.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_OrderBy _$OrderByFromJson(Map json) => _OrderBy(
-      fieldName: json['fieldName'] as String,
+OrderBy _$OrderByFromJson(Map json) => OrderBy(
+      field: fieldMetadataFromJson(json['field']),
       value: json['value'] == null
-          ? Enum_OrderBy.ASC
+          ? OrderByValue.asc
           : orderByValueFromJson(json['value']),
     );
 
-Map<String, dynamic> _$OrderByToJson(_OrderBy instance) => <String, dynamic>{
-      'fieldName': instance.fieldName,
+Map<String, dynamic> _$OrderByToJson(OrderBy instance) => <String, dynamic>{
+      'field': fieldMetadataToJson(instance.field),
       'value': orderByValueToJson(instance.value),
     };

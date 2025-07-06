@@ -3,68 +3,130 @@
 part of 'user.dart';
 
 // **************************************************************************
-// ChurchAdminGenerator
+// QueryableFieldsGenerator
 // **************************************************************************
 
-final _$UserFields = <String, FieldMetadata>{
-  'uid': FieldMetadata<String>(
+class _UserFields {
+  _UserFields();
+
+  final FieldMetadata<String> uid = FieldMetadata<String>(
+    parentType: User,
     name: 'uid',
-    label: '=',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'name': FieldMetadata<String>(
+    label: 'uid',
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<String> name = FieldMetadata<String>(
+    parentType: User,
     name: 'name',
     label: 'الاسم',
-    operators:
-        Operator.comparitive.union(Operator.textual).union({Operator.isNull}),
-  ),
-  'photoUpdatedAt': FieldMetadata<DateTime>(
+    isCodeOnly: false,
+    operators: {...StringOperator.values},
+  );
+
+  final FieldMetadata<String> email = FieldMetadata<String>(
+    parentType: User,
+    name: 'email',
+    label: 'email',
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    parentType: User,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
-    operators: Operator.dateComparitive.union({Operator.isNull}),
-  ),
-  'adminOn': FieldMetadata<AdminOnData>(
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<AdminOnData> adminOn = FieldMetadata<AdminOnData>(
+    parentType: User,
     name: 'adminOn',
     label: 'مسؤول عن',
+    isCodeOnly: false,
     isOrderable: false,
-  ),
-  'permissions': FieldMetadata<PermissionsSet>(
+  );
+
+  final FieldMetadata<UsersPermissionsRel> permissionsRel =
+      FieldMetadata<UsersPermissionsRel>(
+    parentType: User,
     name: 'permissions',
-    label: 'الصلاحيات',
-  ),
-  'lastEdit': FieldMetadata<LastRecordedByInfo>(
+    label: 'permissions',
+    isCodeOnly: true,
+    isOrderable: false,
+  );
+
+  late final FieldMetadata<UserPermission> permissions =
+      permissionsRel.redirectTo(
+    UsersPermissionsRelFields().permission,
+    isExpandable: false,
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastEdit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: User,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
-  ),
-  'person': FieldMetadata<Person>(
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<Person> person = FieldMetadata<Person>(
+    parentType: User,
     name: 'person',
     label: 'بيانات المخدوم',
-  ),
-  'servicesHistory': FieldMetadata<AdminOnData>(
-    name: 'servicesHistory',
-    label: 'servicesHistory',
-    isOrderable: false,
-  ),
-  'classesHistory': FieldMetadata<AdminOnData>(
-    name: 'classesHistory',
-    label: 'classesHistory',
-    isOrderable: false,
-  ),
-  'groupsHistory': FieldMetadata<AdminOnData>(
-    name: 'groupsHistory',
-    label: 'groupsHistory',
-    isOrderable: false,
-  ),
-};
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    uid,
+    name,
+    email,
+    photoUpdatedAt,
+    adminOn,
+    permissions,
+    lastEdit,
+    person
+  ];
+  late final Map<String, FieldMetadata<Object>> allFieldsByName = {
+    'uid': uid,
+    'name': name,
+    'email': email,
+    'photoUpdatedAt': photoUpdatedAt,
+    'adminOn': adminOn,
+    'permissions': permissions,
+    'lastEdit': lastEdit,
+    'person': person
+  };
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_User _$UserFromJson(Map json) => _User(
-      uid: json['uid'] as String,
-      name: json['name'] as String,
+User _$UserFromJson(Map json) => User(
+      uid: json['uid'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       email: json['email'] as String?,
       photoUpdatedAt: json['photoUpdatedAt'] == null
           ? null
@@ -99,7 +161,7 @@ _User _$UserFromJson(Map json) => _User(
           .toList(),
     );
 
-Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'uid': instance.uid,
       'name': instance.name,
       'email': instance.email,

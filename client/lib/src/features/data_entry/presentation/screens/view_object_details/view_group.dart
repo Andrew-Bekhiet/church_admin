@@ -22,10 +22,10 @@ class _ViewGroupState extends State<ViewGroup> {
     objectsPaginatableStream: DatabaseService.I.persons.streamAll(
       where: Stream.value(
         [
-          Input_PersonsBoolExp(
-            groups: Input_PersonsGroupsBoolExp(
-              groupId: Input_UuidComparisonExp($_eq: widget.groupId.toUuid()),
-            ),
+          Filter(
+            PersonFields().groupsRel.redirectTo(PersonsGroupsFields().groupId),
+            PrimitiveOperator.eq,
+            widget.groupId,
           ),
         ],
       ),

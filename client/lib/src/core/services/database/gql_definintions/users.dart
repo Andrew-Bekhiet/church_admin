@@ -3,21 +3,17 @@ import 'package:church_admin/src/core/services/database/gql_definintions/users/_
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
 
-class UsersDAO extends DAOBase<User>
-    with
-        StreamableDAO<User, Input_AuthUsersDataBoolExp,
-            Input_AuthUsersDataOrderBy> {
+class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 
   @override
-  late final StreamAllConfig<User, Input_AuthUsersDataBoolExp,
-      Input_AuthUsersDataOrderBy> baseStreamAllConfig = StreamAllConfig(
+  late final StreamAllConfig<User> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
     transformRequest: _streamAllVarsConstructor,
   );
   @override
-  late final StreamCountConfig<User, Input_AuthUsersDataBoolExp>
-      baseStreamCountConfig = const StreamCountConfig(
+  late final StreamCountConfig<User> baseStreamCountConfig =
+      const StreamCountConfig(
     document: documentNodeSubscriptionwatchAuthUsersDataCount,
   );
   @override
@@ -25,11 +21,7 @@ class UsersDAO extends DAOBase<User>
       const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
 
   Json _streamAllVarsConstructor(
-    PaginatableStreamRequest<
-            User,
-            StreamableDAOParameters<User, Input_AuthUsersDataBoolExp,
-                Input_AuthUsersDataOrderBy>?>
-        request,
+    PaginatableStreamRequest<User, StreamableDAOParameters<User>?> request,
   ) {
     final orderBy = request.param?.orderBy;
 
@@ -37,14 +29,15 @@ class UsersDAO extends DAOBase<User>
       request,
       overrideOrderBy: [
         ...?orderBy,
-        Input_AuthUsersDataOrderBy(
-          permissionsAggregate: Input_AuthUsersPermissionsAggregateOrderBy(
-            count: Enum_OrderBy.DESC,
-          ),
+        OrderBy(
+          field: UserFields()
+              .permissionsAggregate
+              .redirectTo(AggregateDataFields().count),
+          value: OrderByValue.desc,
         ),
-        Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC),
-        Input_AuthUsersDataOrderBy(email: Enum_OrderBy.ASC),
-      ].map((o) => o.toJson()).toList(),
+        OrderBy(field: UserFields().name),
+        OrderBy(field: UserFields().email),
+      ].map((o) => o.toSearchJson()).toList(),
     );
   }
 

@@ -1,74 +1,28 @@
+import 'package:church_admin/annotations.dart';
+import 'package:church_admin/annotations/generate_queryables_registery.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/material.dart';
 
-abstract final class AdvancedQueriesMetadata {
-  static final Map<Type, QueryableType> queryableTypes = {
-    Address: Address.queryableType,
-    Area: Area.queryableType,
-    Street: Street.queryableType,
-    Family: Family.queryableType,
-    Store: Store.queryableType,
-    Service: Service.queryableType,
-    Class: Class.queryableType,
-    Group: Group.queryableType,
-    User: User.queryableType,
-    Person: Person.queryableType,
-    Church: Church.queryableType,
-    College: College.queryableType,
-    District: District.queryableType,
-    Father: Father.queryableType,
-    Hobby: Hobby.queryableType,
-    Job: Job.queryableType,
-    PersonState: PersonState.queryableType,
-    PersonType: PersonType.queryableType,
-    Qualification: Qualification.queryableType,
-    School: School.queryableType,
-    ShammasLevel: ShammasLevel.queryableType,
-    StudyYear: StudyYear.queryableType,
-    Tag: Tag.queryableType,
-    HistoryAggregateData: HistoryAggregateData.queryableType,
-    AggregateData: AggregateData.queryableType,
-    LastRecordedByInfo: LastRecordedByInfo.queryableType,
-  };
+part 'advanced_queries_metadata.g.dart';
 
-  static final Map<Type, dynamic> dummyInstanceForType = {
-    String: '',
-    bool: false,
-    int: 0,
-    double: 0.0,
-    DateTime: DateTime.now(),
-    Area: Area(id: '', name: ''),
-    Street: Street(id: '', name: ''),
-    Family: Family(id: '', name: ''),
-    Store: Store(id: '', name: ''),
-    Service: Service(id: '', name: ''),
-    Class: Class(id: '', name: ''),
-    Group: Group(id: '', name: ''),
-    User: User(uid: '', name: ''),
-    Person: Person(id: '', name: ''),
-    Church: Church(id: '', name: ''),
-    College: College(id: '', name: ''),
-    Father: Father(id: '', name: ''),
-    Hobby: Hobby(id: '', name: ''),
-    Job: Job(id: '', name: ''),
-    PersonState: PersonState(id: '', name: ''),
-    PersonType: PersonType(id: '', name: ''),
-    Qualification: Qualification(id: '', name: ''),
-    School: School(id: '', name: ''),
-    ShammasLevel: ShammasLevel(id: '', name: '', order: 0),
-    StudyYear: StudyYear(name: '', order: 0),
-    Tag: Tag(id: '', name: ''),
-    Color: Colors.transparent,
-    Address: Address(),
-    District: District(id: '', name: ''),
-    Point: const Point(0, 0),
-    Polygon: const Polygon([]),
-    DateTimeRange: DateTimeRange(start: DateTime.now(), end: DateTime.now()),
-    AdminOnData: const AdminOnData(permissionId: ''),
-    UserPermission: UserPermission.approved,
-    HistoryAggregateData:
-        const HistoryAggregateData(aggregate: AggregateData()),
-    AggregateData: const AggregateData(),
-    LastRecordedByInfo: LastRecordedByInfo(time: DateTime.now()),
-  };
+@GenerateQueryablesRegistery()
+final class AdvancedQueriesMetadata extends _$AdvancedQueriesMetadata {
+  static final _instance = AdvancedQueriesMetadata._();
+
+  factory AdvancedQueriesMetadata() => _instance;
+
+  AdvancedQueriesMetadata._();
+
+  @override
+  List<QueryableType<Object>> get allQueryables => {
+        person,
+        service,
+        $class,
+        group,
+        family,
+        store,
+        street,
+        area,
+        user,
+        ...super.allQueryables
+      }.toList();
 }

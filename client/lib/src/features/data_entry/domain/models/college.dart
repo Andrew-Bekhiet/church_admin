@@ -6,29 +6,32 @@ part 'college.freezed.dart';
 part 'college.g.dart';
 
 @freezed
-@TypeMetadata()
-abstract class College extends ViewableWithID
+@JsonSerializable()
+@Queryable(classLabel: 'الكليات')
+class College extends ViewableWithID
     with _$College
     implements SerializableExtra {
-  static Map<String, FieldMetadata> get fieldsMetadata => _$CollegeFields;
+  @override
+  @JsonKey(defaultValue: '')
+  final String id;
+  @override
+  @JsonKey(defaultValue: '')
+  final String name;
+  @override
+  final String? universityId;
 
-  static final QueryableType<College> queryableType = QueryableType<College>(
-    name: 'College',
-    label: 'الكليات',
-    fieldsMetadata: fieldsMetadata,
-    fromJson: College.fromJson,
-  );
-
-  factory College({
-    required String id,
-    required String name,
-    String? universityId,
-  }) = _College;
-  College._();
+  const College({
+    required this.id,
+    required this.name,
+    this.universityId,
+  });
 
   factory College.fromJson(Map<String, Object?> json) =>
       _$CollegeFromJson(json);
 
   @override
-  String get typeName => College.queryableType.name;
+  Json toJson() => _$CollegeToJson(this);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().college.name;
 }

@@ -10,22 +10,32 @@ import 'home_bloc_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<HomeDailyDataRepository>(),
-  MockSpec<AdvancedQueryParser>(),
   MockSpec<DatabaseService>(),
   MockSpec<PageController>(),
 ])
 void main() {
+  final birthdaysQuery = AdvancedQuery(
+    queryableType: AdvancedQueriesMetadata().person,
+    filters: [
+      Filter(
+        PersonFields().birthday,
+        BirthdayOperator.equals,
+        '${DateTime.now().month.toString().padLeft(2, '0')}'
+        '-'
+        '${DateTime.now().day.toString().padLeft(2, '0')}',
+      ),
+    ],
+  );
+
   late MockHomeDailyDataRepository repository;
-  late MockAdvancedQueryParser mockAdvancedQueryParser;
   late MockDatabaseService mockDatabaseService;
 
   setUp(() {
     repository = MockHomeDailyDataRepository();
-    mockAdvancedQueryParser = MockAdvancedQueryParser();
     mockDatabaseService = MockDatabaseService();
 
-    when(mockAdvancedQueryParser.createPaginatableStream(any))
-        .thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
+    when(repository.getTodaysBirthdaysQuery()).thenReturn(null);
+    when(repository.getTodaysBirthdaysData()).thenAnswer((_) async => []);
 
     when(mockDatabaseService.daosByType).thenReturn({
       Family: mockDatabaseService.families,
@@ -44,6 +54,9 @@ void main() {
         when(repository.getVerse()).thenReturn('test verse');
         when(repository.getTodaysSneksar()).thenReturn('test sneksar');
         when(repository.getSaying()).thenReturn('test saying');
+        when(repository.getTodaysBirthdaysData())
+            .thenAnswer((_) async => ['person']);
+        when(repository.getTodaysBirthdaysQuery()).thenReturn(birthdaysQuery);
       });
 
       blocTest<HomeBloc, HomeState>(
@@ -51,7 +64,6 @@ void main() {
         build: () => HomeBloc(
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
-          advancedQueryParser: mockAdvancedQueryParser,
           databaseService: mockDatabaseService,
         ),
         wait: Duration.zero,
@@ -80,11 +92,24 @@ void main() {
             'every page has objectsController',
             [anything, isNotNull, isNotNull],
           ),
+          isA<HomeState>().having(
+            (s) => s.dailyData,
+            'dailyData',
+            HomeDailyData(
+              verse: 'test verse',
+              sneksar: 'test sneksar',
+              saying: 'test saying',
+              birthdays: const ['person'],
+              birthdaysQuery: birthdaysQuery,
+            ),
+          ),
         ],
         verify: (_) {
           verify(repository.getVerse()).called(1);
           verify(repository.getTodaysSneksar()).called(1);
           verify(repository.getSaying()).called(1);
+          verify(repository.getTodaysBirthdaysData()).called(1);
+          verify(repository.getTodaysBirthdaysQuery()).called(1);
         },
       );
     });
@@ -107,7 +132,6 @@ void main() {
         build: () => HomeBloc(
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
-          advancedQueryParser: mockAdvancedQueryParser,
           databaseService: mockDatabaseService,
         ),
         seed: () => HomeState(
@@ -158,7 +182,6 @@ void main() {
           build: () => HomeBloc(
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
-            advancedQueryParser: mockAdvancedQueryParser,
             databaseService: mockDatabaseService,
           ),
           act: (bloc) => bloc
@@ -284,7 +307,6 @@ void main() {
           build: () => HomeBloc(
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
-            advancedQueryParser: mockAdvancedQueryParser,
             databaseService: mockDatabaseService,
           ),
           act: (bloc) async {
@@ -330,6 +352,93 @@ void main() {
               (s) => s.pages[1].listType,
               'first page list type',
               ViewableObjectListType.grid3,
+            ),
+          ],
+        );
+      },
+    );
+
+    group(
+      '$HomePageChange',
+      () {
+        late MockPageController mockPageController;
+        setUp(
+          () {
+            double page = 0;
+            final List<VoidCallback> listeners = [];
+
+            mockPageController = MockPageController();
+            when(mockPageController.page).thenAnswer((_) => page);
+            when(mockPageController.addListener(any)).thenAnswer((invocation) {
+              final listener =
+                  invocation.positionalArguments.first as VoidCallback;
+              listeners.add(listener);
+            });
+            when(mockPageController.hasClients).thenReturn(true);
+            when(mockPageController.initialPage).thenReturn(0);
+            when(mockPageController.removeListener(any))
+                .thenAnswer((invocation) {
+              final listener =
+                  invocation.positionalArguments.first as VoidCallback;
+              listeners.remove(listener);
+            });
+            when(mockPageController.jumpToPage(captureAny)).thenAnswer(
+              (invocation) async {
+                page = (invocation.positionalArguments.first as int).toDouble();
+                for (final listener in listeners) {
+                  listener();
+                }
+              },
+            );
+          },
+        );
+        blocTest(
+          'Listens to PageController page changes',
+          build: () => HomeBloc(
+            pageController: mockPageController,
+            homeDailyDataRepository: repository,
+            databaseService: mockDatabaseService,
+          ),
+          act: (bloc) async {
+            await bloc.stream.first;
+
+            bloc
+              ..add(const HomePageChange(0.1))
+              ..add(const HomePageChange(0.2))
+              ..add(const HomePageChange(0.5))
+              ..add(const HomePageChange(0.8));
+            mockPageController.jumpToPage(1);
+          },
+          expect: () => [
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              0,
+            ),
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              0.1,
+            ),
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              0.2,
+            ),
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              0.5,
+            ),
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              0.8,
+            ),
+            isA<HomeState>().having(
+              (s) => s.currentPage,
+              'current page',
+              1.0,
             ),
           ],
         );
