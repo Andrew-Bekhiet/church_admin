@@ -70,6 +70,7 @@ class LoggingService extends BlocObserver {
         ..attachScreenshot = true
         ..screenshotQuality = SentryScreenshotQuality.low
         ..attachViewHierarchy = true
+        ..enableLogs = true
         ..enableUserInteractionTracing = true,
     );
   }
@@ -178,6 +179,32 @@ class LoggingService extends BlocObserver {
           await _configureScopeWithFeatureFlags(scope);
           await _configureScopeWithUserSettings(scope);
         },
+      );
+    }
+
+    if (FeatureFlagsRepository.I.useSentryLogs) {
+      final logFn = switch (level) {
+        LoggingLevel.error => Sentry.logger.fatal,
+        LoggingLevel.exception => Sentry.logger.error,
+        LoggingLevel.warning => Sentry.logger.warn,
+        LoggingLevel.info => Sentry.logger.info,
+        LoggingLevel.fine || LoggingLevel.config => Sentry.logger.debug,
+      };
+
+      await logFn(
+        message,
+        attributes: record.data?.map(
+          (key, value) => MapEntry(
+            key,
+            switch (value) {
+              final bool v => SentryLogAttribute.bool(v),
+              final int v => SentryLogAttribute.int(v),
+              final double v => SentryLogAttribute.double(v),
+              final String v => SentryLogAttribute.string(v),
+              final Object? v => SentryLogAttribute.string(v.toString()),
+            },
+          ),
+        ),
       );
     }
   }

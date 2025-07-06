@@ -16,6 +16,7 @@ class FeatureFlagsRepository {
   static const String isUnderMaintenanceKey = 'isUnderMaintenance';
   static const String maintenanceMessageKey = 'maintenanceMessage';
   static const String disabledRoutesKey = 'disabledRoutes';
+  static const String useSentryLogsKey = 'useSentryLogs';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -75,6 +76,8 @@ class FeatureFlagsRepository {
     return rawValue.split(',').toSet();
   }
 
+  bool get useSentryLogs => _remoteConfig.getBool(useSentryLogsKey);
+
   Stream<void> get onConfigChanged => kIsWeb
       ? Stream.value(null)
       : _remoteConfig.onConfigUpdated
@@ -91,6 +94,7 @@ class FeatureFlagsRepository {
       mustForceUpdateKey: false,
       isUnderMaintenanceKey: false,
       disabledRoutesKey: '',
+      useSentryLogsKey: true,
     });
   }
 
