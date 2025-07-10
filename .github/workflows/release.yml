@@ -158,6 +158,12 @@ jobs:
           distribution: "corretto"
           java-version: "17"
 
+      - name: Set Up latest stable Xcode version
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
 
