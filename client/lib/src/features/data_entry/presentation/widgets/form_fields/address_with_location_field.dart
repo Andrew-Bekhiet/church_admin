@@ -373,9 +373,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               where: _address.street != null
                   ? [
                       Filter(
-                        AreaFields()
-                            .streets
-                            .redirectTo(AreasStreetsFields().streetId),
+                        AreaFields().streets.redirectTo(StreetFields().id),
                         PrimitiveOperator.eq,
                         _address.street!.id,
                       ),
