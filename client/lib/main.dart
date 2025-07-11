@@ -21,12 +21,14 @@ Future<void> main() async {
   );
   FlutterNativeSplash.remove();
 
-  await AuthBloc.I.loaded;
-
-  runApp(
-    UncontrolledProviderScope(
-      container: globalProviderContainer,
-      child: SentryWidget(child: const ChurchAdminApp()),
-    ),
+  await AuthBloc.I.loaded.whenComplete(
+    () {
+      runApp(
+        UncontrolledProviderScope(
+          container: globalProviderContainer,
+          child: SentryWidget(child: const ChurchAdminApp()),
+        ),
+      );
+    },
   );
 }
