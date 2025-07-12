@@ -42,7 +42,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       for (final p in permissions)
                         if (p != UserPermission.approved)
                           Tooltip(
-                            message: p.humanReadableName,
+                            message: p.label,
                             child: Icon(p.icon, size: 20),
                           ),
                     ],

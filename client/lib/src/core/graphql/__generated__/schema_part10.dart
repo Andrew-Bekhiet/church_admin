@@ -212,6 +212,225 @@ class _CopyWithStubImpl_Input_ChurchesUpdates<TRes>
       CopyWith_Input_ChurchesBoolExp.stub(_res);
 }
 
+class Input_ClassesAggregateBoolExp {
+  factory Input_ClassesAggregateBoolExp({
+    Input_classesAggregateBoolExpBool_and? bool_and,
+    Input_classesAggregateBoolExpBool_or? bool_or,
+    Input_classesAggregateBoolExpCount? count,
+  }) =>
+      Input_ClassesAggregateBoolExp._({
+        if (bool_and != null) r'bool_and': bool_and,
+        if (bool_or != null) r'bool_or': bool_or,
+        if (count != null) r'count': count,
+      });
+
+  Input_ClassesAggregateBoolExp._(this._$data);
+
+  factory Input_ClassesAggregateBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('bool_and')) {
+      final l$bool_and = data['bool_and'];
+      result$data['bool_and'] = l$bool_and == null
+          ? null
+          : Input_classesAggregateBoolExpBool_and.fromJson(
+              (l$bool_and as Map<String, dynamic>));
+    }
+    if (data.containsKey('bool_or')) {
+      final l$bool_or = data['bool_or'];
+      result$data['bool_or'] = l$bool_or == null
+          ? null
+          : Input_classesAggregateBoolExpBool_or.fromJson(
+              (l$bool_or as Map<String, dynamic>));
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = l$count == null
+          ? null
+          : Input_classesAggregateBoolExpCount.fromJson(
+              (l$count as Map<String, dynamic>));
+    }
+    return Input_ClassesAggregateBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_classesAggregateBoolExpBool_and? get bool_and =>
+      (_$data['bool_and'] as Input_classesAggregateBoolExpBool_and?);
+
+  Input_classesAggregateBoolExpBool_or? get bool_or =>
+      (_$data['bool_or'] as Input_classesAggregateBoolExpBool_or?);
+
+  Input_classesAggregateBoolExpCount? get count =>
+      (_$data['count'] as Input_classesAggregateBoolExpCount?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('bool_and')) {
+      final l$bool_and = bool_and;
+      result$data['bool_and'] = l$bool_and?.toJson();
+    }
+    if (_$data.containsKey('bool_or')) {
+      final l$bool_or = bool_or;
+      result$data['bool_or'] = l$bool_or?.toJson();
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = l$count?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ClassesAggregateBoolExp<Input_ClassesAggregateBoolExp>
+      get copyWith => CopyWith_Input_ClassesAggregateBoolExp(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ClassesAggregateBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$bool_and = bool_and;
+    final lOther$bool_and = other.bool_and;
+    if (_$data.containsKey('bool_and') !=
+        other._$data.containsKey('bool_and')) {
+      return false;
+    }
+    if (l$bool_and != lOther$bool_and) {
+      return false;
+    }
+    final l$bool_or = bool_or;
+    final lOther$bool_or = other.bool_or;
+    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
+      return false;
+    }
+    if (l$bool_or != lOther$bool_or) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$bool_and = bool_and;
+    final l$bool_or = bool_or;
+    final l$count = count;
+    return Object.hashAll([
+      _$data.containsKey('bool_and') ? l$bool_and : const {},
+      _$data.containsKey('bool_or') ? l$bool_or : const {},
+      _$data.containsKey('count') ? l$count : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ClassesAggregateBoolExp<TRes> {
+  factory CopyWith_Input_ClassesAggregateBoolExp(
+    Input_ClassesAggregateBoolExp instance,
+    TRes Function(Input_ClassesAggregateBoolExp) then,
+  ) = _CopyWithImpl_Input_ClassesAggregateBoolExp;
+
+  factory CopyWith_Input_ClassesAggregateBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_ClassesAggregateBoolExp;
+
+  TRes call({
+    Input_classesAggregateBoolExpBool_and? bool_and,
+    Input_classesAggregateBoolExpBool_or? bool_or,
+    Input_classesAggregateBoolExpCount? count,
+  });
+  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and;
+  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or;
+  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count;
+}
+
+class _CopyWithImpl_Input_ClassesAggregateBoolExp<TRes>
+    implements CopyWith_Input_ClassesAggregateBoolExp<TRes> {
+  _CopyWithImpl_Input_ClassesAggregateBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_ClassesAggregateBoolExp _instance;
+
+  final TRes Function(Input_ClassesAggregateBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? bool_and = _undefined,
+    Object? bool_or = _undefined,
+    Object? count = _undefined,
+  }) =>
+      _then(Input_ClassesAggregateBoolExp._({
+        ..._instance._$data,
+        if (bool_and != _undefined)
+          'bool_and': (bool_and as Input_classesAggregateBoolExpBool_and?),
+        if (bool_or != _undefined)
+          'bool_or': (bool_or as Input_classesAggregateBoolExpBool_or?),
+        if (count != _undefined)
+          'count': (count as Input_classesAggregateBoolExpCount?),
+      }));
+
+  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and {
+    final local$bool_and = _instance.bool_and;
+    return local$bool_and == null
+        ? CopyWith_Input_classesAggregateBoolExpBool_and.stub(_then(_instance))
+        : CopyWith_Input_classesAggregateBoolExpBool_and(
+            local$bool_and, (e) => call(bool_and: e));
+  }
+
+  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or {
+    final local$bool_or = _instance.bool_or;
+    return local$bool_or == null
+        ? CopyWith_Input_classesAggregateBoolExpBool_or.stub(_then(_instance))
+        : CopyWith_Input_classesAggregateBoolExpBool_or(
+            local$bool_or, (e) => call(bool_or: e));
+  }
+
+  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count {
+    final local$count = _instance.count;
+    return local$count == null
+        ? CopyWith_Input_classesAggregateBoolExpCount.stub(_then(_instance))
+        : CopyWith_Input_classesAggregateBoolExpCount(
+            local$count, (e) => call(count: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_ClassesAggregateBoolExp<TRes>
+    implements CopyWith_Input_ClassesAggregateBoolExp<TRes> {
+  _CopyWithStubImpl_Input_ClassesAggregateBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    Input_classesAggregateBoolExpBool_and? bool_and,
+    Input_classesAggregateBoolExpBool_or? bool_or,
+    Input_classesAggregateBoolExpCount? count,
+  }) =>
+      _res;
+
+  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and =>
+      CopyWith_Input_classesAggregateBoolExpBool_and.stub(_res);
+
+  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or =>
+      CopyWith_Input_classesAggregateBoolExpBool_or.stub(_res);
+
+  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count =>
+      CopyWith_Input_classesAggregateBoolExpCount.stub(_res);
+}
+
 class Input_ClassesAggregateOrderBy {
   factory Input_ClassesAggregateOrderBy({
     Input_ClassesAvgOrderBy? avg,
@@ -2303,361 +2522,6 @@ class Input_ClassesIncInput {
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ClassesIncInput<TRes> {
-  factory CopyWith_Input_ClassesIncInput(
-    Input_ClassesIncInput instance,
-    TRes Function(Input_ClassesIncInput) then,
-  ) = _CopyWithImpl_Input_ClassesIncInput;
-
-  factory CopyWith_Input_ClassesIncInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ClassesIncInput;
-
-  TRes call({
-    int? color,
-    int? serviceStudyYear,
-  });
-}
-
-class _CopyWithImpl_Input_ClassesIncInput<TRes>
-    implements CopyWith_Input_ClassesIncInput<TRes> {
-  _CopyWithImpl_Input_ClassesIncInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_ClassesIncInput _instance;
-
-  final TRes Function(Input_ClassesIncInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? color = _undefined,
-    Object? serviceStudyYear = _undefined,
-  }) =>
-      _then(Input_ClassesIncInput._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as int?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as int?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_ClassesIncInput<TRes>
-    implements CopyWith_Input_ClassesIncInput<TRes> {
-  _CopyWithStubImpl_Input_ClassesIncInput(this._res);
-
-  TRes _res;
-
-  call({
-    int? color,
-    int? serviceStudyYear,
-  }) =>
-      _res;
-}
-
-class Input_ClassesInsertInput {
-  factory Input_ClassesInsertInput({
-    Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-        attendanceDaysConstraints,
-    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
-    int? color,
-    String? name,
-    Input_ServicesObjRelInsertInput? service,
-    bool? serviceGender,
-    UuidValue? serviceId,
-    int? serviceStudyYear,
-    Input_StudyYearsObjRelInsertInput? studyYear,
-  }) =>
-      Input_ClassesInsertInput._({
-        if (adminUsers != null) r'adminUsers': adminUsers,
-        if (attendanceDaysConstraints != null)
-          r'attendanceDaysConstraints': attendanceDaysConstraints,
-        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-        if (color != null) r'color': color,
-        if (name != null) r'name': name,
-        if (service != null) r'service': service,
-        if (serviceGender != null) r'serviceGender': serviceGender,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (studyYear != null) r'studyYear': studyYear,
-      });
-
-  Input_ClassesInsertInput._(this._$data);
-
-  factory Input_ClassesInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('adminUsers')) {
-      final l$adminUsers = data['adminUsers'];
-      result$data['adminUsers'] = l$adminUsers == null
-          ? null
-          : Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
-              (l$adminUsers as Map<String, dynamic>));
-    }
-    if (data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
-      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints ==
-              null
-          ? null
-          : Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
-              (l$attendanceDaysConstraints as Map<String, dynamic>));
-    }
-    if (data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = data['attendanceHistory'];
-      result$data['attendanceHistory'] = l$attendanceHistory == null
-          ? null
-          : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>));
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('service')) {
-      final l$service = data['service'];
-      result$data['service'] = l$service == null
-          ? null
-          : Input_ServicesObjRelInsertInput.fromJson(
-              (l$service as Map<String, dynamic>));
-    }
-    if (data.containsKey('serviceGender')) {
-      final l$serviceGender = data['serviceGender'];
-      result$data['serviceGender'] = (l$serviceGender as bool?);
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] =
-          l$serviceId == null ? null : stringToUuid(l$serviceId);
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
-    }
-    if (data.containsKey('studyYear')) {
-      final l$studyYear = data['studyYear'];
-      result$data['studyYear'] = l$studyYear == null
-          ? null
-          : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$studyYear as Map<String, dynamic>));
-    }
-    return Input_ClassesInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
-      (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
-
-  Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-      get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
-          as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
-
-  Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
-      (_$data['attendanceHistory']
-          as Input_HistoryAttendanceHistoryArrRelInsertInput?);
-
-  int? get color => (_$data['color'] as int?);
-
-  String? get name => (_$data['name'] as String?);
-
-  Input_ServicesObjRelInsertInput? get service =>
-      (_$data['service'] as Input_ServicesObjRelInsertInput?);
-
-  bool? get serviceGender => (_$data['serviceGender'] as bool?);
-
-  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
-
-  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
-
-  Input_StudyYearsObjRelInsertInput? get studyYear =>
-      (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('adminUsers')) {
-      final l$adminUsers = adminUsers;
-      result$data['adminUsers'] = l$adminUsers?.toJson();
-    }
-    if (_$data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = attendanceDaysConstraints;
-      result$data['attendanceDaysConstraints'] =
-          l$attendanceDaysConstraints?.toJson();
-    }
-    if (_$data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = attendanceHistory;
-      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('service')) {
-      final l$service = service;
-      result$data['service'] = l$service?.toJson();
-    }
-    if (_$data.containsKey('serviceGender')) {
-      final l$serviceGender = serviceGender;
-      result$data['serviceGender'] = l$serviceGender;
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : uuidToString(l$serviceId);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear;
-    }
-    if (_$data.containsKey('studyYear')) {
-      final l$studyYear = studyYear;
-      result$data['studyYear'] = l$studyYear?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesInsertInput<Input_ClassesInsertInput> get copyWith =>
-      CopyWith_Input_ClassesInsertInput(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$adminUsers = adminUsers;
-    final lOther$adminUsers = other.adminUsers;
-    if (_$data.containsKey('adminUsers') !=
-        other._$data.containsKey('adminUsers')) {
-      return false;
-    }
-    if (l$adminUsers != lOther$adminUsers) {
-      return false;
-    }
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
-    if (_$data.containsKey('attendanceDaysConstraints') !=
-        other._$data.containsKey('attendanceDaysConstraints')) {
-      return false;
-    }
-    if (l$attendanceDaysConstraints != lOther$attendanceDaysConstraints) {
-      return false;
-    }
-    final l$attendanceHistory = attendanceHistory;
-    final lOther$attendanceHistory = other.attendanceHistory;
-    if (_$data.containsKey('attendanceHistory') !=
-        other._$data.containsKey('attendanceHistory')) {
-      return false;
-    }
-    if (l$attendanceHistory != lOther$attendanceHistory) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$service = service;
-    final lOther$service = other.service;
-    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
-      return false;
-    }
-    if (l$service != lOther$service) {
-      return false;
-    }
-    final l$serviceGender = serviceGender;
-    final lOther$serviceGender = other.serviceGender;
-    if (_$data.containsKey('serviceGender') !=
-        other._$data.containsKey('serviceGender')) {
-      return false;
-    }
-    if (l$serviceGender != lOther$serviceGender) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    final l$studyYear = studyYear;
-    final lOther$studyYear = other.studyYear;
-    if (_$data.containsKey('studyYear') !=
-        other._$data.containsKey('studyYear')) {
-      return false;
-    }
-    if (l$studyYear != lOther$studyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$adminUsers = adminUsers;
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final l$attendanceHistory = attendanceHistory;
-    final l$color = color;
-    final l$name = name;
-    final l$service = service;
-    final l$serviceGender = serviceGender;
-    final l$serviceId = serviceId;
-    final l$serviceStudyYear = serviceStudyYear;
-    final l$studyYear = studyYear;
-    return Object.hashAll([
-      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
-      _$data.containsKey('attendanceDaysConstraints')
-          ? l$attendanceDaysConstraints
-          : const {},
-      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('service') ? l$service : const {},
-      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-      _$data.containsKey('studyYear') ? l$studyYear : const {},
     ]);
   }
 }

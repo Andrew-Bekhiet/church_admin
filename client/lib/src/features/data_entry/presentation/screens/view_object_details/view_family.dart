@@ -169,6 +169,10 @@ class _ViewFamilyState extends State<ViewFamily> {
                 ? ViewableObjectCard(family.address!.street!)
                 : null,
           ),
+          ListTile(
+            title: const Text('الحالة الاجتماعية'),
+            subtitle: Text(family.status.label),
+          ),
           CopiablePropertyWidget(
             'ملاحظات',
             family.notes,

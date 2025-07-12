@@ -345,23 +345,16 @@ class _ValueInputWidget extends StatelessWidget {
           onValueChanged: onChanged,
         );
 
-      case FieldMetadata<UserPermission>() when operator is MultiSelectOperator:
-        widget = MultiObjectSelectionField<UserPermission>(
+      case FieldMetadata<LabeledEnum>(
+            fieldQueryableType: QueryableType(:final enumValues, isEnum: true)
+          )
+          when operator is MultiSelectOperator:
+        widget = MultiObjectSelectionField<ViewableEnumWithID>(
           listController: (s) => ViewableObjectListController(
-            objectsPaginatableStream: PaginatableStream(
-              parametersStream: s,
-              factory: (r) {
-                final data = UserPermission.values
-                    .where((p) => p.name.contains(r.param ?? ''))
-                    .toList(growable: false);
-
-                return Stream.value(
-                  PaginatableStreamResponse(
-                    data: data,
-                    totalCount: data.length,
-                  ),
-                );
-              },
+            objectsPaginatableStream:
+                ViewableEnumWithID.createPaginatableStream(
+              enumValues,
+              s,
             ),
           ),
           builder: (context, state) {
@@ -373,16 +366,16 @@ class _ValueInputWidget extends StatelessWidget {
 
             return null;
           },
-          initialValue: (value as List<UserPermission>? ?? []).toSet(),
+          initialValue: (value as List<ViewableEnumWithID>? ?? []).toSet(),
           labelText: 'اختيار القيم المطلوبة',
           nullable: false,
           onChanged: (v) => onChanged(v?.toList()),
         );
 
       case FieldMetadata<ViewableWithID>(
-            fieldQueryableType: QueryableType(:final dao)
+            fieldQueryableType: QueryableType(:final dao?)
           )
-          when dao != null && operator is MultiSelectOperator:
+          when operator is MultiSelectOperator:
         widget = MultiObjectSelectionField<ViewableWithID>(
           listController: (s) => ViewableObjectListController(
             objectsPaginatableStream: dao.streamAll(searchQuery: s),

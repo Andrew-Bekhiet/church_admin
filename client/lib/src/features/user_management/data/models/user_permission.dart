@@ -1,53 +1,45 @@
+import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-enum UserPermission implements ViewableWithID {
+@Queryable(classLabel: 'صلاحيات المستخدمين')
+enum UserPermission implements LabeledEnum {
   approved(
-    humanReadableName: 'حساب مفعل',
+    label: 'حساب مفعل',
     icon: Symbols.done,
   ),
   manageAllUsers(
-    humanReadableName: 'إدارة جميع الخدام',
+    label: 'إدارة جميع الخدام',
     icon: Symbols.manage_accounts,
   ),
   readAllData(
-    humanReadableName: 'رؤية جميع البيانات',
+    label: 'رؤية جميع البيانات',
     icon: Symbols.visibility,
   ),
   writeAllData(
-    humanReadableName: 'تعديل جميع البيانات',
+    label: 'تعديل جميع البيانات',
     icon: Symbols.edit,
   ),
   recordHistory(
-    humanReadableName: 'تسجيل الحضور',
+    label: 'تسجيل الحضور',
     icon: Symbols.event_available,
   ),
   changeOldHistory(
-    humanReadableName: 'تغيير الحضور لأي يوم',
+    label: 'تغيير الحضور لأي يوم',
     icon: Symbols.history,
   ),
   recoverDeleted(
-    humanReadableName: 'استرجاع المحذوفات',
+    label: 'استرجاع المحذوفات',
     icon: Symbols.restore_from_trash,
   ),
-  exportData(humanReadableName: 'تصدير البيانات', icon: Symbols.upload);
+  exportData(label: 'تصدير البيانات', icon: Symbols.upload);
 
-  final String humanReadableName;
+  static UserPermission byName(String value) => values.byName(value);
+
+  @override
+  final String label;
   final IconData icon;
 
-  const UserPermission({required this.humanReadableName, required this.icon});
-
-  @override
-  String get name => humanReadableName;
-
-  @override
-  Color? get color => null;
-
-  @override
-  Future<String?> getSecondLine() => SynchronousFuture(humanReadableName);
-
-  @override
-  String get id => (this as Enum).name;
+  const UserPermission({required this.label, required this.icon});
 }

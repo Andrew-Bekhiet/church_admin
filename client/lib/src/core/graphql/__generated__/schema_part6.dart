@@ -214,6 +214,7 @@ class Input_AuthUsersAdminOnBoolExp {
     Input_BooleanComparisonExp? areaAdminOnUsers,
     Input_BooleanComparisonExp? areaAllowEdit,
     Input_ClassesBoolExp? classes,
+    Input_ClassesAggregateBoolExp? classesAggregate,
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
@@ -222,7 +223,7 @@ class Input_AuthUsersAdminOnBoolExp {
     Input_BooleanComparisonExp? serviceAdminOnUsers,
     Input_BooleanComparisonExp? serviceAllowEdit,
     Input_BooleanComparisonExp? serviceGender,
-    Input_SmallintComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
@@ -238,6 +239,7 @@ class Input_AuthUsersAdminOnBoolExp {
         if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
         if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
         if (classes != null) r'classes': classes,
+        if (classesAggregate != null) r'classesAggregate': classesAggregate,
         if (group != null) r'group': group,
         if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
         if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
@@ -326,6 +328,13 @@ class Input_AuthUsersAdminOnBoolExp {
           ? null
           : Input_ClassesBoolExp.fromJson((l$classes as Map<String, dynamic>));
     }
+    if (data.containsKey('classesAggregate')) {
+      final l$classesAggregate = data['classesAggregate'];
+      result$data['classesAggregate'] = l$classesAggregate == null
+          ? null
+          : Input_ClassesAggregateBoolExp.fromJson(
+              (l$classesAggregate as Map<String, dynamic>));
+    }
     if (data.containsKey('group')) {
       final l$group = data['group'];
       result$data['group'] = l$group == null
@@ -384,7 +393,7 @@ class Input_AuthUsersAdminOnBoolExp {
       final l$serviceStudyYear = data['serviceStudyYear'];
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
           ? null
-          : Input_SmallintComparisonExp.fromJson(
+          : Input_IntComparisonExp.fromJson(
               (l$serviceStudyYear as Map<String, dynamic>));
     }
     if (data.containsKey('serviceStudyYearData')) {
@@ -441,6 +450,9 @@ class Input_AuthUsersAdminOnBoolExp {
   Input_ClassesBoolExp? get classes =>
       (_$data['classes'] as Input_ClassesBoolExp?);
 
+  Input_ClassesAggregateBoolExp? get classesAggregate =>
+      (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
 
   Input_BooleanComparisonExp? get groupAdminOnUsers =>
@@ -464,8 +476,8 @@ class Input_AuthUsersAdminOnBoolExp {
   Input_BooleanComparisonExp? get serviceGender =>
       (_$data['serviceGender'] as Input_BooleanComparisonExp?);
 
-  Input_SmallintComparisonExp? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Input_SmallintComparisonExp?);
+  Input_IntComparisonExp? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
 
   Input_StudyYearsBoolExp? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsBoolExp?);
@@ -517,6 +529,10 @@ class Input_AuthUsersAdminOnBoolExp {
     if (_$data.containsKey('classes')) {
       final l$classes = classes;
       result$data['classes'] = l$classes?.toJson();
+    }
+    if (_$data.containsKey('classesAggregate')) {
+      final l$classesAggregate = classesAggregate;
+      result$data['classesAggregate'] = l$classesAggregate?.toJson();
     }
     if (_$data.containsKey('group')) {
       final l$group = group;
@@ -691,6 +707,15 @@ class Input_AuthUsersAdminOnBoolExp {
     if (l$classes != lOther$classes) {
       return false;
     }
+    final l$classesAggregate = classesAggregate;
+    final lOther$classesAggregate = other.classesAggregate;
+    if (_$data.containsKey('classesAggregate') !=
+        other._$data.containsKey('classesAggregate')) {
+      return false;
+    }
+    if (l$classesAggregate != lOther$classesAggregate) {
+      return false;
+    }
     final l$group = group;
     final lOther$group = other.group;
     if (_$data.containsKey('group') != other._$data.containsKey('group')) {
@@ -810,6 +835,7 @@ class Input_AuthUsersAdminOnBoolExp {
     final l$areaAdminOnUsers = areaAdminOnUsers;
     final l$areaAllowEdit = areaAllowEdit;
     final l$classes = classes;
+    final l$classesAggregate = classesAggregate;
     final l$group = group;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupAllowEdit = groupAllowEdit;
@@ -841,6 +867,7 @@ class Input_AuthUsersAdminOnBoolExp {
       _$data.containsKey('areaAdminOnUsers') ? l$areaAdminOnUsers : const {},
       _$data.containsKey('areaAllowEdit') ? l$areaAllowEdit : const {},
       _$data.containsKey('classes') ? l$classes : const {},
+      _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('group') ? l$group : const {},
       _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
       _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
@@ -881,6 +908,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
     Input_BooleanComparisonExp? areaAdminOnUsers,
     Input_BooleanComparisonExp? areaAllowEdit,
     Input_ClassesBoolExp? classes,
+    Input_ClassesAggregateBoolExp? classesAggregate,
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
@@ -889,7 +917,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
     Input_BooleanComparisonExp? serviceAdminOnUsers,
     Input_BooleanComparisonExp? serviceAllowEdit,
     Input_BooleanComparisonExp? serviceGender,
-    Input_SmallintComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
@@ -914,6 +942,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get areaAdminOnUsers;
   CopyWith_Input_BooleanComparisonExp<TRes> get areaAllowEdit;
   CopyWith_Input_ClassesBoolExp<TRes> get classes;
+  CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate;
   CopyWith_Input_GroupsBoolExp<TRes> get group;
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAdminOnUsers;
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAllowEdit;
@@ -922,7 +951,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAdminOnUsers;
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAllowEdit;
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
-  CopyWith_Input_SmallintComparisonExp<TRes> get serviceStudyYear;
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear;
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
@@ -952,6 +981,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Object? areaAdminOnUsers = _undefined,
     Object? areaAllowEdit = _undefined,
     Object? classes = _undefined,
+    Object? classesAggregate = _undefined,
     Object? group = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupAllowEdit = _undefined,
@@ -986,6 +1016,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
           'areaAllowEdit': (areaAllowEdit as Input_BooleanComparisonExp?),
         if (classes != _undefined)
           'classes': (classes as Input_ClassesBoolExp?),
+        if (classesAggregate != _undefined)
+          'classesAggregate':
+              (classesAggregate as Input_ClassesAggregateBoolExp?),
         if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
         if (groupAdminOnUsers != _undefined)
           'groupAdminOnUsers':
@@ -1004,8 +1037,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
         if (serviceGender != _undefined)
           'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
         if (serviceStudyYear != _undefined)
-          'serviceStudyYear':
-              (serviceStudyYear as Input_SmallintComparisonExp?),
+          'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
         if (serviceStudyYearData != _undefined)
           'serviceStudyYearData':
               (serviceStudyYearData as Input_StudyYearsBoolExp?),
@@ -1101,6 +1133,14 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
         : CopyWith_Input_ClassesBoolExp(local$classes, (e) => call(classes: e));
   }
 
+  CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate {
+    final local$classesAggregate = _instance.classesAggregate;
+    return local$classesAggregate == null
+        ? CopyWith_Input_ClassesAggregateBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesAggregateBoolExp(
+            local$classesAggregate, (e) => call(classesAggregate: e));
+  }
+
   CopyWith_Input_GroupsBoolExp<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -1164,11 +1204,11 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
             local$serviceGender, (e) => call(serviceGender: e));
   }
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get serviceStudyYear {
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear {
     final local$serviceStudyYear = _instance.serviceStudyYear;
     return local$serviceStudyYear == null
-        ? CopyWith_Input_SmallintComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_SmallintComparisonExp(
+        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_IntComparisonExp(
             local$serviceStudyYear, (e) => call(serviceStudyYear: e));
   }
 
@@ -1212,6 +1252,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_BooleanComparisonExp? areaAdminOnUsers,
     Input_BooleanComparisonExp? areaAllowEdit,
     Input_ClassesBoolExp? classes,
+    Input_ClassesAggregateBoolExp? classesAggregate,
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
@@ -1220,7 +1261,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_BooleanComparisonExp? serviceAdminOnUsers,
     Input_BooleanComparisonExp? serviceAllowEdit,
     Input_BooleanComparisonExp? serviceGender,
-    Input_SmallintComparisonExp? serviceStudyYear,
+    Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
@@ -1255,6 +1296,9 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
   CopyWith_Input_ClassesBoolExp<TRes> get classes =>
       CopyWith_Input_ClassesBoolExp.stub(_res);
 
+  CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
+      CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
 
@@ -1279,8 +1323,8 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 
-  CopyWith_Input_SmallintComparisonExp<TRes> get serviceStudyYear =>
-      CopyWith_Input_SmallintComparisonExp.stub(_res);
+  CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
 
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);

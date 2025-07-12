@@ -27,7 +27,7 @@ fragment EditHistory on HistoryEditHistory {
 
 fragment AttendanceHistory on HistoryAttendanceHistory {
   time
-  user {
+  recordedByUser {
     ...User
   }
 }

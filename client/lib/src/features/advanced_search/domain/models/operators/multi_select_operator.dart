@@ -34,7 +34,7 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
     }
 
     final value = switch (filterValue) {
-      final List<UserPermission> filterValue => {
+      final List<ViewableEnumWithID> filterValue => {
           name: filterValue.map((e) => e.id).toList(),
         },
       final List<ID> filterValue when filterValue.every((u) => u is User) => {
@@ -67,13 +67,16 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
     return switch (this) {
       MultiSelectOperator.isNotEmpty => null,
       _ => switch (value) {
-          final List<ToJson> value => {
+          final List<ViewableEnumWithID> value => {
               'type': AdvancedQueriesMetadata()
-                  .allQueryablesByType[value.first.runtimeType]!
+                  .allQueryablesByType[value.first.enumValue.runtimeType]!
                   .name,
+              'value': value.map((e) => e.id).toList()
+            },
+          final List<SerializableExtra> value => {
+              'type': value.first.typeName,
               'value': value.map((e) => e.toJson()).toList()
             },
-          final List<UserPermission> value => value.map((e) => e.id).toList(),
           _ => throw UnsupportedError(
               'MultiSelectOperator does not support $name: $value',
             ),
@@ -87,20 +90,29 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
       return null;
     }
 
-    if (data case {'type': final type, 'value': final List<Json> value}) {
+    if (data case {'type': final type, 'value': final List<String> value}) {
       final queryableType = AdvancedQueriesMetadata().allQueryables.firstWhere(
-            (q) => q.name == type,
+            (q) => q.name == type && q.byName != null,
             orElse: () =>
                 throw Exception('Cannot deserialize $data to List<$V>'),
           );
 
-      return value.map((e) => queryableType.fromJson(e) as V).toList();
-    } else if (V == UserPermission ||
-        data is List && data.every((e) => e is String)) {
-      return (data as List)
-          .map((e) => UserPermission.values.asNameMap()[e])
-          .nonNulls
-          .toList() as List<V>;
+      return value
+          .map(
+            (e) =>
+                ViewableEnumWithID.wrap(queryableType.byName!(e) as LabeledEnum)
+                    as V,
+          )
+          .toList();
+    } else if (data
+        case {'type': final type, 'value': final List<Json> value}) {
+      final queryableType = AdvancedQueriesMetadata().allQueryables.firstWhere(
+            (q) => q.name == type && q.fromJson != null,
+            orElse: () =>
+                throw Exception('Cannot deserialize $data to List<$V>'),
+          );
+
+      return value.map((e) => queryableType.fromJson!(e) as V).toList();
     }
 
     throw UnsupportedError(

@@ -2,6 +2,279 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_ClassesPersonsBoolExp<TRes> {
+  factory CopyWith_Input_ClassesPersonsBoolExp(
+    Input_ClassesPersonsBoolExp instance,
+    TRes Function(Input_ClassesPersonsBoolExp) then,
+  ) = _CopyWithImpl_Input_ClassesPersonsBoolExp;
+
+  factory CopyWith_Input_ClassesPersonsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_ClassesPersonsBoolExp;
+
+  TRes call({
+    List<Input_ClassesPersonsBoolExp>? $_and,
+    Input_ClassesPersonsBoolExp? $_not,
+    List<Input_ClassesPersonsBoolExp>? $_or,
+    Input_ClassesBoolExp? $class,
+    Input_UuidComparisonExp? classId,
+    Input_PersonsBoolExp? person,
+    Input_UuidComparisonExp? personId,
+  });
+  TRes $_and(
+      Iterable<Input_ClassesPersonsBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_ClassesPersonsBoolExp<
+                      Input_ClassesPersonsBoolExp>>?)
+          _fn);
+  CopyWith_Input_ClassesPersonsBoolExp<TRes> get $_not;
+  TRes $_or(
+      Iterable<Input_ClassesPersonsBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_ClassesPersonsBoolExp<
+                      Input_ClassesPersonsBoolExp>>?)
+          _fn);
+  CopyWith_Input_ClassesBoolExp<TRes> get $class;
+  CopyWith_Input_UuidComparisonExp<TRes> get classId;
+  CopyWith_Input_PersonsBoolExp<TRes> get person;
+  CopyWith_Input_UuidComparisonExp<TRes> get personId;
+}
+
+class _CopyWithImpl_Input_ClassesPersonsBoolExp<TRes>
+    implements CopyWith_Input_ClassesPersonsBoolExp<TRes> {
+  _CopyWithImpl_Input_ClassesPersonsBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_ClassesPersonsBoolExp _instance;
+
+  final TRes Function(Input_ClassesPersonsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? $class = _undefined,
+    Object? classId = _undefined,
+    Object? person = _undefined,
+    Object? personId = _undefined,
+  }) =>
+      _then(Input_ClassesPersonsBoolExp._({
+        ..._instance._$data,
+        if ($_and != _undefined)
+          '_and': ($_and as List<Input_ClassesPersonsBoolExp>?),
+        if ($_not != _undefined)
+          '_not': ($_not as Input_ClassesPersonsBoolExp?),
+        if ($_or != _undefined)
+          '_or': ($_or as List<Input_ClassesPersonsBoolExp>?),
+        if ($class != _undefined) 'class': ($class as Input_ClassesBoolExp?),
+        if (classId != _undefined)
+          'classId': (classId as Input_UuidComparisonExp?),
+        if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
+        if (personId != _undefined)
+          'personId': (personId as Input_UuidComparisonExp?),
+      }));
+
+  TRes $_and(
+          Iterable<Input_ClassesPersonsBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_ClassesPersonsBoolExp<
+                          Input_ClassesPersonsBoolExp>>?)
+              _fn) =>
+      call(
+          $_and: _fn(
+              _instance.$_and?.map((e) => CopyWith_Input_ClassesPersonsBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_ClassesPersonsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_ClassesPersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesPersonsBoolExp(
+            local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+          Iterable<Input_ClassesPersonsBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_ClassesPersonsBoolExp<
+                          Input_ClassesPersonsBoolExp>>?)
+              _fn) =>
+      call(
+          $_or: _fn(
+              _instance.$_or?.map((e) => CopyWith_Input_ClassesPersonsBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_ClassesBoolExp<TRes> get $class {
+    final local$$class = _instance.$class;
+    return local$$class == null
+        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ClassesBoolExp(local$$class, (e) => call($class: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get classId {
+    final local$classId = _instance.classId;
+    return local$classId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$classId, (e) => call(classId: e));
+  }
+
+  CopyWith_Input_PersonsBoolExp<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get personId {
+    final local$personId = _instance.personId;
+    return local$personId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$personId, (e) => call(personId: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_ClassesPersonsBoolExp<TRes>
+    implements CopyWith_Input_ClassesPersonsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_ClassesPersonsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_ClassesPersonsBoolExp>? $_and,
+    Input_ClassesPersonsBoolExp? $_not,
+    List<Input_ClassesPersonsBoolExp>? $_or,
+    Input_ClassesBoolExp? $class,
+    Input_UuidComparisonExp? classId,
+    Input_PersonsBoolExp? person,
+    Input_UuidComparisonExp? personId,
+  }) =>
+      _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_ClassesPersonsBoolExp<TRes> get $_not =>
+      CopyWith_Input_ClassesPersonsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_ClassesBoolExp<TRes> get $class =>
+      CopyWith_Input_ClassesBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get classId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_PersonsBoolExp<TRes> get person =>
+      CopyWith_Input_PersonsBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+}
+
+class Input_ClassesPersonsMaxOrderBy {
+  factory Input_ClassesPersonsMaxOrderBy({
+    Enum_OrderBy? classId,
+    Enum_OrderBy? personId,
+  }) =>
+      Input_ClassesPersonsMaxOrderBy._({
+        if (classId != null) r'classId': classId,
+        if (personId != null) r'personId': personId,
+      });
+
+  Input_ClassesPersonsMaxOrderBy._(this._$data);
+
+  factory Input_ClassesPersonsMaxOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('classId')) {
+      final l$classId = data['classId'];
+      result$data['classId'] = l$classId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$classId as String));
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$personId as String));
+    }
+    return Input_ClassesPersonsMaxOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get classId => (_$data['classId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('classId')) {
+      final l$classId = classId;
+      result$data['classId'] =
+          l$classId == null ? null : toJson_Enum_OrderBy(l$classId);
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] =
+          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ClassesPersonsMaxOrderBy<Input_ClassesPersonsMaxOrderBy>
+      get copyWith => CopyWith_Input_ClassesPersonsMaxOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ClassesPersonsMaxOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$classId = classId;
+    final lOther$classId = other.classId;
+    if (_$data.containsKey('classId') != other._$data.containsKey('classId')) {
+      return false;
+    }
+    if (l$classId != lOther$classId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$classId = classId;
+    final l$personId = personId;
+    return Object.hashAll([
+      _$data.containsKey('classId') ? l$classId : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_ClassesPersonsMaxOrderBy<TRes> {
   factory CopyWith_Input_ClassesPersonsMaxOrderBy(
     Input_ClassesPersonsMaxOrderBy instance,
@@ -2282,341 +2555,6 @@ class Input_ClassesUpdates {
       _$data.containsKey('_inc') ? l$$_inc : const {},
       _$data.containsKey('_set') ? l$$_set : const {},
       l$where,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ClassesUpdates<TRes> {
-  factory CopyWith_Input_ClassesUpdates(
-    Input_ClassesUpdates instance,
-    TRes Function(Input_ClassesUpdates) then,
-  ) = _CopyWithImpl_Input_ClassesUpdates;
-
-  factory CopyWith_Input_ClassesUpdates.stub(TRes res) =
-      _CopyWithStubImpl_Input_ClassesUpdates;
-
-  TRes call({
-    Input_ClassesIncInput? $_inc,
-    Input_ClassesSetInput? $_set,
-    Input_ClassesBoolExp? where,
-  });
-  CopyWith_Input_ClassesIncInput<TRes> get $_inc;
-  CopyWith_Input_ClassesSetInput<TRes> get $_set;
-  CopyWith_Input_ClassesBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_ClassesUpdates<TRes>
-    implements CopyWith_Input_ClassesUpdates<TRes> {
-  _CopyWithImpl_Input_ClassesUpdates(
-    this._instance,
-    this._then,
-  );
-
-  final Input_ClassesUpdates _instance;
-
-  final TRes Function(Input_ClassesUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_inc = _undefined,
-    Object? $_set = _undefined,
-    Object? where = _undefined,
-  }) =>
-      _then(Input_ClassesUpdates._({
-        ..._instance._$data,
-        if ($_inc != _undefined) '_inc': ($_inc as Input_ClassesIncInput?),
-        if ($_set != _undefined) '_set': ($_set as Input_ClassesSetInput?),
-        if (where != _undefined && where != null)
-          'where': (where as Input_ClassesBoolExp),
-      }));
-
-  CopyWith_Input_ClassesIncInput<TRes> get $_inc {
-    final local$$_inc = _instance.$_inc;
-    return local$$_inc == null
-        ? CopyWith_Input_ClassesIncInput.stub(_then(_instance))
-        : CopyWith_Input_ClassesIncInput(local$$_inc, (e) => call($_inc: e));
-  }
-
-  CopyWith_Input_ClassesSetInput<TRes> get $_set {
-    final local$$_set = _instance.$_set;
-    return local$$_set == null
-        ? CopyWith_Input_ClassesSetInput.stub(_then(_instance))
-        : CopyWith_Input_ClassesSetInput(local$$_set, (e) => call($_set: e));
-  }
-
-  CopyWith_Input_ClassesBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_ClassesBoolExp(local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_ClassesUpdates<TRes>
-    implements CopyWith_Input_ClassesUpdates<TRes> {
-  _CopyWithStubImpl_Input_ClassesUpdates(this._res);
-
-  TRes _res;
-
-  call({
-    Input_ClassesIncInput? $_inc,
-    Input_ClassesSetInput? $_set,
-    Input_ClassesBoolExp? where,
-  }) =>
-      _res;
-
-  CopyWith_Input_ClassesIncInput<TRes> get $_inc =>
-      CopyWith_Input_ClassesIncInput.stub(_res);
-
-  CopyWith_Input_ClassesSetInput<TRes> get $_set =>
-      CopyWith_Input_ClassesSetInput.stub(_res);
-
-  CopyWith_Input_ClassesBoolExp<TRes> get where =>
-      CopyWith_Input_ClassesBoolExp.stub(_res);
-}
-
-class Input_ClassesVarPopOrderBy {
-  factory Input_ClassesVarPopOrderBy({
-    Enum_OrderBy? color,
-    Enum_OrderBy? serviceStudyYear,
-  }) =>
-      Input_ClassesVarPopOrderBy._({
-        if (color != null) r'color': color,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
-
-  Input_ClassesVarPopOrderBy._(this._$data);
-
-  factory Input_ClassesVarPopOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
-    }
-    return Input_ClassesVarPopOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceStudyYear);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesVarPopOrderBy<Input_ClassesVarPopOrderBy>
-      get copyWith => CopyWith_Input_ClassesVarPopOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesVarPopOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    final l$serviceStudyYear = serviceStudyYear;
-    return Object.hashAll([
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ClassesVarPopOrderBy<TRes> {
-  factory CopyWith_Input_ClassesVarPopOrderBy(
-    Input_ClassesVarPopOrderBy instance,
-    TRes Function(Input_ClassesVarPopOrderBy) then,
-  ) = _CopyWithImpl_Input_ClassesVarPopOrderBy;
-
-  factory CopyWith_Input_ClassesVarPopOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_ClassesVarPopOrderBy;
-
-  TRes call({
-    Enum_OrderBy? color,
-    Enum_OrderBy? serviceStudyYear,
-  });
-}
-
-class _CopyWithImpl_Input_ClassesVarPopOrderBy<TRes>
-    implements CopyWith_Input_ClassesVarPopOrderBy<TRes> {
-  _CopyWithImpl_Input_ClassesVarPopOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_ClassesVarPopOrderBy _instance;
-
-  final TRes Function(Input_ClassesVarPopOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? color = _undefined,
-    Object? serviceStudyYear = _undefined,
-  }) =>
-      _then(Input_ClassesVarPopOrderBy._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_ClassesVarPopOrderBy<TRes>
-    implements CopyWith_Input_ClassesVarPopOrderBy<TRes> {
-  _CopyWithStubImpl_Input_ClassesVarPopOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? color,
-    Enum_OrderBy? serviceStudyYear,
-  }) =>
-      _res;
-}
-
-class Input_ClassesVarSampOrderBy {
-  factory Input_ClassesVarSampOrderBy({
-    Enum_OrderBy? color,
-    Enum_OrderBy? serviceStudyYear,
-  }) =>
-      Input_ClassesVarSampOrderBy._({
-        if (color != null) r'color': color,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
-
-  Input_ClassesVarSampOrderBy._(this._$data);
-
-  factory Input_ClassesVarSampOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
-    }
-    return Input_ClassesVarSampOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceStudyYear);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesVarSampOrderBy<Input_ClassesVarSampOrderBy>
-      get copyWith => CopyWith_Input_ClassesVarSampOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesVarSampOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    final l$serviceStudyYear = serviceStudyYear;
-    return Object.hashAll([
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }

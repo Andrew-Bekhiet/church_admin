@@ -4,7 +4,7 @@
 # using Dart's part/part of directives for better maintainability.
 
 # Path to the large schema file
-SCHEMA_FILE="client/lib/src/core/graphql/__generated__/schema.graphql.dart"
+SCHEMA_FILE="lib/src/core/graphql/__generated__/schema.graphql.dart"
 OUTPUT_DIR="$(dirname "$SCHEMA_FILE")"
 BASE_FILENAME="schema_part"
 MAX_LINES_PER_PART=2500

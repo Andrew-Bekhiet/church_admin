@@ -32,6 +32,14 @@ class _FamilyFields {
     isCodeOnly: false,
   );
 
+  final FieldMetadata<MartialStatus> status = FieldMetadata<MartialStatus>(
+    parentType: Family,
+    name: 'status',
+    label: 'status',
+    isCodeOnly: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
   final FieldMetadata<String> notes = FieldMetadata<String>(
     parentType: Family,
     name: 'notes',
@@ -126,6 +134,7 @@ class _FamilyFields {
     id,
     name,
     address,
+    status,
     notes,
     color,
     photoUpdatedAt,
@@ -138,6 +147,7 @@ class _FamilyFields {
     'id': id,
     'name': name,
     'address': address,
+    'status': status,
     'notes': notes,
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
@@ -158,6 +168,8 @@ Family _$FamilyFromJson(Map json) => Family(
       address: json['address'] == null
           ? null
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
+      status: $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
+          MartialStatus.married,
       notes: json['notes'] as String?,
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -176,6 +188,7 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address?.toJson(),
+      'status': _$MartialStatusEnumMap[instance.status]!,
       'notes': instance.notes,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
@@ -184,3 +197,10 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'parents': familyParentsToJson(instance.parents),
       'lastEdit': instance.lastEdit?.toJson(),
     };
+
+const _$MartialStatusEnumMap = {
+  MartialStatus.married: 'married',
+  MartialStatus.separated: 'separated',
+  MartialStatus.divorced: 'divorced',
+  MartialStatus.widowed: 'widowed',
+};

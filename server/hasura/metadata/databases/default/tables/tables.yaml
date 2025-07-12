@@ -1,3 +1,4 @@
+- "!include auth_permissions.yaml"
 - "!include auth_users_admin_on.yaml"
 - "!include auth_users_data.yaml"
 - "!include auth_users_permissions.yaml"
@@ -29,6 +30,7 @@
 - "!include public_groups.yaml"
 - "!include public_hobbies.yaml"
 - "!include public_jobs.yaml"
+- "!include public_martial_statuses.yaml"
 - "!include public_person_states.yaml"
 - "!include public_person_types.yaml"
 - "!include public_persons.yaml"

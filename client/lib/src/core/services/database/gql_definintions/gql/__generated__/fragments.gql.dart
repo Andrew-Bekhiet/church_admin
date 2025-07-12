@@ -855,24 +855,25 @@ const documentNodeFragmentEditHistory = DocumentNode(definitions: [
 class Fragment_AttendanceHistory {
   Fragment_AttendanceHistory({
     required this.time,
-    required this.user,
+    required this.recordedByUser,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Fragment_AttendanceHistory.fromJson(Map<String, dynamic> json) {
     final l$time = json['time'];
-    final l$user = json['user'];
+    final l$recordedByUser = json['recordedByUser'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceHistory(
       time: tstzFromString(l$time),
-      user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      recordedByUser:
+          Fragment_User.fromJson((l$recordedByUser as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
 
   final DateTime time;
 
-  final Fragment_User user;
+  final Fragment_User recordedByUser;
 
   final String $__typename;
 
@@ -880,8 +881,8 @@ class Fragment_AttendanceHistory {
     final _resultData = <String, dynamic>{};
     final l$time = time;
     _resultData['time'] = tstzToString(l$time);
-    final l$user = user;
-    _resultData['user'] = l$user.toJson();
+    final l$recordedByUser = recordedByUser;
+    _resultData['recordedByUser'] = l$recordedByUser.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -890,11 +891,11 @@ class Fragment_AttendanceHistory {
   @override
   int get hashCode {
     final l$time = time;
-    final l$user = user;
+    final l$recordedByUser = recordedByUser;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$time,
-      l$user,
+      l$recordedByUser,
       l$$__typename,
     ]);
   }
@@ -913,9 +914,9 @@ class Fragment_AttendanceHistory {
     if (l$time != lOther$time) {
       return false;
     }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (l$user != lOther$user) {
+    final l$recordedByUser = recordedByUser;
+    final lOther$recordedByUser = other.recordedByUser;
+    if (l$recordedByUser != lOther$recordedByUser) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -947,10 +948,10 @@ abstract class CopyWith_Fragment_AttendanceHistory<TRes> {
 
   TRes call({
     DateTime? time,
-    Fragment_User? user,
+    Fragment_User? recordedByUser,
     String? $__typename,
   });
-  CopyWith_Fragment_User<TRes> get user;
+  CopyWith_Fragment_User<TRes> get recordedByUser;
 }
 
 class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
@@ -968,24 +969,25 @@ class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
 
   TRes call({
     Object? time = _undefined,
-    Object? user = _undefined,
+    Object? recordedByUser = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Fragment_AttendanceHistory(
         time: time == _undefined || time == null
             ? _instance.time
             : (time as DateTime),
-        user: user == _undefined || user == null
-            ? _instance.user
-            : (user as Fragment_User),
+        recordedByUser: recordedByUser == _undefined || recordedByUser == null
+            ? _instance.recordedByUser
+            : (recordedByUser as Fragment_User),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
 
-  CopyWith_Fragment_User<TRes> get user {
-    final local$user = _instance.user;
-    return CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  CopyWith_Fragment_User<TRes> get recordedByUser {
+    final local$recordedByUser = _instance.recordedByUser;
+    return CopyWith_Fragment_User(
+        local$recordedByUser, (e) => call(recordedByUser: e));
   }
 }
 
@@ -997,12 +999,13 @@ class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
 
   call({
     DateTime? time,
-    Fragment_User? user,
+    Fragment_User? recordedByUser,
     String? $__typename,
   }) =>
       _res;
 
-  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+  CopyWith_Fragment_User<TRes> get recordedByUser =>
+      CopyWith_Fragment_User.stub(_res);
 }
 
 const fragmentDefinitionAttendanceHistory = FragmentDefinitionNode(
@@ -1022,7 +1025,7 @@ const fragmentDefinitionAttendanceHistory = FragmentDefinitionNode(
       selectionSet: null,
     ),
     FieldNode(
-      name: NameNode(value: 'user'),
+      name: NameNode(value: 'recordedByUser'),
       alias: null,
       arguments: [],
       directives: [],

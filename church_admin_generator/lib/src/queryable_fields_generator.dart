@@ -15,11 +15,15 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (element is! ClassElement) {
+    if (element is! ClassElement && element is! EnumElement) {
       throw InvalidGenerationSourceError(
-        'TypeMetadata annotation can only be used on classes',
+        'Queryable annotation can only be used on classes or Enums',
         element: element,
       );
+    }
+
+    if (element is! ClassElement) {
+      return '';
     }
 
     final annotationInstance = annotation.asQueryable();
@@ -305,15 +309,21 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
       operators.add('...SpatialOperator.values');
     } else if (type is InterfaceType &&
         type.allSupertypes.any(
-          (t) =>
-              t.getDisplayStringWithoutNullability() == 'Iterable' ||
-              t.getDisplayStringWithoutNullability() == 'ViewableWithID' ||
-              t.getDisplayStringWithoutNullability() == 'ID',
+          (t) {
+            final displayString = t.getDisplayStringWithoutNullability();
+
+            return displayString == 'Enum' ||
+                displayString == 'Iterable' ||
+                displayString == 'ViewableWithID' ||
+                displayString == 'ID';
+          },
         )) {
       operators.add('...MultiSelectOperator.values');
     }
 
-    if (operators.isEmpty) return null;
+    if (operators.isEmpty) {
+      return null;
+    }
 
     if (type.nullabilitySuffix == NullabilitySuffix.question) {
       operators

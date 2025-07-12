@@ -1803,6 +1803,7 @@ type Families {
     where: PersonsBoolExp
   ): PersonsAggregate!
   photoUpdatedAt: timestamptz
+  status: String!
   stores(
     distinctOn: [StoresSelectColumn!]
     limit: Int
@@ -1861,6 +1862,7 @@ input FamiliesBoolExp {
   persons: PersonsBoolExp
   personsAggregate: PersonsAggregateBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
+  status: StringComparisonExp
   stores: StoresBoolExp
   storesAggregate: StoresAggregateBoolExp
 }
@@ -1968,6 +1970,7 @@ input FamiliesInsertInput {
   notes: String
   parents: FamiliesFamiliesArrRelInsertInput
   persons: PersonsArrRelInsertInput
+  status: String
   stores: StoresArrRelInsertInput
 }
 type FamiliesMaxFields {
@@ -1978,6 +1981,7 @@ type FamiliesMaxFields {
   name: String
   notes: String
   photoUpdatedAt: timestamptz
+  status: String
 }
 type FamiliesMinFields {
   addressText: String
@@ -1987,6 +1991,7 @@ type FamiliesMinFields {
   name: String
   notes: String
   photoUpdatedAt: timestamptz
+  status: String
 }
 
 type FamiliesMutationResponse {
@@ -2019,6 +2024,7 @@ input FamiliesOrderBy {
   parentsAggregate: FamiliesFamiliesAggregateOrderBy
   personsAggregate: PersonsAggregateOrderBy
   photoUpdatedAt: OrderBy
+  status: OrderBy
   storesAggregate: StoresAggregateOrderBy
 }
 input FamiliesPkColumnsInput {
@@ -2034,6 +2040,7 @@ enum FamiliesSelectColumn {
   name
   notes
   photoUpdatedAt
+  status
 }
 
 input FamiliesSetInput {
@@ -2042,6 +2049,7 @@ input FamiliesSetInput {
   geolocation: geography
   name: String
   notes: String
+  status: String
 }
 type FamiliesStddevFields {
   color: Float
@@ -2066,6 +2074,7 @@ input FamiliesStreamCursorValueInput {
   name: String
   notes: String
   photoUpdatedAt: timestamptz
+  status: String
 }
 type FamiliesSumFields {
   color: bigint
@@ -2077,6 +2086,7 @@ enum FamiliesUpdateColumn {
   geolocation
   name
   notes
+  status
 }
 
 input FamiliesUpdates {
@@ -2975,13 +2985,13 @@ type HistoryAttendanceHistory {
   person: Persons!
   personId: uuid!
   recordedBy: uuid!
+  recordedByUser: AuthUsersData!
   service: Services!
   serviceGender: Boolean
   serviceId: uuid!
   serviceStudyYear: Int
   studyYear: StudyYears
   time: timestamp!
-  user: AuthUsersData!
 }
 
 type HistoryAttendanceHistoryAggregate {
@@ -3049,13 +3059,13 @@ input HistoryAttendanceHistoryBoolExp {
   person: PersonsBoolExp
   personId: UuidComparisonExp
   recordedBy: UuidComparisonExp
+  recordedByUser: AuthUsersDataBoolExp
   service: ServicesBoolExp
   serviceGender: BooleanComparisonExp
   serviceId: UuidComparisonExp
   serviceStudyYear: IntComparisonExp
   studyYear: StudyYearsBoolExp
   time: TimestampComparisonExp
-  user: AuthUsersDataBoolExp
 }
 
 enum HistoryAttendanceHistoryConstraint {
@@ -3143,13 +3153,13 @@ input HistoryAttendanceHistoryOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
   recordedBy: OrderBy
+  recordedByUser: AuthUsersDataOrderBy
   service: ServicesOrderBy
   serviceGender: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
   studyYear: StudyYearsOrderBy
   time: OrderBy
-  user: AuthUsersDataOrderBy
 }
 input HistoryAttendanceHistoryPkColumnsInput {
   id: uuid!

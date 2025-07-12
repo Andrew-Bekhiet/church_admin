@@ -68,6 +68,7 @@ insert_permissions:
         - geolocation
         - name
         - notes
+        - status
 select_permissions:
   - role: user
     permission:
@@ -80,6 +81,7 @@ select_permissions:
         - name
         - notes
         - photo_updated_at
+        - status
       filter:
         _or:
           - _exists:
@@ -114,6 +116,7 @@ update_permissions:
         - geolocation
         - name
         - notes
+        - status
       filter:
         _or:
           - _exists:

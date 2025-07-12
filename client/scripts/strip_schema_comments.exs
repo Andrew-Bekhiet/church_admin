@@ -1,7 +1,7 @@
 IO.puts("Getting GQL schema from the server...")
 
 System.shell(
-  "graphql-inspector introspect http://localhost:8088/v1/graphql -w ./lib/src/core/graphql/schema.graphql get-schema -h \"Authorization: Bearer $TOKEN\""
+  "graphql-inspector introspect 'https://church-admin.up.railway.app/v1/graphql' --comments false -w ./lib/src/core/graphql/schema.graphql get-schema -h \"x-hasura-admin-secret: $HASURA_ADMIN_SECRET\" -h 'x-hasura-role: user'"
 )
 
 IO.puts("Stripping comments from the schema...")

@@ -121,6 +121,13 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: Job.fromJson,
   );
 
+  final martialStatus = QueryableType<MartialStatus>.enum$(
+    name: 'MartialStatus',
+    label: 'الحالات الاجتماعية',
+    byName: MartialStatus.byName,
+    enumValues: MartialStatus.values,
+  );
+
   final person = QueryableType<Person>(
     name: 'Person',
     label: 'الأشخاص',
@@ -297,6 +304,13 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: User.fromJson,
   );
 
+  final userPermission = QueryableType<UserPermission>.enum$(
+    name: 'UserPermission',
+    label: 'صلاحيات المستخدمين',
+    byName: UserPermission.byName,
+    enumValues: UserPermission.values,
+  );
+
   late final allQueryables = <QueryableType<Object>>[
     attendanceRecord,
     aggregateData,
@@ -312,6 +326,7 @@ abstract final class _$AdvancedQueriesMetadata {
     group,
     hobby,
     job,
+    martialStatus,
     person,
     personState,
     personType,
@@ -333,7 +348,8 @@ abstract final class _$AdvancedQueriesMetadata {
     lastRecordedByInfo,
     adminOnData,
     usersPermissionsRel,
-    user
+    user,
+    userPermission
   ];
   late final allQueryablesByType = <Type, QueryableType<Object>>{
     AttendanceRecord: attendanceRecord,
@@ -350,6 +366,7 @@ abstract final class _$AdvancedQueriesMetadata {
     Group: group,
     Hobby: hobby,
     Job: job,
+    MartialStatus: martialStatus,
     Person: person,
     PersonState: personState,
     PersonType: personType,
@@ -371,6 +388,7 @@ abstract final class _$AdvancedQueriesMetadata {
     LastRecordedByInfo: lastRecordedByInfo,
     AdminOnData: adminOnData,
     UsersPermissionsRel: usersPermissionsRel,
-    User: user
+    User: user,
+    UserPermission: userPermission
   };
 }

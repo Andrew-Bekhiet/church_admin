@@ -80,6 +80,21 @@ class _EditFamilyState extends State<EditFamily> {
                 newFamily = newFamily.copyWith(address: value),
             onEditLocation: _editGeolocation,
           ),
+          ObjectSelectionField(
+            nullable: false,
+            initialValue: ViewableEnumWithID.wrap(newFamily.status),
+            listController: (s) => ViewableObjectListController(
+              objectsPaginatableStream:
+                  ViewableEnumWithID.createPaginatableStream(
+                MartialStatus.values,
+                s,
+              ),
+            ),
+            onChanged: (value) =>
+                newFamily = newFamily.copyWith(status: value!.enumValue),
+            dialogFieldLabel: 'الحالة الاجتماعية',
+            builder: (context, state) => Text(state.value?.name ?? ''),
+          ),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'ملاحظات',

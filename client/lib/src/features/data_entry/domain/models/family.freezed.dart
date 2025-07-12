@@ -17,6 +17,7 @@ mixin _$Family {
   String get id;
   String get name;
   Address? get address;
+  MartialStatus get status;
   String? get notes;
   Color? get color;
   DateTime? get photoUpdatedAt;
@@ -40,6 +41,7 @@ mixin _$Family {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
@@ -59,6 +61,7 @@ mixin _$Family {
       id,
       name,
       address,
+      status,
       notes,
       color,
       photoUpdatedAt,
@@ -69,7 +72,7 @@ mixin _$Family {
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit)';
   }
 }
 
@@ -82,6 +85,7 @@ abstract mixin class $FamilyCopyWith<$Res> {
       {String id,
       String name,
       Address? address,
+      MartialStatus status,
       String? notes,
       Color? color,
       DateTime? photoUpdatedAt,
@@ -106,6 +110,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
     Object? address = freezed,
+    Object? status = null,
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
@@ -127,6 +132,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
           ? _self.address
           : address // ignore: cast_nullable_to_non_nullable
               as Address?,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MartialStatus,
       notes: freezed == notes
           ? _self.notes
           : notes // ignore: cast_nullable_to_non_nullable

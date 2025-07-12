@@ -76,7 +76,18 @@ class QueryableRegisteryGenerator extends Generator {
 
       final classLabel = queryable.annotation.read('classLabel').stringValue;
 
-      yield '''
+      if (queryable.element is EnumElement) {
+        yield '''
+
+  final $typeLowerFirst = QueryableType<$type>.enum\$(
+    name: '$type',
+    label: '$classLabel',
+    byName: $type.byName,
+    enumValues: $type.values,
+  );
+''';
+      } else {
+        yield '''
 
   final $typeLowerFirst = QueryableType<$type>(
     name: '$type',
@@ -86,6 +97,7 @@ class QueryableRegisteryGenerator extends Generator {
     fromJson: $type.fromJson,
   );
 ''';
+      }
     }
   }
 

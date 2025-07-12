@@ -38,7 +38,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
 
     return where((e) => e != UserPermission.approved)
         .sorted((p1, p2) => p1.index.compareTo(p2.index))
-        .map((e) => e.humanReadableName)
+        .map((e) => e.label)
         .join('، ');
   }
 
@@ -62,7 +62,7 @@ extension RemoveQuotes on String {
 }
 
 List<Json> permissionsSetToJson(PermissionsSet data) =>
-    data.map((e) => {'permission': e.id}).toList();
+    data.map((e) => {'permission': e.name}).toList();
 PermissionsSet permissionsSetFromJson(dynamic data) => PermissionsSet.parse(
       (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
     );

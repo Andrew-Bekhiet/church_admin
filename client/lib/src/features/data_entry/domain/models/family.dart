@@ -15,30 +15,43 @@ class Family extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   final Address? address;
+
+  @override
+  @JsonKey(defaultValue: MartialStatus.married)
+  final MartialStatus status;
+
   @override
   final String? notes;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
   @QueryableField(
       manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'child')
   final List<Family>? children;
+
   @override
   @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
   @QueryableField(
       manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'parent')
   final List<Family>? parents;
+
   @override
   final LastRecordedByInfo? lastEdit;
 
@@ -46,6 +59,7 @@ class Family extends ViewableWithIDAndImage
     required this.id,
     required this.name,
     this.address,
+    this.status = MartialStatus.married,
     this.notes,
     this.color,
     this.photoUpdatedAt,
@@ -76,6 +90,7 @@ class Family extends ViewableWithIDAndImage
                 data: address!.copyWith(family: null).toInsertInput(),
               )
             : null,
+        status: status.name,
         notes: notes,
         color: colorToInt(color),
       );
@@ -85,6 +100,7 @@ class Family extends ViewableWithIDAndImage
         name: name != oldFamily.name ? name : null,
         notes: notes != oldFamily.notes ? notes : null,
         color: color != oldFamily.color ? colorToInt(color) : null,
+        status: status != oldFamily.status ? status.name : null,
       );
 }
 

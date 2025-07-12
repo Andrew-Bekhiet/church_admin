@@ -10,9 +10,9 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'EditClassExtra': EditClassExtra.fromJson,
   'EditGroupExtra': EditGroupExtra.fromJson,
   'AdvancedQuery': AdvancedQuery.fromJson,
-  ...AdvancedQueriesMetadata()
-      .allQueryablesByType
-      .map((k, v) => MapEntry(v.name, v.fromJson)),
+  for (final MapEntry(value: QueryableType(:name, :fromJson))
+      in AdvancedQueriesMetadata().allQueryablesByType.entries)
+    if (fromJson != null) name: fromJson
 };
 
 class ChurchAdminRouterExtraCodec extends Codec<SerializableExtra?, List?> {

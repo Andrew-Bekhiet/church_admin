@@ -934,6 +934,7 @@ class Input_ChurchesBoolExp {
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       Input_ChurchesBoolExp._({
         if ($_and != null) r'_and': $_and,
@@ -943,6 +944,7 @@ class Input_ChurchesBoolExp {
         if (id != null) r'id': id,
         if (name != null) r'name': name,
         if (persons != null) r'persons': persons,
+        if (personsAggregate != null) r'personsAggregate': personsAggregate,
       });
 
   Input_ChurchesBoolExp._(this._$data);
@@ -994,6 +996,13 @@ class Input_ChurchesBoolExp {
           ? null
           : Input_PersonsBoolExp.fromJson((l$persons as Map<String, dynamic>));
     }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>));
+    }
     return Input_ChurchesBoolExp._(result$data);
   }
 
@@ -1018,6 +1027,9 @@ class Input_ChurchesBoolExp {
 
   Input_PersonsBoolExp? get persons =>
       (_$data['persons'] as Input_PersonsBoolExp?);
+
+  Input_PersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1048,6 +1060,10 @@ class Input_ChurchesBoolExp {
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
       result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
     }
     return result$data;
   }
@@ -1144,6 +1160,15 @@ class Input_ChurchesBoolExp {
     if (l$persons != lOther$persons) {
       return false;
     }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
     return true;
   }
 
@@ -1156,6 +1181,7 @@ class Input_ChurchesBoolExp {
     final l$id = id;
     final l$name = name;
     final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -1172,6 +1198,7 @@ class Input_ChurchesBoolExp {
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
     ]);
   }
 }
@@ -1193,6 +1220,7 @@ abstract class CopyWith_Input_ChurchesBoolExp<TRes> {
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
   });
   TRes $_and(
       Iterable<Input_ChurchesBoolExp>? Function(
@@ -1207,6 +1235,7 @@ abstract class CopyWith_Input_ChurchesBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_PersonsBoolExp<TRes> get persons;
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
 }
 
 class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
@@ -1230,6 +1259,7 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? persons = _undefined,
+    Object? personsAggregate = _undefined,
   }) =>
       _then(Input_ChurchesBoolExp._({
         ..._instance._$data,
@@ -1243,6 +1273,9 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (persons != _undefined)
           'persons': (persons as Input_PersonsBoolExp?),
+        if (personsAggregate != _undefined)
+          'personsAggregate':
+              (personsAggregate as Input_PersonsAggregateBoolExp?),
       }));
 
   TRes $_and(
@@ -1301,6 +1334,14 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
         ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
         : CopyWith_Input_PersonsBoolExp(local$persons, (e) => call(persons: e));
   }
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return local$personsAggregate == null
+        ? CopyWith_Input_PersonsAggregateBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsAggregateBoolExp(
+            local$personsAggregate, (e) => call(personsAggregate: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
@@ -1317,6 +1358,7 @@ class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
   }) =>
       _res;
 
@@ -1338,6 +1380,9 @@ class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
 
   CopyWith_Input_PersonsBoolExp<TRes> get persons =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
+      CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
 
 class Input_ChurchesInsertInput {
