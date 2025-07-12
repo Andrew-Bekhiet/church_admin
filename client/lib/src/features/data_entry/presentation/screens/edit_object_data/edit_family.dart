@@ -88,7 +88,7 @@ class _EditFamilyState extends State<EditFamily> {
             onChanged: (value) => newFamily = newFamily.copyWith(
               notes: value.trim(),
             ),
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.newline,
             maxLines: null,
             validator: (value) => null,
           ).withPadding(const EdgeInsets.symmetric(vertical: 8)),

@@ -811,7 +811,7 @@ class _EditPersonState extends State<EditPerson> {
               initialValue: newPerson.notes,
               onChanged: (value) =>
                   newPerson = newPerson.copyWith(notes: value.trim()),
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.newline,
               maxLines: null,
               validator: (value) => null,
             ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
