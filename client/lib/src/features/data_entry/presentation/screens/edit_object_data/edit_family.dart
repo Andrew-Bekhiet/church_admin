@@ -90,11 +90,27 @@ class _EditFamilyState extends State<EditFamily> {
                 s,
               ),
             ),
-            onChanged: (value) =>
-                newFamily = newFamily.copyWith(status: value!.enumValue),
+            onChanged: (value) => setState(
+              () => newFamily = newFamily.copyWith(status: value!.enumValue),
+            ),
             dialogFieldLabel: 'الحالة الاجتماعية',
             builder: (context, state) => Text(state.value?.name ?? ''),
           ),
+          if (newFamily.status == MartialStatus.widowed)
+            TextFormField(
+              key: const ValueKey('deceasedSpouseName'),
+              decoration: const InputDecoration(
+                labelText: 'اسم المتوفي/ـة',
+              ),
+              initialValue: newFamily.deceasedSpouseName,
+              onChanged: (value) => newFamily = newFamily.copyWith(
+                deceasedSpouseName: value.trim(),
+              ),
+              textInputAction: TextInputAction.next,
+              validator: (value) => value != null && value.isEmpty
+                  ? 'الرجاء إدخال اسم المتوفي/ـة'
+                  : null,
+            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'ملاحظات',

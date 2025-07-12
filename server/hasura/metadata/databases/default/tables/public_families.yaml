@@ -65,6 +65,7 @@ insert_permissions:
       columns:
         - address_text
         - color
+        - deceased_spouse_name
         - geolocation
         - name
         - notes
@@ -76,6 +77,7 @@ select_permissions:
         - address_text
         - blurhash
         - color
+        - deceased_spouse_name
         - geolocation
         - id
         - name
@@ -113,6 +115,7 @@ update_permissions:
       columns:
         - address_text
         - color
+        - deceased_spouse_name
         - geolocation
         - name
         - notes

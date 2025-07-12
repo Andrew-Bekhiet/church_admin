@@ -8,7 +8,10 @@ part 'family.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'العائلات', allowExtension: true)
+@Queryable(classLabel: 'العائلات', allowExtension: true, labelsOverrides: {
+  'status': 'الحالة الاجتماعية',
+  'deceasedSpouseName': 'اسم الزوج المتوفي'
+})
 class Family extends ViewableWithIDAndImage
     with _$Family
     implements SerializableExtra {
@@ -26,6 +29,9 @@ class Family extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: MartialStatus.married)
   final MartialStatus status;
+
+  @override
+  final String? deceasedSpouseName;
 
   @override
   final String? notes;
@@ -60,6 +66,7 @@ class Family extends ViewableWithIDAndImage
     required this.name,
     this.address,
     this.status = MartialStatus.married,
+    this.deceasedSpouseName,
     this.notes,
     this.color,
     this.photoUpdatedAt,
@@ -91,6 +98,8 @@ class Family extends ViewableWithIDAndImage
               )
             : null,
         status: status.name,
+        deceasedSpouseName:
+            status == MartialStatus.widowed ? deceasedSpouseName : null,
         notes: notes,
         color: colorToInt(color),
       );
@@ -101,6 +110,12 @@ class Family extends ViewableWithIDAndImage
         notes: notes != oldFamily.notes ? notes : null,
         color: color != oldFamily.color ? colorToInt(color) : null,
         status: status != oldFamily.status ? status.name : null,
+        deceasedSpouseName: deceasedSpouseName != oldFamily.deceasedSpouseName
+            ? deceasedSpouseName
+            : null,
+      ).copyWith(
+        deceasedSpouseName:
+            status == MartialStatus.widowed ? deceasedSpouseName : null,
       );
 }
 

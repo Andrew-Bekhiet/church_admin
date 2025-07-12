@@ -26,6 +26,8 @@ subscription watchAllFamiliesWithAddresses(
     address {
       ...Address
     }
+    status
+    deceasedSpouseName
   }
 }
 
@@ -35,6 +37,8 @@ subscription watchFamily($id: uuid!) {
     address {
       ...Address
     }
+    status
+    deceasedSpouseName
     notes
     lastEdit {
       ...LatestEditHistory

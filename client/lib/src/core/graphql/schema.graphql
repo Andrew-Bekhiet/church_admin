@@ -1762,6 +1762,7 @@ type Families {
     where: FamiliesFamiliesBoolExp
   ): [FamiliesFamilies!]!
   color: bigint
+  deceasedSpouseName: String
   editHistory(
     distinctOn: [HistoryEditHistorySelectColumn!]
     limit: Int
@@ -1851,6 +1852,7 @@ input FamiliesBoolExp {
   blurhash: StringComparisonExp
   children: FamiliesFamiliesBoolExp
   color: BigintComparisonExp
+  deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   geolocation: GeographyComparisonExp
@@ -1965,6 +1967,7 @@ input FamiliesInsertInput {
   addressText: String
   children: FamiliesFamiliesArrRelInsertInput
   color: bigint
+  deceasedSpouseName: String
   geolocation: geography
   name: String
   notes: String
@@ -1977,6 +1980,7 @@ type FamiliesMaxFields {
   addressText: String
   blurhash: String
   color: bigint
+  deceasedSpouseName: String
   id: uuid
   name: String
   notes: String
@@ -1987,6 +1991,7 @@ type FamiliesMinFields {
   addressText: String
   blurhash: String
   color: bigint
+  deceasedSpouseName: String
   id: uuid
   name: String
   notes: String
@@ -2015,6 +2020,7 @@ input FamiliesOrderBy {
   blurhash: OrderBy
   childrenAggregate: FamiliesFamiliesAggregateOrderBy
   color: OrderBy
+  deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   geolocation: OrderBy
   id: OrderBy
@@ -2035,6 +2041,7 @@ enum FamiliesSelectColumn {
   addressText
   blurhash
   color
+  deceasedSpouseName
   geolocation
   id
   name
@@ -2046,6 +2053,7 @@ enum FamiliesSelectColumn {
 input FamiliesSetInput {
   addressText: String
   color: bigint
+  deceasedSpouseName: String
   geolocation: geography
   name: String
   notes: String
@@ -2069,6 +2077,7 @@ input FamiliesStreamCursorValueInput {
   addressText: String
   blurhash: String
   color: bigint
+  deceasedSpouseName: String
   geolocation: geography
   id: uuid
   name: String
@@ -2083,6 +2092,7 @@ type FamiliesSumFields {
 enum FamiliesUpdateColumn {
   addressText
   color
+  deceasedSpouseName
   geolocation
   name
   notes

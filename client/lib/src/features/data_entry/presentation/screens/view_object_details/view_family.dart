@@ -173,6 +173,11 @@ class _ViewFamilyState extends State<ViewFamily> {
             title: const Text('الحالة الاجتماعية'),
             subtitle: Text(family.status.label),
           ),
+          if (family.deceasedSpouseName case final deceasedSpouseName?)
+            ListTile(
+              title: const Text('اسم المتوفي/ـة'),
+              subtitle: Text(deceasedSpouseName),
+            ),
           CopiablePropertyWidget(
             'ملاحظات',
             family.notes,
