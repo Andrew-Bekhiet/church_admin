@@ -2,6 +2,178 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_FathersMaxOrderBy<TRes> {
+  factory CopyWith_Input_FathersMaxOrderBy(
+    Input_FathersMaxOrderBy instance,
+    TRes Function(Input_FathersMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_FathersMaxOrderBy;
+
+  factory CopyWith_Input_FathersMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersMaxOrderBy;
+
+  TRes call({
+    Enum_OrderBy? churchId,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+  });
+}
+
+class _CopyWithImpl_Input_FathersMaxOrderBy<TRes>
+    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_FathersMaxOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FathersMaxOrderBy _instance;
+
+  final TRes Function(Input_FathersMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? churchId = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+  }) =>
+      _then(Input_FathersMaxOrderBy._({
+        ..._instance._$data,
+        if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+        if (id != _undefined) 'id': (id as Enum_OrderBy?),
+        if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_FathersMaxOrderBy<TRes>
+    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_FathersMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? churchId,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+  }) =>
+      _res;
+}
+
+class Input_FathersMinOrderBy {
+  factory Input_FathersMinOrderBy({
+    Enum_OrderBy? churchId,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+  }) =>
+      Input_FathersMinOrderBy._({
+        if (churchId != null) r'churchId': churchId,
+        if (id != null) r'id': id,
+        if (name != null) r'name': name,
+      });
+
+  Input_FathersMinOrderBy._(this._$data);
+
+  factory Input_FathersMinOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$churchId as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] =
+          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] =
+          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+    }
+    return Input_FathersMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] =
+          l$churchId == null ? null : toJson_Enum_OrderBy(l$churchId);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersMinOrderBy<Input_FathersMinOrderBy> get copyWith =>
+      CopyWith_Input_FathersMinOrderBy(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersMinOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$churchId = churchId;
+    final l$id = id;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_FathersMinOrderBy<TRes> {
   factory CopyWith_Input_FathersMinOrderBy(
     Input_FathersMinOrderBy instance,

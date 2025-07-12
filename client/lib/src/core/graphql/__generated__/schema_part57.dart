@@ -2,6 +2,40 @@
 part of "schema.graphql.dart";
 
 
+String toJson_Enum_PersonsHobbiesSelectColumn(
+    Enum_PersonsHobbiesSelectColumn e) {
+  switch (e) {
+    case Enum_PersonsHobbiesSelectColumn.hobbyId:
+      return r'hobbyId';
+    case Enum_PersonsHobbiesSelectColumn.personId:
+      return r'personId';
+    case Enum_PersonsHobbiesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
+    String value) {
+  switch (value) {
+    case r'hobbyId':
+      return Enum_PersonsHobbiesSelectColumn.hobbyId;
+    case r'personId':
+      return Enum_PersonsHobbiesSelectColumn.personId;
+    default:
+      return Enum_PersonsHobbiesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_PersonsHobbiesUpdateColumn {
+  $_PLACEHOLDER,
+  $unknown;
+
+  factory Enum_PersonsHobbiesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_PersonsHobbiesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_PersonsHobbiesUpdateColumn(this);
+}
+
 String toJson_Enum_PersonsHobbiesUpdateColumn(
     Enum_PersonsHobbiesUpdateColumn e) {
   switch (e) {

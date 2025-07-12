@@ -445,8 +445,10 @@ enum Enum_FamiliesSelectColumn {
   addressText,
   blurhash,
   color,
+  deceasedSpouseName,
   geolocation,
   id,
+  marriageDate,
   name,
   notes,
   photoUpdatedAt,
@@ -467,10 +469,14 @@ String toJson_Enum_FamiliesSelectColumn(Enum_FamiliesSelectColumn e) {
       return r'blurhash';
     case Enum_FamiliesSelectColumn.color:
       return r'color';
+    case Enum_FamiliesSelectColumn.deceasedSpouseName:
+      return r'deceasedSpouseName';
     case Enum_FamiliesSelectColumn.geolocation:
       return r'geolocation';
     case Enum_FamiliesSelectColumn.id:
       return r'id';
+    case Enum_FamiliesSelectColumn.marriageDate:
+      return r'marriageDate';
     case Enum_FamiliesSelectColumn.name:
       return r'name';
     case Enum_FamiliesSelectColumn.notes:
@@ -492,10 +498,14 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
       return Enum_FamiliesSelectColumn.blurhash;
     case r'color':
       return Enum_FamiliesSelectColumn.color;
+    case r'deceasedSpouseName':
+      return Enum_FamiliesSelectColumn.deceasedSpouseName;
     case r'geolocation':
       return Enum_FamiliesSelectColumn.geolocation;
     case r'id':
       return Enum_FamiliesSelectColumn.id;
+    case r'marriageDate':
+      return Enum_FamiliesSelectColumn.marriageDate;
     case r'name':
       return Enum_FamiliesSelectColumn.name;
     case r'notes':
@@ -512,7 +522,9 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
 enum Enum_FamiliesUpdateColumn {
   addressText,
   color,
+  deceasedSpouseName,
   geolocation,
+  marriageDate,
   name,
   notes,
   status,
@@ -530,8 +542,12 @@ String toJson_Enum_FamiliesUpdateColumn(Enum_FamiliesUpdateColumn e) {
       return r'addressText';
     case Enum_FamiliesUpdateColumn.color:
       return r'color';
+    case Enum_FamiliesUpdateColumn.deceasedSpouseName:
+      return r'deceasedSpouseName';
     case Enum_FamiliesUpdateColumn.geolocation:
       return r'geolocation';
+    case Enum_FamiliesUpdateColumn.marriageDate:
+      return r'marriageDate';
     case Enum_FamiliesUpdateColumn.name:
       return r'name';
     case Enum_FamiliesUpdateColumn.notes:
@@ -549,8 +565,12 @@ Enum_FamiliesUpdateColumn fromJson_Enum_FamiliesUpdateColumn(String value) {
       return Enum_FamiliesUpdateColumn.addressText;
     case r'color':
       return Enum_FamiliesUpdateColumn.color;
+    case r'deceasedSpouseName':
+      return Enum_FamiliesUpdateColumn.deceasedSpouseName;
     case r'geolocation':
       return Enum_FamiliesUpdateColumn.geolocation;
+    case r'marriageDate':
+      return Enum_FamiliesUpdateColumn.marriageDate;
     case r'name':
       return Enum_FamiliesUpdateColumn.name;
     case r'notes':
@@ -2489,38 +2509,4 @@ enum Enum_PersonsHobbiesSelectColumn {
       fromJson_Enum_PersonsHobbiesSelectColumn(value);
 
   String toJson() => toJson_Enum_PersonsHobbiesSelectColumn(this);
-}
-
-String toJson_Enum_PersonsHobbiesSelectColumn(
-    Enum_PersonsHobbiesSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsHobbiesSelectColumn.hobbyId:
-      return r'hobbyId';
-    case Enum_PersonsHobbiesSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsHobbiesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
-    String value) {
-  switch (value) {
-    case r'hobbyId':
-      return Enum_PersonsHobbiesSelectColumn.hobbyId;
-    case r'personId':
-      return Enum_PersonsHobbiesSelectColumn.personId;
-    default:
-      return Enum_PersonsHobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsHobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesUpdateColumn(this);
 }

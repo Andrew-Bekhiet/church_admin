@@ -599,11 +599,13 @@ class Input_FamiliesBoolExp {
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_BigintComparisonExp? color,
+    Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
     Input_FamiliesFamiliesBoolExp? parents,
@@ -623,12 +625,15 @@ class Input_FamiliesBoolExp {
         if (blurhash != null) r'blurhash': blurhash,
         if (children != null) r'children': children,
         if (color != null) r'color': color,
+        if (deceasedSpouseName != null)
+          r'deceasedSpouseName': deceasedSpouseName,
         if (editHistory != null) r'editHistory': editHistory,
         if (editHistoryAggregate != null)
           r'editHistoryAggregate': editHistoryAggregate,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (marriageDate != null) r'marriageDate': marriageDate,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
         if (parents != null) r'parents': parents,
@@ -699,6 +704,13 @@ class Input_FamiliesBoolExp {
           : Input_BigintComparisonExp.fromJson(
               (l$color as Map<String, dynamic>));
     }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$deceasedSpouseName as Map<String, dynamic>));
+    }
     if (data.containsKey('editHistory')) {
       final l$editHistory = data['editHistory'];
       result$data['editHistory'] = l$editHistory == null
@@ -732,6 +744,13 @@ class Input_FamiliesBoolExp {
           ? null
           : Input_HistoryLatestEditsBoolExp.fromJson(
               (l$lastEdit as Map<String, dynamic>));
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : Input_DateComparisonExp.fromJson(
+              (l$marriageDate as Map<String, dynamic>));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -823,6 +842,9 @@ class Input_FamiliesBoolExp {
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
 
+  Input_StringComparisonExp? get deceasedSpouseName =>
+      (_$data['deceasedSpouseName'] as Input_StringComparisonExp?);
+
   Input_HistoryEditHistoryBoolExp? get editHistory =>
       (_$data['editHistory'] as Input_HistoryEditHistoryBoolExp?);
 
@@ -837,6 +859,9 @@ class Input_FamiliesBoolExp {
 
   Input_HistoryLatestEditsBoolExp? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
+
+  Input_DateComparisonExp? get marriageDate =>
+      (_$data['marriageDate'] as Input_DateComparisonExp?);
 
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
@@ -898,6 +923,10 @@ class Input_FamiliesBoolExp {
       final l$color = color;
       result$data['color'] = l$color?.toJson();
     }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName?.toJson();
+    }
     if (_$data.containsKey('editHistory')) {
       final l$editHistory = editHistory;
       result$data['editHistory'] = l$editHistory?.toJson();
@@ -917,6 +946,10 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] = l$marriageDate?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1060,6 +1093,15 @@ class Input_FamiliesBoolExp {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
     final l$editHistory = editHistory;
     final lOther$editHistory = other.editHistory;
     if (_$data.containsKey('editHistory') !=
@@ -1102,6 +1144,15 @@ class Input_FamiliesBoolExp {
       return false;
     }
     if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
       return false;
     }
     final l$name = name;
@@ -1192,11 +1243,13 @@ class Input_FamiliesBoolExp {
     final l$blurhash = blurhash;
     final l$children = children;
     final l$color = color;
+    final l$deceasedSpouseName = deceasedSpouseName;
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$geolocation = geolocation;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$marriageDate = marriageDate;
     final l$name = name;
     final l$notes = notes;
     final l$parents = parents;
@@ -1223,6 +1276,9 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('children') ? l$children : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
       _$data.containsKey('editHistory') ? l$editHistory : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
@@ -1230,6 +1286,7 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('parents') ? l$parents : const {},
@@ -1261,11 +1318,13 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_BigintComparisonExp? color,
+    Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
     Input_FamiliesFamiliesBoolExp? parents,
@@ -1290,12 +1349,14 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_StringComparisonExp<TRes> get deceasedSpouseName;
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
       get editHistoryAggregate;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_DateComparisonExp<TRes> get marriageDate;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_StringComparisonExp<TRes> get notes;
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get parents;
@@ -1329,11 +1390,13 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? color = _undefined,
+    Object? deceasedSpouseName = _undefined,
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
     Object? parents = _undefined,
@@ -1359,6 +1422,9 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (children != _undefined)
           'children': (children as Input_FamiliesFamiliesBoolExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+        if (deceasedSpouseName != _undefined)
+          'deceasedSpouseName':
+              (deceasedSpouseName as Input_StringComparisonExp?),
         if (editHistory != _undefined)
           'editHistory': (editHistory as Input_HistoryEditHistoryBoolExp?),
         if (editHistoryAggregate != _undefined)
@@ -1369,6 +1435,8 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+        if (marriageDate != _undefined)
+          'marriageDate': (marriageDate as Input_DateComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (notes != _undefined) 'notes': (notes as Input_StringComparisonExp?),
         if (parents != _undefined)
@@ -1456,6 +1524,14 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
             local$color, (e) => call(color: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get deceasedSpouseName {
+    final local$deceasedSpouseName = _instance.deceasedSpouseName;
+    return local$deceasedSpouseName == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$deceasedSpouseName, (e) => call(deceasedSpouseName: e));
+  }
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory {
     final local$editHistory = _instance.editHistory;
     return local$editHistory == null
@@ -1495,6 +1571,14 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
         : CopyWith_Input_HistoryLatestEditsBoolExp(
             local$lastEdit, (e) => call(lastEdit: e));
+  }
+
+  CopyWith_Input_DateComparisonExp<TRes> get marriageDate {
+    final local$marriageDate = _instance.marriageDate;
+    return local$marriageDate == null
+        ? CopyWith_Input_DateComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_DateComparisonExp(
+            local$marriageDate, (e) => call(marriageDate: e));
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get name {
@@ -1582,11 +1666,13 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_BigintComparisonExp? color,
+    Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
     Input_FamiliesFamiliesBoolExp? parents,
@@ -1621,6 +1707,9 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
 
+  CopyWith_Input_StringComparisonExp<TRes> get deceasedSpouseName =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
 
@@ -1636,6 +1725,9 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
 
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_DateComparisonExp<TRes> get marriageDate =>
+      CopyWith_Input_DateComparisonExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);

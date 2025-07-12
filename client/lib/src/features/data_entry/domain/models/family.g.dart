@@ -35,15 +35,28 @@ class _FamilyFields {
   final FieldMetadata<MartialStatus> status = FieldMetadata<MartialStatus>(
     parentType: Family,
     name: 'status',
-    label: 'status',
+    label: 'الحالة الاجتماعية',
     isCodeOnly: false,
     operators: {...MultiSelectOperator.values},
+  );
+
+  final FieldMetadata<DateTime> marriageDate = FieldMetadata<DateTime>(
+    parentType: Family,
+    name: 'marriageDate',
+    label: 'تاريخ الزواج',
+    isCodeOnly: false,
+    operators: {
+      ...DateTimeOperator.values,
+      ...DateRangeOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
   );
 
   final FieldMetadata<String> deceasedSpouseName = FieldMetadata<String>(
     parentType: Family,
     name: 'deceasedSpouseName',
-    label: 'deceasedSpouseName',
+    label: 'اسم الزوج المتوفي',
     isCodeOnly: false,
     operators: {
       ...StringOperator.values,
@@ -147,6 +160,7 @@ class _FamilyFields {
     name,
     address,
     status,
+    marriageDate,
     deceasedSpouseName,
     notes,
     color,
@@ -161,6 +175,7 @@ class _FamilyFields {
     'name': name,
     'address': address,
     'status': status,
+    'marriageDate': marriageDate,
     'deceasedSpouseName': deceasedSpouseName,
     'notes': notes,
     'color': color,
@@ -184,6 +199,9 @@ Family _$FamilyFromJson(Map json) => Family(
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
       status: $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
           MartialStatus.married,
+      marriageDate: json['marriageDate'] == null
+          ? null
+          : DateTime.parse(json['marriageDate'] as String),
       deceasedSpouseName: json['deceasedSpouseName'] as String?,
       notes: json['notes'] as String?,
       color: colorFromInt((json['color'] as num?)?.toInt()),
@@ -204,6 +222,7 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'name': instance.name,
       'address': instance.address?.toJson(),
       'status': _$MartialStatusEnumMap[instance.status]!,
+      'marriageDate': instance.marriageDate?.toIso8601String(),
       'deceasedSpouseName': instance.deceasedSpouseName,
       'notes': instance.notes,
       'color': colorToInt(instance.color),

@@ -1485,6 +1485,13 @@ const documentNodeSubscriptionwatchAllFamiliesWithAddresses =
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'marriageDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -1516,6 +1523,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     this.address,
     required this.status,
     this.deceasedSpouseName,
+    this.marriageDate,
   });
 
   factory Subscription_watchAllFamiliesWithAddresses_families.fromJson(
@@ -1529,6 +1537,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$address = json['address'];
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
+    final l$marriageDate = json['marriageDate'];
     return Subscription_watchAllFamiliesWithAddresses_families(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -1542,6 +1551,8 @@ class Subscription_watchAllFamiliesWithAddresses_families
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       status: (l$status as String),
       deceasedSpouseName: (l$deceasedSpouseName as String?),
+      marriageDate:
+          l$marriageDate == null ? null : dateFromString(l$marriageDate),
     );
   }
 
@@ -1562,6 +1573,8 @@ class Subscription_watchAllFamiliesWithAddresses_families
   final String status;
 
   final String? deceasedSpouseName;
+
+  final DateTime? marriageDate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1584,6 +1597,9 @@ class Subscription_watchAllFamiliesWithAddresses_families
     _resultData['status'] = l$status;
     final l$deceasedSpouseName = deceasedSpouseName;
     _resultData['deceasedSpouseName'] = l$deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    _resultData['marriageDate'] =
+        l$marriageDate == null ? null : dateToString(l$marriageDate);
     return _resultData;
   }
 
@@ -1598,6 +1614,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$address = address;
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
+    final l$marriageDate = marriageDate;
     return Object.hashAll([
       l$id,
       l$name,
@@ -1608,6 +1625,7 @@ class Subscription_watchAllFamiliesWithAddresses_families
       l$address,
       l$status,
       l$deceasedSpouseName,
+      l$marriageDate,
     ]);
   }
 
@@ -1665,6 +1683,11 @@ class Subscription_watchAllFamiliesWithAddresses_families
     if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
       return false;
     }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
     return true;
   }
 }
@@ -1701,6 +1724,7 @@ abstract class CopyWith_Subscription_watchAllFamiliesWithAddresses_families<
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
+    DateTime? marriageDate,
   });
   CopyWith_Fragment_Address<TRes> get address;
 }
@@ -1730,6 +1754,7 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
     Object? address = _undefined,
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
   }) =>
       _then(Subscription_watchAllFamiliesWithAddresses_families(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -1754,6 +1779,9 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
         deceasedSpouseName: deceasedSpouseName == _undefined
             ? _instance.deceasedSpouseName
             : (deceasedSpouseName as String?),
+        marriageDate: marriageDate == _undefined
+            ? _instance.marriageDate
+            : (marriageDate as DateTime?),
       ));
 
   CopyWith_Fragment_Address<TRes> get address {
@@ -1783,6 +1811,7 @@ class _CopyWithStubImpl_Subscription_watchAllFamiliesWithAddresses_families<
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
+    DateTime? marriageDate,
   }) =>
       _res;
 
@@ -2062,6 +2091,13 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'marriageDate'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'notes'),
             alias: null,
             arguments: [],
@@ -2122,6 +2158,7 @@ class Subscription_watchFamily_familiesByPk
     this.address,
     required this.status,
     this.deceasedSpouseName,
+    this.marriageDate,
     this.notes,
     this.lastEdit,
   });
@@ -2137,6 +2174,7 @@ class Subscription_watchFamily_familiesByPk
     final l$address = json['address'];
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
+    final l$marriageDate = json['marriageDate'];
     final l$notes = json['notes'];
     final l$lastEdit = json['lastEdit'];
     return Subscription_watchFamily_familiesByPk(
@@ -2152,6 +2190,8 @@ class Subscription_watchFamily_familiesByPk
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
       status: (l$status as String),
       deceasedSpouseName: (l$deceasedSpouseName as String?),
+      marriageDate:
+          l$marriageDate == null ? null : dateFromString(l$marriageDate),
       notes: (l$notes as String?),
       lastEdit: l$lastEdit == null
           ? null
@@ -2178,6 +2218,8 @@ class Subscription_watchFamily_familiesByPk
 
   final String? deceasedSpouseName;
 
+  final DateTime? marriageDate;
+
   final String? notes;
 
   final Fragment_LatestEditHistory? lastEdit;
@@ -2203,6 +2245,9 @@ class Subscription_watchFamily_familiesByPk
     _resultData['status'] = l$status;
     final l$deceasedSpouseName = deceasedSpouseName;
     _resultData['deceasedSpouseName'] = l$deceasedSpouseName;
+    final l$marriageDate = marriageDate;
+    _resultData['marriageDate'] =
+        l$marriageDate == null ? null : dateToString(l$marriageDate);
     final l$notes = notes;
     _resultData['notes'] = l$notes;
     final l$lastEdit = lastEdit;
@@ -2221,6 +2266,7 @@ class Subscription_watchFamily_familiesByPk
     final l$address = address;
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
+    final l$marriageDate = marriageDate;
     final l$notes = notes;
     final l$lastEdit = lastEdit;
     return Object.hashAll([
@@ -2233,6 +2279,7 @@ class Subscription_watchFamily_familiesByPk
       l$address,
       l$status,
       l$deceasedSpouseName,
+      l$marriageDate,
       l$notes,
       l$lastEdit,
     ]);
@@ -2292,6 +2339,11 @@ class Subscription_watchFamily_familiesByPk
     if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
       return false;
     }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (l$marriageDate != lOther$marriageDate) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (l$notes != lOther$notes) {
@@ -2335,6 +2387,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
+    DateTime? marriageDate,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
   });
@@ -2365,6 +2418,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? address = _undefined,
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
+    Object? marriageDate = _undefined,
     Object? notes = _undefined,
     Object? lastEdit = _undefined,
   }) =>
@@ -2391,6 +2445,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         deceasedSpouseName: deceasedSpouseName == _undefined
             ? _instance.deceasedSpouseName
             : (deceasedSpouseName as String?),
+        marriageDate: marriageDate == _undefined
+            ? _instance.marriageDate
+            : (marriageDate as DateTime?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
@@ -2429,6 +2486,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
+    DateTime? marriageDate,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
   }) =>

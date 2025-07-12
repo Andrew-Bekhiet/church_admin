@@ -70,6 +70,7 @@ insert_permissions:
         - name
         - notes
         - status
+        - marriage_date
 select_permissions:
   - role: user
     permission:
@@ -84,6 +85,7 @@ select_permissions:
         - notes
         - photo_updated_at
         - status
+        - marriage_date
       filter:
         _or:
           - _exists:
@@ -120,6 +122,7 @@ update_permissions:
         - name
         - notes
         - status
+        - marriage_date
       filter:
         _or:
           - _exists:

@@ -10,7 +10,8 @@ part 'family.g.dart';
 @JsonSerializable()
 @Queryable(classLabel: 'العائلات', allowExtension: true, labelsOverrides: {
   'status': 'الحالة الاجتماعية',
-  'deceasedSpouseName': 'اسم الزوج المتوفي'
+  'deceasedSpouseName': 'اسم الزوج المتوفي',
+  'marriageDate': 'تاريخ الزواج',
 })
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -29,6 +30,9 @@ class Family extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: MartialStatus.married)
   final MartialStatus status;
+
+  @override
+  final DateTime? marriageDate;
 
   @override
   final String? deceasedSpouseName;
@@ -66,6 +70,7 @@ class Family extends ViewableWithIDAndImage
     required this.name,
     this.address,
     this.status = MartialStatus.married,
+    this.marriageDate,
     this.deceasedSpouseName,
     this.notes,
     this.color,
@@ -98,25 +103,57 @@ class Family extends ViewableWithIDAndImage
               )
             : null,
         status: status.name,
+        marriageDate: status == MartialStatus.widowed ? null : marriageDate,
         deceasedSpouseName:
             status == MartialStatus.widowed ? deceasedSpouseName : null,
         notes: notes,
         color: colorToInt(color),
       );
 
-  Input_FamiliesSetInput toUpdateInput(Family oldFamily) =>
-      Input_FamiliesSetInput(
-        name: name != oldFamily.name ? name : null,
-        notes: notes != oldFamily.notes ? notes : null,
-        color: color != oldFamily.color ? colorToInt(color) : null,
-        status: status != oldFamily.status ? status.name : null,
-        deceasedSpouseName: deceasedSpouseName != oldFamily.deceasedSpouseName
-            ? deceasedSpouseName
-            : null,
-      ).copyWith(
+  Input_FamiliesSetInput toUpdateInput(Family oldFamily) {
+    Input_FamiliesSetInput result = Input_FamiliesSetInput();
+
+    if (name != oldFamily.name) {
+      result = result.copyWith(
+        name: name,
+      );
+    }
+
+    if (notes != oldFamily.notes) {
+      result = result.copyWith(
+        notes: notes,
+      );
+    }
+
+    if (color != oldFamily.color) {
+      result = result.copyWith(
+        color: colorToInt(color),
+      );
+    }
+
+    if (marriageDate != oldFamily.marriageDate) {
+      result = result.copyWith(
+        marriageDate: marriageDate,
+      );
+    }
+
+    if (deceasedSpouseName != oldFamily.deceasedSpouseName) {
+      result = result.copyWith(
+        deceasedSpouseName: deceasedSpouseName,
+      );
+    }
+
+    if (status != oldFamily.status) {
+      result = result.copyWith(
+        status: status.name,
+        marriageDate: status == MartialStatus.widowed ? null : marriageDate,
         deceasedSpouseName:
             status == MartialStatus.widowed ? deceasedSpouseName : null,
       );
+    }
+
+    return result;
+  }
 }
 
 class FamilyFields extends _FamilyFields {

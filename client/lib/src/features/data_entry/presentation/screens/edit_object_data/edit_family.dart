@@ -110,7 +110,17 @@ class _EditFamilyState extends State<EditFamily> {
               validator: (value) => value != null && value.isEmpty
                   ? 'الرجاء إدخال اسم المتوفي/ـة'
                   : null,
-            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ).withPadding(const EdgeInsets.symmetric(vertical: 8))
+          else
+            DateTimeField(
+              label: 'تاريخ الزواج',
+              initialValue: newFamily.marriageDate,
+              onChanged: (value) => newFamily = newFamily.copyWith(
+                marriageDate: value,
+              ),
+              nullable: true,
+              withTime: false,
+            ),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'ملاحظات',

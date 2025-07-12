@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -173,6 +174,11 @@ class _ViewFamilyState extends State<ViewFamily> {
             title: const Text('الحالة الاجتماعية'),
             subtitle: Text(family.status.label),
           ),
+          if (family.marriageDate case final marriageDate?)
+            ListTile(
+              title: const Text('تاريخ الزواج'),
+              subtitle: Text(DateFormat('yyyy/M/d').format(marriageDate)),
+            ),
           if (family.deceasedSpouseName case final deceasedSpouseName?)
             ListTile(
               title: const Text('اسم المتوفي/ـة'),

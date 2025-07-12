@@ -17,10 +17,12 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? blurhash,
     Input_FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum_OrderBy? color,
+    Enum_OrderBy? deceasedSpouseName,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
     Input_FamiliesFamiliesAggregateOrderBy? parentsAggregate,
@@ -58,10 +60,12 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? blurhash = _undefined,
     Object? childrenAggregate = _undefined,
     Object? color = _undefined,
+    Object? deceasedSpouseName = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
     Object? parentsAggregate = _undefined,
@@ -81,6 +85,8 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
           'childrenAggregate':
               (childrenAggregate as Input_FamiliesFamiliesAggregateOrderBy?),
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (deceasedSpouseName != _undefined)
+          'deceasedSpouseName': (deceasedSpouseName as Enum_OrderBy?),
         if (editHistoryAggregate != _undefined)
           'editHistoryAggregate': (editHistoryAggregate
               as Input_HistoryEditHistoryAggregateOrderBy?),
@@ -89,6 +95,8 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+        if (marriageDate != _undefined)
+          'marriageDate': (marriageDate as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
         if (parentsAggregate != _undefined)
@@ -175,10 +183,12 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? blurhash,
     Input_FamiliesFamiliesAggregateOrderBy? childrenAggregate,
     Enum_OrderBy? color,
+    Enum_OrderBy? deceasedSpouseName,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
     Input_FamiliesFamiliesAggregateOrderBy? parentsAggregate,
@@ -312,7 +322,9 @@ class Input_FamiliesSetInput {
   factory Input_FamiliesSetInput({
     String? addressText,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     String? status,
@@ -320,7 +332,10 @@ class Input_FamiliesSetInput {
       Input_FamiliesSetInput._({
         if (addressText != null) r'addressText': addressText,
         if (color != null) r'color': color,
+        if (deceasedSpouseName != null)
+          r'deceasedSpouseName': deceasedSpouseName,
         if (geolocation != null) r'geolocation': geolocation,
+        if (marriageDate != null) r'marriageDate': marriageDate,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
         if (status != null) r'status': status,
@@ -338,9 +353,18 @@ class Input_FamiliesSetInput {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
     }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
+    }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
       result$data['geolocation'] = (l$geolocation as Map<String, dynamic>?);
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] =
+          l$marriageDate == null ? null : dateFromString(l$marriageDate);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -363,8 +387,12 @@ class Input_FamiliesSetInput {
 
   int? get color => (_$data['color'] as int?);
 
+  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
+
+  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
 
   String? get name => (_$data['name'] as String?);
 
@@ -382,9 +410,18 @@ class Input_FamiliesSetInput {
       final l$color = color;
       result$data['color'] = l$color;
     }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
+    }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
       result$data['geolocation'] = l$geolocation;
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] =
+          l$marriageDate == null ? null : dateToString(l$marriageDate);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -432,6 +469,15 @@ class Input_FamiliesSetInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
     if (_$data.containsKey('geolocation') !=
@@ -439,6 +485,15 @@ class Input_FamiliesSetInput {
       return false;
     }
     if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
       return false;
     }
     final l$name = name;
@@ -472,14 +527,20 @@ class Input_FamiliesSetInput {
   int get hashCode {
     final l$addressText = addressText;
     final l$color = color;
+    final l$deceasedSpouseName = deceasedSpouseName;
     final l$geolocation = geolocation;
+    final l$marriageDate = marriageDate;
     final l$name = name;
     final l$notes = notes;
     final l$status = status;
     return Object.hashAll([
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('status') ? l$status : const {},
@@ -499,7 +560,9 @@ abstract class CopyWith_Input_FamiliesSetInput<TRes> {
   TRes call({
     String? addressText,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     String? status,
@@ -522,7 +585,9 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
   TRes call({
     Object? addressText = _undefined,
     Object? color = _undefined,
+    Object? deceasedSpouseName = _undefined,
     Object? geolocation = _undefined,
+    Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
     Object? status = _undefined,
@@ -531,8 +596,12 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
         ..._instance._$data,
         if (addressText != _undefined) 'addressText': (addressText as String?),
         if (color != _undefined) 'color': (color as int?),
+        if (deceasedSpouseName != _undefined)
+          'deceasedSpouseName': (deceasedSpouseName as String?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
+        if (marriageDate != _undefined)
+          'marriageDate': (marriageDate as DateTime?),
         if (name != _undefined) 'name': (name as String?),
         if (notes != _undefined) 'notes': (notes as String?),
         if (status != _undefined) 'status': (status as String?),
@@ -548,7 +617,9 @@ class _CopyWithStubImpl_Input_FamiliesSetInput<TRes>
   call({
     String? addressText,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     String? status,
@@ -715,8 +786,10 @@ class Input_FamiliesStreamCursorValueInput {
     String? addressText,
     String? blurhash,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     DateTime? photoUpdatedAt,
@@ -726,8 +799,11 @@ class Input_FamiliesStreamCursorValueInput {
         if (addressText != null) r'addressText': addressText,
         if (blurhash != null) r'blurhash': blurhash,
         if (color != null) r'color': color,
+        if (deceasedSpouseName != null)
+          r'deceasedSpouseName': deceasedSpouseName,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
+        if (marriageDate != null) r'marriageDate': marriageDate,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -751,6 +827,10 @@ class Input_FamiliesStreamCursorValueInput {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
     }
+    if (data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = data['deceasedSpouseName'];
+      result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
+    }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
       result$data['geolocation'] = (l$geolocation as Map<String, dynamic>?);
@@ -758,6 +838,11 @@ class Input_FamiliesStreamCursorValueInput {
     if (data.containsKey('id')) {
       final l$id = data['id'];
       result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+    }
+    if (data.containsKey('marriageDate')) {
+      final l$marriageDate = data['marriageDate'];
+      result$data['marriageDate'] =
+          l$marriageDate == null ? null : dateFromString(l$marriageDate);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -787,10 +872,14 @@ class Input_FamiliesStreamCursorValueInput {
 
   int? get color => (_$data['color'] as int?);
 
+  String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
+
   Map<String, dynamic>? get geolocation =>
       (_$data['geolocation'] as Map<String, dynamic>?);
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
+
+  DateTime? get marriageDate => (_$data['marriageDate'] as DateTime?);
 
   String? get name => (_$data['name'] as String?);
 
@@ -814,6 +903,10 @@ class Input_FamiliesStreamCursorValueInput {
       final l$color = color;
       result$data['color'] = l$color;
     }
+    if (_$data.containsKey('deceasedSpouseName')) {
+      final l$deceasedSpouseName = deceasedSpouseName;
+      result$data['deceasedSpouseName'] = l$deceasedSpouseName;
+    }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
       result$data['geolocation'] = l$geolocation;
@@ -821,6 +914,11 @@ class Input_FamiliesStreamCursorValueInput {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('marriageDate')) {
+      final l$marriageDate = marriageDate;
+      result$data['marriageDate'] =
+          l$marriageDate == null ? null : dateToString(l$marriageDate);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -884,6 +982,15 @@ class Input_FamiliesStreamCursorValueInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$deceasedSpouseName = deceasedSpouseName;
+    final lOther$deceasedSpouseName = other.deceasedSpouseName;
+    if (_$data.containsKey('deceasedSpouseName') !=
+        other._$data.containsKey('deceasedSpouseName')) {
+      return false;
+    }
+    if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
+      return false;
+    }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
     if (_$data.containsKey('geolocation') !=
@@ -899,6 +1006,15 @@ class Input_FamiliesStreamCursorValueInput {
       return false;
     }
     if (l$id != lOther$id) {
+      return false;
+    }
+    final l$marriageDate = marriageDate;
+    final lOther$marriageDate = other.marriageDate;
+    if (_$data.containsKey('marriageDate') !=
+        other._$data.containsKey('marriageDate')) {
+      return false;
+    }
+    if (l$marriageDate != lOther$marriageDate) {
       return false;
     }
     final l$name = name;
@@ -942,8 +1058,10 @@ class Input_FamiliesStreamCursorValueInput {
     final l$addressText = addressText;
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$deceasedSpouseName = deceasedSpouseName;
     final l$geolocation = geolocation;
     final l$id = id;
+    final l$marriageDate = marriageDate;
     final l$name = name;
     final l$notes = notes;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -952,8 +1070,12 @@ class Input_FamiliesStreamCursorValueInput {
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('deceasedSpouseName')
+          ? l$deceasedSpouseName
+          : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -975,8 +1097,10 @@ abstract class CopyWith_Input_FamiliesStreamCursorValueInput<TRes> {
     String? addressText,
     String? blurhash,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     DateTime? photoUpdatedAt,
@@ -1001,8 +1125,10 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
     Object? addressText = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? deceasedSpouseName = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
+    Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -1013,9 +1139,13 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
         if (addressText != _undefined) 'addressText': (addressText as String?),
         if (blurhash != _undefined) 'blurhash': (blurhash as String?),
         if (color != _undefined) 'color': (color as int?),
+        if (deceasedSpouseName != _undefined)
+          'deceasedSpouseName': (deceasedSpouseName as String?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Map<String, dynamic>?),
         if (id != _undefined) 'id': (id as UuidValue?),
+        if (marriageDate != _undefined)
+          'marriageDate': (marriageDate as DateTime?),
         if (name != _undefined) 'name': (name as String?),
         if (notes != _undefined) 'notes': (notes as String?),
         if (photoUpdatedAt != _undefined)
@@ -1034,8 +1164,10 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorValueInput<TRes>
     String? addressText,
     String? blurhash,
     int? color,
+    String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
     UuidValue? id,
+    DateTime? marriageDate,
     String? name,
     String? notes,
     DateTime? photoUpdatedAt,
@@ -2426,178 +2558,6 @@ class Input_FathersMaxOrderBy {
       return true;
     }
     if (other is! Input_FathersMaxOrderBy || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$churchId = churchId;
-    final lOther$churchId = other.churchId;
-    if (_$data.containsKey('churchId') !=
-        other._$data.containsKey('churchId')) {
-      return false;
-    }
-    if (l$churchId != lOther$churchId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$churchId = churchId;
-    final l$id = id;
-    final l$name = name;
-    return Object.hashAll([
-      _$data.containsKey('churchId') ? l$churchId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FathersMaxOrderBy<TRes> {
-  factory CopyWith_Input_FathersMaxOrderBy(
-    Input_FathersMaxOrderBy instance,
-    TRes Function(Input_FathersMaxOrderBy) then,
-  ) = _CopyWithImpl_Input_FathersMaxOrderBy;
-
-  factory CopyWith_Input_FathersMaxOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_FathersMaxOrderBy;
-
-  TRes call({
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-  });
-}
-
-class _CopyWithImpl_Input_FathersMaxOrderBy<TRes>
-    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_FathersMaxOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_FathersMaxOrderBy _instance;
-
-  final TRes Function(Input_FathersMaxOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? churchId = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-  }) =>
-      _then(Input_FathersMaxOrderBy._({
-        ..._instance._$data,
-        if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_FathersMaxOrderBy<TRes>
-    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
-  _CopyWithStubImpl_Input_FathersMaxOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-  }) =>
-      _res;
-}
-
-class Input_FathersMinOrderBy {
-  factory Input_FathersMinOrderBy({
-    Enum_OrderBy? churchId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-  }) =>
-      Input_FathersMinOrderBy._({
-        if (churchId != null) r'churchId': churchId,
-        if (id != null) r'id': id,
-        if (name != null) r'name': name,
-      });
-
-  Input_FathersMinOrderBy._(this._$data);
-
-  factory Input_FathersMinOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('churchId')) {
-      final l$churchId = data['churchId'];
-      result$data['churchId'] = l$churchId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$churchId as String));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
-    }
-    return Input_FathersMinOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('churchId')) {
-      final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : toJson_Enum_OrderBy(l$churchId);
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FathersMinOrderBy<Input_FathersMinOrderBy> get copyWith =>
-      CopyWith_Input_FathersMinOrderBy(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FathersMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$churchId = churchId;

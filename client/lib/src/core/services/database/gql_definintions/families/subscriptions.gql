@@ -28,6 +28,7 @@ subscription watchAllFamiliesWithAddresses(
     }
     status
     deceasedSpouseName
+    marriageDate
   }
 }
 
@@ -39,6 +40,7 @@ subscription watchFamily($id: uuid!) {
     }
     status
     deceasedSpouseName
+    marriageDate
     notes
     lastEdit {
       ...LatestEditHistory

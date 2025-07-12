@@ -1,0 +1,1 @@
+ALTER TABLE "public"."families" DROP COLUMN "marriage_date";

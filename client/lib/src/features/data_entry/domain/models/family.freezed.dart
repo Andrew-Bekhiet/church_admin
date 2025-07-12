@@ -18,6 +18,7 @@ mixin _$Family {
   String get name;
   Address? get address;
   MartialStatus get status;
+  DateTime? get marriageDate;
   String? get deceasedSpouseName;
   String? get notes;
   Color? get color;
@@ -43,6 +44,8 @@ mixin _$Family {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.marriageDate, marriageDate) ||
+                other.marriageDate == marriageDate) &&
             (identical(other.deceasedSpouseName, deceasedSpouseName) ||
                 other.deceasedSpouseName == deceasedSpouseName) &&
             (identical(other.notes, notes) || other.notes == notes) &&
@@ -65,6 +68,7 @@ mixin _$Family {
       name,
       address,
       status,
+      marriageDate,
       deceasedSpouseName,
       notes,
       color,
@@ -76,7 +80,7 @@ mixin _$Family {
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, deceasedSpouseName: $deceasedSpouseName, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit)';
   }
 }
 
@@ -90,6 +94,7 @@ abstract mixin class $FamilyCopyWith<$Res> {
       String name,
       Address? address,
       MartialStatus status,
+      DateTime? marriageDate,
       String? deceasedSpouseName,
       String? notes,
       Color? color,
@@ -116,6 +121,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? name = null,
     Object? address = freezed,
     Object? status = null,
+    Object? marriageDate = freezed,
     Object? deceasedSpouseName = freezed,
     Object? notes = freezed,
     Object? color = freezed,
@@ -142,6 +148,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as MartialStatus,
+      marriageDate: freezed == marriageDate
+          ? _self.marriageDate
+          : marriageDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       deceasedSpouseName: freezed == deceasedSpouseName
           ? _self.deceasedSpouseName
           : deceasedSpouseName // ignore: cast_nullable_to_non_nullable
