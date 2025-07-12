@@ -2205,3 +2205,591 @@ class _CopyWithStubImpl_Mutation_insertPersonLastVisit_insertHistoryVisitHistory
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
+
+class Variables_Mutation_insertFamilyLastVisit {
+  factory Variables_Mutation_insertFamilyLastVisit({
+    required UuidValue familyId,
+    required DateTime lastVisit,
+    required bool isFatherVisit,
+  }) =>
+      Variables_Mutation_insertFamilyLastVisit._({
+        r'familyId': familyId,
+        r'lastVisit': lastVisit,
+        r'isFatherVisit': isFatherVisit,
+      });
+
+  Variables_Mutation_insertFamilyLastVisit._(this._$data);
+
+  factory Variables_Mutation_insertFamilyLastVisit.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$familyId = data['familyId'];
+    result$data['familyId'] = stringToUuid(l$familyId);
+    final l$lastVisit = data['lastVisit'];
+    result$data['lastVisit'] = tstzFromString(l$lastVisit);
+    final l$isFatherVisit = data['isFatherVisit'];
+    result$data['isFatherVisit'] = (l$isFatherVisit as bool);
+    return Variables_Mutation_insertFamilyLastVisit._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get familyId => (_$data['familyId'] as UuidValue);
+
+  DateTime get lastVisit => (_$data['lastVisit'] as DateTime);
+
+  bool get isFatherVisit => (_$data['isFatherVisit'] as bool);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$familyId = familyId;
+    result$data['familyId'] = uuidToString(l$familyId);
+    final l$lastVisit = lastVisit;
+    result$data['lastVisit'] = tstzToString(l$lastVisit);
+    final l$isFatherVisit = isFatherVisit;
+    result$data['isFatherVisit'] = l$isFatherVisit;
+    return result$data;
+  }
+
+  CopyWith_Variables_Mutation_insertFamilyLastVisit<
+          Variables_Mutation_insertFamilyLastVisit>
+      get copyWith => CopyWith_Variables_Mutation_insertFamilyLastVisit(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Mutation_insertFamilyLastVisit ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (l$isFatherVisit != lOther$isFatherVisit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$familyId = familyId;
+    final l$lastVisit = lastVisit;
+    final l$isFatherVisit = isFatherVisit;
+    return Object.hashAll([
+      l$familyId,
+      l$lastVisit,
+      l$isFatherVisit,
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Mutation_insertFamilyLastVisit<TRes> {
+  factory CopyWith_Variables_Mutation_insertFamilyLastVisit(
+    Variables_Mutation_insertFamilyLastVisit instance,
+    TRes Function(Variables_Mutation_insertFamilyLastVisit) then,
+  ) = _CopyWithImpl_Variables_Mutation_insertFamilyLastVisit;
+
+  factory CopyWith_Variables_Mutation_insertFamilyLastVisit.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_insertFamilyLastVisit;
+
+  TRes call({
+    UuidValue? familyId,
+    DateTime? lastVisit,
+    bool? isFatherVisit,
+  });
+}
+
+class _CopyWithImpl_Variables_Mutation_insertFamilyLastVisit<TRes>
+    implements CopyWith_Variables_Mutation_insertFamilyLastVisit<TRes> {
+  _CopyWithImpl_Variables_Mutation_insertFamilyLastVisit(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Mutation_insertFamilyLastVisit _instance;
+
+  final TRes Function(Variables_Mutation_insertFamilyLastVisit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? familyId = _undefined,
+    Object? lastVisit = _undefined,
+    Object? isFatherVisit = _undefined,
+  }) =>
+      _then(Variables_Mutation_insertFamilyLastVisit._({
+        ..._instance._$data,
+        if (familyId != _undefined && familyId != null)
+          'familyId': (familyId as UuidValue),
+        if (lastVisit != _undefined && lastVisit != null)
+          'lastVisit': (lastVisit as DateTime),
+        if (isFatherVisit != _undefined && isFatherVisit != null)
+          'isFatherVisit': (isFatherVisit as bool),
+      }));
+}
+
+class _CopyWithStubImpl_Variables_Mutation_insertFamilyLastVisit<TRes>
+    implements CopyWith_Variables_Mutation_insertFamilyLastVisit<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_insertFamilyLastVisit(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? familyId,
+    DateTime? lastVisit,
+    bool? isFatherVisit,
+  }) =>
+      _res;
+}
+
+class Mutation_insertFamilyLastVisit {
+  Mutation_insertFamilyLastVisit({
+    this.insertHistoryVisitHistoryOne,
+    this.$__typename = 'mutation_root',
+  });
+
+  factory Mutation_insertFamilyLastVisit.fromJson(Map<String, dynamic> json) {
+    final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
+    final l$$__typename = json['__typename'];
+    return Mutation_insertFamilyLastVisit(
+      insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
+          ? null
+          : Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne
+              .fromJson(
+                  (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
+      insertHistoryVisitHistoryOne;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    _resultData['insertHistoryVisitHistoryOne'] =
+        l$insertHistoryVisitHistoryOne?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$insertHistoryVisitHistoryOne,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_insertFamilyLastVisit ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final lOther$insertHistoryVisitHistoryOne =
+        other.insertHistoryVisitHistoryOne;
+    if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_insertFamilyLastVisit
+    on Mutation_insertFamilyLastVisit {
+  CopyWith_Mutation_insertFamilyLastVisit<Mutation_insertFamilyLastVisit>
+      get copyWith => CopyWith_Mutation_insertFamilyLastVisit(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_insertFamilyLastVisit<TRes> {
+  factory CopyWith_Mutation_insertFamilyLastVisit(
+    Mutation_insertFamilyLastVisit instance,
+    TRes Function(Mutation_insertFamilyLastVisit) then,
+  ) = _CopyWithImpl_Mutation_insertFamilyLastVisit;
+
+  factory CopyWith_Mutation_insertFamilyLastVisit.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_insertFamilyLastVisit;
+
+  TRes call({
+    Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
+        insertHistoryVisitHistoryOne,
+    String? $__typename,
+  });
+  CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne;
+}
+
+class _CopyWithImpl_Mutation_insertFamilyLastVisit<TRes>
+    implements CopyWith_Mutation_insertFamilyLastVisit<TRes> {
+  _CopyWithImpl_Mutation_insertFamilyLastVisit(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_insertFamilyLastVisit _instance;
+
+  final TRes Function(Mutation_insertFamilyLastVisit) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? insertHistoryVisitHistoryOne = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_insertFamilyLastVisit(
+        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+            ? _instance.insertHistoryVisitHistoryOne
+            : (insertHistoryVisitHistoryOne
+                as Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne {
+    final local$insertHistoryVisitHistoryOne =
+        _instance.insertHistoryVisitHistoryOne;
+    return local$insertHistoryVisitHistoryOne == null
+        ? CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne
+            .stub(_then(_instance))
+        : CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+            local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e));
+  }
+}
+
+class _CopyWithStubImpl_Mutation_insertFamilyLastVisit<TRes>
+    implements CopyWith_Mutation_insertFamilyLastVisit<TRes> {
+  _CopyWithStubImpl_Mutation_insertFamilyLastVisit(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne?
+        insertHistoryVisitHistoryOne,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne =>
+          CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne
+              .stub(_res);
+}
+
+const documentNodeMutationinsertFamilyLastVisit = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'insertFamilyLastVisit'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'familyId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'uuid'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'lastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'timestamptz'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'isFatherVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'families',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
+                value: VariableNode(name: NameNode(value: 'familyId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: VariableNode(name: NameNode(value: 'lastVisit')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'isFatherVisit'),
+                value: VariableNode(name: NameNode(value: 'isFatherVisit')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'time'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'user'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'User'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  fragmentDefinitionUser,
+  fragmentDefinitionUserNoPhoto,
+]);
+
+class Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne {
+  Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne({
+    required this.time,
+    this.user,
+    this.$__typename = 'HistoryVisitHistory',
+  });
+
+  factory Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne.fromJson(
+      Map<String, dynamic> json) {
+    final l$time = json['time'];
+    final l$user = json['user'];
+    final l$$__typename = json['__typename'];
+    return Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+      time: tstzFromString(l$time),
+      user: l$user == null
+          ? null
+          : Fragment_User.fromJson((l$user as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime time;
+
+  final Fragment_User? user;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$time = time;
+    _resultData['time'] = tstzToString(l$time);
+    final l$user = user;
+    _resultData['user'] = l$user?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$time = time;
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$time,
+      l$user,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne
+    on Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne {
+  CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+          Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne>
+      get copyWith =>
+          CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+    TRes> {
+  factory CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+    Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne instance,
+    TRes Function(Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne)
+        then,
+  ) = _CopyWithImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne;
+
+  factory CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne.stub(
+          TRes res) =
+      _CopyWithStubImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne;
+
+  TRes call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get user;
+}
+
+class _CopyWithImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+        TRes>
+    implements
+        CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+            TRes> {
+  _CopyWithImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne _instance;
+
+  final TRes Function(
+      Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+        time: time == _undefined || time == null
+            ? _instance.time
+            : (time as DateTime),
+        user: user == _undefined ? _instance.user : (user as Fragment_User?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+
+  CopyWith_Fragment_User<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Fragment_User.stub(_then(_instance))
+        : CopyWith_Fragment_User(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+        TRes>
+    implements
+        CopyWith_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne<
+            TRes> {
+  _CopyWithStubImpl_Mutation_insertFamilyLastVisit_insertHistoryVisitHistoryOne(
+      this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) =>
+      _res;
+
+  CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
+}

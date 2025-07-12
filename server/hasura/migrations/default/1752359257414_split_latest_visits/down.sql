@@ -1,0 +1,32 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE
+-- OR REPLACE VIEW "history"."latest_father_visits" AS
+-- SELECT
+--   DISTINCT ON ("table", record_id) "table",
+--   record_id,
+--   "time",
+--   recorded_by,
+--   visit_id
+-- FROM
+--   history.visit_history
+--   where is_father_visit = true
+-- ORDER BY
+--   "table",
+--   record_id,
+--   "time" DESC;
+-- CREATE
+-- OR REPLACE VIEW "history"."latest_visits" AS
+-- SELECT
+--   DISTINCT ON ("table", record_id) "table",
+--   record_id,
+--   "time",
+--   recorded_by,
+--   visit_id
+-- FROM
+--   history.visit_history
+--   where is_father_visit = false
+-- ORDER BY
+--   "table",
+--   record_id,
+--   "time" DESC;

@@ -198,6 +198,36 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ),
           HistoryProperty(
+            name: 'أخر افتقاد',
+            value: family.lastVisit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateFamilyVisitHistory(
+                familyId: family.id,
+              ),
+            ),
+            onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
+              familyId: widget.familyId,
+              lastVisit: DateTime.now(),
+            ),
+          ),
+          HistoryProperty(
+            name: 'أخر افتقاد للأب الكاهن',
+            value: family.lastFatherVisit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.history.paginateFamilyVisitHistory(
+                familyId: family.id,
+                fatherVisit: true,
+              ),
+            ),
+            onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
+              familyId: widget.familyId,
+              lastVisit: DateTime.now(),
+              isFatherVisit: true,
+            ),
+          ),
+          HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: family.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(

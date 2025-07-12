@@ -80,6 +80,13 @@ fragment LatestVisitHistory on HistoryLatestVisits {
   }
 }
 
+fragment LatestFatherVisitHistory on HistoryLatestFatherVisits {
+  time
+  user {
+    ...User
+  }
+}
+
 fragment LatestKodasHistory on HistoryLatestKodases {
   time
   user {

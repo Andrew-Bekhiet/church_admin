@@ -143,6 +143,32 @@ class _FamilyFields {
     },
   );
 
+  final FieldMetadata<LastRecordedByInfo> lastVisit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Family,
+    name: 'lastVisit',
+    label: 'أخر افتقاد',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<LastRecordedByInfo> lastFatherVisit =
+      FieldMetadata<LastRecordedByInfo>(
+    parentType: Family,
+    name: 'lastFatherVisit',
+    label: 'آخر افتقاد للأب',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
     parentType: Family,
     name: 'geolocation',
@@ -168,6 +194,8 @@ class _FamilyFields {
     children,
     parents,
     lastEdit,
+    lastVisit,
+    lastFatherVisit,
     geolocation
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
@@ -183,6 +211,8 @@ class _FamilyFields {
     'children': children,
     'parents': parents,
     'lastEdit': lastEdit,
+    'lastVisit': lastVisit,
+    'lastFatherVisit': lastFatherVisit,
     'geolocation': geolocation
   };
 }
@@ -215,6 +245,14 @@ Family _$FamilyFromJson(Map json) => Family(
           ? null
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
+      lastVisit: json['lastVisit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastVisit'] as Map)),
+      lastFatherVisit: json['lastFatherVisit'] == null
+          ? null
+          : LastRecordedByInfo.fromJson(
+              Map<String, Object?>.from(json['lastFatherVisit'] as Map)),
     );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
@@ -231,6 +269,8 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'children': familyChildrenToJson(instance.children),
       'parents': familyParentsToJson(instance.parents),
       'lastEdit': instance.lastEdit?.toJson(),
+      'lastVisit': instance.lastVisit?.toJson(),
+      'lastFatherVisit': instance.lastFatherVisit?.toJson(),
     };
 
 const _$MartialStatusEnumMap = {

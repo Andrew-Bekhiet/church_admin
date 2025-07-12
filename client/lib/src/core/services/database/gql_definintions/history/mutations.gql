@@ -52,3 +52,23 @@ mutation insertPersonLastVisit($personId: uuid!, $lastVisit: timestamptz!) {
     }
   }
 }
+
+mutation insertFamilyLastVisit(
+  $familyId: uuid!
+  $lastVisit: timestamptz!
+  $isFatherVisit: Boolean!
+) {
+  insertHistoryVisitHistoryOne(
+    object: {
+      table: "families"
+      recordId: $familyId
+      time: $lastVisit
+      isFatherVisit: $isFatherVisit
+    }
+  ) {
+    time
+    user {
+      ...User
+    }
+  }
+}

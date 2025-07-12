@@ -17,6 +17,7 @@ mixin _$LastRecordedByInfo {
   DateTime get time;
   String? get recordedBy;
   User? get user;
+  bool get isFatherVisit;
 
   /// Create a copy of LastRecordedByInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -34,16 +35,19 @@ mixin _$LastRecordedByInfo {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.recordedBy, recordedBy) ||
                 other.recordedBy == recordedBy) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.isFatherVisit, isFatherVisit) ||
+                other.isFatherVisit == isFatherVisit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, time, recordedBy, user);
+  int get hashCode =>
+      Object.hash(runtimeType, time, recordedBy, user, isFatherVisit);
 
   @override
   String toString() {
-    return 'LastRecordedByInfo(time: $time, recordedBy: $recordedBy, user: $user)';
+    return 'LastRecordedByInfo(time: $time, recordedBy: $recordedBy, user: $user, isFatherVisit: $isFatherVisit)';
   }
 }
 
@@ -53,7 +57,8 @@ abstract mixin class $LastRecordedByInfoCopyWith<$Res> {
           LastRecordedByInfo value, $Res Function(LastRecordedByInfo) _then) =
       _$LastRecordedByInfoCopyWithImpl;
   @useResult
-  $Res call({DateTime time, String? recordedBy, User? user});
+  $Res call(
+      {DateTime time, String? recordedBy, User? user, bool isFatherVisit});
 }
 
 /// @nodoc
@@ -72,6 +77,7 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
     Object? time = null,
     Object? recordedBy = freezed,
     Object? user = freezed,
+    Object? isFatherVisit = null,
   }) {
     return _then(LastRecordedByInfo(
       time: null == time
@@ -86,6 +92,10 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
           ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      isFatherVisit: null == isFatherVisit
+          ? _self.isFatherVisit
+          : isFatherVisit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

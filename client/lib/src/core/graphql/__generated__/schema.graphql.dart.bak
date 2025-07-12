@@ -36874,6 +36874,8 @@ class Input_FamiliesBoolExp {
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
@@ -36884,6 +36886,8 @@ class Input_FamiliesBoolExp {
     Input_StringComparisonExp? status,
     Input_StoresBoolExp? stores,
     Input_StoresAggregateBoolExp? storesAggregate,
+    Input_HistoryVisitHistoryBoolExp? visitHistory,
+    Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
   }) =>
       Input_FamiliesBoolExp._({
         if ($_and != null) r'_and': $_and,
@@ -36902,6 +36906,8 @@ class Input_FamiliesBoolExp {
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+        if (lastVisit != null) r'lastVisit': lastVisit,
         if (marriageDate != null) r'marriageDate': marriageDate,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
@@ -36912,6 +36918,9 @@ class Input_FamiliesBoolExp {
         if (status != null) r'status': status,
         if (stores != null) r'stores': stores,
         if (storesAggregate != null) r'storesAggregate': storesAggregate,
+        if (visitHistory != null) r'visitHistory': visitHistory,
+        if (visitHistoryAggregate != null)
+          r'visitHistoryAggregate': visitHistoryAggregate,
       });
 
   Input_FamiliesBoolExp._(this._$data);
@@ -37014,6 +37023,20 @@ class Input_FamiliesBoolExp {
           : Input_HistoryLatestEditsBoolExp.fromJson(
               (l$lastEdit as Map<String, dynamic>));
     }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+              (l$lastFatherVisit as Map<String, dynamic>));
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsBoolExp.fromJson(
+              (l$lastVisit as Map<String, dynamic>));
+    }
     if (data.containsKey('marriageDate')) {
       final l$marriageDate = data['marriageDate'];
       result$data['marriageDate'] = l$marriageDate == null
@@ -37082,6 +37105,20 @@ class Input_FamiliesBoolExp {
           : Input_StoresAggregateBoolExp.fromJson(
               (l$storesAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('visitHistory')) {
+      final l$visitHistory = data['visitHistory'];
+      result$data['visitHistory'] = l$visitHistory == null
+          ? null
+          : Input_HistoryVisitHistoryBoolExp.fromJson(
+              (l$visitHistory as Map<String, dynamic>));
+    }
+    if (data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = data['visitHistoryAggregate'];
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate == null
+          ? null
+          : Input_HistoryVisitHistoryAggregateBoolExp.fromJson(
+              (l$visitHistoryAggregate as Map<String, dynamic>));
+    }
     return Input_FamiliesBoolExp._(result$data);
   }
 
@@ -37129,6 +37166,12 @@ class Input_FamiliesBoolExp {
   Input_HistoryLatestEditsBoolExp? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
 
+  Input_HistoryLatestFatherVisitsBoolExp? get lastFatherVisit =>
+      (_$data['lastFatherVisit'] as Input_HistoryLatestFatherVisitsBoolExp?);
+
+  Input_HistoryLatestVisitsBoolExp? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsBoolExp?);
+
   Input_DateComparisonExp? get marriageDate =>
       (_$data['marriageDate'] as Input_DateComparisonExp?);
 
@@ -37157,6 +37200,13 @@ class Input_FamiliesBoolExp {
 
   Input_StoresAggregateBoolExp? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateBoolExp?);
+
+  Input_HistoryVisitHistoryBoolExp? get visitHistory =>
+      (_$data['visitHistory'] as Input_HistoryVisitHistoryBoolExp?);
+
+  Input_HistoryVisitHistoryAggregateBoolExp? get visitHistoryAggregate =>
+      (_$data['visitHistoryAggregate']
+          as Input_HistoryVisitHistoryAggregateBoolExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -37216,6 +37266,14 @@ class Input_FamiliesBoolExp {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
     }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] = l$lastFatherVisit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
+    }
     if (_$data.containsKey('marriageDate')) {
       final l$marriageDate = marriageDate;
       result$data['marriageDate'] = l$marriageDate?.toJson();
@@ -37255,6 +37313,14 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('storesAggregate')) {
       final l$storesAggregate = storesAggregate;
       result$data['storesAggregate'] = l$storesAggregate?.toJson();
+    }
+    if (_$data.containsKey('visitHistory')) {
+      final l$visitHistory = visitHistory;
+      result$data['visitHistory'] = l$visitHistory?.toJson();
+    }
+    if (_$data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = visitHistoryAggregate;
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
     }
     return result$data;
   }
@@ -37415,6 +37481,24 @@ class Input_FamiliesBoolExp {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$marriageDate = marriageDate;
     final lOther$marriageDate = other.marriageDate;
     if (_$data.containsKey('marriageDate') !=
@@ -37499,6 +37583,24 @@ class Input_FamiliesBoolExp {
     if (l$storesAggregate != lOther$storesAggregate) {
       return false;
     }
+    final l$visitHistory = visitHistory;
+    final lOther$visitHistory = other.visitHistory;
+    if (_$data.containsKey('visitHistory') !=
+        other._$data.containsKey('visitHistory')) {
+      return false;
+    }
+    if (l$visitHistory != lOther$visitHistory) {
+      return false;
+    }
+    final l$visitHistoryAggregate = visitHistoryAggregate;
+    final lOther$visitHistoryAggregate = other.visitHistoryAggregate;
+    if (_$data.containsKey('visitHistoryAggregate') !=
+        other._$data.containsKey('visitHistoryAggregate')) {
+      return false;
+    }
+    if (l$visitHistoryAggregate != lOther$visitHistoryAggregate) {
+      return false;
+    }
     return true;
   }
 
@@ -37518,6 +37620,8 @@ class Input_FamiliesBoolExp {
     final l$geolocation = geolocation;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$lastFatherVisit = lastFatherVisit;
+    final l$lastVisit = lastVisit;
     final l$marriageDate = marriageDate;
     final l$name = name;
     final l$notes = notes;
@@ -37528,6 +37632,8 @@ class Input_FamiliesBoolExp {
     final l$status = status;
     final l$stores = stores;
     final l$storesAggregate = storesAggregate;
+    final l$visitHistory = visitHistory;
+    final l$visitHistoryAggregate = visitHistoryAggregate;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -37555,6 +37661,8 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
@@ -37565,6 +37673,10 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('status') ? l$status : const {},
       _$data.containsKey('stores') ? l$stores : const {},
       _$data.containsKey('storesAggregate') ? l$storesAggregate : const {},
+      _$data.containsKey('visitHistory') ? l$visitHistory : const {},
+      _$data.containsKey('visitHistoryAggregate')
+          ? l$visitHistoryAggregate
+          : const {},
     ]);
   }
 }
@@ -37593,6 +37705,8 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
@@ -37603,6 +37717,8 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_StringComparisonExp? status,
     Input_StoresBoolExp? stores,
     Input_StoresAggregateBoolExp? storesAggregate,
+    Input_HistoryVisitHistoryBoolExp? visitHistory,
+    Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
   });
   TRes $_and(
       Iterable<Input_FamiliesBoolExp>? Function(
@@ -37625,6 +37741,8 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get lastFatherVisit;
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_DateComparisonExp<TRes> get marriageDate;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_StringComparisonExp<TRes> get notes;
@@ -37635,6 +37753,9 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_StringComparisonExp<TRes> get status;
   CopyWith_Input_StoresBoolExp<TRes> get stores;
   CopyWith_Input_StoresAggregateBoolExp<TRes> get storesAggregate;
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get visitHistory;
+  CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
+      get visitHistoryAggregate;
 }
 
 class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
@@ -37665,6 +37786,8 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastFatherVisit = _undefined,
+    Object? lastVisit = _undefined,
     Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
@@ -37675,6 +37798,8 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? status = _undefined,
     Object? stores = _undefined,
     Object? storesAggregate = _undefined,
+    Object? visitHistory = _undefined,
+    Object? visitHistoryAggregate = _undefined,
   }) =>
       _then(Input_FamiliesBoolExp._({
         ..._instance._$data,
@@ -37704,6 +37829,11 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+        if (lastFatherVisit != _undefined)
+          'lastFatherVisit':
+              (lastFatherVisit as Input_HistoryLatestFatherVisitsBoolExp?),
+        if (lastVisit != _undefined)
+          'lastVisit': (lastVisit as Input_HistoryLatestVisitsBoolExp?),
         if (marriageDate != _undefined)
           'marriageDate': (marriageDate as Input_DateComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
@@ -37722,6 +37852,11 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (stores != _undefined) 'stores': (stores as Input_StoresBoolExp?),
         if (storesAggregate != _undefined)
           'storesAggregate': (storesAggregate as Input_StoresAggregateBoolExp?),
+        if (visitHistory != _undefined)
+          'visitHistory': (visitHistory as Input_HistoryVisitHistoryBoolExp?),
+        if (visitHistoryAggregate != _undefined)
+          'visitHistoryAggregate': (visitHistoryAggregate
+              as Input_HistoryVisitHistoryAggregateBoolExp?),
       }));
 
   TRes $_and(
@@ -37842,6 +37977,22 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get lastFatherVisit {
+    final local$lastFatherVisit = _instance.lastFatherVisit;
+    return local$lastFatherVisit == null
+        ? CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+            local$lastFatherVisit, (e) => call(lastFatherVisit: e));
+  }
+
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsBoolExp(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
   CopyWith_Input_DateComparisonExp<TRes> get marriageDate {
     final local$marriageDate = _instance.marriageDate;
     return local$marriageDate == null
@@ -37918,6 +38069,24 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         : CopyWith_Input_StoresAggregateBoolExp(
             local$storesAggregate, (e) => call(storesAggregate: e));
   }
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get visitHistory {
+    final local$visitHistory = _instance.visitHistory;
+    return local$visitHistory == null
+        ? CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryBoolExp(
+            local$visitHistory, (e) => call(visitHistory: e));
+  }
+
+  CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
+      get visitHistoryAggregate {
+    final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
+    return local$visitHistoryAggregate == null
+        ? CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryAggregateBoolExp(
+            local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
@@ -37941,6 +38110,8 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_DateComparisonExp? marriageDate,
     Input_StringComparisonExp? name,
     Input_StringComparisonExp? notes,
@@ -37951,6 +38122,8 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_StringComparisonExp? status,
     Input_StoresBoolExp? stores,
     Input_StoresAggregateBoolExp? storesAggregate,
+    Input_HistoryVisitHistoryBoolExp? visitHistory,
+    Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
   }) =>
       _res;
 
@@ -37995,6 +38168,12 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
 
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get lastFatherVisit =>
+      CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_res);
+
   CopyWith_Input_DateComparisonExp<TRes> get marriageDate =>
       CopyWith_Input_DateComparisonExp.stub(_res);
 
@@ -38024,6 +38203,13 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
 
   CopyWith_Input_StoresAggregateBoolExp<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get visitHistory =>
+      CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
+      get visitHistoryAggregate =>
+          CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(_res);
 }
 
 class Input_FamiliesFamiliesAggregateOrderBy {
@@ -40257,6 +40443,7 @@ class Input_FamiliesInsertInput {
     Input_PersonsArrRelInsertInput? persons,
     String? status,
     Input_StoresArrRelInsertInput? stores,
+    Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
   }) =>
       Input_FamiliesInsertInput._({
         if (address != null) r'address': address,
@@ -40273,6 +40460,7 @@ class Input_FamiliesInsertInput {
         if (persons != null) r'persons': persons,
         if (status != null) r'status': status,
         if (stores != null) r'stores': stores,
+        if (visitHistory != null) r'visitHistory': visitHistory,
       });
 
   Input_FamiliesInsertInput._(this._$data);
@@ -40347,6 +40535,13 @@ class Input_FamiliesInsertInput {
           : Input_StoresArrRelInsertInput.fromJson(
               (l$stores as Map<String, dynamic>));
     }
+    if (data.containsKey('visitHistory')) {
+      final l$visitHistory = data['visitHistory'];
+      result$data['visitHistory'] = l$visitHistory == null
+          ? null
+          : Input_HistoryVisitHistoryArrRelInsertInput.fromJson(
+              (l$visitHistory as Map<String, dynamic>));
+    }
     return Input_FamiliesInsertInput._(result$data);
   }
 
@@ -40383,6 +40578,9 @@ class Input_FamiliesInsertInput {
 
   Input_StoresArrRelInsertInput? get stores =>
       (_$data['stores'] as Input_StoresArrRelInsertInput?);
+
+  Input_HistoryVisitHistoryArrRelInsertInput? get visitHistory =>
+      (_$data['visitHistory'] as Input_HistoryVisitHistoryArrRelInsertInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -40438,6 +40636,10 @@ class Input_FamiliesInsertInput {
     if (_$data.containsKey('stores')) {
       final l$stores = stores;
       result$data['stores'] = l$stores?.toJson();
+    }
+    if (_$data.containsKey('visitHistory')) {
+      final l$visitHistory = visitHistory;
+      result$data['visitHistory'] = l$visitHistory?.toJson();
     }
     return result$data;
   }
@@ -40566,6 +40768,15 @@ class Input_FamiliesInsertInput {
     if (l$stores != lOther$stores) {
       return false;
     }
+    final l$visitHistory = visitHistory;
+    final lOther$visitHistory = other.visitHistory;
+    if (_$data.containsKey('visitHistory') !=
+        other._$data.containsKey('visitHistory')) {
+      return false;
+    }
+    if (l$visitHistory != lOther$visitHistory) {
+      return false;
+    }
     return true;
   }
 
@@ -40584,6 +40795,7 @@ class Input_FamiliesInsertInput {
     final l$persons = persons;
     final l$status = status;
     final l$stores = stores;
+    final l$visitHistory = visitHistory;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('addressText') ? l$addressText : const {},
@@ -40600,6 +40812,7 @@ class Input_FamiliesInsertInput {
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('status') ? l$status : const {},
       _$data.containsKey('stores') ? l$stores : const {},
+      _$data.containsKey('visitHistory') ? l$visitHistory : const {},
     ]);
   }
 }
@@ -40627,12 +40840,14 @@ abstract class CopyWith_Input_FamiliesInsertInput<TRes> {
     Input_PersonsArrRelInsertInput? persons,
     String? status,
     Input_StoresArrRelInsertInput? stores,
+    Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
   });
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address;
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get children;
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get parents;
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
   CopyWith_Input_StoresArrRelInsertInput<TRes> get stores;
+  CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory;
 }
 
 class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
@@ -40662,6 +40877,7 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
     Object? persons = _undefined,
     Object? status = _undefined,
     Object? stores = _undefined,
+    Object? visitHistory = _undefined,
   }) =>
       _then(Input_FamiliesInsertInput._({
         ..._instance._$data,
@@ -40686,6 +40902,9 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
         if (status != _undefined) 'status': (status as String?),
         if (stores != _undefined)
           'stores': (stores as Input_StoresArrRelInsertInput?),
+        if (visitHistory != _undefined)
+          'visitHistory':
+              (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
       }));
 
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address {
@@ -40729,6 +40948,15 @@ class _CopyWithImpl_Input_FamiliesInsertInput<TRes>
         : CopyWith_Input_StoresArrRelInsertInput(
             local$stores, (e) => call(stores: e));
   }
+
+  CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory {
+    final local$visitHistory = _instance.visitHistory;
+    return local$visitHistory == null
+        ? CopyWith_Input_HistoryVisitHistoryArrRelInsertInput.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryArrRelInsertInput(
+            local$visitHistory, (e) => call(visitHistory: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
@@ -40751,6 +40979,7 @@ class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
     Input_PersonsArrRelInsertInput? persons,
     String? status,
     Input_StoresArrRelInsertInput? stores,
+    Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
   }) =>
       _res;
 
@@ -40768,6 +40997,9 @@ class _CopyWithStubImpl_Input_FamiliesInsertInput<TRes>
 
   CopyWith_Input_StoresArrRelInsertInput<TRes> get stores =>
       CopyWith_Input_StoresArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory =>
+      CopyWith_Input_HistoryVisitHistoryArrRelInsertInput.stub(_res);
 }
 
 class Input_FamiliesObjRelInsertInput {
@@ -41146,6 +41378,8 @@ class Input_FamiliesOrderBy {
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
@@ -41154,6 +41388,7 @@ class Input_FamiliesOrderBy {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   }) =>
       Input_FamiliesOrderBy._({
         if (address != null) r'address': address,
@@ -41168,6 +41403,8 @@ class Input_FamiliesOrderBy {
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (lastEdit != null) r'lastEdit': lastEdit,
+        if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+        if (lastVisit != null) r'lastVisit': lastVisit,
         if (marriageDate != null) r'marriageDate': marriageDate,
         if (name != null) r'name': name,
         if (notes != null) r'notes': notes,
@@ -41176,6 +41413,8 @@ class Input_FamiliesOrderBy {
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (status != null) r'status': status,
         if (storesAggregate != null) r'storesAggregate': storesAggregate,
+        if (visitHistoryAggregate != null)
+          r'visitHistoryAggregate': visitHistoryAggregate,
       });
 
   Input_FamiliesOrderBy._(this._$data);
@@ -41244,6 +41483,20 @@ class Input_FamiliesOrderBy {
           : Input_HistoryLatestEditsOrderBy.fromJson(
               (l$lastEdit as Map<String, dynamic>));
     }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : Input_HistoryLatestFatherVisitsOrderBy.fromJson(
+              (l$lastFatherVisit as Map<String, dynamic>));
+    }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsOrderBy.fromJson(
+              (l$lastVisit as Map<String, dynamic>));
+    }
     if (data.containsKey('marriageDate')) {
       final l$marriageDate = data['marriageDate'];
       result$data['marriageDate'] = l$marriageDate == null
@@ -41292,6 +41545,13 @@ class Input_FamiliesOrderBy {
           : Input_StoresAggregateOrderBy.fromJson(
               (l$storesAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = data['visitHistoryAggregate'];
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate == null
+          ? null
+          : Input_HistoryVisitHistoryAggregateOrderBy.fromJson(
+              (l$visitHistoryAggregate as Map<String, dynamic>));
+    }
     return Input_FamiliesOrderBy._(result$data);
   }
 
@@ -41323,6 +41583,12 @@ class Input_FamiliesOrderBy {
   Input_HistoryLatestEditsOrderBy? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsOrderBy?);
 
+  Input_HistoryLatestFatherVisitsOrderBy? get lastFatherVisit =>
+      (_$data['lastFatherVisit'] as Input_HistoryLatestFatherVisitsOrderBy?);
+
+  Input_HistoryLatestVisitsOrderBy? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsOrderBy?);
+
   Enum_OrderBy? get marriageDate => (_$data['marriageDate'] as Enum_OrderBy?);
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -41342,6 +41608,10 @@ class Input_FamiliesOrderBy {
 
   Input_StoresAggregateOrderBy? get storesAggregate =>
       (_$data['storesAggregate'] as Input_StoresAggregateOrderBy?);
+
+  Input_HistoryVisitHistoryAggregateOrderBy? get visitHistoryAggregate =>
+      (_$data['visitHistoryAggregate']
+          as Input_HistoryVisitHistoryAggregateOrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -41391,6 +41661,14 @@ class Input_FamiliesOrderBy {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
     }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] = l$lastFatherVisit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
+    }
     if (_$data.containsKey('marriageDate')) {
       final l$marriageDate = marriageDate;
       result$data['marriageDate'] =
@@ -41427,6 +41705,10 @@ class Input_FamiliesOrderBy {
     if (_$data.containsKey('storesAggregate')) {
       final l$storesAggregate = storesAggregate;
       result$data['storesAggregate'] = l$storesAggregate?.toJson();
+    }
+    if (_$data.containsKey('visitHistoryAggregate')) {
+      final l$visitHistoryAggregate = visitHistoryAggregate;
+      result$data['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
     }
     return result$data;
   }
@@ -41532,6 +41814,24 @@ class Input_FamiliesOrderBy {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$marriageDate = marriageDate;
     final lOther$marriageDate = other.marriageDate;
     if (_$data.containsKey('marriageDate') !=
@@ -41601,6 +41901,15 @@ class Input_FamiliesOrderBy {
     if (l$storesAggregate != lOther$storesAggregate) {
       return false;
     }
+    final l$visitHistoryAggregate = visitHistoryAggregate;
+    final lOther$visitHistoryAggregate = other.visitHistoryAggregate;
+    if (_$data.containsKey('visitHistoryAggregate') !=
+        other._$data.containsKey('visitHistoryAggregate')) {
+      return false;
+    }
+    if (l$visitHistoryAggregate != lOther$visitHistoryAggregate) {
+      return false;
+    }
     return true;
   }
 
@@ -41616,6 +41925,8 @@ class Input_FamiliesOrderBy {
     final l$geolocation = geolocation;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$lastFatherVisit = lastFatherVisit;
+    final l$lastVisit = lastVisit;
     final l$marriageDate = marriageDate;
     final l$name = name;
     final l$notes = notes;
@@ -41624,6 +41935,7 @@ class Input_FamiliesOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$status = status;
     final l$storesAggregate = storesAggregate;
+    final l$visitHistoryAggregate = visitHistoryAggregate;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('addressText') ? l$addressText : const {},
@@ -41639,6 +41951,8 @@ class Input_FamiliesOrderBy {
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('notes') ? l$notes : const {},
@@ -41647,6 +41961,9 @@ class Input_FamiliesOrderBy {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('status') ? l$status : const {},
       _$data.containsKey('storesAggregate') ? l$storesAggregate : const {},
+      _$data.containsKey('visitHistoryAggregate')
+          ? l$visitHistoryAggregate
+          : const {},
     ]);
   }
 }
@@ -41671,6 +41988,8 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
@@ -41679,15 +41998,20 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   });
   CopyWith_Input_AddressesOrderBy<TRes> get address;
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate;
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
       get editHistoryAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit;
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit;
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate;
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate;
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate;
 }
 
 class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
@@ -41714,6 +42038,8 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastFatherVisit = _undefined,
+    Object? lastVisit = _undefined,
     Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
@@ -41722,6 +42048,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? status = _undefined,
     Object? storesAggregate = _undefined,
+    Object? visitHistoryAggregate = _undefined,
   }) =>
       _then(Input_FamiliesOrderBy._({
         ..._instance._$data,
@@ -41744,6 +42071,11 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+        if (lastFatherVisit != _undefined)
+          'lastFatherVisit':
+              (lastFatherVisit as Input_HistoryLatestFatherVisitsOrderBy?),
+        if (lastVisit != _undefined)
+          'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
         if (marriageDate != _undefined)
           'marriageDate': (marriageDate as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -41759,6 +42091,9 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (status != _undefined) 'status': (status as Enum_OrderBy?),
         if (storesAggregate != _undefined)
           'storesAggregate': (storesAggregate as Input_StoresAggregateOrderBy?),
+        if (visitHistoryAggregate != _undefined)
+          'visitHistoryAggregate': (visitHistoryAggregate
+              as Input_HistoryVisitHistoryAggregateOrderBy?),
       }));
 
   CopyWith_Input_AddressesOrderBy<TRes> get address {
@@ -41795,6 +42130,22 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit {
+    final local$lastFatherVisit = _instance.lastFatherVisit;
+    return local$lastFatherVisit == null
+        ? CopyWith_Input_HistoryLatestFatherVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestFatherVisitsOrderBy(
+            local$lastFatherVisit, (e) => call(lastFatherVisit: e));
+  }
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsOrderBy(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate {
     final local$parentsAggregate = _instance.parentsAggregate;
     return local$parentsAggregate == null
@@ -41818,6 +42169,16 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         : CopyWith_Input_StoresAggregateOrderBy(
             local$storesAggregate, (e) => call(storesAggregate: e));
   }
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate {
+    final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
+    return local$visitHistoryAggregate == null
+        ? CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryAggregateOrderBy(
+            local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
@@ -41837,6 +42198,8 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
@@ -41845,6 +42208,7 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   }) =>
       _res;
 
@@ -41861,6 +42225,12 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
 
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit =>
+      CopyWith_Input_HistoryLatestFatherVisitsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateOrderBy.stub(_res);
 
@@ -41869,6 +42239,10 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
 
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate =>
+          CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(_res);
 }
 
 class Input_FamiliesPkColumnsInput {
@@ -78140,6 +78514,806 @@ class _CopyWithStubImpl_Input_HistoryLatestEditsOrderBy<TRes>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
 
+class Input_HistoryLatestFatherVisitsBoolExp {
+  factory Input_HistoryLatestFatherVisitsBoolExp({
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_and,
+    Input_HistoryLatestFatherVisitsBoolExp? $_not,
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
+  }) =>
+      Input_HistoryLatestFatherVisitsBoolExp._({
+        if ($_and != null) r'_and': $_and,
+        if ($_not != null) r'_not': $_not,
+        if ($_or != null) r'_or': $_or,
+        if (recordId != null) r'recordId': recordId,
+        if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
+        if (time != null) r'time': time,
+        if (user != null) r'user': user,
+        if (visitId != null) r'visitId': visitId,
+      });
+
+  Input_HistoryLatestFatherVisitsBoolExp._(this._$data);
+
+  factory Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map((e) => Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map((e) => Input_HistoryLatestFatherVisitsBoolExp.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$recordId as Map<String, dynamic>));
+    }
+    if (data.containsKey('recordedBy')) {
+      final l$recordedBy = data['recordedBy'];
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$recordedBy as Map<String, dynamic>));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
+          ? null
+          : Input_NameComparisonExp.fromJson((l$table as Map<String, dynamic>));
+    }
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null
+          ? null
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$time as Map<String, dynamic>));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataBoolExp.fromJson(
+              (l$user as Map<String, dynamic>));
+    }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$visitId as Map<String, dynamic>));
+    }
+    return Input_HistoryLatestFatherVisitsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_HistoryLatestFatherVisitsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_HistoryLatestFatherVisitsBoolExp>?);
+
+  Input_HistoryLatestFatherVisitsBoolExp? get $_not =>
+      (_$data['_not'] as Input_HistoryLatestFatherVisitsBoolExp?);
+
+  List<Input_HistoryLatestFatherVisitsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_HistoryLatestFatherVisitsBoolExp>?);
+
+  Input_UuidComparisonExp? get recordId =>
+      (_$data['recordId'] as Input_UuidComparisonExp?);
+
+  Input_UuidComparisonExp? get recordedBy =>
+      (_$data['recordedBy'] as Input_UuidComparisonExp?);
+
+  Input_NameComparisonExp? get table =>
+      (_$data['table'] as Input_NameComparisonExp?);
+
+  Input_TimestamptzComparisonExp? get time =>
+      (_$data['time'] as Input_TimestamptzComparisonExp?);
+
+  Input_AuthUsersDataBoolExp? get user =>
+      (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
+  Input_UuidComparisonExp? get visitId =>
+      (_$data['visitId'] as Input_UuidComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId?.toJson();
+    }
+    if (_$data.containsKey('recordedBy')) {
+      final l$recordedBy = recordedBy;
+      result$data['recordedBy'] = l$recordedBy?.toJson();
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table?.toJson();
+    }
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time?.toJson();
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] = l$visitId?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+          Input_HistoryLatestFatherVisitsBoolExp>
+      get copyWith => CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryLatestFatherVisitsBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (_$data.containsKey('recordedBy') !=
+        other._$data.containsKey('recordedBy')) {
+      return false;
+    }
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$recordId = recordId;
+    final l$recordedBy = recordedBy;
+    final l$table = table;
+    final l$time = time;
+    final l$user = user;
+    final l$visitId = visitId;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+              ? null
+              : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+              ? null
+              : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('recordId') ? l$recordId : const {},
+      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
+      _$data.containsKey('time') ? l$time : const {},
+      _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  factory CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+    Input_HistoryLatestFatherVisitsBoolExp instance,
+    TRes Function(Input_HistoryLatestFatherVisitsBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp;
+
+  factory CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp;
+
+  TRes call({
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_and,
+    Input_HistoryLatestFatherVisitsBoolExp? $_not,
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
+  });
+  TRes $_and(
+      Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+                      Input_HistoryLatestFatherVisitsBoolExp>>?)
+          _fn);
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not;
+  TRes $_or(
+      Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+                      Input_HistoryLatestFatherVisitsBoolExp>>?)
+          _fn);
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId;
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
+  CopyWith_Input_NameComparisonExp<TRes> get table;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId;
+}
+
+class _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryLatestFatherVisitsBoolExp _instance;
+
+  final TRes Function(Input_HistoryLatestFatherVisitsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? recordId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? table = _undefined,
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? visitId = _undefined,
+  }) =>
+      _then(Input_HistoryLatestFatherVisitsBoolExp._({
+        ..._instance._$data,
+        if ($_and != _undefined)
+          '_and': ($_and as List<Input_HistoryLatestFatherVisitsBoolExp>?),
+        if ($_not != _undefined)
+          '_not': ($_not as Input_HistoryLatestFatherVisitsBoolExp?),
+        if ($_or != _undefined)
+          '_or': ($_or as List<Input_HistoryLatestFatherVisitsBoolExp>?),
+        if (recordId != _undefined)
+          'recordId': (recordId as Input_UuidComparisonExp?),
+        if (recordedBy != _undefined)
+          'recordedBy': (recordedBy as Input_UuidComparisonExp?),
+        if (table != _undefined) 'table': (table as Input_NameComparisonExp?),
+        if (time != _undefined)
+          'time': (time as Input_TimestamptzComparisonExp?),
+        if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+        if (visitId != _undefined)
+          'visitId': (visitId as Input_UuidComparisonExp?),
+      }));
+
+  TRes $_and(
+          Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+                          Input_HistoryLatestFatherVisitsBoolExp>>?)
+              _fn) =>
+      call(
+          $_and: _fn(_instance.$_and
+              ?.map((e) => CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+            local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+          Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+                          Input_HistoryLatestFatherVisitsBoolExp>>?)
+              _fn) =>
+      call(
+          $_or: _fn(_instance.$_or
+              ?.map((e) => CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId {
+    final local$recordId = _instance.recordId;
+    return local$recordId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordId, (e) => call(recordId: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
+    final local$recordedBy = _instance.recordedBy;
+    return local$recordedBy == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordedBy, (e) => call(recordedBy: e));
+  }
+
+  CopyWith_Input_NameComparisonExp<TRes> get table {
+    final local$table = _instance.table;
+    return local$table == null
+        ? CopyWith_Input_NameComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_NameComparisonExp(local$table, (e) => call(table: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
+    final local$time = _instance.time;
+    return local$time == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$time, (e) => call(time: e));
+  }
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId {
+    final local$visitId = _instance.visitId;
+    return local$visitId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$visitId, (e) => call(visitId: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_and,
+    Input_HistoryLatestFatherVisitsBoolExp? $_not,
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
+  }) =>
+      _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not =>
+      CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_NameComparisonExp<TRes> get table =>
+      CopyWith_Input_NameComparisonExp.stub(_res);
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+}
+
+class Input_HistoryLatestFatherVisitsOrderBy {
+  factory Input_HistoryLatestFatherVisitsOrderBy({
+    Enum_OrderBy? recordId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
+    Enum_OrderBy? time,
+    Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
+  }) =>
+      Input_HistoryLatestFatherVisitsOrderBy._({
+        if (recordId != null) r'recordId': recordId,
+        if (recordedBy != null) r'recordedBy': recordedBy,
+        if (table != null) r'table': table,
+        if (time != null) r'time': time,
+        if (user != null) r'user': user,
+        if (visitId != null) r'visitId': visitId,
+      });
+
+  Input_HistoryLatestFatherVisitsOrderBy._(this._$data);
+
+  factory Input_HistoryLatestFatherVisitsOrderBy.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordId as String));
+    }
+    if (data.containsKey('recordedBy')) {
+      final l$recordedBy = data['recordedBy'];
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordedBy as String));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] =
+          l$table == null ? null : fromJson_Enum_OrderBy((l$table as String));
+    }
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] =
+          l$time == null ? null : fromJson_Enum_OrderBy((l$time as String));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataOrderBy.fromJson(
+              (l$user as Map<String, dynamic>));
+    }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$visitId as String));
+    }
+    return Input_HistoryLatestFatherVisitsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get table => (_$data['table'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
+  Input_AuthUsersDataOrderBy? get user =>
+      (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] =
+          l$recordId == null ? null : toJson_Enum_OrderBy(l$recordId);
+    }
+    if (_$data.containsKey('recordedBy')) {
+      final l$recordedBy = recordedBy;
+      result$data['recordedBy'] =
+          l$recordedBy == null ? null : toJson_Enum_OrderBy(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] =
+          l$table == null ? null : toJson_Enum_OrderBy(l$table);
+    }
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] =
+          l$visitId == null ? null : toJson_Enum_OrderBy(l$visitId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<
+          Input_HistoryLatestFatherVisitsOrderBy>
+      get copyWith => CopyWith_Input_HistoryLatestFatherVisitsOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryLatestFatherVisitsOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (_$data.containsKey('recordedBy') !=
+        other._$data.containsKey('recordedBy')) {
+      return false;
+    }
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$recordId = recordId;
+    final l$recordedBy = recordedBy;
+    final l$table = table;
+    final l$time = time;
+    final l$user = user;
+    final l$visitId = visitId;
+    return Object.hashAll([
+      _$data.containsKey('recordId') ? l$recordId : const {},
+      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
+      _$data.containsKey('time') ? l$time : const {},
+      _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> {
+  factory CopyWith_Input_HistoryLatestFatherVisitsOrderBy(
+    Input_HistoryLatestFatherVisitsOrderBy instance,
+    TRes Function(Input_HistoryLatestFatherVisitsOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryLatestFatherVisitsOrderBy;
+
+  factory CopyWith_Input_HistoryLatestFatherVisitsOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryLatestFatherVisitsOrderBy;
+
+  TRes call({
+    Enum_OrderBy? recordId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
+    Enum_OrderBy? time,
+    Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
+  });
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
+}
+
+class _CopyWithImpl_Input_HistoryLatestFatherVisitsOrderBy<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryLatestFatherVisitsOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryLatestFatherVisitsOrderBy _instance;
+
+  final TRes Function(Input_HistoryLatestFatherVisitsOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? recordId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? table = _undefined,
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? visitId = _undefined,
+  }) =>
+      _then(Input_HistoryLatestFatherVisitsOrderBy._({
+        ..._instance._$data,
+        if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
+        if (recordedBy != _undefined)
+          'recordedBy': (recordedBy as Enum_OrderBy?),
+        if (table != _undefined) 'table': (table as Enum_OrderBy?),
+        if (time != _undefined) 'time': (time as Enum_OrderBy?),
+        if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+        if (visitId != _undefined) 'visitId': (visitId as Enum_OrderBy?),
+      }));
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataOrderBy(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryLatestFatherVisitsOrderBy<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryLatestFatherVisitsOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? recordId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
+    Enum_OrderBy? time,
+    Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
+  }) =>
+      _res;
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
+      CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+}
+
 class Input_HistoryLatestKodasesBoolExp {
   factory Input_HistoryLatestKodasesBoolExp({
     List<Input_HistoryLatestKodasesBoolExp>? $_and,
@@ -79672,9 +80846,14 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsOrderBy<TRes>
 }
 
 class Input_HistoryVisitHistoryAggregateBoolExp {
-  factory Input_HistoryVisitHistoryAggregateBoolExp(
-          {Input_historyVisitHistoryAggregateBoolExpCount? count}) =>
+  factory Input_HistoryVisitHistoryAggregateBoolExp({
+    Input_historyVisitHistoryAggregateBoolExpBool_and? bool_and,
+    Input_historyVisitHistoryAggregateBoolExpBool_or? bool_or,
+    Input_historyVisitHistoryAggregateBoolExpCount? count,
+  }) =>
       Input_HistoryVisitHistoryAggregateBoolExp._({
+        if (bool_and != null) r'bool_and': bool_and,
+        if (bool_or != null) r'bool_or': bool_or,
         if (count != null) r'count': count,
       });
 
@@ -79683,6 +80862,20 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
   factory Input_HistoryVisitHistoryAggregateBoolExp.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('bool_and')) {
+      final l$bool_and = data['bool_and'];
+      result$data['bool_and'] = l$bool_and == null
+          ? null
+          : Input_historyVisitHistoryAggregateBoolExpBool_and.fromJson(
+              (l$bool_and as Map<String, dynamic>));
+    }
+    if (data.containsKey('bool_or')) {
+      final l$bool_or = data['bool_or'];
+      result$data['bool_or'] = l$bool_or == null
+          ? null
+          : Input_historyVisitHistoryAggregateBoolExpBool_or.fromJson(
+              (l$bool_or as Map<String, dynamic>));
+    }
     if (data.containsKey('count')) {
       final l$count = data['count'];
       result$data['count'] = l$count == null
@@ -79695,11 +80888,26 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
 
   Map<String, dynamic> _$data;
 
+  Input_historyVisitHistoryAggregateBoolExpBool_and? get bool_and =>
+      (_$data['bool_and']
+          as Input_historyVisitHistoryAggregateBoolExpBool_and?);
+
+  Input_historyVisitHistoryAggregateBoolExpBool_or? get bool_or =>
+      (_$data['bool_or'] as Input_historyVisitHistoryAggregateBoolExpBool_or?);
+
   Input_historyVisitHistoryAggregateBoolExpCount? get count =>
       (_$data['count'] as Input_historyVisitHistoryAggregateBoolExpCount?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('bool_and')) {
+      final l$bool_and = bool_and;
+      result$data['bool_and'] = l$bool_and?.toJson();
+    }
+    if (_$data.containsKey('bool_or')) {
+      final l$bool_or = bool_or;
+      result$data['bool_or'] = l$bool_or?.toJson();
+    }
     if (_$data.containsKey('count')) {
       final l$count = count;
       result$data['count'] = l$count?.toJson();
@@ -79723,6 +80931,23 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$bool_and = bool_and;
+    final lOther$bool_and = other.bool_and;
+    if (_$data.containsKey('bool_and') !=
+        other._$data.containsKey('bool_and')) {
+      return false;
+    }
+    if (l$bool_and != lOther$bool_and) {
+      return false;
+    }
+    final l$bool_or = bool_or;
+    final lOther$bool_or = other.bool_or;
+    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
+      return false;
+    }
+    if (l$bool_or != lOther$bool_or) {
+      return false;
+    }
     final l$count = count;
     final lOther$count = other.count;
     if (_$data.containsKey('count') != other._$data.containsKey('count')) {
@@ -79736,8 +80961,14 @@ class Input_HistoryVisitHistoryAggregateBoolExp {
 
   @override
   int get hashCode {
+    final l$bool_and = bool_and;
+    final l$bool_or = bool_or;
     final l$count = count;
-    return Object.hashAll([_$data.containsKey('count') ? l$count : const {}]);
+    return Object.hashAll([
+      _$data.containsKey('bool_and') ? l$bool_and : const {},
+      _$data.containsKey('bool_or') ? l$bool_or : const {},
+      _$data.containsKey('count') ? l$count : const {},
+    ]);
   }
 }
 
@@ -79750,7 +80981,13 @@ abstract class CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes> {
   factory CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(TRes res) =
       _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp;
 
-  TRes call({Input_historyVisitHistoryAggregateBoolExpCount? count});
+  TRes call({
+    Input_historyVisitHistoryAggregateBoolExpBool_and? bool_and,
+    Input_historyVisitHistoryAggregateBoolExpBool_or? bool_or,
+    Input_historyVisitHistoryAggregateBoolExpCount? count,
+  });
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes> get bool_and;
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or;
   CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count;
 }
 
@@ -79767,12 +81004,41 @@ class _CopyWithImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? count = _undefined}) =>
+  TRes call({
+    Object? bool_and = _undefined,
+    Object? bool_or = _undefined,
+    Object? count = _undefined,
+  }) =>
       _then(Input_HistoryVisitHistoryAggregateBoolExp._({
         ..._instance._$data,
+        if (bool_and != _undefined)
+          'bool_and':
+              (bool_and as Input_historyVisitHistoryAggregateBoolExpBool_and?),
+        if (bool_or != _undefined)
+          'bool_or':
+              (bool_or as Input_historyVisitHistoryAggregateBoolExpBool_or?),
         if (count != _undefined)
           'count': (count as Input_historyVisitHistoryAggregateBoolExpCount?),
       }));
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
+      get bool_and {
+    final local$bool_and = _instance.bool_and;
+    return local$bool_and == null
+        ? CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and.stub(
+            _then(_instance))
+        : CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
+            local$bool_and, (e) => call(bool_and: e));
+  }
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or {
+    final local$bool_or = _instance.bool_or;
+    return local$bool_or == null
+        ? CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or.stub(
+            _then(_instance))
+        : CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or(
+            local$bool_or, (e) => call(bool_or: e));
+  }
 
   CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count {
     final local$count = _instance.count;
@@ -79790,7 +81056,19 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
 
   TRes _res;
 
-  call({Input_historyVisitHistoryAggregateBoolExpCount? count}) => _res;
+  call({
+    Input_historyVisitHistoryAggregateBoolExpBool_and? bool_and,
+    Input_historyVisitHistoryAggregateBoolExpBool_or? bool_or,
+    Input_historyVisitHistoryAggregateBoolExpCount? count,
+  }) =>
+      _res;
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
+      get bool_and =>
+          CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and.stub(_res);
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or =>
+      CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or.stub(_res);
 
   CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count =>
       CopyWith_Input_historyVisitHistoryAggregateBoolExpCount.stub(_res);
@@ -80193,6 +81471,7 @@ class Input_HistoryVisitHistoryBoolExp {
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
+    Input_BooleanComparisonExp? isFatherVisit,
     Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
     Input_NameComparisonExp? table,
@@ -80204,6 +81483,7 @@ class Input_HistoryVisitHistoryBoolExp {
         if ($_and != null) r'_and': $_and,
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
+        if (isFatherVisit != null) r'isFatherVisit': isFatherVisit,
         if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
         if (table != null) r'table': table,
@@ -80236,6 +81516,13 @@ class Input_HistoryVisitHistoryBoolExp {
           ?.map((e) => Input_HistoryVisitHistoryBoolExp.fromJson(
               (e as Map<String, dynamic>)))
           .toList();
+    }
+    if (data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = data['isFatherVisit'];
+      result$data['isFatherVisit'] = l$isFatherVisit == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isFatherVisit as Map<String, dynamic>));
     }
     if (data.containsKey('recordId')) {
       final l$recordId = data['recordId'];
@@ -80292,6 +81579,9 @@ class Input_HistoryVisitHistoryBoolExp {
   List<Input_HistoryVisitHistoryBoolExp>? get $_or =>
       (_$data['_or'] as List<Input_HistoryVisitHistoryBoolExp>?);
 
+  Input_BooleanComparisonExp? get isFatherVisit =>
+      (_$data['isFatherVisit'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get recordId =>
       (_$data['recordId'] as Input_UuidComparisonExp?);
 
@@ -80323,6 +81613,10 @@ class Input_HistoryVisitHistoryBoolExp {
     if (_$data.containsKey('_or')) {
       final l$$_or = $_or;
       result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = isFatherVisit;
+      result$data['isFatherVisit'] = l$isFatherVisit?.toJson();
     }
     if (_$data.containsKey('recordId')) {
       final l$recordId = recordId;
@@ -80412,6 +81706,15 @@ class Input_HistoryVisitHistoryBoolExp {
     } else if (l$$_or != lOther$$_or) {
       return false;
     }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (_$data.containsKey('isFatherVisit') !=
+        other._$data.containsKey('isFatherVisit')) {
+      return false;
+    }
+    if (l$isFatherVisit != lOther$isFatherVisit) {
+      return false;
+    }
     final l$recordId = recordId;
     final lOther$recordId = other.recordId;
     if (_$data.containsKey('recordId') !=
@@ -80470,6 +81773,7 @@ class Input_HistoryVisitHistoryBoolExp {
     final l$$_and = $_and;
     final l$$_not = $_not;
     final l$$_or = $_or;
+    final l$isFatherVisit = isFatherVisit;
     final l$recordId = recordId;
     final l$recordedBy = recordedBy;
     final l$table = table;
@@ -80488,6 +81792,7 @@ class Input_HistoryVisitHistoryBoolExp {
               ? null
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
+      _$data.containsKey('isFatherVisit') ? l$isFatherVisit : const {},
       _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('table') ? l$table : const {},
@@ -80511,6 +81816,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> {
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
+    Input_BooleanComparisonExp? isFatherVisit,
     Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
     Input_NameComparisonExp? table,
@@ -80531,6 +81837,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> {
                   CopyWith_Input_HistoryVisitHistoryBoolExp<
                       Input_HistoryVisitHistoryBoolExp>>?)
           _fn);
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFatherVisit;
   CopyWith_Input_UuidComparisonExp<TRes> get recordId;
   CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
   CopyWith_Input_NameComparisonExp<TRes> get table;
@@ -80556,6 +81863,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
     Object? $_and = _undefined,
     Object? $_not = _undefined,
     Object? $_or = _undefined,
+    Object? isFatherVisit = _undefined,
     Object? recordId = _undefined,
     Object? recordedBy = _undefined,
     Object? table = _undefined,
@@ -80571,6 +81879,8 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
           '_not': ($_not as Input_HistoryVisitHistoryBoolExp?),
         if ($_or != _undefined)
           '_or': ($_or as List<Input_HistoryVisitHistoryBoolExp>?),
+        if (isFatherVisit != _undefined)
+          'isFatherVisit': (isFatherVisit as Input_BooleanComparisonExp?),
         if (recordId != _undefined)
           'recordId': (recordId as Input_UuidComparisonExp?),
         if (recordedBy != _undefined)
@@ -80616,6 +81926,14 @@ class _CopyWithImpl_Input_HistoryVisitHistoryBoolExp<TRes>
                     e,
                     (i) => i,
                   )))?.toList());
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFatherVisit {
+    final local$isFatherVisit = _instance.isFatherVisit;
+    return local$isFatherVisit == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isFatherVisit, (e) => call(isFatherVisit: e));
+  }
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordId {
     final local$recordId = _instance.recordId;
@@ -80674,6 +81992,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
     List<Input_HistoryVisitHistoryBoolExp>? $_and,
     Input_HistoryVisitHistoryBoolExp? $_not,
     List<Input_HistoryVisitHistoryBoolExp>? $_or,
+    Input_BooleanComparisonExp? isFatherVisit,
     Input_UuidComparisonExp? recordId,
     Input_UuidComparisonExp? recordedBy,
     Input_NameComparisonExp? table,
@@ -80689,6 +82008,9 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
       CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
 
   $_or(_fn) => _res;
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFatherVisit =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
@@ -80711,11 +82033,13 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryBoolExp<TRes>
 
 class Input_HistoryVisitHistoryInsertInput {
   factory Input_HistoryVisitHistoryInsertInput({
+    bool? isFatherVisit,
     UuidValue? recordId,
     String? table,
     DateTime? time,
   }) =>
       Input_HistoryVisitHistoryInsertInput._({
+        if (isFatherVisit != null) r'isFatherVisit': isFatherVisit,
         if (recordId != null) r'recordId': recordId,
         if (table != null) r'table': table,
         if (time != null) r'time': time,
@@ -80726,6 +82050,10 @@ class Input_HistoryVisitHistoryInsertInput {
   factory Input_HistoryVisitHistoryInsertInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = data['isFatherVisit'];
+      result$data['isFatherVisit'] = (l$isFatherVisit as bool?);
+    }
     if (data.containsKey('recordId')) {
       final l$recordId = data['recordId'];
       result$data['recordId'] =
@@ -80744,6 +82072,8 @@ class Input_HistoryVisitHistoryInsertInput {
 
   Map<String, dynamic> _$data;
 
+  bool? get isFatherVisit => (_$data['isFatherVisit'] as bool?);
+
   UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   String? get table => (_$data['table'] as String?);
@@ -80752,6 +82082,10 @@ class Input_HistoryVisitHistoryInsertInput {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = isFatherVisit;
+      result$data['isFatherVisit'] = l$isFatherVisit;
+    }
     if (_$data.containsKey('recordId')) {
       final l$recordId = recordId;
       result$data['recordId'] =
@@ -80784,6 +82118,15 @@ class Input_HistoryVisitHistoryInsertInput {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (_$data.containsKey('isFatherVisit') !=
+        other._$data.containsKey('isFatherVisit')) {
+      return false;
+    }
+    if (l$isFatherVisit != lOther$isFatherVisit) {
+      return false;
+    }
     final l$recordId = recordId;
     final lOther$recordId = other.recordId;
     if (_$data.containsKey('recordId') !=
@@ -80814,10 +82157,12 @@ class Input_HistoryVisitHistoryInsertInput {
 
   @override
   int get hashCode {
+    final l$isFatherVisit = isFatherVisit;
     final l$recordId = recordId;
     final l$table = table;
     final l$time = time;
     return Object.hashAll([
+      _$data.containsKey('isFatherVisit') ? l$isFatherVisit : const {},
       _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
@@ -80835,6 +82180,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryInsertInput<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput;
 
   TRes call({
+    bool? isFatherVisit,
     UuidValue? recordId,
     String? table,
     DateTime? time,
@@ -80855,12 +82201,15 @@ class _CopyWithImpl_Input_HistoryVisitHistoryInsertInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? isFatherVisit = _undefined,
     Object? recordId = _undefined,
     Object? table = _undefined,
     Object? time = _undefined,
   }) =>
       _then(Input_HistoryVisitHistoryInsertInput._({
         ..._instance._$data,
+        if (isFatherVisit != _undefined)
+          'isFatherVisit': (isFatherVisit as bool?),
         if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (table != _undefined) 'table': (table as String?),
         if (time != _undefined) 'time': (time as DateTime?),
@@ -80874,6 +82223,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryInsertInput<TRes>
   TRes _res;
 
   call({
+    bool? isFatherVisit,
     UuidValue? recordId,
     String? table,
     DateTime? time,
@@ -81507,6 +82857,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOnConflict<TRes>
 
 class Input_HistoryVisitHistoryOrderBy {
   factory Input_HistoryVisitHistoryOrderBy({
+    Enum_OrderBy? isFatherVisit,
     Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? table,
@@ -81515,6 +82866,7 @@ class Input_HistoryVisitHistoryOrderBy {
     Enum_OrderBy? visitId,
   }) =>
       Input_HistoryVisitHistoryOrderBy._({
+        if (isFatherVisit != null) r'isFatherVisit': isFatherVisit,
         if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
         if (table != null) r'table': table,
@@ -81527,6 +82879,12 @@ class Input_HistoryVisitHistoryOrderBy {
 
   factory Input_HistoryVisitHistoryOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = data['isFatherVisit'];
+      result$data['isFatherVisit'] = l$isFatherVisit == null
+          ? null
+          : fromJson_Enum_OrderBy((l$isFatherVisit as String));
+    }
     if (data.containsKey('recordId')) {
       final l$recordId = data['recordId'];
       result$data['recordId'] = l$recordId == null
@@ -81567,6 +82925,8 @@ class Input_HistoryVisitHistoryOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get isFatherVisit => (_$data['isFatherVisit'] as Enum_OrderBy?);
+
   Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
@@ -81582,6 +82942,11 @@ class Input_HistoryVisitHistoryOrderBy {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = isFatherVisit;
+      result$data['isFatherVisit'] =
+          l$isFatherVisit == null ? null : toJson_Enum_OrderBy(l$isFatherVisit);
+    }
     if (_$data.containsKey('recordId')) {
       final l$recordId = recordId;
       result$data['recordId'] =
@@ -81626,6 +82991,15 @@ class Input_HistoryVisitHistoryOrderBy {
     }
     if (other is! Input_HistoryVisitHistoryOrderBy ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (_$data.containsKey('isFatherVisit') !=
+        other._$data.containsKey('isFatherVisit')) {
+      return false;
+    }
+    if (l$isFatherVisit != lOther$isFatherVisit) {
       return false;
     }
     final l$recordId = recordId;
@@ -81683,6 +83057,7 @@ class Input_HistoryVisitHistoryOrderBy {
 
   @override
   int get hashCode {
+    final l$isFatherVisit = isFatherVisit;
     final l$recordId = recordId;
     final l$recordedBy = recordedBy;
     final l$table = table;
@@ -81690,6 +83065,7 @@ class Input_HistoryVisitHistoryOrderBy {
     final l$user = user;
     final l$visitId = visitId;
     return Object.hashAll([
+      _$data.containsKey('isFatherVisit') ? l$isFatherVisit : const {},
       _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('table') ? l$table : const {},
@@ -81710,6 +83086,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryOrderBy<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryOrderBy;
 
   TRes call({
+    Enum_OrderBy? isFatherVisit,
     Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? table,
@@ -81734,6 +83111,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryOrderBy<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? isFatherVisit = _undefined,
     Object? recordId = _undefined,
     Object? recordedBy = _undefined,
     Object? table = _undefined,
@@ -81743,6 +83121,8 @@ class _CopyWithImpl_Input_HistoryVisitHistoryOrderBy<TRes>
   }) =>
       _then(Input_HistoryVisitHistoryOrderBy._({
         ..._instance._$data,
+        if (isFatherVisit != _undefined)
+          'isFatherVisit': (isFatherVisit as Enum_OrderBy?),
         if (recordId != _undefined) 'recordId': (recordId as Enum_OrderBy?),
         if (recordedBy != _undefined)
           'recordedBy': (recordedBy as Enum_OrderBy?),
@@ -81767,6 +83147,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryOrderBy<TRes>
   TRes _res;
 
   call({
+    Enum_OrderBy? isFatherVisit,
     Enum_OrderBy? recordId,
     Enum_OrderBy? recordedBy,
     Enum_OrderBy? table,
@@ -81943,6 +83324,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorInput<TRes>
 
 class Input_HistoryVisitHistoryStreamCursorValueInput {
   factory Input_HistoryVisitHistoryStreamCursorValueInput({
+    bool? isFatherVisit,
     UuidValue? recordId,
     UuidValue? recordedBy,
     String? table,
@@ -81950,6 +83332,7 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
     UuidValue? visitId,
   }) =>
       Input_HistoryVisitHistoryStreamCursorValueInput._({
+        if (isFatherVisit != null) r'isFatherVisit': isFatherVisit,
         if (recordId != null) r'recordId': recordId,
         if (recordedBy != null) r'recordedBy': recordedBy,
         if (table != null) r'table': table,
@@ -81962,6 +83345,10 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
   factory Input_HistoryVisitHistoryStreamCursorValueInput.fromJson(
       Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = data['isFatherVisit'];
+      result$data['isFatherVisit'] = (l$isFatherVisit as bool?);
+    }
     if (data.containsKey('recordId')) {
       final l$recordId = data['recordId'];
       result$data['recordId'] =
@@ -81990,6 +83377,8 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  bool? get isFatherVisit => (_$data['isFatherVisit'] as bool?);
+
   UuidValue? get recordId => (_$data['recordId'] as UuidValue?);
 
   UuidValue? get recordedBy => (_$data['recordedBy'] as UuidValue?);
@@ -82002,6 +83391,10 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('isFatherVisit')) {
+      final l$isFatherVisit = isFatherVisit;
+      result$data['isFatherVisit'] = l$isFatherVisit;
+    }
     if (_$data.containsKey('recordId')) {
       final l$recordId = recordId;
       result$data['recordId'] =
@@ -82042,6 +83435,15 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
     }
     if (other is! Input_HistoryVisitHistoryStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$isFatherVisit = isFatherVisit;
+    final lOther$isFatherVisit = other.isFatherVisit;
+    if (_$data.containsKey('isFatherVisit') !=
+        other._$data.containsKey('isFatherVisit')) {
+      return false;
+    }
+    if (l$isFatherVisit != lOther$isFatherVisit) {
       return false;
     }
     final l$recordId = recordId;
@@ -82091,12 +83493,14 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$isFatherVisit = isFatherVisit;
     final l$recordId = recordId;
     final l$recordedBy = recordedBy;
     final l$table = table;
     final l$time = time;
     final l$visitId = visitId;
     return Object.hashAll([
+      _$data.containsKey('isFatherVisit') ? l$isFatherVisit : const {},
       _$data.containsKey('recordId') ? l$recordId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('table') ? l$table : const {},
@@ -82117,6 +83521,7 @@ abstract class CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput;
 
   TRes call({
+    bool? isFatherVisit,
     UuidValue? recordId,
     UuidValue? recordedBy,
     String? table,
@@ -82139,6 +83544,7 @@ class _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? isFatherVisit = _undefined,
     Object? recordId = _undefined,
     Object? recordedBy = _undefined,
     Object? table = _undefined,
@@ -82147,6 +83553,8 @@ class _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
   }) =>
       _then(Input_HistoryVisitHistoryStreamCursorValueInput._({
         ..._instance._$data,
+        if (isFatherVisit != _undefined)
+          'isFatherVisit': (isFatherVisit as bool?),
         if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
         if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
         if (table != _undefined) 'table': (table as String?),
@@ -82162,6 +83570,7 @@ class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
+    bool? isFatherVisit,
     UuidValue? recordId,
     UuidValue? recordedBy,
     String? table,
@@ -143236,6 +144645,459 @@ class _CopyWithStubImpl_Input_historyKodasHistoryAggregateBoolExpCount<TRes>
       CopyWith_Input_IntComparisonExp.stub(_res);
 }
 
+class Input_historyVisitHistoryAggregateBoolExpBool_and {
+  factory Input_historyVisitHistoryAggregateBoolExpBool_and({
+    required Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) =>
+      Input_historyVisitHistoryAggregateBoolExpBool_and._({
+        r'arguments': arguments,
+        if (distinct != null) r'distinct': distinct,
+        if (filter != null) r'filter': filter,
+        r'predicate': predicate,
+      });
+
+  Input_historyVisitHistoryAggregateBoolExpBool_and._(this._$data);
+
+  factory Input_historyVisitHistoryAggregateBoolExpBool_and.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+            (l$arguments as String));
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryVisitHistoryBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+        (l$predicate as Map<String, dynamic>));
+    return Input_historyVisitHistoryAggregateBoolExpBool_and._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+      get arguments => (_$data['arguments']
+          as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryVisitHistoryBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryVisitHistoryBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+            l$arguments);
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
+          Input_historyVisitHistoryAggregateBoolExpBool_and>
+      get copyWith =>
+          CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyVisitHistoryAggregateBoolExpBool_and ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
+    TRes> {
+  factory CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
+    Input_historyVisitHistoryAggregateBoolExpBool_and instance,
+    TRes Function(Input_historyVisitHistoryAggregateBoolExpBool_and) then,
+  ) = _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_and;
+
+  factory CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_and;
+
+  TRes call({
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns?
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
+    implements
+        CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes> {
+  _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_and(
+    this._instance,
+    this._then,
+  );
+
+  final Input_historyVisitHistoryAggregateBoolExpBool_and _instance;
+
+  final TRes Function(Input_historyVisitHistoryAggregateBoolExpBool_and) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) =>
+      _then(Input_historyVisitHistoryAggregateBoolExpBool_and._({
+        ..._instance._$data,
+        if (arguments != _undefined && arguments != null)
+          'arguments': (arguments
+              as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns),
+        if (distinct != _undefined) 'distinct': (distinct as bool?),
+        if (filter != _undefined)
+          'filter': (filter as Input_HistoryVisitHistoryBoolExp?),
+        if (predicate != _undefined && predicate != null)
+          'predicate': (predicate as Input_BooleanComparisonExp),
+      }));
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryBoolExp(
+            local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+        local$predicate, (e) => call(predicate: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
+    implements
+        CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes> {
+  _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_and(
+      this._res);
+
+  TRes _res;
+
+  call({
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns?
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) =>
+      _res;
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter =>
+      CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
+class Input_historyVisitHistoryAggregateBoolExpBool_or {
+  factory Input_historyVisitHistoryAggregateBoolExpBool_or({
+    required Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    required Input_BooleanComparisonExp predicate,
+  }) =>
+      Input_historyVisitHistoryAggregateBoolExpBool_or._({
+        r'arguments': arguments,
+        if (distinct != null) r'distinct': distinct,
+        if (filter != null) r'filter': filter,
+        r'predicate': predicate,
+      });
+
+  Input_historyVisitHistoryAggregateBoolExpBool_or._(this._$data);
+
+  factory Input_historyVisitHistoryAggregateBoolExpBool_or.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$arguments = data['arguments'];
+    result$data['arguments'] =
+        fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+            (l$arguments as String));
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_HistoryVisitHistoryBoolExp.fromJson(
+              (l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
+        (l$predicate as Map<String, dynamic>));
+    return Input_historyVisitHistoryAggregateBoolExpBool_or._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+      get arguments => (_$data['arguments']
+          as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_HistoryVisitHistoryBoolExp? get filter =>
+      (_$data['filter'] as Input_HistoryVisitHistoryBoolExp?);
+
+  Input_BooleanComparisonExp get predicate =>
+      (_$data['predicate'] as Input_BooleanComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$arguments = arguments;
+    result$data['arguments'] =
+        toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+            l$arguments);
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<
+          Input_historyVisitHistoryAggregateBoolExpBool_or>
+      get copyWith => CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_historyVisitHistoryAggregateBoolExpBool_or ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      l$arguments,
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> {
+  factory CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or(
+    Input_historyVisitHistoryAggregateBoolExpBool_or instance,
+    TRes Function(Input_historyVisitHistoryAggregateBoolExpBool_or) then,
+  ) = _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_or;
+
+  factory CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_or;
+
+  TRes call({
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns?
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  });
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter;
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> {
+  _CopyWithImpl_Input_historyVisitHistoryAggregateBoolExpBool_or(
+    this._instance,
+    this._then,
+  );
+
+  final Input_historyVisitHistoryAggregateBoolExpBool_or _instance;
+
+  final TRes Function(Input_historyVisitHistoryAggregateBoolExpBool_or) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) =>
+      _then(Input_historyVisitHistoryAggregateBoolExpBool_or._({
+        ..._instance._$data,
+        if (arguments != _undefined && arguments != null)
+          'arguments': (arguments
+              as Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns),
+        if (distinct != _undefined) 'distinct': (distinct as bool?),
+        if (filter != _undefined)
+          'filter': (filter as Input_HistoryVisitHistoryBoolExp?),
+        if (predicate != _undefined && predicate != null)
+          'predicate': (predicate as Input_BooleanComparisonExp),
+      }));
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryBoolExp(
+            local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_BooleanComparisonExp(
+        local$predicate, (e) => call(predicate: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes>
+    implements CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> {
+  _CopyWithStubImpl_Input_historyVisitHistoryAggregateBoolExpBool_or(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns?
+        arguments,
+    bool? distinct,
+    Input_HistoryVisitHistoryBoolExp? filter,
+    Input_BooleanComparisonExp? predicate,
+  }) =>
+      _res;
+
+  CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get filter =>
+      CopyWith_Input_HistoryVisitHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+}
+
 class Input_historyVisitHistoryAggregateBoolExpCount {
   factory Input_historyVisitHistoryAggregateBoolExpCount({
     List<Enum_HistoryVisitHistorySelectColumn>? arguments,
@@ -147470,6 +149332,7 @@ Enum_HistoryVisitHistoryConstraint fromJson_Enum_HistoryVisitHistoryConstraint(
 }
 
 enum Enum_HistoryVisitHistorySelectColumn {
+  isFatherVisit,
   recordId,
   recordedBy,
   table,
@@ -147486,6 +149349,8 @@ enum Enum_HistoryVisitHistorySelectColumn {
 String toJson_Enum_HistoryVisitHistorySelectColumn(
     Enum_HistoryVisitHistorySelectColumn e) {
   switch (e) {
+    case Enum_HistoryVisitHistorySelectColumn.isFatherVisit:
+      return r'isFatherVisit';
     case Enum_HistoryVisitHistorySelectColumn.recordId:
       return r'recordId';
     case Enum_HistoryVisitHistorySelectColumn.recordedBy:
@@ -147504,6 +149369,8 @@ String toJson_Enum_HistoryVisitHistorySelectColumn(
 Enum_HistoryVisitHistorySelectColumn
     fromJson_Enum_HistoryVisitHistorySelectColumn(String value) {
   switch (value) {
+    case r'isFatherVisit':
+      return Enum_HistoryVisitHistorySelectColumn.isFatherVisit;
     case r'recordId':
       return Enum_HistoryVisitHistorySelectColumn.recordId;
     case r'recordedBy':
@@ -147516,6 +149383,86 @@ Enum_HistoryVisitHistorySelectColumn
       return Enum_HistoryVisitHistorySelectColumn.visitId;
     default:
       return Enum_HistoryVisitHistorySelectColumn.$unknown;
+  }
+}
+
+enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns {
+  isFatherVisit,
+  $unknown;
+
+  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+          this);
+}
+
+String toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+        e) {
+  switch (e) {
+    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+          .isFatherVisit:
+      return r'isFatherVisit';
+    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+          .$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+    fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
+        String value) {
+  switch (value) {
+    case r'isFatherVisit':
+      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+          .isFatherVisit;
+    default:
+      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
+          .$unknown;
+  }
+}
+
+enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns {
+  isFatherVisit,
+  $unknown;
+
+  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns.fromJson(
+          String value) =>
+      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+          value);
+
+  String toJson() =>
+      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+          this);
+}
+
+String toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+    Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+        e) {
+  switch (e) {
+    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+          .isFatherVisit:
+      return r'isFatherVisit';
+    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+          .$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+    fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
+        String value) {
+  switch (value) {
+    case r'isFatherVisit':
+      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+          .isFatherVisit;
+    default:
+      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
+          .$unknown;
   }
 }
 

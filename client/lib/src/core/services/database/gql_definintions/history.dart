@@ -54,6 +54,7 @@ class HistoryDAO {
   PaginatableStreamBase<LastRecordedByInfo>
       paginateVisitHistory<T extends Viewable>({
     required String id,
+    bool fatherVisit = false,
   }) {
     return PaginatableStream.simple(
       factory: (request) {
@@ -73,6 +74,9 @@ class HistoryDAO {
                   recordId: Input_UuidComparisonExp(
                     $_eq: id.toUuid(),
                   ),
+                ),
+                Input_HistoryVisitHistoryBoolExp(
+                  isFatherVisit: Input_BooleanComparisonExp($_eq: fatherVisit),
                 ),
                 if (request.cursor != null)
                   Input_HistoryVisitHistoryBoolExp(
@@ -216,6 +220,16 @@ class HistoryDAO {
     );
   }
 
+  PaginatableStreamBase<LastRecordedByInfo> paginateFamilyVisitHistory({
+    required String familyId,
+    bool fatherVisit = false,
+  }) {
+    return paginateVisitHistory<Family>(
+      id: familyId,
+      fatherVisit: fatherVisit,
+    );
+  }
+
   Future<Person?> updatePersonLastCall({
     required String personId,
     required DateTime lastCall,
@@ -281,6 +295,27 @@ class HistoryDAO {
         variables: Variables_Mutation_insertPersonLastVisit(
           personId: personId.toUuid(),
           lastVisit: lastVisit,
+        ).toJson(),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
+        ),
+      ),
+    );
+  }
+
+  Future<LastRecordedByInfo?> updateFamilyLastVisit({
+    required String familyId,
+    required DateTime lastVisit,
+    bool isFatherVisit = false,
+  }) {
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertFamilyLastVisit,
+        operationName: 'insertFamilyLastVisit',
+        variables: Variables_Mutation_insertFamilyLastVisit(
+          familyId: familyId.toUuid(),
+          lastVisit: lastVisit,
+          isFatherVisit: isFatherVisit,
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(
           db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),

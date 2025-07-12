@@ -45,5 +45,11 @@ subscription watchFamily($id: uuid!) {
     lastEdit {
       ...LatestEditHistory
     }
+    lastVisit {
+      ...LatestVisitHistory
+    }
+    lastFatherVisit {
+      ...LatestFatherVisitHistory
+    }
   }
 }

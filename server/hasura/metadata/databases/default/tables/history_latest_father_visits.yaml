@@ -1,0 +1,49 @@
+table:
+  name: latest_father_visits
+  schema: history
+object_relationships:
+  - name: user
+    using:
+      manual_configuration:
+        column_mapping:
+          recorded_by: uid
+        insertion_order: null
+        remote_table:
+          name: users_data
+          schema: auth
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - record_id
+        - recorded_by
+        - table
+        - time
+        - visit_id
+      filter:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+                  - _and:
+                      - table:
+                          _ceq:
+                            - $
+                            - table
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - record_id
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []

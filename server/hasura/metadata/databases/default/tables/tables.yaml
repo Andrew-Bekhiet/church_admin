@@ -13,6 +13,7 @@
 - "!include history_latest_calls.yaml"
 - "!include history_latest_confessions.yaml"
 - "!include history_latest_edits.yaml"
+- "!include history_latest_father_visits.yaml"
 - "!include history_latest_kodases.yaml"
 - "!include history_latest_visits.yaml"
 - "!include history_visit_history.yaml"

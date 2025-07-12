@@ -12,6 +12,7 @@ part 'family.g.dart';
   'status': 'الحالة الاجتماعية',
   'deceasedSpouseName': 'اسم الزوج المتوفي',
   'marriageDate': 'تاريخ الزواج',
+  'lastFatherVisit': 'آخر افتقاد للأب',
 })
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -65,6 +66,12 @@ class Family extends ViewableWithIDAndImage
   @override
   final LastRecordedByInfo? lastEdit;
 
+  @override
+  final LastRecordedByInfo? lastVisit;
+
+  @override
+  final LastRecordedByInfo? lastFatherVisit;
+
   const Family({
     required this.id,
     required this.name,
@@ -79,6 +86,8 @@ class Family extends ViewableWithIDAndImage
     this.children,
     this.parents,
     this.lastEdit,
+    this.lastVisit,
+    this.lastFatherVisit,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
@@ -108,6 +117,22 @@ class Family extends ViewableWithIDAndImage
             status == MartialStatus.widowed ? deceasedSpouseName : null,
         notes: notes,
         color: colorToInt(color),
+        visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
+          data: [
+            if (lastVisit != null)
+              Input_HistoryVisitHistoryInsertInput(
+                isFatherVisit: false,
+                table: 'families',
+                time: lastVisit!.time,
+              ),
+            if (lastFatherVisit != null)
+              Input_HistoryVisitHistoryInsertInput(
+                isFatherVisit: true,
+                table: 'families',
+                time: lastFatherVisit!.time,
+              ),
+          ],
+        ),
       );
 
   Input_FamiliesSetInput toUpdateInput(Family oldFamily) {

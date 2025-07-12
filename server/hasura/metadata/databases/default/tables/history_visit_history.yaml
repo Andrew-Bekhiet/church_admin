@@ -37,6 +37,7 @@ insert_permissions:
       set:
         recorded_by: x-hasura-User-Id
       columns:
+        - is_father_visit
         - record_id
         - table
         - time
@@ -45,6 +46,7 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - is_father_visit
         - record_id
         - recorded_by
         - table

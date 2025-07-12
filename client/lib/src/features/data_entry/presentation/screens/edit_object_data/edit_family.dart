@@ -244,6 +244,39 @@ class _EditFamilyState extends State<EditFamily> {
                   : null;
             },
           ),
+          DateTimeField(
+            label: 'أخر افتقاد',
+            nullable: true,
+            initialValue: newFamily.lastVisit?.time,
+            onChanged: (v) {
+              if (v != null) {
+                newFamily = newFamily.copyWith(
+                  lastVisit: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                  ),
+                );
+              }
+            },
+            validator: (v) => null,
+          ),
+          DateTimeField(
+            label: 'أخر افتقاد للأب الكاهن',
+            nullable: true,
+            initialValue: newFamily.lastFatherVisit?.time,
+            onChanged: (v) {
+              if (v != null) {
+                newFamily = newFamily.copyWith(
+                  lastFatherVisit: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                    isFatherVisit: true,
+                  ),
+                );
+              }
+            },
+            validator: (v) => null,
+          ),
           const SizedBox(height: 80),
         ],
       ),

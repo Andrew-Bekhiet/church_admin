@@ -22,6 +22,8 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
@@ -30,15 +32,20 @@ abstract class CopyWith_Input_FamiliesOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   });
   CopyWith_Input_AddressesOrderBy<TRes> get address;
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get childrenAggregate;
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
       get editHistoryAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit;
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit;
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate;
   CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate;
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate;
 }
 
 class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
@@ -65,6 +72,8 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastFatherVisit = _undefined,
+    Object? lastVisit = _undefined,
     Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
@@ -73,6 +82,7 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? status = _undefined,
     Object? storesAggregate = _undefined,
+    Object? visitHistoryAggregate = _undefined,
   }) =>
       _then(Input_FamiliesOrderBy._({
         ..._instance._$data,
@@ -95,6 +105,11 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
         if (lastEdit != _undefined)
           'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+        if (lastFatherVisit != _undefined)
+          'lastFatherVisit':
+              (lastFatherVisit as Input_HistoryLatestFatherVisitsOrderBy?),
+        if (lastVisit != _undefined)
+          'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
         if (marriageDate != _undefined)
           'marriageDate': (marriageDate as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -110,6 +125,9 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         if (status != _undefined) 'status': (status as Enum_OrderBy?),
         if (storesAggregate != _undefined)
           'storesAggregate': (storesAggregate as Input_StoresAggregateOrderBy?),
+        if (visitHistoryAggregate != _undefined)
+          'visitHistoryAggregate': (visitHistoryAggregate
+              as Input_HistoryVisitHistoryAggregateOrderBy?),
       }));
 
   CopyWith_Input_AddressesOrderBy<TRes> get address {
@@ -146,6 +164,22 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
             local$lastEdit, (e) => call(lastEdit: e));
   }
 
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit {
+    final local$lastFatherVisit = _instance.lastFatherVisit;
+    return local$lastFatherVisit == null
+        ? CopyWith_Input_HistoryLatestFatherVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestFatherVisitsOrderBy(
+            local$lastFatherVisit, (e) => call(lastFatherVisit: e));
+  }
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsOrderBy(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate {
     final local$parentsAggregate = _instance.parentsAggregate;
     return local$parentsAggregate == null
@@ -169,6 +203,16 @@ class _CopyWithImpl_Input_FamiliesOrderBy<TRes>
         : CopyWith_Input_StoresAggregateOrderBy(
             local$storesAggregate, (e) => call(storesAggregate: e));
   }
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate {
+    final local$visitHistoryAggregate = _instance.visitHistoryAggregate;
+    return local$visitHistoryAggregate == null
+        ? CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryVisitHistoryAggregateOrderBy(
+            local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
@@ -188,6 +232,8 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? geolocation,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestFatherVisitsOrderBy? lastFatherVisit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? marriageDate,
     Enum_OrderBy? name,
     Enum_OrderBy? notes,
@@ -196,6 +242,7 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? status,
     Input_StoresAggregateOrderBy? storesAggregate,
+    Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
   }) =>
       _res;
 
@@ -212,6 +259,12 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
 
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> get lastFatherVisit =>
+      CopyWith_Input_HistoryLatestFatherVisitsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_res);
+
   CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> get parentsAggregate =>
       CopyWith_Input_FamiliesFamiliesAggregateOrderBy.stub(_res);
 
@@ -220,6 +273,10 @@ class _CopyWithStubImpl_Input_FamiliesOrderBy<TRes>
 
   CopyWith_Input_StoresAggregateOrderBy<TRes> get storesAggregate =>
       CopyWith_Input_StoresAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes>
+      get visitHistoryAggregate =>
+          CopyWith_Input_HistoryVisitHistoryAggregateOrderBy.stub(_res);
 }
 
 class Input_FamiliesPkColumnsInput {

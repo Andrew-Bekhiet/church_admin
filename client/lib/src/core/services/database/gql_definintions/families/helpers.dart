@@ -106,5 +106,10 @@ class FamilyUpdateHelper {
         deleteRelatedFamilies: _deleteRelatedFamilies,
         deleteChildren: _deleteChildren,
         deleteParents: _deleteParents,
+        insertFatherVisitHistory:
+            newFamily.lastFatherVisit != oldFamily.lastFatherVisit,
+        insertVisitHistory: newFamily.lastVisit != oldFamily.lastVisit,
+        lastFatherVisit: newFamily.lastFatherVisit?.time,
+        lastVisit: newFamily.lastVisit?.time,
       );
 }

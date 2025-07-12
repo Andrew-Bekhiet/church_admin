@@ -404,6 +404,70 @@ class Person extends ViewableWithIDAndImage
               )
             : null,
         color: colorToInt(color),
+        kodasHistory: Input_HistoryKodasHistoryArrRelInsertInput(
+          data: [
+            if (lastKodas != null)
+              Input_HistoryKodasHistoryInsertInput(
+                day: Input_HistoryAttendanceDaysObjRelInsertInput(
+                  data: Input_HistoryAttendanceDaysInsertInput(
+                    day: lastKodas!.time,
+                  ),
+                  onConflict: Input_HistoryAttendanceDaysOnConflict(
+                    constraint: Enum_HistoryAttendanceDaysConstraint
+                        .attendance_days_pkey,
+                    updateColumns: [
+                      Enum_HistoryAttendanceDaysUpdateColumn.day,
+                    ],
+                  ),
+                ),
+              ),
+          ],
+          onConflict: Input_HistoryKodasHistoryOnConflict(
+            constraint: Enum_HistoryKodasHistoryConstraint
+                .kodas_history_day_id_person_id_key,
+          ),
+        ),
+        confessionHistory: Input_HistoryConfessionHistoryArrRelInsertInput(
+          data: [
+            if (lastConfession != null)
+              Input_HistoryConfessionHistoryInsertInput(
+                day: Input_HistoryAttendanceDaysObjRelInsertInput(
+                  data: Input_HistoryAttendanceDaysInsertInput(
+                    day: lastConfession!.time,
+                  ),
+                  onConflict: Input_HistoryAttendanceDaysOnConflict(
+                    constraint: Enum_HistoryAttendanceDaysConstraint
+                        .attendance_days_pkey,
+                    updateColumns: [
+                      Enum_HistoryAttendanceDaysUpdateColumn.day,
+                    ],
+                  ),
+                ),
+              ),
+          ],
+          onConflict: Input_HistoryConfessionHistoryOnConflict(
+            constraint: Enum_HistoryConfessionHistoryConstraint
+                .confession_history_day_id_person_id_key,
+          ),
+        ),
+        visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
+          data: [
+            if (lastVisit != null)
+              Input_HistoryVisitHistoryInsertInput(
+                time: lastVisit!.time,
+                isFatherVisit: lastVisit!.isFatherVisit,
+                table: 'persons',
+              ),
+          ],
+        ),
+        callHistory: Input_HistoryCallHistoryArrRelInsertInput(
+          data: [
+            if (lastCall != null)
+              Input_HistoryCallHistoryInsertInput(
+                time: lastCall!.time,
+              ),
+          ],
+        ),
       );
 
   Input_PersonsSetInput toUpdateInput(Person oldPerson) {

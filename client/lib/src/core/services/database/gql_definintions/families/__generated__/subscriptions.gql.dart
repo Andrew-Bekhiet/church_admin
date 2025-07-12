@@ -2124,6 +2124,44 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'lastVisit'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'LatestVisitHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'lastFatherVisit'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'LatestFatherVisitHistory'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: '__typename'),
             alias: null,
             arguments: [],
@@ -2144,6 +2182,8 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
   fragmentDefinitionLatestEditHistory,
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
+  fragmentDefinitionLatestVisitHistory,
+  fragmentDefinitionLatestFatherVisitHistory,
 ]);
 
 class Subscription_watchFamily_familiesByPk
@@ -2161,6 +2201,8 @@ class Subscription_watchFamily_familiesByPk
     this.marriageDate,
     this.notes,
     this.lastEdit,
+    this.lastVisit,
+    this.lastFatherVisit,
   });
 
   factory Subscription_watchFamily_familiesByPk.fromJson(
@@ -2177,6 +2219,8 @@ class Subscription_watchFamily_familiesByPk
     final l$marriageDate = json['marriageDate'];
     final l$notes = json['notes'];
     final l$lastEdit = json['lastEdit'];
+    final l$lastVisit = json['lastVisit'];
+    final l$lastFatherVisit = json['lastFatherVisit'];
     return Subscription_watchFamily_familiesByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -2197,6 +2241,14 @@ class Subscription_watchFamily_familiesByPk
           ? null
           : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>)),
+      lastVisit: l$lastVisit == null
+          ? null
+          : Fragment_LatestVisitHistory.fromJson(
+              (l$lastVisit as Map<String, dynamic>)),
+      lastFatherVisit: l$lastFatherVisit == null
+          ? null
+          : Fragment_LatestFatherVisitHistory.fromJson(
+              (l$lastFatherVisit as Map<String, dynamic>)),
     );
   }
 
@@ -2223,6 +2275,10 @@ class Subscription_watchFamily_familiesByPk
   final String? notes;
 
   final Fragment_LatestEditHistory? lastEdit;
+
+  final Fragment_LatestVisitHistory? lastVisit;
+
+  final Fragment_LatestFatherVisitHistory? lastFatherVisit;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2252,6 +2308,10 @@ class Subscription_watchFamily_familiesByPk
     _resultData['notes'] = l$notes;
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
+    final l$lastVisit = lastVisit;
+    _resultData['lastVisit'] = l$lastVisit?.toJson();
+    final l$lastFatherVisit = lastFatherVisit;
+    _resultData['lastFatherVisit'] = l$lastFatherVisit?.toJson();
     return _resultData;
   }
 
@@ -2269,6 +2329,8 @@ class Subscription_watchFamily_familiesByPk
     final l$marriageDate = marriageDate;
     final l$notes = notes;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
+    final l$lastFatherVisit = lastFatherVisit;
     return Object.hashAll([
       l$id,
       l$name,
@@ -2282,6 +2344,8 @@ class Subscription_watchFamily_familiesByPk
       l$marriageDate,
       l$notes,
       l$lastEdit,
+      l$lastVisit,
+      l$lastFatherVisit,
     ]);
   }
 
@@ -2354,6 +2418,16 @@ class Subscription_watchFamily_familiesByPk
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
     return true;
   }
 }
@@ -2390,9 +2464,13 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     DateTime? marriageDate,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestVisitHistory? lastVisit,
+    Fragment_LatestFatherVisitHistory? lastFatherVisit,
   });
   CopyWith_Fragment_Address<TRes> get address;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit;
+  CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit;
 }
 
 class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
@@ -2421,6 +2499,8 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? marriageDate = _undefined,
     Object? notes = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
+    Object? lastFatherVisit = _undefined,
   }) =>
       _then(Subscription_watchFamily_familiesByPk(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -2452,6 +2532,12 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
             : (lastEdit as Fragment_LatestEditHistory?),
+        lastVisit: lastVisit == _undefined
+            ? _instance.lastVisit
+            : (lastVisit as Fragment_LatestVisitHistory?),
+        lastFatherVisit: lastFatherVisit == _undefined
+            ? _instance.lastFatherVisit
+            : (lastFatherVisit as Fragment_LatestFatherVisitHistory?),
       ));
 
   CopyWith_Fragment_Address<TRes> get address {
@@ -2467,6 +2553,22 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestEditHistory(
             local$lastEdit, (e) => call(lastEdit: e));
+  }
+
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Fragment_LatestVisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisitHistory(
+            local$lastVisit, (e) => call(lastVisit: e));
+  }
+
+  CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit {
+    final local$lastFatherVisit = _instance.lastFatherVisit;
+    return local$lastFatherVisit == null
+        ? CopyWith_Fragment_LatestFatherVisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestFatherVisitHistory(
+            local$lastFatherVisit, (e) => call(lastFatherVisit: e));
   }
 }
 
@@ -2489,6 +2591,8 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     DateTime? marriageDate,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestVisitHistory? lastVisit,
+    Fragment_LatestFatherVisitHistory? lastFatherVisit,
   }) =>
       _res;
 
@@ -2497,4 +2601,10 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
+
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit =>
+      CopyWith_Fragment_LatestVisitHistory.stub(_res);
+
+  CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit =>
+      CopyWith_Fragment_LatestFatherVisitHistory.stub(_res);
 }

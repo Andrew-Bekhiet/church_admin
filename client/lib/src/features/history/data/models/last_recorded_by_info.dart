@@ -8,22 +8,33 @@ part 'last_recorded_by_info.g.dart';
 @freezed
 @JsonSerializable()
 @Queryable(
-    classLabel: 'بيانات آخر تسجيل', ignoreFields: ['id', 'name', 'recordedBy'])
+  classLabel: 'بيانات آخر تسجيل',
+  ignoreFields: ['id', 'name', 'recordedBy'],
+  labelsOverrides: {
+    'isFatherVisit': 'زيارة أب كاهن',
+  },
+)
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
   @override
   final DateTime time;
+
   @override
   @JsonKey(readValue: readRecordedBy)
   final String? recordedBy;
+
   @override
   final User? user;
+
+  @override
+  final bool isFatherVisit;
 
   LastRecordedByInfo({
     required this.time,
     this.recordedBy,
     this.user,
+    this.isFatherVisit = false,
   });
 
   factory LastRecordedByInfo.fromJson(Map<String, Object?> json) =>

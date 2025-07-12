@@ -18,6 +18,24 @@ object_relationships:
         remote_table:
           name: latest_edits
           schema: history
+  - name: lastFatherVisit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_father_visits
+          schema: history
+  - name: lastVisit
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: latest_visits
+          schema: history
 array_relationships:
   - name: children
     using:
@@ -58,6 +76,15 @@ array_relationships:
         table:
           name: stores
           schema: public
+  - name: visitHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: visit_history
+          schema: history
 insert_permissions:
   - role: user
     permission:

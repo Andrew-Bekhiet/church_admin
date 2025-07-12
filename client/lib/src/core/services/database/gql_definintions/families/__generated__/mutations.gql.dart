@@ -602,6 +602,10 @@ class Variables_Mutation_updateFamily {
     required bool updateAddress,
     required bool deleteRelatedFamilies,
     required bool insertRelatedFamilies,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+    required bool insertVisitHistory,
+    required bool insertFatherVisitHistory,
   }) =>
       Variables_Mutation_updateFamily._({
         r'familyId': familyId,
@@ -615,6 +619,10 @@ class Variables_Mutation_updateFamily {
         r'updateAddress': updateAddress,
         r'deleteRelatedFamilies': deleteRelatedFamilies,
         r'insertRelatedFamilies': insertRelatedFamilies,
+        if (lastVisit != null) r'lastVisit': lastVisit,
+        if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+        r'insertVisitHistory': insertVisitHistory,
+        r'insertFatherVisitHistory': insertFatherVisitHistory,
       });
 
   Variables_Mutation_updateFamily._(this._$data);
@@ -655,6 +663,21 @@ class Variables_Mutation_updateFamily {
     result$data['deleteRelatedFamilies'] = (l$deleteRelatedFamilies as bool);
     final l$insertRelatedFamilies = data['insertRelatedFamilies'];
     result$data['insertRelatedFamilies'] = (l$insertRelatedFamilies as bool);
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+    }
+    if (data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = data['lastFatherVisit'];
+      result$data['lastFatherVisit'] =
+          l$lastFatherVisit == null ? null : tstzFromString(l$lastFatherVisit);
+    }
+    final l$insertVisitHistory = data['insertVisitHistory'];
+    result$data['insertVisitHistory'] = (l$insertVisitHistory as bool);
+    final l$insertFatherVisitHistory = data['insertFatherVisitHistory'];
+    result$data['insertFatherVisitHistory'] =
+        (l$insertFatherVisitHistory as bool);
     return Variables_Mutation_updateFamily._(result$data);
   }
 
@@ -687,6 +710,15 @@ class Variables_Mutation_updateFamily {
 
   bool get insertRelatedFamilies => (_$data['insertRelatedFamilies'] as bool);
 
+  DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
+
+  DateTime? get lastFatherVisit => (_$data['lastFatherVisit'] as DateTime?);
+
+  bool get insertVisitHistory => (_$data['insertVisitHistory'] as bool);
+
+  bool get insertFatherVisitHistory =>
+      (_$data['insertFatherVisitHistory'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$familyId = familyId;
@@ -716,6 +748,20 @@ class Variables_Mutation_updateFamily {
     result$data['deleteRelatedFamilies'] = l$deleteRelatedFamilies;
     final l$insertRelatedFamilies = insertRelatedFamilies;
     result$data['insertRelatedFamilies'] = l$insertRelatedFamilies;
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] =
+          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+    }
+    if (_$data.containsKey('lastFatherVisit')) {
+      final l$lastFatherVisit = lastFatherVisit;
+      result$data['lastFatherVisit'] =
+          l$lastFatherVisit == null ? null : tstzToString(l$lastFatherVisit);
+    }
+    final l$insertVisitHistory = insertVisitHistory;
+    result$data['insertVisitHistory'] = l$insertVisitHistory;
+    final l$insertFatherVisitHistory = insertFatherVisitHistory;
+    result$data['insertFatherVisitHistory'] = l$insertFatherVisitHistory;
     return result$data;
   }
 
@@ -814,6 +860,34 @@ class Variables_Mutation_updateFamily {
     if (l$insertRelatedFamilies != lOther$insertRelatedFamilies) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
+    final l$lastFatherVisit = lastFatherVisit;
+    final lOther$lastFatherVisit = other.lastFatherVisit;
+    if (_$data.containsKey('lastFatherVisit') !=
+        other._$data.containsKey('lastFatherVisit')) {
+      return false;
+    }
+    if (l$lastFatherVisit != lOther$lastFatherVisit) {
+      return false;
+    }
+    final l$insertVisitHistory = insertVisitHistory;
+    final lOther$insertVisitHistory = other.insertVisitHistory;
+    if (l$insertVisitHistory != lOther$insertVisitHistory) {
+      return false;
+    }
+    final l$insertFatherVisitHistory = insertFatherVisitHistory;
+    final lOther$insertFatherVisitHistory = other.insertFatherVisitHistory;
+    if (l$insertFatherVisitHistory != lOther$insertFatherVisitHistory) {
+      return false;
+    }
     return true;
   }
 
@@ -830,6 +904,10 @@ class Variables_Mutation_updateFamily {
     final l$updateAddress = updateAddress;
     final l$deleteRelatedFamilies = deleteRelatedFamilies;
     final l$insertRelatedFamilies = insertRelatedFamilies;
+    final l$lastVisit = lastVisit;
+    final l$lastFatherVisit = lastFatherVisit;
+    final l$insertVisitHistory = insertVisitHistory;
+    final l$insertFatherVisitHistory = insertFatherVisitHistory;
     return Object.hashAll([
       l$familyId,
       l$newFamily,
@@ -842,6 +920,10 @@ class Variables_Mutation_updateFamily {
       l$updateAddress,
       l$deleteRelatedFamilies,
       l$insertRelatedFamilies,
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},
+      l$insertVisitHistory,
+      l$insertFatherVisitHistory,
     ]);
   }
 }
@@ -867,6 +949,10 @@ abstract class CopyWith_Variables_Mutation_updateFamily<TRes> {
     bool? updateAddress,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+    bool? insertVisitHistory,
+    bool? insertFatherVisitHistory,
   });
 }
 
@@ -895,6 +981,10 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
     Object? updateAddress = _undefined,
     Object? deleteRelatedFamilies = _undefined,
     Object? insertRelatedFamilies = _undefined,
+    Object? lastVisit = _undefined,
+    Object? lastFatherVisit = _undefined,
+    Object? insertVisitHistory = _undefined,
+    Object? insertFatherVisitHistory = _undefined,
   }) =>
       _then(Variables_Mutation_updateFamily._({
         ..._instance._$data,
@@ -923,6 +1013,14 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
         if (insertRelatedFamilies != _undefined &&
             insertRelatedFamilies != null)
           'insertRelatedFamilies': (insertRelatedFamilies as bool),
+        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+        if (lastFatherVisit != _undefined)
+          'lastFatherVisit': (lastFatherVisit as DateTime?),
+        if (insertVisitHistory != _undefined && insertVisitHistory != null)
+          'insertVisitHistory': (insertVisitHistory as bool),
+        if (insertFatherVisitHistory != _undefined &&
+            insertFatherVisitHistory != null)
+          'insertFatherVisitHistory': (insertFatherVisitHistory as bool),
       }));
 }
 
@@ -944,6 +1042,10 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
     bool? updateAddress,
     bool? deleteRelatedFamilies,
     bool? insertRelatedFamilies,
+    DateTime? lastVisit,
+    DateTime? lastFatherVisit,
+    bool? insertVisitHistory,
+    bool? insertFatherVisitHistory,
   }) =>
       _res;
 }
@@ -954,6 +1056,8 @@ class Mutation_updateFamily {
     this.updateAddressesByPk,
     this.deleteFamiliesFamilies,
     this.insertFamiliesFamilies,
+    this.insertHistoryVisitHistoryOne,
+    this.$_fatherVisitHistory,
     this.$__typename = 'mutation_root',
   });
 
@@ -962,6 +1066,8 @@ class Mutation_updateFamily {
     final l$updateAddressesByPk = json['updateAddressesByPk'];
     final l$deleteFamiliesFamilies = json['deleteFamiliesFamilies'];
     final l$insertFamiliesFamilies = json['insertFamiliesFamilies'];
+    final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
+    final l$$_fatherVisitHistory = json['_fatherVisitHistory'];
     final l$$__typename = json['__typename'];
     return Mutation_updateFamily(
       updateFamiliesByPk: l$updateFamiliesByPk == null
@@ -980,6 +1086,14 @@ class Mutation_updateFamily {
           ? null
           : Mutation_updateFamily_insertFamiliesFamilies.fromJson(
               (l$insertFamiliesFamilies as Map<String, dynamic>)),
+      insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
+          ? null
+          : Mutation_updateFamily_insertHistoryVisitHistoryOne.fromJson(
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+      $_fatherVisitHistory: l$$_fatherVisitHistory == null
+          ? null
+          : Mutation_updateFamily__fatherVisitHistory.fromJson(
+              (l$$_fatherVisitHistory as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -991,6 +1105,11 @@ class Mutation_updateFamily {
   final Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies;
 
   final Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies;
+
+  final Mutation_updateFamily_insertHistoryVisitHistoryOne?
+      insertHistoryVisitHistoryOne;
+
+  final Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory;
 
   final String $__typename;
 
@@ -1004,6 +1123,11 @@ class Mutation_updateFamily {
     _resultData['deleteFamiliesFamilies'] = l$deleteFamiliesFamilies?.toJson();
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     _resultData['insertFamiliesFamilies'] = l$insertFamiliesFamilies?.toJson();
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    _resultData['insertHistoryVisitHistoryOne'] =
+        l$insertHistoryVisitHistoryOne?.toJson();
+    final l$$_fatherVisitHistory = $_fatherVisitHistory;
+    _resultData['_fatherVisitHistory'] = l$$_fatherVisitHistory?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1015,12 +1139,16 @@ class Mutation_updateFamily {
     final l$updateAddressesByPk = updateAddressesByPk;
     final l$deleteFamiliesFamilies = deleteFamiliesFamilies;
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final l$$_fatherVisitHistory = $_fatherVisitHistory;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateFamiliesByPk,
       l$updateAddressesByPk,
       l$deleteFamiliesFamilies,
       l$insertFamiliesFamilies,
+      l$insertHistoryVisitHistoryOne,
+      l$$_fatherVisitHistory,
       l$$__typename,
     ]);
   }
@@ -1051,6 +1179,17 @@ class Mutation_updateFamily {
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     final lOther$insertFamiliesFamilies = other.insertFamiliesFamilies;
     if (l$insertFamiliesFamilies != lOther$insertFamiliesFamilies) {
+      return false;
+    }
+    final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final lOther$insertHistoryVisitHistoryOne =
+        other.insertHistoryVisitHistoryOne;
+    if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
+      return false;
+    }
+    final l$$_fatherVisitHistory = $_fatherVisitHistory;
+    final lOther$$_fatherVisitHistory = other.$_fatherVisitHistory;
+    if (l$$_fatherVisitHistory != lOther$$_fatherVisitHistory) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1084,6 +1223,9 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
     Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
+    Mutation_updateFamily_insertHistoryVisitHistoryOne?
+        insertHistoryVisitHistoryOne,
+    Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
     String? $__typename,
   });
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
@@ -1092,6 +1234,10 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
       get deleteFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies;
+  CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne;
+  CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
+      get $_fatherVisitHistory;
 }
 
 class _CopyWithImpl_Mutation_updateFamily<TRes>
@@ -1112,6 +1258,8 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     Object? updateAddressesByPk = _undefined,
     Object? deleteFamiliesFamilies = _undefined,
     Object? insertFamiliesFamilies = _undefined,
+    Object? insertHistoryVisitHistoryOne = _undefined,
+    Object? $_fatherVisitHistory = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updateFamily(
@@ -1129,6 +1277,14 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
             ? _instance.insertFamiliesFamilies
             : (insertFamiliesFamilies
                 as Mutation_updateFamily_insertFamiliesFamilies?),
+        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+            ? _instance.insertHistoryVisitHistoryOne
+            : (insertHistoryVisitHistoryOne
+                as Mutation_updateFamily_insertHistoryVisitHistoryOne?),
+        $_fatherVisitHistory: $_fatherVisitHistory == _undefined
+            ? _instance.$_fatherVisitHistory
+            : ($_fatherVisitHistory
+                as Mutation_updateFamily__fatherVisitHistory?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -1171,6 +1327,28 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
             local$insertFamiliesFamilies,
             (e) => call(insertFamiliesFamilies: e));
   }
+
+  CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne {
+    final local$insertHistoryVisitHistoryOne =
+        _instance.insertHistoryVisitHistoryOne;
+    return local$insertHistoryVisitHistoryOne == null
+        ? CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
+            _then(_instance))
+        : CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+            local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e));
+  }
+
+  CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
+      get $_fatherVisitHistory {
+    final local$$_fatherVisitHistory = _instance.$_fatherVisitHistory;
+    return local$$_fatherVisitHistory == null
+        ? CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(
+            _then(_instance))
+        : CopyWith_Mutation_updateFamily__fatherVisitHistory(
+            local$$_fatherVisitHistory, (e) => call($_fatherVisitHistory: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily<TRes>
@@ -1184,6 +1362,9 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     Fragment_Address? updateAddressesByPk,
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
+    Mutation_updateFamily_insertHistoryVisitHistoryOne?
+        insertHistoryVisitHistoryOne,
+    Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
     String? $__typename,
   }) =>
       _res;
@@ -1201,6 +1382,15 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
       get insertFamiliesFamilies =>
           CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);
+
+  CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
+      get insertHistoryVisitHistoryOne =>
+          CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
+              _res);
+
+  CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
+      get $_fatherVisitHistory =>
+          CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(_res);
 }
 
 const documentNodeMutationupdateFamily = DocumentNode(definitions: [
@@ -1309,6 +1499,43 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
       ),
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'insertRelatedFamilies')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'lastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'timestamptz'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'lastFatherVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'timestamptz'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'insertVisitHistory')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable:
+            VariableNode(name: NameNode(value: 'insertFatherVisitHistory')),
         type: NamedTypeNode(
           name: NameNode(value: 'Boolean'),
           isNonNull: true,
@@ -1517,6 +1744,122 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
             name: NameNode(value: 'affectedRows'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'families',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
+                value: VariableNode(name: NameNode(value: 'familyId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: VariableNode(name: NameNode(value: 'lastVisit')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'isFatherVisit'),
+                value: BooleanValueNode(value: false),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value:
+                    VariableNode(name: NameNode(value: 'insertVisitHistory')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'visitId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+        alias: NameNode(value: '_fatherVisitHistory'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'object'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'table'),
+                value: StringValueNode(
+                  value: 'families',
+                  isBlock: false,
+                ),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'recordId'),
+                value: VariableNode(name: NameNode(value: 'familyId')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'time'),
+                value: VariableNode(name: NameNode(value: 'lastFatherVisit')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'isFatherVisit'),
+                value: BooleanValueNode(value: true),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value: VariableNode(
+                    name: NameNode(value: 'insertFatherVisitHistory')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'visitId'),
             alias: null,
             arguments: [],
             directives: [],
@@ -1798,6 +2141,266 @@ class _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
 
   call({
     int? affectedRows,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Mutation_updateFamily_insertHistoryVisitHistoryOne {
+  Mutation_updateFamily_insertHistoryVisitHistoryOne({
+    required this.visitId,
+    this.$__typename = 'HistoryVisitHistory',
+  });
+
+  factory Mutation_updateFamily_insertHistoryVisitHistoryOne.fromJson(
+      Map<String, dynamic> json) {
+    final l$visitId = json['visitId'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateFamily_insertHistoryVisitHistoryOne(
+      visitId: stringToUuid(l$visitId),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue visitId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$visitId = visitId;
+    _resultData['visitId'] = uuidToString(l$visitId);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$visitId = visitId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$visitId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateFamily_insertHistoryVisitHistoryOne ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateFamily_insertHistoryVisitHistoryOne
+    on Mutation_updateFamily_insertHistoryVisitHistoryOne {
+  CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<
+          Mutation_updateFamily_insertHistoryVisitHistoryOne>
+      get copyWith =>
+          CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<
+    TRes> {
+  factory CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+    Mutation_updateFamily_insertHistoryVisitHistoryOne instance,
+    TRes Function(Mutation_updateFamily_insertHistoryVisitHistoryOne) then,
+  ) = _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne;
+
+  factory CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
+          TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne;
+
+  TRes call({
+    UuidValue? visitId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
+    implements
+        CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes> {
+  _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateFamily_insertHistoryVisitHistoryOne _instance;
+
+  final TRes Function(Mutation_updateFamily_insertHistoryVisitHistoryOne) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? visitId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updateFamily_insertHistoryVisitHistoryOne(
+        visitId: visitId == _undefined || visitId == null
+            ? _instance.visitId
+            : (visitId as UuidValue),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
+    implements
+        CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+      this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? visitId,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Mutation_updateFamily__fatherVisitHistory {
+  Mutation_updateFamily__fatherVisitHistory({
+    required this.visitId,
+    this.$__typename = 'HistoryVisitHistory',
+  });
+
+  factory Mutation_updateFamily__fatherVisitHistory.fromJson(
+      Map<String, dynamic> json) {
+    final l$visitId = json['visitId'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateFamily__fatherVisitHistory(
+      visitId: stringToUuid(l$visitId),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue visitId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$visitId = visitId;
+    _resultData['visitId'] = uuidToString(l$visitId);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$visitId = visitId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$visitId,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateFamily__fatherVisitHistory ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateFamily__fatherVisitHistory
+    on Mutation_updateFamily__fatherVisitHistory {
+  CopyWith_Mutation_updateFamily__fatherVisitHistory<
+          Mutation_updateFamily__fatherVisitHistory>
+      get copyWith => CopyWith_Mutation_updateFamily__fatherVisitHistory(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes> {
+  factory CopyWith_Mutation_updateFamily__fatherVisitHistory(
+    Mutation_updateFamily__fatherVisitHistory instance,
+    TRes Function(Mutation_updateFamily__fatherVisitHistory) then,
+  ) = _CopyWithImpl_Mutation_updateFamily__fatherVisitHistory;
+
+  factory CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory;
+
+  TRes call({
+    UuidValue? visitId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
+    implements CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes> {
+  _CopyWithImpl_Mutation_updateFamily__fatherVisitHistory(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateFamily__fatherVisitHistory _instance;
+
+  final TRes Function(Mutation_updateFamily__fatherVisitHistory) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? visitId = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updateFamily__fatherVisitHistory(
+        visitId: visitId == _undefined || visitId == null
+            ? _instance.visitId
+            : (visitId as UuidValue),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
+    implements CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes> {
+  _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? visitId,
     String? $__typename,
   }) =>
       _res;

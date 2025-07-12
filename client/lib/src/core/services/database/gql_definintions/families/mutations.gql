@@ -22,6 +22,10 @@ mutation updateFamily(
   $updateAddress: Boolean!
   $deleteRelatedFamilies: Boolean!
   $insertRelatedFamilies: Boolean!
+  $lastVisit: timestamptz
+  $lastFatherVisit: timestamptz
+  $insertVisitHistory: Boolean!
+  $insertFatherVisitHistory: Boolean!
 ) {
   updateFamiliesByPk(pkColumns: { id: $familyId }, _set: $newFamily)
     @include(if: $updateFamily) {
@@ -52,5 +56,25 @@ mutation updateFamily(
   insertFamiliesFamilies(objects: $addRelatedFamilies)
     @include(if: $insertRelatedFamilies) {
     affectedRows
+  }
+  insertHistoryVisitHistoryOne(
+    object: {
+      table: "families"
+      recordId: $familyId
+      time: $lastVisit
+      isFatherVisit: false
+    }
+  ) @include(if: $insertVisitHistory) {
+    visitId
+  }
+  _fatherVisitHistory: insertHistoryVisitHistoryOne(
+    object: {
+      table: "families"
+      recordId: $familyId
+      time: $lastFatherVisit
+      isFatherVisit: true
+    }
+  ) @include(if: $insertFatherVisitHistory) {
+    visitId
   }
 }

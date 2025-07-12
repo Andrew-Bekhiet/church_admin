@@ -1780,6 +1780,8 @@ type Families {
   geolocation: geography
   id: uuid!
   lastEdit: HistoryLatestEdits
+  lastFatherVisit: HistoryLatestFatherVisits
+  lastVisit: HistoryLatestVisits
   marriageDate: date
   name: String!
   notes: String
@@ -1820,6 +1822,20 @@ type Families {
     orderBy: [StoresOrderBy!]
     where: StoresBoolExp
   ): StoresAggregate!
+  visitHistory(
+    distinctOn: [HistoryVisitHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryVisitHistoryOrderBy!]
+    where: HistoryVisitHistoryBoolExp
+  ): [HistoryVisitHistory!]!
+  visitHistoryAggregate(
+    distinctOn: [HistoryVisitHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryVisitHistoryOrderBy!]
+    where: HistoryVisitHistoryBoolExp
+  ): HistoryVisitHistoryAggregate!
 }
 
 type FamiliesAggregate {
@@ -1859,6 +1875,8 @@ input FamiliesBoolExp {
   geolocation: GeographyComparisonExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
+  lastFatherVisit: HistoryLatestFatherVisitsBoolExp
+  lastVisit: HistoryLatestVisitsBoolExp
   marriageDate: DateComparisonExp
   name: StringComparisonExp
   notes: StringComparisonExp
@@ -1869,6 +1887,8 @@ input FamiliesBoolExp {
   status: StringComparisonExp
   stores: StoresBoolExp
   storesAggregate: StoresAggregateBoolExp
+  visitHistory: HistoryVisitHistoryBoolExp
+  visitHistoryAggregate: HistoryVisitHistoryAggregateBoolExp
 }
 
 enum FamiliesConstraint {
@@ -1978,6 +1998,7 @@ input FamiliesInsertInput {
   persons: PersonsArrRelInsertInput
   status: String
   stores: StoresArrRelInsertInput
+  visitHistory: HistoryVisitHistoryArrRelInsertInput
 }
 type FamiliesMaxFields {
   addressText: String
@@ -2030,6 +2051,8 @@ input FamiliesOrderBy {
   geolocation: OrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
+  lastFatherVisit: HistoryLatestFatherVisitsOrderBy
+  lastVisit: HistoryLatestVisitsOrderBy
   marriageDate: OrderBy
   name: OrderBy
   notes: OrderBy
@@ -2038,6 +2061,7 @@ input FamiliesOrderBy {
   photoUpdatedAt: OrderBy
   status: OrderBy
   storesAggregate: StoresAggregateOrderBy
+  visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
 }
 input FamiliesPkColumnsInput {
   id: uuid!
@@ -3853,6 +3877,36 @@ input HistoryLatestEditsOrderBy {
   user: AuthUsersDataOrderBy
 }
 
+type HistoryLatestFatherVisits {
+  recordId: uuid
+  recordedBy: uuid
+  table: name
+  time: timestamptz
+  user: AuthUsersData
+  visitId: uuid
+}
+
+input HistoryLatestFatherVisitsBoolExp {
+  _and: [HistoryLatestFatherVisitsBoolExp!]
+  _not: HistoryLatestFatherVisitsBoolExp
+  _or: [HistoryLatestFatherVisitsBoolExp!]
+  recordId: UuidComparisonExp
+  recordedBy: UuidComparisonExp
+  table: NameComparisonExp
+  time: TimestamptzComparisonExp
+  user: AuthUsersDataBoolExp
+  visitId: UuidComparisonExp
+}
+
+input HistoryLatestFatherVisitsOrderBy {
+  recordId: OrderBy
+  recordedBy: OrderBy
+  table: OrderBy
+  time: OrderBy
+  user: AuthUsersDataOrderBy
+  visitId: OrderBy
+}
+
 type HistoryLatestKodases {
   person: Persons
   personId: uuid
@@ -3909,6 +3963,7 @@ input HistoryLatestVisitsOrderBy {
 }
 
 type HistoryVisitHistory {
+  isFatherVisit: Boolean!
   recordId: uuid!
   recordedBy: uuid
   table: name!
@@ -3923,6 +3978,8 @@ type HistoryVisitHistoryAggregate {
 }
 
 input HistoryVisitHistoryAggregateBoolExp {
+  bool_and: historyVisitHistoryAggregateBoolExpBool_and
+  bool_or: historyVisitHistoryAggregateBoolExpBool_or
   count: historyVisitHistoryAggregateBoolExpCount
 }
 
@@ -3947,6 +4004,7 @@ input HistoryVisitHistoryBoolExp {
   _and: [HistoryVisitHistoryBoolExp!]
   _not: HistoryVisitHistoryBoolExp
   _or: [HistoryVisitHistoryBoolExp!]
+  isFatherVisit: BooleanComparisonExp
   recordId: UuidComparisonExp
   recordedBy: UuidComparisonExp
   table: NameComparisonExp
@@ -3960,6 +4018,7 @@ enum HistoryVisitHistoryConstraint {
 }
 
 input HistoryVisitHistoryInsertInput {
+  isFatherVisit: Boolean
   recordId: uuid
   table: name
   time: timestamptz
@@ -4002,6 +4061,7 @@ input HistoryVisitHistoryOnConflict {
   where: HistoryVisitHistoryBoolExp
 }
 input HistoryVisitHistoryOrderBy {
+  isFatherVisit: OrderBy
   recordId: OrderBy
   recordedBy: OrderBy
   table: OrderBy
@@ -4011,6 +4071,7 @@ input HistoryVisitHistoryOrderBy {
 }
 
 enum HistoryVisitHistorySelectColumn {
+  isFatherVisit
   recordId
   recordedBy
   table
@@ -4018,11 +4079,20 @@ enum HistoryVisitHistorySelectColumn {
   visitId
 }
 
+enum HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns {
+  isFatherVisit
+}
+
+enum HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns {
+  isFatherVisit
+}
+
 input HistoryVisitHistoryStreamCursorInput {
   initialValue: HistoryVisitHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
 input HistoryVisitHistoryStreamCursorValueInput {
+  isFatherVisit: Boolean
   recordId: uuid
   recordedBy: uuid
   table: name
@@ -7121,6 +7191,20 @@ input historyKodasHistoryAggregateBoolExpCount {
   distinct: Boolean
   filter: HistoryKodasHistoryBoolExp
   predicate: IntComparisonExp!
+}
+
+input historyVisitHistoryAggregateBoolExpBool_and {
+  arguments: HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns!
+  distinct: Boolean
+  filter: HistoryVisitHistoryBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input historyVisitHistoryAggregateBoolExpBool_or {
+  arguments: HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns!
+  distinct: Boolean
+  filter: HistoryVisitHistoryBoolExp
+  predicate: BooleanComparisonExp!
 }
 
 input historyVisitHistoryAggregateBoolExpCount {

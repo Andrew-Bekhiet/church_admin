@@ -32,10 +32,23 @@ class LastRecordedByInfoFields {
     },
   );
 
-  late final List<FieldMetadata<Object>> allFields = [time, user];
+  final FieldMetadata<bool> isFatherVisit = FieldMetadata<bool>(
+    parentType: LastRecordedByInfo,
+    name: 'isFatherVisit',
+    label: 'زيارة أب كاهن',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    time,
+    user,
+    isFatherVisit
+  ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'time': time,
-    'user': user
+    'user': user,
+    'isFatherVisit': isFatherVisit
   };
 }
 
@@ -49,6 +62,7 @@ LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
       user: json['user'] == null
           ? null
           : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
+      isFatherVisit: json['isFatherVisit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>
@@ -56,4 +70,5 @@ Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>
       'time': instance.time.toIso8601String(),
       'recordedBy': instance.recordedBy,
       'user': instance.user?.toJson(),
+      'isFatherVisit': instance.isFatherVisit,
     };
