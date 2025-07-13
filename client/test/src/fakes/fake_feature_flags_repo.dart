@@ -37,4 +37,9 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
 
   @override
   Json toJson() => {};
+
+  @override
+  bool canAddCustomObjects<T>() {
+    return true;
+  }
 }
