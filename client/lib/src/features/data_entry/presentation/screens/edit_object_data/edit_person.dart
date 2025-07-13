@@ -578,11 +578,15 @@ class _EditPersonState extends State<EditPerson> {
             ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
             ObjectSelectionField<PersonType, PersonType?>(
               initialValue: newPerson.personType,
+              onCreateCustom: (name) async =>
+                  DatabaseService.I.metadata.personTypes.createObject(
+                newObject: PersonType(id: const Uuid().v4(), name: name),
+              ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.personTypes
                     .streamAll(searchQuery: s),
               ),
-              dialogFieldLabel: 'الحالة الاجتماعية',
+              dialogFieldLabel: 'نوع الفرد في العائلة',
               onChanged: (value) => newPerson = newPerson.copyWith(
                 //Store the selected object
                 //so we can build the widget based on it ...

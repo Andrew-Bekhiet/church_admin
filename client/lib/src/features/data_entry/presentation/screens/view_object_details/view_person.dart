@@ -167,7 +167,7 @@ class _ViewPersonState extends State<ViewPerson> {
               subtitle: Text(person.gender ? 'ذكر' : 'أنثى'),
             ),
             ListTile(
-              title: const Text('الحالة الاجتماعية'),
+              title: const Text('نوع الفرد في العائلة'),
               subtitle: Text(person.personType?.name ?? ''),
             ),
             const Divider(thickness: 1),

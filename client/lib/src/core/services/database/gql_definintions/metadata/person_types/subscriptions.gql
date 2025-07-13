@@ -5,7 +5,9 @@ subscription watchAllPersonTypes(
 ) {
   personTypes(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     id
-    order
     name
+    order
+    isFamilyAdmin
+    isHidden
   }
 }

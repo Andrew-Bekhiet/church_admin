@@ -27,23 +27,43 @@ class PersonTypeFields {
     operators: {...StringOperator.values},
   );
 
-  final FieldMetadata<Color> color = FieldMetadata<Color>(
+  final FieldMetadata<int> order = FieldMetadata<int>(
     parentType: PersonType,
-    name: 'color',
-    label: 'اللون',
+    name: 'order',
+    label: 'الترتيب',
     isCodeOnly: false,
-    operators: {
-      ...ColorOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
+    operators: {...PrimitiveOperator.values},
   );
 
-  late final List<FieldMetadata<Object>> allFields = [id, name, color];
+  final FieldMetadata<bool> isFamilyAdmin = FieldMetadata<bool>(
+    parentType: PersonType,
+    name: 'isFamilyAdmin',
+    label: 'isFamilyAdmin',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  final FieldMetadata<bool> isHidden = FieldMetadata<bool>(
+    parentType: PersonType,
+    name: 'isHidden',
+    label: 'مخفي',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [
+    id,
+    name,
+    order,
+    isFamilyAdmin,
+    isHidden
+  ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
-    'color': color
+    'order': order,
+    'isFamilyAdmin': isFamilyAdmin,
+    'isHidden': isHidden
   };
 }
 
@@ -54,12 +74,16 @@ class PersonTypeFields {
 PersonType _$PersonTypeFromJson(Map json) => PersonType(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      color: colorFromInt((json['color'] as num?)?.toInt()),
+      order: (json['order'] as num?)?.toInt() ?? 0,
+      isFamilyAdmin: json['isFamilyAdmin'] as bool? ?? false,
+      isHidden: json['isHidden'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$PersonTypeToJson(PersonType instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'color': colorToInt(instance.color),
+      'order': instance.order,
+      'isFamilyAdmin': instance.isFamilyAdmin,
+      'isHidden': instance.isHidden,
     };

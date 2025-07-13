@@ -419,7 +419,7 @@ final Map<String, String> _fieldsLabels = {
   'job': 'الوظيفة',
   'jobDescription': 'تفاصيل الوظيفة',
   'gender': 'النوع',
-  'personType': 'الحالة الاجتماعية',
+  'personType': 'نوع الفرد في العائلة',
   'isShammas': 'شماس؟',
   'shammasLevel': 'رتبة الشموسية',
   'church': 'الكنيسة',

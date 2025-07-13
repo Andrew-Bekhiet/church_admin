@@ -11,12 +11,9 @@ MAX_LINES_PER_PART=2500
 
 # Make a backup of the original file
 BACKUP_FILE="${SCHEMA_FILE}.bak"
-if [ ! -f "$BACKUP_FILE" ]; then
-  cp "$SCHEMA_FILE" "$BACKUP_FILE"
-  echo "Created backup at $BACKUP_FILE"
-else
-  echo "Using existing backup at $BACKUP_FILE"
-fi
+
+cp "$SCHEMA_FILE" "$BACKUP_FILE"
+echo "Created backup at $BACKUP_FILE"
 
 # Extract imports from original file
 IMPORTS=$(grep -E "^import " "$BACKUP_FILE")

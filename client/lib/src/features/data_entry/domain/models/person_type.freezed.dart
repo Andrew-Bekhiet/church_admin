@@ -16,7 +16,9 @@ T _$identity<T>(T value) => value;
 mixin _$PersonType {
   String get id;
   String get name;
-  Color? get color;
+  int get order;
+  bool get isFamilyAdmin;
+  bool get isHidden;
 
   /// Create a copy of PersonType
   /// with the given fields replaced by the non-null parameter values.
@@ -32,16 +34,21 @@ mixin _$PersonType {
             other is PersonType &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.isFamilyAdmin, isFamilyAdmin) ||
+                other.isFamilyAdmin == isFamilyAdmin) &&
+            (identical(other.isHidden, isHidden) ||
+                other.isHidden == isHidden));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, color);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, order, isFamilyAdmin, isHidden);
 
   @override
   String toString() {
-    return 'PersonType(id: $id, name: $name, color: $color)';
+    return 'PersonType(id: $id, name: $name, order: $order, isFamilyAdmin: $isFamilyAdmin, isHidden: $isHidden)';
   }
 }
 
@@ -51,7 +58,8 @@ abstract mixin class $PersonTypeCopyWith<$Res> {
           PersonType value, $Res Function(PersonType) _then) =
       _$PersonTypeCopyWithImpl;
   @useResult
-  $Res call({String id, String name, Color? color});
+  $Res call(
+      {String id, String name, int order, bool isFamilyAdmin, bool isHidden});
 }
 
 /// @nodoc
@@ -68,7 +76,9 @@ class _$PersonTypeCopyWithImpl<$Res> implements $PersonTypeCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? color = freezed,
+    Object? order = null,
+    Object? isFamilyAdmin = null,
+    Object? isHidden = null,
   }) {
     return _then(PersonType(
       id: null == id
@@ -79,10 +89,18 @@ class _$PersonTypeCopyWithImpl<$Res> implements $PersonTypeCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
+      order: null == order
+          ? _self.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFamilyAdmin: null == isFamilyAdmin
+          ? _self.isFamilyAdmin
+          : isFamilyAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isHidden: null == isHidden
+          ? _self.isHidden
+          : isHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

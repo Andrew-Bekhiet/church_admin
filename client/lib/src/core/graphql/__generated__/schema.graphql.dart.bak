@@ -90896,6 +90896,8 @@ class Input_PersonTypesBoolExp {
     Input_PersonTypesBoolExp? $_not,
     List<Input_PersonTypesBoolExp>? $_or,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isFamilyAdmin,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -90906,6 +90908,8 @@ class Input_PersonTypesBoolExp {
         if ($_not != null) r'_not': $_not,
         if ($_or != null) r'_or': $_or,
         if (id != null) r'id': id,
+        if (isFamilyAdmin != null) r'isFamilyAdmin': isFamilyAdmin,
+        if (isHidden != null) r'isHidden': isHidden,
         if (name != null) r'name': name,
         if (order != null) r'order': order,
         if (persons != null) r'persons': persons,
@@ -90942,6 +90946,20 @@ class Input_PersonTypesBoolExp {
       result$data['id'] = l$id == null
           ? null
           : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = data['isFamilyAdmin'];
+      result$data['isFamilyAdmin'] = l$isFamilyAdmin == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isFamilyAdmin as Map<String, dynamic>));
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isHidden as Map<String, dynamic>));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -90985,6 +91003,12 @@ class Input_PersonTypesBoolExp {
 
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
+  Input_BooleanComparisonExp? get isFamilyAdmin =>
+      (_$data['isFamilyAdmin'] as Input_BooleanComparisonExp?);
+
+  Input_BooleanComparisonExp? get isHidden =>
+      (_$data['isHidden'] as Input_BooleanComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -91014,6 +91038,14 @@ class Input_PersonTypesBoolExp {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = isFamilyAdmin;
+      result$data['isFamilyAdmin'] = l$isFamilyAdmin?.toJson();
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -91103,6 +91135,24 @@ class Input_PersonTypesBoolExp {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final lOther$isFamilyAdmin = other.isFamilyAdmin;
+    if (_$data.containsKey('isFamilyAdmin') !=
+        other._$data.containsKey('isFamilyAdmin')) {
+      return false;
+    }
+    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -91145,6 +91195,8 @@ class Input_PersonTypesBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$id = id;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final l$isHidden = isHidden;
     final l$name = name;
     final l$order = order;
     final l$persons = persons;
@@ -91162,6 +91214,8 @@ class Input_PersonTypesBoolExp {
               : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isFamilyAdmin') ? l$isFamilyAdmin : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
       _$data.containsKey('persons') ? l$persons : const {},
@@ -91184,6 +91238,8 @@ abstract class CopyWith_Input_PersonTypesBoolExp<TRes> {
     Input_PersonTypesBoolExp? $_not,
     List<Input_PersonTypesBoolExp>? $_or,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isFamilyAdmin,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -91201,6 +91257,8 @@ abstract class CopyWith_Input_PersonTypesBoolExp<TRes> {
                   CopyWith_Input_PersonTypesBoolExp<Input_PersonTypesBoolExp>>?)
           _fn);
   CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFamilyAdmin;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_IntComparisonExp<TRes> get order;
   CopyWith_Input_PersonsBoolExp<TRes> get persons;
@@ -91225,6 +91283,8 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
     Object? $_not = _undefined,
     Object? $_or = _undefined,
     Object? id = _undefined,
+    Object? isFamilyAdmin = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
     Object? persons = _undefined,
@@ -91238,6 +91298,10 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
         if ($_or != _undefined)
           '_or': ($_or as List<Input_PersonTypesBoolExp>?),
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+        if (isFamilyAdmin != _undefined)
+          'isFamilyAdmin': (isFamilyAdmin as Input_BooleanComparisonExp?),
+        if (isHidden != _undefined)
+          'isHidden': (isHidden as Input_BooleanComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (order != _undefined) 'order': (order as Input_IntComparisonExp?),
         if (persons != _undefined)
@@ -91287,6 +91351,22 @@ class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
         : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
   }
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFamilyAdmin {
+    final local$isFamilyAdmin = _instance.isFamilyAdmin;
+    return local$isFamilyAdmin == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isFamilyAdmin, (e) => call(isFamilyAdmin: e));
+  }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden {
+    final local$isHidden = _instance.isHidden;
+    return local$isHidden == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isHidden, (e) => call(isHidden: e));
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -91328,6 +91408,8 @@ class _CopyWithStubImpl_Input_PersonTypesBoolExp<TRes>
     Input_PersonTypesBoolExp? $_not,
     List<Input_PersonTypesBoolExp>? $_or,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isFamilyAdmin,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -91345,6 +91427,12 @@ class _CopyWithStubImpl_Input_PersonTypesBoolExp<TRes>
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFamilyAdmin =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
@@ -91358,118 +91446,13 @@ class _CopyWithStubImpl_Input_PersonTypesBoolExp<TRes>
       CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
 }
 
-class Input_PersonTypesIncInput {
-  factory Input_PersonTypesIncInput({int? order}) =>
-      Input_PersonTypesIncInput._({
-        if (order != null) r'order': order,
-      });
-
-  Input_PersonTypesIncInput._(this._$data);
-
-  factory Input_PersonTypesIncInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = (l$order as int?);
-    }
-    return Input_PersonTypesIncInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  int? get order => (_$data['order'] as int?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonTypesIncInput<Input_PersonTypesIncInput> get copyWith =>
-      CopyWith_Input_PersonTypesIncInput(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonTypesIncInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$order = order;
-    return Object.hashAll([_$data.containsKey('order') ? l$order : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_PersonTypesIncInput<TRes> {
-  factory CopyWith_Input_PersonTypesIncInput(
-    Input_PersonTypesIncInput instance,
-    TRes Function(Input_PersonTypesIncInput) then,
-  ) = _CopyWithImpl_Input_PersonTypesIncInput;
-
-  factory CopyWith_Input_PersonTypesIncInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonTypesIncInput;
-
-  TRes call({int? order});
-}
-
-class _CopyWithImpl_Input_PersonTypesIncInput<TRes>
-    implements CopyWith_Input_PersonTypesIncInput<TRes> {
-  _CopyWithImpl_Input_PersonTypesIncInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_PersonTypesIncInput _instance;
-
-  final TRes Function(Input_PersonTypesIncInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? order = _undefined}) => _then(Input_PersonTypesIncInput._({
-        ..._instance._$data,
-        if (order != _undefined) 'order': (order as int?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_PersonTypesIncInput<TRes>
-    implements CopyWith_Input_PersonTypesIncInput<TRes> {
-  _CopyWithStubImpl_Input_PersonTypesIncInput(this._res);
-
-  TRes _res;
-
-  call({int? order}) => _res;
-}
-
 class Input_PersonTypesInsertInput {
   factory Input_PersonTypesInsertInput({
     String? name,
-    int? order,
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       Input_PersonTypesInsertInput._({
         if (name != null) r'name': name,
-        if (order != null) r'order': order,
         if (persons != null) r'persons': persons,
       });
 
@@ -91480,10 +91463,6 @@ class Input_PersonTypesInsertInput {
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = (l$order as int?);
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
@@ -91499,8 +91478,6 @@ class Input_PersonTypesInsertInput {
 
   String? get name => (_$data['name'] as String?);
 
-  int? get order => (_$data['order'] as int?);
-
   Input_PersonsArrRelInsertInput? get persons =>
       (_$data['persons'] as Input_PersonsArrRelInsertInput?);
 
@@ -91509,10 +91486,6 @@ class Input_PersonTypesInsertInput {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order;
     }
     if (_$data.containsKey('persons')) {
       final l$persons = persons;
@@ -91544,14 +91517,6 @@ class Input_PersonTypesInsertInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
     final l$persons = persons;
     final lOther$persons = other.persons;
     if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
@@ -91566,11 +91531,9 @@ class Input_PersonTypesInsertInput {
   @override
   int get hashCode {
     final l$name = name;
-    final l$order = order;
     final l$persons = persons;
     return Object.hashAll([
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('order') ? l$order : const {},
       _$data.containsKey('persons') ? l$persons : const {},
     ]);
   }
@@ -91587,7 +91550,6 @@ abstract class CopyWith_Input_PersonTypesInsertInput<TRes> {
 
   TRes call({
     String? name,
-    int? order,
     Input_PersonsArrRelInsertInput? persons,
   });
   CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
@@ -91608,13 +91570,11 @@ class _CopyWithImpl_Input_PersonTypesInsertInput<TRes>
 
   TRes call({
     Object? name = _undefined,
-    Object? order = _undefined,
     Object? persons = _undefined,
   }) =>
       _then(Input_PersonTypesInsertInput._({
         ..._instance._$data,
         if (name != _undefined) 'name': (name as String?),
-        if (order != _undefined) 'order': (order as int?),
         if (persons != _undefined)
           'persons': (persons as Input_PersonsArrRelInsertInput?),
       }));
@@ -91636,7 +91596,6 @@ class _CopyWithStubImpl_Input_PersonTypesInsertInput<TRes>
 
   call({
     String? name,
-    int? order,
     Input_PersonsArrRelInsertInput? persons,
   }) =>
       _res;
@@ -92017,12 +91976,16 @@ class _CopyWithStubImpl_Input_PersonTypesOnConflict<TRes>
 class Input_PersonTypesOrderBy {
   factory Input_PersonTypesOrderBy({
     Enum_OrderBy? id,
+    Enum_OrderBy? isFamilyAdmin,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) =>
       Input_PersonTypesOrderBy._({
         if (id != null) r'id': id,
+        if (isFamilyAdmin != null) r'isFamilyAdmin': isFamilyAdmin,
+        if (isHidden != null) r'isHidden': isHidden,
         if (name != null) r'name': name,
         if (order != null) r'order': order,
         if (personsAggregate != null) r'personsAggregate': personsAggregate,
@@ -92036,6 +91999,18 @@ class Input_PersonTypesOrderBy {
       final l$id = data['id'];
       result$data['id'] =
           l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = data['isFamilyAdmin'];
+      result$data['isFamilyAdmin'] = l$isFamilyAdmin == null
+          ? null
+          : fromJson_Enum_OrderBy((l$isFamilyAdmin as String));
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : fromJson_Enum_OrderBy((l$isHidden as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -92061,6 +92036,10 @@ class Input_PersonTypesOrderBy {
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get isFamilyAdmin => (_$data['isFamilyAdmin'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get isHidden => (_$data['isHidden'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
@@ -92073,6 +92052,16 @@ class Input_PersonTypesOrderBy {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = isFamilyAdmin;
+      result$data['isFamilyAdmin'] =
+          l$isFamilyAdmin == null ? null : toJson_Enum_OrderBy(l$isFamilyAdmin);
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] =
+          l$isHidden == null ? null : toJson_Enum_OrderBy(l$isHidden);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -92113,6 +92102,24 @@ class Input_PersonTypesOrderBy {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final lOther$isFamilyAdmin = other.isFamilyAdmin;
+    if (_$data.containsKey('isFamilyAdmin') !=
+        other._$data.containsKey('isFamilyAdmin')) {
+      return false;
+    }
+    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -92144,11 +92151,15 @@ class Input_PersonTypesOrderBy {
   @override
   int get hashCode {
     final l$id = id;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final l$isHidden = isHidden;
     final l$name = name;
     final l$order = order;
     final l$personsAggregate = personsAggregate;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isFamilyAdmin') ? l$isFamilyAdmin : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
@@ -92167,6 +92178,8 @@ abstract class CopyWith_Input_PersonTypesOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? id,
+    Enum_OrderBy? isFamilyAdmin,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
@@ -92189,6 +92202,8 @@ class _CopyWithImpl_Input_PersonTypesOrderBy<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? isFamilyAdmin = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
     Object? personsAggregate = _undefined,
@@ -92196,6 +92211,9 @@ class _CopyWithImpl_Input_PersonTypesOrderBy<TRes>
       _then(Input_PersonTypesOrderBy._({
         ..._instance._$data,
         if (id != _undefined) 'id': (id as Enum_OrderBy?),
+        if (isFamilyAdmin != _undefined)
+          'isFamilyAdmin': (isFamilyAdmin as Enum_OrderBy?),
+        if (isHidden != _undefined) 'isHidden': (isHidden as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (order != _undefined) 'order': (order as Enum_OrderBy?),
         if (personsAggregate != _undefined)
@@ -92220,6 +92238,8 @@ class _CopyWithStubImpl_Input_PersonTypesOrderBy<TRes>
 
   call({
     Enum_OrderBy? id,
+    Enum_OrderBy? isFamilyAdmin,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
@@ -92328,13 +92348,9 @@ class _CopyWithStubImpl_Input_PersonTypesPkColumnsInput<TRes>
 }
 
 class Input_PersonTypesSetInput {
-  factory Input_PersonTypesSetInput({
-    String? name,
-    int? order,
-  }) =>
+  factory Input_PersonTypesSetInput({String? name}) =>
       Input_PersonTypesSetInput._({
         if (name != null) r'name': name,
-        if (order != null) r'order': order,
       });
 
   Input_PersonTypesSetInput._(this._$data);
@@ -92345,10 +92361,6 @@ class Input_PersonTypesSetInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('order')) {
-      final l$order = data['order'];
-      result$data['order'] = (l$order as int?);
-    }
     return Input_PersonTypesSetInput._(result$data);
   }
 
@@ -92356,17 +92368,11 @@ class Input_PersonTypesSetInput {
 
   String? get name => (_$data['name'] as String?);
 
-  int? get order => (_$data['order'] as int?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('order')) {
-      final l$order = order;
-      result$data['order'] = l$order;
     }
     return result$data;
   }
@@ -92394,25 +92400,13 @@ class Input_PersonTypesSetInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$order = order;
-    final lOther$order = other.order;
-    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
-      return false;
-    }
-    if (l$order != lOther$order) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$name = name;
-    final l$order = order;
-    return Object.hashAll([
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('order') ? l$order : const {},
-    ]);
+    return Object.hashAll([_$data.containsKey('name') ? l$name : const {}]);
   }
 }
 
@@ -92425,10 +92419,7 @@ abstract class CopyWith_Input_PersonTypesSetInput<TRes> {
   factory CopyWith_Input_PersonTypesSetInput.stub(TRes res) =
       _CopyWithStubImpl_Input_PersonTypesSetInput;
 
-  TRes call({
-    String? name,
-    int? order,
-  });
+  TRes call({String? name});
 }
 
 class _CopyWithImpl_Input_PersonTypesSetInput<TRes>
@@ -92444,14 +92435,9 @@ class _CopyWithImpl_Input_PersonTypesSetInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? name = _undefined,
-    Object? order = _undefined,
-  }) =>
-      _then(Input_PersonTypesSetInput._({
+  TRes call({Object? name = _undefined}) => _then(Input_PersonTypesSetInput._({
         ..._instance._$data,
         if (name != _undefined) 'name': (name as String?),
-        if (order != _undefined) 'order': (order as int?),
       }));
 }
 
@@ -92461,11 +92447,7 @@ class _CopyWithStubImpl_Input_PersonTypesSetInput<TRes>
 
   TRes _res;
 
-  call({
-    String? name,
-    int? order,
-  }) =>
-      _res;
+  call({String? name}) => _res;
 }
 
 class Input_PersonTypesStreamCursorInput {
@@ -92628,11 +92610,15 @@ class _CopyWithStubImpl_Input_PersonTypesStreamCursorInput<TRes>
 class Input_PersonTypesStreamCursorValueInput {
   factory Input_PersonTypesStreamCursorValueInput({
     UuidValue? id,
+    bool? isFamilyAdmin,
+    bool? isHidden,
     String? name,
     int? order,
   }) =>
       Input_PersonTypesStreamCursorValueInput._({
         if (id != null) r'id': id,
+        if (isFamilyAdmin != null) r'isFamilyAdmin': isFamilyAdmin,
+        if (isHidden != null) r'isHidden': isHidden,
         if (name != null) r'name': name,
         if (order != null) r'order': order,
       });
@@ -92645,6 +92631,14 @@ class Input_PersonTypesStreamCursorValueInput {
     if (data.containsKey('id')) {
       final l$id = data['id'];
       result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+    }
+    if (data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = data['isFamilyAdmin'];
+      result$data['isFamilyAdmin'] = (l$isFamilyAdmin as bool?);
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = (l$isHidden as bool?);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -92661,6 +92655,10 @@ class Input_PersonTypesStreamCursorValueInput {
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
+  bool? get isFamilyAdmin => (_$data['isFamilyAdmin'] as bool?);
+
+  bool? get isHidden => (_$data['isHidden'] as bool?);
+
   String? get name => (_$data['name'] as String?);
 
   int? get order => (_$data['order'] as int?);
@@ -92670,6 +92668,14 @@ class Input_PersonTypesStreamCursorValueInput {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('isFamilyAdmin')) {
+      final l$isFamilyAdmin = isFamilyAdmin;
+      result$data['isFamilyAdmin'] = l$isFamilyAdmin;
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -92706,6 +92712,24 @@ class Input_PersonTypesStreamCursorValueInput {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final lOther$isFamilyAdmin = other.isFamilyAdmin;
+    if (_$data.containsKey('isFamilyAdmin') !=
+        other._$data.containsKey('isFamilyAdmin')) {
+      return false;
+    }
+    if (l$isFamilyAdmin != lOther$isFamilyAdmin) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -92728,10 +92752,14 @@ class Input_PersonTypesStreamCursorValueInput {
   @override
   int get hashCode {
     final l$id = id;
+    final l$isFamilyAdmin = isFamilyAdmin;
+    final l$isHidden = isHidden;
     final l$name = name;
     final l$order = order;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isFamilyAdmin') ? l$isFamilyAdmin : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
     ]);
@@ -92749,6 +92777,8 @@ abstract class CopyWith_Input_PersonTypesStreamCursorValueInput<TRes> {
 
   TRes call({
     UuidValue? id,
+    bool? isFamilyAdmin,
+    bool? isHidden,
     String? name,
     int? order,
   });
@@ -92769,12 +92799,17 @@ class _CopyWithImpl_Input_PersonTypesStreamCursorValueInput<TRes>
 
   TRes call({
     Object? id = _undefined,
+    Object? isFamilyAdmin = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
   }) =>
       _then(Input_PersonTypesStreamCursorValueInput._({
         ..._instance._$data,
         if (id != _undefined) 'id': (id as UuidValue?),
+        if (isFamilyAdmin != _undefined)
+          'isFamilyAdmin': (isFamilyAdmin as bool?),
+        if (isHidden != _undefined) 'isHidden': (isHidden as bool?),
         if (name != _undefined) 'name': (name as String?),
         if (order != _undefined) 'order': (order as int?),
       }));
@@ -92788,6 +92823,8 @@ class _CopyWithStubImpl_Input_PersonTypesStreamCursorValueInput<TRes>
 
   call({
     UuidValue? id,
+    bool? isFamilyAdmin,
+    bool? isHidden,
     String? name,
     int? order,
   }) =>
@@ -92796,12 +92833,10 @@ class _CopyWithStubImpl_Input_PersonTypesStreamCursorValueInput<TRes>
 
 class Input_PersonTypesUpdates {
   factory Input_PersonTypesUpdates({
-    Input_PersonTypesIncInput? $_inc,
     Input_PersonTypesSetInput? $_set,
     required Input_PersonTypesBoolExp where,
   }) =>
       Input_PersonTypesUpdates._({
-        if ($_inc != null) r'_inc': $_inc,
         if ($_set != null) r'_set': $_set,
         r'where': where,
       });
@@ -92810,13 +92845,6 @@ class Input_PersonTypesUpdates {
 
   factory Input_PersonTypesUpdates.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('_inc')) {
-      final l$$_inc = data['_inc'];
-      result$data['_inc'] = l$$_inc == null
-          ? null
-          : Input_PersonTypesIncInput.fromJson(
-              (l$$_inc as Map<String, dynamic>));
-    }
     if (data.containsKey('_set')) {
       final l$$_set = data['_set'];
       result$data['_set'] = l$$_set == null
@@ -92832,9 +92860,6 @@ class Input_PersonTypesUpdates {
 
   Map<String, dynamic> _$data;
 
-  Input_PersonTypesIncInput? get $_inc =>
-      (_$data['_inc'] as Input_PersonTypesIncInput?);
-
   Input_PersonTypesSetInput? get $_set =>
       (_$data['_set'] as Input_PersonTypesSetInput?);
 
@@ -92843,10 +92868,6 @@ class Input_PersonTypesUpdates {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_inc')) {
-      final l$$_inc = $_inc;
-      result$data['_inc'] = l$$_inc?.toJson();
-    }
     if (_$data.containsKey('_set')) {
       final l$$_set = $_set;
       result$data['_set'] = l$$_set?.toJson();
@@ -92871,14 +92892,6 @@ class Input_PersonTypesUpdates {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$$_inc = $_inc;
-    final lOther$$_inc = other.$_inc;
-    if (_$data.containsKey('_inc') != other._$data.containsKey('_inc')) {
-      return false;
-    }
-    if (l$$_inc != lOther$$_inc) {
-      return false;
-    }
     final l$$_set = $_set;
     final lOther$$_set = other.$_set;
     if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
@@ -92897,11 +92910,9 @@ class Input_PersonTypesUpdates {
 
   @override
   int get hashCode {
-    final l$$_inc = $_inc;
     final l$$_set = $_set;
     final l$where = where;
     return Object.hashAll([
-      _$data.containsKey('_inc') ? l$$_inc : const {},
       _$data.containsKey('_set') ? l$$_set : const {},
       l$where,
     ]);
@@ -92918,11 +92929,9 @@ abstract class CopyWith_Input_PersonTypesUpdates<TRes> {
       _CopyWithStubImpl_Input_PersonTypesUpdates;
 
   TRes call({
-    Input_PersonTypesIncInput? $_inc,
     Input_PersonTypesSetInput? $_set,
     Input_PersonTypesBoolExp? where,
   });
-  CopyWith_Input_PersonTypesIncInput<TRes> get $_inc;
   CopyWith_Input_PersonTypesSetInput<TRes> get $_set;
   CopyWith_Input_PersonTypesBoolExp<TRes> get where;
 }
@@ -92941,25 +92950,15 @@ class _CopyWithImpl_Input_PersonTypesUpdates<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? $_inc = _undefined,
     Object? $_set = _undefined,
     Object? where = _undefined,
   }) =>
       _then(Input_PersonTypesUpdates._({
         ..._instance._$data,
-        if ($_inc != _undefined) '_inc': ($_inc as Input_PersonTypesIncInput?),
         if ($_set != _undefined) '_set': ($_set as Input_PersonTypesSetInput?),
         if (where != _undefined && where != null)
           'where': (where as Input_PersonTypesBoolExp),
       }));
-
-  CopyWith_Input_PersonTypesIncInput<TRes> get $_inc {
-    final local$$_inc = _instance.$_inc;
-    return local$$_inc == null
-        ? CopyWith_Input_PersonTypesIncInput.stub(_then(_instance))
-        : CopyWith_Input_PersonTypesIncInput(
-            local$$_inc, (e) => call($_inc: e));
-  }
 
   CopyWith_Input_PersonTypesSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
@@ -92983,14 +92982,10 @@ class _CopyWithStubImpl_Input_PersonTypesUpdates<TRes>
   TRes _res;
 
   call({
-    Input_PersonTypesIncInput? $_inc,
     Input_PersonTypesSetInput? $_set,
     Input_PersonTypesBoolExp? where,
   }) =>
       _res;
-
-  CopyWith_Input_PersonTypesIncInput<TRes> get $_inc =>
-      CopyWith_Input_PersonTypesIncInput.stub(_res);
 
   CopyWith_Input_PersonTypesSetInput<TRes> get $_set =>
       CopyWith_Input_PersonTypesSetInput.stub(_res);
@@ -149897,6 +149892,8 @@ Enum_PersonTypesConstraint fromJson_Enum_PersonTypesConstraint(String value) {
 
 enum Enum_PersonTypesSelectColumn {
   id,
+  isFamilyAdmin,
+  isHidden,
   name,
   order,
   $unknown;
@@ -149911,6 +149908,10 @@ String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
   switch (e) {
     case Enum_PersonTypesSelectColumn.id:
       return r'id';
+    case Enum_PersonTypesSelectColumn.isFamilyAdmin:
+      return r'isFamilyAdmin';
+    case Enum_PersonTypesSelectColumn.isHidden:
+      return r'isHidden';
     case Enum_PersonTypesSelectColumn.name:
       return r'name';
     case Enum_PersonTypesSelectColumn.order:
@@ -149925,6 +149926,10 @@ Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
   switch (value) {
     case r'id':
       return Enum_PersonTypesSelectColumn.id;
+    case r'isFamilyAdmin':
+      return Enum_PersonTypesSelectColumn.isFamilyAdmin;
+    case r'isHidden':
+      return Enum_PersonTypesSelectColumn.isHidden;
     case r'name':
       return Enum_PersonTypesSelectColumn.name;
     case r'order':
@@ -149936,7 +149941,6 @@ Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
 
 enum Enum_PersonTypesUpdateColumn {
   name,
-  order,
   $unknown;
 
   factory Enum_PersonTypesUpdateColumn.fromJson(String value) =>
@@ -149949,8 +149953,6 @@ String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
   switch (e) {
     case Enum_PersonTypesUpdateColumn.name:
       return r'name';
-    case Enum_PersonTypesUpdateColumn.order:
-      return r'order';
     case Enum_PersonTypesUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -149961,8 +149963,6 @@ Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
   switch (value) {
     case r'name':
       return Enum_PersonTypesUpdateColumn.name;
-    case r'order':
-      return Enum_PersonTypesUpdateColumn.order;
     default:
       return Enum_PersonTypesUpdateColumn.$unknown;
   }

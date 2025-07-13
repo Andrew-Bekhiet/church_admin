@@ -1,0 +1,12 @@
+mutation createPersonType($object: PersonTypesInsertInput!) {
+  insertPersonTypesOne(
+    object: $object
+    onConflict: { constraint: person_types_name_key, updateColumns: name }
+  ) {
+    id
+    name
+    order
+    isHidden
+    isFamilyAdmin
+  }
+}

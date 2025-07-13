@@ -288,6 +288,8 @@ Enum_PersonTypesConstraint fromJson_Enum_PersonTypesConstraint(String value) {
 
 enum Enum_PersonTypesSelectColumn {
   id,
+  isFamilyAdmin,
+  isHidden,
   name,
   order,
   $unknown;
@@ -302,6 +304,10 @@ String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
   switch (e) {
     case Enum_PersonTypesSelectColumn.id:
       return r'id';
+    case Enum_PersonTypesSelectColumn.isFamilyAdmin:
+      return r'isFamilyAdmin';
+    case Enum_PersonTypesSelectColumn.isHidden:
+      return r'isHidden';
     case Enum_PersonTypesSelectColumn.name:
       return r'name';
     case Enum_PersonTypesSelectColumn.order:
@@ -316,6 +322,10 @@ Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
   switch (value) {
     case r'id':
       return Enum_PersonTypesSelectColumn.id;
+    case r'isFamilyAdmin':
+      return Enum_PersonTypesSelectColumn.isFamilyAdmin;
+    case r'isHidden':
+      return Enum_PersonTypesSelectColumn.isHidden;
     case r'name':
       return Enum_PersonTypesSelectColumn.name;
     case r'order':
@@ -327,7 +337,6 @@ Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
 
 enum Enum_PersonTypesUpdateColumn {
   name,
-  order,
   $unknown;
 
   factory Enum_PersonTypesUpdateColumn.fromJson(String value) =>
@@ -340,8 +349,6 @@ String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
   switch (e) {
     case Enum_PersonTypesUpdateColumn.name:
       return r'name';
-    case Enum_PersonTypesUpdateColumn.order:
-      return r'order';
     case Enum_PersonTypesUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -352,8 +359,6 @@ Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
   switch (value) {
     case r'name':
       return Enum_PersonTypesUpdateColumn.name;
-    case r'order':
-      return Enum_PersonTypesUpdateColumn.order;
     default:
       return Enum_PersonTypesUpdateColumn.$unknown;
   }

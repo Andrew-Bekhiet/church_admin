@@ -13,14 +13,18 @@ insert_permissions:
   - role: user
     permission:
       check: {}
+      set:
+        is_family_admin: "false"
+        is_hidden: "true"
       columns:
         - name
-        - order
 select_permissions:
   - role: user
     permission:
       columns:
         - id
+        - is_family_admin
+        - is_hidden
         - name
         - order
       filter: {}
@@ -30,7 +34,6 @@ update_permissions:
     permission:
       columns:
         - name
-        - order
       filter: {}
       check: null
 delete_permissions:

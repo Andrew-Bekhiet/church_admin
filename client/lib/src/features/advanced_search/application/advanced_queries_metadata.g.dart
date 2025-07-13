@@ -146,7 +146,7 @@ abstract final class _$AdvancedQueriesMetadata {
 
   final personType = QueryableType<PersonType>(
     name: 'PersonType',
-    label: 'الحالات الاجتماعية',
+    label: 'نوع الفرد في العائلة',
     fieldsMetadata: PersonTypeFields().allFields,
     fieldsMetadataByName: PersonTypeFields().allFieldsByName,
     fromJson: PersonType.fromJson,

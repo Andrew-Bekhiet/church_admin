@@ -193,7 +193,7 @@ class _PersonFields {
   final FieldMetadata<PersonType> personType = FieldMetadata<PersonType>(
     parentType: Person,
     name: 'personType',
-    label: 'الحالة الاجتماعية',
+    label: 'نوع الفرد في العائلة',
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,

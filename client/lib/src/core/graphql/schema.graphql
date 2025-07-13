@@ -4449,6 +4449,8 @@ input PersonStatesUpdates {
 
 type PersonTypes {
   id: uuid!
+  isFamilyAdmin: Boolean!
+  isHidden: Boolean!
   name: String!
   order: Int!
   persons(
@@ -4472,6 +4474,8 @@ input PersonTypesBoolExp {
   _not: PersonTypesBoolExp
   _or: [PersonTypesBoolExp!]
   id: UuidComparisonExp
+  isFamilyAdmin: BooleanComparisonExp
+  isHidden: BooleanComparisonExp
   name: StringComparisonExp
   order: IntComparisonExp
   persons: PersonsBoolExp
@@ -4484,13 +4488,8 @@ enum PersonTypesConstraint {
   person_types_pkey
 }
 
-input PersonTypesIncInput {
-  order: Int
-}
-
 input PersonTypesInsertInput {
   name: String
-  order: Int
   persons: PersonsArrRelInsertInput
 }
 
@@ -4511,6 +4510,8 @@ input PersonTypesOnConflict {
 }
 input PersonTypesOrderBy {
   id: OrderBy
+  isFamilyAdmin: OrderBy
+  isHidden: OrderBy
   name: OrderBy
   order: OrderBy
   personsAggregate: PersonsAggregateOrderBy
@@ -4521,13 +4522,14 @@ input PersonTypesPkColumnsInput {
 
 enum PersonTypesSelectColumn {
   id
+  isFamilyAdmin
+  isHidden
   name
   order
 }
 
 input PersonTypesSetInput {
   name: String
-  order: Int
 }
 
 input PersonTypesStreamCursorInput {
@@ -4536,17 +4538,17 @@ input PersonTypesStreamCursorInput {
 }
 input PersonTypesStreamCursorValueInput {
   id: uuid
+  isFamilyAdmin: Boolean
+  isHidden: Boolean
   name: String
   order: Int
 }
 
 enum PersonTypesUpdateColumn {
   name
-  order
 }
 
 input PersonTypesUpdates {
-  _inc: PersonTypesIncInput
   _set: PersonTypesSetInput
   where: PersonTypesBoolExp!
 }
@@ -7812,12 +7814,10 @@ type mutation_root {
     updates: [PersonStatesUpdates!]!
   ): [PersonStatesMutationResponse]
   updatePersonTypes(
-    _inc: PersonTypesIncInput
     _set: PersonTypesSetInput
     where: PersonTypesBoolExp!
   ): PersonTypesMutationResponse
   updatePersonTypesByPk(
-    _inc: PersonTypesIncInput
     _set: PersonTypesSetInput
     pkColumns: PersonTypesPkColumnsInput!
   ): PersonTypes
