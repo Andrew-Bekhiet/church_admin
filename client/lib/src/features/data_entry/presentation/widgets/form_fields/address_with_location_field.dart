@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:uuid/uuid.dart';
 
 class AddressWithLocationField extends StatefulWidget {
   final String? label;
@@ -175,6 +176,10 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
           ObjectSelectionField<District, District?>(
             key: ValueKey(_address.district),
             enabled: widget.enabled,
+            onCreateCustom: (name) =>
+                DatabaseService.I.metadata.districts.createObject(
+              newObject: District(id: const Uuid().v4(), name: name),
+            ),
             listController: (s) =>
                 _listControllerFor(DatabaseService.I.metadata.districts, s),
             initialValue: _address.district,

@@ -75,7 +75,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
                       circleCrop ?? config.shouldCircleCrop(object as IImage),
                 )
               : null),
-      title: title ?? Text(object.name),
+      title: title ?? Text(object.name, overflow: TextOverflow.ellipsis),
       subtitle: subtitle ??
           (secondLine != null
               ? Text(

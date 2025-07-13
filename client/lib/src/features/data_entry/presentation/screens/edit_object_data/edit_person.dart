@@ -760,6 +760,10 @@ class _EditPersonState extends State<EditPerson> {
                 labelText: 'الهوايات',
                 errorMaxLines: 2,
               ),
+              onCreateCustom: (name) =>
+                  DatabaseService.I.metadata.hobbies.createObject(
+                newObject: Hobby(id: const Uuid().v4(), name: name),
+              ),
               onChanged: (s) =>
                   newPerson = newPerson.copyWith(hobbies: s?.toList()),
               initialValue: newPerson.hobbies?.toSet() ?? {},
@@ -799,6 +803,10 @@ class _EditPersonState extends State<EditPerson> {
               decoration: const InputDecoration(
                 labelText: 'الشارات',
                 errorMaxLines: 2,
+              ),
+              onCreateCustom: (name) =>
+                  DatabaseService.I.metadata.tags.createObject(
+                newObject: Tag(id: const Uuid().v4(), name: name),
               ),
               onChanged: (s) =>
                   newPerson = newPerson.copyWith(tags: s?.toList()),

@@ -1,0 +1,9 @@
+mutation createHobby($object: HobbiesInsertInput!) {
+  insertHobbiesOne(
+    object: $object
+    onConflict: { constraint: hobbies_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}

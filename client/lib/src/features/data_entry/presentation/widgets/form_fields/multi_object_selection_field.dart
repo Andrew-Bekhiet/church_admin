@@ -12,6 +12,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
   final bool nullable;
 
   final ItemBuilder<T>? itemBuilder;
+  final Future<T> Function(String)? onCreateCustom;
 
   final String? Function(Set<T>?)? validator;
   final void Function(Set<T>?)? onSaved;
@@ -27,6 +28,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
     required this.labelText,
     this.itemBuilder,
     this.nullable = true,
+    this.onCreateCustom,
     this.validator,
     this.autovalidateMode,
     this.onSaved,
@@ -49,7 +51,6 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
         final search = BehaviorSubject<String?>.seeded(null);
         final controller = listController(search)
           ..selectionController.selectAll(state.value?.toList() ?? []);
-
         final rslt = await showDialog(
           context: state.context,
           builder: (context) {
@@ -70,6 +71,36 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                     SearchField(
                       searchSink: search,
                     ),
+                    if (onCreateCustom != null)
+                      StreamBuilder(
+                        stream: Rx.combineLatest2(
+                          search.stream,
+                          controller.filteredObjectsStream,
+                          (query, objects) => objects.isEmpty ? query : null,
+                        ),
+                        builder: (context, snapshot) {
+                          if (snapshot.data case final newName?) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: OutlinedButton.icon(
+                                icon: const Icon(Symbols.add),
+                                onPressed: () async {
+                                  final customObject =
+                                      await onCreateCustom?.call(search.value!);
+                                  if (customObject != null) {
+                                    controller.selectionController
+                                        .select(customObject);
+                                  }
+                                  search.add(null);
+                                },
+                                label: Text('إضافة $newName'),
+                              ),
+                            );
+                          }
+
+                          return const SizedBox.shrink();
+                        },
+                      ),
                     Expanded(
                       child: ViewableObjectList<T>(
                         objectsController: controller,
@@ -86,7 +117,6 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
             );
           },
         );
-
         await search.close();
         await controller.dispose();
 

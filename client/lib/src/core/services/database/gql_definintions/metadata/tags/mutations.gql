@@ -1,0 +1,9 @@
+mutation createTag($object: TagsInsertInput!) {
+  insertTagsOne(
+    object: $object
+    onConflict: { constraint: tags_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}

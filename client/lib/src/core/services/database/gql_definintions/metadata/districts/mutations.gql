@@ -1,0 +1,9 @@
+mutation createDistrict($object: DistrictsInsertInput!) {
+  insertDistrictsOne(
+    object: $object
+    onConflict: { constraint: districts_unique_name, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}
