@@ -1,0 +1,9 @@
+mutation createChurch($object: ChurchesInsertInput!) {
+  insertChurchesOne(
+    object: $object
+    onConflict: { constraint: churches_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}

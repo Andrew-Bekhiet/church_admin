@@ -473,6 +473,10 @@ class _EditPersonState extends State<EditPerson> {
               ), */
                 ObjectSelectionField<College, College?>(
                   initialValue: newPerson.college,
+                  onCreateCustom: (name) =>
+                      DatabaseService.I.metadata.colleges.createObject(
+                    newObject: College(id: const Uuid().v4(), name: name),
+                  ),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
                         .I.metadata.colleges
@@ -494,6 +498,10 @@ class _EditPersonState extends State<EditPerson> {
               ] else
                 ObjectSelectionField<School, School?>(
                   initialValue: newPerson.school,
+                  onCreateCustom: (name) =>
+                      DatabaseService.I.metadata.schools.createObject(
+                    newObject: School(id: const Uuid().v4(), name: name),
+                  ),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService.I.metadata.schools
                         .streamAll(searchQuery: s),
@@ -514,6 +522,10 @@ class _EditPersonState extends State<EditPerson> {
             ] else ...[
               ObjectSelectionField<Qualification, Qualification?>(
                 initialValue: newPerson.qualification,
+                onCreateCustom: (name) =>
+                    DatabaseService.I.metadata.qualifications.createObject(
+                  newObject: Qualification(id: const Uuid().v4(), name: name),
+                ),
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService
                       .I.metadata.qualifications
@@ -534,6 +546,10 @@ class _EditPersonState extends State<EditPerson> {
               ),
               ObjectSelectionField<Job, Job?>(
                 initialValue: newPerson.job,
+                onCreateCustom: (name) =>
+                    DatabaseService.I.metadata.jobs.createObject(
+                  newObject: Job(id: const Uuid().v4(), name: name),
+                ),
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream:
                       DatabaseService.I.metadata.jobs.streamAll(searchQuery: s),
@@ -602,6 +618,10 @@ class _EditPersonState extends State<EditPerson> {
             const Divider(),
             ObjectSelectionField<Church, Church?>(
               initialValue: newPerson.church,
+              onCreateCustom: (name) =>
+                  DatabaseService.I.metadata.churches.createObject(
+                newObject: Church(id: const Uuid().v4(), name: name),
+              ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.churches
                     .streamAll(searchQuery: s),
@@ -621,6 +641,10 @@ class _EditPersonState extends State<EditPerson> {
             ),
             ObjectSelectionField<Father, Father?>(
               initialValue: newPerson.father,
+              onCreateCustom: (name) =>
+                  DatabaseService.I.metadata.fathers.createObject(
+                newObject: Father(id: const Uuid().v4(), name: name),
+              ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.fathers
                     .streamAll(searchQuery: s),

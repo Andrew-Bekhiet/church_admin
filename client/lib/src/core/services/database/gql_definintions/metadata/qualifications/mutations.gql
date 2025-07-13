@@ -1,0 +1,9 @@
+mutation createQualification($object: QualificationsInsertInput!) {
+  insertQualificationsOne(
+    object: $object
+    onConflict: { constraint: qualifications_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}

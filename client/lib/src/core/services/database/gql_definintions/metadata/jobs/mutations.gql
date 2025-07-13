@@ -1,0 +1,9 @@
+mutation createJob($object: JobsInsertInput!) {
+  insertJobsOne(
+    object: $object
+    onConflict: { constraint: jobs_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}

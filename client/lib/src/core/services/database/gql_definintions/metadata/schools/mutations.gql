@@ -1,0 +1,9 @@
+mutation createSchool($object: SchoolsInsertInput!) {
+  insertSchoolsOne(
+    object: $object
+    onConflict: { constraint: schools_name_key, updateColumns: name }
+  ) {
+    id
+    name
+  }
+}
