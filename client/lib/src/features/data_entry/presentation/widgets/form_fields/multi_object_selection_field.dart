@@ -67,11 +67,13 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                 width: MediaQuery.sizeOf(context).width * 0.9,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SearchField(
                       searchSink: search,
                     ),
-                    if (onCreateCustom != null)
+                    if (onCreateCustom != null &&
+                        FeatureFlagsRepository.I.canAddCustomObjects<T>())
                       StreamBuilder(
                         stream: Rx.combineLatest2(
                           search.stream,

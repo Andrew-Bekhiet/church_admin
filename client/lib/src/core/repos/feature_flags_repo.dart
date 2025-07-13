@@ -17,6 +17,7 @@ class FeatureFlagsRepository {
   static const String maintenanceMessageKey = 'maintenanceMessage';
   static const String disabledRoutesKey = 'disabledRoutes';
   static const String useSentryLogsKey = 'useSentryLogs';
+  static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -86,6 +87,8 @@ class FeatureFlagsRepository {
   Future<void> initialize() async {
     await _remoteConfig.fetchAndActivate();
 
+    final advancedQueriesMetadata = AdvancedQueriesMetadata();
+
     await _remoteConfig.setDefaults({
       latestVersionKey: _packageInfo.version,
       downloadPageURLKey: 'https://church-data-admin.firebaseapp.com/',
@@ -95,7 +98,30 @@ class FeatureFlagsRepository {
       isUnderMaintenanceKey: false,
       disabledRoutesKey: '',
       useSentryLogsKey: true,
+      allowAddingCustomObjectsKey: [
+        advancedQueriesMetadata.district.name,
+        advancedQueriesMetadata.college.name,
+        advancedQueriesMetadata.school.name,
+        advancedQueriesMetadata.qualification.name,
+        advancedQueriesMetadata.job.name,
+        advancedQueriesMetadata.personType.name,
+        advancedQueriesMetadata.church.name,
+        advancedQueriesMetadata.father.name,
+        advancedQueriesMetadata.hobby.name,
+        advancedQueriesMetadata.tag.name,
+      ].join(',')
     });
+  }
+
+  bool canAddCustomObjects<T>() {
+    final typeName = AdvancedQueriesMetadata().allQueryablesByType[T]?.name;
+    if (typeName == null) {
+      return false;
+    }
+
+    final rawValue = _remoteConfig.getString(allowAddingCustomObjectsKey);
+
+    return rawValue.split(',').contains(typeName);
   }
 
   Json toJson() => _remoteConfig

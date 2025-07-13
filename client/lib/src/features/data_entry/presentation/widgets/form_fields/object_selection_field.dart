@@ -72,7 +72,8 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SearchField(searchSink: search),
-                          if (onCreateCustom != null)
+                          if (onCreateCustom != null &&
+                              FeatureFlagsRepository.I.canAddCustomObjects<T>())
                             StreamBuilder(
                               stream: Rx.combineLatest2(
                                 search.stream,
