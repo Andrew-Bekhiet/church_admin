@@ -49,7 +49,7 @@ class _EditFamilyState extends State<EditFamily> {
       newObject: oldFamily ??
           Family(
             id: const Uuid().v4(),
-            name: 'عائلة جديدة',
+            name: '',
             children: widget.children?.toList() ?? [],
             parents: widget.parents?.toList() ?? [],
           ),

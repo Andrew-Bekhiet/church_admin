@@ -40,7 +40,7 @@ class _EditServiceState extends State<EditService> {
       newObject: oldService ??
           Service(
             id: const Uuid().v4(),
-            name: 'خدمة جديدة',
+            name: '',
           ),
       initialObject: oldService,
     );

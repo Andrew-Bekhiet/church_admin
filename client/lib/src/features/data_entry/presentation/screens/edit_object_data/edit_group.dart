@@ -39,7 +39,7 @@ class _EditGroupState extends State<EditGroup> {
       newObject: oldGroup ??
           Group(
             id: const Uuid().v4(),
-            name: 'مجموعة جديدة',
+            name: '',
             service: widget.service,
             serviceId: widget.service?.id,
           ),

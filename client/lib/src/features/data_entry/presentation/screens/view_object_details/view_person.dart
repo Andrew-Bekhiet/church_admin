@@ -161,7 +161,8 @@ class _ViewPersonState extends State<ViewPerson> {
                 title: const Text('المؤهل'),
                 subtitle: Text(person.qualification?.name ?? ''),
               ),
-            if (person.workStatus == WorkStatus.employed) ...[
+            if (person.workStatus == WorkStatus.employed ||
+                person.workStatus == WorkStatus.retired) ...[
               ListTile(
                 title: const Text('الوظيفة'),
                 subtitle: Text(person.job?.name ?? ''),

@@ -33,7 +33,7 @@ class _EditAreaState extends State<EditArea> {
       ),
       onDelete: (object) => DatabaseService.I.areas.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldArea ?? Area(id: const Uuid().v4(), name: 'منطقة جديدة'),
+      newObject: oldArea ?? Area(id: const Uuid().v4(), name: ''),
       initialObject: oldArea,
     );
   }

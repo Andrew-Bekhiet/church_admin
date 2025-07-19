@@ -40,7 +40,7 @@ class _EditClassState extends State<EditClass> {
       newObject: oldClass ??
           Class(
             id: const Uuid().v4(),
-            name: 'فصل جديد',
+            name: '',
             service: widget.service,
             serviceId: widget.service?.id,
           ),

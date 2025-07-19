@@ -33,7 +33,7 @@ class _EditStreetState extends State<EditStreet> {
       ),
       onDelete: (object) => DatabaseService.I.streets.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldStreet ?? Street(id: const Uuid().v4(), name: 'شارع جديد'),
+      newObject: oldStreet ?? Street(id: const Uuid().v4(), name: ''),
       initialObject: oldStreet,
     );
   }

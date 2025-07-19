@@ -581,9 +581,14 @@ class Person extends ViewableWithIDAndImage
             workStatus == WorkStatus.student && (studyYear?.order ?? 12) >= 12
                 ? result.collegeId
                 : null,
-        jobId: workStatus == WorkStatus.employed ? result.jobId : null,
-        jobDescription:
-            workStatus == WorkStatus.employed ? result.jobDescription : null,
+        jobId: workStatus == WorkStatus.employed ||
+                workStatus == WorkStatus.retired
+            ? result.jobId
+            : null,
+        jobDescription: workStatus == WorkStatus.employed ||
+                workStatus == WorkStatus.retired
+            ? result.jobDescription
+            : null,
         qualificationId:
             workStatus != WorkStatus.student ? result.qualificationId : null,
       );

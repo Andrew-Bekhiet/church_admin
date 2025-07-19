@@ -67,7 +67,7 @@ class _EditPersonState extends State<EditPerson> {
       newObject: oldPerson ??
           Person(
             id: const Uuid().v4(),
-            name: 'مخدوم جديد',
+            name: '',
             family: widget.family,
             familyId: widget.family?.id,
             services: widget.service != null ? [widget.service!] : [],
@@ -551,7 +551,8 @@ class _EditPersonState extends State<EditPerson> {
                 },
                 validator: (v) => null,
               ),
-            if (newPerson.workStatus == WorkStatus.employed) ...[
+            if (newPerson.workStatus == WorkStatus.employed ||
+                newPerson.workStatus == WorkStatus.retired) ...[
               ObjectSelectionField<Job, Job?>(
                 initialValue: newPerson.job,
                 onCreateCustom: (name) =>
