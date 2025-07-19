@@ -2098,6 +2098,28 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'familyAdminsPhones'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'aggregatedPhones'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'notes'),
             alias: null,
             arguments: [],
@@ -2199,6 +2221,7 @@ class Subscription_watchFamily_familiesByPk
     required this.status,
     this.deceasedSpouseName,
     this.marriageDate,
+    this.familyAdminsPhones,
     this.notes,
     this.lastEdit,
     this.lastVisit,
@@ -2217,6 +2240,7 @@ class Subscription_watchFamily_familiesByPk
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
     final l$marriageDate = json['marriageDate'];
+    final l$familyAdminsPhones = json['familyAdminsPhones'];
     final l$notes = json['notes'];
     final l$lastEdit = json['lastEdit'];
     final l$lastVisit = json['lastVisit'];
@@ -2236,6 +2260,10 @@ class Subscription_watchFamily_familiesByPk
       deceasedSpouseName: (l$deceasedSpouseName as String?),
       marriageDate:
           l$marriageDate == null ? null : dateFromString(l$marriageDate),
+      familyAdminsPhones: l$familyAdminsPhones == null
+          ? null
+          : Subscription_watchFamily_familiesByPk_familyAdminsPhones.fromJson(
+              (l$familyAdminsPhones as Map<String, dynamic>)),
       notes: (l$notes as String?),
       lastEdit: l$lastEdit == null
           ? null
@@ -2272,6 +2300,9 @@ class Subscription_watchFamily_familiesByPk
 
   final DateTime? marriageDate;
 
+  final Subscription_watchFamily_familiesByPk_familyAdminsPhones?
+      familyAdminsPhones;
+
   final String? notes;
 
   final Fragment_LatestEditHistory? lastEdit;
@@ -2304,6 +2335,8 @@ class Subscription_watchFamily_familiesByPk
     final l$marriageDate = marriageDate;
     _resultData['marriageDate'] =
         l$marriageDate == null ? null : dateToString(l$marriageDate);
+    final l$familyAdminsPhones = familyAdminsPhones;
+    _resultData['familyAdminsPhones'] = l$familyAdminsPhones?.toJson();
     final l$notes = notes;
     _resultData['notes'] = l$notes;
     final l$lastEdit = lastEdit;
@@ -2327,6 +2360,7 @@ class Subscription_watchFamily_familiesByPk
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$marriageDate = marriageDate;
+    final l$familyAdminsPhones = familyAdminsPhones;
     final l$notes = notes;
     final l$lastEdit = lastEdit;
     final l$lastVisit = lastVisit;
@@ -2342,6 +2376,7 @@ class Subscription_watchFamily_familiesByPk
       l$status,
       l$deceasedSpouseName,
       l$marriageDate,
+      l$familyAdminsPhones,
       l$notes,
       l$lastEdit,
       l$lastVisit,
@@ -2408,6 +2443,11 @@ class Subscription_watchFamily_familiesByPk
     if (l$marriageDate != lOther$marriageDate) {
       return false;
     }
+    final l$familyAdminsPhones = familyAdminsPhones;
+    final lOther$familyAdminsPhones = other.familyAdminsPhones;
+    if (l$familyAdminsPhones != lOther$familyAdminsPhones) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (l$notes != lOther$notes) {
@@ -2462,12 +2502,16 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
+    Subscription_watchFamily_familiesByPk_familyAdminsPhones?
+        familyAdminsPhones,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestVisitHistory? lastVisit,
     Fragment_LatestFatherVisitHistory? lastFatherVisit,
   });
   CopyWith_Fragment_Address<TRes> get address;
+  CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
+      get familyAdminsPhones;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit;
   CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit;
@@ -2497,6 +2541,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
     Object? marriageDate = _undefined,
+    Object? familyAdminsPhones = _undefined,
     Object? notes = _undefined,
     Object? lastEdit = _undefined,
     Object? lastVisit = _undefined,
@@ -2528,6 +2573,10 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         marriageDate: marriageDate == _undefined
             ? _instance.marriageDate
             : (marriageDate as DateTime?),
+        familyAdminsPhones: familyAdminsPhones == _undefined
+            ? _instance.familyAdminsPhones
+            : (familyAdminsPhones
+                as Subscription_watchFamily_familiesByPk_familyAdminsPhones?),
         notes: notes == _undefined ? _instance.notes : (notes as String?),
         lastEdit: lastEdit == _undefined
             ? _instance.lastEdit
@@ -2545,6 +2594,16 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     return local$address == null
         ? CopyWith_Fragment_Address.stub(_then(_instance))
         : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
+
+  CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
+      get familyAdminsPhones {
+    final local$familyAdminsPhones = _instance.familyAdminsPhones;
+    return local$familyAdminsPhones == null
+        ? CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones
+            .stub(_then(_instance))
+        : CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+            local$familyAdminsPhones, (e) => call(familyAdminsPhones: e));
   }
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
@@ -2589,6 +2648,8 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
+    Subscription_watchFamily_familiesByPk_familyAdminsPhones?
+        familyAdminsPhones,
     String? notes,
     Fragment_LatestEditHistory? lastEdit,
     Fragment_LatestVisitHistory? lastVisit,
@@ -2599,6 +2660,11 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);
 
+  CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
+      get familyAdminsPhones =>
+          CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones
+              .stub(_res);
+
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
 
@@ -2607,4 +2673,143 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
 
   CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit =>
       CopyWith_Fragment_LatestFatherVisitHistory.stub(_res);
+}
+
+class Subscription_watchFamily_familiesByPk_familyAdminsPhones {
+  Subscription_watchFamily_familiesByPk_familyAdminsPhones({
+    this.aggregatedPhones,
+    this.$__typename = 'FamiliesAdminsPhones',
+  });
+
+  factory Subscription_watchFamily_familiesByPk_familyAdminsPhones.fromJson(
+      Map<String, dynamic> json) {
+    final l$aggregatedPhones = json['aggregatedPhones'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+      aggregatedPhones: (l$aggregatedPhones as Json?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Json? aggregatedPhones;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$aggregatedPhones = aggregatedPhones;
+    _resultData['aggregatedPhones'] = l$aggregatedPhones;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregatedPhones = aggregatedPhones;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$aggregatedPhones,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchFamily_familiesByPk_familyAdminsPhones ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregatedPhones = aggregatedPhones;
+    final lOther$aggregatedPhones = other.aggregatedPhones;
+    if (l$aggregatedPhones != lOther$aggregatedPhones) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchFamily_familiesByPk_familyAdminsPhones
+    on Subscription_watchFamily_familiesByPk_familyAdminsPhones {
+  CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+          Subscription_watchFamily_familiesByPk_familyAdminsPhones>
+      get copyWith =>
+          CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+    TRes> {
+  factory CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+    Subscription_watchFamily_familiesByPk_familyAdminsPhones instance,
+    TRes Function(Subscription_watchFamily_familiesByPk_familyAdminsPhones)
+        then,
+  ) = _CopyWithImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones;
+
+  factory CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones;
+
+  TRes call({
+    Json? aggregatedPhones,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+        TRes>
+    implements
+        CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+            TRes> {
+  _CopyWithImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchFamily_familiesByPk_familyAdminsPhones _instance;
+
+  final TRes Function(Subscription_watchFamily_familiesByPk_familyAdminsPhones)
+      _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregatedPhones = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+        aggregatedPhones: aggregatedPhones == _undefined
+            ? _instance.aggregatedPhones
+            : (aggregatedPhones as Json?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+        TRes>
+    implements
+        CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<
+            TRes> {
+  _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_familyAdminsPhones(
+      this._res);
+
+  TRes _res;
+
+  call({
+    Json? aggregatedPhones,
+    String? $__typename,
+  }) =>
+      _res;
 }

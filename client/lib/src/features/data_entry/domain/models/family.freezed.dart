@@ -26,6 +26,7 @@ mixin _$Family {
   String? get blurhash;
   List<Family>? get children;
   List<Family>? get parents;
+  Json? get familyAdminsPhones;
   LastRecordedByInfo? get lastEdit;
   LastRecordedByInfo? get lastVisit;
   LastRecordedByInfo? get lastFatherVisit;
@@ -58,6 +59,8 @@ mixin _$Family {
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other.children, children) &&
             const DeepCollectionEquality().equals(other.parents, parents) &&
+            const DeepCollectionEquality()
+                .equals(other.familyAdminsPhones, familyAdminsPhones) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.lastVisit, lastVisit) ||
@@ -82,13 +85,14 @@ mixin _$Family {
       blurhash,
       const DeepCollectionEquality().hash(children),
       const DeepCollectionEquality().hash(parents),
+      const DeepCollectionEquality().hash(familyAdminsPhones),
       lastEdit,
       lastVisit,
       lastFatherVisit);
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit)';
   }
 }
 
@@ -112,7 +116,8 @@ abstract mixin class $FamilyCopyWith<$Res> {
       List<Family>? parents,
       LastRecordedByInfo? lastEdit,
       LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastFatherVisit});
+      LastRecordedByInfo? lastFatherVisit,
+      Map<String, dynamic>? familyAdminsPhones});
 }
 
 /// @nodoc
@@ -142,6 +147,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? lastVisit = freezed,
     Object? lastFatherVisit = freezed,
+    Object? familyAdminsPhones = freezed,
   }) {
     return _then(Family(
       id: null == id
@@ -204,6 +210,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
           ? _self.lastFatherVisit
           : lastFatherVisit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
+      familyAdminsPhones: freezed == familyAdminsPhones
+          ? _self.familyAdminsPhones
+          : familyAdminsPhones // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }

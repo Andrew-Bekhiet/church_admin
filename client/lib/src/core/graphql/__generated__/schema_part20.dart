@@ -2,6 +2,1472 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_GroupsAvgOrderBy<TRes> {
+  factory CopyWith_Input_GroupsAvgOrderBy(
+    Input_GroupsAvgOrderBy instance,
+    TRes Function(Input_GroupsAvgOrderBy) then,
+  ) = _CopyWithImpl_Input_GroupsAvgOrderBy;
+
+  factory CopyWith_Input_GroupsAvgOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsAvgOrderBy;
+
+  TRes call({Enum_OrderBy? color});
+}
+
+class _CopyWithImpl_Input_GroupsAvgOrderBy<TRes>
+    implements CopyWith_Input_GroupsAvgOrderBy<TRes> {
+  _CopyWithImpl_Input_GroupsAvgOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_GroupsAvgOrderBy _instance;
+
+  final TRes Function(Input_GroupsAvgOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? color = _undefined}) => _then(Input_GroupsAvgOrderBy._({
+        ..._instance._$data,
+        if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_GroupsAvgOrderBy<TRes>
+    implements CopyWith_Input_GroupsAvgOrderBy<TRes> {
+  _CopyWithStubImpl_Input_GroupsAvgOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? color}) => _res;
+}
+
+class Input_GroupsBoolExp {
+  factory Input_GroupsBoolExp({
+    List<Input_GroupsBoolExp>? $_and,
+    Input_GroupsBoolExp? $_not,
+    List<Input_GroupsBoolExp>? $_or,
+    Input_AuthUsersAdminOnBoolExp? adminUsers,
+    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
+    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+        attendanceDaysConstraintsAggregate,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
+    Input_BigintComparisonExp? color,
+    Input_HistoryEditHistoryBoolExp? editHistroy,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistroyAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_StringComparisonExp? name,
+    Input_PersonsGroupsBoolExp? persons,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_ServicesBoolExp? service,
+    Input_UuidComparisonExp? serviceId,
+    Input_DaterangeComparisonExp? validity,
+  }) =>
+      Input_GroupsBoolExp._({
+        if ($_and != null) r'_and': $_and,
+        if ($_not != null) r'_not': $_not,
+        if ($_or != null) r'_or': $_or,
+        if (adminUsers != null) r'adminUsers': adminUsers,
+        if (attendanceDaysConstraints != null)
+          r'attendanceDaysConstraints': attendanceDaysConstraints,
+        if (attendanceDaysConstraintsAggregate != null)
+          r'attendanceDaysConstraintsAggregate':
+              attendanceDaysConstraintsAggregate,
+        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+        if (attendanceHistoryAggregate != null)
+          r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+        if (blurhash != null) r'blurhash': blurhash,
+        if (color != null) r'color': color,
+        if (editHistroy != null) r'editHistroy': editHistroy,
+        if (editHistroyAggregate != null)
+          r'editHistroyAggregate': editHistroyAggregate,
+        if (id != null) r'id': id,
+        if (lastEdit != null) r'lastEdit': lastEdit,
+        if (name != null) r'name': name,
+        if (persons != null) r'persons': persons,
+        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+        if (service != null) r'service': service,
+        if (serviceId != null) r'serviceId': serviceId,
+        if (validity != null) r'validity': validity,
+      });
+
+  Input_GroupsBoolExp._(this._$data);
+
+  factory Input_GroupsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_GroupsBoolExp.fromJson((l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input_AuthUsersAdminOnBoolExp.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceDaysConstraints')) {
+      final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
+      result$data['attendanceDaysConstraints'] =
+          l$attendanceDaysConstraints == null
+              ? null
+              : Input_HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+                  (l$attendanceDaysConstraints as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceDaysConstraintsAggregate')) {
+      final l$attendanceDaysConstraintsAggregate =
+          data['attendanceDaysConstraintsAggregate'];
+      result$data['attendanceDaysConstraintsAggregate'] =
+          l$attendanceDaysConstraintsAggregate == null
+              ? null
+              : Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.fromJson(
+                  (l$attendanceDaysConstraintsAggregate
+                      as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = data['attendanceHistory'];
+      result$data['attendanceHistory'] = l$attendanceHistory == null
+          ? null
+          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (l$attendanceHistory as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
+      result$data['attendanceHistoryAggregate'] =
+          l$attendanceHistoryAggregate == null
+              ? null
+              : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
+                  (l$attendanceHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>));
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>));
+    }
+    if (data.containsKey('editHistroy')) {
+      final l$editHistroy = data['editHistroy'];
+      result$data['editHistroy'] = l$editHistroy == null
+          ? null
+          : Input_HistoryEditHistoryBoolExp.fromJson(
+              (l$editHistroy as Map<String, dynamic>));
+    }
+    if (data.containsKey('editHistroyAggregate')) {
+      final l$editHistroyAggregate = data['editHistroyAggregate'];
+      result$data['editHistroyAggregate'] = l$editHistroyAggregate == null
+          ? null
+          : Input_HistoryEditHistoryAggregateBoolExp.fromJson(
+              (l$editHistroyAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('lastEdit')) {
+      final l$lastEdit = data['lastEdit'];
+      result$data['lastEdit'] = l$lastEdit == null
+          ? null
+          : Input_HistoryLatestEditsBoolExp.fromJson(
+              (l$lastEdit as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>));
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsGroupsBoolExp.fromJson(
+              (l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$photoUpdatedAt as Map<String, dynamic>));
+    }
+    if (data.containsKey('service')) {
+      final l$service = data['service'];
+      result$data['service'] = l$service == null
+          ? null
+          : Input_ServicesBoolExp.fromJson((l$service as Map<String, dynamic>));
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$serviceId as Map<String, dynamic>));
+    }
+    if (data.containsKey('validity')) {
+      final l$validity = data['validity'];
+      result$data['validity'] = l$validity == null
+          ? null
+          : Input_DaterangeComparisonExp.fromJson(
+              (l$validity as Map<String, dynamic>));
+    }
+    return Input_GroupsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_GroupsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_GroupsBoolExp>?);
+
+  Input_GroupsBoolExp? get $_not => (_$data['_not'] as Input_GroupsBoolExp?);
+
+  List<Input_GroupsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_GroupsBoolExp>?);
+
+  Input_AuthUsersAdminOnBoolExp? get adminUsers =>
+      (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
+
+  Input_HistoryAttendanceDaysConstraintsBoolExp?
+      get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
+          as Input_HistoryAttendanceDaysConstraintsBoolExp?);
+
+  Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+      get attendanceDaysConstraintsAggregate =>
+          (_$data['attendanceDaysConstraintsAggregate']
+              as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+
+  Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
+      (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
+
+  Input_HistoryAttendanceHistoryAggregateBoolExp?
+      get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
+          as Input_HistoryAttendanceHistoryAggregateBoolExp?);
+
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
+
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
+  Input_HistoryEditHistoryBoolExp? get editHistroy =>
+      (_$data['editHistroy'] as Input_HistoryEditHistoryBoolExp?);
+
+  Input_HistoryEditHistoryAggregateBoolExp? get editHistroyAggregate =>
+      (_$data['editHistroyAggregate']
+          as Input_HistoryEditHistoryAggregateBoolExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_HistoryLatestEditsBoolExp? get lastEdit =>
+      (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsGroupsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsGroupsBoolExp?);
+
+  Input_TimestamptzComparisonExp? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
+  Input_ServicesBoolExp? get service =>
+      (_$data['service'] as Input_ServicesBoolExp?);
+
+  Input_UuidComparisonExp? get serviceId =>
+      (_$data['serviceId'] as Input_UuidComparisonExp?);
+
+  Input_DaterangeComparisonExp? get validity =>
+      (_$data['validity'] as Input_DaterangeComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
+    if (_$data.containsKey('attendanceDaysConstraints')) {
+      final l$attendanceDaysConstraints = attendanceDaysConstraints;
+      result$data['attendanceDaysConstraints'] =
+          l$attendanceDaysConstraints?.toJson();
+    }
+    if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
+      final l$attendanceDaysConstraintsAggregate =
+          attendanceDaysConstraintsAggregate;
+      result$data['attendanceDaysConstraintsAggregate'] =
+          l$attendanceDaysConstraintsAggregate?.toJson();
+    }
+    if (_$data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = attendanceHistory;
+      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
+    }
+    if (_$data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+      result$data['attendanceHistoryAggregate'] =
+          l$attendanceHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('editHistroy')) {
+      final l$editHistroy = editHistroy;
+      result$data['editHistroy'] = l$editHistroy?.toJson();
+    }
+    if (_$data.containsKey('editHistroyAggregate')) {
+      final l$editHistroyAggregate = editHistroyAggregate;
+      result$data['editHistroyAggregate'] = l$editHistroyAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('lastEdit')) {
+      final l$lastEdit = lastEdit;
+      result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt?.toJson();
+    }
+    if (_$data.containsKey('service')) {
+      final l$service = service;
+      result$data['service'] = l$service?.toJson();
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId?.toJson();
+    }
+    if (_$data.containsKey('validity')) {
+      final l$validity = validity;
+      result$data['validity'] = l$validity?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp> get copyWith =>
+      CopyWith_Input_GroupsBoolExp(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupsBoolExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
+      return false;
+    }
+    final l$attendanceDaysConstraints = attendanceDaysConstraints;
+    final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
+    if (_$data.containsKey('attendanceDaysConstraints') !=
+        other._$data.containsKey('attendanceDaysConstraints')) {
+      return false;
+    }
+    if (l$attendanceDaysConstraints != lOther$attendanceDaysConstraints) {
+      return false;
+    }
+    final l$attendanceDaysConstraintsAggregate =
+        attendanceDaysConstraintsAggregate;
+    final lOther$attendanceDaysConstraintsAggregate =
+        other.attendanceDaysConstraintsAggregate;
+    if (_$data.containsKey('attendanceDaysConstraintsAggregate') !=
+        other._$data.containsKey('attendanceDaysConstraintsAggregate')) {
+      return false;
+    }
+    if (l$attendanceDaysConstraintsAggregate !=
+        lOther$attendanceDaysConstraintsAggregate) {
+      return false;
+    }
+    final l$attendanceHistory = attendanceHistory;
+    final lOther$attendanceHistory = other.attendanceHistory;
+    if (_$data.containsKey('attendanceHistory') !=
+        other._$data.containsKey('attendanceHistory')) {
+      return false;
+    }
+    if (l$attendanceHistory != lOther$attendanceHistory) {
+      return false;
+    }
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
+    if (_$data.containsKey('attendanceHistoryAggregate') !=
+        other._$data.containsKey('attendanceHistoryAggregate')) {
+      return false;
+    }
+    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$editHistroy = editHistroy;
+    final lOther$editHistroy = other.editHistroy;
+    if (_$data.containsKey('editHistroy') !=
+        other._$data.containsKey('editHistroy')) {
+      return false;
+    }
+    if (l$editHistroy != lOther$editHistroy) {
+      return false;
+    }
+    final l$editHistroyAggregate = editHistroyAggregate;
+    final lOther$editHistroyAggregate = other.editHistroyAggregate;
+    if (_$data.containsKey('editHistroyAggregate') !=
+        other._$data.containsKey('editHistroyAggregate')) {
+      return false;
+    }
+    if (l$editHistroyAggregate != lOther$editHistroyAggregate) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$lastEdit = lastEdit;
+    final lOther$lastEdit = other.lastEdit;
+    if (_$data.containsKey('lastEdit') !=
+        other._$data.containsKey('lastEdit')) {
+      return false;
+    }
+    if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
+      return false;
+    }
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$validity = validity;
+    final lOther$validity = other.validity;
+    if (_$data.containsKey('validity') !=
+        other._$data.containsKey('validity')) {
+      return false;
+    }
+    if (l$validity != lOther$validity) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$adminUsers = adminUsers;
+    final l$attendanceDaysConstraints = attendanceDaysConstraints;
+    final l$attendanceDaysConstraintsAggregate =
+        attendanceDaysConstraintsAggregate;
+    final l$attendanceHistory = attendanceHistory;
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
+    final l$color = color;
+    final l$editHistroy = editHistroy;
+    final l$editHistroyAggregate = editHistroyAggregate;
+    final l$id = id;
+    final l$lastEdit = lastEdit;
+    final l$name = name;
+    final l$persons = persons;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$service = service;
+    final l$serviceId = serviceId;
+    final l$validity = validity;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+              ? null
+              : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+              ? null
+              : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
+      _$data.containsKey('attendanceDaysConstraints')
+          ? l$attendanceDaysConstraints
+          : const {},
+      _$data.containsKey('attendanceDaysConstraintsAggregate')
+          ? l$attendanceDaysConstraintsAggregate
+          : const {},
+      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('attendanceHistoryAggregate')
+          ? l$attendanceHistoryAggregate
+          : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('editHistroy') ? l$editHistroy : const {},
+      _$data.containsKey('editHistroyAggregate')
+          ? l$editHistroyAggregate
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
+      _$data.containsKey('service') ? l$service : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('validity') ? l$validity : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_GroupsBoolExp<TRes> {
+  factory CopyWith_Input_GroupsBoolExp(
+    Input_GroupsBoolExp instance,
+    TRes Function(Input_GroupsBoolExp) then,
+  ) = _CopyWithImpl_Input_GroupsBoolExp;
+
+  factory CopyWith_Input_GroupsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsBoolExp;
+
+  TRes call({
+    List<Input_GroupsBoolExp>? $_and,
+    Input_GroupsBoolExp? $_not,
+    List<Input_GroupsBoolExp>? $_or,
+    Input_AuthUsersAdminOnBoolExp? adminUsers,
+    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
+    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+        attendanceDaysConstraintsAggregate,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
+    Input_BigintComparisonExp? color,
+    Input_HistoryEditHistoryBoolExp? editHistroy,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistroyAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_StringComparisonExp? name,
+    Input_PersonsGroupsBoolExp? persons,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_ServicesBoolExp? service,
+    Input_UuidComparisonExp? serviceId,
+    Input_DaterangeComparisonExp? validity,
+  });
+  TRes $_and(
+      Iterable<Input_GroupsBoolExp>? Function(
+              Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
+          _fn);
+  CopyWith_Input_GroupsBoolExp<TRes> get $_not;
+  TRes $_or(
+      Iterable<Input_GroupsBoolExp>? Function(
+              Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
+          _fn);
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
+      get attendanceDaysConstraints;
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get attendanceDaysConstraintsAggregate;
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash;
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistroy;
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+      get editHistroyAggregate;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_PersonsGroupsBoolExp<TRes> get persons;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
+  CopyWith_Input_ServicesBoolExp<TRes> get service;
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
+  CopyWith_Input_DaterangeComparisonExp<TRes> get validity;
+}
+
+class _CopyWithImpl_Input_GroupsBoolExp<TRes>
+    implements CopyWith_Input_GroupsBoolExp<TRes> {
+  _CopyWithImpl_Input_GroupsBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_GroupsBoolExp _instance;
+
+  final TRes Function(Input_GroupsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? adminUsers = _undefined,
+    Object? attendanceDaysConstraints = _undefined,
+    Object? attendanceDaysConstraintsAggregate = _undefined,
+    Object? attendanceHistory = _undefined,
+    Object? attendanceHistoryAggregate = _undefined,
+    Object? blurhash = _undefined,
+    Object? color = _undefined,
+    Object? editHistroy = _undefined,
+    Object? editHistroyAggregate = _undefined,
+    Object? id = _undefined,
+    Object? lastEdit = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? service = _undefined,
+    Object? serviceId = _undefined,
+    Object? validity = _undefined,
+  }) =>
+      _then(Input_GroupsBoolExp._({
+        ..._instance._$data,
+        if ($_and != _undefined) '_and': ($_and as List<Input_GroupsBoolExp>?),
+        if ($_not != _undefined) '_not': ($_not as Input_GroupsBoolExp?),
+        if ($_or != _undefined) '_or': ($_or as List<Input_GroupsBoolExp>?),
+        if (adminUsers != _undefined)
+          'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
+        if (attendanceDaysConstraints != _undefined)
+          'attendanceDaysConstraints': (attendanceDaysConstraints
+              as Input_HistoryAttendanceDaysConstraintsBoolExp?),
+        if (attendanceDaysConstraintsAggregate != _undefined)
+          'attendanceDaysConstraintsAggregate':
+              (attendanceDaysConstraintsAggregate
+                  as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?),
+        if (attendanceHistory != _undefined)
+          'attendanceHistory':
+              (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
+        if (attendanceHistoryAggregate != _undefined)
+          'attendanceHistoryAggregate': (attendanceHistoryAggregate
+              as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+        if (blurhash != _undefined)
+          'blurhash': (blurhash as Input_StringComparisonExp?),
+        if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+        if (editHistroy != _undefined)
+          'editHistroy': (editHistroy as Input_HistoryEditHistoryBoolExp?),
+        if (editHistroyAggregate != _undefined)
+          'editHistroyAggregate': (editHistroyAggregate
+              as Input_HistoryEditHistoryAggregateBoolExp?),
+        if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+        if (lastEdit != _undefined)
+          'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+        if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+        if (persons != _undefined)
+          'persons': (persons as Input_PersonsGroupsBoolExp?),
+        if (photoUpdatedAt != _undefined)
+          'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
+        if (service != _undefined)
+          'service': (service as Input_ServicesBoolExp?),
+        if (serviceId != _undefined)
+          'serviceId': (serviceId as Input_UuidComparisonExp?),
+        if (validity != _undefined)
+          'validity': (validity as Input_DaterangeComparisonExp?),
+      }));
+
+  TRes $_and(
+          Iterable<Input_GroupsBoolExp>? Function(
+                  Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
+              _fn) =>
+      call(
+          $_and: _fn(_instance.$_and?.map((e) => CopyWith_Input_GroupsBoolExp(
+                e,
+                (i) => i,
+              )))?.toList());
+
+  CopyWith_Input_GroupsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_GroupsBoolExp(local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+          Iterable<Input_GroupsBoolExp>? Function(
+                  Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
+              _fn) =>
+      call(
+          $_or: _fn(_instance.$_or?.map((e) => CopyWith_Input_GroupsBoolExp(
+                e,
+                (i) => i,
+              )))?.toList());
+
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
+    final local$adminUsers = _instance.adminUsers;
+    return local$adminUsers == null
+        ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersAdminOnBoolExp(
+            local$adminUsers, (e) => call(adminUsers: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
+      get attendanceDaysConstraints {
+    final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
+    return local$attendanceDaysConstraints == null
+        ? CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp(
+            local$attendanceDaysConstraints,
+            (e) => call(attendanceDaysConstraints: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get attendanceDaysConstraintsAggregate {
+    final local$attendanceDaysConstraintsAggregate =
+        _instance.attendanceDaysConstraintsAggregate;
+    return local$attendanceDaysConstraintsAggregate == null
+        ? CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
+            local$attendanceDaysConstraintsAggregate,
+            (e) => call(attendanceDaysConstraintsAggregate: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
+    final local$attendanceHistory = _instance.attendanceHistory;
+    return local$attendanceHistory == null
+        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
+            local$attendanceHistory, (e) => call(attendanceHistory: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate {
+    final local$attendanceHistoryAggregate =
+        _instance.attendanceHistoryAggregate;
+    return local$attendanceHistoryAggregate == null
+        ? CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
+            local$attendanceHistoryAggregate,
+            (e) => call(attendanceHistoryAggregate: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash {
+    final local$blurhash = _instance.blurhash;
+    return local$blurhash == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$blurhash, (e) => call(blurhash: e));
+  }
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color, (e) => call(color: e));
+  }
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistroy {
+    final local$editHistroy = _instance.editHistroy;
+    return local$editHistroy == null
+        ? CopyWith_Input_HistoryEditHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryEditHistoryBoolExp(
+            local$editHistroy, (e) => call(editHistroy: e));
+  }
+
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+      get editHistroyAggregate {
+    final local$editHistroyAggregate = _instance.editHistroyAggregate;
+    return local$editHistroyAggregate == null
+        ? CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
+            local$editHistroyAggregate, (e) => call(editHistroyAggregate: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestEditsBoolExp(
+            local$lastEdit, (e) => call(lastEdit: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_PersonsGroupsBoolExp<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsGroupsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsGroupsBoolExp(
+            local$persons, (e) => call(persons: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt {
+    final local$photoUpdatedAt = _instance.photoUpdatedAt;
+    return local$photoUpdatedAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$photoUpdatedAt, (e) => call(photoUpdatedAt: e));
+  }
+
+  CopyWith_Input_ServicesBoolExp<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ServicesBoolExp(
+            local$service, (e) => call(service: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId {
+    final local$serviceId = _instance.serviceId;
+    return local$serviceId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$serviceId, (e) => call(serviceId: e));
+  }
+
+  CopyWith_Input_DaterangeComparisonExp<TRes> get validity {
+    final local$validity = _instance.validity;
+    return local$validity == null
+        ? CopyWith_Input_DaterangeComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_DaterangeComparisonExp(
+            local$validity, (e) => call(validity: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
+    implements CopyWith_Input_GroupsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_GroupsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_GroupsBoolExp>? $_and,
+    Input_GroupsBoolExp? $_not,
+    List<Input_GroupsBoolExp>? $_or,
+    Input_AuthUsersAdminOnBoolExp? adminUsers,
+    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
+    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+        attendanceDaysConstraintsAggregate,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
+    Input_BigintComparisonExp? color,
+    Input_HistoryEditHistoryBoolExp? editHistroy,
+    Input_HistoryEditHistoryAggregateBoolExp? editHistroyAggregate,
+    Input_UuidComparisonExp? id,
+    Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_StringComparisonExp? name,
+    Input_PersonsGroupsBoolExp? persons,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_ServicesBoolExp? service,
+    Input_UuidComparisonExp? serviceId,
+    Input_DaterangeComparisonExp? validity,
+  }) =>
+      _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_GroupsBoolExp<TRes> get $_not =>
+      CopyWith_Input_GroupsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
+      CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
+      get attendanceDaysConstraints =>
+          CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get attendanceDaysConstraintsAggregate =>
+          CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
+              _res);
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
+      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate =>
+          CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistroy =>
+      CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
+      get editHistroyAggregate =>
+          CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
+      CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_PersonsGroupsBoolExp<TRes> get persons =>
+      CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_ServicesBoolExp<TRes> get service =>
+      CopyWith_Input_ServicesBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get serviceId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_DaterangeComparisonExp<TRes> get validity =>
+      CopyWith_Input_DaterangeComparisonExp.stub(_res);
+}
+
+class Input_GroupsIncInput {
+  factory Input_GroupsIncInput({int? color}) => Input_GroupsIncInput._({
+        if (color != null) r'color': color,
+      });
+
+  Input_GroupsIncInput._(this._$data);
+
+  factory Input_GroupsIncInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_GroupsIncInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_GroupsIncInput<Input_GroupsIncInput> get copyWith =>
+      CopyWith_Input_GroupsIncInput(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupsIncInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
+  }
+}
+
+abstract class CopyWith_Input_GroupsIncInput<TRes> {
+  factory CopyWith_Input_GroupsIncInput(
+    Input_GroupsIncInput instance,
+    TRes Function(Input_GroupsIncInput) then,
+  ) = _CopyWithImpl_Input_GroupsIncInput;
+
+  factory CopyWith_Input_GroupsIncInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsIncInput;
+
+  TRes call({int? color});
+}
+
+class _CopyWithImpl_Input_GroupsIncInput<TRes>
+    implements CopyWith_Input_GroupsIncInput<TRes> {
+  _CopyWithImpl_Input_GroupsIncInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_GroupsIncInput _instance;
+
+  final TRes Function(Input_GroupsIncInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? color = _undefined}) => _then(Input_GroupsIncInput._({
+        ..._instance._$data,
+        if (color != _undefined) 'color': (color as int?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_GroupsIncInput<TRes>
+    implements CopyWith_Input_GroupsIncInput<TRes> {
+  _CopyWithStubImpl_Input_GroupsIncInput(this._res);
+
+  TRes _res;
+
+  call({int? color}) => _res;
+}
+
+class Input_GroupsInsertInput {
+  factory Input_GroupsInsertInput({
+    Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
+    Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
+        attendanceDaysConstraints,
+    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
+    int? color,
+    String? name,
+    Input_PersonsGroupsArrRelInsertInput? persons,
+    Input_ServicesObjRelInsertInput? service,
+    UuidValue? serviceId,
+    DateTimeRange? validity,
+  }) =>
+      Input_GroupsInsertInput._({
+        if (adminUsers != null) r'adminUsers': adminUsers,
+        if (attendanceDaysConstraints != null)
+          r'attendanceDaysConstraints': attendanceDaysConstraints,
+        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+        if (color != null) r'color': color,
+        if (name != null) r'name': name,
+        if (persons != null) r'persons': persons,
+        if (service != null) r'service': service,
+        if (serviceId != null) r'serviceId': serviceId,
+        if (validity != null) r'validity': validity,
+      });
+
+  Input_GroupsInsertInput._(this._$data);
+
+  factory Input_GroupsInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('adminUsers')) {
+      final l$adminUsers = data['adminUsers'];
+      result$data['adminUsers'] = l$adminUsers == null
+          ? null
+          : Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
+              (l$adminUsers as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceDaysConstraints')) {
+      final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
+      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints ==
+              null
+          ? null
+          : Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
+              (l$attendanceDaysConstraints as Map<String, dynamic>));
+    }
+    if (data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = data['attendanceHistory'];
+      result$data['attendanceHistory'] = l$attendanceHistory == null
+          ? null
+          : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
+              (l$attendanceHistory as Map<String, dynamic>));
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsGroupsArrRelInsertInput.fromJson(
+              (l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('service')) {
+      final l$service = data['service'];
+      result$data['service'] = l$service == null
+          ? null
+          : Input_ServicesObjRelInsertInput.fromJson(
+              (l$service as Map<String, dynamic>));
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] =
+          l$serviceId == null ? null : stringToUuid(l$serviceId);
+    }
+    if (data.containsKey('validity')) {
+      final l$validity = data['validity'];
+      result$data['validity'] =
+          l$validity == null ? null : dateRangeFromString(l$validity);
+    }
+    return Input_GroupsInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
+      (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
+
+  Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
+      get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
+          as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
+
+  Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
+      (_$data['attendanceHistory']
+          as Input_HistoryAttendanceHistoryArrRelInsertInput?);
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get name => (_$data['name'] as String?);
+
+  Input_PersonsGroupsArrRelInsertInput? get persons =>
+      (_$data['persons'] as Input_PersonsGroupsArrRelInsertInput?);
+
+  Input_ServicesObjRelInsertInput? get service =>
+      (_$data['service'] as Input_ServicesObjRelInsertInput?);
+
+  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
+  DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminUsers')) {
+      final l$adminUsers = adminUsers;
+      result$data['adminUsers'] = l$adminUsers?.toJson();
+    }
+    if (_$data.containsKey('attendanceDaysConstraints')) {
+      final l$attendanceDaysConstraints = attendanceDaysConstraints;
+      result$data['attendanceDaysConstraints'] =
+          l$attendanceDaysConstraints?.toJson();
+    }
+    if (_$data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = attendanceHistory;
+      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('service')) {
+      final l$service = service;
+      result$data['service'] = l$service?.toJson();
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] =
+          l$serviceId == null ? null : uuidToString(l$serviceId);
+    }
+    if (_$data.containsKey('validity')) {
+      final l$validity = validity;
+      result$data['validity'] =
+          l$validity == null ? null : dateRangeToString(l$validity);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput> get copyWith =>
+      CopyWith_Input_GroupsInsertInput(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupsInsertInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminUsers = adminUsers;
+    final lOther$adminUsers = other.adminUsers;
+    if (_$data.containsKey('adminUsers') !=
+        other._$data.containsKey('adminUsers')) {
+      return false;
+    }
+    if (l$adminUsers != lOther$adminUsers) {
+      return false;
+    }
+    final l$attendanceDaysConstraints = attendanceDaysConstraints;
+    final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
+    if (_$data.containsKey('attendanceDaysConstraints') !=
+        other._$data.containsKey('attendanceDaysConstraints')) {
+      return false;
+    }
+    if (l$attendanceDaysConstraints != lOther$attendanceDaysConstraints) {
+      return false;
+    }
+    final l$attendanceHistory = attendanceHistory;
+    final lOther$attendanceHistory = other.attendanceHistory;
+    if (_$data.containsKey('attendanceHistory') !=
+        other._$data.containsKey('attendanceHistory')) {
+      return false;
+    }
+    if (l$attendanceHistory != lOther$attendanceHistory) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
+      return false;
+    }
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$validity = validity;
+    final lOther$validity = other.validity;
+    if (_$data.containsKey('validity') !=
+        other._$data.containsKey('validity')) {
+      return false;
+    }
+    if (l$validity != lOther$validity) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$adminUsers = adminUsers;
+    final l$attendanceDaysConstraints = attendanceDaysConstraints;
+    final l$attendanceHistory = attendanceHistory;
+    final l$color = color;
+    final l$name = name;
+    final l$persons = persons;
+    final l$service = service;
+    final l$serviceId = serviceId;
+    final l$validity = validity;
+    return Object.hashAll([
+      _$data.containsKey('adminUsers') ? l$adminUsers : const {},
+      _$data.containsKey('attendanceDaysConstraints')
+          ? l$attendanceDaysConstraints
+          : const {},
+      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('service') ? l$service : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('validity') ? l$validity : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_GroupsInsertInput<TRes> {
   factory CopyWith_Input_GroupsInsertInput(
     Input_GroupsInsertInput instance,
@@ -1482,1200 +2948,6 @@ class Input_GroupsOrderBy {
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('service') ? l$service : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('validity') ? l$validity : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsOrderBy<TRes> {
-  factory CopyWith_Input_GroupsOrderBy(
-    Input_GroupsOrderBy instance,
-    TRes Function(Input_GroupsOrderBy) then,
-  ) = _CopyWithImpl_Input_GroupsOrderBy;
-
-  factory CopyWith_Input_GroupsOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsOrderBy;
-
-  TRes call({
-    Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
-    Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
-        attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? color,
-    Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
-    Enum_OrderBy? id,
-    Input_HistoryLatestEditsOrderBy? lastEdit,
-    Enum_OrderBy? name,
-    Input_PersonsGroupsAggregateOrderBy? personsAggregate,
-    Enum_OrderBy? photoUpdatedAt,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? validity,
-  });
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
-      get attendanceDaysConstraintsAggregate;
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-      get attendanceHistoryAggregate;
-  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
-      get editHistroyAggregate;
-  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
-  CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get personsAggregate;
-  CopyWith_Input_ServicesOrderBy<TRes> get service;
-}
-
-class _CopyWithImpl_Input_GroupsOrderBy<TRes>
-    implements CopyWith_Input_GroupsOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsOrderBy _instance;
-
-  final TRes Function(Input_GroupsOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? adminUsersAggregate = _undefined,
-    Object? attendanceDaysConstraintsAggregate = _undefined,
-    Object? attendanceHistoryAggregate = _undefined,
-    Object? blurhash = _undefined,
-    Object? color = _undefined,
-    Object? editHistroyAggregate = _undefined,
-    Object? id = _undefined,
-    Object? lastEdit = _undefined,
-    Object? name = _undefined,
-    Object? personsAggregate = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? service = _undefined,
-    Object? serviceId = _undefined,
-    Object? validity = _undefined,
-  }) =>
-      _then(Input_GroupsOrderBy._({
-        ..._instance._$data,
-        if (adminUsersAggregate != _undefined)
-          'adminUsersAggregate':
-              (adminUsersAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
-        if (attendanceDaysConstraintsAggregate != _undefined)
-          'attendanceDaysConstraintsAggregate':
-              (attendanceDaysConstraintsAggregate
-                  as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?),
-        if (attendanceHistoryAggregate != _undefined)
-          'attendanceHistoryAggregate': (attendanceHistoryAggregate
-              as Input_HistoryAttendanceHistoryAggregateOrderBy?),
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (editHistroyAggregate != _undefined)
-          'editHistroyAggregate': (editHistroyAggregate
-              as Input_HistoryEditHistoryAggregateOrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (lastEdit != _undefined)
-          'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (personsAggregate != _undefined)
-          'personsAggregate':
-              (personsAggregate as Input_PersonsGroupsAggregateOrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesOrderBy?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-        if (validity != _undefined) 'validity': (validity as Enum_OrderBy?),
-      }));
-
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-      get adminUsersAggregate {
-    final local$adminUsersAggregate = _instance.adminUsersAggregate;
-    return local$adminUsersAggregate == null
-        ? CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
-            local$adminUsersAggregate, (e) => call(adminUsersAggregate: e));
-  }
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
-      get attendanceDaysConstraintsAggregate {
-    final local$attendanceDaysConstraintsAggregate =
-        _instance.attendanceDaysConstraintsAggregate;
-    return local$attendanceDaysConstraintsAggregate == null
-        ? CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
-            _then(_instance))
-        : CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy(
-            local$attendanceDaysConstraintsAggregate,
-            (e) => call(attendanceDaysConstraintsAggregate: e));
-  }
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-      get attendanceHistoryAggregate {
-    final local$attendanceHistoryAggregate =
-        _instance.attendanceHistoryAggregate;
-    return local$attendanceHistoryAggregate == null
-        ? CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(
-            _then(_instance))
-        : CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy(
-            local$attendanceHistoryAggregate,
-            (e) => call(attendanceHistoryAggregate: e));
-  }
-
-  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
-      get editHistroyAggregate {
-    final local$editHistroyAggregate = _instance.editHistroyAggregate;
-    return local$editHistroyAggregate == null
-        ? CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(
-            _then(_instance))
-        : CopyWith_Input_HistoryEditHistoryAggregateOrderBy(
-            local$editHistroyAggregate, (e) => call(editHistroyAggregate: e));
-  }
-
-  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit {
-    final local$lastEdit = _instance.lastEdit;
-    return local$lastEdit == null
-        ? CopyWith_Input_HistoryLatestEditsOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryLatestEditsOrderBy(
-            local$lastEdit, (e) => call(lastEdit: e));
-  }
-
-  CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsAggregateOrderBy(
-            local$personsAggregate, (e) => call(personsAggregate: e));
-  }
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service {
-    final local$service = _instance.service;
-    return local$service == null
-        ? CopyWith_Input_ServicesOrderBy.stub(_then(_instance))
-        : CopyWith_Input_ServicesOrderBy(
-            local$service, (e) => call(service: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_GroupsOrderBy<TRes>
-    implements CopyWith_Input_GroupsOrderBy<TRes> {
-  _CopyWithStubImpl_Input_GroupsOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
-    Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
-        attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? color,
-    Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
-    Enum_OrderBy? id,
-    Input_HistoryLatestEditsOrderBy? lastEdit,
-    Enum_OrderBy? name,
-    Input_PersonsGroupsAggregateOrderBy? personsAggregate,
-    Enum_OrderBy? photoUpdatedAt,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? validity,
-  }) =>
-      _res;
-
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-      get adminUsersAggregate =>
-          CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy<TRes>
-      get attendanceDaysConstraintsAggregate =>
-          CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.stub(
-              _res);
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
-      get attendanceHistoryAggregate =>
-          CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
-      get editHistroyAggregate =>
-          CopyWith_Input_HistoryEditHistoryAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
-      CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
-
-  CopyWith_Input_PersonsGroupsAggregateOrderBy<TRes> get personsAggregate =>
-      CopyWith_Input_PersonsGroupsAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_ServicesOrderBy<TRes> get service =>
-      CopyWith_Input_ServicesOrderBy.stub(_res);
-}
-
-class Input_GroupsPkColumnsInput {
-  factory Input_GroupsPkColumnsInput({required UuidValue id}) =>
-      Input_GroupsPkColumnsInput._({
-        r'id': id,
-      });
-
-  Input_GroupsPkColumnsInput._(this._$data);
-
-  factory Input_GroupsPkColumnsInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$id = data['id'];
-    result$data['id'] = stringToUuid(l$id);
-    return Input_GroupsPkColumnsInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue get id => (_$data['id'] as UuidValue);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$id = id;
-    result$data['id'] = uuidToString(l$id);
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsPkColumnsInput<Input_GroupsPkColumnsInput>
-      get copyWith => CopyWith_Input_GroupsPkColumnsInput(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsPkColumnsInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    return Object.hashAll([l$id]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsPkColumnsInput<TRes> {
-  factory CopyWith_Input_GroupsPkColumnsInput(
-    Input_GroupsPkColumnsInput instance,
-    TRes Function(Input_GroupsPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_GroupsPkColumnsInput;
-
-  factory CopyWith_Input_GroupsPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsPkColumnsInput;
-
-  TRes call({UuidValue? id});
-}
-
-class _CopyWithImpl_Input_GroupsPkColumnsInput<TRes>
-    implements CopyWith_Input_GroupsPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_GroupsPkColumnsInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsPkColumnsInput _instance;
-
-  final TRes Function(Input_GroupsPkColumnsInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? id = _undefined}) => _then(Input_GroupsPkColumnsInput._({
-        ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as UuidValue),
-      }));
-}
-
-class _CopyWithStubImpl_Input_GroupsPkColumnsInput<TRes>
-    implements CopyWith_Input_GroupsPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsPkColumnsInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? id}) => _res;
-}
-
-class Input_GroupsSetInput {
-  factory Input_GroupsSetInput({
-    int? color,
-    String? name,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  }) =>
-      Input_GroupsSetInput._({
-        if (color != null) r'color': color,
-        if (name != null) r'name': name,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (validity != null) r'validity': validity,
-      });
-
-  Input_GroupsSetInput._(this._$data);
-
-  factory Input_GroupsSetInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] =
-          l$serviceId == null ? null : stringToUuid(l$serviceId);
-    }
-    if (data.containsKey('validity')) {
-      final l$validity = data['validity'];
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeFromString(l$validity);
-    }
-    return Input_GroupsSetInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  int? get color => (_$data['color'] as int?);
-
-  String? get name => (_$data['name'] as String?);
-
-  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
-
-  DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : uuidToString(l$serviceId);
-    }
-    if (_$data.containsKey('validity')) {
-      final l$validity = validity;
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeToString(l$validity);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsSetInput<Input_GroupsSetInput> get copyWith =>
-      CopyWith_Input_GroupsSetInput(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsSetInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$validity = validity;
-    final lOther$validity = other.validity;
-    if (_$data.containsKey('validity') !=
-        other._$data.containsKey('validity')) {
-      return false;
-    }
-    if (l$validity != lOther$validity) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    final l$name = name;
-    final l$serviceId = serviceId;
-    final l$validity = validity;
-    return Object.hashAll([
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('validity') ? l$validity : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsSetInput<TRes> {
-  factory CopyWith_Input_GroupsSetInput(
-    Input_GroupsSetInput instance,
-    TRes Function(Input_GroupsSetInput) then,
-  ) = _CopyWithImpl_Input_GroupsSetInput;
-
-  factory CopyWith_Input_GroupsSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsSetInput;
-
-  TRes call({
-    int? color,
-    String? name,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  });
-}
-
-class _CopyWithImpl_Input_GroupsSetInput<TRes>
-    implements CopyWith_Input_GroupsSetInput<TRes> {
-  _CopyWithImpl_Input_GroupsSetInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsSetInput _instance;
-
-  final TRes Function(Input_GroupsSetInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? color = _undefined,
-    Object? name = _undefined,
-    Object? serviceId = _undefined,
-    Object? validity = _undefined,
-  }) =>
-      _then(Input_GroupsSetInput._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as int?),
-        if (name != _undefined) 'name': (name as String?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
-        if (validity != _undefined) 'validity': (validity as DateTimeRange?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_GroupsSetInput<TRes>
-    implements CopyWith_Input_GroupsSetInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsSetInput(this._res);
-
-  TRes _res;
-
-  call({
-    int? color,
-    String? name,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  }) =>
-      _res;
-}
-
-class Input_GroupsStddevOrderBy {
-  factory Input_GroupsStddevOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsStddevOrderBy._({
-        if (color != null) r'color': color,
-      });
-
-  Input_GroupsStddevOrderBy._(this._$data);
-
-  factory Input_GroupsStddevOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    return Input_GroupsStddevOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStddevOrderBy<Input_GroupsStddevOrderBy> get copyWith =>
-      CopyWith_Input_GroupsStddevOrderBy(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStddevOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsStddevOrderBy<TRes> {
-  factory CopyWith_Input_GroupsStddevOrderBy(
-    Input_GroupsStddevOrderBy instance,
-    TRes Function(Input_GroupsStddevOrderBy) then,
-  ) = _CopyWithImpl_Input_GroupsStddevOrderBy;
-
-  factory CopyWith_Input_GroupsStddevOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStddevOrderBy;
-
-  TRes call({Enum_OrderBy? color});
-}
-
-class _CopyWithImpl_Input_GroupsStddevOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsStddevOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsStddevOrderBy _instance;
-
-  final TRes Function(Input_GroupsStddevOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) => _then(Input_GroupsStddevOrderBy._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_GroupsStddevOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevOrderBy<TRes> {
-  _CopyWithStubImpl_Input_GroupsStddevOrderBy(this._res);
-
-  TRes _res;
-
-  call({Enum_OrderBy? color}) => _res;
-}
-
-class Input_GroupsStddevPopOrderBy {
-  factory Input_GroupsStddevPopOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsStddevPopOrderBy._({
-        if (color != null) r'color': color,
-      });
-
-  Input_GroupsStddevPopOrderBy._(this._$data);
-
-  factory Input_GroupsStddevPopOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    return Input_GroupsStddevPopOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStddevPopOrderBy<Input_GroupsStddevPopOrderBy>
-      get copyWith => CopyWith_Input_GroupsStddevPopOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStddevPopOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsStddevPopOrderBy<TRes> {
-  factory CopyWith_Input_GroupsStddevPopOrderBy(
-    Input_GroupsStddevPopOrderBy instance,
-    TRes Function(Input_GroupsStddevPopOrderBy) then,
-  ) = _CopyWithImpl_Input_GroupsStddevPopOrderBy;
-
-  factory CopyWith_Input_GroupsStddevPopOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStddevPopOrderBy;
-
-  TRes call({Enum_OrderBy? color});
-}
-
-class _CopyWithImpl_Input_GroupsStddevPopOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevPopOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsStddevPopOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsStddevPopOrderBy _instance;
-
-  final TRes Function(Input_GroupsStddevPopOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) =>
-      _then(Input_GroupsStddevPopOrderBy._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_GroupsStddevPopOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevPopOrderBy<TRes> {
-  _CopyWithStubImpl_Input_GroupsStddevPopOrderBy(this._res);
-
-  TRes _res;
-
-  call({Enum_OrderBy? color}) => _res;
-}
-
-class Input_GroupsStddevSampOrderBy {
-  factory Input_GroupsStddevSampOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsStddevSampOrderBy._({
-        if (color != null) r'color': color,
-      });
-
-  Input_GroupsStddevSampOrderBy._(this._$data);
-
-  factory Input_GroupsStddevSampOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    return Input_GroupsStddevSampOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStddevSampOrderBy<Input_GroupsStddevSampOrderBy>
-      get copyWith => CopyWith_Input_GroupsStddevSampOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStddevSampOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsStddevSampOrderBy<TRes> {
-  factory CopyWith_Input_GroupsStddevSampOrderBy(
-    Input_GroupsStddevSampOrderBy instance,
-    TRes Function(Input_GroupsStddevSampOrderBy) then,
-  ) = _CopyWithImpl_Input_GroupsStddevSampOrderBy;
-
-  factory CopyWith_Input_GroupsStddevSampOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStddevSampOrderBy;
-
-  TRes call({Enum_OrderBy? color});
-}
-
-class _CopyWithImpl_Input_GroupsStddevSampOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevSampOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsStddevSampOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsStddevSampOrderBy _instance;
-
-  final TRes Function(Input_GroupsStddevSampOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) =>
-      _then(Input_GroupsStddevSampOrderBy._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_GroupsStddevSampOrderBy<TRes>
-    implements CopyWith_Input_GroupsStddevSampOrderBy<TRes> {
-  _CopyWithStubImpl_Input_GroupsStddevSampOrderBy(this._res);
-
-  TRes _res;
-
-  call({Enum_OrderBy? color}) => _res;
-}
-
-class Input_GroupsStreamCursorInput {
-  factory Input_GroupsStreamCursorInput({
-    required Input_GroupsStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) =>
-      Input_GroupsStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
-
-  Input_GroupsStreamCursorInput._(this._$data);
-
-  factory Input_GroupsStreamCursorInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] = Input_GroupsStreamCursorValueInput.fromJson(
-        (l$initialValue as Map<String, dynamic>));
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_GroupsStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_GroupsStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_GroupsStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStreamCursorInput<Input_GroupsStreamCursorInput>
-      get copyWith => CopyWith_Input_GroupsStreamCursorInput(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  factory CopyWith_Input_GroupsStreamCursorInput(
-    Input_GroupsStreamCursorInput instance,
-    TRes Function(Input_GroupsStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_GroupsStreamCursorInput;
-
-  factory CopyWith_Input_GroupsStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsStreamCursorInput;
-
-  TRes call({
-    Input_GroupsStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_GroupsStreamCursorInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_GroupsStreamCursorInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsStreamCursorInput _instance;
-
-  final TRes Function(Input_GroupsStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) =>
-      _then(Input_GroupsStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue': (initialValue as Input_GroupsStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
-
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_GroupsStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_GroupsStreamCursorInput<TRes>
-    implements CopyWith_Input_GroupsStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_GroupsStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
-
-  CopyWith_Input_GroupsStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_GroupsStreamCursorValueInput.stub(_res);
-}
-
-class Input_GroupsStreamCursorValueInput {
-  factory Input_GroupsStreamCursorValueInput({
-    String? blurhash,
-    int? color,
-    UuidValue? id,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? serviceId,
-    DateTimeRange? validity,
-  }) =>
-      Input_GroupsStreamCursorValueInput._({
-        if (blurhash != null) r'blurhash': blurhash,
-        if (color != null) r'color': color,
-        if (id != null) r'id': id,
-        if (name != null) r'name': name,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (validity != null) r'validity': validity,
-      });
-
-  Input_GroupsStreamCursorValueInput._(this._$data);
-
-  factory Input_GroupsStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = (l$blurhash as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] =
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt);
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] =
-          l$serviceId == null ? null : stringToUuid(l$serviceId);
-    }
-    if (data.containsKey('validity')) {
-      final l$validity = data['validity'];
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeFromString(l$validity);
-    }
-    return Input_GroupsStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get blurhash => (_$data['blurhash'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  UuidValue? get id => (_$data['id'] as UuidValue?);
-
-  String? get name => (_$data['name'] as String?);
-
-  DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-
-  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
-
-  DateTimeRange? get validity => (_$data['validity'] as DateTimeRange?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] = l$blurhash;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : uuidToString(l$id);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] =
-          l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : uuidToString(l$serviceId);
-    }
-    if (_$data.containsKey('validity')) {
-      final l$validity = validity;
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeToString(l$validity);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsStreamCursorValueInput<
-          Input_GroupsStreamCursorValueInput>
-      get copyWith => CopyWith_Input_GroupsStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
-      return false;
-    }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
-      return false;
-    }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$validity = validity;
-    final lOther$validity = other.validity;
-    if (_$data.containsKey('validity') !=
-        other._$data.containsKey('validity')) {
-      return false;
-    }
-    if (l$validity != lOther$validity) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$blurhash = blurhash;
-    final l$color = color;
-    final l$id = id;
-    final l$name = name;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$serviceId = serviceId;
-    final l$validity = validity;
-    return Object.hashAll([
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('validity') ? l$validity : const {},
     ]);

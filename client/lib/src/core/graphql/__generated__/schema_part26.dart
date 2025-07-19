@@ -2,6 +2,737 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_HistoryAttendanceHistoryPkColumnsInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryPkColumnsInput(
+    Input_HistoryAttendanceHistoryPkColumnsInput instance,
+    TRes Function(Input_HistoryAttendanceHistoryPkColumnsInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryPkColumnsInput;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryPkColumnsInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryPkColumnsInput;
+
+  TRes call({UuidValue? id});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceHistoryPkColumnsInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryPkColumnsInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceHistoryPkColumnsInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceHistoryPkColumnsInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceHistoryPkColumnsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? id = _undefined}) =>
+      _then(Input_HistoryAttendanceHistoryPkColumnsInput._({
+        ..._instance._$data,
+        if (id != _undefined && id != null) 'id': (id as UuidValue),
+      }));
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceHistoryPkColumnsInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryPkColumnsInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceHistoryPkColumnsInput(this._res);
+
+  TRes _res;
+
+  call({UuidValue? id}) => _res;
+}
+
+class Input_HistoryAttendanceHistorySetInput {
+  factory Input_HistoryAttendanceHistorySetInput({
+    DateTime? dayId,
+    UuidValue? groupId,
+    UuidValue? personId,
+    UuidValue? serviceId,
+    DateTime? time,
+  }) =>
+      Input_HistoryAttendanceHistorySetInput._({
+        if (dayId != null) r'dayId': dayId,
+        if (groupId != null) r'groupId': groupId,
+        if (personId != null) r'personId': personId,
+        if (serviceId != null) r'serviceId': serviceId,
+        if (time != null) r'time': time,
+      });
+
+  Input_HistoryAttendanceHistorySetInput._(this._$data);
+
+  factory Input_HistoryAttendanceHistorySetInput.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('dayId')) {
+      final l$dayId = data['dayId'];
+      result$data['dayId'] = l$dayId == null ? null : dateFromString(l$dayId);
+    }
+    if (data.containsKey('groupId')) {
+      final l$groupId = data['groupId'];
+      result$data['groupId'] =
+          l$groupId == null ? null : stringToUuid(l$groupId);
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] =
+          l$personId == null ? null : stringToUuid(l$personId);
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] =
+          l$serviceId == null ? null : stringToUuid(l$serviceId);
+    }
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null ? null : tstzFromString(l$time);
+    }
+    return Input_HistoryAttendanceHistorySetInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get dayId => (_$data['dayId'] as DateTime?);
+
+  UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
+
+  UuidValue? get personId => (_$data['personId'] as UuidValue?);
+
+  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
+
+  DateTime? get time => (_$data['time'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('dayId')) {
+      final l$dayId = dayId;
+      result$data['dayId'] = l$dayId == null ? null : dateToString(l$dayId);
+    }
+    if (_$data.containsKey('groupId')) {
+      final l$groupId = groupId;
+      result$data['groupId'] =
+          l$groupId == null ? null : uuidToString(l$groupId);
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] =
+          l$personId == null ? null : uuidToString(l$personId);
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] =
+          l$serviceId == null ? null : uuidToString(l$serviceId);
+    }
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : tstzToString(l$time);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistorySetInput<
+          Input_HistoryAttendanceHistorySetInput>
+      get copyWith => CopyWith_Input_HistoryAttendanceHistorySetInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistorySetInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$dayId = dayId;
+    final lOther$dayId = other.dayId;
+    if (_$data.containsKey('dayId') != other._$data.containsKey('dayId')) {
+      return false;
+    }
+    if (l$dayId != lOther$dayId) {
+      return false;
+    }
+    final l$groupId = groupId;
+    final lOther$groupId = other.groupId;
+    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
+      return false;
+    }
+    if (l$groupId != lOther$groupId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$dayId = dayId;
+    final l$groupId = groupId;
+    final l$personId = personId;
+    final l$serviceId = serviceId;
+    final l$time = time;
+    return Object.hashAll([
+      _$data.containsKey('dayId') ? l$dayId : const {},
+      _$data.containsKey('groupId') ? l$groupId : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('time') ? l$time : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceHistorySetInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistorySetInput(
+    Input_HistoryAttendanceHistorySetInput instance,
+    TRes Function(Input_HistoryAttendanceHistorySetInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistorySetInput;
+
+  factory CopyWith_Input_HistoryAttendanceHistorySetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistorySetInput;
+
+  TRes call({
+    DateTime? dayId,
+    UuidValue? groupId,
+    UuidValue? personId,
+    UuidValue? serviceId,
+    DateTime? time,
+  });
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceHistorySetInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistorySetInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceHistorySetInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceHistorySetInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceHistorySetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? dayId = _undefined,
+    Object? groupId = _undefined,
+    Object? personId = _undefined,
+    Object? serviceId = _undefined,
+    Object? time = _undefined,
+  }) =>
+      _then(Input_HistoryAttendanceHistorySetInput._({
+        ..._instance._$data,
+        if (dayId != _undefined) 'dayId': (dayId as DateTime?),
+        if (groupId != _undefined) 'groupId': (groupId as UuidValue?),
+        if (personId != _undefined) 'personId': (personId as UuidValue?),
+        if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
+        if (time != _undefined) 'time': (time as DateTime?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceHistorySetInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistorySetInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceHistorySetInput(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? dayId,
+    UuidValue? groupId,
+    UuidValue? personId,
+    UuidValue? serviceId,
+    DateTime? time,
+  }) =>
+      _res;
+}
+
+class Input_HistoryAttendanceHistoryStddevOrderBy {
+  factory Input_HistoryAttendanceHistoryStddevOrderBy(
+          {Enum_OrderBy? serviceStudyYear}) =>
+      Input_HistoryAttendanceHistoryStddevOrderBy._({
+        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+      });
+
+  Input_HistoryAttendanceHistoryStddevOrderBy._(this._$data);
+
+  factory Input_HistoryAttendanceHistoryStddevOrderBy.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
+    }
+    return Input_HistoryAttendanceHistoryStddevOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy<
+          Input_HistoryAttendanceHistoryStddevOrderBy>
+      get copyWith => CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistoryStddevOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$serviceStudyYear = serviceStudyYear;
+    return Object.hashAll([
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy(
+    Input_HistoryAttendanceHistoryStddevOrderBy instance,
+    TRes Function(Input_HistoryAttendanceHistoryStddevOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryStddevOrderBy;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevOrderBy;
+
+  TRes call({Enum_OrderBy? serviceStudyYear});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceHistoryStddevOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceHistoryStddevOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceHistoryStddevOrderBy _instance;
+
+  final TRes Function(Input_HistoryAttendanceHistoryStddevOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? serviceStudyYear = _undefined}) =>
+      _then(Input_HistoryAttendanceHistoryStddevOrderBy._({
+        ..._instance._$data,
+        if (serviceStudyYear != _undefined)
+          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? serviceStudyYear}) => _res;
+}
+
+class Input_HistoryAttendanceHistoryStddevPopOrderBy {
+  factory Input_HistoryAttendanceHistoryStddevPopOrderBy(
+          {Enum_OrderBy? serviceStudyYear}) =>
+      Input_HistoryAttendanceHistoryStddevPopOrderBy._({
+        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+      });
+
+  Input_HistoryAttendanceHistoryStddevPopOrderBy._(this._$data);
+
+  factory Input_HistoryAttendanceHistoryStddevPopOrderBy.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
+    }
+    return Input_HistoryAttendanceHistoryStddevPopOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy<
+          Input_HistoryAttendanceHistoryStddevPopOrderBy>
+      get copyWith => CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistoryStddevPopOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$serviceStudyYear = serviceStudyYear;
+    return Object.hashAll([
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy(
+    Input_HistoryAttendanceHistoryStddevPopOrderBy instance,
+    TRes Function(Input_HistoryAttendanceHistoryStddevPopOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy;
+
+  TRes call({Enum_OrderBy? serviceStudyYear});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceHistoryStddevPopOrderBy _instance;
+
+  final TRes Function(Input_HistoryAttendanceHistoryStddevPopOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? serviceStudyYear = _undefined}) =>
+      _then(Input_HistoryAttendanceHistoryStddevPopOrderBy._({
+        ..._instance._$data,
+        if (serviceStudyYear != _undefined)
+          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevPopOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevPopOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? serviceStudyYear}) => _res;
+}
+
+class Input_HistoryAttendanceHistoryStddevSampOrderBy {
+  factory Input_HistoryAttendanceHistoryStddevSampOrderBy(
+          {Enum_OrderBy? serviceStudyYear}) =>
+      Input_HistoryAttendanceHistoryStddevSampOrderBy._({
+        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+      });
+
+  Input_HistoryAttendanceHistoryStddevSampOrderBy._(this._$data);
+
+  factory Input_HistoryAttendanceHistoryStddevSampOrderBy.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
+    }
+    return Input_HistoryAttendanceHistoryStddevSampOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy<
+          Input_HistoryAttendanceHistoryStddevSampOrderBy>
+      get copyWith => CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistoryStddevSampOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$serviceStudyYear = serviceStudyYear;
+    return Object.hashAll([
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy(
+    Input_HistoryAttendanceHistoryStddevSampOrderBy instance,
+    TRes Function(Input_HistoryAttendanceHistoryStddevSampOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy;
+
+  TRes call({Enum_OrderBy? serviceStudyYear});
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceHistoryStddevSampOrderBy _instance;
+
+  final TRes Function(Input_HistoryAttendanceHistoryStddevSampOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? serviceStudyYear = _undefined}) =>
+      _then(Input_HistoryAttendanceHistoryStddevSampOrderBy._({
+        ..._instance._$data,
+        if (serviceStudyYear != _undefined)
+          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes>
+    implements CopyWith_Input_HistoryAttendanceHistoryStddevSampOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceHistoryStddevSampOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? serviceStudyYear}) => _res;
+}
+
+class Input_HistoryAttendanceHistoryStreamCursorInput {
+  factory Input_HistoryAttendanceHistoryStreamCursorInput({
+    required Input_HistoryAttendanceHistoryStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) =>
+      Input_HistoryAttendanceHistoryStreamCursorInput._({
+        r'initialValue': initialValue,
+        if (ordering != null) r'ordering': ordering,
+      });
+
+  Input_HistoryAttendanceHistoryStreamCursorInput._(this._$data);
+
+  factory Input_HistoryAttendanceHistoryStreamCursorInput.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_HistoryAttendanceHistoryStreamCursorValueInput.fromJson(
+            (l$initialValue as Map<String, dynamic>));
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_HistoryAttendanceHistoryStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_HistoryAttendanceHistoryStreamCursorValueInput get initialValue =>
+      (_$data['initialValue']
+          as Input_HistoryAttendanceHistoryStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] =
+          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput<
+          Input_HistoryAttendanceHistoryStreamCursorInput>
+      get copyWith => CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistoryStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput(
+    Input_HistoryAttendanceHistoryStreamCursorInput instance,
+    TRes Function(Input_HistoryAttendanceHistoryStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorInput;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryStreamCursorInput;
+
+  TRes call({
+    Input_HistoryAttendanceHistoryStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_HistoryAttendanceHistoryStreamCursorValueInput<TRes>
+      get initialValue;
+}
+
 class _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorInput<TRes>
     implements CopyWith_Input_HistoryAttendanceHistoryStreamCursorInput<TRes> {
   _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorInput(
@@ -1856,690 +2587,6 @@ class Input_HistoryCallHistoryBoolExp {
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('user') ? l$user : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryCallHistoryBoolExp<TRes> {
-  factory CopyWith_Input_HistoryCallHistoryBoolExp(
-    Input_HistoryCallHistoryBoolExp instance,
-    TRes Function(Input_HistoryCallHistoryBoolExp) then,
-  ) = _CopyWithImpl_Input_HistoryCallHistoryBoolExp;
-
-  factory CopyWith_Input_HistoryCallHistoryBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryCallHistoryBoolExp;
-
-  TRes call({
-    List<Input_HistoryCallHistoryBoolExp>? $_and,
-    Input_HistoryCallHistoryBoolExp? $_not,
-    List<Input_HistoryCallHistoryBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_UuidComparisonExp? recordedBy,
-    Input_TimestamptzComparisonExp? time,
-    Input_AuthUsersDataBoolExp? user,
-  });
-  TRes $_and(
-      Iterable<Input_HistoryCallHistoryBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_HistoryCallHistoryBoolExp<
-                      Input_HistoryCallHistoryBoolExp>>?)
-          _fn);
-  CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get $_not;
-  TRes $_or(
-      Iterable<Input_HistoryCallHistoryBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_HistoryCallHistoryBoolExp<
-                      Input_HistoryCallHistoryBoolExp>>?)
-          _fn);
-  CopyWith_Input_PersonsBoolExp<TRes> get person;
-  CopyWith_Input_UuidComparisonExp<TRes> get personId;
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
-}
-
-class _CopyWithImpl_Input_HistoryCallHistoryBoolExp<TRes>
-    implements CopyWith_Input_HistoryCallHistoryBoolExp<TRes> {
-  _CopyWithImpl_Input_HistoryCallHistoryBoolExp(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryCallHistoryBoolExp _instance;
-
-  final TRes Function(Input_HistoryCallHistoryBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
-    Object? recordedBy = _undefined,
-    Object? time = _undefined,
-    Object? user = _undefined,
-  }) =>
-      _then(Input_HistoryCallHistoryBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_HistoryCallHistoryBoolExp>?),
-        if ($_not != _undefined)
-          '_not': ($_not as Input_HistoryCallHistoryBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_HistoryCallHistoryBoolExp>?),
-        if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-        if (personId != _undefined)
-          'personId': (personId as Input_UuidComparisonExp?),
-        if (recordedBy != _undefined)
-          'recordedBy': (recordedBy as Input_UuidComparisonExp?),
-        if (time != _undefined)
-          'time': (time as Input_TimestamptzComparisonExp?),
-        if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
-      }));
-
-  TRes $_and(
-          Iterable<Input_HistoryCallHistoryBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_HistoryCallHistoryBoolExp<
-                          Input_HistoryCallHistoryBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(_instance.$_and
-              ?.map((e) => CopyWith_Input_HistoryCallHistoryBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
-
-  CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_HistoryCallHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryCallHistoryBoolExp(
-            local$$_not, (e) => call($_not: e));
-  }
-
-  TRes $_or(
-          Iterable<Input_HistoryCallHistoryBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_HistoryCallHistoryBoolExp<
-                          Input_HistoryCallHistoryBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(_instance.$_or
-              ?.map((e) => CopyWith_Input_HistoryCallHistoryBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$personId, (e) => call(personId: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
-    final local$recordedBy = _instance.recordedBy;
-    return local$recordedBy == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$recordedBy, (e) => call(recordedBy: e));
-  }
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
-    final local$time = _instance.time;
-    return local$time == null
-        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_TimestamptzComparisonExp(
-            local$time, (e) => call(time: e));
-  }
-
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
-    final local$user = _instance.user;
-    return local$user == null
-        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryCallHistoryBoolExp<TRes>
-    implements CopyWith_Input_HistoryCallHistoryBoolExp<TRes> {
-  _CopyWithStubImpl_Input_HistoryCallHistoryBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_HistoryCallHistoryBoolExp>? $_and,
-    Input_HistoryCallHistoryBoolExp? $_not,
-    List<Input_HistoryCallHistoryBoolExp>? $_or,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-    Input_UuidComparisonExp? recordedBy,
-    Input_TimestamptzComparisonExp? time,
-    Input_AuthUsersDataBoolExp? user,
-  }) =>
-      _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_HistoryCallHistoryBoolExp<TRes> get $_not =>
-      CopyWith_Input_HistoryCallHistoryBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
-      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
-
-  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
-      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
-}
-
-class Input_HistoryCallHistoryInsertInput {
-  factory Input_HistoryCallHistoryInsertInput({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
-    DateTime? time,
-  }) =>
-      Input_HistoryCallHistoryInsertInput._({
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
-        if (time != null) r'time': time,
-      });
-
-  Input_HistoryCallHistoryInsertInput._(this._$data);
-
-  factory Input_HistoryCallHistoryInsertInput.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
-    }
-    if (data.containsKey('time')) {
-      final l$time = data['time'];
-      result$data['time'] = l$time == null ? null : tstzFromString(l$time);
-    }
-    return Input_HistoryCallHistoryInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
-
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
-
-  DateTime? get time => (_$data['time'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
-    }
-    if (_$data.containsKey('time')) {
-      final l$time = time;
-      result$data['time'] = l$time == null ? null : tstzToString(l$time);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryCallHistoryInsertInput<
-          Input_HistoryCallHistoryInsertInput>
-      get copyWith => CopyWith_Input_HistoryCallHistoryInsertInput(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryCallHistoryInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
-      return false;
-    }
-    if (l$time != lOther$time) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$person = person;
-    final l$personId = personId;
-    final l$time = time;
-    return Object.hashAll([
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('time') ? l$time : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryCallHistoryInsertInput<TRes> {
-  factory CopyWith_Input_HistoryCallHistoryInsertInput(
-    Input_HistoryCallHistoryInsertInput instance,
-    TRes Function(Input_HistoryCallHistoryInsertInput) then,
-  ) = _CopyWithImpl_Input_HistoryCallHistoryInsertInput;
-
-  factory CopyWith_Input_HistoryCallHistoryInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryCallHistoryInsertInput;
-
-  TRes call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
-    DateTime? time,
-  });
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
-}
-
-class _CopyWithImpl_Input_HistoryCallHistoryInsertInput<TRes>
-    implements CopyWith_Input_HistoryCallHistoryInsertInput<TRes> {
-  _CopyWithImpl_Input_HistoryCallHistoryInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryCallHistoryInsertInput _instance;
-
-  final TRes Function(Input_HistoryCallHistoryInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? person = _undefined,
-    Object? personId = _undefined,
-    Object? time = _undefined,
-  }) =>
-      _then(Input_HistoryCallHistoryInsertInput._({
-        ..._instance._$data,
-        if (person != _undefined)
-          'person': (person as Input_PersonsObjRelInsertInput?),
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
-        if (time != _undefined) 'time': (time as DateTime?),
-      }));
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsObjRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_PersonsObjRelInsertInput(
-            local$person, (e) => call(person: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryCallHistoryInsertInput<TRes>
-    implements CopyWith_Input_HistoryCallHistoryInsertInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryCallHistoryInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
-    DateTime? time,
-  }) =>
-      _res;
-
-  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
-      CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
-}
-
-class Input_HistoryCallHistoryMaxOrderBy {
-  factory Input_HistoryCallHistoryMaxOrderBy({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  }) =>
-      Input_HistoryCallHistoryMaxOrderBy._({
-        if (personId != null) r'personId': personId,
-        if (recordedBy != null) r'recordedBy': recordedBy,
-        if (time != null) r'time': time,
-      });
-
-  Input_HistoryCallHistoryMaxOrderBy._(this._$data);
-
-  factory Input_HistoryCallHistoryMaxOrderBy.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
-    }
-    if (data.containsKey('recordedBy')) {
-      final l$recordedBy = data['recordedBy'];
-      result$data['recordedBy'] = l$recordedBy == null
-          ? null
-          : fromJson_Enum_OrderBy((l$recordedBy as String));
-    }
-    if (data.containsKey('time')) {
-      final l$time = data['time'];
-      result$data['time'] =
-          l$time == null ? null : fromJson_Enum_OrderBy((l$time as String));
-    }
-    return Input_HistoryCallHistoryMaxOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
-    }
-    if (_$data.containsKey('recordedBy')) {
-      final l$recordedBy = recordedBy;
-      result$data['recordedBy'] =
-          l$recordedBy == null ? null : toJson_Enum_OrderBy(l$recordedBy);
-    }
-    if (_$data.containsKey('time')) {
-      final l$time = time;
-      result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryCallHistoryMaxOrderBy<
-          Input_HistoryCallHistoryMaxOrderBy>
-      get copyWith => CopyWith_Input_HistoryCallHistoryMaxOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryCallHistoryMaxOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$recordedBy = recordedBy;
-    final lOther$recordedBy = other.recordedBy;
-    if (_$data.containsKey('recordedBy') !=
-        other._$data.containsKey('recordedBy')) {
-      return false;
-    }
-    if (l$recordedBy != lOther$recordedBy) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
-      return false;
-    }
-    if (l$time != lOther$time) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$personId = personId;
-    final l$recordedBy = recordedBy;
-    final l$time = time;
-    return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
-      _$data.containsKey('time') ? l$time : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryCallHistoryMaxOrderBy<TRes> {
-  factory CopyWith_Input_HistoryCallHistoryMaxOrderBy(
-    Input_HistoryCallHistoryMaxOrderBy instance,
-    TRes Function(Input_HistoryCallHistoryMaxOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryCallHistoryMaxOrderBy;
-
-  factory CopyWith_Input_HistoryCallHistoryMaxOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryCallHistoryMaxOrderBy;
-
-  TRes call({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  });
-}
-
-class _CopyWithImpl_Input_HistoryCallHistoryMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryCallHistoryMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryCallHistoryMaxOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryCallHistoryMaxOrderBy _instance;
-
-  final TRes Function(Input_HistoryCallHistoryMaxOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? personId = _undefined,
-    Object? recordedBy = _undefined,
-    Object? time = _undefined,
-  }) =>
-      _then(Input_HistoryCallHistoryMaxOrderBy._({
-        ..._instance._$data,
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
-        if (recordedBy != _undefined)
-          'recordedBy': (recordedBy as Enum_OrderBy?),
-        if (time != _undefined) 'time': (time as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_HistoryCallHistoryMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryCallHistoryMaxOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryCallHistoryMaxOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  }) =>
-      _res;
-}
-
-class Input_HistoryCallHistoryMinOrderBy {
-  factory Input_HistoryCallHistoryMinOrderBy({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  }) =>
-      Input_HistoryCallHistoryMinOrderBy._({
-        if (personId != null) r'personId': personId,
-        if (recordedBy != null) r'recordedBy': recordedBy,
-        if (time != null) r'time': time,
-      });
-
-  Input_HistoryCallHistoryMinOrderBy._(this._$data);
-
-  factory Input_HistoryCallHistoryMinOrderBy.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$personId as String));
-    }
-    if (data.containsKey('recordedBy')) {
-      final l$recordedBy = data['recordedBy'];
-      result$data['recordedBy'] = l$recordedBy == null
-          ? null
-          : fromJson_Enum_OrderBy((l$recordedBy as String));
-    }
-    if (data.containsKey('time')) {
-      final l$time = data['time'];
-      result$data['time'] =
-          l$time == null ? null : fromJson_Enum_OrderBy((l$time as String));
-    }
-    return Input_HistoryCallHistoryMinOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get personId => (_$data['personId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
-    }
-    if (_$data.containsKey('recordedBy')) {
-      final l$recordedBy = recordedBy;
-      result$data['recordedBy'] =
-          l$recordedBy == null ? null : toJson_Enum_OrderBy(l$recordedBy);
-    }
-    if (_$data.containsKey('time')) {
-      final l$time = time;
-      result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryCallHistoryMinOrderBy<
-          Input_HistoryCallHistoryMinOrderBy>
-      get copyWith => CopyWith_Input_HistoryCallHistoryMinOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryCallHistoryMinOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$recordedBy = recordedBy;
-    final lOther$recordedBy = other.recordedBy;
-    if (_$data.containsKey('recordedBy') !=
-        other._$data.containsKey('recordedBy')) {
-      return false;
-    }
-    if (l$recordedBy != lOther$recordedBy) {
-      return false;
-    }
-    final l$time = time;
-    final lOther$time = other.time;
-    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
-      return false;
-    }
-    if (l$time != lOther$time) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$personId = personId;
-    final l$recordedBy = recordedBy;
-    final l$time = time;
-    return Object.hashAll([
-      _$data.containsKey('personId') ? l$personId : const {},
-      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
-      _$data.containsKey('time') ? l$time : const {},
     ]);
   }
 }

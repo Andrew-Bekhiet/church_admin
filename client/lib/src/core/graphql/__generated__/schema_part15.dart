@@ -589,6 +589,824 @@ class _CopyWithStubImpl_Input_DistrictsUpdates<TRes>
       CopyWith_Input_DistrictsBoolExp.stub(_res);
 }
 
+class Input_FamiliesAdminsPhonesBoolExp {
+  factory Input_FamiliesAdminsPhonesBoolExp({
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
+    Input_FamiliesAdminsPhonesBoolExp? $_not,
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
+    Input_JsonComparisonExp? aggregatedPhones,
+    Input_UuidComparisonExp? familyId,
+  }) =>
+      Input_FamiliesAdminsPhonesBoolExp._({
+        if ($_and != null) r'_and': $_and,
+        if ($_not != null) r'_not': $_not,
+        if ($_or != null) r'_or': $_or,
+        if (aggregatedPhones != null) r'aggregatedPhones': aggregatedPhones,
+        if (familyId != null) r'familyId': familyId,
+      });
+
+  Input_FamiliesAdminsPhonesBoolExp._(this._$data);
+
+  factory Input_FamiliesAdminsPhonesBoolExp.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map((e) => Input_FamiliesAdminsPhonesBoolExp.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_FamiliesAdminsPhonesBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map((e) => Input_FamiliesAdminsPhonesBoolExp.fromJson(
+              (e as Map<String, dynamic>)))
+          .toList();
+    }
+    if (data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = data['aggregatedPhones'];
+      result$data['aggregatedPhones'] = l$aggregatedPhones == null
+          ? null
+          : Input_JsonComparisonExp.fromJson(
+              (l$aggregatedPhones as Map<String, dynamic>));
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$familyId as Map<String, dynamic>));
+    }
+    return Input_FamiliesAdminsPhonesBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_FamiliesAdminsPhonesBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_FamiliesAdminsPhonesBoolExp>?);
+
+  Input_FamiliesAdminsPhonesBoolExp? get $_not =>
+      (_$data['_not'] as Input_FamiliesAdminsPhonesBoolExp?);
+
+  List<Input_FamiliesAdminsPhonesBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_FamiliesAdminsPhonesBoolExp>?);
+
+  Input_JsonComparisonExp? get aggregatedPhones =>
+      (_$data['aggregatedPhones'] as Input_JsonComparisonExp?);
+
+  Input_UuidComparisonExp? get familyId =>
+      (_$data['familyId'] as Input_UuidComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = aggregatedPhones;
+      result$data['aggregatedPhones'] = l$aggregatedPhones?.toJson();
+    }
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] = l$familyId?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<Input_FamiliesAdminsPhonesBoolExp>
+      get copyWith => CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamiliesAdminsPhonesBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$aggregatedPhones = aggregatedPhones;
+    final lOther$aggregatedPhones = other.aggregatedPhones;
+    if (_$data.containsKey('aggregatedPhones') !=
+        other._$data.containsKey('aggregatedPhones')) {
+      return false;
+    }
+    if (l$aggregatedPhones != lOther$aggregatedPhones) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$aggregatedPhones = aggregatedPhones;
+    final l$familyId = familyId;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+              ? null
+              : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+              ? null
+              : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('aggregatedPhones') ? l$aggregatedPhones : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
+  factory CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+    Input_FamiliesAdminsPhonesBoolExp instance,
+    TRes Function(Input_FamiliesAdminsPhonesBoolExp) then,
+  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp;
+
+  factory CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp;
+
+  TRes call({
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
+    Input_FamiliesAdminsPhonesBoolExp? $_not,
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
+    Input_JsonComparisonExp? aggregatedPhones,
+    Input_UuidComparisonExp? familyId,
+  });
+  TRes $_and(
+      Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_FamiliesAdminsPhonesBoolExp<
+                      Input_FamiliesAdminsPhonesBoolExp>>?)
+          _fn);
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not;
+  TRes $_or(
+      Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_FamiliesAdminsPhonesBoolExp<
+                      Input_FamiliesAdminsPhonesBoolExp>>?)
+          _fn);
+  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones;
+  CopyWith_Input_UuidComparisonExp<TRes> get familyId;
+}
+
+class _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
+  _CopyWithImpl_Input_FamiliesAdminsPhonesBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamiliesAdminsPhonesBoolExp _instance;
+
+  final TRes Function(Input_FamiliesAdminsPhonesBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? aggregatedPhones = _undefined,
+    Object? familyId = _undefined,
+  }) =>
+      _then(Input_FamiliesAdminsPhonesBoolExp._({
+        ..._instance._$data,
+        if ($_and != _undefined)
+          '_and': ($_and as List<Input_FamiliesAdminsPhonesBoolExp>?),
+        if ($_not != _undefined)
+          '_not': ($_not as Input_FamiliesAdminsPhonesBoolExp?),
+        if ($_or != _undefined)
+          '_or': ($_or as List<Input_FamiliesAdminsPhonesBoolExp>?),
+        if (aggregatedPhones != _undefined)
+          'aggregatedPhones': (aggregatedPhones as Input_JsonComparisonExp?),
+        if (familyId != _undefined)
+          'familyId': (familyId as Input_UuidComparisonExp?),
+      }));
+
+  TRes $_and(
+          Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_FamiliesAdminsPhonesBoolExp<
+                          Input_FamiliesAdminsPhonesBoolExp>>?)
+              _fn) =>
+      call(
+          $_and: _fn(_instance.$_and
+              ?.map((e) => CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+            local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+          Iterable<Input_FamiliesAdminsPhonesBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_FamiliesAdminsPhonesBoolExp<
+                          Input_FamiliesAdminsPhonesBoolExp>>?)
+              _fn) =>
+      call(
+          $_or: _fn(_instance.$_or
+              ?.map((e) => CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones {
+    final local$aggregatedPhones = _instance.aggregatedPhones;
+    return local$aggregatedPhones == null
+        ? CopyWith_Input_JsonComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_JsonComparisonExp(
+            local$aggregatedPhones, (e) => call(aggregatedPhones: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get familyId {
+    final local$familyId = _instance.familyId;
+    return local$familyId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$familyId, (e) => call(familyId: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> {
+  _CopyWithStubImpl_Input_FamiliesAdminsPhonesBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_and,
+    Input_FamiliesAdminsPhonesBoolExp? $_not,
+    List<Input_FamiliesAdminsPhonesBoolExp>? $_or,
+    Input_JsonComparisonExp? aggregatedPhones,
+    Input_UuidComparisonExp? familyId,
+  }) =>
+      _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get $_not =>
+      CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_JsonComparisonExp<TRes> get aggregatedPhones =>
+      CopyWith_Input_JsonComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+}
+
+class Input_FamiliesAdminsPhonesOrderBy {
+  factory Input_FamiliesAdminsPhonesOrderBy({
+    Enum_OrderBy? aggregatedPhones,
+    Enum_OrderBy? familyId,
+  }) =>
+      Input_FamiliesAdminsPhonesOrderBy._({
+        if (aggregatedPhones != null) r'aggregatedPhones': aggregatedPhones,
+        if (familyId != null) r'familyId': familyId,
+      });
+
+  Input_FamiliesAdminsPhonesOrderBy._(this._$data);
+
+  factory Input_FamiliesAdminsPhonesOrderBy.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = data['aggregatedPhones'];
+      result$data['aggregatedPhones'] = l$aggregatedPhones == null
+          ? null
+          : fromJson_Enum_OrderBy((l$aggregatedPhones as String));
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$familyId as String));
+    }
+    return Input_FamiliesAdminsPhonesOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get aggregatedPhones =>
+      (_$data['aggregatedPhones'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get familyId => (_$data['familyId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = aggregatedPhones;
+      result$data['aggregatedPhones'] = l$aggregatedPhones == null
+          ? null
+          : toJson_Enum_OrderBy(l$aggregatedPhones);
+    }
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] =
+          l$familyId == null ? null : toJson_Enum_OrderBy(l$familyId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamiliesAdminsPhonesOrderBy<Input_FamiliesAdminsPhonesOrderBy>
+      get copyWith => CopyWith_Input_FamiliesAdminsPhonesOrderBy(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamiliesAdminsPhonesOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregatedPhones = aggregatedPhones;
+    final lOther$aggregatedPhones = other.aggregatedPhones;
+    if (_$data.containsKey('aggregatedPhones') !=
+        other._$data.containsKey('aggregatedPhones')) {
+      return false;
+    }
+    if (l$aggregatedPhones != lOther$aggregatedPhones) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregatedPhones = aggregatedPhones;
+    final l$familyId = familyId;
+    return Object.hashAll([
+      _$data.containsKey('aggregatedPhones') ? l$aggregatedPhones : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
+  factory CopyWith_Input_FamiliesAdminsPhonesOrderBy(
+    Input_FamiliesAdminsPhonesOrderBy instance,
+    TRes Function(Input_FamiliesAdminsPhonesOrderBy) then,
+  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy;
+
+  factory CopyWith_Input_FamiliesAdminsPhonesOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy;
+
+  TRes call({
+    Enum_OrderBy? aggregatedPhones,
+    Enum_OrderBy? familyId,
+  });
+}
+
+class _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
+  _CopyWithImpl_Input_FamiliesAdminsPhonesOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamiliesAdminsPhonesOrderBy _instance;
+
+  final TRes Function(Input_FamiliesAdminsPhonesOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregatedPhones = _undefined,
+    Object? familyId = _undefined,
+  }) =>
+      _then(Input_FamiliesAdminsPhonesOrderBy._({
+        ..._instance._$data,
+        if (aggregatedPhones != _undefined)
+          'aggregatedPhones': (aggregatedPhones as Enum_OrderBy?),
+        if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesOrderBy<TRes> {
+  _CopyWithStubImpl_Input_FamiliesAdminsPhonesOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? aggregatedPhones,
+    Enum_OrderBy? familyId,
+  }) =>
+      _res;
+}
+
+class Input_FamiliesAdminsPhonesStreamCursorInput {
+  factory Input_FamiliesAdminsPhonesStreamCursorInput({
+    required Input_FamiliesAdminsPhonesStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) =>
+      Input_FamiliesAdminsPhonesStreamCursorInput._({
+        r'initialValue': initialValue,
+        if (ordering != null) r'ordering': ordering,
+      });
+
+  Input_FamiliesAdminsPhonesStreamCursorInput._(this._$data);
+
+  factory Input_FamiliesAdminsPhonesStreamCursorInput.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_FamiliesAdminsPhonesStreamCursorValueInput.fromJson(
+            (l$initialValue as Map<String, dynamic>));
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_FamiliesAdminsPhonesStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FamiliesAdminsPhonesStreamCursorValueInput get initialValue =>
+      (_$data['initialValue']
+          as Input_FamiliesAdminsPhonesStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] =
+          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput<
+          Input_FamiliesAdminsPhonesStreamCursorInput>
+      get copyWith => CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamiliesAdminsPhonesStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput<TRes> {
+  factory CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput(
+    Input_FamiliesAdminsPhonesStreamCursorInput instance,
+    TRes Function(Input_FamiliesAdminsPhonesStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorInput;
+
+  factory CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorInput;
+
+  TRes call({
+    Input_FamiliesAdminsPhonesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes>
+      get initialValue;
+}
+
+class _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorInput<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamiliesAdminsPhonesStreamCursorInput _instance;
+
+  final TRes Function(Input_FamiliesAdminsPhonesStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) =>
+      _then(Input_FamiliesAdminsPhonesStreamCursorInput._({
+        ..._instance._$data,
+        if (initialValue != _undefined && initialValue != null)
+          'initialValue': (initialValue
+              as Input_FamiliesAdminsPhonesStreamCursorValueInput),
+        if (ordering != _undefined)
+          'ordering': (ordering as Enum_CursorOrdering?),
+      }));
+
+  CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes>
+      get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput(
+        local$initialValue, (e) => call(initialValue: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorInput<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_FamiliesAdminsPhonesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) =>
+      _res;
+
+  CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes>
+      get initialValue =>
+          CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput.stub(_res);
+}
+
+class Input_FamiliesAdminsPhonesStreamCursorValueInput {
+  factory Input_FamiliesAdminsPhonesStreamCursorValueInput({
+    Json? aggregatedPhones,
+    UuidValue? familyId,
+  }) =>
+      Input_FamiliesAdminsPhonesStreamCursorValueInput._({
+        if (aggregatedPhones != null) r'aggregatedPhones': aggregatedPhones,
+        if (familyId != null) r'familyId': familyId,
+      });
+
+  Input_FamiliesAdminsPhonesStreamCursorValueInput._(this._$data);
+
+  factory Input_FamiliesAdminsPhonesStreamCursorValueInput.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = data['aggregatedPhones'];
+      result$data['aggregatedPhones'] = (l$aggregatedPhones as Json?);
+    }
+    if (data.containsKey('familyId')) {
+      final l$familyId = data['familyId'];
+      result$data['familyId'] =
+          l$familyId == null ? null : stringToUuid(l$familyId);
+    }
+    return Input_FamiliesAdminsPhonesStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Json? get aggregatedPhones => (_$data['aggregatedPhones'] as Json?);
+
+  UuidValue? get familyId => (_$data['familyId'] as UuidValue?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('aggregatedPhones')) {
+      final l$aggregatedPhones = aggregatedPhones;
+      result$data['aggregatedPhones'] = l$aggregatedPhones;
+    }
+    if (_$data.containsKey('familyId')) {
+      final l$familyId = familyId;
+      result$data['familyId'] =
+          l$familyId == null ? null : uuidToString(l$familyId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<
+          Input_FamiliesAdminsPhonesStreamCursorValueInput>
+      get copyWith => CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FamiliesAdminsPhonesStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$aggregatedPhones = aggregatedPhones;
+    final lOther$aggregatedPhones = other.aggregatedPhones;
+    if (_$data.containsKey('aggregatedPhones') !=
+        other._$data.containsKey('aggregatedPhones')) {
+      return false;
+    }
+    if (l$aggregatedPhones != lOther$aggregatedPhones) {
+      return false;
+    }
+    final l$familyId = familyId;
+    final lOther$familyId = other.familyId;
+    if (_$data.containsKey('familyId') !=
+        other._$data.containsKey('familyId')) {
+      return false;
+    }
+    if (l$familyId != lOther$familyId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$aggregatedPhones = aggregatedPhones;
+    final l$familyId = familyId;
+    return Object.hashAll([
+      _$data.containsKey('aggregatedPhones') ? l$aggregatedPhones : const {},
+      _$data.containsKey('familyId') ? l$familyId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput(
+    Input_FamiliesAdminsPhonesStreamCursorValueInput instance,
+    TRes Function(Input_FamiliesAdminsPhonesStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput;
+
+  factory CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput.stub(
+          TRes res) =
+      _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput;
+
+  TRes call({
+    Json? aggregatedPhones,
+    UuidValue? familyId,
+  });
+}
+
+class _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FamiliesAdminsPhonesStreamCursorValueInput _instance;
+
+  final TRes Function(Input_FamiliesAdminsPhonesStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? aggregatedPhones = _undefined,
+    Object? familyId = _undefined,
+  }) =>
+      _then(Input_FamiliesAdminsPhonesStreamCursorValueInput._({
+        ..._instance._$data,
+        if (aggregatedPhones != _undefined)
+          'aggregatedPhones': (aggregatedPhones as Json?),
+        if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes>
+    implements CopyWith_Input_FamiliesAdminsPhonesStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_FamiliesAdminsPhonesStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({
+    Json? aggregatedPhones,
+    UuidValue? familyId,
+  }) =>
+      _res;
+}
+
 class Input_FamiliesBoolExp {
   factory Input_FamiliesBoolExp({
     List<Input_FamiliesBoolExp>? $_and,
@@ -602,6 +1420,7 @@ class Input_FamiliesBoolExp {
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
@@ -634,6 +1453,8 @@ class Input_FamiliesBoolExp {
         if (editHistory != null) r'editHistory': editHistory,
         if (editHistoryAggregate != null)
           r'editHistoryAggregate': editHistoryAggregate,
+        if (familyAdminsPhones != null)
+          r'familyAdminsPhones': familyAdminsPhones,
         if (geolocation != null) r'geolocation': geolocation,
         if (id != null) r'id': id,
         if (lastEdit != null) r'lastEdit': lastEdit,
@@ -733,6 +1554,13 @@ class Input_FamiliesBoolExp {
           ? null
           : Input_HistoryEditHistoryAggregateBoolExp.fromJson(
               (l$editHistoryAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('familyAdminsPhones')) {
+      final l$familyAdminsPhones = data['familyAdminsPhones'];
+      result$data['familyAdminsPhones'] = l$familyAdminsPhones == null
+          ? null
+          : Input_FamiliesAdminsPhonesBoolExp.fromJson(
+              (l$familyAdminsPhones as Map<String, dynamic>));
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -889,6 +1717,9 @@ class Input_FamiliesBoolExp {
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateBoolExp?);
 
+  Input_FamiliesAdminsPhonesBoolExp? get familyAdminsPhones =>
+      (_$data['familyAdminsPhones'] as Input_FamiliesAdminsPhonesBoolExp?);
+
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
 
@@ -984,6 +1815,10 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = editHistoryAggregate;
       result$data['editHistoryAggregate'] = l$editHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('familyAdminsPhones')) {
+      final l$familyAdminsPhones = familyAdminsPhones;
+      result$data['familyAdminsPhones'] = l$familyAdminsPhones?.toJson();
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -1186,6 +2021,15 @@ class Input_FamiliesBoolExp {
     if (l$editHistoryAggregate != lOther$editHistoryAggregate) {
       return false;
     }
+    final l$familyAdminsPhones = familyAdminsPhones;
+    final lOther$familyAdminsPhones = other.familyAdminsPhones;
+    if (_$data.containsKey('familyAdminsPhones') !=
+        other._$data.containsKey('familyAdminsPhones')) {
+      return false;
+    }
+    if (l$familyAdminsPhones != lOther$familyAdminsPhones) {
+      return false;
+    }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
     if (_$data.containsKey('geolocation') !=
@@ -1348,6 +2192,7 @@ class Input_FamiliesBoolExp {
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
+    final l$familyAdminsPhones = familyAdminsPhones;
     final l$geolocation = geolocation;
     final l$id = id;
     final l$lastEdit = lastEdit;
@@ -1388,6 +2233,9 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('editHistory') ? l$editHistory : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
+          : const {},
+      _$data.containsKey('familyAdminsPhones')
+          ? l$familyAdminsPhones
           : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -1433,6 +2281,7 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
@@ -1469,6 +2318,7 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
       get editHistoryAggregate;
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get familyAdminsPhones;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
@@ -1514,6 +2364,7 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? deceasedSpouseName = _undefined,
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
+    Object? familyAdminsPhones = _undefined,
     Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
@@ -1555,6 +2406,9 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         if (editHistoryAggregate != _undefined)
           'editHistoryAggregate': (editHistoryAggregate
               as Input_HistoryEditHistoryAggregateBoolExp?),
+        if (familyAdminsPhones != _undefined)
+          'familyAdminsPhones':
+              (familyAdminsPhones as Input_FamiliesAdminsPhonesBoolExp?),
         if (geolocation != _undefined)
           'geolocation': (geolocation as Input_GeographyComparisonExp?),
         if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
@@ -1683,6 +2537,14 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
             _then(_instance))
         : CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
             local$editHistoryAggregate, (e) => call(editHistoryAggregate: e));
+  }
+
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get familyAdminsPhones {
+    final local$familyAdminsPhones = _instance.familyAdminsPhones;
+    return local$familyAdminsPhones == null
+        ? CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_FamiliesAdminsPhonesBoolExp(
+            local$familyAdminsPhones, (e) => call(familyAdminsPhones: e));
   }
 
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation {
@@ -1838,6 +2700,7 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
+    Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
     Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
@@ -1889,6 +2752,9 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
       get editHistoryAggregate =>
           CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get familyAdminsPhones =>
+      CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_res);
 
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
@@ -2062,532 +2928,6 @@ class Input_FamiliesFamiliesAggregateOrderBy {
       _$data.containsKey('count') ? l$count : const {},
       _$data.containsKey('max') ? l$max : const {},
       _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> {
-  factory CopyWith_Input_FamiliesFamiliesAggregateOrderBy(
-    Input_FamiliesFamiliesAggregateOrderBy instance,
-    TRes Function(Input_FamiliesFamiliesAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy;
-
-  factory CopyWith_Input_FamiliesFamiliesAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesFamiliesAggregateOrderBy;
-
-  TRes call({
-    Enum_OrderBy? count,
-    Input_FamiliesFamiliesMaxOrderBy? max,
-    Input_FamiliesFamiliesMinOrderBy? min,
-  });
-  CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max;
-  CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> get min;
-}
-
-class _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
-    implements CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_FamiliesFamiliesAggregateOrderBy _instance;
-
-  final TRes Function(Input_FamiliesFamiliesAggregateOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesAggregateOrderBy._({
-        ..._instance._$data,
-        if (count != _undefined) 'count': (count as Enum_OrderBy?),
-        if (max != _undefined)
-          'max': (max as Input_FamiliesFamiliesMaxOrderBy?),
-        if (min != _undefined)
-          'min': (min as Input_FamiliesFamiliesMinOrderBy?),
-      }));
-
-  CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FamiliesFamiliesMaxOrderBy(
-            local$max, (e) => call(max: e));
-  }
-
-  CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_FamiliesFamiliesMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FamiliesFamiliesMinOrderBy(
-            local$min, (e) => call(min: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
-    implements CopyWith_Input_FamiliesFamiliesAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_FamiliesFamiliesAggregateOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? count,
-    Input_FamiliesFamiliesMaxOrderBy? max,
-    Input_FamiliesFamiliesMinOrderBy? min,
-  }) =>
-      _res;
-
-  CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max =>
-      CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(_res);
-
-  CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> get min =>
-      CopyWith_Input_FamiliesFamiliesMinOrderBy.stub(_res);
-}
-
-class Input_FamiliesFamiliesArrRelInsertInput {
-  factory Input_FamiliesFamiliesArrRelInsertInput({
-    required List<Input_FamiliesFamiliesInsertInput> data,
-    Input_FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      Input_FamiliesFamiliesArrRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
-
-  Input_FamiliesFamiliesArrRelInsertInput._(this._$data);
-
-  factory Input_FamiliesFamiliesArrRelInsertInput.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = (l$data as List<dynamic>)
-        .map((e) => Input_FamiliesFamiliesInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
-        .toList();
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_FamiliesFamiliesOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
-    }
-    return Input_FamiliesFamiliesArrRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_FamiliesFamiliesInsertInput> get data =>
-      (_$data['data'] as List<Input_FamiliesFamiliesInsertInput>);
-
-  Input_FamiliesFamiliesOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_FamiliesFamiliesOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.map((e) => e.toJson()).toList();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamiliesFamiliesArrRelInsertInput<
-          Input_FamiliesFamiliesArrRelInsertInput>
-      get copyWith => CopyWith_Input_FamiliesFamiliesArrRelInsertInput(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamiliesFamiliesArrRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data.length != lOther$data.length) {
-      return false;
-    }
-    for (int i = 0; i < l$data.length; i++) {
-      final l$data$entry = l$data[i];
-      final lOther$data$entry = lOther$data[i];
-      if (l$data$entry != lOther$data$entry) {
-        return false;
-      }
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      Object.hashAll(l$data.map((v) => v)),
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> {
-  factory CopyWith_Input_FamiliesFamiliesArrRelInsertInput(
-    Input_FamiliesFamiliesArrRelInsertInput instance,
-    TRes Function(Input_FamiliesFamiliesArrRelInsertInput) then,
-  ) = _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput;
-
-  factory CopyWith_Input_FamiliesFamiliesArrRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesFamiliesArrRelInsertInput;
-
-  TRes call({
-    List<Input_FamiliesFamiliesInsertInput>? data,
-    Input_FamiliesFamiliesOnConflict? onConflict,
-  });
-  TRes data(
-      Iterable<Input_FamiliesFamiliesInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_FamiliesFamiliesInsertInput<
-                      Input_FamiliesFamiliesInsertInput>>)
-          _fn);
-  CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
-    implements CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_FamiliesFamiliesArrRelInsertInput _instance;
-
-  final TRes Function(Input_FamiliesFamiliesArrRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_FamiliesFamiliesInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_FamiliesFamiliesOnConflict?),
-      }));
-
-  TRes data(
-          Iterable<Input_FamiliesFamiliesInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_FamiliesFamiliesInsertInput<
-                          Input_FamiliesFamiliesInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(_instance.data
-              .map((e) => CopyWith_Input_FamiliesFamiliesInsertInput(
-                    e,
-                    (i) => i,
-                  ))).toList());
-
-  CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_FamiliesFamiliesOnConflict.stub(_then(_instance))
-        : CopyWith_Input_FamiliesFamiliesOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
-    implements CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_FamiliesFamiliesArrRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_FamiliesFamiliesInsertInput>? data,
-    Input_FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      _res;
-
-  data(_fn) => _res;
-
-  CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict =>
-      CopyWith_Input_FamiliesFamiliesOnConflict.stub(_res);
-}
-
-class Input_FamiliesFamiliesBoolExp {
-  factory Input_FamiliesFamiliesBoolExp({
-    List<Input_FamiliesFamiliesBoolExp>? $_and,
-    Input_FamiliesFamiliesBoolExp? $_not,
-    List<Input_FamiliesFamiliesBoolExp>? $_or,
-    Input_FamiliesBoolExp? child,
-    Input_UuidComparisonExp? childFamilyId,
-    Input_FamiliesBoolExp? parent,
-    Input_UuidComparisonExp? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (child != null) r'child': child,
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parent != null) r'parent': parent,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
-
-  Input_FamiliesFamiliesBoolExp._(this._$data);
-
-  factory Input_FamiliesFamiliesBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) => Input_FamiliesFamiliesBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_FamiliesFamiliesBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) => Input_FamiliesFamiliesBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
-          .toList();
-    }
-    if (data.containsKey('child')) {
-      final l$child = data['child'];
-      result$data['child'] = l$child == null
-          ? null
-          : Input_FamiliesBoolExp.fromJson((l$child as Map<String, dynamic>));
-    }
-    if (data.containsKey('childFamilyId')) {
-      final l$childFamilyId = data['childFamilyId'];
-      result$data['childFamilyId'] = l$childFamilyId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$childFamilyId as Map<String, dynamic>));
-    }
-    if (data.containsKey('parent')) {
-      final l$parent = data['parent'];
-      result$data['parent'] = l$parent == null
-          ? null
-          : Input_FamiliesBoolExp.fromJson((l$parent as Map<String, dynamic>));
-    }
-    if (data.containsKey('parentFamilyId')) {
-      final l$parentFamilyId = data['parentFamilyId'];
-      result$data['parentFamilyId'] = l$parentFamilyId == null
-          ? null
-          : Input_UuidComparisonExp.fromJson(
-              (l$parentFamilyId as Map<String, dynamic>));
-    }
-    return Input_FamiliesFamiliesBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_FamiliesFamiliesBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_FamiliesFamiliesBoolExp>?);
-
-  Input_FamiliesFamiliesBoolExp? get $_not =>
-      (_$data['_not'] as Input_FamiliesFamiliesBoolExp?);
-
-  List<Input_FamiliesFamiliesBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_FamiliesFamiliesBoolExp>?);
-
-  Input_FamiliesBoolExp? get child =>
-      (_$data['child'] as Input_FamiliesBoolExp?);
-
-  Input_UuidComparisonExp? get childFamilyId =>
-      (_$data['childFamilyId'] as Input_UuidComparisonExp?);
-
-  Input_FamiliesBoolExp? get parent =>
-      (_$data['parent'] as Input_FamiliesBoolExp?);
-
-  Input_UuidComparisonExp? get parentFamilyId =>
-      (_$data['parentFamilyId'] as Input_UuidComparisonExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('child')) {
-      final l$child = child;
-      result$data['child'] = l$child?.toJson();
-    }
-    if (_$data.containsKey('childFamilyId')) {
-      final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] = l$childFamilyId?.toJson();
-    }
-    if (_$data.containsKey('parent')) {
-      final l$parent = parent;
-      result$data['parent'] = l$parent?.toJson();
-    }
-    if (_$data.containsKey('parentFamilyId')) {
-      final l$parentFamilyId = parentFamilyId;
-      result$data['parentFamilyId'] = l$parentFamilyId?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
-      get copyWith => CopyWith_Input_FamiliesFamiliesBoolExp(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_FamiliesFamiliesBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$child = child;
-    final lOther$child = other.child;
-    if (_$data.containsKey('child') != other._$data.containsKey('child')) {
-      return false;
-    }
-    if (l$child != lOther$child) {
-      return false;
-    }
-    final l$childFamilyId = childFamilyId;
-    final lOther$childFamilyId = other.childFamilyId;
-    if (_$data.containsKey('childFamilyId') !=
-        other._$data.containsKey('childFamilyId')) {
-      return false;
-    }
-    if (l$childFamilyId != lOther$childFamilyId) {
-      return false;
-    }
-    final l$parent = parent;
-    final lOther$parent = other.parent;
-    if (_$data.containsKey('parent') != other._$data.containsKey('parent')) {
-      return false;
-    }
-    if (l$parent != lOther$parent) {
-      return false;
-    }
-    final l$parentFamilyId = parentFamilyId;
-    final lOther$parentFamilyId = other.parentFamilyId;
-    if (_$data.containsKey('parentFamilyId') !=
-        other._$data.containsKey('parentFamilyId')) {
-      return false;
-    }
-    if (l$parentFamilyId != lOther$parentFamilyId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$child = child;
-    final l$childFamilyId = childFamilyId;
-    final l$parent = parent;
-    final l$parentFamilyId = parentFamilyId;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('child') ? l$child : const {},
-      _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
-      _$data.containsKey('parent') ? l$parent : const {},
-      _$data.containsKey('parentFamilyId') ? l$parentFamilyId : const {},
     ]);
   }
 }

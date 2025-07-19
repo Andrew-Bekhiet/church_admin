@@ -9,6 +9,15 @@ object_relationships:
         table:
           name: addresses
           schema: public
+  - name: familyAdminsPhones
+    using:
+      manual_configuration:
+        column_mapping:
+          id: family_id
+        insertion_order: null
+        remote_table:
+          name: families_admins_phones
+          schema: public
   - name: lastEdit
     using:
       manual_configuration:

@@ -1777,6 +1777,7 @@ type Families {
     orderBy: [HistoryEditHistoryOrderBy!]
     where: HistoryEditHistoryBoolExp
   ): HistoryEditHistoryAggregate!
+  familyAdminsPhones: FamiliesAdminsPhones
   geolocation: geography
   id: uuid!
   lastEdit: HistoryLatestEdits
@@ -1838,6 +1839,39 @@ type Families {
   ): HistoryVisitHistoryAggregate!
 }
 
+type FamiliesAdminsPhones {
+  aggregatedPhones(
+    path: String
+  ): json
+  familyId: uuid
+}
+
+input FamiliesAdminsPhonesBoolExp {
+  _and: [FamiliesAdminsPhonesBoolExp!]
+  _not: FamiliesAdminsPhonesBoolExp
+  _or: [FamiliesAdminsPhonesBoolExp!]
+  aggregatedPhones: JsonComparisonExp
+  familyId: UuidComparisonExp
+}
+input FamiliesAdminsPhonesOrderBy {
+  aggregatedPhones: OrderBy
+  familyId: OrderBy
+}
+
+enum FamiliesAdminsPhonesSelectColumn {
+  aggregatedPhones
+  familyId
+}
+
+input FamiliesAdminsPhonesStreamCursorInput {
+  initialValue: FamiliesAdminsPhonesStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input FamiliesAdminsPhonesStreamCursorValueInput {
+  aggregatedPhones: json
+  familyId: uuid
+}
+
 type FamiliesAggregate {
   aggregate: FamiliesAggregateFields
   nodes: [Families!]!
@@ -1872,6 +1906,7 @@ input FamiliesBoolExp {
   deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
+  familyAdminsPhones: FamiliesAdminsPhonesBoolExp
   geolocation: GeographyComparisonExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
@@ -2048,6 +2083,7 @@ input FamiliesOrderBy {
   color: OrderBy
   deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
+  familyAdminsPhones: FamiliesAdminsPhonesOrderBy
   geolocation: OrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
@@ -4299,6 +4335,18 @@ enum JobsUpdateColumn {
 input JobsUpdates {
   _set: JobsSetInput
   where: JobsBoolExp!
+}
+
+input JsonComparisonExp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _isNull: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
 }
 
 input JsonbCastExp {
@@ -7216,6 +7264,8 @@ input historyVisitHistoryAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
+scalar json
+
 scalar jsonb
 type mutation_root {
   deleteAddresses(
@@ -8110,6 +8160,13 @@ type query_root {
     orderBy: [FamiliesOrderBy!]
     where: FamiliesBoolExp
   ): [Families!]!
+  familiesAdminsPhones(
+    distinctOn: [FamiliesAdminsPhonesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [FamiliesAdminsPhonesOrderBy!]
+    where: FamiliesAdminsPhonesBoolExp
+  ): [FamiliesAdminsPhones!]!
   familiesAggregate(
     distinctOn: [FamiliesSelectColumn!]
     limit: Int
@@ -8621,6 +8678,18 @@ type subscription_root {
     orderBy: [FamiliesOrderBy!]
     where: FamiliesBoolExp
   ): [Families!]!
+  familiesAdminsPhones(
+    distinctOn: [FamiliesAdminsPhonesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [FamiliesAdminsPhonesOrderBy!]
+    where: FamiliesAdminsPhonesBoolExp
+  ): [FamiliesAdminsPhones!]!
+  familiesAdminsPhonesStream(
+    batchSize: Int!
+    cursor: [FamiliesAdminsPhonesStreamCursorInput]!
+    where: FamiliesAdminsPhonesBoolExp
+  ): [FamiliesAdminsPhones!]!
   familiesAggregate(
     distinctOn: [FamiliesSelectColumn!]
     limit: Int

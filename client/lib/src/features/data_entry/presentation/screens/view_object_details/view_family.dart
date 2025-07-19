@@ -27,6 +27,21 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ],
         ),
+        orderBy: Stream.value(
+          [
+            OrderBy(
+              field: PersonFields()
+                  .personType
+                  .redirectTo(PersonTypeFields().isFamilyAdmin),
+              value: OrderByValue.desc,
+            ),
+            OrderBy(
+              field: PersonFields()
+                  .personType
+                  .redirectTo(PersonTypeFields().order),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -138,6 +153,15 @@ class _ViewFamilyState extends State<ViewFamily> {
       ),
       detailsBuilder: (context, family) => SliverList(
         delegate: SliverChildListDelegate([
+          for (final MapEntry(key: personType, value: phone)
+              in family.familyAdminsPhones?.entries ?? {})
+            PhoneNumberProperty(
+              'رقم هاتف ال$personType',
+              phone,
+              (n) => LauncherService.I.launchCall(
+                PhoneNumberService.I.formatInternational(n),
+              ),
+            ),
           CopiablePropertyWidget(
             'العنوان والموقع',
             family.address?.toString(),
@@ -332,6 +356,6 @@ class _ViewFamilyState extends State<ViewFamily> {
   }
 }
 
-abstract class _ChildrenFamily {}
+abstract final class _ChildrenFamily {}
 
-abstract class _ParentFamily {}
+abstract final class _ParentFamily {}

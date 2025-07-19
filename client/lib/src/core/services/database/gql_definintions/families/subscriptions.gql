@@ -41,6 +41,9 @@ subscription watchFamily($id: uuid!) {
     status
     deceasedSpouseName
     marriageDate
+    familyAdminsPhones {
+      aggregatedPhones
+    }
     notes
     lastEdit {
       ...LatestEditHistory

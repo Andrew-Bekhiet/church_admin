@@ -8,12 +8,19 @@ part 'family.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'العائلات', allowExtension: true, labelsOverrides: {
-  'status': 'الحالة الاجتماعية',
-  'deceasedSpouseName': 'اسم الزوج المتوفي',
-  'marriageDate': 'تاريخ الزواج',
-  'lastFatherVisit': 'آخر افتقاد للأب',
-})
+@Queryable(
+  classLabel: 'العائلات',
+  allowExtension: true,
+  labelsOverrides: {
+    'status': 'الحالة الاجتماعية',
+    'deceasedSpouseName': 'اسم الزوج المتوفي',
+    'marriageDate': 'تاريخ الزواج',
+    'lastFatherVisit': 'آخر افتقاد للأب الكاهن',
+    'children': 'عائلات الأبناء',
+    'parents': 'عائلات الآباء',
+  },
+  ignoreFields: ['blurhash', 'familyAdminsPhones'],
+)
 class Family extends ViewableWithIDAndImage
     with _$Family
     implements SerializableExtra {
@@ -63,6 +70,9 @@ class Family extends ViewableWithIDAndImage
       manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'parent')
   final List<Family>? parents;
 
+  @JsonKey(readValue: _readFamilyAdminsPhones)
+  final Json? familyAdminsPhones;
+
   @override
   final LastRecordedByInfo? lastEdit;
 
@@ -88,6 +98,7 @@ class Family extends ViewableWithIDAndImage
     this.lastEdit,
     this.lastVisit,
     this.lastFatherVisit,
+    this.familyAdminsPhones,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
@@ -234,3 +245,6 @@ List<Family>? familyParentsFromJson(List? data) =>
     data?.map((e) => Family.fromJson(e['parent'])).toList();
 List<Json>? familyParentsToJson(List<Family>? hobbies) =>
     hobbies?.map((e) => {'parent': e.toJson()}).toList();
+
+Json? _readFamilyAdminsPhones(Map json, String key) =>
+    json[key]?['aggregatedPhones'];

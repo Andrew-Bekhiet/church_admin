@@ -56,14 +56,14 @@ class _ViewPersonState extends State<ViewPerson> {
               'رقم الهاتف',
               person.mainPhone ?? '',
               (n) => _phoneCall(context, n),
-              (n) => _contactAdd(context, n, person),
+              addToContacts: (n) => _contactAdd(context, n, person),
             ),
             ...person.otherPhones.entries.map(
               (e) => PhoneNumberProperty(
                 e.key,
                 e.value,
                 (n) => _phoneCall(context, n),
-                (n) => _contactAdd(context, n, person),
+                addToContacts: (n) => _contactAdd(context, n, person),
               ),
             ),
             CopiablePropertyWidget(
