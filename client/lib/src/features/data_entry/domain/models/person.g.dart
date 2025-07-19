@@ -145,12 +145,16 @@ class _PersonFields {
     },
   );
 
-  final FieldMetadata<bool> isStudent = FieldMetadata<bool>(
+  final FieldMetadata<WorkStatus> workStatus = FieldMetadata<WorkStatus>(
     parentType: Person,
-    name: 'isStudent',
-    label: 'طالب؟',
+    name: 'workStatus',
+    label: 'workStatus',
     isCodeOnly: false,
-    operators: {...BooleanOperator.values},
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
   );
 
   final FieldMetadata<Job> job = FieldMetadata<Job>(
@@ -587,7 +591,7 @@ class _PersonFields {
     college,
     church,
     father,
-    isStudent,
+    workStatus,
     job,
     jobDescription,
     qualification,
@@ -640,7 +644,7 @@ class _PersonFields {
     'college': college,
     'church': church,
     'father': father,
-    'isStudent': isStudent,
+    'workStatus': workStatus,
     'job': job,
     'jobDescription': jobDescription,
     'qualification': qualification,
@@ -724,7 +728,9 @@ Person _$PersonFromJson(Map json) => Person(
           ? null
           : Father.fromJson(Map<String, Object?>.from(json['father'] as Map)),
       fatherId: json['fatherId'] as String?,
-      isStudent: json['isStudent'] as bool? ?? false,
+      workStatus:
+          $enumDecodeNullable(_$WorkStatusEnumMap, json['workStatus']) ??
+              WorkStatus.employed,
       job: json['job'] == null
           ? null
           : Job.fromJson(Map<String, Object?>.from(json['job'] as Map)),
@@ -868,7 +874,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'churchId': instance.churchId,
       'father': instance.father?.toJson(),
       'fatherId': instance.fatherId,
-      'isStudent': instance.isStudent,
+      'workStatus': _$WorkStatusEnumMap[instance.workStatus],
       'job': instance.job?.toJson(),
       'jobId': instance.jobId,
       'jobDescription': instance.jobDescription,
@@ -918,3 +924,10 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'visitHistoryAggregate': instance.visitHistoryAggregate?.toJson(),
       'editHistoryAggregate': instance.editHistoryAggregate?.toJson(),
     };
+
+const _$WorkStatusEnumMap = {
+  WorkStatus.student: 'student',
+  WorkStatus.employed: 'employed',
+  WorkStatus.unemployed: 'unemployed',
+  WorkStatus.retired: 'retired',
+};

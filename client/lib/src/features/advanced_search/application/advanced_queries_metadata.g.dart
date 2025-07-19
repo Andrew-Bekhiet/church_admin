@@ -272,6 +272,13 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: Tag.fromJson,
   );
 
+  final workStatus = QueryableType<WorkStatus>.enum$(
+    name: 'WorkStatus',
+    label: 'حالات العمل',
+    byName: WorkStatus.byName,
+    enumValues: WorkStatus.values,
+  );
+
   final lastRecordedByInfo = QueryableType<LastRecordedByInfo>(
     name: 'LastRecordedByInfo',
     label: 'بيانات آخر تسجيل',
@@ -345,6 +352,7 @@ abstract final class _$AdvancedQueriesMetadata {
     street,
     studyYear,
     tag,
+    workStatus,
     lastRecordedByInfo,
     adminOnData,
     usersPermissionsRel,
@@ -385,6 +393,7 @@ abstract final class _$AdvancedQueriesMetadata {
     Street: street,
     StudyYear: studyYear,
     Tag: tag,
+    WorkStatus: workStatus,
     LastRecordedByInfo: lastRecordedByInfo,
     AdminOnData: adminOnData,
     UsersPermissionsRel: usersPermissionsRel,

@@ -30,6 +30,7 @@ abstract class CopyWith_Input_PersonsStreamCursorValueInput<TRes> {
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -41,6 +42,7 @@ abstract class CopyWith_Input_PersonsStreamCursorValueInput<TRes> {
     UuidValue? storeId,
     int? studyYearId,
     UuidValue? uid,
+    String? workStatus,
   });
 }
 
@@ -76,6 +78,7 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
     Object? personTypeId = _undefined,
@@ -87,6 +90,7 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
     Object? storeId = _undefined,
     Object? studyYearId = _undefined,
     Object? uid = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsStreamCursorValueInput._({
         ..._instance._$data,
@@ -110,6 +114,7 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
         if (jobId != _undefined) 'jobId': (jobId as UuidValue?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
         if (name != _undefined) 'name': (name as String?),
+        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (notes != _undefined) 'notes': (notes as String?),
         if (otherPhones != _undefined) 'otherPhones': (otherPhones as Json?),
         if (personTypeId != _undefined)
@@ -125,6 +130,7 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
         if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
         if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
         if (uid != _undefined) 'uid': (uid as UuidValue?),
+        if (workStatus != _undefined) 'workStatus': (workStatus as String?),
       }));
 }
 
@@ -153,6 +159,7 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorValueInput<TRes>
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -164,6 +171,7 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorValueInput<TRes>
     UuidValue? storeId,
     int? studyYearId,
     UuidValue? uid,
+    String? workStatus,
   }) =>
       _res;
 }
@@ -171,10 +179,12 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorValueInput<TRes>
 class Input_PersonsSumOrderBy {
   factory Input_PersonsSumOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsSumOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -186,6 +196,12 @@ class Input_PersonsSumOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -200,6 +216,8 @@ class Input_PersonsSumOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -208,6 +226,11 @@ class Input_PersonsSumOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -239,6 +262,15 @@ class Input_PersonsSumOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -254,9 +286,11 @@ class Input_PersonsSumOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -273,6 +307,7 @@ abstract class CopyWith_Input_PersonsSumOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -292,11 +327,14 @@ class _CopyWithImpl_Input_PersonsSumOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsSumOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -310,6 +348,7 @@ class _CopyWithStubImpl_Input_PersonsSumOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;

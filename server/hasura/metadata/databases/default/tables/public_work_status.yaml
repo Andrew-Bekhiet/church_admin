@@ -1,0 +1,3 @@
+table:
+  name: work_status
+  schema: public

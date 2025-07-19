@@ -4786,6 +4786,7 @@ type Persons {
     orderBy: [HistoryVisitHistoryOrderBy!]
     where: HistoryVisitHistoryBoolExp
   ): HistoryVisitHistoryAggregate!
+  workStatus: String
 }
 
 type PersonsAggregate {
@@ -4916,6 +4917,7 @@ input PersonsBoolExp {
   user: AuthUsersDataBoolExp
   visitHistory: HistoryVisitHistoryBoolExp
   visitHistoryAggregate: HistoryVisitHistoryAggregateBoolExp
+  workStatus: StringComparisonExp
 }
 
 enum PersonsConstraint {
@@ -5162,6 +5164,7 @@ input PersonsInsertInput {
   studyYearId: smallint
   tags: PersonsTagsArrRelInsertInput
   visitHistory: HistoryVisitHistoryArrRelInsertInput
+  workStatus: String
 }
 type PersonsMaxFields {
   addressText: String
@@ -5189,6 +5192,7 @@ type PersonsMaxFields {
   storeId: uuid
   studyYearId: smallint
   uid: uuid
+  workStatus: String
 }
 
 input PersonsMaxOrderBy {
@@ -5216,6 +5220,7 @@ input PersonsMaxOrderBy {
   storeId: OrderBy
   studyYearId: OrderBy
   uid: OrderBy
+  workStatus: OrderBy
 }
 type PersonsMinFields {
   addressText: String
@@ -5243,6 +5248,7 @@ type PersonsMinFields {
   storeId: uuid
   studyYearId: smallint
   uid: uuid
+  workStatus: String
 }
 
 input PersonsMinOrderBy {
@@ -5270,6 +5276,7 @@ input PersonsMinOrderBy {
   storeId: OrderBy
   studyYearId: OrderBy
   uid: OrderBy
+  workStatus: OrderBy
 }
 
 type PersonsMutationResponse {
@@ -5348,6 +5355,7 @@ input PersonsOrderBy {
   uid: OrderBy
   user: AuthUsersDataOrderBy
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
+  workStatus: OrderBy
 }
 input PersonsPkColumnsInput {
   id: uuid!
@@ -5387,6 +5395,7 @@ enum PersonsSelectColumn {
   storeId
   studyYearId
   uid
+  workStatus
 }
 
 enum PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
@@ -5526,6 +5535,7 @@ input PersonsSetInput {
   stateId: uuid
   storeId: uuid
   studyYearId: smallint
+  workStatus: String
 }
 type PersonsStddevFields {
   color: Float
@@ -5596,6 +5606,7 @@ input PersonsStreamCursorValueInput {
   storeId: uuid
   studyYearId: smallint
   uid: uuid
+  workStatus: String
 }
 type PersonsSumFields {
   color: bigint
@@ -5724,6 +5735,7 @@ enum PersonsUpdateColumn {
   stateId
   storeId
   studyYearId
+  workStatus
 }
 
 input PersonsUpdates {

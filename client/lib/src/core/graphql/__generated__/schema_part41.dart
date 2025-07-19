@@ -25,6 +25,7 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -35,6 +36,7 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   });
 }
 
@@ -65,6 +67,7 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? personTypeId = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -75,6 +78,7 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     Object? storeId = _undefined,
     Object? studyYearId = _undefined,
     Object? uid = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsMaxOrderBy._({
         ..._instance._$data,
@@ -93,6 +97,8 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
         if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
         if (personTypeId != _undefined)
           'personTypeId': (personTypeId as Enum_OrderBy?),
@@ -108,6 +114,8 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
         if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        if (workStatus != _undefined)
+          'workStatus': (workStatus as Enum_OrderBy?),
       }));
 }
 
@@ -131,6 +139,7 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -141,6 +150,7 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   }) =>
       _res;
 }
@@ -160,6 +170,7 @@ class Input_PersonsMinOrderBy {
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -170,6 +181,7 @@ class Input_PersonsMinOrderBy {
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   }) =>
       Input_PersonsMinOrderBy._({
         if (addressText != null) r'addressText': addressText,
@@ -185,6 +197,7 @@ class Input_PersonsMinOrderBy {
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (personTypeId != null) r'personTypeId': personTypeId,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -195,6 +208,7 @@ class Input_PersonsMinOrderBy {
         if (storeId != null) r'storeId': storeId,
         if (studyYearId != null) r'studyYearId': studyYearId,
         if (uid != null) r'uid': uid,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsMinOrderBy._(this._$data);
@@ -275,6 +289,12 @@ class Input_PersonsMinOrderBy {
       result$data['name'] =
           l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] =
@@ -333,6 +353,12 @@ class Input_PersonsMinOrderBy {
       result$data['uid'] =
           l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$workStatus as String));
+    }
     return Input_PersonsMinOrderBy._(result$data);
   }
 
@@ -365,6 +391,8 @@ class Input_PersonsMinOrderBy {
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
 
   Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
@@ -387,6 +415,8 @@ class Input_PersonsMinOrderBy {
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get workStatus => (_$data['workStatus'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -454,6 +484,11 @@ class Input_PersonsMinOrderBy {
       final l$name = name;
       result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] =
@@ -505,6 +540,11 @@ class Input_PersonsMinOrderBy {
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] =
+          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
@@ -636,6 +676,15 @@ class Input_PersonsMinOrderBy {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -722,6 +771,15 @@ class Input_PersonsMinOrderBy {
     if (l$uid != lOther$uid) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -740,6 +798,7 @@ class Input_PersonsMinOrderBy {
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$personTypeId = personTypeId;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -750,6 +809,7 @@ class Input_PersonsMinOrderBy {
     final l$storeId = storeId;
     final l$studyYearId = studyYearId;
     final l$uid = uid;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
@@ -764,6 +824,7 @@ class Input_PersonsMinOrderBy {
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('personTypeId') ? l$personTypeId : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -774,6 +835,7 @@ class Input_PersonsMinOrderBy {
       _$data.containsKey('storeId') ? l$storeId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }
@@ -801,6 +863,7 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -811,6 +874,7 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   });
 }
 
@@ -841,6 +905,7 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? personTypeId = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -851,6 +916,7 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     Object? storeId = _undefined,
     Object? studyYearId = _undefined,
     Object? uid = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsMinOrderBy._({
         ..._instance._$data,
@@ -869,6 +935,8 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
         if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
         if (personTypeId != _undefined)
           'personTypeId': (personTypeId as Enum_OrderBy?),
@@ -884,6 +952,8 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
         if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        if (workStatus != _undefined)
+          'workStatus': (workStatus as Enum_OrderBy?),
       }));
 }
 
@@ -907,6 +977,7 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -917,6 +988,7 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   }) =>
       _res;
 }
@@ -1323,6 +1395,7 @@ class Input_PersonsOrderBy {
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? otherPhones,
     Input_PersonTypesOrderBy? personType,
@@ -1344,6 +1417,7 @@ class Input_PersonsOrderBy {
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
+    Enum_OrderBy? workStatus,
   }) =>
       Input_PersonsOrderBy._({
         if (address != null) r'address': address,
@@ -1389,6 +1463,7 @@ class Input_PersonsOrderBy {
         if (lastVisit != null) r'lastVisit': lastVisit,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (otherPhones != null) r'otherPhones': otherPhones,
         if (personType != null) r'personType': personType,
@@ -1411,6 +1486,7 @@ class Input_PersonsOrderBy {
         if (user != null) r'user': user,
         if (visitHistoryAggregate != null)
           r'visitHistoryAggregate': visitHistoryAggregate,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsOrderBy._(this._$data);
@@ -1656,6 +1732,12 @@ class Input_PersonsOrderBy {
       result$data['name'] =
           l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] =
@@ -1789,6 +1871,12 @@ class Input_PersonsOrderBy {
           : Input_HistoryVisitHistoryAggregateOrderBy.fromJson(
               (l$visitHistoryAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$workStatus as String));
+    }
     return Input_PersonsOrderBy._(result$data);
   }
 
@@ -1894,6 +1982,8 @@ class Input_PersonsOrderBy {
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
 
   Enum_OrderBy? get otherPhones => (_$data['otherPhones'] as Enum_OrderBy?);
@@ -1949,6 +2039,8 @@ class Input_PersonsOrderBy {
   Input_HistoryVisitHistoryAggregateOrderBy? get visitHistoryAggregate =>
       (_$data['visitHistoryAggregate']
           as Input_HistoryVisitHistoryAggregateOrderBy?);
+
+  Enum_OrderBy? get workStatus => (_$data['workStatus'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2124,6 +2216,11 @@ class Input_PersonsOrderBy {
       final l$name = name;
       result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] =
@@ -2220,6 +2317,11 @@ class Input_PersonsOrderBy {
     if (_$data.containsKey('visitHistoryAggregate')) {
       final l$visitHistoryAggregate = visitHistoryAggregate;
       result$data['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] =
+          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
@@ -2569,6 +2671,15 @@ class Input_PersonsOrderBy {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -2751,6 +2862,15 @@ class Input_PersonsOrderBy {
     if (l$visitHistoryAggregate != lOther$visitHistoryAggregate) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -2794,6 +2914,7 @@ class Input_PersonsOrderBy {
     final l$lastVisit = lastVisit;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
     final l$personType = personType;
@@ -2815,6 +2936,7 @@ class Input_PersonsOrderBy {
     final l$uid = uid;
     final l$user = user;
     final l$visitHistoryAggregate = visitHistoryAggregate;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('addressText') ? l$addressText : const {},
@@ -2864,6 +2986,7 @@ class Input_PersonsOrderBy {
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personType') ? l$personType : const {},
@@ -2887,6 +3010,7 @@ class Input_PersonsOrderBy {
       _$data.containsKey('visitHistoryAggregate')
           ? l$visitHistoryAggregate
           : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }

@@ -33,3 +33,4 @@ export 'models/viewable_enum_with_id.dart';
 export 'models/viewable_object_widget_config.dart';
 export 'models/viewable_with_id.dart';
 export 'models/viewable_with_id_and_image.dart';
+export 'models/work_status.dart';

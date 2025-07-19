@@ -136,6 +136,10 @@ class _ViewPersonState extends State<ViewPerson> {
               ),
             ),
             const Divider(),
+            ListTile(
+              title: const Text('حالة العمل'),
+              subtitle: Text(person.workStatus?.label ?? ''),
+            ),
             if (person.isStudent) ...[
               ListTile(
                 title: const Text('السنة الدراسية'),
@@ -152,11 +156,12 @@ class _ViewPersonState extends State<ViewPerson> {
                   title: const Text('المدرسة'),
                   subtitle: Text(person.school?.name ?? ''),
                 ),
-            ] else ...[
+            ] else
               ListTile(
                 title: const Text('المؤهل'),
                 subtitle: Text(person.qualification?.name ?? ''),
               ),
+            if (person.workStatus == WorkStatus.employed) ...[
               ListTile(
                 title: const Text('الوظيفة'),
                 subtitle: Text(person.job?.name ?? ''),

@@ -645,6 +645,7 @@ enum Enum_PersonsSelectColumn {
   jobId,
   mainPhone,
   name,
+  nationalId,
   notes,
   otherPhones,
   personTypeId,
@@ -656,6 +657,7 @@ enum Enum_PersonsSelectColumn {
   storeId,
   studyYearId,
   uid,
+  workStatus,
   $unknown;
 
   factory Enum_PersonsSelectColumn.fromJson(String value) =>
@@ -702,6 +704,8 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'mainPhone';
     case Enum_PersonsSelectColumn.name:
       return r'name';
+    case Enum_PersonsSelectColumn.nationalId:
+      return r'nationalId';
     case Enum_PersonsSelectColumn.notes:
       return r'notes';
     case Enum_PersonsSelectColumn.otherPhones:
@@ -724,6 +728,8 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'studyYearId';
     case Enum_PersonsSelectColumn.uid:
       return r'uid';
+    case Enum_PersonsSelectColumn.workStatus:
+      return r'workStatus';
     case Enum_PersonsSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -767,6 +773,8 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.mainPhone;
     case r'name':
       return Enum_PersonsSelectColumn.name;
+    case r'nationalId':
+      return Enum_PersonsSelectColumn.nationalId;
     case r'notes':
       return Enum_PersonsSelectColumn.notes;
     case r'otherPhones':
@@ -789,6 +797,8 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.studyYearId;
     case r'uid':
       return Enum_PersonsSelectColumn.uid;
+    case r'workStatus':
+      return Enum_PersonsSelectColumn.workStatus;
     default:
       return Enum_PersonsSelectColumn.$unknown;
   }
@@ -1132,6 +1142,7 @@ enum Enum_PersonsUpdateColumn {
   jobId,
   mainPhone,
   name,
+  nationalId,
   notes,
   otherPhones,
   personTypeId,
@@ -1141,6 +1152,7 @@ enum Enum_PersonsUpdateColumn {
   stateId,
   storeId,
   studyYearId,
+  workStatus,
   $unknown;
 
   factory Enum_PersonsUpdateColumn.fromJson(String value) =>
@@ -1183,6 +1195,8 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'mainPhone';
     case Enum_PersonsUpdateColumn.name:
       return r'name';
+    case Enum_PersonsUpdateColumn.nationalId:
+      return r'nationalId';
     case Enum_PersonsUpdateColumn.notes:
       return r'notes';
     case Enum_PersonsUpdateColumn.otherPhones:
@@ -1201,6 +1215,8 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'storeId';
     case Enum_PersonsUpdateColumn.studyYearId:
       return r'studyYearId';
+    case Enum_PersonsUpdateColumn.workStatus:
+      return r'workStatus';
     case Enum_PersonsUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -1240,6 +1256,8 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.mainPhone;
     case r'name':
       return Enum_PersonsUpdateColumn.name;
+    case r'nationalId':
+      return Enum_PersonsUpdateColumn.nationalId;
     case r'notes':
       return Enum_PersonsUpdateColumn.notes;
     case r'otherPhones':
@@ -1258,6 +1276,8 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.storeId;
     case r'studyYearId':
       return Enum_PersonsUpdateColumn.studyYearId;
+    case r'workStatus':
+      return Enum_PersonsUpdateColumn.workStatus;
     default:
       return Enum_PersonsUpdateColumn.$unknown;
   }

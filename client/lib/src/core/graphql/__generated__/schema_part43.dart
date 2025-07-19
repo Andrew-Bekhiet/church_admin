@@ -721,6 +721,7 @@ class Input_PersonsSetInput {
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -730,6 +731,7 @@ class Input_PersonsSetInput {
     UuidValue? stateId,
     UuidValue? storeId,
     int? studyYearId,
+    String? workStatus,
   }) =>
       Input_PersonsSetInput._({
         if (addressText != null) r'addressText': addressText,
@@ -748,6 +750,7 @@ class Input_PersonsSetInput {
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (otherPhones != null) r'otherPhones': otherPhones,
         if (personTypeId != null) r'personTypeId': personTypeId,
@@ -757,6 +760,7 @@ class Input_PersonsSetInput {
         if (stateId != null) r'stateId': stateId,
         if (storeId != null) r'storeId': storeId,
         if (studyYearId != null) r'studyYearId': studyYearId,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsSetInput._(this._$data);
@@ -832,6 +836,10 @@ class Input_PersonsSetInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = (l$nationalId as int?);
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] = (l$notes as String?);
@@ -874,6 +882,10 @@ class Input_PersonsSetInput {
       final l$studyYearId = data['studyYearId'];
       result$data['studyYearId'] = (l$studyYearId as int?);
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = (l$workStatus as String?);
+    }
     return Input_PersonsSetInput._(result$data);
   }
 
@@ -912,6 +924,8 @@ class Input_PersonsSetInput {
 
   String? get name => (_$data['name'] as String?);
 
+  int? get nationalId => (_$data['nationalId'] as int?);
+
   String? get notes => (_$data['notes'] as String?);
 
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
@@ -929,6 +943,8 @@ class Input_PersonsSetInput {
   UuidValue? get storeId => (_$data['storeId'] as UuidValue?);
 
   int? get studyYearId => (_$data['studyYearId'] as int?);
+
+  String? get workStatus => (_$data['workStatus'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1001,6 +1017,10 @@ class Input_PersonsSetInput {
       final l$name = name;
       result$data['name'] = l$name;
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId;
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes;
@@ -1042,6 +1062,10 @@ class Input_PersonsSetInput {
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
       result$data['studyYearId'] = l$studyYearId;
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] = l$workStatus;
     }
     return result$data;
   }
@@ -1200,6 +1224,15 @@ class Input_PersonsSetInput {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -1278,6 +1311,15 @@ class Input_PersonsSetInput {
     if (l$studyYearId != lOther$studyYearId) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -1299,6 +1341,7 @@ class Input_PersonsSetInput {
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
     final l$personTypeId = personTypeId;
@@ -1308,6 +1351,7 @@ class Input_PersonsSetInput {
     final l$stateId = stateId;
     final l$storeId = storeId;
     final l$studyYearId = studyYearId;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
@@ -1325,6 +1369,7 @@ class Input_PersonsSetInput {
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personTypeId') ? l$personTypeId : const {},
@@ -1334,6 +1379,7 @@ class Input_PersonsSetInput {
       _$data.containsKey('stateId') ? l$stateId : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }
@@ -1364,6 +1410,7 @@ abstract class CopyWith_Input_PersonsSetInput<TRes> {
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -1373,6 +1420,7 @@ abstract class CopyWith_Input_PersonsSetInput<TRes> {
     UuidValue? stateId,
     UuidValue? storeId,
     int? studyYearId,
+    String? workStatus,
   });
 }
 
@@ -1406,6 +1454,7 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
     Object? personTypeId = _undefined,
@@ -1415,6 +1464,7 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
     Object? stateId = _undefined,
     Object? storeId = _undefined,
     Object? studyYearId = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsSetInput._({
         ..._instance._$data,
@@ -1436,6 +1486,7 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
         if (jobId != _undefined) 'jobId': (jobId as UuidValue?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
         if (name != _undefined) 'name': (name as String?),
+        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (notes != _undefined) 'notes': (notes as String?),
         if (otherPhones != _undefined) 'otherPhones': (otherPhones as Json?),
         if (personTypeId != _undefined)
@@ -1448,6 +1499,7 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
         if (stateId != _undefined) 'stateId': (stateId as UuidValue?),
         if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
         if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
+        if (workStatus != _undefined) 'workStatus': (workStatus as String?),
       }));
 }
 
@@ -1474,6 +1526,7 @@ class _CopyWithStubImpl_Input_PersonsSetInput<TRes>
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -1483,6 +1536,7 @@ class _CopyWithStubImpl_Input_PersonsSetInput<TRes>
     UuidValue? stateId,
     UuidValue? storeId,
     int? studyYearId,
+    String? workStatus,
   }) =>
       _res;
 }
@@ -1490,10 +1544,12 @@ class _CopyWithStubImpl_Input_PersonsSetInput<TRes>
 class Input_PersonsStddevOrderBy {
   factory Input_PersonsStddevOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsStddevOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -1505,6 +1561,12 @@ class Input_PersonsStddevOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -1519,6 +1581,8 @@ class Input_PersonsStddevOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1527,6 +1591,11 @@ class Input_PersonsStddevOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -1559,6 +1628,15 @@ class Input_PersonsStddevOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -1574,9 +1652,11 @@ class Input_PersonsStddevOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -1593,6 +1673,7 @@ abstract class CopyWith_Input_PersonsStddevOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -1612,11 +1693,14 @@ class _CopyWithImpl_Input_PersonsStddevOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsStddevOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -1630,6 +1714,7 @@ class _CopyWithStubImpl_Input_PersonsStddevOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -1638,10 +1723,12 @@ class _CopyWithStubImpl_Input_PersonsStddevOrderBy<TRes>
 class Input_PersonsStddevPopOrderBy {
   factory Input_PersonsStddevPopOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsStddevPopOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -1653,6 +1740,12 @@ class Input_PersonsStddevPopOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -1667,6 +1760,8 @@ class Input_PersonsStddevPopOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1675,6 +1770,11 @@ class Input_PersonsStddevPopOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -1707,6 +1807,15 @@ class Input_PersonsStddevPopOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -1722,9 +1831,11 @@ class Input_PersonsStddevPopOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -1741,6 +1852,7 @@ abstract class CopyWith_Input_PersonsStddevPopOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -1760,11 +1872,14 @@ class _CopyWithImpl_Input_PersonsStddevPopOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsStddevPopOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -1778,6 +1893,7 @@ class _CopyWithStubImpl_Input_PersonsStddevPopOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -1786,10 +1902,12 @@ class _CopyWithStubImpl_Input_PersonsStddevPopOrderBy<TRes>
 class Input_PersonsStddevSampOrderBy {
   factory Input_PersonsStddevSampOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsStddevSampOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -1801,6 +1919,12 @@ class Input_PersonsStddevSampOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -1815,6 +1939,8 @@ class Input_PersonsStddevSampOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -1823,6 +1949,11 @@ class Input_PersonsStddevSampOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -1855,6 +1986,15 @@ class Input_PersonsStddevSampOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -1870,9 +2010,11 @@ class Input_PersonsStddevSampOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -1889,6 +2031,7 @@ abstract class CopyWith_Input_PersonsStddevSampOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -1908,11 +2051,14 @@ class _CopyWithImpl_Input_PersonsStddevSampOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsStddevSampOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -1926,6 +2072,7 @@ class _CopyWithStubImpl_Input_PersonsStddevSampOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -2104,6 +2251,7 @@ class Input_PersonsStreamCursorValueInput {
     UuidValue? jobId,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     UuidValue? personTypeId,
@@ -2115,6 +2263,7 @@ class Input_PersonsStreamCursorValueInput {
     UuidValue? storeId,
     int? studyYearId,
     UuidValue? uid,
+    String? workStatus,
   }) =>
       Input_PersonsStreamCursorValueInput._({
         if (addressText != null) r'addressText': addressText,
@@ -2135,6 +2284,7 @@ class Input_PersonsStreamCursorValueInput {
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (otherPhones != null) r'otherPhones': otherPhones,
         if (personTypeId != null) r'personTypeId': personTypeId,
@@ -2146,6 +2296,7 @@ class Input_PersonsStreamCursorValueInput {
         if (storeId != null) r'storeId': storeId,
         if (studyYearId != null) r'studyYearId': studyYearId,
         if (uid != null) r'uid': uid,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsStreamCursorValueInput._(this._$data);
@@ -2230,6 +2381,10 @@ class Input_PersonsStreamCursorValueInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = (l$nationalId as int?);
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] = (l$notes as String?);
@@ -2281,6 +2436,10 @@ class Input_PersonsStreamCursorValueInput {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = (l$workStatus as String?);
+    }
     return Input_PersonsStreamCursorValueInput._(result$data);
   }
 
@@ -2323,6 +2482,8 @@ class Input_PersonsStreamCursorValueInput {
 
   String? get name => (_$data['name'] as String?);
 
+  int? get nationalId => (_$data['nationalId'] as int?);
+
   String? get notes => (_$data['notes'] as String?);
 
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
@@ -2344,6 +2505,8 @@ class Input_PersonsStreamCursorValueInput {
   int? get studyYearId => (_$data['studyYearId'] as int?);
 
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  String? get workStatus => (_$data['workStatus'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2424,6 +2587,10 @@ class Input_PersonsStreamCursorValueInput {
       final l$name = name;
       result$data['name'] = l$name;
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId;
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes;
@@ -2474,6 +2641,10 @@ class Input_PersonsStreamCursorValueInput {
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] = l$workStatus;
     }
     return result$data;
   }
@@ -2651,6 +2822,15 @@ class Input_PersonsStreamCursorValueInput {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -2746,6 +2926,15 @@ class Input_PersonsStreamCursorValueInput {
     if (l$uid != lOther$uid) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -2769,6 +2958,7 @@ class Input_PersonsStreamCursorValueInput {
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
     final l$personTypeId = personTypeId;
@@ -2780,6 +2970,7 @@ class Input_PersonsStreamCursorValueInput {
     final l$storeId = storeId;
     final l$studyYearId = studyYearId;
     final l$uid = uid;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
@@ -2799,6 +2990,7 @@ class Input_PersonsStreamCursorValueInput {
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personTypeId') ? l$personTypeId : const {},
@@ -2810,6 +3002,7 @@ class Input_PersonsStreamCursorValueInput {
       _$data.containsKey('storeId') ? l$storeId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }

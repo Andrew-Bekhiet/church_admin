@@ -82,7 +82,7 @@ class Person extends ViewableWithIDAndImage
   final String? fatherId;
 
   @override
-  final bool isStudent;
+  final WorkStatus? workStatus;
 
   @override
   final Job? job;
@@ -248,7 +248,7 @@ class Person extends ViewableWithIDAndImage
     this.churchId,
     this.father,
     this.fatherId,
-    this.isStudent = false,
+    this.workStatus = WorkStatus.employed,
     this.job,
     this.jobId,
     this.jobDescription,
@@ -314,6 +314,8 @@ class Person extends ViewableWithIDAndImage
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
+  bool get isStudent => workStatus == WorkStatus.student;
+
   @override
   String get typeName => AdvancedQueriesMetadata().person.name;
 
@@ -346,7 +348,7 @@ class Person extends ViewableWithIDAndImage
         collegeId: college?.id.toUuid(),
         churchId: church?.id.toUuid(),
         fatherId: father?.id.toUuid(),
-        isStudent: isStudent,
+        workStatus: workStatus?.name,
         jobId: job?.id.toUuid(),
         jobDescription: jobDescription,
         qualificationId: qualification?.id.toUuid(),
@@ -498,18 +500,6 @@ class Person extends ViewableWithIDAndImage
       result = result.copyWith(birthdate: birthdate);
     }
 
-    if (gender != oldPerson.gender) {
-      result = result.copyWith(gender: gender);
-    }
-
-    if (isShammas != oldPerson.isShammas) {
-      result = result.copyWith(isShammas: isShammas);
-    }
-
-    if (isStudent != oldPerson.isStudent) {
-      result = result.copyWith(isStudent: isStudent);
-    }
-
     if (jobDescription != oldPerson.jobDescription) {
       result = result.copyWith(jobDescription: jobDescription);
     }
@@ -526,10 +516,6 @@ class Person extends ViewableWithIDAndImage
       result = result.copyWith(color: colorToInt(color));
     }
 
-    if (studyYear?.order != oldPerson.studyYear?.order) {
-      result = result.copyWith(studyYearId: studyYear?.order);
-    }
-
     if (shammasLevel?.id != oldPerson.shammasLevel?.id) {
       result = result.copyWith(shammasLevelId: shammasLevel?.id.toUuid());
     }
@@ -540,6 +526,14 @@ class Person extends ViewableWithIDAndImage
 
     if (college?.id != oldPerson.college?.id) {
       result = result.copyWith(collegeId: college?.id.toUuid());
+    }
+
+    if (studyYear?.order != oldPerson.studyYear?.order) {
+      result = result.copyWith(
+        studyYearId: studyYear?.order,
+        schoolId: (studyYear?.order ?? 0) <= 12 ? school?.id.toUuid() : null,
+        collegeId: (studyYear?.order ?? 12) >= 12 ? college?.id.toUuid() : null,
+      );
     }
 
     if (church?.id != oldPerson.church?.id) {
@@ -572,6 +566,42 @@ class Person extends ViewableWithIDAndImage
 
     if (store?.id != oldPerson.store?.id) {
       result = result.copyWith(storeId: store?.id.toUuid());
+    }
+
+    if (workStatus != oldPerson.workStatus) {
+      result = result.copyWith(
+        workStatus: workStatus?.name,
+        studyYearId:
+            workStatus == WorkStatus.student ? result.studyYearId : null,
+        schoolId:
+            workStatus == WorkStatus.student && (studyYear?.order ?? 0) <= 12
+                ? result.schoolId
+                : null,
+        collegeId:
+            workStatus == WorkStatus.student && (studyYear?.order ?? 12) >= 12
+                ? result.collegeId
+                : null,
+        jobId: workStatus == WorkStatus.employed ? result.jobId : null,
+        jobDescription:
+            workStatus == WorkStatus.employed ? result.jobDescription : null,
+        qualificationId:
+            workStatus != WorkStatus.student ? result.qualificationId : null,
+      );
+    }
+
+    if (isShammas != oldPerson.isShammas) {
+      result = result.copyWith(
+        isShammas: isShammas,
+        shammasLevelId: isShammas ? result.shammasLevelId : null,
+      );
+    }
+
+    if (gender != oldPerson.gender) {
+      result = result.copyWith(
+        gender: gender,
+        isShammas: isShammas && gender,
+        shammasLevelId: isShammas && gender ? result.shammasLevelId : null,
+      );
     }
 
     return result;
@@ -610,7 +640,7 @@ class PersonFields extends _PersonFields {
         father,
         isShammas,
         shammasLevel,
-        isStudent,
+        workStatus,
         studyYear,
         school,
         college,

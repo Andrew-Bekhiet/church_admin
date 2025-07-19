@@ -178,10 +178,12 @@ class _CopyWithStubImpl_Input_PersonsUpdates<TRes>
 class Input_PersonsVarPopOrderBy {
   factory Input_PersonsVarPopOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsVarPopOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -193,6 +195,12 @@ class Input_PersonsVarPopOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -207,6 +215,8 @@ class Input_PersonsVarPopOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -215,6 +225,11 @@ class Input_PersonsVarPopOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -247,6 +262,15 @@ class Input_PersonsVarPopOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -262,9 +286,11 @@ class Input_PersonsVarPopOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -281,6 +307,7 @@ abstract class CopyWith_Input_PersonsVarPopOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -300,11 +327,14 @@ class _CopyWithImpl_Input_PersonsVarPopOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsVarPopOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -318,6 +348,7 @@ class _CopyWithStubImpl_Input_PersonsVarPopOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -326,10 +357,12 @@ class _CopyWithStubImpl_Input_PersonsVarPopOrderBy<TRes>
 class Input_PersonsVarSampOrderBy {
   factory Input_PersonsVarSampOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsVarSampOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -341,6 +374,12 @@ class Input_PersonsVarSampOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -355,6 +394,8 @@ class Input_PersonsVarSampOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -363,6 +404,11 @@ class Input_PersonsVarSampOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -395,6 +441,15 @@ class Input_PersonsVarSampOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -410,9 +465,11 @@ class Input_PersonsVarSampOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -429,6 +486,7 @@ abstract class CopyWith_Input_PersonsVarSampOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -448,11 +506,14 @@ class _CopyWithImpl_Input_PersonsVarSampOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsVarSampOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -466,6 +527,7 @@ class _CopyWithStubImpl_Input_PersonsVarSampOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -474,10 +536,12 @@ class _CopyWithStubImpl_Input_PersonsVarSampOrderBy<TRes>
 class Input_PersonsVarianceOrderBy {
   factory Input_PersonsVarianceOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsVarianceOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -489,6 +553,12 @@ class Input_PersonsVarianceOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -503,6 +573,8 @@ class Input_PersonsVarianceOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -511,6 +583,11 @@ class Input_PersonsVarianceOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -543,6 +620,15 @@ class Input_PersonsVarianceOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -558,9 +644,11 @@ class Input_PersonsVarianceOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -577,6 +665,7 @@ abstract class CopyWith_Input_PersonsVarianceOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -596,11 +685,14 @@ class _CopyWithImpl_Input_PersonsVarianceOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsVarianceOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -614,6 +706,7 @@ class _CopyWithStubImpl_Input_PersonsVarianceOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;

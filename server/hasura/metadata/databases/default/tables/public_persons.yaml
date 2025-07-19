@@ -219,6 +219,7 @@ insert_permissions:
         - state_id
         - store_id
         - study_year_id
+        - work_status
 select_permissions:
   - role: user
     permission:
@@ -253,6 +254,7 @@ select_permissions:
         - store_id
         - study_year_id
         - uid
+        - work_status
       computed_fields:
         - birthday
       filter:
@@ -309,6 +311,7 @@ update_permissions:
         - state_id
         - store_id
         - study_year_id
+        - work_status
       filter:
         _exists:
           _table:

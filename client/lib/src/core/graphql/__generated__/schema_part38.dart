@@ -58,6 +58,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? name,
+    Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
     Input_JsonbComparisonExp? otherPhones,
     Input_PersonTypesBoolExp? personType,
@@ -80,6 +81,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_AuthUsersDataBoolExp? user,
     Input_HistoryVisitHistoryBoolExp? visitHistory,
     Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
+    Input_StringComparisonExp? workStatus,
   });
   TRes $_and(
       Iterable<Input_PersonsBoolExp>? Function(
@@ -138,6 +140,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone;
   CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_IntComparisonExp<TRes> get nationalId;
   CopyWith_Input_StringComparisonExp<TRes> get notes;
   CopyWith_Input_JsonbComparisonExp<TRes> get otherPhones;
   CopyWith_Input_PersonTypesBoolExp<TRes> get personType;
@@ -161,6 +164,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryVisitHistoryBoolExp<TRes> get visitHistory;
   CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
       get visitHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get workStatus;
 }
 
 class _CopyWithImpl_Input_PersonsBoolExp<TRes>
@@ -223,6 +227,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? lastVisit = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
     Object? personType = _undefined,
@@ -245,6 +250,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? user = _undefined,
     Object? visitHistory = _undefined,
     Object? visitHistoryAggregate = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsBoolExp._({
         ..._instance._$data,
@@ -337,6 +343,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         if (mainPhone != _undefined)
           'mainPhone': (mainPhone as Input_StringComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Input_IntComparisonExp?),
         if (notes != _undefined) 'notes': (notes as Input_StringComparisonExp?),
         if (otherPhones != _undefined)
           'otherPhones': (otherPhones as Input_JsonbComparisonExp?),
@@ -376,6 +384,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         if (visitHistoryAggregate != _undefined)
           'visitHistoryAggregate': (visitHistoryAggregate
               as Input_HistoryVisitHistoryAggregateBoolExp?),
+        if (workStatus != _undefined)
+          'workStatus': (workStatus as Input_StringComparisonExp?),
       }));
 
   TRes $_and(
@@ -758,6 +768,14 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
   }
 
+  CopyWith_Input_IntComparisonExp<TRes> get nationalId {
+    final local$nationalId = _instance.nationalId;
+    return local$nationalId == null
+        ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_IntComparisonExp(
+            local$nationalId, (e) => call(nationalId: e));
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get notes {
     final local$notes = _instance.notes;
     return local$notes == null
@@ -931,6 +949,14 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         : CopyWith_Input_HistoryVisitHistoryAggregateBoolExp(
             local$visitHistoryAggregate, (e) => call(visitHistoryAggregate: e));
   }
+
+  CopyWith_Input_StringComparisonExp<TRes> get workStatus {
+    final local$workStatus = _instance.workStatus;
+    return local$workStatus == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$workStatus, (e) => call(workStatus: e));
+  }
 }
 
 class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
@@ -986,6 +1012,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? name,
+    Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
     Input_JsonbComparisonExp? otherPhones,
     Input_PersonTypesBoolExp? personType,
@@ -1008,6 +1035,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_AuthUsersDataBoolExp? user,
     Input_HistoryVisitHistoryBoolExp? visitHistory,
     Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
+    Input_StringComparisonExp? workStatus,
   }) =>
       _res;
 
@@ -1152,6 +1180,9 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
+  CopyWith_Input_IntComparisonExp<TRes> get nationalId =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+
   CopyWith_Input_StringComparisonExp<TRes> get notes =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
@@ -1218,6 +1249,9 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
   CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
       get visitHistoryAggregate =>
           CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get workStatus =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 }
 
 class Input_PersonsDeleteAtPathInput {

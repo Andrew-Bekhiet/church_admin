@@ -49,3 +49,4 @@
 - "!include public_study_years.yaml"
 - "!include public_tags.yaml"
 - "!include public_universities.yaml"
+- "!include public_work_status.yaml"

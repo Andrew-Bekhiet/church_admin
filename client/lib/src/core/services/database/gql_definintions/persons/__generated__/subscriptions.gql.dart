@@ -1816,7 +1816,7 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'isStudent'),
+            name: NameNode(value: 'workStatus'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2514,7 +2514,7 @@ class Subscription_watchPerson_personsByPk
     required this.groups,
     required this.isServant,
     required this.isShammas,
-    this.isStudent,
+    this.workStatus,
     this.job,
     this.jobDescription,
     this.lastCall,
@@ -2558,7 +2558,7 @@ class Subscription_watchPerson_personsByPk
     final l$groups = json['groups'];
     final l$isServant = json['isServant'];
     final l$isShammas = json['isShammas'];
-    final l$isStudent = json['isStudent'];
+    final l$workStatus = json['workStatus'];
     final l$job = json['job'];
     final l$jobDescription = json['jobDescription'];
     final l$lastCall = json['lastCall'];
@@ -2619,7 +2619,7 @@ class Subscription_watchPerson_personsByPk
           .toList(),
       isServant: (l$isServant as bool),
       isShammas: (l$isShammas as bool),
-      isStudent: (l$isStudent as bool?),
+      workStatus: (l$workStatus as String?),
       job: l$job == null
           ? null
           : Subscription_watchPerson_personsByPk_job.fromJson(
@@ -2728,7 +2728,7 @@ class Subscription_watchPerson_personsByPk
 
   final bool isShammas;
 
-  final bool? isStudent;
+  final String? workStatus;
 
   final Subscription_watchPerson_personsByPk_job? job;
 
@@ -2812,8 +2812,8 @@ class Subscription_watchPerson_personsByPk
     _resultData['isServant'] = l$isServant;
     final l$isShammas = isShammas;
     _resultData['isShammas'] = l$isShammas;
-    final l$isStudent = isStudent;
-    _resultData['isStudent'] = l$isStudent;
+    final l$workStatus = workStatus;
+    _resultData['workStatus'] = l$workStatus;
     final l$job = job;
     _resultData['job'] = l$job?.toJson();
     final l$jobDescription = jobDescription;
@@ -2879,7 +2879,7 @@ class Subscription_watchPerson_personsByPk
     final l$groups = groups;
     final l$isServant = isServant;
     final l$isShammas = isShammas;
-    final l$isStudent = isStudent;
+    final l$workStatus = workStatus;
     final l$job = job;
     final l$jobDescription = jobDescription;
     final l$lastCall = lastCall;
@@ -2920,7 +2920,7 @@ class Subscription_watchPerson_personsByPk
       Object.hashAll(l$groups.map((v) => v)),
       l$isServant,
       l$isShammas,
-      l$isStudent,
+      l$workStatus,
       l$job,
       l$jobDescription,
       l$lastCall,
@@ -3058,9 +3058,9 @@ class Subscription_watchPerson_personsByPk
     if (l$isShammas != lOther$isShammas) {
       return false;
     }
-    final l$isStudent = isStudent;
-    final lOther$isStudent = other.isStudent;
-    if (l$isStudent != lOther$isStudent) {
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (l$workStatus != lOther$workStatus) {
       return false;
     }
     final l$job = job;
@@ -3231,7 +3231,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
-    bool? isStudent,
+    String? workStatus,
     Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
     Fragment_LatestCallHistory? lastCall,
@@ -3338,7 +3338,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? groups = _undefined,
     Object? isServant = _undefined,
     Object? isShammas = _undefined,
-    Object? isStudent = _undefined,
+    Object? workStatus = _undefined,
     Object? job = _undefined,
     Object? jobDescription = _undefined,
     Object? lastCall = _undefined,
@@ -3411,9 +3411,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         isShammas: isShammas == _undefined || isShammas == null
             ? _instance.isShammas
             : (isShammas as bool),
-        isStudent: isStudent == _undefined
-            ? _instance.isStudent
-            : (isStudent as bool?),
+        workStatus: workStatus == _undefined
+            ? _instance.workStatus
+            : (workStatus as String?),
         job: job == _undefined
             ? _instance.job
             : (job as Subscription_watchPerson_personsByPk_job?),
@@ -3724,7 +3724,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
     bool? isShammas,
-    bool? isStudent,
+    String? workStatus,
     Subscription_watchPerson_personsByPk_job? job,
     String? jobDescription,
     Fragment_LatestCallHistory? lastCall,

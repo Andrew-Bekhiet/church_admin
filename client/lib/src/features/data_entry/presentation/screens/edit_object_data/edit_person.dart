@@ -74,7 +74,9 @@ class _EditPersonState extends State<EditPerson> {
             groups: widget.group != null ? [widget.group!] : [],
             studyYear: widget.studyYear,
             studyYearId: widget.studyYear?.order,
-            isStudent: widget.studyYear != null,
+            workStatus: widget.studyYear != null
+                ? WorkStatus.student
+                : WorkStatus.employed,
             gender: widget.gender ?? true,
           ),
       initialObject: oldPerson,
@@ -424,33 +426,20 @@ class _EditPersonState extends State<EditPerson> {
                 return const Text('لا يوجد خدمات أو مجموعات');
               },
             ),
-            FormField<bool>(
-              initialValue: newPerson.isStudent,
-              builder: (state) => CheckboxListTile(
-                title: const Text('طالب؟'),
-                value: state.value,
-                onChanged: (v) {
-                  state.didChange(v);
-                  newPerson = v!
-                      ? newPerson.copyWith(
-                          isStudent: v,
-                          qualification: null,
-                          qualificationId: null,
-                          job: null,
-                          jobId: null,
-                          jobDescription: null,
-                        )
-                      : newPerson.copyWith(
-                          isStudent: v,
-                          studyYear: null,
-                          studyYearId: null,
-                          college: null,
-                          collegeId: null,
-                          school: null,
-                          schoolId: null,
-                        );
-                  setState(() {});
-                },
+            DropdownButtonFormField<WorkStatus>(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              value: newPerson.workStatus,
+              decoration: const InputDecoration(
+                labelText: 'حالة العمل',
+              ),
+              items: WorkStatus.values
+                  .map((status) => DropdownMenuItem(
+                        value: status,
+                        child: Text(status.label),
+                      ))
+                  .toList(),
+              onChanged: (value) => setState(
+                () => newPerson = newPerson.copyWith(workStatus: value),
               ),
             ),
             if (newPerson.isStudent) ...[
@@ -462,12 +451,14 @@ class _EditPersonState extends State<EditPerson> {
                       .streamAll(searchQuery: s),
                 ),
                 dialogFieldLabel: 'السنة الدراسية',
-                onChanged: (value) => newPerson = newPerson.copyWith(
-                  //Store the selected object
-                  //so we can build the widget based on it ...
-                  studyYear: value,
-                  //... and its id to send it in the mutation
-                  studyYearId: value?.order,
+                onChanged: (value) => setState(
+                  () => newPerson = newPerson.copyWith(
+                    //Store the selected object
+                    //so we can build the widget based on it ...
+                    studyYear: value,
+                    //... and its id to send it in the mutation
+                    studyYearId: value?.order,
+                  ),
                 ),
                 builder: (context, state) {
                   return state.value != null ? Text(state.value!.name) : null;
@@ -535,7 +526,7 @@ class _EditPersonState extends State<EditPerson> {
                   },
                   validator: (v) => null,
                 ),
-            ] else ...[
+            ] else
               ObjectSelectionField<Qualification, Qualification?>(
                 initialValue: newPerson.qualification,
                 onCreateCustom: (name) =>
@@ -560,6 +551,7 @@ class _EditPersonState extends State<EditPerson> {
                 },
                 validator: (v) => null,
               ),
+            if (newPerson.workStatus == WorkStatus.employed) ...[
               ObjectSelectionField<Job, Job?>(
                 initialValue: newPerson.job,
                 onCreateCustom: (name) =>
@@ -602,8 +594,6 @@ class _EditPersonState extends State<EditPerson> {
                     : newPerson.copyWith(
                         gender: v,
                         isShammas: false,
-                        shammasLevel: null,
-                        shammasLevelId: null,
                       );
                 setState(() {});
               },
@@ -697,13 +687,7 @@ class _EditPersonState extends State<EditPerson> {
                   value: state.value,
                   onChanged: (v) {
                     state.didChange(v);
-                    newPerson = v!
-                        ? newPerson.copyWith(isShammas: v)
-                        : newPerson.copyWith(
-                            isShammas: v,
-                            shammasLevel: null,
-                            shammasLevelId: null,
-                          );
+                    newPerson = newPerson.copyWith(isShammas: v!);
                     setState(() {});
                   },
                 ),
@@ -711,6 +695,7 @@ class _EditPersonState extends State<EditPerson> {
             if (newPerson.gender && newPerson.isShammas)
               ObjectSelectionField<ShammasLevel, ShammasLevel?>(
                 initialValue: newPerson.shammasLevel,
+                nullable: false,
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService
                       .I.metadata.shammasLevels

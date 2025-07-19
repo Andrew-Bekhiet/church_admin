@@ -504,10 +504,12 @@ class _CopyWithStubImpl_Input_PersonsArrRelInsertInput<TRes>
 class Input_PersonsAvgOrderBy {
   factory Input_PersonsAvgOrderBy({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       Input_PersonsAvgOrderBy._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -519,6 +521,12 @@ class Input_PersonsAvgOrderBy {
       final l$color = data['color'];
       result$data['color'] =
           l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -533,6 +541,8 @@ class Input_PersonsAvgOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
@@ -541,6 +551,11 @@ class Input_PersonsAvgOrderBy {
       final l$color = color;
       result$data['color'] =
           l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -572,6 +587,15 @@ class Input_PersonsAvgOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -587,9 +611,11 @@ class Input_PersonsAvgOrderBy {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -606,6 +632,7 @@ abstract class CopyWith_Input_PersonsAvgOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   });
 }
@@ -625,11 +652,14 @@ class _CopyWithImpl_Input_PersonsAvgOrderBy<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsAvgOrderBy._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (studyYearId != _undefined)
           'studyYearId': (studyYearId as Enum_OrderBy?),
       }));
@@ -643,6 +673,7 @@ class _CopyWithStubImpl_Input_PersonsAvgOrderBy<TRes>
 
   call({
     Enum_OrderBy? color,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? studyYearId,
   }) =>
       _res;
@@ -696,6 +727,7 @@ class Input_PersonsBoolExp {
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? name,
+    Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
     Input_JsonbComparisonExp? otherPhones,
     Input_PersonTypesBoolExp? personType,
@@ -718,6 +750,7 @@ class Input_PersonsBoolExp {
     Input_AuthUsersDataBoolExp? user,
     Input_HistoryVisitHistoryBoolExp? visitHistory,
     Input_HistoryVisitHistoryAggregateBoolExp? visitHistoryAggregate,
+    Input_StringComparisonExp? workStatus,
   }) =>
       Input_PersonsBoolExp._({
         if ($_and != null) r'_and': $_and,
@@ -771,6 +804,7 @@ class Input_PersonsBoolExp {
         if (lastVisit != null) r'lastVisit': lastVisit,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (otherPhones != null) r'otherPhones': otherPhones,
         if (personType != null) r'personType': personType,
@@ -794,6 +828,7 @@ class Input_PersonsBoolExp {
         if (visitHistory != null) r'visitHistory': visitHistory,
         if (visitHistoryAggregate != null)
           r'visitHistoryAggregate': visitHistoryAggregate,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsBoolExp._(this._$data);
@@ -1116,6 +1151,13 @@ class Input_PersonsBoolExp {
           : Input_StringComparisonExp.fromJson(
               (l$name as Map<String, dynamic>));
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : Input_IntComparisonExp.fromJson(
+              (l$nationalId as Map<String, dynamic>));
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] = l$notes == null
@@ -1267,6 +1309,13 @@ class Input_PersonsBoolExp {
           : Input_HistoryVisitHistoryAggregateBoolExp.fromJson(
               (l$visitHistoryAggregate as Map<String, dynamic>));
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$workStatus as Map<String, dynamic>));
+    }
     return Input_PersonsBoolExp._(result$data);
   }
 
@@ -1412,6 +1461,9 @@ class Input_PersonsBoolExp {
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
+  Input_IntComparisonExp? get nationalId =>
+      (_$data['nationalId'] as Input_IntComparisonExp?);
+
   Input_StringComparisonExp? get notes =>
       (_$data['notes'] as Input_StringComparisonExp?);
 
@@ -1478,6 +1530,9 @@ class Input_PersonsBoolExp {
   Input_HistoryVisitHistoryAggregateBoolExp? get visitHistoryAggregate =>
       (_$data['visitHistoryAggregate']
           as Input_HistoryVisitHistoryAggregateBoolExp?);
+
+  Input_StringComparisonExp? get workStatus =>
+      (_$data['workStatus'] as Input_StringComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1667,6 +1722,10 @@ class Input_PersonsBoolExp {
       final l$name = name;
       result$data['name'] = l$name?.toJson();
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId?.toJson();
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes?.toJson();
@@ -1754,6 +1813,10 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('visitHistoryAggregate')) {
       final l$visitHistoryAggregate = visitHistoryAggregate;
       result$data['visitHistoryAggregate'] = l$visitHistoryAggregate?.toJson();
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] = l$workStatus?.toJson();
     }
     return result$data;
   }
@@ -2191,6 +2254,15 @@ class Input_PersonsBoolExp {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -2381,6 +2453,15 @@ class Input_PersonsBoolExp {
     if (l$visitHistoryAggregate != lOther$visitHistoryAggregate) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -2432,6 +2513,7 @@ class Input_PersonsBoolExp {
     final l$lastVisit = lastVisit;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
     final l$personType = personType;
@@ -2454,6 +2536,7 @@ class Input_PersonsBoolExp {
     final l$user = user;
     final l$visitHistory = visitHistory;
     final l$visitHistoryAggregate = visitHistoryAggregate;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -2519,6 +2602,7 @@ class Input_PersonsBoolExp {
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personType') ? l$personType : const {},
@@ -2543,6 +2627,7 @@ class Input_PersonsBoolExp {
       _$data.containsKey('visitHistoryAggregate')
           ? l$visitHistoryAggregate
           : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }

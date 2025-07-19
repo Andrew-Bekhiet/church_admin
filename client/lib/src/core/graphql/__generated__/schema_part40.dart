@@ -720,10 +720,12 @@ class _CopyWithStubImpl_Input_PersonsHobbiesUpdates<TRes>
 class Input_PersonsIncInput {
   factory Input_PersonsIncInput({
     int? color,
+    int? nationalId,
     int? studyYearId,
   }) =>
       Input_PersonsIncInput._({
         if (color != null) r'color': color,
+        if (nationalId != null) r'nationalId': nationalId,
         if (studyYearId != null) r'studyYearId': studyYearId,
       });
 
@@ -734,6 +736,10 @@ class Input_PersonsIncInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = (l$nationalId as int?);
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -746,6 +752,8 @@ class Input_PersonsIncInput {
 
   int? get color => (_$data['color'] as int?);
 
+  int? get nationalId => (_$data['nationalId'] as int?);
+
   int? get studyYearId => (_$data['studyYearId'] as int?);
 
   Map<String, dynamic> toJson() {
@@ -753,6 +761,10 @@ class Input_PersonsIncInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId;
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
@@ -783,6 +795,15 @@ class Input_PersonsIncInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$studyYearId = studyYearId;
     final lOther$studyYearId = other.studyYearId;
     if (_$data.containsKey('studyYearId') !=
@@ -798,9 +819,11 @@ class Input_PersonsIncInput {
   @override
   int get hashCode {
     final l$color = color;
+    final l$nationalId = nationalId;
     final l$studyYearId = studyYearId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
     ]);
   }
@@ -817,6 +840,7 @@ abstract class CopyWith_Input_PersonsIncInput<TRes> {
 
   TRes call({
     int? color,
+    int? nationalId,
     int? studyYearId,
   });
 }
@@ -836,11 +860,13 @@ class _CopyWithImpl_Input_PersonsIncInput<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
   }) =>
       _then(Input_PersonsIncInput._({
         ..._instance._$data,
         if (color != _undefined) 'color': (color as int?),
+        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
       }));
 }
@@ -853,6 +879,7 @@ class _CopyWithStubImpl_Input_PersonsIncInput<TRes>
 
   call({
     int? color,
+    int? nationalId,
     int? studyYearId,
   }) =>
       _res;
@@ -888,6 +915,7 @@ class Input_PersonsInsertInput {
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     Input_PersonTypesObjRelInsertInput? personType,
@@ -905,6 +933,7 @@ class Input_PersonsInsertInput {
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
+    String? workStatus,
   }) =>
       Input_PersonsInsertInput._({
         if (address != null) r'address': address,
@@ -935,6 +964,7 @@ class Input_PersonsInsertInput {
         if (kodasHistory != null) r'kodasHistory': kodasHistory,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (otherPhones != null) r'otherPhones': otherPhones,
         if (personType != null) r'personType': personType,
@@ -952,6 +982,7 @@ class Input_PersonsInsertInput {
         if (studyYearId != null) r'studyYearId': studyYearId,
         if (tags != null) r'tags': tags,
         if (visitHistory != null) r'visitHistory': visitHistory,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsInsertInput._(this._$data);
@@ -1111,6 +1142,10 @@ class Input_PersonsInsertInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = (l$nationalId as int?);
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] = (l$notes as String?);
@@ -1209,6 +1244,10 @@ class Input_PersonsInsertInput {
           : Input_HistoryVisitHistoryArrRelInsertInput.fromJson(
               (l$visitHistory as Map<String, dynamic>));
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = (l$workStatus as String?);
+    }
     return Input_PersonsInsertInput._(result$data);
   }
 
@@ -1285,6 +1324,8 @@ class Input_PersonsInsertInput {
 
   String? get name => (_$data['name'] as String?);
 
+  int? get nationalId => (_$data['nationalId'] as int?);
+
   String? get notes => (_$data['notes'] as String?);
 
   Json? get otherPhones => (_$data['otherPhones'] as Json?);
@@ -1326,6 +1367,8 @@ class Input_PersonsInsertInput {
 
   Input_HistoryVisitHistoryArrRelInsertInput? get visitHistory =>
       (_$data['visitHistory'] as Input_HistoryVisitHistoryArrRelInsertInput?);
+
+  String? get workStatus => (_$data['workStatus'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1446,6 +1489,10 @@ class Input_PersonsInsertInput {
       final l$name = name;
       result$data['name'] = l$name;
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] = l$nationalId;
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] = l$notes;
@@ -1519,6 +1566,10 @@ class Input_PersonsInsertInput {
     if (_$data.containsKey('visitHistory')) {
       final l$visitHistory = visitHistory;
       result$data['visitHistory'] = l$visitHistory?.toJson();
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] = l$workStatus;
     }
     return result$data;
   }
@@ -1778,6 +1829,15 @@ class Input_PersonsInsertInput {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -1925,6 +1985,15 @@ class Input_PersonsInsertInput {
     if (l$visitHistory != lOther$visitHistory) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -1958,6 +2027,7 @@ class Input_PersonsInsertInput {
     final l$kodasHistory = kodasHistory;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
     final l$personType = personType;
@@ -1975,6 +2045,7 @@ class Input_PersonsInsertInput {
     final l$studyYearId = studyYearId;
     final l$tags = tags;
     final l$visitHistory = visitHistory;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('addressText') ? l$addressText : const {},
@@ -2004,6 +2075,7 @@ class Input_PersonsInsertInput {
       _$data.containsKey('kodasHistory') ? l$kodasHistory : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('otherPhones') ? l$otherPhones : const {},
       _$data.containsKey('personType') ? l$personType : const {},
@@ -2021,6 +2093,7 @@ class Input_PersonsInsertInput {
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('tags') ? l$tags : const {},
       _$data.containsKey('visitHistory') ? l$visitHistory : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }
@@ -2063,6 +2136,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     Input_PersonTypesObjRelInsertInput? personType,
@@ -2080,6 +2154,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
+    String? workStatus,
   });
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address;
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
@@ -2147,6 +2222,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? kodasHistory = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
     Object? personType = _undefined,
@@ -2164,6 +2240,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? studyYearId = _undefined,
     Object? tags = _undefined,
     Object? visitHistory = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsInsertInput._({
         ..._instance._$data,
@@ -2212,6 +2289,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
               (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
         if (name != _undefined) 'name': (name as String?),
+        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (notes != _undefined) 'notes': (notes as String?),
         if (otherPhones != _undefined) 'otherPhones': (otherPhones as Json?),
         if (personType != _undefined)
@@ -2242,6 +2320,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
         if (visitHistory != _undefined)
           'visitHistory':
               (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
+        if (workStatus != _undefined) 'workStatus': (workStatus as String?),
       }));
 
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address {
@@ -2446,6 +2525,7 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
     String? name,
+    int? nationalId,
     String? notes,
     Json? otherPhones,
     Input_PersonTypesObjRelInsertInput? personType,
@@ -2463,6 +2543,7 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
+    String? workStatus,
   }) =>
       _res;
 
@@ -2544,6 +2625,7 @@ class Input_PersonsMaxOrderBy {
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? personTypeId,
     Enum_OrderBy? photoUpdatedAt,
@@ -2554,6 +2636,7 @@ class Input_PersonsMaxOrderBy {
     Enum_OrderBy? storeId,
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
+    Enum_OrderBy? workStatus,
   }) =>
       Input_PersonsMaxOrderBy._({
         if (addressText != null) r'addressText': addressText,
@@ -2569,6 +2652,7 @@ class Input_PersonsMaxOrderBy {
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
         if (name != null) r'name': name,
+        if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
         if (personTypeId != null) r'personTypeId': personTypeId,
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -2579,6 +2663,7 @@ class Input_PersonsMaxOrderBy {
         if (storeId != null) r'storeId': storeId,
         if (studyYearId != null) r'studyYearId': studyYearId,
         if (uid != null) r'uid': uid,
+        if (workStatus != null) r'workStatus': workStatus,
       });
 
   Input_PersonsMaxOrderBy._(this._$data);
@@ -2659,6 +2744,12 @@ class Input_PersonsMaxOrderBy {
       result$data['name'] =
           l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
     }
+    if (data.containsKey('nationalId')) {
+      final l$nationalId = data['nationalId'];
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$nationalId as String));
+    }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
       result$data['notes'] =
@@ -2717,6 +2808,12 @@ class Input_PersonsMaxOrderBy {
       result$data['uid'] =
           l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
     }
+    if (data.containsKey('workStatus')) {
+      final l$workStatus = data['workStatus'];
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$workStatus as String));
+    }
     return Input_PersonsMaxOrderBy._(result$data);
   }
 
@@ -2749,6 +2846,8 @@ class Input_PersonsMaxOrderBy {
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
 
   Enum_OrderBy? get personTypeId => (_$data['personTypeId'] as Enum_OrderBy?);
@@ -2771,6 +2870,8 @@ class Input_PersonsMaxOrderBy {
   Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get workStatus => (_$data['workStatus'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2838,6 +2939,11 @@ class Input_PersonsMaxOrderBy {
       final l$name = name;
       result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
     }
+    if (_$data.containsKey('nationalId')) {
+      final l$nationalId = nationalId;
+      result$data['nationalId'] =
+          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+    }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
       result$data['notes'] =
@@ -2889,6 +2995,11 @@ class Input_PersonsMaxOrderBy {
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    if (_$data.containsKey('workStatus')) {
+      final l$workStatus = workStatus;
+      result$data['workStatus'] =
+          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
@@ -3020,6 +3131,15 @@ class Input_PersonsMaxOrderBy {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (_$data.containsKey('nationalId') !=
+        other._$data.containsKey('nationalId')) {
+      return false;
+    }
+    if (l$nationalId != lOther$nationalId) {
+      return false;
+    }
     final l$notes = notes;
     final lOther$notes = other.notes;
     if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
@@ -3106,6 +3226,15 @@ class Input_PersonsMaxOrderBy {
     if (l$uid != lOther$uid) {
       return false;
     }
+    final l$workStatus = workStatus;
+    final lOther$workStatus = other.workStatus;
+    if (_$data.containsKey('workStatus') !=
+        other._$data.containsKey('workStatus')) {
+      return false;
+    }
+    if (l$workStatus != lOther$workStatus) {
+      return false;
+    }
     return true;
   }
 
@@ -3124,6 +3253,7 @@ class Input_PersonsMaxOrderBy {
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
     final l$name = name;
+    final l$nationalId = nationalId;
     final l$notes = notes;
     final l$personTypeId = personTypeId;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -3134,6 +3264,7 @@ class Input_PersonsMaxOrderBy {
     final l$storeId = storeId;
     final l$studyYearId = studyYearId;
     final l$uid = uid;
+    final l$workStatus = workStatus;
     return Object.hashAll([
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('birthdate') ? l$birthdate : const {},
@@ -3148,6 +3279,7 @@ class Input_PersonsMaxOrderBy {
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
       _$data.containsKey('personTypeId') ? l$personTypeId : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -3158,6 +3290,7 @@ class Input_PersonsMaxOrderBy {
       _$data.containsKey('storeId') ? l$storeId : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
   }
 }

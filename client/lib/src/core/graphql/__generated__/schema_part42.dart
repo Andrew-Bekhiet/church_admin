@@ -50,6 +50,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? otherPhones,
     Input_PersonTypesOrderBy? personType,
@@ -71,6 +72,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
+    Enum_OrderBy? workStatus,
   });
   CopyWith_Input_AddressesOrderBy<TRes> get address;
   CopyWith_Input_HistoryAttendanceHistoryAggregateOrderBy<TRes>
@@ -161,6 +163,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? lastVisit = _undefined,
     Object? mainPhone = _undefined,
     Object? name = _undefined,
+    Object? nationalId = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
     Object? personType = _undefined,
@@ -182,6 +185,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? uid = _undefined,
     Object? user = _undefined,
     Object? visitHistoryAggregate = _undefined,
+    Object? workStatus = _undefined,
   }) =>
       _then(Input_PersonsOrderBy._({
         ..._instance._$data,
@@ -250,6 +254,8 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
           'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
+        if (nationalId != _undefined)
+          'nationalId': (nationalId as Enum_OrderBy?),
         if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
         if (otherPhones != _undefined)
           'otherPhones': (otherPhones as Enum_OrderBy?),
@@ -287,6 +293,8 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
         if (visitHistoryAggregate != _undefined)
           'visitHistoryAggregate': (visitHistoryAggregate
               as Input_HistoryVisitHistoryAggregateOrderBy?),
+        if (workStatus != _undefined)
+          'workStatus': (workStatus as Enum_OrderBy?),
       }));
 
   CopyWith_Input_AddressesOrderBy<TRes> get address {
@@ -577,6 +585,7 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
     Enum_OrderBy? name,
+    Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
     Enum_OrderBy? otherPhones,
     Input_PersonTypesOrderBy? personType,
@@ -598,6 +607,7 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
+    Enum_OrderBy? workStatus,
   }) =>
       _res;
 
