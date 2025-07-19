@@ -329,7 +329,7 @@ jobs:
         run: flutter build web
 
       - name: Copy web build to public folder
-        run: cp -r ./client/build/web ./server/public
+        run: cp -r ./client/build/web/* ./server/public
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
