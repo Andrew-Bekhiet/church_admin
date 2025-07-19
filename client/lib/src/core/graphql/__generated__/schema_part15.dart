@@ -1416,6 +1416,8 @@ class Input_FamiliesBoolExp {
     Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
+    Input_ChurchesBoolExp? church,
+    Input_UuidComparisonExp? churchId,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
@@ -1447,6 +1449,8 @@ class Input_FamiliesBoolExp {
         if (addressText != null) r'addressText': addressText,
         if (blurhash != null) r'blurhash': blurhash,
         if (children != null) r'children': children,
+        if (church != null) r'church': church,
+        if (churchId != null) r'churchId': churchId,
         if (color != null) r'color': color,
         if (deceasedSpouseName != null)
           r'deceasedSpouseName': deceasedSpouseName,
@@ -1526,6 +1530,19 @@ class Input_FamiliesBoolExp {
           ? null
           : Input_FamiliesFamiliesBoolExp.fromJson(
               (l$children as Map<String, dynamic>));
+    }
+    if (data.containsKey('church')) {
+      final l$church = data['church'];
+      result$data['church'] = l$church == null
+          ? null
+          : Input_ChurchesBoolExp.fromJson((l$church as Map<String, dynamic>));
+    }
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$churchId as Map<String, dynamic>));
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1704,6 +1721,12 @@ class Input_FamiliesBoolExp {
   Input_FamiliesFamiliesBoolExp? get children =>
       (_$data['children'] as Input_FamiliesFamiliesBoolExp?);
 
+  Input_ChurchesBoolExp? get church =>
+      (_$data['church'] as Input_ChurchesBoolExp?);
+
+  Input_UuidComparisonExp? get churchId =>
+      (_$data['churchId'] as Input_UuidComparisonExp?);
+
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
 
@@ -1799,6 +1822,14 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('children')) {
       final l$children = children;
       result$data['children'] = l$children?.toJson();
+    }
+    if (_$data.containsKey('church')) {
+      final l$church = church;
+      result$data['church'] = l$church?.toJson();
+    }
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId?.toJson();
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -1984,6 +2015,23 @@ class Input_FamiliesBoolExp {
       return false;
     }
     if (l$children != lOther$children) {
+      return false;
+    }
+    final l$church = church;
+    final lOther$church = other.church;
+    if (_$data.containsKey('church') != other._$data.containsKey('church')) {
+      return false;
+    }
+    if (l$church != lOther$church) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
       return false;
     }
     final l$color = color;
@@ -2188,6 +2236,8 @@ class Input_FamiliesBoolExp {
     final l$addressText = addressText;
     final l$blurhash = blurhash;
     final l$children = children;
+    final l$church = church;
+    final l$churchId = churchId;
     final l$color = color;
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$editHistory = editHistory;
@@ -2226,6 +2276,8 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('children') ? l$children : const {},
+      _$data.containsKey('church') ? l$church : const {},
+      _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('deceasedSpouseName')
           ? l$deceasedSpouseName
@@ -2277,6 +2329,8 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
+    Input_ChurchesBoolExp? church,
+    Input_UuidComparisonExp? churchId,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
@@ -2313,6 +2367,8 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_StringComparisonExp<TRes> get addressText;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children;
+  CopyWith_Input_ChurchesBoolExp<TRes> get church;
+  CopyWith_Input_UuidComparisonExp<TRes> get churchId;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_StringComparisonExp<TRes> get deceasedSpouseName;
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
@@ -2360,6 +2416,8 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? addressText = _undefined,
     Object? blurhash = _undefined,
     Object? children = _undefined,
+    Object? church = _undefined,
+    Object? churchId = _undefined,
     Object? color = _undefined,
     Object? deceasedSpouseName = _undefined,
     Object? editHistory = _undefined,
@@ -2397,6 +2455,9 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
           'blurhash': (blurhash as Input_StringComparisonExp?),
         if (children != _undefined)
           'children': (children as Input_FamiliesFamiliesBoolExp?),
+        if (church != _undefined) 'church': (church as Input_ChurchesBoolExp?),
+        if (churchId != _undefined)
+          'churchId': (churchId as Input_UuidComparisonExp?),
         if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
         if (deceasedSpouseName != _undefined)
           'deceasedSpouseName':
@@ -2503,6 +2564,21 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         ? CopyWith_Input_FamiliesFamiliesBoolExp.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesBoolExp(
             local$children, (e) => call(children: e));
+  }
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get church {
+    final local$church = _instance.church;
+    return local$church == null
+        ? CopyWith_Input_ChurchesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ChurchesBoolExp(local$church, (e) => call(church: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get churchId {
+    final local$churchId = _instance.churchId;
+    return local$churchId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$churchId, (e) => call(churchId: e));
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -2696,6 +2772,8 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
+    Input_ChurchesBoolExp? church,
+    Input_UuidComparisonExp? churchId,
     Input_BigintComparisonExp? color,
     Input_StringComparisonExp? deceasedSpouseName,
     Input_HistoryEditHistoryBoolExp? editHistory,
@@ -2739,6 +2817,12 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
 
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get church =>
+      CopyWith_Input_ChurchesBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get churchId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);

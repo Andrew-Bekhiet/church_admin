@@ -38,6 +38,10 @@ subscription watchFamily($id: uuid!) {
     address {
       ...Address
     }
+    church {
+      id
+      name
+    }
     status
     deceasedSpouseName
     marriageDate

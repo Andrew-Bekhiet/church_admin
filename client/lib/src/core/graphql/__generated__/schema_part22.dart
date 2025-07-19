@@ -2,6 +2,449 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> {
+  factory CopyWith_Input_HistoryAttendanceDaysBoolExp(
+    Input_HistoryAttendanceDaysBoolExp instance,
+    TRes Function(Input_HistoryAttendanceDaysBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp;
+
+  factory CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp;
+
+  TRes call({
+    List<Input_HistoryAttendanceDaysBoolExp>? $_and,
+    Input_HistoryAttendanceDaysBoolExp? $_not,
+    List<Input_HistoryAttendanceDaysBoolExp>? $_or,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_HistoryConfessionHistoryBoolExp? confessionHistory,
+    Input_HistoryConfessionHistoryAggregateBoolExp? confessionHistoryAggregate,
+    Input_HistoryAttendanceDaysConstraintsBoolExp? constraints,
+    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+        constraintsAggregate,
+    Input_DateComparisonExp? day,
+    Input_HistoryKodasHistoryBoolExp? kodasHistory,
+    Input_HistoryKodasHistoryAggregateBoolExp? kodasHistoryAggregate,
+    Input_StringComparisonExp? notes,
+  });
+  TRes $_and(
+      Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_HistoryAttendanceDaysBoolExp<
+                      Input_HistoryAttendanceDaysBoolExp>>?)
+          _fn);
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get $_not;
+  TRes $_or(
+      Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
+              Iterable<
+                  CopyWith_Input_HistoryAttendanceDaysBoolExp<
+                      Input_HistoryAttendanceDaysBoolExp>>?)
+          _fn);
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate;
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get confessionHistory;
+  CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
+      get confessionHistoryAggregate;
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get constraints;
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get constraintsAggregate;
+  CopyWith_Input_DateComparisonExp<TRes> get day;
+  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory;
+  CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
+      get kodasHistoryAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get notes;
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceDaysBoolExp _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? attendanceHistory = _undefined,
+    Object? attendanceHistoryAggregate = _undefined,
+    Object? confessionHistory = _undefined,
+    Object? confessionHistoryAggregate = _undefined,
+    Object? constraints = _undefined,
+    Object? constraintsAggregate = _undefined,
+    Object? day = _undefined,
+    Object? kodasHistory = _undefined,
+    Object? kodasHistoryAggregate = _undefined,
+    Object? notes = _undefined,
+  }) =>
+      _then(Input_HistoryAttendanceDaysBoolExp._({
+        ..._instance._$data,
+        if ($_and != _undefined)
+          '_and': ($_and as List<Input_HistoryAttendanceDaysBoolExp>?),
+        if ($_not != _undefined)
+          '_not': ($_not as Input_HistoryAttendanceDaysBoolExp?),
+        if ($_or != _undefined)
+          '_or': ($_or as List<Input_HistoryAttendanceDaysBoolExp>?),
+        if (attendanceHistory != _undefined)
+          'attendanceHistory':
+              (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
+        if (attendanceHistoryAggregate != _undefined)
+          'attendanceHistoryAggregate': (attendanceHistoryAggregate
+              as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+        if (confessionHistory != _undefined)
+          'confessionHistory':
+              (confessionHistory as Input_HistoryConfessionHistoryBoolExp?),
+        if (confessionHistoryAggregate != _undefined)
+          'confessionHistoryAggregate': (confessionHistoryAggregate
+              as Input_HistoryConfessionHistoryAggregateBoolExp?),
+        if (constraints != _undefined)
+          'constraints':
+              (constraints as Input_HistoryAttendanceDaysConstraintsBoolExp?),
+        if (constraintsAggregate != _undefined)
+          'constraintsAggregate': (constraintsAggregate
+              as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?),
+        if (day != _undefined) 'day': (day as Input_DateComparisonExp?),
+        if (kodasHistory != _undefined)
+          'kodasHistory': (kodasHistory as Input_HistoryKodasHistoryBoolExp?),
+        if (kodasHistoryAggregate != _undefined)
+          'kodasHistoryAggregate': (kodasHistoryAggregate
+              as Input_HistoryKodasHistoryAggregateBoolExp?),
+        if (notes != _undefined) 'notes': (notes as Input_StringComparisonExp?),
+      }));
+
+  TRes $_and(
+          Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_HistoryAttendanceDaysBoolExp<
+                          Input_HistoryAttendanceDaysBoolExp>>?)
+              _fn) =>
+      call(
+          $_and: _fn(_instance.$_and
+              ?.map((e) => CopyWith_Input_HistoryAttendanceDaysBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysBoolExp(
+            local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+          Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
+                  Iterable<
+                      CopyWith_Input_HistoryAttendanceDaysBoolExp<
+                          Input_HistoryAttendanceDaysBoolExp>>?)
+              _fn) =>
+      call(
+          $_or: _fn(_instance.$_or
+              ?.map((e) => CopyWith_Input_HistoryAttendanceDaysBoolExp(
+                    e,
+                    (i) => i,
+                  )))?.toList());
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
+    final local$attendanceHistory = _instance.attendanceHistory;
+    return local$attendanceHistory == null
+        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
+            local$attendanceHistory, (e) => call(attendanceHistory: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate {
+    final local$attendanceHistoryAggregate =
+        _instance.attendanceHistoryAggregate;
+    return local$attendanceHistoryAggregate == null
+        ? CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
+            local$attendanceHistoryAggregate,
+            (e) => call(attendanceHistoryAggregate: e));
+  }
+
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get confessionHistory {
+    final local$confessionHistory = _instance.confessionHistory;
+    return local$confessionHistory == null
+        ? CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryConfessionHistoryBoolExp(
+            local$confessionHistory, (e) => call(confessionHistory: e));
+  }
+
+  CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
+      get confessionHistoryAggregate {
+    final local$confessionHistoryAggregate =
+        _instance.confessionHistoryAggregate;
+    return local$confessionHistoryAggregate == null
+        ? CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp(
+            local$confessionHistoryAggregate,
+            (e) => call(confessionHistoryAggregate: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> get constraints {
+    final local$constraints = _instance.constraints;
+    return local$constraints == null
+        ? CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp(
+            local$constraints, (e) => call(constraints: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get constraintsAggregate {
+    final local$constraintsAggregate = _instance.constraintsAggregate;
+    return local$constraintsAggregate == null
+        ? CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
+            local$constraintsAggregate, (e) => call(constraintsAggregate: e));
+  }
+
+  CopyWith_Input_DateComparisonExp<TRes> get day {
+    final local$day = _instance.day;
+    return local$day == null
+        ? CopyWith_Input_DateComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_DateComparisonExp(local$day, (e) => call(day: e));
+  }
+
+  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory {
+    final local$kodasHistory = _instance.kodasHistory;
+    return local$kodasHistory == null
+        ? CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryKodasHistoryBoolExp(
+            local$kodasHistory, (e) => call(kodasHistory: e));
+  }
+
+  CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
+      get kodasHistoryAggregate {
+    final local$kodasHistoryAggregate = _instance.kodasHistoryAggregate;
+    return local$kodasHistoryAggregate == null
+        ? CopyWith_Input_HistoryKodasHistoryAggregateBoolExp.stub(
+            _then(_instance))
+        : CopyWith_Input_HistoryKodasHistoryAggregateBoolExp(
+            local$kodasHistoryAggregate, (e) => call(kodasHistoryAggregate: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get notes {
+    final local$notes = _instance.notes;
+    return local$notes == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$notes, (e) => call(notes: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryAttendanceDaysBoolExp>? $_and,
+    Input_HistoryAttendanceDaysBoolExp? $_not,
+    List<Input_HistoryAttendanceDaysBoolExp>? $_or,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_HistoryConfessionHistoryBoolExp? confessionHistory,
+    Input_HistoryConfessionHistoryAggregateBoolExp? confessionHistoryAggregate,
+    Input_HistoryAttendanceDaysConstraintsBoolExp? constraints,
+    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
+        constraintsAggregate,
+    Input_DateComparisonExp? day,
+    Input_HistoryKodasHistoryBoolExp? kodasHistory,
+    Input_HistoryKodasHistoryAggregateBoolExp? kodasHistoryAggregate,
+    Input_StringComparisonExp? notes,
+  }) =>
+      _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get $_not =>
+      CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
+      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
+      get attendanceHistoryAggregate =>
+          CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryConfessionHistoryBoolExp<TRes> get confessionHistory =>
+      CopyWith_Input_HistoryConfessionHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp<TRes>
+      get confessionHistoryAggregate =>
+          CopyWith_Input_HistoryConfessionHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
+      get constraints =>
+          CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
+      get constraintsAggregate =>
+          CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
+              _res);
+
+  CopyWith_Input_DateComparisonExp<TRes> get day =>
+      CopyWith_Input_DateComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory =>
+      CopyWith_Input_HistoryKodasHistoryBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
+      get kodasHistoryAggregate =>
+          CopyWith_Input_HistoryKodasHistoryAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get notes =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+}
+
+class Input_HistoryAttendanceDaysConstraintsAggregateBoolExp {
+  factory Input_HistoryAttendanceDaysConstraintsAggregateBoolExp({
+    Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and? bool_and,
+    Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or? bool_or,
+    Input_historyAttendanceDaysConstraintsAggregateBoolExpCount? count,
+  }) =>
+      Input_HistoryAttendanceDaysConstraintsAggregateBoolExp._({
+        if (bool_and != null) r'bool_and': bool_and,
+        if (bool_or != null) r'bool_or': bool_or,
+        if (count != null) r'count': count,
+      });
+
+  Input_HistoryAttendanceDaysConstraintsAggregateBoolExp._(this._$data);
+
+  factory Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('bool_and')) {
+      final l$bool_and = data['bool_and'];
+      result$data['bool_and'] = l$bool_and == null
+          ? null
+          : Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and
+              .fromJson((l$bool_and as Map<String, dynamic>));
+    }
+    if (data.containsKey('bool_or')) {
+      final l$bool_or = data['bool_or'];
+      result$data['bool_or'] = l$bool_or == null
+          ? null
+          : Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or
+              .fromJson((l$bool_or as Map<String, dynamic>));
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = l$count == null
+          ? null
+          : Input_historyAttendanceDaysConstraintsAggregateBoolExpCount
+              .fromJson((l$count as Map<String, dynamic>));
+    }
+    return Input_HistoryAttendanceDaysConstraintsAggregateBoolExp._(
+        result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and?
+      get bool_and => (_$data['bool_and']
+          as Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and?);
+
+  Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or? get bool_or =>
+      (_$data['bool_or']
+          as Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_or?);
+
+  Input_historyAttendanceDaysConstraintsAggregateBoolExpCount? get count =>
+      (_$data['count']
+          as Input_historyAttendanceDaysConstraintsAggregateBoolExpCount?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('bool_and')) {
+      final l$bool_and = bool_and;
+      result$data['bool_and'] = l$bool_and?.toJson();
+    }
+    if (_$data.containsKey('bool_or')) {
+      final l$bool_or = bool_or;
+      result$data['bool_or'] = l$bool_or?.toJson();
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = l$count?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<
+          Input_HistoryAttendanceDaysConstraintsAggregateBoolExp>
+      get copyWith =>
+          CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceDaysConstraintsAggregateBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$bool_and = bool_and;
+    final lOther$bool_and = other.bool_and;
+    if (_$data.containsKey('bool_and') !=
+        other._$data.containsKey('bool_and')) {
+      return false;
+    }
+    if (l$bool_and != lOther$bool_and) {
+      return false;
+    }
+    final l$bool_or = bool_or;
+    final lOther$bool_or = other.bool_or;
+    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
+      return false;
+    }
+    if (l$bool_or != lOther$bool_or) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$bool_and = bool_and;
+    final l$bool_or = bool_or;
+    final l$count = count;
+    return Object.hashAll([
+      _$data.containsKey('bool_and') ? l$bool_and : const {},
+      _$data.containsKey('bool_or') ? l$bool_or : const {},
+      _$data.containsKey('count') ? l$count : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<
     TRes> {
   factory CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
@@ -2260,245 +2703,6 @@ class Input_HistoryAttendanceDaysConstraintsMaxOrderBy {
       return true;
     }
     if (other is! Input_HistoryAttendanceDaysConstraintsMaxOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$dayId = dayId;
-    final lOther$dayId = other.dayId;
-    if (_$data.containsKey('dayId') != other._$data.containsKey('dayId')) {
-      return false;
-    }
-    if (l$dayId != lOther$dayId) {
-      return false;
-    }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
-      return false;
-    }
-    if (l$groupId != lOther$groupId) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$dayId = dayId;
-    final l$groupId = groupId;
-    final l$id = id;
-    final l$serviceId = serviceId;
-    final l$serviceStudyYear = serviceStudyYear;
-    return Object.hashAll([
-      _$data.containsKey('dayId') ? l$dayId : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes> {
-  factory CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy(
-    Input_HistoryAttendanceDaysConstraintsMaxOrderBy instance,
-    TRes Function(Input_HistoryAttendanceDaysConstraintsMaxOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy;
-
-  factory CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy.stub(
-          TRes res) =
-      _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy;
-
-  TRes call({
-    Enum_OrderBy? dayId,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-  });
-}
-
-class _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryAttendanceDaysConstraintsMaxOrderBy _instance;
-
-  final TRes Function(Input_HistoryAttendanceDaysConstraintsMaxOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? dayId = _undefined,
-    Object? groupId = _undefined,
-    Object? id = _undefined,
-    Object? serviceId = _undefined,
-    Object? serviceStudyYear = _undefined,
-  }) =>
-      _then(Input_HistoryAttendanceDaysConstraintsMaxOrderBy._({
-        ..._instance._$data,
-        if (dayId != _undefined) 'dayId': (dayId as Enum_OrderBy?),
-        if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes>
-    implements CopyWith_Input_HistoryAttendanceDaysConstraintsMaxOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryAttendanceDaysConstraintsMaxOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? dayId,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-  }) =>
-      _res;
-}
-
-class Input_HistoryAttendanceDaysConstraintsMinOrderBy {
-  factory Input_HistoryAttendanceDaysConstraintsMinOrderBy({
-    Enum_OrderBy? dayId,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-  }) =>
-      Input_HistoryAttendanceDaysConstraintsMinOrderBy._({
-        if (dayId != null) r'dayId': dayId,
-        if (groupId != null) r'groupId': groupId,
-        if (id != null) r'id': id,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
-
-  Input_HistoryAttendanceDaysConstraintsMinOrderBy._(this._$data);
-
-  factory Input_HistoryAttendanceDaysConstraintsMinOrderBy.fromJson(
-      Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('dayId')) {
-      final l$dayId = data['dayId'];
-      result$data['dayId'] =
-          l$dayId == null ? null : fromJson_Enum_OrderBy((l$dayId as String));
-    }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$groupId as String));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceId as String));
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
-    }
-    return Input_HistoryAttendanceDaysConstraintsMinOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get dayId => (_$data['dayId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get serviceStudyYear =>
-      (_$data['serviceStudyYear'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('dayId')) {
-      final l$dayId = dayId;
-      result$data['dayId'] =
-          l$dayId == null ? null : toJson_Enum_OrderBy(l$dayId);
-    }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] =
-          l$groupId == null ? null : toJson_Enum_OrderBy(l$groupId);
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : toJson_Enum_OrderBy(l$serviceId);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear == null
-          ? null
-          : toJson_Enum_OrderBy(l$serviceStudyYear);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsMinOrderBy<
-          Input_HistoryAttendanceDaysConstraintsMinOrderBy>
-      get copyWith => CopyWith_Input_HistoryAttendanceDaysConstraintsMinOrderBy(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryAttendanceDaysConstraintsMinOrderBy ||
         runtimeType != other.runtimeType) {
       return false;
     }

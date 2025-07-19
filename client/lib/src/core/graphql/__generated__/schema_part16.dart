@@ -2100,6 +2100,8 @@ class Input_FamiliesInsertInput {
     Input_AddressesObjRelInsertInput? address,
     String? addressText,
     Input_FamiliesFamiliesArrRelInsertInput? children,
+    Input_ChurchesObjRelInsertInput? church,
+    UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
     Map<String, dynamic>? geolocation,
@@ -2116,6 +2118,8 @@ class Input_FamiliesInsertInput {
         if (address != null) r'address': address,
         if (addressText != null) r'addressText': addressText,
         if (children != null) r'children': children,
+        if (church != null) r'church': church,
+        if (churchId != null) r'churchId': churchId,
         if (color != null) r'color': color,
         if (deceasedSpouseName != null)
           r'deceasedSpouseName': deceasedSpouseName,
@@ -2151,6 +2155,18 @@ class Input_FamiliesInsertInput {
           ? null
           : Input_FamiliesFamiliesArrRelInsertInput.fromJson(
               (l$children as Map<String, dynamic>));
+    }
+    if (data.containsKey('church')) {
+      final l$church = data['church'];
+      result$data['church'] = l$church == null
+          ? null
+          : Input_ChurchesObjRelInsertInput.fromJson(
+              (l$church as Map<String, dynamic>));
+    }
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] =
+          l$churchId == null ? null : stringToUuid(l$churchId);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -2222,6 +2238,11 @@ class Input_FamiliesInsertInput {
   Input_FamiliesFamiliesArrRelInsertInput? get children =>
       (_$data['children'] as Input_FamiliesFamiliesArrRelInsertInput?);
 
+  Input_ChurchesObjRelInsertInput? get church =>
+      (_$data['church'] as Input_ChurchesObjRelInsertInput?);
+
+  UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
   int? get color => (_$data['color'] as int?);
 
   String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
@@ -2262,6 +2283,15 @@ class Input_FamiliesInsertInput {
     if (_$data.containsKey('children')) {
       final l$children = children;
       result$data['children'] = l$children?.toJson();
+    }
+    if (_$data.containsKey('church')) {
+      final l$church = church;
+      result$data['church'] = l$church?.toJson();
+    }
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] =
+          l$churchId == null ? null : uuidToString(l$churchId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2350,6 +2380,23 @@ class Input_FamiliesInsertInput {
       return false;
     }
     if (l$children != lOther$children) {
+      return false;
+    }
+    final l$church = church;
+    final lOther$church = other.church;
+    if (_$data.containsKey('church') != other._$data.containsKey('church')) {
+      return false;
+    }
+    if (l$church != lOther$church) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
       return false;
     }
     final l$color = color;
@@ -2452,6 +2499,8 @@ class Input_FamiliesInsertInput {
     final l$address = address;
     final l$addressText = addressText;
     final l$children = children;
+    final l$church = church;
+    final l$churchId = churchId;
     final l$color = color;
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$geolocation = geolocation;
@@ -2467,6 +2516,8 @@ class Input_FamiliesInsertInput {
       _$data.containsKey('address') ? l$address : const {},
       _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('children') ? l$children : const {},
+      _$data.containsKey('church') ? l$church : const {},
+      _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('deceasedSpouseName')
           ? l$deceasedSpouseName
@@ -2482,37 +2533,4 @@ class Input_FamiliesInsertInput {
       _$data.containsKey('visitHistory') ? l$visitHistory : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_FamiliesInsertInput<TRes> {
-  factory CopyWith_Input_FamiliesInsertInput(
-    Input_FamiliesInsertInput instance,
-    TRes Function(Input_FamiliesInsertInput) then,
-  ) = _CopyWithImpl_Input_FamiliesInsertInput;
-
-  factory CopyWith_Input_FamiliesInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_FamiliesInsertInput;
-
-  TRes call({
-    Input_AddressesObjRelInsertInput? address,
-    String? addressText,
-    Input_FamiliesFamiliesArrRelInsertInput? children,
-    int? color,
-    String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
-    DateTime? marriageDate,
-    String? name,
-    String? notes,
-    Input_FamiliesFamiliesArrRelInsertInput? parents,
-    Input_PersonsArrRelInsertInput? persons,
-    String? status,
-    Input_StoresArrRelInsertInput? stores,
-    Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
-  });
-  CopyWith_Input_AddressesObjRelInsertInput<TRes> get address;
-  CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get children;
-  CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> get parents;
-  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
-  CopyWith_Input_StoresArrRelInsertInput<TRes> get stores;
-  CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory;
 }

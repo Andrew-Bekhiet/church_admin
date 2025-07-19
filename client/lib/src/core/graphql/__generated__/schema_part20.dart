@@ -2,6 +2,155 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_GroupsArrRelInsertInput<TRes> {
+  factory CopyWith_Input_GroupsArrRelInsertInput(
+    Input_GroupsArrRelInsertInput instance,
+    TRes Function(Input_GroupsArrRelInsertInput) then,
+  ) = _CopyWithImpl_Input_GroupsArrRelInsertInput;
+
+  factory CopyWith_Input_GroupsArrRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsArrRelInsertInput;
+
+  TRes call({
+    List<Input_GroupsInsertInput>? data,
+    Input_GroupsOnConflict? onConflict,
+  });
+  TRes data(
+      Iterable<Input_GroupsInsertInput> Function(
+              Iterable<
+                  CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput>>)
+          _fn);
+  CopyWith_Input_GroupsOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
+    implements CopyWith_Input_GroupsArrRelInsertInput<TRes> {
+  _CopyWithImpl_Input_GroupsArrRelInsertInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_GroupsArrRelInsertInput _instance;
+
+  final TRes Function(Input_GroupsArrRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? data = _undefined,
+    Object? onConflict = _undefined,
+  }) =>
+      _then(Input_GroupsArrRelInsertInput._({
+        ..._instance._$data,
+        if (data != _undefined && data != null)
+          'data': (data as List<Input_GroupsInsertInput>),
+        if (onConflict != _undefined)
+          'onConflict': (onConflict as Input_GroupsOnConflict?),
+      }));
+
+  TRes data(
+          Iterable<Input_GroupsInsertInput> Function(
+                  Iterable<
+                      CopyWith_Input_GroupsInsertInput<
+                          Input_GroupsInsertInput>>)
+              _fn) =>
+      call(
+          data: _fn(_instance.data.map((e) => CopyWith_Input_GroupsInsertInput(
+                e,
+                (i) => i,
+              ))).toList());
+
+  CopyWith_Input_GroupsOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_GroupsOnConflict.stub(_then(_instance))
+        : CopyWith_Input_GroupsOnConflict(
+            local$onConflict, (e) => call(onConflict: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_GroupsArrRelInsertInput<TRes>
+    implements CopyWith_Input_GroupsArrRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_GroupsArrRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_GroupsInsertInput>? data,
+    Input_GroupsOnConflict? onConflict,
+  }) =>
+      _res;
+
+  data(_fn) => _res;
+
+  CopyWith_Input_GroupsOnConflict<TRes> get onConflict =>
+      CopyWith_Input_GroupsOnConflict.stub(_res);
+}
+
+class Input_GroupsAvgOrderBy {
+  factory Input_GroupsAvgOrderBy({Enum_OrderBy? color}) =>
+      Input_GroupsAvgOrderBy._({
+        if (color != null) r'color': color,
+      });
+
+  Input_GroupsAvgOrderBy._(this._$data);
+
+  factory Input_GroupsAvgOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] =
+          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+    }
+    return Input_GroupsAvgOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] =
+          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_GroupsAvgOrderBy<Input_GroupsAvgOrderBy> get copyWith =>
+      CopyWith_Input_GroupsAvgOrderBy(
+        this,
+        (i) => i,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupsAvgOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
+  }
+}
+
 abstract class CopyWith_Input_GroupsAvgOrderBy<TRes> {
   factory CopyWith_Input_GroupsAvgOrderBy(
     Input_GroupsAvgOrderBy instance,
@@ -2444,512 +2593,6 @@ class Input_GroupsOnConflict {
               : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsOnConflict<TRes> {
-  factory CopyWith_Input_GroupsOnConflict(
-    Input_GroupsOnConflict instance,
-    TRes Function(Input_GroupsOnConflict) then,
-  ) = _CopyWithImpl_Input_GroupsOnConflict;
-
-  factory CopyWith_Input_GroupsOnConflict.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsOnConflict;
-
-  TRes call({
-    Enum_GroupsConstraint? constraint,
-    List<Enum_GroupsUpdateColumn>? updateColumns,
-    Input_GroupsBoolExp? where,
-  });
-  CopyWith_Input_GroupsBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_GroupsOnConflict<TRes>
-    implements CopyWith_Input_GroupsOnConflict<TRes> {
-  _CopyWithImpl_Input_GroupsOnConflict(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsOnConflict _instance;
-
-  final TRes Function(Input_GroupsOnConflict) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? constraint = _undefined,
-    Object? updateColumns = _undefined,
-    Object? where = _undefined,
-  }) =>
-      _then(Input_GroupsOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_GroupsConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns': (updateColumns as List<Enum_GroupsUpdateColumn>),
-        if (where != _undefined) 'where': (where as Input_GroupsBoolExp?),
-      }));
-
-  CopyWith_Input_GroupsBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return local$where == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_GroupsOnConflict<TRes>
-    implements CopyWith_Input_GroupsOnConflict<TRes> {
-  _CopyWithStubImpl_Input_GroupsOnConflict(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_GroupsConstraint? constraint,
-    List<Enum_GroupsUpdateColumn>? updateColumns,
-    Input_GroupsBoolExp? where,
-  }) =>
-      _res;
-
-  CopyWith_Input_GroupsBoolExp<TRes> get where =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
-}
-
-class Input_GroupsOrderBy {
-  factory Input_GroupsOrderBy({
-    Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
-    Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
-        attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryAggregateOrderBy? attendanceHistoryAggregate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? color,
-    Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
-    Enum_OrderBy? id,
-    Input_HistoryLatestEditsOrderBy? lastEdit,
-    Enum_OrderBy? name,
-    Input_PersonsGroupsAggregateOrderBy? personsAggregate,
-    Enum_OrderBy? photoUpdatedAt,
-    Input_ServicesOrderBy? service,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? validity,
-  }) =>
-      Input_GroupsOrderBy._({
-        if (adminUsersAggregate != null)
-          r'adminUsersAggregate': adminUsersAggregate,
-        if (attendanceDaysConstraintsAggregate != null)
-          r'attendanceDaysConstraintsAggregate':
-              attendanceDaysConstraintsAggregate,
-        if (attendanceHistoryAggregate != null)
-          r'attendanceHistoryAggregate': attendanceHistoryAggregate,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (color != null) r'color': color,
-        if (editHistroyAggregate != null)
-          r'editHistroyAggregate': editHistroyAggregate,
-        if (id != null) r'id': id,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (name != null) r'name': name,
-        if (personsAggregate != null) r'personsAggregate': personsAggregate,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (service != null) r'service': service,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (validity != null) r'validity': validity,
-      });
-
-  Input_GroupsOrderBy._(this._$data);
-
-  factory Input_GroupsOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('adminUsersAggregate')) {
-      final l$adminUsersAggregate = data['adminUsersAggregate'];
-      result$data['adminUsersAggregate'] = l$adminUsersAggregate == null
-          ? null
-          : Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
-              (l$adminUsersAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('attendanceDaysConstraintsAggregate')) {
-      final l$attendanceDaysConstraintsAggregate =
-          data['attendanceDaysConstraintsAggregate'];
-      result$data['attendanceDaysConstraintsAggregate'] =
-          l$attendanceDaysConstraintsAggregate == null
-              ? null
-              : Input_HistoryAttendanceDaysConstraintsAggregateOrderBy.fromJson(
-                  (l$attendanceDaysConstraintsAggregate
-                      as Map<String, dynamic>));
-    }
-    if (data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate == null
-              ? null
-              : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
-                  (l$attendanceHistoryAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = l$blurhash == null
-          ? null
-          : fromJson_Enum_OrderBy((l$blurhash as String));
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    if (data.containsKey('editHistroyAggregate')) {
-      final l$editHistroyAggregate = data['editHistroyAggregate'];
-      result$data['editHistroyAggregate'] = l$editHistroyAggregate == null
-          ? null
-          : Input_HistoryEditHistoryAggregateOrderBy.fromJson(
-              (l$editHistroyAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('lastEdit')) {
-      final l$lastEdit = data['lastEdit'];
-      result$data['lastEdit'] = l$lastEdit == null
-          ? null
-          : Input_HistoryLatestEditsOrderBy.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
-    }
-    if (data.containsKey('personsAggregate')) {
-      final l$personsAggregate = data['personsAggregate'];
-      result$data['personsAggregate'] = l$personsAggregate == null
-          ? null
-          : Input_PersonsGroupsAggregateOrderBy.fromJson(
-              (l$personsAggregate as Map<String, dynamic>));
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : fromJson_Enum_OrderBy((l$photoUpdatedAt as String));
-    }
-    if (data.containsKey('service')) {
-      final l$service = data['service'];
-      result$data['service'] = l$service == null
-          ? null
-          : Input_ServicesOrderBy.fromJson((l$service as Map<String, dynamic>));
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$serviceId as String));
-    }
-    if (data.containsKey('validity')) {
-      final l$validity = data['validity'];
-      result$data['validity'] = l$validity == null
-          ? null
-          : fromJson_Enum_OrderBy((l$validity as String));
-    }
-    return Input_GroupsOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_AuthUsersAdminOnAggregateOrderBy? get adminUsersAggregate =>
-      (_$data['adminUsersAggregate']
-          as Input_AuthUsersAdminOnAggregateOrderBy?);
-
-  Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
-      get attendanceDaysConstraintsAggregate =>
-          (_$data['attendanceDaysConstraintsAggregate']
-              as Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?);
-
-  Input_HistoryAttendanceHistoryAggregateOrderBy?
-      get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
-          as Input_HistoryAttendanceHistoryAggregateOrderBy?);
-
-  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Input_HistoryEditHistoryAggregateOrderBy? get editHistroyAggregate =>
-      (_$data['editHistroyAggregate']
-          as Input_HistoryEditHistoryAggregateOrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Input_HistoryLatestEditsOrderBy? get lastEdit =>
-      (_$data['lastEdit'] as Input_HistoryLatestEditsOrderBy?);
-
-  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-
-  Input_PersonsGroupsAggregateOrderBy? get personsAggregate =>
-      (_$data['personsAggregate'] as Input_PersonsGroupsAggregateOrderBy?);
-
-  Enum_OrderBy? get photoUpdatedAt =>
-      (_$data['photoUpdatedAt'] as Enum_OrderBy?);
-
-  Input_ServicesOrderBy? get service =>
-      (_$data['service'] as Input_ServicesOrderBy?);
-
-  Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get validity => (_$data['validity'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('adminUsersAggregate')) {
-      final l$adminUsersAggregate = adminUsersAggregate;
-      result$data['adminUsersAggregate'] = l$adminUsersAggregate?.toJson();
-    }
-    if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
-      final l$attendanceDaysConstraintsAggregate =
-          attendanceDaysConstraintsAggregate;
-      result$data['attendanceDaysConstraintsAggregate'] =
-          l$attendanceDaysConstraintsAggregate?.toJson();
-    }
-    if (_$data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate?.toJson();
-    }
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    if (_$data.containsKey('editHistroyAggregate')) {
-      final l$editHistroyAggregate = editHistroyAggregate;
-      result$data['editHistroyAggregate'] = l$editHistroyAggregate?.toJson();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('lastEdit')) {
-      final l$lastEdit = lastEdit;
-      result$data['lastEdit'] = l$lastEdit?.toJson();
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
-    }
-    if (_$data.containsKey('personsAggregate')) {
-      final l$personsAggregate = personsAggregate;
-      result$data['personsAggregate'] = l$personsAggregate?.toJson();
-    }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : toJson_Enum_OrderBy(l$photoUpdatedAt);
-    }
-    if (_$data.containsKey('service')) {
-      final l$service = service;
-      result$data['service'] = l$service?.toJson();
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : toJson_Enum_OrderBy(l$serviceId);
-    }
-    if (_$data.containsKey('validity')) {
-      final l$validity = validity;
-      result$data['validity'] =
-          l$validity == null ? null : toJson_Enum_OrderBy(l$validity);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsOrderBy<Input_GroupsOrderBy> get copyWith =>
-      CopyWith_Input_GroupsOrderBy(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsOrderBy || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$adminUsersAggregate = adminUsersAggregate;
-    final lOther$adminUsersAggregate = other.adminUsersAggregate;
-    if (_$data.containsKey('adminUsersAggregate') !=
-        other._$data.containsKey('adminUsersAggregate')) {
-      return false;
-    }
-    if (l$adminUsersAggregate != lOther$adminUsersAggregate) {
-      return false;
-    }
-    final l$attendanceDaysConstraintsAggregate =
-        attendanceDaysConstraintsAggregate;
-    final lOther$attendanceDaysConstraintsAggregate =
-        other.attendanceDaysConstraintsAggregate;
-    if (_$data.containsKey('attendanceDaysConstraintsAggregate') !=
-        other._$data.containsKey('attendanceDaysConstraintsAggregate')) {
-      return false;
-    }
-    if (l$attendanceDaysConstraintsAggregate !=
-        lOther$attendanceDaysConstraintsAggregate) {
-      return false;
-    }
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
-    if (_$data.containsKey('attendanceHistoryAggregate') !=
-        other._$data.containsKey('attendanceHistoryAggregate')) {
-      return false;
-    }
-    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
-      return false;
-    }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$editHistroyAggregate = editHistroyAggregate;
-    final lOther$editHistroyAggregate = other.editHistroyAggregate;
-    if (_$data.containsKey('editHistroyAggregate') !=
-        other._$data.containsKey('editHistroyAggregate')) {
-      return false;
-    }
-    if (l$editHistroyAggregate != lOther$editHistroyAggregate) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$lastEdit = lastEdit;
-    final lOther$lastEdit = other.lastEdit;
-    if (_$data.containsKey('lastEdit') !=
-        other._$data.containsKey('lastEdit')) {
-      return false;
-    }
-    if (l$lastEdit != lOther$lastEdit) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$personsAggregate = personsAggregate;
-    final lOther$personsAggregate = other.personsAggregate;
-    if (_$data.containsKey('personsAggregate') !=
-        other._$data.containsKey('personsAggregate')) {
-      return false;
-    }
-    if (l$personsAggregate != lOther$personsAggregate) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
-      return false;
-    }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$service = service;
-    final lOther$service = other.service;
-    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
-      return false;
-    }
-    if (l$service != lOther$service) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$validity = validity;
-    final lOther$validity = other.validity;
-    if (_$data.containsKey('validity') !=
-        other._$data.containsKey('validity')) {
-      return false;
-    }
-    if (l$validity != lOther$validity) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$adminUsersAggregate = adminUsersAggregate;
-    final l$attendanceDaysConstraintsAggregate =
-        attendanceDaysConstraintsAggregate;
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    final l$blurhash = blurhash;
-    final l$color = color;
-    final l$editHistroyAggregate = editHistroyAggregate;
-    final l$id = id;
-    final l$lastEdit = lastEdit;
-    final l$name = name;
-    final l$personsAggregate = personsAggregate;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$service = service;
-    final l$serviceId = serviceId;
-    final l$validity = validity;
-    return Object.hashAll([
-      _$data.containsKey('adminUsersAggregate')
-          ? l$adminUsersAggregate
-          : const {},
-      _$data.containsKey('attendanceDaysConstraintsAggregate')
-          ? l$attendanceDaysConstraintsAggregate
-          : const {},
-      _$data.containsKey('attendanceHistoryAggregate')
-          ? l$attendanceHistoryAggregate
-          : const {},
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('editHistroyAggregate')
-          ? l$editHistroyAggregate
-          : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('service') ? l$service : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('validity') ? l$validity : const {},
     ]);
   }
 }

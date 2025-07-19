@@ -9,6 +9,9 @@ object_relationships:
         table:
           name: addresses
           schema: public
+  - name: church
+    using:
+      foreign_key_constraint_on: church_id
   - name: familyAdminsPhones
     using:
       manual_configuration:
@@ -100,28 +103,30 @@ insert_permissions:
       check: {}
       columns:
         - address_text
+        - church_id
         - color
         - deceased_spouse_name
         - geolocation
+        - marriage_date
         - name
         - notes
         - status
-        - marriage_date
 select_permissions:
   - role: user
     permission:
       columns:
         - address_text
         - blurhash
+        - church_id
         - color
         - deceased_spouse_name
         - geolocation
         - id
+        - marriage_date
         - name
         - notes
         - photo_updated_at
         - status
-        - marriage_date
       filter:
         _or:
           - _exists:
@@ -152,13 +157,14 @@ update_permissions:
     permission:
       columns:
         - address_text
+        - church_id
         - color
         - deceased_spouse_name
         - geolocation
+        - marriage_date
         - name
         - notes
         - status
-        - marriage_date
       filter:
         _or:
           - _exists:

@@ -2,6 +2,219 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput(
+    Input_HistoryAttendanceDaysObjRelInsertInput instance,
+    TRes Function(Input_HistoryAttendanceDaysObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceDaysObjRelInsertInput;
+
+  factory CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceDaysObjRelInsertInput;
+
+  TRes call({
+    Input_HistoryAttendanceDaysInsertInput? data,
+    Input_HistoryAttendanceDaysOnConflict? onConflict,
+  });
+  CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> get data;
+  CopyWith_Input_HistoryAttendanceDaysOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysObjRelInsertInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysObjRelInsertInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryAttendanceDaysObjRelInsertInput _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysObjRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? data = _undefined,
+    Object? onConflict = _undefined,
+  }) =>
+      _then(Input_HistoryAttendanceDaysObjRelInsertInput._({
+        ..._instance._$data,
+        if (data != _undefined && data != null)
+          'data': (data as Input_HistoryAttendanceDaysInsertInput),
+        if (onConflict != _undefined)
+          'onConflict': (onConflict as Input_HistoryAttendanceDaysOnConflict?),
+      }));
+
+  CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_HistoryAttendanceDaysInsertInput(
+        local$data, (e) => call(data: e));
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_HistoryAttendanceDaysOnConflict.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysOnConflict(
+            local$onConflict, (e) => call(onConflict: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysObjRelInsertInput<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_HistoryAttendanceDaysInsertInput? data,
+    Input_HistoryAttendanceDaysOnConflict? onConflict,
+  }) =>
+      _res;
+
+  CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> get data =>
+      CopyWith_Input_HistoryAttendanceDaysInsertInput.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysOnConflict<TRes> get onConflict =>
+      CopyWith_Input_HistoryAttendanceDaysOnConflict.stub(_res);
+}
+
+class Input_HistoryAttendanceDaysOnConflict {
+  factory Input_HistoryAttendanceDaysOnConflict({
+    required Enum_HistoryAttendanceDaysConstraint constraint,
+    List<Enum_HistoryAttendanceDaysUpdateColumn>? updateColumns,
+    Input_HistoryAttendanceDaysBoolExp? where,
+  }) =>
+      Input_HistoryAttendanceDaysOnConflict._({
+        r'constraint': constraint,
+        if (updateColumns != null) r'updateColumns': updateColumns,
+        if (where != null) r'where': where,
+      });
+
+  Input_HistoryAttendanceDaysOnConflict._(this._$data);
+
+  factory Input_HistoryAttendanceDaysOnConflict.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] =
+        fromJson_Enum_HistoryAttendanceDaysConstraint((l$constraint as String));
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) =>
+              fromJson_Enum_HistoryAttendanceDaysUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_HistoryAttendanceDaysBoolExp.fromJson(
+              (l$where as Map<String, dynamic>));
+    }
+    return Input_HistoryAttendanceDaysOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HistoryAttendanceDaysConstraint get constraint =>
+      (_$data['constraint'] as Enum_HistoryAttendanceDaysConstraint);
+
+  List<Enum_HistoryAttendanceDaysUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns']
+          as List<Enum_HistoryAttendanceDaysUpdateColumn>?);
+
+  Input_HistoryAttendanceDaysBoolExp? get where =>
+      (_$data['where'] as Input_HistoryAttendanceDaysBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] =
+        toJson_Enum_HistoryAttendanceDaysConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryAttendanceDaysUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryAttendanceDaysUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysOnConflict<
+          Input_HistoryAttendanceDaysOnConflict>
+      get copyWith => CopyWith_Input_HistoryAttendanceDaysOnConflict(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceDaysOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+              ? null
+              : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryAttendanceDaysOnConflict<TRes> {
   factory CopyWith_Input_HistoryAttendanceDaysOnConflict(
     Input_HistoryAttendanceDaysOnConflict instance,

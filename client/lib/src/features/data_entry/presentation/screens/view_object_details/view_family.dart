@@ -183,16 +183,8 @@ class _ViewFamilyState extends State<ViewFamily> {
             ],
           ),
           ListTile(
-            title: const Text('المنطقة'),
-            subtitle: family.address?.area != null
-                ? ViewableObjectCard(family.address!.area!)
-                : null,
-          ),
-          ListTile(
-            title: const Text('الشارع'),
-            subtitle: family.address?.street != null
-                ? ViewableObjectCard(family.address!.street!)
-                : null,
+            title: const Text('الكنيسة'),
+            subtitle: Text(family.church?.name ?? ''),
           ),
           ListTile(
             title: const Text('الحالة الاجتماعية'),
@@ -212,6 +204,18 @@ class _ViewFamilyState extends State<ViewFamily> {
             'ملاحظات',
             family.notes,
             showErrorIfEmpty: false,
+          ),
+          ListTile(
+            title: const Text('المنطقة'),
+            subtitle: family.address?.area != null
+                ? ViewableObjectCard(family.address!.area!)
+                : null,
+          ),
+          ListTile(
+            title: const Text('الشارع'),
+            subtitle: family.address?.street != null
+                ? ViewableObjectCard(family.address!.street!)
+                : null,
           ),
           ListTile(
             title: FilledButton.icon(

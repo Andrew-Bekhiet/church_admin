@@ -2077,6 +2077,35 @@ const documentNodeSubscriptionwatchFamily = DocumentNode(definitions: [
             ]),
           ),
           FieldNode(
+            name: NameNode(value: 'church'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
             name: NameNode(value: 'status'),
             alias: null,
             arguments: [],
@@ -2218,6 +2247,7 @@ class Subscription_watchFamily_familiesByPk
     this.photoUpdatedAt,
     this.blurhash,
     this.address,
+    this.church,
     required this.status,
     this.deceasedSpouseName,
     this.marriageDate,
@@ -2237,6 +2267,7 @@ class Subscription_watchFamily_familiesByPk
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$address = json['address'];
+    final l$church = json['church'];
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
     final l$marriageDate = json['marriageDate'];
@@ -2256,6 +2287,10 @@ class Subscription_watchFamily_familiesByPk
       address: l$address == null
           ? null
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
+      church: l$church == null
+          ? null
+          : Subscription_watchFamily_familiesByPk_church.fromJson(
+              (l$church as Map<String, dynamic>)),
       status: (l$status as String),
       deceasedSpouseName: (l$deceasedSpouseName as String?),
       marriageDate:
@@ -2294,6 +2329,8 @@ class Subscription_watchFamily_familiesByPk
 
   final Fragment_Address? address;
 
+  final Subscription_watchFamily_familiesByPk_church? church;
+
   final String status;
 
   final String? deceasedSpouseName;
@@ -2328,6 +2365,8 @@ class Subscription_watchFamily_familiesByPk
     _resultData['blurhash'] = l$blurhash;
     final l$address = address;
     _resultData['address'] = l$address?.toJson();
+    final l$church = church;
+    _resultData['church'] = l$church?.toJson();
     final l$status = status;
     _resultData['status'] = l$status;
     final l$deceasedSpouseName = deceasedSpouseName;
@@ -2357,6 +2396,7 @@ class Subscription_watchFamily_familiesByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$address = address;
+    final l$church = church;
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
     final l$marriageDate = marriageDate;
@@ -2373,6 +2413,7 @@ class Subscription_watchFamily_familiesByPk
       l$photoUpdatedAt,
       l$blurhash,
       l$address,
+      l$church,
       l$status,
       l$deceasedSpouseName,
       l$marriageDate,
@@ -2426,6 +2467,11 @@ class Subscription_watchFamily_familiesByPk
     final l$address = address;
     final lOther$address = other.address;
     if (l$address != lOther$address) {
+      return false;
+    }
+    final l$church = church;
+    final lOther$church = other.church;
+    if (l$church != lOther$church) {
       return false;
     }
     final l$status = status;
@@ -2499,6 +2545,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_Address? address,
+    Subscription_watchFamily_familiesByPk_church? church,
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
@@ -2510,6 +2557,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     Fragment_LatestFatherVisitHistory? lastFatherVisit,
   });
   CopyWith_Fragment_Address<TRes> get address;
+  CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> get church;
   CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
       get familyAdminsPhones;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
@@ -2538,6 +2586,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? address = _undefined,
+    Object? church = _undefined,
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
     Object? marriageDate = _undefined,
@@ -2564,6 +2613,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
         address: address == _undefined
             ? _instance.address
             : (address as Fragment_Address?),
+        church: church == _undefined
+            ? _instance.church
+            : (church as Subscription_watchFamily_familiesByPk_church?),
         status: status == _undefined || status == null
             ? _instance.status
             : (status as String),
@@ -2594,6 +2646,15 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     return local$address == null
         ? CopyWith_Fragment_Address.stub(_then(_instance))
         : CopyWith_Fragment_Address(local$address, (e) => call(address: e));
+  }
+
+  CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> get church {
+    final local$church = _instance.church;
+    return local$church == null
+        ? CopyWith_Subscription_watchFamily_familiesByPk_church.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchFamily_familiesByPk_church(
+            local$church, (e) => call(church: e));
   }
 
   CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
@@ -2645,6 +2706,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_Address? address,
+    Subscription_watchFamily_familiesByPk_church? church,
     String? status,
     String? deceasedSpouseName,
     DateTime? marriageDate,
@@ -2660,6 +2722,9 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);
 
+  CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> get church =>
+      CopyWith_Subscription_watchFamily_familiesByPk_church.stub(_res);
+
   CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones<TRes>
       get familyAdminsPhones =>
           CopyWith_Subscription_watchFamily_familiesByPk_familyAdminsPhones
@@ -2673,6 +2738,151 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
 
   CopyWith_Fragment_LatestFatherVisitHistory<TRes> get lastFatherVisit =>
       CopyWith_Fragment_LatestFatherVisitHistory.stub(_res);
+}
+
+class Subscription_watchFamily_familiesByPk_church {
+  Subscription_watchFamily_familiesByPk_church({
+    required this.id,
+    required this.name,
+    this.$__typename = 'Churches',
+  });
+
+  factory Subscription_watchFamily_familiesByPk_church.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchFamily_familiesByPk_church(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchFamily_familiesByPk_church ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchFamily_familiesByPk_church
+    on Subscription_watchFamily_familiesByPk_church {
+  CopyWith_Subscription_watchFamily_familiesByPk_church<
+          Subscription_watchFamily_familiesByPk_church>
+      get copyWith => CopyWith_Subscription_watchFamily_familiesByPk_church(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> {
+  factory CopyWith_Subscription_watchFamily_familiesByPk_church(
+    Subscription_watchFamily_familiesByPk_church instance,
+    TRes Function(Subscription_watchFamily_familiesByPk_church) then,
+  ) = _CopyWithImpl_Subscription_watchFamily_familiesByPk_church;
+
+  factory CopyWith_Subscription_watchFamily_familiesByPk_church.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_church;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchFamily_familiesByPk_church<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> {
+  _CopyWithImpl_Subscription_watchFamily_familiesByPk_church(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchFamily_familiesByPk_church _instance;
+
+  final TRes Function(Subscription_watchFamily_familiesByPk_church) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchFamily_familiesByPk_church(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_church<TRes>
+    implements CopyWith_Subscription_watchFamily_familiesByPk_church<TRes> {
+  _CopyWithStubImpl_Subscription_watchFamily_familiesByPk_church(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
 }
 
 class Subscription_watchFamily_familiesByPk_familyAdminsPhones {

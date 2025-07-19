@@ -20,6 +20,7 @@ mixin _$Family {
   MartialStatus get status;
   DateTime? get marriageDate;
   String? get deceasedSpouseName;
+  Church? get church;
   String? get notes;
   Color? get color;
   DateTime? get photoUpdatedAt;
@@ -51,6 +52,7 @@ mixin _$Family {
                 other.marriageDate == marriageDate) &&
             (identical(other.deceasedSpouseName, deceasedSpouseName) ||
                 other.deceasedSpouseName == deceasedSpouseName) &&
+            (identical(other.church, church) || other.church == church) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
@@ -79,6 +81,7 @@ mixin _$Family {
       status,
       marriageDate,
       deceasedSpouseName,
+      church,
       notes,
       color,
       photoUpdatedAt,
@@ -92,7 +95,7 @@ mixin _$Family {
 
   @override
   String toString() {
-    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit)';
+    return 'Family(id: $id, name: $name, address: $address, status: $status, marriageDate: $marriageDate, deceasedSpouseName: $deceasedSpouseName, church: $church, notes: $notes, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, children: $children, parents: $parents, familyAdminsPhones: $familyAdminsPhones, lastEdit: $lastEdit, lastVisit: $lastVisit, lastFatherVisit: $lastFatherVisit)';
   }
 }
 
@@ -108,6 +111,7 @@ abstract mixin class $FamilyCopyWith<$Res> {
       MartialStatus status,
       DateTime? marriageDate,
       String? deceasedSpouseName,
+      Church? church,
       String? notes,
       Color? color,
       DateTime? photoUpdatedAt,
@@ -138,6 +142,7 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? status = null,
     Object? marriageDate = freezed,
     Object? deceasedSpouseName = freezed,
+    Object? church = freezed,
     Object? notes = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
@@ -174,6 +179,10 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
           ? _self.deceasedSpouseName
           : deceasedSpouseName // ignore: cast_nullable_to_non_nullable
               as String?,
+      church: freezed == church
+          ? _self.church
+          : church // ignore: cast_nullable_to_non_nullable
+              as Church?,
       notes: freezed == notes
           ? _self.notes
           : notes // ignore: cast_nullable_to_non_nullable

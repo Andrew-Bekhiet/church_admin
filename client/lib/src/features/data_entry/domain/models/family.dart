@@ -45,6 +45,8 @@ class Family extends ViewableWithIDAndImage
   @override
   final String? deceasedSpouseName;
 
+  final Church? church;
+
   @override
   final String? notes;
 
@@ -89,6 +91,7 @@ class Family extends ViewableWithIDAndImage
     this.status = MartialStatus.married,
     this.marriageDate,
     this.deceasedSpouseName,
+    this.church,
     this.notes,
     this.color,
     this.photoUpdatedAt,
@@ -126,6 +129,7 @@ class Family extends ViewableWithIDAndImage
         marriageDate: status == MartialStatus.widowed ? null : marriageDate,
         deceasedSpouseName:
             status == MartialStatus.widowed ? deceasedSpouseName : null,
+        churchId: church?.id.toUuid(),
         notes: notes,
         color: colorToInt(color),
         visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
@@ -158,6 +162,12 @@ class Family extends ViewableWithIDAndImage
     if (notes != oldFamily.notes) {
       result = result.copyWith(
         notes: notes,
+      );
+    }
+
+    if (church?.id != oldFamily.church?.id) {
+      result = result.copyWith(
+        churchId: church?.id.toUuid(),
       );
     }
 

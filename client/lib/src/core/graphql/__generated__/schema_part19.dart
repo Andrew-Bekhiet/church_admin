@@ -2,6 +2,315 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_FathersSetInput<TRes> {
+  factory CopyWith_Input_FathersSetInput(
+    Input_FathersSetInput instance,
+    TRes Function(Input_FathersSetInput) then,
+  ) = _CopyWithImpl_Input_FathersSetInput;
+
+  factory CopyWith_Input_FathersSetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersSetInput;
+
+  TRes call({String? name});
+}
+
+class _CopyWithImpl_Input_FathersSetInput<TRes>
+    implements CopyWith_Input_FathersSetInput<TRes> {
+  _CopyWithImpl_Input_FathersSetInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FathersSetInput _instance;
+
+  final TRes Function(Input_FathersSetInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? name = _undefined}) => _then(Input_FathersSetInput._({
+        ..._instance._$data,
+        if (name != _undefined) 'name': (name as String?),
+      }));
+}
+
+class _CopyWithStubImpl_Input_FathersSetInput<TRes>
+    implements CopyWith_Input_FathersSetInput<TRes> {
+  _CopyWithStubImpl_Input_FathersSetInput(this._res);
+
+  TRes _res;
+
+  call({String? name}) => _res;
+}
+
+class Input_FathersStreamCursorInput {
+  factory Input_FathersStreamCursorInput({
+    required Input_FathersStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) =>
+      Input_FathersStreamCursorInput._({
+        r'initialValue': initialValue,
+        if (ordering != null) r'ordering': ordering,
+      });
+
+  Input_FathersStreamCursorInput._(this._$data);
+
+  factory Input_FathersStreamCursorInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] = Input_FathersStreamCursorValueInput.fromJson(
+        (l$initialValue as Map<String, dynamic>));
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_FathersStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FathersStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_FathersStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] =
+          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersStreamCursorInput<Input_FathersStreamCursorInput>
+      get copyWith => CopyWith_Input_FathersStreamCursorInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FathersStreamCursorInput<TRes> {
+  factory CopyWith_Input_FathersStreamCursorInput(
+    Input_FathersStreamCursorInput instance,
+    TRes Function(Input_FathersStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_FathersStreamCursorInput;
+
+  factory CopyWith_Input_FathersStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersStreamCursorInput;
+
+  TRes call({
+    Input_FathersStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_FathersStreamCursorValueInput<TRes> get initialValue;
+}
+
+class _CopyWithImpl_Input_FathersStreamCursorInput<TRes>
+    implements CopyWith_Input_FathersStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_FathersStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_FathersStreamCursorInput _instance;
+
+  final TRes Function(Input_FathersStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) =>
+      _then(Input_FathersStreamCursorInput._({
+        ..._instance._$data,
+        if (initialValue != _undefined && initialValue != null)
+          'initialValue': (initialValue as Input_FathersStreamCursorValueInput),
+        if (ordering != _undefined)
+          'ordering': (ordering as Enum_CursorOrdering?),
+      }));
+
+  CopyWith_Input_FathersStreamCursorValueInput<TRes> get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_FathersStreamCursorValueInput(
+        local$initialValue, (e) => call(initialValue: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_FathersStreamCursorInput<TRes>
+    implements CopyWith_Input_FathersStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_FathersStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_FathersStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) =>
+      _res;
+
+  CopyWith_Input_FathersStreamCursorValueInput<TRes> get initialValue =>
+      CopyWith_Input_FathersStreamCursorValueInput.stub(_res);
+}
+
+class Input_FathersStreamCursorValueInput {
+  factory Input_FathersStreamCursorValueInput({
+    UuidValue? churchId,
+    UuidValue? id,
+    String? name,
+  }) =>
+      Input_FathersStreamCursorValueInput._({
+        if (churchId != null) r'churchId': churchId,
+        if (id != null) r'id': id,
+        if (name != null) r'name': name,
+      });
+
+  Input_FathersStreamCursorValueInput._(this._$data);
+
+  factory Input_FathersStreamCursorValueInput.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] =
+          l$churchId == null ? null : stringToUuid(l$churchId);
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    return Input_FathersStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
+
+  UuidValue? get id => (_$data['id'] as UuidValue?);
+
+  String? get name => (_$data['name'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] =
+          l$churchId == null ? null : uuidToString(l$churchId);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersStreamCursorValueInput<
+          Input_FathersStreamCursorValueInput>
+      get copyWith => CopyWith_Input_FathersStreamCursorValueInput(
+            this,
+            (i) => i,
+          );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$churchId = churchId;
+    final l$id = id;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_FathersStreamCursorValueInput<TRes> {
   factory CopyWith_Input_FathersStreamCursorValueInput(
     Input_FathersStreamCursorValueInput instance,
@@ -2403,154 +2712,5 @@ class Input_GroupsArrRelInsertInput {
       Object.hashAll(l$data.map((v) => v)),
       _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsArrRelInsertInput<TRes> {
-  factory CopyWith_Input_GroupsArrRelInsertInput(
-    Input_GroupsArrRelInsertInput instance,
-    TRes Function(Input_GroupsArrRelInsertInput) then,
-  ) = _CopyWithImpl_Input_GroupsArrRelInsertInput;
-
-  factory CopyWith_Input_GroupsArrRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsArrRelInsertInput;
-
-  TRes call({
-    List<Input_GroupsInsertInput>? data,
-    Input_GroupsOnConflict? onConflict,
-  });
-  TRes data(
-      Iterable<Input_GroupsInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput>>)
-          _fn);
-  CopyWith_Input_GroupsOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
-    implements CopyWith_Input_GroupsArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_GroupsArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_GroupsArrRelInsertInput _instance;
-
-  final TRes Function(Input_GroupsArrRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_GroupsArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_GroupsInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_GroupsOnConflict?),
-      }));
-
-  TRes data(
-          Iterable<Input_GroupsInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_GroupsInsertInput<
-                          Input_GroupsInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(_instance.data.map((e) => CopyWith_Input_GroupsInsertInput(
-                e,
-                (i) => i,
-              ))).toList());
-
-  CopyWith_Input_GroupsOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_GroupsOnConflict.stub(_then(_instance))
-        : CopyWith_Input_GroupsOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_GroupsArrRelInsertInput<TRes>
-    implements CopyWith_Input_GroupsArrRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_GroupsArrRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_GroupsInsertInput>? data,
-    Input_GroupsOnConflict? onConflict,
-  }) =>
-      _res;
-
-  data(_fn) => _res;
-
-  CopyWith_Input_GroupsOnConflict<TRes> get onConflict =>
-      CopyWith_Input_GroupsOnConflict.stub(_res);
-}
-
-class Input_GroupsAvgOrderBy {
-  factory Input_GroupsAvgOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsAvgOrderBy._({
-        if (color != null) r'color': color,
-      });
-
-  Input_GroupsAvgOrderBy._(this._$data);
-
-  factory Input_GroupsAvgOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
-    }
-    return Input_GroupsAvgOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsAvgOrderBy<Input_GroupsAvgOrderBy> get copyWith =>
-      CopyWith_Input_GroupsAvgOrderBy(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsAvgOrderBy || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$color = color;
-    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
   }
 }

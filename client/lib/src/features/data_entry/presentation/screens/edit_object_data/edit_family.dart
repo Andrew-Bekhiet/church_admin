@@ -80,6 +80,23 @@ class _EditFamilyState extends State<EditFamily> {
                 newFamily = newFamily.copyWith(address: value),
             onEditLocation: _editGeolocation,
           ),
+          ObjectSelectionField<Church, Church?>(
+            initialValue: newFamily.church,
+            onCreateCustom: (name) =>
+                DatabaseService.I.metadata.churches.createObject(
+              newObject: Church(id: const Uuid().v4(), name: name),
+            ),
+            listController: (s) => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.metadata.churches.streamAll(searchQuery: s),
+            ),
+            dialogFieldLabel: 'الكنيسة',
+            onChanged: (value) => newFamily = newFamily.copyWith(church: value),
+            builder: (context, state) {
+              return state.value != null ? Text(state.value!.name) : null;
+            },
+            validator: (v) => null,
+          ),
           ObjectSelectionField(
             nullable: false,
             initialValue: ViewableEnumWithID.wrap(newFamily.status),

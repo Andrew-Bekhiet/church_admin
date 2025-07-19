@@ -925,6 +925,7 @@ Enum_FamiliesFamiliesUpdateColumn fromJson_Enum_FamiliesFamiliesUpdateColumn(
 enum Enum_FamiliesSelectColumn {
   addressText,
   blurhash,
+  churchId,
   color,
   deceasedSpouseName,
   geolocation,
@@ -948,6 +949,8 @@ String toJson_Enum_FamiliesSelectColumn(Enum_FamiliesSelectColumn e) {
       return r'addressText';
     case Enum_FamiliesSelectColumn.blurhash:
       return r'blurhash';
+    case Enum_FamiliesSelectColumn.churchId:
+      return r'churchId';
     case Enum_FamiliesSelectColumn.color:
       return r'color';
     case Enum_FamiliesSelectColumn.deceasedSpouseName:
@@ -977,6 +980,8 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
       return Enum_FamiliesSelectColumn.addressText;
     case r'blurhash':
       return Enum_FamiliesSelectColumn.blurhash;
+    case r'churchId':
+      return Enum_FamiliesSelectColumn.churchId;
     case r'color':
       return Enum_FamiliesSelectColumn.color;
     case r'deceasedSpouseName':
@@ -1002,6 +1007,7 @@ Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
 
 enum Enum_FamiliesUpdateColumn {
   addressText,
+  churchId,
   color,
   deceasedSpouseName,
   geolocation,
@@ -1021,6 +1027,8 @@ String toJson_Enum_FamiliesUpdateColumn(Enum_FamiliesUpdateColumn e) {
   switch (e) {
     case Enum_FamiliesUpdateColumn.addressText:
       return r'addressText';
+    case Enum_FamiliesUpdateColumn.churchId:
+      return r'churchId';
     case Enum_FamiliesUpdateColumn.color:
       return r'color';
     case Enum_FamiliesUpdateColumn.deceasedSpouseName:
@@ -1044,6 +1052,8 @@ Enum_FamiliesUpdateColumn fromJson_Enum_FamiliesUpdateColumn(String value) {
   switch (value) {
     case r'addressText':
       return Enum_FamiliesUpdateColumn.addressText;
+    case r'churchId':
+      return Enum_FamiliesUpdateColumn.churchId;
     case r'color':
       return Enum_FamiliesUpdateColumn.color;
     case r'deceasedSpouseName':

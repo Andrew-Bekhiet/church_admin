@@ -1761,6 +1761,8 @@ type Families {
     orderBy: [FamiliesFamiliesOrderBy!]
     where: FamiliesFamiliesBoolExp
   ): [FamiliesFamilies!]!
+  church: Churches
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   editHistory(
@@ -1902,6 +1904,8 @@ input FamiliesBoolExp {
   addressText: StringComparisonExp
   blurhash: StringComparisonExp
   children: FamiliesFamiliesBoolExp
+  church: ChurchesBoolExp
+  churchId: UuidComparisonExp
   color: BigintComparisonExp
   deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
@@ -2023,6 +2027,8 @@ input FamiliesInsertInput {
   address: AddressesObjRelInsertInput
   addressText: String
   children: FamiliesFamiliesArrRelInsertInput
+  church: ChurchesObjRelInsertInput
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   geolocation: geography
@@ -2038,6 +2044,7 @@ input FamiliesInsertInput {
 type FamiliesMaxFields {
   addressText: String
   blurhash: String
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   id: uuid
@@ -2050,6 +2057,7 @@ type FamiliesMaxFields {
 type FamiliesMinFields {
   addressText: String
   blurhash: String
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   id: uuid
@@ -2080,6 +2088,8 @@ input FamiliesOrderBy {
   addressText: OrderBy
   blurhash: OrderBy
   childrenAggregate: FamiliesFamiliesAggregateOrderBy
+  church: ChurchesOrderBy
+  churchId: OrderBy
   color: OrderBy
   deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
@@ -2106,6 +2116,7 @@ input FamiliesPkColumnsInput {
 enum FamiliesSelectColumn {
   addressText
   blurhash
+  churchId
   color
   deceasedSpouseName
   geolocation
@@ -2119,6 +2130,7 @@ enum FamiliesSelectColumn {
 
 input FamiliesSetInput {
   addressText: String
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   geolocation: geography
@@ -2144,6 +2156,7 @@ input FamiliesStreamCursorInput {
 input FamiliesStreamCursorValueInput {
   addressText: String
   blurhash: String
+  churchId: uuid
   color: bigint
   deceasedSpouseName: String
   geolocation: geography
@@ -2160,6 +2173,7 @@ type FamiliesSumFields {
 
 enum FamiliesUpdateColumn {
   addressText
+  churchId
   color
   deceasedSpouseName
   geolocation

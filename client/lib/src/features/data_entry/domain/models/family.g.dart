@@ -65,6 +65,18 @@ class _FamilyFields {
     },
   );
 
+  final FieldMetadata<Church> church = FieldMetadata<Church>(
+    parentType: Family,
+    name: 'church',
+    label: 'الكنيسة',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<String> notes = FieldMetadata<String>(
     parentType: Family,
     name: 'notes',
@@ -160,7 +172,7 @@ class _FamilyFields {
       FieldMetadata<LastRecordedByInfo>(
     parentType: Family,
     name: 'lastFatherVisit',
-    label: 'آخر افتقاد للأب',
+    label: 'آخر افتقاد للأب الكاهن',
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,
@@ -188,6 +200,7 @@ class _FamilyFields {
     status,
     marriageDate,
     deceasedSpouseName,
+    church,
     notes,
     color,
     photoUpdatedAt,
@@ -205,6 +218,7 @@ class _FamilyFields {
     'status': status,
     'marriageDate': marriageDate,
     'deceasedSpouseName': deceasedSpouseName,
+    'church': church,
     'notes': notes,
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
@@ -233,6 +247,9 @@ Family _$FamilyFromJson(Map json) => Family(
           ? null
           : DateTime.parse(json['marriageDate'] as String),
       deceasedSpouseName: json['deceasedSpouseName'] as String?,
+      church: json['church'] == null
+          ? null
+          : Church.fromJson(Map<String, Object?>.from(json['church'] as Map)),
       notes: json['notes'] as String?,
       color: colorFromInt((json['color'] as num?)?.toInt()),
       photoUpdatedAt: json['photoUpdatedAt'] == null
@@ -266,6 +283,7 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
       'status': _$MartialStatusEnumMap[instance.status]!,
       'marriageDate': instance.marriageDate?.toIso8601String(),
       'deceasedSpouseName': instance.deceasedSpouseName,
+      'church': instance.church?.toJson(),
       'notes': instance.notes,
       'color': colorToInt(instance.color),
       'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
