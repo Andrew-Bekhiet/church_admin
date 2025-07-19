@@ -18,6 +18,7 @@ class FeatureFlagsRepository {
   static const String disabledRoutesKey = 'disabledRoutes';
   static const String useSentryLogsKey = 'useSentryLogs';
   static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
+  static const String enablePersonNationalIdKey = 'enablePersonNationalId';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -44,6 +45,9 @@ class FeatureFlagsRepository {
   }
 
   bool get mustForceUpdate => _remoteConfig.getBool(mustForceUpdateKey);
+
+  bool get enablePersonNationalId =>
+      _remoteConfig.getBool(enablePersonNationalIdKey);
 
   String? get forceUpdateMessage {
     final rawValue = _remoteConfig.getString(forceUpdateMessageKey);
@@ -98,6 +102,7 @@ class FeatureFlagsRepository {
       isUnderMaintenanceKey: false,
       disabledRoutesKey: '',
       useSentryLogsKey: true,
+      enablePersonNationalIdKey: false,
       allowAddingCustomObjectsKey: [
         advancedQueriesMetadata.district.name,
         advancedQueriesMetadata.college.name,

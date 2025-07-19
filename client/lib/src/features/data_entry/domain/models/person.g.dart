@@ -688,6 +688,7 @@ class _PersonFields {
 Person _$PersonFromJson(Map json) => Person(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
+      nationalId: (json['nationalId'] as num?)?.toInt(),
       address: json['address'] == null
           ? null
           : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -848,6 +849,7 @@ Person _$PersonFromJson(Map json) => Person(
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'id': instance.id,
+      'nationalId': instance.nationalId,
       'name': instance.name,
       'address': instance.address?.toJson(),
       'mainPhone': instance.mainPhone,

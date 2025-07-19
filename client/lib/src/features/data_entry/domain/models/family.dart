@@ -45,6 +45,7 @@ class Family extends ViewableWithIDAndImage
   @override
   final String? deceasedSpouseName;
 
+  @override
   final Church? church;
 
   @override
@@ -72,6 +73,7 @@ class Family extends ViewableWithIDAndImage
       manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'parent')
   final List<Family>? parents;
 
+  @override
   @JsonKey(readValue: _readFamilyAdminsPhones)
   final Json? familyAdminsPhones;
 

@@ -209,6 +209,7 @@ insert_permissions:
         - job_id
         - main_phone
         - name
+        - national_id
         - notes
         - other_phones
         - person_type_id
@@ -224,6 +225,7 @@ select_permissions:
       columns:
         - address_text
         - birthdate
+        - blurhash
         - church_id
         - college_id
         - color
@@ -239,11 +241,11 @@ select_permissions:
         - job_id
         - main_phone
         - name
+        - national_id
         - notes
         - other_phones
         - person_type_id
         - photo_updated_at
-        - blurhash
         - qualification_id
         - school_id
         - shammas_level_id
@@ -297,6 +299,7 @@ update_permissions:
         - job_id
         - main_phone
         - name
+        - national_id
         - notes
         - other_phones
         - person_type_id

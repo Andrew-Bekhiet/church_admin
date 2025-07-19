@@ -52,6 +52,11 @@ class _ViewPersonState extends State<ViewPerson> {
 
         return SliverList(
           delegate: SliverChildListDelegate([
+            if (person.nationalId != null)
+              ListTile(
+                title: const Text('الرقم القومي'),
+                subtitle: Text(person.nationalId?.toString() ?? ''),
+              ),
             PhoneNumberProperty(
               'رقم الهاتف',
               person.mainPhone ?? '',

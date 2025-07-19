@@ -111,6 +111,22 @@ class _EditPersonState extends State<EditPerson> {
                   newPerson = newPerson.copyWith(name: value.trim()),
               padding: const EdgeInsets.symmetric(vertical: 8),
             ),
+            if (FeatureFlagsRepository.I.enablePersonNationalId)
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'الرقم القومي'),
+                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                initialValue: newPerson.nationalId?.toString(),
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  nationalId: int.tryParse(value),
+                ),
+                validator: (v) => v != null &&
+                        v.isNotEmpty &&
+                        (int.tryParse(v) ?? 0) < 20000000000000
+                    ? 'برجاء إدخال رقم قومي صالح'
+                    : null,
+              ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
             Builder(
               builder: (context) => TextFormField(
                 key: ValueKey(newPerson.mainPhone),

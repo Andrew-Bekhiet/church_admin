@@ -4737,6 +4737,7 @@ type Persons {
   lastVisit: HistoryLatestVisits
   mainPhone: String
   name: String!
+  nationalId: Int
   notes: String
   otherPhones(
     path: String
@@ -4835,11 +4836,13 @@ input PersonsArrRelInsertInput {
 }
 type PersonsAvgFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsAvgOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 
@@ -4890,6 +4893,7 @@ input PersonsBoolExp {
   lastVisit: HistoryLatestVisitsBoolExp
   mainPhone: StringComparisonExp
   name: StringComparisonExp
+  nationalId: IntComparisonExp
   notes: StringComparisonExp
   otherPhones: JsonbComparisonExp
   personType: PersonTypesBoolExp
@@ -5107,6 +5111,7 @@ input PersonsHobbiesUpdates {
 
 input PersonsIncInput {
   color: bigint
+  nationalId: Int
   studyYearId: smallint
 }
 
@@ -5139,6 +5144,7 @@ input PersonsInsertInput {
   kodasHistory: HistoryKodasHistoryArrRelInsertInput
   mainPhone: String
   name: String
+  nationalId: Int
   notes: String
   otherPhones: jsonb
   personType: PersonTypesObjRelInsertInput
@@ -5172,6 +5178,7 @@ type PersonsMaxFields {
   jobId: uuid
   mainPhone: String
   name: String
+  nationalId: Int
   notes: String
   personTypeId: uuid
   photoUpdatedAt: timestamptz
@@ -5198,6 +5205,7 @@ input PersonsMaxOrderBy {
   jobId: OrderBy
   mainPhone: OrderBy
   name: OrderBy
+  nationalId: OrderBy
   notes: OrderBy
   personTypeId: OrderBy
   photoUpdatedAt: OrderBy
@@ -5224,6 +5232,7 @@ type PersonsMinFields {
   jobId: uuid
   mainPhone: String
   name: String
+  nationalId: Int
   notes: String
   personTypeId: uuid
   photoUpdatedAt: timestamptz
@@ -5250,6 +5259,7 @@ input PersonsMinOrderBy {
   jobId: OrderBy
   mainPhone: OrderBy
   name: OrderBy
+  nationalId: OrderBy
   notes: OrderBy
   personTypeId: OrderBy
   photoUpdatedAt: OrderBy
@@ -5316,6 +5326,7 @@ input PersonsOrderBy {
   lastVisit: HistoryLatestVisitsOrderBy
   mainPhone: OrderBy
   name: OrderBy
+  nationalId: OrderBy
   notes: OrderBy
   otherPhones: OrderBy
   personType: PersonTypesOrderBy
@@ -5364,6 +5375,7 @@ enum PersonsSelectColumn {
   jobId
   mainPhone
   name
+  nationalId
   notes
   otherPhones
   personTypeId
@@ -5504,6 +5516,7 @@ input PersonsSetInput {
   jobId: uuid
   mainPhone: String
   name: String
+  nationalId: Int
   notes: String
   otherPhones: jsonb
   personTypeId: uuid
@@ -5516,29 +5529,35 @@ input PersonsSetInput {
 }
 type PersonsStddevFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsStddevOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 type PersonsStddevPopFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsStddevPopOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 type PersonsStddevSampFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsStddevSampOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 
@@ -5565,6 +5584,7 @@ input PersonsStreamCursorValueInput {
   jobId: uuid
   mainPhone: String
   name: String
+  nationalId: Int
   notes: String
   otherPhones: jsonb
   personTypeId: uuid
@@ -5579,11 +5599,13 @@ input PersonsStreamCursorValueInput {
 }
 type PersonsSumFields {
   color: bigint
+  nationalId: Int
   studyYearId: smallint
 }
 
 input PersonsSumOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 
@@ -5692,6 +5714,7 @@ enum PersonsUpdateColumn {
   jobId
   mainPhone
   name
+  nationalId
   notes
   otherPhones
   personTypeId
@@ -5715,29 +5738,35 @@ input PersonsUpdates {
 }
 type PersonsVarPopFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsVarPopOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 type PersonsVarSampFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsVarSampOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 type PersonsVarianceFields {
   color: Float
+  nationalId: Float
   studyYearId: Float
 }
 
 input PersonsVarianceOrderBy {
   color: OrderBy
+  nationalId: OrderBy
   studyYearId: OrderBy
 }
 

@@ -1385,6 +1385,13 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
+            name: NameNode(value: 'nationalId'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'address'),
             alias: null,
             arguments: [],
@@ -2495,6 +2502,7 @@ class Subscription_watchPerson_personsByPk
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
+    this.nationalId,
     this.address,
     this.birthdate,
     required this.classes,
@@ -2538,6 +2546,7 @@ class Subscription_watchPerson_personsByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$nationalId = json['nationalId'];
     final l$address = json['address'];
     final l$birthdate = json['birthdate'];
     final l$classes = json['classes'];
@@ -2579,6 +2588,7 @@ class Subscription_watchPerson_personsByPk
       photoUpdatedAt:
           l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      nationalId: (l$nationalId as int?),
       address: l$address == null
           ? null
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
@@ -2694,6 +2704,8 @@ class Subscription_watchPerson_personsByPk
 
   final String? blurhash;
 
+  final int? nationalId;
+
   final Fragment_Address? address;
 
   final DateTime? birthdate;
@@ -2775,6 +2787,8 @@ class Subscription_watchPerson_personsByPk
         l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$nationalId = nationalId;
+    _resultData['nationalId'] = l$nationalId;
     final l$address = address;
     _resultData['address'] = l$address?.toJson();
     final l$birthdate = birthdate;
@@ -2853,6 +2867,7 @@ class Subscription_watchPerson_personsByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$nationalId = nationalId;
     final l$address = address;
     final l$birthdate = birthdate;
     final l$classes = classes;
@@ -2893,6 +2908,7 @@ class Subscription_watchPerson_personsByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$nationalId,
       l$address,
       l$birthdate,
       Object.hashAll(l$classes.map((v) => v)),
@@ -2966,6 +2982,11 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$nationalId = nationalId;
+    final lOther$nationalId = other.nationalId;
+    if (l$nationalId != lOther$nationalId) {
       return false;
     }
     final l$address = address;
@@ -3198,6 +3219,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,
     List<Subscription_watchPerson_personsByPk_classes>? classes,
@@ -3304,6 +3326,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? nationalId = _undefined,
     Object? address = _undefined,
     Object? birthdate = _undefined,
     Object? classes = _undefined,
@@ -3352,6 +3375,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
             : (photoUpdatedAt as DateTime?),
         blurhash:
             blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
+        nationalId: nationalId == _undefined
+            ? _instance.nationalId
+            : (nationalId as int?),
         address: address == _undefined
             ? _instance.address
             : (address as Fragment_Address?),
@@ -3686,6 +3712,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,
     List<Subscription_watchPerson_personsByPk_classes>? classes,

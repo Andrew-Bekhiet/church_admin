@@ -22,6 +22,9 @@ class Person extends ViewableWithIDAndImage
   final String id;
 
   @override
+  final int? nationalId;
+
+  @override
   @JsonKey(defaultValue: '')
   final String name;
 
@@ -227,6 +230,7 @@ class Person extends ViewableWithIDAndImage
   Person({
     required this.id,
     required this.name,
+    this.nationalId,
     this.address,
     this.mainPhone,
     this.otherPhones = const {},
@@ -330,6 +334,7 @@ class Person extends ViewableWithIDAndImage
   }
 
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
+        nationalId: nationalId,
         name: name,
         mainPhone: mainPhone,
         otherPhones: otherPhones,
@@ -475,6 +480,10 @@ class Person extends ViewableWithIDAndImage
 
     if (name != oldPerson.name) {
       result = result.copyWith(name: name);
+    }
+
+    if (nationalId != oldPerson.nationalId) {
+      result = result.copyWith(nationalId: nationalId);
     }
 
     if (mainPhone != oldPerson.mainPhone) {

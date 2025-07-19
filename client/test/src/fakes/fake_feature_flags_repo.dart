@@ -18,6 +18,9 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get isUnderMaintenance => false;
 
   @override
+  bool get enablePersonNationalId => false;
+
+  @override
   Version get latestVersion => Version(0, 0, 0);
 
   @override
