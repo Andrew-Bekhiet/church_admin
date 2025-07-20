@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             validator: (email) {
                               if (email == null || email.isEmpty) {
                                 return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
-                              } else if (!emailRegex.hasMatch(email)) {
+                              } else if (!emailRegex.hasMatch(email.trim())) {
                                 return 'البريد الإلكتروني غير صالح';
                               }
                               return null;
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             NewPasswordField(
                               key: LoginScreenKeys.passwordFieldKey,
                               controller: _passwordController,
-                              getEmail: () => _emailController.text,
+                              getEmail: () => _emailController.text.trim(),
                             ).withPadding(
                               const EdgeInsets.symmetric(vertical: 10),
                             ),
@@ -276,11 +276,11 @@ class _LoginScreenState extends State<LoginScreen> {
         authBloc.add(
           _isLogin
               ? SignInWithEmailPassword(
-                  email: _emailController.text.toLowerCase(),
+                  email: _emailController.text.toLowerCase().trim(),
                   password: _passwordController.text,
                 )
               : SignUpWithEmailPassword(
-                  email: _emailController.text.toLowerCase(),
+                  email: _emailController.text.toLowerCase().trim(),
                   password: _passwordController.text,
                 ),
         );
