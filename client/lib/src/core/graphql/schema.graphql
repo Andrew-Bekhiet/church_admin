@@ -4750,6 +4750,7 @@ type Persons {
   qualificationId: uuid
   school: Schools
   schoolId: uuid
+  serviceType: String
   services(
     distinctOn: [PersonsServicesSelectColumn!]
     limit: Int
@@ -4757,6 +4758,8 @@ type Persons {
     orderBy: [PersonsServicesOrderBy!]
     where: PersonsServicesBoolExp
   ): [PersonsServices!]!
+  servingChurch: Churches
+  servingChurchId: uuid
   shammasLevel: ShammasLevels
   shammasLevelId: uuid
   state: PersonStates
@@ -4906,7 +4909,10 @@ input PersonsBoolExp {
   qualificationId: UuidComparisonExp
   school: SchoolsBoolExp
   schoolId: UuidComparisonExp
+  serviceType: StringComparisonExp
   services: PersonsServicesBoolExp
+  servingChurch: ChurchesBoolExp
+  servingChurchId: UuidComparisonExp
   shammasLevel: ShammasLevelsBoolExp
   shammasLevelId: UuidComparisonExp
   state: PersonStatesBoolExp
@@ -5158,7 +5164,10 @@ input PersonsInsertInput {
   qualificationId: uuid
   school: SchoolsObjRelInsertInput
   schoolId: uuid
+  serviceType: String
   services: PersonsServicesArrRelInsertInput
+  servingChurch: ChurchesObjRelInsertInput
+  servingChurchId: uuid
   shammasLevelId: uuid
   state: PersonStatesObjRelInsertInput
   stateId: uuid
@@ -5191,6 +5200,8 @@ type PersonsMaxFields {
   photoUpdatedAt: timestamptz
   qualificationId: uuid
   schoolId: uuid
+  serviceType: String
+  servingChurchId: uuid
   shammasLevelId: uuid
   stateId: uuid
   storeId: uuid
@@ -5220,6 +5231,8 @@ input PersonsMaxOrderBy {
   photoUpdatedAt: OrderBy
   qualificationId: OrderBy
   schoolId: OrderBy
+  serviceType: OrderBy
+  servingChurchId: OrderBy
   shammasLevelId: OrderBy
   stateId: OrderBy
   storeId: OrderBy
@@ -5249,6 +5262,8 @@ type PersonsMinFields {
   photoUpdatedAt: timestamptz
   qualificationId: uuid
   schoolId: uuid
+  serviceType: String
+  servingChurchId: uuid
   shammasLevelId: uuid
   stateId: uuid
   storeId: uuid
@@ -5278,6 +5293,8 @@ input PersonsMinOrderBy {
   photoUpdatedAt: OrderBy
   qualificationId: OrderBy
   schoolId: OrderBy
+  serviceType: OrderBy
+  servingChurchId: OrderBy
   shammasLevelId: OrderBy
   stateId: OrderBy
   storeId: OrderBy
@@ -5351,7 +5368,10 @@ input PersonsOrderBy {
   qualificationId: OrderBy
   school: SchoolsOrderBy
   schoolId: OrderBy
+  serviceType: OrderBy
   servicesAggregate: PersonsServicesAggregateOrderBy
+  servingChurch: ChurchesOrderBy
+  servingChurchId: OrderBy
   shammasLevel: ShammasLevelsOrderBy
   shammasLevelId: OrderBy
   state: PersonStatesOrderBy
@@ -5399,6 +5419,8 @@ enum PersonsSelectColumn {
   photoUpdatedAt
   qualificationId
   schoolId
+  serviceType
+  servingChurchId
   shammasLevelId
   stateId
   storeId
@@ -5541,6 +5563,8 @@ input PersonsSetInput {
   personTypeId: uuid
   qualificationId: uuid
   schoolId: uuid
+  serviceType: String
+  servingChurchId: uuid
   shammasLevelId: uuid
   stateId: uuid
   storeId: uuid
@@ -5612,6 +5636,8 @@ input PersonsStreamCursorValueInput {
   photoUpdatedAt: timestamptz
   qualificationId: uuid
   schoolId: uuid
+  serviceType: String
+  servingChurchId: uuid
   shammasLevelId: uuid
   stateId: uuid
   storeId: uuid
@@ -5743,6 +5769,8 @@ enum PersonsUpdateColumn {
   personTypeId
   qualificationId
   schoolId
+  serviceType
+  servingChurchId
   shammasLevelId
   stateId
   storeId

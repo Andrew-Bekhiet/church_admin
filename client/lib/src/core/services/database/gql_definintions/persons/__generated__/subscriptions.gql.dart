@@ -1809,6 +1809,42 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'servingChurch'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'serviceType'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'isShammas'),
             alias: null,
             arguments: [],
@@ -2520,6 +2556,8 @@ class Subscription_watchPerson_personsByPk
     required this.gender,
     required this.groups,
     required this.isServant,
+    this.servingChurch,
+    this.serviceType,
     required this.isShammas,
     this.workStatus,
     this.job,
@@ -2565,6 +2603,8 @@ class Subscription_watchPerson_personsByPk
     final l$gender = json['gender'];
     final l$groups = json['groups'];
     final l$isServant = json['isServant'];
+    final l$servingChurch = json['servingChurch'];
+    final l$serviceType = json['serviceType'];
     final l$isShammas = json['isShammas'];
     final l$workStatus = json['workStatus'];
     final l$job = json['job'];
@@ -2627,6 +2667,11 @@ class Subscription_watchPerson_personsByPk
               (e as Map<String, dynamic>)))
           .toList(),
       isServant: (l$isServant as bool),
+      servingChurch: l$servingChurch == null
+          ? null
+          : Subscription_watchPerson_personsByPk_servingChurch.fromJson(
+              (l$servingChurch as Map<String, dynamic>)),
+      serviceType: (l$serviceType as String?),
       isShammas: (l$isShammas as bool),
       workStatus: (l$workStatus as String?),
       job: l$job == null
@@ -2736,6 +2781,10 @@ class Subscription_watchPerson_personsByPk
 
   final bool isServant;
 
+  final Subscription_watchPerson_personsByPk_servingChurch? servingChurch;
+
+  final String? serviceType;
+
   final bool isShammas;
 
   final String? workStatus;
@@ -2822,6 +2871,10 @@ class Subscription_watchPerson_personsByPk
     _resultData['groups'] = l$groups.map((e) => e.toJson()).toList();
     final l$isServant = isServant;
     _resultData['isServant'] = l$isServant;
+    final l$servingChurch = servingChurch;
+    _resultData['servingChurch'] = l$servingChurch?.toJson();
+    final l$serviceType = serviceType;
+    _resultData['serviceType'] = l$serviceType;
     final l$isShammas = isShammas;
     _resultData['isShammas'] = l$isShammas;
     final l$workStatus = workStatus;
@@ -2892,6 +2945,8 @@ class Subscription_watchPerson_personsByPk
     final l$gender = gender;
     final l$groups = groups;
     final l$isServant = isServant;
+    final l$servingChurch = servingChurch;
+    final l$serviceType = serviceType;
     final l$isShammas = isShammas;
     final l$workStatus = workStatus;
     final l$job = job;
@@ -2934,6 +2989,8 @@ class Subscription_watchPerson_personsByPk
       l$gender,
       Object.hashAll(l$groups.map((v) => v)),
       l$isServant,
+      l$servingChurch,
+      l$serviceType,
       l$isShammas,
       l$workStatus,
       l$job,
@@ -3067,6 +3124,16 @@ class Subscription_watchPerson_personsByPk
     final l$isServant = isServant;
     final lOther$isServant = other.isServant;
     if (l$isServant != lOther$isServant) {
+      return false;
+    }
+    final l$servingChurch = servingChurch;
+    final lOther$servingChurch = other.servingChurch;
+    if (l$servingChurch != lOther$servingChurch) {
+      return false;
+    }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (l$serviceType != lOther$serviceType) {
       return false;
     }
     final l$isShammas = isShammas;
@@ -3251,6 +3318,8 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     bool? gender,
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
+    Subscription_watchPerson_personsByPk_servingChurch? servingChurch,
+    String? serviceType,
     bool? isShammas,
     String? workStatus,
     Subscription_watchPerson_personsByPk_job? job,
@@ -3293,6 +3362,8 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
                   CopyWith_Subscription_watchPerson_personsByPk_groups<
                       Subscription_watchPerson_personsByPk_groups>>)
           _fn);
+  CopyWith_Subscription_watchPerson_personsByPk_servingChurch<TRes>
+      get servingChurch;
   CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job;
   CopyWith_Fragment_LatestCallHistory<TRes> get lastCall;
   CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession;
@@ -3359,6 +3430,8 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? gender = _undefined,
     Object? groups = _undefined,
     Object? isServant = _undefined,
+    Object? servingChurch = _undefined,
+    Object? serviceType = _undefined,
     Object? isShammas = _undefined,
     Object? workStatus = _undefined,
     Object? job = _undefined,
@@ -3431,6 +3504,13 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         isServant: isServant == _undefined || isServant == null
             ? _instance.isServant
             : (isServant as bool),
+        servingChurch: servingChurch == _undefined
+            ? _instance.servingChurch
+            : (servingChurch
+                as Subscription_watchPerson_personsByPk_servingChurch?),
+        serviceType: serviceType == _undefined
+            ? _instance.serviceType
+            : (serviceType as String?),
         isShammas: isShammas == _undefined || isShammas == null
             ? _instance.isShammas
             : (isShammas as bool),
@@ -3569,6 +3649,16 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
                     e,
                     (i) => i,
                   ))).toList());
+
+  CopyWith_Subscription_watchPerson_personsByPk_servingChurch<TRes>
+      get servingChurch {
+    final local$servingChurch = _instance.servingChurch;
+    return local$servingChurch == null
+        ? CopyWith_Subscription_watchPerson_personsByPk_servingChurch.stub(
+            _then(_instance))
+        : CopyWith_Subscription_watchPerson_personsByPk_servingChurch(
+            local$servingChurch, (e) => call(servingChurch: e));
+  }
 
   CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job {
     final local$job = _instance.job;
@@ -3749,6 +3839,8 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     bool? gender,
     List<Subscription_watchPerson_personsByPk_groups>? groups,
     bool? isServant,
+    Subscription_watchPerson_personsByPk_servingChurch? servingChurch,
+    String? serviceType,
     bool? isShammas,
     String? workStatus,
     Subscription_watchPerson_personsByPk_job? job,
@@ -3794,6 +3886,11 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
       CopyWith_Subscription_watchPerson_personsByPk_father.stub(_res);
 
   groups(_fn) => _res;
+
+  CopyWith_Subscription_watchPerson_personsByPk_servingChurch<TRes>
+      get servingChurch =>
+          CopyWith_Subscription_watchPerson_personsByPk_servingChurch.stub(
+              _res);
 
   CopyWith_Subscription_watchPerson_personsByPk_job<TRes> get job =>
       CopyWith_Subscription_watchPerson_personsByPk_job.stub(_res);
@@ -6225,6 +6322,157 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group_attend
 
   call({
     DateTime? time,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Subscription_watchPerson_personsByPk_servingChurch {
+  Subscription_watchPerson_personsByPk_servingChurch({
+    required this.id,
+    required this.name,
+    this.$__typename = 'Churches',
+  });
+
+  factory Subscription_watchPerson_personsByPk_servingChurch.fromJson(
+      Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchPerson_personsByPk_servingChurch(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchPerson_personsByPk_servingChurch ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchPerson_personsByPk_servingChurch
+    on Subscription_watchPerson_personsByPk_servingChurch {
+  CopyWith_Subscription_watchPerson_personsByPk_servingChurch<
+          Subscription_watchPerson_personsByPk_servingChurch>
+      get copyWith =>
+          CopyWith_Subscription_watchPerson_personsByPk_servingChurch(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Subscription_watchPerson_personsByPk_servingChurch<
+    TRes> {
+  factory CopyWith_Subscription_watchPerson_personsByPk_servingChurch(
+    Subscription_watchPerson_personsByPk_servingChurch instance,
+    TRes Function(Subscription_watchPerson_personsByPk_servingChurch) then,
+  ) = _CopyWithImpl_Subscription_watchPerson_personsByPk_servingChurch;
+
+  factory CopyWith_Subscription_watchPerson_personsByPk_servingChurch.stub(
+          TRes res) =
+      _CopyWithStubImpl_Subscription_watchPerson_personsByPk_servingChurch;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Subscription_watchPerson_personsByPk_servingChurch<TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_servingChurch<TRes> {
+  _CopyWithImpl_Subscription_watchPerson_personsByPk_servingChurch(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchPerson_personsByPk_servingChurch _instance;
+
+  final TRes Function(Subscription_watchPerson_personsByPk_servingChurch) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Subscription_watchPerson_personsByPk_servingChurch(
+        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+        name: name == _undefined || name == null
+            ? _instance.name
+            : (name as String),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_servingChurch<TRes>
+    implements
+        CopyWith_Subscription_watchPerson_personsByPk_servingChurch<TRes> {
+  _CopyWithStubImpl_Subscription_watchPerson_personsByPk_servingChurch(
+      this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
     String? $__typename,
   }) =>
       _res;

@@ -38,6 +38,8 @@ abstract class CopyWith_Input_PersonsStreamCursorValueInput<TRes> {
     DateTime? photoUpdatedAt,
     UuidValue? qualificationId,
     UuidValue? schoolId,
+    String? serviceType,
+    UuidValue? servingChurchId,
     UuidValue? shammasLevelId,
     UuidValue? stateId,
     UuidValue? storeId,
@@ -87,6 +89,8 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? qualificationId = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevelId = _undefined,
     Object? stateId = _undefined,
     Object? storeId = _undefined,
@@ -128,6 +132,9 @@ class _CopyWithImpl_Input_PersonsStreamCursorValueInput<TRes>
         if (qualificationId != _undefined)
           'qualificationId': (qualificationId as UuidValue?),
         if (schoolId != _undefined) 'schoolId': (schoolId as UuidValue?),
+        if (serviceType != _undefined) 'serviceType': (serviceType as String?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as UuidValue?),
         if (shammasLevelId != _undefined)
           'shammasLevelId': (shammasLevelId as UuidValue?),
         if (stateId != _undefined) 'stateId': (stateId as UuidValue?),
@@ -171,6 +178,8 @@ class _CopyWithStubImpl_Input_PersonsStreamCursorValueInput<TRes>
     DateTime? photoUpdatedAt,
     UuidValue? qualificationId,
     UuidValue? schoolId,
+    String? serviceType,
+    UuidValue? servingChurchId,
     UuidValue? shammasLevelId,
     UuidValue? stateId,
     UuidValue? storeId,
@@ -2493,286 +2502,4 @@ abstract class CopyWith_Input_PersonsTagsUpdates<TRes> {
 
   TRes call({Input_PersonsTagsBoolExp? where});
   CopyWith_Input_PersonsTagsBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_PersonsTagsUpdates<TRes>
-    implements CopyWith_Input_PersonsTagsUpdates<TRes> {
-  _CopyWithImpl_Input_PersonsTagsUpdates(
-    this._instance,
-    this._then,
-  );
-
-  final Input_PersonsTagsUpdates _instance;
-
-  final TRes Function(Input_PersonsTagsUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? where = _undefined}) => _then(Input_PersonsTagsUpdates._({
-        ..._instance._$data,
-        if (where != _undefined && where != null)
-          'where': (where as Input_PersonsTagsBoolExp),
-      }));
-
-  CopyWith_Input_PersonsTagsBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_PersonsTagsBoolExp(
-        local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonsTagsUpdates<TRes>
-    implements CopyWith_Input_PersonsTagsUpdates<TRes> {
-  _CopyWithStubImpl_Input_PersonsTagsUpdates(this._res);
-
-  TRes _res;
-
-  call({Input_PersonsTagsBoolExp? where}) => _res;
-
-  CopyWith_Input_PersonsTagsBoolExp<TRes> get where =>
-      CopyWith_Input_PersonsTagsBoolExp.stub(_res);
-}
-
-class Input_PersonsUpdates {
-  factory Input_PersonsUpdates({
-    Input_PersonsAppendInput? $_append,
-    Input_PersonsDeleteAtPathInput? $_deleteAtPath,
-    Input_PersonsDeleteElemInput? $_deleteElem,
-    Input_PersonsDeleteKeyInput? $_deleteKey,
-    Input_PersonsIncInput? $_inc,
-    Input_PersonsPrependInput? $_prepend,
-    Input_PersonsSetInput? $_set,
-    required Input_PersonsBoolExp where,
-  }) =>
-      Input_PersonsUpdates._({
-        if ($_append != null) r'_append': $_append,
-        if ($_deleteAtPath != null) r'_deleteAtPath': $_deleteAtPath,
-        if ($_deleteElem != null) r'_deleteElem': $_deleteElem,
-        if ($_deleteKey != null) r'_deleteKey': $_deleteKey,
-        if ($_inc != null) r'_inc': $_inc,
-        if ($_prepend != null) r'_prepend': $_prepend,
-        if ($_set != null) r'_set': $_set,
-        r'where': where,
-      });
-
-  Input_PersonsUpdates._(this._$data);
-
-  factory Input_PersonsUpdates.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_append')) {
-      final l$$_append = data['_append'];
-      result$data['_append'] = l$$_append == null
-          ? null
-          : Input_PersonsAppendInput.fromJson(
-              (l$$_append as Map<String, dynamic>));
-    }
-    if (data.containsKey('_deleteAtPath')) {
-      final l$$_deleteAtPath = data['_deleteAtPath'];
-      result$data['_deleteAtPath'] = l$$_deleteAtPath == null
-          ? null
-          : Input_PersonsDeleteAtPathInput.fromJson(
-              (l$$_deleteAtPath as Map<String, dynamic>));
-    }
-    if (data.containsKey('_deleteElem')) {
-      final l$$_deleteElem = data['_deleteElem'];
-      result$data['_deleteElem'] = l$$_deleteElem == null
-          ? null
-          : Input_PersonsDeleteElemInput.fromJson(
-              (l$$_deleteElem as Map<String, dynamic>));
-    }
-    if (data.containsKey('_deleteKey')) {
-      final l$$_deleteKey = data['_deleteKey'];
-      result$data['_deleteKey'] = l$$_deleteKey == null
-          ? null
-          : Input_PersonsDeleteKeyInput.fromJson(
-              (l$$_deleteKey as Map<String, dynamic>));
-    }
-    if (data.containsKey('_inc')) {
-      final l$$_inc = data['_inc'];
-      result$data['_inc'] = l$$_inc == null
-          ? null
-          : Input_PersonsIncInput.fromJson((l$$_inc as Map<String, dynamic>));
-    }
-    if (data.containsKey('_prepend')) {
-      final l$$_prepend = data['_prepend'];
-      result$data['_prepend'] = l$$_prepend == null
-          ? null
-          : Input_PersonsPrependInput.fromJson(
-              (l$$_prepend as Map<String, dynamic>));
-    }
-    if (data.containsKey('_set')) {
-      final l$$_set = data['_set'];
-      result$data['_set'] = l$$_set == null
-          ? null
-          : Input_PersonsSetInput.fromJson((l$$_set as Map<String, dynamic>));
-    }
-    final l$where = data['where'];
-    result$data['where'] =
-        Input_PersonsBoolExp.fromJson((l$where as Map<String, dynamic>));
-    return Input_PersonsUpdates._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_PersonsAppendInput? get $_append =>
-      (_$data['_append'] as Input_PersonsAppendInput?);
-
-  Input_PersonsDeleteAtPathInput? get $_deleteAtPath =>
-      (_$data['_deleteAtPath'] as Input_PersonsDeleteAtPathInput?);
-
-  Input_PersonsDeleteElemInput? get $_deleteElem =>
-      (_$data['_deleteElem'] as Input_PersonsDeleteElemInput?);
-
-  Input_PersonsDeleteKeyInput? get $_deleteKey =>
-      (_$data['_deleteKey'] as Input_PersonsDeleteKeyInput?);
-
-  Input_PersonsIncInput? get $_inc =>
-      (_$data['_inc'] as Input_PersonsIncInput?);
-
-  Input_PersonsPrependInput? get $_prepend =>
-      (_$data['_prepend'] as Input_PersonsPrependInput?);
-
-  Input_PersonsSetInput? get $_set =>
-      (_$data['_set'] as Input_PersonsSetInput?);
-
-  Input_PersonsBoolExp get where => (_$data['where'] as Input_PersonsBoolExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_append')) {
-      final l$$_append = $_append;
-      result$data['_append'] = l$$_append?.toJson();
-    }
-    if (_$data.containsKey('_deleteAtPath')) {
-      final l$$_deleteAtPath = $_deleteAtPath;
-      result$data['_deleteAtPath'] = l$$_deleteAtPath?.toJson();
-    }
-    if (_$data.containsKey('_deleteElem')) {
-      final l$$_deleteElem = $_deleteElem;
-      result$data['_deleteElem'] = l$$_deleteElem?.toJson();
-    }
-    if (_$data.containsKey('_deleteKey')) {
-      final l$$_deleteKey = $_deleteKey;
-      result$data['_deleteKey'] = l$$_deleteKey?.toJson();
-    }
-    if (_$data.containsKey('_inc')) {
-      final l$$_inc = $_inc;
-      result$data['_inc'] = l$$_inc?.toJson();
-    }
-    if (_$data.containsKey('_prepend')) {
-      final l$$_prepend = $_prepend;
-      result$data['_prepend'] = l$$_prepend?.toJson();
-    }
-    if (_$data.containsKey('_set')) {
-      final l$$_set = $_set;
-      result$data['_set'] = l$$_set?.toJson();
-    }
-    final l$where = where;
-    result$data['where'] = l$where.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsUpdates<Input_PersonsUpdates> get copyWith =>
-      CopyWith_Input_PersonsUpdates(
-        this,
-        (i) => i,
-      );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsUpdates || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_append = $_append;
-    final lOther$$_append = other.$_append;
-    if (_$data.containsKey('_append') != other._$data.containsKey('_append')) {
-      return false;
-    }
-    if (l$$_append != lOther$$_append) {
-      return false;
-    }
-    final l$$_deleteAtPath = $_deleteAtPath;
-    final lOther$$_deleteAtPath = other.$_deleteAtPath;
-    if (_$data.containsKey('_deleteAtPath') !=
-        other._$data.containsKey('_deleteAtPath')) {
-      return false;
-    }
-    if (l$$_deleteAtPath != lOther$$_deleteAtPath) {
-      return false;
-    }
-    final l$$_deleteElem = $_deleteElem;
-    final lOther$$_deleteElem = other.$_deleteElem;
-    if (_$data.containsKey('_deleteElem') !=
-        other._$data.containsKey('_deleteElem')) {
-      return false;
-    }
-    if (l$$_deleteElem != lOther$$_deleteElem) {
-      return false;
-    }
-    final l$$_deleteKey = $_deleteKey;
-    final lOther$$_deleteKey = other.$_deleteKey;
-    if (_$data.containsKey('_deleteKey') !=
-        other._$data.containsKey('_deleteKey')) {
-      return false;
-    }
-    if (l$$_deleteKey != lOther$$_deleteKey) {
-      return false;
-    }
-    final l$$_inc = $_inc;
-    final lOther$$_inc = other.$_inc;
-    if (_$data.containsKey('_inc') != other._$data.containsKey('_inc')) {
-      return false;
-    }
-    if (l$$_inc != lOther$$_inc) {
-      return false;
-    }
-    final l$$_prepend = $_prepend;
-    final lOther$$_prepend = other.$_prepend;
-    if (_$data.containsKey('_prepend') !=
-        other._$data.containsKey('_prepend')) {
-      return false;
-    }
-    if (l$$_prepend != lOther$$_prepend) {
-      return false;
-    }
-    final l$$_set = $_set;
-    final lOther$$_set = other.$_set;
-    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
-      return false;
-    }
-    if (l$$_set != lOther$$_set) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_append = $_append;
-    final l$$_deleteAtPath = $_deleteAtPath;
-    final l$$_deleteElem = $_deleteElem;
-    final l$$_deleteKey = $_deleteKey;
-    final l$$_inc = $_inc;
-    final l$$_prepend = $_prepend;
-    final l$$_set = $_set;
-    final l$where = where;
-    return Object.hashAll([
-      _$data.containsKey('_append') ? l$$_append : const {},
-      _$data.containsKey('_deleteAtPath') ? l$$_deleteAtPath : const {},
-      _$data.containsKey('_deleteElem') ? l$$_deleteElem : const {},
-      _$data.containsKey('_deleteKey') ? l$$_deleteKey : const {},
-      _$data.containsKey('_inc') ? l$$_inc : const {},
-      _$data.containsKey('_prepend') ? l$$_prepend : const {},
-      _$data.containsKey('_set') ? l$$_set : const {},
-      l$where,
-    ]);
-  }
 }

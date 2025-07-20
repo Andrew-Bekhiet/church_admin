@@ -738,7 +738,10 @@ class Input_PersonsBoolExp {
     Input_UuidComparisonExp? qualificationId,
     Input_SchoolsBoolExp? school,
     Input_UuidComparisonExp? schoolId,
+    Input_StringComparisonExp? serviceType,
     Input_PersonsServicesBoolExp? services,
+    Input_ChurchesBoolExp? servingChurch,
+    Input_UuidComparisonExp? servingChurchId,
     Input_ShammasLevelsBoolExp? shammasLevel,
     Input_UuidComparisonExp? shammasLevelId,
     Input_PersonStatesBoolExp? state,
@@ -816,7 +819,10 @@ class Input_PersonsBoolExp {
         if (qualificationId != null) r'qualificationId': qualificationId,
         if (school != null) r'school': school,
         if (schoolId != null) r'schoolId': schoolId,
+        if (serviceType != null) r'serviceType': serviceType,
         if (services != null) r'services': services,
+        if (servingChurch != null) r'servingChurch': servingChurch,
+        if (servingChurchId != null) r'servingChurchId': servingChurchId,
         if (shammasLevel != null) r'shammasLevel': shammasLevel,
         if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
         if (state != null) r'state': state,
@@ -1229,12 +1235,33 @@ class Input_PersonsBoolExp {
           : Input_UuidComparisonExp.fromJson(
               (l$schoolId as Map<String, dynamic>));
     }
+    if (data.containsKey('serviceType')) {
+      final l$serviceType = data['serviceType'];
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$serviceType as Map<String, dynamic>));
+    }
     if (data.containsKey('services')) {
       final l$services = data['services'];
       result$data['services'] = l$services == null
           ? null
           : Input_PersonsServicesBoolExp.fromJson(
               (l$services as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurch')) {
+      final l$servingChurch = data['servingChurch'];
+      result$data['servingChurch'] = l$servingChurch == null
+          ? null
+          : Input_ChurchesBoolExp.fromJson(
+              (l$servingChurch as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurchId')) {
+      final l$servingChurchId = data['servingChurchId'];
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$servingChurchId as Map<String, dynamic>));
     }
     if (data.containsKey('shammasLevel')) {
       final l$shammasLevel = data['shammasLevel'];
@@ -1503,8 +1530,17 @@ class Input_PersonsBoolExp {
   Input_UuidComparisonExp? get schoolId =>
       (_$data['schoolId'] as Input_UuidComparisonExp?);
 
+  Input_StringComparisonExp? get serviceType =>
+      (_$data['serviceType'] as Input_StringComparisonExp?);
+
   Input_PersonsServicesBoolExp? get services =>
       (_$data['services'] as Input_PersonsServicesBoolExp?);
+
+  Input_ChurchesBoolExp? get servingChurch =>
+      (_$data['servingChurch'] as Input_ChurchesBoolExp?);
+
+  Input_UuidComparisonExp? get servingChurchId =>
+      (_$data['servingChurchId'] as Input_UuidComparisonExp?);
 
   Input_ShammasLevelsBoolExp? get shammasLevel =>
       (_$data['shammasLevel'] as Input_ShammasLevelsBoolExp?);
@@ -1778,9 +1814,21 @@ class Input_PersonsBoolExp {
       final l$schoolId = schoolId;
       result$data['schoolId'] = l$schoolId?.toJson();
     }
+    if (_$data.containsKey('serviceType')) {
+      final l$serviceType = serviceType;
+      result$data['serviceType'] = l$serviceType?.toJson();
+    }
     if (_$data.containsKey('services')) {
       final l$services = services;
       result$data['services'] = l$services?.toJson();
+    }
+    if (_$data.containsKey('servingChurch')) {
+      final l$servingChurch = servingChurch;
+      result$data['servingChurch'] = l$servingChurch?.toJson();
+    }
+    if (_$data.containsKey('servingChurchId')) {
+      final l$servingChurchId = servingChurchId;
+      result$data['servingChurchId'] = l$servingChurchId?.toJson();
     }
     if (_$data.containsKey('shammasLevel')) {
       final l$shammasLevel = shammasLevel;
@@ -2367,6 +2415,15 @@ class Input_PersonsBoolExp {
     if (l$schoolId != lOther$schoolId) {
       return false;
     }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (_$data.containsKey('serviceType') !=
+        other._$data.containsKey('serviceType')) {
+      return false;
+    }
+    if (l$serviceType != lOther$serviceType) {
+      return false;
+    }
     final l$services = services;
     final lOther$services = other.services;
     if (_$data.containsKey('services') !=
@@ -2374,6 +2431,24 @@ class Input_PersonsBoolExp {
       return false;
     }
     if (l$services != lOther$services) {
+      return false;
+    }
+    final l$servingChurch = servingChurch;
+    final lOther$servingChurch = other.servingChurch;
+    if (_$data.containsKey('servingChurch') !=
+        other._$data.containsKey('servingChurch')) {
+      return false;
+    }
+    if (l$servingChurch != lOther$servingChurch) {
+      return false;
+    }
+    final l$servingChurchId = servingChurchId;
+    final lOther$servingChurchId = other.servingChurchId;
+    if (_$data.containsKey('servingChurchId') !=
+        other._$data.containsKey('servingChurchId')) {
+      return false;
+    }
+    if (l$servingChurchId != lOther$servingChurchId) {
       return false;
     }
     final l$shammasLevel = shammasLevel;
@@ -2549,7 +2624,10 @@ class Input_PersonsBoolExp {
     final l$qualificationId = qualificationId;
     final l$school = school;
     final l$schoolId = schoolId;
+    final l$serviceType = serviceType;
     final l$services = services;
+    final l$servingChurch = servingChurch;
+    final l$servingChurchId = servingChurchId;
     final l$shammasLevel = shammasLevel;
     final l$shammasLevelId = shammasLevelId;
     final l$state = state;
@@ -2639,7 +2717,10 @@ class Input_PersonsBoolExp {
       _$data.containsKey('qualificationId') ? l$qualificationId : const {},
       _$data.containsKey('school') ? l$school : const {},
       _$data.containsKey('schoolId') ? l$schoolId : const {},
+      _$data.containsKey('serviceType') ? l$serviceType : const {},
       _$data.containsKey('services') ? l$services : const {},
+      _$data.containsKey('servingChurch') ? l$servingChurch : const {},
+      _$data.containsKey('servingChurchId') ? l$servingChurchId : const {},
       _$data.containsKey('shammasLevel') ? l$shammasLevel : const {},
       _$data.containsKey('shammasLevelId') ? l$shammasLevelId : const {},
       _$data.containsKey('state') ? l$state : const {},

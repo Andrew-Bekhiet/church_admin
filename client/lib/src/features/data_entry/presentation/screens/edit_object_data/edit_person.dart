@@ -699,10 +699,41 @@ class _EditPersonState extends State<EditPerson> {
                 value: state.value,
                 onChanged: (v) {
                   state.didChange(v);
-                  newPerson = newPerson.copyWith(isServant: v!);
+                  setState(() => newPerson = newPerson.copyWith(isServant: v!));
                 },
               ),
             ),
+            if (newPerson.isServant) ...[
+              ObjectSelectionField<Church, Church?>(
+                key: ValueKey(newPerson.isServant),
+                initialValue: newPerson.servingChurch,
+                onCreateCustom: (name) =>
+                    DatabaseService.I.metadata.churches.createObject(
+                  newObject: Church(id: const Uuid().v4(), name: name),
+                ),
+                listController: (s) => ViewableObjectListController(
+                  objectsPaginatableStream: DatabaseService.I.metadata.churches
+                      .streamAll(searchQuery: s),
+                ),
+                dialogFieldLabel: 'الكنيسة التي يخدم بها',
+                onChanged: (value) => newPerson = newPerson.copyWith(
+                  servingChurch: value,
+                ),
+                builder: (context, state) {
+                  return state.value != null ? Text(state.value!.name) : null;
+                },
+                validator: (v) => null,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'نوع الخدمة',
+                ),
+                initialValue: newPerson.serviceType,
+                onChanged: (value) =>
+                    newPerson = newPerson.copyWith(serviceType: value.trim()),
+                validator: (value) => null,
+              ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ],
             if (newPerson.gender)
               FormField<bool>(
                 initialValue: newPerson.isShammas,
@@ -718,6 +749,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
             if (newPerson.gender && newPerson.isShammas)
               ObjectSelectionField<ShammasLevel, ShammasLevel?>(
+                key: ValueKey(newPerson.shammasLevel),
                 initialValue: newPerson.shammasLevel,
                 nullable: false,
                 listController: (s) => ViewableObjectListController(

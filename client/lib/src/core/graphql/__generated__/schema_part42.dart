@@ -61,7 +61,10 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Enum_OrderBy? qualificationId,
     Input_SchoolsOrderBy? school,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
     Input_PersonsServicesAggregateOrderBy? servicesAggregate,
+    Input_ChurchesOrderBy? servingChurch,
+    Enum_OrderBy? servingChurchId,
     Input_ShammasLevelsOrderBy? shammasLevel,
     Enum_OrderBy? shammasLevelId,
     Input_PersonStatesOrderBy? state,
@@ -103,6 +106,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
   CopyWith_Input_QualificationsOrderBy<TRes> get qualification;
   CopyWith_Input_SchoolsOrderBy<TRes> get school;
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get servicesAggregate;
+  CopyWith_Input_ChurchesOrderBy<TRes> get servingChurch;
   CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel;
   CopyWith_Input_PersonStatesOrderBy<TRes> get state;
   CopyWith_Input_StudyYearsOrderBy<TRes> get studyYear;
@@ -175,7 +179,10 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? qualificationId = _undefined,
     Object? school = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
     Object? servicesAggregate = _undefined,
+    Object? servingChurch = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevel = _undefined,
     Object? shammasLevelId = _undefined,
     Object? state = _undefined,
@@ -275,9 +282,15 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
           'qualificationId': (qualificationId as Enum_OrderBy?),
         if (school != _undefined) 'school': (school as Input_SchoolsOrderBy?),
         if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+        if (serviceType != _undefined)
+          'serviceType': (serviceType as Enum_OrderBy?),
         if (servicesAggregate != _undefined)
           'servicesAggregate':
               (servicesAggregate as Input_PersonsServicesAggregateOrderBy?),
+        if (servingChurch != _undefined)
+          'servingChurch': (servingChurch as Input_ChurchesOrderBy?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as Enum_OrderBy?),
         if (shammasLevel != _undefined)
           'shammasLevel': (shammasLevel as Input_ShammasLevelsOrderBy?),
         if (shammasLevelId != _undefined)
@@ -494,6 +507,14 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
             local$servicesAggregate, (e) => call(servicesAggregate: e));
   }
 
+  CopyWith_Input_ChurchesOrderBy<TRes> get servingChurch {
+    final local$servingChurch = _instance.servingChurch;
+    return local$servingChurch == null
+        ? CopyWith_Input_ChurchesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ChurchesOrderBy(
+            local$servingChurch, (e) => call(servingChurch: e));
+  }
+
   CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel {
     final local$shammasLevel = _instance.shammasLevel;
     return local$shammasLevel == null
@@ -600,7 +621,10 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Enum_OrderBy? qualificationId,
     Input_SchoolsOrderBy? school,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
     Input_PersonsServicesAggregateOrderBy? servicesAggregate,
+    Input_ChurchesOrderBy? servingChurch,
+    Enum_OrderBy? servingChurchId,
     Input_ShammasLevelsOrderBy? shammasLevel,
     Enum_OrderBy? shammasLevelId,
     Input_PersonStatesOrderBy? state,
@@ -689,6 +713,9 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
 
   CopyWith_Input_PersonsServicesAggregateOrderBy<TRes> get servicesAggregate =>
       CopyWith_Input_PersonsServicesAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_ChurchesOrderBy<TRes> get servingChurch =>
+      CopyWith_Input_ChurchesOrderBy.stub(_res);
 
   CopyWith_Input_ShammasLevelsOrderBy<TRes> get shammasLevel =>
       CopyWith_Input_ShammasLevelsOrderBy.stub(_res);

@@ -32,6 +32,8 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -75,6 +77,8 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? qualificationId = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevelId = _undefined,
     Object? stateId = _undefined,
     Object? storeId = _undefined,
@@ -111,6 +115,10 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
         if (qualificationId != _undefined)
           'qualificationId': (qualificationId as Enum_OrderBy?),
         if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+        if (serviceType != _undefined)
+          'serviceType': (serviceType as Enum_OrderBy?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as Enum_OrderBy?),
         if (shammasLevelId != _undefined)
           'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
         if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
@@ -150,6 +158,8 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -182,6 +192,8 @@ class Input_PersonsMinOrderBy {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -210,6 +222,8 @@ class Input_PersonsMinOrderBy {
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (qualificationId != null) r'qualificationId': qualificationId,
         if (schoolId != null) r'schoolId': schoolId,
+        if (serviceType != null) r'serviceType': serviceType,
+        if (servingChurchId != null) r'servingChurchId': servingChurchId,
         if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
         if (stateId != null) r'stateId': stateId,
         if (storeId != null) r'storeId': storeId,
@@ -337,6 +351,18 @@ class Input_PersonsMinOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$schoolId as String));
     }
+    if (data.containsKey('serviceType')) {
+      final l$serviceType = data['serviceType'];
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceType as String));
+    }
+    if (data.containsKey('servingChurchId')) {
+      final l$servingChurchId = data['servingChurchId'];
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$servingChurchId as String));
+    }
     if (data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = data['shammasLevelId'];
       result$data['shammasLevelId'] = l$shammasLevelId == null
@@ -419,6 +445,11 @@ class Input_PersonsMinOrderBy {
       (_$data['qualificationId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceType => (_$data['serviceType'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get servingChurchId =>
+      (_$data['servingChurchId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get shammasLevelId =>
       (_$data['shammasLevelId'] as Enum_OrderBy?);
@@ -535,6 +566,17 @@ class Input_PersonsMinOrderBy {
       final l$schoolId = schoolId;
       result$data['schoolId'] =
           l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
+    }
+    if (_$data.containsKey('serviceType')) {
+      final l$serviceType = serviceType;
+      result$data['serviceType'] =
+          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+    }
+    if (_$data.containsKey('servingChurchId')) {
+      final l$servingChurchId = servingChurchId;
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$servingChurchId);
     }
     if (_$data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = shammasLevelId;
@@ -758,6 +800,24 @@ class Input_PersonsMinOrderBy {
     if (l$schoolId != lOther$schoolId) {
       return false;
     }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (_$data.containsKey('serviceType') !=
+        other._$data.containsKey('serviceType')) {
+      return false;
+    }
+    if (l$serviceType != lOther$serviceType) {
+      return false;
+    }
+    final l$servingChurchId = servingChurchId;
+    final lOther$servingChurchId = other.servingChurchId;
+    if (_$data.containsKey('servingChurchId') !=
+        other._$data.containsKey('servingChurchId')) {
+      return false;
+    }
+    if (l$servingChurchId != lOther$servingChurchId) {
+      return false;
+    }
     final l$shammasLevelId = shammasLevelId;
     final lOther$shammasLevelId = other.shammasLevelId;
     if (_$data.containsKey('shammasLevelId') !=
@@ -834,6 +894,8 @@ class Input_PersonsMinOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$qualificationId = qualificationId;
     final l$schoolId = schoolId;
+    final l$serviceType = serviceType;
+    final l$servingChurchId = servingChurchId;
     final l$shammasLevelId = shammasLevelId;
     final l$stateId = stateId;
     final l$storeId = storeId;
@@ -861,6 +923,8 @@ class Input_PersonsMinOrderBy {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('qualificationId') ? l$qualificationId : const {},
       _$data.containsKey('schoolId') ? l$schoolId : const {},
+      _$data.containsKey('serviceType') ? l$serviceType : const {},
+      _$data.containsKey('servingChurchId') ? l$servingChurchId : const {},
       _$data.containsKey('shammasLevelId') ? l$shammasLevelId : const {},
       _$data.containsKey('stateId') ? l$stateId : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},
@@ -901,6 +965,8 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -944,6 +1010,8 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? qualificationId = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevelId = _undefined,
     Object? stateId = _undefined,
     Object? storeId = _undefined,
@@ -980,6 +1048,10 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
         if (qualificationId != _undefined)
           'qualificationId': (qualificationId as Enum_OrderBy?),
         if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+        if (serviceType != _undefined)
+          'serviceType': (serviceType as Enum_OrderBy?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as Enum_OrderBy?),
         if (shammasLevelId != _undefined)
           'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
         if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
@@ -1019,6 +1091,8 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -1442,7 +1516,10 @@ class Input_PersonsOrderBy {
     Enum_OrderBy? qualificationId,
     Input_SchoolsOrderBy? school,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
     Input_PersonsServicesAggregateOrderBy? servicesAggregate,
+    Input_ChurchesOrderBy? servingChurch,
+    Enum_OrderBy? servingChurchId,
     Input_ShammasLevelsOrderBy? shammasLevel,
     Enum_OrderBy? shammasLevelId,
     Input_PersonStatesOrderBy? state,
@@ -1511,7 +1588,10 @@ class Input_PersonsOrderBy {
         if (qualificationId != null) r'qualificationId': qualificationId,
         if (school != null) r'school': school,
         if (schoolId != null) r'schoolId': schoolId,
+        if (serviceType != null) r'serviceType': serviceType,
         if (servicesAggregate != null) r'servicesAggregate': servicesAggregate,
+        if (servingChurch != null) r'servingChurch': servingChurch,
+        if (servingChurchId != null) r'servingChurchId': servingChurchId,
         if (shammasLevel != null) r'shammasLevel': shammasLevel,
         if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
         if (state != null) r'state': state,
@@ -1837,12 +1917,31 @@ class Input_PersonsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$schoolId as String));
     }
+    if (data.containsKey('serviceType')) {
+      final l$serviceType = data['serviceType'];
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceType as String));
+    }
     if (data.containsKey('servicesAggregate')) {
       final l$servicesAggregate = data['servicesAggregate'];
       result$data['servicesAggregate'] = l$servicesAggregate == null
           ? null
           : Input_PersonsServicesAggregateOrderBy.fromJson(
               (l$servicesAggregate as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurch')) {
+      final l$servingChurch = data['servingChurch'];
+      result$data['servingChurch'] = l$servingChurch == null
+          ? null
+          : Input_ChurchesOrderBy.fromJson(
+              (l$servingChurch as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurchId')) {
+      final l$servingChurchId = data['servingChurchId'];
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$servingChurchId as String));
     }
     if (data.containsKey('shammasLevel')) {
       final l$shammasLevel = data['shammasLevel'];
@@ -2053,8 +2152,16 @@ class Input_PersonsOrderBy {
 
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get serviceType => (_$data['serviceType'] as Enum_OrderBy?);
+
   Input_PersonsServicesAggregateOrderBy? get servicesAggregate =>
       (_$data['servicesAggregate'] as Input_PersonsServicesAggregateOrderBy?);
+
+  Input_ChurchesOrderBy? get servingChurch =>
+      (_$data['servingChurch'] as Input_ChurchesOrderBy?);
+
+  Enum_OrderBy? get servingChurchId =>
+      (_$data['servingChurchId'] as Enum_OrderBy?);
 
   Input_ShammasLevelsOrderBy? get shammasLevel =>
       (_$data['shammasLevel'] as Input_ShammasLevelsOrderBy?);
@@ -2316,9 +2423,24 @@ class Input_PersonsOrderBy {
       result$data['schoolId'] =
           l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
     }
+    if (_$data.containsKey('serviceType')) {
+      final l$serviceType = serviceType;
+      result$data['serviceType'] =
+          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+    }
     if (_$data.containsKey('servicesAggregate')) {
       final l$servicesAggregate = servicesAggregate;
       result$data['servicesAggregate'] = l$servicesAggregate?.toJson();
+    }
+    if (_$data.containsKey('servingChurch')) {
+      final l$servingChurch = servingChurch;
+      result$data['servingChurch'] = l$servingChurch?.toJson();
+    }
+    if (_$data.containsKey('servingChurchId')) {
+      final l$servingChurchId = servingChurchId;
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$servingChurchId);
     }
     if (_$data.containsKey('shammasLevel')) {
       final l$shammasLevel = shammasLevel;
@@ -2819,6 +2941,15 @@ class Input_PersonsOrderBy {
     if (l$schoolId != lOther$schoolId) {
       return false;
     }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (_$data.containsKey('serviceType') !=
+        other._$data.containsKey('serviceType')) {
+      return false;
+    }
+    if (l$serviceType != lOther$serviceType) {
+      return false;
+    }
     final l$servicesAggregate = servicesAggregate;
     final lOther$servicesAggregate = other.servicesAggregate;
     if (_$data.containsKey('servicesAggregate') !=
@@ -2826,6 +2957,24 @@ class Input_PersonsOrderBy {
       return false;
     }
     if (l$servicesAggregate != lOther$servicesAggregate) {
+      return false;
+    }
+    final l$servingChurch = servingChurch;
+    final lOther$servingChurch = other.servingChurch;
+    if (_$data.containsKey('servingChurch') !=
+        other._$data.containsKey('servingChurch')) {
+      return false;
+    }
+    if (l$servingChurch != lOther$servingChurch) {
+      return false;
+    }
+    final l$servingChurchId = servingChurchId;
+    final lOther$servingChurchId = other.servingChurchId;
+    if (_$data.containsKey('servingChurchId') !=
+        other._$data.containsKey('servingChurchId')) {
+      return false;
+    }
+    if (l$servingChurchId != lOther$servingChurchId) {
       return false;
     }
     final l$shammasLevel = shammasLevel;
@@ -2985,7 +3134,10 @@ class Input_PersonsOrderBy {
     final l$qualificationId = qualificationId;
     final l$school = school;
     final l$schoolId = schoolId;
+    final l$serviceType = serviceType;
     final l$servicesAggregate = servicesAggregate;
+    final l$servingChurch = servingChurch;
+    final l$servingChurchId = servingChurchId;
     final l$shammasLevel = shammasLevel;
     final l$shammasLevelId = shammasLevelId;
     final l$state = state;
@@ -3058,7 +3210,10 @@ class Input_PersonsOrderBy {
       _$data.containsKey('qualificationId') ? l$qualificationId : const {},
       _$data.containsKey('school') ? l$school : const {},
       _$data.containsKey('schoolId') ? l$schoolId : const {},
+      _$data.containsKey('serviceType') ? l$serviceType : const {},
       _$data.containsKey('servicesAggregate') ? l$servicesAggregate : const {},
+      _$data.containsKey('servingChurch') ? l$servingChurch : const {},
+      _$data.containsKey('servingChurchId') ? l$servingChurchId : const {},
       _$data.containsKey('shammasLevel') ? l$shammasLevel : const {},
       _$data.containsKey('shammasLevelId') ? l$shammasLevelId : const {},
       _$data.containsKey('state') ? l$state : const {},

@@ -76,6 +76,11 @@ subscription watchPerson(
       }
     }
     isServant
+    servingChurch {
+      id
+      name
+    }
+    serviceType
     isShammas
     workStatus
     job {

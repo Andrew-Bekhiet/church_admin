@@ -925,7 +925,10 @@ class Input_PersonsInsertInput {
     UuidValue? qualificationId,
     Input_SchoolsObjRelInsertInput? school,
     UuidValue? schoolId,
+    String? serviceType,
     Input_PersonsServicesArrRelInsertInput? services,
+    Input_ChurchesObjRelInsertInput? servingChurch,
+    UuidValue? servingChurchId,
     UuidValue? shammasLevelId,
     Input_PersonStatesObjRelInsertInput? state,
     UuidValue? stateId,
@@ -975,7 +978,10 @@ class Input_PersonsInsertInput {
         if (qualificationId != null) r'qualificationId': qualificationId,
         if (school != null) r'school': school,
         if (schoolId != null) r'schoolId': schoolId,
+        if (serviceType != null) r'serviceType': serviceType,
         if (services != null) r'services': services,
+        if (servingChurch != null) r'servingChurch': servingChurch,
+        if (servingChurchId != null) r'servingChurchId': servingChurchId,
         if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
         if (state != null) r'state': state,
         if (stateId != null) r'stateId': stateId,
@@ -1196,12 +1202,28 @@ class Input_PersonsInsertInput {
       result$data['schoolId'] =
           l$schoolId == null ? null : stringToUuid(l$schoolId);
     }
+    if (data.containsKey('serviceType')) {
+      final l$serviceType = data['serviceType'];
+      result$data['serviceType'] = (l$serviceType as String?);
+    }
     if (data.containsKey('services')) {
       final l$services = data['services'];
       result$data['services'] = l$services == null
           ? null
           : Input_PersonsServicesArrRelInsertInput.fromJson(
               (l$services as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurch')) {
+      final l$servingChurch = data['servingChurch'];
+      result$data['servingChurch'] = l$servingChurch == null
+          ? null
+          : Input_ChurchesObjRelInsertInput.fromJson(
+              (l$servingChurch as Map<String, dynamic>));
+    }
+    if (data.containsKey('servingChurchId')) {
+      final l$servingChurchId = data['servingChurchId'];
+      result$data['servingChurchId'] =
+          l$servingChurchId == null ? null : stringToUuid(l$servingChurchId);
     }
     if (data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = data['shammasLevelId'];
@@ -1353,8 +1375,15 @@ class Input_PersonsInsertInput {
 
   UuidValue? get schoolId => (_$data['schoolId'] as UuidValue?);
 
+  String? get serviceType => (_$data['serviceType'] as String?);
+
   Input_PersonsServicesArrRelInsertInput? get services =>
       (_$data['services'] as Input_PersonsServicesArrRelInsertInput?);
+
+  Input_ChurchesObjRelInsertInput? get servingChurch =>
+      (_$data['servingChurch'] as Input_ChurchesObjRelInsertInput?);
+
+  UuidValue? get servingChurchId => (_$data['servingChurchId'] as UuidValue?);
 
   UuidValue? get shammasLevelId => (_$data['shammasLevelId'] as UuidValue?);
 
@@ -1540,9 +1569,22 @@ class Input_PersonsInsertInput {
       result$data['schoolId'] =
           l$schoolId == null ? null : uuidToString(l$schoolId);
     }
+    if (_$data.containsKey('serviceType')) {
+      final l$serviceType = serviceType;
+      result$data['serviceType'] = l$serviceType;
+    }
     if (_$data.containsKey('services')) {
       final l$services = services;
       result$data['services'] = l$services?.toJson();
+    }
+    if (_$data.containsKey('servingChurch')) {
+      final l$servingChurch = servingChurch;
+      result$data['servingChurch'] = l$servingChurch?.toJson();
+    }
+    if (_$data.containsKey('servingChurchId')) {
+      final l$servingChurchId = servingChurchId;
+      result$data['servingChurchId'] =
+          l$servingChurchId == null ? null : uuidToString(l$servingChurchId);
     }
     if (_$data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = shammasLevelId;
@@ -1929,6 +1971,15 @@ class Input_PersonsInsertInput {
     if (l$schoolId != lOther$schoolId) {
       return false;
     }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (_$data.containsKey('serviceType') !=
+        other._$data.containsKey('serviceType')) {
+      return false;
+    }
+    if (l$serviceType != lOther$serviceType) {
+      return false;
+    }
     final l$services = services;
     final lOther$services = other.services;
     if (_$data.containsKey('services') !=
@@ -1936,6 +1987,24 @@ class Input_PersonsInsertInput {
       return false;
     }
     if (l$services != lOther$services) {
+      return false;
+    }
+    final l$servingChurch = servingChurch;
+    final lOther$servingChurch = other.servingChurch;
+    if (_$data.containsKey('servingChurch') !=
+        other._$data.containsKey('servingChurch')) {
+      return false;
+    }
+    if (l$servingChurch != lOther$servingChurch) {
+      return false;
+    }
+    final l$servingChurchId = servingChurchId;
+    final lOther$servingChurchId = other.servingChurchId;
+    if (_$data.containsKey('servingChurchId') !=
+        other._$data.containsKey('servingChurchId')) {
+      return false;
+    }
+    if (l$servingChurchId != lOther$servingChurchId) {
       return false;
     }
     final l$shammasLevelId = shammasLevelId;
@@ -2058,7 +2127,10 @@ class Input_PersonsInsertInput {
     final l$qualificationId = qualificationId;
     final l$school = school;
     final l$schoolId = schoolId;
+    final l$serviceType = serviceType;
     final l$services = services;
+    final l$servingChurch = servingChurch;
+    final l$servingChurchId = servingChurchId;
     final l$shammasLevelId = shammasLevelId;
     final l$state = state;
     final l$stateId = stateId;
@@ -2107,7 +2179,10 @@ class Input_PersonsInsertInput {
       _$data.containsKey('qualificationId') ? l$qualificationId : const {},
       _$data.containsKey('school') ? l$school : const {},
       _$data.containsKey('schoolId') ? l$schoolId : const {},
+      _$data.containsKey('serviceType') ? l$serviceType : const {},
       _$data.containsKey('services') ? l$services : const {},
+      _$data.containsKey('servingChurch') ? l$servingChurch : const {},
+      _$data.containsKey('servingChurchId') ? l$servingChurchId : const {},
       _$data.containsKey('shammasLevelId') ? l$shammasLevelId : const {},
       _$data.containsKey('state') ? l$state : const {},
       _$data.containsKey('stateId') ? l$stateId : const {},
@@ -2169,7 +2244,10 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     UuidValue? qualificationId,
     Input_SchoolsObjRelInsertInput? school,
     UuidValue? schoolId,
+    String? serviceType,
     Input_PersonsServicesArrRelInsertInput? services,
+    Input_ChurchesObjRelInsertInput? servingChurch,
+    UuidValue? servingChurchId,
     UuidValue? shammasLevelId,
     Input_PersonStatesObjRelInsertInput? state,
     UuidValue? stateId,
@@ -2198,6 +2276,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
   CopyWith_Input_QualificationsObjRelInsertInput<TRes> get qualification;
   CopyWith_Input_SchoolsObjRelInsertInput<TRes> get school;
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get services;
+  CopyWith_Input_ChurchesObjRelInsertInput<TRes> get servingChurch;
   CopyWith_Input_PersonStatesObjRelInsertInput<TRes> get state;
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear;
   CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get tags;
@@ -2256,7 +2335,10 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? qualificationId = _undefined,
     Object? school = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
     Object? services = _undefined,
+    Object? servingChurch = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevelId = _undefined,
     Object? state = _undefined,
     Object? stateId = _undefined,
@@ -2331,8 +2413,13 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
         if (school != _undefined)
           'school': (school as Input_SchoolsObjRelInsertInput?),
         if (schoolId != _undefined) 'schoolId': (schoolId as UuidValue?),
+        if (serviceType != _undefined) 'serviceType': (serviceType as String?),
         if (services != _undefined)
           'services': (services as Input_PersonsServicesArrRelInsertInput?),
+        if (servingChurch != _undefined)
+          'servingChurch': (servingChurch as Input_ChurchesObjRelInsertInput?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as UuidValue?),
         if (shammasLevelId != _undefined)
           'shammasLevelId': (shammasLevelId as UuidValue?),
         if (state != _undefined)
@@ -2483,6 +2570,14 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
             local$services, (e) => call(services: e));
   }
 
+  CopyWith_Input_ChurchesObjRelInsertInput<TRes> get servingChurch {
+    final local$servingChurch = _instance.servingChurch;
+    return local$servingChurch == null
+        ? CopyWith_Input_ChurchesObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_ChurchesObjRelInsertInput(
+            local$servingChurch, (e) => call(servingChurch: e));
+  }
+
   CopyWith_Input_PersonStatesObjRelInsertInput<TRes> get state {
     final local$state = _instance.state;
     return local$state == null
@@ -2562,7 +2657,10 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     UuidValue? qualificationId,
     Input_SchoolsObjRelInsertInput? school,
     UuidValue? schoolId,
+    String? serviceType,
     Input_PersonsServicesArrRelInsertInput? services,
+    Input_ChurchesObjRelInsertInput? servingChurch,
+    UuidValue? servingChurchId,
     UuidValue? shammasLevelId,
     Input_PersonStatesObjRelInsertInput? state,
     UuidValue? stateId,
@@ -2625,6 +2723,9 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get services =>
       CopyWith_Input_PersonsServicesArrRelInsertInput.stub(_res);
 
+  CopyWith_Input_ChurchesObjRelInsertInput<TRes> get servingChurch =>
+      CopyWith_Input_ChurchesObjRelInsertInput.stub(_res);
+
   CopyWith_Input_PersonStatesObjRelInsertInput<TRes> get state =>
       CopyWith_Input_PersonStatesObjRelInsertInput.stub(_res);
 
@@ -2660,6 +2761,8 @@ class Input_PersonsMaxOrderBy {
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? qualificationId,
     Enum_OrderBy? schoolId,
+    Enum_OrderBy? serviceType,
+    Enum_OrderBy? servingChurchId,
     Enum_OrderBy? shammasLevelId,
     Enum_OrderBy? stateId,
     Enum_OrderBy? storeId,
@@ -2688,6 +2791,8 @@ class Input_PersonsMaxOrderBy {
         if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
         if (qualificationId != null) r'qualificationId': qualificationId,
         if (schoolId != null) r'schoolId': schoolId,
+        if (serviceType != null) r'serviceType': serviceType,
+        if (servingChurchId != null) r'servingChurchId': servingChurchId,
         if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
         if (stateId != null) r'stateId': stateId,
         if (storeId != null) r'storeId': storeId,
@@ -2815,6 +2920,18 @@ class Input_PersonsMaxOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$schoolId as String));
     }
+    if (data.containsKey('serviceType')) {
+      final l$serviceType = data['serviceType'];
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceType as String));
+    }
+    if (data.containsKey('servingChurchId')) {
+      final l$servingChurchId = data['servingChurchId'];
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$servingChurchId as String));
+    }
     if (data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = data['shammasLevelId'];
       result$data['shammasLevelId'] = l$shammasLevelId == null
@@ -2897,6 +3014,11 @@ class Input_PersonsMaxOrderBy {
       (_$data['qualificationId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get schoolId => (_$data['schoolId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceType => (_$data['serviceType'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get servingChurchId =>
+      (_$data['servingChurchId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get shammasLevelId =>
       (_$data['shammasLevelId'] as Enum_OrderBy?);
@@ -3013,6 +3135,17 @@ class Input_PersonsMaxOrderBy {
       final l$schoolId = schoolId;
       result$data['schoolId'] =
           l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
+    }
+    if (_$data.containsKey('serviceType')) {
+      final l$serviceType = serviceType;
+      result$data['serviceType'] =
+          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+    }
+    if (_$data.containsKey('servingChurchId')) {
+      final l$servingChurchId = servingChurchId;
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$servingChurchId);
     }
     if (_$data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = shammasLevelId;
@@ -3236,6 +3369,24 @@ class Input_PersonsMaxOrderBy {
     if (l$schoolId != lOther$schoolId) {
       return false;
     }
+    final l$serviceType = serviceType;
+    final lOther$serviceType = other.serviceType;
+    if (_$data.containsKey('serviceType') !=
+        other._$data.containsKey('serviceType')) {
+      return false;
+    }
+    if (l$serviceType != lOther$serviceType) {
+      return false;
+    }
+    final l$servingChurchId = servingChurchId;
+    final lOther$servingChurchId = other.servingChurchId;
+    if (_$data.containsKey('servingChurchId') !=
+        other._$data.containsKey('servingChurchId')) {
+      return false;
+    }
+    if (l$servingChurchId != lOther$servingChurchId) {
+      return false;
+    }
     final l$shammasLevelId = shammasLevelId;
     final lOther$shammasLevelId = other.shammasLevelId;
     if (_$data.containsKey('shammasLevelId') !=
@@ -3312,6 +3463,8 @@ class Input_PersonsMaxOrderBy {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$qualificationId = qualificationId;
     final l$schoolId = schoolId;
+    final l$serviceType = serviceType;
+    final l$servingChurchId = servingChurchId;
     final l$shammasLevelId = shammasLevelId;
     final l$stateId = stateId;
     final l$storeId = storeId;
@@ -3339,6 +3492,8 @@ class Input_PersonsMaxOrderBy {
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('qualificationId') ? l$qualificationId : const {},
       _$data.containsKey('schoolId') ? l$schoolId : const {},
+      _$data.containsKey('serviceType') ? l$serviceType : const {},
+      _$data.containsKey('servingChurchId') ? l$servingChurchId : const {},
       _$data.containsKey('shammasLevelId') ? l$shammasLevelId : const {},
       _$data.containsKey('stateId') ? l$stateId : const {},
       _$data.containsKey('storeId') ? l$storeId : const {},

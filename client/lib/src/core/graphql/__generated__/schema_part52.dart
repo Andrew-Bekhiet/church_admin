@@ -2,6 +2,38 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_StringComparisonExp<TRes> {
+  factory CopyWith_Input_StringComparisonExp(
+    Input_StringComparisonExp instance,
+    TRes Function(Input_StringComparisonExp) then,
+  ) = _CopyWithImpl_Input_StringComparisonExp;
+
+  factory CopyWith_Input_StringComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_StringComparisonExp;
+
+  TRes call({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    String? $_ilike,
+    List<String>? $_in,
+    String? $_iregex,
+    bool? $_isNull,
+    String? $_like,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    String? $_nilike,
+    List<String>? $_nin,
+    String? $_niregex,
+    String? $_nlike,
+    String? $_nregex,
+    String? $_nsimilar,
+    String? $_regex,
+    String? $_similar,
+  });
+}
+
 class _CopyWithImpl_Input_StringComparisonExp<TRes>
     implements CopyWith_Input_StringComparisonExp<TRes> {
   _CopyWithImpl_Input_StringComparisonExp(

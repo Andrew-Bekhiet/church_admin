@@ -80,6 +80,9 @@ object_relationships:
   - name: school
     using:
       foreign_key_constraint_on: school_id
+  - name: servingChurch
+    using:
+      foreign_key_constraint_on: serving_church_id
   - name: shammasLevel
     using:
       foreign_key_constraint_on: shammas_level_id
@@ -216,6 +219,8 @@ insert_permissions:
         - person_type_id
         - qualification_id
         - school_id
+        - service_type
+        - serving_church_id
         - shammas_level_id
         - state_id
         - store_id
@@ -251,6 +256,8 @@ select_permissions:
         - photo_updated_at
         - qualification_id
         - school_id
+        - service_type
+        - serving_church_id
         - shammas_level_id
         - state_id
         - store_id
@@ -310,6 +317,8 @@ update_permissions:
         - person_type_id
         - qualification_id
         - school_id
+        - service_type
+        - serving_church_id
         - shammas_level_id
         - state_id
         - store_id

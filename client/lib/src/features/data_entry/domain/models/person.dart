@@ -118,6 +118,10 @@ class Person extends ViewableWithIDAndImage
   @override
   final bool isServant;
 
+  final Church? servingChurch;
+
+  final String? serviceType;
+
   @override
   final String? notes;
 
@@ -264,6 +268,8 @@ class Person extends ViewableWithIDAndImage
     this.state,
     this.stateId,
     this.isServant = false,
+    this.servingChurch,
+    this.serviceType,
     this.notes,
     this.family,
     this.familyId,
@@ -361,6 +367,8 @@ class Person extends ViewableWithIDAndImage
         personTypeId: personType?.id.toUuid(),
         stateId: state?.id.toUuid(),
         isServant: isServant,
+        servingChurchId: servingChurch?.id.toUuid(),
+        serviceType: serviceType,
         notes: notes,
         family: family == null && address != null
             ? Input_FamiliesObjRelInsertInput(
@@ -510,8 +518,20 @@ class Person extends ViewableWithIDAndImage
       result = result.copyWith(jobDescription: jobDescription);
     }
 
+    if (servingChurch?.id != oldPerson.servingChurch?.id) {
+      result = result.copyWith(servingChurchId: servingChurch?.id.toUuid());
+    }
+
+    if (serviceType != oldPerson.serviceType) {
+      result = result.copyWith(serviceType: serviceType);
+    }
+
     if (isServant != oldPerson.isServant) {
-      result = result.copyWith(isServant: isServant);
+      result = result.copyWith(
+        isServant: isServant,
+        servingChurchId: isServant ? result.servingChurchId : null,
+        serviceType: isServant ? result.serviceType : null,
+      );
     }
 
     if (notes != oldPerson.notes) {

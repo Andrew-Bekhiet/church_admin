@@ -208,6 +208,16 @@ class _ViewPersonState extends State<ViewPerson> {
                     )
                   : null,
             ),
+            if (person.isServant)
+              ListTile(
+                title: const Text('الكنيسة التي يخدم بها'),
+                subtitle: Text(person.servingChurch?.name ?? ''),
+              ),
+            if (person.isServant)
+              ListTile(
+                title: const Text('نوع الخدمة'),
+                subtitle: Text(person.serviceType ?? ''),
+              ),
             if (person.gender)
               ListTile(
                 title: const Text('شماس؟'),

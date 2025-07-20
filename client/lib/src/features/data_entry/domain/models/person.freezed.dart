@@ -46,6 +46,8 @@ mixin _$Person {
   PersonState? get state;
   String? get stateId;
   bool get isServant;
+  Church? get servingChurch;
+  String? get serviceType;
   String? get notes;
   Family? get family;
   String? get familyId;
@@ -145,6 +147,10 @@ mixin _$Person {
             (identical(other.stateId, stateId) || other.stateId == stateId) &&
             (identical(other.isServant, isServant) ||
                 other.isServant == isServant) &&
+            (identical(other.servingChurch, servingChurch) ||
+                other.servingChurch == servingChurch) &&
+            (identical(other.serviceType, serviceType) ||
+                other.serviceType == serviceType) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.family, family) || other.family == family) &&
             (identical(other.familyId, familyId) ||
@@ -192,12 +198,10 @@ mixin _$Person {
                 .equals(other.editHistory, editHistory) &&
             (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
                 other.kodasHistoryAggregate == kodasHistoryAggregate) &&
-            (identical(other.attendanceHistoryAggregate, attendanceHistoryAggregate) ||
-                other.attendanceHistoryAggregate ==
-                    attendanceHistoryAggregate) &&
             (identical(
-                    other.confessionHistoryAggregate, confessionHistoryAggregate) ||
-                other.confessionHistoryAggregate == confessionHistoryAggregate) &&
+                    other.attendanceHistoryAggregate, attendanceHistoryAggregate) ||
+                other.attendanceHistoryAggregate == attendanceHistoryAggregate) &&
+            (identical(other.confessionHistoryAggregate, confessionHistoryAggregate) || other.confessionHistoryAggregate == confessionHistoryAggregate) &&
             (identical(other.callHistoryAggregate, callHistoryAggregate) || other.callHistoryAggregate == callHistoryAggregate) &&
             (identical(other.visitHistoryAggregate, visitHistoryAggregate) || other.visitHistoryAggregate == visitHistoryAggregate) &&
             (identical(other.editHistoryAggregate, editHistoryAggregate) || other.editHistoryAggregate == editHistoryAggregate));
@@ -239,6 +243,8 @@ mixin _$Person {
         state,
         stateId,
         isServant,
+        servingChurch,
+        serviceType,
         notes,
         family,
         familyId,
@@ -277,7 +283,7 @@ mixin _$Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 }
 
@@ -319,6 +325,8 @@ abstract mixin class $PersonCopyWith<$Res> {
       PersonState? state,
       String? stateId,
       bool isServant,
+      Church? servingChurch,
+      String? serviceType,
       String? notes,
       Family? family,
       String? familyId,
@@ -399,6 +407,8 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? state = freezed,
     Object? stateId = freezed,
     Object? isServant = null,
+    Object? servingChurch = freezed,
+    Object? serviceType = freezed,
     Object? notes = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
@@ -563,6 +573,14 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _self.isServant
           : isServant // ignore: cast_nullable_to_non_nullable
               as bool,
+      servingChurch: freezed == servingChurch
+          ? _self.servingChurch
+          : servingChurch // ignore: cast_nullable_to_non_nullable
+              as Church?,
+      serviceType: freezed == serviceType
+          ? _self.serviceType
+          : serviceType // ignore: cast_nullable_to_non_nullable
+              as String?,
       notes: freezed == notes
           ? _self.notes
           : notes // ignore: cast_nullable_to_non_nullable

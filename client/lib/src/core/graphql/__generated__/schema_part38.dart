@@ -69,7 +69,10 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_UuidComparisonExp? qualificationId,
     Input_SchoolsBoolExp? school,
     Input_UuidComparisonExp? schoolId,
+    Input_StringComparisonExp? serviceType,
     Input_PersonsServicesBoolExp? services,
+    Input_ChurchesBoolExp? servingChurch,
+    Input_UuidComparisonExp? servingChurchId,
     Input_ShammasLevelsBoolExp? shammasLevel,
     Input_UuidComparisonExp? shammasLevelId,
     Input_PersonStatesBoolExp? state,
@@ -152,7 +155,10 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get qualificationId;
   CopyWith_Input_SchoolsBoolExp<TRes> get school;
   CopyWith_Input_UuidComparisonExp<TRes> get schoolId;
+  CopyWith_Input_StringComparisonExp<TRes> get serviceType;
   CopyWith_Input_PersonsServicesBoolExp<TRes> get services;
+  CopyWith_Input_ChurchesBoolExp<TRes> get servingChurch;
+  CopyWith_Input_UuidComparisonExp<TRes> get servingChurchId;
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get shammasLevel;
   CopyWith_Input_UuidComparisonExp<TRes> get shammasLevelId;
   CopyWith_Input_PersonStatesBoolExp<TRes> get state;
@@ -240,7 +246,10 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? qualificationId = _undefined,
     Object? school = _undefined,
     Object? schoolId = _undefined,
+    Object? serviceType = _undefined,
     Object? services = _undefined,
+    Object? servingChurch = _undefined,
+    Object? servingChurchId = _undefined,
     Object? shammasLevel = _undefined,
     Object? shammasLevelId = _undefined,
     Object? state = _undefined,
@@ -366,8 +375,14 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         if (school != _undefined) 'school': (school as Input_SchoolsBoolExp?),
         if (schoolId != _undefined)
           'schoolId': (schoolId as Input_UuidComparisonExp?),
+        if (serviceType != _undefined)
+          'serviceType': (serviceType as Input_StringComparisonExp?),
         if (services != _undefined)
           'services': (services as Input_PersonsServicesBoolExp?),
+        if (servingChurch != _undefined)
+          'servingChurch': (servingChurch as Input_ChurchesBoolExp?),
+        if (servingChurchId != _undefined)
+          'servingChurchId': (servingChurchId as Input_UuidComparisonExp?),
         if (shammasLevel != _undefined)
           'shammasLevel': (shammasLevel as Input_ShammasLevelsBoolExp?),
         if (shammasLevelId != _undefined)
@@ -860,12 +875,36 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
             local$schoolId, (e) => call(schoolId: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get serviceType {
+    final local$serviceType = _instance.serviceType;
+    return local$serviceType == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$serviceType, (e) => call(serviceType: e));
+  }
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get services {
     final local$services = _instance.services;
     return local$services == null
         ? CopyWith_Input_PersonsServicesBoolExp.stub(_then(_instance))
         : CopyWith_Input_PersonsServicesBoolExp(
             local$services, (e) => call(services: e));
+  }
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get servingChurch {
+    final local$servingChurch = _instance.servingChurch;
+    return local$servingChurch == null
+        ? CopyWith_Input_ChurchesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ChurchesBoolExp(
+            local$servingChurch, (e) => call(servingChurch: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get servingChurchId {
+    final local$servingChurchId = _instance.servingChurchId;
+    return local$servingChurchId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$servingChurchId, (e) => call(servingChurchId: e));
   }
 
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get shammasLevel {
@@ -1036,7 +1075,10 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_UuidComparisonExp? qualificationId,
     Input_SchoolsBoolExp? school,
     Input_UuidComparisonExp? schoolId,
+    Input_StringComparisonExp? serviceType,
     Input_PersonsServicesBoolExp? services,
+    Input_ChurchesBoolExp? servingChurch,
+    Input_UuidComparisonExp? servingChurchId,
     Input_ShammasLevelsBoolExp? shammasLevel,
     Input_UuidComparisonExp? shammasLevelId,
     Input_PersonStatesBoolExp? state,
@@ -1227,8 +1269,17 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
   CopyWith_Input_UuidComparisonExp<TRes> get schoolId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
+  CopyWith_Input_StringComparisonExp<TRes> get serviceType =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
   CopyWith_Input_PersonsServicesBoolExp<TRes> get services =>
       CopyWith_Input_PersonsServicesBoolExp.stub(_res);
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get servingChurch =>
+      CopyWith_Input_ChurchesBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get servingChurchId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 
   CopyWith_Input_ShammasLevelsBoolExp<TRes> get shammasLevel =>
       CopyWith_Input_ShammasLevelsBoolExp.stub(_res);

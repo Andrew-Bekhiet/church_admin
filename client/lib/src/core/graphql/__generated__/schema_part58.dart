@@ -653,6 +653,8 @@ enum Enum_PersonsSelectColumn {
   photoUpdatedAt,
   qualificationId,
   schoolId,
+  serviceType,
+  servingChurchId,
   shammasLevelId,
   stateId,
   storeId,
@@ -721,6 +723,10 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'qualificationId';
     case Enum_PersonsSelectColumn.schoolId:
       return r'schoolId';
+    case Enum_PersonsSelectColumn.serviceType:
+      return r'serviceType';
+    case Enum_PersonsSelectColumn.servingChurchId:
+      return r'servingChurchId';
     case Enum_PersonsSelectColumn.shammasLevelId:
       return r'shammasLevelId';
     case Enum_PersonsSelectColumn.stateId:
@@ -792,6 +798,10 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.qualificationId;
     case r'schoolId':
       return Enum_PersonsSelectColumn.schoolId;
+    case r'serviceType':
+      return Enum_PersonsSelectColumn.serviceType;
+    case r'servingChurchId':
+      return Enum_PersonsSelectColumn.servingChurchId;
     case r'shammasLevelId':
       return Enum_PersonsSelectColumn.shammasLevelId;
     case r'stateId':
@@ -1154,6 +1164,8 @@ enum Enum_PersonsUpdateColumn {
   personTypeId,
   qualificationId,
   schoolId,
+  serviceType,
+  servingChurchId,
   shammasLevelId,
   stateId,
   storeId,
@@ -1215,6 +1227,10 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'qualificationId';
     case Enum_PersonsUpdateColumn.schoolId:
       return r'schoolId';
+    case Enum_PersonsUpdateColumn.serviceType:
+      return r'serviceType';
+    case Enum_PersonsUpdateColumn.servingChurchId:
+      return r'servingChurchId';
     case Enum_PersonsUpdateColumn.shammasLevelId:
       return r'shammasLevelId';
     case Enum_PersonsUpdateColumn.stateId:
@@ -1278,6 +1294,10 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.qualificationId;
     case r'schoolId':
       return Enum_PersonsUpdateColumn.schoolId;
+    case r'serviceType':
+      return Enum_PersonsUpdateColumn.serviceType;
+    case r'servingChurchId':
+      return Enum_PersonsUpdateColumn.servingChurchId;
     case r'shammasLevelId':
       return Enum_PersonsUpdateColumn.shammasLevelId;
     case r'stateId':

@@ -239,6 +239,30 @@ class _PersonFields {
     operators: {...BooleanOperator.values},
   );
 
+  final FieldMetadata<Church> servingChurch = FieldMetadata<Church>(
+    parentType: Person,
+    name: 'servingChurch',
+    label: 'servingChurch',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
+  final FieldMetadata<String> serviceType = FieldMetadata<String>(
+    parentType: Person,
+    name: 'serviceType',
+    label: 'serviceType',
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<String> notes = FieldMetadata<String>(
     parentType: Person,
     name: 'notes',
@@ -612,6 +636,8 @@ class _PersonFields {
     personType,
     state,
     isServant,
+    servingChurch,
+    serviceType,
     notes,
     family,
     store,
@@ -666,6 +692,8 @@ class _PersonFields {
     'personType': personType,
     'state': state,
     'isServant': isServant,
+    'servingChurch': servingChurch,
+    'serviceType': serviceType,
     'notes': notes,
     'family': family,
     'store': store,
@@ -770,6 +798,11 @@ Person _$PersonFromJson(Map json) => Person(
               Map<String, Object?>.from(json['state'] as Map)),
       stateId: json['stateId'] as String?,
       isServant: json['isServant'] as bool? ?? false,
+      servingChurch: json['servingChurch'] == null
+          ? null
+          : Church.fromJson(
+              Map<String, Object?>.from(json['servingChurch'] as Map)),
+      serviceType: json['serviceType'] as String?,
       notes: json['notes'] as String?,
       family: json['family'] == null
           ? null
@@ -904,6 +937,8 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'state': instance.state?.toJson(),
       'stateId': instance.stateId,
       'isServant': instance.isServant,
+      'servingChurch': instance.servingChurch?.toJson(),
+      'serviceType': instance.serviceType,
       'notes': instance.notes,
       'family': instance.family?.toJson(),
       'familyId': instance.familyId,
