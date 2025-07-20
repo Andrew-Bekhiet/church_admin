@@ -628,6 +628,10 @@ class PersonFields extends _PersonFields {
       address.redirectTo(AddressFields().district, isExpandable: false);
 
   @override
+  FieldMetadata<Point> get geolocation =>
+      address.redirectTo(AddressFields().geolocation, isExpandable: false);
+
+  @override
   List<FieldMetadata<Object>> get allFields => {
         id,
         name,
