@@ -24,6 +24,7 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -66,6 +67,7 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     Object? jobDescription = _undefined,
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -96,6 +98,8 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
           'jobDescription': (jobDescription as Enum_OrderBy?),
         if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (nationalId != _undefined)
           'nationalId': (nationalId as Enum_OrderBy?),
@@ -138,6 +142,7 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -169,6 +174,7 @@ class Input_PersonsMinOrderBy {
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -196,6 +202,7 @@ class Input_PersonsMinOrderBy {
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -283,6 +290,12 @@ class Input_PersonsMinOrderBy {
       result$data['mainPhone'] = l$mainPhone == null
           ? null
           : fromJson_Enum_OrderBy((l$mainPhone as String));
+    }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$martialStatus as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -389,6 +402,8 @@ class Input_PersonsMinOrderBy {
 
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get martialStatus => (_$data['martialStatus'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
@@ -479,6 +494,11 @@ class Input_PersonsMinOrderBy {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] =
           l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] =
+          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -668,6 +688,15 @@ class Input_PersonsMinOrderBy {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -797,6 +826,7 @@ class Input_PersonsMinOrderBy {
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -823,6 +853,7 @@ class Input_PersonsMinOrderBy {
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
@@ -862,6 +893,7 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -904,6 +936,7 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     Object? jobDescription = _undefined,
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -934,6 +967,8 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
           'jobDescription': (jobDescription as Enum_OrderBy?),
         if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (nationalId != _undefined)
           'nationalId': (nationalId as Enum_OrderBy?),
@@ -976,6 +1011,7 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -1394,6 +1430,7 @@ class Input_PersonsOrderBy {
     Input_HistoryLatestKodasesOrderBy? lastKodas,
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -1462,6 +1499,7 @@ class Input_PersonsOrderBy {
         if (lastKodas != null) r'lastKodas': lastKodas,
         if (lastVisit != null) r'lastVisit': lastVisit,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -1727,6 +1765,12 @@ class Input_PersonsOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$mainPhone as String));
     }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$martialStatus as String));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] =
@@ -1980,6 +2024,8 @@ class Input_PersonsOrderBy {
 
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get martialStatus => (_$data['martialStatus'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
@@ -2211,6 +2257,11 @@ class Input_PersonsOrderBy {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] =
           l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] =
+          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2663,6 +2714,15 @@ class Input_PersonsOrderBy {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2913,6 +2973,7 @@ class Input_PersonsOrderBy {
     final l$lastKodas = lastKodas;
     final l$lastVisit = lastVisit;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -2985,6 +3046,7 @@ class Input_PersonsOrderBy {
       _$data.containsKey('lastKodas') ? l$lastKodas : const {},
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},

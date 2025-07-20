@@ -1975,6 +1975,13 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
+            name: NameNode(value: 'martialStatus'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
             name: NameNode(value: 'personType'),
             alias: null,
             arguments: [],
@@ -2525,6 +2532,7 @@ class Subscription_watchPerson_personsByPk
     this.mainPhone,
     this.notes,
     required this.otherPhones,
+    required this.martialStatus,
     this.personType,
     this.qualification,
     this.school,
@@ -2569,6 +2577,7 @@ class Subscription_watchPerson_personsByPk
     final l$mainPhone = json['mainPhone'];
     final l$notes = json['notes'];
     final l$otherPhones = json['otherPhones'];
+    final l$martialStatus = json['martialStatus'];
     final l$personType = json['personType'];
     final l$qualification = json['qualification'];
     final l$school = json['school'];
@@ -2648,6 +2657,7 @@ class Subscription_watchPerson_personsByPk
       mainPhone: (l$mainPhone as String?),
       notes: (l$notes as String?),
       otherPhones: (l$otherPhones as Json),
+      martialStatus: (l$martialStatus as String),
       personType: l$personType == null
           ? null
           : Subscription_watchPerson_personsByPk_personType.fromJson(
@@ -2750,6 +2760,8 @@ class Subscription_watchPerson_personsByPk
 
   final Json otherPhones;
 
+  final String martialStatus;
+
   final Subscription_watchPerson_personsByPk_personType? personType;
 
   final Subscription_watchPerson_personsByPk_qualification? qualification;
@@ -2834,6 +2846,8 @@ class Subscription_watchPerson_personsByPk
     _resultData['notes'] = l$notes;
     final l$otherPhones = otherPhones;
     _resultData['otherPhones'] = l$otherPhones;
+    final l$martialStatus = martialStatus;
+    _resultData['martialStatus'] = l$martialStatus;
     final l$personType = personType;
     _resultData['personType'] = l$personType?.toJson();
     final l$qualification = qualification;
@@ -2890,6 +2904,7 @@ class Subscription_watchPerson_personsByPk
     final l$mainPhone = mainPhone;
     final l$notes = notes;
     final l$otherPhones = otherPhones;
+    final l$martialStatus = martialStatus;
     final l$personType = personType;
     final l$qualification = qualification;
     final l$school = school;
@@ -2931,6 +2946,7 @@ class Subscription_watchPerson_personsByPk
       l$mainPhone,
       l$notes,
       l$otherPhones,
+      l$martialStatus,
       l$personType,
       l$qualification,
       l$school,
@@ -3113,6 +3129,11 @@ class Subscription_watchPerson_personsByPk
     if (l$otherPhones != lOther$otherPhones) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$personType = personType;
     final lOther$personType = other.personType;
     if (l$personType != lOther$personType) {
@@ -3242,6 +3263,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     String? mainPhone,
     String? notes,
     Json? otherPhones,
+    String? martialStatus,
     Subscription_watchPerson_personsByPk_personType? personType,
     Subscription_watchPerson_personsByPk_qualification? qualification,
     Subscription_watchPerson_personsByPk_school? school,
@@ -3349,6 +3371,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? mainPhone = _undefined,
     Object? notes = _undefined,
     Object? otherPhones = _undefined,
+    Object? martialStatus = _undefined,
     Object? personType = _undefined,
     Object? qualification = _undefined,
     Object? school = _undefined,
@@ -3442,6 +3465,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
         otherPhones: otherPhones == _undefined || otherPhones == null
             ? _instance.otherPhones
             : (otherPhones as Json),
+        martialStatus: martialStatus == _undefined || martialStatus == null
+            ? _instance.martialStatus
+            : (martialStatus as String),
         personType: personType == _undefined
             ? _instance.personType
             : (personType as Subscription_watchPerson_personsByPk_personType?),
@@ -3735,6 +3761,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     String? mainPhone,
     String? notes,
     Json? otherPhones,
+    String? martialStatus,
     Subscription_watchPerson_personsByPk_personType? personType,
     Subscription_watchPerson_personsByPk_qualification? qualification,
     Subscription_watchPerson_personsByPk_school? school,

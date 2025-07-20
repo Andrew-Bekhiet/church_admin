@@ -4736,6 +4736,7 @@ type Persons {
   lastKodas: HistoryLatestKodases
   lastVisit: HistoryLatestVisits
   mainPhone: String
+  martialStatus: String!
   name: String!
   nationalId: Int
   notes: String
@@ -4893,6 +4894,7 @@ input PersonsBoolExp {
   lastKodas: HistoryLatestKodasesBoolExp
   lastVisit: HistoryLatestVisitsBoolExp
   mainPhone: StringComparisonExp
+  martialStatus: StringComparisonExp
   name: StringComparisonExp
   nationalId: IntComparisonExp
   notes: StringComparisonExp
@@ -5145,6 +5147,7 @@ input PersonsInsertInput {
   jobId: uuid
   kodasHistory: HistoryKodasHistoryArrRelInsertInput
   mainPhone: String
+  martialStatus: String
   name: String
   nationalId: Int
   notes: String
@@ -5180,6 +5183,7 @@ type PersonsMaxFields {
   jobDescription: String
   jobId: uuid
   mainPhone: String
+  martialStatus: String
   name: String
   nationalId: Int
   notes: String
@@ -5208,6 +5212,7 @@ input PersonsMaxOrderBy {
   jobDescription: OrderBy
   jobId: OrderBy
   mainPhone: OrderBy
+  martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
   notes: OrderBy
@@ -5236,6 +5241,7 @@ type PersonsMinFields {
   jobDescription: String
   jobId: uuid
   mainPhone: String
+  martialStatus: String
   name: String
   nationalId: Int
   notes: String
@@ -5264,6 +5270,7 @@ input PersonsMinOrderBy {
   jobDescription: OrderBy
   jobId: OrderBy
   mainPhone: OrderBy
+  martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
   notes: OrderBy
@@ -5332,6 +5339,7 @@ input PersonsOrderBy {
   lastKodas: HistoryLatestKodasesOrderBy
   lastVisit: HistoryLatestVisitsOrderBy
   mainPhone: OrderBy
+  martialStatus: OrderBy
   name: OrderBy
   nationalId: OrderBy
   notes: OrderBy
@@ -5382,6 +5390,7 @@ enum PersonsSelectColumn {
   jobDescription
   jobId
   mainPhone
+  martialStatus
   name
   nationalId
   notes
@@ -5524,6 +5533,7 @@ input PersonsSetInput {
   jobDescription: String
   jobId: uuid
   mainPhone: String
+  martialStatus: String
   name: String
   nationalId: Int
   notes: String
@@ -5593,6 +5603,7 @@ input PersonsStreamCursorValueInput {
   jobDescription: String
   jobId: uuid
   mainPhone: String
+  martialStatus: String
   name: String
   nationalId: Int
   notes: String
@@ -5724,6 +5735,7 @@ enum PersonsUpdateColumn {
   jobDescription
   jobId
   mainPhone
+  martialStatus
   name
   nationalId
   notes

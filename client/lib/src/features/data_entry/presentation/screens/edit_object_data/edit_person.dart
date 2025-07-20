@@ -604,6 +604,24 @@ class _EditPersonState extends State<EditPerson> {
                 setState(() {});
               },
             ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ObjectSelectionField(
+              nullable: false,
+              initialValue: ViewableEnumWithID.wrap(
+                  newPerson.martialStatus ?? MartialStatus.single),
+              listController: (s) => ViewableObjectListController(
+                objectsPaginatableStream:
+                    ViewableEnumWithID.createPaginatableStream(
+                  MartialStatus.values,
+                  s,
+                ),
+              ),
+              onChanged: (value) => setState(
+                () => newPerson =
+                    newPerson.copyWith(martialStatus: value!.enumValue),
+              ),
+              dialogFieldLabel: 'الحالة الاجتماعية',
+              builder: (context, state) => Text(state.value?.name ?? ''),
+            ),
             ObjectSelectionField<PersonType, PersonType?>(
               initialValue: newPerson.personType,
               onCreateCustom: (name) async =>

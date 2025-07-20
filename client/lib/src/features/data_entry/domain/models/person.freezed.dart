@@ -40,6 +40,7 @@ mixin _$Person {
   String? get jobDescription;
   Qualification? get qualification;
   String? get qualificationId;
+  MartialStatus? get martialStatus;
   PersonType? get personType;
   String? get personTypeId;
   PersonState? get state;
@@ -134,6 +135,8 @@ mixin _$Person {
                 other.qualification == qualification) &&
             (identical(other.qualificationId, qualificationId) ||
                 other.qualificationId == qualificationId) &&
+            (identical(other.martialStatus, martialStatus) ||
+                other.martialStatus == martialStatus) &&
             (identical(other.personType, personType) ||
                 other.personType == personType) &&
             (identical(other.personTypeId, personTypeId) ||
@@ -192,11 +195,10 @@ mixin _$Person {
             (identical(other.attendanceHistoryAggregate, attendanceHistoryAggregate) ||
                 other.attendanceHistoryAggregate ==
                     attendanceHistoryAggregate) &&
-            (identical(other.confessionHistoryAggregate, confessionHistoryAggregate) ||
-                other.confessionHistoryAggregate ==
-                    confessionHistoryAggregate) &&
-            (identical(other.callHistoryAggregate, callHistoryAggregate) ||
-                other.callHistoryAggregate == callHistoryAggregate) &&
+            (identical(
+                    other.confessionHistoryAggregate, confessionHistoryAggregate) ||
+                other.confessionHistoryAggregate == confessionHistoryAggregate) &&
+            (identical(other.callHistoryAggregate, callHistoryAggregate) || other.callHistoryAggregate == callHistoryAggregate) &&
             (identical(other.visitHistoryAggregate, visitHistoryAggregate) || other.visitHistoryAggregate == visitHistoryAggregate) &&
             (identical(other.editHistoryAggregate, editHistoryAggregate) || other.editHistoryAggregate == editHistoryAggregate));
   }
@@ -231,6 +233,7 @@ mixin _$Person {
         jobDescription,
         qualification,
         qualificationId,
+        martialStatus,
         personType,
         personTypeId,
         state,
@@ -274,7 +277,7 @@ mixin _$Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
   }
 }
 
@@ -310,6 +313,7 @@ abstract mixin class $PersonCopyWith<$Res> {
       String? jobDescription,
       Qualification? qualification,
       String? qualificationId,
+      MartialStatus? martialStatus,
       PersonType? personType,
       String? personTypeId,
       PersonState? state,
@@ -389,6 +393,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? jobDescription = freezed,
     Object? qualification = freezed,
     Object? qualificationId = freezed,
+    Object? martialStatus = freezed,
     Object? personType = freezed,
     Object? personTypeId = freezed,
     Object? state = freezed,
@@ -534,6 +539,10 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _self.qualificationId
           : qualificationId // ignore: cast_nullable_to_non_nullable
               as String?,
+      martialStatus: freezed == martialStatus
+          ? _self.martialStatus
+          : martialStatus // ignore: cast_nullable_to_non_nullable
+              as MartialStatus?,
       personType: freezed == personType
           ? _self.personType
           : personType // ignore: cast_nullable_to_non_nullable

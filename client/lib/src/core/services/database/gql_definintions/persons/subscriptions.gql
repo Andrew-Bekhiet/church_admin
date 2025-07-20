@@ -101,6 +101,7 @@ subscription watchPerson(
     mainPhone
     notes
     otherPhones
+    martialStatus
     personType {
       id
       name

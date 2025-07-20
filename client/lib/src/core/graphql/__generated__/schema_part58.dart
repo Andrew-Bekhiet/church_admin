@@ -644,6 +644,7 @@ enum Enum_PersonsSelectColumn {
   jobDescription,
   jobId,
   mainPhone,
+  martialStatus,
   name,
   nationalId,
   notes,
@@ -702,6 +703,8 @@ String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
       return r'jobId';
     case Enum_PersonsSelectColumn.mainPhone:
       return r'mainPhone';
+    case Enum_PersonsSelectColumn.martialStatus:
+      return r'martialStatus';
     case Enum_PersonsSelectColumn.name:
       return r'name';
     case Enum_PersonsSelectColumn.nationalId:
@@ -771,6 +774,8 @@ Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
       return Enum_PersonsSelectColumn.jobId;
     case r'mainPhone':
       return Enum_PersonsSelectColumn.mainPhone;
+    case r'martialStatus':
+      return Enum_PersonsSelectColumn.martialStatus;
     case r'name':
       return Enum_PersonsSelectColumn.name;
     case r'nationalId':
@@ -1141,6 +1146,7 @@ enum Enum_PersonsUpdateColumn {
   jobDescription,
   jobId,
   mainPhone,
+  martialStatus,
   name,
   nationalId,
   notes,
@@ -1193,6 +1199,8 @@ String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
       return r'jobId';
     case Enum_PersonsUpdateColumn.mainPhone:
       return r'mainPhone';
+    case Enum_PersonsUpdateColumn.martialStatus:
+      return r'martialStatus';
     case Enum_PersonsUpdateColumn.name:
       return r'name';
     case Enum_PersonsUpdateColumn.nationalId:
@@ -1254,6 +1262,8 @@ Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
       return Enum_PersonsUpdateColumn.jobId;
     case r'mainPhone':
       return Enum_PersonsUpdateColumn.mainPhone;
+    case r'martialStatus':
+      return Enum_PersonsUpdateColumn.martialStatus;
     case r'name':
       return Enum_PersonsUpdateColumn.name;
     case r'nationalId':

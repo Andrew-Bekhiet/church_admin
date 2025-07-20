@@ -914,6 +914,7 @@ class Input_PersonsInsertInput {
     UuidValue? jobId,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -963,6 +964,7 @@ class Input_PersonsInsertInput {
         if (jobId != null) r'jobId': jobId,
         if (kodasHistory != null) r'kodasHistory': kodasHistory,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -1137,6 +1139,10 @@ class Input_PersonsInsertInput {
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
       result$data['mainPhone'] = (l$mainPhone as String?);
+    }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = (l$martialStatus as String?);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -1322,6 +1328,8 @@ class Input_PersonsInsertInput {
 
   String? get mainPhone => (_$data['mainPhone'] as String?);
 
+  String? get martialStatus => (_$data['martialStatus'] as String?);
+
   String? get name => (_$data['name'] as String?);
 
   int? get nationalId => (_$data['nationalId'] as int?);
@@ -1484,6 +1492,10 @@ class Input_PersonsInsertInput {
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] = l$mainPhone;
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] = l$martialStatus;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1821,6 +1833,15 @@ class Input_PersonsInsertInput {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2026,6 +2047,7 @@ class Input_PersonsInsertInput {
     final l$jobId = jobId;
     final l$kodasHistory = kodasHistory;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -2074,6 +2096,7 @@ class Input_PersonsInsertInput {
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('kodasHistory') ? l$kodasHistory : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
@@ -2135,6 +2158,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     UuidValue? jobId,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -2221,6 +2245,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? jobId = _undefined,
     Object? kodasHistory = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -2288,6 +2313,8 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
           'kodasHistory':
               (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as String?),
         if (name != _undefined) 'name': (name as String?),
         if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (notes != _undefined) 'notes': (notes as String?),
@@ -2524,6 +2551,7 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     UuidValue? jobId,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -2624,6 +2652,7 @@ class Input_PersonsMaxOrderBy {
     Enum_OrderBy? jobDescription,
     Enum_OrderBy? jobId,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -2651,6 +2680,7 @@ class Input_PersonsMaxOrderBy {
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -2738,6 +2768,12 @@ class Input_PersonsMaxOrderBy {
       result$data['mainPhone'] = l$mainPhone == null
           ? null
           : fromJson_Enum_OrderBy((l$mainPhone as String));
+    }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : fromJson_Enum_OrderBy((l$martialStatus as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -2844,6 +2880,8 @@ class Input_PersonsMaxOrderBy {
 
   Enum_OrderBy? get mainPhone => (_$data['mainPhone'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get martialStatus => (_$data['martialStatus'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Enum_OrderBy? get nationalId => (_$data['nationalId'] as Enum_OrderBy?);
@@ -2934,6 +2972,11 @@ class Input_PersonsMaxOrderBy {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] =
           l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] =
+          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -3123,6 +3166,15 @@ class Input_PersonsMaxOrderBy {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -3252,6 +3304,7 @@ class Input_PersonsMaxOrderBy {
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -3278,6 +3331,7 @@ class Input_PersonsMaxOrderBy {
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},

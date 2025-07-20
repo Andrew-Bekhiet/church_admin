@@ -720,6 +720,7 @@ class Input_PersonsSetInput {
     String? jobDescription,
     UuidValue? jobId,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -749,6 +750,7 @@ class Input_PersonsSetInput {
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -831,6 +833,10 @@ class Input_PersonsSetInput {
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
       result$data['mainPhone'] = (l$mainPhone as String?);
+    }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = (l$martialStatus as String?);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -922,6 +928,8 @@ class Input_PersonsSetInput {
 
   String? get mainPhone => (_$data['mainPhone'] as String?);
 
+  String? get martialStatus => (_$data['martialStatus'] as String?);
+
   String? get name => (_$data['name'] as String?);
 
   int? get nationalId => (_$data['nationalId'] as int?);
@@ -1012,6 +1020,10 @@ class Input_PersonsSetInput {
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] = l$mainPhone;
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] = l$martialStatus;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1216,6 +1228,15 @@ class Input_PersonsSetInput {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1340,6 +1361,7 @@ class Input_PersonsSetInput {
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -1368,6 +1390,7 @@ class Input_PersonsSetInput {
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},
@@ -1409,6 +1432,7 @@ abstract class CopyWith_Input_PersonsSetInput<TRes> {
     String? jobDescription,
     UuidValue? jobId,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -1453,6 +1477,7 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
     Object? jobDescription = _undefined,
     Object? jobId = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -1485,6 +1510,8 @@ class _CopyWithImpl_Input_PersonsSetInput<TRes>
           'jobDescription': (jobDescription as String?),
         if (jobId != _undefined) 'jobId': (jobId as UuidValue?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as String?),
         if (name != _undefined) 'name': (name as String?),
         if (nationalId != _undefined) 'nationalId': (nationalId as int?),
         if (notes != _undefined) 'notes': (notes as String?),
@@ -1525,6 +1552,7 @@ class _CopyWithStubImpl_Input_PersonsSetInput<TRes>
     String? jobDescription,
     UuidValue? jobId,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -2250,6 +2278,7 @@ class Input_PersonsStreamCursorValueInput {
     String? jobDescription,
     UuidValue? jobId,
     String? mainPhone,
+    String? martialStatus,
     String? name,
     int? nationalId,
     String? notes,
@@ -2283,6 +2312,7 @@ class Input_PersonsStreamCursorValueInput {
         if (jobDescription != null) r'jobDescription': jobDescription,
         if (jobId != null) r'jobId': jobId,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -2376,6 +2406,10 @@ class Input_PersonsStreamCursorValueInput {
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
       result$data['mainPhone'] = (l$mainPhone as String?);
+    }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = (l$martialStatus as String?);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -2480,6 +2514,8 @@ class Input_PersonsStreamCursorValueInput {
 
   String? get mainPhone => (_$data['mainPhone'] as String?);
 
+  String? get martialStatus => (_$data['martialStatus'] as String?);
+
   String? get name => (_$data['name'] as String?);
 
   int? get nationalId => (_$data['nationalId'] as int?);
@@ -2582,6 +2618,10 @@ class Input_PersonsStreamCursorValueInput {
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] = l$mainPhone;
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] = l$martialStatus;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2814,6 +2854,15 @@ class Input_PersonsStreamCursorValueInput {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2957,6 +3006,7 @@ class Input_PersonsStreamCursorValueInput {
     final l$jobDescription = jobDescription;
     final l$jobId = jobId;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -2989,6 +3039,7 @@ class Input_PersonsStreamCursorValueInput {
       _$data.containsKey('jobDescription') ? l$jobDescription : const {},
       _$data.containsKey('jobId') ? l$jobId : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},

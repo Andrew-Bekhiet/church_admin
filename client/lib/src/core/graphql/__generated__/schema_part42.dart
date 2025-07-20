@@ -49,6 +49,7 @@ abstract class CopyWith_Input_PersonsOrderBy<TRes> {
     Input_HistoryLatestKodasesOrderBy? lastKodas,
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,
@@ -162,6 +163,7 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
     Object? lastKodas = _undefined,
     Object? lastVisit = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -253,6 +255,8 @@ class _CopyWithImpl_Input_PersonsOrderBy<TRes>
         if (lastVisit != _undefined)
           'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
         if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as Enum_OrderBy?),
         if (name != _undefined) 'name': (name as Enum_OrderBy?),
         if (nationalId != _undefined)
           'nationalId': (nationalId as Enum_OrderBy?),
@@ -584,6 +588,7 @@ class _CopyWithStubImpl_Input_PersonsOrderBy<TRes>
     Input_HistoryLatestKodasesOrderBy? lastKodas,
     Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? mainPhone,
+    Enum_OrderBy? martialStatus,
     Enum_OrderBy? name,
     Enum_OrderBy? nationalId,
     Enum_OrderBy? notes,

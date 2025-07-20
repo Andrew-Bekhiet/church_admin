@@ -57,6 +57,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryLatestKodasesBoolExp? lastKodas,
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
+    Input_StringComparisonExp? martialStatus,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -139,6 +140,7 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryLatestKodasesBoolExp<TRes> get lastKodas;
   CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone;
+  CopyWith_Input_StringComparisonExp<TRes> get martialStatus;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_IntComparisonExp<TRes> get nationalId;
   CopyWith_Input_StringComparisonExp<TRes> get notes;
@@ -226,6 +228,7 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? lastKodas = _undefined,
     Object? lastVisit = _undefined,
     Object? mainPhone = _undefined,
+    Object? martialStatus = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -342,6 +345,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
           'lastVisit': (lastVisit as Input_HistoryLatestVisitsBoolExp?),
         if (mainPhone != _undefined)
           'mainPhone': (mainPhone as Input_StringComparisonExp?),
+        if (martialStatus != _undefined)
+          'martialStatus': (martialStatus as Input_StringComparisonExp?),
         if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
         if (nationalId != _undefined)
           'nationalId': (nationalId as Input_IntComparisonExp?),
@@ -761,6 +766,14 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
             local$mainPhone, (e) => call(mainPhone: e));
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get martialStatus {
+    final local$martialStatus = _instance.martialStatus;
+    return local$martialStatus == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$martialStatus, (e) => call(martialStatus: e));
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1011,6 +1024,7 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryLatestKodasesBoolExp? lastKodas,
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
+    Input_StringComparisonExp? martialStatus,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -1175,6 +1189,9 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
       CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get martialStatus =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>

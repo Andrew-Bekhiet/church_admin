@@ -726,6 +726,7 @@ class Input_PersonsBoolExp {
     Input_HistoryLatestKodasesBoolExp? lastKodas,
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
+    Input_StringComparisonExp? martialStatus,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -803,6 +804,7 @@ class Input_PersonsBoolExp {
         if (lastKodas != null) r'lastKodas': lastKodas,
         if (lastVisit != null) r'lastVisit': lastVisit,
         if (mainPhone != null) r'mainPhone': mainPhone,
+        if (martialStatus != null) r'martialStatus': martialStatus,
         if (name != null) r'name': name,
         if (nationalId != null) r'nationalId': nationalId,
         if (notes != null) r'notes': notes,
@@ -1144,6 +1146,13 @@ class Input_PersonsBoolExp {
           : Input_StringComparisonExp.fromJson(
               (l$mainPhone as Map<String, dynamic>));
     }
+    if (data.containsKey('martialStatus')) {
+      final l$martialStatus = data['martialStatus'];
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$martialStatus as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -1458,6 +1467,9 @@ class Input_PersonsBoolExp {
   Input_StringComparisonExp? get mainPhone =>
       (_$data['mainPhone'] as Input_StringComparisonExp?);
 
+  Input_StringComparisonExp? get martialStatus =>
+      (_$data['martialStatus'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -1717,6 +1729,10 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
       result$data['mainPhone'] = l$mainPhone?.toJson();
+    }
+    if (_$data.containsKey('martialStatus')) {
+      final l$martialStatus = martialStatus;
+      result$data['martialStatus'] = l$martialStatus?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2246,6 +2262,15 @@ class Input_PersonsBoolExp {
     if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
+    final l$martialStatus = martialStatus;
+    final lOther$martialStatus = other.martialStatus;
+    if (_$data.containsKey('martialStatus') !=
+        other._$data.containsKey('martialStatus')) {
+      return false;
+    }
+    if (l$martialStatus != lOther$martialStatus) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2512,6 +2537,7 @@ class Input_PersonsBoolExp {
     final l$lastKodas = lastKodas;
     final l$lastVisit = lastVisit;
     final l$mainPhone = mainPhone;
+    final l$martialStatus = martialStatus;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -2601,6 +2627,7 @@ class Input_PersonsBoolExp {
       _$data.containsKey('lastKodas') ? l$lastKodas : const {},
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('martialStatus') ? l$martialStatus : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},

@@ -208,6 +208,7 @@ insert_permissions:
         - job_description
         - job_id
         - main_phone
+        - martial_status
         - name
         - national_id
         - notes
@@ -241,6 +242,7 @@ select_permissions:
         - job_description
         - job_id
         - main_phone
+        - martial_status
         - name
         - national_id
         - notes
@@ -300,6 +302,7 @@ update_permissions:
         - job_description
         - job_id
         - main_phone
+        - martial_status
         - name
         - national_id
         - notes

@@ -194,6 +194,19 @@ class _PersonFields {
     },
   );
 
+  final FieldMetadata<MartialStatus> martialStatus =
+      FieldMetadata<MartialStatus>(
+    parentType: Person,
+    name: 'martialStatus',
+    label: 'الحالة الاجتماعية',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<PersonType> personType = FieldMetadata<PersonType>(
     parentType: Person,
     name: 'personType',
@@ -595,6 +608,7 @@ class _PersonFields {
     job,
     jobDescription,
     qualification,
+    martialStatus,
     personType,
     state,
     isServant,
@@ -648,6 +662,7 @@ class _PersonFields {
     'job': job,
     'jobDescription': jobDescription,
     'qualification': qualification,
+    'martialStatus': martialStatus,
     'personType': personType,
     'state': state,
     'isServant': isServant,
@@ -741,6 +756,9 @@ Person _$PersonFromJson(Map json) => Person(
           : Qualification.fromJson(
               Map<String, Object?>.from(json['qualification'] as Map)),
       qualificationId: json['qualificationId'] as String?,
+      martialStatus:
+          $enumDecodeNullable(_$MartialStatusEnumMap, json['martialStatus']) ??
+              MartialStatus.single,
       personType: json['personType'] == null
           ? null
           : PersonType.fromJson(
@@ -880,6 +898,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'jobDescription': instance.jobDescription,
       'qualification': instance.qualification?.toJson(),
       'qualificationId': instance.qualificationId,
+      'martialStatus': _$MartialStatusEnumMap[instance.martialStatus],
       'personType': instance.personType?.toJson(),
       'personTypeId': instance.personTypeId,
       'state': instance.state?.toJson(),
@@ -930,4 +949,12 @@ const _$WorkStatusEnumMap = {
   WorkStatus.employed: 'employed',
   WorkStatus.unemployed: 'unemployed',
   WorkStatus.retired: 'retired',
+};
+
+const _$MartialStatusEnumMap = {
+  MartialStatus.married: 'married',
+  MartialStatus.separated: 'separated',
+  MartialStatus.divorced: 'divorced',
+  MartialStatus.widowed: 'widowed',
+  MartialStatus.single: 'single',
 };

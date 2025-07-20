@@ -13,6 +13,7 @@ part 'person.g.dart';
   classLabel: 'الأشخاص',
   ignoreFields: ['blurhash', 'isStudent', 'otherPhones'],
   allowExtension: true,
+  labelsOverrides: {'martialStatus': 'الحالة الاجتماعية'},
 )
 class Person extends ViewableWithIDAndImage
     with _$Person
@@ -98,6 +99,9 @@ class Person extends ViewableWithIDAndImage
 
   @override
   final String? qualificationId;
+
+  @override
+  final MartialStatus? martialStatus;
 
   @override
   final PersonType? personType;
@@ -254,6 +258,7 @@ class Person extends ViewableWithIDAndImage
     this.jobDescription,
     this.qualification,
     this.qualificationId,
+    this.martialStatus = MartialStatus.single,
     this.personType,
     this.personTypeId,
     this.state,
@@ -352,6 +357,7 @@ class Person extends ViewableWithIDAndImage
         jobId: job?.id.toUuid(),
         jobDescription: jobDescription,
         qualificationId: qualification?.id.toUuid(),
+        martialStatus: martialStatus?.name,
         personTypeId: personType?.id.toUuid(),
         stateId: state?.id.toUuid(),
         isServant: isServant,
@@ -552,6 +558,10 @@ class Person extends ViewableWithIDAndImage
       result = result.copyWith(qualificationId: qualification?.id.toUuid());
     }
 
+    if (martialStatus != oldPerson.martialStatus) {
+      result = result.copyWith(martialStatus: martialStatus?.name);
+    }
+
     if (personType?.id != oldPerson.personType?.id) {
       result = result.copyWith(personTypeId: personType?.id.toUuid());
     }
@@ -656,6 +666,7 @@ class PersonFields extends _PersonFields {
         qualification,
         job,
         jobDescription,
+        martialStatus,
         personType,
         state,
         hobbies,
