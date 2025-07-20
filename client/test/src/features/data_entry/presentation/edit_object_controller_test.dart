@@ -422,6 +422,28 @@ void main() {
           );
 
           testWidgets(
+            'calls afterCreate',
+            (tester) async {
+              var afterCreateCalled = false;
+
+              final unit = createEditObjectController(
+                afterCreate: (person) => afterCreateCalled = true,
+              );
+
+              await tester.pumpWidgetBuilder(
+                Scaffold(
+                  body: Form(key: unit.formKey, child: const Placeholder()),
+                ),
+                wrapper: materialAppWrapper(),
+              );
+
+              await unit.save(tester.firstState(find.byType(Scaffold)).context);
+
+              expect(afterCreateCalled, isTrue);
+            },
+          );
+
+          testWidgets(
             'calls onCreate',
             (tester) async {
               var onCreateCalled = false;
