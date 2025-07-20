@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
 class GroupsDAO extends FullCRUDDAO<Group> {
   GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
@@ -66,7 +65,7 @@ class GroupsDAO extends FullCRUDDAO<Group> {
 
   Json _createGroupVarsConstructor({required Group newObject}) =>
       Variables_Mutation_insertGroup(
-        newGroup: Input_GroupsInsertInput.fromJson(newObject.toJson()),
+        newGroup: newObject.toInsertInput(),
       ).toJson();
 
   Json _updateGroupVarsConstructor({
@@ -75,9 +74,7 @@ class GroupsDAO extends FullCRUDDAO<Group> {
   }) =>
       Variables_Mutation_updateGroup(
         groupId: newObject.id.toUuid(),
-        newGroup: Input_GroupsSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-        ),
+        newGroup: newObject.toUpdateInput(oldObject: oldObject),
       ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>

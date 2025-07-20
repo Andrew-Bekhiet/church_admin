@@ -54,6 +54,12 @@ EditPersonExtra _$EditPersonExtraFromJson(Map json) => EditPersonExtra(
       family: json['family'] == null
           ? null
           : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+      street: json['street'] == null
+          ? null
+          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+      area: json['area'] == null
+          ? null
+          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
       service: json['service'] == null
           ? null
           : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
@@ -71,6 +77,8 @@ Map<String, dynamic> _$EditPersonExtraToJson(EditPersonExtra instance) =>
     <String, dynamic>{
       'person': instance.person?.toJson(),
       'family': instance.family?.toJson(),
+      'street': instance.street?.toJson(),
+      'area': instance.area?.toJson(),
       'service': instance.service?.toJson(),
       'group': instance.group?.toJson(),
       'studyYear': instance.studyYear?.toJson(),

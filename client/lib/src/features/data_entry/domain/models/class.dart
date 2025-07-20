@@ -78,6 +78,44 @@ class Class extends ViewableWithIDAndImage
 
   @override
   String get typeName => AdvancedQueriesMetadata().$class.name;
+
+  Input_ClassesInsertInput toInsertInput() {
+    return Input_ClassesInsertInput(
+      name: name,
+      color: colorToInt(color),
+      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
+      serviceStudyYear: serviceStudyYear,
+      serviceGender: serviceGender,
+    );
+  }
+
+  Input_ClassesSetInput toUpdateInput({
+    required Class oldObject,
+  }) {
+    Input_ClassesSetInput result = Input_ClassesSetInput();
+
+    if (name != oldObject.name) {
+      result = result.copyWith(name: name);
+    }
+
+    if (color != oldObject.color) {
+      result = result.copyWith(color: colorToInt(color));
+    }
+
+    if (service?.id != oldObject.service?.id) {
+      result = result.copyWith(serviceId: service?.id.toUuid());
+    }
+
+    if (serviceStudyYear != oldObject.serviceStudyYear) {
+      result = result.copyWith(serviceStudyYear: serviceStudyYear);
+    }
+
+    if (serviceGender != oldObject.serviceGender) {
+      result = result.copyWith(serviceGender: serviceGender);
+    }
+
+    return result;
+  }
 }
 
 class ClassFields extends _ClassFields {

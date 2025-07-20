@@ -17,7 +17,7 @@ RouteBase get $editStreetRoute => GoRouteData.$route(
 
 mixin _$EditStreetRoute on GoRouteData {
   static EditStreetRoute _fromState(GoRouterState state) => EditStreetRoute(
-        $extra: state.extra as Street?,
+        $extra: state.extra as EditStreetExtra?,
       );
 
   EditStreetRoute get _self => this as EditStreetRoute;
@@ -42,3 +42,22 @@ mixin _$EditStreetRoute on GoRouteData {
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+EditStreetExtra _$EditStreetExtraFromJson(Map json) => EditStreetExtra(
+      street: json['street'] == null
+          ? null
+          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+      area: json['area'] == null
+          ? null
+          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+    );
+
+Map<String, dynamic> _$EditStreetExtraToJson(EditStreetExtra instance) =>
+    <String, dynamic>{
+      'street': instance.street?.toJson(),
+      'area': instance.area?.toJson(),
+    };

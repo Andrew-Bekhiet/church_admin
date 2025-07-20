@@ -25,6 +25,8 @@ class _EditAreaState extends State<EditArea> {
     final Area? oldArea = widget.area;
 
     _controller = EditObjectController(
+      afterCreate: (object) =>
+          ViewAreaRoute(id: object.id, $extra: object).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.areas.createObject(newObject: object),
       onUpdate: (oldArea, newArea) => DatabaseService.I.areas.updateObject(

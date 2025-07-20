@@ -7,11 +7,12 @@ part 'edit_store_route.g.dart';
 
 @JsonSerializable()
 class EditStoreExtra extends SerializableExtra {
+  final Area? area;
   final Street? street;
   final Store? store;
   final Family? family;
 
-  const EditStoreExtra({this.street, this.store, this.family});
+  const EditStoreExtra({this.area, this.street, this.store, this.family});
 
   factory EditStoreExtra.fromJson(Json json) => _$EditStoreExtraFromJson(json);
 
@@ -30,6 +31,6 @@ class EditStoreRoute extends GoRouteData with _$EditStoreRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return EditStore(store: $extra?.store, family: $extra?.family);
+    return EditStore(store: $extra?.store, withFamily: $extra?.family);
   }
 }

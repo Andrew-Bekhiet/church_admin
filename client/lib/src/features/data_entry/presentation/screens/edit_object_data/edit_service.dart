@@ -27,6 +27,8 @@ class _EditServiceState extends State<EditService> {
     );
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewServiceRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.services.createObject(newObject: object),
       onUpdate: (oldService, newService) =>

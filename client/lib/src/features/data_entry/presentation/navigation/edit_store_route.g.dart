@@ -48,6 +48,9 @@ mixin _$EditStoreRoute on GoRouteData {
 // **************************************************************************
 
 EditStoreExtra _$EditStoreExtraFromJson(Map json) => EditStoreExtra(
+      area: json['area'] == null
+          ? null
+          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
       street: json['street'] == null
           ? null
           : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
@@ -61,6 +64,7 @@ EditStoreExtra _$EditStoreExtraFromJson(Map json) => EditStoreExtra(
 
 Map<String, dynamic> _$EditStoreExtraToJson(EditStoreExtra instance) =>
     <String, dynamic>{
+      'area': instance.area?.toJson(),
       'street': instance.street?.toJson(),
       'store': instance.store?.toJson(),
       'family': instance.family?.toJson(),

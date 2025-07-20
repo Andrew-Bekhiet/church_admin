@@ -4,11 +4,11 @@ import 'package:uuid/uuid.dart';
 
 class EditGroup extends StatefulWidget {
   final Group? group;
-  final Service? service;
+  final Service? withService;
 
   const EditGroup({
     required this.group,
-    required this.service,
+    this.withService,
     super.key,
   });
 
@@ -24,10 +24,12 @@ class _EditGroupState extends State<EditGroup> {
     super.initState();
 
     final Group? oldGroup = widget.group?.copyWith(
-      serviceId: widget.service?.id,
+      serviceId: widget.withService?.id,
     );
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewGroupRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.groups.createObject(newObject: object),
       onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(
@@ -40,8 +42,8 @@ class _EditGroupState extends State<EditGroup> {
           Group(
             id: const Uuid().v4(),
             name: '',
-            service: widget.service,
-            serviceId: widget.service?.id,
+            service: widget.withService,
+            serviceId: widget.withService?.id,
           ),
       initialObject: oldGroup,
     );

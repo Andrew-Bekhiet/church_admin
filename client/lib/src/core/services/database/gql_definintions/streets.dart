@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/streets/helpers.dart';
 
 export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';
@@ -51,16 +50,36 @@ class StreetsDAO extends FullCRUDDAO<Street> {
       Variables_Subscription_watchStreet(id: id).toJson();
 
   Json _createStreetVarsConstructor({required Street newObject}) =>
-      StreetInsertHelper(newStreet: newObject).variables.toJson();
+      Variables_Mutation_insertStreet(newStreet: newObject.toInsertInput())
+          .toJson();
 
   Json _updateStreetVarsConstructor({
     required Street newObject,
     required Street oldObject,
-  }) =>
-      StreetUpdateHelper(
-        oldStreet: oldObject,
-        newStreet: newObject,
-      ).variables.toJson();
+  }) {
+    final areasDiff = diff<Area>(
+      oldObject.areas?.toSet() ?? {},
+      newObject.areas?.toSet() ?? {},
+    );
+
+    return Variables_Mutation_updateStreet(
+      streetId: newObject.id.toUuid(),
+      newStreet: newObject.toUpdateInput(oldStreet: oldObject),
+      updateLastVisit: newObject.lastVisit != oldObject.lastVisit,
+      lastVisit: newObject.lastVisit?.time,
+      insertAreasStreets: areasDiff.added.isNotEmpty,
+      deleteAreasStreets: areasDiff.removed.isNotEmpty,
+      addAreas: areasDiff.added
+          .map(
+            (e) => Input_AreasStreetsInsertInput(
+              areaId: e.id.toUuid(),
+              streetId: newObject.id.toUuid(),
+            ),
+          )
+          .toList(),
+      removeAreas: areasDiff.removed.map((e) => e.id.toUuid()).toList(),
+    ).toJson();
+  }
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteStreet(streetId: id).toJson();

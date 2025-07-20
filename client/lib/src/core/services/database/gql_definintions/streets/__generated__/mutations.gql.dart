@@ -593,13 +593,21 @@ class Variables_Mutation_updateStreet {
     required UuidValue streetId,
     required Input_StreetsSetInput newStreet,
     DateTime? lastVisit,
+    required List<Input_AreasStreetsInsertInput> addAreas,
+    required List<UuidValue> removeAreas,
     required bool updateLastVisit,
+    required bool insertAreasStreets,
+    required bool deleteAreasStreets,
   }) =>
       Variables_Mutation_updateStreet._({
         r'streetId': streetId,
         r'newStreet': newStreet,
         if (lastVisit != null) r'lastVisit': lastVisit,
+        r'addAreas': addAreas,
+        r'removeAreas': removeAreas,
         r'updateLastVisit': updateLastVisit,
+        r'insertAreasStreets': insertAreasStreets,
+        r'deleteAreasStreets': deleteAreasStreets,
       });
 
   Variables_Mutation_updateStreet._(this._$data);
@@ -616,8 +624,20 @@ class Variables_Mutation_updateStreet {
       result$data['lastVisit'] =
           l$lastVisit == null ? null : tstzFromString(l$lastVisit);
     }
+    final l$addAreas = data['addAreas'];
+    result$data['addAreas'] = (l$addAreas as List<dynamic>)
+        .map((e) =>
+            Input_AreasStreetsInsertInput.fromJson((e as Map<String, dynamic>)))
+        .toList();
+    final l$removeAreas = data['removeAreas'];
+    result$data['removeAreas'] =
+        (l$removeAreas as List<dynamic>).map((e) => stringToUuid(e)).toList();
     final l$updateLastVisit = data['updateLastVisit'];
     result$data['updateLastVisit'] = (l$updateLastVisit as bool);
+    final l$insertAreasStreets = data['insertAreasStreets'];
+    result$data['insertAreasStreets'] = (l$insertAreasStreets as bool);
+    final l$deleteAreasStreets = data['deleteAreasStreets'];
+    result$data['deleteAreasStreets'] = (l$deleteAreasStreets as bool);
     return Variables_Mutation_updateStreet._(result$data);
   }
 
@@ -630,7 +650,16 @@ class Variables_Mutation_updateStreet {
 
   DateTime? get lastVisit => (_$data['lastVisit'] as DateTime?);
 
+  List<Input_AreasStreetsInsertInput> get addAreas =>
+      (_$data['addAreas'] as List<Input_AreasStreetsInsertInput>);
+
+  List<UuidValue> get removeAreas => (_$data['removeAreas'] as List<UuidValue>);
+
   bool get updateLastVisit => (_$data['updateLastVisit'] as bool);
+
+  bool get insertAreasStreets => (_$data['insertAreasStreets'] as bool);
+
+  bool get deleteAreasStreets => (_$data['deleteAreasStreets'] as bool);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -643,8 +672,17 @@ class Variables_Mutation_updateStreet {
       result$data['lastVisit'] =
           l$lastVisit == null ? null : tstzToString(l$lastVisit);
     }
+    final l$addAreas = addAreas;
+    result$data['addAreas'] = l$addAreas.map((e) => e.toJson()).toList();
+    final l$removeAreas = removeAreas;
+    result$data['removeAreas'] =
+        l$removeAreas.map((e) => uuidToString(e)).toList();
     final l$updateLastVisit = updateLastVisit;
     result$data['updateLastVisit'] = l$updateLastVisit;
+    final l$insertAreasStreets = insertAreasStreets;
+    result$data['insertAreasStreets'] = l$insertAreasStreets;
+    final l$deleteAreasStreets = deleteAreasStreets;
+    result$data['deleteAreasStreets'] = l$deleteAreasStreets;
     return result$data;
   }
 
@@ -682,9 +720,43 @@ class Variables_Mutation_updateStreet {
     if (l$lastVisit != lOther$lastVisit) {
       return false;
     }
+    final l$addAreas = addAreas;
+    final lOther$addAreas = other.addAreas;
+    if (l$addAreas.length != lOther$addAreas.length) {
+      return false;
+    }
+    for (int i = 0; i < l$addAreas.length; i++) {
+      final l$addAreas$entry = l$addAreas[i];
+      final lOther$addAreas$entry = lOther$addAreas[i];
+      if (l$addAreas$entry != lOther$addAreas$entry) {
+        return false;
+      }
+    }
+    final l$removeAreas = removeAreas;
+    final lOther$removeAreas = other.removeAreas;
+    if (l$removeAreas.length != lOther$removeAreas.length) {
+      return false;
+    }
+    for (int i = 0; i < l$removeAreas.length; i++) {
+      final l$removeAreas$entry = l$removeAreas[i];
+      final lOther$removeAreas$entry = lOther$removeAreas[i];
+      if (l$removeAreas$entry != lOther$removeAreas$entry) {
+        return false;
+      }
+    }
     final l$updateLastVisit = updateLastVisit;
     final lOther$updateLastVisit = other.updateLastVisit;
     if (l$updateLastVisit != lOther$updateLastVisit) {
+      return false;
+    }
+    final l$insertAreasStreets = insertAreasStreets;
+    final lOther$insertAreasStreets = other.insertAreasStreets;
+    if (l$insertAreasStreets != lOther$insertAreasStreets) {
+      return false;
+    }
+    final l$deleteAreasStreets = deleteAreasStreets;
+    final lOther$deleteAreasStreets = other.deleteAreasStreets;
+    if (l$deleteAreasStreets != lOther$deleteAreasStreets) {
       return false;
     }
     return true;
@@ -695,12 +767,20 @@ class Variables_Mutation_updateStreet {
     final l$streetId = streetId;
     final l$newStreet = newStreet;
     final l$lastVisit = lastVisit;
+    final l$addAreas = addAreas;
+    final l$removeAreas = removeAreas;
     final l$updateLastVisit = updateLastVisit;
+    final l$insertAreasStreets = insertAreasStreets;
+    final l$deleteAreasStreets = deleteAreasStreets;
     return Object.hashAll([
       l$streetId,
       l$newStreet,
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
+      Object.hashAll(l$addAreas.map((v) => v)),
+      Object.hashAll(l$removeAreas.map((v) => v)),
       l$updateLastVisit,
+      l$insertAreasStreets,
+      l$deleteAreasStreets,
     ]);
   }
 }
@@ -718,7 +798,11 @@ abstract class CopyWith_Variables_Mutation_updateStreet<TRes> {
     UuidValue? streetId,
     Input_StreetsSetInput? newStreet,
     DateTime? lastVisit,
+    List<Input_AreasStreetsInsertInput>? addAreas,
+    List<UuidValue>? removeAreas,
     bool? updateLastVisit,
+    bool? insertAreasStreets,
+    bool? deleteAreasStreets,
   });
 }
 
@@ -739,7 +823,11 @@ class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
     Object? streetId = _undefined,
     Object? newStreet = _undefined,
     Object? lastVisit = _undefined,
+    Object? addAreas = _undefined,
+    Object? removeAreas = _undefined,
     Object? updateLastVisit = _undefined,
+    Object? insertAreasStreets = _undefined,
+    Object? deleteAreasStreets = _undefined,
   }) =>
       _then(Variables_Mutation_updateStreet._({
         ..._instance._$data,
@@ -748,8 +836,16 @@ class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
         if (newStreet != _undefined && newStreet != null)
           'newStreet': (newStreet as Input_StreetsSetInput),
         if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+        if (addAreas != _undefined && addAreas != null)
+          'addAreas': (addAreas as List<Input_AreasStreetsInsertInput>),
+        if (removeAreas != _undefined && removeAreas != null)
+          'removeAreas': (removeAreas as List<UuidValue>),
         if (updateLastVisit != _undefined && updateLastVisit != null)
           'updateLastVisit': (updateLastVisit as bool),
+        if (insertAreasStreets != _undefined && insertAreasStreets != null)
+          'insertAreasStreets': (insertAreasStreets as bool),
+        if (deleteAreasStreets != _undefined && deleteAreasStreets != null)
+          'deleteAreasStreets': (deleteAreasStreets as bool),
       }));
 }
 
@@ -763,7 +859,11 @@ class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
     UuidValue? streetId,
     Input_StreetsSetInput? newStreet,
     DateTime? lastVisit,
+    List<Input_AreasStreetsInsertInput>? addAreas,
+    List<UuidValue>? removeAreas,
     bool? updateLastVisit,
+    bool? insertAreasStreets,
+    bool? deleteAreasStreets,
   }) =>
       _res;
 }
@@ -772,12 +872,16 @@ class Mutation_updateStreet {
   Mutation_updateStreet({
     this.updateStreetsByPk,
     this.insertHistoryVisitHistoryOne,
+    this.insertAreasStreets,
+    this.deleteAreasStreets,
     this.$__typename = 'mutation_root',
   });
 
   factory Mutation_updateStreet.fromJson(Map<String, dynamic> json) {
     final l$updateStreetsByPk = json['updateStreetsByPk'];
     final l$insertHistoryVisitHistoryOne = json['insertHistoryVisitHistoryOne'];
+    final l$insertAreasStreets = json['insertAreasStreets'];
+    final l$deleteAreasStreets = json['deleteAreasStreets'];
     final l$$__typename = json['__typename'];
     return Mutation_updateStreet(
       updateStreetsByPk: l$updateStreetsByPk == null
@@ -788,6 +892,14 @@ class Mutation_updateStreet {
           ? null
           : Fragment_VisitHistory.fromJson(
               (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+      insertAreasStreets: l$insertAreasStreets == null
+          ? null
+          : Mutation_updateStreet_insertAreasStreets.fromJson(
+              (l$insertAreasStreets as Map<String, dynamic>)),
+      deleteAreasStreets: l$deleteAreasStreets == null
+          ? null
+          : Mutation_updateStreet_deleteAreasStreets.fromJson(
+              (l$deleteAreasStreets as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -795,6 +907,10 @@ class Mutation_updateStreet {
   final Fragment_Street? updateStreetsByPk;
 
   final Fragment_VisitHistory? insertHistoryVisitHistoryOne;
+
+  final Mutation_updateStreet_insertAreasStreets? insertAreasStreets;
+
+  final Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets;
 
   final String $__typename;
 
@@ -805,6 +921,10 @@ class Mutation_updateStreet {
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
     _resultData['insertHistoryVisitHistoryOne'] =
         l$insertHistoryVisitHistoryOne?.toJson();
+    final l$insertAreasStreets = insertAreasStreets;
+    _resultData['insertAreasStreets'] = l$insertAreasStreets?.toJson();
+    final l$deleteAreasStreets = deleteAreasStreets;
+    _resultData['deleteAreasStreets'] = l$deleteAreasStreets?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -814,10 +934,14 @@ class Mutation_updateStreet {
   int get hashCode {
     final l$updateStreetsByPk = updateStreetsByPk;
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
+    final l$insertAreasStreets = insertAreasStreets;
+    final l$deleteAreasStreets = deleteAreasStreets;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$updateStreetsByPk,
       l$insertHistoryVisitHistoryOne,
+      l$insertAreasStreets,
+      l$deleteAreasStreets,
       l$$__typename,
     ]);
   }
@@ -839,6 +963,16 @@ class Mutation_updateStreet {
     final lOther$insertHistoryVisitHistoryOne =
         other.insertHistoryVisitHistoryOne;
     if (l$insertHistoryVisitHistoryOne != lOther$insertHistoryVisitHistoryOne) {
+      return false;
+    }
+    final l$insertAreasStreets = insertAreasStreets;
+    final lOther$insertAreasStreets = other.insertAreasStreets;
+    if (l$insertAreasStreets != lOther$insertAreasStreets) {
+      return false;
+    }
+    final l$deleteAreasStreets = deleteAreasStreets;
+    final lOther$deleteAreasStreets = other.deleteAreasStreets;
+    if (l$deleteAreasStreets != lOther$deleteAreasStreets) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -870,10 +1004,16 @@ abstract class CopyWith_Mutation_updateStreet<TRes> {
   TRes call({
     Fragment_Street? updateStreetsByPk,
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
+    Mutation_updateStreet_insertAreasStreets? insertAreasStreets,
+    Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets,
     String? $__typename,
   });
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk;
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
+  CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
+      get insertAreasStreets;
+  CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
+      get deleteAreasStreets;
 }
 
 class _CopyWithImpl_Mutation_updateStreet<TRes>
@@ -892,6 +1032,8 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
   TRes call({
     Object? updateStreetsByPk = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
+    Object? insertAreasStreets = _undefined,
+    Object? deleteAreasStreets = _undefined,
     Object? $__typename = _undefined,
   }) =>
       _then(Mutation_updateStreet(
@@ -901,6 +1043,12 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
         insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
             ? _instance.insertHistoryVisitHistoryOne
             : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
+        insertAreasStreets: insertAreasStreets == _undefined
+            ? _instance.insertAreasStreets
+            : (insertAreasStreets as Mutation_updateStreet_insertAreasStreets?),
+        deleteAreasStreets: deleteAreasStreets == _undefined
+            ? _instance.deleteAreasStreets
+            : (deleteAreasStreets as Mutation_updateStreet_deleteAreasStreets?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
@@ -922,6 +1070,26 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
         : CopyWith_Fragment_VisitHistory(local$insertHistoryVisitHistoryOne,
             (e) => call(insertHistoryVisitHistoryOne: e));
   }
+
+  CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
+      get insertAreasStreets {
+    final local$insertAreasStreets = _instance.insertAreasStreets;
+    return local$insertAreasStreets == null
+        ? CopyWith_Mutation_updateStreet_insertAreasStreets.stub(
+            _then(_instance))
+        : CopyWith_Mutation_updateStreet_insertAreasStreets(
+            local$insertAreasStreets, (e) => call(insertAreasStreets: e));
+  }
+
+  CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
+      get deleteAreasStreets {
+    final local$deleteAreasStreets = _instance.deleteAreasStreets;
+    return local$deleteAreasStreets == null
+        ? CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(
+            _then(_instance))
+        : CopyWith_Mutation_updateStreet_deleteAreasStreets(
+            local$deleteAreasStreets, (e) => call(deleteAreasStreets: e));
+  }
 }
 
 class _CopyWithStubImpl_Mutation_updateStreet<TRes>
@@ -933,6 +1101,8 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
   call({
     Fragment_Street? updateStreetsByPk,
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
+    Mutation_updateStreet_insertAreasStreets? insertAreasStreets,
+    Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets,
     String? $__typename,
   }) =>
       _res;
@@ -942,6 +1112,14 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
 
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne =>
       CopyWith_Fragment_VisitHistory.stub(_res);
+
+  CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
+      get insertAreasStreets =>
+          CopyWith_Mutation_updateStreet_insertAreasStreets.stub(_res);
+
+  CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
+      get deleteAreasStreets =>
+          CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(_res);
 }
 
 const documentNodeMutationupdateStreet = DocumentNode(definitions: [
@@ -977,7 +1155,49 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'addAreas')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'AreasStreetsInsertInput'),
+            isNonNull: true,
+          ),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'removeAreas')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'uuid'),
+            isNonNull: true,
+          ),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'insertAreasStreets')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Boolean'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'deleteAreasStreets')),
         type: NamedTypeNode(
           name: NameNode(value: 'Boolean'),
           isNonNull: true,
@@ -1072,6 +1292,101 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
         ]),
       ),
       FieldNode(
+        name: NameNode(value: 'insertAreasStreets'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'objects'),
+            value: VariableNode(name: NameNode(value: 'addAreas')),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value:
+                    VariableNode(name: NameNode(value: 'insertAreasStreets')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'affectedRows'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'deleteAreasStreets'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'streetId'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_eq'),
+                    value: VariableNode(name: NameNode(value: 'streetId')),
+                  )
+                ]),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'areaId'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: '_in'),
+                    value: VariableNode(name: NameNode(value: 'removeAreas')),
+                  )
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [
+          DirectiveNode(
+            name: NameNode(value: 'include'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'if'),
+                value:
+                    VariableNode(name: NameNode(value: 'deleteAreasStreets')),
+              )
+            ],
+          )
+        ],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'affectedRows'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -1086,3 +1401,257 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
   fragmentDefinitionUser,
   fragmentDefinitionUserNoPhoto,
 ]);
+
+class Mutation_updateStreet_insertAreasStreets {
+  Mutation_updateStreet_insertAreasStreets({
+    required this.affectedRows,
+    this.$__typename = 'AreasStreetsMutationResponse',
+  });
+
+  factory Mutation_updateStreet_insertAreasStreets.fromJson(
+      Map<String, dynamic> json) {
+    final l$affectedRows = json['affectedRows'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateStreet_insertAreasStreets(
+      affectedRows: (l$affectedRows as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int affectedRows;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$affectedRows = affectedRows;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$affectedRows,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateStreet_insertAreasStreets ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateStreet_insertAreasStreets
+    on Mutation_updateStreet_insertAreasStreets {
+  CopyWith_Mutation_updateStreet_insertAreasStreets<
+          Mutation_updateStreet_insertAreasStreets>
+      get copyWith => CopyWith_Mutation_updateStreet_insertAreasStreets(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updateStreet_insertAreasStreets<TRes> {
+  factory CopyWith_Mutation_updateStreet_insertAreasStreets(
+    Mutation_updateStreet_insertAreasStreets instance,
+    TRes Function(Mutation_updateStreet_insertAreasStreets) then,
+  ) = _CopyWithImpl_Mutation_updateStreet_insertAreasStreets;
+
+  factory CopyWith_Mutation_updateStreet_insertAreasStreets.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets;
+
+  TRes call({
+    int? affectedRows,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updateStreet_insertAreasStreets<TRes>
+    implements CopyWith_Mutation_updateStreet_insertAreasStreets<TRes> {
+  _CopyWithImpl_Mutation_updateStreet_insertAreasStreets(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateStreet_insertAreasStreets _instance;
+
+  final TRes Function(Mutation_updateStreet_insertAreasStreets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? affectedRows = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updateStreet_insertAreasStreets(
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets<TRes>
+    implements CopyWith_Mutation_updateStreet_insertAreasStreets<TRes> {
+  _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets(this._res);
+
+  TRes _res;
+
+  call({
+    int? affectedRows,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Mutation_updateStreet_deleteAreasStreets {
+  Mutation_updateStreet_deleteAreasStreets({
+    required this.affectedRows,
+    this.$__typename = 'AreasStreetsMutationResponse',
+  });
+
+  factory Mutation_updateStreet_deleteAreasStreets.fromJson(
+      Map<String, dynamic> json) {
+    final l$affectedRows = json['affectedRows'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateStreet_deleteAreasStreets(
+      affectedRows: (l$affectedRows as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final int affectedRows;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$affectedRows = affectedRows;
+    _resultData['affectedRows'] = l$affectedRows;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$affectedRows = affectedRows;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$affectedRows,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateStreet_deleteAreasStreets ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$affectedRows = affectedRows;
+    final lOther$affectedRows = other.affectedRows;
+    if (l$affectedRows != lOther$affectedRows) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateStreet_deleteAreasStreets
+    on Mutation_updateStreet_deleteAreasStreets {
+  CopyWith_Mutation_updateStreet_deleteAreasStreets<
+          Mutation_updateStreet_deleteAreasStreets>
+      get copyWith => CopyWith_Mutation_updateStreet_deleteAreasStreets(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes> {
+  factory CopyWith_Mutation_updateStreet_deleteAreasStreets(
+    Mutation_updateStreet_deleteAreasStreets instance,
+    TRes Function(Mutation_updateStreet_deleteAreasStreets) then,
+  ) = _CopyWithImpl_Mutation_updateStreet_deleteAreasStreets;
+
+  factory CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets;
+
+  TRes call({
+    int? affectedRows,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
+    implements CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes> {
+  _CopyWithImpl_Mutation_updateStreet_deleteAreasStreets(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateStreet_deleteAreasStreets _instance;
+
+  final TRes Function(Mutation_updateStreet_deleteAreasStreets) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? affectedRows = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation_updateStreet_deleteAreasStreets(
+        affectedRows: affectedRows == _undefined || affectedRows == null
+            ? _instance.affectedRows
+            : (affectedRows as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
+    implements CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes> {
+  _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets(this._res);
+
+  TRes _res;
+
+  call({
+    int? affectedRows,
+    String? $__typename,
+  }) =>
+      _res;
+}

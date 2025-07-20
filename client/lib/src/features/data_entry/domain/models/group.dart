@@ -72,6 +72,39 @@ class Group extends ViewableWithIDAndImage
 
   @override
   String get typeName => AdvancedQueriesMetadata().group.name;
+
+  Input_GroupsInsertInput toInsertInput() {
+    return Input_GroupsInsertInput(
+      name: name,
+      color: colorToInt(color),
+      serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
+      validity: validity,
+    );
+  }
+
+  Input_GroupsSetInput toUpdateInput({
+    required Group oldObject,
+  }) {
+    Input_GroupsSetInput result = Input_GroupsSetInput();
+
+    if (name != oldObject.name) {
+      result = result.copyWith(name: name);
+    }
+
+    if (color != oldObject.color) {
+      result = result.copyWith(color: colorToInt(color));
+    }
+
+    if (service?.id != oldObject.service?.id) {
+      result = result.copyWith(serviceId: service?.id.toUuid());
+    }
+
+    if (validity != oldObject.validity) {
+      result = result.copyWith(validity: validity);
+    }
+
+    return result;
+  }
 }
 
 class GroupFields extends _GroupFields {

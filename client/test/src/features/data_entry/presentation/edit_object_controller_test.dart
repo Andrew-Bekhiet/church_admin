@@ -595,12 +595,14 @@ void main() {
 EditObjectController<Person> createEditObjectController({
   Person? initialObject,
   Future<void> Function(Person)? onDelete,
+  void Function(Person)? afterCreate,
   Future<Person> Function(Person)? onCreate,
   Future<Person?> Function(Person, Person)? onUpdate,
 }) {
   return EditObjectController<Person>(
     initialObject: initialObject,
     newObject: Person(id: 'id', name: 'name'),
+    afterCreate: afterCreate ?? (object) {},
     onCreate: onCreate ?? (object) async => object,
     toJson: (object) => object.toJson(),
     onDelete: onDelete,

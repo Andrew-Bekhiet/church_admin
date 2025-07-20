@@ -4,9 +4,9 @@ import 'package:uuid/uuid.dart';
 
 class EditStore extends StatefulWidget {
   final Store? store;
-  final Family? family;
+  final Family? withFamily;
 
-  const EditStore({required this.store, this.family, super.key});
+  const EditStore({required this.store, this.withFamily, super.key});
 
   @override
   State<EditStore> createState() => _EditStoreState();
@@ -21,6 +21,8 @@ class _EditStoreState extends State<EditStore> {
     final Store? oldStore = widget.store;
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewStoreRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.stores.createObject(newObject: object),
       onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateObject(
@@ -33,8 +35,8 @@ class _EditStoreState extends State<EditStore> {
           Store(
             id: const Uuid().v4(),
             name: '',
-            family: widget.family,
-            familyId: widget.family?.id,
+            family: widget.withFamily,
+            familyId: widget.withFamily?.id,
           ),
       initialObject: oldStore,
     );

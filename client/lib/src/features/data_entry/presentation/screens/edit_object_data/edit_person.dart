@@ -12,19 +12,21 @@ import 'package:uuid/uuid.dart';
 
 class EditPerson extends StatefulWidget {
   final Person? person;
-  final Family? family;
-  final Service? service;
-  final Group? group;
-  final StudyYear? studyYear;
-  final bool? gender;
+  final Family? withFamily;
+  final Address? withAddress;
+  final Service? withService;
+  final Group? withGroup;
+  final StudyYear? withStudyYear;
+  final bool? withGender;
 
   const EditPerson({
     required this.person,
-    this.family,
-    this.service,
-    this.group,
-    this.studyYear,
-    this.gender,
+    this.withFamily,
+    this.withAddress,
+    this.withService,
+    this.withGroup,
+    this.withStudyYear,
+    this.withGender,
     super.key,
   });
 
@@ -55,6 +57,8 @@ class _EditPersonState extends State<EditPerson> {
     );
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewPersonRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.persons.createObject(newObject: object),
       onUpdate: (oldPerson, newPerson) =>
@@ -68,16 +72,17 @@ class _EditPersonState extends State<EditPerson> {
           Person(
             id: const Uuid().v4(),
             name: '',
-            family: widget.family,
-            familyId: widget.family?.id,
-            services: widget.service != null ? [widget.service!] : [],
-            groups: widget.group != null ? [widget.group!] : [],
-            studyYear: widget.studyYear,
-            studyYearId: widget.studyYear?.order,
-            workStatus: widget.studyYear != null
+            family: widget.withFamily,
+            familyId: widget.withFamily?.id,
+            services: widget.withService != null ? [widget.withService!] : [],
+            groups: widget.withGroup != null ? [widget.withGroup!] : [],
+            studyYear: widget.withStudyYear,
+            studyYearId: widget.withStudyYear?.order,
+            workStatus: widget.withStudyYear != null
                 ? WorkStatus.student
                 : WorkStatus.employed,
-            gender: widget.gender ?? true,
+            gender: widget.withGender ?? true,
+            address: widget.withAddress,
           ),
       initialObject: oldPerson,
     );
@@ -278,7 +283,7 @@ class _EditPersonState extends State<EditPerson> {
               onChanged: (value) {
                 if (value?.id ==
                     (_controller.initialObject?.family?.id ??
-                        widget.family?.id)) {
+                        widget.withFamily?.id)) {
                   setState(
                     () => newPerson = newPerson.copyWith(
                       family: _controller.initialObject?.family,

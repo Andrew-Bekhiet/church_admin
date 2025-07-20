@@ -31,7 +31,7 @@ class EditClassRoute extends GoRouteData with _$EditClassRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return EditClass(
       class$: $extra?.$class,
-      service: $extra?.service,
+      withService: $extra?.service,
     );
   }
 }

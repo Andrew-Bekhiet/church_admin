@@ -11,7 +11,7 @@ part 'person.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'الأشخاص',
-  ignoreFields: ['blurhash', 'otherPhones'],
+  ignoreFields: ['blurhash', 'isStudent', 'otherPhones'],
   allowExtension: true,
 )
 class Person extends ViewableWithIDAndImage

@@ -9,12 +9,14 @@ part 'edit_family_route.g.dart';
 class EditFamilyExtra extends SerializableExtra {
   final Family? family;
   final Street? street;
+  final Area? area;
   final Set<Family>? children;
   final Set<Family>? parents;
 
   const EditFamilyExtra({
     this.family,
     this.street,
+    this.area,
     this.children,
     this.parents,
   });
@@ -39,8 +41,9 @@ class EditFamilyRoute extends GoRouteData with _$EditFamilyRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return EditFamily(
       family: $extra?.family,
-      children: $extra?.children,
-      parents: $extra?.parents,
+      withChildren: $extra?.children,
+      withParents: $extra?.parents,
+      withAddress: Address(street: $extra?.street, area: $extra?.area),
     );
   }
 }

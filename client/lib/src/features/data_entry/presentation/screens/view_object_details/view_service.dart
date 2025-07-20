@@ -182,7 +182,7 @@ class _ViewServiceState extends State<ViewService> {
           );
         },
       ),
-      floatingActionButtonBuilder: (context, tabController, area) =>
+      floatingActionButtonBuilder: (context, tabController, service) =>
           SwitchingFloatingActionButton.fromTabController(
         tabController: tabController,
         icons: const [
@@ -192,23 +192,14 @@ class _ViewServiceState extends State<ViewService> {
         ],
         onTap: (newIndex) {
           if (newIndex == 0) {
-            EditClassRoute(
-              $extra: EditClassExtra(
-                service: widget.service,
-              ),
-            ).push(context);
+            EditClassRoute($extra: EditClassExtra(service: service))
+                .push(context);
           } else if (newIndex == 1) {
-            EditGroupRoute(
-              $extra: EditGroupExtra(
-                service: widget.service,
-              ),
-            ).push(context);
+            EditGroupRoute($extra: EditGroupExtra(service: service))
+                .push(context);
           } else if (newIndex == 2) {
-            EditPersonRoute(
-              $extra: EditPersonExtra(
-                service: widget.service,
-              ),
-            ).push(context);
+            EditPersonRoute($extra: EditPersonExtra(service: service))
+                .push(context);
           }
         },
       ),

@@ -6,13 +6,15 @@ import 'package:uuid/uuid.dart';
 
 class EditFamily extends StatefulWidget {
   final Family? family;
-  final Set<Family>? children;
-  final Set<Family>? parents;
+  final Set<Family>? withChildren;
+  final Set<Family>? withParents;
+  final Address? withAddress;
 
   const EditFamily({
     required this.family,
-    this.children,
-    this.parents,
+    this.withChildren,
+    this.withParents,
+    this.withAddress,
     super.key,
   });
 
@@ -36,6 +38,8 @@ class _EditFamilyState extends State<EditFamily> {
     final oldFamily = widget.family;
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewFamilyRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.families.createObject(newObject: object),
       onUpdate: (oldFamily, newFamily) =>
@@ -50,8 +54,9 @@ class _EditFamilyState extends State<EditFamily> {
           Family(
             id: const Uuid().v4(),
             name: '',
-            children: widget.children?.toList() ?? [],
-            parents: widget.parents?.toList() ?? [],
+            children: widget.withChildren?.toList() ?? [],
+            parents: widget.withParents?.toList() ?? [],
+            address: widget.withAddress,
           ),
       initialObject: oldFamily,
     );

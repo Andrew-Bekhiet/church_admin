@@ -554,7 +554,7 @@ mixin _$ViewStreetRoute on GoRouteData {
 
 mixin _$EditStreetRoute on GoRouteData {
   static EditStreetRoute _fromState(GoRouterState state) => EditStreetRoute(
-        $extra: state.extra as Street?,
+        $extra: state.extra as EditStreetExtra?,
       );
 
   EditStreetRoute get _self => this as EditStreetRoute;

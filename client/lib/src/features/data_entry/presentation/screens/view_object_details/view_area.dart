@@ -227,13 +227,21 @@ class _ViewAreaState extends State<ViewArea> {
         ],
         onTap: (newIndex) {
           if (newIndex == 0) {
-            const EditStreetRoute().push(context);
+            EditStreetRoute(
+              $extra: EditStreetExtra(area: area),
+            ).push(context);
           } else if (newIndex == 1) {
-            const EditFamilyRoute().push(context);
+            EditFamilyRoute(
+              $extra: EditFamilyExtra(area: area),
+            ).push(context);
           } else if (newIndex == 2) {
-            const EditPersonRoute().push(context);
+            EditPersonRoute(
+              $extra: EditPersonExtra(area: area),
+            ).push(context);
           } else if (newIndex == 3) {
-            const EditStoreRoute().push(context);
+            EditStoreRoute(
+              $extra: EditStoreExtra(area: area),
+            ).push(context);
           }
         },
       ),

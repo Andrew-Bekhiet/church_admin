@@ -5,9 +5,11 @@ import 'package:uuid/uuid.dart';
 
 class EditStreet extends StatefulWidget {
   final Street? street;
+  final Area? withArea;
 
   const EditStreet({
     required this.street,
+    this.withArea,
     super.key,
   });
 
@@ -24,6 +26,8 @@ class _EditStreetState extends State<EditStreet> {
     final Street? oldStreet = widget.street;
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewStreetRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.streets.createObject(newObject: object),
       onUpdate: (oldStreet, newStreet) =>
@@ -33,7 +37,12 @@ class _EditStreetState extends State<EditStreet> {
       ),
       onDelete: (object) => DatabaseService.I.streets.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldStreet ?? Street(id: const Uuid().v4(), name: ''),
+      newObject: oldStreet ??
+          Street(
+            id: const Uuid().v4(),
+            name: '',
+            areas: [if (widget.withArea != null) widget.withArea!],
+          ),
       initialObject: oldStreet,
     );
   }
@@ -62,6 +71,29 @@ class _EditStreetState extends State<EditStreet> {
             onPressed: _editGeolocation(context),
             icon: const Icon(Symbols.edit_location),
             label: const Text('المكان على الخريطة'),
+          ),
+          MultiObjectSelectionField<Area>(
+            listController: (s) => ViewableObjectListController(
+              objectsPaginatableStream:
+                  DatabaseService.I.areas.streamAll(searchQuery: s),
+            ),
+            initialValue: newStreet.areas?.toSet() ?? {},
+            onChanged: (value) => setState(
+              () => newStreet = newStreet.copyWith(areas: value?.toList()),
+            ),
+            builder: (context, state) => state.value?.isEmpty ?? true
+                ? const Text('لا توجد مناطق')
+                : Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final area in state.value!) ViewableObjectCard(area),
+                    ],
+                  ),
+            nullable: false,
+            validator: (v) =>
+                v?.isEmpty ?? true ? 'يجب اختيار منطقة واحدة على الأقل' : null,
+            labelText: 'المناطق',
           ),
           DateTimeField(
             label: 'أخر افتقاد',

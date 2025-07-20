@@ -9,6 +9,8 @@ part 'edit_person_route.g.dart';
 class EditPersonExtra extends SerializableExtra {
   final Person? person;
   final Family? family;
+  final Street? street;
+  final Area? area;
   final Service? service;
   final Group? group;
   final StudyYear? studyYear;
@@ -17,6 +19,8 @@ class EditPersonExtra extends SerializableExtra {
   const EditPersonExtra({
     this.person,
     this.family,
+    this.street,
+    this.area,
     this.service,
     this.group,
     this.studyYear,
@@ -43,11 +47,12 @@ class EditPersonRoute extends GoRouteData with _$EditPersonRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return EditPerson(
       person: $extra?.person,
-      family: $extra?.family,
-      service: $extra?.service,
-      group: $extra?.group,
-      studyYear: $extra?.studyYear,
-      gender: $extra?.gender,
+      withFamily: $extra?.family,
+      withAddress: Address(street: $extra?.street, area: $extra?.area),
+      withService: $extra?.service,
+      withGroup: $extra?.group,
+      withStudyYear: $extra?.studyYear,
+      withGender: $extra?.gender,
     );
   }
 }

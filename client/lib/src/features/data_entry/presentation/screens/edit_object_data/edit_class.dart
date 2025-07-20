@@ -4,11 +4,11 @@ import 'package:uuid/uuid.dart';
 
 class EditClass extends StatefulWidget {
   final Class? class$;
-  final Service? service;
+  final Service? withService;
 
   const EditClass({
     required this.class$,
-    required this.service,
+    this.withService,
     super.key,
   });
 
@@ -24,11 +24,13 @@ class _EditClassState extends State<EditClass> {
     super.initState();
 
     final Class? oldClass = widget.class$?.copyWith(
-      serviceId: widget.service?.id,
+      serviceId: widget.withService?.id,
       serviceStudyYear: widget.class$?.studyYear?.order,
     );
 
     _controller = EditObjectController(
+      afterCreate: (object) => ViewClassRoute(id: object.id, $extra: object)
+          .pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.classes.createObject(newObject: object),
       onUpdate: (oldClass, newClass) => DatabaseService.I.classes.updateObject(
@@ -41,8 +43,8 @@ class _EditClassState extends State<EditClass> {
           Class(
             id: const Uuid().v4(),
             name: '',
-            service: widget.service,
-            serviceId: widget.service?.id,
+            service: widget.withService,
+            serviceId: widget.withService?.id,
           ),
       initialObject: oldClass,
     );

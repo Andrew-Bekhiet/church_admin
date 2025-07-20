@@ -18,6 +18,7 @@ class EditObjectController<T extends ViewableWithID> {
 
   T newObject;
 
+  final void Function(T object) afterCreate;
   final Future<T> Function(T object) onCreate;
   final UpdateFunc<T>? onUpdate;
   final Future<void> Function(T object)? onDelete;
@@ -28,6 +29,7 @@ class EditObjectController<T extends ViewableWithID> {
     required this.toJson,
     required this.newObject,
     required this.onCreate,
+    required this.afterCreate,
     this.onUpdate,
     this.onDelete,
     this.initialObject,
@@ -87,7 +89,13 @@ class EditObjectController<T extends ViewableWithID> {
               ),
             ),
           );
-        navigator.pop();
+
+        if (isCreate) {
+          afterCreate(returnedObject);
+        } else {
+          navigator.pop();
+        }
+
         _saveLock = false;
       }
     } on Exception catch (e, stackTrace) {
@@ -166,6 +174,9 @@ class EditObjectController<T extends ViewableWithID> {
     }
 
     final navigator = Navigator.of(context);
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final themeData = Theme.of(context);
+
     final rslt = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -183,12 +194,23 @@ class EditObjectController<T extends ViewableWithID> {
       ),
     );
 
-    if (rslt == true) {
-      await onDelete!(initialObject!);
-      navigator
-        ..pop()
-        ..pop();
-    }
+    if (rslt != true) return;
+
+    await onDelete!(initialObject!);
+
+    scaffoldMessenger.showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Expanded(child: Text('تم الحذف بنجاح')),
+            Icon(Symbols.done, color: themeData.primaryIconTheme.color),
+          ],
+        ),
+      ),
+    );
+
+    navigator.pop();
+    WidgetsBinding.instance.addPostFrameCallback((_) => navigator.pop());
   }
 
   Future<bool> confirmExit(BuildContext context) async {
@@ -221,6 +243,7 @@ class EditObjectController<T extends ViewableWithID> {
     UpdateFunc<T>? onUpdate,
     Future<void> Function(T object)? onDelete,
     Json Function(T object)? toJson,
+    void Function(T object)? afterCreate,
   }) {
     return EditObjectController<T>(
       initialObject: initialObject ?? this.initialObject,
@@ -229,6 +252,7 @@ class EditObjectController<T extends ViewableWithID> {
       onUpdate: onUpdate ?? this.onUpdate,
       onDelete: onDelete ?? this.onDelete,
       toJson: toJson ?? this.toJson,
+      afterCreate: afterCreate ?? this.afterCreate,
     );
   }
 }

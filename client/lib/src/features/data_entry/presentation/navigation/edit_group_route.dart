@@ -31,7 +31,7 @@ class EditGroupRoute extends GoRouteData with _$EditGroupRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return EditGroup(
       group: $extra?.group,
-      service: $extra?.service,
+      withService: $extra?.service,
     );
   }
 }

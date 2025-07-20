@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 
 class ClassesDAO extends FullCRUDDAO<Class> {
   ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
@@ -64,9 +63,8 @@ class ClassesDAO extends FullCRUDDAO<Class> {
       Variables_Subscription_watchClass(id: id).toJson();
 
   Json _createClassVarsConstructor({required Class newObject}) =>
-      Variables_Mutation_insertClass(
-        newClass: Input_ClassesInsertInput.fromJson(newObject.toJson()),
-      ).toJson();
+      Variables_Mutation_insertClass(newClass: newObject.toInsertInput())
+          .toJson();
 
   Json _updateClassVarsConstructor({
     required Class newObject,
@@ -74,9 +72,7 @@ class ClassesDAO extends FullCRUDDAO<Class> {
   }) =>
       Variables_Mutation_updateClass(
         classId: newObject.id.toUuid(),
-        newClass: Input_ClassesSetInput.fromJson(
-          computeObjectDelta(newObject.toJson(), oldObject.toJson()),
-        ),
+        newClass: newObject.toUpdateInput(oldObject: oldObject),
       ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>

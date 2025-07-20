@@ -49,6 +49,7 @@ class GenderField extends StatelessWidget {
             children: [
               if (nullable)
                 Expanded(
+                  flex: 5,
                   child: Row(
                     children: [
                       Radio<bool?>(
@@ -68,6 +69,7 @@ class GenderField extends StatelessWidget {
                   ),
                 ),
               Expanded(
+                flex: 4,
                 child: Row(
                   children: [
                     Radio<bool?>(
@@ -87,6 +89,7 @@ class GenderField extends StatelessWidget {
                 ),
               ),
               Expanded(
+                flex: 4,
                 child: Row(
                   children: [
                     Radio<bool?>(

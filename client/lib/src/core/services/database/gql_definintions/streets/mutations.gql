@@ -14,7 +14,11 @@ mutation updateStreet(
   $streetId: uuid!
   $newStreet: StreetsSetInput!
   $lastVisit: timestamptz
+  $addAreas: [AreasStreetsInsertInput!]!
+  $removeAreas: [uuid!]!
   $updateLastVisit: Boolean!
+  $insertAreasStreets: Boolean!
+  $deleteAreasStreets: Boolean!
 ) {
   updateStreetsByPk(pkColumns: { id: $streetId }, _set: $newStreet) {
     ...Street
@@ -24,5 +28,15 @@ mutation updateStreet(
     object: { table: "streets", recordId: $streetId, time: $lastVisit }
   ) @include(if: $updateLastVisit) {
     ...VisitHistory
+  }
+
+  insertAreasStreets(objects: $addAreas) @include(if: $insertAreasStreets) {
+    affectedRows
+  }
+
+  deleteAreasStreets(
+    where: { streetId: { _eq: $streetId }, areaId: { _in: $removeAreas } }
+  ) @include(if: $deleteAreasStreets) {
+    affectedRows
   }
 }
