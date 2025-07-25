@@ -1,0 +1,14 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- DROP TRIGGER IF EXISTS persons_container_check ON public.persons;
+-- DROP TRIGGER IF EXISTS check_person_insertion_permission ON public.persons;
+--
+-- CREATE CONSTRAINT TRIGGER check_person_insertion_permission
+--     AFTER INSERT ON public.persons
+--     DEFERRABLE INITIALLY DEFERRED
+--     FOR EACH ROW EXECUTE FUNCTION check_row_insertion_permission('person');
+--
+-- CREATE CONSTRAINT TRIGGER persons_container_check
+--     AFTER INSERT OR UPDATE ON public.persons
+--     DEFERRABLE INITIALLY DEFERRED
+--     FOR EACH ROW EXECUTE FUNCTION persons_general_check();
