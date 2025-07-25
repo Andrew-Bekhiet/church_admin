@@ -925,6 +925,7 @@ class _EditPersonState extends State<EditPerson> {
                                       ), */
             const Divider(),
             DateTimeField(
+              nullable: true,
               withTime: false,
               label: 'أخر تناول',
               initialValue: newPerson.lastKodas?.time,
@@ -941,6 +942,7 @@ class _EditPersonState extends State<EditPerson> {
               validator: (v) => null,
             ),
             DateTimeField(
+              nullable: true,
               withTime: false,
               label: 'أخر اعتراف',
               initialValue: newPerson.lastConfession?.time,
@@ -958,6 +960,7 @@ class _EditPersonState extends State<EditPerson> {
             ),
             const Divider(),
             DateTimeField(
+              nullable: true,
               label: 'أخر افتقاد',
               initialValue: newPerson.lastVisit?.time,
               onChanged: (v) {
@@ -973,6 +976,7 @@ class _EditPersonState extends State<EditPerson> {
               validator: (v) => null,
             ),
             DateTimeField(
+              nullable: true,
               label: 'أخر مكالمة',
               initialValue: newPerson.lastCall?.time,
               onChanged: (v) {
