@@ -27,10 +27,19 @@ class FatherFields {
     operators: {...StringOperator.values},
   );
 
-  late final List<FieldMetadata<Object>> allFields = [id, name];
+  final FieldMetadata<bool> isHidden = FieldMetadata<bool>(
+    parentType: Father,
+    name: 'isHidden',
+    label: 'isHidden',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name, isHidden];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
+    'isHidden': isHidden
   };
 }
 
@@ -42,10 +51,12 @@ Father _$FatherFromJson(Map json) => Father(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       churchId: json['churchId'] as String?,
+      isHidden: json['isHidden'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$FatherToJson(Father instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'churchId': instance.churchId,
+      'isHidden': instance.isHidden,
     };

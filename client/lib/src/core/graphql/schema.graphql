@@ -2202,6 +2202,7 @@ type Fathers {
   church: Churches
   churchId: uuid
   id: uuid!
+  isHidden: Boolean!
   name: String!
   persons(
     distinctOn: [PersonsSelectColumn!]
@@ -2237,6 +2238,7 @@ input FathersBoolExp {
   church: ChurchesBoolExp
   churchId: UuidComparisonExp
   id: UuidComparisonExp
+  isHidden: BooleanComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
   personsAggregate: PersonsAggregateBoolExp
@@ -2285,6 +2287,7 @@ input FathersOrderBy {
   church: ChurchesOrderBy
   churchId: OrderBy
   id: OrderBy
+  isHidden: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
@@ -2295,6 +2298,7 @@ input FathersPkColumnsInput {
 enum FathersSelectColumn {
   churchId
   id
+  isHidden
   name
 }
 
@@ -2309,6 +2313,7 @@ input FathersStreamCursorInput {
 input FathersStreamCursorValueInput {
   churchId: uuid
   id: uuid
+  isHidden: Boolean
   name: String
 }
 

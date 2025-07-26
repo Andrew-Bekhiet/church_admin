@@ -1109,6 +1109,7 @@ Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
 enum Enum_FathersSelectColumn {
   churchId,
   id,
+  isHidden,
   name,
   $unknown;
 
@@ -1124,6 +1125,8 @@ String toJson_Enum_FathersSelectColumn(Enum_FathersSelectColumn e) {
       return r'churchId';
     case Enum_FathersSelectColumn.id:
       return r'id';
+    case Enum_FathersSelectColumn.isHidden:
+      return r'isHidden';
     case Enum_FathersSelectColumn.name:
       return r'name';
     case Enum_FathersSelectColumn.$unknown:
@@ -1137,6 +1140,8 @@ Enum_FathersSelectColumn fromJson_Enum_FathersSelectColumn(String value) {
       return Enum_FathersSelectColumn.churchId;
     case r'id':
       return Enum_FathersSelectColumn.id;
+    case r'isHidden':
+      return Enum_FathersSelectColumn.isHidden;
     case r'name':
       return Enum_FathersSelectColumn.name;
     default:

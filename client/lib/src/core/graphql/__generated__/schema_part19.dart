@@ -199,11 +199,13 @@ class Input_FathersStreamCursorValueInput {
   factory Input_FathersStreamCursorValueInput({
     UuidValue? churchId,
     UuidValue? id,
+    bool? isHidden,
     String? name,
   }) =>
       Input_FathersStreamCursorValueInput._({
         if (churchId != null) r'churchId': churchId,
         if (id != null) r'id': id,
+        if (isHidden != null) r'isHidden': isHidden,
         if (name != null) r'name': name,
       });
 
@@ -221,6 +223,10 @@ class Input_FathersStreamCursorValueInput {
       final l$id = data['id'];
       result$data['id'] = l$id == null ? null : stringToUuid(l$id);
     }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = (l$isHidden as bool?);
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
@@ -234,6 +240,8 @@ class Input_FathersStreamCursorValueInput {
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
+  bool? get isHidden => (_$data['isHidden'] as bool?);
+
   String? get name => (_$data['name'] as String?);
 
   Map<String, dynamic> toJson() {
@@ -246,6 +254,10 @@ class Input_FathersStreamCursorValueInput {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -287,6 +299,15 @@ class Input_FathersStreamCursorValueInput {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -302,10 +323,12 @@ class Input_FathersStreamCursorValueInput {
   int get hashCode {
     final l$churchId = churchId;
     final l$id = id;
+    final l$isHidden = isHidden;
     final l$name = name;
     return Object.hashAll([
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
     ]);
   }
@@ -323,6 +346,7 @@ abstract class CopyWith_Input_FathersStreamCursorValueInput<TRes> {
   TRes call({
     UuidValue? churchId,
     UuidValue? id,
+    bool? isHidden,
     String? name,
   });
 }
@@ -343,12 +367,14 @@ class _CopyWithImpl_Input_FathersStreamCursorValueInput<TRes>
   TRes call({
     Object? churchId = _undefined,
     Object? id = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
   }) =>
       _then(Input_FathersStreamCursorValueInput._({
         ..._instance._$data,
         if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
         if (id != _undefined) 'id': (id as UuidValue?),
+        if (isHidden != _undefined) 'isHidden': (isHidden as bool?),
         if (name != _undefined) 'name': (name as String?),
       }));
 }
@@ -362,6 +388,7 @@ class _CopyWithStubImpl_Input_FathersStreamCursorValueInput<TRes>
   call({
     UuidValue? churchId,
     UuidValue? id,
+    bool? isHidden,
     String? name,
   }) =>
       _res;

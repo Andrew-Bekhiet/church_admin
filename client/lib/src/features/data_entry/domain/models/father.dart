@@ -12,16 +12,22 @@ class Father extends ViewableWithID with _$Father implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   final String? churchId;
+
+  @override
+  final bool isHidden;
 
   const Father({
     required this.id,
     required this.name,
     this.churchId,
+    this.isHidden = true,
   });
 
   factory Father.fromJson(Map<String, Object?> json) => _$FatherFromJson(json);

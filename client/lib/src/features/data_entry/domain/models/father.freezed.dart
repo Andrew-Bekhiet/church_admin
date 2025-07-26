@@ -17,6 +17,7 @@ mixin _$Father {
   String get id;
   String get name;
   String? get churchId;
+  bool get isHidden;
 
   /// Create a copy of Father
   /// with the given fields replaced by the non-null parameter values.
@@ -33,16 +34,18 @@ mixin _$Father {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.churchId, churchId) ||
-                other.churchId == churchId));
+                other.churchId == churchId) &&
+            (identical(other.isHidden, isHidden) ||
+                other.isHidden == isHidden));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, churchId);
+  int get hashCode => Object.hash(runtimeType, id, name, churchId, isHidden);
 
   @override
   String toString() {
-    return 'Father(id: $id, name: $name, churchId: $churchId)';
+    return 'Father(id: $id, name: $name, churchId: $churchId, isHidden: $isHidden)';
   }
 }
 
@@ -51,7 +54,7 @@ abstract mixin class $FatherCopyWith<$Res> {
   factory $FatherCopyWith(Father value, $Res Function(Father) _then) =
       _$FatherCopyWithImpl;
   @useResult
-  $Res call({String id, String name, String? churchId});
+  $Res call({String id, String name, String? churchId, bool isHidden});
 }
 
 /// @nodoc
@@ -69,6 +72,7 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
     Object? churchId = freezed,
+    Object? isHidden = null,
   }) {
     return _then(Father(
       id: null == id
@@ -83,6 +87,10 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
           ? _self.churchId
           : churchId // ignore: cast_nullable_to_non_nullable
               as String?,
+      isHidden: null == isHidden
+          ? _self.isHidden
+          : isHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

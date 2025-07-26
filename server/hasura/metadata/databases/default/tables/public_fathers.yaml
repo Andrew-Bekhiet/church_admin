@@ -17,6 +17,8 @@ insert_permissions:
   - role: user
     permission:
       check: {}
+      set:
+        is_hidden: "true"
       columns:
         - church_id
         - name
@@ -26,6 +28,7 @@ select_permissions:
       columns:
         - church_id
         - id
+        - is_hidden
         - name
       filter: {}
       limit: 200

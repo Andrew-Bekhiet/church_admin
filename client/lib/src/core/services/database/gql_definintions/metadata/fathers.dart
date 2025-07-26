@@ -12,9 +12,11 @@ class FathersDAO extends DAOBase<Father>
   StreamAllConfig<Father> get baseStreamAllConfig => const StreamAllConfig(
         document: documentNodeSubscriptionwatchAllFathers,
       );
+
   @override
   StreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
+
   @override
   CreateObjectConfig<Father> get baseCreateObjectConfig => CreateObjectConfig(
         document: documentNodeMutationcreateFather,
@@ -25,4 +27,29 @@ class FathersDAO extends DAOBase<Father>
   Json _createFatherVarsConstructor({required Father newObject}) => {
         'object': {'name': newObject.name},
       };
+
+  @override
+  PaginatableStreamBase<Father> streamAll({
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+  }) {
+    return streamingProxy.streamAll(
+      streamAllConfig: baseStreamAllConfig,
+      streamCountConfig: baseStreamCountConfig,
+      searchQuery: searchQuery,
+      where: where ??
+          Stream.value(
+            [
+              Filter(FatherFields().isHidden, BooleanOperator.is$, false),
+            ],
+          ),
+      orderBy: orderBy ??
+          Stream.value(
+            [
+              OrderBy(field: FatherFields().name),
+            ],
+          ),
+    );
+  }
 }
