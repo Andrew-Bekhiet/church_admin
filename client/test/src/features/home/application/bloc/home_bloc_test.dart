@@ -99,7 +99,7 @@ void main() {
               verse: 'test verse',
               sneksar: 'test sneksar',
               saying: 'test saying',
-              birthdays: const ['person'],
+              birthdaysText: 'person',
               birthdaysQuery: birthdaysQuery,
             ),
           ),

@@ -216,7 +216,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           verse: currentData.verse,
           sneksar: currentData.sneksar,
           saying: currentData.saying,
-          birthdays: birthdays,
+          birthdaysText: birthdays.take(3).join('، ') +
+              (birthdays.length > 3 ? '، ...' : ''),
           birthdaysQuery: _homeDailyDataRepository.getTodaysBirthdaysQuery(),
         ),
       ),

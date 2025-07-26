@@ -61,7 +61,7 @@ class HomeScreenSummary extends StatelessWidget {
                 final HomeDailyData dailyData => Column(
                     spacing: 6,
                     children: [
-                      if (dailyData.birthdays.isNotEmpty)
+                      if (dailyData.birthdaysText.isNotEmpty)
                         AnimatedSize(
                           duration: const Duration(milliseconds: 400),
                           alignment: Alignment.topCenter,
@@ -72,7 +72,7 @@ class HomeScreenSummary extends StatelessWidget {
                               $extra: dailyData.birthdaysQuery,
                             ).push(context),
                             title: 'أعياد الميلاد اليوم',
-                            text: dailyData.birthdays.join('، '),
+                            text: dailyData.birthdaysText,
                             textMaxLines: 2,
                           ),
                         ),
