@@ -33,8 +33,9 @@ class HomeScreenSummary extends StatelessWidget {
           children: [
             Image.asset(
               _getHomeImage(),
+              alignment: const Alignment(0, -0.7),
               height: size.height * 0.24,
-              fit: BoxFit.fill,
+              fit: BoxFit.fitWidth,
             ),
             const UpdateAvailableWidget(),
             Container(
@@ -152,7 +153,7 @@ class HomeScreenSummary extends StatelessWidget {
         return 'assets/risen.jpg';
 
       case _:
-        return 'assets/images/High way to God 1.png';
+        return 'assets/images/home-screen.jpg';
     }
   }
 
