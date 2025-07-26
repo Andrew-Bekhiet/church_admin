@@ -118,8 +118,10 @@ class Person extends ViewableWithIDAndImage
   @override
   final bool isServant;
 
+  @override
   final Church? servingChurch;
 
+  @override
   final String? serviceType;
 
   @override
