@@ -96,8 +96,6 @@ class _EditPersonState extends State<EditPerson> {
 
   bool _classesAndGroupsLoaded = false;
 
-  //TODO: make every field a separate widget
-
   @override
   Widget build(BuildContext context) {
     return EditObjectData(
