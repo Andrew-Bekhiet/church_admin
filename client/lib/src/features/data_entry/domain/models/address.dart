@@ -93,19 +93,11 @@ class Address with _$Address {
 
   @override
   String toString() {
-    //شقة {0} عمارة {1} ش {2} متفرع من {3} حي {4} {5}
+    // 45 شارع النصر, متفرع من شارع التحرير, حي الزهور بجوار مستشفى السلام الدور الثاني شقة 5
     final StringBuffer buffer = StringBuffer();
 
-    if (apartmentNumber != null) {
-      buffer.write('شقة $apartmentNumber ');
-    }
-
-    if (storeyNumber != null) {
-      buffer.write('الدور $storeyNumber ');
-    }
-
     if (houseNumber != null) {
-      buffer.write('عمارة $houseNumber ');
+      buffer.write('$houseNumber ');
     }
 
     if (street != null) {
@@ -122,7 +114,7 @@ class Address with _$Address {
 
     if (district != null) {
       buffer.write(
-        'حي ${district!.name.replaceAll(RegExp('حي|الحي'), '').replaceAll(RegExp('حى|الحى'), '').trim()} ',
+        'حي ${district!.name.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()} ',
       );
     }
 
@@ -130,10 +122,12 @@ class Address with _$Address {
       buffer.write('$specialLandmark ');
     }
 
-    if (area != null) {
-      buffer.write(
-        'منطقة ${area!.name.replaceAll(RegExp('منطقة|المنطقة'), '').trim()} ',
-      );
+    if (storeyNumber != null) {
+      buffer.write('الدور $storeyNumber ');
+    }
+
+    if (apartmentNumber != null) {
+      buffer.write('شقة $apartmentNumber ');
     }
 
     return buffer.toString().trim();
