@@ -991,5 +991,6 @@ const _$MartialStatusEnumMap = {
   MartialStatus.separated: 'separated',
   MartialStatus.divorced: 'divorced',
   MartialStatus.widowed: 'widowed',
+  MartialStatus.widowedWithoutChildren: 'widowedWithoutChildren',
   MartialStatus.single: 'single',
 };

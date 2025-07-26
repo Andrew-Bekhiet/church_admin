@@ -6,7 +6,8 @@ enum MartialStatus implements LabeledEnum {
   married('متزوج/متزوجة'),
   separated('منفصل/منفصلة'),
   divorced('مطلق/مطلقة'),
-  widowed('أرمل/أرملة'),
+  widowed('أرمل/أرملة مع أبناء'),
+  widowedWithoutChildren('أرمل/أرملة بدون أبناء'),
   single('عازب/عزباء');
 
   static MartialStatus byName(String value) => values.byName(value);
