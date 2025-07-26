@@ -35,6 +35,20 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _passwordConfirmationController = TextEditingController();
 
+  late final _termsOfServiceRecognizer = TapGestureRecognizer()
+    ..onTap = () => LauncherService.I.launchUrl(
+          Uri.parse(
+            'https://church-data-admin.firebaseapp.com/terms-of-service/',
+          ),
+        );
+
+  late final _privacyPolicyRecognizer = TapGestureRecognizer()
+    ..onTap = () => LauncherService.I.launchUrl(
+          Uri.parse(
+            'https://church-data-admin.firebaseapp.com/privacy-policy/',
+          ),
+        );
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -209,10 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.blue,
                                     ),
                                     text: 'شروط الاستخدام',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        //TODO: TOS
-                                      },
+                                    recognizer: _termsOfServiceRecognizer,
                                   ),
                                   TextSpan(
                                     style: theme.textTheme.bodySmall,
@@ -223,10 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.blue,
                                     ),
                                     text: 'سياسة الخصوصية',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        //TODO: Privacy Policy
-                                      },
+                                    recognizer: _privacyPolicyRecognizer,
                                   ),
                                 ],
                               ),
@@ -306,6 +314,10 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmationController.dispose();
+
+    _termsOfServiceRecognizer.dispose();
+    _privacyPolicyRecognizer.dispose();
+
     super.dispose();
   }
 }

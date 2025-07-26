@@ -345,8 +345,12 @@ final aboutAppServiceProvider = Provider<AboutAppService>(
     urlLauncher: ref.watch(launcherServiceProvider).launchUrl,
     version: ref.watch(packageInfoPluginProvider).requireValue.version,
     appIcon: Image.asset('assets/logo.png', width: 50, height: 50),
-    privacyPolicyUrl: Uri(),
-    termsOfServiceUrl: Uri(),
+    privacyPolicyUrl: Uri.parse(
+      'https://church-data-admin.firebaseapp.com/privacy-policy/',
+    ),
+    termsOfServiceUrl: Uri.parse(
+      'https://church-data-admin.firebaseapp.com/terms-of-service/',
+    ),
     githubUrl: Uri(
       scheme: 'https',
       host: 'github.com',
