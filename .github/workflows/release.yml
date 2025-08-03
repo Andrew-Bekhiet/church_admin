@@ -10,6 +10,26 @@ on:
         description: "Release tag (e.g., v1.0.0)"
         required: true
         type: string
+      test:
+        description: "Run tests before release"
+        required: false
+        default: true
+        type: boolean
+      android:
+        description: "Release for Android"
+        required: false
+        default: true
+        type: boolean
+      ios:
+        description: "Release for iOS"
+        required: false
+        default: true
+        type: boolean
+      web:
+        description: "Release for Web"
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   validate-tag:
@@ -46,6 +66,7 @@ jobs:
 
   run-tests:
     needs: validate-tag
+    if: ${{ github.event_name == 'push' || github.event.inputs.test == 'true' }}
     permissions:
       contents: read
 
@@ -100,10 +121,16 @@ jobs:
     permissions:
       contents: write
 
-    needs: run-tests
+    needs: [validate-tag, run-tests]
+    if: ${{ always() && (needs.validate-tag.result == 'success') && (needs.run-tests.result == 'success' || needs.run-tests.result == 'skipped') && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
+        exclude:
+          # Skip Ubuntu (Android) if only iOS is requested
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
+          # Skip macOS (iOS) if only Android is requested
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -231,8 +258,8 @@ jobs:
         run: |
           cd build/ios
           mkdir Payload
-          if [ -d "shorebird" ]; then
-            cp -r shorebird Payload/
+          if [ -d "archive" ]; then
+            cp -r archive Payload/
           elif [ -d "iphoneos" ]; then
             cp -r iphoneos Payload/
           elif [ -d "Runner.app" ]; then
@@ -287,7 +314,8 @@ jobs:
           generateReleaseNotes: true
 
   release-web:
-    needs: run-tests
+    needs: [validate-tag, run-tests]
+    if: ${{ always() && (needs.validate-tag.result == 'success') && (needs.run-tests.result == 'success' || needs.run-tests.result == 'skipped') && (github.event_name == 'push' || github.event.inputs.web == 'true') }}
     runs-on: ubuntu-latest
 
     steps:
