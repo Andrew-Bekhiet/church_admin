@@ -231,7 +231,9 @@ jobs:
         run: |
           cd build/ios
           mkdir Payload
-          if [ -d "iphoneos" ]; then
+          if [ -d "shorebird" ]; then
+            cp -r shorebird Payload/
+          elif [ -d "iphoneos" ]; then
             cp -r iphoneos Payload/
           elif [ -d "Runner.app" ]; then
             cp -r Runner.app Payload/
