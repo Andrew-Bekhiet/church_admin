@@ -188,7 +188,7 @@ jobs:
         with:
           working-directory: client
           platform: android
-          args: "--verbose --artifact=apk"
+          args: --artifact=apk
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -208,7 +208,7 @@ jobs:
         with:
           working-directory: client
           platform: ios
-          args: "--release --no-codesign"
+          args: --no-codesign
 
       - name: Get version from tag
         id: version
