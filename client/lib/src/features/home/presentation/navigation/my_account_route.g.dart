@@ -1,0 +1,39 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'my_account_route.dart';
+
+// **************************************************************************
+// GoRouterGenerator
+// **************************************************************************
+
+List<RouteBase> get $appRoutes => [
+      $myAccountRoute,
+    ];
+
+RouteBase get $myAccountRoute => GoRouteData.$route(
+      path: '/my_account',
+      factory: _$MyAccountRoute._fromState,
+    );
+
+mixin _$MyAccountRoute on GoRouteData {
+  static MyAccountRoute _fromState(GoRouterState state) =>
+      const MyAccountRoute();
+
+  @override
+  String get location => GoRouteData.$location(
+        '/my_account',
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}

@@ -56,7 +56,7 @@ class _ViewUserState extends State<ViewUser> {
                 style: Theme.of(context).filledTonalButtonStyleWorkaround,
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات الحضور'),
-                onPressed: () => _attendanceAnalysis(context, user),
+                onPressed: () => _attendanceAnalysis(user),
               ),
             ),
             const Divider(thickness: 1),
@@ -68,6 +68,21 @@ class _ViewUserState extends State<ViewUser> {
                     .paginateEditHistory<User>(id: user.id),
               ),
             ),
+            const Divider(thickness: 1),
+            if (AuthBloc.I.state.unwrapped
+                case AuthAuthenticated(userData: User(id: final userId))
+                when userId == user.id)
+              ListTile(
+                title: FilledButton.icon(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: ColorScheme.of(context).error,
+                    foregroundColor: ColorScheme.of(context).onError,
+                  ),
+                  icon: const Icon(Symbols.delete_forever),
+                  label: const Text('حذف حسابي'),
+                  onPressed: _confirmDeleteMyAccount,
+                ),
+              ),
             const SizedBox(height: 50),
           ],
         ),
@@ -87,7 +102,7 @@ class _ViewUserState extends State<ViewUser> {
     );
   }
 
-  void _attendanceAnalysis(BuildContext context, User user) {
+  void _attendanceAnalysis(User user) {
     PersonAnalysisRoute(
       $extra: PersonAnalysisExtra(
         editOptionsBuilder: (
@@ -104,6 +119,73 @@ class _ViewUserState extends State<ViewUser> {
         user: user,
       ),
     ).push(context);
+  }
+
+  Future<void> _confirmDeleteMyAccount() async {
+    bool? dialogResult = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('هل تريد حقا حذف حسابك وجميع البيانات المتعلقة به؟'),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('لا'),
+          ),
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('نعم'),
+          ),
+        ],
+      ),
+    );
+
+    if (dialogResult != true || !mounted) return;
+
+    dialogResult = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'سيتم حذف حسابك في التطبيق ولا يمكن استرجاعه ولا البيانات المتعلقة به\nبرجاء التأكيد',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onErrorContainer,
+          ),
+        ),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('تراجع'),
+          ),
+          FilledButton.tonal(
+            style: Theme.of(context).filledTonalButtonStyleWorkaround,
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('قد قرأت الرسالة أعلاه وأريد حذف حسابي'),
+          ),
+        ],
+      ),
+    );
+
+    if (dialogResult != true) return;
+
+    try {
+      await FunctionsService.I.deleteMyAccount();
+      AuthBloc.I.add(const SignOut());
+    } catch (err, stkTrace) {
+      await LoggingService.I
+          .exception(LogRecord(error: err, stackTrace: stkTrace));
+
+      scaffoldMessenger
+          .showErrorSnackBar('حدث خطأ أثناء حذف الحساب، يرجى المحاولة لاحقا');
+      return;
+    }
+
+    scaffoldMessenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text('تم حذف الحساب بنجاح'),
+          duration: Duration(seconds: 3),
+        ),
+      );
   }
 
   @override

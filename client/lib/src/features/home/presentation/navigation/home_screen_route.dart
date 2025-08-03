@@ -26,6 +26,7 @@ part 'home_screen_route.g.dart';
     TypedGoRoute<EditStoreRoute>(path: 'edit_store'),
     TypedGoRoute<PersonAnalysisRoute>(path: 'person_analysis'),
     // Drawer
+    TypedGoRoute<MyAccountRoute>(path: 'my_account'),
     TypedGoRoute<ManageUsersRoute>(path: 'manage_users'),
     TypedGoRoute<VisitsMapRoute>(path: 'visits_map'),
     TypedGoRoute<AdvancedSearchRoute>(path: 'advanced_search'),

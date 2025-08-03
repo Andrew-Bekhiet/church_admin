@@ -34,8 +34,12 @@ class HomeDrawer extends StatelessWidget {
             icon: const Icon(Symbols.home),
             onTap: () => homeBloc.add(const HomeSwitchMode()),
           ),
-          if (state is AuthAuthenticated &&
-              (state.userData?.canManageSomeUsers ?? false))
+          if (state
+              case AuthAuthenticated(
+                userData: User(
+                  canManageSomeUsers: true,
+                ),
+              ))
             HomeDrawerDestination(
               icon: const Icon(Symbols.manage_accounts),
               label: const Text('إدارة الخدام'),
@@ -88,6 +92,15 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 child: SizedBox.expand(),
               ),
+              if (state case AuthAuthenticated(:final userData?))
+                ListTile(
+                  leading: ImageObjectWidget(userData),
+                  title: const Text('حسابي'),
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                    const MyAccountRoute().push(context);
+                  },
+                ),
               Expanded(
                 child: NavigationDrawer(
                   onDestinationSelected: (i) {
