@@ -70,7 +70,9 @@ select_permissions:
         - id
         - name
         - photo_updated_at
-      filter: {}
+      filter:
+        deleted_at:
+          _is_null: true
       limit: 200
       allow_aggregations: true
 update_permissions:

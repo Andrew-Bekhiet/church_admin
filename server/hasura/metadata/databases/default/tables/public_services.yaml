@@ -108,7 +108,9 @@ select_permissions:
         - blurhash
         - study_year_from_id
         - study_year_to_id
-      filter: {}
+      filter:
+        deleted_at:
+          _is_null: true
       limit: 200
       allow_aggregations: true
 update_permissions:

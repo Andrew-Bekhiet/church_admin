@@ -267,27 +267,30 @@ select_permissions:
       computed_fields:
         - birthday
       filter:
-        _exists:
-          _table:
-            name: users_permissions_by_entity_id
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - _or:
-                  - _and:
-                      - entity_type:
-                          _eq: person
-                      - entity_id:
-                          _ceq:
-                            - $
-                            - id
-                  - _and:
-                      - entity_type:
-                          _eq: any
-                      - entity_id:
-                          _is_null: true
+        _and:
+          - deleted_at:
+              _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: person
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - id
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
       limit: 200
       allow_aggregations: true
 update_permissions:

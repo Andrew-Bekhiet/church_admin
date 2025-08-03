@@ -1,0 +1,60 @@
+CREATE OR REPLACE FUNCTION soft_delete_trigger()
+RETURNS TRIGGER AS $$
+DECLARE
+    hasura_user_session text := current_setting('hasura.user'::text, true);
+BEGIN
+    -- If hasura.user is not set (e.g., admin operation from psql)
+    -- or if the role is 'admin', allow the hard delete to proceed.
+    IF hasura_user_session IS NULL OR ((hasura_user_session::json) ->> 'x-hasura-role') = 'admin' THEN
+        RETURN OLD;
+    END IF;
+
+    -- For other users, perform a soft delete.
+    -- Update the row to mark it as deleted
+    EXECUTE format('UPDATE %I SET deleted_at = now(), deleted_by = $1 WHERE id = $2', TG_TABLE_NAME)
+    USING ((hasura_user_session::json) ->> 'x-hasura-user-id')::uuid, OLD.id;
+
+    -- Cancel the original DELETE operation
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER soft_delete_areas
+BEFORE DELETE ON areas
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_classes
+BEFORE DELETE ON classes
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_groups
+BEFORE DELETE ON groups
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_families
+BEFORE DELETE ON families
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_services
+BEFORE DELETE ON services
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_streets
+BEFORE DELETE ON streets
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_stores
+BEFORE DELETE ON stores
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
+
+CREATE TRIGGER soft_delete_persons
+BEFORE DELETE ON persons
+FOR EACH ROW
+EXECUTE FUNCTION soft_delete_trigger();
