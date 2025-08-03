@@ -1,0 +1,82 @@
+name: Test and Coverage
+
+on:
+  pull_request:
+    paths:
+      - "client/**"
+      - ".github/workflows/test.yml"
+  push:
+    branches: [main]
+    paths:
+      - "client/**"
+      - ".github/workflows/test.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+          channel: "stable"
+
+      - name: Populate Flutter cache
+        run: flutter precache
+
+      - name: Override files for CI
+        working-directory: client
+        run: |
+          cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
+          cp --force lib/src/core/services/secrets/secrets_service_ci_impl.dart lib/src/core/services/secrets/secrets_service_impl.dart
+
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Analyze code
+        working-directory: client
+        run: flutter analyze
+
+      - name: Run code generation
+        working-directory: client
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Run tests with coverage
+        working-directory: client
+        run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: client/test-results.json
+
+      - name: Report test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: "Unit and Widget Tests"
+          path: client/test-results.json
+          reporter: flutter-json
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          directory: client
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
