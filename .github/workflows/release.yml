@@ -200,16 +200,6 @@ jobs:
         working-directory: client/ios
         run: pod install --repo-update
 
-      - name: 🚀 Shorebird Release
-        if: ${{ matrix.os == 'macos-latest' }}
-        uses: shorebirdtech/shorebird-release@v0
-        env:
-          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-        with:
-          working-directory: client
-          platform: ios
-          args: --no-codesign
-
       - name: Get version from tag
         id: version
         run: |
@@ -220,6 +210,15 @@ jobs:
           fi
           VERSION=${VERSION#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+      - name: 🚀 Shorebird Release
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: shorebirdtech/shorebird-release@v0
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        with:
+          working-directory: client
+          platform: ios
+          args: --no-codesign --build-name ${{ steps.version.outputs.version }}
 
       - name: Compress ios src
         if: ${{ matrix.os == 'macos-latest' }}
@@ -231,8 +230,19 @@ jobs:
         working-directory: client
         run: |
           cd build/ios
-          mv iphoneos Payload
-          zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload
+          mkdir Payload
+          if [ -d "iphoneos" ]; then
+            cp -r iphoneos Payload/
+          elif [ -d "Runner.app" ]; then
+            cp -r Runner.app Payload/
+          elif [ -d "Release-iphoneos/Runner.app" ]; then
+            cp -r Release-iphoneos/Runner.app Payload/
+          else
+            echo "No valid iOS build found in build/ios directory."
+            ls -la .
+          fi
+          zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload/
+          rm -rf Payload/
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
