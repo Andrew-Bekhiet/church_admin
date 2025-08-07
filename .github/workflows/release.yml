@@ -256,22 +256,20 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
         run: |
-          cd build/ios
-          mkdir Payload
-          if [ -d "archive" ]; then
-            cp -r archive Payload/
-          elif [ -d "iphoneos" ]; then
-            cp -r iphoneos Payload/
-          elif [ -d "Runner.app" ]; then
-            cp -r Runner.app Payload/
-          elif [ -d "Release-iphoneos/Runner.app" ]; then
-            cp -r Release-iphoneos/Runner.app Payload/
+          if [ -d "build/ios/archive/Runner.xcarchive" ]; then
+            echo "Found xcarchive, extracting app bundle..."
+            cd build/ios
+            mkdir -p Payload
+            # Extract the app from the xcarchive
+            cp -r archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
+            zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload/
+            rm -rf Payload/
+            echo "✅ IPA created from xcarchive"
           else
-            echo "No valid iOS build found in build/ios directory."
-            ls -la .
+            echo "❌ No xcarchive found. Available files:"
+            ls -la build/ios/
+            exit 1
           fi
-          zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload/
-          rm -rf Payload/
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
