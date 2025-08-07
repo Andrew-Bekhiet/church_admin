@@ -14,6 +14,10 @@ class NotificationsServiceCallbacks {
 
     final notification = Notification.fromRemoteMessage(message);
 
+    if (notification.type == NotificationType.triggerShorebirdUpdate) {
+      return;
+    }
+
     await NotificationsStorage.I.writeNotification(notification);
 
     if (notification.type == NotificationType.manualPushRemote) {

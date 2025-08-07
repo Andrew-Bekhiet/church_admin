@@ -45,9 +45,9 @@ class Notification with _$Notification {
   factory Notification.fromRemoteMessage(RemoteMessage message) => Notification(
         id: message.messageId ??
             DateTime.now().millisecondsSinceEpoch.toString(),
-        type: message.notification == null
-            ? NotificationType.manualPushRemote
-            : NotificationType.remote,
+        type: NotificationType.values.byName(
+          message.data['type'] ?? NotificationType.remote.name,
+        ),
         body: message.notification?.body ??
             message.data['body'] ??
             message.data['content'],
@@ -77,4 +77,9 @@ class Notification with _$Notification {
   }
 }
 
-enum NotificationType { local, remote, manualPushRemote }
+enum NotificationType {
+  local,
+  remote,
+  manualPushRemote,
+  triggerShorebirdUpdate
+}

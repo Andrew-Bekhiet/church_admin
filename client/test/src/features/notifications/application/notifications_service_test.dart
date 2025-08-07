@@ -589,6 +589,7 @@ void main() {
                   'senderUID': 'foobar',
                   'title': 'asasa',
                   'body': 'asasas',
+                  'type': NotificationType.manualPushRemote.name,
                 },
               );
 
@@ -619,7 +620,10 @@ void main() {
               final remoteMessage = RemoteMessage(
                 messageId: '1',
                 sentTime: DateTime.now(),
-                data: {'senderUID': 'foobar'},
+                data: {
+                  'senderUID': 'foobar',
+                  'type': NotificationType.remote.name
+                },
                 notification: const RemoteNotification(
                   body: 'body',
                   title: 'title',
@@ -644,6 +648,44 @@ void main() {
                   id: anyNamed('id'),
                 ),
               );
+            },
+          );
+
+          test(
+            'triggerShorebirdUpdate',
+            () async {
+              final remoteMessage = RemoteMessage(
+                messageId: '1',
+                sentTime: DateTime.now(),
+                data: {
+                  'senderUID': 'foobar',
+                  'type': NotificationType.triggerShorebirdUpdate.name
+                },
+                notification: const RemoteNotification(
+                  body: 'body',
+                  title: 'title',
+                ),
+              );
+
+              final expectedNotification =
+                  Notification.fromRemoteMessage(remoteMessage);
+
+              await NotificationsServiceCallbacks.onBackgroundMessageReceived(
+                remoteMessage,
+              );
+
+              verifyInOrder([
+                InitializationService.I.initialize(),
+              ]);
+              verifyNever(
+                (NotificationsService.I as MockNotificationsService).notify(
+                  any,
+                  notificationDetails: anyNamed('notificationDetails'),
+                  id: anyNamed('id'),
+                ),
+              );
+              verifyNever(NotificationsStorage.I
+                  .writeNotification(expectedNotification));
             },
           );
         },
