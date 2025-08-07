@@ -1,0 +1,249 @@
+name: Patch
+
+on:
+  push:
+    tags:
+      - "v*.*.*+*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Patch tag (e.g., v1.0.0+1)"
+        required: true
+        type: string
+      android:
+        description: "Patch for Android"
+        required: false
+        default: true
+        type: boolean
+      ios:
+        description: "Patch for iOS"
+        required: false
+        default: true
+        type: boolean
+      web:
+        description: "Deploy web"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  validate-tag:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+      patch-number: ${{ steps.get-patch.outputs.patch-number }}
+      is-valid: ${{ steps.validate.outputs.is-valid }}
+
+    steps:
+      - name: Get version from tag
+        id: get-version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.tag }}"
+          else
+            VERSION="${GITHUB_REF#refs/tags/}"
+          fi
+          # Remove 'v' prefix if present
+          VERSION=${VERSION#v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Extract patch number
+        id: get-patch
+        run: |
+          VERSION="${{ steps.get-version.outputs.version }}"
+          PATCH_NUMBER=${VERSION##*+}
+          echo "patch-number=$PATCH_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Validate patch version format
+        id: validate
+        run: |
+          VERSION="${{ steps.get-version.outputs.version }}"
+          if [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+$ ]]; then
+            echo "is-valid=true" >> $GITHUB_OUTPUT
+            echo "✅ Valid patch version: $VERSION"
+          else
+            echo "is-valid=false" >> $GITHUB_OUTPUT
+            echo "❌ Invalid patch version format: $VERSION"
+            echo "Expected format: v1.0.0+1"
+            exit 1
+          fi
+
+  patch-mobile:
+    permissions:
+      contents: write
+
+    needs: validate-tag
+    if: ${{ needs.validate-tag.result == 'success' && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        exclude:
+          # Skip Ubuntu (Android) if only iOS is requested
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
+          # Skip macOS (iOS) if only Android is requested
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+          channel: "stable"
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: Set Up Java
+        uses: actions/setup-java@v4
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          cache: "gradle"
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set Up latest stable Xcode version
+        if: ${{ matrix.os == 'macos-latest' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Populate the Flutter tool's cache of binary artifacts
+        run: flutter precache
+
+      - name: Decode and save secrets to files
+        working-directory: client
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
+          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
+
+      - name: Decode and save android secrets
+        working-directory: client
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        env:
+          ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
+          ANDROID_STRINGS: ${{ secrets.ANDROID_STRINGS }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
+        run: |
+          echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
+          echo $ANDROID_STRINGS | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/src/main/res/values/strings.xml
+          echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
+          echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
+
+      - name: Decode and save ios secrets
+        working-directory: client
+        if: ${{ matrix.os == 'macos-latest' }}
+        env:
+          GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
+        run: |
+          echo $GOOGLE_SERVICES_PLIST | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./ios/Runner/GoogleService-Info.plist
+
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Run new builder
+        working-directory: client
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Get base version for patch
+        id: base-version
+        run: |
+          VERSION="${{ needs.validate-tag.outputs.version }}"
+          BASE_VERSION=${VERSION%+*}
+          echo "base-version=$BASE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: 🚀 Shorebird Patch Android
+        uses: shorebirdtech/shorebird-patch@v0
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        with:
+          platform: android
+          working-directory: client
+          args: "--release-version ${{ steps.base-version.outputs.base-version }}"
+
+      - name: Run pod repo update
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        run: pod repo update
+
+      - name: Update podfile.lock
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client/ios
+        run: pod install --repo-update
+
+      - name: 🚀 Shorebird Patch iOS
+        uses: shorebirdtech/shorebird-patch@v0
+        if: ${{ matrix.os == 'macos-latest' }}
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        with:
+          platform: ios
+          working-directory: client
+          args: "--release-version ${{ steps.base-version.outputs.base-version }}"
+
+  patch-web:
+    needs: validate-tag
+    if: ${{ needs.validate-tag.result == 'success' && (github.event_name == 'push' || github.event.inputs.web == 'true') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+          channel: "stable"
+
+      - name: Populate the Flutter tool's cache of binary artifacts
+        run: flutter precache
+
+      - name: Decode and save secrets to files
+        working-directory: client
+        env:
+          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
+          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
+        run: |
+          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
+          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
+
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Run new builder
+        working-directory: client
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build web
+        working-directory: client
+        run: flutter build web
+
+      - name: Copy web build to public folder
+        run: cp -r ./client/build/web/* ./server/public
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_HOSTING_DEPLOYER_KEY }}
+          entryPoint: ./server/
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          channelId: live
