@@ -48,9 +48,22 @@ config :spark,
     ]
   ]
 
+config :geo_postgis, json_library: Jason
+
+config :ash, :custom_types,
+  point: ChurchAdmin.Type.Point,
+  line_string: ChurchAdmin.Type.LineString,
+  polygon: ChurchAdmin.Type.Polygon,
+  color: ChurchAdmin.Type.Color
+
 config :church_admin,
   ecto_repos: [ChurchAdmin.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  ash_domains: [
+    ChurchAdmin.Person,
+    ChurchAdmin.Geography,
+    ChurchAdmin.Attendance
+  ]
 
 # Configures the endpoint
 config :church_admin, ChurchAdminWeb.Endpoint,
@@ -62,36 +75,6 @@ config :church_admin, ChurchAdminWeb.Endpoint,
   ],
   pubsub_server: ChurchAdmin.PubSub,
   live_view: [signing_salt: "IBQBmcan"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :church_admin, ChurchAdmin.Mailer, adapter: Swoosh.Adapters.Local
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.25.4",
-  church_admin: [
-    args:
-      ~w(js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/* --alias:@=.),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => [Path.expand("../deps", __DIR__), Mix.Project.build_path()]}
-  ]
-
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "4.1.7",
-  church_admin: [
-    args: ~w(
-      --input=assets/css/app.css
-      --output=priv/static/assets/css/app.css
-    ),
-    cd: Path.expand("..", __DIR__)
-  ]
 
 # Configures Elixir's Logger
 config :logger, :default_formatter,

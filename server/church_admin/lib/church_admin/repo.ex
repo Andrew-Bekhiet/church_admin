@@ -5,7 +5,7 @@ defmodule ChurchAdmin.Repo do
   @impl true
   def installed_extensions do
     # Add extensions here, and the migration generator will install them.
-    ["ash-functions"]
+    ["ash-functions", "postgis"]
   end
 
   # Don't open unnecessary transactions
@@ -17,6 +17,6 @@ defmodule ChurchAdmin.Repo do
 
   @impl true
   def min_pg_version do
-    %Version{major: 16, minor: 0, patch: 0}
+    %Version{major: 17, minor: 0, patch: 0}
   end
 end

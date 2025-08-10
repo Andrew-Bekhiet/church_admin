@@ -24,11 +24,7 @@ config :church_admin, ChurchAdminWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "yIw4LiAURUqSyG8sqpCEI1iuJi4xISli9onSTNZ3eN+xk8Uttl0xPfhjRKL3R4oP",
-  watchers: [
-    esbuild: {Esbuild, :install_and_run, [:church_admin, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:church_admin, ~w(--watch)]}
-  ]
+  secret_key_base: "yIw4LiAURUqSyG8sqpCEI1iuJi4xISli9onSTNZ3eN+xk8Uttl0xPfhjRKL3R4oP"
 
 # ## SSL Support
 #

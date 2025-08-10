@@ -21,19 +21,22 @@ defmodule ChurchAdminWeb.Router do
   scope "/gql" do
     pipe_through [:graphql]
 
-    forward "/playground", Absinthe.Plug.GraphiQL,
-      schema: Module.concat(["ChurchAdminWeb.GraphqlSchema"]),
-      socket: Module.concat(["ChurchAdminWeb.GraphqlSocket"]),
-      interface: :simple
+    if Mix.env() == :dev do
+      forward "/playground", Absinthe.Plug.GraphiQL,
+        schema: Module.concat([ChurchAdminWeb.GraphqlSchema]),
+        socket: Module.concat([ChurchAdminWeb.GraphqlSocket]),
+        socket_url: "/ws/gql",
+        interface: :simple
+    end
 
-    forward "/", Absinthe.Plug, schema: Module.concat(["ChurchAdminWeb.GraphqlSchema"])
+    forward "/", Absinthe.Plug, schema: Module.concat([ChurchAdminWeb.GraphqlSchema])
   end
 
-  scope "/", ChurchAdminWeb do
-    pipe_through :browser
+  # scope "/", ChurchAdminWeb do
+  #   pipe_through :browser
 
-    get "/", PageController, :home
-  end
+  #   get "/", PageController, :home
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", ChurchAdminWeb do

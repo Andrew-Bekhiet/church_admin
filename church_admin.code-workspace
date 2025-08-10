@@ -1,11 +1,15 @@
 {
   "folders": [
     { "name": "ash_server", "path": "./server/church_admin/" },
+    { "name": "server", "path": "./server" },
+    {
+      "name": "client",
+      "path": "./client"
+    },
     {
       "name": "church_admin",
       "path": "."
-    },
-    { "name": "server", "path": "./server" }
+    }
   ],
   "launch": {
     "version": "0.2.0",
@@ -14,7 +18,7 @@
         "name": "church_admin",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:church_admin}/client",
+        "cwd": "${workspaceFolder:client}",
         "args": ["--device-user", "0"]
       },
       {
@@ -22,7 +26,7 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "cwd": "${workspaceFolder:church_admin}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--device-user", "0"]
       },
       {
@@ -30,14 +34,14 @@
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "cwd": "${workspaceFolder:church_admin}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--device-user", "0"]
       },
       {
         "name": "church_admin (web debug mode)",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:church_admin}/client/",
+        "cwd": "${workspaceFolder:client}/",
         "args": ["--web-port", "5083"]
       },
       {
@@ -46,7 +50,7 @@
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
         "args": ["build", "--delete-conflicting-outputs"],
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:client}/"
       },
       {
         "name": "Golden",
@@ -56,7 +60,7 @@
           "for": ["run-test", "run-test-file"]
         },
         "args": ["--update-goldens"],
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:client}/"
       },
       {
         "name": "Debug /server/functions/src/firestore_migration.ts",
@@ -84,7 +88,7 @@
         "label": "Flutter test coverage",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:church_admin}/client"
+          "cwd": "${workspaceFolder:client}"
         },
         "command": "flutter",
         "args": [

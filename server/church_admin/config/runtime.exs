@@ -116,4 +116,14 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Req
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # Postgrex: Geo.PostGIS types
+  Postgrex.Types.define(
+    ChurchAdmin.PostgresTypes,
+    [Geo.PostGIS.Extension | Ecto.Adapters.Postgres.extensions()],
+    json: Jason
+  )
+
+  # Ecto: Geo.PostGIS types
+  config :church_admin, ChurchAdmin.Repo, types: ChurchAdmin.PostgresTypes
 end
