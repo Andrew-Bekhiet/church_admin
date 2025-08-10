@@ -1,5 +1,6 @@
 {
   "folders": [
+    { "name": "ash_server", "path": "./server/church_admin/" },
     {
       "name": "church_admin",
       "path": "."
