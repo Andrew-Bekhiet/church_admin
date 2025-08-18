@@ -209,6 +209,28 @@ export async function upsertUser(user: {
   return null;
 }
 
+export async function unapproveUser(hasuraUID: string): Promise<void> {
+  try {
+    await makeGraphqlRequest({
+      query: `
+            mutation unapproveUser($uid: uuid!) {
+  deleteAuthUsersPermissions(where: {_and: [{uid: {_eq: $uid}}, {permission: {_eq: "approved"}}]}) {
+    returning {
+      uid
+    }
+  }
+}
+          `,
+      variables: {
+        uid: hasuraUID,
+      },
+      operationName: "unapproveUser",
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export async function updatePhotoTime(
   table: PhotoTable,
   id: string,
@@ -223,7 +245,9 @@ export async function updatePhotoTime(
     const hasura_response = await makeGraphqlRequest({
       query: `
             mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
-              ${op_name}(pkColumns: {id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
+              ${op_name}(pkColumns: {${
+        table == "users" ? "u" : ""
+      }id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
@@ -267,7 +291,9 @@ export async function updatePhotoBlurHash(
     const hasura_response = await makeGraphqlRequest({
       query: `
             mutation updatePhotoBlurHash($id: uuid!, $blurhash: String) {
-              ${op_name}(pkColumns: {id: $id}, _set: {blurhash: $blurhash}) {
+              ${op_name}(pkColumns: {${
+        table == "users" ? "u" : ""
+      }id: $id}, _set: {blurhash: $blurhash}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
