@@ -8,6 +8,7 @@ import {
   getHasuraUID,
   getPersonIdFromUser,
   photoTables,
+  publicPhotoTables,
   updatePhotoTime,
 } from "./hasura_interface";
 
@@ -129,7 +130,12 @@ async function _authenticateStorageRequest(
     const hasuraUID = (await getHasuraUID(currentUser.uid))!;
 
     console.log({ hasuraUID, table, id, action });
+
+    const isReadingPublicPhoto =
+      action == "read" && publicPhotoTables.find((t) => t == table);
+
     if (
+      !isReadingPublicPhoto &&
       !(await checkUserAccess(
         table as PhotoTable,
         id,

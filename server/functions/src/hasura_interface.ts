@@ -321,16 +321,19 @@ export async function updatePhotoBlurHash(
   }
 }
 
-export const photoTables = [
+export const publicPhotoTables = [
   "areas",
   "streets",
+  "services",
+  "users",
+] as const;
+export const photoTables = [
+  ...publicPhotoTables,
   "stores",
   "families",
-  "services",
   "groups",
   "classes",
   "persons",
-  "users",
 ] as const;
 export type PhotoTable = (typeof photoTables)[number];
 
