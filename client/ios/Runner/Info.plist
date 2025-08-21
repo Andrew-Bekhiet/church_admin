@@ -51,6 +51,8 @@
 		<string>Used for picking phone number for person and saving person number to the device</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>Used for google maps views and showing your location in them</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>Used for google maps views and showing your location in them</string>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
