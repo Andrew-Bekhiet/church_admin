@@ -79,12 +79,14 @@ query personsGeolocations(
         { parents: { parentFamilyId: { _in: $familiesIds } } }
         { children: { childFamilyId: { _in: $familiesIds } } }
       ]
-      geolocation: { _isNull: false }
+      address: { geolocation: { _isNull: false } }
     }
   ) @include(if: $getFamilies) {
     ...FamilyNoPhoto
 
-    geolocation
+    address {
+      geolocation
+    }
   }
   stores(
     where: {
@@ -100,18 +102,26 @@ query personsGeolocations(
         }
         { adminFamily: { _in: $familiesIds } }
       ]
-      geolocation: { _isNull: false }
+      address: { geolocation: { _isNull: false } }
     }
   ) @include(if: $getStores) {
     ...StoreNoPhoto
 
-    geolocation
+    address {
+      geolocation
+    }
   }
-  persons(where: { _and: $personsConditions, geolocation: { _isNull: false } })
-    @include(if: $getPersons) {
+  persons(
+    where: {
+      _and: $personsConditions
+      address: { geolocation: { _isNull: false } }
+    }
+  ) @include(if: $getPersons) {
     ...PersonNoPhoto
 
-    geolocation
+    address {
+      geolocation
+    }
   }
 }
 

@@ -1935,11 +1935,16 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                 ]),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'geolocation'),
+                name: NameNode(value: 'address'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: '_isNull'),
-                    value: BooleanValueNode(value: false),
+                    name: NameNode(value: 'geolocation'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: '_isNull'),
+                        value: BooleanValueNode(value: false),
+                      )
+                    ]),
                   )
                 ]),
               ),
@@ -1963,11 +1968,26 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
-            name: NameNode(value: 'geolocation'),
+            name: NameNode(value: 'address'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'geolocation'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -2051,11 +2071,16 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                 ]),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'geolocation'),
+                name: NameNode(value: 'address'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: '_isNull'),
-                    value: BooleanValueNode(value: false),
+                    name: NameNode(value: 'geolocation'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: '_isNull'),
+                        value: BooleanValueNode(value: false),
+                      )
+                    ]),
                   )
                 ]),
               ),
@@ -2079,11 +2104,26 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
-            name: NameNode(value: 'geolocation'),
+            name: NameNode(value: 'address'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'geolocation'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -2106,11 +2146,16 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
                 value: VariableNode(name: NameNode(value: 'personsConditions')),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'geolocation'),
+                name: NameNode(value: 'address'),
                 value: ObjectValueNode(fields: [
                   ObjectFieldNode(
-                    name: NameNode(value: '_isNull'),
-                    value: BooleanValueNode(value: false),
+                    name: NameNode(value: 'geolocation'),
+                    value: ObjectValueNode(fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: '_isNull'),
+                        value: BooleanValueNode(value: false),
+                      )
+                    ]),
                   )
                 ]),
               ),
@@ -2134,11 +2179,26 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(definitions: [
             directives: [],
           ),
           FieldNode(
-            name: NameNode(value: 'geolocation'),
+            name: NameNode(value: 'address'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'geolocation'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -2534,7 +2594,7 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     required this.name,
     this.color,
     this.$__typename = 'Families',
-    this.geolocation,
+    this.address,
   });
 
   factory Query_personsGeolocations_families.fromJson(
@@ -2543,13 +2603,16 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    final l$geolocation = json['geolocation'];
+    final l$address = json['address'];
     return Query_personsGeolocations_families(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
+      address: l$address == null
+          ? null
+          : Query_personsGeolocations_families_address.fromJson(
+              (l$address as Map<String, dynamic>)),
     );
   }
 
@@ -2561,7 +2624,7 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
 
   final String $__typename;
 
-  final Map<String, dynamic>? geolocation;
+  final Query_personsGeolocations_families_address? address;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2573,8 +2636,8 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
     return _resultData;
   }
 
@@ -2584,13 +2647,13 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    final l$geolocation = geolocation;
+    final l$address = address;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$$__typename,
-      l$geolocation,
+      l$address,
     ]);
   }
 
@@ -2623,9 +2686,9 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     if (l$$__typename != lOther$$__typename) {
       return false;
     }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
       return false;
     }
     return true;
@@ -2656,8 +2719,9 @@ abstract class CopyWith_Query_personsGeolocations_families<TRes> {
     String? name,
     int? color,
     String? $__typename,
-    Map<String, dynamic>? geolocation,
+    Query_personsGeolocations_families_address? address,
   });
+  CopyWith_Query_personsGeolocations_families_address<TRes> get address;
 }
 
 class _CopyWithImpl_Query_personsGeolocations_families<TRes>
@@ -2678,7 +2742,7 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-    Object? geolocation = _undefined,
+    Object? address = _undefined,
   }) =>
       _then(Query_personsGeolocations_families(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -2689,10 +2753,19 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Query_personsGeolocations_families_address?),
       ));
+
+  CopyWith_Query_personsGeolocations_families_address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Query_personsGeolocations_families_address.stub(
+            _then(_instance))
+        : CopyWith_Query_personsGeolocations_families_address(
+            local$address, (e) => call(address: e));
+  }
 }
 
 class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
@@ -2706,7 +2779,137 @@ class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
     String? name,
     int? color,
     String? $__typename,
+    Query_personsGeolocations_families_address? address,
+  }) =>
+      _res;
+
+  CopyWith_Query_personsGeolocations_families_address<TRes> get address =>
+      CopyWith_Query_personsGeolocations_families_address.stub(_res);
+}
+
+class Query_personsGeolocations_families_address {
+  Query_personsGeolocations_families_address({
+    this.geolocation,
+    this.$__typename = 'Addresses',
+  });
+
+  factory Query_personsGeolocations_families_address.fromJson(
+      Map<String, dynamic> json) {
+    final l$geolocation = json['geolocation'];
+    final l$$__typename = json['__typename'];
+    return Query_personsGeolocations_families_address(
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Map<String, dynamic>? geolocation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$geolocation = geolocation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$geolocation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsGeolocations_families_address ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsGeolocations_families_address
+    on Query_personsGeolocations_families_address {
+  CopyWith_Query_personsGeolocations_families_address<
+          Query_personsGeolocations_families_address>
+      get copyWith => CopyWith_Query_personsGeolocations_families_address(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Query_personsGeolocations_families_address<TRes> {
+  factory CopyWith_Query_personsGeolocations_families_address(
+    Query_personsGeolocations_families_address instance,
+    TRes Function(Query_personsGeolocations_families_address) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_families_address;
+
+  factory CopyWith_Query_personsGeolocations_families_address.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_families_address;
+
+  TRes call({
     Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_personsGeolocations_families_address<TRes>
+    implements CopyWith_Query_personsGeolocations_families_address<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_families_address(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personsGeolocations_families_address _instance;
+
+  final TRes Function(Query_personsGeolocations_families_address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? geolocation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query_personsGeolocations_families_address(
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Query_personsGeolocations_families_address<TRes>
+    implements CopyWith_Query_personsGeolocations_families_address<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_families_address(this._res);
+
+  TRes _res;
+
+  call({
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
   }) =>
       _res;
 }
@@ -2717,7 +2920,7 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     required this.name,
     this.color,
     this.$__typename = 'Stores',
-    this.geolocation,
+    this.address,
   });
 
   factory Query_personsGeolocations_stores.fromJson(Map<String, dynamic> json) {
@@ -2725,13 +2928,16 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    final l$geolocation = json['geolocation'];
+    final l$address = json['address'];
     return Query_personsGeolocations_stores(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
+      address: l$address == null
+          ? null
+          : Query_personsGeolocations_stores_address.fromJson(
+              (l$address as Map<String, dynamic>)),
     );
   }
 
@@ -2743,7 +2949,7 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
 
   final String $__typename;
 
-  final Map<String, dynamic>? geolocation;
+  final Query_personsGeolocations_stores_address? address;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2755,8 +2961,8 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
     return _resultData;
   }
 
@@ -2766,13 +2972,13 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    final l$geolocation = geolocation;
+    final l$address = address;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$$__typename,
-      l$geolocation,
+      l$address,
     ]);
   }
 
@@ -2805,9 +3011,9 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     if (l$$__typename != lOther$$__typename) {
       return false;
     }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
       return false;
     }
     return true;
@@ -2837,8 +3043,9 @@ abstract class CopyWith_Query_personsGeolocations_stores<TRes> {
     String? name,
     int? color,
     String? $__typename,
-    Map<String, dynamic>? geolocation,
+    Query_personsGeolocations_stores_address? address,
   });
+  CopyWith_Query_personsGeolocations_stores_address<TRes> get address;
 }
 
 class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
@@ -2859,7 +3066,7 @@ class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-    Object? geolocation = _undefined,
+    Object? address = _undefined,
   }) =>
       _then(Query_personsGeolocations_stores(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -2870,10 +3077,19 @@ class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Query_personsGeolocations_stores_address?),
       ));
+
+  CopyWith_Query_personsGeolocations_stores_address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Query_personsGeolocations_stores_address.stub(
+            _then(_instance))
+        : CopyWith_Query_personsGeolocations_stores_address(
+            local$address, (e) => call(address: e));
+  }
 }
 
 class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
@@ -2887,7 +3103,137 @@ class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
     String? name,
     int? color,
     String? $__typename,
+    Query_personsGeolocations_stores_address? address,
+  }) =>
+      _res;
+
+  CopyWith_Query_personsGeolocations_stores_address<TRes> get address =>
+      CopyWith_Query_personsGeolocations_stores_address.stub(_res);
+}
+
+class Query_personsGeolocations_stores_address {
+  Query_personsGeolocations_stores_address({
+    this.geolocation,
+    this.$__typename = 'Addresses',
+  });
+
+  factory Query_personsGeolocations_stores_address.fromJson(
+      Map<String, dynamic> json) {
+    final l$geolocation = json['geolocation'];
+    final l$$__typename = json['__typename'];
+    return Query_personsGeolocations_stores_address(
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Map<String, dynamic>? geolocation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$geolocation = geolocation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$geolocation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsGeolocations_stores_address ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsGeolocations_stores_address
+    on Query_personsGeolocations_stores_address {
+  CopyWith_Query_personsGeolocations_stores_address<
+          Query_personsGeolocations_stores_address>
+      get copyWith => CopyWith_Query_personsGeolocations_stores_address(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Query_personsGeolocations_stores_address<TRes> {
+  factory CopyWith_Query_personsGeolocations_stores_address(
+    Query_personsGeolocations_stores_address instance,
+    TRes Function(Query_personsGeolocations_stores_address) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_stores_address;
+
+  factory CopyWith_Query_personsGeolocations_stores_address.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_stores_address;
+
+  TRes call({
     Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_personsGeolocations_stores_address<TRes>
+    implements CopyWith_Query_personsGeolocations_stores_address<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_stores_address(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personsGeolocations_stores_address _instance;
+
+  final TRes Function(Query_personsGeolocations_stores_address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? geolocation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query_personsGeolocations_stores_address(
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Query_personsGeolocations_stores_address<TRes>
+    implements CopyWith_Query_personsGeolocations_stores_address<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_stores_address(this._res);
+
+  TRes _res;
+
+  call({
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
   }) =>
       _res;
 }
@@ -2898,7 +3244,7 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     required this.name,
     this.color,
     this.$__typename = 'Persons',
-    this.geolocation,
+    this.address,
   });
 
   factory Query_personsGeolocations_persons.fromJson(
@@ -2907,13 +3253,16 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     final l$name = json['name'];
     final l$color = json['color'];
     final l$$__typename = json['__typename'];
-    final l$geolocation = json['geolocation'];
+    final l$address = json['address'];
     return Query_personsGeolocations_persons(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      geolocation: (l$geolocation as Map<String, dynamic>?),
+      address: l$address == null
+          ? null
+          : Query_personsGeolocations_persons_address.fromJson(
+              (l$address as Map<String, dynamic>)),
     );
   }
 
@@ -2925,7 +3274,7 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
 
   final String $__typename;
 
-  final Map<String, dynamic>? geolocation;
+  final Query_personsGeolocations_persons_address? address;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -2937,8 +3286,8 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     _resultData['color'] = l$color;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
-    final l$geolocation = geolocation;
-    _resultData['geolocation'] = l$geolocation;
+    final l$address = address;
+    _resultData['address'] = l$address?.toJson();
     return _resultData;
   }
 
@@ -2948,13 +3297,13 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    final l$geolocation = geolocation;
+    final l$address = address;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
       l$$__typename,
-      l$geolocation,
+      l$address,
     ]);
   }
 
@@ -2987,9 +3336,9 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     if (l$$__typename != lOther$$__typename) {
       return false;
     }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (l$geolocation != lOther$geolocation) {
+    final l$address = address;
+    final lOther$address = other.address;
+    if (l$address != lOther$address) {
       return false;
     }
     return true;
@@ -3019,8 +3368,9 @@ abstract class CopyWith_Query_personsGeolocations_persons<TRes> {
     String? name,
     int? color,
     String? $__typename,
-    Map<String, dynamic>? geolocation,
+    Query_personsGeolocations_persons_address? address,
   });
+  CopyWith_Query_personsGeolocations_persons_address<TRes> get address;
 }
 
 class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
@@ -3041,7 +3391,7 @@ class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-    Object? geolocation = _undefined,
+    Object? address = _undefined,
   }) =>
       _then(Query_personsGeolocations_persons(
         id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -3052,10 +3402,19 @@ class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
+        address: address == _undefined
+            ? _instance.address
+            : (address as Query_personsGeolocations_persons_address?),
       ));
+
+  CopyWith_Query_personsGeolocations_persons_address<TRes> get address {
+    final local$address = _instance.address;
+    return local$address == null
+        ? CopyWith_Query_personsGeolocations_persons_address.stub(
+            _then(_instance))
+        : CopyWith_Query_personsGeolocations_persons_address(
+            local$address, (e) => call(address: e));
+  }
 }
 
 class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
@@ -3069,7 +3428,137 @@ class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
     String? name,
     int? color,
     String? $__typename,
+    Query_personsGeolocations_persons_address? address,
+  }) =>
+      _res;
+
+  CopyWith_Query_personsGeolocations_persons_address<TRes> get address =>
+      CopyWith_Query_personsGeolocations_persons_address.stub(_res);
+}
+
+class Query_personsGeolocations_persons_address {
+  Query_personsGeolocations_persons_address({
+    this.geolocation,
+    this.$__typename = 'Addresses',
+  });
+
+  factory Query_personsGeolocations_persons_address.fromJson(
+      Map<String, dynamic> json) {
+    final l$geolocation = json['geolocation'];
+    final l$$__typename = json['__typename'];
+    return Query_personsGeolocations_persons_address(
+      geolocation: (l$geolocation as Map<String, dynamic>?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Map<String, dynamic>? geolocation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$geolocation = geolocation;
+    _resultData['geolocation'] = l$geolocation;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$geolocation = geolocation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$geolocation,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_personsGeolocations_persons_address ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$geolocation = geolocation;
+    final lOther$geolocation = other.geolocation;
+    if (l$geolocation != lOther$geolocation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_personsGeolocations_persons_address
+    on Query_personsGeolocations_persons_address {
+  CopyWith_Query_personsGeolocations_persons_address<
+          Query_personsGeolocations_persons_address>
+      get copyWith => CopyWith_Query_personsGeolocations_persons_address(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith_Query_personsGeolocations_persons_address<TRes> {
+  factory CopyWith_Query_personsGeolocations_persons_address(
+    Query_personsGeolocations_persons_address instance,
+    TRes Function(Query_personsGeolocations_persons_address) then,
+  ) = _CopyWithImpl_Query_personsGeolocations_persons_address;
+
+  factory CopyWith_Query_personsGeolocations_persons_address.stub(TRes res) =
+      _CopyWithStubImpl_Query_personsGeolocations_persons_address;
+
+  TRes call({
     Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Query_personsGeolocations_persons_address<TRes>
+    implements CopyWith_Query_personsGeolocations_persons_address<TRes> {
+  _CopyWithImpl_Query_personsGeolocations_persons_address(
+    this._instance,
+    this._then,
+  );
+
+  final Query_personsGeolocations_persons_address _instance;
+
+  final TRes Function(Query_personsGeolocations_persons_address) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? geolocation = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Query_personsGeolocations_persons_address(
+        geolocation: geolocation == _undefined
+            ? _instance.geolocation
+            : (geolocation as Map<String, dynamic>?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl_Query_personsGeolocations_persons_address<TRes>
+    implements CopyWith_Query_personsGeolocations_persons_address<TRes> {
+  _CopyWithStubImpl_Query_personsGeolocations_persons_address(this._res);
+
+  TRes _res;
+
+  call({
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
   }) =>
       _res;
 }
