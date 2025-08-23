@@ -184,7 +184,6 @@ class DataGeomapState extends State<DataGeomap> {
           },
           maxZoom: 18,
           initialZoom: 14,
-          crs: const Epsg4326(),
           interactionOptions: const InteractionOptions(
             flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
           ),
