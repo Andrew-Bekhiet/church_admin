@@ -1507,6 +1507,16 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i11.Future<String>);
+
+  @override
+  _i11.Future<void> deleteMyAccount() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteMyAccount,
+          [],
+        ),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
 }
 
 /// A class which mocks [InitializationService].

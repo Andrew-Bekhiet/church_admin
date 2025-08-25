@@ -348,6 +348,21 @@ class ImagePickerPlatform_ extends _i1.Mock implements _i5.ImagePickerPlatform {
       ) as _i4.Future<List<_i6.XFile>>);
 
   @override
+  _i4.Future<List<_i6.XFile>> getMultiVideoWithOptions(
+          {_i2.MultiVideoPickerOptions? options =
+              const _i2.MultiVideoPickerOptions()}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMultiVideoWithOptions,
+          [],
+          {#options: options},
+        ),
+        returnValue: _i4.Future<List<_i6.XFile>>.value(<_i6.XFile>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i6.XFile>>.value(<_i6.XFile>[]),
+      ) as _i4.Future<List<_i6.XFile>>);
+
+  @override
   bool supportsImageSource(_i2.ImageSource? source) => (super.noSuchMethod(
         Invocation.method(
           #supportsImageSource,

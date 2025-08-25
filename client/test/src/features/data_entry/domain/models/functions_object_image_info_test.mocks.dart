@@ -323,4 +323,14 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           ),
         )),
       ) as _i5.Future<String>);
+
+  @override
+  _i5.Future<void> deleteMyAccount() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteMyAccount,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

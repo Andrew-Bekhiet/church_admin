@@ -36,4 +36,5 @@ const _$NotificationTypeEnumMap = {
   NotificationType.local: 'local',
   NotificationType.remote: 'remote',
   NotificationType.manualPushRemote: 'manualPushRemote',
+  NotificationType.triggerShorebirdUpdate: 'triggerShorebirdUpdate',
 };
