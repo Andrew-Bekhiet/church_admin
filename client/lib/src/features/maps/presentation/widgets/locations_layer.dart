@@ -1,109 +1,143 @@
 part of 'data_geomap.dart';
 
-class _LocationsLayer extends StatefulWidget {
+class _LocationsLayer<T extends Viewable> extends StatefulWidget {
+  final Set<T> objects;
+  final Point? currentFocusedLocation;
+  final Point? Function(T) getLocation;
+  final void Function(T, Point)? afterTap;
+
   const _LocationsLayer({
-    required this.currentGeomapOptions,
-    required this.families,
-    required this.mapController,
-    required this.stores,
-    required this.persons,
-    this.focusedLocationStream,
+    required this.objects,
+    required this.getLocation,
+    this.afterTap,
+    this.currentFocusedLocation,
   });
 
-  final GeomapOptions currentGeomapOptions;
-  final Set<Family> families;
-  final MapController mapController;
-  final Set<Store> stores;
-  final Set<Person> persons;
-  final BehaviorSubject<Point?>? focusedLocationStream;
-
   @override
-  State<_LocationsLayer> createState() => _LocationsLayerState();
+  State<_LocationsLayer<T>> createState() => _LocationsLayerState();
 }
 
-class _LocationsLayerState extends State<_LocationsLayer>
+class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
     with TickerProviderStateMixin {
+  static const _tapRecencyDuration = Duration(seconds: 5);
+
+  Set<Point> _recentlyTappedLocations = {};
+
   @override
   Widget build(BuildContext context) {
+    final (:T? focusedObject, :List<Marker> markers) =
+        _splitFocusedObjectFromMarkers();
+
     return MarkerLayer(
       rotate: true,
       markers: [
-        if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.families))
-          ...widget.families.where((f) => f.geolocation != null).map(
-                (f) => _buildMarkerWith(f, f.geolocation!),
-              ),
-        if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.stores))
-          ...widget.stores.where((f) => f.geolocation != null).map(
-                (s) => _buildMarkerWith(s, s.geolocation!),
-              ),
-        if (widget.currentGeomapOptions.layers.contains(GeoMapLayer.persons))
-          ...widget.persons.where((f) => f.geolocation != null).map(
-                (p) => _buildMarkerWith(p, p.geolocation!),
-              ),
+        ...markers,
+        if (focusedObject != null && widget.currentFocusedLocation != null)
+          _makeMarkerFromPoint(
+            isFocused: true,
+            location: widget.currentFocusedLocation!,
+            object: focusedObject,
+          ),
       ],
     );
   }
 
-  Marker _buildMarkerWith(Viewable object, Point geolocation) {
-    return markerFromPoint(
-      geolocation,
-      StreamBuilder<Point?>(
-        stream: widget.focusedLocationStream,
-        builder: (context, snapshot) {
-          return ObjectMarkerWidget(
-            isFocused: snapshot.data == geolocation,
-            object: object,
-            afterTap: () {
-              widget.focusedLocationStream?.value = geolocation;
+  ({T? focusedObject, List<Marker> markers}) _splitFocusedObjectFromMarkers() {
+    return widget.objects
+        .map((o) => (object: o, location: widget.getLocation(o)))
+        .where((element) => element.location != null)
+        .fold(
+      (markers: [], focusedObject: null),
+      (acc, object) {
+        final location = object.location!;
+        final isFocused = widget.currentFocusedLocation == location;
 
-              _animatedMapMove(
-                LatLng(
-                  geolocation.latitude,
-                  geolocation.longitude,
-                ),
-                widget.mapController.camera.zoom,
-              );
-            },
-          );
+        return (
+          markers: [
+            ...acc.markers,
+            if (!isFocused)
+              _makeMarkerFromPoint(
+                isFocused: false,
+                location: location,
+                object: object.object,
+              ),
+          ],
+          focusedObject: isFocused ? object.object : acc.focusedObject,
+        );
+      },
+    );
+  }
+
+  Marker _makeMarkerFromPoint({
+    required Point location,
+    required bool isFocused,
+    required T object,
+  }) {
+    return markerFromPoint(
+      location,
+      ObjectMarkerWidget(
+        isFocused: isFocused,
+        enableTap: !_recentlyTappedLocations.contains(location),
+        object: object,
+        afterTap: () async {
+          _recentlyTappedLocations = _recentlyTappedLocations.union({location});
+
+          unawaited(_animatedMapMove(
+            LatLng(location.latitude, location.longitude),
+          ));
+
+          widget.afterTap?.call(object, location);
+
+          await Future.delayed(_tapRecencyDuration);
+
+          if (!mounted) return;
+
+          setState(() {
+            _recentlyTappedLocations =
+                _recentlyTappedLocations.difference({location});
+          });
         },
       ),
     );
   }
 
-  void _animatedMapMove(LatLng destLocation, double destZoom) {
+  Future<void> _animatedMapMove(LatLng destLocation) async {
+    final mapController = MapController.of(context);
+    final mapCamera = mapController.camera;
+
+    final destZoom = mapCamera.zoom;
+
     final latTween = Tween<double>(
-      begin: widget.mapController.camera.center.latitude,
+      begin: mapCamera.center.latitude,
       end: destLocation.latitude,
     );
     final lngTween = Tween<double>(
-      begin: widget.mapController.camera.center.longitude,
+      begin: mapCamera.center.longitude,
       end: destLocation.longitude,
     );
-    final zoomTween =
-        Tween<double>(begin: widget.mapController.camera.zoom, end: destZoom);
+    final zoomTween = Tween<double>(begin: mapCamera.zoom, end: destZoom);
 
-    final controller = AnimationController(
+    final animationController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    final Animation<double> animation =
-        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+    final Animation<double> animation = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.fastOutSlowIn,
+    );
 
-    controller.addListener(() {
-      widget.mapController.move(
+    void animationListener() {
+      mapController.move(
         LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
         zoomTween.evaluate(animation),
       );
-    });
+    }
 
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.dispose();
-      } else if (status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
+    animationController.addListener(animationListener);
 
-    controller.forward();
+    await animationController.forward();
+    animationController
+      ..removeListener(animationListener)
+      ..dispose();
   }
 }

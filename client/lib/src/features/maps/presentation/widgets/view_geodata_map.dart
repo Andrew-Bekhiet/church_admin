@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:align_positioned/align_positioned.dart';
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -28,8 +30,9 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
     with TickerProviderStateMixin {
   final _sheetScrollController = ScrollController();
 
-  final BehaviorSubject<Point?> _focusedLocation = BehaviorSubject.seeded(null);
-  Point? _oldFocusedLocation;
+  Point? _focusedLocation;
+  late Alignment _fabAlignment =
+      AlignmentDirectional.bottomEnd.resolve(Directionality.of(context));
 
   late final BehaviorSubject<GeomapOptions> _mapOptions =
       BehaviorSubject.seeded(widget.initialGeomapOptions);
@@ -52,48 +55,56 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
         sheetBelow: SnappingSheetContent(
           draggable: (_) => true,
           childScrollController: _sheetScrollController,
-          child: StreamBuilder<GeomapOptions>(
-            initialData: _mapOptions.value,
-            stream: _mapOptions,
-            builder: (context, snapshot) {
-              return EditGeomapOptionsWidget(
+          child: RepaintBoundary(
+            child: StreamBuilder<GeomapOptions>(
+              initialData: _mapOptions.value,
+              stream: _mapOptions,
+              builder: (context, snapshot) => EditGeomapOptionsWidget(
                 mapOptions: snapshot.requireData,
                 sheetScrollController: _sheetScrollController,
                 apply: _mapOptions.add,
-              );
-            },
+              ),
+            ),
           ),
         ),
-        child: DataGeomap(
-          initialPerson: widget.initialPerson,
-          focusedLocationStream: _focusedLocation,
-          geomapOptionsStream: _mapOptions,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            RepaintBoundary(
+              child: DataGeomap(
+                initialPerson: widget.initialPerson,
+                geomapOptionsStream: _mapOptions,
+                onTapLocation: (location) =>
+                    setState(() => _focusedLocation = location),
+              ),
+            ),
+            if (_focusedLocation != null)
+              AlignPositioned(
+                alignment: _fabAlignment,
+                moveByChildHeight: -0.5,
+                child: RepaintBoundary(
+                  child: GeomapFAB(focusedLocation: _focusedLocation!),
+                ),
+              )
+          ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      floatingActionButton:
-          GeomapFAB(onFocusedLocationChange: _focusedLocation),
     );
   }
 
   void _onSheetMoved(SheetPositionData position) {
-    if (position.relativeToSnappingPositions >= 0.06 &&
-        _focusedLocation.value != null) {
-      _oldFocusedLocation = _focusedLocation.value;
-      _focusedLocation.value = null;
-    } else if (position.relativeToSnappingPositions < 0.06 &&
-        _focusedLocation.value == null &&
-        _oldFocusedLocation != null) {
-      _focusedLocation.value = _oldFocusedLocation;
-      _oldFocusedLocation = null;
-    }
+    setState(() {
+      _fabAlignment = AlignmentDirectional(
+        1,
+        1 - min(0.5, position.relativeToSnappingPositions) * 2,
+      ).resolve(Directionality.of(context));
+    });
   }
 
   @override
   Future<void> dispose() async {
     super.dispose();
 
-    await _focusedLocation.close();
     await _mapOptions.close();
   }
 }

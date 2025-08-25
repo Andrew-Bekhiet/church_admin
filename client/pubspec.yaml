@@ -12,6 +12,7 @@ dependency_overrides:
   js: ^0.7.1
 
 dependencies:
+  align_positioned: ^5.0.1
   android_alarm_manager_plus: ^4.0.6
   async: ^2.9.0
   cached_network_image: ^3.2.3

@@ -7,72 +7,57 @@ class ObjectMarkerWidget extends StatelessWidget {
   final Viewable object;
   final bool isFocused;
   final bool enableTap;
-  final bool ignoreOnFocused;
   final VoidCallback? afterTap;
 
   const ObjectMarkerWidget({
     required this.object,
     required this.isFocused,
-    this.ignoreOnFocused = true,
-    this.afterTap,
     this.enableTap = true,
+    this.afterTap,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final effectiveColor =
-        object.color ?? Theme.of(context).colorScheme.primary;
+    final objectColor = object.color ?? Theme.of(context).colorScheme.primary;
+
+    final color =
+        isFocused ? objectColor.brighten(18).saturate(8) : objectColor;
+
     final child = Stack(
       alignment: Alignment.center,
       children: [
-        if (isFocused) ...[
-          Positioned(
-            width: 50,
-            height: 50,
-            child: Icon(
-              Symbols.location_pin,
-              size: 50,
-              fill: isFocused ? 1 : 0,
-              color: effectiveColor.darken(50),
-            ),
-          ),
-          Positioned(
-            width: 47,
-            height: 47,
-            child: Icon(
-              Symbols.location_pin,
-              size: 47,
-              color: effectiveColor.brighten(50),
-            ),
-          ),
-        ],
-        Positioned(
-          width: 40,
-          height: 40,
-          child: Icon(
-            Symbols.location_pin,
-            size: 40,
-            fill: isFocused ? 1 : 0,
-            shadows: [
-              if (!isFocused)
-                Shadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  offset: const Offset(4, 3),
-                  blurRadius: 3,
-                ),
-            ],
-            color: effectiveColor,
-          ),
+        const Icon(
+          Symbols.location_pin,
+          size: 42,
+          fill: 1,
+          weight: 100,
+          color: Colors.black45,
+        ),
+        Icon(
+          Symbols.location_pin,
+          size: 40,
+          fill: 1,
+          weight: 100,
+          shadows: [
+            if (!isFocused)
+              Shadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                offset: const Offset(4, 3),
+                blurRadius: 3,
+              )
+            else
+              Shadow(
+                color: color.withValues(alpha: 0.35),
+                blurRadius: 8,
+              ),
+          ],
+          color: color,
         ),
       ],
     );
 
-    if (!enableTap) return child;
-
-    if (isFocused && ignoreOnFocused) {
-      return IgnorePointer(child: child);
-    }
+    if (!enableTap) return IgnorePointer(child: child);
 
     return GestureDetector(
       onTap: () {
@@ -81,7 +66,9 @@ class ObjectMarkerWidget extends StatelessWidget {
           SnackBar(
             content: Text(object.name),
             backgroundColor:
-                object.color == Colors.transparent ? null : object.color,
+                object.color != null && object.color != Colors.transparent
+                    ? object.color?.withValues(alpha: 1)
+                    : null,
             action: SnackBarAction(
               label: 'فتح',
               onPressed: () => ViewableObjectService.I.onTap(object),

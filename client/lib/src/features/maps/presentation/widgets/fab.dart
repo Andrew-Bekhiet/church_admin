@@ -5,63 +5,54 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:rxdart/rxdart.dart';
 
 class GeomapFAB extends StatelessWidget {
   const GeomapFAB({
-    required this.onFocusedLocationChange,
+    required this.focusedLocation,
     super.key,
   });
 
-  final BehaviorSubject<Point?> onFocusedLocationChange;
+  final Point focusedLocation;
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Point?>(
-      stream: onFocusedLocationChange,
-      builder: (context, locationData) {
-        if (!locationData.hasData) return const SizedBox();
+    final location = focusedLocation;
 
-        final location = locationData.data!;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 28),
+      child: FloatingActionButton.small(
+        onPressed: () async {
+          bool launched = false;
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 28),
-          child: FloatingActionButton.small(
-            onPressed: _onTap(location),
-            child: const Icon(Symbols.map),
-          ),
-        );
-      },
+          try {
+            if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
+              await _showMarker(location, MapType.google);
+              launched = true;
+            } else if (await MapLauncher.isMapAvailable(MapType.apple) ??
+                false) {
+              await _showMarker(location, MapType.apple);
+              launched = true;
+            }
+          } finally {
+            if (!launched) {
+              await LauncherService.I.launchUrl(
+                Uri(
+                  scheme: 'https',
+                  host: 'google.com',
+                  pathSegments: ['maps', 'search', ''],
+                  queryParameters: {
+                    'api': '1',
+                    'query': '${location.latitude},${location.longitude}',
+                  },
+                ),
+              );
+            }
+          }
+        },
+        child: const Icon(Symbols.map),
+      ),
     );
   }
-
-  Future<void> Function() _onTap(Point location) => () async {
-        var launched = false;
-
-        try {
-          if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
-            await _showMarker(location, MapType.google);
-            launched = true;
-          } else if (await MapLauncher.isMapAvailable(MapType.apple) ?? false) {
-            await _showMarker(location, MapType.apple);
-            launched = true;
-          }
-        } finally {
-          if (!launched) {
-            await LauncherService.I.launchUrl(
-              Uri(
-                scheme: 'https',
-                host: 'google.com',
-                pathSegments: ['maps', 'search', ''],
-                queryParameters: {
-                  'api': '1',
-                  'query': '${location.latitude},${location.longitude}',
-                },
-              ),
-            );
-          }
-        }
-      };
 
   Future<void> _showMarker(Point location, MapType mapType) {
     return MapLauncher.showMarker(

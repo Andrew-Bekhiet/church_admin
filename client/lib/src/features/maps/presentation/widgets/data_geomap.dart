@@ -19,7 +19,7 @@ part 'streets_layer.dart';
 class DataGeomap extends StatefulWidget {
   final Person? initialPerson;
   final ValueStream<GeomapOptions> geomapOptionsStream;
-  final BehaviorSubject<Point?>? focusedLocationStream;
+  final void Function(Point?)? onTapLocation;
   final MapOptions Function(LatLng)? createMapOptions;
   final List<Widget> addLayers;
   final Stream<PersonsGeolocationsResponse?> Function(
@@ -32,12 +32,12 @@ class DataGeomap extends StatefulWidget {
   const DataGeomap({
     required this.geomapOptionsStream,
     this.initialPerson,
-    this.focusedLocationStream,
     this.createMapOptions,
     this.addLayers = const [],
     this.overrideResponseObjects,
     this.showUserLocation = true,
     this.onUserLocationChanged,
+    this.onTapLocation,
     super.key,
   });
 
@@ -46,8 +46,6 @@ class DataGeomap extends StatefulWidget {
 }
 
 class DataGeomapState extends State<DataGeomap> {
-  final MapController _mapController = MapController();
-
   final _locationMemoizer = AsyncMemoizer<Position?>();
 
   late final Stream<_MapStreamResponse> _stream = Rx.combineLatest2(
@@ -67,6 +65,8 @@ class DataGeomapState extends State<DataGeomap> {
       const LocationMarkerDataStreamFactory().fromGeolocatorPositionStream();
   late final _userLocationHeadingStream =
       const LocationMarkerDataStreamFactory().fromRotationSensorHeadingStream();
+
+  Point? _currentFocusedLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -90,21 +90,23 @@ class DataGeomapState extends State<DataGeomap> {
       ),
       stream: _stream,
       builder: (context, data) {
-        if (data.requireData.personsGeolocationsResponse == null) {
+        final locationsData = data.requireData.personsGeolocationsResponse;
+
+        if (locationsData == null) {
           return const Center(child: CircularProgressIndicator());
         }
 
         final currentLocation = data.requireData.location;
-        final locationsData = data.requireData.personsGeolocationsResponse!;
 
-        final areas = locationsData.areas;
-        final streets = locationsData.streets;
-        final families = locationsData.families;
-        final stores = locationsData.stores;
-        final persons = locationsData.persons;
+        final PersonsGeolocationsResponse(
+          :areas,
+          :streets,
+          :families,
+          :stores,
+          :persons
+        ) = locationsData;
 
         return FlutterMap(
-          mapController: _mapController,
           options: _getMapOptions(
             currentLocation: currentLocation,
             areas: areas,
@@ -121,7 +123,6 @@ class DataGeomapState extends State<DataGeomap> {
               userAgentPackageName:
                   '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}'
                   ': ${CurrentPlatformService.I.effectiveValue.name}',
-              maxZoom: 19,
             ),
             if (_currentMapOptions.layers.contains(GeoMapLayer.areas))
               _AreasLayer(areas: areas),
@@ -132,14 +133,35 @@ class DataGeomapState extends State<DataGeomap> {
                 positionStream: _userLocationStream,
                 headingStream: _userLocationHeadingStream,
               ),
-            _LocationsLayer(
-              currentGeomapOptions: _currentMapOptions,
-              families: families,
-              mapController: _mapController,
-              stores: stores,
-              persons: persons,
-              focusedLocationStream: widget.focusedLocationStream,
-            ),
+            if (_currentMapOptions.layers.intersection({
+              GeoMapLayer.stores,
+              GeoMapLayer.families,
+              GeoMapLayer.persons,
+            }).isNotEmpty)
+              _LocationsLayer(
+                objects: {
+                  if (_currentMapOptions.layers.contains(GeoMapLayer.stores))
+                    ...stores,
+                  if (_currentMapOptions.layers.contains(GeoMapLayer.families))
+                    ...families,
+                  if (_currentMapOptions.layers.contains(GeoMapLayer.persons))
+                    ...persons,
+                },
+                getLocation: (o) {
+                  switch (o) {
+                    case Person(:final geolocation):
+                      return geolocation;
+                    case Store(:final geolocation):
+                      return geolocation;
+                    case Family(:final geolocation):
+                      return geolocation;
+                  }
+
+                  return null;
+                },
+                currentFocusedLocation: _currentFocusedLocation,
+                afterTap: (_, location) => _onTapLocation(location),
+              ),
             DefaultTextStyle(
               style: Theme.of(context).textTheme.bodySmall ??
                   const TextStyle(fontSize: 12),
@@ -158,6 +180,11 @@ class DataGeomapState extends State<DataGeomap> {
         );
       },
     );
+  }
+
+  void _onTapLocation(Point? location) {
+    widget.onTapLocation?.call(location);
+    setState(() => _currentFocusedLocation = location);
   }
 
   MapOptions _getMapOptions({
@@ -179,9 +206,7 @@ class DataGeomapState extends State<DataGeomap> {
 
     return widget.createMapOptions?.call(center) ??
         MapOptions(
-          onTap: (pos, point) {
-            widget.focusedLocationStream?.value = null;
-          },
+          onTap: (pos, point) => _onTapLocation(null),
           maxZoom: 18,
           initialZoom: 14,
           interactionOptions: const InteractionOptions(
