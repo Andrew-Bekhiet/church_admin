@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final emailRegex = RegExp(r'^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$');
+final emailRegex = RegExp(r'^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$');
 
 abstract final class LoginScreenKeys {
   static const Key emailFieldKey = ValueKey('Email Field Key');
@@ -69,6 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 'الحساب مسجل بالفعل. قم بتسجيل الدخول',
               );
               setState(() => _isLogin = true);
+              break;
+
+            default:
+              ScaffoldMessenger.of(context).showErrorSnackBar(
+                'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
+              );
           }
         }
       },

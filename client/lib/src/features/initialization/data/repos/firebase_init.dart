@@ -55,8 +55,9 @@ class FirebaseInit implements Initializer {
     await FirebaseAppCheck.instance.activate(
       androidProvider:
           kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
-      appleProvider:
-          kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+      appleProvider: kDebugMode
+          ? AppleProvider.debug
+          : AppleProvider.appAttestWithDeviceCheckFallback,
       webProvider: ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey),
     );
 

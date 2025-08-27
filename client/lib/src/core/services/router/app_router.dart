@@ -8,6 +8,13 @@ final GoRouter $appRouter = GoRouter(
   extraCodec: ChurchAdminRouterExtraCodec(),
   refreshListenable: GoRouterRefreshStream.I,
   redirect: (context, state) {
+    // Ignore external custom-scheme callbacks (e.g., Firebase Auth com.googleusercontent.apps)
+    // and route back to a safe in-app location instead of showing an error page.
+    final uri = state.uri;
+    if (uri.scheme.isNotEmpty && uri.scheme != 'http' && uri.scheme != 'https') {
+      return const LoginRoute().location;
+    }
+
     final featureFlags = FeatureFlagsRepository.I;
 
     if (featureFlags.mustForceUpdate) {
@@ -40,6 +47,15 @@ final GoRouter $appRouter = GoRouter(
     $outdatedFeatureRoute,
   ],
   errorBuilder: (context, state) {
+    // If an external callback URL slips through to the router, fail closed to login
+    // instead of rendering an error screen with the raw URL.
+    final uri = state.uri;
+    if (uri.scheme.isNotEmpty && uri.scheme != 'http' && uri.scheme != 'https') {
+      // Defer navigation to the next microtask to avoid build-time navigation
+      WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/login'));
+      return const SizedBox.shrink();
+    }
+
     if (kReleaseMode) {
       LoggingService.I.error(
         LogRecord(

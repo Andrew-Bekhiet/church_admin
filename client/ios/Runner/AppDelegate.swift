@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import flutter_local_notifications
+import FirebaseAuth
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -19,5 +20,14 @@ import flutter_local_notifications
 
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  // Handle Firebase Auth / reCAPTCHA and other OAuth redirects (e.g., com.googleusercontent.apps callbacks)
+  override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    if Auth.auth().canHandle(url) {
+      return true
+    }
+
+    return super.application(app, open: url, options: options)
   }
 }
