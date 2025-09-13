@@ -40,7 +40,7 @@ class InitializationService {
     for (final step in steps) {
       try {
         await step.initialize();
-      } catch (e, stackTrace) {
+      } catch (e) {
         // Log error but continue with other initialization steps
         debugPrint('Initialization step ${step.runtimeType} failed: $e');
         // Don't rethrow to allow app to continue
