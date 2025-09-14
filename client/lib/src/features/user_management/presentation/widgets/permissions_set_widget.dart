@@ -37,6 +37,13 @@ class PermissionsSetWidget extends StatelessWidget {
               UserPermission.writeAllData.label,
             ),
           ),
+        if (permissions.deleteData)
+          ListTile(
+            leading: Icon(UserPermission.deleteData.icon),
+            title: Text(
+              UserPermission.deleteData.label,
+            ),
+          ),
         if ((permissions.manageAllUsers ||
                 permissions.readAllData ||
                 permissions.writeAllData) &&

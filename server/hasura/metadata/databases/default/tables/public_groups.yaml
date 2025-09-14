@@ -196,30 +196,41 @@ delete_permissions:
   - role: user
     permission:
       filter:
-        _or:
+        _and:
           - _exists:
               _table:
-                name: users_permissions_by_entity_id
+                name: users_permissions
                 schema: auth
               _where:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
-                  - entity_type:
-                      _eq: any
-                  - entity_id:
-                      _is_null: true
-          - _exists:
-              _table:
-                name: users_permissions_by_entity_id
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - entity_type:
-                      _eq: group
-                  - entity_id:
-                      _ceq:
-                        - $
-                        - id
+                  - permission:
+                      _eq: deleteData
+          - _or:
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - entity_type:
+                          _eq: group
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - id

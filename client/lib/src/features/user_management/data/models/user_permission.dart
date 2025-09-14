@@ -29,6 +29,10 @@ enum UserPermission implements LabeledEnum {
     label: 'تغيير الحضور لأي يوم',
     icon: Symbols.history,
   ),
+  deleteData(
+    label: 'حذف البيانات',
+    icon: Symbols.delete,
+  ),
   recoverDeleted(
     label: 'استرجاع المحذوفات',
     icon: Symbols.restore_from_trash,

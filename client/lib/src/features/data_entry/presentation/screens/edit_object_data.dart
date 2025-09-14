@@ -13,19 +13,20 @@ export 'edit_object_data/edit_store.dart';
 export 'edit_object_data/edit_street.dart';
 
 class EditObjectData<T extends ViewableWithID> extends StatefulWidget {
-  static bool defaultCanDeletePhoto(EditObjectController controller) =>
-      controller.isUpdate;
+  static bool defaultCanDelete(EditObjectController controller) =>
+      controller.isUpdate &&
+      AuthBloc.I.currentUserData!.canDeleteObject(controller.initialObject!);
 
   final T? objectData;
   final EditObjectController<T> Function() getController;
   final Widget Function(BuildContext, EditObjectController<T>) builder;
-  final bool Function(EditObjectController<T>) canDeletePhoto;
+  final bool Function(EditObjectController<T>) canDelete;
 
   const EditObjectData({
     required this.objectData,
     required this.getController,
     required this.builder,
-    this.canDeletePhoto = defaultCanDeletePhoto,
+    this.canDelete = defaultCanDelete,
     super.key,
   });
 
@@ -68,7 +69,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                     pinned: true,
                     expandedHeight: MediaQuery.sizeOf(context).width,
                     actions: [
-                      if (widget.canDeletePhoto(_controller))
+                      if (widget.canDelete(_controller))
                         IconButton(
                           onPressed: () => _controller.delete(context),
                           icon: const Icon(Symbols.delete),

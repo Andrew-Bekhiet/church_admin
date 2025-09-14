@@ -134,13 +134,26 @@ delete_permissions:
   - role: user
     permission:
       filter:
-        _exists:
-          _table:
-            name: users_permissions
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - permission:
-                  _eq: writeAllData
+        _and:
+          - deleted_at:
+              _is_null: true
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: writeAllData
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: deleteData

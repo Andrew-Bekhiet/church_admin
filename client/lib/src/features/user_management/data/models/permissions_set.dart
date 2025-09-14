@@ -22,6 +22,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
 
   bool get recordHistory => contains(UserPermission.recordHistory);
   bool get changeOldHistory => contains(UserPermission.changeOldHistory);
+  bool get deleteData => contains(UserPermission.deleteData);
   bool get recoverDeleted => contains(UserPermission.recoverDeleted);
   bool get exportData => contains(UserPermission.exportData);
 

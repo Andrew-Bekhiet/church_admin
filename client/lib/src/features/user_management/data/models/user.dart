@@ -102,6 +102,8 @@ class User extends ViewableWithIDAndImage
     return _isAdminOn(object, canEdit: true);
   }
 
+  bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
+
   bool _isAdminOn(ViewableWithID object, {required bool canEdit}) {
     switch (object) {
       case Person(

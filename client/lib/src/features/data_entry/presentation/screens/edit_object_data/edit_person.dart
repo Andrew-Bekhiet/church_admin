@@ -101,7 +101,7 @@ class _EditPersonState extends State<EditPerson> {
     return EditObjectData(
       objectData: widget.person,
       getController: () => _controller,
-      canDeletePhoto: (_) =>
+      canDelete: (_) =>
           widget.person != null && widget.person?.user?.email == null,
       builder: (context, controller) {
         final themeData = Theme.of(context);
