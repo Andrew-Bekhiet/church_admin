@@ -1397,32 +1397,6 @@ class MockSecretsService extends _i1.Mock implements _i16.SecretsService {
       ) as String);
 
   @override
-  String get webAuthHandler => (super.noSuchMethod(
-        Invocation.getter(#webAuthHandler),
-        returnValue: _i17.dummyValue<String>(
-          this,
-          Invocation.getter(#webAuthHandler),
-        ),
-        returnValueForMissingStub: _i17.dummyValue<String>(
-          this,
-          Invocation.getter(#webAuthHandler),
-        ),
-      ) as String);
-
-  @override
-  String get desktopClientId => (super.noSuchMethod(
-        Invocation.getter(#desktopClientId),
-        returnValue: _i17.dummyValue<String>(
-          this,
-          Invocation.getter(#desktopClientId),
-        ),
-        returnValueForMissingStub: _i17.dummyValue<String>(
-          this,
-          Invocation.getter(#desktopClientId),
-        ),
-      ) as String);
-
-  @override
   Iterable<MapEntry<dynamic, dynamic>> get entries => (super.noSuchMethod(
         Invocation.getter(#entries),
         returnValue: <MapEntry<dynamic, dynamic>>[],

@@ -21,8 +21,6 @@ void main() {
       expect(unit.hasuraServer, env['HASURA_SERVER']);
       expect(unit.sentryDSN, env['SENTRY_DSN']);
       expect(unit.webRecaptchaSiteKey, env['WEB_RECAPTCHA_SITE_KEY']);
-      expect(unit.webAuthHandler, env['WEB_AUTH_HANDLER']);
-      expect(unit.desktopClientId, env['DESKTOP_CLIENT_ID']);
 
       expect(() => unit['any'] = 'value', throwsUnsupportedError);
       expect(() => unit['HASURA_SERVER'] = 'value', throwsUnsupportedError);
