@@ -26,7 +26,7 @@ class StreamAllConfig<T>
     DocumentNode? document,
     String? operationName,
     Json? variables,
-    StreamAllConfigVarsConstructor<T>? varsConstructor,
+    StreamAllConfigVarsConstructor<T>? transformRequest,
     SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions,
     PaginatableStreamResponse<T> Function(Json)? parserFn,
   }) {
@@ -34,7 +34,7 @@ class StreamAllConfig<T>
       document: document ?? this.document,
       operationName: operationName ?? super.effectiveOperationName,
       variables: variables ?? this.variables,
-      transformRequest: varsConstructor ?? this.transformRequest,
+      transformRequest: transformRequest ?? this.transformRequest,
       operationOptions: operationOptions ?? this.operationOptions,
       parserFn: parserFn ?? this.parserFn,
     );

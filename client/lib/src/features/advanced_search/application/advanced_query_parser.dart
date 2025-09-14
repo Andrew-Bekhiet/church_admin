@@ -78,7 +78,7 @@ class AdvancedQueryParser {
   }) {
     return config.copyWith(
       document: document,
-      varsConstructor: (request) => {
+      transformRequest: (request) => {
         ...DatabaseService.I.varsTransformer.transformrequestForPagination(
           request,
           overrideWhere: [jsonConditions],
